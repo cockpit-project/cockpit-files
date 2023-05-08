@@ -19,32 +19,46 @@
 
 import cockpit from 'cockpit';
 import React from 'react';
-import { Alert } from "@patternfly/react-core/dist/esm/components/Alert/index.js";
-import { Card, CardBody, CardTitle } from "@patternfly/react-core/dist/esm/components/Card/index.js";
+import { Flex, FlexItem, Icon } from "@patternfly/react-core";
+import { FolderIcon } from "@patternfly/react-icons";
 
 const _ = cockpit.gettext;
 
 export class Application extends React.Component {
     constructor() {
         super();
-        this.state = { hostname: _("Unknown") };
+        this.state = { hostname: _("Unknown"), current_user: "", files: [] };
 
         cockpit.file('/etc/hostname').watch(content => {
             this.setState({ hostname: content.trim() });
         });
     }
 
+    componentDidMount() {
+        cockpit.user().then(user => {
+            this.setState({ current_user: user.name || "" });
+        })
+                .then(() => {
+                    cockpit.spawn(["ls", `/home/${this.state.current_user}`], { superuser: true }).then((res) => {
+                        res = res.split("\n");
+                        console.log(res.slice(0, res.length - 1));
+                        this.setState({ files: res.slice(0, res.length - 1) });
+                    });
+                });
+    }
+
     render() {
         return (
-            <Card>
-                <CardTitle>Starter Kit</CardTitle>
-                <CardBody>
-                    <Alert
-                        variant="info"
-                        title={ cockpit.format(_("Running on $0"), this.state.hostname) }
-                    />
-                </CardBody>
-            </Card>
+            <Flex>
+                <Icon>
+                    <FolderIcon />
+                </Icon>
+                {this.state.files.map((file) => {
+                    return (
+                        <FlexItem key={file}>{file}</FlexItem>
+                    );
+                })}
+            </Flex>
         );
     }
 }
