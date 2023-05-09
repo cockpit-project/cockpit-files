@@ -19,8 +19,8 @@
 
 import cockpit from 'cockpit';
 import React from 'react';
-import { Flex, FlexItem, Icon } from "@patternfly/react-core";
-import { FolderIcon } from "@patternfly/react-icons";
+import { Flex, FlexItem, Icon, Page, PageSection } from "@patternfly/react-core";
+import { FileIcon, FolderIcon } from "@patternfly/react-icons";
 
 const _ = cockpit.gettext;
 
@@ -39,7 +39,7 @@ export class Application extends React.Component {
             this.setState({ current_user: user.name || "" });
         })
                 .then(() => {
-                    cockpit.spawn(["ls", `/home/${this.state.current_user}`], { superuser: true }).then((res) => {
+                    cockpit.spawn(["ls", "-p", `/home/${this.state.current_user}`], { superuser: true }).then((res) => {
                         res = res.split("\n");
                         console.log(res.slice(0, res.length - 1));
                         this.setState({ files: res.slice(0, res.length - 1) });
@@ -49,16 +49,29 @@ export class Application extends React.Component {
 
     render() {
         return (
-            <Flex>
-                <Icon>
-                    <FolderIcon />
-                </Icon>
-                {this.state.files.map((file) => {
-                    return (
-                        <FlexItem key={file}>{file}</FlexItem>
-                    );
-                })}
-            </Flex>
+            <Page>
+                <PageSection>
+                    <Flex>
+                        {this.state.files.map((file) => {
+                            const directory = file.substring(file.length - 1) === "/";
+                            if (directory)
+                                file = file.substring(0, file.length - 1);
+                            return (
+                                <Flex key={file} direction={{ default: "column" }} spaceItems={{ default: 'spaceItemsNone' }}>
+                                    <FlexItem alignSelf={{ default: "alignSelfCenter" }}>
+                                        <Icon size="xl">
+                                            {directory
+                                                ? <FolderIcon />
+                                                : <FileIcon />}
+                                        </Icon>
+                                    </FlexItem>
+                                    <FlexItem alignSelf={{ default: "alignSelfCenter" }}>{file}</FlexItem>
+                                </Flex>
+                            );
+                        })}
+                    </Flex>
+                </PageSection>
+            </Page>
         );
     }
 }
