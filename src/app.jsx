@@ -19,8 +19,8 @@
 
 import cockpit from 'cockpit';
 import React from 'react';
-import { Breadcrumb, BreadcrumbItem, Button, Flex, FlexItem, Icon, Page, PageBreadcrumb, PageSection } from "@patternfly/react-core";
-import { ArrowLeftIcon, ArrowRightIcon, EditAltIcon, FileIcon, FolderIcon, PficonHistoryIcon, StarIcon } from "@patternfly/react-icons";
+import { Breadcrumb, BreadcrumbItem, Button, Dropdown, Flex, FlexItem, Icon, Page, PageBreadcrumb, PageSection, SearchInput } from "@patternfly/react-core";
+import { ArrowLeftIcon, ArrowRightIcon, EditAltIcon, FileIcon, FolderIcon, ListIcon, PficonHistoryIcon, StarIcon } from "@patternfly/react-icons";
 
 const _ = cockpit.gettext;
 
@@ -42,13 +42,12 @@ export class Application extends React.Component {
                 .then(() => {
                     cockpit.spawn(["ls", "-p", `/home/${this.state.current_user}`], { superuser: true }).then((res) => {
                         res = res.split("\n");
-                        console.log(res.slice(0, res.length - 1));
                         this.setState({ files: res.slice(0, res.length - 1) });
                     });
                 });
     }
 
-    // To do: button spacing, correct refresh icon
+    // To do: button spacing, correct refresh icon, dropdown
     render() {
         return (
             <Page>
@@ -101,24 +100,46 @@ export class Application extends React.Component {
                     </Flex>
                 </PageBreadcrumb>
                 <PageSection>
-                    <Flex>
-                        {this.state.files.map((file) => {
-                            const directory = file.substring(file.length - 1) === "/";
-                            if (directory)
-                                file = file.substring(0, file.length - 1);
-                            return (
-                                <Flex key={file} direction={{ default: "column" }} spaceItems={{ default: 'spaceItemsNone' }}>
-                                    <FlexItem alignSelf={{ default: "alignSelfCenter" }}>
-                                        <Icon size="xl">
-                                            {directory
-                                                ? <FolderIcon />
-                                                : <FileIcon />}
-                                        </Icon>
-                                    </FlexItem>
-                                    <FlexItem alignSelf={{ default: "alignSelfCenter" }}>{file}</FlexItem>
-                                </Flex>
-                            );
-                        })}
+                    <Flex direction={{ default: "column" }}>
+                        <Flex id="header">
+                            <FlexItem>{_("Directories & files")}</FlexItem>
+                            <FlexItem align={{ default: 'alignRight' }}>
+                                <SearchInput placeholder={_("Filter directory")} />
+                            </FlexItem>
+                            <FlexItem>
+                                <Dropdown toggle={() => {}} />
+                                <Button variant="secondary">
+                                    <Icon>
+                                        <ListIcon />
+                                    </Icon>
+                                </Button>
+                            </FlexItem>
+                            <FlexItem>
+                                <Button variant="secondary">Upload</Button>
+                            </FlexItem>
+                            <FlexItem>
+                                :
+                            </FlexItem>
+                        </Flex>
+                        <Flex id="folder-view">
+                            {this.state.files.map((file) => {
+                                const directory = file.substring(file.length - 1) === "/";
+                                if (directory)
+                                    file = file.substring(0, file.length - 1);
+                                return (
+                                    <Flex key={file} direction={{ default: "column" }} spaceItems={{ default: 'spaceItemsNone' }}>
+                                        <FlexItem alignSelf={{ default: "alignSelfCenter" }}>
+                                            <Icon size="xl">
+                                                {directory
+                                                    ? <FolderIcon />
+                                                    : <FileIcon />}
+                                            </Icon>
+                                        </FlexItem>
+                                        <FlexItem alignSelf={{ default: "alignSelfCenter" }}>{file}</FlexItem>
+                                    </Flex>
+                                );
+                            })}
+                        </Flex>
                     </Flex>
                 </PageSection>
             </Page>
