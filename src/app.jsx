@@ -19,11 +19,12 @@
 
 import cockpit from 'cockpit';
 import React from 'react';
-import { Flex, FlexItem, Icon, Page, PageSection } from "@patternfly/react-core";
-import { FileIcon, FolderIcon } from "@patternfly/react-icons";
+import { Breadcrumb, BreadcrumbItem, Button, Flex, FlexItem, Icon, Page, PageBreadcrumb, PageSection } from "@patternfly/react-core";
+import { ArrowLeftIcon, ArrowRightIcon, EditAltIcon, FileIcon, FolderIcon, PficonHistoryIcon, StarIcon } from "@patternfly/react-icons";
 
 const _ = cockpit.gettext;
 
+// To do: convert to functional component
 export class Application extends React.Component {
     constructor() {
         super();
@@ -47,9 +48,58 @@ export class Application extends React.Component {
                 });
     }
 
+    // To do: button spacing, correct refresh icon
     render() {
         return (
             <Page>
+                <PageBreadcrumb stickyOnBreakpoint={{ default: "top" }}>
+                    <Flex>
+                        <FlexItem>
+                            <Button variant="secondary">
+                                <Icon>
+                                    <ArrowLeftIcon />
+                                </Icon>
+                            </Button>
+                        </FlexItem>
+                        <FlexItem>
+                            <Button variant="secondary">
+                                <Icon>
+                                    <ArrowRightIcon />
+                                </Icon>
+                            </Button>
+                        </FlexItem>
+                        <FlexItem>
+                            <Button variant="secondary">
+                                <Icon>
+                                    <PficonHistoryIcon />
+                                </Icon>
+                            </Button>
+                        </FlexItem>
+                        <FlexItem>
+                            <Breadcrumb>
+                                <BreadcrumbItem to="#/">{_("home")}</BreadcrumbItem>
+                            </Breadcrumb>
+                        </FlexItem>
+                        <FlexItem align={{ default: 'alignRight' }}>
+                            <Button variant="secondary">
+                                <Icon>
+                                    <EditAltIcon />
+                                </Icon>
+                            </Button>
+                        </FlexItem>
+                        <FlexItem>
+                            <Button variant="secondary">
+                                <Icon>
+                                    <StarIcon />
+                                </Icon>
+                            </Button>
+                        </FlexItem>
+                        <FlexItem>
+                            {/* To do: Kebab dropdown */}
+                            :
+                        </FlexItem>
+                    </Flex>
+                </PageBreadcrumb>
                 <PageSection>
                     <Flex>
                         {this.state.files.map((file) => {
