@@ -104,7 +104,7 @@ export class Application extends React.Component {
                             <CardTitle component="h2">{_("Directories & files")}</CardTitle>
                             <Flex flexWrap={{ default: 'nowrap' }}>
                                 <SearchInput placeholder={_("Filter directory")} />
-                                <DropdownBasic />
+                                <ViewSelector />
                                 <Button variant="secondary">Upload</Button>
                                 <FlexItem>
                                     <DropdownWithKebab />
@@ -174,21 +174,16 @@ const DropdownWithKebab = () => {
     );
 };
 
-export const DropdownBasic = () => {
+export const ViewSelector = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const onToggleClick = () => {
-        setIsOpen(!isOpen);
-    };
-    const onSelect = (_event, itemId) => {
-        console.log('selected', itemId);
-        setIsOpen(false);
-    };
+    const onToggleClick = isOpen => setIsOpen(!isOpen);
+    const onSelect = () => setIsOpen(false);
     return (
         <Dropdown
             isOpen={isOpen}
             onSelect={onSelect}
-            onOpenChange={isOpen => setIsOpen(isOpen)}
-            toggle={toggleRef => <MenuToggle ref={toggleRef} onClick={onToggleClick} isExpanded={isOpen} variant="secondary" splitButtonOptions={{ variant: "action", items: [<Flex key="list-icon"><Icon><ListIcon /></Icon></Flex>] }} />} ouiaId="BasicDropdown"
+            onOpenChange={setIsOpen}
+            toggle={toggleRef => <MenuToggle ref={toggleRef} onClick={() => { onToggleClick(isOpen) }} isExpanded={isOpen} variant="secondary" splitButtonOptions={{ variant: "action", items: [<Icon key="list-icon"><ListIcon /></Icon>] }} />}
         >
             <DropdownList>
                 <DropdownItem itemId={0} key="action1">
