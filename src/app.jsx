@@ -27,8 +27,11 @@ const _ = cockpit.gettext;
 // To do: refresh automatically when files change
 export const Application = () => {
     const [currentUser, setCurrentUser] = useState("");
+    const [currentFilter, setCurrentFilter] = useState("");
     const [files, setFiles] = useState([]);
     const [path, setPath] = useState([]);
+
+    const onFilterChange = (_, value) => setCurrentFilter(value);
 
     useEffect(() => {
         cockpit.user().then(user => {
@@ -48,8 +51,8 @@ export const Application = () => {
             <NavigatorBreadcrumbs path={path} setPath={setPath} />
             <PageSection>
                 <Card>
-                    <NavigatorCardHeader />
-                    <NavigatorCardBody files={files} setPath={setPath} path={path} />
+                    <NavigatorCardHeader currentFilter={currentFilter} onFilterChange={onFilterChange} />
+                    <NavigatorCardBody currentFilter={currentFilter} files={files} setPath={setPath} path={path} />
                 </Card>
             </PageSection>
         </Page>
@@ -103,12 +106,12 @@ const NavigatorBreadcrumbs = ({ path, setPath }) => {
     );
 };
 
-const NavigatorCardHeader = () => {
+const NavigatorCardHeader = ({ currentFilter, onFilterChange }) => {
     return (
         <CardHeader>
             <CardTitle component="h2">{_("Directories & files")}</CardTitle>
             <Flex flexWrap={{ default: 'nowrap' }}>
-                <SearchInput placeholder={_("Filter directory")} />
+                <SearchInput placeholder={_("Filter directory")} value={currentFilter} onChange={onFilterChange} />
                 <ViewSelector />
                 <Button variant="secondary">Upload</Button>
                 <FlexItem>
@@ -119,7 +122,7 @@ const NavigatorCardHeader = () => {
     );
 };
 
-const NavigatorCardBody = ({ files, setPath, path }) => {
+const NavigatorCardBody = ({ currentFilter, files, setPath, path }) => {
     const onDoubleClickNavigate = (dir, path, file) => {
         if (dir) {
             setPath([...path, file]);
@@ -133,20 +136,25 @@ const NavigatorCardBody = ({ files, setPath, path }) => {
                     const directory = file.substring(file.length - 1) === "/";
                     if (directory)
                         file = file.substring(0, file.length - 1);
-                    return (
-                        <Flex key={file} direction={{ default: "column" }} spaceItems={{ default: 'spaceItemsNone' }}>
-                            <FlexItem alignSelf={{ default: "alignSelfCenter" }}>
-                                <Button variant="plain" onDoubleClick={ () => onDoubleClickNavigate(directory, path, file)}>
-                                    <Icon size="xl">
-                                        {directory
-                                            ? <FolderIcon />
-                                            : <FileIcon />}
-                                    </Icon>
-                                </Button>
-                            </FlexItem>
-                            <FlexItem alignSelf={{ default: "alignSelfCenter" }}>{file}</FlexItem>
-                        </Flex>
-                    );
+
+                    if (file.toLowerCase().includes(currentFilter.toLowerCase())) {
+                        return (
+                            <Flex key={file} direction={{ default: "column" }} spaceItems={{ default: 'spaceItemsNone' }}>
+                                <FlexItem alignSelf={{ default: "alignSelfCenter" }}>
+                                    <Button variant="plain" onDoubleClick={ () => onDoubleClickNavigate(directory, path, file)}>
+                                        <Icon size="xl">
+                                            {directory
+                                                ? <FolderIcon />
+                                                : <FileIcon />}
+                                        </Icon>
+                                    </Button>
+                                </FlexItem>
+                                <FlexItem alignSelf={{ default: "alignSelfCenter" }}>{file}</FlexItem>
+                            </Flex>
+                        );
+                    } else {
+                        return null;
+                    }
                 })}
             </Flex>
         </CardBody>
