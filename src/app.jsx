@@ -55,23 +55,17 @@ export class Application extends React.Component {
                     <Flex>
                         <FlexItem>
                             <Button variant="secondary">
-                                <Icon>
-                                    <ArrowLeftIcon />
-                                </Icon>
+                                <ArrowLeftIcon />
                             </Button>
                         </FlexItem>
                         <FlexItem>
                             <Button variant="secondary">
-                                <Icon>
-                                    <ArrowRightIcon />
-                                </Icon>
+                                <ArrowRightIcon />
                             </Button>
                         </FlexItem>
                         <FlexItem>
                             <Button variant="secondary">
-                                <Icon>
-                                    <PficonHistoryIcon />
-                                </Icon>
+                                <PficonHistoryIcon />
                             </Button>
                         </FlexItem>
                         <FlexItem>
@@ -81,16 +75,12 @@ export class Application extends React.Component {
                         </FlexItem>
                         <FlexItem align={{ default: 'alignRight' }}>
                             <Button variant="secondary">
-                                <Icon>
-                                    <EditAltIcon />
-                                </Icon>
+                                <EditAltIcon />
                             </Button>
                         </FlexItem>
                         <FlexItem>
                             <Button variant="secondary">
-                                <Icon>
-                                    <StarIcon />
-                                </Icon>
+                                <StarIcon />
                             </Button>
                         </FlexItem>
                         <FlexItem>
@@ -120,11 +110,13 @@ export class Application extends React.Component {
                                     return (
                                         <Flex key={file} direction={{ default: "column" }} spaceItems={{ default: 'spaceItemsNone' }}>
                                             <FlexItem alignSelf={{ default: "alignSelfCenter" }}>
-                                                <Icon size="xl">
-                                                    {directory
-                                                        ? <FolderIcon />
-                                                        : <FileIcon />}
-                                                </Icon>
+                                                <Button variant="plain">
+                                                    <Icon size="xl">
+                                                        {directory
+                                                            ? <FolderIcon />
+                                                            : <FileIcon />}
+                                                    </Icon>
+                                                </Button>
                                             </FlexItem>
                                             <FlexItem alignSelf={{ default: "alignSelfCenter" }}>{file}</FlexItem>
                                         </Flex>
