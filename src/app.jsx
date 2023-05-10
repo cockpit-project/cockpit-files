@@ -188,7 +188,7 @@ export const DropdownBasic = () => {
             isOpen={isOpen}
             onSelect={onSelect}
             onOpenChange={isOpen => setIsOpen(isOpen)}
-            toggle={toggleRef => <MenuToggle ref={toggleRef} onClick={onToggleClick} isExpanded={isOpen} variant="secondary" splitButtonOptions={{ variant: "action", items: [<Icon key="list-icon"><ListIcon /></Icon>] }} />} ouiaId="BasicDropdown"
+            toggle={toggleRef => <MenuToggle ref={toggleRef} onClick={onToggleClick} isExpanded={isOpen} variant="secondary" splitButtonOptions={{ variant: "action", items: [<Flex key="list-icon"><Icon><ListIcon /></Icon></Flex>] }} />} ouiaId="BasicDropdown"
         >
             <DropdownList>
                 <DropdownItem itemId={0} key="action1">
