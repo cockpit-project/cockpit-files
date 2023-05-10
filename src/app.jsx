@@ -18,118 +18,127 @@
  */
 
 import cockpit from 'cockpit';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Breadcrumb, BreadcrumbItem, Button, Card, CardBody, CardTitle, CardHeader, Dropdown, DropdownItem, DropdownList, Divider, Flex, FlexItem, Icon, MenuToggle, Page, PageBreadcrumb, PageSection, SearchInput } from "@patternfly/react-core";
 import { ArrowLeftIcon, ArrowRightIcon, EditAltIcon, EllipsisVIcon, FileIcon, FolderIcon, ListIcon, PficonHistoryIcon, StarIcon } from "@patternfly/react-icons";
 
 const _ = cockpit.gettext;
 
-// To do: convert to functional component
-export class Application extends React.Component {
-    constructor() {
-        super();
-        this.state = { hostname: _("Unknown"), current_user: "", files: [] };
+// To do: refresh automatically when files change
+export const Application = () => {
+    const [currentUser, setCurrentUser] = useState("");
+    const [files, setFiles] = useState([]);
 
-        cockpit.file('/etc/hostname').watch(content => {
-            this.setState({ hostname: content.trim() });
-        });
-    }
-
-    componentDidMount() {
+    useEffect(() => {
         cockpit.user().then(user => {
-            this.setState({ current_user: user.name || "" });
+            setCurrentUser(user.name || "");
         })
                 .then(() => {
-                    cockpit.spawn(["ls", "-p", `/home/${this.state.current_user}`], { superuser: true }).then((res) => {
+                    cockpit.spawn(["ls", "-p", `/home/${currentUser}`], { superuser: true }).then((res) => {
                         res = res.split("\n");
-                        this.setState({ files: res.slice(0, res.length - 1) });
+                        setFiles(res.slice(0, res.length - 1));
                     });
                 });
-    }
+    }, [currentUser]);
 
-    // To do: button spacing, correct refresh icon, dropdown
-    render() {
-        return (
-            <Page>
-                <PageBreadcrumb stickyOnBreakpoint={{ default: "top" }}>
-                    <Flex>
-                        <FlexItem>
-                            <Button variant="secondary">
-                                <ArrowLeftIcon />
-                            </Button>
-                        </FlexItem>
-                        <FlexItem>
-                            <Button variant="secondary">
-                                <ArrowRightIcon />
-                            </Button>
-                        </FlexItem>
-                        <FlexItem>
-                            <Button variant="secondary">
-                                <PficonHistoryIcon />
-                            </Button>
-                        </FlexItem>
-                        <FlexItem>
-                            <Breadcrumb>
-                                <BreadcrumbItem to="#/">{_("home")}</BreadcrumbItem>
-                            </Breadcrumb>
-                        </FlexItem>
-                        <FlexItem align={{ default: 'alignRight' }}>
-                            <Button variant="secondary">
-                                <EditAltIcon />
-                            </Button>
-                        </FlexItem>
-                        <FlexItem>
-                            <Button variant="secondary">
-                                <StarIcon />
-                            </Button>
-                        </FlexItem>
-                        <FlexItem>
-                            <DropdownWithKebab />
-                        </FlexItem>
-                    </Flex>
-                </PageBreadcrumb>
-                <PageSection>
-                    <Card>
-                        <CardHeader>
-                            <CardTitle component="h2">{_("Directories & files")}</CardTitle>
-                            <Flex flexWrap={{ default: 'nowrap' }}>
-                                <SearchInput placeholder={_("Filter directory")} />
-                                <ViewSelector />
-                                <Button variant="secondary">Upload</Button>
-                                <FlexItem>
-                                    <DropdownWithKebab />
-                                </FlexItem>
-                            </Flex>
-                        </CardHeader>
-                        <CardBody>
-                            <Flex id="folder-view">
-                                {this.state.files.map((file) => {
-                                    const directory = file.substring(file.length - 1) === "/";
-                                    if (directory)
-                                        file = file.substring(0, file.length - 1);
-                                    return (
-                                        <Flex key={file} direction={{ default: "column" }} spaceItems={{ default: 'spaceItemsNone' }}>
-                                            <FlexItem alignSelf={{ default: "alignSelfCenter" }}>
-                                                <Button variant="plain">
-                                                    <Icon size="xl">
-                                                        {directory
-                                                            ? <FolderIcon />
-                                                            : <FileIcon />}
-                                                    </Icon>
-                                                </Button>
-                                            </FlexItem>
-                                            <FlexItem alignSelf={{ default: "alignSelfCenter" }}>{file}</FlexItem>
-                                        </Flex>
-                                    );
-                                })}
-                            </Flex>
-                        </CardBody>
-                    </Card>
-                </PageSection>
-            </Page>
-        );
-    }
-}
+    return (
+        <Page>
+            <NavigatorBreadcrumbs />
+            <PageSection>
+                <Card>
+                    <NavigatorCardHeader />
+                    <NavigatorCardBody files={files} />
+                </Card>
+            </PageSection>
+        </Page>
+    );
+};
+
+const NavigatorBreadcrumbs = () => {
+    return (
+        <PageBreadcrumb stickyOnBreakpoint={{ default: "top" }}>
+            <Flex>
+                <FlexItem>
+                    <Button variant="secondary">
+                        <ArrowLeftIcon />
+                    </Button>
+                </FlexItem>
+                <FlexItem>
+                    <Button variant="secondary">
+                        <ArrowRightIcon />
+                    </Button>
+                </FlexItem>
+                <FlexItem>
+                    <Button variant="secondary">
+                        <PficonHistoryIcon />
+                    </Button>
+                </FlexItem>
+                <FlexItem>
+                    <Breadcrumb>
+                        <BreadcrumbItem to="#/">{_("home")}</BreadcrumbItem>
+                    </Breadcrumb>
+                </FlexItem>
+                <FlexItem align={{ default: 'alignRight' }}>
+                    <Button variant="secondary">
+                        <EditAltIcon />
+                    </Button>
+                </FlexItem>
+                <FlexItem>
+                    <Button variant="secondary">
+                        <StarIcon />
+                    </Button>
+                </FlexItem>
+                <FlexItem>
+                    <DropdownWithKebab />
+                </FlexItem>
+            </Flex>
+        </PageBreadcrumb>
+    );
+};
+
+const NavigatorCardHeader = () => {
+    return (
+        <CardHeader>
+            <CardTitle component="h2">{_("Directories & files")}</CardTitle>
+            <Flex flexWrap={{ default: 'nowrap' }}>
+                <SearchInput placeholder={_("Filter directory")} />
+                <ViewSelector />
+                <Button variant="secondary">Upload</Button>
+                <FlexItem>
+                    <DropdownWithKebab />
+                </FlexItem>
+            </Flex>
+        </CardHeader>
+    );
+};
+
+const NavigatorCardBody = ({ files }) => {
+    return (
+        <CardBody>
+            <Flex id="folder-view">
+                {files.map((file) => {
+                    const directory = file.substring(file.length - 1) === "/";
+                    if (directory)
+                        file = file.substring(0, file.length - 1);
+                    return (
+                        <Flex key={file} direction={{ default: "column" }} spaceItems={{ default: 'spaceItemsNone' }}>
+                            <FlexItem alignSelf={{ default: "alignSelfCenter" }}>
+                                <Button variant="plain">
+                                    <Icon size="xl">
+                                        {directory
+                                            ? <FolderIcon />
+                                            : <FileIcon />}
+                                    </Icon>
+                                </Button>
+                            </FlexItem>
+                            <FlexItem alignSelf={{ default: "alignSelfCenter" }}>{file}</FlexItem>
+                        </Flex>
+                    );
+                })}
+            </Flex>
+        </CardBody>
+    );
+};
 
 const DropdownWithKebab = () => {
     const [isOpen, setIsOpen] = useState(false);
