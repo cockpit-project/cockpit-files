@@ -28,33 +28,35 @@ const _ = cockpit.gettext;
 export const Application = () => {
     const [currentUser, setCurrentUser] = useState("");
     const [files, setFiles] = useState([]);
+    const [path, setPath] = useState([]);
 
     useEffect(() => {
         cockpit.user().then(user => {
             setCurrentUser(user.name || "");
         })
                 .then(() => {
-                    cockpit.spawn(["ls", "-p", `/home/${currentUser}`], { superuser: true }).then((res) => {
+                    const currentPath = path.join("/");
+                    cockpit.spawn(["ls", "-p", `/home/${currentUser}/${currentPath}`], { superuser: true }).then((res) => {
                         res = res.split("\n");
                         setFiles(res.slice(0, res.length - 1));
                     });
                 });
-    }, [currentUser]);
+    }, [currentUser, path]);
 
     return (
         <Page>
-            <NavigatorBreadcrumbs />
+            <NavigatorBreadcrumbs path={path} setPath={setPath} />
             <PageSection>
                 <Card>
                     <NavigatorCardHeader />
-                    <NavigatorCardBody files={files} />
+                    <NavigatorCardBody files={files} setPath={setPath} path={path} />
                 </Card>
             </PageSection>
         </Page>
     );
 };
 
-const NavigatorBreadcrumbs = () => {
+const NavigatorBreadcrumbs = ({ path, setPath }) => {
     return (
         <PageBreadcrumb stickyOnBreakpoint={{ default: "top" }}>
             <Flex>
@@ -75,7 +77,12 @@ const NavigatorBreadcrumbs = () => {
                 </FlexItem>
                 <FlexItem>
                     <Breadcrumb>
-                        <BreadcrumbItem to="#/">{_("home")}</BreadcrumbItem>
+                        <BreadcrumbItem to="#" onClick={() => setPath([])}>{_("home")}</BreadcrumbItem>
+                        {path.map((dir, i) => {
+                            return (
+                                <BreadcrumbItem to="#" onClick={() => setPath(path.slice(0, i + 1))} key={dir}>{dir}</BreadcrumbItem>
+                            );
+                        })}
                     </Breadcrumb>
                 </FlexItem>
                 <FlexItem align={{ default: 'alignRight' }}>
@@ -112,7 +119,13 @@ const NavigatorCardHeader = () => {
     );
 };
 
-const NavigatorCardBody = ({ files }) => {
+const NavigatorCardBody = ({ files, setPath, path }) => {
+    const onDoubleClickNavigate = (dir, path, file) => {
+        if (dir) {
+            setPath([...path, file]);
+        }
+    };
+
     return (
         <CardBody>
             <Flex id="folder-view">
@@ -123,7 +136,7 @@ const NavigatorCardBody = ({ files }) => {
                     return (
                         <Flex key={file} direction={{ default: "column" }} spaceItems={{ default: 'spaceItemsNone' }}>
                             <FlexItem alignSelf={{ default: "alignSelfCenter" }}>
-                                <Button variant="plain">
+                                <Button variant="plain" onDoubleClick={ () => onDoubleClickNavigate(directory, path, file)}>
                                     <Icon size="xl">
                                         {directory
                                             ? <FolderIcon />
