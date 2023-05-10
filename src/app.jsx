@@ -18,9 +18,9 @@
  */
 
 import cockpit from 'cockpit';
-import React from 'react';
-import { Breadcrumb, BreadcrumbItem, Button, Card, CardBody, CardTitle, CardHeader, Dropdown, Flex, FlexItem, Icon, Page, PageBreadcrumb, PageSection, SearchInput } from "@patternfly/react-core";
-import { ArrowLeftIcon, ArrowRightIcon, EditAltIcon, FileIcon, FolderIcon, ListIcon, PficonHistoryIcon, StarIcon } from "@patternfly/react-icons";
+import React, { useState } from 'react';
+import { Breadcrumb, BreadcrumbItem, Button, Card, CardBody, CardTitle, CardHeader, Dropdown, DropdownItem, DropdownList, Divider, Flex, FlexItem, Icon, MenuToggle, Page, PageBreadcrumb, PageSection, SearchInput } from "@patternfly/react-core";
+import { ArrowLeftIcon, ArrowRightIcon, EditAltIcon, EllipsisVIcon, FileIcon, FolderIcon, ListIcon, PficonHistoryIcon, StarIcon } from "@patternfly/react-icons";
 
 const _ = cockpit.gettext;
 
@@ -94,8 +94,7 @@ export class Application extends React.Component {
                             </Button>
                         </FlexItem>
                         <FlexItem>
-                            {/* To do: Kebab dropdown */}
-                            :
+                            <DropdownWithKebab />
                         </FlexItem>
                     </Flex>
                 </PageBreadcrumb>
@@ -105,15 +104,10 @@ export class Application extends React.Component {
                             <CardTitle component="h2">{_("Directories & files")}</CardTitle>
                             <Flex flexWrap={{ default: 'nowrap' }}>
                                 <SearchInput placeholder={_("Filter directory")} />
-                                <Dropdown toggle={() => {}} />
-                                <Button variant="secondary">
-                                    <Icon>
-                                        <ListIcon />
-                                    </Icon>
-                                </Button>
+                                <DropdownBasic />
                                 <Button variant="secondary">Upload</Button>
                                 <FlexItem>
-                                    :
+                                    <DropdownWithKebab />
                                 </FlexItem>
                             </Flex>
                         </CardHeader>
@@ -144,3 +138,70 @@ export class Application extends React.Component {
         );
     }
 }
+
+const DropdownWithKebab = () => {
+    const [isOpen, setIsOpen] = useState(false);
+    const onToggleClick = () => {
+        setIsOpen(!isOpen);
+    };
+    const onSelect = (_event, itemId) => {
+        setIsOpen(false);
+    };
+    return (
+        <Dropdown
+            isPlain
+            isOpen={isOpen}
+            onSelect={onSelect}
+            onOpenChange={isOpen => setIsOpen(isOpen)}
+            toggle={toggleRef =>
+                <MenuToggle ref={toggleRef} aria-label="kebab dropdown toggle" variant="plain" onClick={onToggleClick} isExpanded={isOpen}>
+                    <EllipsisVIcon />
+                </MenuToggle>}
+        >
+            <DropdownList>
+                <DropdownItem itemId={0} key="action1">
+                    Action
+                </DropdownItem>
+                <DropdownItem itemId={1} key="action2">
+                    Action
+                </DropdownItem>
+                <Divider component="li" key="separator" />
+                <DropdownItem itemId={2} key="action3">
+                    Action
+                </DropdownItem>
+            </DropdownList>
+        </Dropdown>
+    );
+};
+
+export const DropdownBasic = () => {
+    const [isOpen, setIsOpen] = useState(false);
+    const onToggleClick = () => {
+        setIsOpen(!isOpen);
+    };
+    const onSelect = (_event, itemId) => {
+        console.log('selected', itemId);
+        setIsOpen(false);
+    };
+    return (
+        <Dropdown
+            isOpen={isOpen}
+            onSelect={onSelect}
+            onOpenChange={isOpen => setIsOpen(isOpen)}
+            toggle={toggleRef => <MenuToggle ref={toggleRef} onClick={onToggleClick} isExpanded={isOpen} variant="secondary" splitButtonOptions={{ variant: "action", items: [<Icon key="list-icon"><ListIcon /></Icon>] }} />} ouiaId="BasicDropdown"
+        >
+            <DropdownList>
+                <DropdownItem itemId={0} key="action1">
+                    Action
+                </DropdownItem>
+                <DropdownItem itemId={1} key="action2">
+                    Action
+                </DropdownItem>
+                <Divider component="li" key="separator" />
+                <DropdownItem itemId={2} key="action3">
+                    Action
+                </DropdownItem>
+            </DropdownList>
+        </Dropdown>
+    );
+};
