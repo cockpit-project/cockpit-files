@@ -30,6 +30,7 @@ export const Application = () => {
     const [currentFilter, setCurrentFilter] = useState("");
     const [files, setFiles] = useState([]);
     const [path, setPath] = useState([]);
+    const [pathIndex, setPathIndex] = useState(0);
 
     const onFilterChange = (_, value) => setCurrentFilter(value);
 
@@ -38,38 +39,48 @@ export const Application = () => {
             setCurrentUser(user.name || "");
         })
                 .then(() => {
-                    const currentPath = path.join("/");
-                    cockpit.spawn(["ls", "-p", `/home/${currentUser}/${currentPath}`], { superuser: true }).then((res) => {
+                    const currentPath = path.slice(0, pathIndex).join("/");
+                    cockpit.spawn(["ls", "-p", `/${currentPath}`], { superuser: true }).then((res) => {
                         res = res.split("\n");
                         setFiles(res.slice(0, res.length - 1));
                     });
                 });
-    }, [currentUser, path]);
+    }, [currentUser, path, pathIndex]);
 
     return (
         <Page>
-            <NavigatorBreadcrumbs path={path} setPath={setPath} />
+            <NavigatorBreadcrumbs path={path} setPath={setPath} pathIndex={pathIndex} setPathIndex={setPathIndex} />
             <PageSection>
                 <Card>
                     <NavigatorCardHeader currentFilter={currentFilter} onFilterChange={onFilterChange} />
-                    <NavigatorCardBody currentFilter={currentFilter} files={files} setPath={setPath} path={path} />
+                    <NavigatorCardBody currentFilter={currentFilter} files={files} setPath={setPath} path={path} pathIndex={pathIndex} setPathIndex={setPathIndex} />
                 </Card>
             </PageSection>
         </Page>
     );
 };
 
-const NavigatorBreadcrumbs = ({ path, setPath }) => {
+const NavigatorBreadcrumbs = ({ path, setPath, pathIndex, setPathIndex }) => {
+    const navigateBack = () => {
+        if (pathIndex > 0)
+            setPathIndex(pathIndex - 1);
+    };
+
+    const navigateForward = () => {
+        if (pathIndex < path.length) {
+            setPathIndex(pathIndex + 1);
+        }
+    };
     return (
         <PageBreadcrumb stickyOnBreakpoint={{ default: "top" }}>
             <Flex>
                 <FlexItem>
-                    <Button variant="secondary">
+                    <Button variant="secondary" onClick={navigateBack} isDisabled={pathIndex === 0}>
                         <ArrowLeftIcon />
                     </Button>
                 </FlexItem>
                 <FlexItem>
-                    <Button variant="secondary">
+                    <Button variant="secondary" onClick={navigateForward}>
                         <ArrowRightIcon />
                     </Button>
                 </FlexItem>
@@ -106,10 +117,11 @@ const NavigatorCardHeader = ({ currentFilter, onFilterChange }) => {
     );
 };
 
-const NavigatorCardBody = ({ currentFilter, files, setPath, path }) => {
+const NavigatorCardBody = ({ currentFilter, files, setPath, path, pathIndex, setPathIndex }) => {
     const onDoubleClickNavigate = (dir, path, file) => {
         if (dir) {
-            setPath([...path, file]);
+            setPath([...path.slice(0, pathIndex), file]);
+            setPathIndex(pathIndex + 1);
         }
     };
 
