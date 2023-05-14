@@ -40,11 +40,49 @@ export const Application = () => {
             setCurrentUser(user.name || "");
         })
                 .then(() => {
-                    const currentPath = path.slice(0, pathIndex).join("/");
-                    cockpit.spawn(["ls", "-p", `/${currentPath}`], { superuser: true }).then((res) => {
-                        res = res.split("\n");
-                        setFiles(res.slice(0, res.length - 1));
+                    let result = [];
+                    const currentPath = path.join("/");
+                    const channel = cockpit.channel({
+                        payload: "fslist1",
+                        path: `/home/${currentUser}/${currentPath}`,
+                        superuser: "try",
+                        watch: true,
                     });
+
+                    channel.addEventListener("ready", () => {
+                        setFiles(result);
+                        console.log("ready");
+                    });
+
+                    channel.addEventListener("close", (ev, data) => {
+                        console.log("close");
+                    });
+
+                    channel.addEventListener("message", (ev, data) => {
+                        const item = JSON.parse(data);
+                        console.log(item);
+                        // setFiles([...files, { name: item.path, type: item.type }]);
+                        if (item && item.path && item.event === 'present' && item.path[0] !== ".")
+                            result.push({ name: item.path, type: item.type });
+                        else if (item.event === 'deleted') {
+                            const deleted_name = item.path.slice(item.path.lastIndexOf("/") + 1);
+                            console.log(deleted_name);
+                            result = result.filter((res) => { return res.name !== deleted_name });
+                            setFiles(result);
+                            console.log(files);
+                        } else if (item.event === 'created') {
+                            const created_name = item.path.slice(item.path.lastIndexOf("/") + 1);
+                            console.log(created_name);
+                            result.push({ name: created_name, type: item.type });
+                            console.log(result);
+                            setFiles(result);
+                            console.log(files);
+                        }
+                    });
+                    // cockpit.spawn(["ls", "-p", `/home/${currentUser}/${currentPath}`], { superuser: true }).then((res) => {
+                    //     res = res.split("\n");
+                    //     setFiles(res.slice(0, res.length - 1));
+                    // });
                 });
     }, [currentUser, path, pathIndex]);
 
@@ -140,23 +178,23 @@ const NavigatorCardBody = ({ currentFilter, files, setPath, path, pathIndex, set
         <CardBody>
             <Flex id="folder-view">
                 {files.map((file) => {
-                    const directory = file.substring(file.length - 1) === "/";
-                    if (directory)
-                        file = file.substring(0, file.length - 1);
+                    // const directory = file.substring(file.length - 1) === "/";
+                    // if (directory)
+                    //     file = file.substring(0, file.length - 1);
 
-                    if (file.toLowerCase().includes(currentFilter.toLowerCase())) {
+                    if (file.name.toLowerCase().includes(currentFilter.toLowerCase())) {
                         return (
-                            <Flex key={file} direction={{ default: "column" }} spaceItems={{ default: 'spaceItemsNone' }}>
+                            <Flex key={file.name} direction={{ default: "column" }} spaceItems={{ default: 'spaceItemsNone' }}>
                                 <FlexItem alignSelf={{ default: "alignSelfCenter" }}>
-                                    <Button variant="plain" onDoubleClick={ () => onDoubleClickNavigate(directory, path, file)}>
+                                    <Button variant="plain" onDoubleClick={ () => onDoubleClickNavigate(file.name, path, file)}>
                                         <Icon size="xl">
-                                            {directory
+                                            {file.type === "directory"
                                                 ? <FolderIcon />
                                                 : <FileIcon />}
                                         </Icon>
                                     </Button>
                                 </FlexItem>
-                                <FlexItem alignSelf={{ default: "alignSelfCenter" }}>{file}</FlexItem>
+                                <FlexItem alignSelf={{ default: "alignSelfCenter" }}>{file.name}</FlexItem>
                             </Flex>
                         );
                     } else {
