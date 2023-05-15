@@ -19,7 +19,7 @@
 
 import cockpit from 'cockpit';
 import React, { useEffect, useState } from 'react';
-import { Breadcrumb, BreadcrumbItem, Button, Card, CardBody, CardTitle, CardHeader, Dropdown, DropdownItem, DropdownList, Flex, FlexItem, Icon, MenuToggle, Page, PageBreadcrumb, PageSection, SearchInput } from "@patternfly/react-core";
+import { Button, Card, CardBody, CardTitle, CardHeader, Dropdown, DropdownItem, DropdownList, Flex, FlexItem, Icon, MenuToggle, Page, PageBreadcrumb, PageSection, SearchInput } from "@patternfly/react-core";
 import { ArrowLeftIcon, ArrowRightIcon, EllipsisVIcon, FileIcon, FolderIcon, ListIcon, PficonHistoryIcon } from "@patternfly/react-icons";
 
 const _ = cockpit.gettext;
@@ -34,6 +34,7 @@ export const Application = () => {
 
     const onFilterChange = (_, value) => setCurrentFilter(value);
 
+    // To do: Start navigator on user home directory
     useEffect(() => {
         cockpit.user().then(user => {
             setCurrentUser(user.name || "");
@@ -71,6 +72,12 @@ const NavigatorBreadcrumbs = ({ path, setPath, pathIndex, setPathIndex }) => {
             setPathIndex(pathIndex + 1);
         }
     };
+
+    const navigateBreadcrumb = (i) => {
+        setPath(path.slice(0, i + 1));
+        setPathIndex(i);
+    };
+
     return (
         <PageBreadcrumb stickyOnBreakpoint={{ default: "top" }}>
             <Flex>
@@ -90,14 +97,18 @@ const NavigatorBreadcrumbs = ({ path, setPath, pathIndex, setPathIndex }) => {
                     </Button>
                 </FlexItem>
                 <FlexItem>
-                    <Breadcrumb>
-                        <BreadcrumbItem to="#" onClick={() => setPath([])}>{_("home")}</BreadcrumbItem>
-                        {path.map((dir, i) => {
+                    <Flex spaceItems={{ default: "spaceItemsXs" }}>
+                        {/* To do: adjust spacing */}
+                        <Button variant='link' onClick={() => { navigateBreadcrumb(0) }} className='breadcrumb-button'>/</Button>
+                        {path.slice(0, pathIndex).map((dir, i) => {
                             return (
-                                <BreadcrumbItem to="#" onClick={() => setPath(path.slice(0, i + 1))} key={dir}>{dir}</BreadcrumbItem>
+                                <React.Fragment key={dir}>
+                                    <Button variant='link' onClick={() => { navigateBreadcrumb(i + 1) }} key={dir} className='breadcrumb-button'>{dir}</Button>
+                                    <p key={i} className='breadcrumb-button'>/</p>
+                                </React.Fragment>
                             );
                         })}
-                    </Breadcrumb>
+                    </Flex>
                 </FlexItem>
             </Flex>
         </PageBreadcrumb>

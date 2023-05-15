@@ -5,3 +5,8 @@
 .pf-c-page__main-section > .pf-c-card {
     @extend .ct-card;
 }
+
+.breadcrumb-button {
+    padding-left: 0;
+    padding-right: 0;
+}
