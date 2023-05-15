@@ -100,9 +100,7 @@ const NavigatorCardHeader = ({ currentFilter, onFilterChange }) => {
             <Flex flexWrap={{ default: 'nowrap' }}>
                 <SearchInput placeholder={_("Filter directory")} value={currentFilter} onChange={onFilterChange} />
                 <ViewSelector />
-                <FlexItem>
-                    <DropdownWithKebab />
-                </FlexItem>
+                <DropdownWithKebab />
             </Flex>
         </CardHeader>
     );
