@@ -40,7 +40,7 @@ export const Application = () => {
             setCurrentUser(user.name || "");
         })
                 .then(() => {
-                    let result = [];
+                    const result = [];
                     const currentPath = path.join("/");
                     const channel = cockpit.channel({
                         payload: "fslist1",
@@ -61,22 +61,16 @@ export const Application = () => {
                     channel.addEventListener("message", (ev, data) => {
                         const item = JSON.parse(data);
                         console.log(item);
-                        // setFiles([...files, { name: item.path, type: item.type }]);
                         if (item && item.path && item.event === 'present' && item.path[0] !== ".")
                             result.push({ name: item.path, type: item.type });
                         else if (item.event === 'deleted') {
                             const deleted_name = item.path.slice(item.path.lastIndexOf("/") + 1);
-                            console.log(deleted_name);
-                            result = result.filter((res) => { return res.name !== deleted_name });
-                            setFiles(result);
-                            console.log(files);
+                            console.log("deleted:", deleted_name);
+                            setFiles(result.filter((res) => { return res.name !== deleted_name }));
                         } else if (item.event === 'created') {
                             const created_name = item.path.slice(item.path.lastIndexOf("/") + 1);
-                            console.log(created_name);
-                            result.push({ name: created_name, type: item.type });
-                            console.log(result);
-                            setFiles(result);
-                            console.log(files);
+                            console.log("created", created_name);
+                            setFiles([...result, { name: created_name, type: item.type }]);
                         }
                     });
                     // cockpit.spawn(["ls", "-p", `/home/${currentUser}/${currentPath}`], { superuser: true }).then((res) => {
@@ -169,7 +163,7 @@ const NavigatorCardHeader = ({ currentFilter, onFilterChange }) => {
 const NavigatorCardBody = ({ currentFilter, files, setPath, path, pathIndex, setPathIndex }) => {
     const onDoubleClickNavigate = (dir, path, file) => {
         if (dir) {
-            setPath([...path.slice(0, pathIndex), file]);
+            setPath([...path.slice(0, pathIndex), file.name]);
             setPathIndex(pathIndex + 1);
         }
     };
