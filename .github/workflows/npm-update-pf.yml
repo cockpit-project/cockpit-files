@@ -2,7 +2,7 @@ name: npm-update-pf
 on:
   schedule:
     - cron: '0 2 * * 1'
-  # can be run manually on https://github.com/cockpit-project/starter-kit/actions
+  # can be run manually on https://github.com/KKoukiou/cockpit-navigator/actions
   workflow_dispatch:
 jobs:
   npm-update:
