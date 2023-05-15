@@ -1,11 +1,12 @@
 {
-    "requires": {
-        "cockpit": "137"
-    },
+  "requires": {
+      "cockpit": "215"
+  },
 
-    "tools": {
-        "index": {
-            "label": "Navigator"
-        }
-    }
+  "tools": {
+      "index": {
+          "label": "Navigator"
+      }
+  },
+  "content-security-policy": "img-src 'self' data:; frame-src 'self' data:"
 }
