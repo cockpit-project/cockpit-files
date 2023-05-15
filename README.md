@@ -19,7 +19,7 @@ These commands check out the source and build it into the `dist/` directory:
 
 ```
 git clone https://github.com/KKoukiou/cockpit-navigator.git
-cd starter-kit
+cd cockpit-navigator
 make
 ```
 
@@ -70,7 +70,7 @@ set to upload code changes to `~/.local/share/cockpit/` instead of
 To "uninstall" the locally installed version, run `make devel-uninstall`, or
 remove manually the symlink:
 
-    rm ~/.local/share/cockpit/starter-kit
+    rm ~/.local/share/cockpit/cockpit-navigator
 
 # Running eslint
 
@@ -196,12 +196,12 @@ see the [packit.yaml](./packit.yaml) control file.
 It is important to keep your [NPM modules](./package.json) up to date, to keep
 up with security updates and bug fixes. This is done with the
 [npm-update bot script](https://github.com/cockpit-project/bots/blob/main/npm-update)
-which is run weekly or upon [manual request](https://github.com/cockpit-project/starter-kit/actions) through the
+which is run weekly or upon [manual request](https://github.com/KKoukiou/cockpit-navigator/actions) through the
 [npm-update.yml](.github/workflows/npm-update.yml) [GitHub action](https://github.com/features/actions).
 
 # Further reading
 
- * The [Starter Kit announcement](https://cockpit-project.org/blog/cockpit-starter-kit.html)
+ * The [Cockpit announcement](https://cockpit-project.org/blog/cockpit.html)
    blog post explains the rationale for this project.
  * [Cockpit Deployment and Developer documentation](https://cockpit-project.org/guide/latest/)
  * [Make your project easily discoverable](https://cockpit-project.org/blog/making-a-cockpit-application.html)
