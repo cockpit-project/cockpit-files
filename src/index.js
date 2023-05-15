@@ -21,7 +21,7 @@ import "cockpit-dark-theme";
 import "patternfly/patternfly-5-cockpit.scss";
 
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { Application } from './app.jsx';
 /*
  * PF4 overrides need to come after the JSX components imports because
@@ -34,5 +34,6 @@ import "patternfly/patternfly-5-overrides.scss";
 import './app.scss';
 
 document.addEventListener("DOMContentLoaded", function () {
-    ReactDOM.render(React.createElement(Application, {}), document.getElementById('app'));
+    const root = createRoot(document.getElementById('app'));
+    root.render(<Application />);
 });
