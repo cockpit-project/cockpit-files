@@ -19,7 +19,7 @@
 
 import cockpit from 'cockpit';
 import React, { useEffect, useState } from 'react';
-import { Breadcrumb, BreadcrumbItem, Button, Card, CardBody, CardTitle, CardHeader, Dropdown, DropdownItem, DropdownList, Divider, Flex, FlexItem, Icon, MenuToggle, Page, PageBreadcrumb, PageSection, SearchInput } from "@patternfly/react-core";
+import { Breadcrumb, BreadcrumbItem, Button, Card, CardBody, CardTitle, CardHeader, Dropdown, DropdownItem, DropdownList, Flex, FlexItem, Icon, MenuToggle, Page, PageBreadcrumb, PageSection, SearchInput } from "@patternfly/react-core";
 import { ArrowLeftIcon, ArrowRightIcon, EllipsisVIcon, FileIcon, FolderIcon, ListIcon, PficonHistoryIcon } from "@patternfly/react-icons";
 
 const _ = cockpit.gettext;
@@ -153,6 +153,7 @@ const DropdownWithKebab = () => {
     const onSelect = (_event, itemId) => {
         setIsOpen(false);
     };
+
     return (
         <Dropdown
             isPlain
@@ -160,20 +161,13 @@ const DropdownWithKebab = () => {
             onSelect={onSelect}
             onOpenChange={isOpen => setIsOpen(isOpen)}
             toggle={toggleRef =>
-                <MenuToggle ref={toggleRef} aria-label="kebab dropdown toggle" variant="plain" onClick={onToggleClick} isExpanded={isOpen}>
+                <MenuToggle ref={toggleRef} variant="plain" onClick={onToggleClick} isExpanded={isOpen}>
                     <EllipsisVIcon />
                 </MenuToggle>}
         >
             <DropdownList>
-                <DropdownItem itemId={0} key="action1">
-                    Action
-                </DropdownItem>
-                <DropdownItem itemId={1} key="action2">
-                    Action
-                </DropdownItem>
-                <Divider component="li" key="separator" />
-                <DropdownItem itemId={2} key="action3">
-                    Action
+                <DropdownItem itemId='create-directory' key="create-directory">
+                    {_("Create new directory")}
                 </DropdownItem>
             </DropdownList>
         </Dropdown>
@@ -192,15 +186,17 @@ export const ViewSelector = () => {
             toggle={toggleRef => <MenuToggle ref={toggleRef} onClick={() => { onToggleClick(isOpen) }} isExpanded={isOpen} variant="secondary" splitButtonOptions={{ variant: "action", items: [<Icon key="list-icon"><ListIcon /></Icon>] }} />}
         >
             <DropdownList>
-                <DropdownItem itemId={0} key="action1">
-                    Action
+                <DropdownItem itemId="az" key="az">
+                    {_("A-Z")}
                 </DropdownItem>
-                <DropdownItem itemId={1} key="action2">
-                    Action
+                <DropdownItem itemId="za" key="za">
+                    {_("Z-A")}
                 </DropdownItem>
-                <Divider component="li" key="separator" />
-                <DropdownItem itemId={2} key="action3">
-                    Action
+                <DropdownItem itemId="last_modified" key="last_modified">
+                    {_("Last modified")}
+                </DropdownItem>
+                <DropdownItem itemId="first_modified" key="first_modified">
+                    {_("First modified")}
                 </DropdownItem>
             </DropdownList>
         </Dropdown>
