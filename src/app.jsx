@@ -20,7 +20,7 @@
 import cockpit from 'cockpit';
 import React, { useEffect, useState } from 'react';
 import { Breadcrumb, BreadcrumbItem, Button, Card, CardBody, CardTitle, CardHeader, Dropdown, DropdownItem, DropdownList, Divider, Flex, FlexItem, Icon, MenuToggle, Page, PageBreadcrumb, PageSection, SearchInput } from "@patternfly/react-core";
-import { ArrowLeftIcon, ArrowRightIcon, EditAltIcon, EllipsisVIcon, FileIcon, FolderIcon, ListIcon, PficonHistoryIcon, StarIcon } from "@patternfly/react-icons";
+import { ArrowLeftIcon, ArrowRightIcon, EllipsisVIcon, FileIcon, FolderIcon, ListIcon, PficonHistoryIcon } from "@patternfly/react-icons";
 
 const _ = cockpit.gettext;
 
@@ -88,19 +88,6 @@ const NavigatorBreadcrumbs = ({ path, setPath }) => {
                         })}
                     </Breadcrumb>
                 </FlexItem>
-                <FlexItem align={{ default: 'alignRight' }}>
-                    <Button variant="secondary">
-                        <EditAltIcon />
-                    </Button>
-                </FlexItem>
-                <FlexItem>
-                    <Button variant="secondary">
-                        <StarIcon />
-                    </Button>
-                </FlexItem>
-                <FlexItem>
-                    <DropdownWithKebab />
-                </FlexItem>
             </Flex>
         </PageBreadcrumb>
     );
@@ -113,7 +100,6 @@ const NavigatorCardHeader = ({ currentFilter, onFilterChange }) => {
             <Flex flexWrap={{ default: 'nowrap' }}>
                 <SearchInput placeholder={_("Filter directory")} value={currentFilter} onChange={onFilterChange} />
                 <ViewSelector />
-                <Button variant="secondary">Upload</Button>
                 <FlexItem>
                     <DropdownWithKebab />
                 </FlexItem>
