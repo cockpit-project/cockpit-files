@@ -24,11 +24,7 @@ jobs:
   - job: copr_build
     trigger: pull_request
     targets:
-    - fedora-all
-    - fedora-latest-aarch64
-    - centos-stream-8
-    - centos-stream-9
-    - centos-stream-9-aarch64
+      - fedora-37
   
   - job: tests
     trigger: pull_request
