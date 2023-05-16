@@ -75,7 +75,9 @@ export const Application = () => {
                 setFiles(result.filter((res) => { return res.name !== deleted_name }));
             } else if (item.event === 'created') {
                 const created_name = item.path.slice(item.path.lastIndexOf("/") + 1);
-                setFiles((f) => [...f, { name: created_name, type: item.type }]);
+                if (created_name[0] !== ".") {
+                    setFiles(f => [...f, { name: created_name, type: item.type }]);
+                }
             }
         });
     }, [path, pathIndex]);
