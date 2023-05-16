@@ -24,7 +24,6 @@ import { ArrowLeftIcon, ArrowRightIcon, EllipsisVIcon, FileIcon, FolderIcon, Lis
 
 const _ = cockpit.gettext;
 
-// TODO: refresh automatically when files change
 export const Application = () => {
     const [currentUser, setCurrentUser] = useState("");
     const [currentFilter, setCurrentFilter] = useState("");
@@ -41,10 +40,10 @@ export const Application = () => {
         })
                 .then(() => {
                     const result = [];
-                    const currentPath = path.join("/");
+                    const currentPath = path.slice(0, pathIndex).join("/");
                     const channel = cockpit.channel({
                         payload: "fslist1",
-                        path: `/home/${currentUser}/${currentPath}`,
+                        path: `/${currentPath}`,
                         superuser: "try",
                         watch: true,
                     });
@@ -106,7 +105,7 @@ const NavigatorBreadcrumbs = ({ path, setPath, pathIndex, setPathIndex }) => {
     };
 
     const navigateBreadcrumb = (i) => {
-        setPath(path.slice(0, i + 1));
+        setPath(path.slice(0, i));
         setPathIndex(i);
     };
 
@@ -115,6 +114,9 @@ const NavigatorBreadcrumbs = ({ path, setPath, pathIndex, setPathIndex }) => {
             <Flex>
                 <FlexItem>
                     <Button variant="secondary" onClick={navigateBack} isDisabled={pathIndex === 0}>
+                        <ArrowLeftIcon />
+                    </Button>
+                    <Button variant="secondary" onClick={() => { console.log(path) }}>
                         <ArrowLeftIcon />
                     </Button>
                 </FlexItem>
@@ -130,7 +132,6 @@ const NavigatorBreadcrumbs = ({ path, setPath, pathIndex, setPathIndex }) => {
                 </FlexItem>
                 <FlexItem>
                     <Flex spaceItems={{ default: "spaceItemsXs" }}>
-                        {/* TODO: adjust spacing */}
                         <Button variant='link' onClick={() => { navigateBreadcrumb(0) }} className='breadcrumb-button'>/</Button>
                         {path.slice(0, pathIndex).map((dir, i) => {
                             return (
@@ -161,10 +162,11 @@ const NavigatorCardHeader = ({ currentFilter, onFilterChange }) => {
 };
 
 const NavigatorCardBody = ({ currentFilter, files, setPath, path, pathIndex, setPathIndex }) => {
-    const onDoubleClickNavigate = (dir, path, file) => {
-        if (dir) {
-            setPath([...path.slice(0, pathIndex), file.name]);
-            setPathIndex(pathIndex + 1);
+    const onDoubleClickNavigate = (path, file) => {
+        if (file.type === "directory") {
+            console.log("clicked", file.name, pathIndex, path);
+            setPath((p) => [...p, file.name]);
+            setPathIndex((p) => p + 1);
         }
     };
 
@@ -180,7 +182,7 @@ const NavigatorCardBody = ({ currentFilter, files, setPath, path, pathIndex, set
                         return (
                             <Flex key={file.name} direction={{ default: "column" }} spaceItems={{ default: 'spaceItemsNone' }}>
                                 <FlexItem alignSelf={{ default: "alignSelfCenter" }}>
-                                    <Button variant="plain" onDoubleClick={ () => onDoubleClickNavigate(file.name, path, file)}>
+                                    <Button variant="plain" onDoubleClick={ () => { onDoubleClickNavigate(path, file) }}>
                                         <Icon size="xl">
                                             {file.type === "directory"
                                                 ? <FolderIcon />
