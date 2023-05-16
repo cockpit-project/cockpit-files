@@ -20,13 +20,11 @@
 import cockpit from 'cockpit';
 import React, { useEffect, useState } from 'react';
 import { Button, Card, CardBody, CardTitle, CardHeader, Dropdown, DropdownItem, DropdownList, Flex, FlexItem, Icon, MenuToggle, Page, PageBreadcrumb, PageSection, SearchInput } from "@patternfly/react-core";
-import { ArrowLeftIcon, ArrowRightIcon, EllipsisVIcon, FileIcon, FolderIcon, ListIcon, PficonHistoryIcon } from "@patternfly/react-icons";
+import { ArrowLeftIcon, ArrowRightIcon, EllipsisVIcon, FileIcon, FolderIcon, ListIcon } from "@patternfly/react-icons";
 
 const _ = cockpit.gettext;
 
-// TODO: refresh automatically when files change
 export const Application = () => {
-    const [currentUser, setCurrentUser] = useState("");
     const [currentFilter, setCurrentFilter] = useState("");
     const [files, setFiles] = useState([]);
     const [path, setPath] = useState([]);
@@ -34,19 +32,41 @@ export const Application = () => {
 
     const onFilterChange = (_, value) => setCurrentFilter(value);
 
-    // TODO: Start navigator on user home directory
     useEffect(() => {
         cockpit.user().then(user => {
-            setCurrentUser(user.name || "");
-        })
-                .then(() => {
-                    const currentPath = path.slice(0, pathIndex).join("/");
-                    cockpit.spawn(["ls", "-p", `/${currentPath}`], { superuser: true }).then((res) => {
-                        res = res.split("\n");
-                        setFiles(res.slice(0, res.length - 1));
-                    });
-                });
-    }, [currentUser, path, pathIndex]);
+            const userPath = user.home.split("/").slice(1);
+            setPath(userPath);
+            setPathIndex(userPath.length);
+        });
+    }, []);
+
+    useEffect(() => {
+        const result = [];
+        const currentPath = path.slice(0, pathIndex).join("/");
+        const channel = cockpit.channel({
+            payload: "fslist1",
+            path: `/${currentPath}`,
+            superuser: "try",
+            watch: true,
+        });
+
+        channel.addEventListener("ready", () => {
+            setFiles(result);
+        });
+
+        channel.addEventListener("message", (ev, data) => {
+            const item = JSON.parse(data);
+            if (item && item.path && item.event === 'present' && item.path[0] !== ".")
+                result.push({ name: item.path, type: item.type });
+            else if (item.event === 'deleted') {
+                const deleted_name = item.path.slice(item.path.lastIndexOf("/") + 1);
+                setFiles(result.filter((res) => { return res.name !== deleted_name }));
+            } else if (item.event === 'created') {
+                const created_name = item.path.slice(item.path.lastIndexOf("/") + 1);
+                setFiles((f) => [...f, { name: created_name, type: item.type }]);
+            }
+        });
+    }, [path, pathIndex]);
 
     return (
         <Page>
@@ -74,7 +94,7 @@ const NavigatorBreadcrumbs = ({ path, setPath, pathIndex, setPathIndex }) => {
     };
 
     const navigateBreadcrumb = (i) => {
-        setPath(path.slice(0, i + 1));
+        setPath(path.slice(0, i));
         setPathIndex(i);
     };
 
@@ -92,13 +112,7 @@ const NavigatorBreadcrumbs = ({ path, setPath, pathIndex, setPathIndex }) => {
                     </Button>
                 </FlexItem>
                 <FlexItem>
-                    <Button variant="secondary">
-                        <PficonHistoryIcon />
-                    </Button>
-                </FlexItem>
-                <FlexItem>
                     <Flex spaceItems={{ default: "spaceItemsXs" }}>
-                        {/* TODO: adjust spacing */}
                         <Button variant='link' onClick={() => { navigateBreadcrumb(0) }} className='breadcrumb-button'>/</Button>
                         {path.slice(0, pathIndex).map((dir, i) => {
                             return (
@@ -129,10 +143,10 @@ const NavigatorCardHeader = ({ currentFilter, onFilterChange }) => {
 };
 
 const NavigatorCardBody = ({ currentFilter, files, setPath, path, pathIndex, setPathIndex }) => {
-    const onDoubleClickNavigate = (dir, path, file) => {
-        if (dir) {
-            setPath([...path.slice(0, pathIndex), file]);
-            setPathIndex(pathIndex + 1);
+    const onDoubleClickNavigate = (path, file) => {
+        if (file.type === "directory") {
+            setPath(p => [...p, file.name]);
+            setPathIndex(p => p + 1);
         }
     };
 
@@ -140,23 +154,19 @@ const NavigatorCardBody = ({ currentFilter, files, setPath, path, pathIndex, set
         <CardBody>
             <Flex id="folder-view">
                 {files.map((file) => {
-                    const directory = file.substring(file.length - 1) === "/";
-                    if (directory)
-                        file = file.substring(0, file.length - 1);
-
-                    if (file.toLowerCase().includes(currentFilter.toLowerCase())) {
+                    if (file.name.toLowerCase().includes(currentFilter.toLowerCase())) {
                         return (
-                            <Flex key={file} direction={{ default: "column" }} spaceItems={{ default: 'spaceItemsNone' }}>
+                            <Flex key={file.name} direction={{ default: "column" }} spaceItems={{ default: 'spaceItemsNone' }}>
                                 <FlexItem alignSelf={{ default: "alignSelfCenter" }}>
-                                    <Button variant="plain" onDoubleClick={ () => onDoubleClickNavigate(directory, path, file)}>
+                                    <Button variant="plain" onDoubleClick={() => onDoubleClickNavigate(path, file)}>
                                         <Icon size="xl">
-                                            {directory
+                                            {file.type === "directory"
                                                 ? <FolderIcon />
                                                 : <FileIcon />}
                                         </Icon>
                                     </Button>
                                 </FlexItem>
-                                <FlexItem alignSelf={{ default: "alignSelfCenter" }}>{file}</FlexItem>
+                                <FlexItem alignSelf={{ default: "alignSelfCenter" }}>{file.name}</FlexItem>
                             </Flex>
                         );
                     } else {
