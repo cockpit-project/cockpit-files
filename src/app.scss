@@ -1,5 +1,6 @@
 @use "page.scss";
 @use "ct-card.scss";
+@use "@patternfly/patternfly/utilities/Text/text.css";
 
 /* Style the list cards as ct-cards */
 .pf-c-page__main-section > .pf-c-card {
@@ -16,4 +17,8 @@
         display: flex;
         align-items: flex-start;
     }
+}
+
+.grid-file-name {
+    width: 10em;
 }
