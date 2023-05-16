@@ -41,7 +41,7 @@ export const Application = () => {
     }, []);
 
     useEffect(() => {
-        const result = [];
+        setFiles([]);
         const currentPath = path.slice(0, pathIndex).join("/");
         const channel = cockpit.channel({
             payload: "fslist1",
@@ -50,20 +50,16 @@ export const Application = () => {
             watch: true,
         });
 
-        channel.addEventListener("ready", () => {
-            setFiles(result);
-        });
-
         channel.addEventListener("message", (ev, data) => {
             const item = JSON.parse(data);
-            if (item && item.path && item.event === 'present' && item.path[0] !== ".")
-                result.push({ name: item.path, type: item.type });
-            else if (item.event === 'deleted') {
+            if (item.event === 'present' && item.path[0] !== ".") {
+                setFiles(f => [...f, { name: item.path, type: item.type }]);
+            } else if (item.event === 'deleted') {
                 const deleted_name = item.path.slice(item.path.lastIndexOf("/") + 1);
-                setFiles(result.filter((res) => { return res.name !== deleted_name }));
+                setFiles(f => f.filter((res) => { return res.name !== deleted_name }));
             } else if (item.event === 'created') {
                 const created_name = item.path.slice(item.path.lastIndexOf("/") + 1);
-                setFiles((f) => [...f, { name: created_name, type: item.type }]);
+                setFiles(f => [...f, { name: created_name, type: item.type }]);
             }
         });
     }, [path, pathIndex]);
