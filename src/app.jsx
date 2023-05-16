@@ -20,7 +20,7 @@
 import cockpit from 'cockpit';
 import React, { useEffect, useState } from 'react';
 import { Button, Card, CardBody, CardTitle, CardHeader, Dropdown, DropdownItem, DropdownList, Flex, FlexItem, Icon, MenuToggle, Page, PageBreadcrumb, PageSection, SearchInput } from "@patternfly/react-core";
-import { ArrowLeftIcon, ArrowRightIcon, EllipsisVIcon, FileIcon, FolderIcon, ListIcon } from "@patternfly/react-icons";
+import { ArrowLeftIcon, ArrowRightIcon, FileIcon, FolderIcon, ListIcon } from "@patternfly/react-icons";
 
 const _ = cockpit.gettext;
 
@@ -136,7 +136,6 @@ const NavigatorCardHeader = ({ currentFilter, onFilterChange }) => {
             <Flex flexWrap={{ default: 'nowrap' }}>
                 <SearchInput placeholder={_("Filter directory")} value={currentFilter} onChange={onFilterChange} />
                 <ViewSelector />
-                <DropdownWithKebab />
             </Flex>
         </CardHeader>
     );
@@ -175,35 +174,6 @@ const NavigatorCardBody = ({ currentFilter, files, setPath, path, pathIndex, set
                 })}
             </Flex>
         </CardBody>
-    );
-};
-
-const DropdownWithKebab = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    const onToggleClick = () => {
-        setIsOpen(!isOpen);
-    };
-    const onSelect = (_event, itemId) => {
-        setIsOpen(false);
-    };
-
-    return (
-        <Dropdown
-            isPlain
-            isOpen={isOpen}
-            onSelect={onSelect}
-            onOpenChange={isOpen => setIsOpen(isOpen)}
-            toggle={toggleRef =>
-                <MenuToggle ref={toggleRef} variant="plain" onClick={onToggleClick} isExpanded={isOpen}>
-                    <EllipsisVIcon />
-                </MenuToggle>}
-        >
-            <DropdownList>
-                <DropdownItem itemId='create-directory' key="create-directory">
-                    {_("Create new directory")}
-                </DropdownItem>
-            </DropdownList>
-        </Dropdown>
     );
 };
 
