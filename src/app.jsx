@@ -19,14 +19,26 @@
 
 import cockpit from 'cockpit';
 import React, { useEffect, useState } from 'react';
-import { Button, Card, CardBody, CardTitle, CardHeader, Dropdown, DropdownItem, DropdownList, Flex, FlexItem, Icon, MenuToggle, Page, PageBreadcrumb, PageSection, SearchInput } from "@patternfly/react-core";
-import { ArrowLeftIcon, ArrowRightIcon, FileIcon, FolderIcon, ListIcon } from "@patternfly/react-icons";
+import {
+    Button,
+    Card, CardBody, CardTitle, CardHeader,
+    Dropdown, DropdownItem, DropdownList,
+    Flex, FlexItem,
+    Icon,
+    MenuToggle, MenuToggleAction,
+    Page, PageBreadcrumb, PageSection,
+    SearchInput,
+} from "@patternfly/react-core";
+import { ArrowLeftIcon, ArrowRightIcon, FileIcon, FolderIcon, GripVerticalIcon, ListIcon } from "@patternfly/react-icons";
+
+import { ListingTable } from "cockpit-components-table.jsx";
 
 const _ = cockpit.gettext;
 
 export const Application = () => {
     const [currentFilter, setCurrentFilter] = useState("");
     const [files, setFiles] = useState([]);
+    const [isGrid, setIsGrid] = useState(true);
     const [path, setPath] = useState([]);
     const [pathIndex, setPathIndex] = useState(0);
 
@@ -73,8 +85,8 @@ export const Application = () => {
             <NavigatorBreadcrumbs path={path} setPath={setPath} pathIndex={pathIndex} setPathIndex={setPathIndex} />
             <PageSection>
                 <Card>
-                    <NavigatorCardHeader currentFilter={currentFilter} onFilterChange={onFilterChange} />
-                    <NavigatorCardBody currentFilter={currentFilter} files={files} setPath={setPath} path={path} pathIndex={pathIndex} setPathIndex={setPathIndex} />
+                    <NavigatorCardHeader currentFilter={currentFilter} onFilterChange={onFilterChange} isGrid={isGrid} setIsGrid={setIsGrid} />
+                    <NavigatorCardBody currentFilter={currentFilter} files={files} setPath={setPath} path={path} pathIndex={pathIndex} setPathIndex={setPathIndex} isGrid={isGrid} />
                 </Card>
             </PageSection>
         </Page>
@@ -129,58 +141,72 @@ const NavigatorBreadcrumbs = ({ path, setPath, pathIndex, setPathIndex }) => {
     );
 };
 
-const NavigatorCardHeader = ({ currentFilter, onFilterChange }) => {
+const NavigatorCardHeader = ({ currentFilter, onFilterChange, isGrid, setIsGrid }) => {
     return (
         <CardHeader>
             <CardTitle component="h2">{_("Directories & files")}</CardTitle>
             <Flex flexWrap={{ default: 'nowrap' }} alignItems={{ default: 'alignItemsCenter' }}>
                 <SearchInput placeholder={_("Filter directory")} value={currentFilter} onChange={onFilterChange} />
-                <ViewSelector />
+                <ViewSelector isGrid={isGrid} setIsGrid={setIsGrid} />
             </Flex>
         </CardHeader>
     );
 };
 
-const NavigatorCardBody = ({ currentFilter, files, setPath, path, pathIndex, setPathIndex }) => {
+const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, pathIndex, setPathIndex }) => {
     const onDoubleClickNavigate = (path, file) => {
         if (file.type === "directory") {
             setPath(p => [...p, file.name]);
             setPathIndex(p => p + 1);
         }
     };
+    const filteredFiles = files
+            .filter(file => {
+                return file.name.toLowerCase().includes(currentFilter.toLowerCase());
+            });
 
-    return (
-        <CardBody>
-            <Flex id="folder-view">
-                {files.map((file) => {
-                    if (file.name.toLowerCase().includes(currentFilter.toLowerCase())) {
-                        return (
-                            <Flex key={file.name} direction={{ default: "column" }} spaceItems={{ default: 'spaceItemsNone' }}>
-                                <FlexItem alignSelf={{ default: "alignSelfCenter" }}>
-                                    <Button variant="plain" onDoubleClick={() => onDoubleClickNavigate(path, file)}>
-                                        <Icon size="xl">
-                                            {file.type === "directory"
-                                                ? <FolderIcon />
-                                                : <FileIcon />}
-                                        </Icon>
-                                    </Button>
-                                </FlexItem>
-                                <FlexItem alignSelf={{ default: "alignSelfCenter" }}>{file.name}</FlexItem>
-                            </Flex>
-                        );
-                    } else {
-                        return null;
-                    }
-                })}
+    const Item = ({ file }) => {
+        return (
+            <Flex key={file.name} direction={{ default: isGrid ? "column" : "row" }} spaceItems={{ default: 'spaceItemsNone' }}>
+                <FlexItem alignSelf={{ default: "alignSelfCenter" }}>
+                    <Button variant="plain" onDoubleClick={ () => onDoubleClickNavigate(path, file)}>
+                        <Icon size={isGrid ? "xl" : "lg"}>
+                            {file.type === "directory"
+                                ? <FolderIcon />
+                                : <FileIcon />}
+                        </Icon>
+                    </Button>
+                </FlexItem>
+                <FlexItem alignSelf={{ default: "alignSelfCenter" }}>{file.name}</FlexItem>
             </Flex>
-        </CardBody>
-    );
+        );
+    };
+
+    if (isGrid) {
+        return (
+            <CardBody>
+                <Flex id="folder-view">
+                    {filteredFiles.map(file => <Item file={file} key={file.name} />)}
+                </Flex>
+            </CardBody>
+        );
+    } else {
+        return (
+            <ListingTable
+                className="pf-m-no-border-rows"
+                variant="compact"
+                columns={[_("Name")]}
+                rows={filteredFiles.map(file => ({ columns: [{ title: <Item file={file} key={file.name} /> }] }))}
+            />
+        );
+    }
 };
 
-export const ViewSelector = () => {
+export const ViewSelector = ({ isGrid, setIsGrid }) => {
     const [isOpen, setIsOpen] = useState(false);
     const onToggleClick = isOpen => setIsOpen(!isOpen);
     const onSelect = () => setIsOpen(false);
+
     return (
         <Dropdown
             isOpen={isOpen}
@@ -192,7 +218,18 @@ export const ViewSelector = () => {
                     isExpanded={isOpen}
                     onClick={() => onToggleClick(isOpen)}
                     ref={toggleRef}
-                    splitButtonOptions={{ variant: "action", items: [<ListIcon key="list-icon" className="view-toggle-icon" />] }}
+                    splitButtonOptions={{
+                        variant: "action",
+                        items: [
+                            <MenuToggleAction
+                                aria-label={isGrid ? _("Display as a list") : _("Display as a grid")}
+                                key="view-toggle-action"
+                                onClick={() => setIsGrid(!isGrid)}
+                            >
+                                {isGrid ? <ListIcon className="view-toggle-icon" /> : <GripVerticalIcon className="view-toggle-icon" />}
+                            </MenuToggleAction>
+                        ]
+                    }}
                     variant="secondary"
                 />
             )}
