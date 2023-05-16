@@ -133,7 +133,7 @@ const NavigatorCardHeader = ({ currentFilter, onFilterChange }) => {
     return (
         <CardHeader>
             <CardTitle component="h2">{_("Directories & files")}</CardTitle>
-            <Flex flexWrap={{ default: 'nowrap' }}>
+            <Flex flexWrap={{ default: 'nowrap' }} alignItems={{ default: 'alignItemsCenter' }}>
                 <SearchInput placeholder={_("Filter directory")} value={currentFilter} onChange={onFilterChange} />
                 <ViewSelector />
             </Flex>
@@ -186,7 +186,16 @@ export const ViewSelector = () => {
             isOpen={isOpen}
             onSelect={onSelect}
             onOpenChange={setIsOpen}
-            toggle={toggleRef => <MenuToggle ref={toggleRef} onClick={() => { onToggleClick(isOpen) }} isExpanded={isOpen} variant="secondary" splitButtonOptions={{ variant: "action", items: [<Icon key="list-icon"><ListIcon /></Icon>] }} />}
+            toggle={toggleRef => (
+                <MenuToggle
+                    className="view-toggle-group"
+                    isExpanded={isOpen}
+                    onClick={() => onToggleClick(isOpen)}
+                    ref={toggleRef}
+                    splitButtonOptions={{ variant: "action", items: [<ListIcon key="list-icon" className="view-toggle-icon" />] }}
+                    variant="secondary"
+                />
+            )}
         >
             <DropdownList>
                 <DropdownItem itemId="az" key="az">

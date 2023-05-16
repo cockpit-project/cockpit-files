@@ -10,3 +10,15 @@
     padding-left: 0;
     padding-right: 0;
 }
+
+.view-toggle-group {
+    .view-toggle-icon {
+        height: 2rem;
+        width: 2rem;
+    }
+
+    .pf-c-menu-toggle__button {
+        display: flex;
+        align-items: flex-start;
+    }
+}
