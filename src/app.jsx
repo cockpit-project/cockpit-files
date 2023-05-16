@@ -169,18 +169,20 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, pathIn
 
     const Item = ({ file }) => {
         return (
-            <Flex data-item={file.name} key={file.name} direction={{ default: isGrid ? "column" : "row" }} spaceItems={{ default: 'spaceItemsNone' }}>
-                <FlexItem alignSelf={{ default: "alignSelfCenter" }}>
-                    <Button variant="plain" onDoubleClick={ () => onDoubleClickNavigate(path, file)}>
+            <Button data-item={file.name} variant="plain" onDoubleClick={ () => onDoubleClickNavigate(path, file)}>
+                <Flex direction={{ default: isGrid ? "column" : "row" }} spaceItems={{ default: isGrid ? 'spaceItemsNone' : 'spaceItemsMd' }}>
+                    <FlexItem alignSelf={{ default: "alignSelfCenter" }}>
                         <Icon size={isGrid ? "xl" : "lg"}>
                             {file.type === "directory"
                                 ? <FolderIcon />
                                 : <FileIcon />}
                         </Icon>
-                    </Button>
-                </FlexItem>
-                <FlexItem alignSelf={{ default: "alignSelfCenter" }}>{file.name}</FlexItem>
-            </Flex>
+                    </FlexItem>
+                    <FlexItem className={"pf-u-text-break-word pf-u-text-wrap" + (isGrid ? " grid-file-name" : "")}>
+                        {file.name}
+                    </FlexItem>
+                </Flex>
+            </Button>
         );
     };
 
