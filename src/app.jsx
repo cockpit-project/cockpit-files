@@ -33,39 +33,41 @@ export const Application = () => {
 
     const onFilterChange = (_, value) => setCurrentFilter(value);
 
-    // TODO: Start navigator on user home directory
     useEffect(() => {
         cockpit.user().then(user => {
             setCurrentUser(user.name || "");
-        })
-                .then(() => {
-                    const result = [];
-                    const currentPath = path.slice(0, pathIndex).join("/");
-                    const channel = cockpit.channel({
-                        payload: "fslist1",
-                        path: `/${currentPath}`,
-                        superuser: "try",
-                        watch: true,
-                    });
+            setPath(["home", currentUser]);
+            setPathIndex(2);
+        });
+    }, [currentUser]);
 
-                    channel.addEventListener("ready", () => {
-                        setFiles(result);
-                    });
+    useEffect(() => {
+        const result = [];
+        const currentPath = path.slice(0, pathIndex).join("/");
+        const channel = cockpit.channel({
+            payload: "fslist1",
+            path: `/${currentPath}`,
+            superuser: "try",
+            watch: true,
+        });
 
-                    channel.addEventListener("message", (ev, data) => {
-                        const item = JSON.parse(data);
-                        if (item && item.path && item.event === 'present' && item.path[0] !== ".")
-                            result.push({ name: item.path, type: item.type });
-                        else if (item.event === 'deleted') {
-                            const deleted_name = item.path.slice(item.path.lastIndexOf("/") + 1);
-                            setFiles(result.filter((res) => { return res.name !== deleted_name }));
-                        } else if (item.event === 'created') {
-                            const created_name = item.path.slice(item.path.lastIndexOf("/") + 1);
-                            setFiles((f) => [...f, { name: created_name, type: item.type }]);
-                        }
-                    });
-                });
-    }, [currentUser, path, pathIndex]);
+        channel.addEventListener("ready", () => {
+            setFiles(result);
+        });
+
+        channel.addEventListener("message", (ev, data) => {
+            const item = JSON.parse(data);
+            if (item && item.path && item.event === 'present' && item.path[0] !== ".")
+                result.push({ name: item.path, type: item.type });
+            else if (item.event === 'deleted') {
+                const deleted_name = item.path.slice(item.path.lastIndexOf("/") + 1);
+                setFiles(result.filter((res) => { return res.name !== deleted_name }));
+            } else if (item.event === 'created') {
+                const created_name = item.path.slice(item.path.lastIndexOf("/") + 1);
+                setFiles((f) => [...f, { name: created_name, type: item.type }]);
+            }
+        });
+    }, [path, pathIndex]);
 
     return (
         <Page>
