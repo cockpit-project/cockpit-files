@@ -24,7 +24,7 @@ import { ArrowLeftIcon, ArrowRightIcon, EllipsisVIcon, FileIcon, FolderIcon, Lis
 
 const _ = cockpit.gettext;
 
-// To do: refresh automatically when files change
+// TODO: refresh automatically when files change
 export const Application = () => {
     const [currentUser, setCurrentUser] = useState("");
     const [currentFilter, setCurrentFilter] = useState("");
@@ -34,7 +34,7 @@ export const Application = () => {
 
     const onFilterChange = (_, value) => setCurrentFilter(value);
 
-    // To do: Start navigator on user home directory
+    // TODO: Start navigator on user home directory
     useEffect(() => {
         cockpit.user().then(user => {
             setCurrentUser(user.name || "");
@@ -98,7 +98,7 @@ const NavigatorBreadcrumbs = ({ path, setPath, pathIndex, setPathIndex }) => {
                 </FlexItem>
                 <FlexItem>
                     <Flex spaceItems={{ default: "spaceItemsXs" }}>
-                        {/* To do: adjust spacing */}
+                        {/* TODO: adjust spacing */}
                         <Button variant='link' onClick={() => { navigateBreadcrumb(0) }} className='breadcrumb-button'>/</Button>
                         {path.slice(0, pathIndex).map((dir, i) => {
                             return (
