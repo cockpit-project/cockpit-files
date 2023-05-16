@@ -50,32 +50,20 @@ export const Application = () => {
 
                     channel.addEventListener("ready", () => {
                         setFiles(result);
-                        console.log("ready");
-                    });
-
-                    channel.addEventListener("close", (ev, data) => {
-                        console.log("close");
                     });
 
                     channel.addEventListener("message", (ev, data) => {
                         const item = JSON.parse(data);
-                        console.log(item);
                         if (item && item.path && item.event === 'present' && item.path[0] !== ".")
                             result.push({ name: item.path, type: item.type });
                         else if (item.event === 'deleted') {
                             const deleted_name = item.path.slice(item.path.lastIndexOf("/") + 1);
-                            console.log("deleted:", deleted_name);
                             setFiles(result.filter((res) => { return res.name !== deleted_name }));
                         } else if (item.event === 'created') {
                             const created_name = item.path.slice(item.path.lastIndexOf("/") + 1);
-                            console.log("created", created_name);
                             setFiles((f) => [...f, { name: created_name, type: item.type }]);
                         }
                     });
-                    // cockpit.spawn(["ls", "-p", `/home/${currentUser}/${currentPath}`], { superuser: true }).then((res) => {
-                    //     res = res.split("\n");
-                    //     setFiles(res.slice(0, res.length - 1));
-                    // });
                 });
     }, [currentUser, path, pathIndex]);
 
@@ -114,9 +102,6 @@ const NavigatorBreadcrumbs = ({ path, setPath, pathIndex, setPathIndex }) => {
             <Flex>
                 <FlexItem>
                     <Button variant="secondary" onClick={navigateBack} isDisabled={pathIndex === 0}>
-                        <ArrowLeftIcon />
-                    </Button>
-                    <Button variant="secondary" onClick={() => { console.log(path) }}>
                         <ArrowLeftIcon />
                     </Button>
                 </FlexItem>
@@ -164,7 +149,6 @@ const NavigatorCardHeader = ({ currentFilter, onFilterChange }) => {
 const NavigatorCardBody = ({ currentFilter, files, setPath, path, pathIndex, setPathIndex }) => {
     const onDoubleClickNavigate = (path, file) => {
         if (file.type === "directory") {
-            console.log("clicked", file.name, pathIndex, path);
             setPath((p) => [...p, file.name]);
             setPathIndex((p) => p + 1);
         }
@@ -174,10 +158,6 @@ const NavigatorCardBody = ({ currentFilter, files, setPath, path, pathIndex, set
         <CardBody>
             <Flex id="folder-view">
                 {files.map((file) => {
-                    // const directory = file.substring(file.length - 1) === "/";
-                    // if (directory)
-                    //     file = file.substring(0, file.length - 1);
-
                     if (file.name.toLowerCase().includes(currentFilter.toLowerCase())) {
                         return (
                             <Flex key={file.name} direction={{ default: "column" }} spaceItems={{ default: 'spaceItemsNone' }}>
