@@ -25,7 +25,6 @@ import { ArrowLeftIcon, ArrowRightIcon, EllipsisVIcon, FileIcon, FolderIcon, Lis
 const _ = cockpit.gettext;
 
 export const Application = () => {
-    const [currentUser, setCurrentUser] = useState("");
     const [currentFilter, setCurrentFilter] = useState("");
     const [files, setFiles] = useState([]);
     const [path, setPath] = useState([]);
@@ -35,11 +34,11 @@ export const Application = () => {
 
     useEffect(() => {
         cockpit.user().then(user => {
-            setCurrentUser(user.name || "");
-            setPath(["home", currentUser]);
-            setPathIndex(2);
+            const userPath = user.home.split("/").slice(1);
+            setPath(userPath);
+            setPathIndex(userPath.length);
         });
-    }, [currentUser]);
+    }, []);
 
     useEffect(() => {
         const result = [];
