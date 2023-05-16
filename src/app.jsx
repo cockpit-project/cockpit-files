@@ -70,7 +70,7 @@ export const Application = () => {
                         } else if (item.event === 'created') {
                             const created_name = item.path.slice(item.path.lastIndexOf("/") + 1);
                             console.log("created", created_name);
-                            setFiles([...result, { name: created_name, type: item.type }]);
+                            setFiles((f) => [...f, { name: created_name, type: item.type }]);
                         }
                     });
                     // cockpit.spawn(["ls", "-p", `/home/${currentUser}/${currentPath}`], { superuser: true }).then((res) => {
