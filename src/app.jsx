@@ -20,7 +20,7 @@
 import cockpit from 'cockpit';
 import React, { useEffect, useState } from 'react';
 import { Button, Card, CardBody, CardTitle, CardHeader, Dropdown, DropdownItem, DropdownList, Flex, FlexItem, Icon, MenuToggle, Page, PageBreadcrumb, PageSection, SearchInput } from "@patternfly/react-core";
-import { ArrowLeftIcon, ArrowRightIcon, EllipsisVIcon, FileIcon, FolderIcon, ListIcon, PficonHistoryIcon } from "@patternfly/react-icons";
+import { ArrowLeftIcon, ArrowRightIcon, EllipsisVIcon, FileIcon, FolderIcon, ListIcon } from "@patternfly/react-icons";
 
 const _ = cockpit.gettext;
 
@@ -113,11 +113,6 @@ const NavigatorBreadcrumbs = ({ path, setPath, pathIndex, setPathIndex }) => {
                     </Button>
                 </FlexItem>
                 <FlexItem>
-                    <Button variant="secondary">
-                        <PficonHistoryIcon />
-                    </Button>
-                </FlexItem>
-                <FlexItem>
                     <Flex spaceItems={{ default: "spaceItemsXs" }}>
                         <Button variant='link' onClick={() => { navigateBreadcrumb(0) }} className='breadcrumb-button'>/</Button>
                         {path.slice(0, pathIndex).map((dir, i) => {
@@ -151,8 +146,8 @@ const NavigatorCardHeader = ({ currentFilter, onFilterChange }) => {
 const NavigatorCardBody = ({ currentFilter, files, setPath, path, pathIndex, setPathIndex }) => {
     const onDoubleClickNavigate = (path, file) => {
         if (file.type === "directory") {
-            setPath((p) => [...p, file.name]);
-            setPathIndex((p) => p + 1);
+            setPath(p => [...p, file.name]);
+            setPathIndex(p => p + 1);
         }
     };
 
@@ -164,7 +159,7 @@ const NavigatorCardBody = ({ currentFilter, files, setPath, path, pathIndex, set
                         return (
                             <Flex key={file.name} direction={{ default: "column" }} spaceItems={{ default: 'spaceItemsNone' }}>
                                 <FlexItem alignSelf={{ default: "alignSelfCenter" }}>
-                                    <Button variant="plain" onDoubleClick={ () => { onDoubleClickNavigate(path, file) }}>
+                                    <Button variant="plain" onDoubleClick={() => onDoubleClickNavigate(path, file)}>
                                         <Icon size="xl">
                                             {file.type === "directory"
                                                 ? <FolderIcon />
