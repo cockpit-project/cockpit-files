@@ -169,7 +169,7 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, pathIn
 
     const Item = ({ file }) => {
         return (
-            <Flex key={file.name} direction={{ default: isGrid ? "column" : "row" }} spaceItems={{ default: 'spaceItemsNone' }}>
+            <Flex data-item={file.name} key={file.name} direction={{ default: isGrid ? "column" : "row" }} spaceItems={{ default: 'spaceItemsNone' }}>
                 <FlexItem alignSelf={{ default: "alignSelfCenter" }}>
                     <Button variant="plain" onDoubleClick={ () => onDoubleClickNavigate(path, file)}>
                         <Icon size={isGrid ? "xl" : "lg"}>
@@ -195,6 +195,7 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, pathIn
     } else {
         return (
             <ListingTable
+                id="folder-view"
                 className="pf-m-no-border-rows"
                 variant="compact"
                 columns={[_("Name")]}

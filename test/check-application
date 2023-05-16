@@ -15,14 +15,66 @@ import testlib
 # Nondestructive tests all run in the same running VM. This allows them to run in Packit, Fedora, and RHEL dist-git gating
 # They must not permanently change any file or configuration on the system in a way that influences other tests.
 @testlib.nondestructive
-class TestApplication(testlib.MachineCase):
+class TestNavigator(testlib.MachineCase):
     def testBasic(self):
         b = self.browser
         m = self.machine
 
+        self.restore_dir("/home/admin")
+
         self.login_and_go("/navigator")
-        # verify expected heading
+        # expected heading
         b.wait_text(".pf-c-card__title", "Directories & files")
+
+        # new files are auto-detected
+        m.execute("touch /home/admin/newfile")
+        b.wait_visible("[data-item='newfile']")
+
+        # new directories are auto-detected
+        m.execute("mkdir /home/admin/newdir")
+        b.wait_visible("[data-item='newdir']")
+
+        # hidden files are not displayed
+        m.execute("touch /home/admin/.hiddenfile /home/admin/not-hidden")
+        b.wait_visible("[data-item='not-hidden']")
+        b.wait_not_present("[data-item='.hiddenfile']")
+
+        # filtering works
+        self.browser.wait_js_cond("ph_count('#folder-view > button') > 1")
+        b.set_input_text("input[placeholder='Filter directory']", "newfile")
+        self.browser.wait_js_cond("ph_count('#folder-view > button') == 1")
+
+        # filtering persists when changing view
+        b.click("button[aria-label='Display as a list']")
+        self.browser.wait_js_cond("ph_count('#folder-view tbody tr') == 1")
+        b.set_input_text("input[placeholder='Filter directory']", "")
+        self.browser.wait_js_cond("ph_count('#folder-view tbody tr') > 1")
+
+        # deleted files and directories are auto-detected
+        m.execute("rmdir /home/admin/newdir")
+        m.execute("rm /home/admin/newfile")
+        b.wait_not_present("[data-item='newdir']")
+        b.wait_not_present("[data-item='newfile']")
+
+    def testNavigation(self):
+        b = self.browser
+        m = self.machine
+
+        self.login_and_go("/navigator")
+
+        b.wait_text(".breadcrumb-button:nth-of-type(1)", "/")
+        b.wait_text(".breadcrumb-button:nth-of-type(2)", "home")
+        b.wait_text(".breadcrumb-button:nth-of-type(3)", "admin")
+
+        # clicking on the home button should take us to the home directory
+        b.click(".breadcrumb-button:nth-of-type(2)")
+        b.wait_not_present(".breadcrumb-button:nth-of-type(3)")
+        b.wait_visible("[data-item='admin']")
+
+        # double-clicking on a directory should take us into it
+        b.mouse("[data-item='admin']", "dblclick")
+        b.wait_not_present("[data-item='admin']")
+        b.wait_text(".breadcrumb-button:nth-of-type(3)", "admin")
 
 
 if __name__ == '__main__':
