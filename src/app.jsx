@@ -22,12 +22,11 @@ import React, { useEffect, useState } from 'react';
 import {
     Button,
     Card, CardBody, CardTitle, CardHeader,
-    Dropdown, DropdownItem, DropdownList,
     Flex, FlexItem,
     Icon,
     MenuToggle, MenuToggleAction,
     Page, PageBreadcrumb, PageSection,
-    SearchInput,
+    SearchInput, Select, SelectList, SelectOption,
 } from "@patternfly/react-core";
 import { ArrowLeftIcon, ArrowRightIcon, FileIcon, FolderIcon, GripVerticalIcon, ListIcon } from "@patternfly/react-icons";
 
@@ -41,6 +40,7 @@ export const Application = () => {
     const [isGrid, setIsGrid] = useState(true);
     const [path, setPath] = useState([]);
     const [pathIndex, setPathIndex] = useState(0);
+    const [sortBy, setSortBy] = useState("az");
 
     const onFilterChange = (_, value) => setCurrentFilter(value);
 
@@ -53,7 +53,7 @@ export const Application = () => {
     }, []);
 
     useEffect(() => {
-        const result = [];
+        setFiles([]);
         const currentPath = path.slice(0, pathIndex).join("/");
         const channel = cockpit.channel({
             payload: "fslist1",
@@ -62,22 +62,27 @@ export const Application = () => {
             watch: true,
         });
 
-        channel.addEventListener("ready", () => {
-            setFiles(result);
-        });
-
         channel.addEventListener("message", (ev, data) => {
             const item = JSON.parse(data);
-            if (item && item.path && item.event === 'present' && item.path[0] !== ".")
-                result.push({ name: item.path, type: item.type });
+            if (item.event === 'present' && item.path[0] !== ".")
+                setFiles(f => [...f, { name: item.path, type: item.type, modified: item.modified }]);
             else if (item.event === 'deleted') {
                 const deleted_name = item.path.slice(item.path.lastIndexOf("/") + 1);
-                setFiles(result.filter((res) => { return res.name !== deleted_name }));
+                setFiles(f => f.filter((res) => { return res.name !== deleted_name }));
             } else if (item.event === 'created') {
                 const created_name = item.path.slice(item.path.lastIndexOf("/") + 1);
+                const date_modified = item.tag.slice(item.tag.indexOf("-") + 1, item.tag.lastIndexOf("."));
                 if (created_name[0] !== ".") {
-                    setFiles(f => [...f, { name: created_name, type: item.type }]);
+                    setFiles(f => [...f, { name: created_name, type: item.type, modified: date_modified }]);
                 }
+            } else if (item.event === 'changed' || item.event === 'attribute-changed') {
+                const changed_name = item.path.slice(item.path.lastIndexOf("/") + 1);
+                const date_modified = item.tag.slice(item.tag.indexOf("-") + 1, item.tag.lastIndexOf("."));
+                setFiles(f => f.map((file) => {
+                    return file.name === changed_name
+                        ? { name: file.name, type: item.type, modified: date_modified }
+                        : file;
+                }));
             }
         });
     }, [path, pathIndex]);
@@ -87,8 +92,8 @@ export const Application = () => {
             <NavigatorBreadcrumbs path={path} setPath={setPath} pathIndex={pathIndex} setPathIndex={setPathIndex} />
             <PageSection>
                 <Card>
-                    <NavigatorCardHeader currentFilter={currentFilter} onFilterChange={onFilterChange} isGrid={isGrid} setIsGrid={setIsGrid} />
-                    <NavigatorCardBody currentFilter={currentFilter} files={files} setPath={setPath} path={path} pathIndex={pathIndex} setPathIndex={setPathIndex} isGrid={isGrid} />
+                    <NavigatorCardHeader currentFilter={currentFilter} onFilterChange={onFilterChange} isGrid={isGrid} setIsGrid={setIsGrid} sortBy={sortBy} setSortBy={setSortBy} />
+                    <NavigatorCardBody currentFilter={currentFilter} files={files} setPath={setPath} path={path} pathIndex={pathIndex} setPathIndex={setPathIndex} isGrid={isGrid} sortBy={sortBy} />
                 </Card>
             </PageSection>
         </Page>
@@ -143,19 +148,19 @@ const NavigatorBreadcrumbs = ({ path, setPath, pathIndex, setPathIndex }) => {
     );
 };
 
-const NavigatorCardHeader = ({ currentFilter, onFilterChange, isGrid, setIsGrid }) => {
+const NavigatorCardHeader = ({ currentFilter, onFilterChange, isGrid, setIsGrid, sortBy, setSortBy }) => {
     return (
         <CardHeader>
             <CardTitle component="h2">{_("Directories & files")}</CardTitle>
             <Flex flexWrap={{ default: 'nowrap' }} alignItems={{ default: 'alignItemsCenter' }}>
                 <SearchInput placeholder={_("Filter directory")} value={currentFilter} onChange={onFilterChange} />
-                <ViewSelector isGrid={isGrid} setIsGrid={setIsGrid} />
+                <ViewSelector isGrid={isGrid} setIsGrid={setIsGrid} setSortBy={setSortBy} sortBy={sortBy} />
             </Flex>
         </CardHeader>
     );
 };
 
-const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, pathIndex, setPathIndex }) => {
+const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, pathIndex, setPathIndex, sortBy }) => {
     const onDoubleClickNavigate = (path, file) => {
         if (file.type === "directory") {
             setPath(p => [...p, file.name]);
@@ -167,9 +172,29 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, pathIn
                 return file.name.toLowerCase().includes(currentFilter.toLowerCase());
             });
 
+    let compare;
+    switch (sortBy) {
+    case "az":
+        compare = (a, b) => a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1;
+        break;
+    case "za":
+        compare = (a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? -1 : 1;
+        break;
+    case "last_modified":
+        compare = (a, b) => a.modified > b.modified ? -1 : 1;
+        break;
+    case "first_modified":
+        compare = (a, b) => a.modified < b.modified ? -1 : 1;
+        break;
+    default:
+        break;
+    }
+
+    const sortedFiles = filteredFiles.sort(compare);
+
     const Item = ({ file }) => {
         return (
-            <Button data-item={file.name} variant="plain" onDoubleClick={ () => onDoubleClickNavigate(path, file)}>
+            <Button data-item={file.name} variant="plain" onDoubleClick={ () => onDoubleClickNavigate(path, file)} className='item-button'>
                 <Flex direction={{ default: isGrid ? "column" : "row" }} spaceItems={{ default: isGrid ? 'spaceItemsNone' : 'spaceItemsMd' }}>
                     <FlexItem alignSelf={{ default: "alignSelfCenter" }}>
                         <Icon size={isGrid ? "xl" : "lg"}>
@@ -190,7 +215,7 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, pathIn
         return (
             <CardBody>
                 <Flex id="folder-view">
-                    {filteredFiles.map(file => <Item file={file} key={file.name} />)}
+                    {sortedFiles.map(file => <Item file={file} key={file.name} />)}
                 </Flex>
             </CardBody>
         );
@@ -207,18 +232,25 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, pathIn
     }
 };
 
-export const ViewSelector = ({ isGrid, setIsGrid }) => {
+export const ViewSelector = ({ isGrid, setIsGrid, sortBy, setSortBy }) => {
     const [isOpen, setIsOpen] = useState(false);
     const onToggleClick = isOpen => setIsOpen(!isOpen);
-    const onSelect = () => setIsOpen(false);
+    const onSelect = (ev, itemId) => {
+        setIsOpen(false);
+        setSortBy(itemId);
+    };
 
     return (
-        <Dropdown
+        <Select
+            id='sort-menu'
             isOpen={isOpen}
+            selected={sortBy}
             onSelect={onSelect}
             onOpenChange={setIsOpen}
+            popperProps={{ position: "right" }}
             toggle={toggleRef => (
                 <MenuToggle
+                    id='sort-menu-toggle'
                     className="view-toggle-group"
                     isExpanded={isOpen}
                     onClick={() => onToggleClick(isOpen)}
@@ -239,20 +271,12 @@ export const ViewSelector = ({ isGrid, setIsGrid }) => {
                 />
             )}
         >
-            <DropdownList>
-                <DropdownItem itemId="az" key="az">
-                    {_("A-Z")}
-                </DropdownItem>
-                <DropdownItem itemId="za" key="za">
-                    {_("Z-A")}
-                </DropdownItem>
-                <DropdownItem itemId="last_modified" key="last_modified">
-                    {_("Last modified")}
-                </DropdownItem>
-                <DropdownItem itemId="first_modified" key="first_modified">
-                    {_("First modified")}
-                </DropdownItem>
-            </DropdownList>
-        </Dropdown>
+            <SelectList>
+                <SelectOption itemId="az">{_("A-Z")}</SelectOption>
+                <SelectOption itemId="za">{_("Z-A")}</SelectOption>
+                <SelectOption itemId="last_modified">{_("Last modified")}</SelectOption>
+                <SelectOption itemId="first_modified">{_("First modified")}</SelectOption>
+            </SelectList>
+        </Select>
     );
 };
