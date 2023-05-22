@@ -38,7 +38,7 @@ export const Application = () => {
     const [currentFilter, setCurrentFilter] = useState("");
     const [files, setFiles] = useState([]);
     const [isGrid, setIsGrid] = useState(true);
-    const [path, setPath] = useState([]);
+    const [path, setPath] = useState(undefined);
     const [pathIndex, setPathIndex] = useState(0);
     const [sortBy, setSortBy] = useState("az");
 
@@ -53,6 +53,8 @@ export const Application = () => {
     }, []);
 
     useEffect(() => {
+        if (path === undefined)
+            return;
         setFiles([]);
         const currentPath = path.slice(0, pathIndex).join("/");
         const channel = cockpit.channel({
@@ -86,6 +88,9 @@ export const Application = () => {
             }
         });
     }, [path, pathIndex]);
+
+    if (!path)
+        return null;
 
     return (
         <Page>
