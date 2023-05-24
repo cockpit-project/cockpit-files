@@ -44,9 +44,9 @@ export const Application = () => {
 
     const onFilterChange = (_, value) => setCurrentFilter(value);
 
-    const refreshFslist = (created_name) => {
+    const refreshFslist = () => {
         setFiles([]);
-        // console.log(files);
+        const result = [];
         const currentPath = path.slice(0, pathIndex).join("/");
         const channel = cockpit.channel({
             payload: "fslist1",
@@ -58,7 +58,11 @@ export const Application = () => {
         channel.addEventListener("message", (ev, data) => {
             const item = JSON.parse(data);
             if (item.event === "present" && item.path[0] !== ".")
-                setFiles(f => [...f, { name: item.path, type: item.type, modified: item.modified, size: item.size, owner: item.owner, group: item.group }]);
+                result.push({ name: item.path, type: item.type, modified: item.modified, size: item.size, owner: item.owner, group: item.group });
+        });
+
+        channel.addEventListener("ready", () => {
+            setFiles(result);
         });
     };
 
@@ -89,23 +93,8 @@ export const Application = () => {
             else if (item.event === 'deleted') {
                 const deleted_name = item.path.slice(item.path.lastIndexOf("/") + 1);
                 setFiles(f => f.filter((res) => { return res.name !== deleted_name }));
-            } else if (item.event === 'created' || item.event === 'changed') {
+            } else {
                 refreshFslist();
-                // const created_name = item.path.slice(item.path.lastIndexOf("/") + 1);
-                // const date_modified = item.tag.slice(item.tag.indexOf("-") + 1, item.tag.lastIndexOf("."));
-                // if (created_name[0] !== ".") {
-                //     setFiles(f => [...f, { name: created_name, type: item.type, modified: date_modified }]);
-                // }
-            //     refreshFslist();
-            // } else if (item.event === 'changed' || item.event === 'attribute-changed') {
-                // const changed_name = item.path.slice(item.path.lastIndexOf("/") + 1);
-                // const date_modified = item.tag.slice(item.tag.indexOf("-") + 1, item.tag.lastIndexOf("."));
-                // setFiles(f => f.map((file) => {
-                //     return file.name === changed_name
-                //         ? { name: file.name, type: item.type, modified: date_modified }
-                //         : file;
-                // }));
-                // refreshFslist();
             }
         });
     }, [path, pathIndex]);
