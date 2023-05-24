@@ -16,6 +16,10 @@ import testlib
 # They must not permanently change any file or configuration on the system in a way that influences other tests.
 @testlib.nondestructive
 class TestNavigator(testlib.MachineCase):
+    @classmethod
+    def setUpClass(cls):
+        # Run browser in UTC as the displayed time is in the browser's timezone
+        os.environ['TZ'] = 'UTC'
 
     # FIXME: Move to testlib.py
     def select_PF5(self, b, selector_button: str, selector: str, value):
@@ -31,20 +35,49 @@ class TestNavigator(testlib.MachineCase):
 
         self.login_and_go("/navigator")
         # expected heading
-        b.wait_text(".pf-c-card__title", "Directories & files")
+        b.wait_text("#navigator-card-header", "Directories & files")
+        b.wait_in_text("#sidebar-card-header", "admin")
 
         # new files are auto-detected
-        m.execute("touch /home/admin/newfile")
+        m.execute("touch --date @1641038400 /home/admin/newfile")
         b.wait_visible("[data-item='newfile']")
 
         # new directories are auto-detected
-        m.execute("mkdir /home/admin/newdir")
+        m.execute("mkdir /home/admin/newdir; touch --date @1641038400 /home/admin/newfile /home/admin/newdir")
         b.wait_visible("[data-item='newdir']")
 
         # hidden files are not displayed
         m.execute("touch /home/admin/.hiddenfile /home/admin/not-hidden")
         b.wait_visible("[data-item='not-hidden']")
         b.wait_not_present("[data-item='.hiddenfile']")
+
+        # file sidebar information
+        b.click("button:contains('newfile')")
+        b.wait_text("#sidebar-card-header", "newfile")
+        b.wait_text("#description-list-owner dd", "root")
+        b.wait_text("#description-list-group dd", "root")
+        b.wait_text("#description-list-size dd", "0 B")
+        b.wait_text("#description-list-last-modified dd", "Jan 1, 2022, 12:00 PM")
+
+        # saving a file updates sidebar info
+        # FIXME: Size does not update
+        m.execute("head -c 7 /dev/zero > /home/admin/newfile")
+        b.wait_text("#description-list-size dd", "7 B")
+        b.wait_not_in_text("#description-list-last-modified ", "Jan 1, 2022, 12:00 PM")
+        m.execute("touch --date @1641038400 /home/admin/newfile")
+        b.wait_in_text("#description-list-last-modified ", "Jan 1, 2022, 12:00 PM")
+
+        # clicking empty space resets sidebar
+        b.click("#folder-view")
+        b.wait_in_text("#sidebar-card-header", "admin")
+
+        # folder information doesn't contain size
+        b.click("button:contains('newdir')")
+        b.wait_text("#sidebar-card-header", "newdir")
+        b.wait_text("#description-list-owner dd", "root")
+        b.wait_text("#description-list-group dd", "root")
+        b.wait_not_present("#description-list-size")
+        b.wait_text("#description-list-last-modified dd", "Jan 1, 2022, 12:00 PM")
 
         # filtering works
         self.browser.wait_js_cond("ph_count('#folder-view > button') > 1")
@@ -63,6 +96,9 @@ class TestNavigator(testlib.MachineCase):
         b.wait_not_present("[data-item='newdir']")
         b.wait_not_present("[data-item='newfile']")
 
+        # sidebar is reset when files are removed
+        b.wait_in_text("#sidebar-card-header", "admin")
+
     def testNavigation(self):
         b = self.browser
         m = self.machine
@@ -78,10 +114,17 @@ class TestNavigator(testlib.MachineCase):
         b.wait_not_present(".breadcrumb-button:nth-of-type(3)")
         b.wait_visible("[data-item='admin']")
 
+        # show folder info in sidebar
+        b.click("button:contains('admin')")
+        b.wait_in_text("#sidebar-card-header", "admin")
+
         # double-clicking on a directory should take us into it
         b.mouse("[data-item='admin']", "dblclick")
         b.wait_not_present("[data-item='admin']")
         b.wait_text(".breadcrumb-button:nth-of-type(3)", "admin")
+
+        # navigating into a directory resets the sidebar
+        b.wait_in_text("#sidebar-card-header", "admin")
 
     def testSorting(self):
         b = self.browser
@@ -90,7 +133,7 @@ class TestNavigator(testlib.MachineCase):
         self.login_and_go("/navigator")
 
         # Expected heading
-        b.wait_text(".pf-c-card__title", "Directories & files")
+        b.wait_text("#navigator-card-header", "Directories & files")
 
         # Create test files and folders
         m.execute("touch -d '3 hours ago' /home/admin/aaa")

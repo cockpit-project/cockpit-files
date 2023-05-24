@@ -17,11 +17,13 @@
  * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
  */
 
+import * as timeformat from "timeformat";
 import cockpit from 'cockpit';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import {
     Button,
     Card, CardBody, CardTitle, CardHeader,
+    DescriptionList, DescriptionListGroup, DescriptionListTerm, DescriptionListDescription,
     Flex, FlexItem,
     Icon,
     MenuToggle, MenuToggleAction,
@@ -41,6 +43,8 @@ export const Application = () => {
     const [path, setPath] = useState(undefined);
     const [pathIndex, setPathIndex] = useState(0);
     const [sortBy, setSortBy] = useState("az");
+    const channel = useRef(null);
+    const [selected, setSelected] = useState(null);
 
     const onFilterChange = (_, value) => setCurrentFilter(value);
 
@@ -55,38 +59,50 @@ export const Application = () => {
     useEffect(() => {
         if (path === undefined)
             return;
-        setFiles([]);
-        const currentPath = path.slice(0, pathIndex).join("/");
-        const channel = cockpit.channel({
-            payload: "fslist1",
-            path: `/${currentPath}`,
-            superuser: "try",
-            watch: true,
-        });
 
-        channel.addEventListener("message", (ev, data) => {
-            const item = JSON.parse(data);
-            if (item.event === 'present' && item.path[0] !== ".")
-                setFiles(f => [...f, { name: item.path, type: item.type, modified: item.modified }]);
-            else if (item.event === 'deleted') {
-                const deleted_name = item.path.slice(item.path.lastIndexOf("/") + 1);
-                setFiles(f => f.filter((res) => { return res.name !== deleted_name }));
-            } else if (item.event === 'created') {
-                const created_name = item.path.slice(item.path.lastIndexOf("/") + 1);
-                const date_modified = item.tag.slice(item.tag.indexOf("-") + 1, item.tag.lastIndexOf("."));
-                if (created_name[0] !== ".") {
-                    setFiles(f => [...f, { name: created_name, type: item.type, modified: date_modified }]);
+        setSelected(path[path.length - 1]);
+
+        const getFsList = () => {
+            if (channel.current !== null)
+                channel.current.close();
+
+            const currentPath = path.slice(0, pathIndex).join("/");
+            channel.current = cockpit.channel({
+                payload: "fslist1",
+                path: `/${currentPath}`,
+                superuser: "try",
+                watch: true,
+            });
+
+            const files = [];
+            channel.current.addEventListener("message", (ev, data) => {
+                const item = JSON.parse(data);
+                if (item.event === "present") {
+                    if (item.path[0] !== ".") {
+                        // TODO: Show hidden files if the user has enabled that option
+                        files.push({ ...item, name: item.path });
+                    }
+                } else {
+                    const name = item.path.slice(item.path.lastIndexOf("/") + 1);
+                    if (item.event === 'deleted') {
+                        setFiles(f => f.filter(res => res.name !== name));
+                    } else {
+                        // For events other than 'present' we don't receive file stat information
+                        // so we rerun the fslist command to get the updated information
+                        // https://github.com/allisonkarlitskaya/systemd_ctypes/issues/56
+                        const name = item.path.slice(item.path.lastIndexOf("/") + 1);
+                        if (name[0] !== ".") {
+                            getFsList();
+                        }
+                    }
                 }
-            } else if (item.event === 'changed' || item.event === 'attribute-changed') {
-                const changed_name = item.path.slice(item.path.lastIndexOf("/") + 1);
-                const date_modified = item.tag.slice(item.tag.indexOf("-") + 1, item.tag.lastIndexOf("."));
-                setFiles(f => f.map((file) => {
-                    return file.name === changed_name
-                        ? { name: file.name, type: item.type, modified: date_modified }
-                        : file;
-                }));
-            }
-        });
+            });
+
+            channel.current.addEventListener("ready", () => {
+                setFiles(files);
+            });
+        };
+        getFsList();
     }, [path, pathIndex]);
 
     if (!path)
@@ -96,10 +112,17 @@ export const Application = () => {
         <Page>
             <NavigatorBreadcrumbs path={path} setPath={setPath} pathIndex={pathIndex} setPathIndex={setPathIndex} />
             <PageSection>
-                <Card>
-                    <NavigatorCardHeader currentFilter={currentFilter} onFilterChange={onFilterChange} isGrid={isGrid} setIsGrid={setIsGrid} sortBy={sortBy} setSortBy={setSortBy} />
-                    <NavigatorCardBody currentFilter={currentFilter} files={files} setPath={setPath} path={path} pathIndex={pathIndex} setPathIndex={setPathIndex} isGrid={isGrid} sortBy={sortBy} />
-                </Card>
+                <Flex>
+                    <FlexItem flex={{ lg: 'flex_3' }}>
+                        <Card>
+                            <NavigatorCardHeader currentFilter={currentFilter} onFilterChange={onFilterChange} isGrid={isGrid} setIsGrid={setIsGrid} sortBy={sortBy} setSortBy={setSortBy} />
+                            <NavigatorCardBody currentFilter={currentFilter} files={files} setPath={setPath} path={path} pathIndex={pathIndex} setPathIndex={setPathIndex} isGrid={isGrid} sortBy={sortBy} setSelected={setSelected} />
+                        </Card>
+                    </FlexItem>
+                    <FlexItem flex={{ lg: 'flex_1' }}>
+                        <Sidebar selected={files.find(file => file.name === selected)} />
+                    </FlexItem>
+                </Flex>
             </PageSection>
         </Page>
     );
@@ -156,7 +179,7 @@ const NavigatorBreadcrumbs = ({ path, setPath, pathIndex, setPathIndex }) => {
 const NavigatorCardHeader = ({ currentFilter, onFilterChange, isGrid, setIsGrid, sortBy, setSortBy }) => {
     return (
         <CardHeader>
-            <CardTitle component="h2">{_("Directories & files")}</CardTitle>
+            <CardTitle component="h2" id="navigator-card-header">{_("Directories & files")}</CardTitle>
             <Flex flexWrap={{ default: 'nowrap' }} alignItems={{ default: 'alignItemsCenter' }}>
                 <SearchInput placeholder={_("Filter directory")} value={currentFilter} onChange={onFilterChange} />
                 <ViewSelector isGrid={isGrid} setIsGrid={setIsGrid} setSortBy={setSortBy} sortBy={sortBy} />
@@ -165,13 +188,19 @@ const NavigatorCardHeader = ({ currentFilter, onFilterChange, isGrid, setIsGrid,
     );
 };
 
-const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, pathIndex, setPathIndex, sortBy }) => {
+const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, pathIndex, setPathIndex, sortBy, setSelected }) => {
     const onDoubleClickNavigate = (path, file) => {
         if (file.type === "directory") {
             setPath(p => [...p, file.name]);
             setPathIndex(p => p + 1);
         }
     };
+
+    const resetSelected = e => {
+        if (e.target.id === "folder-view" || e.target.id === "navigator-card-body")
+            setSelected(null);
+    };
+
     const filteredFiles = files
             .filter(file => {
                 return file.name.toLowerCase().includes(currentFilter.toLowerCase());
@@ -199,7 +228,7 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, pathIn
 
     const Item = ({ file }) => {
         return (
-            <Button data-item={file.name} variant="plain" onDoubleClick={ () => onDoubleClickNavigate(path, file)} className='item-button'>
+            <Button data-item={file.name} variant="plain" onDoubleClick={ () => onDoubleClickNavigate(path, file)} onClick={() => setSelected(file.name)} className='item-button'>
                 <Flex direction={{ default: isGrid ? "column" : "row" }} spaceItems={{ default: isGrid ? 'spaceItemsNone' : 'spaceItemsMd' }}>
                     <FlexItem alignSelf={{ default: "alignSelfCenter" }}>
                         <Icon size={isGrid ? "xl" : "lg"}>
@@ -218,7 +247,7 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, pathIn
 
     if (isGrid) {
         return (
-            <CardBody>
+            <CardBody onClick={resetSelected} id="navigator-card-body">
                 <Flex id="folder-view">
                     {sortedFiles.map(file => <Item file={file} key={file.name} />)}
                 </Flex>
@@ -235,6 +264,38 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, pathIn
             />
         );
     }
+};
+
+const Sidebar = ({ selected }) => {
+    return (
+        <Card id="sidebar-card">
+            <CardHeader>
+                <CardTitle component="h2" id="sidebar-card-header">{!selected ? _("Current directory") : selected.name}</CardTitle>
+            </CardHeader>
+            {selected &&
+            <CardBody>
+                <DescriptionList isHorizontal>
+                    <DescriptionListGroup id="description-list-last-modified">
+                        <DescriptionListTerm>{_("Last modified")}</DescriptionListTerm>
+                        <DescriptionListDescription>{timeformat.dateTime(selected.modified * 1000)}</DescriptionListDescription>
+                    </DescriptionListGroup>
+                    <DescriptionListGroup id="description-list-owner">
+                        <DescriptionListTerm>{_("Owner")}</DescriptionListTerm>
+                        <DescriptionListDescription>{selected.owner}</DescriptionListDescription>
+                    </DescriptionListGroup>
+                    <DescriptionListGroup id="description-list-group">
+                        <DescriptionListTerm>{_("Group")}</DescriptionListTerm>
+                        <DescriptionListDescription>{selected.group}</DescriptionListDescription>
+                    </DescriptionListGroup>
+                    {selected.type === "file" &&
+                    <DescriptionListGroup id="description-list-size">
+                        <DescriptionListTerm>{_("Size")}</DescriptionListTerm>
+                        <DescriptionListDescription>{cockpit.format("$0 $1", cockpit.format_bytes(selected.size), selected.size < 1000 ? "B" : "")}</DescriptionListDescription>
+                    </DescriptionListGroup>}
+                </DescriptionList>
+            </CardBody>}
+        </Card>
+    );
 };
 
 export const ViewSelector = ({ isGrid, setIsGrid, sortBy, setSortBy }) => {
