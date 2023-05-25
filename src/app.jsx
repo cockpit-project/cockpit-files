@@ -29,6 +29,7 @@ import {
     MenuToggle, MenuToggleAction,
     Page, PageBreadcrumb, PageSection,
     SearchInput, Select, SelectList, SelectOption,
+    Sidebar, SidebarPanel, SidebarContent,
     Text, TextContent, TextVariants,
 } from "@patternfly/react-core";
 import { ArrowLeftIcon, ArrowRightIcon, FileIcon, FolderIcon, GripVerticalIcon, ListIcon } from "@patternfly/react-icons";
@@ -112,17 +113,17 @@ export const Application = () => {
         <Page>
             <NavigatorBreadcrumbs path={path} setPath={setPath} pathIndex={pathIndex} setPathIndex={setPathIndex} />
             <PageSection>
-                <Flex>
-                    <FlexItem flex={{ lg: 'flex_3' }}>
+                <Sidebar isPanelRight hasGutter>
+                    <SidebarPanel className="sidebar-panel">
+                        <SidebarPanelDetails selected={files.find(file => file.name === selected) || ({ name: path[path.length - 1], items_cnt: { all: files.length, hidden: files.length - visibleFiles.length } })} />
+                    </SidebarPanel>
+                    <SidebarContent>
                         <Card>
                             <NavigatorCardHeader currentFilter={currentFilter} onFilterChange={onFilterChange} isGrid={isGrid} setIsGrid={setIsGrid} sortBy={sortBy} setSortBy={setSortBy} />
                             <NavigatorCardBody currentFilter={currentFilter} files={visibleFiles} setPath={setPath} path={path} pathIndex={pathIndex} setPathIndex={setPathIndex} isGrid={isGrid} sortBy={sortBy} setSelected={setSelected} />
                         </Card>
-                    </FlexItem>
-                    <FlexItem flex={{ lg: 'flex_1' }}>
-                        <Sidebar selected={files.find(file => file.name === selected) || ({ name: path[path.length - 1], items_cnt: { all: files.length, hidden: files.length - visibleFiles.length } })} />
-                    </FlexItem>
-                </Flex>
+                    </SidebarContent>
+                </Sidebar>
             </PageSection>
         </Page>
     );
@@ -266,9 +267,9 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, pathIn
     }
 };
 
-const Sidebar = ({ selected }) => {
+const SidebarPanelDetails = ({ selected }) => {
     return (
-        <Card id="sidebar-card">
+        <Card className="sidebar-card">
             <CardHeader>
                 <CardTitle component="h2" id="sidebar-card-header">
                     <TextContent>
