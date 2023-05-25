@@ -27,7 +27,12 @@
     color: var(--pf-global--primary-color--100);
 }
 
-#sidebar-card {
+.sidebar-card {
     background: inherit;
     box-shadow: none;
+}
+
+.sidebar-panel {
+    background-color: var(--pf-c-page__main-section--BackgroundColor);
+    top: 3rem;
 }
