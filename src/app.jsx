@@ -29,6 +29,7 @@ import {
     MenuToggle, MenuToggleAction,
     Page, PageBreadcrumb, PageSection,
     SearchInput, Select, SelectList, SelectOption,
+    Text, TextContent, TextVariants,
 } from "@patternfly/react-core";
 import { ArrowLeftIcon, ArrowRightIcon, FileIcon, FolderIcon, GripVerticalIcon, ListIcon } from "@patternfly/react-icons";
 
@@ -78,10 +79,7 @@ export const Application = () => {
             channel.current.addEventListener("message", (ev, data) => {
                 const item = JSON.parse(data);
                 if (item.event === "present") {
-                    if (item.path[0] !== ".") {
-                        // TODO: Show hidden files if the user has enabled that option
-                        files.push({ ...item, name: item.path });
-                    }
+                    files.push({ ...item, name: item.path, isHidden: item.path.startsWith(".") });
                 } else {
                     const name = item.path.slice(item.path.lastIndexOf("/") + 1);
                     if (item.event === 'deleted') {
@@ -108,6 +106,8 @@ export const Application = () => {
     if (!path)
         return null;
 
+    const visibleFiles = files.filter(file => !file.name.startsWith("."));
+
     return (
         <Page>
             <NavigatorBreadcrumbs path={path} setPath={setPath} pathIndex={pathIndex} setPathIndex={setPathIndex} />
@@ -116,11 +116,11 @@ export const Application = () => {
                     <FlexItem flex={{ lg: 'flex_3' }}>
                         <Card>
                             <NavigatorCardHeader currentFilter={currentFilter} onFilterChange={onFilterChange} isGrid={isGrid} setIsGrid={setIsGrid} sortBy={sortBy} setSortBy={setSortBy} />
-                            <NavigatorCardBody currentFilter={currentFilter} files={files} setPath={setPath} path={path} pathIndex={pathIndex} setPathIndex={setPathIndex} isGrid={isGrid} sortBy={sortBy} setSelected={setSelected} />
+                            <NavigatorCardBody currentFilter={currentFilter} files={visibleFiles} setPath={setPath} path={path} pathIndex={pathIndex} setPathIndex={setPathIndex} isGrid={isGrid} sortBy={sortBy} setSelected={setSelected} />
                         </Card>
                     </FlexItem>
                     <FlexItem flex={{ lg: 'flex_1' }}>
-                        <Sidebar selected={files.find(file => file.name === selected)} />
+                        <Sidebar selected={files.find(file => file.name === selected) || ({ name: path[path.length - 1], items_cnt: { all: files.length, hidden: files.length - visibleFiles.length } })} />
                     </FlexItem>
                 </Flex>
             </PageSection>
@@ -270,9 +270,17 @@ const Sidebar = ({ selected }) => {
     return (
         <Card id="sidebar-card">
             <CardHeader>
-                <CardTitle component="h2" id="sidebar-card-header">{!selected ? _("Current directory") : selected.name}</CardTitle>
+                <CardTitle component="h2" id="sidebar-card-header">
+                    <TextContent>
+                        <Text>{selected.name}</Text>
+                        {selected.items_cnt !== undefined &&
+                        <Text component={TextVariants.small}>
+                            {cockpit.format(cockpit.ngettext("$0 item $1", "$0 items $1", selected.items_cnt.all), selected.items_cnt.all, cockpit.format("($0 hidden)", selected.items_cnt.hidden))}
+                        </Text>}
+                    </TextContent>
+                </CardTitle>
             </CardHeader>
-            {selected &&
+            {selected.items_cnt === undefined &&
             <CardBody>
                 <DescriptionList isHorizontal>
                     <DescriptionListGroup id="description-list-last-modified">
