@@ -165,7 +165,9 @@ const NavigatorBreadcrumbs = ({ path, setPath, pathIndex, setPathIndex }) => {
                         {path.slice(0, pathIndex).map((dir, i) => {
                             return (
                                 <React.Fragment key={dir}>
-                                    <Button variant='link' onClick={() => { navigateBreadcrumb(i + 1) }} key={dir} className='breadcrumb-button'>{dir}</Button>
+                                    {i !== path.slice(0, pathIndex).length - 1
+                                        ? <Button variant='link' onClick={() => { navigateBreadcrumb(i + 1) }} key={dir} className='breadcrumb-button'>{dir}</Button>
+                                        : <p>{dir}</p>}
                                     <p key={i}>/</p>
                                 </React.Fragment>
                             );
