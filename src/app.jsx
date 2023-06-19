@@ -375,6 +375,10 @@ const DropdownWithKebab = ({ selected, path }) => {
             const itemPath = "/" + path.join("/") + "/" + selected.name;
             cockpit.spawn(["rm", itemPath]);
         }
+        else if (selected.type === "directory") {
+            const itemPath = "/" + path.join("/") + "/" + selected.name;
+            cockpit.spawn(["rmdir", itemPath]);
+        }
     };
 
     return (
