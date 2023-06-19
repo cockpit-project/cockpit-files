@@ -114,7 +114,7 @@ export const Application = () => {
             <NavigatorBreadcrumbs path={path} setPath={setPath} pathIndex={pathIndex} setPathIndex={setPathIndex} />
             <PageSection>
                 <Sidebar isPanelRight hasGutter>
-                    <SidebarPanel className="sidebar-panel">
+                    <SidebarPanel className="sidebar-panel" width={{ default: "width_25" }}>
                         <SidebarPanelDetails selected={files.find(file => file.name === selected) || ({ name: path[path.length - 1], items_cnt: { all: files.length, hidden: files.length - visibleFiles.length } })} />
                     </SidebarPanel>
                     <SidebarContent>
