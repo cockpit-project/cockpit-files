@@ -30,9 +30,9 @@ import {
     Page, PageBreadcrumb, PageSection,
     SearchInput, Select, SelectList, SelectOption,
     Sidebar, SidebarPanel, SidebarContent,
-    Text, TextContent, TextVariants,
+    Text, TextContent, TextVariants, Dropdown, DropdownList, DropdownItem,
 } from "@patternfly/react-core";
-import { ArrowLeftIcon, ArrowRightIcon, FileIcon, FolderIcon, GripVerticalIcon, ListIcon } from "@patternfly/react-icons";
+import { ArrowLeftIcon, ArrowRightIcon, EllipsisVIcon, FileIcon, FolderIcon, GripVerticalIcon, ListIcon } from "@patternfly/react-icons";
 
 import { ListingTable } from "cockpit-components-table.jsx";
 
@@ -111,7 +111,7 @@ export const Application = () => {
 
     return (
         <Page>
-            <NavigatorBreadcrumbs path={path} setPath={setPath} pathIndex={pathIndex} setPathIndex={setPathIndex} />
+            <NavigatorBreadcrumbs path={path} setPath={setPath} pathIndex={pathIndex} setPathIndex={setPathIndex} selected={files.find(file => file.name === selected)} />
             <PageSection>
                 <Sidebar isPanelRight hasGutter>
                     <SidebarPanel className="sidebar-panel" width={{ default: "width_25" }}>
@@ -129,7 +129,7 @@ export const Application = () => {
     );
 };
 
-const NavigatorBreadcrumbs = ({ path, setPath, pathIndex, setPathIndex }) => {
+const NavigatorBreadcrumbs = ({ path, setPath, pathIndex, setPathIndex, selected }) => {
     const navigateBack = () => {
         if (pathIndex > 0)
             setPathIndex(pathIndex - 1);
@@ -173,6 +173,9 @@ const NavigatorBreadcrumbs = ({ path, setPath, pathIndex, setPathIndex }) => {
                             );
                         })}
                     </Flex>
+                </FlexItem>
+                <FlexItem>
+                    <DropdownWithKebab selected={selected} path={path} />
                 </FlexItem>
             </Flex>
         </PageBreadcrumb>
@@ -355,5 +358,41 @@ export const ViewSelector = ({ isGrid, setIsGrid, sortBy, setSortBy }) => {
                 <SelectOption itemId="first_modified">{_("First modified")}</SelectOption>
             </SelectList>
         </Select>
+    );
+};
+
+const DropdownWithKebab = ({ selected, path }) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const onToggleClick = () => {
+        setIsOpen(!isOpen);
+    };
+    const onSelect = (_event, itemId) => {
+        setIsOpen(false);
+    };
+
+    const deleteItem = () => {
+        if (selected.type === "file") {
+            const itemPath = "/" + path.join("/") + "/" + selected.name;
+            cockpit.spawn(["rm", itemPath]);
+        }
+    };
+
+    return (
+        <Dropdown
+            isPlain
+            isOpen={isOpen}
+            onSelect={onSelect}
+            onOpenChange={isOpen => setIsOpen(isOpen)}
+            toggle={toggleRef =>
+                <MenuToggle ref={toggleRef} variant="plain" onClick={onToggleClick} isExpanded={isOpen}>
+                    <EllipsisVIcon />
+                </MenuToggle>}
+        >
+            <DropdownList>
+                <DropdownItem itemId='delete-item' key="delete-item" isDisabled={!selected} onClick={deleteItem}>
+                    {_("Delete")}
+                </DropdownItem>
+            </DropdownList>
+        </Dropdown>
     );
 };
