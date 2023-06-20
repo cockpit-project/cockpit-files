@@ -19,6 +19,7 @@
 
 import * as timeformat from "timeformat";
 import cockpit from 'cockpit';
+import { useDialogs } from "dialogs.jsx";
 import React, { useEffect, useState, useRef } from 'react';
 import {
     Button,
@@ -26,7 +27,7 @@ import {
     DescriptionList, DescriptionListGroup, DescriptionListTerm, DescriptionListDescription,
     Flex, FlexItem,
     Icon,
-    MenuToggle, MenuToggleAction,
+    MenuToggle, MenuToggleAction, Modal,
     Page, PageBreadcrumb, PageSection,
     SearchInput, Select, SelectList, SelectOption,
     Sidebar, SidebarPanel, SidebarContent,
@@ -362,7 +363,9 @@ export const ViewSelector = ({ isGrid, setIsGrid, sortBy, setSortBy }) => {
 };
 
 const DropdownWithKebab = ({ selected, path }) => {
+    const Dialogs = useDialogs();
     const [isOpen, setIsOpen] = useState(false);
+
     const onToggleClick = () => {
         setIsOpen(!isOpen);
     };
@@ -376,7 +379,16 @@ const DropdownWithKebab = ({ selected, path }) => {
             cockpit.spawn(["rm", itemPath]);
         } else if (selected.type === "directory") {
             const itemPath = "/" + path.join("/") + "/" + selected.name;
-            cockpit.spawn(["rmdir", itemPath]);
+            let emptyDirectory = false;
+            // Check for empty directory
+            cockpit.spawn(["ls", "-A", itemPath]).then(result => {
+                emptyDirectory = result === "";
+            });
+            if (emptyDirectory)
+                cockpit.spawn(["rmdir", itemPath]);
+            else {
+                Dialogs.show(<ConfirmDeletionDialog />);
+            }
         }
     };
 
@@ -398,5 +410,19 @@ const DropdownWithKebab = ({ selected, path }) => {
                 </DropdownItem>
             </DropdownList>
         </Dropdown>
+    );
+};
+
+const ConfirmDeletionDialog = () => {
+    const Dialogs = useDialogs();
+    return (
+        <Modal
+            position="top"
+            title="Delete item"
+            isOpen
+            onClose={Dialogs.close}
+        >
+            Modal
+        </Modal>
     );
 };
