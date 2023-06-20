@@ -174,7 +174,7 @@ const NavigatorBreadcrumbs = ({ path, setPath, pathIndex, setPathIndex, selected
                         })}
                     </Flex>
                 </FlexItem>
-                <FlexItem>
+                <FlexItem align={{ default: 'alignRight' }}>
                     <DropdownWithKebab selected={selected} path={path} />
                 </FlexItem>
             </Flex>
@@ -374,8 +374,7 @@ const DropdownWithKebab = ({ selected, path }) => {
         if (selected.type === "file") {
             const itemPath = "/" + path.join("/") + "/" + selected.name;
             cockpit.spawn(["rm", itemPath]);
-        }
-        else if (selected.type === "directory") {
+        } else if (selected.type === "directory") {
             const itemPath = "/" + path.join("/") + "/" + selected.name;
             cockpit.spawn(["rmdir", itemPath]);
         }
@@ -387,6 +386,7 @@ const DropdownWithKebab = ({ selected, path }) => {
             isOpen={isOpen}
             onSelect={onSelect}
             onOpenChange={isOpen => setIsOpen(isOpen)}
+            popperProps={{ position: "right" }}
             toggle={toggleRef =>
                 <MenuToggle ref={toggleRef} variant="plain" onClick={onToggleClick} isExpanded={isOpen}>
                     <EllipsisVIcon />
