@@ -393,7 +393,7 @@ const DropdownWithKebab = ({ selected, path }) => {
                 </MenuToggle>}
         >
             <DropdownList>
-                <DropdownItem itemId='delete-item' key="delete-item" isDisabled={!selected} onClick={deleteItem}>
+                <DropdownItem itemId='delete-item' key="delete-item" isDisabled={!selected} onClick={deleteItem} className={!selected ? "" : "pf-m-danger"}>
                     {_("Delete")}
                 </DropdownItem>
             </DropdownList>
