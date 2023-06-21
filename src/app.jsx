@@ -19,7 +19,7 @@
 
 import * as timeformat from "timeformat";
 import cockpit from 'cockpit';
-import { useDialogs } from "dialogs.jsx";
+import { useDialogs, WithDialogs } from "dialogs.jsx";
 import React, { useEffect, useState, useRef } from 'react';
 import {
     Button,
@@ -176,7 +176,9 @@ const NavigatorBreadcrumbs = ({ path, setPath, pathIndex, setPathIndex, selected
                     </Flex>
                 </FlexItem>
                 <FlexItem align={{ default: 'alignRight' }}>
-                    <DropdownWithKebab selected={selected} path={path} />
+                    <WithDialogs>
+                        <DropdownWithKebab selected={selected} path={path} />
+                    </WithDialogs>
                 </FlexItem>
             </Flex>
         </PageBreadcrumb>
@@ -374,22 +376,8 @@ const DropdownWithKebab = ({ selected, path }) => {
     };
 
     const deleteItem = () => {
-        if (selected.type === "file") {
-            const itemPath = "/" + path.join("/") + "/" + selected.name;
-            cockpit.spawn(["rm", itemPath]);
-        } else if (selected.type === "directory") {
-            const itemPath = "/" + path.join("/") + "/" + selected.name;
-            let emptyDirectory = false;
-            // Check for empty directory
-            cockpit.spawn(["ls", "-A", itemPath]).then(result => {
-                emptyDirectory = result === "";
-            });
-            if (emptyDirectory)
-                cockpit.spawn(["rmdir", itemPath]);
-            else {
-                Dialogs.show(<ConfirmDeletionDialog />);
-            }
-        }
+        const itemPath = "/" + path.join("/") + "/" + selected.name;
+        Dialogs.show(<ConfirmDeletionDialog selected={selected} itemPath={itemPath} />);
     };
 
     return (
@@ -413,16 +401,42 @@ const DropdownWithKebab = ({ selected, path }) => {
     );
 };
 
-const ConfirmDeletionDialog = () => {
+const ConfirmDeletionDialog = ({ selected, itemPath }) => {
     const Dialogs = useDialogs();
+
+    const deleteItem = () => {
+        if (selected.type === "file") {
+            cockpit.spawn(["rm", itemPath]).then(Dialogs.close);
+        } else if (selected.type === "directory") {
+            let emptyDirectory = false;
+            // Check for empty directory
+            cockpit.spawn(["ls", "-A", itemPath])
+                    .then(result => { emptyDirectory = result === "" })
+                    .then(() => {
+                        if (emptyDirectory)
+                            cockpit.spawn(["rmdir", itemPath]).then(Dialogs.close);
+                        else {
+                            cockpit.spawn(["rm", "-rf", itemPath]);
+                        }
+                    })
+                    .then(Dialogs.close);
+        }
+    };
+
     return (
         <Modal
             position="top"
-            title="Delete item"
+            title={_("Confirm deletion")}
             isOpen
             onClose={Dialogs.close}
+            footer={
+                <>
+                    <Button variant='danger' onClick={deleteItem}>{_("Delete Item")}</Button>
+                    <Button variant='link' onClick={Dialogs.close}>{_("Cancel")}</Button>
+                </>
+            }
         >
-            Modal
+            {_("Are you sure you want to permenantly delete ")} {selected.name}{_("?")}
         </Modal>
     );
 };

@@ -42,7 +42,8 @@
         "react/jsx-indent-props": "off",
         "react/prop-types": "off",
         "space-before-function-paren": "off",
-        "standard/no-callback-literal": "off"
+        "standard/no-callback-literal": "off",
+        "react/jsx-handler-names": "off"
     },
     "globals": {
         "require": false,
