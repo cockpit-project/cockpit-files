@@ -406,7 +406,8 @@ const ConfirmDeletionDialog = ({ selected, itemPath }) => {
 
     const deleteItem = () => {
         if (selected.type === "file") {
-            cockpit.spawn(["rm", itemPath]).then(Dialogs.close);
+            cockpit.spawn(["rm", itemPath]).then(Dialogs.close)
+                    .catch(() => { Dialogs.show(<ForceDeleteModal itemPath={itemPath} />) });
         } else if (selected.type === "directory") {
             let emptyDirectory = false;
             // Check for empty directory
@@ -416,10 +417,11 @@ const ConfirmDeletionDialog = ({ selected, itemPath }) => {
                         if (emptyDirectory)
                             cockpit.spawn(["rmdir", itemPath]).then(Dialogs.close);
                         else {
-                            cockpit.spawn(["rm", "-rf", itemPath]);
+                            cockpit.spawn(["rm", "-r", itemPath]);
                         }
                     })
-                    .then(Dialogs.close);
+                    .then(Dialogs.close)
+                    .catch(() => { Dialogs.show(<ForceDeleteModal itemPath={itemPath} />) });
         }
     };
 
@@ -437,6 +439,48 @@ const ConfirmDeletionDialog = ({ selected, itemPath }) => {
             }
         >
             {cockpit.format(_("Are you sure you want to permenantly delete $0?"), selected.name)}
+        </Modal>
+    );
+};
+
+const ForceDeleteModal = ({ itemPath }) => {
+    const Dialogs = useDialogs();
+
+    const forceDelete = () => {
+        cockpit.spawn(["rm", "-rf", itemPath])
+                .then(Dialogs.close)
+                .catch((err) => { Dialogs.show(<DeleteErrorModal errorMessage={err.message} />) });
+    };
+
+    return (
+        <Modal
+            position="top"
+            title={_("Force Delete")}
+            isOpen
+            onClose={Dialogs.close}
+            footer={
+                <>
+                    <Button variant='danger' onClick={forceDelete}>{_("Force Delete")}</Button>
+                    <Button variant='link' onClick={Dialogs.close}>{_("Cancel")}</Button>
+                </>
+            }
+        >
+            {_("Unable to delete item, do you want to force delete?")}
+        </Modal>
+    );
+};
+
+const DeleteErrorModal = ({ errorMessage }) => {
+    const Dialogs = useDialogs();
+
+    return (
+        <Modal
+            position="top"
+            title={_("Unable To Delete")}
+            isOpen
+            onClose={Dialogs.close}
+        >
+            {errorMessage}
         </Modal>
     );
 };
