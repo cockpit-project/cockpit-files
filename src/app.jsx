@@ -436,7 +436,7 @@ const ConfirmDeletionDialog = ({ selected, itemPath }) => {
                 </>
             }
         >
-            {_("Are you sure you want to permenantly delete ")} {selected.name}{_("?")}
+            {cockpit.format(_("Are you sure you want to permenantly delete $0?"), selected.name)}
         </Modal>
     );
 };
