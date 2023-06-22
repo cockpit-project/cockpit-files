@@ -24,18 +24,18 @@ import React, { useEffect, useState, useRef } from 'react';
 import {
     Button,
     Card, CardBody, CardTitle, CardHeader,
-    DescriptionList, DescriptionListGroup, DescriptionListTerm, DescriptionListDescription,
+    DescriptionList, DescriptionListGroup, DescriptionListTerm, DescriptionListDescription, Dropdown, DropdownList, DropdownItem,
     Flex, FlexItem,
     Icon,
     MenuToggle, MenuToggleAction, Modal,
     Page, PageBreadcrumb, PageSection,
-    SearchInput, Select, SelectList, SelectOption,
-    Sidebar, SidebarPanel, SidebarContent,
-    Text, TextContent, TextVariants, Dropdown, DropdownList, DropdownItem,
+    SearchInput, Select, SelectList, SelectOption, Sidebar, SidebarPanel, SidebarContent,
+    Text, TextContent, TextVariants,
 } from "@patternfly/react-core";
 import { ArrowLeftIcon, ArrowRightIcon, EllipsisVIcon, FileIcon, FolderIcon, GripVerticalIcon, ListIcon } from "@patternfly/react-icons";
 
 import { ListingTable } from "cockpit-components-table.jsx";
+import { InlineNotification } from "../pkg/lib/cockpit-components-inline-notification";
 
 const _ = cockpit.gettext;
 
@@ -116,7 +116,7 @@ export const Application = () => {
             <PageSection>
                 <Sidebar isPanelRight hasGutter>
                     <SidebarPanel className="sidebar-panel" width={{ default: "width_25" }}>
-                        <SidebarPanelDetails selected={files.find(file => file.name === selected) || ({ name: path[path.length - 1], items_cnt: { all: files.length, hidden: files.length - visibleFiles.length } })} />
+                        <SidebarPanelDetails path={path} selected={files.find(file => file.name === selected) || ({ name: path[path.length - 1], items_cnt: { all: files.length, hidden: files.length - visibleFiles.length } })} />
                     </SidebarPanel>
                     <SidebarContent>
                         <Card>
@@ -174,11 +174,6 @@ const NavigatorBreadcrumbs = ({ path, setPath, pathIndex, setPathIndex, selected
                             );
                         })}
                     </Flex>
-                </FlexItem>
-                <FlexItem align={{ default: 'alignRight' }}>
-                    <WithDialogs>
-                        <DropdownWithKebab selected={selected} path={path} />
-                    </WithDialogs>
                 </FlexItem>
             </Flex>
         </PageBreadcrumb>
@@ -275,7 +270,7 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, pathIn
     }
 };
 
-const SidebarPanelDetails = ({ selected }) => {
+const SidebarPanelDetails = ({ selected, path }) => {
     return (
         <Card className="sidebar-card">
             <CardHeader>
@@ -288,6 +283,9 @@ const SidebarPanelDetails = ({ selected }) => {
                         </Text>}
                     </TextContent>
                 </CardTitle>
+                <WithDialogs>
+                    <DropdownWithKebab selected={selected} path={path} />
+                </WithDialogs>
             </CardHeader>
             {selected.items_cnt === undefined &&
             <CardBody>
@@ -385,7 +383,7 @@ const DropdownWithKebab = ({ selected, path }) => {
             isPlain
             isOpen={isOpen}
             onSelect={onSelect}
-            onOpenChange={isOpen => setIsOpen(isOpen)}
+            onOpenChange={isOpen}
             popperProps={{ position: "right" }}
             toggle={toggleRef =>
                 <MenuToggle ref={toggleRef} variant="plain" onClick={onToggleClick} isExpanded={isOpen}>
@@ -393,7 +391,7 @@ const DropdownWithKebab = ({ selected, path }) => {
                 </MenuToggle>}
         >
             <DropdownList>
-                <DropdownItem itemId='delete-item' key="delete-item" isDisabled={!selected} onClick={deleteItem} className={!selected ? "" : "pf-m-danger"}>
+                <DropdownItem itemId='delete-item' key="delete-item" isDisabled={!selected} onClick={deleteItem} className="pf-m-danger">
                     {_("Delete")}
                 </DropdownItem>
             </DropdownList>
@@ -406,66 +404,58 @@ const ConfirmDeletionDialog = ({ selected, itemPath }) => {
 
     const deleteItem = () => {
         if (selected.type === "file") {
-            cockpit.spawn(["rm", itemPath]).then(Dialogs.close)
-                    .catch(() => { Dialogs.show(<ForceDeleteModal itemPath={itemPath} />) });
+            cockpit.spawn(["rm", itemPath])
+                    .then(Dialogs.close, (err) => { Dialogs.show(<ForceDeleteModal selected={selected} itemPath={itemPath} errorMessage={err.message} />) });
         } else if (selected.type === "directory") {
-            let emptyDirectory = false;
-            // Check for empty directory
-            cockpit.spawn(["ls", "-A", itemPath])
-                    .then(result => { emptyDirectory = result === "" })
-                    .then(() => {
-                        if (emptyDirectory)
-                            cockpit.spawn(["rmdir", itemPath]).then(Dialogs.close);
-                        else {
-                            cockpit.spawn(["rm", "-r", itemPath]);
-                        }
-                    })
-                    .then(Dialogs.close)
-                    .catch(() => { Dialogs.show(<ForceDeleteModal itemPath={itemPath} />) });
+            cockpit.spawn(["rm", "-r", itemPath])
+                    .then(Dialogs.close, (err) => { Dialogs.show(<ForceDeleteModal selected={selected} itemPath={itemPath} errorMessage={err.message} />) });
         }
     };
 
     return (
         <Modal
             position="top"
-            title={_("Confirm deletion")}
+            title={_(cockpit.format("Delete $0 $1?", selected.name, selected.type === "file" ? _("file") : _("directory")))}
+            titleIconVariant="warning"
             isOpen
             onClose={Dialogs.close}
             footer={
                 <>
-                    <Button variant='danger' onClick={deleteItem}>{_("Delete Item")}</Button>
+                    <Button variant='danger' onClick={deleteItem}>{_("Delete")}</Button>
                     <Button variant='link' onClick={Dialogs.close}>{_("Cancel")}</Button>
                 </>
             }
-        >
-            {cockpit.format(_("Are you sure you want to permenantly delete $0?"), selected.name)}
-        </Modal>
+        />
     );
 };
 
-const ForceDeleteModal = ({ itemPath }) => {
+const ForceDeleteModal = ({ selected, itemPath, errorMessage }) => {
     const Dialogs = useDialogs();
 
     const forceDelete = () => {
         cockpit.spawn(["rm", "-rf", itemPath])
-                .then(Dialogs.close)
-                .catch((err) => { Dialogs.show(<DeleteErrorModal errorMessage={err.message} />) });
+                .then(Dialogs.close, (err) => { Dialogs.show(<DeleteErrorModal errorMessage={err.message} />) });
     };
 
     return (
         <Modal
             position="top"
-            title={_("Force Delete")}
+            title={_(cockpit.format("Force delete $0 $1?", selected.name, selected.type === "file" ? _("file") : _("directory")))}
+            titleIconVariant="warning"
             isOpen
             onClose={Dialogs.close}
             footer={
                 <>
-                    <Button variant='danger' onClick={forceDelete}>{_("Force Delete")}</Button>
+                    <Button variant='danger' onClick={forceDelete}>{_("Force delete")}</Button>
                     <Button variant='link' onClick={Dialogs.close}>{_("Cancel")}</Button>
                 </>
             }
         >
-            {_("Unable to delete item, do you want to force delete?")}
+            <InlineNotification
+            type="danger"
+            text={errorMessage}
+            isInline
+            />
         </Modal>
     );
 };
@@ -480,7 +470,11 @@ const DeleteErrorModal = ({ errorMessage }) => {
             isOpen
             onClose={Dialogs.close}
         >
-            {errorMessage}
+            <InlineNotification
+            type="danger"
+            text={errorMessage}
+            isInline
+            />
         </Modal>
     );
 };
