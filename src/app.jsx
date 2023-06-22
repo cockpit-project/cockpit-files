@@ -386,12 +386,12 @@ const DropdownWithKebab = ({ selected, path, setPath, setPathIndex }) => {
             onOpenChange={setIsOpen}
             popperProps={{ position: "right" }}
             toggle={toggleRef =>
-                <MenuToggle ref={toggleRef} variant="plain" onClick={onToggleClick} isExpanded={isOpen}>
+                <MenuToggle ref={toggleRef} variant="plain" onClick={onToggleClick} isExpanded={isOpen} id="dropdown-menu">
                     <EllipsisVIcon />
                 </MenuToggle>}
         >
             <DropdownList>
-                <DropdownItem itemId='delete-item' key="delete-item" isDisabled={!selected} onClick={deleteItem} className="pf-m-danger">
+                <DropdownItem id="delete-item" itemId='delete-item' key="delete-item" onClick={deleteItem} className="pf-m-danger">
                     {_("Delete")}
                 </DropdownItem>
             </DropdownList>
