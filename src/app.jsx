@@ -383,7 +383,7 @@ const DropdownWithKebab = ({ selected, path }) => {
             isPlain
             isOpen={isOpen}
             onSelect={onSelect}
-            onOpenChange={isOpen}
+            onOpenChange={setIsOpen}
             popperProps={{ position: "right" }}
             toggle={toggleRef =>
                 <MenuToggle ref={toggleRef} variant="plain" onClick={onToggleClick} isExpanded={isOpen}>
