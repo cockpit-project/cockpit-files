@@ -378,6 +378,8 @@ const DropdownWithKebab = ({ selected, path }) => {
         Dialogs.show(<ConfirmDeletionDialog selected={selected} itemPath={itemPath} />);
     };
 
+    const isCurrentDirectory = selected.name === path[path.length - 1];
+
     return (
         <Dropdown
             isPlain
@@ -391,7 +393,7 @@ const DropdownWithKebab = ({ selected, path }) => {
                 </MenuToggle>}
         >
             <DropdownList>
-                <DropdownItem itemId='delete-item' key="delete-item" isDisabled={!selected} onClick={deleteItem} className="pf-m-danger">
+                <DropdownItem itemId='delete-item' key="delete-item" isDisabled={isCurrentDirectory} onClick={deleteItem} className={!isCurrentDirectory ? "pf-m-danger" : ""}>
                     {_("Delete")}
                 </DropdownItem>
             </DropdownList>
