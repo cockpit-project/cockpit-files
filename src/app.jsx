@@ -413,10 +413,14 @@ const ConfirmDeletionDialog = ({ selected, itemPath, path, setPath, setPathIndex
                 .then(Dialogs.close, (err) => { Dialogs.show(<ForceDeleteModal selected={selected} itemPath={itemPath} errorMessage={err.message} />) });
     };
 
+    const modalTitle = selected.type === "file"
+        ? cockpit.format(_("Delete file $0?"), selected.name)
+        : cockpit.format(_("Delete directory $0?"), selected.name);
+
     return (
         <Modal
             position="top"
-            title={_(cockpit.format("Delete $0 $1?", selected.name, selected.type === "file" ? _("file") : _("directory")))}
+            title={modalTitle}
             titleIconVariant="warning"
             isOpen
             onClose={Dialogs.close}
@@ -438,10 +442,14 @@ const ForceDeleteModal = ({ selected, itemPath, errorMessage }) => {
                 .then(Dialogs.close, (err) => { Dialogs.show(<DeleteErrorModal errorMessage={err.message} />) });
     };
 
+    const modalTitle = selected.type === "file"
+        ? cockpit.format(_("Force delete file $0?"), selected.name)
+        : cockpit.format(_("Force delete directory $0?"), selected.name);
+
     return (
         <Modal
             position="top"
-            title={_(cockpit.format("Force delete $0 $1?", selected.name, selected.type === "file" ? _("file") : _("directory")))}
+            title={modalTitle}
             titleIconVariant="warning"
             isOpen
             onClose={Dialogs.close}
