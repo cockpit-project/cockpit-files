@@ -116,7 +116,7 @@ export const Application = () => {
             <PageSection>
                 <Sidebar isPanelRight hasGutter>
                     <SidebarPanel className="sidebar-panel" width={{ default: "width_25" }}>
-                        <SidebarPanelDetails path={path} selected={files.find(file => file.name === selected) || ({ name: path[path.length - 1], items_cnt: { all: files.length, hidden: files.length - visibleFiles.length } })} />
+                        <SidebarPanelDetails path={path} selected={files.find(file => file.name === selected) || ({ name: path[path.length - 1], items_cnt: { all: files.length, hidden: files.length - visibleFiles.length } })} setPath={setPath} setPathIndex={setPathIndex} />
                     </SidebarPanel>
                     <SidebarContent>
                         <Card>
@@ -270,7 +270,7 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, setPat
     }
 };
 
-const SidebarPanelDetails = ({ selected, path }) => {
+const SidebarPanelDetails = ({ selected, path, setPath, setPathIndex }) => {
     return (
         <Card className="sidebar-card">
             <CardHeader>
@@ -284,7 +284,7 @@ const SidebarPanelDetails = ({ selected, path }) => {
                     </TextContent>
                 </CardTitle>
                 <WithDialogs>
-                    <DropdownWithKebab selected={selected} path={path} />
+                    <DropdownWithKebab selected={selected} path={path} setPath={setPath} setPathIndex={setPathIndex} />
                 </WithDialogs>
             </CardHeader>
             {selected.items_cnt === undefined &&
@@ -362,7 +362,7 @@ export const ViewSelector = ({ isGrid, setIsGrid, sortBy, setSortBy }) => {
     );
 };
 
-const DropdownWithKebab = ({ selected, path }) => {
+const DropdownWithKebab = ({ selected, path, setPath, setPathIndex }) => {
     const Dialogs = useDialogs();
     const [isOpen, setIsOpen] = useState(false);
 
@@ -374,11 +374,9 @@ const DropdownWithKebab = ({ selected, path }) => {
     };
 
     const deleteItem = () => {
-        const itemPath = "/" + path.join("/") + "/" + selected.name;
-        Dialogs.show(<ConfirmDeletionDialog selected={selected} itemPath={itemPath} />);
+        const itemPath = "/" + path.join("/") + "/" + (selected.items_cnt ? "" : selected.name);
+        Dialogs.show(<ConfirmDeletionDialog selected={selected} itemPath={itemPath} path={path} setPath={setPath} setPathIndex={setPathIndex} />);
     };
-
-    const isCurrentDirectory = selected.name === path[path.length - 1];
 
     return (
         <Dropdown
@@ -393,7 +391,7 @@ const DropdownWithKebab = ({ selected, path }) => {
                 </MenuToggle>}
         >
             <DropdownList>
-                <DropdownItem itemId='delete-item' key="delete-item" isDisabled={isCurrentDirectory} onClick={deleteItem} className={!isCurrentDirectory ? "pf-m-danger" : ""}>
+                <DropdownItem itemId='delete-item' key="delete-item" isDisabled={!selected} onClick={deleteItem} className="pf-m-danger">
                     {_("Delete")}
                 </DropdownItem>
             </DropdownList>
@@ -401,17 +399,18 @@ const DropdownWithKebab = ({ selected, path }) => {
     );
 };
 
-const ConfirmDeletionDialog = ({ selected, itemPath }) => {
+const ConfirmDeletionDialog = ({ selected, itemPath, path, setPath, setPathIndex }) => {
     const Dialogs = useDialogs();
 
     const deleteItem = () => {
-        if (selected.type === "file") {
-            cockpit.spawn(["rm", itemPath])
-                    .then(Dialogs.close, (err) => { Dialogs.show(<ForceDeleteModal selected={selected} itemPath={itemPath} errorMessage={err.message} />) });
-        } else if (selected.type === "directory") {
-            cockpit.spawn(["rm", "-r", itemPath])
-                    .then(Dialogs.close, (err) => { Dialogs.show(<ForceDeleteModal selected={selected} itemPath={itemPath} errorMessage={err.message} />) });
-        }
+        cockpit.spawn(["rm", "-r", itemPath])
+                .then(() => {
+                    if (selected.items_cnt) {
+                        setPath(path.slice(0, -1));
+                        setPathIndex(path.length - 1);
+                    }
+                })
+                .then(Dialogs.close, (err) => { Dialogs.show(<ForceDeleteModal selected={selected} itemPath={itemPath} errorMessage={err.message} />) });
     };
 
     return (
