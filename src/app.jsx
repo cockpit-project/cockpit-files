@@ -112,7 +112,7 @@ export const Application = () => {
 
     return (
         <Page>
-            <NavigatorBreadcrumbs path={path} setPath={setPath} pathIndex={pathIndex} setPathIndex={setPathIndex} selected={files.find(file => file.name === selected)} />
+            <NavigatorBreadcrumbs path={path} setPath={setPath} pathIndex={pathIndex} setPathIndex={setPathIndex} />
             <PageSection>
                 <Sidebar isPanelRight hasGutter>
                     <SidebarPanel className="sidebar-panel" width={{ default: "width_25" }}>
@@ -121,7 +121,7 @@ export const Application = () => {
                     <SidebarContent>
                         <Card>
                             <NavigatorCardHeader currentFilter={currentFilter} onFilterChange={onFilterChange} isGrid={isGrid} setIsGrid={setIsGrid} sortBy={sortBy} setSortBy={setSortBy} />
-                            <NavigatorCardBody currentFilter={currentFilter} files={visibleFiles} setPath={setPath} path={path} pathIndex={pathIndex} setPathIndex={setPathIndex} isGrid={isGrid} sortBy={sortBy} setSelected={setSelected} />
+                            <NavigatorCardBody currentFilter={currentFilter} files={visibleFiles} setPath={setPath} path={path} setPathIndex={setPathIndex} isGrid={isGrid} sortBy={sortBy} setSelected={setSelected} />
                         </Card>
                     </SidebarContent>
                 </Sidebar>
@@ -130,7 +130,7 @@ export const Application = () => {
     );
 };
 
-const NavigatorBreadcrumbs = ({ path, setPath, pathIndex, setPathIndex, selected }) => {
+const NavigatorBreadcrumbs = ({ path, setPath, pathIndex, setPathIndex }) => {
     const navigateBack = () => {
         if (pathIndex > 0)
             setPathIndex(pathIndex - 1);
@@ -192,7 +192,7 @@ const NavigatorCardHeader = ({ currentFilter, onFilterChange, isGrid, setIsGrid,
     );
 };
 
-const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, pathIndex, setPathIndex, sortBy, setSelected }) => {
+const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, setPathIndex, sortBy, setSelected }) => {
     const onDoubleClickNavigate = (path, file) => {
         if (file.type === "directory") {
             setPath(p => [...p, file.name]);
