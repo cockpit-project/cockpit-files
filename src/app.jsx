@@ -403,7 +403,7 @@ const ConfirmDeletionDialog = ({ selected, itemPath, path, setPath, setPathIndex
     const Dialogs = useDialogs();
 
     const deleteItem = () => {
-        cockpit.spawn(["rm", "-r", itemPath])
+        cockpit.spawn(["rm", "-r", itemPath], { superuser: "try" })
                 .then(() => {
                     if (selected.items_cnt) {
                         setPath(path.slice(0, -1));
@@ -438,7 +438,7 @@ const ForceDeleteModal = ({ selected, itemPath, errorMessage }) => {
     const Dialogs = useDialogs();
 
     const forceDelete = () => {
-        cockpit.spawn(["rm", "-rf", itemPath])
+        cockpit.spawn(["rm", "-rf", itemPath], { superuser: "try" })
                 .then(Dialogs.close, (err) => { Dialogs.show(<DeleteErrorModal errorMessage={err.message} />) });
     };
 
