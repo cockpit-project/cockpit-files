@@ -36,6 +36,7 @@ import { ArrowLeftIcon, ArrowRightIcon, EllipsisVIcon, FileIcon, FolderIcon, Gri
 
 import { ListingTable } from "cockpit-components-table.jsx";
 import { InlineNotification } from "../pkg/lib/cockpit-components-inline-notification";
+import { ContextMenu } from "./navigator-context-menu";
 
 const _ = cockpit.gettext;
 
@@ -122,6 +123,7 @@ export const Application = () => {
                         <Card>
                             <NavigatorCardHeader currentFilter={currentFilter} onFilterChange={onFilterChange} isGrid={isGrid} setIsGrid={setIsGrid} sortBy={sortBy} setSortBy={setSortBy} />
                             <NavigatorCardBody currentFilter={currentFilter} files={visibleFiles} setPath={setPath} path={path} setPathIndex={setPathIndex} isGrid={isGrid} sortBy={sortBy} setSelected={setSelected} />
+                            <ContextMenu parentId="folder-view" />
                         </Card>
                     </SidebarContent>
                 </Sidebar>
@@ -232,7 +234,7 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, setPat
 
     const Item = ({ file }) => {
         return (
-            <Button data-item={file.name} variant="plain" onDoubleClick={ () => onDoubleClickNavigate(path, file)} onClick={() => setSelected(file.name)} className='item-button'>
+            <Button data-item={file.name} variant="plain" onDoubleClick={ () => onDoubleClickNavigate(path, file)} onClick={() => setSelected(file.name)} className={'item-button ' + (file.type === "directory" ? "directory-item" : "file-item")}>
                 <Flex direction={{ default: isGrid ? "column" : "row" }} spaceItems={{ default: isGrid ? 'spaceItemsNone' : 'spaceItemsMd' }}>
                     <FlexItem alignSelf={{ default: "alignSelfCenter" }}>
                         <Icon size={isGrid ? "xl" : "lg"}>
