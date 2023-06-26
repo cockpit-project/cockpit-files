@@ -236,7 +236,7 @@ class TestNavigator(testlib.MachineCase):
         b.wait_in_text("h1.pf-c-modal-box__title", "Force delete file newfile?")
         b.wait_in_text("h4.pf-c-alert__title", "rm exited with code 1")
         b.click("button.pf-m-danger")
-        b.wait_in_text("h1.pf-c-modal-box__title", "Unable To Delete")
+        b.wait_in_text("h1.pf-c-modal-box__title", "Force delete file newfile?")
         b.wait_in_text("h4.pf-c-alert__title", "rm exited with code 1")
         b.click("div.pf-c-modal-box__close")
         b.wait_visible("[data-item='newfile']")
