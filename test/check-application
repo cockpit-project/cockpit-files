@@ -205,6 +205,12 @@ class TestNavigator(testlib.MachineCase):
         b.wait_visible("[data-item='newfile']")
         self.delete_item(b, "file", "newfile")
         b.wait_not_present("[data-item='newfile']")
+        
+        # Delete file with space in the file name
+        m.execute("touch /home/admin/new\ file")
+        b.wait_visible("[data-item='new file']")
+        self.delete_item(b, "file", "new file")
+        b.wait_not_present("[data-item='new file']")
 
         # Delete empty directory
         m.execute("mkdir /home/admin/newdir")
