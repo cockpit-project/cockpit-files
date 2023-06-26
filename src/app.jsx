@@ -439,12 +439,14 @@ const ForceDeleteModal = ({ selected, itemPath, errorMessage }) => {
 
     const forceDelete = () => {
         cockpit.spawn(["rm", "-rf", itemPath], { superuser: "try" })
-                .then(Dialogs.close, (err) => { Dialogs.show(<DeleteErrorModal errorMessage={err.message} />) });
+                .then(Dialogs.close, (err) => { Dialogs.show(<ForceDeleteModal selected={undefined} itemPath={undefined} errorMessage={err.message} />) });
     };
 
-    const modalTitle = selected.type === "file"
-        ? cockpit.format(_("Force delete file $0?"), selected.name)
-        : cockpit.format(_("Force delete directory $0?"), selected.name);
+    const modalTitle = selected
+        ? selected.type === "file"
+            ? cockpit.format(_("Force delete file $0?"), selected.name)
+            : cockpit.format(_("Force delete directory $0?"), selected.name)
+        : _("Unable To Delete");
 
     return (
         <Modal
@@ -453,31 +455,11 @@ const ForceDeleteModal = ({ selected, itemPath, errorMessage }) => {
             titleIconVariant="warning"
             isOpen
             onClose={Dialogs.close}
-            footer={
+            footer={selected &&
                 <>
                     <Button variant='danger' onClick={forceDelete}>{_("Force delete")}</Button>
                     <Button variant='link' onClick={Dialogs.close}>{_("Cancel")}</Button>
-                </>
-            }
-        >
-            <InlineNotification
-            type="danger"
-            text={errorMessage}
-            isInline
-            />
-        </Modal>
-    );
-};
-
-const DeleteErrorModal = ({ errorMessage }) => {
-    const Dialogs = useDialogs();
-
-    return (
-        <Modal
-            position="top"
-            title={_("Unable To Delete")}
-            isOpen
-            onClose={Dialogs.close}
+                </>}
         >
             <InlineNotification
             type="danger"
