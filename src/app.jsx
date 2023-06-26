@@ -19,22 +19,23 @@
 
 import * as timeformat from "timeformat";
 import cockpit from 'cockpit';
+import { useDialogs, WithDialogs } from "dialogs.jsx";
 import React, { useEffect, useState, useRef } from 'react';
 import {
     Button,
     Card, CardBody, CardTitle, CardHeader,
-    DescriptionList, DescriptionListGroup, DescriptionListTerm, DescriptionListDescription,
+    DescriptionList, DescriptionListGroup, DescriptionListTerm, DescriptionListDescription, Dropdown, DropdownList, DropdownItem,
     Flex, FlexItem,
     Icon,
-    MenuToggle, MenuToggleAction,
+    MenuToggle, MenuToggleAction, Modal,
     Page, PageBreadcrumb, PageSection,
-    SearchInput, Select, SelectList, SelectOption,
-    Sidebar, SidebarPanel, SidebarContent,
+    SearchInput, Select, SelectList, SelectOption, Sidebar, SidebarPanel, SidebarContent,
     Text, TextContent, TextVariants,
 } from "@patternfly/react-core";
-import { ArrowLeftIcon, ArrowRightIcon, FileIcon, FolderIcon, GripVerticalIcon, ListIcon } from "@patternfly/react-icons";
+import { ArrowLeftIcon, ArrowRightIcon, EllipsisVIcon, FileIcon, FolderIcon, GripVerticalIcon, ListIcon } from "@patternfly/react-icons";
 
 import { ListingTable } from "cockpit-components-table.jsx";
+import { InlineNotification } from "../pkg/lib/cockpit-components-inline-notification";
 
 const _ = cockpit.gettext;
 
@@ -115,12 +116,12 @@ export const Application = () => {
             <PageSection>
                 <Sidebar isPanelRight hasGutter>
                     <SidebarPanel className="sidebar-panel" width={{ default: "width_25" }}>
-                        <SidebarPanelDetails selected={files.find(file => file.name === selected) || ({ name: path[path.length - 1], items_cnt: { all: files.length, hidden: files.length - visibleFiles.length } })} />
+                        <SidebarPanelDetails path={path} selected={files.find(file => file.name === selected) || ({ name: path[path.length - 1], items_cnt: { all: files.length, hidden: files.length - visibleFiles.length } })} setPath={setPath} setPathIndex={setPathIndex} />
                     </SidebarPanel>
                     <SidebarContent>
                         <Card>
                             <NavigatorCardHeader currentFilter={currentFilter} onFilterChange={onFilterChange} isGrid={isGrid} setIsGrid={setIsGrid} sortBy={sortBy} setSortBy={setSortBy} />
-                            <NavigatorCardBody currentFilter={currentFilter} files={visibleFiles} setPath={setPath} path={path} pathIndex={pathIndex} setPathIndex={setPathIndex} isGrid={isGrid} sortBy={sortBy} setSelected={setSelected} />
+                            <NavigatorCardBody currentFilter={currentFilter} files={visibleFiles} setPath={setPath} path={path} setPathIndex={setPathIndex} isGrid={isGrid} sortBy={sortBy} setSelected={setSelected} />
                         </Card>
                     </SidebarContent>
                 </Sidebar>
@@ -191,7 +192,7 @@ const NavigatorCardHeader = ({ currentFilter, onFilterChange, isGrid, setIsGrid,
     );
 };
 
-const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, pathIndex, setPathIndex, sortBy, setSelected }) => {
+const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, setPathIndex, sortBy, setSelected }) => {
     const onDoubleClickNavigate = (path, file) => {
         if (file.type === "directory") {
             setPath(p => [...p, file.name]);
@@ -269,7 +270,7 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, pathIn
     }
 };
 
-const SidebarPanelDetails = ({ selected }) => {
+const SidebarPanelDetails = ({ selected, path, setPath, setPathIndex }) => {
     return (
         <Card className="sidebar-card">
             <CardHeader>
@@ -282,6 +283,9 @@ const SidebarPanelDetails = ({ selected }) => {
                         </Text>}
                     </TextContent>
                 </CardTitle>
+                <WithDialogs>
+                    <DropdownWithKebab selected={selected} path={path} setPath={setPath} setPathIndex={setPathIndex} />
+                </WithDialogs>
             </CardHeader>
             {selected.items_cnt === undefined &&
             <CardBody>
@@ -355,5 +359,111 @@ export const ViewSelector = ({ isGrid, setIsGrid, sortBy, setSortBy }) => {
                 <SelectOption itemId="first_modified">{_("First modified")}</SelectOption>
             </SelectList>
         </Select>
+    );
+};
+
+const DropdownWithKebab = ({ selected, path, setPath, setPathIndex }) => {
+    const Dialogs = useDialogs();
+    const [isOpen, setIsOpen] = useState(false);
+
+    const onToggleClick = () => {
+        setIsOpen(!isOpen);
+    };
+    const onSelect = (_event, itemId) => {
+        setIsOpen(false);
+    };
+
+    const deleteItem = () => {
+        const itemPath = "/" + path.join("/") + "/" + (selected.items_cnt ? "" : selected.name);
+        Dialogs.show(<ConfirmDeletionDialog selected={selected} itemPath={itemPath} path={path} setPath={setPath} setPathIndex={setPathIndex} />);
+    };
+
+    return (
+        <Dropdown
+            isPlain
+            isOpen={isOpen}
+            onSelect={onSelect}
+            onOpenChange={setIsOpen}
+            popperProps={{ position: "right" }}
+            toggle={toggleRef =>
+                <MenuToggle ref={toggleRef} variant="plain" onClick={onToggleClick} isExpanded={isOpen} id="dropdown-menu">
+                    <EllipsisVIcon />
+                </MenuToggle>}
+        >
+            <DropdownList>
+                <DropdownItem id="delete-item" itemId='delete-item' key="delete-item" onClick={deleteItem} className="pf-m-danger">
+                    {selected.type === "file" ? _("Delete file") : _("Delete directory")}
+                </DropdownItem>
+            </DropdownList>
+        </Dropdown>
+    );
+};
+
+const ConfirmDeletionDialog = ({ selected, itemPath, path, setPath, setPathIndex }) => {
+    const Dialogs = useDialogs();
+
+    const deleteItem = () => {
+        cockpit.spawn(["rm", "-r", itemPath], { superuser: "try" })
+                .then(() => {
+                    if (selected.items_cnt) {
+                        setPath(path.slice(0, -1));
+                        setPathIndex(path.length - 1);
+                    }
+                })
+                .then(Dialogs.close, (err) => { Dialogs.show(<ForceDeleteModal selected={selected} itemPath={itemPath} errorMessage={err.message} deleteFailed={false} />) });
+    };
+
+    const modalTitle = selected.type === "file"
+        ? cockpit.format(_("Delete file $0?"), selected.name)
+        : cockpit.format(_("Delete directory $0?"), selected.name);
+
+    return (
+        <Modal
+            position="top"
+            title={modalTitle}
+            titleIconVariant="warning"
+            isOpen
+            onClose={Dialogs.close}
+            footer={
+                <>
+                    <Button variant='danger' onClick={deleteItem}>{_("Delete")}</Button>
+                    <Button variant='link' onClick={Dialogs.close}>{_("Cancel")}</Button>
+                </>
+            }
+        />
+    );
+};
+
+const ForceDeleteModal = ({ selected, itemPath, errorMessage, deleteFailed }) => {
+    const Dialogs = useDialogs();
+
+    const forceDelete = () => {
+        cockpit.spawn(["rm", "-rf", itemPath], { superuser: "try" })
+                .then(Dialogs.close, (err) => { Dialogs.show(<ForceDeleteModal selected={selected} itemPath={itemPath} errorMessage={err.message} deleteFailed />) });
+    };
+
+    const modalTitle = selected.type === "file"
+        ? cockpit.format(_("Force delete file $0?"), selected.name)
+        : cockpit.format(_("Force delete directory $0?"), selected.name);
+
+    return (
+        <Modal
+            position="top"
+            title={modalTitle}
+            titleIconVariant="warning"
+            isOpen
+            onClose={Dialogs.close}
+            footer={!deleteFailed &&
+                <>
+                    <Button variant='danger' onClick={forceDelete}>{_("Force delete")}</Button>
+                    <Button variant='link' onClick={Dialogs.close}>{_("Cancel")}</Button>
+                </>}
+        >
+            <InlineNotification
+            type="danger"
+            text={errorMessage}
+            isInline
+            />
+        </Modal>
     );
 };
