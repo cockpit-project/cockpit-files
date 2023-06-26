@@ -392,7 +392,7 @@ const DropdownWithKebab = ({ selected, path, setPath, setPathIndex }) => {
         >
             <DropdownList>
                 <DropdownItem id="delete-item" itemId='delete-item' key="delete-item" onClick={deleteItem} className="pf-m-danger">
-                    {_("Delete")}
+                    {selected.type === "file" ? _("Delete file") : _("Delete directory")}
                 </DropdownItem>
             </DropdownList>
         </Dropdown>
@@ -410,7 +410,7 @@ const ConfirmDeletionDialog = ({ selected, itemPath, path, setPath, setPathIndex
                         setPathIndex(path.length - 1);
                     }
                 })
-                .then(Dialogs.close, (err) => { Dialogs.show(<ForceDeleteModal selected={selected} itemPath={itemPath} errorMessage={err.message} />) });
+                .then(Dialogs.close, (err) => { Dialogs.show(<ForceDeleteModal selected={selected} itemPath={itemPath} errorMessage={err.message} deleteFailed={false} />) });
     };
 
     const modalTitle = selected.type === "file"
@@ -434,19 +434,17 @@ const ConfirmDeletionDialog = ({ selected, itemPath, path, setPath, setPathIndex
     );
 };
 
-const ForceDeleteModal = ({ selected, itemPath, errorMessage }) => {
+const ForceDeleteModal = ({ selected, itemPath, errorMessage, deleteFailed }) => {
     const Dialogs = useDialogs();
 
     const forceDelete = () => {
         cockpit.spawn(["rm", "-rf", itemPath], { superuser: "try" })
-                .then(Dialogs.close, (err) => { Dialogs.show(<ForceDeleteModal selected={undefined} itemPath={undefined} errorMessage={err.message} />) });
+                .then(Dialogs.close, (err) => { Dialogs.show(<ForceDeleteModal selected={selected} itemPath={itemPath} errorMessage={err.message} deleteFailed />) });
     };
 
-    const modalTitle = selected
-        ? selected.type === "file"
-            ? cockpit.format(_("Force delete file $0?"), selected.name)
-            : cockpit.format(_("Force delete directory $0?"), selected.name)
-        : _("Unable To Delete");
+    const modalTitle = selected.type === "file"
+        ? cockpit.format(_("Force delete file $0?"), selected.name)
+        : cockpit.format(_("Force delete directory $0?"), selected.name);
 
     return (
         <Modal
@@ -455,7 +453,7 @@ const ForceDeleteModal = ({ selected, itemPath, errorMessage }) => {
             titleIconVariant="warning"
             isOpen
             onClose={Dialogs.close}
-            footer={selected &&
+            footer={!deleteFailed &&
                 <>
                     <Button variant='danger' onClick={forceDelete}>{_("Force delete")}</Button>
                     <Button variant='link' onClick={Dialogs.close}>{_("Cancel")}</Button>
