@@ -27,6 +27,13 @@ class TestNavigator(testlib.MachineCase):
         select_entry = f"{selector} ul button:contains('{value}')"
         b.click(select_entry)
 
+    def delete_item(self, b, type, filename):
+        b.click(f"[data-item='{filename}']")
+        b.click("#dropdown-menu")
+        b.click("#delete-item")
+        b.wait_in_text("h1.pf-c-modal-box__title", f"Delete {type} {filename}?")
+        b.click("button.pf-m-danger")
+
     def testBasic(self):
         b = self.browser
         m = self.machine
@@ -196,43 +203,27 @@ class TestNavigator(testlib.MachineCase):
         # Delete file
         m.execute("touch /home/admin/newfile")
         b.wait_visible("[data-item='newfile']")
-        b.click("[data-item='newfile']")
-        b.click("#dropdown-menu")
-        b.click("#delete-item")
-        b.wait_in_text("h1.pf-c-modal-box__title", "Delete file newfile?")
-        b.click("button.pf-m-danger")
+        self.delete_item(b, "file", "newfile")
         b.wait_not_present("[data-item='newfile']")
 
         # Delete empty directory
         m.execute("mkdir /home/admin/newdir")
         b.wait_visible("[data-item='newdir']")
-        b.click("[data-item='newdir']")
-        b.click("#dropdown-menu")
-        b.click("#delete-item")
-        b.wait_in_text("h1.pf-c-modal-box__title", "Delete directory newdir?")
-        b.click("button.pf-m-danger")
+        self.delete_item(b, "directory", "newdir")
         b.wait_not_present("[data-item='newdir']")
 
         # Delete full directory
         m.execute("mkdir /home/admin/newdir")
         m.execute("touch /home/admin/newdir/newfile")
         b.wait_visible("[data-item='newdir']")
-        b.click("[data-item='newdir']")
-        b.click("#dropdown-menu")
-        b.click("#delete-item")
-        b.wait_in_text("h1.pf-c-modal-box__title", "Delete directory newdir?")
-        b.click("button.pf-m-danger")
+        self.delete_item(b, "directory", "newdir")
         b.wait_not_present("[data-item='newdir']")
 
         # Deleting protected file should give error
         m.execute("touch /home/admin/newfile")
         m.execute("sudo chattr +i /home/admin/newfile")
         b.wait_visible("[data-item='newfile']")
-        b.click("[data-item='newfile']")
-        b.click("#dropdown-menu")
-        b.click("#delete-item")
-        b.wait_in_text("h1.pf-c-modal-box__title", "Delete file newfile?")
-        b.click("button.pf-m-danger")
+        self.delete_item(b, "file", "newfile")
         b.wait_in_text("h1.pf-c-modal-box__title", "Force delete file newfile?")
         b.wait_in_text("h4.pf-c-alert__title", "rm exited with code 1")
         b.click("button.pf-m-danger")
@@ -241,11 +232,7 @@ class TestNavigator(testlib.MachineCase):
         b.click("div.pf-c-modal-box__close")
         b.wait_visible("[data-item='newfile']")
         m.execute("sudo chattr -i /home/admin/newfile")
-        b.click("[data-item='newfile']")
-        b.click("#dropdown-menu")
-        b.click("#delete-item")
-        b.wait_in_text("h1.pf-c-modal-box__title", "Delete file newfile?")
-        b.click("button.pf-m-danger")
+        self.delete_item(b, "file", "newfile")
         b.wait_not_present("[data-item='newfile']")
 
         # Delete current directory
