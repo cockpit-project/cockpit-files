@@ -497,16 +497,17 @@ const CreateDirectoryModal = ({ currentPath, errorMessage }) => {
                     <Button variant='link' onClick={Dialogs.close}>{_("Cancel")}</Button>
                 </>}
         >
-            {errorMessage === undefined
-                ? <>
+            {errorMessage === undefined &&
+                <>
                     <Text>{_("Directory name")}</Text>
                     <TextInput value={name} onChange={setName} id="create-directory-input" />
-                  </>
-                : <InlineNotification
-                type="danger"
-                text={errorMessage}
-                isInline
-                  />}
+                </>}
+            {errorMessage !== undefined &&
+                <InlineNotification
+                    type="danger"
+                    text={errorMessage}
+                    isInline
+                />}
         </Modal>
     );
 };
