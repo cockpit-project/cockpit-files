@@ -30,7 +30,7 @@ import {
     MenuToggle, MenuToggleAction, Modal,
     Page, PageBreadcrumb, PageSection,
     SearchInput, Select, SelectList, SelectOption, Sidebar, SidebarPanel, SidebarContent,
-    Text, TextContent, TextVariants,
+    Text, TextContent, TextVariants, TextInput,
 } from "@patternfly/react-core";
 import { ArrowLeftIcon, ArrowRightIcon, EllipsisVIcon, FileIcon, FolderIcon, GripVerticalIcon, ListIcon } from "@patternfly/react-icons";
 
@@ -378,6 +378,11 @@ const DropdownWithKebab = ({ selected, path, setPath, setPathIndex }) => {
         Dialogs.show(<ConfirmDeletionDialog selected={selected} itemPath={itemPath} path={path} setPath={setPath} setPathIndex={setPathIndex} />);
     };
 
+    const createDirectory = () => {
+        const currentPath = "/" + path.join("/") + "/";
+        Dialogs.show(<CreateDirectoryModal currentPath={currentPath} errorMessage={undefined} />);
+    };
+
     return (
         <Dropdown
             isPlain
@@ -391,6 +396,9 @@ const DropdownWithKebab = ({ selected, path, setPath, setPathIndex }) => {
                 </MenuToggle>}
         >
             <DropdownList>
+                <DropdownItem id="create-item" itemId='create-item' key="create-item" onClick={createDirectory}>
+                    {_("Create directory")}
+                </DropdownItem>
                 <DropdownItem id="delete-item" itemId='delete-item' key="delete-item" onClick={deleteItem} className="pf-m-danger">
                     {selected.type === "file" ? _("Delete file") : _("Delete directory")}
                 </DropdownItem>
@@ -464,6 +472,41 @@ const ForceDeleteModal = ({ selected, itemPath, errorMessage, deleteFailed }) =>
             text={errorMessage}
             isInline
             />
+        </Modal>
+    );
+};
+
+const CreateDirectoryModal = ({ currentPath, errorMessage }) => {
+    const Dialogs = useDialogs();
+    const [name, setName] = useState("");
+
+    const createDirectory = () => {
+        cockpit.spawn(["mkdir", currentPath + name], { superuser: "try" })
+                .then(Dialogs.close, (err) => { Dialogs.show(<CreateDirectoryModal currentPath={currentPath} errorMessage={err.message} />) });
+    };
+
+    return (
+        <Modal
+            position="top"
+            title={_("Create directory")}
+            isOpen
+            onClose={Dialogs.close}
+            footer={errorMessage === undefined &&
+                <>
+                    <Button variant='primary' onClick={createDirectory}>{_("Create")}</Button>
+                    <Button variant='link' onClick={Dialogs.close}>{_("Cancel")}</Button>
+                </>}
+        >
+            {errorMessage === undefined
+                ? <>
+                    <Text>{_("Directory name")}</Text>
+                    <TextInput value={name} onChange={setName} id="create-directory-input" />
+                  </>
+                : <InlineNotification
+                type="danger"
+                text={errorMessage}
+                isInline
+                  />}
         </Modal>
     );
 };
