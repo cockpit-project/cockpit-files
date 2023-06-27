@@ -30,7 +30,7 @@ import {
     MenuToggle, MenuToggleAction, Modal,
     Page, PageBreadcrumb, PageSection,
     SearchInput, Select, SelectList, SelectOption, Sidebar, SidebarPanel, SidebarContent,
-    Text, TextContent, TextVariants, TextInput,
+    Text, TextContent, TextVariants, TextInput, Form, FormGroup,
 } from "@patternfly/react-core";
 import { ArrowLeftIcon, ArrowRightIcon, EllipsisVIcon, FileIcon, FolderIcon, GripVerticalIcon, ListIcon } from "@patternfly/react-icons";
 
@@ -396,10 +396,10 @@ const DropdownWithKebab = ({ selected, path, setPath, setPathIndex }) => {
                 </MenuToggle>}
         >
             <DropdownList>
-                <DropdownItem id="create-item" itemId='create-item' key="create-item" onClick={createDirectory}>
+                <DropdownItem id="create-item" key="create-item" onClick={createDirectory}>
                     {_("Create directory")}
                 </DropdownItem>
-                <DropdownItem id="delete-item" itemId='delete-item' key="delete-item" onClick={deleteItem} className="pf-m-danger">
+                <DropdownItem id="delete-item" key="delete-item" onClick={deleteItem} className="pf-m-danger">
                     {selected.type === "file" ? _("Delete file") : _("Delete directory")}
                 </DropdownItem>
             </DropdownList>
@@ -497,11 +497,11 @@ const CreateDirectoryModal = ({ currentPath, errorMessage }) => {
                     <Button variant='link' onClick={Dialogs.close}>{_("Cancel")}</Button>
                 </>}
         >
-            {errorMessage === undefined &&
-                <>
-                    <Text>{_("Directory name")}</Text>
+            <Form isHorizontal>
+                <FormGroup label={_("Directory name")}>
                     <TextInput value={name} onChange={setName} id="create-directory-input" />
-                </>}
+                </FormGroup>
+            </Form>
             {errorMessage !== undefined &&
                 <InlineNotification
                     type="danger"
