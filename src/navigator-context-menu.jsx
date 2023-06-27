@@ -108,7 +108,7 @@ export const ContextMenu = ({ parentId, deleteItem }) => {
             <MenuContent ref={root}>
                 <MenuList>
                     {selected !== "none" &&
-                    <MenuItem className="contextMenuOption" onClick={deleteItem}>
+                    <MenuItem className="contextMenuOption pf-m-danger" onClick={deleteItem}>
                         <div className="contextMenuName"> {selected === "file" ? _("Delete file") : _("Delete directory") } </div>
                         <div className="contextMenuShortcut">{ _("Del") }</div>
                     </MenuItem>}
