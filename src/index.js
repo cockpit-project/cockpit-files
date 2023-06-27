@@ -22,6 +22,7 @@ import "patternfly/patternfly-5-cockpit.scss";
 
 import React from 'react';
 import { createRoot } from 'react-dom/client';
+import { WithDialogs } from "dialogs.jsx";
 import { Application } from './app.jsx';
 /*
  * PF4 overrides need to come after the JSX components imports because
@@ -34,5 +35,5 @@ import './app.scss';
 
 document.addEventListener("DOMContentLoaded", function () {
     const root = createRoot(document.getElementById('app'));
-    root.render(<Application />);
+    root.render(<WithDialogs><Application /></WithDialogs>);
 });

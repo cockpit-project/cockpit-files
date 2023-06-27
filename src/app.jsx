@@ -19,7 +19,7 @@
 
 import * as timeformat from "timeformat";
 import cockpit from 'cockpit';
-import { useDialogs, WithDialogs } from "dialogs.jsx";
+import { useDialogs } from "dialogs.jsx";
 import React, { useEffect, useState, useRef } from 'react';
 import {
     Button,
@@ -41,6 +41,7 @@ import { ContextMenu } from "./navigator-context-menu";
 const _ = cockpit.gettext;
 
 export const Application = () => {
+    const Dialogs = useDialogs();
     const [currentFilter, setCurrentFilter] = useState("");
     const [files, setFiles] = useState([]);
     const [isGrid, setIsGrid] = useState(true);
@@ -49,6 +50,7 @@ export const Application = () => {
     const [sortBy, setSortBy] = useState("az");
     const channel = useRef(null);
     const [selected, setSelected] = useState(null);
+    const [selectedContext, setSelectedContext] = useState(null);
 
     const onFilterChange = (_, value) => setCurrentFilter(value);
 
@@ -111,6 +113,11 @@ export const Application = () => {
 
     const visibleFiles = files.filter(file => !file.name.startsWith("."));
 
+    const deleteItem = () => {
+        const itemPath = "/" + path.join("/") + "/" + selectedContext.name;
+        Dialogs.show(<ConfirmDeletionDialog selected={selectedContext} itemPath={itemPath} />);
+    };
+
     return (
         <Page>
             <NavigatorBreadcrumbs path={path} setPath={setPath} pathIndex={pathIndex} setPathIndex={setPathIndex} />
@@ -122,8 +129,8 @@ export const Application = () => {
                     <SidebarContent>
                         <Card>
                             <NavigatorCardHeader currentFilter={currentFilter} onFilterChange={onFilterChange} isGrid={isGrid} setIsGrid={setIsGrid} sortBy={sortBy} setSortBy={setSortBy} />
-                            <NavigatorCardBody currentFilter={currentFilter} files={visibleFiles} setPath={setPath} path={path} setPathIndex={setPathIndex} isGrid={isGrid} sortBy={sortBy} setSelected={setSelected} />
-                            <ContextMenu parentId="folder-view" />
+                            <NavigatorCardBody currentFilter={currentFilter} files={visibleFiles} setPath={setPath} path={path} setPathIndex={setPathIndex} isGrid={isGrid} sortBy={sortBy} setSelected={setSelected} setSelectedContext={setSelectedContext} />
+                            <ContextMenu parentId="folder-view" selectedContext={selectedContext} deleteItem={deleteItem} />
                         </Card>
                     </SidebarContent>
                 </Sidebar>
@@ -194,7 +201,7 @@ const NavigatorCardHeader = ({ currentFilter, onFilterChange, isGrid, setIsGrid,
     );
 };
 
-const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, setPathIndex, sortBy, setSelected }) => {
+const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, setPathIndex, sortBy, setSelected, setSelectedContext }) => {
     const onDoubleClickNavigate = (path, file) => {
         if (file.type === "directory") {
             setPath(p => [...p, file.name]);
@@ -234,7 +241,7 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, setPat
 
     const Item = ({ file }) => {
         return (
-            <Button data-item={file.name} variant="plain" onDoubleClick={ () => onDoubleClickNavigate(path, file)} onClick={() => setSelected(file.name)} className={'item-button ' + (file.type === "directory" ? "directory-item" : "file-item")}>
+            <Button data-item={file.name} variant="plain" onDoubleClick={ () => onDoubleClickNavigate(path, file)} onClick={() => setSelected(file.name)} onContextMenu={() => setSelectedContext(file)} className={'item-button ' + (file.type === "directory" ? "directory-item" : "file-item")}>
                 <Flex direction={{ default: isGrid ? "column" : "row" }} spaceItems={{ default: isGrid ? 'spaceItemsNone' : 'spaceItemsMd' }}>
                     <FlexItem alignSelf={{ default: "alignSelfCenter" }}>
                         <Icon size={isGrid ? "xl" : "lg"}>
@@ -285,9 +292,7 @@ const SidebarPanelDetails = ({ selected, path, setPath, setPathIndex }) => {
                         </Text>}
                     </TextContent>
                 </CardTitle>
-                <WithDialogs>
-                    <DropdownWithKebab selected={selected} path={path} setPath={setPath} setPathIndex={setPathIndex} />
-                </WithDialogs>
+                <DropdownWithKebab selected={selected} path={path} setPath={setPath} setPathIndex={setPathIndex} />
             </CardHeader>
             {selected.items_cnt === undefined &&
             <CardBody>
