@@ -254,5 +254,18 @@ class TestNavigator(testlib.MachineCase):
         b.wait_in_text("#sidebar-card-header", "admin")
         b.wait_not_present("[data-item='newdir']")
 
+    def testCreate(self):
+        b = self.browser
+        m = self.machine
+
+        self.login_and_go("/navigator")
+
+        # Create folder
+        b.click("#dropdown-menu")
+        b.click("#create-item")
+        b.set_val("#create-directory-input", "newdir")
+        b.click("button.pf-m-primary")
+        b.wait_visible("[data-item='newdir']")
+
 if __name__ == '__main__':
     testlib.test_main()
