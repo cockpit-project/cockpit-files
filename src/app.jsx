@@ -30,7 +30,7 @@ import {
     MenuToggle, MenuToggleAction, Modal,
     Page, PageBreadcrumb, PageSection,
     SearchInput, Select, SelectList, SelectOption, Sidebar, SidebarPanel, SidebarContent,
-    Text, TextContent, TextVariants, TextInput, Form, FormGroup,
+    Text, TextContent, TextVariants, TextInput, Form, FormGroup, Stack,
 } from "@patternfly/react-core";
 import { ArrowLeftIcon, ArrowRightIcon, EllipsisVIcon, FileIcon, FolderIcon, GripVerticalIcon, ListIcon } from "@patternfly/react-icons";
 
@@ -497,17 +497,19 @@ const CreateDirectoryModal = ({ currentPath, errorMessage }) => {
                     <Button variant='link' onClick={Dialogs.close}>{_("Cancel")}</Button>
                 </>}
         >
-            <Form isHorizontal>
-                <FormGroup label={_("Directory name")}>
-                    <TextInput value={name} onChange={setName} id="create-directory-input" />
-                </FormGroup>
-            </Form>
-            {errorMessage !== undefined &&
+            <Stack>
+                {errorMessage !== undefined &&
                 <InlineNotification
-                    type="danger"
-                    text={errorMessage}
-                    isInline
+                type="danger"
+                text={errorMessage}
+                isInline
                 />}
+                <Form isHorizontal>
+                    <FormGroup label={_("Directory name")}>
+                        <TextInput value={name} onChange={setName} id="create-directory-input" />
+                    </FormGroup>
+                </Form>
+            </Stack>
         </Modal>
     );
 };
