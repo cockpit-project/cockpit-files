@@ -26,7 +26,7 @@ import React from "react";
 
 const _ = cockpit.gettext;
 
-export const ContextMenu = ({ parentId, selectedContext, deleteItem }) => {
+export const ContextMenu = ({ parentId, deleteItem }) => {
     const [visible, setVisible] = React.useState(false);
     const [event, setEvent] = React.useState(null);
     const [selected, setSelected] = React.useState("none");
