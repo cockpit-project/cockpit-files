@@ -411,7 +411,9 @@ const ConfirmDeletionDialog = ({ selected, itemPath, path, setPath, setPathIndex
     const Dialogs = useDialogs();
 
     const deleteItem = () => {
-        cockpit.spawn(["rm", "-r", itemPath], { superuser: "try" })
+        const options = { err: "message", superuser: "try" };
+
+        cockpit.spawn(["rm", "-r", itemPath], options)
                 .then(() => {
                     if (selected.items_cnt) {
                         setPath(path.slice(0, -1));
@@ -446,7 +448,9 @@ const ForceDeleteModal = ({ selected, itemPath, errorMessage, deleteFailed }) =>
     const Dialogs = useDialogs();
 
     const forceDelete = () => {
-        cockpit.spawn(["rm", "-rf", itemPath], { superuser: "try" })
+        const options = { err: "message", superuser: "try" };
+
+        cockpit.spawn(["rm", "-rf", itemPath], options)
                 .then(Dialogs.close, (err) => { Dialogs.show(<ForceDeleteModal selected={selected} itemPath={itemPath} errorMessage={err.message} deleteFailed />) });
     };
 
@@ -481,7 +485,9 @@ const CreateDirectoryModal = ({ currentPath, errorMessage }) => {
     const [name, setName] = useState("");
 
     const createDirectory = () => {
-        cockpit.spawn(["mkdir", currentPath + name], { superuser: "try" })
+        const options = { err: "message", superuser: "try" };
+
+        cockpit.spawn(["mkdir", currentPath + name], options)
                 .then(Dialogs.close, (err) => { Dialogs.show(<CreateDirectoryModal currentPath={currentPath} errorMessage={err.message} />) });
     };
 
