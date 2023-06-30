@@ -34,6 +34,12 @@ class TestNavigator(testlib.MachineCase):
         b.wait_in_text("h1.pf-c-modal-box__title", f"Delete {type} {filename}?")
         b.click("button.pf-m-danger")
 
+    def create_directory(self, b, filename):
+        b.click("#dropdown-menu")
+        b.click("#create-item")
+        b.set_input_text("#create-directory-input", f"{filename}")
+        b.click("button.pf-m-primary")
+
     def testBasic(self):
         b = self.browser
         m = self.machine
@@ -205,7 +211,7 @@ class TestNavigator(testlib.MachineCase):
         b.wait_visible("[data-item='newfile']")
         self.delete_item(b, "file", "newfile")
         b.wait_not_present("[data-item='newfile']")
-        
+
         # Delete file with space in the file name
         m.execute("touch /home/admin/new\ file")
         b.wait_visible("[data-item='new file']")
@@ -231,10 +237,10 @@ class TestNavigator(testlib.MachineCase):
         b.wait_visible("[data-item='newfile']")
         self.delete_item(b, "file", "newfile")
         b.wait_in_text("h1.pf-c-modal-box__title", "Force delete file newfile?")
-        b.wait_in_text("h4.pf-c-alert__title", "rm exited with code 1")
+        b.wait_in_text("h4.pf-c-alert__title", "rm: cannot remove '/home/admin/newfile': Operation not permitted")
         b.click("button.pf-m-danger")
         b.wait_in_text("h1.pf-c-modal-box__title", "Force delete file newfile?")
-        b.wait_in_text("h4.pf-c-alert__title", "rm exited with code 1")
+        b.wait_in_text("h4.pf-c-alert__title", "rm: cannot remove '/home/admin/newfile': Operation not permitted")
         b.click("div.pf-c-modal-box__close")
         b.wait_visible("[data-item='newfile']")
         m.execute("sudo chattr -i /home/admin/newfile")
@@ -250,9 +256,41 @@ class TestNavigator(testlib.MachineCase):
         b.click("#delete-item")
         b.wait_in_text("h1.pf-c-modal-box__title", "Delete directory newdir?")
         b.click("button.pf-m-danger")
-        b.wait_text(".last-breadcrumb-button", "admin")     
+        b.wait_text(".last-breadcrumb-button", "admin")
         b.wait_in_text("#sidebar-card-header", "admin")
         b.wait_not_present("[data-item='newdir']")
+
+    def testCreate(self):
+        b = self.browser
+        m = self.machine
+
+        self.login_and_go("/navigator")
+
+        # Create folder
+        self.create_directory(b, "newdir")
+        b.wait_visible("[data-item='newdir']")
+
+        # Creating folder with duplicate name should return an error
+        self.create_directory(b, "newdir")
+        b.wait_in_text("h4.pf-c-alert__title", "mkdir: cannot create directory ‘/home/admin/newdir’: File exists")
+        b.click("div.pf-c-modal-box__close")
+        
+        # Creating folder with empty name should return an error
+        self.create_directory(b, "")
+        b.wait_in_text("h4.pf-c-alert__title", "mkdir: cannot create directory ‘/home/admin/’: File exists")
+        b.click("div.pf-c-modal-box__close")
+        
+        # Creating folder inside protected folder should return an error
+        m.execute("sudo chattr +i /home/admin/newdir")
+        b.mouse("[data-item='newdir']", "dblclick")
+        b.wait_not_present("[data-item='newdir']")
+        self.create_directory(b, "test")
+        b.wait_in_text("h4.pf-c-alert__title", "mkdir: cannot create directory ‘/home/admin/newdir/test’: Operation not permitted")
+        b.click("div.pf-c-modal-box__close")
+
+        # Remove leftover folder
+        m.execute("sudo chattr -i /home/admin/newdir")
+        m.execute("rm -r /home/admin/newdir")
 
 if __name__ == '__main__':
     testlib.test_main()

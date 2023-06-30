@@ -30,7 +30,7 @@ import {
     MenuToggle, MenuToggleAction, Modal,
     Page, PageBreadcrumb, PageSection,
     SearchInput, Select, SelectList, SelectOption, Sidebar, SidebarPanel, SidebarContent,
-    Text, TextContent, TextVariants,
+    Text, TextContent, TextVariants, TextInput, Form, FormGroup, Stack,
 } from "@patternfly/react-core";
 import { ArrowLeftIcon, ArrowRightIcon, EllipsisVIcon, FileIcon, FolderIcon, GripVerticalIcon, ListIcon } from "@patternfly/react-icons";
 
@@ -378,6 +378,11 @@ const DropdownWithKebab = ({ selected, path, setPath, setPathIndex }) => {
         Dialogs.show(<ConfirmDeletionDialog selected={selected} itemPath={itemPath} path={path} setPath={setPath} setPathIndex={setPathIndex} />);
     };
 
+    const createDirectory = () => {
+        const currentPath = "/" + path.join("/") + "/";
+        Dialogs.show(<CreateDirectoryModal currentPath={currentPath} errorMessage={undefined} />);
+    };
+
     return (
         <Dropdown
             isPlain
@@ -391,7 +396,10 @@ const DropdownWithKebab = ({ selected, path, setPath, setPathIndex }) => {
                 </MenuToggle>}
         >
             <DropdownList>
-                <DropdownItem id="delete-item" itemId='delete-item' key="delete-item" onClick={deleteItem} className="pf-m-danger">
+                <DropdownItem id="create-item" key="create-item" onClick={createDirectory}>
+                    {_("Create directory")}
+                </DropdownItem>
+                <DropdownItem id="delete-item" key="delete-item" onClick={deleteItem} className="pf-m-danger">
                     {selected.type === "file" ? _("Delete file") : _("Delete directory")}
                 </DropdownItem>
             </DropdownList>
@@ -403,7 +411,9 @@ const ConfirmDeletionDialog = ({ selected, itemPath, path, setPath, setPathIndex
     const Dialogs = useDialogs();
 
     const deleteItem = () => {
-        cockpit.spawn(["rm", "-r", itemPath], { superuser: "try" })
+        const options = { err: "message", superuser: "try" };
+
+        cockpit.spawn(["rm", "-r", itemPath], options)
                 .then(() => {
                     if (selected.items_cnt) {
                         setPath(path.slice(0, -1));
@@ -438,7 +448,9 @@ const ForceDeleteModal = ({ selected, itemPath, errorMessage, deleteFailed }) =>
     const Dialogs = useDialogs();
 
     const forceDelete = () => {
-        cockpit.spawn(["rm", "-rf", itemPath], { superuser: "try" })
+        const options = { err: "message", superuser: "try" };
+
+        cockpit.spawn(["rm", "-rf", itemPath], options)
                 .then(Dialogs.close, (err) => { Dialogs.show(<ForceDeleteModal selected={selected} itemPath={itemPath} errorMessage={err.message} deleteFailed />) });
     };
 
@@ -464,6 +476,46 @@ const ForceDeleteModal = ({ selected, itemPath, errorMessage, deleteFailed }) =>
             text={errorMessage}
             isInline
             />
+        </Modal>
+    );
+};
+
+const CreateDirectoryModal = ({ currentPath, errorMessage }) => {
+    const Dialogs = useDialogs();
+    const [name, setName] = useState("");
+
+    const createDirectory = () => {
+        const options = { err: "message", superuser: "try" };
+
+        cockpit.spawn(["mkdir", currentPath + name], options)
+                .then(Dialogs.close, (err) => { Dialogs.show(<CreateDirectoryModal currentPath={currentPath} errorMessage={err.message} />) });
+    };
+
+    return (
+        <Modal
+            position="top"
+            title={_("Create directory")}
+            isOpen
+            onClose={Dialogs.close}
+            footer={errorMessage === undefined &&
+                <>
+                    <Button variant='primary' onClick={createDirectory}>{_("Create")}</Button>
+                    <Button variant='link' onClick={Dialogs.close}>{_("Cancel")}</Button>
+                </>}
+        >
+            <Stack>
+                {errorMessage !== undefined &&
+                <InlineNotification
+                type="danger"
+                text={errorMessage}
+                isInline
+                />}
+                <Form isHorizontal>
+                    <FormGroup label={_("Directory name")}>
+                        <TextInput value={name} onChange={setName} id="create-directory-input" />
+                    </FormGroup>
+                </Form>
+            </Stack>
         </Modal>
     );
 };
