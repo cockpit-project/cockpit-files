@@ -118,6 +118,11 @@ export const Application = () => {
         Dialogs.show(<ConfirmDeletionDialog selected={selectedContext} itemPath={itemPath} />);
     };
 
+    const createDirectory = () => {
+        const currentPath = "/" + path.join("/") + "/";
+        Dialogs.show(<CreateDirectoryModal currentPath={currentPath} errorMessage={undefined} />);
+    };
+
     return (
         <Page>
             <NavigatorBreadcrumbs path={path} setPath={setPath} pathIndex={pathIndex} setPathIndex={setPathIndex} />
@@ -130,7 +135,7 @@ export const Application = () => {
                         <Card>
                             <NavigatorCardHeader currentFilter={currentFilter} onFilterChange={onFilterChange} isGrid={isGrid} setIsGrid={setIsGrid} sortBy={sortBy} setSortBy={setSortBy} />
                             <NavigatorCardBody currentFilter={currentFilter} files={visibleFiles} setPath={setPath} path={path} setPathIndex={setPathIndex} isGrid={isGrid} sortBy={sortBy} setSelected={setSelected} setSelectedContext={setSelectedContext} />
-                            <ContextMenu parentId="folder-view" selectedContext={selectedContext} deleteItem={deleteItem} />
+                            <ContextMenu parentId="folder-view" selectedContext={selectedContext} deleteItem={deleteItem} createDirectory={createDirectory} />
                         </Card>
                     </SidebarContent>
                 </Sidebar>

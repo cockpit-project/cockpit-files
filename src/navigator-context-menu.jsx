@@ -26,7 +26,7 @@ import React from "react";
 
 const _ = cockpit.gettext;
 
-export const ContextMenu = ({ parentId, deleteItem }) => {
+export const ContextMenu = ({ parentId, deleteItem, createDirectory }) => {
     const [visible, setVisible] = React.useState(false);
     const [event, setEvent] = React.useState(null);
     const [selected, setSelected] = React.useState("none");
@@ -107,10 +107,12 @@ export const ContextMenu = ({ parentId, deleteItem }) => {
         <Menu ref={root} className="contextMenu">
             <MenuContent ref={root}>
                 <MenuList>
+                    <MenuItem className="contextMenuOption" onClick={createDirectory}>
+                        <div className="contextMenuName"> {_("Create directory")}</div>
+                    </MenuItem>
                     {selected !== "none" &&
                     <MenuItem className="contextMenuOption pf-m-danger" onClick={deleteItem}>
                         <div className="contextMenuName"> {selected === "file" ? _("Delete file") : _("Delete directory") } </div>
-                        <div className="contextMenuShortcut">{ _("Del") }</div>
                     </MenuItem>}
                 </MenuList>
             </MenuContent>
