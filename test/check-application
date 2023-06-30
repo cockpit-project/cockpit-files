@@ -263,7 +263,7 @@ class TestNavigator(testlib.MachineCase):
         # Create folder
         b.click("#dropdown-menu")
         b.click("#create-item")
-        b.set_val("#create-directory-input", "newdir")
+        b.set_input_text("#create-directory-input", "newdir")
         b.click("button.pf-m-primary")
         b.wait_visible("[data-item='newdir']")
 
