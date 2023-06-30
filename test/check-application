@@ -205,7 +205,7 @@ class TestNavigator(testlib.MachineCase):
         b.wait_visible("[data-item='newfile']")
         self.delete_item(b, "file", "newfile")
         b.wait_not_present("[data-item='newfile']")
-        
+
         # Delete file with space in the file name
         m.execute("touch /home/admin/new\ file")
         b.wait_visible("[data-item='new file']")
@@ -250,7 +250,7 @@ class TestNavigator(testlib.MachineCase):
         b.click("#delete-item")
         b.wait_in_text("h1.pf-c-modal-box__title", "Delete directory newdir?")
         b.click("button.pf-m-danger")
-        b.wait_text(".last-breadcrumb-button", "admin")     
+        b.wait_text(".last-breadcrumb-button", "admin")
         b.wait_in_text("#sidebar-card-header", "admin")
         b.wait_not_present("[data-item='newdir']")
 
