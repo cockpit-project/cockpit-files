@@ -404,7 +404,7 @@ const DropdownWithKebab = ({ selected, path, setPath, setPathIndex }) => {
 
     const createDirectory = () => {
         const currentPath = "/" + path.join("/") + "/";
-        Dialogs.show(<CreateDirectoryModal currentPath={currentPath} errorMessage={undefined} />);
+        Dialogs.show(<CreateDirectoryModal currentPath={currentPath} />);
     };
 
     return (
