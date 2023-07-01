@@ -17,36 +17,19 @@
  * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
  */
 
-import cockpit from "cockpit";
-
-import { Menu, MenuContent, MenuList, MenuItem } from "@patternfly/react-core";
+import { Menu, MenuContent } from "@patternfly/react-core";
 
 import "context-menu.scss";
 import React from "react";
 
-const _ = cockpit.gettext;
-
-export const ContextMenu = ({ parentId, deleteItem, createDirectory }) => {
+export const ContextMenu = ({ parentId, contextMenuItems, setSelectedContext }) => {
     const [visible, setVisible] = React.useState(false);
     const [event, setEvent] = React.useState(null);
-    const [selected, setSelected] = React.useState("none");
     const root = React.useRef(null);
 
     React.useEffect(() => {
         const _handleContextMenu = (event) => {
             event.preventDefault();
-            let elem = event.target;
-            setSelected("none");
-            while (elem.parentNode) {
-                if ([...elem.classList].includes("directory-item")) {
-                    setSelected("directory");
-                    break;
-                } else if ([...elem.classList].includes("file-item")) {
-                    setSelected("file");
-                    break;
-                }
-                elem = elem.parentNode;
-            }
             setVisible(true);
             setEvent(event);
         };
@@ -55,8 +38,10 @@ export const ContextMenu = ({ parentId, deleteItem, createDirectory }) => {
             if (event && event.button === 0) {
                 const wasOutside = !(event.target.contains === root.current);
 
-                if (wasOutside)
+                if (wasOutside) {
                     setVisible(false);
+                    setSelectedContext(null);
+                }
             }
         };
 
@@ -68,7 +53,7 @@ export const ContextMenu = ({ parentId, deleteItem, createDirectory }) => {
             parent.removeEventListener('contextmenu', _handleContextMenu);
             document.removeEventListener('click', _handleClick);
         };
-    }, [parentId]);
+    }, [parentId, setSelectedContext]);
 
     React.useEffect(() => {
         if (!event)
@@ -106,15 +91,7 @@ export const ContextMenu = ({ parentId, deleteItem, createDirectory }) => {
     return visible &&
         <Menu ref={root} className="contextMenu">
             <MenuContent ref={root}>
-                <MenuList>
-                    <MenuItem className="contextMenuOption" onClick={createDirectory}>
-                        <div className="contextMenuName"> {_("Create directory")}</div>
-                    </MenuItem>
-                    {selected !== "none" &&
-                    <MenuItem className="contextMenuOption pf-m-danger" onClick={deleteItem}>
-                        <div className="contextMenuName"> {selected === "file" ? _("Delete file") : _("Delete directory") } </div>
-                    </MenuItem>}
-                </MenuList>
+                {contextMenuItems}
             </MenuContent>
         </Menu>;
 };

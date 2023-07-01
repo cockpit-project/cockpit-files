@@ -30,7 +30,7 @@ import {
     MenuToggle, MenuToggleAction, Modal,
     Page, PageBreadcrumb, PageSection,
     SearchInput, Select, SelectList, SelectOption, Sidebar, SidebarPanel, SidebarContent,
-    Text, TextContent, TextVariants, TextInput, Form, FormGroup, Stack,
+    Text, TextContent, TextVariants, TextInput, Form, FormGroup, Stack, MenuList, MenuItem,
 } from "@patternfly/react-core";
 import { ArrowLeftIcon, ArrowRightIcon, EllipsisVIcon, FileIcon, FolderIcon, GripVerticalIcon, ListIcon } from "@patternfly/react-icons";
 
@@ -123,6 +123,18 @@ export const Application = () => {
         Dialogs.show(<CreateDirectoryModal currentPath={currentPath} />);
     };
 
+    const contextMenuItems = (
+        <MenuList>
+            <MenuItem className="contextMenuOption" onClick={createDirectory}>
+                <div className="contextMenuName"> {_("Create directory")}</div>
+            </MenuItem>
+            {selectedContext &&
+            <MenuItem className="contextMenuOption pf-m-danger" onClick={deleteItem}>
+                <div className="contextMenuName"> {selectedContext.type === "file" ? _("Delete file") : _("Delete directory") } </div>
+            </MenuItem>}
+        </MenuList>
+    );
+
     return (
         <Page>
             <NavigatorBreadcrumbs path={path} setPath={setPath} pathIndex={pathIndex} setPathIndex={setPathIndex} />
@@ -135,7 +147,7 @@ export const Application = () => {
                         <Card>
                             <NavigatorCardHeader currentFilter={currentFilter} onFilterChange={onFilterChange} isGrid={isGrid} setIsGrid={setIsGrid} sortBy={sortBy} setSortBy={setSortBy} />
                             <NavigatorCardBody currentFilter={currentFilter} files={visibleFiles} setPath={setPath} path={path} setPathIndex={setPathIndex} isGrid={isGrid} sortBy={sortBy} setSelected={setSelected} setSelectedContext={setSelectedContext} />
-                            <ContextMenu parentId="navigator-page" selectedContext={selectedContext} deleteItem={deleteItem} createDirectory={createDirectory} />
+                            <ContextMenu parentId="navigator-page" contextMenuItems={contextMenuItems} setSelectedContext={setSelectedContext} />
                         </Card>
                     </SidebarContent>
                 </Sidebar>
