@@ -27,10 +27,10 @@ import {
     DescriptionList, DescriptionListGroup, DescriptionListTerm, DescriptionListDescription, Dropdown, DropdownList, DropdownItem,
     Flex, FlexItem,
     Icon,
-    MenuToggle, MenuToggleAction,
+    MenuItem, MenuList, MenuToggle, MenuToggleAction,
     Page, PageBreadcrumb, PageSection,
     SearchInput, Select, SelectList, SelectOption, Sidebar, SidebarPanel, SidebarContent,
-    Text, TextContent, TextVariants, MenuList, MenuItem,
+    Text, TextContent, TextVariants,
 } from "@patternfly/react-core";
 import { ArrowLeftIcon, ArrowRightIcon, EllipsisVIcon, FileIcon, FolderIcon, GripVerticalIcon, ListIcon } from "@patternfly/react-icons";
 

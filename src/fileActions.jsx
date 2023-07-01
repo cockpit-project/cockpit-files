@@ -22,8 +22,10 @@ import { useDialogs } from "dialogs.jsx";
 import React, { useState } from 'react';
 import {
     Button,
+    Form, FormGroup,
     Modal,
-    TextInput, Form, FormGroup, Stack,
+    Stack,
+    TextInput,
 } from "@patternfly/react-core";
 
 import { InlineNotification } from "../pkg/lib/cockpit-components-inline-notification";
