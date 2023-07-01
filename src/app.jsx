@@ -27,16 +27,16 @@ import {
     DescriptionList, DescriptionListGroup, DescriptionListTerm, DescriptionListDescription, Dropdown, DropdownList, DropdownItem,
     Flex, FlexItem,
     Icon,
-    MenuToggle, MenuToggleAction, Modal,
+    MenuToggle, MenuToggleAction,
     Page, PageBreadcrumb, PageSection,
     SearchInput, Select, SelectList, SelectOption, Sidebar, SidebarPanel, SidebarContent,
-    Text, TextContent, TextVariants, TextInput, Form, FormGroup, Stack, MenuList, MenuItem,
+    Text, TextContent, TextVariants, MenuList, MenuItem,
 } from "@patternfly/react-core";
 import { ArrowLeftIcon, ArrowRightIcon, EllipsisVIcon, FileIcon, FolderIcon, GripVerticalIcon, ListIcon } from "@patternfly/react-icons";
 
 import { ListingTable } from "cockpit-components-table.jsx";
-import { InlineNotification } from "../pkg/lib/cockpit-components-inline-notification";
 import { ContextMenu } from "./navigator-context-menu";
+import { ConfirmDeletionDialog, CreateDirectoryModal } from "./fileActions";
 
 const _ = cockpit.gettext;
 
@@ -428,118 +428,5 @@ const DropdownWithKebab = ({ selected, path, setPath, setPathIndex }) => {
                 </DropdownItem>
             </DropdownList>
         </Dropdown>
-    );
-};
-
-const ConfirmDeletionDialog = ({ selected, itemPath, path, setPath, setPathIndex }) => {
-    const Dialogs = useDialogs();
-
-    const deleteItem = () => {
-        const options = { err: "message", superuser: "try" };
-
-        cockpit.spawn(["rm", "-r", itemPath], options)
-                .then(() => {
-                    if (selected.items_cnt) {
-                        setPath(path.slice(0, -1));
-                        setPathIndex(path.length - 1);
-                    }
-                })
-                .then(Dialogs.close, (err) => { Dialogs.show(<ForceDeleteModal selected={selected} itemPath={itemPath} errorMessage={err.message} deleteFailed={false} />) });
-    };
-
-    const modalTitle = selected.type === "file"
-        ? cockpit.format(_("Delete file $0?"), selected.name)
-        : cockpit.format(_("Delete directory $0?"), selected.name);
-
-    return (
-        <Modal
-            position="top"
-            title={modalTitle}
-            titleIconVariant="warning"
-            isOpen
-            onClose={Dialogs.close}
-            footer={
-                <>
-                    <Button variant='danger' onClick={deleteItem}>{_("Delete")}</Button>
-                    <Button variant='link' onClick={Dialogs.close}>{_("Cancel")}</Button>
-                </>
-            }
-        />
-    );
-};
-
-const ForceDeleteModal = ({ selected, itemPath, errorMessage, deleteFailed }) => {
-    const Dialogs = useDialogs();
-
-    const forceDelete = () => {
-        const options = { err: "message", superuser: "try" };
-
-        cockpit.spawn(["rm", "-rf", itemPath], options)
-                .then(Dialogs.close, (err) => { Dialogs.show(<ForceDeleteModal selected={selected} itemPath={itemPath} errorMessage={err.message} deleteFailed />) });
-    };
-
-    const modalTitle = selected.type === "file"
-        ? cockpit.format(_("Force delete file $0?"), selected.name)
-        : cockpit.format(_("Force delete directory $0?"), selected.name);
-
-    return (
-        <Modal
-            position="top"
-            title={modalTitle}
-            titleIconVariant="warning"
-            isOpen
-            onClose={Dialogs.close}
-            footer={!deleteFailed &&
-                <>
-                    <Button variant='danger' onClick={forceDelete}>{_("Force delete")}</Button>
-                    <Button variant='link' onClick={Dialogs.close}>{_("Cancel")}</Button>
-                </>}
-        >
-            <InlineNotification
-            type="danger"
-            text={errorMessage}
-            isInline
-            />
-        </Modal>
-    );
-};
-
-const CreateDirectoryModal = ({ currentPath, errorMessage }) => {
-    const Dialogs = useDialogs();
-    const [name, setName] = useState("");
-
-    const createDirectory = () => {
-        const options = { err: "message", superuser: "try" };
-
-        cockpit.spawn(["mkdir", currentPath + name], options)
-                .then(Dialogs.close, (err) => { Dialogs.show(<CreateDirectoryModal currentPath={currentPath} errorMessage={err.message} />) });
-    };
-
-    return (
-        <Modal
-            position="top"
-            title={_("Create directory")}
-            isOpen
-            onClose={Dialogs.close}
-            footer={errorMessage === undefined &&
-                <>
-                    <Button variant='primary' onClick={createDirectory}>{_("Create")}</Button>
-                    <Button variant='link' onClick={Dialogs.close}>{_("Cancel")}</Button>
-                </>}
-        >
-            <Stack>
-                {errorMessage !== undefined &&
-                <InlineNotification
-                type="danger"
-                text={errorMessage}
-                isInline
-                />}
-                <Form isHorizontal>
-                    <FormGroup label={_("Directory name")}>
-                        <TextInput value={name} onChange={setName} id="create-directory-input" />
-                    </FormGroup>
-                </Form>
-            </Stack>
-        </Modal>
     );
 };
