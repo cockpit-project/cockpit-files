@@ -19,7 +19,7 @@
 
 import cockpit from "cockpit";
 
-import { Menu, MenuContent, MenuList, MenuItem } from "@patternfly/react-core/dist/esm/components/Menu";
+import { Menu, MenuContent, MenuList, MenuItem } from "@patternfly/react-core";
 
 import "context-menu.scss";
 import React from "react";
