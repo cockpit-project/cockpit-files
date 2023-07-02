@@ -36,7 +36,7 @@ import { ArrowLeftIcon, ArrowRightIcon, EllipsisVIcon, FileIcon, FolderIcon, Gri
 
 import { ListingTable } from "cockpit-components-table.jsx";
 import { ContextMenu } from "./navigator-context-menu";
-import { ConfirmDeletionDialog, CreateDirectoryModal } from "./fileActions";
+import { createDirectory, deleteItem } from "./fileActions";
 
 const _ = cockpit.gettext;
 
@@ -113,23 +113,13 @@ export const Application = () => {
 
     const visibleFiles = files.filter(file => !file.name.startsWith("."));
 
-    const deleteItem = () => {
-        const itemPath = "/" + path.join("/") + "/" + selectedContext.name;
-        Dialogs.show(<ConfirmDeletionDialog selected={selectedContext} itemPath={itemPath} />);
-    };
-
-    const createDirectory = () => {
-        const currentPath = "/" + path.join("/") + "/";
-        Dialogs.show(<CreateDirectoryModal currentPath={currentPath} />);
-    };
-
     const contextMenuItems = (
         <MenuList>
-            <MenuItem className="contextMenuOption" onClick={createDirectory}>
+            <MenuItem className="contextMenuOption" onClick={() => { createDirectory(Dialogs, "/" + path.join("/") + "/") }}>
                 <div className="contextMenuName"> {_("Create directory")}</div>
             </MenuItem>
             {selectedContext &&
-            <MenuItem className="contextMenuOption pf-m-danger" onClick={deleteItem}>
+            <MenuItem className="contextMenuOption pf-m-danger" onClick={() => { deleteItem(Dialogs, { selected: selectedContext, itemPath: "/" + path.join("/") + "/" + selectedContext.name }) }}>
                 <div className="contextMenuName"> {selectedContext.type === "file" ? _("Delete file") : _("Delete directory") } </div>
             </MenuItem>}
         </MenuList>
@@ -397,16 +387,6 @@ const DropdownWithKebab = ({ selected, path, setPath, setPathIndex }) => {
         setIsOpen(false);
     };
 
-    const deleteItem = () => {
-        const itemPath = "/" + path.join("/") + "/" + (selected.items_cnt ? "" : selected.name);
-        Dialogs.show(<ConfirmDeletionDialog selected={selected} itemPath={itemPath} path={path} setPath={setPath} setPathIndex={setPathIndex} />);
-    };
-
-    const createDirectory = () => {
-        const currentPath = "/" + path.join("/") + "/";
-        Dialogs.show(<CreateDirectoryModal currentPath={currentPath} />);
-    };
-
     return (
         <Dropdown
             isPlain
@@ -420,10 +400,10 @@ const DropdownWithKebab = ({ selected, path, setPath, setPathIndex }) => {
                 </MenuToggle>}
         >
             <DropdownList>
-                <DropdownItem id="create-item" key="create-item" onClick={createDirectory}>
+                <DropdownItem id="create-item" key="create-item" onClick={() => { createDirectory(Dialogs, "/" + path.join("/") + "/") }}>
                     {_("Create directory")}
                 </DropdownItem>
-                <DropdownItem id="delete-item" key="delete-item" onClick={deleteItem} className="pf-m-danger">
+                <DropdownItem id="delete-item" key="delete-item" onClick={() => { deleteItem(Dialogs, { selected, itemPath: "/" + path.join("/") + "/" + (selected.items_cnt ? "" : selected.name), path, setPath, setPathIndex }) }} className="pf-m-danger">
                     {selected.type === "file" ? _("Delete file") : _("Delete directory")}
                 </DropdownItem>
             </DropdownList>

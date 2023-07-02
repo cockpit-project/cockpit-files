@@ -32,6 +32,14 @@ import { InlineNotification } from "../pkg/lib/cockpit-components-inline-notific
 
 const _ = cockpit.gettext;
 
+export const createDirectory = (Dialogs, currentPath) => {
+    Dialogs.show(<CreateDirectoryModal currentPath={currentPath} />);
+};
+
+export const deleteItem = (Dialogs, options) => {
+    Dialogs.show(<ConfirmDeletionDialog selected={options.selected} itemPath={options.itemPath} path={options.path} setPath={options.setPath} setPathIndex={options.setPathIndex} />);
+};
+
 export const ConfirmDeletionDialog = ({ selected, itemPath, path, setPath, setPathIndex }) => {
     const Dialogs = useDialogs();
 
