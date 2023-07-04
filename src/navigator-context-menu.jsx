@@ -19,7 +19,7 @@
 
 import { Menu, MenuContent } from "@patternfly/react-core";
 
-import "context-menu.scss";
+import "./context-menu.scss";
 import React from "react";
 
 export const ContextMenu = ({ parentId, contextMenuItems, setSelectedContext }) => {

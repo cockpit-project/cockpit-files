@@ -1,4 +1,4 @@
-.contextMenu {
+.context-menu {
   position: fixed;
   /* xterm accessibility tree has z-index 100 and we need to be in front of it
      * to be able to handle mouse events.
