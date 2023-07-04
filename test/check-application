@@ -292,5 +292,34 @@ class TestNavigator(testlib.MachineCase):
         m.execute("sudo chattr -i /home/admin/newdir")
         m.execute("rm -r /home/admin/newdir")
 
+    def testContextMenu(self):
+        b = self.browser
+        m = self.machine
+
+        self.login_and_go("/navigator")
+
+        # Create folder from context menu
+        b.mouse("#folder-view", "contextmenu")
+        b.wait_in_text(".context-menu button", "Create directory")
+        b.click(".context-menu button:contains('Create directory')")
+        b.set_input_text("#create-directory-input", "newdir")
+        b.click("button.pf-m-primary")        
+        b.wait_visible("[data-item='newdir']")
+
+        # Delete folder from context menu
+        b.mouse("[data-item='newdir']", "contextmenu")
+        b.wait_in_text(".context-menu li:nth-child(2) button", "Delete directory")
+        b.click(".context-menu button:contains('Delete directory')")
+        b.click("button.pf-m-danger")
+        b.wait_not_present("[data-item='newdir']")
+
+        # Delete button text should match item type: directory/file
+        m.execute("touch /home/admin/newfile")
+        b.mouse("[data-item='newfile']", "contextmenu")
+        b.wait_in_text(".context-menu li:nth-child(2) button", "Delete file")
+        b.click(".context-menu button:contains('Delete file')")
+        b.click("button.pf-m-danger")
+        b.wait_not_present("[data-item='newfile']")
+
 if __name__ == '__main__':
     testlib.test_main()
