@@ -18,7 +18,6 @@
  */
 
 import cockpit from 'cockpit';
-import { useDialogs } from "dialogs.jsx";
 import React, { useState } from 'react';
 import {
     Button,
@@ -28,7 +27,8 @@ import {
     TextInput,
 } from "@patternfly/react-core";
 
-import { InlineNotification } from "../pkg/lib/cockpit-components-inline-notification";
+import { useDialogs } from "dialogs.jsx";
+import { InlineNotification } from "cockpit-components-inline-notification";
 
 const _ = cockpit.gettext;
 

@@ -1,7 +1,8 @@
 /*
- * This file is part of Cockpit.
+ * This file is part of Cockpit, and is a direct copy from the Cockpit repository
+ * https://github.com/cockpit-project/cockpit/blob/main/pkg/lib/cockpit-components-context-menu.jsx
  *
- * Copyright (C) 2019 Red Hat, Inc.
+ * Copyright (C) 2023 Red Hat, Inc.
  *
  * Cockpit is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -17,10 +18,10 @@
  * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
  */
 
+import React from "react";
 import { Menu, MenuContent } from "@patternfly/react-core";
 
 import "./context-menu.scss";
-import React from "react";
 
 export const ContextMenu = ({ parentId, contextMenuItems, setSelectedContext }) => {
     const [visible, setVisible] = React.useState(false);
