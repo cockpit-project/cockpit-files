@@ -89,7 +89,7 @@ export const ContextMenu = ({ parentId, contextMenuItems, setSelectedContext }) 
     }, [event]);
 
     return visible &&
-        <Menu ref={root} className="contextMenu">
+        <Menu ref={root} className="context-menu">
             <MenuContent ref={root}>
                 {contextMenuItems}
             </MenuContent>

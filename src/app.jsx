@@ -115,12 +115,12 @@ export const Application = () => {
 
     const contextMenuItems = (
         <MenuList>
-            <MenuItem className="contextMenuOption" onClick={() => { createDirectory(Dialogs, "/" + path.join("/") + "/") }}>
-                <div className="contextMenuName"> {_("Create directory")}</div>
+            <MenuItem className="context-menu-option" onClick={() => { createDirectory(Dialogs, "/" + path.join("/") + "/") }}>
+                <div className="context-menu-name"> {_("Create directory")}</div>
             </MenuItem>
             {selectedContext &&
-            <MenuItem className="contextMenuOption pf-m-danger" onClick={() => { deleteItem(Dialogs, { selected: selectedContext, itemPath: "/" + path.join("/") + "/" + selectedContext.name }) }}>
-                <div className="contextMenuName"> {selectedContext.type === "file" ? _("Delete file") : _("Delete directory") } </div>
+            <MenuItem className="context-menu-option pf-m-danger" onClick={() => { deleteItem(Dialogs, { selected: selectedContext, itemPath: "/" + path.join("/") + "/" + selectedContext.name }) }}>
+                <div className="context-menu-name"> {selectedContext.type === "file" ? _("Delete file") : _("Delete directory") } </div>
             </MenuItem>}
         </MenuList>
     );
