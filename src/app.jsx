@@ -17,9 +17,9 @@
  * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
  */
 
-import cockpit from 'cockpit';
+import cockpit from "cockpit";
 import { useDialogs } from "dialogs.jsx";
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from "react";
 import {
     Button,
     Card, CardBody,
@@ -87,7 +87,7 @@ export const Application = () => {
                     files.push({ ...item, name: item.path, isHidden: item.path.startsWith(".") });
                 } else {
                     const name = item.path.slice(item.path.lastIndexOf("/") + 1);
-                    if (item.event === 'deleted') {
+                    if (item.event === "deleted") {
                         setFiles(f => f.filter(res => res.name !== name));
                     } else {
                         // For events other than 'present' we don't receive file stat information
@@ -186,8 +186,8 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, setPat
 
     const Item = ({ file }) => {
         return (
-            <Button data-item={file.name} variant="plain" onDoubleClick={ () => onDoubleClickNavigate(path, file)} onClick={() => setSelected(file.name)} onContextMenu={(e) => { e.stopPropagation(); setSelectedContext(file) }} className={'item-button ' + (file.type === "directory" ? "directory-item" : "file-item")}>
-                <Flex direction={{ default: isGrid ? "column" : "row" }} spaceItems={{ default: isGrid ? 'spaceItemsNone' : 'spaceItemsMd' }}>
+            <Button data-item={file.name} variant="plain" onDoubleClick={ () => onDoubleClickNavigate(path, file)} onClick={() => setSelected(file.name)} onContextMenu={(e) => { e.stopPropagation(); setSelectedContext(file) }} className={"item-button " + (file.type === "directory" ? "directory-item" : "file-item")}>
+                <Flex direction={{ default: isGrid ? "column" : "row" }} spaceItems={{ default: isGrid ? "spaceItemsNone" : "spaceItemsMd" }}>
                     <FlexItem alignSelf={{ default: "alignSelfCenter" }}>
                         <Icon size={isGrid ? "xl" : "lg"}>
                             {file.type === "directory"

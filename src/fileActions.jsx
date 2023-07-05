@@ -17,8 +17,8 @@
  * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
  */
 
-import cockpit from 'cockpit';
-import React, { useState } from 'react';
+import cockpit from "cockpit";
+import React, { useState } from "react";
 import {
     Button,
     Form, FormGroup,
@@ -69,8 +69,8 @@ export const ConfirmDeletionDialog = ({ selected, itemPath, path, setPath, setPa
             onClose={Dialogs.close}
             footer={
                 <>
-                    <Button variant='danger' onClick={deleteItem}>{_("Delete")}</Button>
-                    <Button variant='link' onClick={Dialogs.close}>{_("Cancel")}</Button>
+                    <Button variant="danger" onClick={deleteItem}>{_("Delete")}</Button>
+                    <Button variant="link" onClick={Dialogs.close}>{_("Cancel")}</Button>
                 </>
             }
         />
@@ -100,8 +100,8 @@ const ForceDeleteModal = ({ selected, itemPath, errorMessage, deleteFailed }) =>
             onClose={Dialogs.close}
             footer={!deleteFailed &&
                 <>
-                    <Button variant='danger' onClick={forceDelete}>{_("Force delete")}</Button>
-                    <Button variant='link' onClick={Dialogs.close}>{_("Cancel")}</Button>
+                    <Button variant="danger" onClick={forceDelete}>{_("Force delete")}</Button>
+                    <Button variant="link" onClick={Dialogs.close}>{_("Cancel")}</Button>
                 </>}
         >
             <InlineNotification
@@ -132,8 +132,8 @@ export const CreateDirectoryModal = ({ currentPath, errorMessage }) => {
             onClose={Dialogs.close}
             footer={errorMessage === undefined &&
                 <>
-                    <Button variant='primary' onClick={createDirectory}>{_("Create")}</Button>
-                    <Button variant='link' onClick={Dialogs.close}>{_("Cancel")}</Button>
+                    <Button variant="primary" onClick={createDirectory}>{_("Create")}</Button>
+                    <Button variant="link" onClick={Dialogs.close}>{_("Cancel")}</Button>
                 </>}
         >
             <Stack>
