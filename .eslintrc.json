@@ -6,11 +6,7 @@
     },
     "extends": ["eslint:recommended", "standard", "standard-jsx", "react-app"],
     "parserOptions": {
-        "ecmaVersion": "7",
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "sourceType": "module"
+        "ecmaVersion": 2022
     },
     "plugins": ["flowtype", "react", "react-hooks"],
     "rules": {
@@ -31,7 +27,6 @@
         "react-hooks/rules-of-hooks": "error",
         "react-hooks/exhaustive-deps": "error",
 
-        "camelcase": "off",
         "comma-dangle": "off",
         "curly": "off",
         "jsx-quotes": ["error", "prefer-double"],
