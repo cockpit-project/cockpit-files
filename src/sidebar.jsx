@@ -46,7 +46,7 @@ import {
 import * as timeformat from "timeformat";
 import { useDialogs } from "dialogs.jsx";
 
-import { createDirectory, deleteItem } from "./fileActions.jsx";
+import { createDirectory, deleteItem, renameItem } from "./fileActions.jsx";
 
 const _ = cockpit.gettext;
 
@@ -117,6 +117,9 @@ const DropdownWithKebab = ({ selected, path, setPath, setPathIndex }) => {
             <DropdownList>
                 <DropdownItem id="create-item" key="create-item" onClick={() => { createDirectory(Dialogs, "/" + path.join("/") + "/") }}>
                     {_("Create directory")}
+                </DropdownItem>
+                <DropdownItem id="rename-item" key="rename-item" onClick={() => { renameItem(Dialogs, { selected, path, setPath }) }}>
+                    {selected.type === "file" ? _("Rename file") : _("Rename directory")}
                 </DropdownItem>
                 <DropdownItem id="delete-item" key="delete-item" onClick={() => { deleteItem(Dialogs, { selected, itemPath: "/" + path.join("/") + "/" + (selected.items_cnt ? "" : selected.name), path, setPath, setPathIndex }) }} className="pf-m-danger">
                     {selected.type === "file" ? _("Delete file") : _("Delete directory")}
