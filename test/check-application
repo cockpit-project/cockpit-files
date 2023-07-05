@@ -134,6 +134,8 @@ class TestNavigator(testlib.MachineCase):
         b = self.browser
         m = self.machine
 
+        self.restore_dir("/home/admin")
+
         self.login_and_go("/navigator")
 
         b.wait_text(".breadcrumb-button:nth-of-type(1)", "/")
@@ -161,6 +163,8 @@ class TestNavigator(testlib.MachineCase):
     def testSorting(self):
         b = self.browser
         m = self.machine
+
+        self.restore_dir("/home/admin")
 
         self.login_and_go("/navigator")
 
@@ -211,6 +215,8 @@ class TestNavigator(testlib.MachineCase):
     def testDelete(self):
         b = self.browser
         m = self.machine
+
+        self.restore_dir("/home/admin")
 
         self.login_and_go("/navigator")
 
@@ -275,6 +281,8 @@ class TestNavigator(testlib.MachineCase):
         b = self.browser
         m = self.machine
 
+        self.restore_dir("/home/admin")
+
         self.login_and_go("/navigator")
 
         # Create folder
@@ -298,14 +306,14 @@ class TestNavigator(testlib.MachineCase):
         self.create_directory(b, "test")
         self.wait_modal_inline_alert(b, "mkdir: cannot create directory ‘/home/admin/newdir/test’: Operation not permitted")
         b.click("div.pf-c-modal-box__close")
-
-        # Remove leftover folder
         m.execute("sudo chattr -i /home/admin/newdir")
-        m.execute("rm -r /home/admin/newdir")
+
 
     def testContextMenu(self):
         b = self.browser
         m = self.machine
+
+        self.restore_dir("/home/admin")
 
         self.login_and_go("/navigator")
 
@@ -344,6 +352,8 @@ class TestNavigator(testlib.MachineCase):
         b = self.browser
         m = self.machine
 
+        self.restore_dir("/home/admin")
+
         self.login_and_go("/navigator")
 
         # Rename file
@@ -380,9 +390,6 @@ class TestNavigator(testlib.MachineCase):
         self.wait_modal_inline_alert(b, "mv: cannot move '/home/admin/newdir2' to '/home/admin/testdir': Operation not permitted")
         b.click("div.pf-c-modal-box__close")
         m.execute("sudo chattr -i /home/admin/newdir2")
-
-        # Remove leftover folder
-        m.execute("rm -r /home/admin/newdir2")
 
 if __name__ == '__main__':
     testlib.test_main()
