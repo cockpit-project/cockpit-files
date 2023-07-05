@@ -120,7 +120,7 @@ export const Application = () => {
             </MenuItem>
             {selectedContext &&
             <MenuItem className="context-menu-option pf-m-danger" onClick={() => { deleteItem(Dialogs, { selected: selectedContext, itemPath: "/" + path.join("/") + "/" + selectedContext.name }) }}>
-                <div className="context-menu-name"> {selectedContext.type === "file" ? _("Delete file") : _("Delete directory") } </div>
+                <div className="context-menu-name"> {selectedContext.type === "file" ? _("Delete file") : _("Delete directory")} </div>
             </MenuItem>}
         </MenuList>
     );
@@ -186,7 +186,7 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, setPat
 
     const Item = ({ file }) => {
         return (
-            <Button data-item={file.name} variant="plain" onDoubleClick={ () => onDoubleClickNavigate(path, file)} onClick={() => setSelected(file.name)} onContextMenu={(e) => { e.stopPropagation(); setSelectedContext(file) }} className={"item-button " + (file.type === "directory" ? "directory-item" : "file-item")}>
+            <Button data-item={file.name} variant="plain" onDoubleClick={() => onDoubleClickNavigate(path, file)} onClick={() => setSelected(file.name)} onContextMenu={(e) => { e.stopPropagation(); setSelectedContext(file) }} className={"item-button " + (file.type === "directory" ? "directory-item" : "file-item")}>
                 <Flex direction={{ default: isGrid ? "column" : "row" }} spaceItems={{ default: isGrid ? "spaceItemsNone" : "spaceItemsMd" }}>
                     <FlexItem alignSelf={{ default: "alignSelfCenter" }}>
                         <Icon size={isGrid ? "xl" : "lg"}>
@@ -214,11 +214,11 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, setPat
     } else {
         return (
             <ListingTable
-                id="folder-view"
-                className="pf-m-no-border-rows"
-                variant="compact"
-                columns={[_("Name")]}
-                rows={filteredFiles.map(file => ({ columns: [{ title: <Item file={file} key={file.name} /> }] }))}
+              id="folder-view"
+              className="pf-m-no-border-rows"
+              variant="compact"
+              columns={[_("Name")]}
+              rows={filteredFiles.map(file => ({ columns: [{ title: <Item file={file} key={file.name} /> }] }))}
             />
         );
     }

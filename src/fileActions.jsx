@@ -62,17 +62,17 @@ export const ConfirmDeletionDialog = ({ selected, itemPath, path, setPath, setPa
 
     return (
         <Modal
-            position="top"
-            title={modalTitle}
-            titleIconVariant="warning"
-            isOpen
-            onClose={Dialogs.close}
-            footer={
-                <>
-                    <Button variant="danger" onClick={deleteItem}>{_("Delete")}</Button>
-                    <Button variant="link" onClick={Dialogs.close}>{_("Cancel")}</Button>
-                </>
-            }
+          position="top"
+          title={modalTitle}
+          titleIconVariant="warning"
+          isOpen
+          onClose={Dialogs.close}
+          footer={
+              <>
+                  <Button variant="danger" onClick={deleteItem}>{_("Delete")}</Button>
+                  <Button variant="link" onClick={Dialogs.close}>{_("Cancel")}</Button>
+              </>
+          }
         />
     );
 };
@@ -93,21 +93,21 @@ const ForceDeleteModal = ({ selected, itemPath, errorMessage, deleteFailed }) =>
 
     return (
         <Modal
-            position="top"
-            title={modalTitle}
-            titleIconVariant="warning"
-            isOpen
-            onClose={Dialogs.close}
-            footer={!deleteFailed &&
-                <>
-                    <Button variant="danger" onClick={forceDelete}>{_("Force delete")}</Button>
-                    <Button variant="link" onClick={Dialogs.close}>{_("Cancel")}</Button>
-                </>}
+          position="top"
+          title={modalTitle}
+          titleIconVariant="warning"
+          isOpen
+          onClose={Dialogs.close}
+          footer={!deleteFailed &&
+          <>
+              <Button variant="danger" onClick={forceDelete}>{_("Force delete")}</Button>
+              <Button variant="link" onClick={Dialogs.close}>{_("Cancel")}</Button>
+          </>}
         >
             <InlineNotification
-            type="danger"
-            text={errorMessage}
-            isInline
+              type="danger"
+              text={errorMessage}
+              isInline
             />
         </Modal>
     );
@@ -126,22 +126,22 @@ export const CreateDirectoryModal = ({ currentPath, errorMessage }) => {
 
     return (
         <Modal
-            position="top"
-            title={_("Create directory")}
-            isOpen
-            onClose={Dialogs.close}
-            footer={errorMessage === undefined &&
-                <>
-                    <Button variant="primary" onClick={createDirectory}>{_("Create")}</Button>
-                    <Button variant="link" onClick={Dialogs.close}>{_("Cancel")}</Button>
-                </>}
+          position="top"
+          title={_("Create directory")}
+          isOpen
+          onClose={Dialogs.close}
+          footer={errorMessage === undefined &&
+          <>
+              <Button variant="primary" onClick={createDirectory}>{_("Create")}</Button>
+              <Button variant="link" onClick={Dialogs.close}>{_("Cancel")}</Button>
+          </>}
         >
             <Stack>
                 {errorMessage !== undefined &&
                 <InlineNotification
-                type="danger"
-                text={errorMessage}
-                isInline
+                  type="danger"
+                  text={errorMessage}
+                  isInline
                 />}
                 <Form isHorizontal>
                     <FormGroup label={_("Directory name")}>
