@@ -104,15 +104,15 @@ const DropdownWithKebab = ({ selected, path, setPath, setPathIndex }) => {
 
     return (
         <Dropdown
-            isPlain
-            isOpen={isOpen}
-            onSelect={onSelect}
-            onOpenChange={setIsOpen}
-            popperProps={{ position: "right" }}
-            toggle={toggleRef =>
-                <MenuToggle ref={toggleRef} variant="plain" onClick={onToggleClick} isExpanded={isOpen} id="dropdown-menu">
-                    <EllipsisVIcon />
-                </MenuToggle>}
+          isPlain
+          isOpen={isOpen}
+          onSelect={onSelect}
+          onOpenChange={setIsOpen}
+          popperProps={{ position: "right" }}
+          toggle={toggleRef =>
+              <MenuToggle ref={toggleRef} variant="plain" onClick={onToggleClick} isExpanded={isOpen} id="dropdown-menu">
+                  <EllipsisVIcon />
+              </MenuToggle>}
         >
             <DropdownList>
                 <DropdownItem id="create-item" key="create-item" onClick={() => { createDirectory(Dialogs, "/" + path.join("/") + "/") }}>

@@ -47,34 +47,34 @@ const ViewSelector = ({ isGrid, setIsGrid, sortBy, setSortBy }) => {
 
     return (
         <Select
-            id="sort-menu"
-            isOpen={isOpen}
-            selected={sortBy}
-            onSelect={onSelect}
-            onOpenChange={setIsOpen}
-            popperProps={{ position: "right" }}
-            toggle={toggleRef => (
-                <MenuToggle
-                    id="sort-menu-toggle"
-                    className="view-toggle-group"
-                    isExpanded={isOpen}
-                    onClick={() => onToggleClick(isOpen)}
-                    ref={toggleRef}
-                    splitButtonOptions={{
-                        variant: "action",
-                        items: [
-                            <MenuToggleAction
-                                aria-label={isGrid ? _("Display as a list") : _("Display as a grid")}
-                                key="view-toggle-action"
-                                onClick={() => setIsGrid(!isGrid)}
-                            >
-                                {isGrid ? <ListIcon className="view-toggle-icon" /> : <GripVerticalIcon className="view-toggle-icon" />}
-                            </MenuToggleAction>
-                        ]
-                    }}
-                    variant="secondary"
-                />
-            )}
+          id="sort-menu"
+          isOpen={isOpen}
+          selected={sortBy}
+          onSelect={onSelect}
+          onOpenChange={setIsOpen}
+          popperProps={{ position: "right" }}
+          toggle={toggleRef => (
+              <MenuToggle
+                id="sort-menu-toggle"
+                className="view-toggle-group"
+                isExpanded={isOpen}
+                onClick={() => onToggleClick(isOpen)}
+                ref={toggleRef}
+                splitButtonOptions={{
+                    variant: "action",
+                    items: [
+                        <MenuToggleAction
+                          aria-label={isGrid ? _("Display as a list") : _("Display as a grid")}
+                          key="view-toggle-action"
+                          onClick={() => setIsGrid(!isGrid)}
+                        >
+                            {isGrid ? <ListIcon className="view-toggle-icon" /> : <GripVerticalIcon className="view-toggle-icon" />}
+                        </MenuToggleAction>
+                    ]
+                }}
+                variant="secondary"
+              />
+          )}
         >
             <SelectList>
                 <SelectOption itemId="az">{_("A-Z")}</SelectOption>
