@@ -40,6 +40,10 @@ export const deleteItem = (Dialogs, options) => {
     Dialogs.show(<ConfirmDeletionDialog selected={options.selected} itemPath={options.itemPath} path={options.path} setPath={options.setPath} setPathIndex={options.setPathIndex} />);
 };
 
+export const renameItem = (Dialogs, options) => {
+    Dialogs.show(<RenameItemModal path={options.path} setPath={options.setPath} selected={options.selected} />);
+};
+
 export const ConfirmDeletionDialog = ({ selected, itemPath, path, setPath, setPathIndex }) => {
     const Dialogs = useDialogs();
 
@@ -146,6 +150,54 @@ export const CreateDirectoryModal = ({ currentPath, errorMessage }) => {
                 <Form isHorizontal>
                     <FormGroup label={_("Directory name")}>
                         <TextInput value={name} onChange={setName} id="create-directory-input" />
+                    </FormGroup>
+                </Form>
+            </Stack>
+        </Modal>
+    );
+};
+
+export const RenameItemModal = ({ path, setPath, selected }) => {
+    const Dialogs = useDialogs();
+    const [name, setName] = useState(selected.name);
+    const [errorMessage, setErrorMessage] = useState(undefined);
+
+    const renameItem = () => {
+        const options = { err: "message", superuser: "try" };
+        const command = selected.items_cnt
+            ? ["mv", "/" + path.join("/"), "/" + path.slice(0, -1).join("/") + "/" + name]
+            : ["mv", "/" + path.join("/") + "/" + selected.name, "/" + path.join("/") + "/" + name];
+
+        cockpit.spawn(command, options)
+                .then(() => {
+                    if (selected.items_cnt)
+                        setPath(path.slice(0, -1).concat(name));
+                    Dialogs.close();
+                }, (err) => { setErrorMessage(err.message) });
+    };
+
+    return (
+        <Modal
+          position="top"
+          title={selected.type === "file" ? _("Rename file") : _("Rename directory")}
+          isOpen
+          onClose={Dialogs.close}
+          footer={errorMessage === undefined &&
+          <>
+              <Button variant="primary" onClick={renameItem}>{_("Rename")}</Button>
+              <Button variant="link" onClick={Dialogs.close}>{_("Cancel")}</Button>
+          </>}
+        >
+            <Stack>
+                {errorMessage !== undefined &&
+                <InlineNotification
+                  type="danger"
+                  text={errorMessage}
+                  isInline
+                />}
+                <Form isHorizontal>
+                    <FormGroup label={selected.type === "file" ? _("File name") : _("Directory name")}>
+                        <TextInput value={name} onChange={setName} id="rename-item-input" />
                     </FormGroup>
                 </Form>
             </Stack>

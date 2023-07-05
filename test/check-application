@@ -40,6 +40,17 @@ class TestNavigator(testlib.MachineCase):
         b.set_input_text("#create-directory-input", f"{filename}")
         b.click("button.pf-m-primary")
 
+    def wait_modal_inline_alert(self, b, msg):
+        b.wait_in_text("h4.pf-c-alert__title", msg)
+
+    def rename_item(self, b, type, itemname, newname):
+        b.click(f"[data-item='{itemname}']")
+        b.click("#dropdown-menu")
+        b.click("#rename-item")
+        b.wait_in_text("h1.pf-c-modal-box__title", f"Rename {type}")
+        b.set_input_text("#rename-item-input", f"{newname}")
+        b.click("button.pf-m-primary")
+
     def testBasic(self):
         b = self.browser
         m = self.machine
@@ -231,16 +242,16 @@ class TestNavigator(testlib.MachineCase):
         self.delete_item(b, "directory", "newdir")
         b.wait_not_present("[data-item='newdir']")
 
-        # Deleting protected file should give error
+        # Deleting protected file should give an error
         m.execute("touch /home/admin/newfile")
         m.execute("sudo chattr +i /home/admin/newfile")
         b.wait_visible("[data-item='newfile']")
         self.delete_item(b, "file", "newfile")
         b.wait_in_text("h1.pf-c-modal-box__title", "Force delete file newfile?")
-        b.wait_in_text("h4.pf-c-alert__title", "rm: cannot remove '/home/admin/newfile': Operation not permitted")
+        self.wait_modal_inline_alert(b, "rm: cannot remove '/home/admin/newfile': Operation not permitted")
         b.click("button.pf-m-danger")
         b.wait_in_text("h1.pf-c-modal-box__title", "Force delete file newfile?")
-        b.wait_in_text("h4.pf-c-alert__title", "rm: cannot remove '/home/admin/newfile': Operation not permitted")
+        self.wait_modal_inline_alert(b, "rm: cannot remove '/home/admin/newfile': Operation not permitted")
         b.click("div.pf-c-modal-box__close")
         b.wait_visible("[data-item='newfile']")
         m.execute("sudo chattr -i /home/admin/newfile")
@@ -272,12 +283,12 @@ class TestNavigator(testlib.MachineCase):
 
         # Creating folder with duplicate name should return an error
         self.create_directory(b, "newdir")
-        b.wait_in_text("h4.pf-c-alert__title", "mkdir: cannot create directory ‘/home/admin/newdir’: File exists")
+        self.wait_modal_inline_alert(b, "mkdir: cannot create directory ‘/home/admin/newdir’: File exists")
         b.click("div.pf-c-modal-box__close")
         
         # Creating folder with empty name should return an error
         self.create_directory(b, "")
-        b.wait_in_text("h4.pf-c-alert__title", "mkdir: cannot create directory ‘/home/admin/’: File exists")
+        self.wait_modal_inline_alert(b, "mkdir: cannot create directory ‘/home/admin/’: File exists")
         b.click("div.pf-c-modal-box__close")
         
         # Creating folder inside protected folder should return an error
@@ -285,7 +296,7 @@ class TestNavigator(testlib.MachineCase):
         b.mouse("[data-item='newdir']", "dblclick")
         b.wait_not_present("[data-item='newdir']")
         self.create_directory(b, "test")
-        b.wait_in_text("h4.pf-c-alert__title", "mkdir: cannot create directory ‘/home/admin/newdir/test’: Operation not permitted")
+        self.wait_modal_inline_alert(b, "mkdir: cannot create directory ‘/home/admin/newdir/test’: Operation not permitted")
         b.click("div.pf-c-modal-box__close")
 
         # Remove leftover folder
@@ -306,20 +317,72 @@ class TestNavigator(testlib.MachineCase):
         b.click("button.pf-m-primary")        
         b.wait_visible("[data-item='newdir']")
 
-        # Delete folder from context menu
+        # Rename folder from context menu
         b.mouse("[data-item='newdir']", "contextmenu")
-        b.wait_in_text(".context-menu li:nth-child(2) button", "Delete directory")
+        b.wait_in_text(".context-menu li:nth-child(2) button", "Rename directory")
+        b.click(".context-menu button:contains('Rename directory')")
+        b.set_input_text("#rename-item-input", "newdir1")
+        b.click("button.pf-m-primary")
+        b.wait_visible("[data-item='newdir1']")
+
+        # Delete folder from context menu
+        b.mouse("[data-item='newdir1']", "contextmenu")
+        b.wait_in_text(".context-menu li:nth-child(3) button", "Delete directory")
         b.click(".context-menu button:contains('Delete directory')")
         b.click("button.pf-m-danger")
-        b.wait_not_present("[data-item='newdir']")
+        b.wait_not_present("[data-item='newdir1']")
 
         # Delete button text should match item type: directory/file
         m.execute("touch /home/admin/newfile")
         b.mouse("[data-item='newfile']", "contextmenu")
-        b.wait_in_text(".context-menu li:nth-child(2) button", "Delete file")
+        b.wait_in_text(".context-menu li:nth-child(3) button", "Delete file")
         b.click(".context-menu button:contains('Delete file')")
         b.click("button.pf-m-danger")
         b.wait_not_present("[data-item='newfile']")
+
+    def testRename(self):
+        b = self.browser
+        m = self.machine
+
+        self.login_and_go("/navigator")
+
+        # Rename file
+        m.execute("touch /home/admin/newfile")
+        self.rename_item(b, "file", "newfile", "newfile1")
+        b.wait_visible("[data-item='newfile1']")
+        m.execute("rm /home/admin/newfile1")
+
+        # Rename directory
+        m.execute("mkdir /home/admin/newdir")
+        self.rename_item(b, "directory", "newdir", "newdir1")
+        b.wait_visible("[data-item='newdir1']")
+
+        # Rename with space
+        self.rename_item(b, "directory", "newdir1", "new dir1")
+        b.wait_visible("[data-item='new dir1']")
+
+        # Rename current folder
+        b.mouse("[data-item='new dir1']", "dblclick")
+        b.click("#dropdown-menu")
+        b.click("#rename-item")
+        b.wait_in_text("h1.pf-c-modal-box__title", "Rename directory")
+        b.set_input_text("#rename-item-input", "newdir2")
+        b.click("button.pf-m-primary")
+        b.wait_in_text("#sidebar-card-header", "newdir2")
+        b.wait_text(".last-breadcrumb-button", "newdir2")
+        
+        # Go back to home folder
+        b.click(".breadcrumb-button:nth-of-type(3)")
+
+        # Renaming protected item should give an error
+        m.execute("sudo chattr +i /home/admin/newdir2")
+        self.rename_item(b, "directory", "newdir2", "testdir")
+        self.wait_modal_inline_alert(b, "mv: cannot move '/home/admin/newdir2' to '/home/admin/testdir': Operation not permitted")
+        b.click("div.pf-c-modal-box__close")
+        m.execute("sudo chattr -i /home/admin/newdir2")
+
+        # Remove leftover folder
+        m.execute("rm -r /home/admin/newdir2")
 
 if __name__ == '__main__':
     testlib.test_main()

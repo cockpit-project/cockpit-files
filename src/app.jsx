@@ -34,7 +34,7 @@ import { FileIcon, FolderIcon } from "@patternfly/react-icons";
 import { ListingTable } from "cockpit-components-table.jsx";
 import { ContextMenu } from "./navigator-context-menu.jsx";
 import { NavigatorBreadcrumbs } from "./navigatorBreadcrumbs.jsx";
-import { createDirectory, deleteItem } from "./fileActions.jsx";
+import { createDirectory, deleteItem, renameItem } from "./fileActions.jsx";
 import { SidebarPanelDetails } from "./sidebar.jsx";
 import { NavigatorCardHeader } from "./header.jsx";
 
@@ -119,9 +119,14 @@ export const Application = () => {
                 <div className="context-menu-name"> {_("Create directory")}</div>
             </MenuItem>
             {selectedContext &&
-            <MenuItem className="context-menu-option pf-m-danger" onClick={() => { deleteItem(Dialogs, { selected: selectedContext, itemPath: "/" + path.join("/") + "/" + selectedContext.name }) }}>
-                <div className="context-menu-name"> {selectedContext.type === "file" ? _("Delete file") : _("Delete directory")} </div>
-            </MenuItem>}
+            <>
+                <MenuItem className="context-menu-option" onClick={() => { renameItem(Dialogs, { selected: selectedContext, path, setPath }) }}>
+                    <div className="context-menu-name"> {selectedContext.type === "file" ? _("Rename file") : _("Rename directory")} </div>
+                </MenuItem>
+                <MenuItem className="context-menu-option pf-m-danger" onClick={() => { deleteItem(Dialogs, { selected: selectedContext, itemPath: "/" + path.join("/") + "/" + selectedContext.name }) }}>
+                    <div className="context-menu-name"> {selectedContext.type === "file" ? _("Delete file") : _("Delete directory")} </div>
+                </MenuItem>
+            </>}
         </MenuList>
     );
 
