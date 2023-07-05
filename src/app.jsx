@@ -128,7 +128,7 @@ export const Application = () => {
     return (
         <Page>
             <NavigatorBreadcrumbs path={path} setPath={setPath} pathIndex={pathIndex} setPathIndex={setPathIndex} />
-            <PageSection id="navigator-page" onContextMenu={() => setSelectedContext(null)}>
+            <PageSection onContextMenu={() => setSelectedContext(null)}>
                 <Sidebar isPanelRight hasGutter>
                     <SidebarPanel className="sidebar-panel" width={{ default: "width_25" }}>
                         <SidebarPanelDetails path={path} selected={files.find(file => file.name === selected) || ({ name: path[path.length - 1], items_cnt: { all: files.length, hidden: files.length - visibleFiles.length } })} setPath={setPath} setPathIndex={setPathIndex} />
@@ -137,7 +137,7 @@ export const Application = () => {
                         <Card>
                             <NavigatorCardHeader currentFilter={currentFilter} onFilterChange={onFilterChange} isGrid={isGrid} setIsGrid={setIsGrid} sortBy={sortBy} setSortBy={setSortBy} />
                             <NavigatorCardBody currentFilter={currentFilter} files={visibleFiles} setPath={setPath} path={path} setPathIndex={setPathIndex} isGrid={isGrid} sortBy={sortBy} setSelected={setSelected} setSelectedContext={setSelectedContext} />
-                            <ContextMenu parentId="navigator-page" contextMenuItems={contextMenuItems} setSelectedContext={setSelectedContext} />
+                            <ContextMenu parentId="folder-view" contextMenuItems={contextMenuItems} setSelectedContext={setSelectedContext} />
                         </Card>
                     </SidebarContent>
                 </Sidebar>
