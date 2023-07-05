@@ -47,12 +47,12 @@ export const ContextMenu = ({ parentId, contextMenuItems, setSelectedContext }) 
         };
 
         const parent = document.getElementById(parentId);
-        parent.addEventListener('contextmenu', _handleContextMenu);
-        document.addEventListener('click', _handleClick);
+        parent.addEventListener("contextmenu", _handleContextMenu);
+        document.addEventListener("click", _handleClick);
 
         return () => {
-            parent.removeEventListener('contextmenu', _handleContextMenu);
-            document.removeEventListener('click', _handleClick);
+            parent.removeEventListener("contextmenu", _handleContextMenu);
+            document.removeEventListener("click", _handleClick);
         };
     }, [parentId, setSelectedContext]);
 

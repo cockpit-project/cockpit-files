@@ -18,10 +18,10 @@
  */
 
 import cockpit from "cockpit";
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import { CardHeader, CardTitle, Flex, MenuToggle, MenuToggleAction, SearchInput, Select, SelectList, SelectOption } from '@patternfly/react-core';
-import { GripVerticalIcon, ListIcon } from '@patternfly/react-icons';
+import { CardHeader, CardTitle, Flex, MenuToggle, MenuToggleAction, SearchInput, Select, SelectList, SelectOption } from "@patternfly/react-core";
+import { GripVerticalIcon, ListIcon } from "@patternfly/react-icons";
 
 const _ = cockpit.gettext;
 
@@ -29,7 +29,7 @@ export const NavigatorCardHeader = ({ currentFilter, onFilterChange, isGrid, set
     return (
         <CardHeader>
             <CardTitle component="h2" id="navigator-card-header">{_("Directories & files")}</CardTitle>
-            <Flex flexWrap={{ default: 'nowrap' }} alignItems={{ default: 'alignItemsCenter' }}>
+            <Flex flexWrap={{ default: "nowrap" }} alignItems={{ default: "alignItemsCenter" }}>
                 <SearchInput placeholder={_("Filter directory")} value={currentFilter} onChange={onFilterChange} />
                 <ViewSelector isGrid={isGrid} setIsGrid={setIsGrid} setSortBy={setSortBy} sortBy={sortBy} />
             </Flex>
@@ -47,7 +47,7 @@ const ViewSelector = ({ isGrid, setIsGrid, sortBy, setSortBy }) => {
 
     return (
         <Select
-            id='sort-menu'
+            id="sort-menu"
             isOpen={isOpen}
             selected={sortBy}
             onSelect={onSelect}
@@ -55,7 +55,7 @@ const ViewSelector = ({ isGrid, setIsGrid, sortBy, setSortBy }) => {
             popperProps={{ position: "right" }}
             toggle={toggleRef => (
                 <MenuToggle
-                    id='sort-menu-toggle'
+                    id="sort-menu-toggle"
                     className="view-toggle-group"
                     isExpanded={isOpen}
                     onClick={() => onToggleClick(isOpen)}

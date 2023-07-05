@@ -53,13 +53,13 @@ export const NavigatorBreadcrumbs = ({ path, setPath, pathIndex, setPathIndex })
                 </FlexItem>
                 <FlexItem>
                     <Flex spaceItems={{ default: "spaceItemsXs" }}>
-                        <Button variant='link' onClick={() => { navigateBreadcrumb(0) }} className='breadcrumb-button'>/</Button>
+                        <Button variant="link" onClick={() => { navigateBreadcrumb(0) }} className="breadcrumb-button">/</Button>
                         {path.slice(0, pathIndex).map((dir, i) => {
                             return (
                                 <React.Fragment key={dir}>
                                     {i !== path.slice(0, pathIndex).length - 1
-                                        ? <Button variant='link' onClick={() => { navigateBreadcrumb(i + 1) }} key={dir} className='breadcrumb-button'>{dir}</Button>
-                                        : <p className='last-breadcrumb-button'>{dir}</p>}
+                                        ? <Button variant="link" onClick={() => { navigateBreadcrumb(i + 1) }} key={dir} className="breadcrumb-button">{dir}</Button>
+                                        : <p className="last-breadcrumb-button">{dir}</p>}
                                     <p key={i}>/</p>
                                 </React.Fragment>
                             );
