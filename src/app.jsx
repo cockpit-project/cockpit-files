@@ -19,7 +19,7 @@
 
 import * as timeformat from "timeformat";
 import cockpit from 'cockpit';
-import { useDialogs, WithDialogs } from "dialogs.jsx";
+import { useDialogs } from "dialogs.jsx";
 import React, { useEffect, useState, useRef } from 'react';
 import {
     Button,
@@ -27,19 +27,21 @@ import {
     DescriptionList, DescriptionListGroup, DescriptionListTerm, DescriptionListDescription, Dropdown, DropdownList, DropdownItem,
     Flex, FlexItem,
     Icon,
-    MenuToggle, MenuToggleAction, Modal,
+    MenuItem, MenuList, MenuToggle, MenuToggleAction,
     Page, PageBreadcrumb, PageSection,
     SearchInput, Select, SelectList, SelectOption, Sidebar, SidebarPanel, SidebarContent,
-    Text, TextContent, TextVariants, TextInput, Form, FormGroup, Stack,
+    Text, TextContent, TextVariants,
 } from "@patternfly/react-core";
 import { ArrowLeftIcon, ArrowRightIcon, EllipsisVIcon, FileIcon, FolderIcon, GripVerticalIcon, ListIcon } from "@patternfly/react-icons";
 
 import { ListingTable } from "cockpit-components-table.jsx";
-import { InlineNotification } from "../pkg/lib/cockpit-components-inline-notification";
+import { ContextMenu } from "./navigator-context-menu";
+import { createDirectory, deleteItem } from "./fileActions";
 
 const _ = cockpit.gettext;
 
 export const Application = () => {
+    const Dialogs = useDialogs();
     const [currentFilter, setCurrentFilter] = useState("");
     const [files, setFiles] = useState([]);
     const [isGrid, setIsGrid] = useState(true);
@@ -48,6 +50,7 @@ export const Application = () => {
     const [sortBy, setSortBy] = useState("az");
     const channel = useRef(null);
     const [selected, setSelected] = useState(null);
+    const [selectedContext, setSelectedContext] = useState(null);
 
     const onFilterChange = (_, value) => setCurrentFilter(value);
 
@@ -110,10 +113,22 @@ export const Application = () => {
 
     const visibleFiles = files.filter(file => !file.name.startsWith("."));
 
+    const contextMenuItems = (
+        <MenuList>
+            <MenuItem className="context-menu-option" onClick={() => { createDirectory(Dialogs, "/" + path.join("/") + "/") }}>
+                <div className="context-menu-name"> {_("Create directory")}</div>
+            </MenuItem>
+            {selectedContext &&
+            <MenuItem className="context-menu-option pf-m-danger" onClick={() => { deleteItem(Dialogs, { selected: selectedContext, itemPath: "/" + path.join("/") + "/" + selectedContext.name }) }}>
+                <div className="context-menu-name"> {selectedContext.type === "file" ? _("Delete file") : _("Delete directory") } </div>
+            </MenuItem>}
+        </MenuList>
+    );
+
     return (
         <Page>
             <NavigatorBreadcrumbs path={path} setPath={setPath} pathIndex={pathIndex} setPathIndex={setPathIndex} />
-            <PageSection>
+            <PageSection onContextMenu={() => setSelectedContext(null)}>
                 <Sidebar isPanelRight hasGutter>
                     <SidebarPanel className="sidebar-panel" width={{ default: "width_25" }}>
                         <SidebarPanelDetails path={path} selected={files.find(file => file.name === selected) || ({ name: path[path.length - 1], items_cnt: { all: files.length, hidden: files.length - visibleFiles.length } })} setPath={setPath} setPathIndex={setPathIndex} />
@@ -121,7 +136,8 @@ export const Application = () => {
                     <SidebarContent>
                         <Card>
                             <NavigatorCardHeader currentFilter={currentFilter} onFilterChange={onFilterChange} isGrid={isGrid} setIsGrid={setIsGrid} sortBy={sortBy} setSortBy={setSortBy} />
-                            <NavigatorCardBody currentFilter={currentFilter} files={visibleFiles} setPath={setPath} path={path} setPathIndex={setPathIndex} isGrid={isGrid} sortBy={sortBy} setSelected={setSelected} />
+                            <NavigatorCardBody currentFilter={currentFilter} files={visibleFiles} setPath={setPath} path={path} setPathIndex={setPathIndex} isGrid={isGrid} sortBy={sortBy} setSelected={setSelected} setSelectedContext={setSelectedContext} />
+                            <ContextMenu parentId="folder-view" contextMenuItems={contextMenuItems} setSelectedContext={setSelectedContext} />
                         </Card>
                     </SidebarContent>
                 </Sidebar>
@@ -192,7 +208,7 @@ const NavigatorCardHeader = ({ currentFilter, onFilterChange, isGrid, setIsGrid,
     );
 };
 
-const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, setPathIndex, sortBy, setSelected }) => {
+const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, setPathIndex, sortBy, setSelected, setSelectedContext }) => {
     const onDoubleClickNavigate = (path, file) => {
         if (file.type === "directory") {
             setPath(p => [...p, file.name]);
@@ -232,7 +248,7 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, setPat
 
     const Item = ({ file }) => {
         return (
-            <Button data-item={file.name} variant="plain" onDoubleClick={ () => onDoubleClickNavigate(path, file)} onClick={() => setSelected(file.name)} className='item-button'>
+            <Button data-item={file.name} variant="plain" onDoubleClick={ () => onDoubleClickNavigate(path, file)} onClick={() => setSelected(file.name)} onContextMenu={(e) => { e.stopPropagation(); setSelectedContext(file) }} className={'item-button ' + (file.type === "directory" ? "directory-item" : "file-item")}>
                 <Flex direction={{ default: isGrid ? "column" : "row" }} spaceItems={{ default: isGrid ? 'spaceItemsNone' : 'spaceItemsMd' }}>
                     <FlexItem alignSelf={{ default: "alignSelfCenter" }}>
                         <Icon size={isGrid ? "xl" : "lg"}>
@@ -283,9 +299,7 @@ const SidebarPanelDetails = ({ selected, path, setPath, setPathIndex }) => {
                         </Text>}
                     </TextContent>
                 </CardTitle>
-                <WithDialogs>
-                    <DropdownWithKebab selected={selected} path={path} setPath={setPath} setPathIndex={setPathIndex} />
-                </WithDialogs>
+                <DropdownWithKebab selected={selected} path={path} setPath={setPath} setPathIndex={setPathIndex} />
             </CardHeader>
             {selected.items_cnt === undefined &&
             <CardBody>
@@ -373,16 +387,6 @@ const DropdownWithKebab = ({ selected, path, setPath, setPathIndex }) => {
         setIsOpen(false);
     };
 
-    const deleteItem = () => {
-        const itemPath = "/" + path.join("/") + "/" + (selected.items_cnt ? "" : selected.name);
-        Dialogs.show(<ConfirmDeletionDialog selected={selected} itemPath={itemPath} path={path} setPath={setPath} setPathIndex={setPathIndex} />);
-    };
-
-    const createDirectory = () => {
-        const currentPath = "/" + path.join("/") + "/";
-        Dialogs.show(<CreateDirectoryModal currentPath={currentPath} errorMessage={undefined} />);
-    };
-
     return (
         <Dropdown
             isPlain
@@ -396,126 +400,13 @@ const DropdownWithKebab = ({ selected, path, setPath, setPathIndex }) => {
                 </MenuToggle>}
         >
             <DropdownList>
-                <DropdownItem id="create-item" key="create-item" onClick={createDirectory}>
+                <DropdownItem id="create-item" key="create-item" onClick={() => { createDirectory(Dialogs, "/" + path.join("/") + "/") }}>
                     {_("Create directory")}
                 </DropdownItem>
-                <DropdownItem id="delete-item" key="delete-item" onClick={deleteItem} className="pf-m-danger">
+                <DropdownItem id="delete-item" key="delete-item" onClick={() => { deleteItem(Dialogs, { selected, itemPath: "/" + path.join("/") + "/" + (selected.items_cnt ? "" : selected.name), path, setPath, setPathIndex }) }} className="pf-m-danger">
                     {selected.type === "file" ? _("Delete file") : _("Delete directory")}
                 </DropdownItem>
             </DropdownList>
         </Dropdown>
-    );
-};
-
-const ConfirmDeletionDialog = ({ selected, itemPath, path, setPath, setPathIndex }) => {
-    const Dialogs = useDialogs();
-
-    const deleteItem = () => {
-        const options = { err: "message", superuser: "try" };
-
-        cockpit.spawn(["rm", "-r", itemPath], options)
-                .then(() => {
-                    if (selected.items_cnt) {
-                        setPath(path.slice(0, -1));
-                        setPathIndex(path.length - 1);
-                    }
-                })
-                .then(Dialogs.close, (err) => { Dialogs.show(<ForceDeleteModal selected={selected} itemPath={itemPath} errorMessage={err.message} deleteFailed={false} />) });
-    };
-
-    const modalTitle = selected.type === "file"
-        ? cockpit.format(_("Delete file $0?"), selected.name)
-        : cockpit.format(_("Delete directory $0?"), selected.name);
-
-    return (
-        <Modal
-            position="top"
-            title={modalTitle}
-            titleIconVariant="warning"
-            isOpen
-            onClose={Dialogs.close}
-            footer={
-                <>
-                    <Button variant='danger' onClick={deleteItem}>{_("Delete")}</Button>
-                    <Button variant='link' onClick={Dialogs.close}>{_("Cancel")}</Button>
-                </>
-            }
-        />
-    );
-};
-
-const ForceDeleteModal = ({ selected, itemPath, errorMessage, deleteFailed }) => {
-    const Dialogs = useDialogs();
-
-    const forceDelete = () => {
-        const options = { err: "message", superuser: "try" };
-
-        cockpit.spawn(["rm", "-rf", itemPath], options)
-                .then(Dialogs.close, (err) => { Dialogs.show(<ForceDeleteModal selected={selected} itemPath={itemPath} errorMessage={err.message} deleteFailed />) });
-    };
-
-    const modalTitle = selected.type === "file"
-        ? cockpit.format(_("Force delete file $0?"), selected.name)
-        : cockpit.format(_("Force delete directory $0?"), selected.name);
-
-    return (
-        <Modal
-            position="top"
-            title={modalTitle}
-            titleIconVariant="warning"
-            isOpen
-            onClose={Dialogs.close}
-            footer={!deleteFailed &&
-                <>
-                    <Button variant='danger' onClick={forceDelete}>{_("Force delete")}</Button>
-                    <Button variant='link' onClick={Dialogs.close}>{_("Cancel")}</Button>
-                </>}
-        >
-            <InlineNotification
-            type="danger"
-            text={errorMessage}
-            isInline
-            />
-        </Modal>
-    );
-};
-
-const CreateDirectoryModal = ({ currentPath, errorMessage }) => {
-    const Dialogs = useDialogs();
-    const [name, setName] = useState("");
-
-    const createDirectory = () => {
-        const options = { err: "message", superuser: "try" };
-
-        cockpit.spawn(["mkdir", currentPath + name], options)
-                .then(Dialogs.close, (err) => { Dialogs.show(<CreateDirectoryModal currentPath={currentPath} errorMessage={err.message} />) });
-    };
-
-    return (
-        <Modal
-            position="top"
-            title={_("Create directory")}
-            isOpen
-            onClose={Dialogs.close}
-            footer={errorMessage === undefined &&
-                <>
-                    <Button variant='primary' onClick={createDirectory}>{_("Create")}</Button>
-                    <Button variant='link' onClick={Dialogs.close}>{_("Cancel")}</Button>
-                </>}
-        >
-            <Stack>
-                {errorMessage !== undefined &&
-                <InlineNotification
-                type="danger"
-                text={errorMessage}
-                isInline
-                />}
-                <Form isHorizontal>
-                    <FormGroup label={_("Directory name")}>
-                        <TextInput value={name} onChange={setName} id="create-directory-input" />
-                    </FormGroup>
-                </Form>
-            </Stack>
-        </Modal>
     );
 };
