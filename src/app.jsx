@@ -1,7 +1,7 @@
 /*
  * This file is part of Cockpit.
  *
- * Copyright (C) 2017 Red Hat, Inc.
+ * Copyright (C) 2023 Red Hat, Inc.
  *
  * Cockpit is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -17,26 +17,26 @@
  * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
  */
 
-import * as timeformat from "timeformat";
 import cockpit from 'cockpit';
 import { useDialogs } from "dialogs.jsx";
 import React, { useEffect, useState, useRef } from 'react';
 import {
     Button,
-    Card, CardBody, CardTitle, CardHeader,
-    DescriptionList, DescriptionListGroup, DescriptionListTerm, DescriptionListDescription, Dropdown, DropdownList, DropdownItem,
+    Card, CardBody,
     Flex, FlexItem,
     Icon,
-    MenuItem, MenuList, MenuToggle, MenuToggleAction,
-    Page, PageBreadcrumb, PageSection,
-    SearchInput, Select, SelectList, SelectOption, Sidebar, SidebarPanel, SidebarContent,
-    Text, TextContent, TextVariants,
+    MenuItem, MenuList,
+    Page, PageSection,
+    Sidebar, SidebarPanel, SidebarContent,
 } from "@patternfly/react-core";
-import { ArrowLeftIcon, ArrowRightIcon, EllipsisVIcon, FileIcon, FolderIcon, GripVerticalIcon, ListIcon } from "@patternfly/react-icons";
+import { FileIcon, FolderIcon } from "@patternfly/react-icons";
 
 import { ListingTable } from "cockpit-components-table.jsx";
-import { ContextMenu } from "./navigator-context-menu";
-import { createDirectory, deleteItem } from "./fileActions";
+import { ContextMenu } from "./navigator-context-menu.jsx";
+import { NavigatorBreadcrumbs } from "./navigatorBreadcrumbs.jsx";
+import { createDirectory, deleteItem } from "./fileActions.jsx";
+import { SidebarPanelDetails } from "./sidebar.jsx";
+import { NavigatorCardHeader } from "./header.jsx";
 
 const _ = cockpit.gettext;
 
@@ -146,68 +146,6 @@ export const Application = () => {
     );
 };
 
-const NavigatorBreadcrumbs = ({ path, setPath, pathIndex, setPathIndex }) => {
-    const navigateBack = () => {
-        if (pathIndex > 0)
-            setPathIndex(pathIndex - 1);
-    };
-
-    const navigateForward = () => {
-        if (pathIndex < path.length) {
-            setPathIndex(pathIndex + 1);
-        }
-    };
-
-    const navigateBreadcrumb = (i) => {
-        setPath(path.slice(0, i));
-        setPathIndex(i);
-    };
-
-    return (
-        <PageBreadcrumb stickyOnBreakpoint={{ default: "top" }}>
-            <Flex>
-                <FlexItem>
-                    <Button variant="secondary" onClick={navigateBack} isDisabled={pathIndex === 0}>
-                        <ArrowLeftIcon />
-                    </Button>
-                </FlexItem>
-                <FlexItem>
-                    <Button variant="secondary" onClick={navigateForward}>
-                        <ArrowRightIcon />
-                    </Button>
-                </FlexItem>
-                <FlexItem>
-                    <Flex spaceItems={{ default: "spaceItemsXs" }}>
-                        <Button variant='link' onClick={() => { navigateBreadcrumb(0) }} className='breadcrumb-button'>/</Button>
-                        {path.slice(0, pathIndex).map((dir, i) => {
-                            return (
-                                <React.Fragment key={dir}>
-                                    {i !== path.slice(0, pathIndex).length - 1
-                                        ? <Button variant='link' onClick={() => { navigateBreadcrumb(i + 1) }} key={dir} className='breadcrumb-button'>{dir}</Button>
-                                        : <p className='last-breadcrumb-button'>{dir}</p>}
-                                    <p key={i}>/</p>
-                                </React.Fragment>
-                            );
-                        })}
-                    </Flex>
-                </FlexItem>
-            </Flex>
-        </PageBreadcrumb>
-    );
-};
-
-const NavigatorCardHeader = ({ currentFilter, onFilterChange, isGrid, setIsGrid, sortBy, setSortBy }) => {
-    return (
-        <CardHeader>
-            <CardTitle component="h2" id="navigator-card-header">{_("Directories & files")}</CardTitle>
-            <Flex flexWrap={{ default: 'nowrap' }} alignItems={{ default: 'alignItemsCenter' }}>
-                <SearchInput placeholder={_("Filter directory")} value={currentFilter} onChange={onFilterChange} />
-                <ViewSelector isGrid={isGrid} setIsGrid={setIsGrid} setSortBy={setSortBy} sortBy={sortBy} />
-            </Flex>
-        </CardHeader>
-    );
-};
-
 const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, setPathIndex, sortBy, setSelected, setSelectedContext }) => {
     const onDoubleClickNavigate = (path, file) => {
         if (file.type === "directory") {
@@ -284,129 +222,4 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, setPat
             />
         );
     }
-};
-
-const SidebarPanelDetails = ({ selected, path, setPath, setPathIndex }) => {
-    return (
-        <Card className="sidebar-card">
-            <CardHeader>
-                <CardTitle component="h2" id="sidebar-card-header">
-                    <TextContent>
-                        <Text>{selected.name}</Text>
-                        {selected.items_cnt !== undefined &&
-                        <Text component={TextVariants.small}>
-                            {cockpit.format(cockpit.ngettext("$0 item $1", "$0 items $1", selected.items_cnt.all), selected.items_cnt.all, cockpit.format("($0 hidden)", selected.items_cnt.hidden))}
-                        </Text>}
-                    </TextContent>
-                </CardTitle>
-                <DropdownWithKebab selected={selected} path={path} setPath={setPath} setPathIndex={setPathIndex} />
-            </CardHeader>
-            {selected.items_cnt === undefined &&
-            <CardBody>
-                <DescriptionList isHorizontal>
-                    <DescriptionListGroup id="description-list-last-modified">
-                        <DescriptionListTerm>{_("Last modified")}</DescriptionListTerm>
-                        <DescriptionListDescription>{timeformat.dateTime(selected.modified * 1000)}</DescriptionListDescription>
-                    </DescriptionListGroup>
-                    <DescriptionListGroup id="description-list-owner">
-                        <DescriptionListTerm>{_("Owner")}</DescriptionListTerm>
-                        <DescriptionListDescription>{selected.owner}</DescriptionListDescription>
-                    </DescriptionListGroup>
-                    <DescriptionListGroup id="description-list-group">
-                        <DescriptionListTerm>{_("Group")}</DescriptionListTerm>
-                        <DescriptionListDescription>{selected.group}</DescriptionListDescription>
-                    </DescriptionListGroup>
-                    {selected.type === "file" &&
-                    <DescriptionListGroup id="description-list-size">
-                        <DescriptionListTerm>{_("Size")}</DescriptionListTerm>
-                        <DescriptionListDescription>{cockpit.format("$0 $1", cockpit.format_bytes(selected.size), selected.size < 1000 ? "B" : "")}</DescriptionListDescription>
-                    </DescriptionListGroup>}
-                </DescriptionList>
-            </CardBody>}
-        </Card>
-    );
-};
-
-export const ViewSelector = ({ isGrid, setIsGrid, sortBy, setSortBy }) => {
-    const [isOpen, setIsOpen] = useState(false);
-    const onToggleClick = isOpen => setIsOpen(!isOpen);
-    const onSelect = (ev, itemId) => {
-        setIsOpen(false);
-        setSortBy(itemId);
-    };
-
-    return (
-        <Select
-            id='sort-menu'
-            isOpen={isOpen}
-            selected={sortBy}
-            onSelect={onSelect}
-            onOpenChange={setIsOpen}
-            popperProps={{ position: "right" }}
-            toggle={toggleRef => (
-                <MenuToggle
-                    id='sort-menu-toggle'
-                    className="view-toggle-group"
-                    isExpanded={isOpen}
-                    onClick={() => onToggleClick(isOpen)}
-                    ref={toggleRef}
-                    splitButtonOptions={{
-                        variant: "action",
-                        items: [
-                            <MenuToggleAction
-                                aria-label={isGrid ? _("Display as a list") : _("Display as a grid")}
-                                key="view-toggle-action"
-                                onClick={() => setIsGrid(!isGrid)}
-                            >
-                                {isGrid ? <ListIcon className="view-toggle-icon" /> : <GripVerticalIcon className="view-toggle-icon" />}
-                            </MenuToggleAction>
-                        ]
-                    }}
-                    variant="secondary"
-                />
-            )}
-        >
-            <SelectList>
-                <SelectOption itemId="az">{_("A-Z")}</SelectOption>
-                <SelectOption itemId="za">{_("Z-A")}</SelectOption>
-                <SelectOption itemId="last_modified">{_("Last modified")}</SelectOption>
-                <SelectOption itemId="first_modified">{_("First modified")}</SelectOption>
-            </SelectList>
-        </Select>
-    );
-};
-
-const DropdownWithKebab = ({ selected, path, setPath, setPathIndex }) => {
-    const Dialogs = useDialogs();
-    const [isOpen, setIsOpen] = useState(false);
-
-    const onToggleClick = () => {
-        setIsOpen(!isOpen);
-    };
-    const onSelect = (_event, itemId) => {
-        setIsOpen(false);
-    };
-
-    return (
-        <Dropdown
-            isPlain
-            isOpen={isOpen}
-            onSelect={onSelect}
-            onOpenChange={setIsOpen}
-            popperProps={{ position: "right" }}
-            toggle={toggleRef =>
-                <MenuToggle ref={toggleRef} variant="plain" onClick={onToggleClick} isExpanded={isOpen} id="dropdown-menu">
-                    <EllipsisVIcon />
-                </MenuToggle>}
-        >
-            <DropdownList>
-                <DropdownItem id="create-item" key="create-item" onClick={() => { createDirectory(Dialogs, "/" + path.join("/") + "/") }}>
-                    {_("Create directory")}
-                </DropdownItem>
-                <DropdownItem id="delete-item" key="delete-item" onClick={() => { deleteItem(Dialogs, { selected, itemPath: "/" + path.join("/") + "/" + (selected.items_cnt ? "" : selected.name), path, setPath, setPathIndex }) }} className="pf-m-danger">
-                    {selected.type === "file" ? _("Delete file") : _("Delete directory")}
-                </DropdownItem>
-            </DropdownList>
-        </Dropdown>
-    );
 };
