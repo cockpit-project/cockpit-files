@@ -306,8 +306,14 @@ class TestNavigator(testlib.MachineCase):
         self.create_directory(b, "test")
         self.wait_modal_inline_alert(b, "mkdir: cannot create directory ‘/home/admin/newdir/test’: Operation not permitted")
         b.click("div.pf-c-modal-box__close")
+        b.click(".breadcrumb-button:nth-of-type(3)")
         m.execute("sudo chattr -i /home/admin/newdir")
 
+        # Create folder inside selected folder
+        b.click("[data-item='newdir']")
+        self.create_directory(b, "nesteddir")
+        b.mouse("[data-item='newdir']", "dblclick")
+        b.wait_visible("[data-item='nesteddir']")
 
     def testContextMenu(self):
         b = self.browser
@@ -390,6 +396,33 @@ class TestNavigator(testlib.MachineCase):
         self.wait_modal_inline_alert(b, "mv: cannot move '/home/admin/newdir2' to '/home/admin/testdir': Operation not permitted")
         b.click("div.pf-c-modal-box__close")
         m.execute("sudo chattr -i /home/admin/newdir2")
+
+    def testHiddenItems(self):
+        b = self.browser
+        m = self.machine
+
+        self.restore_dir("/home/admin")
+
+        self.login_and_go("/navigator")
+
+        # Check hidden item count
+        m.execute("mkdir /home/admin/newdir")
+        m.execute("touch /home/admin/newdir/f1 /home/admin/newdir/.f2")
+        b.mouse("[data-item='newdir']", "dblclick")
+        b.wait_visible("[data-item='f1']")
+        b.wait_not_present("[data-item='.f2']")
+        b.wait_in_text("#sidebar-card-header", "2 items (1 hidden)")
+
+        # Show hidden items
+        b.click("#dropdown-menu")
+        b.click("#show-hidden-items")
+        b.wait_visible("[data-item='f1']")
+        b.wait_visible("[data-item='.f2']")
+
+        # Button shouldn't be visible when a file is selected
+        b.click("[data-item='f1']")
+        b.click("#dropdown-menu")
+        b.wait_not_present("#show-hidden-items")
 
 if __name__ == '__main__':
     testlib.test_main()

@@ -51,6 +51,7 @@ export const Application = () => {
     const channel = useRef(null);
     const [selected, setSelected] = useState(null);
     const [selectedContext, setSelectedContext] = useState(null);
+    const [showHidden, setShowHidden] = useState(false);
 
     const onFilterChange = (_, value) => setCurrentFilter(value);
 
@@ -111,11 +112,11 @@ export const Application = () => {
     if (!path)
         return null;
 
-    const visibleFiles = files.filter(file => !file.name.startsWith("."));
+    const visibleFiles = !showHidden ? files.filter(file => !file.name.startsWith(".")) : files;
 
     const contextMenuItems = (
         <MenuList>
-            <MenuItem className="context-menu-option" onClick={() => { createDirectory(Dialogs, "/" + path.join("/") + "/") }}>
+            <MenuItem className="context-menu-option" onClick={() => { createDirectory(Dialogs, "/" + path.join("/") + "/", selectedContext || selected) }}>
                 <div className="context-menu-name"> {_("Create directory")}</div>
             </MenuItem>
             {selectedContext &&
@@ -136,7 +137,7 @@ export const Application = () => {
             <PageSection onContextMenu={() => setSelectedContext(null)}>
                 <Sidebar isPanelRight hasGutter>
                     <SidebarPanel className="sidebar-panel" width={{ default: "width_25" }}>
-                        <SidebarPanelDetails path={path} selected={files.find(file => file.name === selected) || ({ name: path[path.length - 1], items_cnt: { all: files.length, hidden: files.length - visibleFiles.length } })} setPath={setPath} setPathIndex={setPathIndex} />
+                        <SidebarPanelDetails path={path} selected={files.find(file => file.name === selected) || ({ name: path[path.length - 1], items_cnt: { all: files.length, hidden: files.length - files.filter(file => !file.name.startsWith(".")).length } })} setPath={setPath} setPathIndex={setPathIndex} showHidden={showHidden} setShowHidden={setShowHidden} />
                     </SidebarPanel>
                     <SidebarContent>
                         <Card>
