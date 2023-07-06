@@ -32,8 +32,8 @@ import { InlineNotification } from "cockpit-components-inline-notification";
 
 const _ = cockpit.gettext;
 
-export const createDirectory = (Dialogs, currentPath) => {
-    Dialogs.show(<CreateDirectoryModal currentPath={currentPath} />);
+export const createDirectory = (Dialogs, currentPath, selected) => {
+    Dialogs.show(<CreateDirectoryModal currentPath={currentPath} selected={selected} />);
 };
 
 export const deleteItem = (Dialogs, options) => {
@@ -117,14 +117,19 @@ const ForceDeleteModal = ({ selected, itemPath, errorMessage, deleteFailed }) =>
     );
 };
 
-export const CreateDirectoryModal = ({ currentPath, errorMessage }) => {
+export const CreateDirectoryModal = ({ selected, currentPath, errorMessage }) => {
     const Dialogs = useDialogs();
     const [name, setName] = useState("");
 
     const createDirectory = () => {
         const options = { err: "message", superuser: "try" };
-
-        cockpit.spawn(["mkdir", currentPath + name], options)
+        let path;
+        if (selected.icons_cnt || selected.type === "directory") {
+            path = currentPath + selected.name + "/" + name;
+        } else {
+            path = currentPath + name;
+        }
+        cockpit.spawn(["mkdir", path], options)
                 .then(Dialogs.close, (err) => { Dialogs.show(<CreateDirectoryModal currentPath={currentPath} errorMessage={err.message} />) });
     };
 
