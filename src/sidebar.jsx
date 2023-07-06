@@ -33,6 +33,9 @@ import {
     Dropdown,
     DropdownItem,
     DropdownList,
+    Flex,
+    FlexItem,
+    Icon,
     MenuToggle,
     Text,
     TextContent,
@@ -40,6 +43,7 @@ import {
 } from "@patternfly/react-core";
 
 import {
+    CheckIcon,
     EllipsisVIcon,
 } from "@patternfly/react-icons";
 
@@ -50,7 +54,7 @@ import { createDirectory, deleteItem, renameItem } from "./fileActions.jsx";
 
 const _ = cockpit.gettext;
 
-export const SidebarPanelDetails = ({ selected, path, setPath, setPathIndex }) => {
+export const SidebarPanelDetails = ({ selected, path, setPath, setPathIndex, showHidden, setShowHidden }) => {
     return (
         <Card className="sidebar-card">
             <CardHeader>
@@ -63,7 +67,7 @@ export const SidebarPanelDetails = ({ selected, path, setPath, setPathIndex }) =
                         </Text>}
                     </TextContent>
                 </CardTitle>
-                <DropdownWithKebab selected={selected} path={path} setPath={setPath} setPathIndex={setPathIndex} />
+                <DropdownWithKebab selected={selected} path={path} setPath={setPath} setPathIndex={setPathIndex} showHidden={showHidden} setShowHidden={setShowHidden} />
             </CardHeader>
             {selected.items_cnt === undefined &&
             <CardBody>
@@ -91,7 +95,7 @@ export const SidebarPanelDetails = ({ selected, path, setPath, setPathIndex }) =
     );
 };
 
-const DropdownWithKebab = ({ selected, path, setPath, setPathIndex }) => {
+const DropdownWithKebab = ({ selected, path, setPath, setPathIndex, showHidden, setShowHidden }) => {
     const Dialogs = useDialogs();
     const [isOpen, setIsOpen] = useState(false);
 
@@ -100,6 +104,9 @@ const DropdownWithKebab = ({ selected, path, setPath, setPathIndex }) => {
     };
     const onSelect = (_event, itemId) => {
         setIsOpen(false);
+    };
+    const onToggleHidden = () => {
+        setShowHidden(!showHidden);
     };
 
     return (
@@ -115,9 +122,18 @@ const DropdownWithKebab = ({ selected, path, setPath, setPathIndex }) => {
               </MenuToggle>}
         >
             <DropdownList>
-                <DropdownItem id="create-item" key="create-item" onClick={() => { createDirectory(Dialogs, "/" + path.join("/") + "/") }}>
-                    {_("Create directory")}
-                </DropdownItem>
+                {selected.type !== "file" &&
+                <>
+                    <DropdownItem id="show-hidden-items" key="show-hidden-items" onClick={onToggleHidden}>
+                        <Flex justifyContent={{ default: "justifyContentSpaceBetween" }}>
+                            <FlexItem>{_("Show hidden items")}</FlexItem>
+                            <FlexItem>{showHidden && <Icon size="sm"><CheckIcon className="check-icon" /></Icon>}</FlexItem>
+                        </Flex>
+                    </DropdownItem>
+                    <DropdownItem id="create-item" key="create-item" onClick={() => { createDirectory(Dialogs, "/" + path.join("/") + "/") }}>
+                        {_("Create directory")}
+                    </DropdownItem>
+                </>}
                 <DropdownItem id="rename-item" key="rename-item" onClick={() => { renameItem(Dialogs, { selected, path, setPath }) }}>
                     {selected.type === "file" ? _("Rename file") : _("Rename directory")}
                 </DropdownItem>
