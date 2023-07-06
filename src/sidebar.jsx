@@ -130,7 +130,7 @@ const DropdownWithKebab = ({ selected, path, setPath, setPathIndex, showHidden, 
                             <FlexItem>{showHidden && <Icon size="sm"><CheckIcon className="check-icon" /></Icon>}</FlexItem>
                         </Flex>
                     </DropdownItem>
-                    <DropdownItem id="create-item" key="create-item" onClick={() => { createDirectory(Dialogs, "/" + path.join("/") + "/") }}>
+                    <DropdownItem id="create-item" key="create-item" onClick={() => { createDirectory(Dialogs, "/" + path.join("/") + "/", selected) }}>
                         {_("Create directory")}
                     </DropdownItem>
                 </>}
