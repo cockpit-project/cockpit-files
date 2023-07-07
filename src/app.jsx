@@ -194,7 +194,7 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, setPat
             <Button data-item={file.name} variant="plain" onDoubleClick={() => onDoubleClickNavigate(path, file)} onClick={() => setSelected(file.name)} onContextMenu={(e) => { e.stopPropagation(); setSelectedContext(file) }} className={"item-button " + (file.type === "directory" ? "directory-item" : "file-item")}>
                 <Flex direction={{ default: isGrid ? "column" : "row" }} spaceItems={{ default: isGrid ? "spaceItemsNone" : "spaceItemsMd" }}>
                     <FlexItem alignSelf={{ default: "alignSelfCenter" }}>
-                        <Icon size={isGrid ? "xl" : "lg"}>
+                        <Icon size={isGrid ? "xl" : "lg"} isInline>
                             {file.type === "directory"
                                 ? <FolderIcon />
                                 : <FileIcon />}
