@@ -137,7 +137,7 @@ export const Application = () => {
             <PageSection onContextMenu={() => setSelectedContext(null)}>
                 <Sidebar isPanelRight hasGutter>
                     <SidebarPanel className="sidebar-panel" width={{ default: "width_25" }}>
-                        <SidebarPanelDetails path={path} selected={files.find(file => file.name === selected) || ({ name: path[path.length - 1], items_cnt: { all: files.length, hidden: files.length - files.filter(file => !file.name.startsWith(".")).length } })} setPath={setPath} setPathIndex={setPathIndex} showHidden={showHidden} setShowHidden={setShowHidden} />
+                        <SidebarPanelDetails path={path} selected={(files.find(file => file.name === selected?.name)) || ({ name: path[path.length - 1], items_cnt: { all: files.length, hidden: files.length - files.filter(file => !file.name.startsWith(".")).length } })} setPath={setPath} setPathIndex={setPathIndex} showHidden={showHidden} setShowHidden={setShowHidden} />
                     </SidebarPanel>
                     <SidebarContent>
                         <Card>
@@ -192,7 +192,7 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, setPat
 
     const Item = ({ file }) => {
         return (
-            <Button data-item={file.name} variant="plain" onDoubleClick={() => onDoubleClickNavigate(path, file)} onClick={() => setSelected(file.name)} onContextMenu={(e) => { e.stopPropagation(); setSelectedContext(file) }} className={"item-button " + (file.type === "directory" ? "directory-item" : "file-item")}>
+            <Button data-item={file.name} variant="plain" onDoubleClick={() => onDoubleClickNavigate(path, file)} onClick={() => setSelected(file)} onContextMenu={(e) => { e.stopPropagation(); setSelectedContext(file) }} className={"item-button " + (file.type === "directory" ? "directory-item" : "file-item")}>
                 <Flex direction={{ default: isGrid ? "column" : "row" }} spaceItems={{ default: isGrid ? "spaceItemsNone" : "spaceItemsMd" }}>
                     <FlexItem alignSelf={{ default: "alignSelfCenter" }}>
                         <Icon size={isGrid ? "xl" : "lg"} isInline>
