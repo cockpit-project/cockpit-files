@@ -104,7 +104,23 @@ export const Application = () => {
             });
 
             channel.current.addEventListener("ready", () => {
-                setFiles(files);
+                Promise.all(files.map(file => {
+                    return cockpit.spawn(["stat", "-c", "%a", "/" + path.join("/") + "/" + file.path], { superuser: "try" }).then(res => {
+                        // trim newline character
+                        res = res.slice(0, -1);
+                        // trim sticky bit
+                        if (res.length === 4) res = res.slice(1);
+                        if (res.length === 1) res = "00".concat(res);
+                        if (res.length === 2) res = "0".concat(res);
+                        return { ...file, permissions: res };
+                    });
+                })).then(res => {
+                    Promise.all(res.map(file => {
+                        return cockpit.spawn(["file", "/" + path.join("/") + "/" + file.path], { superuser: "try" }).then(res => {
+                            return { ...file, info: res.split(":")[1].slice(0, -1) };
+                        });
+                    })).then(res => setFiles(res));
+                });
             });
         };
         getFsList();

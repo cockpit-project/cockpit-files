@@ -20,7 +20,7 @@
 import cockpit from "cockpit";
 import React, { useState } from "react";
 
-import { CardHeader, CardTitle, Flex, MenuToggle, MenuToggleAction, SearchInput, Select, SelectList, SelectOption } from "@patternfly/react-core";
+import { CardHeader, CardTitle, Flex, MenuToggle, MenuToggleAction, SearchInput, Select, SelectList, SelectOption, Text, TextContent, TextVariants } from "@patternfly/react-core";
 import { GripVerticalIcon, ListIcon } from "@patternfly/react-icons";
 
 const _ = cockpit.gettext;
@@ -28,7 +28,13 @@ const _ = cockpit.gettext;
 export const NavigatorCardHeader = ({ currentFilter, onFilterChange, isGrid, setIsGrid, sortBy, setSortBy }) => {
     return (
         <CardHeader>
-            <CardTitle component="h2" id="navigator-card-header">{_("Directories & files")}</CardTitle>
+            <CardTitle component="h2" id="navigator-card-header">
+                <TextContent>
+                    <Text component={TextVariants.h2}>
+                        {_("Directories & files")}
+                    </Text>
+                </TextContent>
+            </CardTitle>
             <Flex flexWrap={{ default: "nowrap" }} alignItems={{ default: "alignItemsCenter" }}>
                 <SearchInput
                   placeholder={_("Filter directory")} value={currentFilter}
