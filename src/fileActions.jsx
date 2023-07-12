@@ -37,18 +37,20 @@ export const createDirectory = (Dialogs, currentPath, selected) => {
 };
 
 export const deleteItem = (Dialogs, options) => {
-    Dialogs.show(<ConfirmDeletionDialog
-      selected={options.selected} itemPath={options.itemPath}
-      path={options.path} setPath={options.setPath}
-      setHistory={options.setHistory} setHistoryIndex={options.setHistoryIndex}
-    />);
+    Dialogs.show(
+        <ConfirmDeletionDialog
+          selected={options.selected} itemPath={options.itemPath}
+          path={options.path} setPath={options.setPath}
+          setHistory={options.setHistory} setHistoryIndex={options.setHistoryIndex}
+        />);
 };
 
 export const renameItem = (Dialogs, options) => {
-    Dialogs.show(<RenameItemModal
-      path={options.path} setPath={options.setPath}
-      selected={options.selected}
-    />);
+    Dialogs.show(
+        <RenameItemModal
+          path={options.path} setPath={options.setPath}
+          selected={options.selected}
+        />);
 };
 
 export const ConfirmDeletionDialog = ({ selected, itemPath, path, setPath, setHistory, setHistoryIndex }) => {
@@ -66,10 +68,11 @@ export const ConfirmDeletionDialog = ({ selected, itemPath, path, setPath, setHi
                     }
                 })
                 .then(Dialogs.close, (err) => {
-                    Dialogs.show(<ForceDeleteModal
-                      selected={selected} itemPath={itemPath}
-                      errorMessage={err.message} deleteFailed={false}
-                    />);
+                    Dialogs.show(
+                        <ForceDeleteModal
+                          selected={selected} itemPath={itemPath}
+                          errorMessage={err.message} deleteFailed={false}
+                        />);
                 });
     };
 
@@ -102,10 +105,11 @@ const ForceDeleteModal = ({ selected, itemPath, errorMessage, deleteFailed }) =>
 
         cockpit.spawn(["rm", "-rf", itemPath], options)
                 .then(Dialogs.close, (err) => {
-                    Dialogs.show(<ForceDeleteModal
-                      selected={selected} itemPath={itemPath}
-                      errorMessage={err.message} deleteFailed
-                    />);
+                    Dialogs.show(
+                        <ForceDeleteModal
+                          selected={selected} itemPath={itemPath}
+                          errorMessage={err.message} deleteFailed
+                        />);
                 });
     };
 
