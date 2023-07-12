@@ -46,12 +46,12 @@ export const NavigatorBreadcrumbs = ({ path, setPath, history, setHistory, histo
         <PageBreadcrumb stickyOnBreakpoint={{ default: "top" }}>
             <Flex>
                 <FlexItem>
-                    <Button variant="secondary" onClick={navigateBack} isDisabled={historyIndex === 0}>
+                    <Button variant="secondary" onClick={navigateBack} isDisabled={historyIndex === 0} id="navigate-back">
                         <ArrowLeftIcon />
                     </Button>
                 </FlexItem>
                 <FlexItem>
-                    <Button variant="secondary" onClick={navigateForward} isDisabled={history.length === historyIndex + 1}>
+                    <Button variant="secondary" onClick={navigateForward} isDisabled={history.length === historyIndex + 1} id="navigate-forward">
                         <ArrowRightIcon />
                     </Button>
                 </FlexItem>

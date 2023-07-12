@@ -160,6 +160,42 @@ class TestNavigator(testlib.MachineCase):
         # navigating into a directory resets the sidebar
         b.wait_in_text("#sidebar-card-header", "admin")
 
+        # create folders and test navigation history buttons
+        m.execute("mkdir /home/admin/newdir")
+        m.execute("mkdir /home/admin/newdir/newdir2")
+        b.mouse("[data-item='newdir']", "dblclick")
+        b.wait_not_present("[data-item='admin']")
+        b.wait_visible("[data-item='newdir2']")
+        b.mouse("[data-item='newdir2']", "dblclick")
+        b.wait_not_present("[data-item='newdir']")
+        b.click(".breadcrumb-button:nth-of-type(2)")
+        b.wait_text(".last-breadcrumb-button", "home")
+        b.wait_visible("[data-item='admin']")
+        # navigate back
+        b.click("#navigate-back")
+        b.wait_in_text("#sidebar-card-header", "newdir2")
+        b.wait_not_present("[data-item='admin']")
+        b.click("#navigate-back")
+        b.wait_in_text("#sidebar-card-header", "newdir")
+        b.wait_visible("[data-item='newdir2']")
+        b.click("#navigate-back")
+        b.wait_in_text("#sidebar-card-header", "admin")
+        b.wait_visible("[data-item='newdir']")
+        # navigate forward
+        b.click("#navigate-forward")
+        b.wait_in_text("#sidebar-card-header", "newdir")
+        b.wait_not_present("[data-item='admin']")
+        b.wait_text(".last-breadcrumb-button", "newdir")
+        b.click("#navigate-forward")
+        b.wait_in_text("#sidebar-card-header", "newdir2")
+        b.wait_not_present("[data-item='newdir']")
+        b.wait_text(".last-breadcrumb-button", "newdir2")
+        b.click("#navigate-forward")
+        b.wait_in_text("#sidebar-card-header", "home")
+        b.wait_not_present("[data-item='newdir']")
+        b.wait_text(".last-breadcrumb-button", "home")
+        b.wait_visible("[data-item='admin']")
+
     def testSorting(self):
         b = self.browser
         m = self.machine
