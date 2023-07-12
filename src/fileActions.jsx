@@ -37,11 +37,18 @@ export const createDirectory = (Dialogs, currentPath, selected) => {
 };
 
 export const deleteItem = (Dialogs, options) => {
-    Dialogs.show(<ConfirmDeletionDialog selected={options.selected} itemPath={options.itemPath} path={options.path} setPath={options.setPath} setHistory={options.setHistory} setHistoryIndex={options.setHistoryIndex} />);
+    Dialogs.show(<ConfirmDeletionDialog
+      selected={options.selected} itemPath={options.itemPath}
+      path={options.path} setPath={options.setPath}
+      setHistory={options.setHistory} setHistoryIndex={options.setHistoryIndex}
+    />);
 };
 
 export const renameItem = (Dialogs, options) => {
-    Dialogs.show(<RenameItemModal path={options.path} setPath={options.setPath} selected={options.selected} />);
+    Dialogs.show(<RenameItemModal
+      path={options.path} setPath={options.setPath}
+      selected={options.selected}
+    />);
 };
 
 export const ConfirmDeletionDialog = ({ selected, itemPath, path, setPath, setHistory, setHistoryIndex }) => {
@@ -58,7 +65,12 @@ export const ConfirmDeletionDialog = ({ selected, itemPath, path, setPath, setHi
                         setHistoryIndex(i => i - 1);
                     }
                 })
-                .then(Dialogs.close, (err) => { Dialogs.show(<ForceDeleteModal selected={selected} itemPath={itemPath} errorMessage={err.message} deleteFailed={false} />) });
+                .then(Dialogs.close, (err) => {
+                    Dialogs.show(<ForceDeleteModal
+                      selected={selected} itemPath={itemPath}
+                      errorMessage={err.message} deleteFailed={false}
+                    />);
+                });
     };
 
     const modalTitle = selected.type === "file"
@@ -89,7 +101,12 @@ const ForceDeleteModal = ({ selected, itemPath, errorMessage, deleteFailed }) =>
         const options = { err: "message", superuser: "try" };
 
         cockpit.spawn(["rm", "-rf", itemPath], options)
-                .then(Dialogs.close, (err) => { Dialogs.show(<ForceDeleteModal selected={selected} itemPath={itemPath} errorMessage={err.message} deleteFailed />) });
+                .then(Dialogs.close, (err) => {
+                    Dialogs.show(<ForceDeleteModal
+                      selected={selected} itemPath={itemPath}
+                      errorMessage={err.message} deleteFailed
+                    />);
+                });
     };
 
     const modalTitle = selected.type === "file"
@@ -155,7 +172,10 @@ export const CreateDirectoryModal = ({ selected, currentPath, errorMessage }) =>
                 />}
                 <Form isHorizontal>
                     <FormGroup label={_("Directory name")}>
-                        <TextInput value={name} onChange={setName} id="create-directory-input" />
+                        <TextInput
+                          value={name} onChange={setName}
+                          id="create-directory-input"
+                        />
                     </FormGroup>
                 </Form>
             </Stack>
@@ -203,7 +223,10 @@ export const RenameItemModal = ({ path, setPath, selected }) => {
                 />}
                 <Form isHorizontal>
                     <FormGroup label={selected.type === "file" ? _("File name") : _("Directory name")}>
-                        <TextInput value={name} onChange={setName} id="rename-item-input" />
+                        <TextInput
+                          value={name} onChange={setName}
+                          id="rename-item-input"
+                        />
                     </FormGroup>
                 </Form>
             </Stack>
