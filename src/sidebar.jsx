@@ -54,7 +54,7 @@ import { createDirectory, deleteItem, renameItem } from "./fileActions.jsx";
 
 const _ = cockpit.gettext;
 
-export const SidebarPanelDetails = ({ selected, path, setPath, setPathIndex, showHidden, setShowHidden }) => {
+export const SidebarPanelDetails = ({ selected, path, setPath, showHidden, setShowHidden, setHistory, setHistoryIndex }) => {
     return (
         <Card className="sidebar-card">
             <CardHeader>
@@ -67,7 +67,7 @@ export const SidebarPanelDetails = ({ selected, path, setPath, setPathIndex, sho
                         </Text>}
                     </TextContent>
                 </CardTitle>
-                <DropdownWithKebab selected={selected} path={path} setPath={setPath} setPathIndex={setPathIndex} showHidden={showHidden} setShowHidden={setShowHidden} />
+                <DropdownWithKebab selected={selected} path={path} setPath={setPath} showHidden={showHidden} setShowHidden={setShowHidden} setHistory={setHistory} setHistoryIndex={setHistoryIndex} />
             </CardHeader>
             {selected.items_cnt === undefined &&
             <CardBody>
@@ -95,7 +95,7 @@ export const SidebarPanelDetails = ({ selected, path, setPath, setPathIndex, sho
     );
 };
 
-const DropdownWithKebab = ({ selected, path, setPath, setPathIndex, showHidden, setShowHidden }) => {
+const DropdownWithKebab = ({ selected, path, setPath, showHidden, setShowHidden, setHistory, setHistoryIndex }) => {
     const Dialogs = useDialogs();
     const [isOpen, setIsOpen] = useState(false);
 
@@ -137,7 +137,7 @@ const DropdownWithKebab = ({ selected, path, setPath, setPathIndex, showHidden, 
                 <DropdownItem id="rename-item" key="rename-item" onClick={() => { renameItem(Dialogs, { selected, path, setPath }) }}>
                     {selected.type === "file" ? _("Rename file") : _("Rename directory")}
                 </DropdownItem>
-                <DropdownItem id="delete-item" key="delete-item" onClick={() => { deleteItem(Dialogs, { selected, itemPath: "/" + path.join("/") + "/" + (selected.items_cnt ? "" : selected.name), path, setPath, setPathIndex }) }} className="pf-m-danger">
+                <DropdownItem id="delete-item" key="delete-item" onClick={() => { deleteItem(Dialogs, { selected, itemPath: "/" + path.join("/") + "/" + (selected.items_cnt ? "" : selected.name), path, setPath, setHistory, setHistoryIndex }) }} className="pf-m-danger">
                     {selected.type === "file" ? _("Delete file") : _("Delete directory")}
                 </DropdownItem>
             </DropdownList>

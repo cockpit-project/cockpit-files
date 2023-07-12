@@ -21,43 +21,47 @@ import React from "react";
 import { Button, Flex, FlexItem, PageBreadcrumb } from "@patternfly/react-core";
 import { ArrowLeftIcon, ArrowRightIcon } from "@patternfly/react-icons";
 
-export const NavigatorBreadcrumbs = ({ path, setPath, pathIndex, setPathIndex }) => {
+export const NavigatorBreadcrumbs = ({ path, setPath, history, setHistory, historyIndex, setHistoryIndex }) => {
     const navigateBack = () => {
-        if (pathIndex > 0)
-            setPathIndex(pathIndex - 1);
+        if (historyIndex > 0) {
+            setPath(history[historyIndex - 1]);
+            setHistoryIndex(i => i - 1);
+        }
     };
 
     const navigateForward = () => {
-        if (pathIndex < path.length) {
-            setPathIndex(pathIndex + 1);
+        if (historyIndex < history.length) {
+            setPath(history[historyIndex + 1]);
+            setHistoryIndex(i => i + 1);
         }
     };
 
     const navigateBreadcrumb = (i) => {
-        setPath(path.slice(0, i));
-        setPathIndex(i);
+        setHistory(h => [...h.slice(0, historyIndex + 1), path.slice(0, i)]);
+        setHistoryIndex(i => i + 1);
+        setPath(p => p.slice(0, i));
     };
 
     return (
         <PageBreadcrumb stickyOnBreakpoint={{ default: "top" }}>
             <Flex>
                 <FlexItem>
-                    <Button variant="secondary" onClick={navigateBack} isDisabled={pathIndex === 0}>
+                    <Button variant="secondary" onClick={navigateBack} isDisabled={historyIndex === 0} id="navigate-back">
                         <ArrowLeftIcon />
                     </Button>
                 </FlexItem>
                 <FlexItem>
-                    <Button variant="secondary" onClick={navigateForward}>
+                    <Button variant="secondary" onClick={navigateForward} isDisabled={history.length === historyIndex + 1} id="navigate-forward">
                         <ArrowRightIcon />
                     </Button>
                 </FlexItem>
                 <FlexItem>
                     <Flex spaceItems={{ default: "spaceItemsXs" }}>
                         <Button variant="link" onClick={() => { navigateBreadcrumb(0) }} className="breadcrumb-button">/</Button>
-                        {path.slice(0, pathIndex).map((dir, i) => {
+                        {path.map((dir, i) => {
                             return (
                                 <React.Fragment key={dir}>
-                                    {i !== path.slice(0, pathIndex).length - 1
+                                    {i !== path.length - 1
                                         ? <Button variant="link" onClick={() => { navigateBreadcrumb(i + 1) }} key={dir} className="breadcrumb-button">{dir}</Button>
                                         : <p className="last-breadcrumb-button">{dir}</p>}
                                     <p key={i}>/</p>
