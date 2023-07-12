@@ -46,12 +46,13 @@ export const Application = () => {
     const [files, setFiles] = useState([]);
     const [isGrid, setIsGrid] = useState(true);
     const [path, setPath] = useState(undefined);
-    const [pathIndex, setPathIndex] = useState(0);
     const [sortBy, setSortBy] = useState("az");
     const channel = useRef(null);
     const [selected, setSelected] = useState(null);
     const [selectedContext, setSelectedContext] = useState(null);
     const [showHidden, setShowHidden] = useState(false);
+    const [history, setHistory] = useState([]);
+    const [historyIndex, setHistoryIndex] = useState(0);
 
     const onFilterChange = (_, value) => setCurrentFilter(value);
 
@@ -59,7 +60,7 @@ export const Application = () => {
         cockpit.user().then(user => {
             const userPath = user.home.split("/").slice(1);
             setPath(userPath);
-            setPathIndex(userPath.length);
+            setHistory(h => [...h, userPath]);
         });
     }, []);
 
@@ -73,7 +74,7 @@ export const Application = () => {
             if (channel.current !== null)
                 channel.current.close();
 
-            const currentPath = path.slice(0, pathIndex).join("/");
+            const currentPath = path.join("/");
             channel.current = cockpit.channel({
                 payload: "fslist1",
                 path: `/${currentPath}`,
@@ -107,7 +108,7 @@ export const Application = () => {
             });
         };
         getFsList();
-    }, [path, pathIndex]);
+    }, [path]);
 
     if (!path)
         return null;
@@ -133,16 +134,16 @@ export const Application = () => {
 
     return (
         <Page>
-            <NavigatorBreadcrumbs path={path} setPath={setPath} pathIndex={pathIndex} setPathIndex={setPathIndex} />
+            <NavigatorBreadcrumbs path={path} setPath={setPath} setHistory={setHistory} history={history} historyIndex={historyIndex} setHistoryIndex={setHistoryIndex} />
             <PageSection onContextMenu={() => setSelectedContext(null)}>
                 <Sidebar isPanelRight hasGutter>
                     <SidebarPanel className="sidebar-panel" width={{ default: "width_25" }}>
-                        <SidebarPanelDetails path={path} selected={(files.find(file => file.name === selected?.name)) || ({ name: path[path.length - 1], items_cnt: { all: files.length, hidden: files.length - files.filter(file => !file.name.startsWith(".")).length } })} setPath={setPath} setPathIndex={setPathIndex} showHidden={showHidden} setShowHidden={setShowHidden} />
+                        <SidebarPanelDetails path={path} selected={(files.find(file => file.name === selected?.name)) || ({ name: path[path.length - 1], items_cnt: { all: files.length, hidden: files.length - files.filter(file => !file.name.startsWith(".")).length } })} setPath={setPath} showHidden={showHidden} setShowHidden={setShowHidden} setHistory={setHistory} setHistoryIndex={setHistoryIndex} />
                     </SidebarPanel>
                     <SidebarContent>
                         <Card>
                             <NavigatorCardHeader currentFilter={currentFilter} onFilterChange={onFilterChange} isGrid={isGrid} setIsGrid={setIsGrid} sortBy={sortBy} setSortBy={setSortBy} />
-                            <NavigatorCardBody currentFilter={currentFilter} files={visibleFiles} setPath={setPath} path={path} setPathIndex={setPathIndex} isGrid={isGrid} sortBy={sortBy} setSelected={setSelected} setSelectedContext={setSelectedContext} />
+                            <NavigatorCardBody currentFilter={currentFilter} files={visibleFiles} setPath={setPath} path={path} isGrid={isGrid} sortBy={sortBy} setSelected={setSelected} setSelectedContext={setSelectedContext} setHistory={setHistory} setHistoryIndex={setHistoryIndex} history={history} historyIndex={historyIndex} />
                             <ContextMenu parentId="folder-view" contextMenuItems={contextMenuItems} setSelectedContext={setSelectedContext} />
                         </Card>
                     </SidebarContent>
@@ -152,11 +153,12 @@ export const Application = () => {
     );
 };
 
-const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, setPathIndex, sortBy, setSelected, setSelectedContext }) => {
+const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, sortBy, setSelected, setSelectedContext, history, setHistory, historyIndex, setHistoryIndex }) => {
     const onDoubleClickNavigate = (path, file) => {
         if (file.type === "directory") {
             setPath(p => [...p, file.name]);
-            setPathIndex(p => p + 1);
+            setHistory(h => [...h.slice(0, historyIndex + 1), [...path, file.name]]);
+            setHistoryIndex(h => h + 1);
         }
     };
 

@@ -37,14 +37,14 @@ export const createDirectory = (Dialogs, currentPath, selected) => {
 };
 
 export const deleteItem = (Dialogs, options) => {
-    Dialogs.show(<ConfirmDeletionDialog selected={options.selected} itemPath={options.itemPath} path={options.path} setPath={options.setPath} setPathIndex={options.setPathIndex} />);
+    Dialogs.show(<ConfirmDeletionDialog selected={options.selected} itemPath={options.itemPath} path={options.path} setPath={options.setPath} setHistory={options.setHistory} setHistoryIndex={options.setHistoryIndex} />);
 };
 
 export const renameItem = (Dialogs, options) => {
     Dialogs.show(<RenameItemModal path={options.path} setPath={options.setPath} selected={options.selected} />);
 };
 
-export const ConfirmDeletionDialog = ({ selected, itemPath, path, setPath, setPathIndex }) => {
+export const ConfirmDeletionDialog = ({ selected, itemPath, path, setPath, setHistory, setHistoryIndex }) => {
     const Dialogs = useDialogs();
 
     const deleteItem = () => {
@@ -54,7 +54,8 @@ export const ConfirmDeletionDialog = ({ selected, itemPath, path, setPath, setPa
                 .then(() => {
                     if (selected.items_cnt) {
                         setPath(path.slice(0, -1));
-                        setPathIndex(path.length - 1);
+                        setHistory(h => h.slice(0, -1));
+                        setHistoryIndex(i => i - 1);
                     }
                 })
                 .then(Dialogs.close, (err) => { Dialogs.show(<ForceDeleteModal selected={selected} itemPath={itemPath} errorMessage={err.message} deleteFailed={false} />) });
