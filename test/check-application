@@ -215,6 +215,12 @@ class TestNavigator(testlib.MachineCase):
         m.execute("touch -d '2 hours ago' /home/admin/ccc")
         b.wait_visible("[data-item='ccc']")
 
+        # Default sort is A-Z
+        # Alphabet sorts should be case insensetive
+        b.wait_text(".item-button:nth-of-type(1)", "aaa")
+        b.wait_text(".item-button:nth-of-type(2)", "BBB")
+        b.wait_text(".item-button:nth-of-type(3)", "ccc")
+
         # Sort by reverse alphabet
         self.select_PF5(b, "#sort-menu-toggle", "#sort-menu", "Z-A")
         # Alphabet sorts should be case insensetive
@@ -241,12 +247,16 @@ class TestNavigator(testlib.MachineCase):
         b.wait_text(".item-button:nth-of-type(2)", "ccc")
         b.wait_text(".item-button:nth-of-type(3)", "aaa")
 
-        # Sort by alphabet
-        self.select_PF5(b, "#sort-menu-toggle", "#sort-menu", "A-Z")
-        # Alphabet sorts should be case insensetive
-        b.wait_text(".item-button:nth-of-type(1)", "aaa")
+        # Sort option should be saved in localStorage
+        self.select_PF5(b, "#sort-menu-toggle", "#sort-menu", "Z-A")
+        b.wait_text(".item-button:nth-of-type(1)", "ccc")
         b.wait_text(".item-button:nth-of-type(2)", "BBB")
-        b.wait_text(".item-button:nth-of-type(3)", "ccc")
+        b.wait_text(".item-button:nth-of-type(3)", "aaa")
+        b.reload()
+        b.enter_page("/navigator")
+        b.wait_text(".item-button:nth-of-type(1)", "ccc")
+        b.wait_text(".item-button:nth-of-type(2)", "BBB")
+        b.wait_text(".item-button:nth-of-type(3)", "aaa")
 
     def testDelete(self):
         b = self.browser
