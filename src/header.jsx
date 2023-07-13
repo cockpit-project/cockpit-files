@@ -30,8 +30,14 @@ export const NavigatorCardHeader = ({ currentFilter, onFilterChange, isGrid, set
         <CardHeader>
             <CardTitle component="h2" id="navigator-card-header">{_("Directories & files")}</CardTitle>
             <Flex flexWrap={{ default: "nowrap" }} alignItems={{ default: "alignItemsCenter" }}>
-                <SearchInput placeholder={_("Filter directory")} value={currentFilter} onChange={onFilterChange} />
-                <ViewSelector isGrid={isGrid} setIsGrid={setIsGrid} setSortBy={setSortBy} sortBy={sortBy} />
+                <SearchInput
+                  placeholder={_("Filter directory")} value={currentFilter}
+                  onChange={onFilterChange}
+                />
+                <ViewSelector
+                  isGrid={isGrid} setIsGrid={setIsGrid}
+                  setSortBy={setSortBy} sortBy={sortBy}
+                />
             </Flex>
         </CardHeader>
     );

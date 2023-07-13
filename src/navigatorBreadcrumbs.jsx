@@ -46,24 +46,39 @@ export const NavigatorBreadcrumbs = ({ path, setPath, history, setHistory, histo
         <PageBreadcrumb stickyOnBreakpoint={{ default: "top" }}>
             <Flex>
                 <FlexItem>
-                    <Button variant="secondary" onClick={navigateBack} isDisabled={historyIndex === 0} id="navigate-back">
+                    <Button
+                      variant="secondary" onClick={navigateBack}
+                      isDisabled={historyIndex === 0} id="navigate-back"
+                    >
                         <ArrowLeftIcon />
                     </Button>
                 </FlexItem>
                 <FlexItem>
-                    <Button variant="secondary" onClick={navigateForward} isDisabled={history.length === historyIndex + 1} id="navigate-forward">
+                    <Button
+                      variant="secondary" onClick={navigateForward}
+                      isDisabled={history.length === historyIndex + 1} id="navigate-forward"
+                    >
                         <ArrowRightIcon />
                     </Button>
                 </FlexItem>
                 <FlexItem>
                     <Flex spaceItems={{ default: "spaceItemsXs" }}>
-                        <Button variant="link" onClick={() => { navigateBreadcrumb(0) }} className="breadcrumb-button">/</Button>
+                        <Button
+                          variant="link" onClick={() => { navigateBreadcrumb(0) }}
+                          className="breadcrumb-button"
+                        >/
+                        </Button>
                         {path.map((dir, i) => {
                             return (
                                 <React.Fragment key={dir}>
-                                    {i !== path.length - 1
-                                        ? <Button variant="link" onClick={() => { navigateBreadcrumb(i + 1) }} key={dir} className="breadcrumb-button">{dir}</Button>
-                                        : <p className="last-breadcrumb-button">{dir}</p>}
+                                    {i !== path.length - 1 &&
+                                        <Button
+                                          variant="link" onClick={() => { navigateBreadcrumb(i + 1) }}
+                                          key={dir} className="breadcrumb-button"
+                                        >
+                                            {dir}
+                                        </Button>}
+                                    {i === path.length - 1 && <p className="last-breadcrumb-button">{dir}</p>}
                                     <p key={i}>/</p>
                                 </React.Fragment>
                             );

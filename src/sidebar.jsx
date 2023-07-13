@@ -67,7 +67,12 @@ export const SidebarPanelDetails = ({ selected, path, setPath, showHidden, setSh
                         </Text>}
                     </TextContent>
                 </CardTitle>
-                <DropdownWithKebab selected={selected} path={path} setPath={setPath} showHidden={showHidden} setShowHidden={setShowHidden} setHistory={setHistory} setHistoryIndex={setHistoryIndex} />
+                <DropdownWithKebab
+                  selected={selected} path={path}
+                  setPath={setPath} showHidden={showHidden}
+                  setShowHidden={setShowHidden} setHistory={setHistory}
+                  setHistoryIndex={setHistoryIndex}
+                />
             </CardHeader>
             {selected.items_cnt === undefined &&
             <CardBody>
@@ -117,27 +122,43 @@ const DropdownWithKebab = ({ selected, path, setPath, showHidden, setShowHidden,
           onOpenChange={setIsOpen}
           popperProps={{ position: "right" }}
           toggle={toggleRef =>
-              <MenuToggle ref={toggleRef} variant="plain" onClick={onToggleClick} isExpanded={isOpen} id="dropdown-menu">
+              <MenuToggle
+                ref={toggleRef} variant="plain"
+                onClick={onToggleClick} isExpanded={isOpen}
+                id="dropdown-menu"
+              >
                   <EllipsisVIcon />
               </MenuToggle>}
         >
             <DropdownList>
                 {selected.type !== "file" &&
                 <>
-                    <DropdownItem id="show-hidden-items" key="show-hidden-items" onClick={onToggleHidden}>
+                    <DropdownItem
+                      id="show-hidden-items" key="show-hidden-items"
+                      onClick={onToggleHidden}
+                    >
                         <Flex justifyContent={{ default: "justifyContentSpaceBetween" }}>
                             <FlexItem>{_("Show hidden items")}</FlexItem>
                             <FlexItem>{showHidden && <Icon size="sm"><CheckIcon className="check-icon" /></Icon>}</FlexItem>
                         </Flex>
                     </DropdownItem>
-                    <DropdownItem id="create-item" key="create-item" onClick={() => { createDirectory(Dialogs, "/" + path.join("/") + "/", selected) }}>
+                    <DropdownItem
+                      id="create-item" key="create-item"
+                      onClick={() => { createDirectory(Dialogs, "/" + path.join("/") + "/", selected) }}
+                    >
                         {_("Create directory")}
                     </DropdownItem>
                 </>}
-                <DropdownItem id="rename-item" key="rename-item" onClick={() => { renameItem(Dialogs, { selected, path, setPath }) }}>
+                <DropdownItem
+                  id="rename-item" key="rename-item"
+                  onClick={() => { renameItem(Dialogs, { selected, path, setPath }) }}
+                >
                     {selected.type === "file" ? _("Rename file") : _("Rename directory")}
                 </DropdownItem>
-                <DropdownItem id="delete-item" key="delete-item" onClick={() => { deleteItem(Dialogs, { selected, itemPath: "/" + path.join("/") + "/" + (selected.items_cnt ? "" : selected.name), path, setPath, setHistory, setHistoryIndex }) }} className="pf-m-danger">
+                <DropdownItem
+                  id="delete-item" key="delete-item"
+                  onClick={() => { deleteItem(Dialogs, { selected, itemPath: "/" + path.join("/") + "/" + (selected.items_cnt ? "" : selected.name), path, setPath, setHistory, setHistoryIndex }) }} className="pf-m-danger"
+                >
                     {selected.type === "file" ? _("Delete file") : _("Delete directory")}
                 </DropdownItem>
             </DropdownList>
