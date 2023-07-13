@@ -255,7 +255,7 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, sortBy
               className="pf-m-no-border-rows"
               variant="compact"
               columns={[_("Name")]}
-              rows={filteredFiles.map(file => ({ columns: [{ title: <Item file={file} key={file.name} /> }] }))}
+              rows={sortedFiles.map(file => ({ columns: [{ title: <Item file={file} key={file.name} /> }] }))}
             />
         );
     }
