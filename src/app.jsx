@@ -46,7 +46,7 @@ export const Application = () => {
     const [files, setFiles] = useState([]);
     const [isGrid, setIsGrid] = useState(true);
     const [path, setPath] = useState(undefined);
-    const [sortBy, setSortBy] = useState("az");
+    const [sortBy, setSortBy] = useState(localStorage.getItem("sort") || "az");
     const channel = useRef(null);
     const [selected, setSelected] = useState(null);
     const [selectedContext, setSelectedContext] = useState(null);
@@ -190,7 +190,7 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, sortBy
             setSelected(null);
     };
 
-    const filteredFiles = files
+    const filteredItems = files
             .filter(file => {
                 return file.name.toLowerCase().includes(currentFilter.toLowerCase());
             });
@@ -213,7 +213,9 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, sortBy
         break;
     }
 
-    const sortedFiles = filteredFiles.sort(compare);
+    const filteredFolders = filteredItems.filter((item) => (item.type === "directory"));
+    const filteredFiles = filteredItems.filter((item) => (item.type === "file"));
+    const sortedFiles = filteredFolders.sort(compare).concat(filteredFiles.sort(compare));
 
     const Item = ({ file }) => {
         return (

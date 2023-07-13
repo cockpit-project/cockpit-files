@@ -49,6 +49,7 @@ const ViewSelector = ({ isGrid, setIsGrid, sortBy, setSortBy }) => {
     const onSelect = (ev, itemId) => {
         setIsOpen(false);
         setSortBy(itemId);
+        localStorage.setItem("sort", itemId);
     };
 
     return (
