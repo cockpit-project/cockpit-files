@@ -46,7 +46,7 @@ export const Application = () => {
     const [files, setFiles] = useState([]);
     const [isGrid, setIsGrid] = useState(true);
     const [path, setPath] = useState(undefined);
-    const [sortBy, setSortBy] = useState(localStorage.getItem("sort") || "az");
+    const [sortBy, setSortBy] = useState(localStorage.getItem("cockpit-navigator.sort") || "az");
     const channel = useRef(null);
     const [selected, setSelected] = useState(null);
     const [selectedContext, setSelectedContext] = useState(null);
