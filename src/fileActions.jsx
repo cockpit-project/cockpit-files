@@ -22,7 +22,10 @@ import React, { useState } from "react";
 import {
     Button,
     Form, FormGroup,
+    FormSelect,
+    FormSelectOption,
     Modal,
+    Radio,
     Stack,
     TextInput,
 } from "@patternfly/react-core";
@@ -34,6 +37,14 @@ const _ = cockpit.gettext;
 
 export const createDirectory = (Dialogs, currentPath, selected) => {
     Dialogs.show(<CreateDirectoryModal currentPath={currentPath} selected={selected} />);
+};
+
+export const createLink = (Dialogs, currentPath, files, selected) => {
+    Dialogs.show(
+        <CreateLinkModal
+          currentPath={currentPath} selected={selected}
+          files={files.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0))}
+        />);
 };
 
 export const deleteItem = (Dialogs, options) => {
@@ -230,6 +241,79 @@ export const RenameItemModal = ({ path, setPath, selected }) => {
                         <TextInput
                           value={name} onChange={(_, val) => setName(val)}
                           id="rename-item-input"
+                        />
+                    </FormGroup>
+                </Form>
+            </Stack>
+        </Modal>
+    );
+};
+
+export const CreateLinkModal = ({ currentPath, files, selected }) => {
+    const Dialogs = useDialogs();
+    const [originalName, setOriginalName] = useState(selected?.name || "");
+    const [newName, setNewName] = useState("");
+    const [type, setType] = useState("symbolic");
+    const [errorMessage, setErrorMessage] = useState(undefined);
+
+    const createLink = () => {
+        const options = { err: "message", superuser: "try" };
+        cockpit.spawn(["ln", ...(type === "symbolic" ? ["-s"] : []), currentPath + originalName, currentPath + newName], options)
+                .then(Dialogs.close, (err) => { setErrorMessage(err.message) });
+    };
+
+    return (
+        <Modal
+          position="top"
+          title={_("New link")}
+          isOpen
+          onClose={Dialogs.close}
+          footer={
+              <>
+                  <Button variant="primary" onClick={createLink}>{_("Create link")}</Button>
+                  <Button variant="link" onClick={Dialogs.close}>{_("Cancel")}</Button>
+              </>
+          }
+        >
+            <Stack>
+                {errorMessage !== undefined &&
+                <InlineNotification
+                  type="danger"
+                  text={errorMessage}
+                  isInline
+                />}
+                <Form isHorizontal>
+                    <FormGroup label={_("Original")}>
+                        <FormSelect
+                          key="location" onChange={(_, val) => setOriginalName(val)}
+                          id="create-link-original" value={originalName}
+                        >
+                            {files.map(file => {
+                                return (
+                                    <FormSelectOption
+                                      value={file.name} key={file.name}
+                                      label={file.name}
+                                    />
+                                );
+                            })}
+                        </FormSelect>
+                    </FormGroup>
+                    <FormGroup label={_("New")}>
+                        <TextInput
+                          value={newName} onChange={setNewName}
+                          id="create-link-new"
+                        />
+                    </FormGroup>
+                    <FormGroup label={_("Link type")} isInline>
+                        <Radio
+                          name="create-link-type" label={_("Symbolic")}
+                          value="symbolic" onChange={() => { setType("symbolic") }}
+                          id="create-link-symbolic" isChecked={type === "symbolic"}
+                        />
+                        <Radio
+                          name="create-link-type" label={_("Hard")}
+                          value="new" onChange={() => { setType("hard") }}
+                          id="create-link-hard" isChecked={type === "hard"}
                         />
                     </FormGroup>
                 </Form>
