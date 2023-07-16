@@ -160,9 +160,10 @@ export const Application = () => {
                               currentFilter={currentFilter} files={visibleFiles}
                               setPath={setPath} path={path}
                               isGrid={isGrid} sortBy={sortBy}
-                              setSelected={setSelected} setSelectedContext={setSelectedContext}
-                              setHistory={setHistory} setHistoryIndex={setHistoryIndex}
-                              history={history} historyIndex={historyIndex}
+                              selected={selected} setSelected={setSelected}
+                              setSelectedContext={setSelectedContext} setHistory={setHistory}
+                              setHistoryIndex={setHistoryIndex} history={history}
+                              historyIndex={historyIndex}
                             />
                             <ContextMenu
                               parentId="folder-view" contextMenuItems={contextMenuItems}
@@ -176,7 +177,7 @@ export const Application = () => {
     );
 };
 
-const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, sortBy, setSelected, setSelectedContext, history, setHistory, historyIndex, setHistoryIndex }) => {
+const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, sortBy, selected, setSelected, setSelectedContext, history, setHistory, historyIndex, setHistoryIndex }) => {
     const onDoubleClickNavigate = (path, file) => {
         if (file.type === "directory") {
             setPath(p => [...p, file.name]);
@@ -188,6 +189,10 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, sortBy
     const resetSelected = e => {
         if (e.target.id === "folder-view" || e.target.id === "navigator-card-body")
             setSelected(null);
+    };
+
+    const truncate = name => {
+        return name.length < 15 ? name : name.slice(0, 15) + "\u2026";
     };
 
     const filteredItems = files
@@ -233,7 +238,7 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, sortBy
                         </Icon>
                     </FlexItem>
                     <FlexItem className={"pf-u-text-break-word pf-u-text-wrap" + (isGrid ? " grid-file-name" : "")}>
-                        {file.name}
+                        {selected?.name === file.name ? file.name : truncate(file.name)}
                     </FlexItem>
                 </Flex>
             </Button>
