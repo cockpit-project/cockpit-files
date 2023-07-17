@@ -139,7 +139,7 @@ export const Application = () => {
               setHistory={setHistory} history={history}
               historyIndex={historyIndex} setHistoryIndex={setHistoryIndex}
             />
-            <PageSection onContextMenu={() => setSelectedContext(null)}>
+            <PageSection onContextMenu={() => { setSelectedContext(null); setSelected(path[path.length - 1]) }}>
                 <Sidebar isPanelRight hasGutter>
                     <SidebarPanel className="sidebar-panel" width={{ default: "width_25" }}>
                         <SidebarPanelDetails
@@ -187,7 +187,7 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, sortBy
 
     const resetSelected = e => {
         if (e.target.id === "folder-view" || e.target.id === "navigator-card-body")
-            setSelected(null);
+            setSelected(path[path.length - 1]);
     };
 
     const filteredItems = files

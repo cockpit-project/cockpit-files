@@ -377,6 +377,25 @@ class TestNavigator(testlib.MachineCase):
         b.click("button.pf-m-primary")        
         b.wait_visible("[data-item='newdir']")
 
+        # Create folder inside selected folder
+        b.mouse("[data-item='newdir']", "contextmenu")
+        b.click(".context-menu button:contains('Create directory')")
+        b.set_input_text("#create-directory-input", "newdir2")
+        b.click("button.pf-m-primary")
+        b.mouse("[data-item='newdir']", "dblclick")
+        b.wait_not_present("[data-item='newdir']")
+        b.wait_visible("[data-item='newdir2']")
+        b.click(".breadcrumb-button:nth-of-type(3)")
+
+        # Opening context menu from empty space deselects item
+        b.click("[data-item='newdir']")
+        b.mouse("#folder-view", "contextmenu")
+        b.click(".context-menu button:contains('Create directory')")
+        b.set_input_text("#create-directory-input", "newdir2")
+        b.click("button.pf-m-primary")        
+        b.wait_visible("[data-item='newdir2']")
+        m.execute("rmdir /home/admin/newdir2")
+
         # Rename folder from context menu
         b.mouse("[data-item='newdir']", "contextmenu")
         b.wait_in_text(".context-menu li:nth-child(2) button", "Rename directory")
