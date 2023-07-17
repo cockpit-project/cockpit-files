@@ -27,7 +27,7 @@ import {
     Icon,
     MenuItem, MenuList,
     Page, PageSection,
-    Sidebar, SidebarPanel, SidebarContent,
+    Sidebar, SidebarPanel, SidebarContent, Truncate,
 } from "@patternfly/react-core";
 import { FileIcon, FolderIcon } from "@patternfly/react-icons";
 
@@ -191,10 +191,6 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, sortBy
             setSelected(null);
     };
 
-    const truncate = name => {
-        return name.length < 15 ? name : name.slice(0, 15) + "\u2026";
-    };
-
     const filteredItems = files
             .filter(file => {
                 return file.name.toLowerCase().includes(currentFilter.toLowerCase());
@@ -238,7 +234,7 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, sortBy
                         </Icon>
                     </FlexItem>
                     <FlexItem className={"pf-u-text-break-word pf-u-text-wrap" + (isGrid ? " grid-file-name" : "")}>
-                        {selected?.name === file.name ? file.name : truncate(file.name)}
+                        {selected?.name !== file.name ? <Truncate content={file.name} position="middle" /> : file.name}
                     </FlexItem>
                 </Flex>
             </Button>
