@@ -257,7 +257,7 @@ export const CreateLinkModal = ({ currentPath, files, selected }) => {
 
     const createLink = () => {
         const options = { err: "message", superuser: "try" };
-        cockpit.spawn(["ln", ...(type === "symbolic" ? ["-s"] : []), currentPath + originalName, currentPath + newName], options)
+        cockpit.spawn(["ln", ...(type === "symbolic" ? ["-s"] : []), currentPath + originalName.slice(originalName.lastIndexOf("/") + 1), currentPath + newName], options)
                 .then(Dialogs.close, (err) => { setErrorMessage(err.message) });
     };
 
@@ -285,7 +285,8 @@ export const CreateLinkModal = ({ currentPath, files, selected }) => {
                     <FormGroup label={_("Original")}>
                         <FileAutoComplete
                           onChange={setOriginalName} placeholder={_("Path to file")}
-                          superuser="try" value={currentPath}
+                          superuser="try" value={currentPath + originalName}
+                          type="file"
                         />
                     </FormGroup>
                     <FormGroup label={_("New")}>
