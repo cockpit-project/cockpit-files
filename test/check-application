@@ -51,6 +51,14 @@ class TestNavigator(testlib.MachineCase):
         b.set_input_text("#rename-item-input", f"{newname}")
         b.click("button.pf-m-primary")
 
+    def create_link(self, b, original, new, type):
+        b.click("#dropdown-menu")
+        b.click("#create-link")
+        b.set_val("#create-link-original", original)
+        b.set_input_text("#create-link-new", new)
+        b.click(f"#create-link-{type}")
+        b.click("button.pf-m-primary")
+
     def testBasic(self):
         b = self.browser
         m = self.machine
@@ -371,10 +379,10 @@ class TestNavigator(testlib.MachineCase):
 
         # Create folder from context menu
         b.mouse("#folder-view", "contextmenu")
-        b.wait_in_text(".context-menu button", "Create directory")
+        b.wait_in_text(".context-menu li:nth-child(1) button", "Create directory")
         b.click(".context-menu button:contains('Create directory')")
         b.set_input_text("#create-directory-input", "newdir")
-        b.click("button.pf-m-primary")        
+        b.click("button.pf-m-primary")
         b.wait_visible("[data-item='newdir']")
 
         # Create folder inside selected folder
@@ -398,7 +406,7 @@ class TestNavigator(testlib.MachineCase):
 
         # Rename folder from context menu
         b.mouse("[data-item='newdir']", "contextmenu")
-        b.wait_in_text(".context-menu li:nth-child(2) button", "Rename directory")
+        b.wait_in_text(".context-menu li:nth-child(3) button", "Rename directory")
         b.click(".context-menu button:contains('Rename directory')")
         b.set_input_text("#rename-item-input", "newdir1")
         b.click("button.pf-m-primary")
@@ -406,7 +414,7 @@ class TestNavigator(testlib.MachineCase):
 
         # Delete folder from context menu
         b.mouse("[data-item='newdir1']", "contextmenu")
-        b.wait_in_text(".context-menu li:nth-child(3) button", "Delete directory")
+        b.wait_in_text(".context-menu li:nth-child(4) button", "Delete directory")
         b.click(".context-menu button:contains('Delete directory')")
         b.click("button.pf-m-danger")
         b.wait_not_present("[data-item='newdir1']")
@@ -414,7 +422,7 @@ class TestNavigator(testlib.MachineCase):
         # Delete button text should match item type: directory/file
         m.execute("touch /home/admin/newfile")
         b.mouse("[data-item='newfile']", "contextmenu")
-        b.wait_in_text(".context-menu li:nth-child(3) button", "Delete file")
+        b.wait_in_text(".context-menu li:nth-child(4) button", "Delete file")
         b.click(".context-menu button:contains('Delete file')")
         b.click("button.pf-m-danger")
         b.wait_not_present("[data-item='newfile']")
@@ -488,6 +496,37 @@ class TestNavigator(testlib.MachineCase):
         b.click("[data-item='f1']")
         b.click("#dropdown-menu")
         b.wait_not_present("#show-hidden-items")
+
+    def testCreateLink(self):
+        b = self.browser
+        m = self.machine
+
+        self.restore_dir("/home/admin")
+
+        self.login_and_go("/navigator")
+
+        m.execute("touch /home/admin/test")
+        m.execute("mkdir /home/admin/testdir")
+        m.execute("touch /home/admin/protectedfile")
+
+        # Create file symbolic link
+        self.create_link(b, "test", "test-sym", "symbolic")
+        b.wait_visible("[data-item='test-sym']")
+        self.assertEqual(m.execute("ls -l /home/admin/test-sym")[0:23], "lrwxrwxrwx. 1 root root")
+
+        # Create file hard link
+        self.create_link(b, "test", "test-hard", "hard")
+        b.wait_visible("[data-item='test-hard']")
+        self.assertEqual(m.execute("ls -l /home/admin/test-hard")[0:23], "-rw-r--r--. 2 root root")
+
+        # Create folder symbolic link
+        self.create_link(b, "testdir", "testdir-sym", "symbolic")
+        b.wait_visible("[data-item='testdir-sym']")
+        self.assertEqual(m.execute("ls -l /home/admin/testdir-sym")[0:23], "lrwxrwxrwx. 1 root root")
+
+        # Creating folder hard link should return an error
+        self.create_link(b, "testdir", "testdir-hard", "hard")
+        self.wait_modal_inline_alert(b, "ln: /home/admin/testdir: hard link not allowed for directory")
 
 if __name__ == '__main__':
     testlib.test_main()
