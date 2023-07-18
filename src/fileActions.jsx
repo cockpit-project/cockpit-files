@@ -22,8 +22,6 @@ import React, { useState } from "react";
 import {
     Button,
     Form, FormGroup,
-    FormSelect,
-    FormSelectOption,
     Modal,
     Radio,
     Stack,
@@ -32,6 +30,7 @@ import {
 
 import { useDialogs } from "dialogs.jsx";
 import { InlineNotification } from "cockpit-components-inline-notification";
+import { FileAutoComplete } from "../pkg/lib/cockpit-components-file-autocomplete";
 
 const _ = cockpit.gettext;
 
@@ -284,19 +283,10 @@ export const CreateLinkModal = ({ currentPath, files, selected }) => {
                 />}
                 <Form isHorizontal>
                     <FormGroup label={_("Original")}>
-                        <FormSelect
-                          key="location" onChange={(_, val) => setOriginalName(val)}
-                          id="create-link-original" value={originalName}
-                        >
-                            {files.map(file => {
-                                return (
-                                    <FormSelectOption
-                                      value={file.name} key={file.name}
-                                      label={file.name}
-                                    />
-                                );
-                            })}
-                        </FormSelect>
+                        <FileAutoComplete
+                          onChange={setOriginalName} placeholder={_("Path to file")}
+                          superuser="try" value={currentPath}
+                        />
                     </FormGroup>
                     <FormGroup label={_("New")}>
                         <TextInput
