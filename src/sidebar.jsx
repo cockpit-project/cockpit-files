@@ -131,6 +131,12 @@ const DropdownWithKebab = ({ selected, path, setPath, showHidden, setShowHidden,
               </MenuToggle>}
         >
             <DropdownList>
+                <DropdownItem
+                  id="open-in-terminal" key="open-in-terminal"
+                  onClick={() => { cockpit.jump("/system/terminal/#/?path=/" + path.join("/")) }}
+                >
+                    {_("Open in terminal")}
+                </DropdownItem>
                 {selected.type !== "file" &&
                 <>
                     <DropdownItem
