@@ -286,7 +286,6 @@ export const CreateLinkModal = ({ currentPath, files, selected }) => {
                         <FileAutoComplete
                           onChange={setOriginalName} placeholder={_("Path to file")}
                           superuser="try" value={currentPath + originalName}
-                          type="file"
                         />
                     </FormGroup>
                     <FormGroup label={_("New")}>
