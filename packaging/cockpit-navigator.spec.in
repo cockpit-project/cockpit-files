@@ -2,7 +2,7 @@ Name: cockpit-navigator
 Version: %{VERSION}
 Release: 1%{?dist}
 Summary: A filesystem browser for Cockpit
-License: LGPLv2+
+License: LGPL-2.1-or-later
 
 Source0: https://github.com/KKoukiou/cockpit-navigator/releases/download/%{version}/%{name}-%{version}.tar.xz
 Source1: https://github.com/KKoukiou/cockpit-navigator/releases/download/%{version}/%{name}-node-%{version}.tar.xz
