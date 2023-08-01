@@ -36,3 +36,8 @@
     background-color: var(--pf-c-page__main-section--BackgroundColor);
     top: 3rem;
 }
+
+#folder-view {
+    overflow-y: scroll;
+    max-height: 70vh;
+}
