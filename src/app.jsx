@@ -27,7 +27,7 @@ import {
     Icon,
     MenuItem, MenuList,
     Page, PageSection,
-    Sidebar, SidebarPanel, SidebarContent, Truncate,
+    Sidebar, SidebarPanel, SidebarContent, Truncate, CardHeader, CardTitle,
 } from "@patternfly/react-core";
 import { FileIcon, FolderIcon } from "@patternfly/react-icons";
 
@@ -83,6 +83,7 @@ export const Application = () => {
     const channel = useRef(null);
     const channelList = useRef(null);
     const [selected, setSelected] = useState(null);
+    const [selectedArray, setSelectedArray] = useState([]);
     const [selectedContext, setSelectedContext] = useState(null);
     const [showHidden, setShowHidden] = useState(false);
     const [history, setHistory] = useState([]);
@@ -246,6 +247,7 @@ export const Application = () => {
                               selected={selected} setSelected={setSelected}
                               setSelectedContext={setSelectedContext} setHistory={setHistory}
                               setHistoryIndex={setHistoryIndex} historyIndex={historyIndex}
+                              selectedArray={selectedArray} setSelectedArray={setSelectedArray}
                             />
                             <ContextMenu
                               parentId="folder-view" contextMenuItems={contextMenuItems}
@@ -259,7 +261,7 @@ export const Application = () => {
     );
 };
 
-const NavigatorCardBody = ({ currentFilter, files, isGrid, path, sortBy, selected, setSelected, setSelectedContext, setHistory, historyIndex, setHistoryIndex }) => {
+const NavigatorCardBody = ({ currentFilter, files, isGrid, path, sortBy, selected, setSelected, setSelectedContext, setHistory, historyIndex, setHistoryIndex, selectedArray, setSelectedArray }) => {
     const onDoubleClickNavigate = (path, file) => {
         const newPath = [...path, file.name].join("/");
         if (file.type === "directory" || file.to === "directory") {
@@ -303,26 +305,51 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, path, sortBy, selecte
     const filteredFiles = filteredItems.filter((item) => (item.type !== "directory"));
     const sortedFiles = filteredFolders.sort(compare).concat(filteredFiles.sort(compare));
 
+    const onCardChange = file => {
+        if (selectedArray.includes(file.name)) {
+            setSelectedArray(s => s.filter(i => i !== file.name));
+        } else
+            setSelectedArray(s => [...s, file.name]);
+    };
+
     const Item = ({ file }) => {
         return (
-            <Button
-              data-item={file.name} variant="plain"
-              onDoubleClick={() => onDoubleClickNavigate(path, file)} onClick={() => setSelected(file)}
-              onContextMenu={(e) => { e.stopPropagation(); setSelectedContext(file) }} className={"item-button " + (file.type === "directory" ? "directory-item" : "file-item")}
+            <Card
+              isSelectable isCompact
+              isPlain isRounded
+              onContextMenu={(e) => { e.stopPropagation(); setSelectedContext(file) }}
+              onDoubleClick={() => onDoubleClickNavigate(path, file)} onClick={() => { setSelected(file); onCardChange(file) }}
             >
-                <Flex direction={{ default: isGrid ? "column" : "row" }} spaceItems={{ default: isGrid ? "spaceItemsNone" : "spaceItemsMd" }}>
-                    <FlexItem alignSelf={{ default: "alignSelfCenter" }}>
-                        <Icon size={isGrid ? "xl" : "lg"} isInline>
-                            {file.type === "directory" || file.to === "directory"
-                                ? <FolderIcon />
-                                : <FileIcon />}
-                        </Icon>
-                    </FlexItem>
-                    <FlexItem className={"pf-u-text-break-word pf-u-text-wrap" + (isGrid ? " grid-file-name" : "")}>
-                        {selected?.name !== file.name ? <Truncate content={file.name} position="middle" /> : file.name}
-                    </FlexItem>
-                </Flex>
-            </Button>
+                <CardHeader
+                  selectableActions={{
+                      selectableActionId: file.name,
+                      selectableActionAriaLabelledby: file.name,
+                      name: file.name,
+                      isChecked: selectedArray.includes(file.name),
+                      onChange: onCardChange
+                  }}
+                >
+                    <CardTitle>
+                        <Button
+                          data-item={file.name} variant="plain"
+                          className={"item-button " + (file.type === "directory" ? "directory-item" : "file-item")}
+                        >
+                            <Flex direction={{ default: isGrid ? "column" : "row" }} spaceItems={{ default: isGrid ? "spaceItemsNone" : "spaceItemsMd" }}>
+                                <FlexItem alignSelf={{ default: "alignSelfCenter" }}>
+                                    <Icon size={isGrid ? "xl" : "lg"} isInline>
+                                        {file.type === "directory" || file.to === "directory"
+                                            ? <FolderIcon />
+                                            : <FileIcon />}
+                                    </Icon>
+                                </FlexItem>
+                                <FlexItem className={"pf-u-text-break-word pf-u-text-wrap" + (isGrid ? " grid-file-name" : "")}>
+                                    {selected?.name !== file.name ? <Truncate content={file.name} position="middle" /> : file.name}
+                                </FlexItem>
+                            </Flex>
+                        </Button>
+                    </CardTitle>
+                </CardHeader>
+            </Card>
         );
     };
 
