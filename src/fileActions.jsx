@@ -283,10 +283,13 @@ export const CreateLinkModal = ({ currentPath, files, selected }) => {
                 />}
                 <Form isHorizontal>
                     <FormGroup label={_("Original")}>
-                        <FileAutoComplete
-                          onChange={setOriginalName} placeholder={_("Path to file")}
-                          superuser="try" value={currentPath + originalName}
-                        />
+                        <div id="create-link-original-wrapper">
+                            <FileAutoComplete
+                              onChange={setOriginalName} placeholder={_("Path to file")}
+                              superuser="try" value={currentPath + originalName}
+                              id="create-link-original"
+                            />
+                        </div>
                     </FormGroup>
                     <FormGroup label={_("New")}>
                         <TextInput
