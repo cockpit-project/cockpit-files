@@ -273,8 +273,10 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, path, sortBy, selecte
     };
 
     const resetSelected = e => {
-        if (e.target.id === "folder-view" || e.target.id === "navigator-card-body")
+        if (e.target.id === "folder-view" || e.target.id === "navigator-card-body") {
             setSelected(path[path.length - 1]);
+            setSelectedArray([]);
+        }
     };
 
     const filteredItems = files
