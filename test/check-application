@@ -424,8 +424,15 @@ class TestNavigator(testlib.MachineCase):
         b.click("button.pf-m-danger")
         b.wait_not_present("[data-item='newdir1']")
 
-        # Delete button text should match item type: directory/file
+        # Check file name is pre-selected when creating link
         m.execute("touch /home/admin/newfile")
+        b.mouse("[data-item='newfile']", "contextmenu")
+        b.wait_in_text(".context-menu li:nth-child(2) button", "Create link")
+        b.click(".context-menu button:contains('Create link')")
+        b.wait_val(f"#create-link-original-wrapper input", "/home/admin/newfile")
+        b.click("button.pf-m-link:contains('Cancel')")
+
+        # Delete button text should match item type: directory/file
         b.mouse("[data-item='newfile']", "contextmenu")
         b.wait_in_text(".context-menu li:nth-child(4) button", "Delete file")
         b.click(".context-menu button:contains('Delete file')")
