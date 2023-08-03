@@ -177,7 +177,7 @@ export const CreateDirectoryModal = ({ selected, currentPath, errorMessage }) =>
                 <Form isHorizontal>
                     <FormGroup label={_("Directory name")}>
                         <TextInput
-                          value={name} onChange={setName}
+                          value={name} onChange={(_, val) => setName(val)}
                           id="create-directory-input"
                         />
                     </FormGroup>
@@ -228,7 +228,7 @@ export const RenameItemModal = ({ path, setPath, selected }) => {
                 <Form isHorizontal>
                     <FormGroup label={selected.type === "file" ? _("File name") : _("Directory name")}>
                         <TextInput
-                          value={name} onChange={setName}
+                          value={name} onChange={(_, val) => setName(val)}
                           id="rename-item-input"
                         />
                     </FormGroup>

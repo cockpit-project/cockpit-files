@@ -31,7 +31,7 @@ class TestNavigator(testlib.MachineCase):
         b.click(f"[data-item='{filename}']")
         b.click("#dropdown-menu")
         b.click("#delete-item")
-        b.wait_in_text("h1.pf-c-modal-box__title", f"Delete {type} {filename}?")
+        b.wait_in_text("h1.pf-v5-c-modal-box__title", f"Delete {type} {filename}?")
         b.click("button.pf-m-danger")
 
     def create_directory(self, b, filename):
@@ -41,13 +41,13 @@ class TestNavigator(testlib.MachineCase):
         b.click("button.pf-m-primary")
 
     def wait_modal_inline_alert(self, b, msg):
-        b.wait_in_text("h4.pf-c-alert__title", msg)
+        b.wait_in_text("h4.pf-v5-c-alert__title", msg)
 
     def rename_item(self, b, type, itemname, newname):
         b.click(f"[data-item='{itemname}']")
         b.click("#dropdown-menu")
         b.click("#rename-item")
-        b.wait_in_text("h1.pf-c-modal-box__title", f"Rename {type}")
+        b.wait_in_text("h1.pf-v5-c-modal-box__title", f"Rename {type}")
         b.set_input_text("#rename-item-input", f"{newname}")
         b.click("button.pf-m-primary")
 
@@ -299,12 +299,12 @@ class TestNavigator(testlib.MachineCase):
         m.execute("sudo chattr +i /home/admin/newfile")
         b.wait_visible("[data-item='newfile']")
         self.delete_item(b, "file", "newfile")
-        b.wait_in_text("h1.pf-c-modal-box__title", "Force delete file newfile?")
+        b.wait_in_text("h1.pf-v5-c-modal-box__title", "Force delete file newfile?")
         self.wait_modal_inline_alert(b, "rm: cannot remove '/home/admin/newfile': Operation not permitted")
         b.click("button.pf-m-danger")
-        b.wait_in_text("h1.pf-c-modal-box__title", "Force delete file newfile?")
+        b.wait_in_text("h1.pf-v5-c-modal-box__title", "Force delete file newfile?")
         self.wait_modal_inline_alert(b, "rm: cannot remove '/home/admin/newfile': Operation not permitted")
-        b.click("div.pf-c-modal-box__close")
+        b.click("div.pf-v5-c-modal-box__close")
         b.wait_visible("[data-item='newfile']")
         m.execute("sudo chattr -i /home/admin/newfile")
         self.delete_item(b, "file", "newfile")
@@ -317,7 +317,7 @@ class TestNavigator(testlib.MachineCase):
         b.wait_not_present("[data-item='newdir']")
         b.click("#dropdown-menu")
         b.click("#delete-item")
-        b.wait_in_text("h1.pf-c-modal-box__title", "Delete directory newdir?")
+        b.wait_in_text("h1.pf-v5-c-modal-box__title", "Delete directory newdir?")
         b.click("button.pf-m-danger")
         b.wait_text(".last-breadcrumb-button", "admin")
         b.wait_in_text("#sidebar-card-header", "admin")
@@ -338,12 +338,12 @@ class TestNavigator(testlib.MachineCase):
         # Creating folder with duplicate name should return an error
         self.create_directory(b, "newdir")
         self.wait_modal_inline_alert(b, "mkdir: cannot create directory ‘/home/admin/newdir’: File exists")
-        b.click("div.pf-c-modal-box__close")
+        b.click("div.pf-v5-c-modal-box__close")
         
         # Creating folder with empty name should return an error
         self.create_directory(b, "")
         self.wait_modal_inline_alert(b, "mkdir: cannot create directory ‘/home/admin/’: File exists")
-        b.click("div.pf-c-modal-box__close")
+        b.click("div.pf-v5-c-modal-box__close")
         
         # Creating folder inside protected folder should return an error
         m.execute("sudo chattr +i /home/admin/newdir")
@@ -351,7 +351,7 @@ class TestNavigator(testlib.MachineCase):
         b.wait_not_present("[data-item='newdir']")
         self.create_directory(b, "test")
         self.wait_modal_inline_alert(b, "mkdir: cannot create directory ‘/home/admin/newdir/test’: Operation not permitted")
-        b.click("div.pf-c-modal-box__close")
+        b.click("div.pf-v5-c-modal-box__close")
         b.click(".breadcrumb-button:nth-of-type(3)")
         m.execute("sudo chattr -i /home/admin/newdir")
 
@@ -446,7 +446,7 @@ class TestNavigator(testlib.MachineCase):
         b.mouse("[data-item='new dir1']", "dblclick")
         b.click("#dropdown-menu")
         b.click("#rename-item")
-        b.wait_in_text("h1.pf-c-modal-box__title", "Rename directory")
+        b.wait_in_text("h1.pf-v5-c-modal-box__title", "Rename directory")
         b.set_input_text("#rename-item-input", "newdir2")
         b.click("button.pf-m-primary")
         b.wait_in_text("#sidebar-card-header", "newdir2")
@@ -459,7 +459,7 @@ class TestNavigator(testlib.MachineCase):
         m.execute("sudo chattr +i /home/admin/newdir2")
         self.rename_item(b, "directory", "newdir2", "testdir")
         self.wait_modal_inline_alert(b, "mv: cannot move '/home/admin/newdir2' to '/home/admin/testdir': Operation not permitted")
-        b.click("div.pf-c-modal-box__close")
+        b.click("div.pf-v5-c-modal-box__close")
         m.execute("sudo chattr -i /home/admin/newdir2")
 
     def testHiddenItems(self):
