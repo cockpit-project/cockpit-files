@@ -34,7 +34,7 @@ import { FileIcon, FolderIcon } from "@patternfly/react-icons";
 import { ListingTable } from "cockpit-components-table.jsx";
 import { ContextMenu } from "./navigator-context-menu.jsx";
 import { NavigatorBreadcrumbs } from "./navigatorBreadcrumbs.jsx";
-import { createDirectory, deleteItem, renameItem } from "./fileActions.jsx";
+import { createDirectory, createLink, deleteItem, renameItem } from "./fileActions.jsx";
 import { SidebarPanelDetails } from "./sidebar.jsx";
 import { NavigatorCardHeader } from "./header.jsx";
 
@@ -120,6 +120,9 @@ export const Application = () => {
             <MenuItem className="context-menu-option" onClick={() => { createDirectory(Dialogs, "/" + path.join("/") + "/", selectedContext || selected) }}>
                 <div className="context-menu-name"> {_("Create directory")}</div>
             </MenuItem>
+            <MenuItem className="context-menu-option" onClick={() => { createLink(Dialogs, "/" + path.join("/") + "/", files, selectedContext) }}>
+                <div className="context-menu-name"> {_("Create link")}</div>
+            </MenuItem>
             {selectedContext &&
             <>
                 <MenuItem className="context-menu-option" onClick={() => { renameItem(Dialogs, { selected: selectedContext, path, setPath }) }}>
@@ -146,7 +149,7 @@ export const Application = () => {
                           path={path} selected={(files.find(file => file.name === selected?.name)) || ({ name: path[path.length - 1], items_cnt: { all: files.length, hidden: files.length - files.filter(file => !file.name.startsWith(".")).length } })}
                           setPath={setPath} showHidden={showHidden}
                           setShowHidden={setShowHidden} setHistory={setHistory}
-                          setHistoryIndex={setHistoryIndex}
+                          setHistoryIndex={setHistoryIndex} files={files}
                         />
                     </SidebarPanel>
                     <SidebarContent>

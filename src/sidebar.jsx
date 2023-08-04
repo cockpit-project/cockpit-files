@@ -50,11 +50,11 @@ import {
 import * as timeformat from "timeformat";
 import { useDialogs } from "dialogs.jsx";
 
-import { createDirectory, deleteItem, renameItem } from "./fileActions.jsx";
+import { createDirectory, createLink, deleteItem, renameItem } from "./fileActions.jsx";
 
 const _ = cockpit.gettext;
 
-export const SidebarPanelDetails = ({ selected, path, setPath, showHidden, setShowHidden, setHistory, setHistoryIndex }) => {
+export const SidebarPanelDetails = ({ selected, path, setPath, showHidden, setShowHidden, setHistory, setHistoryIndex, files }) => {
     return (
         <Card className="sidebar-card">
             <CardHeader>
@@ -71,7 +71,7 @@ export const SidebarPanelDetails = ({ selected, path, setPath, showHidden, setSh
                   selected={selected} path={path}
                   setPath={setPath} showHidden={showHidden}
                   setShowHidden={setShowHidden} setHistory={setHistory}
-                  setHistoryIndex={setHistoryIndex}
+                  setHistoryIndex={setHistoryIndex} files={files}
                 />
             </CardHeader>
             {selected.items_cnt === undefined &&
@@ -100,7 +100,7 @@ export const SidebarPanelDetails = ({ selected, path, setPath, showHidden, setSh
     );
 };
 
-const DropdownWithKebab = ({ selected, path, setPath, showHidden, setShowHidden, setHistory, setHistoryIndex }) => {
+const DropdownWithKebab = ({ selected, path, setPath, showHidden, setShowHidden, setHistory, setHistoryIndex, files }) => {
     const Dialogs = useDialogs();
     const [isOpen, setIsOpen] = useState(false);
 
@@ -113,6 +113,8 @@ const DropdownWithKebab = ({ selected, path, setPath, showHidden, setShowHidden,
     const onToggleHidden = () => {
         setShowHidden(!showHidden);
     };
+
+    const currentDirectory = "/" + path.join("/") + "/";
 
     return (
         <Dropdown
@@ -144,11 +146,17 @@ const DropdownWithKebab = ({ selected, path, setPath, showHidden, setShowHidden,
                     </DropdownItem>
                     <DropdownItem
                       id="create-item" key="create-item"
-                      onClick={() => { createDirectory(Dialogs, "/" + path.join("/") + "/", selected) }}
+                      onClick={() => { createDirectory(Dialogs, currentDirectory, selected) }}
                     >
                         {_("Create directory")}
                     </DropdownItem>
                 </>}
+                <DropdownItem
+                  id="create-link" key="create-link"
+                  onClick={() => { createLink(Dialogs, currentDirectory, files) }}
+                >
+                    {_("Create link")}
+                </DropdownItem>
                 <DropdownItem
                   id="rename-item" key="rename-item"
                   onClick={() => { renameItem(Dialogs, { selected, path, setPath }) }}
@@ -157,7 +165,7 @@ const DropdownWithKebab = ({ selected, path, setPath, showHidden, setShowHidden,
                 </DropdownItem>
                 <DropdownItem
                   id="delete-item" key="delete-item"
-                  onClick={() => { deleteItem(Dialogs, { selected, itemPath: "/" + path.join("/") + "/" + (selected.items_cnt ? "" : selected.name), path, setPath, setHistory, setHistoryIndex }) }} className="pf-m-danger"
+                  onClick={() => { deleteItem(Dialogs, { selected, itemPath: currentDirectory + (selected.items_cnt ? "" : selected.name), path, setPath, setHistory, setHistoryIndex }) }} className="pf-m-danger"
                 >
                     {selected.type === "file" ? _("Delete file") : _("Delete directory")}
                 </DropdownItem>
