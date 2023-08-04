@@ -248,7 +248,7 @@ export const RenameItemModal = ({ path, setPath, selected }) => {
     );
 };
 
-export const CreateLinkModal = ({ currentPath, files, selected }) => {
+export const CreateLinkModal = ({ currentPath, selected }) => {
     const Dialogs = useDialogs();
     const [originalName, setOriginalName] = useState(selected?.name || "");
     const [newName, setNewName] = useState("");
