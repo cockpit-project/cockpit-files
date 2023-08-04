@@ -293,7 +293,7 @@ export const CreateLinkModal = ({ currentPath, files, selected }) => {
                     </FormGroup>
                     <FormGroup label={_("New")}>
                         <TextInput
-                          value={newName} onChange={setNewName}
+                          value={newName} onChange={(_, val) => setNewName(val)}
                           id="create-link-new"
                         />
                     </FormGroup>
