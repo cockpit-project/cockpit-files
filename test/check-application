@@ -92,7 +92,7 @@ class TestNavigator(testlib.MachineCase):
 
         # file sidebar information
         b.click("button:contains('newfile')")
-        b.wait_text("#sidebar-card-header", "newfile")
+        b.wait_text("#sidebar-card-header", "newfile empty")
         b.wait_text("#description-list-owner dd", "root")
         b.wait_text("#description-list-group dd", "root")
         b.wait_text("#description-list-size dd", "0 B")
@@ -112,7 +112,7 @@ class TestNavigator(testlib.MachineCase):
 
         # folder information doesn't contain size
         b.click("button:contains('newdir')")
-        b.wait_text("#sidebar-card-header", "newdir")
+        b.wait_text("#sidebar-card-header", "newdir directory")
         b.wait_text("#description-list-owner dd", "root")
         b.wait_text("#description-list-group dd", "root")
         b.wait_not_present("#description-list-size")
