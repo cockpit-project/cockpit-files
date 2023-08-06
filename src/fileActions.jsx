@@ -379,8 +379,9 @@ export const EditPermissionsModal = ({ selected, path, setPath }) => {
             ? ["mv", "/" + path.join("/"), "/" + path.slice(0, -1).join("/") + "/" + name]
             : ["mv", "/" + path.join("/") + "/" + selected.name, "/" + path.join("/") + "/" + name];
 
-        cockpit.spawn(command, options)
-                .then(() => cockpit.spawn(["chown", owner + ":" + group, "/" + path.join("/") + "/" + selected.name], options))
+        Promise.resolve()
+                .then(() => { if (ownerAccess !== selected.permissions[0] || groupAccess !== selected.permissions[1] || otherAccess !== selected.permissions[2]) return cockpit.spawn(command, options); })
+                .then(() => { if (owner !== selected.owner || group !== selected.group) return cockpit.spawn(["chown", owner + ":" + group, "/" + path.join("/") + "/" + selected.name], options); })
                 .then(() => { if (name !== selected.name) return cockpit.spawn(renameCommand, options); })
                 .then(Dialogs.close, err => setErrorMessage(err.message));
     };
@@ -389,7 +390,7 @@ export const EditPermissionsModal = ({ selected, path, setPath }) => {
         setOwner(owner);
         const currentOwner = filteredAccounts.find(a => a.name === owner);
         const currentGroup = filteredGroups.find(g => g.name === group);
-        if (currentGroup.gid !== currentOwner.gid && !currentGroup.userlist.includes(currentOwner.name)) {
+        if (currentGroup?.gid !== currentOwner?.gid && !currentGroup?.userlist.includes(currentOwner?.name)) {
             setGroup(filteredGroups.find(g => g.gid === currentOwner.gid).name);
         }
     };
@@ -431,7 +432,7 @@ export const EditPermissionsModal = ({ selected, path, setPath }) => {
                     <FormSection title={_("File properties")}>
                         <FormGroup label={selected.type === "file" ? _("File name") : _("Directory name")} fieldId="edit-permissions-name">
                             <TextInput
-                              value={name} onChange={setName}
+                              value={name} onChange={(_, val) => setName(val)}
                               id="edit-permissions-name"
                             />
                         </FormGroup>
