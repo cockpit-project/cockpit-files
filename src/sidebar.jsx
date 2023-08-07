@@ -164,6 +164,12 @@ const DropdownWithKebab = ({ selected, path, setPath, showHidden, setShowHidden,
                     {selected.type === "file" ? _("Rename file") : _("Rename directory")}
                 </DropdownItem>
                 <DropdownItem
+                  id="copy-path" key="copy-path"
+                  onClick={() => { navigator.clipboard.writeText("/" + path.join("/") + "/" + selected.name) }}
+                >
+                    {_("Copy full path")}
+                </DropdownItem>
+                <DropdownItem
                   id="delete-item" key="delete-item"
                   onClick={() => { deleteItem(Dialogs, { selected, itemPath: currentDirectory + (selected.items_cnt ? "" : selected.name), path, setPath, setHistory, setHistoryIndex }) }} className="pf-m-danger"
                 >
