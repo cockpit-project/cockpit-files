@@ -165,7 +165,7 @@ const DropdownWithKebab = ({ selected, path, setPath, showHidden, setShowHidden,
                 </DropdownItem>
                 <DropdownItem
                   id="copy-path" key="copy-path"
-                  onClick={() => { navigator.clipboard.writeText("/" + path.join("/") + "/" + selected.name) }}
+                  onClick={() => { navigator.clipboard.writeText("/" + path.join("/") + "/" + (selected.type ? selected.name : "")) }}
                 >
                     {_("Copy full path")}
                 </DropdownItem>
