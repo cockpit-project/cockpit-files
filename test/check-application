@@ -411,7 +411,7 @@ class TestNavigator(testlib.MachineCase):
 
         # Rename folder from context menu
         b.mouse("[data-item='newdir']", "contextmenu")
-        b.wait_in_text(".context-menu li:nth-child(3) button", "Rename directory")
+        b.wait_in_text(".context-menu li:nth-child(4) button", "Rename directory")
         b.click(".context-menu button:contains('Rename directory')")
         b.set_input_text("#rename-item-input", "newdir1")
         b.click("button.pf-m-primary")
@@ -419,7 +419,7 @@ class TestNavigator(testlib.MachineCase):
 
         # Delete folder from context menu
         b.mouse("[data-item='newdir1']", "contextmenu")
-        b.wait_in_text(".context-menu li:nth-child(4) button", "Delete directory")
+        b.wait_in_text(".context-menu li:nth-child(5) button", "Delete directory")
         b.click(".context-menu button:contains('Delete directory')")
         b.click("button.pf-m-danger")
         b.wait_not_present("[data-item='newdir1']")
@@ -434,7 +434,7 @@ class TestNavigator(testlib.MachineCase):
 
         # Delete button text should match item type: directory/file
         b.mouse("[data-item='newfile']", "contextmenu")
-        b.wait_in_text(".context-menu li:nth-child(4) button", "Delete file")
+        b.wait_in_text(".context-menu li:nth-child(5) button", "Delete file")
         b.click(".context-menu button:contains('Delete file')")
         b.click("button.pf-m-danger")
         b.wait_not_present("[data-item='newfile']")
