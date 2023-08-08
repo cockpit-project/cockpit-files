@@ -52,22 +52,13 @@ import * as timeformat from "timeformat";
 import { useDialogs } from "dialogs.jsx";
 
 import { createDirectory, createLink, deleteItem, editPermissions, renameItem } from "./fileActions.jsx";
+import { permissions } from "./common.js";
 
 const _ = cockpit.gettext;
 
 export const SidebarPanelDetails = ({ selected, path, setPath, showHidden, setShowHidden, setHistory, setHistoryIndex, files }) => {
     const Dialogs = useDialogs();
     const getPermissions = (str) => {
-        const permissions = [
-            { label: _("None"), value: "0" },
-            { label: _("Read-only"), value: "4" },
-            { label: _("Write-only"), value: "2" },
-            { label: _("Execute-only"), value: "1" },
-            { label: _("Read and write"), value: "6" },
-            { label: _("Read and execute"), value: "5" },
-            { label: _("Read, write and execute"), value: "7" },
-            { label: _("Write and execute"), value: "3" },
-        ];
         return permissions.find(e => e.value === str).label;
     };
 

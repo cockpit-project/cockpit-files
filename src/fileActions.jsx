@@ -37,6 +37,7 @@ import { useFile } from "hooks.js";
 import { etc_group_syntax as etcGroupSyntax, etc_passwd_syntax as etcPasswdSyntax } from "pam_user_parser.js";
 import { FileAutoComplete } from "../pkg/lib/cockpit-components-file-autocomplete";
 import { spawnCreateDirectory, spawnCreateLink, spawnDeleteItem, spawnEditPermissions, spawnForceDelete, spawnRenameItem } from "./apis/spawnHelpers";
+import { permissions } from "./common";
 
 const _ = cockpit.gettext;
 
@@ -319,17 +320,6 @@ export const EditPermissionsModal = ({ selected, path }) => {
             setGroup(filteredGroups.find(g => g.gid === currentOwner.gid).name);
         }
     };
-
-    const permissions = [
-        { label: _("None"), value: "0" },
-        { label: _("Read-only"), value: "4" },
-        { label: _("Write-only"), value: "2" },
-        { label: _("Execute-only"), value: "1" },
-        { label: _("Read and write"), value: "6" },
-        { label: _("Read and execute"), value: "5" },
-        { label: _("Read, write and execute"), value: "7" },
-        { label: _("Write and execute"), value: "3" },
-    ];
 
     const options = { Dialogs, selected, path, owner, group, ownerAccess, groupAccess, otherAccess, name, setErrorMessage };
 
