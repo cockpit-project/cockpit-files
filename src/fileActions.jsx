@@ -36,6 +36,7 @@ import { InlineNotification } from "cockpit-components-inline-notification";
 import { useFile } from "hooks.js";
 import { etc_group_syntax as etcGroupSyntax, etc_passwd_syntax as etcPasswdSyntax } from "pam_user_parser.js";
 import { FileAutoComplete } from "../pkg/lib/cockpit-components-file-autocomplete";
+import { spawnCreateDirectory, spawnCreateLink, spawnDeleteItem, spawnEditPermissions, spawnForceDelete, spawnRenameItem } from "./apis/spawnHelpers";
 
 const _ = cockpit.gettext;
 
@@ -79,26 +80,6 @@ export const editPermissions = (Dialogs, options) => {
 export const ConfirmDeletionDialog = ({ selected, itemPath, path, setPath, setHistory, setHistoryIndex }) => {
     const Dialogs = useDialogs();
 
-    const deleteItem = () => {
-        const options = { err: "message", superuser: "try" };
-
-        cockpit.spawn(["rm", "-r", itemPath], options)
-                .then(() => {
-                    if (selected.items_cnt) {
-                        setPath(path.slice(0, -1));
-                        setHistory(h => h.slice(0, -1));
-                        setHistoryIndex(i => i - 1);
-                    }
-                })
-                .then(Dialogs.close, (err) => {
-                    Dialogs.show(
-                        <ForceDeleteModal
-                          selected={selected} itemPath={itemPath}
-                          errorMessage={err.message} deleteFailed={false}
-                        />);
-                });
-    };
-
     const modalTitle = selected.type === "file"
         ? cockpit.format(_("Delete file $0?"), selected.name)
         : cockpit.format(_("Delete directory $0?"), selected.name);
@@ -112,7 +93,7 @@ export const ConfirmDeletionDialog = ({ selected, itemPath, path, setPath, setHi
           onClose={Dialogs.close}
           footer={
               <>
-                  <Button variant="danger" onClick={deleteItem}>{_("Delete")}</Button>
+                  <Button variant="danger" onClick={() => spawnDeleteItem({ Dialogs, selected, itemPath, path, setPath, setHistory, setHistoryIndex })}>{_("Delete")}</Button>
                   <Button variant="link" onClick={Dialogs.close}>{_("Cancel")}</Button>
               </>
           }
@@ -120,21 +101,10 @@ export const ConfirmDeletionDialog = ({ selected, itemPath, path, setPath, setHi
     );
 };
 
-const ForceDeleteModal = ({ selected, itemPath, errorMessage, deleteFailed }) => {
+export const ForceDeleteModal = ({ selected, itemPath, initialError }) => {
     const Dialogs = useDialogs();
-
-    const forceDelete = () => {
-        const options = { err: "message", superuser: "try" };
-
-        cockpit.spawn(["rm", "-rf", itemPath], options)
-                .then(Dialogs.close, (err) => {
-                    Dialogs.show(
-                        <ForceDeleteModal
-                          selected={selected} itemPath={itemPath}
-                          errorMessage={err.message} deleteFailed
-                        />);
-                });
-    };
+    const [errorMessage, setErrorMessage] = useState(initialError);
+    const [deleteFailed, setDeleteFailed] = useState(false);
 
     const modalTitle = selected.type === "file"
         ? cockpit.format(_("Force delete file $0?"), selected.name)
@@ -149,7 +119,7 @@ const ForceDeleteModal = ({ selected, itemPath, errorMessage, deleteFailed }) =>
           onClose={Dialogs.close}
           footer={!deleteFailed &&
           <>
-              <Button variant="danger" onClick={forceDelete}>{_("Force delete")}</Button>
+              <Button variant="danger" onClick={() => spawnForceDelete({ Dialogs, itemPath, setDeleteFailed, setErrorMessage })}>{_("Force delete")}</Button>
               <Button variant="link" onClick={Dialogs.close}>{_("Cancel")}</Button>
           </>}
         >
@@ -162,21 +132,10 @@ const ForceDeleteModal = ({ selected, itemPath, errorMessage, deleteFailed }) =>
     );
 };
 
-export const CreateDirectoryModal = ({ selected, currentPath, errorMessage }) => {
+export const CreateDirectoryModal = ({ selected, currentPath }) => {
     const Dialogs = useDialogs();
     const [name, setName] = useState("");
-
-    const createDirectory = () => {
-        const options = { err: "message", superuser: "try" };
-        let path;
-        if (selected.icons_cnt || selected.type === "directory") {
-            path = currentPath + selected.name + "/" + name;
-        } else {
-            path = currentPath + name;
-        }
-        cockpit.spawn(["mkdir", path], options)
-                .then(Dialogs.close, (err) => { Dialogs.show(<CreateDirectoryModal currentPath={currentPath} errorMessage={err.message} />) });
-    };
+    const [errorMessage, setErrorMessage] = useState(undefined);
 
     return (
         <Modal
@@ -186,7 +145,7 @@ export const CreateDirectoryModal = ({ selected, currentPath, errorMessage }) =>
           onClose={Dialogs.close}
           footer={errorMessage === undefined &&
           <>
-              <Button variant="primary" onClick={createDirectory}>{_("Create")}</Button>
+              <Button variant="primary" onClick={() => spawnCreateDirectory({ Dialogs, selected, currentPath, name, setErrorMessage })}>{_("Create")}</Button>
               <Button variant="link" onClick={Dialogs.close}>{_("Cancel")}</Button>
           </>}
         >
@@ -215,20 +174,6 @@ export const RenameItemModal = ({ path, setPath, selected }) => {
     const [name, setName] = useState(selected.name);
     const [errorMessage, setErrorMessage] = useState(undefined);
 
-    const renameItem = () => {
-        const options = { err: "message", superuser: "try" };
-        const command = selected.items_cnt
-            ? ["mv", "/" + path.join("/"), "/" + path.slice(0, -1).join("/") + "/" + name]
-            : ["mv", "/" + path.join("/") + "/" + selected.name, "/" + path.join("/") + "/" + name];
-
-        cockpit.spawn(command, options)
-                .then(() => {
-                    if (selected.items_cnt)
-                        setPath(path.slice(0, -1).concat(name));
-                    Dialogs.close();
-                }, (err) => { setErrorMessage(err.message) });
-    };
-
     return (
         <Modal
           position="top"
@@ -237,7 +182,7 @@ export const RenameItemModal = ({ path, setPath, selected }) => {
           onClose={Dialogs.close}
           footer={errorMessage === undefined &&
           <>
-              <Button variant="primary" onClick={renameItem}>{_("Rename")}</Button>
+              <Button variant="primary" onClick={() => spawnRenameItem({ Dialogs, path, setPath, selected, name, setErrorMessage })}>{_("Rename")}</Button>
               <Button variant="link" onClick={Dialogs.close}>{_("Cancel")}</Button>
           </>}
         >
@@ -268,12 +213,6 @@ export const CreateLinkModal = ({ currentPath, selected }) => {
     const [type, setType] = useState("symbolic");
     const [errorMessage, setErrorMessage] = useState(undefined);
 
-    const createLink = () => {
-        const options = { err: "message", superuser: "try" };
-        cockpit.spawn(["ln", ...(type === "symbolic" ? ["-s"] : []), currentPath + originalName.slice(originalName.lastIndexOf("/") + 1), currentPath + newName], options)
-                .then(Dialogs.close, (err) => { setErrorMessage(err.message) });
-    };
-
     return (
         <Modal
           position="top"
@@ -282,7 +221,7 @@ export const CreateLinkModal = ({ currentPath, selected }) => {
           onClose={Dialogs.close}
           footer={
               <>
-                  <Button variant="primary" onClick={createLink}>{_("Create link")}</Button>
+                  <Button variant="primary" onClick={() => spawnCreateLink({ Dialogs, currentPath, type, originalName, newName, setErrorMessage })}>{_("Create link")}</Button>
                   <Button variant="link" onClick={Dialogs.close}>{_("Cancel")}</Button>
               </>
           }
@@ -328,7 +267,7 @@ export const CreateLinkModal = ({ currentPath, selected }) => {
     );
 };
 
-export const EditPermissionsModal = ({ selected, path, setPath }) => {
+export const EditPermissionsModal = ({ selected, path }) => {
     const Dialogs = useDialogs();
     const [name, setName] = useState(selected.name);
     const [owner, setOwner] = useState(selected.owner);
@@ -372,20 +311,6 @@ export const EditPermissionsModal = ({ selected, path, setPath }) => {
         filteredGroups = groups.filter(g => g.gid >= minGid && g.gid <= maxGid);
     }
 
-    const editPermissions = changeAll => {
-        const options = { err: "message", superuser: "try" };
-        const command = ["chmod", ...(changeAll ? ["-R"] : []), ownerAccess + groupAccess + otherAccess, "/" + path.join("/") + "/" + selected.name];
-        const renameCommand = selected.items_cnt
-            ? ["mv", "/" + path.join("/"), "/" + path.slice(0, -1).join("/") + "/" + name]
-            : ["mv", "/" + path.join("/") + "/" + selected.name, "/" + path.join("/") + "/" + name];
-
-        Promise.resolve()
-                .then(() => { if (ownerAccess !== selected.permissions[0] || groupAccess !== selected.permissions[1] || otherAccess !== selected.permissions[2]) return cockpit.spawn(command, options); })
-                .then(() => { if (owner !== selected.owner || group !== selected.group) return cockpit.spawn(["chown", owner + ":" + group, "/" + path.join("/") + "/" + selected.name], options); })
-                .then(() => { if (name !== selected.name) return cockpit.spawn(renameCommand, options); })
-                .then(Dialogs.close, err => setErrorMessage(err.message));
-    };
-
     const changeOwner = (owner) => {
         setOwner(owner);
         const currentOwner = filteredAccounts.find(a => a.name === owner);
@@ -406,6 +331,8 @@ export const EditPermissionsModal = ({ selected, path, setPath }) => {
         { label: _("Write and execute"), value: "3" },
     ];
 
+    const options = { Dialogs, selected, path, owner, group, ownerAccess, groupAccess, otherAccess, name, setErrorMessage };
+
     return (
         <Modal
           position="top"
@@ -415,8 +342,8 @@ export const EditPermissionsModal = ({ selected, path, setPath }) => {
           onClose={Dialogs.close}
           footer={
               <>
-                  <Button variant="primary" onClick={() => editPermissions(false)}>{_("Change")}</Button>
-                  {selected.type === "directory" && <Button variant="secondary" onClick={() => editPermissions(true)}>{_("Change permissions for enclosed files")}</Button>}
+                  <Button variant="primary" onClick={() => spawnEditPermissions({ ...options, changeAll: false })}>{_("Change")}</Button>
+                  {selected.type === "directory" && <Button variant="secondary" onClick={() => spawnEditPermissions({ ...options, changeAll: true })}>{_("Change permissions for enclosed files")}</Button>}
                   <Button variant="link" onClick={Dialogs.close}>{_("Cancel")}</Button>
               </>
           }
