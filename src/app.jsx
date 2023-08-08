@@ -34,7 +34,7 @@ import { FileIcon, FolderIcon } from "@patternfly/react-icons";
 import { ListingTable } from "cockpit-components-table.jsx";
 import { ContextMenu } from "./navigator-context-menu.jsx";
 import { NavigatorBreadcrumbs } from "./navigatorBreadcrumbs.jsx";
-import { createDirectory, createLink, deleteItem, renameItem } from "./fileActions.jsx";
+import { createDirectory, createLink, deleteItem, editPermissions, renameItem } from "./fileActions.jsx";
 import { SidebarPanelDetails } from "./sidebar.jsx";
 import { NavigatorCardHeader } from "./header.jsx";
 
@@ -104,7 +104,23 @@ export const Application = () => {
             });
 
             channel.current.addEventListener("ready", () => {
-                setFiles(files);
+                Promise.all(files.map(file => {
+                    return cockpit.spawn(["stat", "-c", "%a", "/" + path.join("/") + "/" + file.path], { superuser: "try" }).then(res => {
+                        // trim newline character
+                        res = res.slice(0, -1);
+                        // trim sticky bit
+                        if (res.length === 4) res = res.slice(1);
+                        if (res.length === 1) res = "00".concat(res);
+                        if (res.length === 2) res = "0".concat(res);
+                        return { ...file, permissions: res };
+                    });
+                })).then(res => {
+                    Promise.all(res.map(file => {
+                        return cockpit.spawn(["file", "/" + path.join("/") + "/" + file.path], { superuser: "try" }).then(res => {
+                            return { ...file, info: res.split(":")[1].slice(0, -1) };
+                        });
+                    })).then(res => setFiles(res));
+                });
             });
         };
         getFsList();
@@ -130,6 +146,9 @@ export const Application = () => {
                 </MenuItem>
                 <MenuItem className="context-menu-option" onClick={() => { renameItem(Dialogs, { selected: selectedContext, path, setPath }) }}>
                     <div className="context-menu-name"> {selectedContext.type === "file" ? _("Rename file") : _("Rename directory")} </div>
+                </MenuItem>
+                <MenuItem className="context-menu-option" onClick={() => { editPermissions(Dialogs, { selected: selectedContext, path, setPath }) }}>
+                    <div className="context-menu-name"> {_("Edit properties")} </div>
                 </MenuItem>
                 <MenuItem className="context-menu-option pf-m-danger" onClick={() => { deleteItem(Dialogs, { selected: selectedContext, itemPath: "/" + path.join("/") + "/" + selectedContext.name }) }}>
                     <div className="context-menu-name"> {selectedContext.type === "file" ? _("Delete file") : _("Delete directory")} </div>

@@ -92,7 +92,7 @@ class TestNavigator(testlib.MachineCase):
 
         # file sidebar information
         b.click("button:contains('newfile')")
-        b.wait_text("#sidebar-card-header", "newfile")
+        b.wait_text("#sidebar-card-header", "newfile empty")
         b.wait_text("#description-list-owner dd", "root")
         b.wait_text("#description-list-group dd", "root")
         b.wait_text("#description-list-size dd", "0 B")
@@ -112,7 +112,7 @@ class TestNavigator(testlib.MachineCase):
 
         # folder information doesn't contain size
         b.click("button:contains('newdir')")
-        b.wait_text("#sidebar-card-header", "newdir")
+        b.wait_text("#sidebar-card-header", "newdir directory")
         b.wait_text("#description-list-owner dd", "root")
         b.wait_text("#description-list-group dd", "root")
         b.wait_not_present("#description-list-size")
@@ -445,9 +445,18 @@ class TestNavigator(testlib.MachineCase):
         b.click("button.pf-m-primary")
         b.wait_visible("[data-item='newdir1']")
 
+        # Edit properties from context menu
+        b.click("[data-item='newdir1']")
+        b.mouse("[data-item='newdir1']", "contextmenu")
+        b.wait_in_text(".context-menu li:nth-child(5) button", "Edit properties")
+        b.click(".context-menu button:contains('Edit properties')")
+        b.select_from_dropdown("#edit-permissions-owner", "fedora")
+        b.click("button.pf-m-primary")
+        b.wait_text("#description-list-owner dd", "fedora")
+
         # Delete folder from context menu
         b.mouse("[data-item='newdir1']", "contextmenu")
-        b.wait_in_text(".context-menu li:nth-child(5) button", "Delete directory")
+        b.wait_in_text(".context-menu li:nth-child(6) button", "Delete directory")
         b.click(".context-menu button:contains('Delete directory')")
         b.click("button.pf-m-danger")
         b.wait_not_present("[data-item='newdir1']")
@@ -479,7 +488,7 @@ class TestNavigator(testlib.MachineCase):
 
             # Delete button text should match item type: directory/file
             b.mouse("[data-item='newfile']", "contextmenu")
-            b.wait_in_text(".context-menu li:nth-child(5) button", "Delete file")
+            b.wait_in_text(".context-menu li:nth-child(6) button", "Delete file")
             b.click(".context-menu button:contains('Delete file')")
             b.click("button.pf-m-danger")
             b.wait_not_present("[data-item='newfile']")
@@ -584,6 +593,84 @@ class TestNavigator(testlib.MachineCase):
         # Creating folder hard link should return an error
         self.create_link(b, "testdir", "testdir-hard", "hard", 5)
         self.wait_modal_inline_alert(b, "ln: /home/admin/: hard link not allowed for directory")
+
+    def testPermissions(self):
+        b = self.browser
+        m = self.machine
+
+        def wait_permissions(permission):
+            b.wait_text("#description-list-owner-permissions dd", permission)
+            b.wait_text("#description-list-group-permissions dd", permission)
+            b.wait_text("#description-list-other-permissions dd", permission)
+        
+        def select_access(access):
+            b.select_from_dropdown("#edit-permissions-owner-access", access)
+            b.select_from_dropdown("#edit-permissions-group-access", access)
+            b.select_from_dropdown("#edit-permissions-other-access", access)
+
+        self.restore_dir("/home/admin")
+
+        self.login_and_go("/navigator")
+
+        # Check sidebar info
+        m.execute("touch /home/admin/newfile")
+        b.click("button:contains('newfile')")
+        self.assertEqual(m.execute("ls -l /home/admin/newfile")[:10], "-rw-r--r--")
+        b.wait_text("#description-list-owner-permissions dd", "Read and write")
+        b.wait_text("#description-list-group-permissions dd", "Read-only")
+        b.wait_text("#description-list-other-permissions dd", "Read-only")
+
+        # Test renaming item
+        b.click("button:contains('Edit properties')")
+        b.set_input_text("#edit-permissions-name", "newfile1")
+        b.click("button.pf-m-primary")
+        b.wait_not_present("[data-item='newfile']")
+        b.wait_visible("[data-item='newfile1']")
+
+        # Test changing owner/group
+        b.click("button:contains('newfile1')")
+        b.click("button:contains('Edit properties')")
+        # Changing owner should change group if user is not in the group
+        b.select_from_dropdown("#edit-permissions-owner", "fedora")
+        b.wait_in_text("#edit-permissions-group", "fedora")
+        b.click("button.pf-m-primary")
+        b.wait_text("#description-list-owner dd", "fedora")
+        b.wait_text("#description-list-group dd", "fedora")
+
+        m.execute("usermod -a -G fedora admin")
+        b.click("button:contains('Edit properties')")
+        # Changing owner shouldn't change group if user is in the group
+        b.select_from_dropdown("#edit-permissions-owner", "admin")
+        b.wait_in_text("#edit-permissions-group", "fedora")
+        b.click("button.pf-m-primary")
+        b.wait_text("#description-list-owner dd", "admin")
+        b.wait_text("#description-list-group dd", "fedora")
+
+        # Test changing permissions
+        b.click("button:contains('Edit properties')")
+        select_access("0")
+        b.click("button.pf-m-primary")
+        self.assertEqual(m.execute("ls -l /home/admin/newfile1")[:10], "----------")
+        wait_permissions("None")
+
+        b.click("button:contains('Edit properties')")
+        select_access("7")
+        b.click("button.pf-m-primary")
+        self.assertEqual(m.execute("ls -l /home/admin/newfile1")[:10], "-rwxrwxrwx")
+        wait_permissions("Read, write and execute")
+
+        # Check changing permissions for all files in folder
+        m.execute("mkdir /home/admin/newdir")
+        m.execute("touch /home/admin/newdir/file1")
+        m.execute("touch /home/admin/newdir/file2")
+        b.click("button:contains('newdir')")
+        b.click("button:contains('Edit properties')")
+        select_access("7")
+        b.click("button.pf-m-secondary:contains('Change permissions for enclosed files')")
+        self.assertEqual(m.execute("ls -ld /home/admin/newdir")[:10], "drwxrwxrwx")
+        wait_permissions("Read, write and execute")
+        self.assertEqual(m.execute("ls -l /home/admin/newdir/file1")[:10], "-rwxrwxrwx")
+        self.assertEqual(m.execute("ls -l /home/admin/newdir/file2")[:10], "-rwxrwxrwx")
 
 if __name__ == '__main__':
     testlib.test_main()

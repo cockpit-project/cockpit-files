@@ -50,6 +50,7 @@
     "@patternfly/react-table": "5.0.0",
     "@patternfly/react-tokens": "5.0.0",
     "date-fns": "2.30.0",
+    "deep-equal": "2.0.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "throttle-debounce": "^5.0.0"

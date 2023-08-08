@@ -22,6 +22,7 @@ import cockpit from "cockpit";
 import React, { useState } from "react";
 
 import {
+    Button,
     Card,
     CardBody,
     CardHeader,
@@ -50,21 +51,40 @@ import {
 import * as timeformat from "timeformat";
 import { useDialogs } from "dialogs.jsx";
 
-import { createDirectory, createLink, deleteItem, renameItem } from "./fileActions.jsx";
+import { createDirectory, createLink, deleteItem, editPermissions, renameItem } from "./fileActions.jsx";
 
 const _ = cockpit.gettext;
 
 export const SidebarPanelDetails = ({ selected, path, setPath, showHidden, setShowHidden, setHistory, setHistoryIndex, files }) => {
+    const Dialogs = useDialogs();
+    const getPermissions = (str) => {
+        const permissions = [
+            { label: _("None"), value: "0" },
+            { label: _("Read-only"), value: "4" },
+            { label: _("Write-only"), value: "2" },
+            { label: _("Execute-only"), value: "1" },
+            { label: _("Read and write"), value: "6" },
+            { label: _("Read and execute"), value: "5" },
+            { label: _("Read, write and execute"), value: "7" },
+            { label: _("Write and execute"), value: "3" },
+        ];
+        return permissions.find(e => e.value === str).label;
+    };
+
     return (
         <Card className="sidebar-card">
             <CardHeader>
                 <CardTitle component="h2" id="sidebar-card-header">
                     <TextContent>
-                        <Text>{selected.name}</Text>
+                        <Text component={TextVariants.h2}>{selected.name}</Text>
                         {selected.items_cnt !== undefined &&
-                        <Text component={TextVariants.small}>
-                            {cockpit.format(cockpit.ngettext("$0 item $1", "$0 items $1", selected.items_cnt.all), selected.items_cnt.all, cockpit.format("($0 hidden)", selected.items_cnt.hidden))}
-                        </Text>}
+                            <Text component={TextVariants.small}>
+                                {cockpit.format(cockpit.ngettext("$0 item $1", "$0 items $1", selected.items_cnt.all), selected.items_cnt.all, cockpit.format("($0 hidden)", selected.items_cnt.hidden))}
+                            </Text>}
+                        {selected.items_cnt === undefined &&
+                            <Text component={TextVariants.small}>
+                                {selected.info}
+                            </Text>}
                     </TextContent>
                 </CardTitle>
                 <DropdownWithKebab
@@ -76,7 +96,7 @@ export const SidebarPanelDetails = ({ selected, path, setPath, showHidden, setSh
             </CardHeader>
             {selected.items_cnt === undefined &&
             <CardBody>
-                <DescriptionList isHorizontal>
+                <DescriptionList isHorizontal id="description-list-sidebar">
                     <DescriptionListGroup id="description-list-last-modified">
                         <DescriptionListTerm>{_("Last modified")}</DescriptionListTerm>
                         <DescriptionListDescription>{timeformat.dateTime(selected.modified * 1000)}</DescriptionListDescription>
@@ -94,7 +114,20 @@ export const SidebarPanelDetails = ({ selected, path, setPath, showHidden, setSh
                         <DescriptionListTerm>{_("Size")}</DescriptionListTerm>
                         <DescriptionListDescription>{cockpit.format("$0 $1", cockpit.format_bytes(selected.size), selected.size < 1000 ? "B" : "")}</DescriptionListDescription>
                     </DescriptionListGroup>}
+                    <DescriptionListGroup id="description-list-owner-permissions">
+                        <DescriptionListTerm>{_("Owner permissions")}</DescriptionListTerm>
+                        <DescriptionListDescription>{getPermissions(selected.permissions[0])}</DescriptionListDescription>
+                    </DescriptionListGroup>
+                    <DescriptionListGroup id="description-list-group-permissions">
+                        <DescriptionListTerm>{_("Group permissions")}</DescriptionListTerm>
+                        <DescriptionListDescription>{getPermissions(selected.permissions[1])}</DescriptionListDescription>
+                    </DescriptionListGroup>
+                    <DescriptionListGroup id="description-list-other-permissions">
+                        <DescriptionListTerm>{_("Other permissions")}</DescriptionListTerm>
+                        <DescriptionListDescription>{getPermissions(selected.permissions[2])}</DescriptionListDescription>
+                    </DescriptionListGroup>
                 </DescriptionList>
+                <Button variant="secondary" onClick={() => editPermissions(Dialogs, { selected, path, setPath })}>{_("Edit properties")}</Button>
             </CardBody>}
         </Card>
     );
