@@ -143,6 +143,34 @@ class TestNavigator(testlib.MachineCase):
         # sidebar is reset when files are removed
         b.wait_in_text("#sidebar-card-header", "admin")
 
+        # Firefox does not support setting of permissions
+        # and therefore we cannot test copy/paste with context menu
+        if b.cdp.browser.name != "firefox":
+            try:
+                b.grant_permissions("clipboardReadWrite", "clipboardSanitizedWrite")
+            except RuntimeError:
+                # fallback for older Chrome releases
+                b.grant_permissions("clipboardRead", "clipboardWrite")
+
+            # Copy current path
+            b.click("button[aria-label='Display as a grid']")
+            b.click("#dropdown-menu")
+            b.click("#copy-path")
+            # Paste text in filter input to check copied text
+            b.focus("input[placeholder='Filter directory']")
+            b.key_press("v", 2)
+            b.wait_val("input[placeholder='Filter directory']", "/home/admin/")
+            b.key_press(["\b"] * 12)
+
+            # Copy item path
+            b.click("button:contains('not-hidden')")
+            b.click("#dropdown-menu")
+            b.click("#copy-path")
+            # Paste text in filter input to check copied text
+            b.focus("input[placeholder='Filter directory']")
+            b.key_press("v", 2)
+            b.wait_val("input[placeholder='Filter directory']", "/home/admin/not-hidden")
+
     def testNavigation(self):
         b = self.browser
         m = self.machine
@@ -411,7 +439,7 @@ class TestNavigator(testlib.MachineCase):
 
         # Rename folder from context menu
         b.mouse("[data-item='newdir']", "contextmenu")
-        b.wait_in_text(".context-menu li:nth-child(3) button", "Rename directory")
+        b.wait_in_text(".context-menu li:nth-child(4) button", "Rename directory")
         b.click(".context-menu button:contains('Rename directory')")
         b.set_input_text("#rename-item-input", "newdir1")
         b.click("button.pf-m-primary")
@@ -419,7 +447,7 @@ class TestNavigator(testlib.MachineCase):
 
         # Delete folder from context menu
         b.mouse("[data-item='newdir1']", "contextmenu")
-        b.wait_in_text(".context-menu li:nth-child(4) button", "Delete directory")
+        b.wait_in_text(".context-menu li:nth-child(5) button", "Delete directory")
         b.click(".context-menu button:contains('Delete directory')")
         b.click("button.pf-m-danger")
         b.wait_not_present("[data-item='newdir1']")
@@ -432,12 +460,29 @@ class TestNavigator(testlib.MachineCase):
         b.wait_val(f"#create-link-original-wrapper input", "/home/admin/newfile")
         b.click("button.pf-m-link:contains('Cancel')")
 
-        # Delete button text should match item type: directory/file
-        b.mouse("[data-item='newfile']", "contextmenu")
-        b.wait_in_text(".context-menu li:nth-child(4) button", "Delete file")
-        b.click(".context-menu button:contains('Delete file')")
-        b.click("button.pf-m-danger")
-        b.wait_not_present("[data-item='newfile']")
+        # Firefox does not support setting of permissions
+        # and therefore we cannot test copy/paste with context menu
+        if b.cdp.browser.name != "firefox":
+            try:
+                b.grant_permissions("clipboardReadWrite", "clipboardSanitizedWrite")
+            except RuntimeError:
+                # fallback for older Chrome releases
+                b.grant_permissions("clipboardRead", "clipboardWrite")
+        
+            # Copy path from context menu
+            b.mouse("[data-item='newfile']", "contextmenu")
+            b.click(".context-menu button:contains('Copy full path')")
+            b.focus("input[placeholder='Filter directory']")
+            b.key_press("v", 2)
+            b.wait_val("input[placeholder='Filter directory']", "/home/admin/newfile")
+            b.key_press(["\b"] * 19)
+
+            # Delete button text should match item type: directory/file
+            b.mouse("[data-item='newfile']", "contextmenu")
+            b.wait_in_text(".context-menu li:nth-child(5) button", "Delete file")
+            b.click(".context-menu button:contains('Delete file')")
+            b.click("button.pf-m-danger")
+            b.wait_not_present("[data-item='newfile']")
 
     def testRename(self):
         b = self.browser

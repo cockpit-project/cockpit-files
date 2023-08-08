@@ -125,6 +125,9 @@ export const Application = () => {
             </MenuItem>
             {selectedContext &&
             <>
+                <MenuItem className="context-menu-option" onClick={() => { navigator.clipboard.writeText("/" + path.join("/") + "/" + selectedContext.name) }}>
+                    <div className="context-menu-name"> {_("Copy full path")} </div>
+                </MenuItem>
                 <MenuItem className="context-menu-option" onClick={() => { renameItem(Dialogs, { selected: selectedContext, path, setPath }) }}>
                     <div className="context-menu-name"> {selectedContext.type === "file" ? _("Rename file") : _("Rename directory")} </div>
                 </MenuItem>
