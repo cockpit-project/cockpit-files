@@ -32,7 +32,7 @@ import {
 import { FileIcon, FolderIcon } from "@patternfly/react-icons";
 
 import { ListingTable } from "cockpit-components-table.jsx";
-import { ContextMenu } from "./navigator-context-menu.jsx";
+import { ContextMenu } from "./navigatorContextMenu.jsx";
 import { NavigatorBreadcrumbs } from "./navigatorBreadcrumbs.jsx";
 import { createDirectory, createLink, deleteItem, editPermissions, renameItem } from "./fileActions.jsx";
 import { SidebarPanelDetails } from "./sidebar.jsx";
