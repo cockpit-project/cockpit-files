@@ -24,12 +24,12 @@ jobs:
   - job: copr_build
     trigger: pull_request
     targets:
-      - fedora-37
-  
+      - fedora-38
+
   - job: tests
     trigger: pull_request
     targets:
-      - fedora-37
+      - fedora-38
 
   # Build releases in COPR: https://packit.dev/docs/configuration/#copr_build
   #- job: copr_build
