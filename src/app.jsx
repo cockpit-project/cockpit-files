@@ -19,7 +19,7 @@
 
 import cockpit from "cockpit";
 import { useDialogs } from "dialogs.jsx";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useCallback, useEffect, useState, useRef } from "react";
 import {
     Button,
     Card, CardBody,
@@ -32,6 +32,7 @@ import {
 import { FileIcon, FolderIcon } from "@patternfly/react-icons";
 
 import { ListingTable } from "cockpit-components-table.jsx";
+import { EmptyStatePanel } from "cockpit-components-empty-state.jsx";
 import { ContextMenu } from "./navigatorContextMenu.jsx";
 import { NavigatorBreadcrumbs } from "./navigatorBreadcrumbs.jsx";
 import { createDirectory, createLink, deleteItem, editPermissions, renameItem } from "./fileActions.jsx";
@@ -40,14 +41,37 @@ import { NavigatorCardHeader } from "./header.jsx";
 
 const _ = cockpit.gettext;
 
+const updateFile = (file, currentPath) => {
+    const filePath = currentPath + "/" + file.name;
+    return cockpit.spawn(["stat", "-c", "%a,%Y,%G,%U,%s", filePath], { superuser: "try", error: "message" })
+            .then(res => {
+                res = res.trim().split(",");
+
+                let perm = res[0];
+                // trim sticky bit
+                if (perm.length === 4) perm = perm.slice(1);
+                if (perm.length === 1) perm = "00".concat(perm);
+                if (perm.length === 2) perm = "0".concat(perm);
+                file.permissions = perm;
+
+                file.modified = res[1];
+                file.group = res[2];
+                file.owner = res[3];
+                file.size = res[4];
+                return file;
+            }, exc => console.error("Adding file failed", file, exc));
+};
+
 export const Application = () => {
     const Dialogs = useDialogs();
+    const [loading, setLoading] = useState(true);
     const [currentFilter, setCurrentFilter] = useState("");
     const [files, setFiles] = useState([]);
     const [isGrid, setIsGrid] = useState(true);
     const [path, setPath] = useState(undefined);
     const [sortBy, setSortBy] = useState(localStorage.getItem("cockpit-navigator.sort") || "az");
     const channel = useRef(null);
+    const channelList = useRef(null);
     const [selected, setSelected] = useState(null);
     const [selectedContext, setSelectedContext] = useState(null);
     const [showHidden, setShowHidden] = useState(false);
@@ -64,72 +88,93 @@ export const Application = () => {
         });
     }, []);
 
+    const getFsList = useCallback(() => {
+        const _files = [];
+        const currentPath = path.join("/");
+
+        if (channelList.current !== null)
+            channelList.current.close();
+
+        channelList.current = cockpit.channel({
+            payload: "fslist1",
+            path: `/${currentPath}`,
+            superuser: "try",
+            watch: false,
+        });
+
+        channelList.current.addEventListener("message", (ev, data) => {
+            const file = JSON.parse(data);
+
+            _files.push({ ...file, name: file.path, isHidden: file.path.startsWith(".") });
+        });
+
+        channelList.current.addEventListener("close", () => {
+            Promise.all(_files.map(file => updateFile(file, currentPath)))
+                    .then(() => {
+                        setFiles(_files);
+                        setLoading(false);
+                    });
+        });
+    }, [path]);
+
+    const watchFiles = useCallback(() => {
+        if (path === undefined)
+            return;
+
+        const currentPath = path.join("/");
+
+        if (channel.current !== null)
+            channel.current.close();
+
+        channel.current = cockpit.channel({
+            payload: "fswatch1",
+            path: `/${currentPath}`,
+            superuser: "try",
+        });
+
+        channel.current.addEventListener("message", (ev, data) => {
+            const item = JSON.parse(data);
+
+            item.name = item.path.slice(item.path.lastIndexOf("/") + 1);
+            item.isHidden = item.name.startsWith(".");
+
+            // When files are created with some file editor we get also 'attribute-changed' and
+            // 'done-hint' events which are handled below. We should not add the same file twice.
+            if (item.event === "created" && item.type === "directory") {
+                updateFile(item, currentPath).then(file => {
+                    setFiles(_f => [..._f, file]);
+                });
+            } else {
+                if (item.event === "deleted") {
+                    setFiles(f => f.filter(res => res.name !== item.name));
+                } else {
+                    // For events other than 'present' we don't receive file stat information
+                    // so we rerun the fslist command to get the updated information
+                    // https://github.com/allisonkarlitskaya/systemd_ctypes/issues/56
+                    if (item.name[0] !== ".") {
+                        getFsList();
+                    }
+                }
+            }
+        });
+    }, [path, getFsList]);
+
     useEffect(() => {
         if (path === undefined)
             return;
 
         setSelected(path[path.length - 1]);
+        setFiles([]);
+        setLoading(true);
 
-        const getFsList = () => {
-            if (channel.current !== null)
-                channel.current.close();
-
-            const currentPath = path.join("/");
-            channel.current = cockpit.channel({
-                payload: "fslist1",
-                path: `/${currentPath}`,
-                superuser: "try",
-                watch: true,
-            });
-
-            const files = [];
-            channel.current.addEventListener("message", (ev, data) => {
-                const item = JSON.parse(data);
-                if (item.event === "present") {
-                    files.push({ ...item, name: item.path, isHidden: item.path.startsWith(".") });
-                } else {
-                    const name = item.path.slice(item.path.lastIndexOf("/") + 1);
-                    if (item.event === "deleted") {
-                        setFiles(f => f.filter(res => res.name !== name));
-                    } else {
-                        // For events other than 'present' we don't receive file stat information
-                        // so we rerun the fslist command to get the updated information
-                        // https://github.com/allisonkarlitskaya/systemd_ctypes/issues/56
-                        const name = item.path.slice(item.path.lastIndexOf("/") + 1);
-                        if (name[0] !== ".") {
-                            getFsList();
-                        }
-                    }
-                }
-            });
-
-            channel.current.addEventListener("ready", () => {
-                Promise.all(files.map(file => {
-                    return cockpit.spawn(["stat", "-c", "%a", "/" + path.join("/") + "/" + file.path], { superuser: "try" }).then(res => {
-                        // trim newline character
-                        res = res.slice(0, -1);
-                        // trim sticky bit
-                        if (res.length === 4) res = res.slice(1);
-                        if (res.length === 1) res = "00".concat(res);
-                        if (res.length === 2) res = "0".concat(res);
-                        return { ...file, permissions: res };
-                    });
-                })).then(res => {
-                    Promise.all(res.map(file => {
-                        return cockpit.spawn(["file", "/" + path.join("/") + "/" + file.path], { superuser: "try" }).then(res => {
-                            return { ...file, info: res.split(":")[1].slice(0, -1) };
-                        });
-                    })).then(res => setFiles(res));
-                });
-            });
-        };
+        watchFiles();
         getFsList();
-    }, [path]);
+    }, [path, getFsList, watchFiles]);
 
-    if (!path)
-        return null;
+    if (!path || loading)
+        return <EmptyStatePanel loading />;
 
-    const visibleFiles = !showHidden ? files.filter(file => !file.name.startsWith(".")) : files;
+    const visibleFiles = !showHidden ? files.filter(file => !file.isHidden) : files;
 
     const contextMenuItems = (
         <MenuList>
