@@ -19,7 +19,7 @@
 
 import cockpit from "cockpit";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import {
     Button,
@@ -57,6 +57,18 @@ import { permissions } from "./common.js";
 const _ = cockpit.gettext;
 
 export const SidebarPanelDetails = ({ selected, path, setPath, showHidden, setShowHidden, setHistory, setHistoryIndex, files }) => {
+    const [info, setInfo] = useState(null);
+
+    useEffect(() => {
+        const filePath = path.join("/") + "/" + selected.path;
+
+        cockpit.spawn(["file", filePath], { superuser: "try", error: "message" })
+                .then(res => {
+                    const _info = res.split(":")[1].slice(0, -1);
+                    setInfo(_info);
+                }, console.error);
+    }, [path, selected]);
+
     const Dialogs = useDialogs();
     const getPermissions = (str) => {
         return permissions.find(e => e.value === str).label;
@@ -74,7 +86,7 @@ export const SidebarPanelDetails = ({ selected, path, setPath, showHidden, setSh
                             </Text>}
                         {selected.items_cnt === undefined &&
                             <Text component={TextVariants.small}>
-                                {selected.info}
+                                {info}
                             </Text>}
                     </TextContent>
                 </CardTitle>
