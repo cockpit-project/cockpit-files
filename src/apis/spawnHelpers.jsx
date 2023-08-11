@@ -28,7 +28,9 @@ export const spawnDeleteItem = (o) => {
     cockpit.spawn(["rm", "-r", o.itemPath], options)
             .then(() => {
                 if (o.selected.items_cnt) {
-                    o.setPath(o.path.slice(0, -1));
+                    const newPath = "/" + o.path.slice(0, -1).join("/");
+
+                    cockpit.location.go("/", { path: encodeURIComponent(newPath) });
                     o.setHistory(h => h.slice(0, -1));
                     o.setHistoryIndex(i => i - 1);
                 }
@@ -51,14 +53,20 @@ export const spawnForceDelete = (o) => {
 };
 
 export const spawnRenameItem = (o) => {
+    const newPath = o.selected.items_cnt
+        ? "/" + o.path.slice(0, -1).join("/") + "/" + o.name
+        : "/" + o.path.join("/") + "/" + o.name;
     const command = o.selected.items_cnt
-        ? ["mv", "/" + o.path.join("/"), "/" + o.path.slice(0, -1).join("/") + "/" + o.name]
-        : ["mv", "/" + o.path.join("/") + "/" + o.selected.name, "/" + o.path.join("/") + "/" + o.name];
+        ? ["mv", "/" + o.path.join("/"), newPath]
+        : ["mv", "/" + o.path.join("/") + "/" + o.selected.name, newPath];
 
     cockpit.spawn(command, options)
             .then(() => {
-                if (o.selected.items_cnt)
-                    o.setPath(o.path.slice(0, -1).concat(o.name));
+                if (o.selected.items_cnt) {
+                    cockpit.location.go("/", { path: encodeURIComponent(newPath) });
+                    o.setHistory(h => h.slice(0, -1));
+                    o.setHistoryIndex(i => i - 1);
+                }
                 o.Dialogs.close();
             }, err => o.setErrorMessage(err.message));
 };

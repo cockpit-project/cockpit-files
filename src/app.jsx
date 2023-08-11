@@ -38,6 +38,7 @@ import { NavigatorBreadcrumbs } from "./navigatorBreadcrumbs.jsx";
 import { createDirectory, createLink, deleteItem, editPermissions, renameItem } from "./fileActions.jsx";
 import { SidebarPanelDetails } from "./sidebar.jsx";
 import { NavigatorCardHeader } from "./header.jsx";
+import { usePageLocation } from "hooks.js";
 
 const _ = cockpit.gettext;
 
@@ -63,12 +64,12 @@ const updateFile = (file, currentPath) => {
 };
 
 export const Application = () => {
+    const { options } = usePageLocation();
     const Dialogs = useDialogs();
     const [loading, setLoading] = useState(true);
     const [currentFilter, setCurrentFilter] = useState("");
     const [files, setFiles] = useState([]);
     const [isGrid, setIsGrid] = useState(true);
-    const [path, setPath] = useState(undefined);
     const [sortBy, setSortBy] = useState(localStorage.getItem("cockpit-navigator.sort") || "az");
     const channel = useRef(null);
     const channelList = useRef(null);
@@ -79,25 +80,31 @@ export const Application = () => {
     const [historyIndex, setHistoryIndex] = useState(0);
 
     const onFilterChange = (_, value) => setCurrentFilter(value);
+    const currentPath = decodeURIComponent(options.path || "");
+    const path = currentPath?.split("/").filter(Boolean);
+    const currentDir = path.join("/") + "/";
+    const sel = path[path.length - 1];
 
     useEffect(() => {
         cockpit.user().then(user => {
             const userPath = user.home.split("/").slice(1);
-            setPath(userPath);
             setHistory(h => [...h, userPath]);
+
+            if (options.path === undefined) {
+                cockpit.location.go("/", { path: encodeURIComponent(user.home) });
+            }
         });
-    }, []);
+    }, [options]);
 
     const getFsList = useCallback(() => {
         const _files = [];
-        const currentPath = path.join("/");
 
         if (channelList.current !== null)
             channelList.current.close();
 
         channelList.current = cockpit.channel({
             payload: "fslist1",
-            path: `/${currentPath}`,
+            path: `/${currentDir}`,
             superuser: "try",
             watch: false,
         });
@@ -109,26 +116,21 @@ export const Application = () => {
         });
 
         channelList.current.addEventListener("close", () => {
-            Promise.all(_files.map(file => updateFile(file, currentPath)))
+            Promise.all(_files.map(file => updateFile(file, currentDir)))
                     .then(() => {
                         setFiles(_files);
                         setLoading(false);
                     });
         });
-    }, [path]);
+    }, [currentDir]);
 
     const watchFiles = useCallback(() => {
-        if (path === undefined)
-            return;
-
-        const currentPath = path.join("/");
-
         if (channel.current !== null)
             channel.current.close();
 
         channel.current = cockpit.channel({
             payload: "fswatch1",
-            path: `/${currentPath}`,
+            path: `/${currentDir}`,
             superuser: "try",
         });
 
@@ -141,7 +143,7 @@ export const Application = () => {
             // When files are created with some file editor we get also 'attribute-changed' and
             // 'done-hint' events which are handled below. We should not add the same file twice.
             if (item.event === "created" && item.type === "directory") {
-                updateFile(item, currentPath).then(file => {
+                updateFile(item, currentDir).then(file => {
                     setFiles(_f => [..._f, file]);
                 });
             } else {
@@ -157,21 +159,21 @@ export const Application = () => {
                 }
             }
         });
-    }, [path, getFsList]);
+    }, [currentDir, getFsList]);
 
     useEffect(() => {
-        if (path === undefined)
+        if (currentPath === "")
             return;
 
-        setSelected(path[path.length - 1]);
+        setSelected(sel);
         setFiles([]);
         setLoading(true);
 
         watchFiles();
         getFsList();
-    }, [path, getFsList, watchFiles]);
+    }, [currentPath, sel, getFsList, watchFiles]);
 
-    if (!path || loading)
+    if (loading || path.length === 0)
         return <EmptyStatePanel loading />;
 
     const visibleFiles = !showHidden ? files.filter(file => !file.isHidden) : files;
@@ -189,13 +191,13 @@ export const Application = () => {
                 <MenuItem className="context-menu-option" onClick={() => { navigator.clipboard.writeText("/" + path.join("/") + "/" + selectedContext.name) }}>
                     <div className="context-menu-name"> {_("Copy full path")} </div>
                 </MenuItem>
-                <MenuItem className="context-menu-option" onClick={() => { renameItem(Dialogs, { selected: selectedContext, path, setPath }) }}>
+                <MenuItem className="context-menu-option" onClick={() => { renameItem(Dialogs, { selected: selectedContext, path, setHistory, setHistoryIndex }) }}>
                     <div className="context-menu-name"> {selectedContext.type === "file" ? _("Rename file") : _("Rename directory")} </div>
                 </MenuItem>
-                <MenuItem className="context-menu-option" onClick={() => { editPermissions(Dialogs, { selected: selectedContext, path, setPath }) }}>
+                <MenuItem className="context-menu-option" onClick={() => { editPermissions(Dialogs, { selected: selectedContext, path }) }}>
                     <div className="context-menu-name"> {_("Edit properties")} </div>
                 </MenuItem>
-                <MenuItem className="context-menu-option pf-m-danger" onClick={() => { deleteItem(Dialogs, { selected: selectedContext, itemPath: "/" + path.join("/") + "/" + selectedContext.name }) }}>
+                <MenuItem className="context-menu-option pf-m-danger" onClick={() => { deleteItem(Dialogs, { selected: selectedContext, itemPath: "/" + path.join("/") + "/" + selectedContext.name, setHistory, setHistoryIndex }) }}>
                     <div className="context-menu-name"> {selectedContext.type === "file" ? _("Delete file") : _("Delete directory")} </div>
                 </MenuItem>
             </>}
@@ -205,7 +207,8 @@ export const Application = () => {
     return (
         <Page>
             <NavigatorBreadcrumbs
-              path={path} setPath={setPath}
+              path={path}
+              currentDir={currentDir}
               setHistory={setHistory} history={history}
               historyIndex={historyIndex} setHistoryIndex={setHistoryIndex}
             />
@@ -214,9 +217,9 @@ export const Application = () => {
                     <SidebarPanel className="sidebar-panel" width={{ default: "width_25" }}>
                         <SidebarPanelDetails
                           path={path} selected={(files.find(file => file.name === selected?.name)) || ({ name: path[path.length - 1], items_cnt: { all: files.length, hidden: files.length - files.filter(file => !file.name.startsWith(".")).length } })}
-                          setPath={setPath} showHidden={showHidden}
-                          setShowHidden={setShowHidden} setHistory={setHistory}
-                          setHistoryIndex={setHistoryIndex} files={files}
+                          setHistory={setHistory} setHistoryIndex={setHistoryIndex}
+                          showHidden={showHidden}
+                          setShowHidden={setShowHidden} files={files}
                         />
                     </SidebarPanel>
                     <SidebarContent>
@@ -228,7 +231,8 @@ export const Application = () => {
                             />
                             <NavigatorCardBody
                               currentFilter={currentFilter} files={visibleFiles}
-                              setPath={setPath} path={path}
+                              path={path}
+                              currentDir={currentDir}
                               isGrid={isGrid} sortBy={sortBy}
                               selected={selected} setSelected={setSelected}
                               setSelectedContext={setSelectedContext} setHistory={setHistory}
@@ -246,12 +250,14 @@ export const Application = () => {
     );
 };
 
-const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, sortBy, selected, setSelected, setSelectedContext, setHistory, historyIndex, setHistoryIndex }) => {
+const NavigatorCardBody = ({ currentFilter, files, isGrid, path, sortBy, selected, setSelected, setSelectedContext, setHistory, historyIndex, setHistoryIndex }) => {
     const onDoubleClickNavigate = (path, file) => {
+        const newPath = [...path, file.name].join("/");
         if (file.type === "directory") {
-            setPath(p => [...p, file.name]);
             setHistory(h => [...h.slice(0, historyIndex + 1), [...path, file.name]]);
             setHistoryIndex(h => h + 1);
+
+            cockpit.location.go("/", { path: encodeURIComponent(newPath) });
         }
     };
 

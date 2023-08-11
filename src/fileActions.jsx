@@ -57,7 +57,7 @@ export const deleteItem = (Dialogs, options) => {
     Dialogs.show(
         <ConfirmDeletionDialog
           selected={options.selected} itemPath={options.itemPath}
-          path={options.path} setPath={options.setPath}
+          path={options.path}
           setHistory={options.setHistory} setHistoryIndex={options.setHistoryIndex}
         />);
 };
@@ -65,8 +65,9 @@ export const deleteItem = (Dialogs, options) => {
 export const renameItem = (Dialogs, options) => {
     Dialogs.show(
         <RenameItemModal
-          path={options.path} setPath={options.setPath}
+          path={options.path}
           selected={options.selected}
+          setHistory={options.setHistory} setHistoryIndex={options.setHistoryIndex}
         />);
 };
 
@@ -74,11 +75,10 @@ export const editPermissions = (Dialogs, options) => {
     Dialogs.show(
         <EditPermissionsModal
           selected={options.selected} path={options.path}
-          setPath={options.setPath}
         />);
 };
 
-export const ConfirmDeletionDialog = ({ selected, itemPath, path, setPath, setHistory, setHistoryIndex }) => {
+export const ConfirmDeletionDialog = ({ selected, itemPath, path, setHistory, setHistoryIndex }) => {
     const Dialogs = useDialogs();
 
     const modalTitle = selected.type === "file"
@@ -94,7 +94,7 @@ export const ConfirmDeletionDialog = ({ selected, itemPath, path, setPath, setHi
           onClose={Dialogs.close}
           footer={
               <>
-                  <Button variant="danger" onClick={() => spawnDeleteItem({ Dialogs, selected, itemPath, path, setPath, setHistory, setHistoryIndex })}>{_("Delete")}</Button>
+                  <Button variant="danger" onClick={() => spawnDeleteItem({ Dialogs, selected, itemPath, path, setHistory, setHistoryIndex })}>{_("Delete")}</Button>
                   <Button variant="link" onClick={Dialogs.close}>{_("Cancel")}</Button>
               </>
           }
@@ -170,7 +170,7 @@ export const CreateDirectoryModal = ({ selected, currentPath }) => {
     );
 };
 
-export const RenameItemModal = ({ path, setPath, selected }) => {
+export const RenameItemModal = ({ path, selected, setHistory, setHistoryIndex }) => {
     const Dialogs = useDialogs();
     const [name, setName] = useState(selected.name);
     const [errorMessage, setErrorMessage] = useState(undefined);
@@ -183,7 +183,7 @@ export const RenameItemModal = ({ path, setPath, selected }) => {
           onClose={Dialogs.close}
           footer={errorMessage === undefined &&
           <>
-              <Button variant="primary" onClick={() => spawnRenameItem({ Dialogs, path, setPath, selected, name, setErrorMessage })}>{_("Rename")}</Button>
+              <Button variant="primary" onClick={() => spawnRenameItem({ Dialogs, path, selected, name, setErrorMessage, setHistory, setHistoryIndex })}>{_("Rename")}</Button>
               <Button variant="link" onClick={Dialogs.close}>{_("Cancel")}</Button>
           </>}
         >
