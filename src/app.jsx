@@ -187,8 +187,7 @@ export const Application = () => {
                               isGrid={isGrid} sortBy={sortBy}
                               selected={selected} setSelected={setSelected}
                               setSelectedContext={setSelectedContext} setHistory={setHistory}
-                              setHistoryIndex={setHistoryIndex} history={history}
-                              historyIndex={historyIndex}
+                              setHistoryIndex={setHistoryIndex} historyIndex={historyIndex}
                             />
                             <ContextMenu
                               parentId="folder-view" contextMenuItems={contextMenuItems}
@@ -202,7 +201,7 @@ export const Application = () => {
     );
 };
 
-const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, sortBy, selected, setSelected, setSelectedContext, history, setHistory, historyIndex, setHistoryIndex }) => {
+const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, sortBy, selected, setSelected, setSelectedContext, setHistory, historyIndex, setHistoryIndex }) => {
     const onDoubleClickNavigate = (path, file) => {
         if (file.type === "directory") {
             setPath(p => [...p, file.name]);
