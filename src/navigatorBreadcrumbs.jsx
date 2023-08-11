@@ -16,22 +16,23 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
  */
+import cockpit from "cockpit";
 import React from "react";
 
 import { Button, Flex, FlexItem, PageBreadcrumb } from "@patternfly/react-core";
 import { ArrowLeftIcon, ArrowRightIcon } from "@patternfly/react-icons";
 
-export const NavigatorBreadcrumbs = ({ path, setPath, history, setHistory, historyIndex, setHistoryIndex }) => {
+export const NavigatorBreadcrumbs = ({ currentDir, path, history, setHistory, historyIndex, setHistoryIndex }) => {
     const navigateBack = () => {
         if (historyIndex > 0) {
-            setPath(history[historyIndex - 1]);
+            cockpit.location.go("/", { path: encodeURIComponent(history[historyIndex - 1].join("/")) });
             setHistoryIndex(i => i - 1);
         }
     };
 
     const navigateForward = () => {
         if (historyIndex < history.length) {
-            setPath(history[historyIndex + 1]);
+            cockpit.location.go("/", { path: encodeURIComponent(history[historyIndex + 1].join("/")) });
             setHistoryIndex(i => i + 1);
         }
     };
@@ -39,7 +40,7 @@ export const NavigatorBreadcrumbs = ({ path, setPath, history, setHistory, histo
     const navigateBreadcrumb = (i) => {
         setHistory(h => [...h.slice(0, historyIndex + 1), path.slice(0, i)]);
         setHistoryIndex(i => i + 1);
-        setPath(p => p.slice(0, i));
+        cockpit.location.go("/", { path: encodeURIComponent(path.slice(0, i).join("/")) });
     };
 
     return (

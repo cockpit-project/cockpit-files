@@ -130,13 +130,13 @@ export const SidebarPanelDetails = ({ selected, path, setPath, showHidden, setSh
                         <DescriptionListDescription>{getPermissions(selected.permissions[2])}</DescriptionListDescription>
                     </DescriptionListGroup>
                 </DescriptionList>
-                <Button variant="secondary" onClick={() => editPermissions(Dialogs, { selected, path, setPath })}>{_("Edit properties")}</Button>
+                <Button variant="secondary" onClick={() => editPermissions(Dialogs, { selected, path })}>{_("Edit properties")}</Button>
             </CardBody>}
         </Card>
     );
 };
 
-const DropdownWithKebab = ({ selected, path, setPath, showHidden, setShowHidden, setHistory, setHistoryIndex, files }) => {
+const DropdownWithKebab = ({ selected, path, showHidden, setShowHidden, setHistory, setHistoryIndex, files }) => {
     const Dialogs = useDialogs();
     const [isOpen, setIsOpen] = useState(false);
 
@@ -195,7 +195,7 @@ const DropdownWithKebab = ({ selected, path, setPath, showHidden, setShowHidden,
                 </DropdownItem>
                 <DropdownItem
                   id="rename-item" key="rename-item"
-                  onClick={() => { renameItem(Dialogs, { selected, path, setPath }) }}
+                  onClick={() => { renameItem(Dialogs, { selected, path, setHistory, setHistoryIndex }) }}
                 >
                     {selected.type === "file" ? _("Rename file") : _("Rename directory")}
                 </DropdownItem>
@@ -207,7 +207,7 @@ const DropdownWithKebab = ({ selected, path, setPath, showHidden, setShowHidden,
                 </DropdownItem>
                 <DropdownItem
                   id="delete-item" key="delete-item"
-                  onClick={() => { deleteItem(Dialogs, { selected, itemPath: currentDirectory + (selected.items_cnt ? "" : selected.name), path, setPath, setHistory, setHistoryIndex }) }} className="pf-m-danger"
+                  onClick={() => { deleteItem(Dialogs, { selected, itemPath: currentDirectory + (selected.items_cnt ? "" : selected.name), path, setHistory, setHistoryIndex }) }} className="pf-m-danger"
                 >
                     {selected.type === "file" ? _("Delete file") : _("Delete directory")}
                 </DropdownItem>
