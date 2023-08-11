@@ -17,6 +17,8 @@
  * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
  */
 
+/* eslint-disable no-restricted-globals */
+
 import cockpit from "cockpit";
 import React, { useEffect, useState } from "react";
 import {
@@ -33,7 +35,7 @@ import {
 
 import { useDialogs } from "dialogs.jsx";
 import { InlineNotification } from "cockpit-components-inline-notification";
-import { useFile } from "hooks.js";
+import { useFile, usePageLocation } from "hooks.js";
 import { etc_group_syntax as etcGroupSyntax, etc_passwd_syntax as etcPasswdSyntax } from "pam_user_parser.js";
 import { FileAutoComplete } from "../pkg/lib/cockpit-components-file-autocomplete";
 import { spawnCreateDirectory, spawnCreateLink, spawnDeleteItem, spawnEditPermissions, spawnForceDelete, spawnRenameItem } from "./apis/spawnHelpers";
@@ -171,6 +173,7 @@ export const CreateDirectoryModal = ({ selected, currentPath }) => {
 };
 
 export const RenameItemModal = ({ path, setPath, selected }) => {
+    const { options } = usePageLocation();
     const Dialogs = useDialogs();
     const [name, setName] = useState(selected.name);
     const [errorMessage, setErrorMessage] = useState(undefined);
@@ -183,7 +186,7 @@ export const RenameItemModal = ({ path, setPath, selected }) => {
           onClose={Dialogs.close}
           footer={errorMessage === undefined &&
           <>
-              <Button variant="primary" onClick={() => spawnRenameItem({ Dialogs, path, setPath, selected, name, setErrorMessage })}>{_("Rename")}</Button>
+              <Button variant="primary" onClick={() => spawnRenameItem({ Dialogs, path, setPath, selected, name, setErrorMessage, pathOptions: options })}>{_("Rename")}</Button>
               <Button variant="link" onClick={Dialogs.close}>{_("Cancel")}</Button>
           </>}
         >

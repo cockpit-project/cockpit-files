@@ -16,30 +16,38 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
  */
+
+/* eslint-disable no-restricted-globals */
+
+import cockpit from "cockpit";
 import React from "react";
 
 import { Button, Flex, FlexItem, PageBreadcrumb } from "@patternfly/react-core";
 import { ArrowLeftIcon, ArrowRightIcon } from "@patternfly/react-icons";
 
-export const NavigatorBreadcrumbs = ({ path, setPath, history, setHistory, historyIndex, setHistoryIndex }) => {
+export const NavigatorBreadcrumbs = ({ path, historyIndex, setHistoryIndex }) => {
     const navigateBack = () => {
-        if (historyIndex > 0) {
-            setPath(history[historyIndex - 1]);
-            setHistoryIndex(i => i - 1);
+        if (historyIndex.current > 0) {
+            history.back();
+            history.replaceState({ index: historyIndex.current }, "");
+            setHistoryIndex(i => ({ length: i.length, current: i.current - 1 }));
         }
     };
 
     const navigateForward = () => {
-        if (historyIndex < history.length) {
-            setPath(history[historyIndex + 1]);
-            setHistoryIndex(i => i + 1);
+        if ((historyIndex.current + 1) < historyIndex.length) {
+            history.forward();
+            history.replaceState({ index: historyIndex.current }, "");
+            setHistoryIndex(i => ({ length: i.length, current: i.current + 1 }));
         }
     };
 
     const navigateBreadcrumb = (i) => {
-        setHistory(h => [...h.slice(0, historyIndex + 1), path.slice(0, i)]);
-        setHistoryIndex(i => i + 1);
-        setPath(p => p.slice(0, i));
+        cockpit.location.go("?path=root/" + path.slice(0, i).join("/"));
+        if (historyIndex.current + 1 === historyIndex.length)
+            setHistoryIndex(i => ({ length: i.length + 1, current: i.length }));
+        else
+            setHistoryIndex(i => ({ length: i.current + 2, current: i.current + 1 }));
     };
 
     return (
@@ -48,7 +56,7 @@ export const NavigatorBreadcrumbs = ({ path, setPath, history, setHistory, histo
                 <FlexItem>
                     <Button
                       variant="secondary" onClick={navigateBack}
-                      isDisabled={historyIndex === 0} id="navigate-back"
+                      isDisabled={historyIndex.current === 0} id="navigate-back"
                     >
                         <ArrowLeftIcon />
                     </Button>
@@ -56,7 +64,7 @@ export const NavigatorBreadcrumbs = ({ path, setPath, history, setHistory, histo
                 <FlexItem>
                     <Button
                       variant="secondary" onClick={navigateForward}
-                      isDisabled={history.length === historyIndex + 1} id="navigate-forward"
+                      isDisabled={historyIndex.current + 1 === historyIndex.length} id="navigate-forward"
                     >
                         <ArrowRightIcon />
                     </Button>

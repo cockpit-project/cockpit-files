@@ -37,47 +37,49 @@ import { NavigatorBreadcrumbs } from "./navigatorBreadcrumbs.jsx";
 import { createDirectory, createLink, deleteItem, editPermissions, renameItem } from "./fileActions.jsx";
 import { SidebarPanelDetails } from "./sidebar.jsx";
 import { NavigatorCardHeader } from "./header.jsx";
+import { usePageLocation } from "hooks.js";
 
 const _ = cockpit.gettext;
 
 export const Application = () => {
+    const { options } = usePageLocation();
     const Dialogs = useDialogs();
     const [currentFilter, setCurrentFilter] = useState("");
     const [files, setFiles] = useState([]);
     const [isGrid, setIsGrid] = useState(true);
-    const [path, setPath] = useState(undefined);
     const [sortBy, setSortBy] = useState(localStorage.getItem("cockpit-navigator.sort") || "az");
     const channel = useRef(null);
     const [selected, setSelected] = useState(null);
     const [selectedContext, setSelectedContext] = useState(null);
     const [showHidden, setShowHidden] = useState(false);
-    const [history, setHistory] = useState([]);
-    const [historyIndex, setHistoryIndex] = useState(0);
+    const [historyIndex, setHistoryIndex] = useState({ length: 1, current: 0 });
 
     const onFilterChange = (_, value) => setCurrentFilter(value);
 
     useEffect(() => {
         cockpit.user().then(user => {
-            const userPath = user.home.split("/").slice(1);
-            setPath(userPath);
-            setHistory(h => [...h, userPath]);
+            if (options.path === undefined) {
+                cockpit.location.go("?path=root" + user.home);
+            }
         });
-    }, []);
+    }, [options]);
 
+    const path = options.path ? options.path.slice(5).split("/") : [];
     useEffect(() => {
-        if (path === undefined)
+        if (options.path === undefined)
             return;
 
+        const path = options.path ? options.path.slice(5).split("/") : [];
         setSelected(path[path.length - 1]);
 
         const getFsList = () => {
             if (channel.current !== null)
                 channel.current.close();
 
-            const currentPath = path.join("/");
+            const currentPath = options.path.slice(4) || "/";
             channel.current = cockpit.channel({
                 payload: "fslist1",
-                path: `/${currentPath}`,
+                path: currentPath,
                 superuser: "try",
                 watch: true,
             });
@@ -105,7 +107,7 @@ export const Application = () => {
 
             channel.current.addEventListener("ready", () => {
                 Promise.all(files.map(file => {
-                    return cockpit.spawn(["stat", "-c", "%a", "/" + path.join("/") + "/" + file.path], { superuser: "try" }).then(res => {
+                    return cockpit.spawn(["stat", "-c", "%a", currentPath + "/" + file.path], { superuser: "try" }).then(res => {
                         // trim newline character
                         res = res.slice(0, -1);
                         // trim sticky bit
@@ -116,7 +118,7 @@ export const Application = () => {
                     });
                 })).then(res => {
                     Promise.all(res.map(file => {
-                        return cockpit.spawn(["file", "/" + path.join("/") + "/" + file.path], { superuser: "try" }).then(res => {
+                        return cockpit.spawn(["file", currentPath + "/" + file.path], { superuser: "try" }).then(res => {
                             return { ...file, info: res.split(":")[1].slice(0, -1) };
                         });
                     })).then(res => setFiles(res));
@@ -124,9 +126,9 @@ export const Application = () => {
             });
         };
         getFsList();
-    }, [path]);
+    }, [options]);
 
-    if (!path)
+    if (!options?.path)
         return null;
 
     const visibleFiles = !showHidden ? files.filter(file => !file.name.startsWith(".")) : files;
@@ -144,10 +146,10 @@ export const Application = () => {
                 <MenuItem className="context-menu-option" onClick={() => { navigator.clipboard.writeText("/" + path.join("/") + "/" + selectedContext.name) }}>
                     <div className="context-menu-name"> {_("Copy full path")} </div>
                 </MenuItem>
-                <MenuItem className="context-menu-option" onClick={() => { renameItem(Dialogs, { selected: selectedContext, path, setPath }) }}>
+                <MenuItem className="context-menu-option" onClick={() => { renameItem(Dialogs, { selected: selectedContext, path }) }}>
                     <div className="context-menu-name"> {selectedContext.type === "file" ? _("Rename file") : _("Rename directory")} </div>
                 </MenuItem>
-                <MenuItem className="context-menu-option" onClick={() => { editPermissions(Dialogs, { selected: selectedContext, path, setPath }) }}>
+                <MenuItem className="context-menu-option" onClick={() => { editPermissions(Dialogs, { selected: selectedContext, path }) }}>
                     <div className="context-menu-name"> {_("Edit properties")} </div>
                 </MenuItem>
                 <MenuItem className="context-menu-option pf-m-danger" onClick={() => { deleteItem(Dialogs, { selected: selectedContext, itemPath: "/" + path.join("/") + "/" + selectedContext.name }) }}>
@@ -160,18 +162,16 @@ export const Application = () => {
     return (
         <Page>
             <NavigatorBreadcrumbs
-              path={path} setPath={setPath}
-              setHistory={setHistory} history={history}
-              historyIndex={historyIndex} setHistoryIndex={setHistoryIndex}
+              path={path} historyIndex={historyIndex}
+              setHistoryIndex={setHistoryIndex} options={options}
             />
             <PageSection onContextMenu={() => { setSelectedContext(null); setSelected(path[path.length - 1]) }}>
                 <Sidebar isPanelRight hasGutter>
                     <SidebarPanel className="sidebar-panel" width={{ default: "width_25" }}>
                         <SidebarPanelDetails
                           path={path} selected={(files.find(file => file.name === selected?.name)) || ({ name: path[path.length - 1], items_cnt: { all: files.length, hidden: files.length - files.filter(file => !file.name.startsWith(".")).length } })}
-                          setPath={setPath} showHidden={showHidden}
-                          setShowHidden={setShowHidden} setHistory={setHistory}
-                          setHistoryIndex={setHistoryIndex} files={files}
+                          showHidden={showHidden}
+                          setShowHidden={setShowHidden} files={files}
                         />
                     </SidebarPanel>
                     <SidebarContent>
@@ -183,11 +183,11 @@ export const Application = () => {
                             />
                             <NavigatorCardBody
                               currentFilter={currentFilter} files={visibleFiles}
-                              setPath={setPath} path={path}
+                              path={path}
                               isGrid={isGrid} sortBy={sortBy}
                               selected={selected} setSelected={setSelected}
-                              setSelectedContext={setSelectedContext} setHistory={setHistory}
-                              setHistoryIndex={setHistoryIndex} historyIndex={historyIndex}
+                              setSelectedContext={setSelectedContext} options={options}
+                              historyIndex={historyIndex} setHistoryIndex={setHistoryIndex}
                             />
                             <ContextMenu
                               parentId="folder-view" contextMenuItems={contextMenuItems}
@@ -201,12 +201,14 @@ export const Application = () => {
     );
 };
 
-const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, sortBy, selected, setSelected, setSelectedContext, setHistory, historyIndex, setHistoryIndex }) => {
+const NavigatorCardBody = ({ currentFilter, files, isGrid, path, sortBy, selected, setSelected, setSelectedContext, historyIndex, setHistoryIndex, options }) => {
     const onDoubleClickNavigate = (path, file) => {
         if (file.type === "directory") {
-            setPath(p => [...p, file.name]);
-            setHistory(h => [...h.slice(0, historyIndex + 1), [...path, file.name]]);
-            setHistoryIndex(h => h + 1);
+            cockpit.location.go("?path=" + options.path + "/" + file.name);
+            if (historyIndex.current + 1 === historyIndex.length)
+                setHistoryIndex(i => ({ length: i.length + 1, current: i.length }));
+            else
+                setHistoryIndex(i => ({ length: i.current + 2, current: i.current + 1 }));
         }
     };
 

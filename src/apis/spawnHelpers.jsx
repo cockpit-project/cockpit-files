@@ -17,6 +17,8 @@
  * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
  */
 
+/* eslint-disable no-restricted-globals */
+
 import cockpit from "cockpit";
 import React from "react";
 
@@ -28,9 +30,7 @@ export const spawnDeleteItem = (o) => {
     cockpit.spawn(["rm", "-r", o.itemPath], options)
             .then(() => {
                 if (o.selected.items_cnt) {
-                    o.setPath(o.path.slice(0, -1));
-                    o.setHistory(h => h.slice(0, -1));
-                    o.setHistoryIndex(i => i - 1);
+                    cockpit.location.go("/navigator?path=root/" + o.path.slice(0, -1).join("/"));
                 }
             })
             .then(o.Dialogs.close, err => {
@@ -57,8 +57,11 @@ export const spawnRenameItem = (o) => {
 
     cockpit.spawn(command, options)
             .then(() => {
-                if (o.selected.items_cnt)
-                    o.setPath(o.path.slice(0, -1).concat(o.name));
+                if (o.selected.items_cnt) {
+                    // hack: change options to update the state and re-render, as replaceState doesn't work
+                    history.replaceState({}, "", "?path=root/" + o.path.slice(0, -1).join("/") + "/" + o.name);
+                    o.pathOptions.path = "root/" + o.path.slice(0, -1).join("/") + "/" + o.name;
+                }
                 o.Dialogs.close();
             }, err => o.setErrorMessage(err.message));
 };
