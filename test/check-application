@@ -379,20 +379,20 @@ class TestNavigator(testlib.MachineCase):
         # Creating folder with duplicate name should return an error
         self.create_directory(b, "newdir")
         self.wait_modal_inline_alert(b, "mkdir: cannot create directory ‘/home/admin/newdir’: File exists")
-        b.click("div.pf-v5-c-modal-box__close")
-        
+        b.click("div.pf-v5-c-modal-box__close button.pf-v5-c-button")
+
         # Creating folder with empty name should return an error
         self.create_directory(b, "")
         self.wait_modal_inline_alert(b, "mkdir: cannot create directory ‘/home/admin/’: File exists")
-        b.click("div.pf-v5-c-modal-box__close")
-        
+        b.click("div.pf-v5-c-modal-box__close button.pf-v5-c-button")
+
         # Creating folder inside protected folder should return an error
         m.execute("sudo chattr +i /home/admin/newdir")
         b.mouse("[data-item='newdir']", "dblclick")
         b.wait_not_present("[data-item='newdir']")
         self.create_directory(b, "test")
         self.wait_modal_inline_alert(b, "mkdir: cannot create directory ‘/home/admin/newdir/test’: Operation not permitted")
-        b.click("div.pf-v5-c-modal-box__close")
+        b.click("div.pf-v5-c-modal-box__close button.pf-v5-c-button")
         b.click(".breadcrumb-button:nth-of-type(3)")
         m.execute("sudo chattr -i /home/admin/newdir")
 
