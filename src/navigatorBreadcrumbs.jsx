@@ -26,6 +26,15 @@ import { Button, Flex, FlexItem, PageBreadcrumb } from "@patternfly/react-core";
 import { ArrowLeftIcon, ArrowRightIcon } from "@patternfly/react-icons";
 
 export const NavigatorBreadcrumbs = ({ path, historyIndex, setHistoryIndex }) => {
+    // Update historyIndex when browser's history buttons are pressed
+    addEventListener("popstate", () => {
+        console.log(history.state, historyIndex.current);
+        if (history.state < historyIndex.current)
+            setHistoryIndex(i => ({ length: i.length, current: i.current - 1 }));
+        else if (history.state > historyIndex.current)
+            setHistoryIndex(i => ({ length: i.length, current: i.current + 1 }));
+    });
+
     const navigateBack = () => {
         if (historyIndex.current > 0) {
             history.back();

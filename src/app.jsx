@@ -56,6 +56,9 @@ export const Application = () => {
 
     const onFilterChange = (_, value) => setCurrentFilter(value);
 
+    // eslint-disable-next-line no-restricted-globals
+    useEffect(() => history.replaceState({ index: historyIndex.current }, ""));
+
     useEffect(() => {
         cockpit.user().then(user => {
             if (options.path === undefined) {
