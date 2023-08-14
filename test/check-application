@@ -21,6 +21,10 @@ class TestNavigator(testlib.MachineCase):
         # Run browser in UTC as the displayed time is in the browser's timezone
         os.environ['TZ'] = 'UTC'
 
+    def enter_navigator(self):
+        self.login_and_go("/navigator")
+        self.browser.wait_not_present(".pf-c-empty-state")
+
     # FIXME: Move to testlib.py
     def select_PF5(self, b, selector_button: str, selector: str, value):
         b.click(f"{selector_button}:not([disabled]):not([aria-disabled=true])")
@@ -70,7 +74,7 @@ class TestNavigator(testlib.MachineCase):
 
         self.restore_dir("/home/admin")
 
-        self.login_and_go("/navigator")
+        self.enter_navigator()
         # expected heading
         b.wait_text("#navigator-card-header", "Directories & files")
         files_cnt = m.execute("ls -A /home/admin | wc -l").strip()
@@ -177,7 +181,7 @@ class TestNavigator(testlib.MachineCase):
 
         self.restore_dir("/home/admin")
 
-        self.login_and_go("/navigator")
+        self.enter_navigator()
 
         b.wait_text(".breadcrumb-button:nth-of-type(1)", "/")
         b.wait_text(".breadcrumb-button:nth-of-type(2)", "home")
@@ -243,7 +247,7 @@ class TestNavigator(testlib.MachineCase):
 
         self.restore_dir("/home/admin")
 
-        self.login_and_go("/navigator")
+        self.enter_navigator()
 
         # Expected heading
         b.wait_text("#navigator-card-header", "Directories & files")
@@ -305,7 +309,7 @@ class TestNavigator(testlib.MachineCase):
 
         self.restore_dir("/home/admin")
 
-        self.login_and_go("/navigator")
+        self.enter_navigator()
 
         self.allow_journal_messages("rm: cannot remove '/home/admin/newdir/newfile': Permission denied",
                                     "rm: cannot remove '/home/admin/newfile': Operation not permitted")
@@ -370,7 +374,7 @@ class TestNavigator(testlib.MachineCase):
 
         self.restore_dir("/home/admin")
 
-        self.login_and_go("/navigator")
+        self.enter_navigator()
 
         # Create folder
         self.create_directory(b, "newdir")
@@ -408,7 +412,7 @@ class TestNavigator(testlib.MachineCase):
 
         self.restore_dir("/home/admin")
 
-        self.login_and_go("/navigator")
+        self.enter_navigator()
 
         # Create folder from context menu
         b.mouse("#folder-view", "contextmenu")
@@ -499,7 +503,7 @@ class TestNavigator(testlib.MachineCase):
 
         self.restore_dir("/home/admin")
 
-        self.login_and_go("/navigator")
+        self.enter_navigator()
 
         # Rename file
         m.execute("touch /home/admin/newfile")
@@ -542,7 +546,7 @@ class TestNavigator(testlib.MachineCase):
 
         self.restore_dir("/home/admin")
 
-        self.login_and_go("/navigator")
+        self.enter_navigator()
 
         # Check hidden item count
         m.execute("mkdir /home/admin/newdir")
@@ -569,7 +573,7 @@ class TestNavigator(testlib.MachineCase):
 
         self.restore_dir("/home/admin")
 
-        self.login_and_go("/navigator")
+        self.enter_navigator()
 
         m.execute("touch /home/admin/test")
         m.execute("mkdir /home/admin/testdir")
@@ -610,7 +614,7 @@ class TestNavigator(testlib.MachineCase):
 
         self.restore_dir("/home/admin")
 
-        self.login_and_go("/navigator")
+        self.enter_navigator()
 
         # Check sidebar info
         m.execute("touch /home/admin/newfile")
