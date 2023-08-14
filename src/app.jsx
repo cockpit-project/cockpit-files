@@ -239,7 +239,8 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, setPath, path, sortBy
     }
 
     const filteredFolders = filteredItems.filter((item) => (item.type === "directory"));
-    const filteredFiles = filteredItems.filter((item) => (item.type === "file"));
+    // filtered files can be files, links or special files
+    const filteredFiles = filteredItems.filter((item) => (item.type !== "directory"));
     const sortedFiles = filteredFolders.sort(compare).concat(filteredFiles.sort(compare));
 
     const Item = ({ file }) => {
