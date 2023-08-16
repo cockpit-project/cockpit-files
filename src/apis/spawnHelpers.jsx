@@ -24,10 +24,10 @@ import { ForceDeleteModal } from "../fileActions";
 
 const options = { err: "message", superuser: "try" };
 
-const renameCommand = (o) => {
-    return o.selected.items_cnt
-        ? ["mv", "/" + o.path.join("/"), "/" + o.path.slice(0, -1).join("/") + "/" + o.name]
-        : ["mv", "/" + o.path.join("/") + "/" + o.selected.name, "/" + o.path.join("/") + "/" + o.name];
+const renameCommand = ({ selected, path, name }) => {
+    return selected.items_cnt
+        ? ["mv", "/" + path.join("/"), "/" + path.slice(0, -1).join("/") + "/" + name]
+        : ["mv", "/" + path.join("/") + "/" + selected.name, "/" + path.join("/") + "/" + name];
 };
 
 export const spawnDeleteItem = (o) => {
@@ -63,7 +63,7 @@ export const spawnRenameItem = (o) => {
         ? "/" + o.path.slice(0, -1).join("/") + "/" + o.name
         : "/" + o.path.join("/") + "/" + o.name;
 
-    cockpit.spawn(renameCommand(o), options)
+    cockpit.spawn(renameCommand({ selected: o.selected, path: o.path, name: o.name }), options)
             .then(() => {
                 if (o.selected.items_cnt) {
                     cockpit.location.go("/", { path: encodeURIComponent(newPath) });
@@ -96,6 +96,6 @@ export const spawnEditPermissions = (o) => {
     Promise.resolve()
             .then(() => { if (o.ownerAccess !== o.selected.permissions[0] || o.groupAccess !== o.selected.permissions[1] || o.otherAccess !== o.selected.permissions[2]) return cockpit.spawn(command, options); })
             .then(() => { if (o.owner !== o.selected.owner || o.group !== o.selected.group) return cockpit.spawn(["chown", o.owner + ":" + o.group, "/" + o.path.join("/") + "/" + o.selected.name], options); })
-            .then(() => { if (o.name !== o.selected.name) return cockpit.spawn(renameCommand(o), options); })
+            .then(() => { if (o.name !== o.selected.name) return cockpit.spawn(renameCommand({ selected: o.selected, path: o.path, name: o.name }), options); })
             .then(o.Dialogs.close, err => o.setErrorMessage(err.message));
 };
