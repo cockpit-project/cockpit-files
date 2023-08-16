@@ -81,9 +81,7 @@ export const editPermissions = (Dialogs, options) => {
 export const ConfirmDeletionDialog = ({ selected, itemPath, path, setHistory, setHistoryIndex }) => {
     const Dialogs = useDialogs();
 
-    const modalTitle = selected.type === "file"
-        ? cockpit.format(_("Delete file $0?"), selected.name)
-        : cockpit.format(_("Delete directory $0?"), selected.name);
+    const modalTitle = cockpit.format(_("Delete $0 $1?"), selected.type, selected.name);
 
     return (
         <Modal
@@ -107,9 +105,7 @@ export const ForceDeleteModal = ({ selected, itemPath, initialError }) => {
     const [errorMessage, setErrorMessage] = useState(initialError);
     const [deleteFailed, setDeleteFailed] = useState(false);
 
-    const modalTitle = selected.type === "file"
-        ? cockpit.format(_("Force delete file $0?"), selected.name)
-        : cockpit.format(_("Force delete directory $0?"), selected.name);
+    const modalTitle = cockpit.format(_("Force delete $0 $1?"), selected.type, selected.name);
 
     return (
         <Modal
@@ -178,7 +174,7 @@ export const RenameItemModal = ({ path, selected, setHistory, setHistoryIndex })
     return (
         <Modal
           position="top"
-          title={selected.type === "file" ? _("Rename file") : _("Rename directory")}
+          title={cockpit.format(_("Rename $0"), selected.type)}
           isOpen
           onClose={Dialogs.close}
           footer={errorMessage === undefined &&
@@ -195,7 +191,7 @@ export const RenameItemModal = ({ path, selected, setHistory, setHistoryIndex })
                   isInline
                 />}
                 <Form isHorizontal>
-                    <FormGroup label={selected.type === "file" ? _("File name") : _("Directory name")}>
+                    <FormGroup label={cockpit.format(_("$0 name"), selected.type)}>
                         <TextInput
                           value={name} onChange={(_, val) => setName(val)}
                           id="rename-item-input"
@@ -327,7 +323,7 @@ export const EditPermissionsModal = ({ selected, path }) => {
         <Modal
           position="top"
           variant="medium"
-          title={selected.type === "file" ? _("File properties and access") : _("Directory properties and access")}
+          title={selected.type === "file" ? _("File properties and access") : selected.type === "link" ? _("Link properties and access") : _("Directory properties and access")}
           isOpen
           onClose={Dialogs.close}
           footer={
@@ -346,8 +342,8 @@ export const EditPermissionsModal = ({ selected, path }) => {
                   isInline
                 />}
                 <Form isHorizontal>
-                    <FormSection title={_("File properties")}>
-                        <FormGroup label={selected.type === "file" ? _("File name") : _("Directory name")} fieldId="edit-permissions-name">
+                    <FormSection title={selected.type === "file" ? _("File properties") : selected.type === "link" ? _("Link properties") : _("Directory properties")}>
+                        <FormGroup label={selected.type === "file" ? _("File name") : selected.type === "link" ? _("Link name") : _("Directory name")} fieldId="edit-permissions-name">
                             <TextInput
                               value={name} onChange={(_, val) => setName(val)}
                               id="edit-permissions-name"
