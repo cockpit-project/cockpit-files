@@ -81,7 +81,11 @@ export const editPermissions = (Dialogs, options) => {
 export const ConfirmDeletionDialog = ({ selected, itemPath, path, setHistory, setHistoryIndex }) => {
     const Dialogs = useDialogs();
 
-    const modalTitle = cockpit.format(_("Delete $0 $1?"), selected.type || "directory", selected.name);
+    const modalTitle = selected.type === "file"
+        ? cockpit.format(_("Delete file $0?"), selected.name)
+        : selected.type === "link"
+            ? cockpit.format(_("Delete link $0?"), selected.name)
+            : cockpit.format(_("Delete directory $0?"), selected.name);
 
     return (
         <Modal
@@ -105,7 +109,11 @@ export const ForceDeleteModal = ({ selected, itemPath, initialError }) => {
     const [errorMessage, setErrorMessage] = useState(initialError);
     const [deleteFailed, setDeleteFailed] = useState(false);
 
-    const modalTitle = cockpit.format(_("Force delete $0 $1?"), selected.type || "directory", selected.name);
+    const modalTitle = selected.type === "file"
+        ? cockpit.format(_("Force delete file $0?"), selected.name)
+        : selected.type === "link"
+            ? cockpit.format(_("Force delete link $0?"), selected.name)
+            : cockpit.format(_("Force delete directory $0?"), selected.name);
 
     return (
         <Modal
@@ -174,7 +182,7 @@ export const RenameItemModal = ({ path, selected, setHistory, setHistoryIndex })
     return (
         <Modal
           position="top"
-          title={cockpit.format(_("Rename $0"), selected.type || "directory")}
+          title={selected.type === "file" ? _("Rename file") : selected.type === "link" ? _("Rename link") : _("Rename directory")}
           isOpen
           onClose={Dialogs.close}
           footer={errorMessage === undefined &&
