@@ -20,6 +20,9 @@
 import cockpit from "cockpit";
 import { useDialogs } from "dialogs.jsx";
 import React, { useCallback, useEffect, useState, useRef } from "react";
+import Editor, { loader } from "@monaco-editor/react";
+import * as monaco from "monaco-editor";
+
 import {
     Button,
     Card, CardBody,
@@ -41,6 +44,7 @@ import { NavigatorCardHeader } from "./header.jsx";
 import { usePageLocation } from "hooks.js";
 
 const _ = cockpit.gettext;
+loader.config({ monaco });
 
 const updateFile = (file, currentPath) => {
     const filePath = currentPath + "/" + file.name;
@@ -323,6 +327,10 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, path, sortBy, selecte
                 <Flex id="folder-view">
                     {sortedFiles.map(file => <Item file={file} key={file.name} />)}
                 </Flex>
+                <Editor
+                  height="90vh" defaultLanguage="javascript"
+                  defaultValue="// some comment" options={{ minimap: { enabled: false } }}
+                />
             </CardBody>
         );
     } else {
