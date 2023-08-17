@@ -81,7 +81,7 @@ export const editPermissions = (Dialogs, options) => {
 export const ConfirmDeletionDialog = ({ selected, itemPath, path, setHistory, setHistoryIndex }) => {
     const Dialogs = useDialogs();
 
-    const modalTitle = cockpit.format(_("Delete $0 $1?"), selected.type, selected.name);
+    const modalTitle = cockpit.format(_("Delete $0 $1?"), selected.type || "directory", selected.name);
 
     return (
         <Modal
@@ -105,7 +105,7 @@ export const ForceDeleteModal = ({ selected, itemPath, initialError }) => {
     const [errorMessage, setErrorMessage] = useState(initialError);
     const [deleteFailed, setDeleteFailed] = useState(false);
 
-    const modalTitle = cockpit.format(_("Force delete $0 $1?"), selected.type, selected.name);
+    const modalTitle = cockpit.format(_("Force delete $0 $1?"), selected.type || "directory", selected.name);
 
     return (
         <Modal
@@ -174,7 +174,7 @@ export const RenameItemModal = ({ path, selected, setHistory, setHistoryIndex })
     return (
         <Modal
           position="top"
-          title={cockpit.format(_("Rename $0"), selected.type)}
+          title={cockpit.format(_("Rename $0"), selected.type || "directory")}
           isOpen
           onClose={Dialogs.close}
           footer={errorMessage === undefined &&
@@ -191,7 +191,7 @@ export const RenameItemModal = ({ path, selected, setHistory, setHistoryIndex })
                   isInline
                 />}
                 <Form isHorizontal>
-                    <FormGroup label={cockpit.format(_("$0 name"), selected.type)}>
+                    <FormGroup label={selected.type === "file" ? _("File name") : selected.type === "link" ? _("Link name") : _("Directory name")}>
                         <TextInput
                           value={name} onChange={(_, val) => setName(val)}
                           id="rename-item-input"

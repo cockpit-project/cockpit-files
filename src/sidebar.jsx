@@ -169,7 +169,7 @@ const DropdownWithKebab = ({ selected, path, showHidden, setShowHidden, setHisto
               </MenuToggle>}
         >
             <DropdownList>
-                {selected.type === "directory" &&
+                {selected.type !== "file" && selected.type !== "link" &&
                 <>
                     <DropdownItem
                       id="show-hidden-items" key="show-hidden-items"
@@ -197,7 +197,7 @@ const DropdownWithKebab = ({ selected, path, showHidden, setShowHidden, setHisto
                   id="rename-item" key="rename-item"
                   onClick={() => { renameItem(Dialogs, { selected, path, setHistory, setHistoryIndex }) }}
                 >
-                    {cockpit.format(_("Rename $0"), selected.type)}
+                    {cockpit.format(_("Rename $0"), selected.type || "directory")}
                 </DropdownItem>
                 <DropdownItem
                   id="copy-path" key="copy-path"
@@ -209,7 +209,7 @@ const DropdownWithKebab = ({ selected, path, showHidden, setShowHidden, setHisto
                   id="delete-item" key="delete-item"
                   onClick={() => { deleteItem(Dialogs, { selected, itemPath: currentDirectory + (selected.items_cnt ? "" : selected.name), path, setHistory, setHistoryIndex }) }} className="pf-m-danger"
                 >
-                    {cockpit.format(_("Delete $0"), selected.type)}
+                    {cockpit.format(_("Delete $0"), selected.type || "directory")}
                 </DropdownItem>
             </DropdownList>
         </Dropdown>
