@@ -81,11 +81,16 @@ export const editPermissions = (Dialogs, options) => {
 export const ConfirmDeletionDialog = ({ selected, itemPath, path, setHistory, setHistoryIndex }) => {
     const Dialogs = useDialogs();
 
-    const modalTitle = selected.type === "file"
-        ? cockpit.format(_("Delete file $0?"), selected.name)
-        : selected.type === "link"
-            ? cockpit.format(_("Delete link $0?"), selected.name)
-            : cockpit.format(_("Delete directory $0?"), selected.name);
+    let modalTitle;
+    if (selected.type === "file") {
+        modalTitle = cockpit.format(_("Delete file $0?"), selected.name);
+    } else if (selected.type === "link") {
+        modalTitle = cockpit.format(_("Delete link $0?"), selected.name);
+    } else if (selected.type === "directory") {
+        modalTitle = cockpit.format(_("Delete directory $0?"), selected.name);
+    } else {
+        modalTitle = cockpit.format(_("Delete $0?"), selected.name);
+    }
 
     return (
         <Modal
@@ -109,11 +114,16 @@ export const ForceDeleteModal = ({ selected, itemPath, initialError }) => {
     const [errorMessage, setErrorMessage] = useState(initialError);
     const [deleteFailed, setDeleteFailed] = useState(false);
 
-    const modalTitle = selected.type === "file"
-        ? cockpit.format(_("Force delete file $0?"), selected.name)
-        : selected.type === "link"
-            ? cockpit.format(_("Force delete link $0?"), selected.name)
-            : cockpit.format(_("Force delete directory $0?"), selected.name);
+    let modalTitle;
+    if (selected.type === "file") {
+        modalTitle = cockpit.format(_("Force delete file $0?"), selected.name);
+    } else if (selected.type === "link") {
+        modalTitle = cockpit.format(_("Force delete link $0?"), selected.name);
+    } else if (selected.type === "directory") {
+        modalTitle = cockpit.format(_("Force delete directory $0?"), selected.name);
+    } else {
+        modalTitle = _("Force delete $0?", selected.name);
+    }
 
     return (
         <Modal
@@ -179,10 +189,21 @@ export const RenameItemModal = ({ path, selected, setHistory, setHistoryIndex })
     const [name, setName] = useState(selected.name);
     const [errorMessage, setErrorMessage] = useState(undefined);
 
+    let title;
+    if (selected.type === "file") {
+        title = cockpit.format(_("Rename file $0"), selected.name);
+    } else if (selected.type === "link") {
+        title = cockpit.format(_("Rename link $0"), selected.name);
+    } else if (selected.type === "directory") {
+        title = cockpit.format(_("Rename directory $0"), selected.name);
+    } else {
+        title = _("Rename $0", selected.name);
+    }
+
     return (
         <Modal
           position="top"
-          title={selected.type === "file" ? _("Rename file") : selected.type === "link" ? _("Rename link") : _("Rename directory")}
+          title={title}
           isOpen
           onClose={Dialogs.close}
           footer={errorMessage === undefined &&
@@ -199,7 +220,7 @@ export const RenameItemModal = ({ path, selected, setHistory, setHistoryIndex })
                   isInline
                 />}
                 <Form isHorizontal>
-                    <FormGroup label={selected.type === "file" ? _("File name") : selected.type === "link" ? _("Link name") : _("Directory name")}>
+                    <FormGroup label={_("New name")}>
                         <TextInput
                           value={name} onChange={(_, val) => setName(val)}
                           id="rename-item-input"
@@ -351,7 +372,7 @@ export const EditPermissionsModal = ({ selected, path }) => {
                 />}
                 <Form isHorizontal>
                     <FormSection title={selected.type === "file" ? _("File properties") : selected.type === "link" ? _("Link properties") : _("Directory properties")}>
-                        <FormGroup label={selected.type === "file" ? _("File name") : selected.type === "link" ? _("Link name") : _("Directory name")} fieldId="edit-permissions-name">
+                        <FormGroup label={_("Name")} fieldId="edit-permissions-name">
                             <TextInput
                               value={name} onChange={(_, val) => setName(val)}
                               id="edit-permissions-name"
