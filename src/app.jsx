@@ -20,6 +20,7 @@
 import cockpit from "cockpit";
 import { useDialogs } from "dialogs.jsx";
 import React, { useCallback, useEffect, useState, useRef } from "react";
+import { CodeEditor, Language } from "@patternfly/react-code-editor";
 import {
     Button,
     Card, CardBody,
@@ -78,6 +79,7 @@ export const Application = () => {
     const [showHidden, setShowHidden] = useState(false);
     const [history, setHistory] = useState([]);
     const [historyIndex, setHistoryIndex] = useState(0);
+    const [isEditing, setIsEditing] = useState(false);
 
     const onFilterChange = (_, value) => setCurrentFilter(value);
     const currentPath = decodeURIComponent(options.path || "");
@@ -186,6 +188,10 @@ export const Application = () => {
             <MenuItem className="context-menu-option" onClick={() => { createLink(Dialogs, "/" + path.join("/") + "/", files, selectedContext) }}>
                 <div className="context-menu-name"> {_("Create link")}</div>
             </MenuItem>
+            {selectedContext && selectedContext.type === "file" &&
+                <MenuItem className="context-menu-option" onClick={() => { setIsEditing(true) }}>
+                    <div className="context-menu-name"> {_("Edit file")} </div>
+                </MenuItem>}
             {selectedContext &&
             <>
                 <MenuItem className="context-menu-option" onClick={() => { navigator.clipboard.writeText("/" + path.join("/") + "/" + selectedContext.name) }}>
@@ -220,6 +226,7 @@ export const Application = () => {
                           setHistory={setHistory} setHistoryIndex={setHistoryIndex}
                           showHidden={showHidden}
                           setShowHidden={setShowHidden} files={files}
+                          setIsEditing={setIsEditing}
                         />
                     </SidebarPanel>
                     <SidebarContent>
@@ -237,6 +244,7 @@ export const Application = () => {
                               selected={selected} setSelected={setSelected}
                               setSelectedContext={setSelectedContext} setHistory={setHistory}
                               setHistoryIndex={setHistoryIndex} historyIndex={historyIndex}
+                              isEditing={isEditing}
                             />
                             <ContextMenu
                               parentId="folder-view" contextMenuItems={contextMenuItems}
@@ -250,7 +258,7 @@ export const Application = () => {
     );
 };
 
-const NavigatorCardBody = ({ currentFilter, files, isGrid, path, sortBy, selected, setSelected, setSelectedContext, setHistory, historyIndex, setHistoryIndex }) => {
+const NavigatorCardBody = ({ currentFilter, files, isGrid, path, sortBy, selected, setSelected, setSelectedContext, setHistory, historyIndex, setHistoryIndex, isEditing }) => {
     const onDoubleClickNavigate = (path, file) => {
         const newPath = [...path, file.name].join("/");
         if (file.type === "directory") {
@@ -316,23 +324,39 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, path, sortBy, selecte
             </Button>
         );
     };
-
-    if (isGrid) {
-        return (
-            <CardBody onClick={resetSelected} id="navigator-card-body">
-                <Flex id="folder-view">
-                    {sortedFiles.map(file => <Item file={file} key={file.name} />)}
-                </Flex>
-            </CardBody>
-        );
+    const onEditorDidMount = (editor, monaco) => {
+        console.log(editor.getValue());
+        editor.layout();
+        editor.focus();
+        monaco.editor.getModels()[0].updateOptions({ tabSize: 5 });
+    };
+    if (!isEditing) {
+        if (isGrid) {
+            return (
+                <CardBody onClick={resetSelected} id="navigator-card-body">
+                    <Flex id="folder-view">
+                        {sortedFiles.map(file => <Item file={file} key={file.name} />)}
+                    </Flex>
+                </CardBody>
+            );
+        } else {
+            return (
+                <ListingTable
+                  id="folder-view"
+                  className="pf-m-no-border-rows"
+                  variant="compact"
+                  columns={[_("Name")]}
+                  rows={sortedFiles.map(file => ({ columns: [{ title: <Item file={file} key={file.name} /> }] }))}
+                />
+            );
+        }
     } else {
         return (
-            <ListingTable
-              id="folder-view"
-              className="pf-m-no-border-rows"
-              variant="compact"
-              columns={[_("Name")]}
-              rows={sortedFiles.map(file => ({ columns: [{ title: <Item file={file} key={file.name} /> }] }))}
+            <CodeEditor
+              code="Some example content"
+              language={Language.javascript}
+              onEditorDidMount={onEditorDidMount}
+              height="400px"
             />
         );
     }
