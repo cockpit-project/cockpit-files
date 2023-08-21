@@ -59,7 +59,16 @@ const updateFile = (file, currentPath) => {
                 file.group = res[2];
                 file.owner = res[3];
                 file.size = res[4];
-                return file;
+                if (file.type === "link")
+                    return cockpit.spawn(["ls", "-lF", filePath])
+                            .then(res => {
+                                file.to = res.slice(-2, -1) === "/"
+                                    ? "directory"
+                                    : "file";
+                                return file;
+                            });
+                else
+                    return file;
             }, exc => console.error("Adding file failed", file, exc));
 };
 
@@ -192,13 +201,13 @@ export const Application = () => {
                     <div className="context-menu-name"> {_("Copy full path")} </div>
                 </MenuItem>
                 <MenuItem className="context-menu-option" onClick={() => { renameItem(Dialogs, { selected: selectedContext, path, setHistory, setHistoryIndex }) }}>
-                    <div className="context-menu-name"> {selectedContext.type === "file" ? _("Rename file") : _("Rename directory")} </div>
+                    <div className="context-menu-name"> {cockpit.format(_("Rename $0"), selectedContext.type)} </div>
                 </MenuItem>
                 <MenuItem className="context-menu-option" onClick={() => { editPermissions(Dialogs, { selected: selectedContext, path }) }}>
                     <div className="context-menu-name"> {_("Edit properties")} </div>
                 </MenuItem>
                 <MenuItem className="context-menu-option pf-m-danger" onClick={() => { deleteItem(Dialogs, { selected: selectedContext, itemPath: "/" + path.join("/") + "/" + selectedContext.name, setHistory, setHistoryIndex }) }}>
-                    <div className="context-menu-name"> {selectedContext.type === "file" ? _("Delete file") : _("Delete directory")} </div>
+                    <div className="context-menu-name"> {cockpit.format(_("Delete $0"), selectedContext.type)} </div>
                 </MenuItem>
             </>}
         </MenuList>
@@ -253,7 +262,7 @@ export const Application = () => {
 const NavigatorCardBody = ({ currentFilter, files, isGrid, path, sortBy, selected, setSelected, setSelectedContext, setHistory, historyIndex, setHistoryIndex }) => {
     const onDoubleClickNavigate = (path, file) => {
         const newPath = [...path, file.name].join("/");
-        if (file.type === "directory") {
+        if (file.type === "directory" || file.to === "directory") {
             setHistory(h => [...h.slice(0, historyIndex + 1), [...path, file.name]]);
             setHistoryIndex(h => h + 1);
 
@@ -304,7 +313,7 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, path, sortBy, selecte
                 <Flex direction={{ default: isGrid ? "column" : "row" }} spaceItems={{ default: isGrid ? "spaceItemsNone" : "spaceItemsMd" }}>
                     <FlexItem alignSelf={{ default: "alignSelfCenter" }}>
                         <Icon size={isGrid ? "xl" : "lg"} isInline>
-                            {file.type === "directory"
+                            {file.type === "directory" || file.to === "directory"
                                 ? <FolderIcon />
                                 : <FileIcon />}
                         </Icon>
