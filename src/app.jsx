@@ -19,9 +19,8 @@
 
 import cockpit from "cockpit";
 import { useDialogs } from "dialogs.jsx";
-import React, { useCallback, useEffect, useState, useRef } from "react";
+import React, { useCallback, useEffect, useMemo, useState, useRef } from "react";
 import {
-    Button,
     Card, CardBody,
     Flex, FlexItem,
     Icon,
@@ -83,7 +82,6 @@ export const Application = () => {
     const channel = useRef(null);
     const channelList = useRef(null);
     const [selected, setSelected] = useState(null);
-    const [selectedArray, setSelectedArray] = useState([]);
     const [selectedContext, setSelectedContext] = useState(null);
     const [showHidden, setShowHidden] = useState(false);
     const [history, setHistory] = useState([]);
@@ -247,7 +245,6 @@ export const Application = () => {
                               selected={selected} setSelected={setSelected}
                               setSelectedContext={setSelectedContext} setHistory={setHistory}
                               setHistoryIndex={setHistoryIndex} historyIndex={historyIndex}
-                              selectedArray={selectedArray} setSelectedArray={setSelectedArray}
                             />
                             <ContextMenu
                               parentId="folder-view" contextMenuItems={contextMenuItems}
@@ -261,7 +258,70 @@ export const Application = () => {
     );
 };
 
-const NavigatorCardBody = ({ currentFilter, files, isGrid, path, sortBy, selected, setSelected, setSelectedContext, setHistory, historyIndex, setHistoryIndex, selectedArray, setSelectedArray }) => {
+const compare = (sortBy) => {
+    const compareFileType = (a, b) => {
+        if (a.type === "directory" && b.type !== "directory")
+            return -1;
+        if (a.type !== "directory" && b.type === "directory")
+            return 1;
+        return 0;
+    };
+
+    switch (sortBy) {
+    case "az":
+        return (a, b) => compareFileType(a, b) === 0 ? (a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1) : compareFileType(a, b);
+    case "za":
+        return (a, b) => compareFileType(a, b) === 0 ? (a.name.toLowerCase() > b.name.toLowerCase() ? -1 : 1) : compareFileType(a, b);
+    case "last_modified":
+        return (a, b) => compareFileType(a, b) === 0 ? (a.modified > b.modified ? -1 : 1) : compareFileType(a, b);
+    case "first_modified":
+        return (a, b) => compareFileType(a, b) === 0 ? (a.modified < b.modified ? -1 : 1) : compareFileType(a, b);
+    default:
+        break;
+    }
+};
+
+const NavigatorCardBody = ({ currentFilter, files, isGrid, path, sortBy, selected, setSelected, setSelectedContext, setHistory, historyIndex, setHistoryIndex }) => {
+    const sortedFiles = useMemo(() => {
+        const compareFunc = compare(sortBy);
+
+        return files
+                .filter(file => {
+                    return file.name.toLowerCase().includes(currentFilter.toLowerCase());
+                })
+                .sort(compareFunc);
+    }, [files, currentFilter, sortBy]);
+    const isMounted = useRef(null);
+
+    useEffect(() => {
+        const onKeyboardNav = (e) => {
+            if (e.key === "ArrowRight") {
+                setSelected(_selected => {
+                    const selectedIdx = sortedFiles?.findIndex(file => file.name === _selected?.name);
+                    const newIdx = selectedIdx < sortedFiles.length - 1 ? selectedIdx + 1 : 0;
+
+                    return sortedFiles[newIdx];
+                });
+            } else if (e.key === "ArrowLeft") {
+                setSelected(_selected => {
+                    const selectedIdx = sortedFiles?.findIndex(file => file.name === _selected?.name);
+                    const newIdx = selectedIdx > 0 ? selectedIdx - 1 : sortedFiles.length - 1;
+
+                    return sortedFiles[newIdx];
+                });
+            }
+        };
+
+        if (!isMounted.current) {
+            isMounted.current = true;
+            document.addEventListener("keydown", onKeyboardNav);
+        }
+        return () => {
+            isMounted.current = false;
+            document.removeEventListener("keydown", onKeyboardNav);
+        };
+    }, [setSelected, sortedFiles]);
+
     const onDoubleClickNavigate = (path, file) => {
         const newPath = [...path, file.name].join("/");
         if (file.type === "directory" || file.to === "directory") {
@@ -275,80 +335,43 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, path, sortBy, selecte
     const resetSelected = e => {
         if (e.target.id === "folder-view" || e.target.id === "navigator-card-body") {
             setSelected(path[path.length - 1]);
-            setSelectedArray([]);
         }
-    };
-
-    const filteredItems = files
-            .filter(file => {
-                return file.name.toLowerCase().includes(currentFilter.toLowerCase());
-            });
-
-    let compare;
-    switch (sortBy) {
-    case "az":
-        compare = (a, b) => a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1;
-        break;
-    case "za":
-        compare = (a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? -1 : 1;
-        break;
-    case "last_modified":
-        compare = (a, b) => a.modified > b.modified ? -1 : 1;
-        break;
-    case "first_modified":
-        compare = (a, b) => a.modified < b.modified ? -1 : 1;
-        break;
-    default:
-        break;
-    }
-
-    const filteredFolders = filteredItems.filter((item) => (item.type === "directory"));
-    // filtered files can be files, links or special files
-    const filteredFiles = filteredItems.filter((item) => (item.type !== "directory"));
-    const sortedFiles = filteredFolders.sort(compare).concat(filteredFiles.sort(compare));
-
-    const onCardChange = file => {
-        if (selectedArray.includes(file.name)) {
-            setSelectedArray(s => s.filter(i => i !== file.name));
-        } else
-            setSelectedArray(s => [...s, file.name]);
     };
 
     const Item = ({ file }) => {
         return (
             <Card
-              isSelectable isCompact
+              isClickable isCompact
               isPlain isRounded
               onContextMenu={(e) => { e.stopPropagation(); setSelectedContext(file) }}
-              onDoubleClick={() => onDoubleClickNavigate(path, file)} onClick={() => { setSelected(file); onCardChange(file) }}
+              onDoubleClick={() => onDoubleClickNavigate(path, file)}
+              onClick={() => setSelected(file)}
+              id={"card-item-" + file.name + file.type}
+              isSelected={selected?.name === file.name}
             >
                 <CardHeader
                   selectableActions={{
-                      selectableActionId: file.name,
-                      selectableActionAriaLabelledby: file.name,
                       name: file.name,
-                      isChecked: selectedArray.includes(file.name),
-                      onChange: onCardChange
+                      selectableActionAriaLabelledby: "card-item-" + file.name + file.type,
+                      selectableActionId: "card-item-" + file.name + file.type + "-selectable-action",
                   }}
                 >
-                    <CardTitle>
-                        <Button
-                          data-item={file.name} variant="plain"
-                          className={"item-button " + (file.type === "directory" ? "directory-item" : "file-item")}
-                        >
-                            <Flex direction={{ default: isGrid ? "column" : "row" }} spaceItems={{ default: isGrid ? "spaceItemsNone" : "spaceItemsMd" }}>
-                                <FlexItem alignSelf={{ default: "alignSelfCenter" }}>
-                                    <Icon size={isGrid ? "xl" : "lg"} isInline>
-                                        {file.type === "directory" || file.to === "directory"
-                                            ? <FolderIcon />
-                                            : <FileIcon />}
-                                    </Icon>
-                                </FlexItem>
-                                <FlexItem className={"pf-u-text-break-word pf-u-text-wrap" + (isGrid ? " grid-file-name" : "")}>
-                                    {selected?.name !== file.name ? <Truncate content={file.name} position="middle" /> : file.name}
-                                </FlexItem>
-                            </Flex>
-                        </Button>
+                    <CardTitle
+                      data-item={file.name}
+                      className={"item-button " + (file.type === "directory" ? "directory-item" : "file-item")}
+                    >
+                        <Flex direction={{ default: isGrid ? "column" : "row" }} spaceItems={{ default: isGrid ? "spaceItemsNone" : "spaceItemsMd" }}>
+                            <FlexItem alignSelf={{ default: "alignSelfCenter" }}>
+                                <Icon size={isGrid ? "xl" : "lg"} isInline>
+                                    {file.type === "directory" || file.to === "directory"
+                                        ? <FolderIcon />
+                                        : <FileIcon />}
+                                </Icon>
+                            </FlexItem>
+                            <FlexItem className={"pf-u-text-break-word pf-u-text-wrap" + (isGrid ? " grid-file-name" : "")}>
+                                {selected?.name !== file.name ? <Truncate content={file.name} position="middle" /> : file.name}
+                            </FlexItem>
+                        </Flex>
                     </CardTitle>
                 </CardHeader>
             </Card>
