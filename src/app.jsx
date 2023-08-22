@@ -367,6 +367,7 @@ const NavigatorCardBody = ({
     setSelectedContext,
     sortBy,
 }) => {
+    const [boxPerRow, setBoxPerRow] = useState(0);
     const sortedFiles = useMemo(() => {
         const compareFunc = compare(sortBy);
 
@@ -377,6 +378,24 @@ const NavigatorCardBody = ({
                 .sort(compareFunc);
     }, [files, currentFilter, sortBy]);
     const isMounted = useRef(null);
+
+    function calculateBoxPerRow () {
+        const boxes = document.querySelectorAll(".item-button");
+        if (boxes.length > 1) {
+            let i = 0;
+            const total = boxes.length;
+            const firstOffset = boxes[0].offsetTop;
+            while (++i < total && boxes[i].offsetTop === firstOffset);
+            setBoxPerRow(i);
+        }
+    }
+    useEffect(() => {
+        calculateBoxPerRow();
+        window.onresize = calculateBoxPerRow;
+        return () => {
+            window.onresize = undefined;
+        };
+    });
 
     useEffect(() => {
         const onKeyboardNav = (e) => {
@@ -398,6 +417,20 @@ const NavigatorCardBody = ({
 
                     return sortedFiles[newIdx];
                 });
+            } else if (e.key === "ArrowUp") {
+                setSelected(_selected => {
+                    const selectedIdx = sortedFiles?.findIndex(file => file.name === _selected?.name);
+                    const newIdx = Math.max(selectedIdx - boxPerRow, 0);
+
+                    return sortedFiles[newIdx];
+                });
+            } else if (e.key === "ArrowDown") {
+                setSelected(_selected => {
+                    const selectedIdx = sortedFiles?.findIndex(file => file.name === _selected?.name);
+                    const newIdx = Math.min(selectedIdx + boxPerRow, sortedFiles.length - 1);
+
+                    return sortedFiles[newIdx];
+                });
             }
         };
 
@@ -409,7 +442,7 @@ const NavigatorCardBody = ({
             isMounted.current = false;
             document.removeEventListener("keydown", onKeyboardNav);
         };
-    }, [setSelected, sortedFiles]);
+    }, [setSelected, sortedFiles, boxPerRow]);
 
     const onDoubleClickNavigate = (path, file) => {
         const newPath = [...path, file.name].join("/");
