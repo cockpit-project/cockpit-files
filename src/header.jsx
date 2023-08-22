@@ -77,11 +77,15 @@ const ViewSelector = ({ isGrid, setIsGrid, sortBy, setSortBy }) => {
                     variant: "action",
                     items: [
                         <MenuToggleAction
-                          aria-label={isGrid ? _("Display as a list") : _("Display as a grid")}
+                          aria-label={isGrid
+                              ? _("Display as a list")
+                              : _("Display as a grid")}
                           key="view-toggle-action"
                           onClick={() => setIsGrid(!isGrid)}
                         >
-                            {isGrid ? <ListIcon className="view-toggle-icon" /> : <GripVerticalIcon className="view-toggle-icon" />}
+                            {isGrid
+                                ? <ListIcon className="view-toggle-icon" />
+                                : <GripVerticalIcon className="view-toggle-icon" />}
                         </MenuToggleAction>
                     ]
                 }}

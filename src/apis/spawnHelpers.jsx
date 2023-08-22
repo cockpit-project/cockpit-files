@@ -89,7 +89,9 @@ export const spawnCreateDirectory = (o) => {
 export const spawnCreateLink = (o) => {
     cockpit.spawn([
         "ln",
-        ...(o.type === "symbolic" ? ["-s"] : []),
+        ...(o.type === "symbolic"
+            ? ["-s"]
+            : []),
         o.currentPath + o.originalName.slice(o.originalName.lastIndexOf("/") + 1),
         o.currentPath + o.newName
     ], options)
@@ -99,7 +101,9 @@ export const spawnCreateLink = (o) => {
 export const spawnEditPermissions = (o) => {
     const command = [
         "chmod",
-        ...(o.changeAll ? ["-R"] : []),
+        ...(o.changeAll
+            ? ["-R"]
+            : []),
         o.ownerAccess + o.groupAccess + o.otherAccess,
         "/" + o.path.join("/") + "/" + o.selected.name
     ];
