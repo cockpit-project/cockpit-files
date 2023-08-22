@@ -95,7 +95,7 @@ class TestNavigator(testlib.MachineCase):
         b.wait_not_present("[data-item='.hiddenfile']")
 
         # file sidebar information
-        b.click("button:contains('newfile')")
+        b.click("[data-item='newfile']")
         b.wait_text("#sidebar-card-header", "newfile empty")
         b.wait_text("#description-list-owner dd", "root")
         b.wait_text("#description-list-group dd", "root")
@@ -115,7 +115,7 @@ class TestNavigator(testlib.MachineCase):
         b.wait_in_text("#sidebar-card-header", "admin")
 
         # folder information doesn't contain size
-        b.click("button:contains('newdir')")
+        b.click("[data-item='newdir']")
         b.wait_text("#sidebar-card-header", "newdir directory")
         b.wait_text("#description-list-owner dd", "root")
         b.wait_text("#description-list-group dd", "root")
@@ -123,9 +123,9 @@ class TestNavigator(testlib.MachineCase):
         b.wait_text("#description-list-last-modified dd", "Jan 1, 2022, 12:00 PM")
 
         # filtering works
-        self.browser.wait_js_cond("ph_count('#folder-view > button') > 1")
+        self.browser.wait_js_cond("ph_count('#folder-view > .pf-v5-c-card') > 1")
         b.set_input_text("input[placeholder='Filter directory']", "newfile")
-        self.browser.wait_js_cond("ph_count('#folder-view > button') == 1")
+        self.browser.wait_js_cond("ph_count('#folder-view > .pf-v5-c-card') == 1")
 
         # filtering persists when changing view
         b.click("button[aria-label='Display as a list']")
@@ -194,7 +194,7 @@ class TestNavigator(testlib.MachineCase):
         b.wait_visible("[data-item='admin']")
 
         # show folder info in sidebar
-        b.click("button:contains('admin')")
+        b.click("[data-item='admin']")
         b.wait_in_text("#sidebar-card-header", "admin")
 
         # double-clicking on a directory should take us into it
@@ -618,7 +618,7 @@ class TestNavigator(testlib.MachineCase):
 
         # Check sidebar info
         m.execute("touch /home/admin/newfile")
-        b.click("button:contains('newfile')")
+        b.click("[data-item='newfile']")
         self.assertEqual(m.execute("ls -l /home/admin/newfile")[:10], "-rw-r--r--")
         b.wait_text("#description-list-owner-permissions dd", "Read and write")
         b.wait_text("#description-list-group-permissions dd", "Read-only")
@@ -632,7 +632,7 @@ class TestNavigator(testlib.MachineCase):
         b.wait_visible("[data-item='newfile1']")
 
         # Test changing owner/group
-        b.click("button:contains('newfile1')")
+        b.click("[data-item='newfile1']")
         b.click("button:contains('Edit properties')")
         # Changing owner should change group if user is not in the group
         b.select_from_dropdown("#edit-permissions-owner", "fedora")
@@ -667,7 +667,7 @@ class TestNavigator(testlib.MachineCase):
         m.execute("mkdir /home/admin/newdir")
         m.execute("touch /home/admin/newdir/file1")
         m.execute("touch /home/admin/newdir/file2")
-        b.click("button:contains('newdir')")
+        b.click("[data-item='newdir']")
         b.click("button:contains('Edit properties')")
         select_access("7")
         b.click("button.pf-m-secondary:contains('Change permissions for enclosed files')")

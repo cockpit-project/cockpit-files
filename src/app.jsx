@@ -341,13 +341,15 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, path, sortBy, selecte
     const Item = ({ file }) => {
         return (
             <Card
+              className={"item-button " + (file.type === "directory" ? "directory-item" : "file-item")}
+              data-item={file.name}
+              id={"card-item-" + file.name + file.type}
               isClickable isCompact
               isPlain isRounded
+              isSelected={selected?.name === file.name}
+              onClick={() => setSelected(file)}
               onContextMenu={(e) => { e.stopPropagation(); setSelectedContext(file) }}
               onDoubleClick={() => onDoubleClickNavigate(path, file)}
-              onClick={() => setSelected(file)}
-              id={"card-item-" + file.name + file.type}
-              isSelected={selected?.name === file.name}
             >
                 <CardHeader
                   selectableActions={{
@@ -356,10 +358,7 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, path, sortBy, selecte
                       selectableActionId: "card-item-" + file.name + file.type + "-selectable-action",
                   }}
                 >
-                    <CardTitle
-                      data-item={file.name}
-                      className={"item-button " + (file.type === "directory" ? "directory-item" : "file-item")}
-                    >
+                    <CardTitle>
                         <Flex direction={{ default: isGrid ? "column" : "row" }} spaceItems={{ default: isGrid ? "spaceItemsNone" : "spaceItemsMd" }}>
                             <FlexItem alignSelf={{ default: "alignSelfCenter" }}>
                                 <Icon size={isGrid ? "xl" : "lg"} isInline>
