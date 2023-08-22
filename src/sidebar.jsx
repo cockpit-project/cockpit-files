@@ -69,13 +69,15 @@ export const SidebarPanelDetails = ({
     const [info, setInfo] = useState(null);
 
     useEffect(() => {
-        const filePath = path.join("/") + "/" + selected.path;
+        if (selected.type === "single") {
+            const filePath = path.join("/") + "/" + selected.data.path;
 
-        cockpit.spawn(["file", filePath], { superuser: "try", error: "message" })
-                .then(res => {
-                    const _info = res.split(":")[1].slice(0, -1);
-                    setInfo(_info);
-                }, console.error);
+            cockpit.spawn(["file", filePath], { superuser: "try", error: "message" })
+                    .then(res => {
+                        const _info = res.split(":")[1].slice(0, -1);
+                        setInfo(_info);
+                    }, console.error);
+        }
     }, [path, selected]);
 
     const Dialogs = useDialogs();
@@ -88,19 +90,19 @@ export const SidebarPanelDetails = ({
             <CardHeader>
                 <CardTitle component="h2" id="sidebar-card-header">
                     <TextContent>
-                        <Text component={TextVariants.h2}>{selected.name}</Text>
-                        {selected.items_cnt !== undefined &&
+                        <Text component={TextVariants.h2}>{selected.data.name}</Text>
+                        {selected.type === "current" &&
                             <Text component={TextVariants.small}>
                                 {cockpit.format(
                                     cockpit.ngettext(
                                         "$0 item $1", "$0 items $1",
-                                        selected.items_cnt.all
+                                        selected.data.items_cnt.all
                                     ),
-                                    selected.items_cnt.all,
-                                    cockpit.format("($0 hidden)", selected.items_cnt.hidden)
+                                    selected.data.items_cnt.all,
+                                    cockpit.format("($0 hidden)", selected.data.items_cnt.hidden)
                                 )}
                             </Text>}
-                        {selected.items_cnt === undefined &&
+                        {selected.type === "single" &&
                             <Text component={TextVariants.small}>
                                 {info}
                             </Text>}
@@ -113,28 +115,28 @@ export const SidebarPanelDetails = ({
                   setHistoryIndex={setHistoryIndex} files={files}
                 />
             </CardHeader>
-            {selected.items_cnt === undefined &&
+            {selected.type === "single" &&
             <CardBody>
                 <DescriptionList isHorizontal id="description-list-sidebar">
                     <DescriptionListGroup id="description-list-last-modified">
                         <DescriptionListTerm>{_("Last modified")}</DescriptionListTerm>
                         <DescriptionListDescription>
-                            {timeformat.dateTime(selected.modified * 1000)}
+                            {timeformat.dateTime(selected.data.modified * 1000)}
                         </DescriptionListDescription>
                     </DescriptionListGroup>
                     <DescriptionListGroup id="description-list-owner">
                         <DescriptionListTerm>{_("Owner")}</DescriptionListTerm>
-                        <DescriptionListDescription>{selected.owner}</DescriptionListDescription>
+                        <DescriptionListDescription>{selected.data.owner}</DescriptionListDescription>
                     </DescriptionListGroup>
                     <DescriptionListGroup id="description-list-group">
                         <DescriptionListTerm>{_("Group")}</DescriptionListTerm>
-                        <DescriptionListDescription>{selected.group}</DescriptionListDescription>
+                        <DescriptionListDescription>{selected.data.group}</DescriptionListDescription>
                     </DescriptionListGroup>
-                    {selected.type === "file" &&
+                    {selected.data.type === "file" &&
                     <DescriptionListGroup id="description-list-size">
                         <DescriptionListTerm>{_("Size")}</DescriptionListTerm>
                         <DescriptionListDescription>
-                            {cockpit.format("$0 $1", cockpit.format_bytes(selected.size), selected.size < 1000
+                            {cockpit.format("$0 $1", cockpit.format_bytes(selected.data.size), selected.data.size < 1000
                                 ? "B"
                                 : "")}
                         </DescriptionListDescription>
@@ -142,19 +144,19 @@ export const SidebarPanelDetails = ({
                     <DescriptionListGroup id="description-list-owner-permissions">
                         <DescriptionListTerm>{_("Owner permissions")}</DescriptionListTerm>
                         <DescriptionListDescription>
-                            {getPermissions(selected.permissions[0])}
+                            {getPermissions(selected.data.permissions[0])}
                         </DescriptionListDescription>
                     </DescriptionListGroup>
                     <DescriptionListGroup id="description-list-group-permissions">
                         <DescriptionListTerm>{_("Group permissions")}</DescriptionListTerm>
                         <DescriptionListDescription>
-                            {getPermissions(selected.permissions[1])}
+                            {getPermissions(selected.data.permissions[1])}
                         </DescriptionListDescription>
                     </DescriptionListGroup>
                     <DescriptionListGroup id="description-list-other-permissions">
                         <DescriptionListTerm>{_("Other permissions")}</DescriptionListTerm>
                         <DescriptionListDescription>
-                            {getPermissions(selected.permissions[2])}
+                            {getPermissions(selected.data.permissions[2])}
                         </DescriptionListDescription>
                     </DescriptionListGroup>
                 </DescriptionList>

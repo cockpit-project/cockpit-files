@@ -106,14 +106,14 @@ export const ConfirmDeletionDialog = ({
     const Dialogs = useDialogs();
 
     let modalTitle;
-    if (selected.type === "file") {
-        modalTitle = cockpit.format(_("Delete file $0?"), selected.name);
-    } else if (selected.type === "link") {
-        modalTitle = cockpit.format(_("Delete link $0?"), selected.name);
-    } else if (selected.type === "directory" || selected.items_cnt) {
-        modalTitle = cockpit.format(_("Delete directory $0?"), selected.name);
+    if (selected.data.type === "file") {
+        modalTitle = cockpit.format(_("Delete file $0?"), selected.data.name);
+    } else if (selected.data.type === "link") {
+        modalTitle = cockpit.format(_("Delete link $0?"), selected.data.name);
+    } else if (selected.data.type === "directory" || selected.type === "current") {
+        modalTitle = cockpit.format(_("Delete directory $0?"), selected.data.name);
     } else {
-        modalTitle = cockpit.format(_("Delete $0?"), selected.name);
+        modalTitle = cockpit.format(_("Delete $0?"), selected.data.name);
     }
 
     const deleteItem = () => {
@@ -143,14 +143,14 @@ export const ForceDeleteModal = ({ selected, itemPath, initialError }) => {
     const [deleteFailed, setDeleteFailed] = useState(false);
 
     let modalTitle;
-    if (selected.type === "file") {
-        modalTitle = cockpit.format(_("Force delete file $0?"), selected.name);
-    } else if (selected.type === "link") {
-        modalTitle = cockpit.format(_("Force delete link $0?"), selected.name);
-    } else if (selected.type === "directory" || selected.items_cnt) {
-        modalTitle = cockpit.format(_("Force delete directory $0?"), selected.name);
+    if (selected.data.type === "file") {
+        modalTitle = cockpit.format(_("Force delete file $0?"), selected.data.name);
+    } else if (selected.data.type === "link") {
+        modalTitle = cockpit.format(_("Force delete link $0?"), selected.data.name);
+    } else if (selected.data.type === "directory" || selected.type === "current") {
+        modalTitle = cockpit.format(_("Force delete directory $0?"), selected.data.name);
     } else {
-        modalTitle = _("Force delete $0?", selected.name);
+        modalTitle = _("Force delete $0?", selected.data.name);
     }
 
     const forceDeleteItem = () => {
@@ -221,18 +221,18 @@ export const CreateDirectoryModal = ({ selected, currentPath }) => {
 
 export const RenameItemModal = ({ path, selected, setHistory, setHistoryIndex }) => {
     const Dialogs = useDialogs();
-    const [name, setName] = useState(selected.name);
+    const [name, setName] = useState(selected.data.name);
     const [errorMessage, setErrorMessage] = useState(undefined);
 
     let title;
-    if (selected.type === "file") {
-        title = cockpit.format(_("Rename file $0"), selected.name);
-    } else if (selected.type === "link") {
-        title = cockpit.format(_("Rename link $0"), selected.name);
-    } else if (selected.type === "directory" || selected.items_cnt) {
-        title = cockpit.format(_("Rename directory $0"), selected.name);
+    if (selected.data.type === "file") {
+        title = cockpit.format(_("Rename file $0"), selected.data.name);
+    } else if (selected.data.type === "link") {
+        title = cockpit.format(_("Rename link $0"), selected.data.name);
+    } else if (selected.data.type === "directory" || selected.type === "current") {
+        title = cockpit.format(_("Rename directory $0"), selected.data.name);
     } else {
-        title = _("Rename $0", selected.name);
+        title = _("Rename $0", selected.data.name);
     }
 
     const renameItem = () => {
@@ -273,7 +273,7 @@ export const RenameItemModal = ({ path, selected, setHistory, setHistoryIndex })
 
 export const CreateLinkModal = ({ currentPath, selected }) => {
     const Dialogs = useDialogs();
-    const [originalName, setOriginalName] = useState(selected?.name || "");
+    const [originalName, setOriginalName] = useState(selected?.data.name || "");
     const [newName, setNewName] = useState("");
     const [type, setType] = useState("symbolic");
     const [errorMessage, setErrorMessage] = useState(undefined);
@@ -338,12 +338,12 @@ export const CreateLinkModal = ({ currentPath, selected }) => {
 
 export const EditPermissionsModal = ({ selected, path }) => {
     const Dialogs = useDialogs();
-    const [name, setName] = useState(selected.name);
-    const [owner, setOwner] = useState(selected.owner);
-    const [ownerAccess, setOwnerAccess] = useState(selected.permissions[0]);
-    const [group, setGroup] = useState(selected.group);
-    const [groupAccess, setGroupAccess] = useState(selected.permissions[1]);
-    const [otherAccess, setOtherAccess] = useState(selected.permissions[2]);
+    const [name, setName] = useState(selected.data.name);
+    const [owner, setOwner] = useState(selected.data.owner);
+    const [ownerAccess, setOwnerAccess] = useState(selected.data.permissions[0]);
+    const [group, setGroup] = useState(selected.data.group);
+    const [groupAccess, setGroupAccess] = useState(selected.data.permissions[1]);
+    const [otherAccess, setOtherAccess] = useState(selected.data.permissions[2]);
     const [errorMessage, setErrorMessage] = useState(undefined);
     const accounts = useFile("/etc/passwd", { syntax: etcPasswdSyntax });
     const groups = useFile("/etc/group", { syntax: etcGroupSyntax });
@@ -406,9 +406,9 @@ export const EditPermissionsModal = ({ selected, path }) => {
         <Modal
           position="top"
           variant="medium"
-          title={selected.type === "file"
+          title={selected.data.type === "file"
               ? _("File properties and access")
-              : selected.type === "link"
+              : selected.data.type === "link"
                   ? _("Link properties and access")
                   : _("Directory properties and access")}
           isOpen
@@ -421,7 +421,7 @@ export const EditPermissionsModal = ({ selected, path }) => {
                   >
                       {_("Change")}
                   </Button>
-                  {selected.type === "directory" &&
+                  {selected.data.type === "directory" &&
                   <Button
                     variant="secondary"
                     onClick={() => spawnEditPermissions({ ...options, changeAll: true })}
@@ -440,9 +440,9 @@ export const EditPermissionsModal = ({ selected, path }) => {
                   isInline
                 />}
                 <Form isHorizontal>
-                    <FormSection title={selected.type === "file"
+                    <FormSection title={selected.data.type === "file"
                         ? _("File properties")
-                        : selected.type === "link"
+                        : selected.data.type === "link"
                             ? _("Link properties")
                             : _("Directory properties")}
                     >

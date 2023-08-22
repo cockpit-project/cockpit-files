@@ -25,15 +25,15 @@ import { ForceDeleteModal } from "../fileActions";
 const options = { err: "message", superuser: "try" };
 
 const renameCommand = ({ selected, path, name }) => {
-    return selected.items_cnt
+    return selected.type === "current"
         ? ["mv", "/" + path.join("/"), "/" + path.slice(0, -1).join("/") + "/" + name]
-        : ["mv", "/" + path.join("/") + "/" + selected.name, "/" + path.join("/") + "/" + name];
+        : ["mv", "/" + path.join("/") + "/" + selected.data.name, "/" + path.join("/") + "/" + name];
 };
 
 export const spawnDeleteItem = (o) => {
     cockpit.spawn(["rm", "-r", o.itemPath], options)
             .then(() => {
-                if (o.selected.items_cnt) {
+                if (o.selected.type === "current") {
                     const newPath = "/" + o.path.slice(0, -1).join("/");
 
                     cockpit.location.go("/", { path: encodeURIComponent(newPath) });
@@ -60,13 +60,13 @@ export const spawnForceDelete = (o) => {
 };
 
 export const spawnRenameItem = (o) => {
-    const newPath = o.selected.items_cnt
+    const newPath = o.selected.type === "current"
         ? "/" + o.path.slice(0, -1).join("/") + "/" + o.name
         : "/" + o.path.join("/") + "/" + o.name;
 
     cockpit.spawn(renameCommand({ selected: o.selected, path: o.path, name: o.name }), options)
             .then(() => {
-                if (o.selected.items_cnt) {
+                if (o.selected.type === "current") {
                     cockpit.location.go("/", { path: encodeURIComponent(newPath) });
                     o.setHistory(h => h.slice(0, -1));
                     o.setHistoryIndex(i => i - 1);
@@ -77,8 +77,8 @@ export const spawnRenameItem = (o) => {
 
 export const spawnCreateDirectory = (o) => {
     let path;
-    if (o.selected.icons_cnt || o.selected.type === "directory") {
-        path = o.currentPath + o.selected.name + "/" + o.name;
+    if (o.selected.data.type === "directory") {
+        path = o.currentPath + o.selected.data.name + "/" + o.name;
     } else {
         path = o.currentPath + o.name;
     }
@@ -105,15 +105,15 @@ export const spawnEditPermissions = (o) => {
             ? ["-R"]
             : []),
         o.ownerAccess + o.groupAccess + o.otherAccess,
-        "/" + o.path.join("/") + "/" + o.selected.name
+        "/" + o.path.join("/") + "/" + o.selected.data.name
     ];
     const permissionChanged = (
-        o.ownerAccess !== o.selected.permissions[0] ||
-        o.groupAccess !== o.selected.permissions[1] ||
-        o.otherAccess !== o.selected.permissions[2]
+        o.ownerAccess !== o.selected.data.permissions[0] ||
+        o.groupAccess !== o.selected.data.permissions[1] ||
+        o.otherAccess !== o.selected.data.permissions[2]
     );
-    const ownerChanged = o.owner !== o.selected.owner || o.group !== o.selected.group;
-    const nameChanged = o.name !== o.selected.name;
+    const ownerChanged = o.owner !== o.selected.data.owner || o.group !== o.selected.data.group;
+    const nameChanged = o.name !== o.selected.data.name;
 
     Promise.resolve()
             .then(() => {
@@ -123,7 +123,7 @@ export const spawnEditPermissions = (o) => {
             .then(() => {
                 if (ownerChanged) {
                     return cockpit.spawn(
-                        ["chown", o.owner + ":" + o.group, "/" + o.path.join("/") + "/" + o.selected.name],
+                        ["chown", o.owner + ":" + o.group, "/" + o.path.join("/") + "/" + o.selected.data.name],
                         options
                     );
                 }

@@ -86,7 +86,8 @@ export const Application = () => {
     const [sortBy, setSortBy] = useState(localStorage.getItem("cockpit-navigator.sort") || "az");
     const channel = useRef(null);
     const channelList = useRef(null);
-    const [selected, setSelected] = useState(null);
+    // selected types: current, single, multiple
+    const [selected, setSelected] = useState({ type: "current", data: {} });
     const [selectedContext, setSelectedContext] = useState(null);
     const [showHidden, setShowHidden] = useState(false);
     const [history, setHistory] = useState([]);
@@ -178,7 +179,7 @@ export const Application = () => {
         if (currentPath === "")
             return;
 
-        setSelected(sel);
+        setSelected({ type: "current", data: { name: sel } });
         setFiles([]);
         setLoading(true);
 
@@ -240,7 +241,7 @@ export const Application = () => {
                 </MenuItem>
                 <MenuItem className="context-menu-option" onClick={_renameItem}>
                     <div className="context-menu-name">
-                        {cockpit.format(_("Rename $0"), selectedContext.type)}
+                        {cockpit.format(_("Rename $0"), selectedContext.data.type)}
                     </div>
                 </MenuItem>
                 <MenuItem className="context-menu-option" onClick={_editPermissions}>
@@ -248,7 +249,7 @@ export const Application = () => {
                 </MenuItem>
                 <MenuItem className="context-menu-option pf-m-danger" onClick={_deleteItem}>
                     <div className="context-menu-name">
-                        {cockpit.format(_("Delete $0"), selectedContext.type)}
+                        {cockpit.format(_("Delete $0"), selectedContext.data.type)}
                     </div>
                 </MenuItem>
             </>}
@@ -265,23 +266,24 @@ export const Application = () => {
             />
             <PageSection onContextMenu={() => {
                 setSelectedContext(null);
-                setSelected(path[path.length - 1]);
+                setSelected({ type:"current", data: { name:path[path.length - 1] } });
             }}
             >
                 <Sidebar isPanelRight hasGutter>
                     <SidebarPanel className="sidebar-panel" width={{ default: "width_25" }}>
                         <SidebarPanelDetails
-                          path={path}
-                          selected={
-                              (files.find(file => file.name === selected?.name)) ||
-                              ({
-                                  name: path[path.length - 1],
-                                  items_cnt: {
-                                      all: files.length,
-                                      hidden: files.length - files.filter(file => !file.name.startsWith(".")).length
+                          path={path} selected={selected.type !== "current"
+                              ? selected
+                              : {
+                                  type: "current",
+                                  data: {
+                                      name: path[path.length - 1],
+                                      items_cnt: {
+                                          all: files.length,
+                                          hidden: files.length - files.filter(file => !file.name.startsWith(".")).length
+                                      }
                                   }
-                              })
-                          }
+                              }}
                           setHistory={setHistory} setHistoryIndex={setHistoryIndex}
                           showHidden={showHidden}
                           setShowHidden={setShowHidden} files={files}
@@ -382,21 +384,21 @@ const NavigatorCardBody = ({
         const onKeyboardNav = (e) => {
             if (e.key === "ArrowRight") {
                 setSelected(_selected => {
-                    const selectedIdx = sortedFiles?.findIndex(file => file.name === _selected?.name);
+                    const selectedIdx = sortedFiles?.findIndex(file => file.name === _selected.data.name);
                     const newIdx = selectedIdx < sortedFiles.length - 1
                         ? selectedIdx + 1
                         : 0;
 
-                    return sortedFiles[newIdx];
+                    return { type: "single", data: sortedFiles[newIdx] };
                 });
             } else if (e.key === "ArrowLeft") {
                 setSelected(_selected => {
-                    const selectedIdx = sortedFiles?.findIndex(file => file.name === _selected?.name);
+                    const selectedIdx = sortedFiles?.findIndex(file => file.name === _selected.data.name);
                     const newIdx = selectedIdx > 0
                         ? selectedIdx - 1
                         : sortedFiles.length - 1;
 
-                    return sortedFiles[newIdx];
+                    return { type: "single", data: sortedFiles[newIdx] };
                 });
             }
         };
@@ -412,6 +414,7 @@ const NavigatorCardBody = ({
     }, [setSelected, sortedFiles]);
 
     const onDoubleClickNavigate = (path, file) => {
+        console.log(path, file);
         const newPath = [...path, file.name].join("/");
         if (file.type === "directory" || file.to === "directory") {
             setHistory(h => [...h.slice(0, historyIndex + 1), [...path, file.name]]);
@@ -423,7 +426,7 @@ const NavigatorCardBody = ({
 
     const resetSelected = e => {
         if (e.target.id === "folder-view" || e.target.id === "navigator-card-body") {
-            setSelected(path[path.length - 1]);
+            setSelected({ type: "current", data: { name: path[path.length - 1] } });
         }
     };
 
@@ -437,11 +440,17 @@ const NavigatorCardBody = ({
               id={"card-item-" + file.name + file.type}
               isClickable isCompact
               isPlain isRounded
-              isSelected={selected?.name === file.name}
-              onClick={() => setSelected(file)}
-              onContextMenu={(e) => {
+              isSelected={selected.type === "single"
+                  ? (selected.data.name === file.name)
+                  : false}
+              onClick={(ev) => {
+                  setSelected({ type: "single", data: file });
+                  console.log(ev.ctrlKey);
+              }}
+              onContextMenu={e => {
                   e.stopPropagation();
-                  setSelectedContext(file);
+                  setSelectedContext({ type: "single", data: file });
+                  setSelected({ type: "single", data: file });
               }}
               onDoubleClick={() => onDoubleClickNavigate(path, file)}
             >
@@ -479,7 +488,7 @@ const NavigatorCardBody = ({
                                 ? " grid-file-name"
                                 : "")}
                             >
-                                {selected?.name !== file.name
+                                {selected?.type === "single" && selected.data.name !== file.name
                                     ? <Truncate content={file.name} position="middle" />
                                     : file.name}
                             </FlexItem>
