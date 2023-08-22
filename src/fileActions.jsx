@@ -34,9 +34,19 @@ import {
 import { useDialogs } from "dialogs.jsx";
 import { InlineNotification } from "cockpit-components-inline-notification";
 import { useFile } from "hooks.js";
-import { etc_group_syntax as etcGroupSyntax, etc_passwd_syntax as etcPasswdSyntax } from "pam_user_parser.js";
+import {
+    etc_group_syntax as etcGroupSyntax,
+    etc_passwd_syntax as etcPasswdSyntax
+} from "pam_user_parser.js";
 import { FileAutoComplete } from "../pkg/lib/cockpit-components-file-autocomplete";
-import { spawnCreateDirectory, spawnCreateLink, spawnDeleteItem, spawnEditPermissions, spawnForceDelete, spawnRenameItem } from "./apis/spawnHelpers";
+import {
+    spawnCreateDirectory,
+    spawnCreateLink,
+    spawnDeleteItem,
+    spawnEditPermissions,
+    spawnForceDelete,
+    spawnRenameItem
+} from "./apis/spawnHelpers";
 import { permissions } from "./common";
 
 const _ = cockpit.gettext;
@@ -86,7 +96,13 @@ export const editPermissions = (Dialogs, options) => {
     );
 };
 
-export const ConfirmDeletionDialog = ({ selected, itemPath, path, setHistory, setHistoryIndex }) => {
+export const ConfirmDeletionDialog = ({
+    itemPath,
+    path,
+    selected,
+    setHistory,
+    setHistoryIndex
+}) => {
     const Dialogs = useDialogs();
 
     let modalTitle;
@@ -100,6 +116,10 @@ export const ConfirmDeletionDialog = ({ selected, itemPath, path, setHistory, se
         modalTitle = cockpit.format(_("Delete $0?"), selected.name);
     }
 
+    const deleteItem = () => {
+        spawnDeleteItem({ Dialogs, selected, itemPath, path, setHistory, setHistoryIndex });
+    };
+
     return (
         <Modal
           position="top"
@@ -109,7 +129,7 @@ export const ConfirmDeletionDialog = ({ selected, itemPath, path, setHistory, se
           onClose={Dialogs.close}
           footer={
               <>
-                  <Button variant="danger" onClick={() => spawnDeleteItem({ Dialogs, selected, itemPath, path, setHistory, setHistoryIndex })}>{_("Delete")}</Button>
+                  <Button variant="danger" onClick={deleteItem}>{_("Delete")}</Button>
                   <Button variant="link" onClick={Dialogs.close}>{_("Cancel")}</Button>
               </>
           }
@@ -133,6 +153,10 @@ export const ForceDeleteModal = ({ selected, itemPath, initialError }) => {
         modalTitle = _("Force delete $0?", selected.name);
     }
 
+    const forceDeleteItem = () => {
+        spawnForceDelete({ Dialogs, itemPath, setDeleteFailed, setErrorMessage });
+    };
+
     return (
         <Modal
           position="top"
@@ -142,7 +166,7 @@ export const ForceDeleteModal = ({ selected, itemPath, initialError }) => {
           onClose={Dialogs.close}
           footer={!deleteFailed &&
           <>
-              <Button variant="danger" onClick={() => spawnForceDelete({ Dialogs, itemPath, setDeleteFailed, setErrorMessage })}>{_("Force delete")}</Button>
+              <Button variant="danger" onClick={forceDeleteItem}>{_("Force delete")}</Button>
               <Button variant="link" onClick={Dialogs.close}>{_("Cancel")}</Button>
           </>}
         >
@@ -159,6 +183,9 @@ export const CreateDirectoryModal = ({ selected, currentPath }) => {
     const Dialogs = useDialogs();
     const [name, setName] = useState("");
     const [errorMessage, setErrorMessage] = useState(undefined);
+    const createDirectory = () => {
+        spawnCreateDirectory({ Dialogs, selected, currentPath, name, setErrorMessage });
+    };
 
     return (
         <Modal
@@ -168,7 +195,7 @@ export const CreateDirectoryModal = ({ selected, currentPath }) => {
           onClose={Dialogs.close}
           footer={errorMessage === undefined &&
           <>
-              <Button variant="primary" onClick={() => spawnCreateDirectory({ Dialogs, selected, currentPath, name, setErrorMessage })}>{_("Create")}</Button>
+              <Button variant="primary" onClick={createDirectory}>{_("Create")}</Button>
               <Button variant="link" onClick={Dialogs.close}>{_("Cancel")}</Button>
           </>}
         >
@@ -208,6 +235,10 @@ export const RenameItemModal = ({ path, selected, setHistory, setHistoryIndex })
         title = _("Rename $0", selected.name);
     }
 
+    const renameItem = () => {
+        spawnRenameItem({ Dialogs, path, selected, name, setErrorMessage, setHistory, setHistoryIndex });
+    };
+
     return (
         <Modal
           position="top"
@@ -216,7 +247,7 @@ export const RenameItemModal = ({ path, selected, setHistory, setHistoryIndex })
           onClose={Dialogs.close}
           footer={errorMessage === undefined &&
           <>
-              <Button variant="primary" onClick={() => spawnRenameItem({ Dialogs, path, selected, name, setErrorMessage, setHistory, setHistoryIndex })}>{_("Rename")}</Button>
+              <Button variant="primary" onClick={renameItem}>{_("Rename")}</Button>
               <Button variant="link" onClick={Dialogs.close}>{_("Cancel")}</Button>
           </>}
         >
@@ -247,6 +278,10 @@ export const CreateLinkModal = ({ currentPath, selected }) => {
     const [type, setType] = useState("symbolic");
     const [errorMessage, setErrorMessage] = useState(undefined);
 
+    const createLink = () => {
+        spawnCreateLink({ Dialogs, currentPath, type, originalName, newName, setErrorMessage });
+    };
+
     return (
         <Modal
           position="top"
@@ -255,7 +290,7 @@ export const CreateLinkModal = ({ currentPath, selected }) => {
           onClose={Dialogs.close}
           footer={
               <>
-                  <Button variant="primary" onClick={() => spawnCreateLink({ Dialogs, currentPath, type, originalName, newName, setErrorMessage })}>{_("Create link")}</Button>
+                  <Button variant="primary" onClick={createLink}>{_("Create link")}</Button>
                   <Button variant="link" onClick={Dialogs.close}>{_("Cancel")}</Button>
               </>
           }
@@ -354,7 +389,18 @@ export const EditPermissionsModal = ({ selected, path }) => {
         }
     };
 
-    const options = { Dialogs, selected, path, owner, group, ownerAccess, groupAccess, otherAccess, name, setErrorMessage };
+    const options = {
+        Dialogs,
+        group,
+        groupAccess,
+        name,
+        otherAccess,
+        owner,
+        ownerAccess,
+        path,
+        selected,
+        setErrorMessage
+    };
 
     return (
         <Modal
@@ -369,8 +415,19 @@ export const EditPermissionsModal = ({ selected, path }) => {
           onClose={Dialogs.close}
           footer={
               <>
-                  <Button variant="primary" onClick={() => spawnEditPermissions({ ...options, changeAll: false })}>{_("Change")}</Button>
-                  {selected.type === "directory" && <Button variant="secondary" onClick={() => spawnEditPermissions({ ...options, changeAll: true })}>{_("Change permissions for enclosed files")}</Button>}
+                  <Button
+                    variant="primary"
+                    onClick={() => spawnEditPermissions({ ...options, changeAll: false })}
+                  >
+                      {_("Change")}
+                  </Button>
+                  {selected.type === "directory" &&
+                  <Button
+                    variant="secondary"
+                    onClick={() => spawnEditPermissions({ ...options, changeAll: true })}
+                  >
+                      {_("Change permissions for enclosed files")}
+                  </Button>}
                   <Button variant="link" onClick={Dialogs.close}>{_("Cancel")}</Button>
               </>
           }
@@ -427,9 +484,13 @@ export const EditPermissionsModal = ({ selected, path }) => {
                         </FormGroup>
                     </FormSection>
                     <FormSection title={_("Access")}>
-                        <FormGroup label={_("Owner access")} fieldId="edit-permissions-owner-access">
+                        <FormGroup
+                          label={_("Owner access")}
+                          fieldId="edit-permissions-owner-access"
+                        >
                             <FormSelect
-                              value={ownerAccess} onChange={(_, val) => { setOwnerAccess(val) }}
+                              value={ownerAccess}
+                              onChange={(_, val) => { setOwnerAccess(val) }}
                               id="edit-permissions-owner-access"
                             >
                                 {permissions.map(p => (
@@ -440,9 +501,13 @@ export const EditPermissionsModal = ({ selected, path }) => {
                                 ))}
                             </FormSelect>
                         </FormGroup>
-                        <FormGroup label={_("Group access")} fieldId="edit-permissions-group-access">
+                        <FormGroup
+                          label={_("Group access")}
+                          fieldId="edit-permissions-group-access"
+                        >
                             <FormSelect
-                              value={groupAccess} onChange={(_, val) => { setGroupAccess(val) }}
+                              value={groupAccess}
+                              onChange={(_, val) => { setGroupAccess(val) }}
                               id="edit-permissions-group-access"
                             >
                                 {permissions.map(p => (
@@ -453,9 +518,13 @@ export const EditPermissionsModal = ({ selected, path }) => {
                                 ))}
                             </FormSelect>
                         </FormGroup>
-                        <FormGroup label={_("Others access")} fieldId="edit-permissions-other-access">
+                        <FormGroup
+                          label={_("Others access")}
+                          fieldId="edit-permissions-other-access"
+                        >
                             <FormSelect
-                              value={otherAccess} onChange={(_, val) => { setOtherAccess(val) }}
+                              value={otherAccess}
+                              onChange={(_, val) => { setOtherAccess(val) }}
                               id="edit-permissions-other-access"
                             >
                                 {permissions.map(p => (

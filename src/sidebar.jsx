@@ -56,7 +56,16 @@ import { permissions } from "./common.js";
 
 const _ = cockpit.gettext;
 
-export const SidebarPanelDetails = ({ selected, path, setPath, showHidden, setShowHidden, setHistory, setHistoryIndex, files }) => {
+export const SidebarPanelDetails = ({
+    files,
+    path,
+    selected,
+    setHistory,
+    setHistoryIndex,
+    setPath,
+    setShowHidden,
+    showHidden,
+}) => {
     const [info, setInfo] = useState(null);
 
     useEffect(() => {
@@ -82,7 +91,14 @@ export const SidebarPanelDetails = ({ selected, path, setPath, showHidden, setSh
                         <Text component={TextVariants.h2}>{selected.name}</Text>
                         {selected.items_cnt !== undefined &&
                             <Text component={TextVariants.small}>
-                                {cockpit.format(cockpit.ngettext("$0 item $1", "$0 items $1", selected.items_cnt.all), selected.items_cnt.all, cockpit.format("($0 hidden)", selected.items_cnt.hidden))}
+                                {cockpit.format(
+                                    cockpit.ngettext(
+                                        "$0 item $1", "$0 items $1",
+                                        selected.items_cnt.all
+                                    ),
+                                    selected.items_cnt.all,
+                                    cockpit.format("($0 hidden)", selected.items_cnt.hidden)
+                                )}
                             </Text>}
                         {selected.items_cnt === undefined &&
                             <Text component={TextVariants.small}>
@@ -102,7 +118,9 @@ export const SidebarPanelDetails = ({ selected, path, setPath, showHidden, setSh
                 <DescriptionList isHorizontal id="description-list-sidebar">
                     <DescriptionListGroup id="description-list-last-modified">
                         <DescriptionListTerm>{_("Last modified")}</DescriptionListTerm>
-                        <DescriptionListDescription>{timeformat.dateTime(selected.modified * 1000)}</DescriptionListDescription>
+                        <DescriptionListDescription>
+                            {timeformat.dateTime(selected.modified * 1000)}
+                        </DescriptionListDescription>
                     </DescriptionListGroup>
                     <DescriptionListGroup id="description-list-owner">
                         <DescriptionListTerm>{_("Owner")}</DescriptionListTerm>
@@ -115,25 +133,39 @@ export const SidebarPanelDetails = ({ selected, path, setPath, showHidden, setSh
                     {selected.type === "file" &&
                     <DescriptionListGroup id="description-list-size">
                         <DescriptionListTerm>{_("Size")}</DescriptionListTerm>
-                        <DescriptionListDescription>{cockpit.format("$0 $1", cockpit.format_bytes(selected.size), selected.size < 1000
-                            ? "B"
-                            : "")}
+                        <DescriptionListDescription>
+                            {cockpit.format("$0 $1", cockpit.format_bytes(selected.size), selected.size < 1000
+                                ? "B"
+                                : "")}
                         </DescriptionListDescription>
                     </DescriptionListGroup>}
                     <DescriptionListGroup id="description-list-owner-permissions">
                         <DescriptionListTerm>{_("Owner permissions")}</DescriptionListTerm>
-                        <DescriptionListDescription>{getPermissions(selected.permissions[0])}</DescriptionListDescription>
+                        <DescriptionListDescription>
+                            {getPermissions(selected.permissions[0])}
+                        </DescriptionListDescription>
                     </DescriptionListGroup>
                     <DescriptionListGroup id="description-list-group-permissions">
                         <DescriptionListTerm>{_("Group permissions")}</DescriptionListTerm>
-                        <DescriptionListDescription>{getPermissions(selected.permissions[1])}</DescriptionListDescription>
+                        <DescriptionListDescription>
+                            {getPermissions(selected.permissions[1])}
+                        </DescriptionListDescription>
                     </DescriptionListGroup>
                     <DescriptionListGroup id="description-list-other-permissions">
                         <DescriptionListTerm>{_("Other permissions")}</DescriptionListTerm>
-                        <DescriptionListDescription>{getPermissions(selected.permissions[2])}</DescriptionListDescription>
+                        <DescriptionListDescription>
+                            {getPermissions(selected.permissions[2])}
+                        </DescriptionListDescription>
                     </DescriptionListGroup>
                 </DescriptionList>
-                <Button variant="secondary" onClick={() => editPermissions(Dialogs, { selected, path })}>{_("Edit properties")}</Button>
+                <Button
+                  variant="secondary"
+                  onClick={() => {
+                      editPermissions(Dialogs, { selected, path });
+                  }}
+                >
+                    {_("Edit properties")}
+                </Button>
             </CardBody>}
         </Card>
     );
@@ -180,7 +212,12 @@ const DropdownWithKebab = ({ selected, path, showHidden, setShowHidden, setHisto
                     >
                         <Flex justifyContent={{ default: "justifyContentSpaceBetween" }}>
                             <FlexItem>{_("Show hidden items")}</FlexItem>
-                            <FlexItem>{showHidden && <Icon size="sm"><CheckIcon className="check-icon" /></Icon>}</FlexItem>
+                            <FlexItem>
+                                {showHidden &&
+                                <Icon size="sm">
+                                    <CheckIcon className="check-icon" />
+                                </Icon>}
+                            </FlexItem>
                         </Flex>
                     </DropdownItem>
                     <DropdownItem
@@ -198,7 +235,9 @@ const DropdownWithKebab = ({ selected, path, showHidden, setShowHidden, setHisto
                 </DropdownItem>
                 <DropdownItem
                   id="rename-item" key="rename-item"
-                  onClick={() => { renameItem(Dialogs, { selected, path, setHistory, setHistoryIndex }) }}
+                  onClick={() => {
+                      renameItem(Dialogs, { selected, path, setHistory, setHistoryIndex });
+                  }}
                 >
                     {cockpit.format(_("Rename $0"), selected.type || "directory")}
                 </DropdownItem>

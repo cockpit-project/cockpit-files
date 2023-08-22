@@ -20,7 +20,20 @@
 import cockpit from "cockpit";
 import React, { useState } from "react";
 
-import { CardHeader, CardTitle, Flex, MenuToggle, MenuToggleAction, SearchInput, Select, SelectList, SelectOption, Text, TextContent, TextVariants } from "@patternfly/react-core";
+import {
+    CardHeader,
+    CardTitle,
+    Flex,
+    MenuToggle,
+    MenuToggleAction,
+    SearchInput,
+    Select,
+    SelectList,
+    SelectOption,
+    Text,
+    TextContent,
+    TextVariants
+} from "@patternfly/react-core";
 import { GripVerticalIcon, ListIcon } from "@patternfly/react-icons";
 
 const _ = cockpit.gettext;
