@@ -220,7 +220,10 @@ export const Application = () => {
               setHistory={setHistory} history={history}
               historyIndex={historyIndex} setHistoryIndex={setHistoryIndex}
             />
-            <PageSection onContextMenu={() => { setSelectedContext(null); setSelected(path[path.length - 1]) }}>
+            <PageSection onContextMenu={() => {
+                setSelectedContext(null);
+                setSelected(path[path.length - 1]);
+            }}>
                 <Sidebar isPanelRight hasGutter>
                     <SidebarPanel className="sidebar-panel" width={{ default: "width_25" }}>
                         <SidebarPanelDetails
@@ -348,7 +351,10 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, path, sortBy, selecte
               isPlain isRounded
               isSelected={selected?.name === file.name}
               onClick={() => setSelected(file)}
-              onContextMenu={(e) => { e.stopPropagation(); setSelectedContext(file) }}
+              onContextMenu={(e) => {
+                  e.stopPropagation();
+                  setSelectedContext(file);
+              }}
               onDoubleClick={() => onDoubleClickNavigate(path, file)}
             >
                 <CardHeader
