@@ -86,12 +86,22 @@ export const spawnCreateDirectory = (o) => {
 };
 
 export const spawnCreateLink = (o) => {
-    cockpit.spawn(["ln", ...(o.type === "symbolic" ? ["-s"] : []), o.currentPath + o.originalName.slice(o.originalName.lastIndexOf("/") + 1), o.currentPath + o.newName], options)
+    cockpit.spawn([
+        "ln",
+        ...(o.type === "symbolic" ? ["-s"] : []),
+        o.currentPath + o.originalName.slice(o.originalName.lastIndexOf("/") + 1),
+        o.currentPath + o.newName
+    ], options)
             .then(o.Dialogs.close, (err) => { o.setErrorMessage(err.message) });
 };
 
 export const spawnEditPermissions = (o) => {
-    const command = ["chmod", ...(o.changeAll ? ["-R"] : []), o.ownerAccess + o.groupAccess + o.otherAccess, "/" + o.path.join("/") + "/" + o.selected.name];
+    const command = [
+        "chmod",
+        ...(o.changeAll ? ["-R"] : []),
+        o.ownerAccess + o.groupAccess + o.otherAccess,
+        "/" + o.path.join("/") + "/" + o.selected.name
+    ];
 
     Promise.resolve()
             .then(() => { if (o.ownerAccess !== o.selected.permissions[0] || o.groupAccess !== o.selected.permissions[1] || o.otherAccess !== o.selected.permissions[2]) return cockpit.spawn(command, options); })

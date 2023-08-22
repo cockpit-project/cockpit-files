@@ -43,7 +43,12 @@ const _ = cockpit.gettext;
 
 const updateFile = (file, currentPath) => {
     const filePath = currentPath + "/" + file.name;
-    return cockpit.spawn(["stat", "-c", "%a,%Y,%G,%U,%s", filePath], { superuser: "try", error: "message" })
+    return cockpit.spawn([
+        "stat",
+        "-c",
+        "%a,%Y,%G,%U,%s",
+        filePath
+    ], { superuser: "try", error: "message" })
             .then(res => {
                 res = res.trim().split(",");
 
@@ -179,7 +184,12 @@ export const Application = () => {
 
         watchFiles();
         getFsList();
-    }, [currentPath, sel, getFsList, watchFiles]);
+    }, [
+        currentPath,
+        sel,
+        getFsList,
+        watchFiles
+    ]);
 
     if (loading || path.length === 0)
         return <EmptyStatePanel loading />;
