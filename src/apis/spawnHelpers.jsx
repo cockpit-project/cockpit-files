@@ -107,10 +107,30 @@ export const spawnEditPermissions = (o) => {
         o.ownerAccess + o.groupAccess + o.otherAccess,
         "/" + o.path.join("/") + "/" + o.selected.name
     ];
+    const permissionChanged = (
+        o.ownerAccess !== o.selected.permissions[0] ||
+        o.groupAccess !== o.selected.permissions[1] ||
+        o.otherAccess !== o.selected.permissions[2]
+    );
+    const ownerChanged = o.owner !== o.selected.owner || o.group !== o.selected.group;
+    const nameChanged = o.name !== o.selected.name;
 
     Promise.resolve()
-            .then(() => { if (o.ownerAccess !== o.selected.permissions[0] || o.groupAccess !== o.selected.permissions[1] || o.otherAccess !== o.selected.permissions[2]) return cockpit.spawn(command, options); })
-            .then(() => { if (o.owner !== o.selected.owner || o.group !== o.selected.group) return cockpit.spawn(["chown", o.owner + ":" + o.group, "/" + o.path.join("/") + "/" + o.selected.name], options); })
-            .then(() => { if (o.name !== o.selected.name) return cockpit.spawn(renameCommand({ selected: o.selected, path: o.path, name: o.name }), options); })
+            .then(() => {
+                if (permissionChanged)
+                    return cockpit.spawn(command, options);
+            })
+            .then(() => {
+                if (ownerChanged) {
+                    return cockpit.spawn(
+                        ["chown", o.owner + ":" + o.group, "/" + o.path.join("/") + "/" + o.selected.name],
+                        options
+                    );
+                }
+            })
+            .then(() => {
+                if (nameChanged)
+                    return cockpit.spawn(renameCommand({ selected: o.selected, path: o.path, name: o.name }), options);
+            })
             .then(o.Dialogs.close, err => o.setErrorMessage(err.message));
 };

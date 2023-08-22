@@ -194,29 +194,62 @@ export const Application = () => {
     if (loading || path.length === 0)
         return <EmptyStatePanel loading />;
 
-    const visibleFiles = !showHidden ? files.filter(file => !file.isHidden) : files;
+    const visibleFiles = !showHidden
+        ? files.filter(file => !file.isHidden)
+        : files;
+
+    const _createDirectory = () => {
+        createDirectory(Dialogs, "/" + path.join("/") + "/", selectedContext || selected);
+    };
+    const _createLink = () => {
+        createLink(Dialogs, "/" + path.join("/") + "/", files, selectedContext);
+    };
+    const _copyFullPath = () => {
+        navigator.clipboard.writeText("/" + path.join("/") + "/" + selectedContext.name);
+    };
+    const _renameItem = () => {
+        renameItem(Dialogs, { selected: selectedContext, path, setHistory, setHistoryIndex });
+    };
+    const _editPermissions = () => {
+        editPermissions(Dialogs, { selected: selectedContext, path });
+    };
+    const _deleteItem = () => {
+        deleteItem(
+            Dialogs,
+            {
+                selected: selectedContext,
+                itemPath: "/" + path.join("/") + "/" + selectedContext.name,
+                setHistory,
+                setHistoryIndex
+            }
+        );
+    };
 
     const contextMenuItems = (
         <MenuList>
-            <MenuItem className="context-menu-option" onClick={() => { createDirectory(Dialogs, "/" + path.join("/") + "/", selectedContext || selected) }}>
+            <MenuItem className="context-menu-option" onClick={_createDirectory}>
                 <div className="context-menu-name"> {_("Create directory")}</div>
             </MenuItem>
-            <MenuItem className="context-menu-option" onClick={() => { createLink(Dialogs, "/" + path.join("/") + "/", files, selectedContext) }}>
+            <MenuItem className="context-menu-option" onClick={_createLink}>
                 <div className="context-menu-name"> {_("Create link")}</div>
             </MenuItem>
             {selectedContext &&
             <>
-                <MenuItem className="context-menu-option" onClick={() => { navigator.clipboard.writeText("/" + path.join("/") + "/" + selectedContext.name) }}>
+                <MenuItem className="context-menu-option" onClick={_copyFullPath}>
                     <div className="context-menu-name"> {_("Copy full path")} </div>
                 </MenuItem>
-                <MenuItem className="context-menu-option" onClick={() => { renameItem(Dialogs, { selected: selectedContext, path, setHistory, setHistoryIndex }) }}>
-                    <div className="context-menu-name"> {cockpit.format(_("Rename $0"), selectedContext.type)} </div>
+                <MenuItem className="context-menu-option" onClick={_renameItem}>
+                    <div className="context-menu-name">
+                        {cockpit.format(_("Rename $0"), selectedContext.type)}
+                    </div>
                 </MenuItem>
-                <MenuItem className="context-menu-option" onClick={() => { editPermissions(Dialogs, { selected: selectedContext, path }) }}>
+                <MenuItem className="context-menu-option" onClick={_editPermissions}>
                     <div className="context-menu-name"> {_("Edit properties")} </div>
                 </MenuItem>
-                <MenuItem className="context-menu-option pf-m-danger" onClick={() => { deleteItem(Dialogs, { selected: selectedContext, itemPath: "/" + path.join("/") + "/" + selectedContext.name, setHistory, setHistoryIndex }) }}>
-                    <div className="context-menu-name"> {cockpit.format(_("Delete $0"), selectedContext.type)} </div>
+                <MenuItem className="context-menu-option pf-m-danger" onClick={_deleteItem}>
+                    <div className="context-menu-name">
+                        {cockpit.format(_("Delete $0"), selectedContext.type)}
+                    </div>
                 </MenuItem>
             </>}
         </MenuList>
@@ -233,11 +266,22 @@ export const Application = () => {
             <PageSection onContextMenu={() => {
                 setSelectedContext(null);
                 setSelected(path[path.length - 1]);
-            }}>
+            }}
+            >
                 <Sidebar isPanelRight hasGutter>
                     <SidebarPanel className="sidebar-panel" width={{ default: "width_25" }}>
                         <SidebarPanelDetails
-                          path={path} selected={(files.find(file => file.name === selected?.name)) || ({ name: path[path.length - 1], items_cnt: { all: files.length, hidden: files.length - files.filter(file => !file.name.startsWith(".")).length } })}
+                          path={path}
+                          selected={
+                              (files.find(file => file.name === selected?.name)) ||
+                              ({
+                                  name: path[path.length - 1],
+                                  items_cnt: {
+                                      all: files.length,
+                                      hidden: files.length - files.filter(file => !file.name.startsWith(".")).length
+                                  }
+                              })
+                          }
                           setHistory={setHistory} setHistoryIndex={setHistoryIndex}
                           showHidden={showHidden}
                           setShowHidden={setShowHidden} files={files}
@@ -282,19 +326,47 @@ const compare = (sortBy) => {
 
     switch (sortBy) {
     case "az":
-        return (a, b) => compareFileType(a, b) === 0 ? (a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1) : compareFileType(a, b);
+        return (a, b) => compareFileType(a, b) === 0
+            ? (a.name.toLowerCase() < b.name.toLowerCase()
+                ? -1
+                : 1)
+            : compareFileType(a, b);
     case "za":
-        return (a, b) => compareFileType(a, b) === 0 ? (a.name.toLowerCase() > b.name.toLowerCase() ? -1 : 1) : compareFileType(a, b);
+        return (a, b) => compareFileType(a, b) === 0
+            ? (a.name.toLowerCase() > b.name.toLowerCase()
+                ? -1
+                : 1)
+            : compareFileType(a, b);
     case "last_modified":
-        return (a, b) => compareFileType(a, b) === 0 ? (a.modified > b.modified ? -1 : 1) : compareFileType(a, b);
+        return (a, b) => compareFileType(a, b) === 0
+            ? (a.modified > b.modified
+                ? -1
+                : 1)
+            : compareFileType(a, b);
     case "first_modified":
-        return (a, b) => compareFileType(a, b) === 0 ? (a.modified < b.modified ? -1 : 1) : compareFileType(a, b);
+        return (a, b) => compareFileType(a, b) === 0
+            ? (a.modified < b.modified
+                ? -1
+                : 1)
+            : compareFileType(a, b);
     default:
         break;
     }
 };
 
-const NavigatorCardBody = ({ currentFilter, files, isGrid, path, sortBy, selected, setSelected, setSelectedContext, setHistory, historyIndex, setHistoryIndex }) => {
+const NavigatorCardBody = ({
+    currentFilter,
+    files,
+    historyIndex,
+    isGrid,
+    path,
+    selected,
+    setHistory,
+    setHistoryIndex,
+    setSelected,
+    setSelectedContext,
+    sortBy,
+}) => {
     const sortedFiles = useMemo(() => {
         const compareFunc = compare(sortBy);
 
@@ -311,14 +383,18 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, path, sortBy, selecte
             if (e.key === "ArrowRight") {
                 setSelected(_selected => {
                     const selectedIdx = sortedFiles?.findIndex(file => file.name === _selected?.name);
-                    const newIdx = selectedIdx < sortedFiles.length - 1 ? selectedIdx + 1 : 0;
+                    const newIdx = selectedIdx < sortedFiles.length - 1
+                        ? selectedIdx + 1
+                        : 0;
 
                     return sortedFiles[newIdx];
                 });
             } else if (e.key === "ArrowLeft") {
                 setSelected(_selected => {
                     const selectedIdx = sortedFiles?.findIndex(file => file.name === _selected?.name);
-                    const newIdx = selectedIdx > 0 ? selectedIdx - 1 : sortedFiles.length - 1;
+                    const newIdx = selectedIdx > 0
+                        ? selectedIdx - 1
+                        : sortedFiles.length - 1;
 
                     return sortedFiles[newIdx];
                 });
@@ -354,7 +430,9 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, path, sortBy, selecte
     const Item = ({ file }) => {
         return (
             <Card
-              className={"item-button " + (file.type === "directory" ? "directory-item" : "file-item")}
+              className={"item-button " + (file.type === "directory"
+                  ? "directory-item"
+                  : "file-item")}
               data-item={file.name}
               id={"card-item-" + file.name + file.type}
               isClickable isCompact
@@ -375,16 +453,35 @@ const NavigatorCardBody = ({ currentFilter, files, isGrid, path, sortBy, selecte
                   }}
                 >
                     <CardTitle>
-                        <Flex direction={{ default: isGrid ? "column" : "row" }} spaceItems={{ default: isGrid ? "spaceItemsNone" : "spaceItemsMd" }}>
+                        <Flex
+                          direction={{
+                              default: isGrid
+                                  ? "column"
+                                  : "row"
+                          }} spaceItems={{
+                              default: isGrid
+                                  ? "spaceItemsNone"
+                                  : "spaceItemsMd"
+                          }}
+                        >
                             <FlexItem alignSelf={{ default: "alignSelfCenter" }}>
-                                <Icon size={isGrid ? "xl" : "lg"} isInline>
+                                <Icon
+                                  size={isGrid
+                                      ? "xl"
+                                      : "lg"} isInline
+                                >
                                     {file.type === "directory" || file.to === "directory"
                                         ? <FolderIcon />
                                         : <FileIcon />}
                                 </Icon>
                             </FlexItem>
-                            <FlexItem className={"pf-u-text-break-word pf-u-text-wrap" + (isGrid ? " grid-file-name" : "")}>
-                                {selected?.name !== file.name ? <Truncate content={file.name} position="middle" /> : file.name}
+                            <FlexItem className={"pf-u-text-break-word pf-u-text-wrap" + (isGrid
+                                ? " grid-file-name"
+                                : "")}
+                            >
+                                {selected?.name !== file.name
+                                    ? <Truncate content={file.name} position="middle" />
+                                    : file.name}
                             </FlexItem>
                         </Flex>
                     </CardTitle>
