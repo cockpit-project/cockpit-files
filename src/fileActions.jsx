@@ -50,7 +50,8 @@ export const createLink = (Dialogs, currentPath, files, selected) => {
         <CreateLinkModal
           currentPath={currentPath} selected={selected}
           files={files.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0))}
-        />);
+        />
+    );
 };
 
 export const deleteItem = (Dialogs, options) => {
@@ -59,7 +60,8 @@ export const deleteItem = (Dialogs, options) => {
           selected={options.selected} itemPath={options.itemPath}
           path={options.path}
           setHistory={options.setHistory} setHistoryIndex={options.setHistoryIndex}
-        />);
+        />
+    );
 };
 
 export const renameItem = (Dialogs, options) => {
@@ -68,14 +70,16 @@ export const renameItem = (Dialogs, options) => {
           path={options.path}
           selected={options.selected}
           setHistory={options.setHistory} setHistoryIndex={options.setHistoryIndex}
-        />);
+        />
+    );
 };
 
 export const editPermissions = (Dialogs, options) => {
     Dialogs.show(
         <EditPermissionsModal
           selected={options.selected} path={options.path}
-        />);
+        />
+    );
 };
 
 export const ConfirmDeletionDialog = ({ selected, itemPath, path, setHistory, setHistoryIndex }) => {

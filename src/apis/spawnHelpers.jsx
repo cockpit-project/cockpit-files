@@ -46,7 +46,8 @@ export const spawnDeleteItem = (o) => {
                     <ForceDeleteModal
                       selected={o.selected} itemPath={o.itemPath}
                       initialError={err.message}
-                    />);
+                    />
+                );
             });
 };
 
