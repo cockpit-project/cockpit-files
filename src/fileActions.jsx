@@ -49,7 +49,11 @@ export const createLink = (Dialogs, currentPath, files, selected) => {
     Dialogs.show(
         <CreateLinkModal
           currentPath={currentPath} selected={selected}
-          files={files.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0))}
+          files={files.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase())
+              ? 1
+              : ((b.name.toLowerCase() > a.name.toLowerCase())
+                  ? -1
+                  : 0))}
         />
     );
 };
@@ -356,7 +360,11 @@ export const EditPermissionsModal = ({ selected, path }) => {
         <Modal
           position="top"
           variant="medium"
-          title={selected.type === "file" ? _("File properties and access") : selected.type === "link" ? _("Link properties and access") : _("Directory properties and access")}
+          title={selected.type === "file"
+              ? _("File properties and access")
+              : selected.type === "link"
+                  ? _("Link properties and access")
+                  : _("Directory properties and access")}
           isOpen
           onClose={Dialogs.close}
           footer={
@@ -375,7 +383,12 @@ export const EditPermissionsModal = ({ selected, path }) => {
                   isInline
                 />}
                 <Form isHorizontal>
-                    <FormSection title={selected.type === "file" ? _("File properties") : selected.type === "link" ? _("Link properties") : _("Directory properties")}>
+                    <FormSection title={selected.type === "file"
+                        ? _("File properties")
+                        : selected.type === "link"
+                            ? _("Link properties")
+                            : _("Directory properties")}
+                    >
                         <FormGroup label={_("Name")} fieldId="edit-permissions-name">
                             <TextInput
                               value={name} onChange={(_, val) => setName(val)}

@@ -115,7 +115,10 @@ export const SidebarPanelDetails = ({ selected, path, setPath, showHidden, setSh
                     {selected.type === "file" &&
                     <DescriptionListGroup id="description-list-size">
                         <DescriptionListTerm>{_("Size")}</DescriptionListTerm>
-                        <DescriptionListDescription>{cockpit.format("$0 $1", cockpit.format_bytes(selected.size), selected.size < 1000 ? "B" : "")}</DescriptionListDescription>
+                        <DescriptionListDescription>{cockpit.format("$0 $1", cockpit.format_bytes(selected.size), selected.size < 1000
+                            ? "B"
+                            : "")}
+                        </DescriptionListDescription>
                     </DescriptionListGroup>}
                     <DescriptionListGroup id="description-list-owner-permissions">
                         <DescriptionListTerm>{_("Owner permissions")}</DescriptionListTerm>
@@ -201,13 +204,27 @@ const DropdownWithKebab = ({ selected, path, showHidden, setShowHidden, setHisto
                 </DropdownItem>
                 <DropdownItem
                   id="copy-path" key="copy-path"
-                  onClick={() => { navigator.clipboard.writeText("/" + path.join("/") + "/" + (selected.type ? selected.name : "")) }}
+                  onClick={() => {
+                      navigator.clipboard.writeText("/" + path.join("/") + "/" + (selected.type
+                          ? selected.name
+                          : ""));
+                  }}
                 >
                     {_("Copy full path")}
                 </DropdownItem>
                 <DropdownItem
                   id="delete-item" key="delete-item"
-                  onClick={() => { deleteItem(Dialogs, { selected, itemPath: currentDirectory + (selected.items_cnt ? "" : selected.name), path, setHistory, setHistoryIndex }) }} className="pf-m-danger"
+                  onClick={() => {
+                      deleteItem(Dialogs, {
+                          selected,
+                          itemPath: currentDirectory + (selected.items_cnt
+                              ? ""
+                              : selected.name),
+                          path,
+                          setHistory,
+                          setHistoryIndex
+                      });
+                  }} className="pf-m-danger"
                 >
                     {cockpit.format(_("Delete $0"), selected.type || "directory")}
                 </DropdownItem>

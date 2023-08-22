@@ -23,6 +23,7 @@
             }],
         "function-paren-newline": ["error", "consistent"],
         "max-statements-per-line": ["error", { "max": 1 }],
+        "multiline-ternary": ["error", "always"],
         "newline-per-chained-call": ["error", { "ignoreChainWithDepth": 2 }],
         "no-var": "error",
         "lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }],
