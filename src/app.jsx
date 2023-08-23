@@ -219,7 +219,7 @@ export const Application = () => {
     const _renameItem = () => {
         renameItem(Dialogs, { selected: selectedContext, path, setHistory, setHistoryIndex });
     };
-    const _editPermissions = () => {
+    const _editProperties = () => {
         editPermissions(Dialogs, { selected: selectedContext, path });
     };
     const _deleteItem = () => {
@@ -236,31 +236,26 @@ export const Application = () => {
 
     const contextMenuItems = (
         <MenuList>
-            <MenuItem className="context-menu-option" onClick={_createDirectory}>
-                <div className="context-menu-name"> {_("Create directory")}</div>
-            </MenuItem>
-            <MenuItem className="context-menu-option" onClick={_createLink}>
-                <div className="context-menu-name"> {_("Create link")}</div>
-            </MenuItem>
-            {selectedContext &&
-            <>
-                <MenuItem className="context-menu-option" onClick={_copyFullPath}>
-                    <div className="context-menu-name"> {_("Copy full path")} </div>
-                </MenuItem>
-                <MenuItem className="context-menu-option" onClick={_renameItem}>
-                    <div className="context-menu-name">
-                        {cockpit.format(_("Rename $0"), selectedContext.type)}
-                    </div>
-                </MenuItem>
-                <MenuItem className="context-menu-option" onClick={_editPermissions}>
-                    <div className="context-menu-name"> {_("Edit properties")} </div>
-                </MenuItem>
-                <MenuItem className="context-menu-option pf-m-danger" onClick={_deleteItem}>
-                    <div className="context-menu-name">
-                        {cockpit.format(_("Delete $0"), selectedContext.type)}
-                    </div>
-                </MenuItem>
-            </>}
+            {[
+                { title: _("Create directory"), onClick: _createDirectory },
+                { title: _("Create link"), onClick: _createLink },
+                ...!selectedContext
+                    ? []
+                    : [
+                        { title: _("Copy full path"), onClick: _copyFullPath },
+                        { title: cockpit.format(_("Rename $0"), selectedContext?.type), onClick: _renameItem },
+                        { title: _("Edit properties"), onClick: _editProperties },
+                        { title: cockpit.format(_("Delete $0"), selectedContext?.type), onClick: _deleteItem }
+                    ],
+            ]
+                    .map(item => (
+                        <MenuItem
+                          className="context-menu-option" key={item.title}
+                          onClick={item.onClick}
+                        >
+                            <div className="context-menu-name">{item.title}</div>
+                        </MenuItem>
+                    ))}
         </MenuList>
     );
 

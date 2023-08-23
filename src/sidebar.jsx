@@ -56,6 +56,60 @@ import { permissions } from "./common.js";
 
 const _ = cockpit.gettext;
 
+const getDescriptionListItems = selected => {
+    const getPermissions = (str) => {
+        return permissions.find(e => e.value === str).label;
+    };
+
+    return ([
+        {
+            id: "description-list-last-modified",
+            label: _("Last modified"),
+            value: timeformat.dateTime(selected.modified * 1000)
+        },
+        {
+            id: "description-list-owner",
+            label: _("Owner"),
+            value: selected.owner
+        },
+        {
+            id: "description-list-group",
+            label: _("Group"),
+            value: selected.group
+        },
+        ...(selected.type === "file"
+            ? [
+                {
+                    id: "description-list-size",
+                    label: _("Size"),
+                    value: cockpit.format(
+                        "$0 $1",
+                        cockpit.format_bytes(selected.size),
+                        selected.size < 1000
+                            ? "B"
+                            : "",
+                    )
+                },
+            ]
+            : []),
+        {
+            id: "description-list-owner-permissions",
+            label: _("Owner permissions"),
+            value: getPermissions(selected.permissions[0])
+        },
+        {
+            id: "description-list-group-permissions",
+            label: _("Group permissions"),
+            value: getPermissions(selected.permissions[1])
+        },
+        {
+            id: "description-list-other-permissions",
+            label: _("Other permissions"),
+            value: getPermissions(selected.permissions[2])
+        },
+    ]);
+};
+
 export const SidebarPanelDetails = ({
     files,
     path,
@@ -79,9 +133,6 @@ export const SidebarPanelDetails = ({
     }, [path, selected]);
 
     const Dialogs = useDialogs();
-    const getPermissions = (str) => {
-        return permissions.find(e => e.value === str).label;
-    };
 
     return (
         <Card className="sidebar-card">
@@ -116,47 +167,13 @@ export const SidebarPanelDetails = ({
             {selected.items_cnt === undefined &&
             <CardBody>
                 <DescriptionList isHorizontal id="description-list-sidebar">
-                    <DescriptionListGroup id="description-list-last-modified">
-                        <DescriptionListTerm>{_("Last modified")}</DescriptionListTerm>
-                        <DescriptionListDescription>
-                            {timeformat.dateTime(selected.modified * 1000)}
-                        </DescriptionListDescription>
-                    </DescriptionListGroup>
-                    <DescriptionListGroup id="description-list-owner">
-                        <DescriptionListTerm>{_("Owner")}</DescriptionListTerm>
-                        <DescriptionListDescription>{selected.owner}</DescriptionListDescription>
-                    </DescriptionListGroup>
-                    <DescriptionListGroup id="description-list-group">
-                        <DescriptionListTerm>{_("Group")}</DescriptionListTerm>
-                        <DescriptionListDescription>{selected.group}</DescriptionListDescription>
-                    </DescriptionListGroup>
-                    {selected.type === "file" &&
-                    <DescriptionListGroup id="description-list-size">
-                        <DescriptionListTerm>{_("Size")}</DescriptionListTerm>
-                        <DescriptionListDescription>
-                            {cockpit.format("$0 $1", cockpit.format_bytes(selected.size), selected.size < 1000
-                                ? "B"
-                                : "")}
-                        </DescriptionListDescription>
-                    </DescriptionListGroup>}
-                    <DescriptionListGroup id="description-list-owner-permissions">
-                        <DescriptionListTerm>{_("Owner permissions")}</DescriptionListTerm>
-                        <DescriptionListDescription>
-                            {getPermissions(selected.permissions[0])}
-                        </DescriptionListDescription>
-                    </DescriptionListGroup>
-                    <DescriptionListGroup id="description-list-group-permissions">
-                        <DescriptionListTerm>{_("Group permissions")}</DescriptionListTerm>
-                        <DescriptionListDescription>
-                            {getPermissions(selected.permissions[1])}
-                        </DescriptionListDescription>
-                    </DescriptionListGroup>
-                    <DescriptionListGroup id="description-list-other-permissions">
-                        <DescriptionListTerm>{_("Other permissions")}</DescriptionListTerm>
-                        <DescriptionListDescription>
-                            {getPermissions(selected.permissions[2])}
-                        </DescriptionListDescription>
-                    </DescriptionListGroup>
+                    {getDescriptionListItems(selected).map((item, index) => (
+                        <DescriptionListGroup key={item.id} id={item.id}>
+                            <DescriptionListTerm>{item.label}</DescriptionListTerm>
+                            <DescriptionListDescription>
+                                {item.value}
+                            </DescriptionListDescription>
+                        </DescriptionListGroup>))}
                 </DescriptionList>
                 <Button
                   variant="secondary"
