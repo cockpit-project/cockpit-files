@@ -389,6 +389,22 @@ const NavigatorCardBody = ({
             setBoxPerRow(i);
         }
     }
+
+    const onDoubleClickNavigate = useCallback((file) => {
+        const newPath = [...path, file.name].join("/");
+        if (file.type === "directory" || file.to === "directory") {
+            setHistory(h => [...h.slice(0, historyIndex + 1), [...path, file.name]]);
+            setHistoryIndex(h => h + 1);
+
+            cockpit.location.go("/", { path: encodeURIComponent(newPath) });
+        }
+    }, [
+        path,
+        historyIndex,
+        setHistoryIndex,
+        setHistory
+    ]);
+
     useEffect(() => {
         calculateBoxPerRow();
         window.onresize = calculateBoxPerRow;
@@ -431,6 +447,8 @@ const NavigatorCardBody = ({
 
                     return sortedFiles[newIdx];
                 });
+            } else if (e.key === "Enter") {
+                onDoubleClickNavigate(selected);
             }
         };
 
@@ -442,17 +460,13 @@ const NavigatorCardBody = ({
             isMounted.current = false;
             document.removeEventListener("keydown", onKeyboardNav);
         };
-    }, [setSelected, sortedFiles, boxPerRow]);
-
-    const onDoubleClickNavigate = (path, file) => {
-        const newPath = [...path, file.name].join("/");
-        if (file.type === "directory" || file.to === "directory") {
-            setHistory(h => [...h.slice(0, historyIndex + 1), [...path, file.name]]);
-            setHistoryIndex(h => h + 1);
-
-            cockpit.location.go("/", { path: encodeURIComponent(newPath) });
-        }
-    };
+    }, [
+        setSelected,
+        sortedFiles,
+        boxPerRow,
+        selected,
+        onDoubleClickNavigate
+    ]);
 
     const resetSelected = e => {
         if (e.target.id === "folder-view" || e.target.id === "navigator-card-body") {
@@ -476,7 +490,7 @@ const NavigatorCardBody = ({
                   e.stopPropagation();
                   setSelectedContext(file);
               }}
-              onDoubleClick={() => onDoubleClickNavigate(path, file)}
+              onDoubleClick={() => onDoubleClickNavigate(file)}
             >
                 <CardHeader
                   selectableActions={{
