@@ -83,7 +83,7 @@ $(DIST_TEST): $(NODE_MODULES_TEST) $(COCKPIT_REPO_STAMP) $(shell find src/ -type
 	NODE_ENV=$(NODE_ENV) ./build.js
 
 watch: $(NODE_MODULES_TEST) $(COCKPIT_REPO_STAMP)
-	NODE_ENV=$(NODE_ENV) npm run watch
+	NODE_ENV=$(NODE_ENV) ./build.js -w
 
 clean:
 	rm -rf dist/
