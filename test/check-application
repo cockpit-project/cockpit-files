@@ -170,6 +170,12 @@ class TestNavigator(testlib.MachineCase):
             b.focus("input[placeholder='Filter directory']")
             b.key_press("v", 2)
             b.wait_val("input[placeholder='Filter directory']", "/home/admin/not-hidden")
+            b.set_input_text("input[placeholder='Filter directory']", "")
+
+        # List root directory
+        # Click "/" on the breadcrumb
+        b.click(".breadcrumb-button:nth-of-type(1)")
+        b.wait_visible("[data-item='home']")
 
     def testNavigation(self):
         b = self.browser

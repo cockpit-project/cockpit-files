@@ -92,7 +92,7 @@ export const renameItem = (Dialogs, options) => {
 
 export const editPermissions = (Dialogs, options) => {
     if (options.selected === null) {
-        updateFile({ name: "" }, "/" + options.path.join("/"))
+        updateFile({ name: "" }, options.path.join("/"))
                 .then(res => {
                     Dialogs.show(
                         <EditPermissionsModal

@@ -233,7 +233,7 @@ const DropdownWithKebab = ({
         setShowHidden(!showHidden);
     };
 
-    const currentPath = "/" + path.join("/") + "/";
+    const currentPath = path.join("/") + "/";
 
     const showHiddenItems = (
         <Flex justifyContent={{ default: "justifyContentSpaceBetween" }}>
@@ -254,7 +254,7 @@ const DropdownWithKebab = ({
         {
             id: "copy-path",
             onClick: () => {
-                navigator.clipboard.writeText("/" + path.join("/") + "/" + (selected.length === 1
+                navigator.clipboard.writeText(path.join("/") + "/" + (selected.length === 1
                     ? selected[0].name
                     : ""));
             },
@@ -265,7 +265,7 @@ const DropdownWithKebab = ({
             ? [
                 {
                     id: "copy-item",
-                    onClick: () => { copyItem(setClipboard, ["/" + path.join("/") + "/" + selected[0].name]) },
+                    onClick: () => { copyItem(setClipboard, [path.join("/") + "/" + selected[0].name]) },
                     title: cockpit.format(_("Copy $0"), selected[0].type)
                 }
             ]
@@ -274,7 +274,7 @@ const DropdownWithKebab = ({
             ? [
                 {
                     id: "paste-item",
-                    onClick: () => { pasteItem(clipboard, "/" + path.join("/") + "/", false, addAlert) },
+                    onClick: () => { pasteItem(clipboard, path.join("/") + "/", false, addAlert) },
                     title: _("Paste"),
                     isDisabled: clipboard === undefined
                 }
@@ -285,7 +285,7 @@ const DropdownWithKebab = ({
                 {
                     id: "paste-into-directory",
                     onClick: () => {
-                        pasteItem(clipboard, "/" + path.join("/") + "/" + selected[0].name + "/", false, addAlert);
+                        pasteItem(clipboard, path.join("/") + "/" + selected[0].name + "/", false, addAlert);
                     },
                     title: _("Paste into directory"),
                     isDisabled: clipboard === undefined
@@ -296,7 +296,7 @@ const DropdownWithKebab = ({
             ? [
                 {
                     id: "paste-as-symlink",
-                    onClick: () => { pasteItem(clipboard, "/" + path.join("/") + "/", true, addAlert) },
+                    onClick: () => { pasteItem(clipboard, path.join("/") + "/", true, addAlert) },
                     title: _("Paste as symlink"),
                     isDisabled: clipboard === undefined
                 }
@@ -361,7 +361,7 @@ const DropdownWithKebab = ({
     const multiDropdownOptions = [
         {
             id: "copy-item",
-            onClick: () => { copyItem(setClipboard, selected.map(s => "/" + path.join("/") + "/" + s.name)) },
+            onClick: () => { copyItem(setClipboard, selected.map(s => path.join("/") + "/" + s.name)) },
             title: _("Copy")
         },
         {
