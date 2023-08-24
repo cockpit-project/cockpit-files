@@ -18,6 +18,7 @@
  */
 
 import cockpit from "cockpit";
+import { superuser } from "superuser";
 import { useDialogs } from "dialogs.jsx";
 import React, { useCallback, useEffect, useMemo, useState, useRef } from "react";
 import {
@@ -40,6 +41,8 @@ import { NavigatorCardHeader } from "./header.jsx";
 import { usePageLocation } from "hooks.js";
 
 const _ = cockpit.gettext;
+
+superuser.reload_page_on_change();
 
 const updateFile = (file, currentPath) => {
     const filePath = currentPath + "/" + file.name;
