@@ -28,7 +28,7 @@ import {
     Page, PageSection,
     Sidebar, SidebarPanel, SidebarContent, Truncate, CardHeader, CardTitle,
 } from "@patternfly/react-core";
-import { FileIcon, FolderIcon } from "@patternfly/react-icons";
+import { ExclamationCircleIcon, FileIcon, FolderIcon } from "@patternfly/react-icons";
 
 import { ListingTable } from "cockpit-components-table.jsx";
 import { EmptyStatePanel } from "cockpit-components-empty-state.jsx";
@@ -80,6 +80,7 @@ export const Application = () => {
     const { options } = usePageLocation();
     const Dialogs = useDialogs();
     const [loading, setLoading] = useState(true);
+    const [errorMessage, setErrorMessage] = useState();
     const [currentFilter, setCurrentFilter] = useState("");
     const [files, setFiles] = useState([]);
     const [isGrid, setIsGrid] = useState(true);
@@ -128,12 +129,17 @@ export const Application = () => {
             _files.push({ ...file, name: file.path, isHidden: file.path.startsWith(".") });
         });
 
-        channelList.current.addEventListener("close", () => {
-            Promise.all(_files.map(file => updateFile(file, currentDir)))
-                    .then(() => {
-                        setFiles(_files);
-                        setLoading(false);
-                    });
+        channelList.current.addEventListener("close", (ev, data) => {
+            setLoading(false);
+            if (data?.problem && data?.message) {
+                setErrorMessage(data.message);
+            } else {
+                setErrorMessage(null);
+                Promise.all(_files.map(file => updateFile(file, currentDir)))
+                        .then(() => {
+                            setFiles(_files);
+                        });
+            }
         });
     }, [currentDir]);
 
@@ -275,6 +281,7 @@ export const Application = () => {
                           selected={
                               (files.find(file => file.name === selected?.name)) ||
                               ({
+                                  has_error: errorMessage,
                                   name: path[path.length - 1],
                                   items_cnt: {
                                       all: files.length,
@@ -294,6 +301,7 @@ export const Application = () => {
                               isGrid={isGrid} setIsGrid={setIsGrid}
                               sortBy={sortBy} setSortBy={setSortBy}
                             />
+                            {errorMessage && <EmptyStatePanel paragraph={errorMessage} icon={ExclamationCircleIcon} />}
                             <NavigatorCardBody
                               currentFilter={currentFilter} files={visibleFiles}
                               path={path}

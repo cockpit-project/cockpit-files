@@ -89,7 +89,7 @@ export const SidebarPanelDetails = ({
                 <CardTitle component="h2" id="sidebar-card-header">
                     <TextContent>
                         <Text component={TextVariants.h2}>{selected.name}</Text>
-                        {selected.items_cnt !== undefined &&
+                        {!selected.has_error && selected.items_cnt !== undefined &&
                             <Text component={TextVariants.small}>
                                 {cockpit.format(
                                     cockpit.ngettext(

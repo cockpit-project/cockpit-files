@@ -433,7 +433,7 @@ class TestNavigator(testlib.MachineCase):
         b.mouse("#folder-view", "contextmenu")
         b.click(".context-menu button:contains('Create directory')")
         b.set_input_text("#create-directory-input", "newdir2")
-        b.click("button.pf-m-primary")        
+        b.click("button.pf-m-primary")
         b.wait_visible("[data-item='newdir2']")
         m.execute("rmdir /home/admin/newdir2")
 
@@ -477,7 +477,7 @@ class TestNavigator(testlib.MachineCase):
             except RuntimeError:
                 # fallback for older Chrome releases
                 b.grant_permissions("clipboardRead", "clipboardWrite")
-        
+
             # Copy path from context menu
             b.mouse("[data-item='newfile']", "contextmenu")
             b.click(".context-menu button:contains('Copy full path')")
@@ -525,7 +525,7 @@ class TestNavigator(testlib.MachineCase):
         b.click("button.pf-m-primary")
         b.wait_in_text("#sidebar-card-header", "newdir2")
         b.wait_text(".last-breadcrumb-button", "newdir2")
-        
+
         # Go back to home folder
         b.click(".breadcrumb-button:nth-of-type(3)")
 
@@ -602,7 +602,7 @@ class TestNavigator(testlib.MachineCase):
             b.wait_text("#description-list-owner-permissions dd", permission)
             b.wait_text("#description-list-group-permissions dd", permission)
             b.wait_text("#description-list-other-permissions dd", permission)
-        
+
         def select_access(access):
             b.select_from_dropdown("#edit-permissions-owner-access", access)
             b.select_from_dropdown("#edit-permissions-group-access", access)
@@ -671,6 +671,20 @@ class TestNavigator(testlib.MachineCase):
         wait_permissions("Read, write and execute")
         self.assertEqual(m.execute("ls -l /home/admin/newdir/file1")[:10], "-rwxrwxrwx")
         self.assertEqual(m.execute("ls -l /home/admin/newdir/file2")[:10], "-rwxrwxrwx")
+
+    def testErrors(self):
+        b = self.browser
+        m = self.machine
+
+        self.restore_dir("/home/admin")
+
+        self.enter_navigator()
+
+        m.execute("mkdir /home/admin/testdir && chmod 400 /home/admin/testdir")
+        b.mouse("[data-item='testdir']", "dblclick")
+        b.wait_not_present(".pf-v5-c-empty-state")
+        b.drop_superuser()
+        b.wait_in_text(".pf-v5-c-empty-state", "Permission denied")
 
 if __name__ == '__main__':
     testlib.test_main()
