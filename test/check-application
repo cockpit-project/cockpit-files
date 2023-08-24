@@ -466,7 +466,7 @@ class TestNavigator(testlib.MachineCase):
         b.mouse("[data-item='newfile']", "contextmenu")
         b.wait_in_text(".context-menu li:nth-child(2) button", "Create link")
         b.click(".context-menu button:contains('Create link')")
-        b.wait_val(f"#create-link-original-wrapper input", "/home/admin/newfile")
+        b.wait_val("#create-link-original-wrapper input", "/home/admin/newfile")
         b.click("button.pf-m-link:contains('Cancel')")
 
         # Firefox does not support setting of permissions
