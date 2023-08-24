@@ -70,13 +70,17 @@ export const Application = () => {
 
     const onFilterChange = (_, value) => setCurrentFilter(value);
     const currentPath = decodeURIComponent(options.path || "");
-    const path = currentPath?.split("/").filter(Boolean);
+    const path = currentPath?.split("/");
     const currentDir = path.join("/") + "/";
-    const sel = path[path.length - 1];
+    const sel = (
+        options.path !== undefined
+            ? path[path.length - 1]
+            : undefined
+    );
 
     useEffect(() => {
         cockpit.user().then(user => {
-            const userPath = user.home.split("/").slice(1);
+            const userPath = user.home.split("/");
             setHistory(h => [...h, userPath]);
 
             if (options.path === undefined) {
@@ -159,8 +163,10 @@ export const Application = () => {
     }, [currentDir, getFsList]);
 
     useEffect(() => {
-        if (currentPath === "")
+        // Wait for the path initial value to be set before fetching the files
+        if (sel === undefined) {
             return;
+        }
 
         setSelected([]);
         setFiles([]);
@@ -168,14 +174,9 @@ export const Application = () => {
 
         watchFiles();
         getFsList();
-    }, [
-        currentPath,
-        sel,
-        getFsList,
-        watchFiles
-    ]);
+    }, [sel, getFsList, watchFiles]);
 
-    if (loading || path.length === 0 || !sel)
+    if (loading)
         return <EmptyStatePanel loading />;
 
     const visibleFiles = !showHidden
@@ -183,18 +184,18 @@ export const Application = () => {
         : files;
 
     const _createDirectory = () => {
-        createDirectory(Dialogs, "/" + path.join("/") + "/", selectedContext || selected);
+        createDirectory(Dialogs, currentDir, selectedContext || selected);
     };
     const _createLink = () => {
-        createLink(Dialogs, "/" + path.join("/") + "/", files, selectedContext);
+        createLink(Dialogs, currentDir, files, selectedContext);
     };
     const _copyItem = () => {
         copyItem(setClipboard, selected.length > 1
-            ? selected.map(s => "/" + path.join("/") + "/" + s.name)
-            : ["/" + path.join("/") + "/" + selectedContext.name]);
+            ? selected.map(s => currentDir + s.name)
+            : [currentDir + selectedContext.name]);
     };
     const _pasteItem = (targetPath, asSymlink) => {
-        pasteItem(clipboard, "/" + targetPath.join("/") + "/", asSymlink, addAlert);
+        pasteItem(clipboard, targetPath.join("/") + "/", asSymlink, addAlert);
     };
     const _renameItem = () => {
         renameItem(Dialogs, { selected: selectedContext, path, setHistory, setHistoryIndex });
@@ -207,10 +208,10 @@ export const Application = () => {
             Dialogs,
             {
                 selected,
-                itemPath: "/" + path.join("/") + "/" + selectedContext.name,
+                itemPath: currentDir + selectedContext.name,
                 setHistory,
                 setHistoryIndex,
-                path: "/" + path.join("/") + "/",
+                path: currentDir,
                 multiple: Array.isArray(selected),
                 setSelected
             }

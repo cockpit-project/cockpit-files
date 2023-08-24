@@ -26,8 +26,8 @@ const options = { err: "message", superuser: "try" };
 
 const renameCommand = ({ selected, path, name }) => {
     return selected.items_cnt
-        ? ["mv", "/" + path.join("/"), "/" + path.slice(0, -1).join("/") + "/" + name]
-        : ["mv", "/" + path.join("/") + "/" + selected.name, "/" + path.join("/") + "/" + name];
+        ? ["mv", path.join("/"), path.slice(0, -1).join("/") + "/" + name]
+        : ["mv", path.join("/") + "/" + selected.name, path.join("/") + "/" + name];
 };
 
 export const spawnDeleteItem = ({ path, selected, itemPath, Dialogs, setSelected, setHistory, setHistoryIndex }) => {
@@ -41,7 +41,7 @@ export const spawnDeleteItem = ({ path, selected, itemPath, Dialogs, setSelected
             .then(() => {
                 setSelected([]);
                 if (selected.length === 0) {
-                    const newPath = "/" + path.slice(0, -1).join("/");
+                    const newPath = path.slice(0, -1).join("/");
 
                     cockpit.location.go("/", { path: encodeURIComponent(newPath) });
                     setHistory(h => h.slice(0, -1));
@@ -74,8 +74,8 @@ export const spawnForceDelete = ({ selected, path, itemPath, Dialogs, setDeleteF
 
 export const spawnRenameItem = ({ selected, name, path, Dialogs, setErrorMessage, setHistory, setHistoryIndex }) => {
     const newPath = selected.items_cnt
-        ? "/" + path.slice(0, -1).join("/") + "/" + name
-        : "/" + path.join("/") + "/" + name;
+        ? path.slice(0, -1).join("/") + "/" + name
+        : path.join("/") + "/" + name;
 
     cockpit.spawn(renameCommand({ selected, path, name }), options)
             .then(() => {
@@ -119,7 +119,7 @@ export const spawnEditPermissions = ({ changeAll, ownerAccess, groupAccess, othe
             ? ["-R"]
             : []),
         ownerAccess + groupAccess + otherAccess,
-        "/" + path.join("/") + "/" + selected.name
+        path.join("/") + "/" + selected.name
     ];
     const permissionChanged = (
         ownerAccess !== selected.permissions[0] ||
@@ -137,7 +137,7 @@ export const spawnEditPermissions = ({ changeAll, ownerAccess, groupAccess, othe
             .then(() => {
                 if (ownerChanged) {
                     return cockpit.spawn(
-                        ["chown", owner + ":" + group, "/" + path.join("/") + "/" + selected.name],
+                        ["chown", owner + ":" + group, path.join("/") + "/" + selected.name],
                         options
                     );
                 }
