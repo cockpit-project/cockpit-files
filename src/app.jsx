@@ -64,7 +64,7 @@ const updateFile = (file, currentPath) => {
                 file.owner = res[3];
                 file.size = res[4];
                 if (file.type === "link")
-                    return cockpit.spawn(["ls", "-lF", filePath])
+                    return cockpit.spawn(["ls", "-lF", filePath], { superuser: "try" })
                             .then(res => {
                                 file.to = res.slice(-2, -1) === "/"
                                     ? "directory"
