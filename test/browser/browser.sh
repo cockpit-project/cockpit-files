@@ -1,9 +1,11 @@
 #!/bin/sh
 set -eux
 
+export TEST_BROWSER=${TEST_BROWSER:-firefox}
+
 TESTS="$(realpath $(dirname "$0"))"
-SOURCE="$(realpath $TESTS/../..)"
-LOGS="$(pwd)/logs"
+export SOURCE="$(realpath $TESTS/../..)"
+export LOGS="$(pwd)/logs"
 mkdir -p "$LOGS"
 chmod a+w "$LOGS"
 
@@ -47,7 +49,10 @@ echo core > /proc/sys/kernel/core_pattern
 systemctl enable --now cockpit.socket
 
 # Run tests as unprivileged user
-su - -c "env TEST_BROWSER=firefox SOURCE=$SOURCE LOGS=$LOGS $TESTS/run-test.sh" runtest
+# once we drop support for RHEL 8, use this:
+# runuser -u runtest --whitelist-environment=TEST_BROWSER,TEST_ALLOW_JOURNAL_MESSAGES,TEST_AUDIT_NO_SELINUX,SOURCE,LOGS $TESTS/run-test.sh
+runuser -u runtest --preserve-environment env USER=runtest HOME=$(getent passwd runtest | cut -f6 -d:) $TESTS/run-test.sh
+
 
 RC=$(cat $LOGS/exitcode)
 exit ${RC:-1}

@@ -184,10 +184,10 @@ print-vm:
 # without actually running them
 prepare-check: $(NODE_MODULES_TEST) $(VM_IMAGE) test/common
 
-# run the browser integration tests; skip check for SELinux denials
+# run the browser integration tests
 # this will run all tests/check-* and format them as TAP
 check: prepare-check
-	TEST_AUDIT_NO_SELINUX=1 test/common/run-tests ${RUN_TESTS_OPTIONS}
+	test/common/run-tests ${RUN_TESTS_OPTIONS}
 
 # checkout Cockpit's bots for standard test VM images and API to launch them
 bots: test/common
