@@ -163,7 +163,7 @@ class TestNavigator(testlib.MachineCase):
             b.key_press(["\b"] * 12)
 
             # Copy item path
-            b.click("button:contains('not-hidden')")
+            b.click("[data-item='not-hidden']")
             b.click("#dropdown-menu")
             b.click("#copy-path")
             # Paste text in filter input to check copied text
