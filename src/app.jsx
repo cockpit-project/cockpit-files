@@ -27,7 +27,7 @@ import {
     Icon,
     MenuItem, MenuList,
     Page, PageSection,
-    Sidebar, SidebarPanel, SidebarContent, Truncate, CardHeader, CardTitle,
+    Sidebar, SidebarPanel, SidebarContent, Truncate, CardHeader, CardTitle, Divider,
 } from "@patternfly/react-core";
 import { ExclamationCircleIcon, FileIcon, FolderIcon } from "@patternfly/react-icons";
 
@@ -198,29 +198,36 @@ export const Application = () => {
 
     const contextMenuItems = (
         <MenuList>
-            {[
-                { title: _("Create directory"), onClick: _createDirectory },
-                { title: _("Create link"), onClick: _createLink },
-                { title: _("Edit properties"), onClick: _editProperties },
-                ...!selectedContext
-                    ? []
-                    : [
-                        { title: cockpit.format(_("Rename $0"), selectedContext?.type), onClick: _renameItem },
-                        {
-                            title: cockpit.format(_("Delete $0"), selectedContext?.type),
-                            onClick: _deleteItem,
-                            className: "pf-m-danger"
-                        }
-                    ],
-            ]
-                    .map(item => (
-                        <MenuItem
-                          className={"context-menu-option " + item.className} key={item.title}
-                          onClick={item.onClick}
-                        >
-                            <div className="context-menu-name">{item.title}</div>
-                        </MenuItem>
-                    ))}
+            {
+            ...(!selectedContext
+                ? [
+                    { title: _("Create directory"), onClick: _createDirectory },
+                    { title: _("Create link"), onClick: _createLink },
+                    { type: "divider" },
+                    { title: _("Edit properties"), onClick: _editProperties }
+                ]
+                : [
+                    { title: _("Edit properties"), onClick: _editProperties },
+                    { title: cockpit.format(_("Rename $0"), selectedContext?.type), onClick: _renameItem },
+                    { type: "divider" },
+                    { title: _("Create link"), onClick: _createLink },
+                    { type: "divider" },
+                    {
+                        title: cockpit.format(_("Delete $0"), selectedContext?.type),
+                        onClick: _deleteItem,
+                        className: "pf-m-danger"
+                    }
+                ])
+                    .map((item, i) => item.type !== "divider"
+                        ? (
+                            <MenuItem
+                              className={"context-menu-option " + item.className} key={item.title}
+                              onClick={item.onClick}
+                            >
+                                <div className="context-menu-name">{item.title}</div>
+                            </MenuItem>
+                        )
+                        : <Divider key={i} />)}
         </MenuList>
     );
 
