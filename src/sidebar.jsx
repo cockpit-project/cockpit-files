@@ -31,6 +31,7 @@ import {
     DescriptionListDescription,
     DescriptionListGroup,
     DescriptionListTerm,
+    Divider,
     Dropdown,
     DropdownItem,
     DropdownList,
@@ -221,8 +222,7 @@ const DropdownWithKebab = ({ selected, path, showHidden, setShowHidden, setHisto
               </MenuToggle>}
         >
             <DropdownList>
-                {selected.type !== "file" && selected.type !== "link" &&
-                <>
+                {selected.items_cnt &&
                     <DropdownItem
                       id="show-hidden-items" key="show-hidden-items"
                       onClick={onToggleHidden}
@@ -236,41 +236,7 @@ const DropdownWithKebab = ({ selected, path, showHidden, setShowHidden, setHisto
                                 </Icon>}
                             </FlexItem>
                         </Flex>
-                    </DropdownItem>
-                    <DropdownItem
-                      id="create-item" key="create-item"
-                      onClick={() => { createDirectory(Dialogs, currentDirectory, selected) }}
-                    >
-                        {_("Create directory")}
-                    </DropdownItem>
-                    <DropdownItem
-                      id="edit-properties" key="edit-properties"
-                      onClick={() => {
-                          editPermissions(Dialogs, {
-                              selected: selected.items_cnt
-                                  ? null
-                                  : selected,
-                              path
-                          });
-                      }}
-                    >
-                        {_("Edit properties")}
-                    </DropdownItem>
-                </>}
-                <DropdownItem
-                  id="create-link" key="create-link"
-                  onClick={() => { createLink(Dialogs, currentDirectory, files) }}
-                >
-                    {_("Create link")}
-                </DropdownItem>
-                <DropdownItem
-                  id="rename-item" key="rename-item"
-                  onClick={() => {
-                      renameItem(Dialogs, { selected, path, setHistory, setHistoryIndex });
-                  }}
-                >
-                    {cockpit.format(_("Rename $0"), selected.type || "directory")}
-                </DropdownItem>
+                    </DropdownItem>}
                 <DropdownItem
                   id="copy-path" key="copy-path"
                   onClick={() => {
@@ -281,6 +247,43 @@ const DropdownWithKebab = ({ selected, path, showHidden, setShowHidden, setHisto
                 >
                     {_("Copy full path")}
                 </DropdownItem>
+                <Divider />
+                {selected.items_cnt &&
+                <DropdownItem
+                  id="create-item" key="create-item"
+                  onClick={() => { createDirectory(Dialogs, currentDirectory, selected) }}
+                >
+                    {_("Create directory")}
+                </DropdownItem>}
+                <DropdownItem
+                  id="create-link" key="create-link"
+                  onClick={() => { createLink(Dialogs, currentDirectory, files) }}
+                >
+                    {_("Create link")}
+                </DropdownItem>
+                <Divider />
+                <DropdownItem
+                  id="edit-properties" key="edit-properties"
+                  onClick={() => {
+                      editPermissions(Dialogs, {
+                          selected: selected.items_cnt
+                              ? null
+                              : selected,
+                          path
+                      });
+                  }}
+                >
+                    {_("Edit properties")}
+                </DropdownItem>
+                <DropdownItem
+                  id="rename-item" key="rename-item"
+                  onClick={() => {
+                      renameItem(Dialogs, { selected, path, setHistory, setHistoryIndex });
+                  }}
+                >
+                    {cockpit.format(_("Rename $0"), selected.type || "directory")}
+                </DropdownItem>
+                <Divider />
                 <DropdownItem
                   id="delete-item" key="delete-item"
                   onClick={() => {
