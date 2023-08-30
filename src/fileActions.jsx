@@ -89,11 +89,26 @@ export const renameItem = (Dialogs, options) => {
 };
 
 export const editPermissions = (Dialogs, options) => {
-    Dialogs.show(
-        <EditPermissionsModal
-          selected={options.selected} path={options.path}
-        />
-    );
+    if (options.selected === null) {
+        updateFile({ name: "" }, "/" + options.path.join("/"))
+                .then(res => {
+                    Dialogs.show(
+                        <EditPermissionsModal
+                          selected={{
+                              ...res,
+                              name: options.path[options.path.length - 1],
+                              type: "directory"
+                          }} path={options.path.slice(0, -1)}
+                        />
+                    );
+                });
+    } else {
+        Dialogs.show(
+            <EditPermissionsModal
+              selected={options.selected} path={options.path}
+            />
+        );
+    }
 };
 
 export const ConfirmDeletionDialog = ({
@@ -540,4 +555,39 @@ export const EditPermissionsModal = ({ selected, path }) => {
             </Stack>
         </Modal>
     );
+};
+
+export const updateFile = (file, currentPath) => {
+    const filePath = currentPath + "/" + file.name;
+    return cockpit.spawn([
+        "stat",
+        "-c",
+        "%a,%Y,%G,%U,%s",
+        filePath
+    ], { superuser: "try", error: "message" })
+            .then(res => {
+                res = res.trim().split(",");
+
+                let perm = res[0];
+                // trim sticky bit
+                if (perm.length === 4) perm = perm.slice(1);
+                if (perm.length === 1) perm = "00".concat(perm);
+                if (perm.length === 2) perm = "0".concat(perm);
+                file.permissions = perm;
+
+                file.modified = res[1];
+                file.group = res[2];
+                file.owner = res[3];
+                file.size = res[4];
+                if (file.type === "link")
+                    return cockpit.spawn(["ls", "-lF", filePath], { superuser: "try" })
+                            .then(res => {
+                                file.to = res.slice(-2, -1) === "/"
+                                    ? "directory"
+                                    : "file";
+                                return file;
+                            });
+                else
+                    return file;
+            }, exc => console.error("Adding file failed", file, exc));
 };
