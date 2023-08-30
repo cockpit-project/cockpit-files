@@ -35,7 +35,7 @@ import { ListingTable } from "cockpit-components-table.jsx";
 import { EmptyStatePanel } from "cockpit-components-empty-state.jsx";
 import { ContextMenu } from "./navigatorContextMenu.jsx";
 import { NavigatorBreadcrumbs } from "./navigatorBreadcrumbs.jsx";
-import { createDirectory, createLink, deleteItem, editPermissions, renameItem } from "./fileActions.jsx";
+import { createDirectory, createLink, deleteItem, editPermissions, renameItem, updateFile } from "./fileActions.jsx";
 import { SidebarPanelDetails } from "./sidebar.jsx";
 import { NavigatorCardHeader } from "./header.jsx";
 import { usePageLocation } from "hooks.js";
@@ -43,41 +43,6 @@ import { usePageLocation } from "hooks.js";
 const _ = cockpit.gettext;
 
 superuser.reload_page_on_change();
-
-const updateFile = (file, currentPath) => {
-    const filePath = currentPath + "/" + file.name;
-    return cockpit.spawn([
-        "stat",
-        "-c",
-        "%a,%Y,%G,%U,%s",
-        filePath
-    ], { superuser: "try", error: "message" })
-            .then(res => {
-                res = res.trim().split(",");
-
-                let perm = res[0];
-                // trim sticky bit
-                if (perm.length === 4) perm = perm.slice(1);
-                if (perm.length === 1) perm = "00".concat(perm);
-                if (perm.length === 2) perm = "0".concat(perm);
-                file.permissions = perm;
-
-                file.modified = res[1];
-                file.group = res[2];
-                file.owner = res[3];
-                file.size = res[4];
-                if (file.type === "link")
-                    return cockpit.spawn(["ls", "-lF", filePath], { superuser: "try" })
-                            .then(res => {
-                                file.to = res.slice(-2, -1) === "/"
-                                    ? "directory"
-                                    : "file";
-                                return file;
-                            });
-                else
-                    return file;
-            }, exc => console.error("Adding file failed", file, exc));
-};
 
 export const Application = () => {
     const { options } = usePageLocation();
@@ -236,11 +201,11 @@ export const Application = () => {
             {[
                 { title: _("Create directory"), onClick: _createDirectory },
                 { title: _("Create link"), onClick: _createLink },
+                { title: _("Edit properties"), onClick: _editProperties },
                 ...!selectedContext
                     ? []
                     : [
                         { title: cockpit.format(_("Rename $0"), selectedContext?.type), onClick: _renameItem },
-                        { title: _("Edit properties"), onClick: _editProperties },
                         {
                             title: cockpit.format(_("Delete $0"), selectedContext?.type),
                             onClick: _deleteItem,

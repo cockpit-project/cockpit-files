@@ -243,6 +243,19 @@ const DropdownWithKebab = ({ selected, path, showHidden, setShowHidden, setHisto
                     >
                         {_("Create directory")}
                     </DropdownItem>
+                    <DropdownItem
+                      id="edit-properties" key="edit-properties"
+                      onClick={() => {
+                          editPermissions(Dialogs, {
+                              selected: selected.items_cnt
+                                  ? null
+                                  : selected,
+                              path
+                          });
+                      }}
+                    >
+                        {_("Edit properties")}
+                    </DropdownItem>
                 </>}
                 <DropdownItem
                   id="create-link" key="create-link"
