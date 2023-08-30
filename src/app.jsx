@@ -241,12 +241,16 @@ export const Application = () => {
                     : [
                         { title: cockpit.format(_("Rename $0"), selectedContext?.type), onClick: _renameItem },
                         { title: _("Edit properties"), onClick: _editProperties },
-                        { title: cockpit.format(_("Delete $0"), selectedContext?.type), onClick: _deleteItem }
+                        {
+                            title: cockpit.format(_("Delete $0"), selectedContext?.type),
+                            onClick: _deleteItem,
+                            className: "pf-m-danger"
+                        }
                     ],
             ]
                     .map(item => (
                         <MenuItem
-                          className="context-menu-option" key={item.title}
+                          className={"context-menu-option " + item.className} key={item.title}
                           onClick={item.onClick}
                         >
                             <div className="context-menu-name">{item.title}</div>
