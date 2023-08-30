@@ -213,9 +213,6 @@ export const Application = () => {
     const _createLink = () => {
         createLink(Dialogs, "/" + path.join("/") + "/", files, selectedContext);
     };
-    const _copyFullPath = () => {
-        navigator.clipboard.writeText("/" + path.join("/") + "/" + selectedContext.name);
-    };
     const _renameItem = () => {
         renameItem(Dialogs, { selected: selectedContext, path, setHistory, setHistoryIndex });
     };
@@ -242,7 +239,6 @@ export const Application = () => {
                 ...!selectedContext
                     ? []
                     : [
-                        { title: _("Copy full path"), onClick: _copyFullPath },
                         { title: cockpit.format(_("Rename $0"), selectedContext?.type), onClick: _renameItem },
                         { title: _("Edit properties"), onClick: _editProperties },
                         { title: cockpit.format(_("Delete $0"), selectedContext?.type), onClick: _deleteItem }
