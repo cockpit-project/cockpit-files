@@ -396,12 +396,6 @@ class TestNavigator(testlib.MachineCase):
         b.click(".breadcrumb-button:nth-of-type(3)")
         m.execute("sudo chattr -i /home/admin/newdir")
 
-        # Create folder inside selected folder
-        b.click("[data-item='newdir']")
-        self.create_directory(b, "nesteddir")
-        b.mouse("[data-item='newdir']", "dblclick")
-        b.wait_visible("[data-item='nesteddir']")
-
     def testContextMenu(self):
         b = self.browser
         m = self.machine
@@ -418,16 +412,6 @@ class TestNavigator(testlib.MachineCase):
         b.click("button.pf-m-primary")
         b.wait_visible("[data-item='newdir']")
 
-        # Create folder inside selected folder
-        b.mouse("[data-item='newdir']", "contextmenu")
-        b.click(".context-menu button:contains('Create directory')")
-        b.set_input_text("#create-directory-input", "newdir2")
-        b.click("button.pf-m-primary")
-        b.mouse("[data-item='newdir']", "dblclick")
-        b.wait_not_present("[data-item='newdir']")
-        b.wait_visible("[data-item='newdir2']")
-        b.click(".breadcrumb-button:nth-of-type(3)")
-
         # Opening context menu from empty space deselects item
         b.click("[data-item='newdir']")
         b.mouse("#folder-view", "contextmenu")
@@ -439,7 +423,7 @@ class TestNavigator(testlib.MachineCase):
 
         # Rename folder from context menu
         b.mouse("[data-item='newdir']", "contextmenu")
-        b.wait_in_text(".context-menu li:nth-child(4) button", "Rename directory")
+        b.wait_in_text(".context-menu li:nth-child(2) button", "Rename directory")
         b.click(".context-menu button:contains('Rename directory')")
         b.set_input_text("#rename-item-input", "newdir1")
         b.click("button.pf-m-primary")
@@ -448,7 +432,7 @@ class TestNavigator(testlib.MachineCase):
         # Edit properties from context menu
         b.click("[data-item='newdir1']")
         b.mouse("[data-item='newdir1']", "contextmenu")
-        b.wait_in_text(".context-menu li:nth-child(5) button", "Edit properties")
+        b.wait_in_text(".context-menu li:nth-child(1) button", "Edit properties")
         b.click(".context-menu button:contains('Edit properties')")
         b.select_from_dropdown("#edit-permissions-owner", "fedora")
         b.click("button.pf-m-primary")
@@ -464,34 +448,17 @@ class TestNavigator(testlib.MachineCase):
         # Check file name is pre-selected when creating link
         m.execute("touch /home/admin/newfile")
         b.mouse("[data-item='newfile']", "contextmenu")
-        b.wait_in_text(".context-menu li:nth-child(2) button", "Create link")
+        b.wait_in_text(".context-menu li:nth-child(4) button", "Create link")
         b.click(".context-menu button:contains('Create link')")
         b.wait_val("#create-link-original-wrapper input", "/home/admin/newfile")
         b.click("button.pf-m-link:contains('Cancel')")
 
-        # Firefox does not support setting of permissions
-        # and therefore we cannot test copy/paste with context menu
-        if b.cdp.browser.name != "firefox":
-            try:
-                b.grant_permissions("clipboardReadWrite", "clipboardSanitizedWrite")
-            except RuntimeError:
-                # fallback for older Chrome releases
-                b.grant_permissions("clipboardRead", "clipboardWrite")
-
-            # Copy path from context menu
-            b.mouse("[data-item='newfile']", "contextmenu")
-            b.click(".context-menu button:contains('Copy full path')")
-            b.focus("input[placeholder='Filter directory']")
-            b.key_press("v", 2)
-            b.wait_val("input[placeholder='Filter directory']", "/home/admin/newfile")
-            b.key_press(["\b"] * 19)
-
-            # Delete button text should match item type: directory/file
-            b.mouse("[data-item='newfile']", "contextmenu")
-            b.wait_in_text(".context-menu li:nth-child(6) button", "Delete file")
-            b.click(".context-menu button:contains('Delete file')")
-            b.click("button.pf-m-danger")
-            b.wait_not_present("[data-item='newfile']")
+        # Delete button text should match item type: directory/file
+        b.mouse("[data-item='newfile']", "contextmenu")
+        b.wait_in_text(".context-menu li:nth-child(6) button", "Delete file")
+        b.click(".context-menu button:contains('Delete file')")
+        b.click("button.pf-m-danger")
+        b.wait_not_present("[data-item='newfile']")
 
     def testRename(self):
         b = self.browser
