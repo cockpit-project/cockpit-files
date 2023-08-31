@@ -374,6 +374,7 @@ const NavigatorCardBody = ({
     sortBy,
 }) => {
     const [boxPerRow, setBoxPerRow] = useState(0);
+    const Dialogs = useDialogs();
     const sortedFiles = useMemo(() => {
         const compareFunc = compare(sortBy);
 
@@ -458,10 +459,12 @@ const NavigatorCardBody = ({
             }
         };
 
-        if (!isMounted.current) {
+        if (!isMounted.current && !Dialogs.isActive()) {
             isMounted.current = true;
             document.addEventListener("keydown", onKeyboardNav);
         }
+        if (Dialogs.isActive())
+            document.removeEventListener("keydown", onKeyboardNav);
         return () => {
             isMounted.current = false;
             document.removeEventListener("keydown", onKeyboardNav);
@@ -471,7 +474,8 @@ const NavigatorCardBody = ({
         sortedFiles,
         boxPerRow,
         selected,
-        onDoubleClickNavigate
+        onDoubleClickNavigate,
+        Dialogs
     ]);
 
     const resetSelected = e => {
