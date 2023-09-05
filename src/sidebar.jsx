@@ -152,7 +152,11 @@ export const SidebarPanelDetails = ({
                                     cockpit.format("($0 hidden)", selected.items_cnt.hidden)
                                 )}
                             </Text>}
-                        {selected.items_cnt === undefined &&
+                        {selected.items &&
+                            <Text component={TextVariants.small}>
+                                {cockpit.format("$0 items selected", selected.items.length)}
+                            </Text>}
+                        {!selected.items_cnt && !selected.items &&
                             <Text component={TextVariants.small}>
                                 {info}
                             </Text>}
@@ -165,7 +169,7 @@ export const SidebarPanelDetails = ({
                   setHistoryIndex={setHistoryIndex} files={files}
                 />
             </CardHeader>
-            {selected.items_cnt === undefined &&
+            {selected.items_cnt === undefined && !selected.items &&
             <CardBody>
                 <DescriptionList isHorizontal id="description-list-sidebar">
                     {getDescriptionListItems(selected).map((item, index) => (

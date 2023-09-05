@@ -249,6 +249,7 @@ export const Application = () => {
                         <SidebarPanelDetails
                           path={path}
                           selected={
+                              (Array.isArray(selected) && { items: selected, name: path[path.length - 1] }) ||
                               (files.find(file => file.name === selected?.name)) ||
                               ({
                                   has_error: errorMessage,
@@ -456,6 +457,26 @@ const NavigatorCardBody = ({
         }
     };
 
+    const handleClick = (ev, file) => {
+        if (ev.ctrlKey && selected !== path[path.length - 1]) {
+            setSelected(s => {
+                if (Array.isArray(s))
+                    if (s.find(f => f.name === file.name)) {
+                        const filtered = s.filter(f => f.name !== file.name);
+                        return filtered.length > 1
+                            ? filtered
+                            : filtered[0];
+                    } else
+                        return [...s, file];
+                else
+                    return s === file
+                        ? path[path.length - 1]
+                        : [s, file];
+            });
+        } else
+            setSelected(file);
+    };
+
     const Item = ({ file }) => {
         return (
             <Card
@@ -466,8 +487,10 @@ const NavigatorCardBody = ({
               id={"card-item-" + file.name + file.type}
               isClickable isCompact
               isPlain isRounded
-              isSelected={selected?.name === file.name}
-              onClick={() => setSelected(file)}
+              isSelected={Array.isArray(selected)
+                  ? selected.find(s => s.name === file.name)
+                  : selected?.name === file.name}
+              onClick={ev => handleClick(ev, file)}
               onContextMenu={(e) => {
                   e.stopPropagation();
                   setSelectedContext(file);
