@@ -458,23 +458,24 @@ const NavigatorCardBody = ({
     };
 
     const handleClick = (ev, file) => {
-        if (ev.ctrlKey && selected !== path[path.length - 1]) {
-            setSelected(s => {
-                if (Array.isArray(s))
-                    if (s.find(f => f.name === file.name)) {
-                        const filtered = s.filter(f => f.name !== file.name);
-                        return filtered.length > 1
-                            ? filtered
-                            : filtered[0];
-                    } else
-                        return [...s, file];
-                else
-                    return s === file
-                        ? path[path.length - 1]
-                        : [s, file];
-            });
-        } else
+        if (!ev.ctrlKey || selected === path[path.length - 1]) {
             setSelected(file);
+            return;
+        }
+        setSelected(s => {
+            if (!Array.isArray(s))
+                return s === file
+                    ? path[path.length - 1]
+                    : [s, file];
+
+            if (!s.find(f => f.name === file.name))
+                return [...s, file];
+
+            const filtered = s.filter(f => f.name !== file.name);
+            return filtered.length > 1
+                ? filtered
+                : filtered[0];
+        });
     };
 
     const Item = ({ file }) => {
