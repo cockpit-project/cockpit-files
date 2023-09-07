@@ -31,7 +31,13 @@ const renameCommand = ({ selected, path, name }) => {
 };
 
 export const spawnDeleteItem = (o) => {
-    cockpit.spawn(["rm", "-r", o.itemPath], options)
+    cockpit.spawn([
+        "rm",
+        "-r",
+        ...o.multiple
+            ? o.selected.map(f => o.path + f.name)
+            : [o.itemPath]
+    ], options)
             .then(() => {
                 if (o.selected.items_cnt) {
                     const newPath = "/" + o.path.slice(0, -1).join("/");
@@ -52,7 +58,13 @@ export const spawnDeleteItem = (o) => {
 };
 
 export const spawnForceDelete = (o) => {
-    cockpit.spawn(["rm", "-rf", o.itemPath], options)
+    cockpit.spawn([
+        "rm",
+        "-r",
+        ...o.multiple
+            ? o.selected.map(f => o.path + f.name)
+            : [o.itemPath]
+    ], options)
             .then(o.Dialogs.close, err => {
                 o.setDeleteFailed(true);
                 o.setErrorMessage(err.message);

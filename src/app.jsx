@@ -188,10 +188,12 @@ export const Application = () => {
         deleteItem(
             Dialogs,
             {
-                selected: selectedContext,
+                selected,
                 itemPath: "/" + path.join("/") + "/" + selectedContext.name,
                 setHistory,
-                setHistoryIndex
+                setHistoryIndex,
+                path: "/" + path.join("/") + "/",
+                multiple: Array.isArray(selected)
             }
         );
     };
@@ -206,18 +208,20 @@ export const Application = () => {
                     { type: "divider" },
                     { title: _("Edit properties"), onClick: _editProperties }
                 ]
-                : [
-                    { title: _("Edit properties"), onClick: _editProperties },
-                    { title: cockpit.format(_("Rename $0"), selectedContext?.type), onClick: _renameItem },
-                    { type: "divider" },
-                    { title: _("Create link"), onClick: _createLink },
-                    { type: "divider" },
-                    {
-                        title: cockpit.format(_("Delete $0"), selectedContext?.type),
-                        onClick: _deleteItem,
-                        className: "pf-m-danger"
-                    }
-                ])
+                : Array.isArray(selected) && selected.includes(selectedContext)
+                    ? [{ title: _("Delete"), onClick: _deleteItem, className: "pf-m-danger" },]
+                    : [
+                        { title: _("Edit properties"), onClick: _editProperties },
+                        { title: cockpit.format(_("Rename $0"), selectedContext?.type), onClick: _renameItem },
+                        { type: "divider" },
+                        { title: _("Create link"), onClick: _createLink },
+                        { type: "divider" },
+                        {
+                            title: cockpit.format(_("Delete $0"), selectedContext?.type),
+                            onClick: _deleteItem,
+                            className: "pf-m-danger"
+                        }
+                    ])
                     .map((item, i) => item.type !== "divider"
                         ? (
                             <MenuItem
@@ -495,6 +499,8 @@ const NavigatorCardBody = ({
               onContextMenu={(e) => {
                   e.stopPropagation();
                   setSelectedContext(file);
+                  if (!Array.isArray(selected) || (Array.isArray(selected) && !selected.includes(file)))
+                      setSelected(file);
               }}
               onDoubleClick={() => onDoubleClickNavigate(file)}
             >
