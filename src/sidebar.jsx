@@ -120,6 +120,7 @@ export const SidebarPanelDetails = ({
     setPath,
     setShowHidden,
     showHidden,
+    setSelected
 }) => {
     const [info, setInfo] = useState(null);
 
@@ -167,6 +168,7 @@ export const SidebarPanelDetails = ({
                   setPath={setPath} showHidden={showHidden}
                   setShowHidden={setShowHidden} setHistory={setHistory}
                   setHistoryIndex={setHistoryIndex} files={files}
+                  setSelected={setSelected}
                 />
             </CardHeader>
             {selected.items_cnt === undefined && !selected.items &&
@@ -193,7 +195,9 @@ export const SidebarPanelDetails = ({
     );
 };
 
-const DropdownWithKebab = ({ selected, path, showHidden, setShowHidden, setHistory, setHistoryIndex, files }) => {
+const DropdownWithKebab = ({
+    selected, path, showHidden, setShowHidden, setHistory, setHistoryIndex, files, setSelected
+}) => {
     const Dialogs = useDialogs();
     const [isOpen, setIsOpen] = useState(false);
 
@@ -298,7 +302,8 @@ const DropdownWithKebab = ({ selected, path, showHidden, setShowHidden, setHisto
                               : selected.name),
                           path,
                           setHistory,
-                          setHistoryIndex
+                          setHistoryIndex,
+                          setSelected
                       });
                   }} className="pf-m-danger"
                 >

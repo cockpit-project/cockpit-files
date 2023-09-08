@@ -72,7 +72,7 @@ export const deleteItem = (Dialogs, options) => {
     Dialogs.show(
         <ConfirmDeletionDialog
           selected={options.selected} itemPath={options.itemPath}
-          path={options.path}
+          path={options.path} setSelected={options.setSelected}
           setHistory={options.setHistory} setHistoryIndex={options.setHistoryIndex}
         />
     );
@@ -117,6 +117,7 @@ export const ConfirmDeletionDialog = ({
     selected,
     setHistory,
     setHistoryIndex,
+    setSelected
 }) => {
     const Dialogs = useDialogs();
 
@@ -139,7 +140,7 @@ export const ConfirmDeletionDialog = ({
     }
 
     const deleteItem = () => {
-        spawnDeleteItem({ Dialogs, selected, itemPath, path, setHistory, setHistoryIndex });
+        spawnDeleteItem({ Dialogs, selected, itemPath, path, setHistory, setHistoryIndex, setSelected });
     };
 
     return (

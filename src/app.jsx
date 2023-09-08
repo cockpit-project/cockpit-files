@@ -193,7 +193,8 @@ export const Application = () => {
                 setHistory,
                 setHistoryIndex,
                 path: "/" + path.join("/") + "/",
-                multiple: Array.isArray(selected)
+                multiple: Array.isArray(selected),
+                setSelected
             }
         );
     };
@@ -265,7 +266,7 @@ export const Application = () => {
                               })
                           }
                           setHistory={setHistory} setHistoryIndex={setHistoryIndex}
-                          showHidden={showHidden}
+                          showHidden={showHidden} setSelected={setSelected}
                           setShowHidden={setShowHidden} files={files}
                         />
                     </SidebarPanel>

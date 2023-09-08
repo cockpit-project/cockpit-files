@@ -39,6 +39,7 @@ export const spawnDeleteItem = (o) => {
             : [o.itemPath]
     ], options)
             .then(() => {
+                o.setSelected([{ name: o.path[o.path.length - 1] }]);
                 if (o.selected.items_cnt) {
                     const newPath = "/" + o.path.slice(0, -1).join("/");
 
