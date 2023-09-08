@@ -34,7 +34,7 @@ export const spawnDeleteItem = (o) => {
     cockpit.spawn([
         "rm",
         "-r",
-        ...o.multiple
+        ...o.selected.length > 1
             ? o.selected.map(f => o.path + f.name)
             : [o.itemPath]
     ], options)
@@ -61,7 +61,7 @@ export const spawnForceDelete = (o) => {
     cockpit.spawn([
         "rm",
         "-r",
-        ...o.multiple
+        ...o.selected.length > 1
             ? o.selected.map(f => o.path + f.name)
             : [o.itemPath]
     ], options)
