@@ -230,7 +230,9 @@ const DropdownWithKebab = ({
               </MenuToggle>}
         >
             <DropdownList>
-                {selected.items_cnt &&
+                {(selected.items === undefined || selected.items.length < 1) &&
+                <>
+                    {selected.items_cnt &&
                     <DropdownItem
                       id="show-hidden-items" key="show-hidden-items"
                       onClick={onToggleHidden}
@@ -245,53 +247,54 @@ const DropdownWithKebab = ({
                             </FlexItem>
                         </Flex>
                     </DropdownItem>}
-                <DropdownItem
-                  id="copy-path" key="copy-path"
-                  onClick={() => {
-                      navigator.clipboard.writeText("/" + path.join("/") + "/" + (selected.type
-                          ? selected.name
-                          : ""));
-                  }}
-                >
-                    {_("Copy full path")}
-                </DropdownItem>
-                <Divider />
-                {selected.items_cnt &&
-                <DropdownItem
-                  id="create-item" key="create-item"
-                  onClick={() => { createDirectory(Dialogs, currentDirectory, selected) }}
-                >
-                    {_("Create directory")}
-                </DropdownItem>}
-                <DropdownItem
-                  id="create-link" key="create-link"
-                  onClick={() => { createLink(Dialogs, currentDirectory, files) }}
-                >
-                    {_("Create link")}
-                </DropdownItem>
-                <Divider />
-                <DropdownItem
-                  id="edit-properties" key="edit-properties"
-                  onClick={() => {
-                      editPermissions(Dialogs, {
-                          selected: selected.items_cnt
-                              ? null
-                              : selected,
-                          path
-                      });
-                  }}
-                >
-                    {_("Edit properties")}
-                </DropdownItem>
-                <DropdownItem
-                  id="rename-item" key="rename-item"
-                  onClick={() => {
-                      renameItem(Dialogs, { selected, path, setHistory, setHistoryIndex });
-                  }}
-                >
-                    {cockpit.format(_("Rename $0"), selected.type || "directory")}
-                </DropdownItem>
-                <Divider />
+                    <DropdownItem
+                      id="copy-path" key="copy-path"
+                      onClick={() => {
+                          navigator.clipboard.writeText("/" + path.join("/") + "/" + (selected.type
+                              ? selected.name
+                              : ""));
+                      }}
+                    >
+                        {_("Copy full path")}
+                    </DropdownItem>
+                    <Divider />
+                    {selected.items_cnt &&
+                    <DropdownItem
+                      id="create-item" key="create-item"
+                      onClick={() => { createDirectory(Dialogs, currentDirectory, selected) }}
+                    >
+                        {_("Create directory")}
+                    </DropdownItem>}
+                    <DropdownItem
+                      id="create-link" key="create-link"
+                      onClick={() => { createLink(Dialogs, currentDirectory, files) }}
+                    >
+                        {_("Create link")}
+                    </DropdownItem>
+                    <Divider />
+                    <DropdownItem
+                      id="edit-properties" key="edit-properties"
+                      onClick={() => {
+                          editPermissions(Dialogs, {
+                              selected: selected.items_cnt
+                                  ? null
+                                  : selected,
+                              path
+                          });
+                      }}
+                    >
+                        {_("Edit properties")}
+                    </DropdownItem>
+                    <DropdownItem
+                      id="rename-item" key="rename-item"
+                      onClick={() => {
+                          renameItem(Dialogs, { selected, path, setHistory, setHistoryIndex });
+                      }}
+                    >
+                        {cockpit.format(_("Rename $0"), selected.type || "directory")}
+                    </DropdownItem>
+                    <Divider />
+                </>}
                 <DropdownItem
                   id="delete-item" key="delete-item"
                   onClick={() => {
@@ -307,7 +310,9 @@ const DropdownWithKebab = ({
                       });
                   }} className="pf-m-danger"
                 >
-                    {cockpit.format(_("Delete $0"), selected.type || "directory")}
+                    {selected.items?.length > 1
+                        ? _("Delete")
+                        : cockpit.format(_("Delete $0"), selected.type || "directory")}
                 </DropdownItem>
             </DropdownList>
         </Dropdown>
