@@ -152,7 +152,7 @@ export const Application = () => {
         if (currentPath === "")
             return;
 
-        setSelected([{ name : sel }]);
+        setSelected([]);
         setFiles([]);
         setLoading(true);
 
@@ -253,17 +253,16 @@ export const Application = () => {
                     <SidebarPanel className="sidebar-panel" width={{ default: "width_25" }}>
                         <SidebarPanelDetails
                           path={path}
-                          selected={
-                              (selected.length > 1 && { items: selected, name: path[path.length - 1] }) ||
-                              (files.find(file => file.name === selected[0]?.name)) ||
-                              ({
+                          selected={selected.map(s => files.find(f => f.name === s.name)).filter(s => s !== undefined)}
+                          currentDirectory={
+                              {
                                   has_error: errorMessage,
                                   name: path[path.length - 1],
                                   items_cnt: {
                                       all: files.length,
                                       hidden: files.length - files.filter(file => !file.name.startsWith(".")).length
                                   }
-                              })
+                              }
                           }
                           setHistory={setHistory} setHistoryIndex={setHistoryIndex}
                           showHidden={showHidden} setSelected={setSelected}

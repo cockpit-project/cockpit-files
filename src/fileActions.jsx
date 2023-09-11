@@ -74,6 +74,7 @@ export const deleteItem = (Dialogs, options) => {
           selected={options.selected} itemPath={options.itemPath}
           path={options.path} setSelected={options.setSelected}
           setHistory={options.setHistory} setHistoryIndex={options.setHistoryIndex}
+          currentDirectory={options.currentDirectory}
         />
     );
 };
@@ -117,7 +118,8 @@ export const ConfirmDeletionDialog = ({
     selected,
     setHistory,
     setHistoryIndex,
-    setSelected
+    setSelected,
+    currentDirectory
 }) => {
     const Dialogs = useDialogs();
 
@@ -125,9 +127,9 @@ export const ConfirmDeletionDialog = ({
     if (selected.length > 1) {
         modalTitle = cockpit.format(_("Delete $0 items?"), selected.length);
     } else {
-        const selectedItem = Array.isArray(selected)
+        const selectedItem = selected.length === 1
             ? selected[0]
-            : selected;
+            : currentDirectory;
         if (selectedItem.type === "file") {
             modalTitle = cockpit.format(_("Delete file $0?"), selectedItem.name);
         } else if (selectedItem.type === "link") {

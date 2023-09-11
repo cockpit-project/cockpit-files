@@ -39,8 +39,8 @@ export const spawnDeleteItem = (o) => {
             : [o.itemPath]
     ], options)
             .then(() => {
-                o.setSelected([{ name: o.path[o.path.length - 1] }]);
-                if (o.selected.items_cnt) {
+                o.setSelected([]);
+                if (o.selected.length === 0) {
                     const newPath = "/" + o.path.slice(0, -1).join("/");
 
                     cockpit.location.go("/", { path: encodeURIComponent(newPath) });
