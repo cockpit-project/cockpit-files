@@ -665,27 +665,27 @@ class TestNavigator(testlib.MachineCase):
         m.execute("touch /home/admin/file1 && touch /home/admin/file2")
         b.click("[data-item='file1']")
         b.mouse("[data-item='file2']", "click", ctrlKey=True)
-        self.assertIn("pf-m-selected", b.attr("[data-item='file1']", "class"))
-        self.assertIn("pf-m-selected", b.attr("[data-item='file2']", "class"))
+        b.wait_visible("[data-item='file1'].pf-m-selected")
+        b.wait_visible("[data-item='file2'].pf-m-selected")
         b.wait_text("#sidebar-card-header", f"admin2 items selected")
 
         b.mouse("[data-item='file2']", "click", ctrlKey=True)
-        self.assertIn("pf-m-selected", b.attr("[data-item='file1']", "class"))
-        self.assertNotIn("pf-m-selected", b.attr("[data-item='file2']", "class"))
+        b.wait_visible("[data-item='file1'].pf-m-selected")
+        b.wait_not_present("[data-item='file2'].pf-m-selected")
         b.wait_text("#sidebar-card-header", f"file1 empty")
 
         b.mouse("[data-item='file1']", "click", ctrlKey=True)
-        self.assertNotIn("pf-m-selected", b.attr("[data-item='file1']", "class"))
+        b.wait_not_present("[data-item='file1'].pf-m-selected")
         b.wait_in_text("#sidebar-card-header", f"admin")
 
         # Control-clicking when nothing is selected should select item normally
         b.mouse("[data-item='file1']", "click", ctrlKey=True)
-        self.assertIn("pf-m-selected", b.attr("[data-item='file1']", "class"))
+        b.wait_visible("[data-item='file1'].pf-m-selected")
         b.wait_text("#sidebar-card-header", f"file1 empty")
         
         # Check context menu
         b.mouse("[data-item='file2']", "click", ctrlKey=True)
-        self.assertIn("pf-m-selected", b.attr("[data-item='file2']", "class"))
+        b.wait_visible("[data-item='file2'].pf-m-selected")
         b.wait_text("#sidebar-card-header", f"admin2 items selected")
         b.mouse("[data-item='file1']", "contextmenu")
         b.wait_in_text(".context-menu li:nth-child(1) button", "Delete")
