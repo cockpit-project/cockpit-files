@@ -406,7 +406,7 @@ class TestNavigator(testlib.MachineCase):
 
         # Create folder from context menu
         b.mouse("#folder-view", "contextmenu")
-        b.wait_in_text(".context-menu li:nth-child(1) button", "Create directory")
+        b.wait_in_text(".context-menu li:nth-child(4) button", "Create directory")
         b.click(".context-menu button:contains('Create directory')")
         b.set_input_text("#create-directory-input", "newdir")
         b.click("button.pf-m-primary")
@@ -423,7 +423,7 @@ class TestNavigator(testlib.MachineCase):
 
         # Rename folder from context menu
         b.mouse("[data-item='newdir']", "contextmenu")
-        b.wait_in_text(".context-menu li:nth-child(2) button", "Rename directory")
+        b.wait_in_text(".context-menu li:nth-child(5) button", "Rename directory")
         b.click(".context-menu button:contains('Rename directory')")
         b.set_input_text("#rename-item-input", "newdir1")
         b.click("button.pf-m-primary")
@@ -432,7 +432,7 @@ class TestNavigator(testlib.MachineCase):
         # Edit properties from context menu
         b.click("[data-item='newdir1']")
         b.mouse("[data-item='newdir1']", "contextmenu")
-        b.wait_in_text(".context-menu li:nth-child(1) button", "Edit properties")
+        b.wait_in_text(".context-menu li:nth-child(4) button", "Edit properties")
         b.click(".context-menu button:contains('Edit properties')")
         b.select_from_dropdown("#edit-permissions-owner", "fedora")
         b.click("button.pf-m-primary")
@@ -440,7 +440,7 @@ class TestNavigator(testlib.MachineCase):
 
         # Delete folder from context menu
         b.mouse("[data-item='newdir1']", "contextmenu")
-        b.wait_in_text(".context-menu li:nth-child(6) button", "Delete directory")
+        b.wait_in_text(".context-menu li:nth-child(9) button", "Delete directory")
         b.click(".context-menu button:contains('Delete directory')")
         b.click("button.pf-m-danger")
         b.wait_not_present("[data-item='newdir1']")
@@ -448,14 +448,14 @@ class TestNavigator(testlib.MachineCase):
         # Check file name is pre-selected when creating link
         m.execute("touch /home/admin/newfile")
         b.mouse("[data-item='newfile']", "contextmenu")
-        b.wait_in_text(".context-menu li:nth-child(4) button", "Create link")
+        b.wait_in_text(".context-menu li:nth-child(6) button", "Create link")
         b.click(".context-menu button:contains('Create link')")
         b.wait_val("#create-link-original-wrapper input", "/home/admin/newfile")
         b.click("button.pf-m-link:contains('Cancel')")
 
         # Delete button text should match item type: directory/file
         b.mouse("[data-item='newfile']", "contextmenu")
-        b.wait_in_text(".context-menu li:nth-child(6) button", "Delete file")
+        b.wait_in_text(".context-menu li:nth-child(8) button", "Delete file")
         b.click(".context-menu button:contains('Delete file')")
         b.click("button.pf-m-danger")
         b.wait_not_present("[data-item='newfile']")
@@ -688,7 +688,7 @@ class TestNavigator(testlib.MachineCase):
         b.wait_visible("[data-item='file2'].pf-m-selected")
         b.wait_text("#sidebar-card-header", f"admin2 items selected")
         b.mouse("[data-item='file1']", "contextmenu")
-        b.wait_in_text(".context-menu li:nth-child(1) button", "Delete")
+        b.wait_in_text(".context-menu li:nth-child(2) button", "Delete")
         b.click(".context-menu button:contains('Delete')")
         b.wait_in_text("h1.pf-v5-c-modal-box__title", f"Delete 2 items?")
         b.click("button.pf-m-danger")
@@ -705,6 +705,75 @@ class TestNavigator(testlib.MachineCase):
         b.click("button.pf-m-danger")
         b.wait_not_present("[data-item='file1']")
         b.wait_not_present("[data-item='file2']")
+
+    def testCopyPaste(self):
+        b = self.browser
+        m = self.machine
+
+        self.restore_dir("/home/admin")
+
+        self.enter_navigator()
+
+        # Copy/paste file
+        m.execute('mkdir /home/admin/newdir && echo "test_text" > /home/admin/newfile && chmod 777 /home/admin/newdir')
+        b.click("[data-item='newfile']")
+        b.click("#dropdown-menu")
+        b.click("#copy-item")
+        b.mouse("[data-item='newdir']", "dblclick")
+        b.click("#dropdown-menu")
+        b.click("#paste-item")
+        b.wait_visible("[data-item='newfile']")
+        self.assertEqual(m.execute("head -n 1 /home/admin/newdir/newfile"), "test_text\n")
+        b.click(".breadcrumb-button:nth-of-type(3)")
+
+        # Copy/paste directory
+        m.execute("mkdir /home/admin/copyDir")
+        b.click("[data-item='copyDir']")
+        b.click("#dropdown-menu")
+        b.click("#copy-item")
+        b.mouse("[data-item='newdir']", "dblclick")
+        b.click("#dropdown-menu")
+        b.click("#paste-item")
+        b.wait_visible("[data-item='copyDir']")
+        b.click(".breadcrumb-button:nth-of-type(3)")
+
+        # Paste into directory
+        m.execute("touch /home/admin/newfile2")
+        b.click("[data-item='newfile2']")
+        b.click("#dropdown-menu")
+        b.click("#copy-item")
+        b.click("[data-item='newdir']")
+        b.click("#dropdown-menu")
+        b.click("#paste-into-directory")
+        b.mouse("[data-item='newdir']", "dblclick")
+        b.wait_visible("[data-item='newfile2']")
+        b.click(".breadcrumb-button:nth-of-type(3)")
+
+        # Paste as symlink
+        m.execute("touch /home/admin/newfile3")
+        b.click("[data-item='newfile3']")
+        b.click("#dropdown-menu")
+        b.click("#copy-item")
+        b.mouse("[data-item='newdir']", "dblclick")
+        b.click("#dropdown-menu")
+        b.click("#paste-as-symlink")
+        b.wait_visible("[data-item='newfile3']")
+        b.click("[data-item='newfile3']")
+        b.wait_text("#sidebar-card-header", "newfile3 symbolic link to /home/admin/newfile3")
+        b.click(".breadcrumb-button:nth-of-type(3)")
+
+        # Check error alerts
+        b.click("#dropdown-menu")
+        b.click("#paste-item")
+        b.wait_in_text("h4.pf-v5-c-alert__title", "Danger alert:cp: '/home/admin/newfile3' and '/home/admin/newfile3' are the same file")
+        b.click("div.pf-v5-c-alert__action button")
+        m.execute("mkdir /home/admin/locked && chattr +i /home/admin/locked")
+        b.mouse("[data-item='locked']", "dblclick")
+        b.click("#dropdown-menu")
+        b.click("#paste-item")
+        b.wait_in_text("h4.pf-v5-c-alert__title", "Danger alert:cp: cannot create regular file '/home/admin/locked/newfile3': Operation not permitted")
+        b.click(".breadcrumb-button:nth-of-type(3)")
+        m.execute("chattr -i /home/admin/locked")
 
 if __name__ == '__main__':
     testlib.test_main()
