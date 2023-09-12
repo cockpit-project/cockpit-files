@@ -72,8 +72,9 @@ export const deleteItem = (Dialogs, options) => {
     Dialogs.show(
         <ConfirmDeletionDialog
           selected={options.selected} itemPath={options.itemPath}
-          path={options.path}
+          path={options.path} setSelected={options.setSelected}
           setHistory={options.setHistory} setHistoryIndex={options.setHistoryIndex}
+          currentDirectory={options.currentDirectory}
         />
     );
 };
@@ -116,23 +117,32 @@ export const ConfirmDeletionDialog = ({
     path,
     selected,
     setHistory,
-    setHistoryIndex
+    setHistoryIndex,
+    setSelected,
+    currentDirectory
 }) => {
     const Dialogs = useDialogs();
 
     let modalTitle;
-    if (selected.type === "file") {
-        modalTitle = cockpit.format(_("Delete file $0?"), selected.name);
-    } else if (selected.type === "link") {
-        modalTitle = cockpit.format(_("Delete link $0?"), selected.name);
-    } else if (selected.type === "directory" || selected.items_cnt) {
-        modalTitle = cockpit.format(_("Delete directory $0?"), selected.name);
+    if (selected.length > 1) {
+        modalTitle = cockpit.format(_("Delete $0 items?"), selected.length);
     } else {
-        modalTitle = cockpit.format(_("Delete $0?"), selected.name);
+        const selectedItem = selected.length === 1
+            ? selected[0]
+            : currentDirectory;
+        if (selectedItem.type === "file") {
+            modalTitle = cockpit.format(_("Delete file $0?"), selectedItem.name);
+        } else if (selectedItem.type === "link") {
+            modalTitle = cockpit.format(_("Delete link $0?"), selectedItem.name);
+        } else if (selectedItem.type === "directory" || selectedItem.items_cnt) {
+            modalTitle = cockpit.format(_("Delete directory $0?"), selectedItem.name);
+        } else {
+            modalTitle = cockpit.format(_("Delete $0?"), selectedItem.name);
+        }
     }
 
     const deleteItem = () => {
-        spawnDeleteItem({ Dialogs, selected, itemPath, path, setHistory, setHistoryIndex });
+        spawnDeleteItem({ Dialogs, selected, itemPath, path, setHistory, setHistoryIndex, setSelected });
     };
 
     return (
@@ -158,18 +168,25 @@ export const ForceDeleteModal = ({ selected, itemPath, initialError }) => {
     const [deleteFailed, setDeleteFailed] = useState(false);
 
     let modalTitle;
-    if (selected.type === "file") {
-        modalTitle = cockpit.format(_("Force delete file $0?"), selected.name);
-    } else if (selected.type === "link") {
-        modalTitle = cockpit.format(_("Force delete link $0?"), selected.name);
-    } else if (selected.type === "directory" || selected.items_cnt) {
-        modalTitle = cockpit.format(_("Force delete directory $0?"), selected.name);
-    } else {
-        modalTitle = _("Force delete $0?", selected.name);
+    if (selected.length > 1)
+        modalTitle = cockpit.format(_("Force delete $0 items?"), selected.length);
+    else {
+        const selectedItem = Array.isArray(selected)
+            ? selected[0]
+            : selected;
+        if (selectedItem.type === "file") {
+            modalTitle = cockpit.format(_("Force delete file $0?"), selectedItem.name);
+        } else if (selectedItem.type === "link") {
+            modalTitle = cockpit.format(_("Force delete link $0?"), selectedItem.name);
+        } else if (selectedItem.type === "directory" || selectedItem.items_cnt) {
+            modalTitle = cockpit.format(_("Force delete directory $0?"), selectedItem.name);
+        } else {
+            modalTitle = _("Force delete $0?", selectedItem.name);
+        }
     }
 
     const forceDeleteItem = () => {
-        spawnForceDelete({ Dialogs, itemPath, setDeleteFailed, setErrorMessage });
+        spawnForceDelete({ Dialogs, selected, itemPath, setDeleteFailed, setErrorMessage });
     };
 
     return (

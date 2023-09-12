@@ -55,7 +55,7 @@ export const Application = () => {
     const [sortBy, setSortBy] = useState(localStorage.getItem("cockpit-navigator.sort") || "az");
     const channel = useRef(null);
     const channelList = useRef(null);
-    const [selected, setSelected] = useState(null);
+    const [selected, setSelected] = useState([]);
     const [selectedContext, setSelectedContext] = useState(null);
     const [showHidden, setShowHidden] = useState(false);
     const [history, setHistory] = useState([]);
@@ -152,7 +152,7 @@ export const Application = () => {
         if (currentPath === "")
             return;
 
-        setSelected(sel);
+        setSelected([]);
         setFiles([]);
         setLoading(true);
 
@@ -165,7 +165,7 @@ export const Application = () => {
         watchFiles
     ]);
 
-    if (loading || path.length === 0)
+    if (loading || path.length === 0 || !sel)
         return <EmptyStatePanel loading />;
 
     const visibleFiles = !showHidden
@@ -188,10 +188,13 @@ export const Application = () => {
         deleteItem(
             Dialogs,
             {
-                selected: selectedContext,
+                selected,
                 itemPath: "/" + path.join("/") + "/" + selectedContext.name,
                 setHistory,
-                setHistoryIndex
+                setHistoryIndex,
+                path: "/" + path.join("/") + "/",
+                multiple: Array.isArray(selected),
+                setSelected
             }
         );
     };
@@ -206,18 +209,20 @@ export const Application = () => {
                     { type: "divider" },
                     { title: _("Edit properties"), onClick: _editProperties }
                 ]
-                : [
-                    { title: _("Edit properties"), onClick: _editProperties },
-                    { title: cockpit.format(_("Rename $0"), selectedContext?.type), onClick: _renameItem },
-                    { type: "divider" },
-                    { title: _("Create link"), onClick: _createLink },
-                    { type: "divider" },
-                    {
-                        title: cockpit.format(_("Delete $0"), selectedContext?.type),
-                        onClick: _deleteItem,
-                        className: "pf-m-danger"
-                    }
-                ])
+                : selected.length > 1 && selected.includes(selectedContext)
+                    ? [{ title: _("Delete"), onClick: _deleteItem, className: "pf-m-danger" },]
+                    : [
+                        { title: _("Edit properties"), onClick: _editProperties },
+                        { title: cockpit.format(_("Rename $0"), selectedContext?.type), onClick: _renameItem },
+                        { type: "divider" },
+                        { title: _("Create link"), onClick: _createLink },
+                        { type: "divider" },
+                        {
+                            title: cockpit.format(_("Delete $0"), selectedContext?.type),
+                            onClick: _deleteItem,
+                            className: "pf-m-danger"
+                        }
+                    ])
                     .map((item, i) => item.type !== "divider"
                         ? (
                             <MenuItem
@@ -241,26 +246,26 @@ export const Application = () => {
             />
             <PageSection onContextMenu={() => {
                 setSelectedContext(null);
-                setSelected(path[path.length - 1]);
+                setSelected([{ name: sel }]);
             }}
             >
                 <Sidebar isPanelRight hasGutter>
                     <SidebarPanel className="sidebar-panel" width={{ default: "width_25" }}>
                         <SidebarPanelDetails
                           path={path}
-                          selected={
-                              (files.find(file => file.name === selected?.name)) ||
-                              ({
+                          selected={selected.map(s => files.find(f => f.name === s.name)).filter(s => s !== undefined)}
+                          currentDirectory={
+                              {
                                   has_error: errorMessage,
                                   name: path[path.length - 1],
                                   items_cnt: {
                                       all: files.length,
                                       hidden: files.length - files.filter(file => !file.name.startsWith(".")).length
                                   }
-                              })
+                              }
                           }
                           setHistory={setHistory} setHistoryIndex={setHistoryIndex}
-                          showHidden={showHidden}
+                          showHidden={showHidden} setSelected={setSelected}
                           setShowHidden={setShowHidden} files={files}
                         />
                     </SidebarPanel>
@@ -396,38 +401,42 @@ const NavigatorCardBody = ({
         const onKeyboardNav = (e) => {
             if (e.key === "ArrowRight") {
                 setSelected(_selected => {
-                    const selectedIdx = sortedFiles?.findIndex(file => file.name === _selected?.name);
+                    const firstSelectedName = _selected?.[0]?.name;
+                    const selectedIdx = sortedFiles?.findIndex(file => file.name === firstSelectedName);
                     const newIdx = selectedIdx < sortedFiles.length - 1
                         ? selectedIdx + 1
                         : 0;
 
-                    return sortedFiles[newIdx];
+                    return [sortedFiles[newIdx]];
                 });
             } else if (e.key === "ArrowLeft") {
                 setSelected(_selected => {
-                    const selectedIdx = sortedFiles?.findIndex(file => file.name === _selected?.name);
+                    const firstSelectedName = _selected?.[0]?.name;
+                    const selectedIdx = sortedFiles?.findIndex(file => file.name === firstSelectedName);
                     const newIdx = selectedIdx > 0
                         ? selectedIdx - 1
                         : sortedFiles.length - 1;
 
-                    return sortedFiles[newIdx];
+                    return [sortedFiles[newIdx]];
                 });
             } else if (e.key === "ArrowUp") {
                 setSelected(_selected => {
-                    const selectedIdx = sortedFiles?.findIndex(file => file.name === _selected?.name);
+                    const firstSelectedName = _selected?.[0]?.name;
+                    const selectedIdx = sortedFiles?.findIndex(file => file.name === firstSelectedName);
                     const newIdx = Math.max(selectedIdx - boxPerRow, 0);
 
-                    return sortedFiles[newIdx];
+                    return [sortedFiles[newIdx]];
                 });
             } else if (e.key === "ArrowDown") {
                 setSelected(_selected => {
-                    const selectedIdx = sortedFiles?.findIndex(file => file.name === _selected?.name);
+                    const firstSelectedName = _selected?.[0]?.name;
+                    const selectedIdx = sortedFiles?.findIndex(file => file.name === firstSelectedName);
                     const newIdx = Math.min(selectedIdx + boxPerRow, sortedFiles.length - 1);
 
-                    return sortedFiles[newIdx];
+                    return [sortedFiles[newIdx]];
                 });
             } else if (e.key === "Enter") {
-                onDoubleClickNavigate(selected);
+                onDoubleClickNavigate(selected?.[0]);
             }
         };
 
@@ -452,7 +461,25 @@ const NavigatorCardBody = ({
 
     const resetSelected = e => {
         if (e.target.id === "folder-view" || e.target.id === "navigator-card-body") {
-            setSelected(path[path.length - 1]);
+            setSelected([]);
+        }
+    };
+
+    const handleClick = (ev, file) => {
+        if (ev.detail > 1) {
+            onDoubleClickNavigate(file);
+        } else {
+            if (!ev.ctrlKey || selected === path[path.length - 1]) {
+                setSelected([file]);
+            } else {
+                setSelected(s => {
+                    if (!s.find(f => f.name === file.name)) {
+                        return [...s, file];
+                    } else {
+                        return s.filter(f => f.name !== file.name);
+                    }
+                });
+            }
         }
     };
 
@@ -466,11 +493,13 @@ const NavigatorCardBody = ({
               id={"card-item-" + file.name + file.type}
               isClickable isCompact
               isPlain isRounded
-              isSelected={selected?.name === file.name}
-              onClick={() => setSelected(file)}
+              isSelected={selected.find(s => s.name === file.name)}
+              onClick={ev => handleClick(ev, file)}
               onContextMenu={(e) => {
                   e.stopPropagation();
                   setSelectedContext(file);
+                  if (selected.length === 1 || !selected.includes(file))
+                      setSelected([file]);
               }}
               onDoubleClick={() => onDoubleClickNavigate(file)}
             >

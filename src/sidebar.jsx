@@ -120,11 +120,13 @@ export const SidebarPanelDetails = ({
     setPath,
     setShowHidden,
     showHidden,
+    setSelected,
+    currentDirectory
 }) => {
     const [info, setInfo] = useState(null);
 
     useEffect(() => {
-        const filePath = path.join("/") + "/" + selected.path;
+        const filePath = path.join("/") + "/" + selected[0]?.name;
 
         cockpit.spawn(["file", filePath], { superuser: "try", error: "message" })
                 .then(res => {
@@ -140,19 +142,26 @@ export const SidebarPanelDetails = ({
             <CardHeader>
                 <CardTitle component="h2" id="sidebar-card-header">
                     <TextContent>
-                        <Text component={TextVariants.h2}>{selected.name}</Text>
-                        {!selected.has_error && selected.items_cnt !== undefined &&
+                        <Text component={TextVariants.h2}>{selected.length === 1
+                            ? selected[0].name
+                            : currentDirectory.name}
+                        </Text>
+                        {selected.length === 0 && !currentDirectory.has_error &&
                             <Text component={TextVariants.small}>
                                 {cockpit.format(
                                     cockpit.ngettext(
                                         "$0 item $1", "$0 items $1",
-                                        selected.items_cnt.all
+                                        currentDirectory.items_cnt.all
                                     ),
-                                    selected.items_cnt.all,
-                                    cockpit.format("($0 hidden)", selected.items_cnt.hidden)
+                                    currentDirectory.items_cnt.all,
+                                    cockpit.format("($0 hidden)", currentDirectory.items_cnt.hidden)
                                 )}
                             </Text>}
-                        {selected.items_cnt === undefined &&
+                        {selected.length > 1 &&
+                            <Text component={TextVariants.small}>
+                                {cockpit.format("$0 items selected", selected.length)}
+                            </Text>}
+                        {selected.length === 1 &&
                             <Text component={TextVariants.small}>
                                 {info}
                             </Text>}
@@ -163,12 +172,13 @@ export const SidebarPanelDetails = ({
                   setPath={setPath} showHidden={showHidden}
                   setShowHidden={setShowHidden} setHistory={setHistory}
                   setHistoryIndex={setHistoryIndex} files={files}
+                  setSelected={setSelected} currentDirectory={currentDirectory}
                 />
             </CardHeader>
-            {selected.items_cnt === undefined &&
+            {selected.length === 1 &&
             <CardBody>
                 <DescriptionList isHorizontal id="description-list-sidebar">
-                    {getDescriptionListItems(selected).map((item, index) => (
+                    {getDescriptionListItems(selected[0]).map((item, index) => (
                         <DescriptionListGroup key={item.id} id={item.id}>
                             <DescriptionListTerm>{item.label}</DescriptionListTerm>
                             <DescriptionListDescription>
@@ -179,7 +189,7 @@ export const SidebarPanelDetails = ({
                 <Button
                   variant="secondary"
                   onClick={() => {
-                      editPermissions(Dialogs, { selected, path });
+                      editPermissions(Dialogs, { selected: selected[0], path });
                   }}
                 >
                     {_("Edit properties")}
@@ -189,7 +199,9 @@ export const SidebarPanelDetails = ({
     );
 };
 
-const DropdownWithKebab = ({ selected, path, showHidden, setShowHidden, setHistory, setHistoryIndex, files }) => {
+const DropdownWithKebab = ({
+    selected, path, showHidden, setShowHidden, setHistory, setHistoryIndex, files, setSelected, currentDirectory
+}) => {
     const Dialogs = useDialogs();
     const [isOpen, setIsOpen] = useState(false);
 
@@ -203,7 +215,109 @@ const DropdownWithKebab = ({ selected, path, showHidden, setShowHidden, setHisto
         setShowHidden(!showHidden);
     };
 
-    const currentDirectory = "/" + path.join("/") + "/";
+    const currentPath = "/" + path.join("/") + "/";
+
+    const showHiddenItems = (
+        <Flex justifyContent={{ default: "justifyContentSpaceBetween" }}>
+            <FlexItem>{_("Show hidden items")}</FlexItem>
+            <FlexItem>
+                {showHidden &&
+                <Icon size="sm">
+                    <CheckIcon className="check-icon" />
+                </Icon>}
+            </FlexItem>
+        </Flex>
+    );
+
+    const singleDropdownOptions = [
+        ...selected.length === 0
+            ? [{ id: "show-hidden-items", onClick: onToggleHidden, title: showHiddenItems }]
+            : [],
+        {
+            id: "copy-path",
+            onClick: () => {
+                navigator.clipboard.writeText("/" + path.join("/") + "/" + (selected.length === 1
+                    ? selected[0].name
+                    : ""));
+            },
+            title: _("Copy full path")
+        },
+        { type: "divider" },
+        ...selected.length === 0
+            ? [
+                {
+                    id: "create-item",
+                    onClick: () => { createDirectory(Dialogs, currentPath, selected) },
+                    title: _("Create directory")
+                }
+            ]
+            : [],
+        {
+            id: "create-link",
+            onClick: () => { createLink(Dialogs, currentPath, files, selected[0]) },
+            title: _("Create link")
+        },
+        { type: "divider" },
+        {
+            id: "edit-properties",
+            onClick: () => {
+                editPermissions(Dialogs, {
+                    selected: selected.length === 0
+                        ? null
+                        : selected[0],
+                    path
+                });
+            },
+            title: _("Edit properties")
+        },
+        {
+            id: "rename-item",
+            onClick: () => {
+                renameItem(Dialogs, { selected: selected[0] || currentDirectory, path, setHistory, setHistoryIndex });
+            },
+            title: cockpit.format(_("Rename $0"), selected[0]?.type || "directory")
+        },
+        { type: "divider" },
+        {
+            id: "delete-item",
+            onClick: () => {
+                deleteItem(Dialogs, {
+                    selected,
+                    itemPath: currentPath + (selected.length === 0
+                        ? ""
+                        : selected[0].name),
+                    path,
+                    setHistory,
+                    setHistoryIndex,
+                    setSelected,
+                    currentDirectory
+                });
+            },
+            title: cockpit.format(_("Delete $0"), selected[0]?.type || "directory"),
+            className:"pf-m-danger"
+        },
+    ];
+
+    const multiDropdownOptions = [
+        {
+            id: "delete-item",
+            onClick: () => {
+                deleteItem(Dialogs, {
+                    selected,
+                    path: currentPath,
+                    setHistory,
+                    setHistoryIndex,
+                    setSelected
+                });
+            },
+            title:_("Delete"),
+            className:"pf-m-danger"
+        }
+    ];
+
+    const dropdownOptions = selected.length > 1
+        ? multiDropdownOptions
+        : singleDropdownOptions;
 
     return (
         <Dropdown
@@ -222,84 +336,18 @@ const DropdownWithKebab = ({ selected, path, showHidden, setShowHidden, setHisto
               </MenuToggle>}
         >
             <DropdownList>
-                {selected.items_cnt &&
-                    <DropdownItem
-                      id="show-hidden-items" key="show-hidden-items"
-                      onClick={onToggleHidden}
-                    >
-                        <Flex justifyContent={{ default: "justifyContentSpaceBetween" }}>
-                            <FlexItem>{_("Show hidden items")}</FlexItem>
-                            <FlexItem>
-                                {showHidden &&
-                                <Icon size="sm">
-                                    <CheckIcon className="check-icon" />
-                                </Icon>}
-                            </FlexItem>
-                        </Flex>
-                    </DropdownItem>}
-                <DropdownItem
-                  id="copy-path" key="copy-path"
-                  onClick={() => {
-                      navigator.clipboard.writeText("/" + path.join("/") + "/" + (selected.type
-                          ? selected.name
-                          : ""));
-                  }}
-                >
-                    {_("Copy full path")}
-                </DropdownItem>
-                <Divider />
-                {selected.items_cnt &&
-                <DropdownItem
-                  id="create-item" key="create-item"
-                  onClick={() => { createDirectory(Dialogs, currentDirectory, selected) }}
-                >
-                    {_("Create directory")}
-                </DropdownItem>}
-                <DropdownItem
-                  id="create-link" key="create-link"
-                  onClick={() => { createLink(Dialogs, currentDirectory, files) }}
-                >
-                    {_("Create link")}
-                </DropdownItem>
-                <Divider />
-                <DropdownItem
-                  id="edit-properties" key="edit-properties"
-                  onClick={() => {
-                      editPermissions(Dialogs, {
-                          selected: selected.items_cnt
-                              ? null
-                              : selected,
-                          path
-                      });
-                  }}
-                >
-                    {_("Edit properties")}
-                </DropdownItem>
-                <DropdownItem
-                  id="rename-item" key="rename-item"
-                  onClick={() => {
-                      renameItem(Dialogs, { selected, path, setHistory, setHistoryIndex });
-                  }}
-                >
-                    {cockpit.format(_("Rename $0"), selected.type || "directory")}
-                </DropdownItem>
-                <Divider />
-                <DropdownItem
-                  id="delete-item" key="delete-item"
-                  onClick={() => {
-                      deleteItem(Dialogs, {
-                          selected,
-                          itemPath: currentDirectory + (selected.items_cnt
-                              ? ""
-                              : selected.name),
-                          path,
-                          setHistory,
-                          setHistoryIndex
-                      });
-                  }} className="pf-m-danger"
-                >
-                    {cockpit.format(_("Delete $0"), selected.type || "directory")}
-                </DropdownItem>
+                {dropdownOptions.map((option, i) => {
+                    if (option.type === "divider")
+                        return <Divider key={i} />;
+                    return (
+                        <DropdownItem
+                          id={option.id} key={option.id}
+                          className={option.className} onClick={option.onClick}
+                        >
+                            {option.title}
+                        </DropdownItem>
+                    );
+                })}
             </DropdownList>
         </Dropdown>
     );
