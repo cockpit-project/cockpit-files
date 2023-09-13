@@ -118,8 +118,7 @@ export const copyItem = (setClipboard, sourcePath) => {
 };
 
 export const pasteItem = (clipboard, targetPath, asSymlink, addAlert) => {
-    const source = clipboard.split("/");
-    spawnPaste(clipboard, targetPath + source[source.length - 1], asSymlink, addAlert);
+    spawnPaste(clipboard, targetPath, asSymlink, addAlert);
 };
 
 export const ConfirmDeletionDialog = ({

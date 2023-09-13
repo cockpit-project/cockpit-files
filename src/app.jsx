@@ -184,7 +184,9 @@ export const Application = () => {
         createLink(Dialogs, "/" + path.join("/") + "/", files, selectedContext);
     };
     const _copyItem = () => {
-        copyItem(setClipboard, "/" + path.join("/") + "/" + selectedContext.name);
+        copyItem(setClipboard, selected.length > 1
+            ? selected.map(s => "/" + path.join("/") + "/" + s.name)
+            : ["/" + path.join("/") + "/" + selectedContext.name]);
     };
     const _pasteItem = (targetPath, asSymlink) => {
         pasteItem(clipboard, "/" + targetPath.join("/") + "/", asSymlink, addAlert);
@@ -236,7 +238,8 @@ export const Application = () => {
                     { title: _("Edit properties"), onClick: _editProperties }
                 ]
                 : selected.length > 1 && selected.includes(selectedContext)
-                    ? [{ title: _("Delete"), onClick: _deleteItem, className: "pf-m-danger" },]
+                    // eslint-disable-next-line max-len
+                    ? [{ title: _("Copy"), onClick: _copyItem }, { title: _("Delete"), onClick: _deleteItem, className: "pf-m-danger" }]
                     : [
                         { title: cockpit.format(_("Copy $0"), selectedContext.type), onClick: _copyItem },
                         ...(selectedContext.type === "directory")

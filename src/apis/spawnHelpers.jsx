@@ -153,14 +153,14 @@ export const spawnPaste = (sourcePath, targetPath, asSymlink, addAlert) => {
         cockpit.spawn([
             "ln",
             "-s",
-            sourcePath,
+            ...sourcePath,
             targetPath
         ]).catch(err => addAlert(err.message, "danger", new Date().getTime()));
     } else {
         cockpit.spawn([
             "cp",
             "-R",
-            sourcePath,
+            ...sourcePath,
             targetPath
         ]).catch(err => addAlert(err.message, "danger", new Date().getTime()));
     }

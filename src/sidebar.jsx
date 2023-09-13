@@ -265,7 +265,7 @@ const DropdownWithKebab = ({
             ? [
                 {
                     id: "copy-item",
-                    onClick: () => { copyItem(setClipboard, "/" + path.join("/") + "/" + selected[0].name) },
+                    onClick: () => { copyItem(setClipboard, ["/" + path.join("/") + "/" + selected[0].name]) },
                     title: cockpit.format(_("Copy $0"), selected[0].type)
                 }
             ]
@@ -359,6 +359,11 @@ const DropdownWithKebab = ({
     ];
 
     const multiDropdownOptions = [
+        {
+            id: "copy-item",
+            onClick: () => { copyItem(setClipboard, selected.map(s => "/" + path.join("/") + "/" + s.name)) },
+            title: _("Copy")
+        },
         {
             id: "delete-item",
             onClick: () => {
