@@ -27,7 +27,8 @@ import {
     Icon,
     MenuItem, MenuList,
     Page, PageSection,
-    Sidebar, SidebarPanel, SidebarContent, Truncate, CardHeader, CardTitle, Divider,
+    Sidebar, SidebarPanel, SidebarContent, Truncate,
+    CardHeader, CardTitle, Divider, AlertGroup, Alert, AlertActionCloseButton,
 } from "@patternfly/react-core";
 import { ExclamationCircleIcon, FileIcon, FolderIcon } from "@patternfly/react-icons";
 
@@ -35,7 +36,9 @@ import { ListingTable } from "cockpit-components-table.jsx";
 import { EmptyStatePanel } from "cockpit-components-empty-state.jsx";
 import { ContextMenu } from "./navigatorContextMenu.jsx";
 import { NavigatorBreadcrumbs } from "./navigatorBreadcrumbs.jsx";
-import { createDirectory, createLink, deleteItem, editPermissions, renameItem, updateFile } from "./fileActions.jsx";
+import {
+    copyItem, createDirectory, createLink, deleteItem, editPermissions, pasteItem, renameItem, updateFile
+} from "./fileActions.jsx";
 import { SidebarPanelDetails } from "./sidebar.jsx";
 import { NavigatorCardHeader } from "./header.jsx";
 import { usePageLocation } from "hooks.js";
@@ -60,6 +63,8 @@ export const Application = () => {
     const [showHidden, setShowHidden] = useState(false);
     const [history, setHistory] = useState([]);
     const [historyIndex, setHistoryIndex] = useState(0);
+    const [clipboard, setClipboard] = useState(undefined);
+    const [alerts, setAlerts] = useState([]);
 
     const onFilterChange = (_, value) => setCurrentFilter(value);
     const currentPath = decodeURIComponent(options.path || "");
@@ -178,6 +183,14 @@ export const Application = () => {
     const _createLink = () => {
         createLink(Dialogs, "/" + path.join("/") + "/", files, selectedContext);
     };
+    const _copyItem = () => {
+        copyItem(setClipboard, selected.length > 1
+            ? selected.map(s => "/" + path.join("/") + "/" + s.name)
+            : ["/" + path.join("/") + "/" + selectedContext.name]);
+    };
+    const _pasteItem = (targetPath, asSymlink) => {
+        pasteItem(clipboard, "/" + targetPath.join("/") + "/", asSymlink, addAlert);
+    };
     const _renameItem = () => {
         renameItem(Dialogs, { selected: selectedContext, path, setHistory, setHistoryIndex });
     };
@@ -199,19 +212,46 @@ export const Application = () => {
         );
     };
 
+    const addAlert = (title, variant, key) => {
+        setAlerts(prevAlerts => [...prevAlerts, { title, variant, key }]);
+    };
+
+    const removeAlert = (key) => {
+        setAlerts(prevAlerts => [...prevAlerts.filter(alert => alert.key !== key)]);
+    };
+
     const contextMenuItems = (
         <MenuList>
             {
             ...(!selectedContext
                 ? [
+                    { title: _("Paste"), onClick: () => _pasteItem(path, false), isDisabled: clipboard === undefined },
+                    {
+                        title: _("Paste as symlink"),
+                        onClick: () => _pasteItem(path, true),
+                        isDisabled: clipboard === undefined
+                    },
+                    { type: "divider" },
                     { title: _("Create directory"), onClick: _createDirectory },
                     { title: _("Create link"), onClick: _createLink },
                     { type: "divider" },
                     { title: _("Edit properties"), onClick: _editProperties }
                 ]
                 : selected.length > 1 && selected.includes(selectedContext)
-                    ? [{ title: _("Delete"), onClick: _deleteItem, className: "pf-m-danger" },]
+                    // eslint-disable-next-line max-len
+                    ? [{ title: _("Copy"), onClick: _copyItem }, { title: _("Delete"), onClick: _deleteItem, className: "pf-m-danger" }]
                     : [
+                        { title: cockpit.format(_("Copy $0"), selectedContext.type), onClick: _copyItem },
+                        ...(selectedContext.type === "directory")
+                            ? [
+                                {
+                                    title: _("Paste into directory"),
+                                    onClick: () => _pasteItem([...path, selectedContext.name], false),
+                                    isDisabled: clipboard === undefined
+                                }
+                            ]
+                            : [],
+                        { type: "divider" },
                         { title: _("Edit properties"), onClick: _editProperties },
                         { title: cockpit.format(_("Rename $0"), selectedContext?.type), onClick: _renameItem },
                         { type: "divider" },
@@ -227,7 +267,7 @@ export const Application = () => {
                         ? (
                             <MenuItem
                               className={"context-menu-option " + item.className} key={item.title}
-                              onClick={item.onClick}
+                              onClick={item.onClick} isDisabled={item.isDisabled}
                             >
                                 <div className="context-menu-name">{item.title}</div>
                             </MenuItem>
@@ -266,7 +306,9 @@ export const Application = () => {
                           }
                           setHistory={setHistory} setHistoryIndex={setHistoryIndex}
                           showHidden={showHidden} setSelected={setSelected}
-                          setShowHidden={setShowHidden} files={files}
+                          setShowHidden={setShowHidden}
+                          clipboard={clipboard} setClipboard={setClipboard}
+                          files={files} addAlert={addAlert}
                         />
                     </SidebarPanel>
                     <SidebarContent>
@@ -290,6 +332,22 @@ export const Application = () => {
                               parentId="folder-view" contextMenuItems={contextMenuItems}
                               setSelectedContext={setSelectedContext}
                             />
+                            <AlertGroup isToast isLiveRegion>
+                                {alerts.map(alert => (
+                                    <Alert
+                                      variant={alert.variant}
+                                      title={alert.title}
+                                      actionClose={
+                                          <AlertActionCloseButton
+                                            title={alert.title}
+                                            variantLabel={`${alert.variant} alert`}
+                                            onClose={() => removeAlert(alert.key)}
+                                          />
+                                      }
+                                      key={alert.key}
+                                    />
+                                ))}
+                            </AlertGroup>
                         </Card>
                     </SidebarContent>
                 </Sidebar>

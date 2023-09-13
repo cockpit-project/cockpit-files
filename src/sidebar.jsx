@@ -52,7 +52,9 @@ import {
 import * as timeformat from "timeformat";
 import { useDialogs } from "dialogs.jsx";
 
-import { createDirectory, createLink, deleteItem, editPermissions, renameItem } from "./fileActions.jsx";
+import {
+    copyItem, createDirectory, createLink, deleteItem, editPermissions, pasteItem, renameItem
+} from "./fileActions.jsx";
 import { permissions } from "./common.js";
 
 const _ = cockpit.gettext;
@@ -121,7 +123,10 @@ export const SidebarPanelDetails = ({
     setShowHidden,
     showHidden,
     setSelected,
-    currentDirectory
+    currentDirectory,
+    clipboard,
+    setClipboard,
+    addAlert
 }) => {
     const [info, setInfo] = useState(null);
 
@@ -172,7 +177,9 @@ export const SidebarPanelDetails = ({
                   setPath={setPath} showHidden={showHidden}
                   setShowHidden={setShowHidden} setHistory={setHistory}
                   setHistoryIndex={setHistoryIndex} files={files}
+                  clipboard={clipboard} setClipboard={setClipboard}
                   setSelected={setSelected} currentDirectory={currentDirectory}
+                  addAlert={addAlert}
                 />
             </CardHeader>
             {selected.length === 1 &&
@@ -200,7 +207,18 @@ export const SidebarPanelDetails = ({
 };
 
 const DropdownWithKebab = ({
-    selected, path, showHidden, setShowHidden, setHistory, setHistoryIndex, files, setSelected, currentDirectory
+    selected,
+    path,
+    showHidden,
+    setShowHidden,
+    setHistory,
+    setHistoryIndex,
+    files,
+    clipboard,
+    setClipboard,
+    setSelected,
+    currentDirectory,
+    addAlert
 }) => {
     const Dialogs = useDialogs();
     const [isOpen, setIsOpen] = useState(false);
@@ -242,6 +260,48 @@ const DropdownWithKebab = ({
             },
             title: _("Copy full path")
         },
+        { type: "divider" },
+        ...selected.length === 1
+            ? [
+                {
+                    id: "copy-item",
+                    onClick: () => { copyItem(setClipboard, ["/" + path.join("/") + "/" + selected[0].name]) },
+                    title: cockpit.format(_("Copy $0"), selected[0].type)
+                }
+            ]
+            : [],
+        ...selected.length === 0
+            ? [
+                {
+                    id: "paste-item",
+                    onClick: () => { pasteItem(clipboard, "/" + path.join("/") + "/", false, addAlert) },
+                    title: _("Paste"),
+                    isDisabled: clipboard === undefined
+                }
+            ]
+            : [],
+        ...(selected.length === 1 && selected[0].type === "directory")
+            ? [
+                {
+                    id: "paste-into-directory",
+                    onClick: () => {
+                        pasteItem(clipboard, "/" + path.join("/") + "/" + selected[0].name + "/", false, addAlert);
+                    },
+                    title: _("Paste into directory"),
+                    isDisabled: clipboard === undefined
+                }
+            ]
+            : [],
+        ...selected.length === 0
+            ? [
+                {
+                    id: "paste-as-symlink",
+                    onClick: () => { pasteItem(clipboard, "/" + path.join("/") + "/", true, addAlert) },
+                    title: _("Paste as symlink"),
+                    isDisabled: clipboard === undefined
+                }
+            ]
+            : [],
         { type: "divider" },
         ...selected.length === 0
             ? [
@@ -300,6 +360,11 @@ const DropdownWithKebab = ({
 
     const multiDropdownOptions = [
         {
+            id: "copy-item",
+            onClick: () => { copyItem(setClipboard, selected.map(s => "/" + path.join("/") + "/" + s.name)) },
+            title: _("Copy")
+        },
+        {
             id: "delete-item",
             onClick: () => {
                 deleteItem(Dialogs, {
@@ -343,6 +408,7 @@ const DropdownWithKebab = ({
                         <DropdownItem
                           id={option.id} key={option.id}
                           className={option.className} onClick={option.onClick}
+                          isDisabled={option.isDisabled}
                         >
                             {option.title}
                         </DropdownItem>

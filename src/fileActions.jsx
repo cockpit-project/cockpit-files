@@ -45,6 +45,7 @@ import {
     spawnDeleteItem,
     spawnEditPermissions,
     spawnForceDelete,
+    spawnPaste,
     spawnRenameItem
 } from "./apis/spawnHelpers";
 import { permissions } from "./common";
@@ -110,6 +111,14 @@ export const editPermissions = (Dialogs, options) => {
             />
         );
     }
+};
+
+export const copyItem = (setClipboard, sourcePath) => {
+    setClipboard(sourcePath);
+};
+
+export const pasteItem = (clipboard, targetPath, asSymlink, addAlert) => {
+    spawnPaste(clipboard, targetPath, asSymlink, addAlert);
 };
 
 export const ConfirmDeletionDialog = ({

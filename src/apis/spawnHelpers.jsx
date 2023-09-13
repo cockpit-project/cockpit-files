@@ -147,3 +147,21 @@ export const spawnEditPermissions = (o) => {
             })
             .then(o.Dialogs.close, err => o.setErrorMessage(err.message));
 };
+
+export const spawnPaste = (sourcePath, targetPath, asSymlink, addAlert) => {
+    if (asSymlink) {
+        cockpit.spawn([
+            "ln",
+            "-s",
+            ...sourcePath,
+            targetPath
+        ]).catch(err => addAlert(err.message, "danger", new Date().getTime()));
+    } else {
+        cockpit.spawn([
+            "cp",
+            "-R",
+            ...sourcePath,
+            targetPath
+        ]).catch(err => addAlert(err.message, "danger", new Date().getTime()));
+    }
+};
