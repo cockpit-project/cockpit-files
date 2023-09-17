@@ -757,12 +757,9 @@ class TestNavigator(testlib.MachineCase):
         b.click(".breadcrumb-button:nth-of-type(3)")
         m.execute("chattr -i /home/admin/locked")
 
-
     def testFileEditor(self):
         b = self.browser
         m = self.machine
-
-        self.restore_dir("/home/admin")
 
         self.enter_navigator()
 

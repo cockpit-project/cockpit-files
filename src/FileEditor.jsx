@@ -41,11 +41,23 @@ export const FileEditor = ({ path }) => {
 
     const saveEdit = () => {
         window.removeEventListener("beforeunload", onBeforeUnload);
-        cockpit.file("/" + path.join("/") + "/" + editorFile)
-                .replace(editorText)
-                .then(() => {
-                    cockpit.location.go("/", { path: encodeURIComponent(path.join("/")) });
-                });
+        const fileName = "/" + path.join("/") + "/" + editorFile;
+        if (editorText === "") {
+            cockpit.spawn([
+                "truncate",
+                "-s",
+                "0",
+                fileName
+            ]).then(() => {
+                cockpit.location.go("/", { path: encodeURIComponent(path.join("/")) });
+            });
+        } else {
+            cockpit.file(fileName)
+                    .replace(editorText)
+                    .then(() => {
+                        cockpit.location.go("/", { path: encodeURIComponent(path.join("/")) });
+                    });
+        }
     };
 
     const onEditorChange = (_, value) => {
