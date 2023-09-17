@@ -47,12 +47,16 @@ export const ContextMenu = ({ parentId, contextMenuItems, setSelectedContext }) 
         };
 
         const parent = document.getElementById(parentId);
-        parent.addEventListener("contextmenu", _handleContextMenu);
-        document.addEventListener("click", _handleClick);
+        if (parent && parent.id === "folder-view") {
+            parent.addEventListener("contextmenu", _handleContextMenu);
+            document.addEventListener("click", _handleClick);
+        }
 
         return () => {
-            parent.removeEventListener("contextmenu", _handleContextMenu);
-            document.removeEventListener("click", _handleClick);
+            if (parent && parent.id === "folder-view") {
+                parent.removeEventListener("contextmenu", _handleContextMenu);
+                document.removeEventListener("click", _handleClick);
+            }
         };
     }, [parentId, setSelectedContext]);
 

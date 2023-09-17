@@ -28,7 +28,7 @@ import {
     MenuItem, MenuList,
     Page, PageSection,
     Sidebar, SidebarPanel, SidebarContent, Truncate,
-    CardHeader, CardTitle, Divider, AlertGroup, Alert, AlertActionCloseButton,
+    CardHeader, CardTitle, Divider, AlertGroup, Alert, AlertActionCloseButton, Spinner
 } from "@patternfly/react-core";
 import { ExclamationCircleIcon, FileIcon, FolderIcon } from "@patternfly/react-icons";
 
@@ -51,6 +51,7 @@ export const Application = () => {
     const { options } = usePageLocation();
     const Dialogs = useDialogs();
     const [loading, setLoading] = useState(true);
+    const [loadingFiles, setLoadingFiles] = useState(true);
     const [errorMessage, setErrorMessage] = useState();
     const [currentFilter, setCurrentFilter] = useState("");
     const [files, setFiles] = useState([]);
@@ -85,6 +86,7 @@ export const Application = () => {
 
     const getFsList = useCallback(() => {
         const _files = [];
+        setLoadingFiles(true);
 
         if (channelList.current !== null)
             channelList.current.close();
@@ -111,6 +113,7 @@ export const Application = () => {
                 Promise.all(_files.map(file => updateFile(file, currentDir)))
                         .then(() => {
                             setFiles(_files);
+                            setLoadingFiles(false);
                         });
             }
         });
@@ -327,6 +330,7 @@ export const Application = () => {
                               selected={selected} setSelected={setSelected}
                               setSelectedContext={setSelectedContext} setHistory={setHistory}
                               setHistoryIndex={setHistoryIndex} historyIndex={historyIndex}
+                              loadingFiles={loadingFiles}
                             />
                             <ContextMenu
                               parentId="folder-view" contextMenuItems={contextMenuItems}
@@ -407,6 +411,7 @@ const NavigatorCardBody = ({
     setSelected,
     setSelectedContext,
     sortBy,
+    loadingFiles
 }) => {
     const [boxPerRow, setBoxPerRow] = useState(0);
     const Dialogs = useDialogs();
@@ -606,23 +611,31 @@ const NavigatorCardBody = ({
         );
     };
 
-    if (isGrid) {
+    if (loadingFiles)
         return (
-            <CardBody onClick={resetSelected} id="navigator-card-body">
-                <Flex id="folder-view">
-                    {sortedFiles.map(file => <Item file={file} key={file.name} />)}
-                </Flex>
-            </CardBody>
+            <Flex justifyContent={{ default: "justifyContentCenter" }}>
+                <Spinner />
+            </Flex>
         );
-    } else {
-        return (
-            <ListingTable
-              id="folder-view"
-              className="pf-m-no-border-rows"
-              variant="compact"
-              columns={[_("Name")]}
-              rows={sortedFiles.map(file => ({ columns: [{ title: <Item file={file} key={file.name} /> }] }))}
-            />
-        );
+    else {
+        if (isGrid) {
+            return (
+                <CardBody onClick={resetSelected} id="navigator-card-body">
+                    <Flex id="folder-view">
+                        {sortedFiles.map(file => <Item file={file} key={file.name} />)}
+                    </Flex>
+                </CardBody>
+            );
+        } else {
+            return (
+                <ListingTable
+                  id="folder-view"
+                  className="pf-m-no-border-rows"
+                  variant="compact"
+                  columns={[_("Name")]}
+                  rows={sortedFiles.map(file => ({ columns: [{ title: <Item file={file} key={file.name} /> }] }))}
+                />
+            );
+        }
     }
 };
