@@ -332,10 +332,11 @@ export const Application = () => {
                               setHistoryIndex={setHistoryIndex} historyIndex={historyIndex}
                               loadingFiles={loadingFiles}
                             />
+                            {!loadingFiles &&
                             <ContextMenu
                               parentId="folder-view" contextMenuItems={contextMenuItems}
                               setSelectedContext={setSelectedContext}
-                            />
+                            />}
                             <AlertGroup isToast isLiveRegion>
                                 {alerts.map(alert => (
                                     <Alert
@@ -617,25 +618,23 @@ const NavigatorCardBody = ({
                 <Spinner />
             </Flex>
         );
-    else {
-        if (isGrid) {
-            return (
-                <CardBody onClick={resetSelected} id="navigator-card-body">
-                    <Flex id="folder-view">
-                        {sortedFiles.map(file => <Item file={file} key={file.name} />)}
-                    </Flex>
-                </CardBody>
-            );
-        } else {
-            return (
-                <ListingTable
-                  id="folder-view"
-                  className="pf-m-no-border-rows"
-                  variant="compact"
-                  columns={[_("Name")]}
-                  rows={sortedFiles.map(file => ({ columns: [{ title: <Item file={file} key={file.name} /> }] }))}
-                />
-            );
-        }
+    if (isGrid) {
+        return (
+            <CardBody onClick={resetSelected} id="navigator-card-body">
+                <Flex id="folder-view">
+                    {sortedFiles.map(file => <Item file={file} key={file.name} />)}
+                </Flex>
+            </CardBody>
+        );
+    } else {
+        return (
+            <ListingTable
+              id="folder-view"
+              className="pf-m-no-border-rows"
+              variant="compact"
+              columns={[_("Name")]}
+              rows={sortedFiles.map(file => ({ columns: [{ title: <Item file={file} key={file.name} /> }] }))}
+            />
+        );
     }
 };
