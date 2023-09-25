@@ -18,7 +18,7 @@ On Fedora:
 These commands check out the source and build it into the `dist/` directory:
 
 ```
-git clone https://github.com/KKoukiou/cockpit-navigator.git
+git clone https://github.com/cockpit-project/cockpit-navigator.git
 cd cockpit-navigator
 make
 ```
@@ -196,7 +196,7 @@ see the [packit.yaml](./packit.yaml) control file.
 It is important to keep your [NPM modules](./package.json) up to date, to keep
 up with security updates and bug fixes. This is done with the
 [npm-update bot script](https://github.com/cockpit-project/bots/blob/main/npm-update)
-which is run weekly or upon [manual request](https://github.com/KKoukiou/cockpit-navigator/actions) through the
+which is run weekly or upon [manual request](https://github.com/cockpit-project/cockpit-navigator/actions) through the
 [npm-update.yml](.github/workflows/npm-update.yml) [GitHub action](https://github.com/features/actions).
 
 # Further reading
