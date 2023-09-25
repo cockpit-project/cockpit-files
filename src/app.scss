@@ -30,6 +30,44 @@
     color: var(--pf-global--primary-color--100);
 }
 
+.directory-item {
+    --icon-color: var(--pf-v5-global--link--Color--light);
+
+    &:is(:hover,.pf-m-selected) {
+        --icon-color: var(--pf-v5-global--link--Color);
+    }
+
+    .pf-v5-theme-dark & {
+        --icon-color: var(--pf-v5-global--link--Color--dark);
+    }
+
+    .pf-v5-theme-dark &:is(:hover,.pf-m-selected) {
+        --icon-color: var(--pf-v5-global--link--Color--dark--hover);
+    }
+}
+
+.file-item {
+    --icon-color: var(--pf-v5-global--palette--black-400);
+
+    &:is(:hover,.pf-m-selected) {
+        --icon-color: var(--pf-v5-global--palette--black-500);
+    }
+
+    .pf-v5-theme-dark & {
+        --icon-color: var(--pf-v5-global--palette--black-400);
+    }
+
+    .pf-v5-theme-dark &:is(:hover,.pf-m-selected) {
+        --icon-color: var(--pf-v5-global--palette--black-300);
+    }
+}
+
+.directory-item, .file-item {
+     svg > path {
+        fill: var(--icon-color);
+    }
+}
+
 .sidebar-card {
     background: inherit;
     box-shadow: none;
