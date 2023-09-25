@@ -10,7 +10,7 @@
   </description>
   <extends>org.cockpit_project.cockpit</extends>
   <launchable type="cockpit-manifest">navigator</launchable>
-  <url type="homepage">https://github.com/KKoukiou/cockpit-navigator</url>
-  <url type="bugtracker">https://github.com/KKoukiou/cockpit-navigator/issues</url>
+  <url type="homepage">https://github.com/cockpit-project/cockpit-navigator</url>
+  <url type="bugtracker">https://github.com/cockpit-project/cockpit-navigator/issues</url>
   <update_contact>cockpit-devel_AT_lists.fedorahosted.org</update_contact>
 </component>

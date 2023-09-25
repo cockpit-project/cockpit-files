@@ -3,7 +3,7 @@
   "description": "Scaffolding for a cockpit module",
   "type": "module",
   "main": "index.js",
-  "repository": "git@github.com:KKoukiou/navigator.git",
+  "repository": "git@github.com:cockpit-project/navigator.git",
   "author": "",
   "license": "LGPL-2.1",
   "scripts": {
