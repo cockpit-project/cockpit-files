@@ -228,17 +228,6 @@ export const CreateDirectoryModal = ({ selected, currentPath }) => {
         spawnCreateDirectory({ Dialogs, selected, currentPath, name, setErrorMessage });
     };
 
-    useEffect(() => {
-        const onEnter = e => {
-            if (e.key === "Enter") {
-                e.preventDefault();
-                createDirectory();
-            }
-        };
-        document.addEventListener("keydown", onEnter);
-        return () => document.removeEventListener("keydown", onEnter);
-    });
-
     return (
         <Modal
           position="top"
@@ -258,7 +247,13 @@ export const CreateDirectoryModal = ({ selected, currentPath }) => {
                   text={errorMessage}
                   isInline
                 />}
-                <Form isHorizontal>
+                <Form
+                  isHorizontal onSubmit={e => {
+                      createDirectory();
+                      e.preventDefault();
+                      return false;
+                  }}
+                >
                     <FormGroup label={_("Directory name")}>
                         <TextInput
                           value={name} onChange={(_, val) => setName(val)}
