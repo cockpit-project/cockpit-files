@@ -82,12 +82,15 @@ $(SPEC): packaging/$(SPEC).in $(NODE_MODULES_TEST)
 $(DIST_TEST): $(NODE_MODULES_TEST) $(COCKPIT_REPO_STAMP) $(shell find src/ -type f) package.json build.js
 	NODE_ENV=$(NODE_ENV) ./build.js
 
+packaging/debian/changelog: packaging/debian/changelog.in
+	sed 's/VERSION/$(VERSION)/' $< > $@
+
 watch: $(NODE_MODULES_TEST) $(COCKPIT_REPO_STAMP)
 	NODE_ENV=$(NODE_ENV) ./build.js -w
 
 clean:
 	rm -rf dist/
-	rm -f $(SPEC)
+	rm -f $(SPEC) packaging/debian/changelog
 	rm -f po/LINGUAS
 
 install: $(DIST_TEST) po/LINGUAS
@@ -119,11 +122,12 @@ dist: $(TARFILE)
 # pre-built dist/ (so it's not necessary) and ship package-lock.json (so that
 # node_modules/ can be reconstructed if necessary)
 $(TARFILE): export NODE_ENV=production
-$(TARFILE): $(DIST_TEST) $(SPEC)
+$(TARFILE): $(DIST_TEST) $(SPEC) packaging/debian/changelog
 	if type appstream-util >/dev/null 2>&1; then appstream-util validate-relax --nonet *.metainfo.xml; fi
 	tar --xz $(TAR_ARGS) -cf $(TARFILE) --transform 's,^,$(RPM_NAME)/,' \
 		--exclude packaging/$(SPEC).in --exclude node_modules \
-		$$(git ls-files) $(COCKPIT_REPO_FILES) $(NODE_MODULES_TEST) $(SPEC) dist/
+		$$(git ls-files) $(COCKPIT_REPO_FILES) $(NODE_MODULES_TEST) $(SPEC) \
+		packaging/debian/changelog dist/
 
 $(NODE_CACHE): $(NODE_MODULES_TEST)
 	tar --xz $(TAR_ARGS) -cf $@ node_modules
