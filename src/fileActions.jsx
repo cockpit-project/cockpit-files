@@ -228,6 +228,17 @@ export const CreateDirectoryModal = ({ selected, currentPath }) => {
         spawnCreateDirectory({ Dialogs, selected, currentPath, name, setErrorMessage });
     };
 
+    useEffect(() => {
+        const onEnter = e => {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                createDirectory();
+            }
+        };
+        document.addEventListener("keydown", onEnter);
+        return () => document.removeEventListener("keydown", onEnter);
+    });
+
     return (
         <Modal
           position="top"
@@ -251,7 +262,7 @@ export const CreateDirectoryModal = ({ selected, currentPath }) => {
                     <FormGroup label={_("Directory name")}>
                         <TextInput
                           value={name} onChange={(_, val) => setName(val)}
-                          id="create-directory-input"
+                          id="create-directory-input" autoFocus
                         />
                     </FormGroup>
                 </Form>
