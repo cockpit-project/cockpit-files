@@ -293,27 +293,6 @@ export const Application = () => {
             }}
             >
                 <Sidebar isPanelRight hasGutter>
-                    <SidebarPanel className="sidebar-panel" width={{ default: "width_25" }}>
-                        <SidebarPanelDetails
-                          path={path}
-                          selected={selected.map(s => files.find(f => f.name === s.name)).filter(s => s !== undefined)}
-                          currentDirectory={
-                              {
-                                  has_error: errorMessage,
-                                  name: path[path.length - 1],
-                                  items_cnt: {
-                                      all: files.length,
-                                      hidden: files.length - files.filter(file => !file.name.startsWith(".")).length
-                                  }
-                              }
-                          }
-                          setHistory={setHistory} setHistoryIndex={setHistoryIndex}
-                          showHidden={showHidden} setSelected={setSelected}
-                          setShowHidden={setShowHidden}
-                          clipboard={clipboard} setClipboard={setClipboard}
-                          files={files} addAlert={addAlert}
-                        />
-                    </SidebarPanel>
                     <SidebarContent>
                         <Card>
                             <NavigatorCardHeader
@@ -355,6 +334,27 @@ export const Application = () => {
                             </AlertGroup>
                         </Card>
                     </SidebarContent>
+                    <SidebarPanel className="sidebar-panel" width={{ default: "width_25" }}>
+                        <SidebarPanelDetails
+                          path={path}
+                          selected={selected.map(s => files.find(f => f.name === s.name)).filter(s => s !== undefined)}
+                          currentDirectory={
+                              {
+                                  has_error: errorMessage,
+                                  name: path[path.length - 1],
+                                  items_cnt: {
+                                      all: files.length,
+                                      hidden: files.length - files.filter(file => !file.name.startsWith(".")).length
+                                  }
+                              }
+                          }
+                          setHistory={setHistory} setHistoryIndex={setHistoryIndex}
+                          showHidden={showHidden} setSelected={setSelected}
+                          setShowHidden={setShowHidden}
+                          clipboard={clipboard} setClipboard={setClipboard}
+                          files={files} addAlert={addAlert}
+                        />
+                    </SidebarPanel>
                 </Sidebar>
             </PageSection>
         </Page>
