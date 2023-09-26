@@ -25,7 +25,7 @@ import {
     FormSection,
     FormSelect,
     FormSelectOption,
-    Modal,
+    Modal, ModalVariant,
     Radio,
     Stack,
     TextInput,
@@ -159,6 +159,7 @@ export const ConfirmDeletionDialog = ({
           position="top"
           title={modalTitle}
           titleIconVariant="warning"
+          variant={ModalVariant.small}
           isOpen
           onClose={Dialogs.close}
           footer={
