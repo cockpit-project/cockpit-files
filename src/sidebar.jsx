@@ -386,7 +386,6 @@ const DropdownWithKebab = ({
 
     return (
         <Dropdown
-          isPlain
           isOpen={isOpen}
           onSelect={onSelect}
           onOpenChange={setIsOpen}
