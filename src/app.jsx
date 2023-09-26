@@ -23,12 +23,13 @@ import { useDialogs } from "dialogs.jsx";
 import React, { useCallback, useEffect, useMemo, useState, useRef } from "react";
 import {
     Card, CardBody,
-    Flex, FlexItem,
+    Flex,
+    Gallery,
     Icon,
     MenuItem, MenuList,
     Page, PageSection,
-    Sidebar, SidebarPanel, SidebarContent, Truncate,
-    CardHeader, CardTitle, Divider, AlertGroup, Alert, AlertActionCloseButton, Spinner
+    Sidebar, SidebarPanel, SidebarContent,
+    CardTitle, Divider, AlertGroup, Alert, AlertActionCloseButton, Spinner, CardHeader,
 } from "@patternfly/react-core";
 import { ExclamationCircleIcon, FileIcon, FolderIcon } from "@patternfly/react-icons";
 
@@ -556,7 +557,7 @@ const NavigatorCardBody = ({
               data-item={file.name}
               id={"card-item-" + file.name + file.type}
               isClickable isCompact
-              isPlain isRounded
+              isPlain
               isSelected={selected.find(s => s.name === file.name)}
               onClick={ev => handleClick(ev, file)}
               onContextMenu={(e) => {
@@ -574,38 +575,17 @@ const NavigatorCardBody = ({
                       selectableActionId: "card-item-" + file.name + file.type + "-selectable-action",
                   }}
                 >
+                    <Icon
+                      size={isGrid
+                          ? "xl"
+                          : "lg"} isInline
+                    >
+                        {file.type === "directory" || file.to === "directory"
+                            ? <FolderIcon />
+                            : <FileIcon />}
+                    </Icon>
                     <CardTitle>
-                        <Flex
-                          direction={{
-                              default: isGrid
-                                  ? "column"
-                                  : "row"
-                          }} spaceItems={{
-                              default: isGrid
-                                  ? "spaceItemsNone"
-                                  : "spaceItemsMd"
-                          }}
-                        >
-                            <FlexItem alignSelf={{ default: "alignSelfCenter" }}>
-                                <Icon
-                                  size={isGrid
-                                      ? "xl"
-                                      : "lg"} isInline
-                                >
-                                    {file.type === "directory" || file.to === "directory"
-                                        ? <FolderIcon />
-                                        : <FileIcon />}
-                                </Icon>
-                            </FlexItem>
-                            <FlexItem className={"pf-u-text-break-word pf-u-text-wrap" + (isGrid
-                                ? " grid-file-name"
-                                : "")}
-                            >
-                                {selected?.name !== file.name
-                                    ? <Truncate content={file.name} position="middle" />
-                                    : file.name}
-                            </FlexItem>
-                        </Flex>
+                        {file.name}
                     </CardTitle>
                 </CardHeader>
             </Card>
@@ -621,9 +601,9 @@ const NavigatorCardBody = ({
     if (isGrid) {
         return (
             <CardBody onClick={resetSelected} id="navigator-card-body">
-                <Flex id="folder-view">
+                <Gallery id="folder-view">
                     {sortedFiles.map(file => <Item file={file} key={file.name} />)}
-                </Flex>
+                </Gallery>
             </CardBody>
         );
     } else {
