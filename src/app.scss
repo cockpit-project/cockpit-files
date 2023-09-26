@@ -85,3 +85,13 @@
 .item-button {
     color: var(--pf-v5-global--Color--200);
 }
+
+// Improve header layout and wrap header text
+.sidebar-panel {
+    .pf-v5-c-card__header-main {
+        display: grid !important;
+        grid-template: 1fr / 1fr auto;
+        overflow-wrap: anywhere;
+        align-items: start;
+    }
+}
