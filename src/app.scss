@@ -30,6 +30,47 @@
     color: var(--pf-global--primary-color--100);
 }
 
+.pf-v5-l-gallery {
+    --pf-v5-l-gallery--GridTemplateColumns--max: 10rem;
+    align-items: start;
+    gap: var(--pf-v5-global--spacer--sm);
+    grid-template-columns: repeat(auto-fill, minmax(var(--pf-v5-l-gallery--GridTemplateColumns--max), 1fr));
+}
+
+.directory-item, .file-item {
+    // Align icon and text in icon mode
+    .pf-v5-l-gallery & .pf-v5-c-card__header-main {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 0;
+    }
+
+    // Align icon and text in list mode
+    .ct-table & .pf-v5-c-card__header-main {
+        justify-content: start !important;
+        gap: var(--pf-v5-global--spacer--sm);
+    }
+
+    // Limit to 3 vertical lines and add ellipsis at the end when needed.
+    // (Sadly, there's no way to truncate in the middle, except via a PF
+    // component... but that doesn't allow wrapping and clamping line height.)
+    .pf-v5-c-card__title-text {
+        // Yes, all browsers support line-clamp with the webkit prefix. No
+        // browser supports it unprefixed. All browsers require a display of
+        // -webkit-box and -webkit-box-orient as well. It's one of the few
+        // prefixed attributes that's so well supported and still needed.
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        overflow-wrap: anywhere;
+        // Wrapping should be more balanced (new; not supported everywhere yet)
+        text-wrap: balance;
+    }
+}
+
 .directory-item {
     --icon-color: var(--pf-v5-global--link--Color--light);
 
