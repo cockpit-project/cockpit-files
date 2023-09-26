@@ -285,6 +285,7 @@ export const RenameItemModal = ({ path, selected, setHistory, setHistoryIndex })
         <Modal
           position="top"
           title={title}
+          variant={ModalVariant.medium}
           isOpen
           onClose={Dialogs.close}
           footer={errorMessage === undefined &&
