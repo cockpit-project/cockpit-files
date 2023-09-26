@@ -30,6 +30,22 @@
     color: var(--pf-global--primary-color--100);
 }
 
+// Make the card heading sticky
+.card-actionbar {
+    position: sticky;
+    // Background bleeds through, so we need we need to add a local background
+    background: var(--pf-v5-global--BackgroundColor--100);
+    // Breadcrumb header size + padding?
+    top: calc(var(--pf-v5-global--spacer--md) * 3.5);
+    // Lift up above icon content
+    z-index: 1;
+}
+
+// Make the sidebar sticky
+.pf-v5-c-sidebar__panel {
+    --pf-v5-c-sidebar__panel--Position: sticky;
+}
+
 .pf-v5-l-gallery {
     --pf-v5-l-gallery--GridTemplateColumns--max: 10rem;
     align-items: start;
