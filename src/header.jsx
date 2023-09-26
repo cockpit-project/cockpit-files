@@ -40,7 +40,7 @@ const _ = cockpit.gettext;
 
 export const NavigatorCardHeader = ({ currentFilter, onFilterChange, isGrid, setIsGrid, sortBy, setSortBy }) => {
     return (
-        <CardHeader>
+        <CardHeader className="card-actionbar">
             <CardTitle component="h2" id="navigator-card-header">
                 <TextContent>
                     <Text component={TextVariants.h2}>
