@@ -536,17 +536,22 @@ class TestNavigator(testlib.MachineCase):
         # Create file symbolic link
         self.create_link(b, "test", "test-sym", "symbolic", 1)
         b.wait_visible("[data-item='test-sym']")
-        self.assertEqual(m.execute("ls -l /home/admin/test-sym")[0:23], "lrwxrwxrwx. 1 root root")
+
+        def ls_output(filename):
+            output = m.execute(f"ls -l {filename}")[0:23]
+            return output.strip()
+
+        self.assertRegex(ls_output("/home/admin/test-sym"), "lrwxrwxrwx.* 1 root root")
 
         # Create file hard link
         self.create_link(b, "test", "test-hard", "hard", 1)
         b.wait_visible("[data-item='test-hard']")
-        self.assertEqual(m.execute("ls -l /home/admin/test-hard")[0:23], "-rw-r--r--. 2 root root")
+        self.assertRegex(ls_output("/home/admin/test-hard"), "-rw-r--r--.* 2 root root")
 
         # Create folder symbolic link
         self.create_link(b, "testdir", "testdir-sym", "symbolic", 4)
         b.wait_visible("[data-item='testdir-sym'].directory-item")
-        self.assertEqual(m.execute("ls -l /home/admin/testdir-sym")[0:23], "lrwxrwxrwx. 1 root root")
+        self.assertRegex(ls_output("/home/admin/testdir-sym"), "lrwxrwxrwx.* 1 root root")
 
         # Creating folder hard link should return an error
         self.create_link(b, "testdir", "testdir-hard", "hard", 5)
