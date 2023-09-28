@@ -500,8 +500,8 @@ const NavigatorCardBody = ({
 
                     return [sortedFiles[newIdx]];
                 });
-            } else if (e.key === "Enter") {
-                onDoubleClickNavigate(selected?.[0]);
+            } else if (e.key === "Enter" && selected.length === 1) {
+                onDoubleClickNavigate(selected[0]);
             }
         };
 
