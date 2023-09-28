@@ -248,11 +248,17 @@ export const CreateDirectoryModal = ({ selected, currentPath }) => {
                   text={errorMessage}
                   isInline
                 />}
-                <Form isHorizontal>
+                <Form
+                  isHorizontal onSubmit={e => {
+                      createDirectory();
+                      e.preventDefault();
+                      return false;
+                  }}
+                >
                     <FormGroup label={_("Directory name")}>
                         <TextInput
                           value={name} onChange={(_, val) => setName(val)}
-                          id="create-directory-input"
+                          id="create-directory-input" autoFocus
                         />
                     </FormGroup>
                 </Form>
