@@ -58,7 +58,6 @@ export const Application = () => {
     const [files, setFiles] = useState([]);
     const [isGrid, setIsGrid] = useState(true);
     const [sortBy, setSortBy] = useState(localStorage.getItem("cockpit-navigator.sort") || "az");
-    const channel = useRef(null);
     const channelList = useRef(null);
     const [selected, setSelected] = useState([]);
     const [selectedContext, setSelectedContext] = useState(null);
@@ -87,6 +86,7 @@ export const Application = () => {
 
     const getFsList = useCallback(() => {
         const _files = [];
+        const initialised = false;
         setLoadingFiles(true);
 
         if (channelList.current !== null)
@@ -96,66 +96,62 @@ export const Application = () => {
             payload: "fslist1",
             path: `/${currentDir}`,
             superuser: "try",
-            watch: false,
+            attrs: ["size", "owner", "group", "target", "type", "mode", "modified"],
+        });
+
+        channelList.current.addEventListener("event", (ev, data) => {
+            console.log("event", ev, data);
+        });
+
+        channelList.current.addEventListener("ready", (ev, data) => {
+            console.log("ready", ev, data);
         });
 
         channelList.current.addEventListener("message", (ev, data) => {
+            const convertFile = file => {
+              return {
+                    ...file,
+                    name: file.path,
+                    permissions: file.mode,
+                    to: file.target,
+                    isHidden: file.path.startsWith("."),
+              };
+            };
             const file = JSON.parse(data);
+            console.log("message", file);
 
-            _files.push({ ...file, name: file.path, isHidden: file.path.startsWith(".") });
+            switch (file.event) {
+            case "present":
+                // FIXME: replace usage of `file.to` and `file.permissions`
+                _files.push(convertFile(file));
+                console.log(_files);
+                break;
+            case "created":
+                setFiles(f => [...f, convertFile(file)]);
+                console.log(_files);
+                break;
+            case "deleted":
+                setFiles(f => f.filter(res => res.path !== file.path));
+                console.log(_files);
+                break;
+            case "done":
+                setLoading(false);
+                setErrorMessage(null);
+                console.log(_files);
+                setFiles(_files);
+                setLoadingFiles(false);
+                break;
+            default:
+                console.log("unsupported event", file.event);
+            }
         });
 
         channelList.current.addEventListener("close", (ev, data) => {
-            setLoading(false);
             if (data?.problem && data?.message) {
                 setErrorMessage(data.message);
-            } else {
-                setErrorMessage(null);
-                Promise.all(_files.map(file => updateFile(file, currentDir)))
-                        .then(() => {
-                            setFiles(_files);
-                            setLoadingFiles(false);
-                        });
             }
         });
     }, [currentDir]);
-
-    const watchFiles = useCallback(() => {
-        if (channel.current !== null)
-            channel.current.close();
-
-        channel.current = cockpit.channel({
-            payload: "fswatch1",
-            path: `/${currentDir}`,
-            superuser: "try",
-        });
-
-        channel.current.addEventListener("message", (ev, data) => {
-            const item = JSON.parse(data);
-
-            item.name = item.path.slice(item.path.lastIndexOf("/") + 1);
-            item.isHidden = item.name.startsWith(".");
-
-            // When files are created with some file editor we get also 'attribute-changed' and
-            // 'done-hint' events which are handled below. We should not add the same file twice.
-            if (item.event === "created" && item.type === "directory") {
-                updateFile(item, currentDir).then(file => {
-                    setFiles(_f => [..._f, file]);
-                });
-            } else {
-                if (item.event === "deleted") {
-                    setFiles(f => f.filter(res => res.name !== item.name));
-                } else {
-                    // For events other than 'present' we don't receive file stat information
-                    // so we rerun the fslist command to get the updated information
-                    // https://github.com/allisonkarlitskaya/systemd_ctypes/issues/56
-                    if (item.name[0] !== ".") {
-                        getFsList();
-                    }
-                }
-            }
-        });
-    }, [currentDir, getFsList]);
 
     useEffect(() => {
         if (currentPath === "")
@@ -165,14 +161,8 @@ export const Application = () => {
         setFiles([]);
         setLoading(true);
 
-        watchFiles();
         getFsList();
-    }, [
-        currentPath,
-        sel,
-        getFsList,
-        watchFiles
-    ]);
+    }, [currentPath, sel, getFsList]);
 
     if (loading || path.length === 0 || !sel)
         return <EmptyStatePanel loading />;

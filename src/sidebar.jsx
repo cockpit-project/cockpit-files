@@ -95,21 +95,21 @@ const getDescriptionListItems = selected => {
                 },
             ]
             : []),
-        {
-            id: "description-list-owner-permissions",
-            label: _("Owner permissions"),
-            value: getPermissions(selected.permissions[0])
-        },
-        {
-            id: "description-list-group-permissions",
-            label: _("Group permissions"),
-            value: getPermissions(selected.permissions[1])
-        },
-        {
-            id: "description-list-other-permissions",
-            label: _("Other permissions"),
-            value: getPermissions(selected.permissions[2])
-        },
+        // {
+        //     id: "description-list-owner-permissions",
+        //     label: _("Owner permissions"),
+        //     value: getPermissions(selected.permissions[0])
+        // },
+        // {
+        //     id: "description-list-group-permissions",
+        //     label: _("Group permissions"),
+        //     value: getPermissions(selected.permissions[1])
+        // },
+        // {
+        //     id: "description-list-other-permissions",
+        //     label: _("Other permissions"),
+        //     value: getPermissions(selected.permissions[2])
+        // },
     ]);
 };
 
