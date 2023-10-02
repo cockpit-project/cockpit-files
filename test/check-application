@@ -92,7 +92,7 @@ class TestNavigator(testlib.MachineCase):
 
         # file sidebar information
         b.click("[data-item='newfile']")
-        b.wait_text("#sidebar-card-header", "newfile empty")
+        b.wait_text("#sidebar-card-header", "newfileempty")
         b.wait_text("#description-list-owner dd", "root")
         b.wait_text("#description-list-group dd", "root")
         b.wait_text("#description-list-size dd", "0 B")
@@ -112,7 +112,7 @@ class TestNavigator(testlib.MachineCase):
 
         # folder information doesn't contain size
         b.click("[data-item='newdir']")
-        b.wait_text("#sidebar-card-header", "newdir directory")
+        b.wait_text("#sidebar-card-header", "newdirdirectory")
         b.wait_text("#description-list-owner dd", "root")
         b.wait_text("#description-list-group dd", "root")
         b.wait_not_present("#description-list-size")
@@ -672,7 +672,7 @@ class TestNavigator(testlib.MachineCase):
         b.mouse("[data-item='file2']", "click", ctrlKey=True)
         b.wait_visible("[data-item='file1'].pf-m-selected")
         b.wait_not_present("[data-item='file2'].pf-m-selected")
-        b.wait_text("#sidebar-card-header", "file1 empty")
+        b.wait_text("#sidebar-card-header", "file1empty")
 
         b.mouse("[data-item='file1']", "click", ctrlKey=True)
         b.wait_not_present("[data-item='file1'].pf-m-selected")
@@ -681,7 +681,7 @@ class TestNavigator(testlib.MachineCase):
         # Control-clicking when nothing is selected should select item normally
         b.mouse("[data-item='file1']", "click", ctrlKey=True)
         b.wait_visible("[data-item='file1'].pf-m-selected")
-        b.wait_text("#sidebar-card-header", "file1 empty")
+        b.wait_text("#sidebar-card-header", "file1empty")
         
         # Check context menu
         b.mouse("[data-item='file2']", "click", ctrlKey=True)
@@ -759,7 +759,7 @@ class TestNavigator(testlib.MachineCase):
         b.click("#paste-as-symlink")
         b.wait_visible("[data-item='newfile3']")
         b.click("[data-item='newfile3']")
-        b.wait_text("#sidebar-card-header", "newfile3 symbolic link to /home/admin/newfile3")
+        b.wait_text("#sidebar-card-header", "newfile3symbolic link to /home/admin/newfile3")
         b.click(".breadcrumb-button:nth-of-type(3)")
 
         # Check error alerts
