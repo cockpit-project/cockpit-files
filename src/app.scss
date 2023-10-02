@@ -76,7 +76,7 @@
         // browser supports it unprefixed. All browsers require a display of
         // -webkit-box and -webkit-box-orient as well. It's one of the few
         // prefixed attributes that's so well supported and still needed.
-        display: -webkit-box;
+        display: -webkit-box; /* stylelint-disable-line value-no-vendor-prefix */
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
         overflow: hidden;
