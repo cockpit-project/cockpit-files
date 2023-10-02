@@ -95,6 +95,7 @@ const context = await esbuild.context({
     target: ['es2020'],
     plugins: [
         cleanPlugin(),
+        ...args.no_stylelint ? [] : [stylelintPlugin({ filter: new RegExp(cwd + '/src/.*\\.(css?|scss?)$') })],
         ...args.no_eslint ? [] : [eslintPlugin({ filter: new RegExp(cwd + '/src/.*\\.(jsx?|js?)$') })],
         // Esbuild will only copy assets that are explicitly imported and used
         // in the code. This is a problem for index.html and manifest.json which are not imported
