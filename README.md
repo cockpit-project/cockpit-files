@@ -124,12 +124,12 @@ After the test VM is prepared, you can manually run the test without rebuilding
 the VM, possibly with extra options for tracing and halting on test failures
 (for interactive debugging):
 
-    TEST_OS=centos-8-stream test/check-application -tvs
+    TEST_OS=centos-9-stream test/check-application -tvs
 
 It is possible to setup the test environment without running the tests:
 
-    TEST_OS=centos-8-stream make prepare-check
+    TEST_OS=centos-9-stream make prepare-check
 
 You can also run the test against a different Cockpit image, for example:
 
-    TEST_OS=fedora-34 make check
+    TEST_OS=fedora-38 make check
