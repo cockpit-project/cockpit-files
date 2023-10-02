@@ -1,6 +1,4 @@
-# Cockpit Starter Kit
-
-Scaffolding for a [Cockpit](https://cockpit-project.org/) module.
+# Cockpit Navigator
 
 # Development dependencies
 
@@ -74,7 +72,7 @@ remove manually the symlink:
 
 # Running eslint
 
-Cockpit Starter Kit uses [ESLint](https://eslint.org/) to automatically check
+Cockpit Navigator uses [ESLint](https://eslint.org/) to automatically check
 JavaScript code style in `.js` and `.jsx` files.
 
 eslint is executed within every build.
@@ -135,73 +133,3 @@ It is possible to setup the test environment without running the tests:
 You can also run the test against a different Cockpit image, for example:
 
     TEST_OS=fedora-34 make check
-
-# Running tests in CI
-
-These tests can be run in [Cirrus CI](https://cirrus-ci.org/), on their free
-[Linux Containers](https://cirrus-ci.org/guide/linux/) environment which
-explicitly supports `/dev/kvm`. Please see [Quick
-Start](https://cirrus-ci.org/guide/quick-start/) how to set up Cirrus CI for
-your project after forking from starter-kit.
-
-The included [.cirrus.yml](./.cirrus.yml) runs the integration tests for two
-operating systems (Fedora and CentOS 8). Note that if/once your project grows
-bigger, or gets frequent changes, you may need to move to a paid account, or
-different infrastructure with more capacity.
-
-Tests also run in [Packit](https://packit.dev/) for all currently supported
-Fedora releases; see the [packit.yaml](./packit.yaml) control file. You need to
-[enable Packit-as-a-service](https://packit.dev/docs/packit-service/) in your GitHub project to use this.
-To run the tests in the exact same way for upstream pull requests and for
-[Fedora package update gating](https://docs.fedoraproject.org/en-US/ci/), the
-tests are wrapped in the [FMF metadata format](https://github.com/teemtee/fmf)
-for using with the [tmt test management tool](https://docs.fedoraproject.org/en-US/ci/tmt/).
-Note that Packit tests can *not* run their own virtual machine images, thus
-they only run [@nondestructive tests](https://github.com/cockpit-project/cockpit/blob/main/test/common/testlib.py).
-
-# Customizing
-
-After cloning the Starter Kit you should rename the files, package names, and
-labels to your own project's name. Use these commands to find out what to
-change:
-
-    find -iname '*starter*'
-    git grep -i starter
-
-# Automated release
-
-Once your cloned project is ready for a release, you should consider automating
-that. The intention is that the only manual step for releasing a project is to create
-a signed tag for the version number, which includes a summary of the noteworthy
-changes:
-
-```
-123
-
-- this new feature
-- fix bug #123
-```
-
-Pushing the release tag triggers the [release.yml](.github/workflows/release.yml.disabled)
-[GitHub action](https://github.com/features/actions) workflow. This creates the
-official release tarball and publishes as upstream release to GitHub. The
-workflow is disabled by default -- to use it, edit the file as per the comment
-at the top, and rename it to just `*.yml`.
-
-The Fedora and COPR releases are done with [Packit](https://packit.dev/),
-see the [packit.yaml](./packit.yaml) control file.
-
-# Automated maintenance
-
-It is important to keep your [NPM modules](./package.json) up to date, to keep
-up with security updates and bug fixes. This is done with the
-[npm-update bot script](https://github.com/cockpit-project/bots/blob/main/npm-update)
-which is run weekly or upon [manual request](https://github.com/cockpit-project/cockpit-navigator/actions) through the
-[npm-update.yml](.github/workflows/npm-update.yml) [GitHub action](https://github.com/features/actions).
-
-# Further reading
-
- * The [Cockpit announcement](https://cockpit-project.org/blog/cockpit.html)
-   blog post explains the rationale for this project.
- * [Cockpit Deployment and Developer documentation](https://cockpit-project.org/guide/latest/)
- * [Make your project easily discoverable](https://cockpit-project.org/blog/making-a-cockpit-application.html)
