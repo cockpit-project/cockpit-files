@@ -133,11 +133,11 @@ export const SidebarPanelDetails = ({
     useEffect(() => {
         const filePath = path.join("/") + "/" + selected[0]?.name;
 
-        cockpit.spawn(["file", filePath], { superuser: "try", error: "message" })
-                .then(res => {
-                    const _info = res.split(":")[1].slice(0, -1);
-                    setInfo(_info);
-                }, console.error);
+        cockpit.spawn(["file", "--brief", filePath], { superuser: "try", error: "message" })
+                .then(res => setInfo(res
+                    ? res.trim()
+                    : null),
+                      console.error);
     }, [path, selected]);
 
     const Dialogs = useDialogs();
