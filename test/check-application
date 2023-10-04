@@ -733,6 +733,7 @@ class TestNavigator(testlib.MachineCase):
         b.click(".breadcrumb-button:nth-of-type(3)")
 
         # Copy/paste directory
+        self.browser.wait_not_present(".pf-c-empty-state")
         m.execute("mkdir /home/admin/copyDir")
         b.click("[data-item='copyDir']")
         b.click("#dropdown-menu")
@@ -744,6 +745,7 @@ class TestNavigator(testlib.MachineCase):
         b.click(".breadcrumb-button:nth-of-type(3)")
 
         # Paste into directory
+        self.browser.wait_not_present(".pf-c-empty-state")
         m.execute("touch /home/admin/newfile2")
         b.click("[data-item='newfile2']")
         b.click("#dropdown-menu")
@@ -756,6 +758,7 @@ class TestNavigator(testlib.MachineCase):
         b.click(".breadcrumb-button:nth-of-type(3)")
 
         # Paste as symlink
+        self.browser.wait_not_present(".pf-c-empty-state")
         m.execute("touch /home/admin/newfile3")
         b.click("[data-item='newfile3']")
         b.click("#dropdown-menu")
