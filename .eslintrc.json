@@ -8,7 +8,7 @@
     "parserOptions": {
         "ecmaVersion": 2022
     },
-    "plugins": ["flowtype", "react", "react-hooks"],
+    "plugins": ["react", "react-hooks"],
     "rules": {
         "array-bracket-newline": ["error", { "multiline": true }],
         "array-element-newline": [
