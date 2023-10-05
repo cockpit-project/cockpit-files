@@ -18,9 +18,10 @@
  */
 
 import cockpit from "cockpit";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 import {
+    Button,
     CardHeader,
     CardTitle,
     Flex,
@@ -38,7 +39,9 @@ import { GripVerticalIcon, ListIcon } from "@patternfly/react-icons";
 
 const _ = cockpit.gettext;
 
-export const NavigatorCardHeader = ({ currentFilter, onFilterChange, isGrid, setIsGrid, sortBy, setSortBy }) => {
+export const NavigatorCardHeader = ({
+    currentFilter, onFilterChange, isGrid, setIsGrid, sortBy, setSortBy, currentDir
+}) => {
     return (
         <CardHeader className="card-actionbar">
             <CardTitle component="h2" id="navigator-card-header">
@@ -57,6 +60,7 @@ export const NavigatorCardHeader = ({ currentFilter, onFilterChange, isGrid, set
                   isGrid={isGrid} setIsGrid={setIsGrid}
                   setSortBy={setSortBy} sortBy={sortBy}
                 />
+                <UploadButton currentDir={currentDir} />
             </Flex>
         </CardHeader>
     );
@@ -113,5 +117,40 @@ const ViewSelector = ({ isGrid, setIsGrid, sortBy, setSortBy }) => {
                 <SelectOption itemId="first_modified">{_("First modified")}</SelectOption>
             </SelectList>
         </Select>
+    );
+};
+
+const UploadButton = ({ currentDir }) => {
+    const ref = useRef();
+
+    const handleClick = () => {
+        ref.current.click();
+    };
+
+    const onUpload = e => {
+        const reader = new FileReader();
+        reader.readAsArrayBuffer(e.target.files[0], "UTF-8");
+        reader.onload = readerEvent => {
+            const channel = cockpit.channel({
+                binary: true,
+                payload: "fsreplace1",
+                path: currentDir + e.target.files[0].name
+            });
+
+            const buffer = readerEvent.target.result;
+            channel.send(buffer);
+            channel.control({ command: "done" });
+            channel.close();
+        };
+    };
+
+    return (
+        <>
+            <Button variant="secondary" onClick={handleClick}>Upload</Button>
+            <input
+              ref={ref} type="file"
+              hidden onChange={onUpload}
+            />
+        </>
     );
 };
