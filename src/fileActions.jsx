@@ -258,7 +258,7 @@ export const CreateDirectoryModal = ({ selected, currentPath }) => {
                     <FormGroup label={_("Directory name")}>
                         <TextInput
                           value={name} onChange={(_, val) => setName(val)}
-                          id="create-directory-input" autoFocus
+                          id="create-directory-input" autoFocus // eslint-disable-line jsx-a11y/no-autofocus
                         />
                     </FormGroup>
                 </Form>

@@ -4,11 +4,11 @@
         "browser": true,
         "es6": true
     },
-    "extends": ["eslint:recommended", "standard", "standard-jsx", "standard-react"],
+    "extends": ["eslint:recommended", "standard", "standard-jsx", "standard-react", "plugin:jsx-a11y/recommended"],
     "parserOptions": {
         "ecmaVersion": 2022
     },
-    "plugins": ["react", "react-hooks"],
+    "plugins": ["react", "react-hooks", "jsx-a11y"],
     "rules": {
         "array-bracket-newline": ["error", { "multiline": true }],
         "array-element-newline": [
@@ -43,7 +43,9 @@
         "quotes": ["error", "double"],
         "react/prop-types": "off",
         "react/jsx-handler-names": "off",
-        "react/jsx-max-props-per-line": [1, { "maximum": 2 }]
+        "react/jsx-max-props-per-line": [1, { "maximum": 2 }],
+
+        "jsx-a11y/anchor-is-valid": "off"
     },
     "globals": {
         "require": false,
