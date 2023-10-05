@@ -25,6 +25,7 @@
     "eslint": "^8.13.0",
     "eslint-config-standard": "^17.0.0-1",
     "eslint-config-standard-jsx": "^11.0.0-1",
+    "eslint-config-standard-react": "13.0.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.0.0",
@@ -49,6 +50,7 @@
     "@patternfly/react-tokens": "5.0.1",
     "date-fns": "2.30.0",
     "deep-equal": "2.0.5",
+    "eslint-config-standard-react": "^13.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "throttle-debounce": "5.0.0"
