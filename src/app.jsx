@@ -109,6 +109,7 @@ export const Application = () => {
             setLoading(false);
             if (data?.problem && data?.message) {
                 setErrorMessage(data.message);
+                setLoadingFiles(false);
             } else {
                 setErrorMessage(null);
                 Promise.all(_files.map(file => updateFile(file, currentDir)))
