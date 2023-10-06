@@ -30,103 +30,104 @@ const renameCommand = ({ selected, path, name }) => {
         : ["mv", "/" + path.join("/") + "/" + selected.name, "/" + path.join("/") + "/" + name];
 };
 
-export const spawnDeleteItem = (o) => {
+export const spawnDeleteItem = ({ path, selected, itemPath, Dialogs, setSelected, setHistory, setHistoryIndex }) => {
     cockpit.spawn([
         "rm",
         "-r",
-        ...o.selected.length > 1
-            ? o.selected.map(f => o.path + f.name)
-            : [o.itemPath]
+        ...selected.length > 1
+            ? selected.map(f => path + f.name)
+            : [itemPath]
     ], options)
             .then(() => {
-                o.setSelected([]);
-                if (o.selected.length === 0) {
-                    const newPath = "/" + o.path.slice(0, -1).join("/");
+                setSelected([]);
+                if (selected.length === 0) {
+                    const newPath = "/" + path.slice(0, -1).join("/");
 
                     cockpit.location.go("/", { path: encodeURIComponent(newPath) });
-                    o.setHistory(h => h.slice(0, -1));
-                    o.setHistoryIndex(i => i - 1);
+                    setHistory(h => h.slice(0, -1));
+                    setHistoryIndex(i => i - 1);
                 }
             })
-            .then(o.Dialogs.close, err => {
-                o.Dialogs.show(
+            .then(Dialogs.close, err => {
+                Dialogs.show(
                     <ForceDeleteModal
-                      selected={o.selected} itemPath={o.itemPath}
+                      selected={selected} itemPath={itemPath}
                       initialError={err.message}
                     />
                 );
             });
 };
 
-export const spawnForceDelete = (o) => {
+export const spawnForceDelete = ({ selected, path, itemPath, Dialogs, setDeleteFailed, setErrorMessage }) => {
     cockpit.spawn([
         "rm",
         "-r",
-        ...o.selected.length > 1
-            ? o.selected.map(f => o.path + f.name)
-            : [o.itemPath]
+        ...selected.length > 1
+            ? selected.map(f => path + f.name)
+            : [itemPath]
     ], options)
-            .then(o.Dialogs.close, err => {
-                o.setDeleteFailed(true);
-                o.setErrorMessage(err.message);
+            .then(Dialogs.close, err => {
+                setDeleteFailed(true);
+                setErrorMessage(err.message);
             });
 };
 
-export const spawnRenameItem = (o) => {
-    const newPath = o.selected.items_cnt
-        ? "/" + o.path.slice(0, -1).join("/") + "/" + o.name
-        : "/" + o.path.join("/") + "/" + o.name;
+export const spawnRenameItem = ({ selected, name, path, Dialogs, setErrorMessage, setHistory, setHistoryIndex }) => {
+    const newPath = selected.items_cnt
+        ? "/" + path.slice(0, -1).join("/") + "/" + name
+        : "/" + path.join("/") + "/" + name;
 
-    cockpit.spawn(renameCommand({ selected: o.selected, path: o.path, name: o.name }), options)
+    cockpit.spawn(renameCommand({ selected, path, name }), options)
             .then(() => {
-                if (o.selected.items_cnt) {
+                if (selected.items_cnt) {
                     cockpit.location.go("/", { path: encodeURIComponent(newPath) });
-                    o.setHistory(h => h.slice(0, -1));
-                    o.setHistoryIndex(i => i - 1);
+                    setHistory(h => h.slice(0, -1));
+                    setHistoryIndex(i => i - 1);
                 }
-                o.Dialogs.close();
-            }, err => o.setErrorMessage(err.message));
+                Dialogs.close();
+            }, err => setErrorMessage(err.message));
 };
 
-export const spawnCreateDirectory = (o) => {
+export const spawnCreateDirectory = ({ name, currentPath, selected, Dialogs, setErrorMessage }) => {
     let path;
-    if (o.selected.icons_cnt || o.selected.type === "directory") {
-        path = o.currentPath + o.selected.name + "/" + o.name;
+    if (selected.icons_cnt || selected.type === "directory") {
+        path = currentPath + selected.name + "/" + name;
     } else {
-        path = o.currentPath + o.name;
+        path = currentPath + name;
     }
     cockpit.spawn(["mkdir", path], options)
-            .then(o.Dialogs.close, err => o.setErrorMessage(err.message));
+            .then(Dialogs.close, err => setErrorMessage(err.message));
 };
 
-export const spawnCreateLink = (o) => {
+export const spawnCreateLink = ({ type, currentPath, originalName, newName, Dialogs, setErrorMessage }) => {
     cockpit.spawn([
         "ln",
-        ...(o.type === "symbolic"
+        ...(type === "symbolic"
             ? ["-s"]
             : []),
-        o.currentPath + o.originalName.slice(o.originalName.lastIndexOf("/") + 1),
-        o.currentPath + o.newName
+        currentPath + originalName.slice(originalName.lastIndexOf("/") + 1),
+        currentPath + newName
     ], options)
-            .then(o.Dialogs.close, (err) => { o.setErrorMessage(err.message) });
+            .then(Dialogs.close, (err) => { setErrorMessage(err.message) });
 };
 
-export const spawnEditPermissions = (o) => {
+// eslint-disable-next-line max-len
+export const spawnEditPermissions = ({ changeAll, ownerAccess, groupAccess, otherAccess, name, path, selected, owner, group, Dialogs, setErrorMessage }) => {
     const command = [
         "chmod",
-        ...(o.changeAll
+        ...(changeAll
             ? ["-R"]
             : []),
-        o.ownerAccess + o.groupAccess + o.otherAccess,
-        "/" + o.path.join("/") + "/" + o.selected.name
+        ownerAccess + groupAccess + otherAccess,
+        "/" + path.join("/") + "/" + selected.name
     ];
     const permissionChanged = (
-        o.ownerAccess !== o.selected.permissions[0] ||
-        o.groupAccess !== o.selected.permissions[1] ||
-        o.otherAccess !== o.selected.permissions[2]
+        ownerAccess !== selected.permissions[0] ||
+        groupAccess !== selected.permissions[1] ||
+        otherAccess !== selected.permissions[2]
     );
-    const ownerChanged = o.owner !== o.selected.owner || o.group !== o.selected.group;
-    const nameChanged = o.name !== o.selected.name;
+    const ownerChanged = owner !== selected.owner || group !== selected.group;
+    const nameChanged = name !== selected.name;
 
     Promise.resolve()
             .then(() => {
@@ -136,16 +137,16 @@ export const spawnEditPermissions = (o) => {
             .then(() => {
                 if (ownerChanged) {
                     return cockpit.spawn(
-                        ["chown", o.owner + ":" + o.group, "/" + o.path.join("/") + "/" + o.selected.name],
+                        ["chown", owner + ":" + group, "/" + path.join("/") + "/" + selected.name],
                         options
                     );
                 }
             })
             .then(() => {
                 if (nameChanged)
-                    return cockpit.spawn(renameCommand({ selected: o.selected, path: o.path, name: o.name }), options);
+                    return cockpit.spawn(renameCommand({ selected, path, name }), options);
             })
-            .then(o.Dialogs.close, err => o.setErrorMessage(err.message));
+            .then(Dialogs.close, err => setErrorMessage(err.message));
 };
 
 export const spawnPaste = (sourcePath, targetPath, asSymlink, addAlert) => {
