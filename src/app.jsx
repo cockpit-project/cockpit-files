@@ -304,7 +304,7 @@ export const Application = () => {
                               currentFilter={currentFilter} onFilterChange={onFilterChange}
                               isGrid={isGrid} setIsGrid={setIsGrid}
                               sortBy={sortBy} setSortBy={setSortBy}
-                              currentDir={currentDir}
+                              currentDir={currentDir} files={files}
                             />
                             {errorMessage && <EmptyStatePanel paragraph={errorMessage} icon={ExclamationCircleIcon} />}
                             <NavigatorCardBody

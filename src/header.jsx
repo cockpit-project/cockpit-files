@@ -40,7 +40,7 @@ import { GripVerticalIcon, ListIcon } from "@patternfly/react-icons";
 const _ = cockpit.gettext;
 
 export const NavigatorCardHeader = ({
-    currentFilter, onFilterChange, isGrid, setIsGrid, sortBy, setSortBy, currentDir
+    currentFilter, onFilterChange, isGrid, setIsGrid, sortBy, setSortBy, currentDir, files
 }) => {
     return (
         <CardHeader className="card-actionbar">
@@ -60,7 +60,7 @@ export const NavigatorCardHeader = ({
                   isGrid={isGrid} setIsGrid={setIsGrid}
                   setSortBy={setSortBy} sortBy={sortBy}
                 />
-                <UploadButton currentDir={currentDir} />
+                <UploadButton currentDir={currentDir} files={files} />
             </Flex>
         </CardHeader>
     );
@@ -120,7 +120,7 @@ const ViewSelector = ({ isGrid, setIsGrid, sortBy, setSortBy }) => {
     );
 };
 
-const UploadButton = ({ currentDir }) => {
+const UploadButton = ({ currentDir, files }) => {
     const ref = useRef();
 
     const handleClick = () => {
@@ -128,13 +128,25 @@ const UploadButton = ({ currentDir }) => {
     };
 
     const onUpload = e => {
+        const uploadedFile = e.target.files[0];
+
+        let fileName = uploadedFile.name;
+
+        let fileCount = 2;
+        if (files.some(f => f.name === fileName))
+            fileName += " (1)";
+        while (files.some(f => f.name === fileName)) {
+            fileName = fileName.substring(0, fileName.length - 2) + `${fileCount}` + ")";
+            fileCount += 1;
+        }
+
         const reader = new FileReader();
-        reader.readAsArrayBuffer(e.target.files[0], "UTF-8");
+        reader.readAsArrayBuffer(uploadedFile, "UTF-8");
         reader.onload = readerEvent => {
             const channel = cockpit.channel({
                 binary: true,
                 payload: "fsreplace1",
-                path: currentDir + e.target.files[0].name
+                path: currentDir + fileName
             });
 
             const buffer = readerEvent.target.result;
