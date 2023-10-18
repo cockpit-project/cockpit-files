@@ -368,9 +368,12 @@ export const Application = () => {
 
 const compare = (sortBy) => {
     const compareFileType = (a, b) => {
-        if (a.type === "directory" && b.type !== "directory")
+        const aIsDir = (a.type === "directory" || a?.to === "directory");
+        const bIsDir = (b.type === "directory" || b?.to === "directory");
+
+        if (aIsDir && !bIsDir)
             return -1;
-        if (a.type !== "directory" && b.type === "directory")
+        if (!aIsDir && bIsDir)
             return 1;
         return 0;
     };
@@ -553,11 +556,19 @@ const NavigatorCardBody = ({
     };
 
     const Item = ({ file }) => {
+        const getFileType = (file) => {
+            if (file.type === "directory") {
+                return "directory-item";
+            } else if (file.type === "link" && file?.to === "directory") {
+                return "directory-item";
+            } else {
+                return "file-item";
+            }
+        };
+
         return (
             <Card
-              className={"item-button " + (file.type === "directory"
-                  ? "directory-item"
-                  : "file-item")}
+              className={"item-button " + getFileType(file)}
               data-item={file.name}
               id={"card-item-" + file.name + file.type}
               isClickable isCompact
