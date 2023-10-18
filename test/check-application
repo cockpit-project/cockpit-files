@@ -546,7 +546,7 @@ class TestNavigator(testlib.MachineCase):
 
         # Create folder symbolic link
         self.create_link(b, "testdir", "testdir-sym", "symbolic", 4)
-        b.wait_visible("[data-item='testdir-sym']")
+        b.wait_visible("[data-item='testdir-sym'].directory-item")
         self.assertEqual(m.execute("ls -l /home/admin/testdir-sym")[0:23], "lrwxrwxrwx. 1 root root")
 
         # Creating folder hard link should return an error
