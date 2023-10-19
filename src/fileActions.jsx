@@ -623,5 +623,5 @@ export const updateFile = (file, currentPath) => {
                             });
                 else
                     return file;
-            }, exc => console.error("Adding file failed", file, exc));
+            }, exc => console.error(`Adding file ${file} failed: ${exc.toString()}`));
 };
