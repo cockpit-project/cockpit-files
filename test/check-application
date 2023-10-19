@@ -17,6 +17,10 @@ class TestNavigator(testlib.MachineCase):
         # Run browser in UTC as the displayed time is in the browser's timezone
         os.environ['TZ'] = 'UTC'
 
+    def setUp(self):
+        super().setUp()
+        self.restore_dir("/home/admin")
+
     def enter_navigator(self):
         self.login_and_go("/navigator")
         self.browser.wait_not_present(".pf-c-empty-state")
@@ -67,8 +71,6 @@ class TestNavigator(testlib.MachineCase):
     def testBasic(self):
         b = self.browser
         m = self.machine
-
-        self.restore_dir("/home/admin")
 
         self.enter_navigator()
         # expected heading
@@ -181,8 +183,6 @@ class TestNavigator(testlib.MachineCase):
         b = self.browser
         m = self.machine
 
-        self.restore_dir("/home/admin")
-
         self.enter_navigator()
 
         b.wait_text(".breadcrumb-button:nth-of-type(1)", "/")
@@ -247,8 +247,6 @@ class TestNavigator(testlib.MachineCase):
         b = self.browser
         m = self.machine
 
-        self.restore_dir("/home/admin")
-
         self.enter_navigator()
 
         # Expected heading
@@ -308,8 +306,6 @@ class TestNavigator(testlib.MachineCase):
     def testDelete(self):
         b = self.browser
         m = self.machine
-
-        self.restore_dir("/home/admin")
 
         self.enter_navigator()
 
@@ -374,8 +370,6 @@ class TestNavigator(testlib.MachineCase):
         b = self.browser
         m = self.machine
 
-        self.restore_dir("/home/admin")
-
         self.enter_navigator()
 
         # Create folder
@@ -405,8 +399,6 @@ class TestNavigator(testlib.MachineCase):
     def testContextMenu(self):
         b = self.browser
         m = self.machine
-
-        self.restore_dir("/home/admin")
 
         self.enter_navigator()
 
@@ -470,8 +462,6 @@ class TestNavigator(testlib.MachineCase):
         b = self.browser
         m = self.machine
 
-        self.restore_dir("/home/admin")
-
         self.enter_navigator()
 
         # Rename file
@@ -513,8 +503,6 @@ class TestNavigator(testlib.MachineCase):
         b = self.browser
         m = self.machine
 
-        self.restore_dir("/home/admin")
-
         self.enter_navigator()
 
         # Check hidden item count
@@ -539,8 +527,6 @@ class TestNavigator(testlib.MachineCase):
     def testCreateLink(self):
         b = self.browser
         m = self.machine
-
-        self.restore_dir("/home/admin")
 
         self.enter_navigator()
 
@@ -580,8 +566,6 @@ class TestNavigator(testlib.MachineCase):
             b.select_from_dropdown("#edit-permissions-owner-access", access)
             b.select_from_dropdown("#edit-permissions-group-access", access)
             b.select_from_dropdown("#edit-permissions-other-access", access)
-
-        self.restore_dir("/home/admin")
 
         self.enter_navigator()
 
@@ -649,8 +633,6 @@ class TestNavigator(testlib.MachineCase):
         b = self.browser
         m = self.machine
 
-        self.restore_dir("/home/admin")
-
         self.enter_navigator()
 
         m.execute("mkdir /home/admin/testdir && chmod 400 /home/admin/testdir")
@@ -662,8 +644,6 @@ class TestNavigator(testlib.MachineCase):
     def testMultiSelect(self):
         b = self.browser
         m = self.machine
-
-        self.restore_dir("/home/admin")
 
         self.enter_navigator()
 
@@ -688,7 +668,7 @@ class TestNavigator(testlib.MachineCase):
         b.mouse("[data-item='file1']", "click", ctrlKey=True)
         b.wait_visible("[data-item='file1'].pf-m-selected")
         b.wait_text("#sidebar-card-header", "file1empty")
-        
+
         # Check context menu
         b.mouse("[data-item='file2']", "click", ctrlKey=True)
         b.wait_visible("[data-item='file2'].pf-m-selected")
@@ -715,8 +695,6 @@ class TestNavigator(testlib.MachineCase):
     def testCopyPaste(self):
         b = self.browser
         m = self.machine
-
-        self.restore_dir("/home/admin")
 
         self.enter_navigator()
 
