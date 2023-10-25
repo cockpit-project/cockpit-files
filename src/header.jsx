@@ -154,7 +154,10 @@ const UploadButton = ({ currentDir, files }) => {
 
         cockpit.spawn(["mktemp", "-t", `cockpit-upload-${fileName}-XXXXX`])
                 .then(tempPath => {
-                    const process = cockpit.spawn(["dd", `of=${tempPath}`], { superuser: "try", binary: true });
+                    const process = cockpit.spawn(
+                        ["dd", "status=none", `of=${tempPath}`],
+                        { superuser: "try", binary: true }
+                    );
                     const reader = new FileReader();
 
                     let chunkIndex = 0;
