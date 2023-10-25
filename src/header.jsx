@@ -140,20 +140,36 @@ const UploadButton = ({ currentDir, files }) => {
             fileCount += 1;
         }
 
-        const reader = new FileReader();
-        reader.readAsArrayBuffer(uploadedFile, "UTF-8");
-        reader.onload = readerEvent => {
-            const channel = cockpit.channel({
-                binary: true,
-                payload: "fsreplace1",
-                path: currentDir + fileName
-            });
+        let offset = 0;
+        let nextOffset = 0;
+        const chunkSize = 65536;
+        const chunks = [];
+        const numChunks = Math.ceil(uploadedFile.size / chunkSize);
 
-            const buffer = readerEvent.target.result;
-            channel.send(buffer);
-            channel.control({ command: "done" });
-            channel.close();
-        };
+        for (let i = 0; i < numChunks; i++) {
+            nextOffset = Math.min(chunkSize * (i + 1), uploadedFile.size);
+            chunks.push(uploadedFile.slice(offset, nextOffset));
+            offset = nextOffset;
+        }
+
+        cockpit.spawn(["mktemp", "-t", `cockpit-upload-${fileName}-XXXXX`])
+                .then(tempPath => {
+                    const process = cockpit.spawn(["dd", `of=${tempPath}`], { superuser: "try", binary: true });
+                    const reader = new FileReader();
+
+                    let chunkIndex = 0;
+                    reader.readAsArrayBuffer(chunks[0]);
+                    reader.onload = readerEvent => {
+                        process.input(new Uint8Array(readerEvent.target.result), true);
+                        chunkIndex += 1;
+                        if (chunkIndex < numChunks) {
+                            reader.readAsArrayBuffer(chunks[chunkIndex]);
+                        } else {
+                            process.input();
+                            cockpit.spawn(["mv", tempPath, `/home/mahmoud/${fileName}`]);
+                        }
+                    };
+                });
     };
 
     return (
