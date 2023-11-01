@@ -92,7 +92,7 @@ export const renameItem = (Dialogs, options) => {
 
 export const editPermissions = (Dialogs, options) => {
     if (options.selected === null) {
-        updateFile({ name: "" }, options.path.join("/"))
+        updateFiles({ name: "" }, options.path.join("/"))
                 .then(res => {
                     Dialogs.show(
                         <EditPermissionsModal
@@ -591,37 +591,59 @@ export const EditPermissionsModal = ({ selected, path }) => {
     );
 };
 
-export const updateFile = (file, currentPath) => {
-    const filePath = currentPath + "/" + file.name;
+const parseStat = (files, currentPath) => {
+    const filePaths = files.map(file => currentPath + file.name);
     return cockpit.spawn([
         "stat",
         "-c",
         "%a,%Y,%G,%U,%s",
-        filePath
+        ...filePaths
     ], { superuser: "try", error: "message" })
             .then(res => {
-                res = res.trim().split(",");
+                return Promise.all(res.trim().split("\n")
+                        .map(async (line, i) => {
+                            line = line.trim().split(",");
 
-                let perm = res[0];
-                // trim sticky bit
-                if (perm.length === 4) perm = perm.slice(1);
-                if (perm.length === 1) perm = "00".concat(perm);
-                if (perm.length === 2) perm = "0".concat(perm);
-                file.permissions = perm;
+                            let perm = line[0];
+                            // trim sticky bit
+                            if (perm.length === 4) perm = perm.slice(1);
+                            if (perm.length === 1) perm = "00".concat(perm);
+                            if (perm.length === 2) perm = "0".concat(perm);
+                            const file = files[i];
+                            file.permissions = perm;
 
-                file.modified = res[1];
-                file.group = res[2];
-                file.owner = res[3];
-                file.size = res[4];
-                if (file.type === "link")
-                    return cockpit.spawn(["ls", "-lF", filePath], { superuser: "try" })
-                            .then(res => {
-                                file.to = res.slice(-2, -1) === "/"
+                            file.modified = line[1];
+                            file.group = line[2];
+                            file.owner = line[3];
+                            file.size = line[4];
+                            if (file.type === "link") {
+                                const line = await cockpit.spawn(["ls", "-lF", filePaths[i]], { superuser: "try" });
+                                file.to = line.slice(-2, -1) === "/"
                                     ? "directory"
                                     : "file";
                                 return file;
-                            });
-                else
-                    return file;
-            }, exc => console.error(`Adding file ${file} failed: ${exc.toString()}`));
+                            } else {
+                                return file;
+                            }
+                        }));
+            }, ex => {
+                console.error(`Adding file failed: ${ex.toString()}`);
+            });
+};
+
+export const updateFiles = async (files, currentPath) => {
+    if (!Array.isArray(files)) {
+        files = [files];
+    }
+
+    const chunkSize = 256;
+    const result = [];
+
+    for (let i = 0; i < files.length; i += chunkSize) {
+        const chunk = files.slice(i, i + chunkSize);
+        const res = await parseStat(chunk, currentPath);
+        result.push(...res);
+    }
+
+    return result;
 };

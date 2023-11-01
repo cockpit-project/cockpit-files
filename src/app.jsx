@@ -38,7 +38,7 @@ import { EmptyStatePanel } from "cockpit-components-empty-state.jsx";
 import { ContextMenu } from "./navigatorContextMenu.jsx";
 import { NavigatorBreadcrumbs } from "./navigatorBreadcrumbs.jsx";
 import {
-    copyItem, createDirectory, createLink, deleteItem, editPermissions, pasteItem, renameItem, updateFile
+    copyItem, createDirectory, createLink, deleteItem, editPermissions, pasteItem, renameItem, updateFiles
 } from "./fileActions.jsx";
 import { SidebarPanelDetails } from "./sidebar.jsx";
 import { NavigatorCardHeader } from "./header.jsx";
@@ -116,11 +116,12 @@ export const Application = () => {
                 setLoadingFiles(false);
             } else {
                 setErrorMessage(null);
-                Promise.all(_files.map(file => updateFile(file, currentDir)))
-                        .then(() => {
-                            setFiles(_files);
+                updateFiles(_files, currentDir)
+                        .then((res) => {
+                            setFiles(res);
                             setLoadingFiles(false);
-                        });
+                        })
+                        .catch(ex => console.warn(ex));
             }
         });
     }, [currentDir]);
@@ -144,8 +145,8 @@ export const Application = () => {
             // When files are created with some file editor we get also 'attribute-changed' and
             // 'done-hint' events which are handled below. We should not add the same file twice.
             if (item.event === "created" && item.type === "directory") {
-                updateFile(item, currentDir).then(file => {
-                    setFiles(_f => [..._f, file]);
+                updateFiles(item, currentDir).then(file => {
+                    setFiles(_f => [..._f, ...file]);
                 });
             } else {
                 if (item.event === "deleted") {

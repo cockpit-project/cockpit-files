@@ -179,6 +179,10 @@ class TestNavigator(testlib.MachineCase):
         b.click(".breadcrumb-button:nth-of-type(1)")
         b.wait_visible("[data-item='home']")
 
+        # Try opening a directory which contains large amount of files
+        b.mouse("[data-item='bin']", "dblclick")
+        b.wait_visible("[data-item='[']")
+
     def testNavigation(self):
         b = self.browser
         m = self.machine
