@@ -75,8 +75,8 @@ export const NavigatorCardHeader = ({
                   setSortBy={setSortBy} sortBy={sortBy}
                 />
                 <UploadButton
-                  files={files}
-                  setChunksProgress={setChunksProgress} setIsUploading={setIsUploading}
+                  files={files} setChunksProgress={setChunksProgress}
+                  isUploading={isUploading} setIsUploading={setIsUploading}
                 />
             </Flex>
         </CardHeader>
@@ -137,7 +137,7 @@ const ViewSelector = ({ isGrid, setIsGrid, sortBy, setSortBy }) => {
     );
 };
 
-const UploadButton = ({ files, setChunksProgress, setIsUploading }) => {
+const UploadButton = ({ files, setChunksProgress, isUploading, setIsUploading }) => {
     const ref = useRef();
 
     const handleClick = () => {
@@ -204,7 +204,11 @@ const UploadButton = ({ files, setChunksProgress, setIsUploading }) => {
 
     return (
         <>
-            <Button variant="secondary" onClick={handleClick}>Upload</Button>
+            <Button
+              variant="secondary" onClick={handleClick}
+              isDisabled={isUploading}
+            >Upload
+            </Button>
             <input
               ref={ref} type="file"
               hidden onChange={onUpload}
