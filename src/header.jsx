@@ -169,7 +169,7 @@ const UploadButton = ({ currentDir, files }) => {
                             reader.readAsArrayBuffer(chunks[chunkIndex]);
                         } else {
                             process.input();
-                            cockpit.spawn(["mv", tempPath, `/home/mahmoud/${fileName}`])
+                            cockpit.spawn(["mv", tempPath, `/home/mahmoud/${fileName}`], { superuser: "try" })
                                     .then(() => {
                                         // trim newline character
                                         cockpit.spawn(["rm", tempPath.substring(0, tempPath.length - 1)]);
