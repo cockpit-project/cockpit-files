@@ -31,12 +31,15 @@ class TestNavigator(testlib.MachineCase):
         select_entry = f"{selector} ul button:contains('{value}')"
         b.click(select_entry)
 
-    def delete_item(self, b, type, filename):
+    def delete_item(self, b, type, filename, expect_success=True):
         b.click(f"[data-item='{filename}']")
         b.click("#dropdown-menu")
         b.click("#delete-item")
         b.wait_in_text("h1.pf-v5-c-modal-box__title", f"Delete {type} {filename}?")
         b.click("button.pf-m-danger")
+        if expect_success:
+            b.wait_not_present(".pf-v5-c-modal-box")
+            b.wait_not_present(f"[data-item='{filename}']")
 
     def create_directory(self, b, filename):
         b.click("#dropdown-menu")
@@ -316,32 +319,28 @@ class TestNavigator(testlib.MachineCase):
         m.execute("touch /home/admin/newfile")
         b.wait_visible("[data-item='newfile']")
         self.delete_item(b, "file", "newfile")
-        b.wait_not_present("[data-item='newfile']")
 
         # Delete file with space in the file name
         m.execute("touch /home/admin/new\ file")
         b.wait_visible("[data-item='new file']")
         self.delete_item(b, "file", "new file")
-        b.wait_not_present("[data-item='new file']")
 
         # Delete empty directory
         m.execute("mkdir /home/admin/newdir")
         b.wait_visible("[data-item='newdir']")
         self.delete_item(b, "directory", "newdir")
-        b.wait_not_present("[data-item='newdir']")
 
         # Delete full directory
         m.execute("mkdir /home/admin/newdir")
         m.execute("touch /home/admin/newdir/newfile")
         b.wait_visible("[data-item='newdir']")
         self.delete_item(b, "directory", "newdir")
-        b.wait_not_present("[data-item='newdir']")
 
         # Deleting protected file should give an error
         m.execute("touch /home/admin/newfile")
         m.execute("sudo chattr +i /home/admin/newfile")
         b.wait_visible("[data-item='newfile']")
-        self.delete_item(b, "file", "newfile")
+        self.delete_item(b, "file", "newfile", expect_success=False)
         b.wait_in_text("h1.pf-v5-c-modal-box__title", "Force delete file newfile?")
         self.wait_modal_inline_alert(b, "rm: cannot remove '/home/admin/newfile': Operation not permitted")
         b.click("button.pf-m-danger")
@@ -351,7 +350,6 @@ class TestNavigator(testlib.MachineCase):
         b.wait_visible("[data-item='newfile']")
         m.execute("sudo chattr -i /home/admin/newfile")
         self.delete_item(b, "file", "newfile")
-        b.wait_not_present("[data-item='newfile']")
 
         # Delete current directory
         m.execute("mkdir /home/admin/newdir")
