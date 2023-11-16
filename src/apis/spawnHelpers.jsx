@@ -48,7 +48,8 @@ export const spawnDeleteItem = ({ path, selected, itemPath, Dialogs, setSelected
                     setHistoryIndex(i => i - 1);
                 }
             })
-            .then(Dialogs.close, err => {
+            .finally(Dialogs.close)
+            .catch(err => {
                 Dialogs.show(
                     <ForceDeleteModal
                       selected={selected} itemPath={itemPath}
