@@ -1,23 +1,3 @@
-/*
- * This file is part of Cockpit, and is a direct copy from the Cockpit repository
- * https://github.com/cockpit-project/cockpit/blob/main/pkg/lib/cockpit-components-context-menu.jsx
- *
- * Copyright (C) 2023 Red Hat, Inc.
- *
- * Cockpit is free software; you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation; either version 2.1 of the License, or
- * (at your option) any later version.
- *
- * Cockpit is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
- */
-
 import React from "react";
 import { Menu, MenuContent } from "@patternfly/react-core";
 
@@ -27,6 +7,11 @@ export const ContextMenu = ({ parentId, contextMenuItems, setSelectedContext }) 
     const [visible, setVisible] = React.useState(false);
     const [event, setEvent] = React.useState(null);
     const root = React.useRef(null);
+    const parentRef = React.useRef(null); // Add a ref for the parent element
+
+    React.useEffect(() => {
+        parentRef.current = document.getElementById(parentId); // Set the parentRef when the component mounts
+    }, [parentId]);
 
     React.useEffect(() => {
         const _handleContextMenu = (event) => {
@@ -37,7 +22,7 @@ export const ContextMenu = ({ parentId, contextMenuItems, setSelectedContext }) 
 
         const _handleClick = (event) => {
             if (event && event.button === 0) {
-                const wasOutside = !(event.target.contains === root.current);
+                const wasOutside = !parentRef.current.contains(event.target); // Check against parentRef
 
                 if (wasOutside) {
                     setVisible(false);
@@ -46,12 +31,15 @@ export const ContextMenu = ({ parentId, contextMenuItems, setSelectedContext }) 
             }
         };
 
-        const parent = document.getElementById(parentId);
-        parent.addEventListener("contextmenu", _handleContextMenu);
-        document.addEventListener("click", _handleClick);
+        if (parentRef.current) { // Check if parentRef is valid
+            parentRef.current.addEventListener("contextmenu", _handleContextMenu);
+            document.addEventListener("click", _handleClick);
+        }
 
         return () => {
-            parent.removeEventListener("contextmenu", _handleContextMenu);
+            if (parentRef.current) { // Check if parentRef is valid
+                parentRef.current.removeEventListener("contextmenu", _handleContextMenu);
+            }
             document.removeEventListener("click", _handleClick);
         };
     }, [parentId, setSelectedContext]);
@@ -89,10 +77,11 @@ export const ContextMenu = ({ parentId, contextMenuItems, setSelectedContext }) 
         }
     }, [event]);
 
-    return visible &&
+    return visible && (
         <Menu ref={root} className="context-menu">
             <MenuContent ref={root}>
                 {contextMenuItems}
             </MenuContent>
-        </Menu>;
+        </Menu>
+    );
 };
