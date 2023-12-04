@@ -616,37 +616,9 @@ const NavigatorCardBody = ({
     if (isGrid) {
         return (
             <CardBody onClick={resetSelected} id="navigator-card-body">
-                {sortedFiles.length === 0
-                    ? (
-                        <div style={{
-                            minHeight: "200px",
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center"
-                        }}
-                        >
-                            <p>Directory is empty.</p>
-                        </div>
-                    )
-                    : (
-                        isGrid
-                            ? (
-                                <Gallery id="folder-view">
-                                    {sortedFiles.map(file => <Item file={file} key={file.name} />)}
-                                </Gallery>
-                            )
-                            : (
-                                <ListingTable
-                                  id="folder-view"
-                                  className="pf-m-no-border-rows"
-                                  variant="compact"
-                                  columns={[_("Name")]}
-                                  rows={sortedFiles.map(file => ({
-                                      columns: [{ title: <Item file={file} key={file.name} /> }]
-                                  }))}
-                                />
-                            )
-                    )}
+                <Gallery id="folder-view">
+                    {sortedFiles.map(file => <Item file={file} key={file.name} />)}
+                </Gallery>
             </CardBody>
         );
     } else {
