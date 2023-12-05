@@ -47,11 +47,21 @@ export const ContextMenu = ({ parentId, contextMenuItems, setSelectedContext }) 
         };
 
         const parent = document.getElementById(parentId);
-        parent.addEventListener("contextmenu", _handleContextMenu);
-        document.addEventListener("click", _handleClick);
-
+        const isEmptyDirectory = parent === null;
+        // Check if the parent is present and the directory is not empty
+        if (parent && !isEmptyDirectory) {
+            parent.addEventListener("contextmenu", _handleContextMenu);
+            document.addEventListener("click", _handleClick);
+        } else {
+            // If the parent is absent or directory is empty, attach listeners to the entire document
+            document.addEventListener("contextmenu", _handleContextMenu);
+            document.addEventListener("click", _handleClick);
+        }
         return () => {
-            parent.removeEventListener("contextmenu", _handleContextMenu);
+            if (parent) {
+                parent.removeEventListener("contextmenu", _handleContextMenu);
+            }
+            document.removeEventListener("contextmenu", _handleContextMenu);
             document.removeEventListener("click", _handleClick);
         };
     }, [parentId, setSelectedContext]);
