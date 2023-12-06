@@ -30,6 +30,7 @@ import {
     Page, PageSection,
     Sidebar, SidebarPanel, SidebarContent,
     CardTitle, Divider, AlertGroup, Alert, AlertActionCloseButton, Spinner, CardHeader,
+    EmptyState, EmptyStateBody
 } from "@patternfly/react-core";
 import { ExclamationCircleIcon, FileIcon, FolderIcon } from "@patternfly/react-icons";
 
@@ -607,6 +608,17 @@ const NavigatorCardBody = ({
         );
     };
 
+    const EmptyDirectoryMessage = () => {
+        return (
+            <EmptyState>
+                {/* <EmptyStateHeader titleText="Directory is empty" headingLevel="h4" /> */}
+                <EmptyStateBody>
+                    Directory is empty
+                </EmptyStateBody>
+            </EmptyState>
+        );
+    };
+
     if (loadingFiles)
         return (
             <Flex justifyContent={{ default: "justifyContentCenter" }}>
@@ -619,12 +631,7 @@ const NavigatorCardBody = ({
             <CardBody onClick={resetSelected} id="navigator-card-body">
                 {sortedFiles.length === 0
                     ? (
-                        <div style={{
-                            minHeight: "200px", display: "flex", justifyContent: "center", alignItems: "center"
-                        }}
-                        >
-                            <p>Directory is empty.</p>
-                        </div>
+                        <EmptyDirectoryMessage />
                     )
                     : (
                         isGrid
@@ -652,12 +659,7 @@ const NavigatorCardBody = ({
             <CardBody onClick={resetSelected} id="navigator-card-body">
                 {sortedFiles.length === 0
                     ? (
-                        <div style={{
-                            minHeight: "200px", display: "flex", justifyContent: "center", alignItems: "center"
-                        }}
-                        >
-                            <p>Directory is empty.</p>
-                        </div>
+                        <EmptyDirectoryMessage />
                     )
                     : (
                         isGrid
