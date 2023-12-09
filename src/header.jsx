@@ -42,6 +42,8 @@ const _ = cockpit.gettext;
 export const NavigatorCardHeader = ({
     currentFilter, onFilterChange, isGrid, setIsGrid, sortBy, setSortBy, currentDir, files
 }) => {
+    const [chunksProgress, setChunksProgress] = useState({ number: 0, completed: 0 });
+    const [isUploading, setIsUploading] = useState(false);
     return (
         <CardHeader className="card-actionbar">
             <CardTitle component="h2" id="navigator-card-header">
@@ -60,7 +62,11 @@ export const NavigatorCardHeader = ({
                   isGrid={isGrid} setIsGrid={setIsGrid}
                   setSortBy={setSortBy} sortBy={sortBy}
                 />
-                <UploadButton currentDir={currentDir} files={files} />
+                <UploadButton
+                  files={files} setChunksProgress={setChunksProgress}
+                  isUploading={isUploading} setIsUploading={setIsUploading}
+                />
+                <UploadProgress chunksProgress={chunksProgress} />
             </Flex>
         </CardHeader>
     );
@@ -120,7 +126,7 @@ const ViewSelector = ({ isGrid, setIsGrid, sortBy, setSortBy }) => {
     );
 };
 
-const UploadButton = ({ currentDir, files }) => {
+const UploadButton = ({ files, setChunksProgress, isUploading, setIsUploading }) => {
     const ref = useRef();
 
     const handleClick = () => {
@@ -145,6 +151,7 @@ const UploadButton = ({ currentDir, files }) => {
         const chunkSize = 65536;
         const chunks = [];
         const numChunks = Math.ceil(uploadedFile.size / chunkSize);
+        setChunksProgress({ completed: 0, number: numChunks });
 
         for (let i = 0; i < numChunks; i++) {
             nextOffset = Math.min(chunkSize * (i + 1), uploadedFile.size);
@@ -164,6 +171,9 @@ const UploadButton = ({ currentDir, files }) => {
                     reader.readAsArrayBuffer(chunks[0]);
                     reader.onload = readerEvent => {
                         process.input(new Uint8Array(readerEvent.target.result), true);
+                        setChunksProgress(c => {
+                            return { ...c, completed: c.completed + 1 };
+                        });
                         chunkIndex += 1;
                         if (chunkIndex < numChunks) {
                             reader.readAsArrayBuffer(chunks[chunkIndex]);
@@ -187,5 +197,15 @@ const UploadButton = ({ currentDir, files }) => {
               hidden onChange={onUpload}
             />
         </>
+    );
+};
+
+const UploadProgress = ({ chunksProgress }) => {
+    const progress = Math.round(100 * chunksProgress.completed / chunksProgress.number);
+    return (
+        <div
+          id="progress" className="progress-pie"
+          title="Upload 22% completed" style={{ "--progress": `${progress}%` }}
+        />
     );
 };
