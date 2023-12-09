@@ -25,12 +25,8 @@ import {
     CardHeader,
     CardTitle,
     Flex,
-    FlexItem,
     MenuToggle,
     MenuToggleAction,
-    Progress,
-    ProgressMeasureLocation,
-    ProgressSize,
     SearchInput,
     Select,
     SelectList,
@@ -46,8 +42,6 @@ const _ = cockpit.gettext;
 export const NavigatorCardHeader = ({
     currentFilter, onFilterChange, isGrid, setIsGrid, sortBy, setSortBy, currentDir, files
 }) => {
-    const [chunksProgress, setChunksProgress] = useState({ number: 0, completed: 0 });
-    const [isUploading, setIsUploading] = useState(false);
     return (
         <CardHeader className="card-actionbar">
             <CardTitle component="h2" id="navigator-card-header">
@@ -58,14 +52,6 @@ export const NavigatorCardHeader = ({
                 </TextContent>
             </CardTitle>
             <Flex flexWrap={{ default: "nowrap" }} alignItems={{ default: "alignItemsCenter" }}>
-                {isUploading &&
-                <FlexItem>
-                    <Progress
-                      value={Math.round(100 * chunksProgress.completed / chunksProgress.number)}
-                      style={{ width: "15vw" }}
-                      size={ProgressSize.sm} measureLocation={ProgressMeasureLocation.outside}
-                    />
-                </FlexItem>}
                 <SearchInput
                   placeholder={_("Filter directory")} value={currentFilter}
                   onChange={onFilterChange}
@@ -74,10 +60,7 @@ export const NavigatorCardHeader = ({
                   isGrid={isGrid} setIsGrid={setIsGrid}
                   setSortBy={setSortBy} sortBy={sortBy}
                 />
-                <UploadButton
-                  files={files}
-                  setChunksProgress={setChunksProgress} setIsUploading={setIsUploading}
-                />
+                <UploadButton currentDir={currentDir} files={files} />
             </Flex>
         </CardHeader>
     );
@@ -137,7 +120,7 @@ const ViewSelector = ({ isGrid, setIsGrid, sortBy, setSortBy }) => {
     );
 };
 
-const UploadButton = ({ files, setChunksProgress, setIsUploading }) => {
+const UploadButton = ({ currentDir, files }) => {
     const ref = useRef();
 
     const handleClick = () => {
@@ -145,7 +128,6 @@ const UploadButton = ({ files, setChunksProgress, setIsUploading }) => {
     };
 
     const onUpload = e => {
-        setIsUploading(true);
         const uploadedFile = e.target.files[0];
 
         let fileName = uploadedFile.name;
@@ -163,7 +145,6 @@ const UploadButton = ({ files, setChunksProgress, setIsUploading }) => {
         const chunkSize = 65536;
         const chunks = [];
         const numChunks = Math.ceil(uploadedFile.size / chunkSize);
-        setChunksProgress({ completed: 0, number: numChunks });
 
         for (let i = 0; i < numChunks; i++) {
             nextOffset = Math.min(chunkSize * (i + 1), uploadedFile.size);
@@ -183,9 +164,6 @@ const UploadButton = ({ files, setChunksProgress, setIsUploading }) => {
                     reader.readAsArrayBuffer(chunks[0]);
                     reader.onload = readerEvent => {
                         process.input(new Uint8Array(readerEvent.target.result), true);
-                        setChunksProgress(c => {
-                            return { ...c, completed: c.completed + 1 };
-                        });
                         chunkIndex += 1;
                         if (chunkIndex < numChunks) {
                             reader.readAsArrayBuffer(chunks[chunkIndex]);
@@ -195,7 +173,6 @@ const UploadButton = ({ files, setChunksProgress, setIsUploading }) => {
                                     .then(() => {
                                         // trim newline character
                                         cockpit.spawn(["rm", tempPath.substring(0, tempPath.length - 1)]);
-                                        setIsUploading(false);
                                     });
                         }
                     };
