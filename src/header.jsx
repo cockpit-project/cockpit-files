@@ -201,11 +201,12 @@ const UploadButton = ({ files, setChunksProgress, isUploading, setIsUploading })
 };
 
 const UploadProgress = ({ chunksProgress }) => {
-    const progress = Math.round(100 * chunksProgress.completed / chunksProgress.number);
+    const progress = Math.round(100 * chunksProgress.completed / (chunksProgress.number || 1));
+    console.log(progress);
     return (
         <div
           id="progress" className="progress-pie"
-          title="Upload 22% completed" style={{ "--progress": `${progress}%` }}
+          title={`Upload ${progress}% completed`} style={{ "--progress": `${progress}%` }}
         />
     );
 };
