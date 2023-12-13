@@ -611,7 +611,6 @@ const NavigatorCardBody = ({
     const EmptyDirectoryMessage = () => {
         return (
             <EmptyState>
-                {/* <EmptyStateHeader titleText="Directory is empty" headingLevel="h4" /> */}
                 <EmptyStateBody>
                     Directory is empty
                 </EmptyStateBody>
