@@ -427,13 +427,14 @@ class TestNavigator(testlib.MachineCase):
         b.wait_visible("[data-item='newdir1']")
 
         # Edit properties from context menu
+        m.execute("useradd testuser")
         b.click("[data-item='newdir1']")
         b.mouse("[data-item='newdir1']", "contextmenu")
         b.wait_in_text(".context-menu li:nth-child(4) button", "Edit properties")
         b.click(".context-menu button:contains('Edit properties')")
-        b.select_from_dropdown("#edit-permissions-owner", "fedora")
+        b.select_from_dropdown("#edit-permissions-owner", "testuser")
         b.click("button.pf-m-primary")
-        b.wait_text("#description-list-owner dd", "fedora")
+        b.wait_text("#description-list-owner dd", "testuser")
 
         # Delete folder from context menu
         b.mouse("[data-item='newdir1']", "contextmenu")
@@ -589,23 +590,24 @@ class TestNavigator(testlib.MachineCase):
         b.wait_visible("[data-item='newfile1']")
 
         # Test changing owner/group
+        m.execute("useradd testuser")
         b.click("[data-item='newfile1']")
         b.click("button:contains('Edit properties')")
         # Changing owner should change group if user is not in the group
-        b.select_from_dropdown("#edit-permissions-owner", "fedora")
-        b.wait_in_text("#edit-permissions-group", "fedora")
+        b.select_from_dropdown("#edit-permissions-owner", "testuser")
+        b.wait_in_text("#edit-permissions-group", "testuser")
         b.click("button.pf-m-primary")
-        b.wait_text("#description-list-owner dd", "fedora")
-        b.wait_text("#description-list-group dd", "fedora")
+        b.wait_text("#description-list-owner dd", "testuser")
+        b.wait_text("#description-list-group dd", "testuser")
 
-        m.execute("usermod -a -G fedora admin")
+        m.execute("usermod -a -G testuser admin")
         b.click("button:contains('Edit properties')")
         # Changing owner shouldn't change group if user is in the group
         b.select_from_dropdown("#edit-permissions-owner", "admin")
-        b.wait_in_text("#edit-permissions-group", "fedora")
+        b.wait_in_text("#edit-permissions-group", "testuser")
         b.click("button.pf-m-primary")
         b.wait_text("#description-list-owner dd", "admin")
-        b.wait_text("#description-list-group dd", "fedora")
+        b.wait_text("#description-list-group dd", "testuser")
 
         # Test changing permissions
         b.click("button:contains('Edit properties')")
