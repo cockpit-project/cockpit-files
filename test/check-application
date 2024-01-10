@@ -79,7 +79,7 @@ class TestNavigator(testlib.MachineCase):
         # expected heading
         b.wait_text("#navigator-card-header", "Directories & files")
         files_cnt = m.execute("ls -A /home/admin | wc -l").strip()
-        hidden_files_cnt = m.execute('ls -A /home/admin | grep "^\." | wc -l').strip()
+        hidden_files_cnt = m.execute(r'ls -A /home/admin | grep "^\." | wc -l').strip()
         b.wait_text("#sidebar-card-header", f"admin{files_cnt} items ({hidden_files_cnt} hidden)")
 
         # new files are auto-detected
@@ -142,7 +142,7 @@ class TestNavigator(testlib.MachineCase):
 
         # current directory sidebar item count is updated
         files_cnt = m.execute("ls -A /home/admin | wc -l").strip()
-        hidden_files_cnt = m.execute('ls -A /home/admin | grep "^\." | wc -l').strip()
+        hidden_files_cnt = m.execute(r'ls -A /home/admin | grep "^\." | wc -l').strip()
         b.wait_text("#sidebar-card-header", f"admin{files_cnt} items ({hidden_files_cnt} hidden)")
 
         # sidebar is reset when files are removed
