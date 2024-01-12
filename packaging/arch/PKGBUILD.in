@@ -1,0 +1,15 @@
+pkgname=cockpit-navigator
+pkgver=VERSION
+pkgrel=1
+pkgdesc='A filesystem browser for Cockpit'
+arch=('any')
+url='https://github.com/cockpit-project/cockpit-navigator'
+license=(LGPL)
+depends=(cockpit)
+source=("SOURCE")
+sha256sums=('SKIP')
+
+package() {
+  cd $pkgname
+  make DESTDIR="$pkgdir" install PREFIX=/usr
+}
