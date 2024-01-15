@@ -65,6 +65,7 @@ export const NavigatorCardHeader = ({
                 <UploadButton
                   files={files} setChunksProgress={setChunksProgress}
                   isUploading={isUploading} setIsUploading={setIsUploading}
+                  currentDir={currentDir}
                 />
                 <UploadProgress chunksProgress={chunksProgress} />
             </Flex>
@@ -126,67 +127,58 @@ const ViewSelector = ({ isGrid, setIsGrid, sortBy, setSortBy }) => {
     );
 };
 
-const UploadButton = ({ files, setChunksProgress, isUploading, setIsUploading }) => {
+const UploadButton = ({ files, setChunksProgress, isUploading, setIsUploading, currentDir }) => {
+    const BLOCK_SIZE = 64 * 1024;
     const ref = useRef();
 
     const handleClick = () => {
         ref.current.click();
     };
+    console.log("files", files);
 
-    const onUpload = e => {
-        const uploadedFile = e.target.files[0];
+    const onUpload = event => {
+        setChunksProgress({ completed: 0, number: 0 });
 
-        let fileName = uploadedFile.name;
+        console.log(event.target.files);
+        for (let fileIndex = 0; fileIndex < event.target.files.length; fileIndex++) {
+            const uploadedFile = event.target.files[fileIndex];
+            console.log(uploadedFile);
+            // TODO: duplicate file names?
+            const fileName = uploadedFile.name;
 
-        let fileCount = 2;
-        if (files.some(f => f.name === fileName))
-            fileName += " (1)";
-        while (files.some(f => f.name === fileName)) {
-            fileName = fileName.substring(0, fileName.length - 2) + `${fileCount}` + ")";
-            fileCount += 1;
+            const reader = new FileReader();
+            reader.readAsArrayBuffer(uploadedFile);
+            const channel = cockpit.channel({
+                binary: true,
+                payload: "fsreplace1",
+                path: `${currentDir}/${fileName}`,
+                superuser: "try"
+            });
+
+            reader.onprogress = event => {
+                console.log("progress", event);
+                setChunksProgress({ completed: event.total, number: event.loaded });
+            };
+
+            reader.onload = readerEvent => {
+                let len = 0;
+                const content = readerEvent.target.result;
+                console.log(content);
+                len = content.byteLength;
+
+                for (let i = 0; i < len; i += BLOCK_SIZE) {
+                    const n = Math.min(len - i, BLOCK_SIZE);
+                    channel.send(new window.Uint8Array(content, i, n));
+                }
+            };
+
+            reader.onloadend = event => {
+                // TODO: check for errors?
+                console.log("loadend", event);
+                channel.control({ command: "done" });
+                setChunksProgress({ completed: 100, number: 100 });
+            };
         }
-
-        let offset = 0;
-        let nextOffset = 0;
-        const chunkSize = 65536;
-        const chunks = [];
-        const numChunks = Math.ceil(uploadedFile.size / chunkSize);
-        setChunksProgress({ completed: 0, number: numChunks });
-
-        for (let i = 0; i < numChunks; i++) {
-            nextOffset = Math.min(chunkSize * (i + 1), uploadedFile.size);
-            chunks.push(uploadedFile.slice(offset, nextOffset));
-            offset = nextOffset;
-        }
-
-        cockpit.spawn(["mktemp", "-t", `cockpit-upload-${fileName}-XXXXX`])
-                .then(tempPath => {
-                    const process = cockpit.spawn(
-                        ["dd", "status=none", `of=${tempPath}`],
-                        { superuser: "try", binary: true }
-                    );
-                    const reader = new FileReader();
-
-                    let chunkIndex = 0;
-                    reader.readAsArrayBuffer(chunks[0]);
-                    reader.onload = readerEvent => {
-                        process.input(new Uint8Array(readerEvent.target.result), true);
-                        setChunksProgress(c => {
-                            return { ...c, completed: c.completed + 1 };
-                        });
-                        chunkIndex += 1;
-                        if (chunkIndex < numChunks) {
-                            reader.readAsArrayBuffer(chunks[chunkIndex]);
-                        } else {
-                            process.input();
-                            cockpit.spawn(["mv", tempPath, `/home/mahmoud/${fileName}`], { superuser: "try" })
-                                    .then(() => {
-                                        // trim newline character
-                                        cockpit.spawn(["rm", tempPath.substring(0, tempPath.length - 1)]);
-                                    });
-                        }
-                    };
-                });
     };
 
     return (
@@ -201,8 +193,8 @@ const UploadButton = ({ files, setChunksProgress, isUploading, setIsUploading })
 };
 
 const UploadProgress = ({ chunksProgress }) => {
-    const progress = Math.round(100 * chunksProgress.completed / (chunksProgress.number || 1));
-    console.log(progress);
+    const progress = Math.round(100 * (chunksProgress.number / chunksProgress.completed));
+    console.log("progress", progress);
     return (
         <div
           id="progress" className="progress-pie"
