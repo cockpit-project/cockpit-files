@@ -128,7 +128,7 @@ const ViewSelector = ({ isGrid, setIsGrid, sortBy, setSortBy }) => {
 };
 
 const UploadButton = ({ files, setChunksProgress, isUploading, setIsUploading, currentDir }) => {
-    const BLOCK_SIZE = 64 * 1024;
+    const BLOCK_SIZE = 16 * 1024;
     const ref = useRef();
 
     const handleClick = () => {
