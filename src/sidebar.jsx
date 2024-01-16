@@ -263,7 +263,7 @@ const DropdownWithKebab = ({
             ? [
                 {
                     id: "copy-item",
-                    onClick: () => { copyItem(setClipboard, [path.join("/") + "/" + selected[0].name]) },
+                    onClick: () => copyItem(setClipboard, [path.join("/") + "/" + selected[0].name]),
                     title: cockpit.format(_("Copy $0"), selected[0].type)
                 }
             ]
@@ -272,7 +272,7 @@ const DropdownWithKebab = ({
             ? [
                 {
                     id: "paste-item",
-                    onClick: () => { pasteItem(clipboard, path.join("/") + "/", false, addAlert) },
+                    onClick: () => pasteItem(clipboard, path.join("/") + "/", false, addAlert),
                     title: _("Paste"),
                     isDisabled: clipboard === undefined
                 }
@@ -294,7 +294,7 @@ const DropdownWithKebab = ({
             ? [
                 {
                     id: "paste-as-symlink",
-                    onClick: () => { pasteItem(clipboard, path.join("/") + "/", true, addAlert) },
+                    onClick: () => pasteItem(clipboard, path.join("/") + "/", true, addAlert),
                     title: _("Paste as symlink"),
                     isDisabled: clipboard === undefined
                 }
@@ -305,14 +305,14 @@ const DropdownWithKebab = ({
             ? [
                 {
                     id: "create-item",
-                    onClick: () => { createDirectory(Dialogs, currentPath, selected) },
+                    onClick: () => createDirectory(Dialogs, currentPath, selected),
                     title: _("Create directory")
                 }
             ]
             : [],
         {
             id: "create-link",
-            onClick: () => { createLink(Dialogs, currentPath, files, selected[0]) },
+            onClick: () => createLink(Dialogs, currentPath, files, selected[0]),
             title: _("Create link")
         },
         { type: "divider" },
@@ -359,7 +359,7 @@ const DropdownWithKebab = ({
     const multiDropdownOptions = [
         {
             id: "copy-item",
-            onClick: () => { copyItem(setClipboard, selected.map(s => path.join("/") + "/" + s.name)) },
+            onClick: () => copyItem(setClipboard, selected.map(s => path.join("/") + "/" + s.name)),
             title: _("Copy")
         },
         {
