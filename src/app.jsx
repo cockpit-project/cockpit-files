@@ -183,26 +183,16 @@ export const Application = () => {
         ? files.filter(file => !file.isHidden)
         : files;
 
-    const _createDirectory = () => {
-        createDirectory(Dialogs, currentDir, selectedContext || selected);
-    };
-    const _createLink = () => {
-        createLink(Dialogs, currentDir, files, selectedContext);
-    };
+    const _createDirectory = () => createDirectory(Dialogs, currentDir, selectedContext || selected);
+    const _createLink = () => createLink(Dialogs, currentDir, files, selectedContext);
     const _copyItem = () => {
         copyItem(setClipboard, selected.length > 1
             ? selected.map(s => currentDir + s.name)
             : [currentDir + selectedContext.name]);
     };
-    const _pasteItem = (targetPath, asSymlink) => {
-        pasteItem(clipboard, targetPath.join("/") + "/", asSymlink, addAlert);
-    };
-    const _renameItem = () => {
-        renameItem(Dialogs, { selected: selectedContext, path, setHistory, setHistoryIndex });
-    };
-    const _editProperties = () => {
-        editPermissions(Dialogs, { selected: selectedContext, path });
-    };
+    const _pasteItem = (targetPath, asSymlink) => pasteItem(clipboard, targetPath.join("/") + "/", asSymlink, addAlert);
+    const _renameItem = () => renameItem(Dialogs, { selected: selectedContext, path, setHistory, setHistoryIndex });
+    const _editProperties = () => editPermissions(Dialogs, { selected: selectedContext, path });
     const _deleteItem = () => {
         deleteItem(
             Dialogs,
@@ -218,13 +208,8 @@ export const Application = () => {
         );
     };
 
-    const addAlert = (title, variant, key) => {
-        setAlerts(prevAlerts => [...prevAlerts, { title, variant, key }]);
-    };
-
-    const removeAlert = (key) => {
-        setAlerts(prevAlerts => [...prevAlerts.filter(alert => alert.key !== key)]);
-    };
+    const addAlert = (title, variant, key) => setAlerts(prevAlerts => [...prevAlerts, { title, variant, key }]);
+    const removeAlert = (key) => setAlerts(prevAlerts => [...prevAlerts.filter(alert => alert.key !== key)]);
 
     const contextMenuItems = (
         <MenuList>
