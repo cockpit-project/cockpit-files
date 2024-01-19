@@ -29,6 +29,7 @@ all: $(DIST_TEST)
 COCKPIT_REPO_FILES = \
 	pkg/lib \
 	test/common \
+	test/static-code \
 	$(NULL)
 
 COCKPIT_REPO_URL = https://github.com/cockpit-project/cockpit.git
@@ -186,6 +187,9 @@ vm: $(VM_IMAGE)
 # convenience target to print the filename of the test image
 print-vm:
 	@echo $(VM_IMAGE)
+
+codecheck: test/static-code $(NODE_MODULES_TEST)
+	test/static-code
 
 # convenience target to setup all the bits needed for the integration tests
 # without actually running them
