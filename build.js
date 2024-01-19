@@ -28,9 +28,11 @@ const outdir = 'dist';
 const packageJson = JSON.parse(fs.readFileSync('package.json'));
 
 const parser = (await import('argparse')).default.ArgumentParser();
+/* eslint-disable max-len */
 parser.add_argument('-r', '--rsync', { help: "rsync bundles to ssh target after build", metavar: "HOST" });
 parser.add_argument('-w', '--watch', { action: 'store_true', help: "Enable watch mode", default: process.env.ESBUILD_WATCH === "true" });
 parser.add_argument('-e', '--no-eslint', { action: 'store_true', help: "Disable eslint linting", default: lintDefault });
+/* eslint-enable max-len */
 const args = parser.parse_args();
 
 if (args.rsync)
@@ -86,8 +88,10 @@ const context = await esbuild.context({
     ...!production ? { sourcemap: "linked" } : {},
     bundle: true,
     entryPoints: ['./src/index.js'],
-    external: ['*.woff', '*.woff2', '*.jpg', '*.svg', '../../assets*'], // Allow external font files which live in ../../static/fonts
-    legalComments: 'external', // Move all legal comments to a .LEGAL.txt file
+    // Allow external font files which live in ../../static/fonts
+    external: ['*.woff', '*.woff2', '*.jpg', '*.svg', '../../assets*'],
+    // Move all legal comments to a .LEGAL.txt file
+    legalComments: 'external',
     loader: { ".js": "jsx" },
     minify: production,
     nodePaths,

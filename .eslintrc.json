@@ -11,9 +11,6 @@
     "plugins": ["react", "react-hooks", "jsx-a11y"],
     "rules": {
         "array-bracket-newline": ["error", { "multiline": true }],
-        "array-element-newline": [
-            "error", { "multiline": true, "minItems": 4 }
-        ],
         "indent": ["error", 4,
             {
                 "ObjectExpression": "first",
@@ -22,9 +19,9 @@
                 "ignoredNodes": [ "JSXAttribute" ]
             }],
         "function-paren-newline": ["error", "consistent"],
+	"space-before-function-paren": "off",
         "max-len": ["error", { "code": 120 }],
         "max-statements-per-line": ["error", { "max": 1 }],
-        "multiline-ternary": ["error", "always"],
         "newline-per-chained-call": ["error", { "ignoreChainWithDepth": 2 }],
         "no-var": "error",
         "lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }],
@@ -35,12 +32,13 @@
         "react-hooks/rules-of-hooks": "error",
         "react-hooks/exhaustive-deps": "error",
 
+	"camelcase": "off",
         "comma-dangle": "off",
         "curly": "off",
-        "jsx-quotes": ["error", "prefer-double"],
+        "jsx-quotes": "off",
         "key-spacing": "off",
         "no-console": "off",
-        "quotes": ["error", "double"],
+        "quotes": "off",
         "react/prop-types": "off",
         "react/jsx-handler-names": "off",
         "react/jsx-max-props-per-line": [1, { "maximum": 2 }],
