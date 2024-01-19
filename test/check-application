@@ -8,6 +8,7 @@ import os
 # import Cockpit's machinery for test VMs and its browser test API
 import testlib
 
+
 # Nondestructive tests all run in the same running VM. This allows them to run in Packit, Fedora, and RHEL dist-git gating
 # They must not permanently change any file or configuration on the system in a way that influences other tests.
 @testlib.nondestructive
@@ -321,7 +322,7 @@ class TestNavigator(testlib.MachineCase):
         self.delete_item(b, "file", "newfile")
 
         # Delete file with space in the file name
-        m.execute("touch /home/admin/new\ file")
+        m.execute(r"touch /home/admin/new\ file")
         b.wait_visible("[data-item='new file']")
         self.delete_item(b, "file", "new file")
 
