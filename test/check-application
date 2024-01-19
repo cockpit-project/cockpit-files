@@ -32,11 +32,11 @@ class TestNavigator(testlib.MachineCase):
         select_entry = f"{selector} ul button:contains('{value}')"
         b.click(select_entry)
 
-    def delete_item(self, b, type, filename, expect_success=True):
+    def delete_item(self, b, filetype, filename, expect_success=True):
         b.click(f"[data-item='{filename}']")
         b.click("#dropdown-menu")
         b.click("#delete-item")
-        b.wait_in_text("h1.pf-v5-c-modal-box__title", f"Delete {type} {filename}?")
+        b.wait_in_text("h1.pf-v5-c-modal-box__title", f"Delete {filetype} {filename}?")
         b.click("button.pf-m-danger")
         if expect_success:
             b.wait_not_present(".pf-v5-c-modal-box")
@@ -51,15 +51,15 @@ class TestNavigator(testlib.MachineCase):
     def wait_modal_inline_alert(self, b, msg):
         b.wait_in_text("h4.pf-v5-c-alert__title", msg)
 
-    def rename_item(self, b, type, itemname, newname):
+    def rename_item(self, b, filetype, itemname, newname):
         b.click(f"[data-item='{itemname}']")
         b.click("#dropdown-menu")
         b.click("#rename-item")
-        b.wait_in_text("h1.pf-v5-c-modal-box__title", f"Rename {type}")
+        b.wait_in_text("h1.pf-v5-c-modal-box__title", f"Rename {filetype}")
         b.set_input_text("#rename-item-input", f"{newname}")
         b.click("button.pf-m-primary")
 
-    def create_link(self, b, original, new, type, index):
+    def create_link(self, b, original, new, filetype, index):
         b.click("#dropdown-menu")
         b.click("#create-link")
         b.focus("#create-link-original-wrapper input")
@@ -69,7 +69,7 @@ class TestNavigator(testlib.MachineCase):
         b.wait_in_text(f"#create-link-original li:nth-of-type({index}) button", original)
         b.click(f"#create-link-original li:nth-of-type({index}) button")
         b.set_input_text("#create-link-new", new)
-        b.click(f"#create-link-{type}")
+        b.click(f"#create-link-{filetype}")
         b.click("button.pf-m-primary")
 
     def testBasic(self):
