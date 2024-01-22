@@ -36,7 +36,7 @@
     "htmlparser": "1.7.7",
     "jed": "1.1.1",
     "sass": "1.70.0",
-    "sizzle": "2.3.3",
+    "sizzle": "2.3.10",
     "stylelint": "14.9.1",
     "stylelint-config-standard-scss": "5.0.0",
     "stylelint-formatter-pretty": "3.2.0"
