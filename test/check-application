@@ -52,11 +52,11 @@ class TestNavigator(testlib.MachineCase):
     def wait_modal_inline_alert(self, b, msg):
         b.wait_in_text("h4.pf-v5-c-alert__title", msg)
 
-    def rename_item(self, b, filetype, itemname, newname):
+    def rename_item(self, b, itemname, newname):
         b.click(f"[data-item='{itemname}']")
         b.click("#dropdown-menu")
         b.click("#rename-item")
-        b.wait_in_text("h1.pf-v5-c-modal-box__title", f"Rename {filetype}")
+        b.wait_in_text("h1.pf-v5-c-modal-box__title", "Rename")
         b.set_input_text("#rename-item-input", f"{newname}")
         b.click("button.pf-m-primary")
 
@@ -423,8 +423,8 @@ class TestNavigator(testlib.MachineCase):
 
         # Rename folder from context menu
         b.mouse("[data-item='newdir']", "contextmenu")
-        b.wait_in_text(".context-menu li:nth-child(5) button", "Rename directory")
-        b.click(".context-menu button:contains('Rename directory')")
+        b.wait_in_text(".context-menu li:nth-child(5) button", "Rename")
+        b.click(".context-menu button:contains('Rename')")
         b.set_input_text("#rename-item-input", "newdir1")
         b.click("button.pf-m-primary")
         b.wait_visible("[data-item='newdir1']")
@@ -441,8 +441,8 @@ class TestNavigator(testlib.MachineCase):
 
         # Delete folder from context menu
         b.mouse("[data-item='newdir1']", "contextmenu")
-        b.wait_in_text(".context-menu li:nth-child(9) button", "Delete directory")
-        b.click(".context-menu button:contains('Delete directory')")
+        b.wait_in_text(".context-menu li:nth-child(9) button", "Delete")
+        b.click(".context-menu button:contains('Delete')")
         b.click("button.pf-m-danger")
         b.wait_not_present("[data-item='newdir1']")
 
@@ -456,8 +456,8 @@ class TestNavigator(testlib.MachineCase):
 
         # Delete button text should match item type: directory/file
         b.mouse("[data-item='newfile']", "contextmenu")
-        b.wait_in_text(".context-menu li:nth-child(8) button", "Delete file")
-        b.click(".context-menu button:contains('Delete file')")
+        b.wait_in_text(".context-menu li:nth-child(8) button", "Delete")
+        b.click(".context-menu button:contains('Delete')")
         b.click("button.pf-m-danger")
         b.wait_not_present("[data-item='newfile']")
 
@@ -469,24 +469,24 @@ class TestNavigator(testlib.MachineCase):
 
         # Rename file
         m.execute("touch /home/admin/newfile")
-        self.rename_item(b, "file", "newfile", "newfile1")
+        self.rename_item(b, "newfile", "newfile1")
         b.wait_visible("[data-item='newfile1']")
         m.execute("rm /home/admin/newfile1")
 
         # Rename directory
         m.execute("mkdir /home/admin/newdir")
-        self.rename_item(b, "directory", "newdir", "newdir1")
+        self.rename_item(b, "newdir", "newdir1")
         b.wait_visible("[data-item='newdir1']")
 
         # Rename with space
-        self.rename_item(b, "directory", "newdir1", "new dir1")
+        self.rename_item(b, "newdir1", "new dir1")
         b.wait_visible("[data-item='new dir1']")
 
         # Rename current folder
         b.mouse("[data-item='new dir1']", "dblclick")
         b.click("#dropdown-menu")
         b.click("#rename-item")
-        b.wait_in_text("h1.pf-v5-c-modal-box__title", "Rename directory")
+        b.wait_in_text("h1.pf-v5-c-modal-box__title", "Rename")
         b.set_input_text("#rename-item-input", "newdir2")
         b.click("button.pf-m-primary")
         b.wait_in_text("#sidebar-card-header", "newdir2")
@@ -497,7 +497,7 @@ class TestNavigator(testlib.MachineCase):
 
         # Renaming protected item should give an error
         m.execute("sudo chattr +i /home/admin/newdir2")
-        self.rename_item(b, "directory", "newdir2", "testdir")
+        self.rename_item(b, "newdir2", "testdir")
         alert_text = "mv: cannot move '/home/admin/newdir2' to '/home/admin/testdir': Operation not permitted"
         self.wait_modal_inline_alert(b, alert_text)
         b.click("div.pf-v5-c-modal-box__close")

@@ -264,7 +264,7 @@ const DropdownWithKebab = ({
                 {
                     id: "copy-item",
                     onClick: () => copyItem(setClipboard, [path.join("/") + "/" + selected[0].name]),
-                    title: cockpit.format(_("Copy $0"), selected[0].type)
+                    title: _("Copy"),
                 }
             ]
             : [],
@@ -333,7 +333,7 @@ const DropdownWithKebab = ({
             onClick: () => {
                 renameItem(Dialogs, { selected: selected[0] || currentDirectory, path, setHistory, setHistoryIndex });
             },
-            title: cockpit.format(_("Rename $0"), selected[0]?.type || "directory")
+            title: _("Rename")
         },
         { type: "divider" },
         {
@@ -351,7 +351,7 @@ const DropdownWithKebab = ({
                     currentDirectory
                 });
             },
-            title: cockpit.format(_("Delete $0"), selected[0]?.type || "directory"),
+            title: _("Delete"),
             className:"pf-m-danger"
         },
     ];
