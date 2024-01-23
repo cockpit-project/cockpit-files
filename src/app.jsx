@@ -202,7 +202,6 @@ export const Application = () => {
                 setHistory,
                 setHistoryIndex,
                 path: currentDir,
-                multiple: Array.isArray(selected),
                 setSelected
             }
         );
