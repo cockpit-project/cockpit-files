@@ -113,7 +113,7 @@ export const spawnCreateLink = ({ type, currentPath, originalName, newName, Dial
 };
 
 // eslint-disable-next-line max-len
-export const spawnEditPermissions = ({ ownerAccess, groupAccess, otherAccess, name, path, selected, owner, group, Dialogs, setErrorMessage }) => {
+export const spawnEditPermissions = ({ ownerAccess, groupAccess, otherAccess, path, selected, owner, group, Dialogs, setErrorMessage }) => {
     const command = [
         "chmod",
         ownerAccess + groupAccess + otherAccess,
@@ -125,7 +125,6 @@ export const spawnEditPermissions = ({ ownerAccess, groupAccess, otherAccess, na
         otherAccess !== selected.permissions[2]
     );
     const ownerChanged = owner !== selected.owner || group !== selected.group;
-    const nameChanged = name !== selected.name;
 
     Promise.resolve()
             .then(() => {
@@ -139,10 +138,6 @@ export const spawnEditPermissions = ({ ownerAccess, groupAccess, otherAccess, na
                         options
                     );
                 }
-            })
-            .then(() => {
-                if (nameChanged)
-                    return cockpit.spawn(renameCommand({ selected, path, name }), options);
             })
             .then(Dialogs.close, err => setErrorMessage(err.message));
 };

@@ -31,3 +31,10 @@ export const permissions = [
     { label: _("Read, write and execute"), value: "7" },
     { label: _("Write and execute"), value: "3" },
 ];
+
+export const inode_types = {
+    directory: _("Directory"),
+    file: _("Regular file"),
+    link: _("Symbolic link"),
+    special: _("Special file"),
+};

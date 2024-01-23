@@ -586,16 +586,8 @@ class TestNavigator(testlib.MachineCase):
         b.wait_text("#description-list-group-permissions dd", "Read-only")
         b.wait_text("#description-list-other-permissions dd", "Read-only")
 
-        # Test renaming item
-        b.click("button:contains('Edit properties')")
-        b.set_input_text("#edit-permissions-name", "newfile1")
-        b.click("button.pf-m-primary")
-        b.wait_not_present("[data-item='newfile']")
-        b.wait_visible("[data-item='newfile1']")
-
         # Test changing owner/group
         m.execute("useradd testuser")
-        b.click("[data-item='newfile1']")
         b.click("button:contains('Edit properties')")
         # Changing owner should change group if user is not in the group
         b.select_from_dropdown("#edit-permissions-owner", "testuser")
@@ -617,13 +609,13 @@ class TestNavigator(testlib.MachineCase):
         b.click("button:contains('Edit properties')")
         select_access("0")
         b.click("button.pf-m-primary")
-        self.assertEqual(m.execute("ls -l /home/admin/newfile1")[:10], "----------")
+        self.assertEqual(m.execute("ls -l /home/admin/newfile")[:10], "----------")
         wait_permissions("None")
 
         b.click("button:contains('Edit properties')")
         select_access("7")
         b.click("button.pf-m-primary")
-        self.assertEqual(m.execute("ls -l /home/admin/newfile1")[:10], "-rwxrwxrwx")
+        self.assertEqual(m.execute("ls -l /home/admin/newfile")[:10], "-rwxrwxrwx")
         wait_permissions("Read, write and execute")
 
     def testErrors(self):
