@@ -48,7 +48,7 @@ import {
     spawnPaste,
     spawnRenameItem
 } from "./apis/spawnHelpers";
-import { permissions } from "./common";
+import { permissions, inode_types } from "./common";
 
 const _ = cockpit.gettext;
 
@@ -387,7 +387,6 @@ export const CreateLinkModal = ({ currentPath, selected }) => {
 
 export const EditPermissionsModal = ({ selected, path }) => {
     const Dialogs = useDialogs();
-    const [name, setName] = useState(selected.name);
     const [owner, setOwner] = useState(selected.owner);
     const [ownerAccess, setOwnerAccess] = useState(selected.permissions[0]);
     const [group, setGroup] = useState(selected.group);
@@ -442,7 +441,6 @@ export const EditPermissionsModal = ({ selected, path }) => {
         Dialogs,
         group,
         groupAccess,
-        name,
         otherAccess,
         owner,
         ownerAccess,
@@ -454,12 +452,10 @@ export const EditPermissionsModal = ({ selected, path }) => {
     return (
         <Modal
           position="top"
-          variant="medium"
-          title={selected.type === "file"
-              ? _("File properties and access")
-              : selected.type === "link"
-                  ? _("Link properties and access")
-                  : _("Directory properties and access")}
+          variant={ModalVariant.small}
+          /* Translators: $0 represents a filename */
+          title={cockpit.format(_("“$0” permissions"), selected.name)}
+          description={inode_types[selected.type] || "Unknown type"}
           isOpen
           onClose={Dialogs.close}
           footer={
@@ -482,18 +478,7 @@ export const EditPermissionsModal = ({ selected, path }) => {
                   isInline
                 />}
                 <Form isHorizontal>
-                    <FormSection title={selected.type === "file"
-                        ? _("File properties")
-                        : selected.type === "link"
-                            ? _("Link properties")
-                            : _("Directory properties")}
-                    >
-                        <FormGroup label={_("Name")} fieldId="edit-permissions-name">
-                            <TextInput
-                              value={name} onChange={(_, val) => setName(val)}
-                              id="edit-permissions-name"
-                            />
-                        </FormGroup>
+                    <FormSection title={_("Ownership")}>
                         <FormGroup label={_("Owner")} fieldId="edit-permissions-owner">
                             <FormSelect
                               onChange={(_, val) => changeOwner(val)} id="edit-permissions-owner"
