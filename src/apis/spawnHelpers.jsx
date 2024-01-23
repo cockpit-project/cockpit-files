@@ -113,12 +113,9 @@ export const spawnCreateLink = ({ type, currentPath, originalName, newName, Dial
 };
 
 // eslint-disable-next-line max-len
-export const spawnEditPermissions = ({ changeAll, ownerAccess, groupAccess, otherAccess, name, path, selected, owner, group, Dialogs, setErrorMessage }) => {
+export const spawnEditPermissions = ({ ownerAccess, groupAccess, otherAccess, name, path, selected, owner, group, Dialogs, setErrorMessage }) => {
     const command = [
         "chmod",
-        ...(changeAll
-            ? ["-R"]
-            : []),
         ownerAccess + groupAccess + otherAccess,
         path.join("/") + "/" + selected.name
     ];

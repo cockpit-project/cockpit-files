@@ -470,13 +470,6 @@ export const EditPermissionsModal = ({ selected, path }) => {
                   >
                       {_("Change")}
                   </Button>
-                  {selected.type === "directory" &&
-                  <Button
-                    variant="secondary"
-                    onClick={() => spawnEditPermissions({ ...options, changeAll: true })}
-                  >
-                      {_("Change permissions for enclosed files")}
-                  </Button>}
                   <Button variant="link" onClick={Dialogs.close}>{_("Cancel")}</Button>
               </>
           }
