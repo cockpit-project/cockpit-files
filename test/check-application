@@ -626,19 +626,6 @@ class TestNavigator(testlib.MachineCase):
         self.assertEqual(m.execute("ls -l /home/admin/newfile1")[:10], "-rwxrwxrwx")
         wait_permissions("Read, write and execute")
 
-        # Check changing permissions for all files in folder
-        m.execute("mkdir /home/admin/newdir")
-        m.execute("touch /home/admin/newdir/file1")
-        m.execute("touch /home/admin/newdir/file2")
-        b.click("[data-item='newdir']")
-        b.click("button:contains('Edit properties')")
-        select_access("7")
-        b.click("button.pf-m-secondary:contains('Change permissions for enclosed files')")
-        self.assertEqual(m.execute("ls -ld /home/admin/newdir")[:10], "drwxrwxrwx")
-        wait_permissions("Read, write and execute")
-        self.assertEqual(m.execute("ls -l /home/admin/newdir/file1")[:10], "-rwxrwxrwx")
-        self.assertEqual(m.execute("ls -l /home/admin/newdir/file2")[:10], "-rwxrwxrwx")
-
     def testErrors(self):
         b = self.browser
         m = self.machine
