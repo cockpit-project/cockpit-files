@@ -523,6 +523,7 @@ class TestNavigator(testlib.MachineCase):
         b.click("#show-hidden-items")
         b.wait_visible("[data-item='f1']")
         b.wait_visible("[data-item='.f2']")
+        b.wait_in_text("#sidebar-card-header", "2 items")
 
         # Button shouldn't be visible when a file is selected
         b.click("[data-item='f1']")
