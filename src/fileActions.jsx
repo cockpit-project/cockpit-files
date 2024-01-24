@@ -220,11 +220,18 @@ export const CreateDirectoryModal = ({ selected, currentPath }) => {
           title={_("Create directory")}
           isOpen
           onClose={Dialogs.close}
-          footer={errorMessage === undefined &&
-          <>
-              <Button variant="primary" onClick={createDirectory}>{_("Create")}</Button>
-              <Button variant="link" onClick={Dialogs.close}>{_("Cancel")}</Button>
-          </>}
+          footer={
+              <>
+                  <Button
+                    variant="primary"
+                    onClick={createDirectory}
+                    isDisabled={errorMessage !== undefined}
+                  >
+                      {_("Create")}
+                  </Button>
+                  <Button variant="link" onClick={Dialogs.close}>{_("Cancel")}</Button>
+              </>
+          }
         >
             <Stack>
                 {errorMessage !== undefined &&
@@ -242,7 +249,10 @@ export const CreateDirectoryModal = ({ selected, currentPath }) => {
                 >
                     <FormGroup label={_("Directory name")}>
                         <TextInput
-                          value={name} onChange={(_, val) => setName(val)}
+                          value={name} onChange={(_, val) => {
+                              setErrorMessage(undefined);
+                              setName(val);
+                          }}
                           id="create-directory-input" autoFocus // eslint-disable-line jsx-a11y/no-autofocus
                         />
                     </FormGroup>
