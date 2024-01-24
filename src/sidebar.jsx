@@ -137,6 +137,11 @@ export const SidebarPanelDetails = ({
     }, [path, selected]);
 
     const Dialogs = useDialogs();
+    const hidden_count = currentDirectory.items_cnt.hidden;
+    let shown_items = cockpit.format(cockpit.ngettext("$0 item", "$0 items", currentDirectory.items_cnt.all),
+                                     currentDirectory.items_cnt.all);
+    if (!showHidden)
+        shown_items += " " + cockpit.format(cockpit.ngettext("($0 hidden)", "($0 hidden)", hidden_count), hidden_count);
 
     return (
         <Card className="sidebar-card">
@@ -149,14 +154,7 @@ export const SidebarPanelDetails = ({
                         </Text>
                         {selected.length === 0 && !currentDirectory.has_error &&
                             <Text component={TextVariants.small}>
-                                {cockpit.format(
-                                    cockpit.ngettext(
-                                        "$0 item $1", "$0 items $1",
-                                        currentDirectory.items_cnt.all
-                                    ),
-                                    currentDirectory.items_cnt.all,
-                                    cockpit.format("($0 hidden)", currentDirectory.items_cnt.hidden)
-                                )}
+                                {shown_items}
                             </Text>}
                         {selected.length > 1 &&
                             <Text component={TextVariants.small}>
