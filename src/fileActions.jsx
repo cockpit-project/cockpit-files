@@ -140,7 +140,7 @@ export const ConfirmDeletionDialog = ({
           position="top"
           title={modalTitle}
           titleIconVariant="warning"
-          variant={ModalVariant.small}
+          variant={ModalVariant.medium}
           isOpen
           onClose={Dialogs.close}
           footer={
@@ -336,6 +336,7 @@ export const CreateLinkModal = ({ currentPath, selected }) => {
     return (
         <Modal
           position="top"
+          variant={ModalVariant.small}
           title={_("New link")}
           isOpen
           onClose={Dialogs.close}
