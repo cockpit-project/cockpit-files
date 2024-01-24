@@ -365,6 +365,21 @@ class TestNavigator(testlib.MachineCase):
         self.create_directory(b, "newdir")
         b.wait_visible("[data-item='newdir']")
 
+        # validation
+        b.click("#dropdown-menu")
+        b.click("#create-item")
+        b.set_input_text("#create-directory-input", "test")
+        b.set_input_text("#create-directory-input", "")
+        b.wait_visible("button.pf-m-primary:disabled")
+        b.wait_in_text("#create-directory-input-helper", "Directory name cannot be empty.")
+
+        b.set_input_text("#create-directory-input", "a" * 256)
+        b.wait_visible("button.pf-m-primary:disabled")
+        b.wait_in_text("#create-directory-input-helper", "Directory name too long.")
+        b.set_input_text("#create-directory-input", "test")
+        b.wait_visible("button.pf-m-primary:not(:disabled)")
+        b.click(".pf-v5-c-modal-box__footer button.pf-m-link")  # cancel
+
         # Creating folder with duplicate name should return an error
         self.create_directory(b, "newdir")
         self.wait_modal_inline_alert(b, "mkdir: cannot create directory ‘/home/admin/newdir’: File exists")

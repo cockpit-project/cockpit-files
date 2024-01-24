@@ -33,6 +33,7 @@ import {
 
 import { useDialogs } from "dialogs.jsx";
 import { InlineNotification } from "cockpit-components-inline-notification";
+import { FormHelper } from 'cockpit-components-form-helper.jsx';
 import { useFile } from "hooks.js";
 import {
     etc_group_syntax as etcGroupSyntax,
@@ -204,6 +205,7 @@ export const ForceDeleteModal = ({ selected, path, initialError }) => {
 export const CreateDirectoryModal = ({ currentPath }) => {
     const Dialogs = useDialogs();
     const [name, setName] = useState("");
+    const [nameError, setNameError] = useState(null);
     const [errorMessage, setErrorMessage] = useState(undefined);
     const createDirectory = () => {
         spawnCreateDirectory({ Dialogs, currentPath, name, setErrorMessage });
@@ -220,7 +222,7 @@ export const CreateDirectoryModal = ({ currentPath }) => {
                   <Button
                     variant="primary"
                     onClick={createDirectory}
-                    isDisabled={errorMessage !== undefined}
+                    isDisabled={errorMessage !== undefined || nameError !== null}
                   >
                       {_("Create")}
                   </Button>
@@ -242,14 +244,24 @@ export const CreateDirectoryModal = ({ currentPath }) => {
                       return false;
                   }}
                 >
-                    <FormGroup label={_("Directory name")}>
+                    <FormGroup fieldId="create-directory-input" label={_("Directory name")}>
                         <TextInput
-                          value={name} onChange={(_, val) => {
+                          validated={nameError ? "error" : "default"}
+                          value={name} onChange={(_event, val) => {
                               setErrorMessage(undefined);
                               setName(val);
+
+                              if (val === "") {
+                                  setNameError(_("Directory name cannot be empty."));
+                              } else if (val.length >= 256) {
+                                  setNameError(_("Directory name too long."));
+                              } else {
+                                  setNameError(null);
+                              }
                           }}
                           id="create-directory-input" autoFocus // eslint-disable-line jsx-a11y/no-autofocus
                         />
+                        <FormHelper fieldId="create-directory-input" helperTextInvalid={nameError} />
                     </FormGroup>
                 </Form>
             </Stack>
