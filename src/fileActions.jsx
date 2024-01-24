@@ -217,6 +217,7 @@ export const CreateDirectoryModal = ({ currentPath }) => {
           title={_("Create directory")}
           isOpen
           onClose={Dialogs.close}
+          variant={ModalVariant.small}
           footer={
               <>
                   <Button
