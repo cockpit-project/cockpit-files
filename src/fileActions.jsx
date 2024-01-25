@@ -185,6 +185,7 @@ export const ForceDeleteModal = ({ selected, path, initialError }) => {
           position="top"
           title={modalTitle}
           titleIconVariant="warning"
+          variant={ModalVariant.small}
           isOpen
           onClose={Dialogs.close}
           footer={!deleteFailed &&
