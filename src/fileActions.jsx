@@ -252,18 +252,8 @@ export const CreateDirectoryModal = ({ selected, currentPath }) => {
                     <FormGroup fieldId="create-directory-input" label={_("Directory name")}>
                         <TextInput
                           validated={nameError ? "error" : "default"}
-                          value={name} onChange={(_event, val) => {
-                              setErrorMessage(undefined);
-                              setName(val);
-
-                              if (val === "") {
-                                  setNameError(_("Directory name cannot be empty."));
-                              } else if (val.length >= 256) {
-                                  setNameError(_("Directory name too long."));
-                              } else {
-                                  setNameError(null);
-                              }
-                          }}
+                          value={name}
+                          onChange={(_, val) => setDirectoryName(val, setName, setNameError, setErrorMessage)}
                           id="create-directory-input" autoFocus // eslint-disable-line jsx-a11y/no-autofocus
                         />
                         <FormHelper fieldId="create-directory-input" helperTextInvalid={nameError} />
@@ -277,6 +267,7 @@ export const CreateDirectoryModal = ({ selected, currentPath }) => {
 export const RenameItemModal = ({ path, selected, setHistory, setHistoryIndex }) => {
     const Dialogs = useDialogs();
     const [name, setName] = useState(selected.name);
+    const [nameError, setNameError] = useState(null);
     const [errorMessage, setErrorMessage] = useState(undefined);
 
     let title;
@@ -301,11 +292,18 @@ export const RenameItemModal = ({ path, selected, setHistory, setHistoryIndex })
           variant={ModalVariant.medium}
           isOpen
           onClose={Dialogs.close}
-          footer={errorMessage === undefined &&
-          <>
-              <Button variant="primary" onClick={renameItem}>{_("Rename")}</Button>
-              <Button variant="link" onClick={Dialogs.close}>{_("Cancel")}</Button>
-          </>}
+          footer={
+              <>
+                  <Button
+                    variant="primary"
+                    onClick={renameItem}
+                    isDisabled={errorMessage !== undefined || nameError !== null}
+                  >
+                      {_("Rename")}
+                  </Button>
+                  <Button variant="link" onClick={Dialogs.close}>{_("Cancel")}</Button>
+              </>
+          }
         >
             <Stack>
                 {errorMessage !== undefined &&
@@ -315,11 +313,13 @@ export const RenameItemModal = ({ path, selected, setHistory, setHistoryIndex })
                   isInline
                 />}
                 <Form isHorizontal>
-                    <FormGroup label={_("New name")}>
+                    <FormGroup fieldId="rename-item-input" label={_("New name")}>
                         <TextInput
-                          value={name} onChange={(_, val) => setName(val)}
+                          value={name}
+                          onChange={(_, val) => setDirectoryName(val, setName, setNameError, setErrorMessage)}
                           id="rename-item-input"
                         />
+                        <FormHelper fieldId="rename-item-input" helperTextInvalid={nameError} />
                     </FormGroup>
                 </Form>
             </Stack>
@@ -567,4 +567,17 @@ export const EditPermissionsModal = ({ selected, path }) => {
             </Stack>
         </Modal>
     );
+};
+
+const setDirectoryName = (val, setName, setNameError, setErrorMessage) => {
+    setErrorMessage(undefined);
+    setName(val);
+
+    if (val === "") {
+        setNameError(_("Directory name cannot be empty."));
+    } else if (val.length >= 256) {
+        setNameError(_("Directory name too long."));
+    } else {
+        setNameError(null);
+    }
 };
