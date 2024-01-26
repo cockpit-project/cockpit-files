@@ -224,7 +224,10 @@ const DropdownWithKebab = ({
         setIsOpen(false);
     };
     const onToggleHidden = () => {
-        setShowHidden(!showHidden);
+        setShowHidden(showHidden => {
+            localStorage.setItem("cockpit-navigator.showHiddenFiles", !showHidden ? "true" : "false");
+            return !showHidden;
+        });
     };
 
     const currentPath = path.join("/") + "/";

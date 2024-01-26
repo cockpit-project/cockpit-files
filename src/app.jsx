@@ -59,7 +59,7 @@ export const Application = () => {
     const [sortBy, setSortBy] = useState(localStorage.getItem("cockpit-navigator.sort") || "az");
     const [selected, setSelected] = useState([]);
     const [selectedContext, setSelectedContext] = useState(null);
-    const [showHidden, setShowHidden] = useState(false);
+    const [showHidden, setShowHidden] = useState(localStorage.getItem("cockpit-navigator.showHiddenFiles") === "true");
     const [history, setHistory] = useState([]);
     const [historyIndex, setHistoryIndex] = useState(0);
     const [clipboard, setClipboard] = useState(undefined);
