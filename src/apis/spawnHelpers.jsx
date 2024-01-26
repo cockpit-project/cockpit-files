@@ -91,7 +91,7 @@ export const spawnRenameItem = ({ selected, name, path, Dialogs, setErrorMessage
 
 export const spawnCreateDirectory = ({ name, currentPath, selected, Dialogs, setErrorMessage }) => {
     let path;
-    if (selected.icons_cnt || selected.type === "directory") {
+    if (selected.icons_cnt || selected.type === "dir") {
         path = currentPath + selected.name + "/" + name;
     } else {
         path = currentPath + name;
@@ -112,31 +112,18 @@ export const spawnCreateLink = ({ type, currentPath, originalName, newName, Dial
             .then(Dialogs.close, (err) => { setErrorMessage(err.message) });
 };
 
-// eslint-disable-next-line max-len
-export const spawnEditPermissions = ({ ownerAccess, groupAccess, otherAccess, path, selected, owner, group, Dialogs, setErrorMessage }) => {
-    const command = [
-        "chmod",
-        ownerAccess + groupAccess + otherAccess,
-        path.join("/") + "/" + selected.name
-    ];
-    const permissionChanged = (
-        ownerAccess !== selected.permissions[0] ||
-        groupAccess !== selected.permissions[1] ||
-        otherAccess !== selected.permissions[2]
-    );
-    const ownerChanged = owner !== selected.owner || group !== selected.group;
+export const spawnEditPermissions = ({ mode, path, selected, owner, group, Dialogs, setErrorMessage }) => {
+    const permissionChanged = mode !== selected.mode;
+    const ownerChanged = owner !== selected.user || group !== selected.group;
 
     Promise.resolve()
             .then(() => {
                 if (permissionChanged)
-                    return cockpit.spawn(command, options);
+                    return cockpit.spawn(["chmod", mode.toString(8), path.join("/") + "/" + selected.name], options);
             })
             .then(() => {
                 if (ownerChanged) {
-                    return cockpit.spawn(
-                        ["chown", owner + ":" + group, path.join("/") + "/" + selected.name],
-                        options
-                    );
+                    return cockpit.spawn(["chown", owner + ":" + group, path.join("/") + "/" + selected.name], options);
                 }
             })
             .then(Dialogs.close, err => setErrorMessage(err.message));

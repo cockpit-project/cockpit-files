@@ -48,7 +48,7 @@ import {
     spawnPaste,
     spawnRenameItem
 } from "./apis/spawnHelpers";
-import { permissions, inode_types } from "./common";
+import { map_permissions, inode_types } from "./common";
 
 const _ = cockpit.gettext;
 
@@ -91,26 +91,11 @@ export const renameItem = (Dialogs, options) => {
 };
 
 export const editPermissions = (Dialogs, options) => {
-    if (options.selected === null) {
-        updateFile({ name: "" }, options.path.join("/"))
-                .then(res => {
-                    Dialogs.show(
-                        <EditPermissionsModal
-                          selected={{
-                              ...res,
-                              name: options.path[options.path.length - 1],
-                              type: "directory"
-                          }} path={options.path.slice(0, -1)}
-                        />
-                    );
-                });
-    } else {
-        Dialogs.show(
-            <EditPermissionsModal
-              selected={options.selected} path={options.path}
-            />
-        );
-    }
+    Dialogs.show(
+        <EditPermissionsModal
+          selected={options.selected} path={options.path}
+        />
+    );
 };
 
 export const copyItem = (setClipboard, sourcePath) => {
@@ -139,11 +124,11 @@ export const ConfirmDeletionDialog = ({
         const selectedItem = selected.length === 1
             ? selected[0]
             : currentDirectory;
-        if (selectedItem.type === "file") {
+        if (selectedItem.type === "reg") {
             modalTitle = cockpit.format(_("Delete file $0?"), selectedItem.name);
-        } else if (selectedItem.type === "link") {
+        } else if (selectedItem.type === "lnk") {
             modalTitle = cockpit.format(_("Delete link $0?"), selectedItem.name);
-        } else if (selectedItem.type === "directory" || selectedItem.items_cnt) {
+        } else if (selectedItem.type === "dir" || selectedItem.items_cnt) {
             modalTitle = cockpit.format(_("Delete directory $0?"), selectedItem.name);
         } else {
             modalTitle = cockpit.format(_("Delete $0?"), selectedItem.name);
@@ -184,11 +169,11 @@ export const ForceDeleteModal = ({ selected, itemPath, initialError }) => {
         const selectedItem = Array.isArray(selected)
             ? selected[0]
             : selected;
-        if (selectedItem.type === "file") {
+        if (selectedItem.type === "reg") {
             modalTitle = cockpit.format(_("Force delete file $0?"), selectedItem.name);
-        } else if (selectedItem.type === "link") {
+        } else if (selectedItem.type === "lnk") {
             modalTitle = cockpit.format(_("Force delete link $0?"), selectedItem.name);
-        } else if (selectedItem.type === "directory" || selectedItem.items_cnt) {
+        } else if (selectedItem.type === "dir" || selectedItem.items_cnt) {
             modalTitle = cockpit.format(_("Force delete directory $0?"), selectedItem.name);
         } else {
             modalTitle = _("Force delete $0?", selectedItem.name);
@@ -273,11 +258,11 @@ export const RenameItemModal = ({ path, selected, setHistory, setHistoryIndex })
     const [errorMessage, setErrorMessage] = useState(undefined);
 
     let title;
-    if (selected.type === "file") {
+    if (selected.type === "reg") {
         title = cockpit.format(_("Rename file $0"), selected.name);
-    } else if (selected.type === "link") {
+    } else if (selected.type === "lnk") {
         title = cockpit.format(_("Rename link $0"), selected.name);
-    } else if (selected.type === "directory" || selected.items_cnt) {
+    } else if (selected.type === "dir" || selected.items_cnt) {
         title = cockpit.format(_("Rename directory $0"), selected.name);
     } else {
         title = _("Rename $0", selected.name);
@@ -387,11 +372,9 @@ export const CreateLinkModal = ({ currentPath, selected }) => {
 
 export const EditPermissionsModal = ({ selected, path }) => {
     const Dialogs = useDialogs();
-    const [owner, setOwner] = useState(selected.owner);
-    const [ownerAccess, setOwnerAccess] = useState(selected.permissions[0]);
+    const [owner, setOwner] = useState(selected.user);
+    const [mode, setMode] = useState(selected.mode);
     const [group, setGroup] = useState(selected.group);
-    const [groupAccess, setGroupAccess] = useState(selected.permissions[1]);
-    const [otherAccess, setOtherAccess] = useState(selected.permissions[2]);
     const [errorMessage, setErrorMessage] = useState(undefined);
     const accounts = useFile("/etc/passwd", { syntax: etcPasswdSyntax });
     const groups = useFile("/etc/group", { syntax: etcGroupSyntax });
@@ -440,14 +423,24 @@ export const EditPermissionsModal = ({ selected, path }) => {
     const options = {
         Dialogs,
         group,
-        groupAccess,
-        otherAccess,
+        mode,
         owner,
-        ownerAccess,
         path,
         selected,
         setErrorMessage
     };
+
+    function permissions_options() {
+        return [
+            ...map_permissions((value, label) => (
+                <FormSelectOption
+                  key={value}
+                  value={value}
+                  label={label}
+                />
+            ))
+        ];
+    }
 
     return (
         <Modal
@@ -516,16 +509,11 @@ export const EditPermissionsModal = ({ selected, path }) => {
                           fieldId="edit-permissions-owner-access"
                         >
                             <FormSelect
-                              value={ownerAccess}
-                              onChange={(_, val) => { setOwnerAccess(val) }}
+                              value={(mode >> 6) & 7}
+                              onChange={(_, val) => { setMode((mode & 0o077) | (val << 6)) }}
                               id="edit-permissions-owner-access"
                             >
-                                {permissions.map(p => (
-                                    <FormSelectOption
-                                      key={p.value} value={p.value}
-                                      label={p.label}
-                                    />
-                                ))}
+                                {permissions_options()}
                             </FormSelect>
                         </FormGroup>
                         <FormGroup
@@ -533,16 +521,11 @@ export const EditPermissionsModal = ({ selected, path }) => {
                           fieldId="edit-permissions-group-access"
                         >
                             <FormSelect
-                              value={groupAccess}
-                              onChange={(_, val) => { setGroupAccess(val) }}
+                              value={(mode >> 3) & 7}
+                              onChange={(_, val) => { setMode((mode & 0o707) | (val << 3)) }}
                               id="edit-permissions-group-access"
                             >
-                                {permissions.map(p => (
-                                    <FormSelectOption
-                                      key={p.value} value={p.value}
-                                      label={p.label}
-                                    />
-                                ))}
+                                {permissions_options()}
                             </FormSelect>
                         </FormGroup>
                         <FormGroup
@@ -550,16 +533,11 @@ export const EditPermissionsModal = ({ selected, path }) => {
                           fieldId="edit-permissions-other-access"
                         >
                             <FormSelect
-                              value={otherAccess}
-                              onChange={(_, val) => { setOtherAccess(val) }}
+                              value={mode & 7}
+                              onChange={(_, val) => { setMode((mode & 0o770) | val) }}
                               id="edit-permissions-other-access"
                             >
-                                {permissions.map(p => (
-                                    <FormSelectOption
-                                      key={p.value} value={p.value}
-                                      label={p.label}
-                                    />
-                                ))}
+                                {permissions_options()}
                             </FormSelect>
                         </FormGroup>
                     </FormSection>
@@ -567,39 +545,4 @@ export const EditPermissionsModal = ({ selected, path }) => {
             </Stack>
         </Modal>
     );
-};
-
-export const updateFile = (file, currentPath) => {
-    const filePath = currentPath + "/" + file.name;
-    return cockpit.spawn([
-        "stat",
-        "-c",
-        "%a,%Y,%G,%U,%s",
-        filePath
-    ], { superuser: "try", error: "message" })
-            .then(res => {
-                res = res.trim().split(",");
-
-                let perm = res[0];
-                // trim sticky bit
-                if (perm.length === 4) perm = perm.slice(1);
-                if (perm.length === 1) perm = "00".concat(perm);
-                if (perm.length === 2) perm = "0".concat(perm);
-                file.permissions = perm;
-
-                file.modified = res[1];
-                file.group = res[2];
-                file.owner = res[3];
-                file.size = res[4];
-                if (file.type === "link")
-                    return cockpit.spawn(["ls", "-lF", filePath], { superuser: "try" })
-                            .then(res => {
-                                file.to = res.slice(-2, -1) === "/"
-                                    ? "directory"
-                                    : "file";
-                                return file;
-                            });
-                else
-                    return file;
-            }, exc => console.error(`Adding file ${file} failed: ${exc.toString()}`));
 };
