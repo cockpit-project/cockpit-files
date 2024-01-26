@@ -524,6 +524,12 @@ class TestNavigator(testlib.MachineCase):
         b.wait_visible("[data-item='f1']")
         b.wait_visible("[data-item='.f2']")
 
+        # Selected option is saved in localStorage
+        b.reload()
+        b.enter_page("/navigator")
+        b.wait_visible("[data-item='f1']")
+        b.wait_visible("[data-item='.f2']")
+
         # Button shouldn't be visible when a file is selected
         b.click("[data-item='f1']")
         b.click("#dropdown-menu")
