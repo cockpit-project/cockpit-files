@@ -243,6 +243,7 @@ class TestNavigator(testlib.MachineCase):
         b.wait_not_present("[data-item='newdir']")
         b.wait_text(".last-breadcrumb-button", "newdir2")
         b.click("#navigate-forward")
+        b.click("#navigator-card-body")  # unselect
         b.wait_in_text("#sidebar-card-header", "home")
         b.wait_not_present("[data-item='newdir']")
         b.wait_text(".last-breadcrumb-button", "home")
@@ -743,6 +744,7 @@ class TestNavigator(testlib.MachineCase):
         b.click(".breadcrumb-button:nth-of-type(3)")
 
         # Check error alerts
+        b.click("#navigator-card-body")  # unselect
         b.click("#dropdown-menu")
         b.click("#paste-item")
         b.wait_in_text("h4.pf-v5-c-alert__title",

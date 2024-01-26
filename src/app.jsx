@@ -38,11 +38,12 @@ import { EmptyStatePanel } from "cockpit-components-empty-state.jsx";
 import { ContextMenu } from "./navigatorContextMenu.jsx";
 import { NavigatorBreadcrumbs } from "./navigatorBreadcrumbs.jsx";
 import {
-    copyItem, createDirectory, createLink, deleteItem, editPermissions, pasteItem, renameItem, updateFile
+    copyItem, createDirectory, createLink, deleteItem, editPermissions, pasteItem, renameItem
 } from "./fileActions.jsx";
 import { SidebarPanelDetails } from "./sidebar.jsx";
 import { NavigatorCardHeader } from "./header.jsx";
 import { usePageLocation } from "hooks.js";
+import { fsinfo } from "./fsinfo";
 
 const _ = cockpit.gettext;
 
@@ -56,10 +57,9 @@ export const Application = () => {
     const [errorMessage, setErrorMessage] = useState();
     const [currentFilter, setCurrentFilter] = useState("");
     const [files, setFiles] = useState([]);
+    const [rootInfo, setRootInfo] = useState();
     const [isGrid, setIsGrid] = useState(true);
     const [sortBy, setSortBy] = useState(localStorage.getItem("cockpit-navigator.sort") || "az");
-    const channel = useRef(null);
-    const channelList = useRef(null);
     const [selected, setSelected] = useState([]);
     const [selectedContext, setSelectedContext] = useState(null);
     const [showHidden, setShowHidden] = useState(false);
@@ -89,98 +89,38 @@ export const Application = () => {
         });
     }, [options]);
 
-    const getFsList = useCallback(() => {
-        const _files = [];
-        setLoadingFiles(true);
-
-        if (channelList.current !== null)
-            channelList.current.close();
-
-        channelList.current = cockpit.channel({
-            payload: "fslist1",
-            path: `/${currentDir}`,
-            superuser: "try",
-            watch: false,
-        });
-
-        channelList.current.addEventListener("message", (ev, data) => {
-            const file = JSON.parse(data);
-
-            _files.push({ ...file, name: file.path, isHidden: file.path.startsWith(".") });
-        });
-
-        channelList.current.addEventListener("close", (ev, data) => {
-            setLoading(false);
-            if (data?.problem && data?.message) {
-                setErrorMessage(data.message);
-                setLoadingFiles(false);
-            } else {
-                setErrorMessage(null);
-                Promise.all(_files.map(file => updateFile(file, currentDir)))
-                        .then(() => {
-                            setFiles(_files);
-                            setLoadingFiles(false);
-                        });
+    useEffect(
+        () => {
+            if (sel === undefined) {
+                return;
             }
-        });
-    }, [currentDir]);
 
-    const watchFiles = useCallback(() => {
-        if (channel.current !== null)
-            channel.current.close();
-
-        channel.current = cockpit.channel({
-            payload: "fswatch1",
-            path: `/${currentDir}`,
-            superuser: "try",
-        });
-
-        channel.current.addEventListener("message", (ev, data) => {
-            const item = JSON.parse(data);
-
-            item.name = item.path.slice(item.path.lastIndexOf("/") + 1);
-            item.isHidden = item.name.startsWith(".");
-
-            // When files are created with some file editor we get also 'attribute-changed' and
-            // 'done-hint' events which are handled below. We should not add the same file twice.
-            if (item.event === "created" && item.type === "directory") {
-                updateFile(item, currentDir).then(file => {
-                    setFiles(_f => [..._f, file]);
-                });
-            } else {
-                if (item.event === "deleted") {
-                    setFiles(f => f.filter(res => res.name !== item.name));
-                } else {
-                    // For events other than 'present' we don't receive file stat information
-                    // so we rerun the fslist command to get the updated information
-                    // https://github.com/allisonkarlitskaya/systemd_ctypes/issues/56
-                    if (item.name[0] !== ".") {
-                        getFsList();
-                    }
-                }
-            }
-        });
-    }, [currentDir, getFsList]);
-
-    useEffect(() => {
-        // Wait for the path initial value to be set before fetching the files
-        if (sel === undefined) {
-            return;
-        }
-
-        setSelected([]);
-        setFiles([]);
-        setLoading(true);
-
-        watchFiles();
-        getFsList();
-    }, [sel, getFsList, watchFiles]);
+            const info = fsinfo(
+                `/${currentDir}`,
+                ["type", "mode", "size", "mtime", "user", "group", "target", "entries", "targets"]
+            );
+            return info.effect(state => {
+                setLoading(false);
+                setLoadingFiles(!(state.info || state.error));
+                setRootInfo(state.info);
+                setErrorMessage(state.error?.message ?? "");
+                const entries = Object.entries(state?.info?.entries || {});
+                const files = entries.map(([name, attrs]) => ({
+                    ...attrs,
+                    name,
+                    to: info.target(name)?.type ?? null
+                }));
+                setFiles(files);
+            });
+        },
+        [currentDir, sel]
+    );
 
     if (loading)
         return <EmptyStatePanel loading />;
 
     const visibleFiles = !showHidden
-        ? files.filter(file => !file.isHidden)
+        ? files.filter(file => !file.name.startsWith("."))
         : files;
 
     const _createDirectory = () => createDirectory(Dialogs, currentDir, selectedContext || selected);
@@ -192,7 +132,7 @@ export const Application = () => {
     };
     const _pasteItem = (targetPath, asSymlink) => pasteItem(clipboard, targetPath.join("/") + "/", asSymlink, addAlert);
     const _renameItem = () => renameItem(Dialogs, { selected: selectedContext, path, setHistory, setHistoryIndex });
-    const _editPermissions = () => editPermissions(Dialogs, { selected: selectedContext, path });
+    const _editPermissions = () => editPermissions(Dialogs, { selected: selectedContext || rootInfo, path });
     const _deleteItem = () => {
         deleteItem(
             Dialogs,
@@ -233,7 +173,7 @@ export const Application = () => {
                         ? [{ title: _("Copy"), onClick: _copyItem }, { title: _("Delete"), onClick: _deleteItem, className: "pf-m-danger" }]
                         : [
                             { title: _("Copy"), onClick: _copyItem },
-                            ...(selectedContext.type === "directory")
+                            ...(selectedContext.type === "dir")
                                 ? [
                                     {
                                         title: _("Paste into directory"),
@@ -348,8 +288,8 @@ export const Application = () => {
 
 const compare = (sortBy) => {
     const compareFileType = (a, b) => {
-        const aIsDir = (a.type === "directory" || a?.to === "directory");
-        const bIsDir = (b.type === "directory" || b?.to === "directory");
+        const aIsDir = (a.type === "dir" || a?.to === "dir");
+        const bIsDir = (b.type === "dir" || b?.to === "dir");
 
         if (aIsDir && !bIsDir)
             return -1;
@@ -373,13 +313,13 @@ const compare = (sortBy) => {
             : compareFileType(a, b);
     case "last_modified":
         return (a, b) => compareFileType(a, b) === 0
-            ? (a.modified > b.modified
+            ? (a.mtime > b.mtime
                 ? -1
                 : 1)
             : compareFileType(a, b);
     case "first_modified":
         return (a, b) => compareFileType(a, b) === 0
-            ? (a.modified < b.modified
+            ? (a.mtime < b.mtime
                 ? -1
                 : 1)
             : compareFileType(a, b);
@@ -428,7 +368,7 @@ const NavigatorCardBody = ({
 
     const onDoubleClickNavigate = useCallback((file) => {
         const newPath = [...path, file.name].join("/");
-        if (file.type === "directory" || file.to === "directory") {
+        if (file.type === "dir" || file.to === "dir") {
             setHistory(h => [...h.slice(0, historyIndex + 1), [...path, file.name]]);
             setHistoryIndex(h => h + 1);
 
@@ -537,9 +477,9 @@ const NavigatorCardBody = ({
 
     const Item = ({ file }) => {
         const getFileType = (file) => {
-            if (file.type === "directory") {
+            if (file.type === "dir") {
                 return "directory-item";
-            } else if (file.type === "link" && file?.to === "directory") {
+            } else if (file.type === "lnk" && file?.to === "dir") {
                 return "directory-item";
             } else {
                 return "file-item";
@@ -575,7 +515,7 @@ const NavigatorCardBody = ({
                           ? "xl"
                           : "lg"} isInline
                     >
-                        {file.type === "directory" || file.to === "directory"
+                        {file.type === "dir" || file.to === "dir"
                             ? <FolderIcon />
                             : <FileIcon />}
                     </Icon>

@@ -22,19 +22,32 @@ import cockpit from "cockpit";
 const _ = cockpit.gettext;
 
 export const permissions = [
-    { label: _("None"), value: "0" },
-    { label: _("Read-only"), value: "4" },
-    { label: _("Write-only"), value: "2" },
-    { label: _("Execute-only"), value: "1" },
-    { label: _("Read and write"), value: "6" },
-    { label: _("Read and execute"), value: "5" },
-    { label: _("Read, write and execute"), value: "7" },
-    { label: _("Write and execute"), value: "3" },
+    /* 0 */ _("None"),
+    /* 1 */ _("Execute-only"),
+    /* 2 */ _("Write-only"),
+    /* 3 */ _("Write and execute"),
+    /* 4 */ _("Read-only"),
+    /* 5 */ _("Read and execute"),
+    /* 6 */ _("Read and write"),
+    /* 7 */ _("Read, write and execute"),
 ];
 
 export const inode_types = {
-    directory: _("Directory"),
-    file: _("Regular file"),
-    link: _("Symbolic link"),
-    special: _("Special file"),
+    blk: _("Block device"),
+    chr: _("Character device"),
+    dir: _("Directory"),
+    fifo: _("Named pipe"),
+    lnk: _("Symbolic link"),
+    reg: _("Regular file"),
+    sock: _("Socket"),
 };
+
+export function get_permissions(n: number) {
+    return permissions[n & 0o7];
+}
+
+export function * map_permissions<T>(func: (value: number, label: string) => T) {
+    for (const [value, label] of permissions.entries()) {
+        yield func(value, label);
+    }
+}

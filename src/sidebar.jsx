@@ -55,32 +55,28 @@ import { useDialogs } from "dialogs.jsx";
 import {
     copyItem, createDirectory, createLink, deleteItem, editPermissions, pasteItem, renameItem
 } from "./fileActions.jsx";
-import { permissions } from "./common.js";
+import { get_permissions } from "./common";
 
 const _ = cockpit.gettext;
 
 const getDescriptionListItems = selected => {
-    const getPermissions = (str) => {
-        return permissions.find(e => e.value === str).label;
-    };
-
     return ([
         {
             id: "description-list-last-modified",
             label: _("Last modified"),
-            value: timeformat.dateTime(selected.modified * 1000)
+            value: timeformat.dateTime(selected.mtime * 1000)
         },
         {
             id: "description-list-owner",
             label: _("Owner"),
-            value: selected.owner
+            value: selected.user
         },
         {
             id: "description-list-group",
             label: _("Group"),
             value: selected.group
         },
-        ...(selected.type === "file"
+        ...(selected.type === "reg"
             ? [
                 {
                     id: "description-list-size",
@@ -98,17 +94,17 @@ const getDescriptionListItems = selected => {
         {
             id: "description-list-owner-permissions",
             label: _("Owner permissions"),
-            value: getPermissions(selected.permissions[0])
+            value: get_permissions(selected.mode >> 6),
         },
         {
             id: "description-list-group-permissions",
             label: _("Group permissions"),
-            value: getPermissions(selected.permissions[1])
+            value: get_permissions(selected.mode >> 3),
         },
         {
             id: "description-list-other-permissions",
             label: _("Other permissions"),
-            value: getPermissions(selected.permissions[2])
+            value: get_permissions(selected.mode >> 0),
         },
     ]);
 };
@@ -278,7 +274,7 @@ const DropdownWithKebab = ({
                 }
             ]
             : [],
-        ...(selected.length === 1 && selected[0].type === "directory")
+        ...(selected.length === 1 && selected[0].type === "dir")
             ? [
                 {
                     id: "paste-into-directory",
