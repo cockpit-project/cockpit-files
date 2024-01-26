@@ -15,6 +15,9 @@
     "stylelint:fix": "stylelint --fix src/*{.css,scss}"
   },
   "devDependencies": {
+    "@types/react": "18.2.48",
+    "@types/react-dom": "18.2.18",
+    "@typescript-eslint/eslint-plugin": "6.19.0",
     "argparse": "2.0.1",
     "chrome-remote-interface": "0.33.0",
     "esbuild": "0.19.12",
@@ -39,7 +42,8 @@
     "sizzle": "2.3.10",
     "stylelint": "14.9.1",
     "stylelint-config-standard-scss": "5.0.0",
-    "stylelint-formatter-pretty": "3.2.0"
+    "stylelint-formatter-pretty": "3.2.0",
+    "typescript": "5.3.3"
   },
   "dependencies": {
     "@patternfly/patternfly": "5.1.0",
