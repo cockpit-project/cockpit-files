@@ -196,6 +196,11 @@ print-vm:
 	@echo $(VM_IMAGE)
 
 codecheck: test/static-code $(NODE_MODULES_TEST)
+	# https://github.com/microsoft/TypeScript/issues/30511
+	# We can't tell tsc to ignore the .d.ts in node_modules/ and check our
+	# own cockpit.d.ts, so we do two separate invocations as a workaround:
+	node_modules/.bin/tsc --typeRoots /dev/null --strict src/cockpit.d.ts
+	node_modules/.bin/tsc --checkJs false --skipLibCheck
 	test/static-code
 
 # convenience target to setup all the bits needed for the integration tests

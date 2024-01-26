@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "jsx": "react",
+    "lib": [
+      "dom",
+      "es2020"
+    ],
+    "paths": {
+        "*": ["./pkg/lib/*"]
+    },
+    "moduleResolution": "bundler",
+    "noEmit": true,
+    "strict": true,
+    "target": "es2020"
+  },
+  "include": [
+    "src/**/*"
+  ]
+}
