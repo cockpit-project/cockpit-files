@@ -1,0 +1,20 @@
+#!/bin/sh -eux
+
+. /usr/lib/os-release
+
+WHEEL='/var/tmp/cockpit-0-py3-none-any.whl'
+
+case "${ID}" in
+    arch)
+        pacman -Sy --noconfirm python-pip
+        pip install --prefix=/usr "${WHEEL}"
+        ;;
+    debian)
+        apt-get update
+        apt-get install -y python3-pip
+        pip install --break-system-packages "${WHEEL}"
+        ;;
+    *)
+        pip install "${WHEEL}"
+        ;;
+esac
