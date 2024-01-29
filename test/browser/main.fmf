@@ -10,5 +10,6 @@ require:
   - make
   - npm
   - python3
+  - python3-pip
 test: ./browser.sh
 duration: 60m
