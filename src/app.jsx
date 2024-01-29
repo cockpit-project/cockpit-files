@@ -441,6 +441,10 @@ const NavigatorCardBody = ({
     const isMounted = useRef(null);
 
     function calculateBoxPerRow () {
+        if (!isGrid) {
+            setBoxPerRow(1);
+            return;
+        }
         const boxes = document.querySelectorAll(".item-button");
         if (boxes.length > 1) {
             let i = 0;
