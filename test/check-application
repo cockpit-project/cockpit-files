@@ -429,12 +429,12 @@ class TestNavigator(testlib.MachineCase):
         b.click("button.pf-m-primary")
         b.wait_visible("[data-item='newdir1']")
 
-        # Edit properties from context menu
+        # Edit permissions from context menu
         m.execute("useradd testuser")
         b.click("[data-item='newdir1']")
         b.mouse("[data-item='newdir1']", "contextmenu")
-        b.wait_in_text(".context-menu li:nth-child(4) button", "Edit properties")
-        b.click(".context-menu button:contains('Edit properties')")
+        b.wait_in_text(".context-menu li:nth-child(4) button", "Edit permissions")
+        b.click(".context-menu button:contains('Edit permissions')")
         b.select_from_dropdown("#edit-permissions-owner", "testuser")
         b.click("button.pf-m-primary")
         b.wait_text("#description-list-owner dd", "testuser")
@@ -588,7 +588,7 @@ class TestNavigator(testlib.MachineCase):
 
         # Test changing owner/group
         m.execute("useradd testuser")
-        b.click("button:contains('Edit properties')")
+        b.click("button:contains('Edit permissions')")
         # Changing owner should change group if user is not in the group
         b.select_from_dropdown("#edit-permissions-owner", "testuser")
         b.wait_in_text("#edit-permissions-group", "testuser")
@@ -597,7 +597,7 @@ class TestNavigator(testlib.MachineCase):
         b.wait_text("#description-list-group dd", "testuser")
 
         m.execute("usermod -a -G testuser admin")
-        b.click("button:contains('Edit properties')")
+        b.click("button:contains('Edit permissions')")
         # Changing owner shouldn't change group if user is in the group
         b.select_from_dropdown("#edit-permissions-owner", "admin")
         b.wait_in_text("#edit-permissions-group", "testuser")
@@ -606,13 +606,13 @@ class TestNavigator(testlib.MachineCase):
         b.wait_text("#description-list-group dd", "testuser")
 
         # Test changing permissions
-        b.click("button:contains('Edit properties')")
+        b.click("button:contains('Edit permissions')")
         select_access("0")
         b.click("button.pf-m-primary")
         self.assertEqual(m.execute("ls -l /home/admin/newfile")[:10], "----------")
         wait_permissions("None")
 
-        b.click("button:contains('Edit properties')")
+        b.click("button:contains('Edit permissions')")
         select_access("7")
         b.click("button.pf-m-primary")
         self.assertEqual(m.execute("ls -l /home/admin/newfile")[:10], "-rwxrwxrwx")

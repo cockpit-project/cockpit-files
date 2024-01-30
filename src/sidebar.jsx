@@ -197,7 +197,7 @@ export const SidebarPanelDetails = ({
                       editPermissions(Dialogs, { selected: selected[0], path });
                   }}
                 >
-                    {_("Edit properties")}
+                    {_("Edit permissions")}
                 </Button>
             </CardBody>}
         </Card>
@@ -317,7 +317,7 @@ const DropdownWithKebab = ({
         },
         { type: "divider" },
         {
-            id: "edit-properties",
+            id: "edit-permissions",
             onClick: () => {
                 editPermissions(Dialogs, {
                     selected: selected.length === 0
@@ -326,7 +326,7 @@ const DropdownWithKebab = ({
                     path
                 });
             },
-            title: _("Edit properties")
+            title: _("Edit permissions")
         },
         {
             id: "rename-item",
