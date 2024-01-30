@@ -192,7 +192,7 @@ export const Application = () => {
     };
     const _pasteItem = (targetPath, asSymlink) => pasteItem(clipboard, targetPath.join("/") + "/", asSymlink, addAlert);
     const _renameItem = () => renameItem(Dialogs, { selected: selectedContext, path, setHistory, setHistoryIndex });
-    const _editProperties = () => editPermissions(Dialogs, { selected: selectedContext, path });
+    const _editPermissions = () => editPermissions(Dialogs, { selected: selectedContext, path });
     const _deleteItem = () => {
         deleteItem(
             Dialogs,
@@ -226,7 +226,7 @@ export const Application = () => {
                         { title: _("Create directory"), onClick: _createDirectory },
                         { title: _("Create link"), onClick: _createLink },
                         { type: "divider" },
-                        { title: _("Edit properties"), onClick: _editProperties }
+                        { title: _("Edit permissions"), onClick: _editPermissions }
                     ]
                     : selected.length > 1 && selected.includes(selectedContext)
                     // eslint-disable-next-line max-len
@@ -243,7 +243,7 @@ export const Application = () => {
                                 ]
                                 : [],
                             { type: "divider" },
-                            { title: _("Edit properties"), onClick: _editProperties },
+                            { title: _("Edit permissions"), onClick: _editPermissions },
                             { title: _("Rename"), onClick: _renameItem },
                             { type: "divider" },
                             { title: _("Create link"), onClick: _createLink },
