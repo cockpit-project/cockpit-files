@@ -5,7 +5,12 @@
 
   "tools": {
       "index": {
-          "label": "Navigator"
+          "label": "File browser",
+          "keywords": [
+		{
+			"matches": ["files", "navigator", "explorer", "filesystem"]
+		}
+	  ]
       }
   },
   "content-security-policy": "img-src 'self' data:; frame-src 'self' data:"
