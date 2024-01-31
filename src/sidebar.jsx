@@ -219,12 +219,8 @@ const DropdownWithKebab = ({
     const Dialogs = useDialogs();
     const [isOpen, setIsOpen] = useState(false);
 
-    const onToggleClick = () => {
-        setIsOpen(!isOpen);
-    };
-    const onSelect = (_event, itemId) => {
-        setIsOpen(false);
-    };
+    const onToggleClick = () => setIsOpen(!isOpen);
+    const onSelect = (_event, itemId) => setIsOpen(false);
     const onToggleHidden = () => {
         setShowHidden(showHidden => {
             localStorage.setItem("cockpit-navigator.showHiddenFiles", !showHidden ? "true" : "false");
