@@ -18,6 +18,7 @@
  */
 import cockpit from "cockpit";
 import React from "react";
+import { HddIcon } from "@patternfly/react-icons";
 
 import { Button, Flex, FlexItem, PageBreadcrumb } from "@patternfly/react-core";
 
@@ -25,26 +26,54 @@ import { SettingsDropdown } from "./settings-dropdown.jsx";
 
 type setShowHiddenType = typeof React.useState<boolean>
 
+function useHostname() {
+    const [hostname, setHostname] = React.useState<string | null>(null);
+
+    React.useEffect(() => {
+        const client = cockpit.dbus('org.freedesktop.hostname1');
+        const hostname1 = client.proxy('org.freedesktop.hostname1', '/org/freedesktop/hostname1');
+
+        function changed() {
+            if (hostname1.valid && typeof hostname1.Hostname === 'string') {
+                setHostname(hostname1.Hostname);
+            }
+        }
+
+        hostname1.addEventListener("changed", changed);
+        return () => {
+            hostname1.removeEventListener("changed", changed);
+            client.close();
+        };
+    }, []);
+
+    return hostname;
+}
+
 // eslint-disable-next-line max-len
 export function NavigatorBreadcrumbs({ path, showHidden, setShowHidden }: { path: string[], showHidden: boolean, setShowHidden: setShowHiddenType }) {
+    const hostname = useHostname();
+
     function navigate(n_parts: number) {
         cockpit.location.go("/", { path: encodeURIComponent(path.slice(0, n_parts).join("/")) });
     }
 
+    const fullPath = path.slice(1);
+    fullPath.unshift(hostname || "server");
+
     return (
         <PageBreadcrumb stickyOnBreakpoint={{ default: "top" }}>
             <Flex spaceItems={{ default: "spaceItemsXs" }}>
-                {path.map((dir, i) => {
+                {fullPath.map((dir, i) => {
                     return (
                         <React.Fragment key={dir || "/"}>
-                            {i !== path.length - 1 &&
-                                <Button
-                                  variant="link" onClick={() => { navigate(i + 1) }}
-                                  key={dir} className="breadcrumb-button"
-                                >
-                                    {dir || "/"}
-                                </Button>}
-                            {i === path.length - 1 && <p className="last-breadcrumb-button">{dir || "/"}</p>}
+                            <Button
+                              isDisabled={i === path.length - 1}
+                              icon={i === 0 ? <HddIcon /> : null}
+                              variant="link" onClick={() => { navigate(i + 1) }}
+                              key={dir} className="breadcrumb-button"
+                            >
+                                {dir || "/"}
+                            </Button>
                             {dir !== "" && <p key={i}>/</p>}
                         </React.Fragment>
                     );
