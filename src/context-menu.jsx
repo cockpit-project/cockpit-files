@@ -21,7 +21,7 @@
 import React from "react";
 import { Menu, MenuContent } from "@patternfly/react-core";
 
-import "./contextMenu.scss";
+import "./context-menu.scss";
 
 export const ContextMenu = ({ parentId, contextMenuItems, setSelectedContext }) => {
     const [visible, setVisible] = React.useState(false);

@@ -31,7 +31,7 @@ import {
 import { ExclamationCircleIcon } from "@patternfly/react-icons";
 
 import { EmptyStatePanel } from "cockpit-components-empty-state.jsx";
-import { ContextMenu } from "./navigatorContextMenu.jsx";
+import { ContextMenu } from "./context-menu.jsx";
 import { NavigatorBreadcrumbs } from "./navigatorBreadcrumbs.jsx";
 import { NavigatorCardBody } from "./navigator-card-body.jsx";
 import {
