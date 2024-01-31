@@ -104,6 +104,33 @@ declare module 'cockpit' {
 
     export const location: Location;
 
+    /* === cockpit.dbus ========================== */
+
+    interface DBusProxyEvents extends EventMap {
+        changed(changes: { [property: string]: unknown }): void;
+    }
+
+    interface DBusProxy extends EventSource<DBusProxyEvents> {
+        valid: boolean;
+        [property: string]: unknown;
+    }
+
+    interface DBusOptions {
+        bus?: string;
+        address?: string;
+        superuser?: "require" | "try";
+        track?: boolean;
+    }
+
+    interface DBusClient {
+        readonly unique_name: string;
+        readonly options: DBusOptions;
+        proxy(interface: string, path: string, options?: { watch?: boolean }): DBusProxy;
+        close(): void;
+    }
+
+    function dbus(name: string | null, options?: DBusOptions): DBusClient;
+
     /* === cockpit.file ========================== */
 
     interface FileSyntaxObject<T, B> {

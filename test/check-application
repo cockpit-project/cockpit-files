@@ -33,6 +33,9 @@ class TestNavigator(testlib.MachineCase):
         select_entry = f"{selector} ul button:contains('{value}')"
         b.click(select_entry)
 
+    def last_breadcrumb_sel(self):
+        return ".pf-v5-c-page__main-breadcrumb > div > button:last-of-type"
+
     def delete_item(self, b, filetype, filename, expect_success=True):
         b.click(f"[data-item='{filename}']")
         b.click("#dropdown-menu")
@@ -161,14 +164,15 @@ class TestNavigator(testlib.MachineCase):
 
         self.enter_navigator()
 
-        b.wait_text(".breadcrumb-button:nth-of-type(1)", "/")
+        hostname = m.execute("hostname").strip()
+        b.wait_text(".breadcrumb-button:nth-of-type(1)", hostname)
         b.wait_text(".breadcrumb-button:nth-of-type(2)", "home")
-        b.wait_text(".last-breadcrumb-button", "admin")
+        b.wait_text(".breadcrumb-button:nth-of-type(3)", "admin")
 
         # clicking on the home button should take us to the home directory
         b.click(".breadcrumb-button:nth-of-type(2)")
-        b.wait_not_present(".breadcrumb-button:nth-of-type(2)")
-        b.wait_text(".last-breadcrumb-button", "home")
+        b.wait_visible(".breadcrumb-button:nth-of-type(2):disabled")
+        b.wait_text(".breadcrumb-button:nth-of-type(2)", "home")
         b.wait_visible("[data-item='admin']")
 
         # show folder info in sidebar
@@ -178,7 +182,7 @@ class TestNavigator(testlib.MachineCase):
         # double-clicking on a directory should take us into it
         b.mouse("[data-item='admin']", "dblclick")
         b.wait_not_present("[data-item='admin']")
-        b.wait_text(".last-breadcrumb-button", "admin")
+        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "admin")
 
         # navigating into a directory resets the sidebar
         b.wait_in_text("#sidebar-card-header", "admin")
@@ -192,7 +196,7 @@ class TestNavigator(testlib.MachineCase):
         b.mouse("[data-item='newdir2']", "dblclick")
         b.wait_not_present("[data-item='newdir']")
         b.click(".breadcrumb-button:nth-of-type(2)")
-        b.wait_text(".last-breadcrumb-button", "home")
+        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "home")
         b.wait_visible("[data-item='admin']")
         # navigate back
         b.eval_js("window.history.back()")
@@ -208,16 +212,16 @@ class TestNavigator(testlib.MachineCase):
         b.eval_js("window.history.forward()")
         b.wait_in_text("#sidebar-card-header", "newdir")
         b.wait_not_present("[data-item='admin']")
-        b.wait_text(".last-breadcrumb-button", "newdir")
+        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "newdir")
         b.eval_js("window.history.forward()")
         b.wait_in_text("#sidebar-card-header", "newdir2")
         b.wait_not_present("[data-item='newdir']")
-        b.wait_text(".last-breadcrumb-button", "newdir2")
+        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "newdir2")
         b.eval_js("window.history.forward()")
         b.click("#navigator-card-body")  # unselect
         b.wait_in_text("#sidebar-card-header", "home")
         b.wait_not_present("[data-item='newdir']")
-        b.wait_text(".last-breadcrumb-button", "home")
+        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "home")
         b.wait_visible("[data-item='admin']")
 
     def testSorting(self):
@@ -479,7 +483,7 @@ class TestNavigator(testlib.MachineCase):
         b.set_input_text("#rename-item-input", "newdir2")
         b.click("button.pf-m-primary")
         b.wait_in_text("#sidebar-card-header", "newdir2")
-        b.wait_text(".last-breadcrumb-button", "newdir2")
+        b.wait_text(self.last_breadcrumb_sel(), "newdir2")
 
         # Go back to home folder
         b.click(".breadcrumb-button:nth-of-type(3)")
