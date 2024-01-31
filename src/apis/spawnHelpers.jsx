@@ -38,11 +38,6 @@ export const spawnDeleteItem = ({ path, selected, Dialogs, setSelected }) => {
     ], options)
             .then(() => {
                 setSelected([]);
-                if (selected.length === 0) {
-                    const newPath = path.slice(0, -1).join("/");
-
-                    cockpit.location.go("/", { path: encodeURIComponent(newPath) });
-                }
             })
             .finally(Dialogs.close)
             .catch(err => {
