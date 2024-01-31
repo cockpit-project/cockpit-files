@@ -83,22 +83,20 @@ const compare = (sortBy) => {
 };
 
 // eslint-disable-next-line max-len
-const ContextMenuItems = ({ path, currentDir, selected, setSelected, setHistory, setHistoryIndex, addAlert, clipboard, setClipboard, files }) => {
+const ContextMenuItems = ({ path, currentDir, selected, setSelected, addAlert, clipboard, setClipboard, files }) => {
     const Dialogs = useDialogs();
 
     const _createDirectory = () => createDirectory(Dialogs, currentDir);
     const _createLink = () => createLink(Dialogs, currentDir, files, selected[0]);
     const _copyItems = () => copyItems(setClipboard, selected.map(s => currentDir + s.name));
     const _pasteItem = (targetPath, asSymlink) => pasteItem(clipboard, targetPath.join("/") + "/", asSymlink, addAlert);
-    const _renameItem = () => renameItem(Dialogs, { selected: selected[0], path, setHistory, setHistoryIndex });
+    const _renameItem = () => renameItem(Dialogs, { selected: selected[0], path });
     const _editPermissions = () => editPermissions(Dialogs, { selected: selected[0], path });
     const _deleteItem = () => {
         deleteItem(
             Dialogs,
             {
                 selected,
-                setHistory,
-                setHistoryIndex,
                 path: currentDir,
                 setSelected
             }
@@ -176,12 +174,9 @@ export const NavigatorCardBody = ({
     currentDir,
     currentFilter,
     files,
-    historyIndex,
     isGrid,
     path,
     selected,
-    setHistory,
-    setHistoryIndex,
     setSelected,
     sortBy,
     loadingFiles,
@@ -217,17 +212,9 @@ export const NavigatorCardBody = ({
     const onDoubleClickNavigate = useCallback((file) => {
         const newPath = [...path, file.name].join("/");
         if (file.type === "dir" || file.to === "dir") {
-            setHistory(h => [...h.slice(0, historyIndex + 1), [...path, file.name]]);
-            setHistoryIndex(h => h + 1);
-
             cockpit.location.go("/", { path: encodeURIComponent(newPath) });
         }
-    }, [
-        path,
-        historyIndex,
-        setHistoryIndex,
-        setHistory
-    ]);
+    }, [path]);
 
     useEffect(() => {
         calculateBoxPerRow();
@@ -393,8 +380,6 @@ export const NavigatorCardBody = ({
               currentDir={currentDir}
               selected={selected}
               setSelected={setSelected}
-              setHistory={setHistory}
-              setHistoryIndex={setHistoryIndex}
               addAlert={addAlert}
               clipboard={clipboard}
               setClipboard={setClipboard}

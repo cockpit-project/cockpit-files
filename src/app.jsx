@@ -29,7 +29,7 @@ import {
 import { ExclamationCircleIcon } from "@patternfly/react-icons";
 
 import { EmptyStatePanel } from "cockpit-components-empty-state.jsx";
-import { NavigatorBreadcrumbs } from "./navigatorBreadcrumbs.jsx";
+import { NavigatorBreadcrumbs } from "./navigator-breadcrumbs";
 import { NavigatorCardBody } from "./navigator-card-body.jsx";
 import { SidebarPanelDetails } from "./sidebar.jsx";
 import { NavigatorCardHeader } from "./header.jsx";
@@ -51,8 +51,6 @@ export const Application = () => {
     const [sortBy, setSortBy] = useState(localStorage.getItem("cockpit-navigator.sort") || "az");
     const [selected, setSelected] = useState([]);
     const [showHidden, setShowHidden] = useState(localStorage.getItem("cockpit-navigator.showHiddenFiles") === "true");
-    const [history, setHistory] = useState([]);
-    const [historyIndex, setHistoryIndex] = useState(0);
     const [clipboard, setClipboard] = useState(undefined);
     const [alerts, setAlerts] = useState([]);
 
@@ -68,11 +66,8 @@ export const Application = () => {
 
     useEffect(() => {
         cockpit.user().then(user => {
-            const userPath = user.home.split("/");
-            setHistory(h => [...h, userPath]);
-
             if (options.path === undefined) {
-                cockpit.location.go("/", { path: encodeURIComponent(user.home) });
+                cockpit.location.replace("/", { path: encodeURIComponent(user.home) });
             }
         });
     }, [options]);
@@ -118,8 +113,6 @@ export const Application = () => {
         <Page>
             <NavigatorBreadcrumbs
               path={path}
-              setHistory={setHistory} history={history}
-              historyIndex={historyIndex} setHistoryIndex={setHistoryIndex}
               showHidden={showHidden} setShowHidden={setShowHidden}
             />
             <PageSection>
@@ -138,8 +131,6 @@ export const Application = () => {
                               currentDir={currentDir}
                               isGrid={isGrid} sortBy={sortBy}
                               selected={selected} setSelected={setSelected}
-                              setHistory={setHistory}
-                              setHistoryIndex={setHistoryIndex} historyIndex={historyIndex}
                               loadingFiles={loadingFiles}
                               clipboard={clipboard}
                               setClipboard={setClipboard}
@@ -168,7 +159,6 @@ export const Application = () => {
                         <SidebarPanelDetails
                           path={path}
                           selected={selected.map(s => files.find(f => f.name === s.name)).filter(s => s !== undefined)}
-                          setHistory={setHistory} setHistoryIndex={setHistoryIndex}
                           showHidden={showHidden} setSelected={setSelected}
                           clipboard={clipboard} setClipboard={setClipboard}
                           files={files} addAlert={addAlert}

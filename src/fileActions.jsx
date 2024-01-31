@@ -75,7 +75,6 @@ export const deleteItem = (Dialogs, options) => {
         <ConfirmDeletionDialog
           selected={options.selected}
           path={options.path} setSelected={options.setSelected}
-          setHistory={options.setHistory} setHistoryIndex={options.setHistoryIndex}
         />
     );
 };
@@ -85,7 +84,6 @@ export const renameItem = (Dialogs, options) => {
         <RenameItemModal
           path={options.path}
           selected={options.selected}
-          setHistory={options.setHistory} setHistoryIndex={options.setHistoryIndex}
         />
     );
 };
@@ -109,8 +107,6 @@ export const pasteItem = (clipboard, targetPath, asSymlink, addAlert) => {
 export const ConfirmDeletionDialog = ({
     path,
     selected,
-    setHistory,
-    setHistoryIndex,
     setSelected,
 }) => {
     const Dialogs = useDialogs();
@@ -132,7 +128,7 @@ export const ConfirmDeletionDialog = ({
     }
 
     const deleteItem = () => {
-        spawnDeleteItem({ Dialogs, selected, path, setHistory, setHistoryIndex, setSelected });
+        spawnDeleteItem({ Dialogs, selected, path, setSelected });
     };
 
     return (
@@ -261,7 +257,7 @@ export const CreateDirectoryModal = ({ currentPath }) => {
     );
 };
 
-export const RenameItemModal = ({ path, selected, setHistory, setHistoryIndex }) => {
+export const RenameItemModal = ({ path, selected }) => {
     const Dialogs = useDialogs();
     const [name, setName] = useState(selected.name);
     const [nameError, setNameError] = useState(null);
@@ -279,7 +275,7 @@ export const RenameItemModal = ({ path, selected, setHistory, setHistoryIndex })
     }
 
     const renameItem = () => {
-        spawnRenameItem({ Dialogs, path, selected, name, setErrorMessage, setHistory, setHistoryIndex });
+        spawnRenameItem({ Dialogs, path, selected, name, setErrorMessage });
     };
 
     return (

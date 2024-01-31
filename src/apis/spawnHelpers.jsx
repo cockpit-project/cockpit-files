@@ -30,7 +30,7 @@ const renameCommand = (selected, path, newPath, is_current_dir) => {
         : ["mv", path.join("/") + "/" + selected.name, newPath];
 };
 
-export const spawnDeleteItem = ({ path, selected, Dialogs, setSelected, setHistory, setHistoryIndex }) => {
+export const spawnDeleteItem = ({ path, selected, Dialogs, setSelected }) => {
     cockpit.spawn([
         "rm",
         "-r",
@@ -42,8 +42,6 @@ export const spawnDeleteItem = ({ path, selected, Dialogs, setSelected, setHisto
                     const newPath = path.slice(0, -1).join("/");
 
                     cockpit.location.go("/", { path: encodeURIComponent(newPath) });
-                    setHistory(h => h.slice(0, -1));
-                    setHistoryIndex(i => i - 1);
                 }
             })
             .finally(Dialogs.close)
@@ -70,8 +68,7 @@ export const spawnForceDelete = ({ selected, path, Dialogs, setDeleteFailed, set
             });
 };
 
-export const spawnRenameItem = ({ selected, name, path, Dialogs, setErrorMessage, setHistory, setHistoryIndex }) => {
-    console.log(selected);
+export const spawnRenameItem = ({ selected, name, path, Dialogs, setErrorMessage }) => {
     const is_current_dir = path.at(-1) === selected.name;
     const newPath = is_current_dir
         ? path.slice(0, -1).join("/") + "/" + name
@@ -81,8 +78,6 @@ export const spawnRenameItem = ({ selected, name, path, Dialogs, setErrorMessage
             .then(() => {
                 if (is_current_dir) {
                     cockpit.location.go("/", { path: encodeURIComponent(newPath) });
-                    setHistory(h => h.slice(0, -1));
-                    setHistoryIndex(i => i - 1);
                 }
                 Dialogs.close();
             }, err => setErrorMessage(err.message));
