@@ -93,12 +93,16 @@ declare module 'cockpit' {
 
     /* === cockpit.location ========================== */
 
-    export const location : {
+    interface Location {
         url_root: string;
         options: { [name: string]: string | Array<string> };
         path: Array<string>;
         href: string;
-    };
+        go(path: Location | string, options?: { [key: string]: string }): void;
+        replace(path: Location | string, options?: { [key: string]: string }): void;
+    }
+
+    export const location: Location;
 
     /* === cockpit.file ========================== */
 
