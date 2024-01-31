@@ -223,54 +223,10 @@ export const NavigatorCardBody = ({
     };
 
     const Item = ({ file }) => {
-        const getFileType = (file) => {
-            if (file.type === "dir") {
-                return "directory-item";
-            } else if (file.type === "lnk" && file?.to === "dir") {
-                return "directory-item";
-            } else {
-                return "file-item";
-            }
-        };
-
         return (
-            <Card
-              className={"item-button " + getFileType(file)}
-              data-item={file.name}
-              id={"card-item-" + file.name + file.type}
-              isClickable isCompact
-              isPlain
-              isSelected={selected.find(s => s.name === file.name)}
-              onClick={ev => handleClick(ev, file)}
-              onContextMenu={(e) => {
-                  e.stopPropagation();
-                  setSelectedContext(file);
-                  if (selected.length === 1 || !selected.includes(file))
-                      setSelected([file]);
-              }}
-              onDoubleClick={() => onDoubleClickNavigate(file)}
-            >
-                <CardHeader
-                  selectableActions={{
-                      name: file.name,
-                      selectableActionAriaLabelledby: "card-item-" + file.name + file.type,
-                      selectableActionId: "card-item-" + file.name + file.type + "-selectable-action",
-                  }}
-                >
-                    <Icon
-                      size={isGrid
-                          ? "xl"
-                          : "lg"} isInline
-                    >
-                        {file.type === "dir" || file.to === "dir"
-                            ? <FolderIcon />
-                            : <FileIcon />}
-                    </Icon>
-                    <CardTitle>
-                        {file.name}
-                    </CardTitle>
-                </CardHeader>
-            </Card>
+            <li>
+                <p> {file.name} </p>
+            </li>
         );
     };
 
@@ -282,21 +238,21 @@ export const NavigatorCardBody = ({
         );
     if (isGrid) {
         return (
-            <CardBody onClick={resetSelected} id="navigator-card-body">
-                <Gallery id="folder-view">
-                    {sortedFiles.map(file => <Item file={file} key={file.name} />)}
-                </Gallery>
-            </CardBody>
+            <ol
+              id="folder-view"
+              className="pf-m-no-border-rows"
+            >
+                {sortedFiles.map(file => <Item file={file} key={file.name} />)}
+            </ol>
         );
     } else {
         return (
-            <ListingTable
+            <ul
               id="folder-view"
               className="pf-m-no-border-rows"
-              variant="compact"
-              columns={[_("Name")]}
-              rows={sortedFiles.map(file => ({ columns: [{ title: <Item file={file} key={file.name} /> }] }))}
-            />
+            >
+                {sortedFiles.map(file => <Item file={file} key={file.name} />)}
+            </ul>
         );
     }
 };
