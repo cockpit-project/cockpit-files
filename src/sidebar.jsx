@@ -109,8 +109,6 @@ export const SidebarPanelDetails = ({
     files,
     path,
     selected,
-    setHistory,
-    setHistoryIndex,
     setPath,
     showHidden,
     setSelected,
@@ -162,9 +160,7 @@ export const SidebarPanelDetails = ({
                 </CardTitle>
                 <DropdownWithKebab
                   selected={selected} path={path}
-                  setPath={setPath}
-                  setHistory={setHistory}
-                  setHistoryIndex={setHistoryIndex} files={files}
+                  files={files}
                   clipboard={clipboard} setClipboard={setClipboard}
                   setSelected={setSelected}
                   addAlert={addAlert}
@@ -197,8 +193,6 @@ export const SidebarPanelDetails = ({
 const DropdownWithKebab = ({
     selected,
     path,
-    setHistory,
-    setHistoryIndex,
     files,
     clipboard,
     setClipboard,
@@ -287,8 +281,6 @@ const DropdownWithKebab = ({
                 renameItem(Dialogs, {
                     selected: selected[0] || { name: directory_name, type: "dir" },
                     path,
-                    setHistory,
-                    setHistoryIndex
                 });
             },
             title: _("Rename")
@@ -302,8 +294,6 @@ const DropdownWithKebab = ({
                         deleteItem(Dialogs, {
                             selected,
                             path: currentPath,
-                            setHistory,
-                            setHistoryIndex,
                             setSelected,
                         });
                     },
@@ -326,8 +316,6 @@ const DropdownWithKebab = ({
                 deleteItem(Dialogs, {
                     selected,
                     path: currentPath,
-                    setHistory,
-                    setHistoryIndex,
                     setSelected
                 });
             },
