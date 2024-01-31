@@ -127,11 +127,13 @@ export const SidebarPanelDetails = ({
     const [info, setInfo] = useState(null);
 
     useEffect(() => {
-        const filePath = path.join("/") + "/" + selected[0]?.name;
+        if (selected.length === 1) {
+            const filePath = path.join("/") + "/" + selected[0]?.name;
 
-        cockpit.spawn(["file", "--brief", filePath], { superuser: "try", error: "message" })
-                .then(res => setInfo(res?.trim()))
-                .catch(error => console.warn(`Failed to run file --brief on ${filePath}: ${error.toString()}`));
+            cockpit.spawn(["file", "--brief", filePath], { superuser: "try", error: "message" })
+                    .then(res => setInfo(res?.trim()))
+                    .catch(error => console.warn(`Failed to run file --brief on ${filePath}: ${error.toString()}`));
+        }
     }, [path, selected]);
 
     const Dialogs = useDialogs();
