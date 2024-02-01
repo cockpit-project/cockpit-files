@@ -72,10 +72,9 @@ export const createLink = (Dialogs, currentPath, files, selected) => {
 export const deleteItem = (Dialogs, options) => {
     Dialogs.show(
         <ConfirmDeletionDialog
-          selected={options.selected} itemPath={options.itemPath}
+          selected={options.selected}
           path={options.path} setSelected={options.setSelected}
           setHistory={options.setHistory} setHistoryIndex={options.setHistoryIndex}
-          currentDirectory={options.currentDirectory}
         />
     );
 };
@@ -107,13 +106,11 @@ export const pasteItem = (clipboard, targetPath, asSymlink, addAlert) => {
 };
 
 export const ConfirmDeletionDialog = ({
-    itemPath,
     path,
     selected,
     setHistory,
     setHistoryIndex,
     setSelected,
-    currentDirectory
 }) => {
     const Dialogs = useDialogs();
 
@@ -121,9 +118,7 @@ export const ConfirmDeletionDialog = ({
     if (selected.length > 1) {
         modalTitle = cockpit.format(_("Delete $0 items?"), selected.length);
     } else {
-        const selectedItem = selected.length === 1
-            ? selected[0]
-            : currentDirectory;
+        const selectedItem = selected[0];
         if (selectedItem.type === "reg") {
             modalTitle = cockpit.format(_("Delete file $0?"), selectedItem.name);
         } else if (selectedItem.type === "lnk") {
@@ -136,7 +131,7 @@ export const ConfirmDeletionDialog = ({
     }
 
     const deleteItem = () => {
-        spawnDeleteItem({ Dialogs, selected, itemPath, path, setHistory, setHistoryIndex, setSelected });
+        spawnDeleteItem({ Dialogs, selected, path, setHistory, setHistoryIndex, setSelected });
     };
 
     return (
@@ -157,7 +152,7 @@ export const ConfirmDeletionDialog = ({
     );
 };
 
-export const ForceDeleteModal = ({ selected, itemPath, initialError }) => {
+export const ForceDeleteModal = ({ selected, path, initialError }) => {
     const Dialogs = useDialogs();
     const [errorMessage, setErrorMessage] = useState(initialError);
     const [deleteFailed, setDeleteFailed] = useState(false);
@@ -181,7 +176,7 @@ export const ForceDeleteModal = ({ selected, itemPath, initialError }) => {
     }
 
     const forceDeleteItem = () => {
-        spawnForceDelete({ Dialogs, selected, itemPath, setDeleteFailed, setErrorMessage });
+        spawnForceDelete({ Dialogs, selected, path, setDeleteFailed, setErrorMessage });
     };
 
     return (

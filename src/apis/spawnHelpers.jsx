@@ -30,13 +30,11 @@ const renameCommand = ({ selected, path, name }) => {
         : ["mv", path.join("/") + "/" + selected.name, path.join("/") + "/" + name];
 };
 
-export const spawnDeleteItem = ({ path, selected, itemPath, Dialogs, setSelected, setHistory, setHistoryIndex }) => {
+export const spawnDeleteItem = ({ path, selected, Dialogs, setSelected, setHistory, setHistoryIndex }) => {
     cockpit.spawn([
         "rm",
         "-r",
-        ...selected.length > 1
-            ? selected.map(f => path + f.name)
-            : [itemPath]
+        ...selected.map(f => path + f.name)
     ], options)
             .then(() => {
                 setSelected([]);
@@ -52,20 +50,19 @@ export const spawnDeleteItem = ({ path, selected, itemPath, Dialogs, setSelected
             .catch(err => {
                 Dialogs.show(
                     <ForceDeleteModal
-                      selected={selected} itemPath={itemPath}
+                      path={path}
+                      selected={selected}
                       initialError={err.message}
                     />
                 );
             });
 };
 
-export const spawnForceDelete = ({ selected, path, itemPath, Dialogs, setDeleteFailed, setErrorMessage }) => {
+export const spawnForceDelete = ({ selected, path, Dialogs, setDeleteFailed, setErrorMessage }) => {
     cockpit.spawn([
         "rm",
         "-r",
-        ...selected.length > 1
-            ? selected.map(f => path + f.name)
-            : [itemPath]
+        ...selected.map(f => path + f.name)
     ], options)
             .then(Dialogs.close, err => {
                 setDeleteFailed(true);
