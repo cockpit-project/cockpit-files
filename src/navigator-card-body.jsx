@@ -83,7 +83,7 @@ const compare = (sortBy) => {
 };
 
 // eslint-disable-next-line max-len
-const ContextMenuItems = ({ path, currentDir, selected, selectedContext, setSelected, setHistory, setHistoryIndex, addAlert, clipboard, setClipboard, files }) => {
+const ContextMenuItems = ({ path, currentDir, selected, setSelected, setHistory, setHistoryIndex, addAlert, clipboard, setClipboard, files }) => {
     const Dialogs = useDialogs();
 
     const _createDirectory = () => createDirectory(Dialogs, currentDir);
@@ -109,57 +109,69 @@ const ContextMenuItems = ({ path, currentDir, selected, selectedContext, setSele
         );
     };
 
+    if (selected.length === 0)
+        return null;
+
+    const menuItems = [];
+
+    // HACK: No item selected but the current folder, this depends on
+    // `selected` contained the currently viewed directory which is plain wrong
+    // from a state perspective. `selected` should be the actually "selected"
+    // items and not the current path. Refactor this later.
+    if (selected.length === 1 && selected[0].name === path[path.length - 1]) {
+        menuItems.push(
+            { title: _("Paste"), onClick: () => _pasteItem(path, false), isDisabled: clipboard === undefined },
+            {
+                title: _("Paste as symlink"),
+                onClick: () => _pasteItem(path, true),
+                isDisabled: clipboard === undefined
+            },
+            { type: "divider" },
+            { title: _("Create directory"), onClick: _createDirectory },
+            { title: _("Create link"), onClick: _createLink },
+            { type: "divider" },
+            { title: _("Edit permissions"), onClick: _editPermissions }
+        );
+    } else if (selected.length === 1) {
+        menuItems.push(
+            { title: _("Copy"), onClick: _copyItem },
+            ...(selected[0].type === "dir")
+                ? [
+                    {
+                        title: _("Paste into directory"),
+                        onClick: () => _pasteItem([...path, selected[0].name], false),
+                        isDisabled: clipboard === undefined
+                    }
+                ]
+                : [],
+            { type: "divider" },
+            { title: _("Edit permissions"), onClick: _editPermissions },
+            { title: _("Rename"), onClick: _renameItem },
+            { type: "divider" },
+            { title: _("Create link"), onClick: _createLink },
+            { type: "divider" },
+            { title: cockpit.format(_("Delete")), onClick: _deleteItem, className: "pf-m-danger" },
+        );
+    } else if (selected.length > 1) {
+        menuItems.push(
+            { title: _("Copy"), onClick: _copyItem },
+            { title: _("Delete"), onClick: _deleteItem, className: "pf-m-danger" }
+        );
+    }
+
     return (
         <MenuList>
-            {
-                (!selectedContext
-                    ? [
-                    // eslint-disable-next-line max-len
-                        { title: _("Paste"), onClick: () => _pasteItem(path, false), isDisabled: clipboard === undefined },
-                        {
-                            title: _("Paste as symlink"),
-                            onClick: () => _pasteItem(path, true),
-                            isDisabled: clipboard === undefined
-                        },
-                        { type: "divider" },
-                        { title: _("Create directory"), onClick: _createDirectory },
-                        { title: _("Create link"), onClick: _createLink },
-                        { type: "divider" },
-                        { title: _("Edit permissions"), onClick: _editPermissions }
-                    ]
-                    : selected.length > 1 && selected.includes(selectedContext)
-                    // eslint-disable-next-line max-len
-                        ? [{ title: _("Copy"), onClick: _copyItem }, { title: _("Delete"), onClick: _deleteItem, className: "pf-m-danger" }]
-                        : [
-                            { title: _("Copy"), onClick: _copyItem },
-                            ...(selectedContext.type === "dir")
-                                ? [
-                                    {
-                                        title: _("Paste into directory"),
-                                        onClick: () => _pasteItem([...path, selectedContext.name], false),
-                                        isDisabled: clipboard === undefined
-                                    }
-                                ]
-                                : [],
-                            { type: "divider" },
-                            { title: _("Edit permissions"), onClick: _editPermissions },
-                            { title: _("Rename"), onClick: _renameItem },
-                            { type: "divider" },
-                            { title: _("Create link"), onClick: _createLink },
-                            { type: "divider" },
-                            { title: cockpit.format(_("Delete")), onClick: _deleteItem, className: "pf-m-danger" },
-                        ])
-                        .map((item, i) => item.type !== "divider"
-                            ? (
-                                <MenuItem
-                                  className={"context-menu-option " + item.className} key={item.title}
-                                  onClick={item.onClick} isDisabled={item.isDisabled}
-                                >
-                                    <div className="context-menu-name">{item.title}</div>
-                                </MenuItem>
-                            )
-                            : <Divider key={i} />)
-            }
+            {menuItems.map((item, i) =>
+                item.type !== "divider"
+                    ? (
+                        <MenuItem
+                          className={"context-menu-option " + item.className} key={item.title}
+                          onClick={item.onClick} isDisabled={item.isDisabled}
+                        >
+                            <div className="context-menu-name">{item.title}</div>
+                        </MenuItem>
+                    )
+                    : <Divider key={i} />)}
         </MenuList>
     );
 };
@@ -183,7 +195,6 @@ export const NavigatorCardBody = ({
     allFiles,
 }) => {
     const [boxPerRow, setBoxPerRow] = useState(0);
-    const [selectedContext, setSelectedContext] = useState(null);
     const Dialogs = useDialogs();
     const sortedFiles = useMemo(() => {
         const compareFunc = compare(sortBy);
@@ -317,7 +328,6 @@ export const NavigatorCardBody = ({
     };
 
     const handleContextMenu = () => {
-        setSelectedContext(null);
         const sel = path ? path[path.length - 1] : undefined;
         setSelected([{ name: sel }]);
     };
@@ -344,7 +354,6 @@ export const NavigatorCardBody = ({
               onClick={ev => handleClick(ev, file)}
               onContextMenu={(e) => {
                   e.stopPropagation();
-                  setSelectedContext(file);
                   if (selected.length === 1 || !selected.includes(file))
                       setSelected([file]);
               }}
@@ -390,7 +399,6 @@ export const NavigatorCardBody = ({
                 currentDir={currentDir}
                 selected={selected}
                 setSelected={setSelected}
-                selectedContext={selectedContext}
                 setHistory={setHistory}
                 setHistoryIndex={setHistoryIndex}
                 addAlert={addAlert}
@@ -399,7 +407,6 @@ export const NavigatorCardBody = ({
                 files={allFiles}
               />
           }
-          setSelectedContext={setSelectedContext}
         />
     );
 
