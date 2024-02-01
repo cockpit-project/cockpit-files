@@ -91,7 +91,7 @@ const ContextMenuItems = ({ path, currentDir, selected, selectedContext, setSele
     const _copyItem = () => {
         copyItem(setClipboard, selected.length > 1
             ? selected.map(s => currentDir + s.name)
-            : [currentDir + selectedContext.name]);
+            : [currentDir + selected[0].name]);
     };
     const _pasteItem = (targetPath, asSymlink) => pasteItem(clipboard, targetPath.join("/") + "/", asSymlink, addAlert);
     const _renameItem = () => renameItem(Dialogs, { selected: selectedContext, path, setHistory, setHistoryIndex });
