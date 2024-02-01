@@ -330,25 +330,25 @@ const DropdownWithKebab = ({
             },
             title: _("Rename")
         },
-        { type: "divider" },
-        {
-            id: "delete-item",
-            onClick: () => {
-                deleteItem(Dialogs, {
-                    selected,
-                    itemPath: currentPath + (selected.length === 0
-                        ? ""
-                        : selected[0].name),
-                    path,
-                    setHistory,
-                    setHistoryIndex,
-                    setSelected,
-                    currentDirectory
-                });
-            },
-            title: _("Delete"),
-            className:"pf-m-danger"
-        },
+        ...selected.length !== 0
+            ? [
+                { type: "divider" },
+                {
+                    id: "delete-item",
+                    onClick: () => {
+                        deleteItem(Dialogs, {
+                            selected,
+                            path: currentPath,
+                            setHistory,
+                            setHistoryIndex,
+                            setSelected,
+                        });
+                    },
+                    title: _("Delete"),
+                    className:"pf-m-danger"
+                }
+            ]
+            : [],
     ];
 
     const multiDropdownOptions = [

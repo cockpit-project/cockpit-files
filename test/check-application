@@ -355,19 +355,6 @@ class TestNavigator(testlib.MachineCase):
         m.execute("sudo chattr -i /home/admin/newfile")
         self.delete_item(b, "file", "newfile")
 
-        # Delete current directory
-        m.execute("mkdir /home/admin/newdir")
-        b.wait_visible("[data-item='newdir']")
-        b.mouse("[data-item='newdir']", "dblclick")
-        b.wait_not_present("[data-item='newdir']")
-        b.click("#dropdown-menu")
-        b.click("#delete-item")
-        b.wait_in_text("h1.pf-v5-c-modal-box__title", "Delete directory newdir?")
-        b.click("button.pf-m-danger")
-        b.wait_text(".last-breadcrumb-button", "admin")
-        b.wait_in_text("#sidebar-card-header", "admin")
-        b.wait_not_present("[data-item='newdir']")
-
     def testCreate(self):
         b = self.browser
         m = self.machine
