@@ -83,7 +83,7 @@ const compare = (sortBy) => {
 };
 
 // eslint-disable-next-line max-len
-const ContextMenuItems = ({ path, currentDir, selected, selectedContext, setSelected, setHistory, setHistoryIndex, addAlert, rootInfo, clipboard, setClipboard, files }) => {
+const ContextMenuItems = ({ path, currentDir, selected, selectedContext, setSelected, setHistory, setHistoryIndex, addAlert, clipboard, setClipboard, files }) => {
     const Dialogs = useDialogs();
 
     const _createDirectory = () => createDirectory(Dialogs, currentDir);
@@ -95,7 +95,7 @@ const ContextMenuItems = ({ path, currentDir, selected, selectedContext, setSele
     };
     const _pasteItem = (targetPath, asSymlink) => pasteItem(clipboard, targetPath.join("/") + "/", asSymlink, addAlert);
     const _renameItem = () => renameItem(Dialogs, { selected: selected[0], path, setHistory, setHistoryIndex });
-    const _editPermissions = () => editPermissions(Dialogs, { selected: selectedContext || rootInfo, path });
+    const _editPermissions = () => editPermissions(Dialogs, { selected: selected[0], path });
     const _deleteItem = () => {
         deleteItem(
             Dialogs,
@@ -181,7 +181,6 @@ export const NavigatorCardBody = ({
     setClipboard,
     addAlert,
     allFiles,
-    rootInfo,
 }) => {
     const [boxPerRow, setBoxPerRow] = useState(0);
     const [selectedContext, setSelectedContext] = useState(null);
@@ -398,7 +397,6 @@ export const NavigatorCardBody = ({
                 clipboard={clipboard}
                 setClipboard={setClipboard}
                 files={allFiles}
-                rootInfo={rootInfo}
               />
           }
           setSelectedContext={setSelectedContext}
