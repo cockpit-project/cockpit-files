@@ -87,7 +87,7 @@ const ContextMenuItems = ({ path, currentDir, selected, selectedContext, setSele
     const Dialogs = useDialogs();
 
     const _createDirectory = () => createDirectory(Dialogs, currentDir);
-    const _createLink = () => createLink(Dialogs, currentDir, files, selectedContext);
+    const _createLink = () => createLink(Dialogs, currentDir, files, selected[0]);
     const _copyItem = () => {
         copyItem(setClipboard, selected.length > 1
             ? selected.map(s => currentDir + s.name)
