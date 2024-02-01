@@ -127,6 +127,7 @@ export const NavigatorCardBody = ({
                 .sort(compare(sortBy));
     }, [files, showHidden, currentFilter, sortBy]);
     const isMounted = useRef(null);
+    const folderViewRef = React.useRef();
 
     function calculateBoxPerRow () {
         const boxes = document.querySelectorAll(".item-button");
@@ -155,6 +156,69 @@ export const NavigatorCardBody = ({
     });
 
     useEffect(() => {
+        let folderViewElem = null;
+
+        const resetSelected = e => {
+            if (e.target.id === "folder-view" || e.target.id === "navigator-card-body") {
+                if (selected.length !== 0) {
+                    setSelected([]);
+                }
+            }
+        };
+
+        const handleDoubleClick = (ev) => {
+            const name = getFilenameForEvent(ev);
+            const file = sortedFiles?.find(file => file.name === name);
+            if (!file)
+                return null;
+            if (!file) {
+                resetSelected(ev);
+                return;
+            }
+
+            onDoubleClickNavigate(file);
+        };
+
+        const handleClick = (ev) => {
+            const name = getFilenameForEvent(ev);
+            const file = sortedFiles?.find(file => file.name === name);
+            if (!file) {
+                resetSelected(ev);
+                return;
+            }
+
+            if (ev.detail > 1) {
+                onDoubleClickNavigate(file);
+            } else {
+                if (!ev.ctrlKey || selected === path[path.length - 1]) {
+                    setSelected([file]);
+                } else {
+                    setSelected(s => {
+                        if (!s.find(f => f.name === file.name)) {
+                            return [...s, file];
+                        } else {
+                            return s.filter(f => f.name !== file.name);
+                        }
+                    });
+                }
+            }
+        };
+
+        const handleContextMenu = (event) => {
+            let sel = getFilenameForEvent(event);
+            if (sel !== null && selected.length > 1) {
+                return;
+            }
+
+            if (sel === null) {
+                sel = path ? path[path.length - 1] : undefined;
+                setSelected([{ name: sel }]);
+            } else {
+                sel = sortedFiles?.find(file => file.name === sel);
+                setSelected([sel]);
+            }
+        };
+
         const onKeyboardNav = (e) => {
             if (e.key === "ArrowRight") {
                 setSelected(_selected => {
@@ -197,6 +261,13 @@ export const NavigatorCardBody = ({
             }
         };
 
+        if (folderViewRef.current) {
+            folderViewElem = folderViewRef.current;
+            folderViewElem.addEventListener("click", handleClick);
+            folderViewElem.addEventListener("dblclick", handleDoubleClick);
+            folderViewElem.addEventListener("contextmenu", handleContextMenu);
+        }
+
         if (!isMounted.current && !Dialogs.isActive()) {
             isMounted.current = true;
             document.addEventListener("keydown", onKeyboardNav);
@@ -206,6 +277,11 @@ export const NavigatorCardBody = ({
         return () => {
             isMounted.current = false;
             document.removeEventListener("keydown", onKeyboardNav);
+            if (folderViewElem) {
+                folderViewElem.removeEventListener("click", handleClick);
+                folderViewElem.removeEventListener("dblclick", handleDoubleClick);
+                folderViewElem.removeEventListener("contextmenu", handleContextMenu);
+            }
         };
     }, [
         setSelected,
@@ -213,15 +289,33 @@ export const NavigatorCardBody = ({
         boxPerRow,
         selected,
         onDoubleClickNavigate,
-        Dialogs
+        Dialogs,
+        path,
     ]);
 
-    const resetSelected = e => {
-        if (e.target.id === "folder-view" || e.target.id === "navigator-card-body") {
-            if (selected.length !== 0) {
-                setSelected([]);
-            }
+    // Generic event handler to look up the corresponding `data-item` for a click event when
+    // a user clicks in the folder view. We use three event listeners (click,
+    // doubleclick and rightclick) instead of having three event listeners per
+    // item in the folder view. Having a lot of event listeners hurts
+    // performance, this does require us to walk up the DOM until we find the
+    // required `data-item` but this is a fairly trivial at the benefit of the
+    // performance gains.
+    const getFilenameForEvent = event => {
+        let data_item = null;
+        let elem = event.target;
+        // Limit iterating to ten parents
+        for (let i = 0; i < 10; i++) {
+            data_item = elem.getAttribute("data-item");
+            if (data_item)
+                break;
+
+            if (elem.parentElement)
+                elem = elem.parentElement;
+            else
+                break;
         }
+
+        return data_item;
     };
 
     if (loadingFiles)
@@ -231,8 +325,9 @@ export const NavigatorCardBody = ({
             </Flex>
         );
 
+    const navigator_parent_id = "navigator-card-parent";
     const contextMenu = (
-        <ContextMenu parentId="folder-view">
+        <ContextMenu parentId={navigator_parent_id}>
             <ContextMenuItems
               path={path}
               selected={selected}
@@ -245,78 +340,52 @@ export const NavigatorCardBody = ({
         </ContextMenu>
     );
 
-    if (isGrid) {
-        return (
-            <>
-                {contextMenu}
-                <CardBody
-                  id="navigator-card-body"
-                  onClick={resetSelected}
-                  onContextMenu={resetSelected}
-                >
-                    <Gallery id="folder-view">
-                        {sortedFiles.map(file =>
-                            <Item
-                              file={file} key={file.name}
-                              isSelected={!!selected.find(s => s.name === file.name)} setSelected={setSelected}
-                              onDoubleClickNavigate={onDoubleClickNavigate}
-                              isGrid={isGrid}
-                            />)}
-                    </Gallery>
-                </CardBody>
-            </>
-        );
-    } else {
-        return (
-            <>
-                {contextMenu}
-                <ListingTable
-                  onClick={resetSelected}
-                  onContextMenu={resetSelected}
-                  id="folder-view"
-                  className="pf-m-no-border-rows"
-                  variant="compact"
-                  columns={[_("Name")]}
-                  rows={sortedFiles.map(file => ({
-                      columns: [
-                          {
-                              title:
-    <Item
-      file={file} key={file.name}
-      isSelected={!!selected.find(s => s.name === file.name)}
-      setSelected={setSelected}
-      onDoubleClickNavigate={onDoubleClickNavigate}
-      isGrid={isGrid}
-    />
-                          }
-                      ]
-                  }))}
-                />
-            </>
-        );
-    }
+    return (
+        <>
+            {contextMenu}
+            <div
+              id={navigator_parent_id}
+              ref={folderViewRef}
+            >
+                {isGrid &&
+                    <CardBody id="navigator-card-body">
+                        <Gallery id="folder-view">
+                            {sortedFiles.map(file =>
+                                <Item
+                                  file={file}
+                                  key={file.name}
+                                  isSelected={!!selected.find(s => s.name === file.name)}
+                                  isGrid={isGrid}
+                                />)}
+                        </Gallery>
+                    </CardBody>}
+                {!isGrid &&
+                    <ListingTable
+                      id="folder-view"
+                      className="pf-m-no-border-rows"
+                      variant="compact"
+                      columns={[_("Name")]}
+                      rows={sortedFiles.map(file => ({
+                          columns: [
+                              {
+                                  title: (
+                                      <Item
+                                        file={file}
+                                        key={file.name}
+                                        isSelected={!!selected.find(s => s.name === file.name)}
+                                        isGrid={isGrid}
+                                      />)
+                              }
+                          ]
+                      }))}
+                    />}
+            </div>
+        </>
+    );
 };
 
 // Memoize the Item component as rendering thousands of them on each render of parent component is costly.
-const Item = React.memo(function Item({ file, isSelected, setSelected, onDoubleClickNavigate, isGrid }) {
-    function handleClick(ev, file) {
-        if (ev.detail > 1) {
-            onDoubleClickNavigate(file);
-        } else {
-            if (!ev.ctrlKey) {
-                setSelected([file]);
-            } else {
-                setSelected(s => {
-                    if (!s.find(f => f.name === file.name)) {
-                        return [...s, file];
-                    } else {
-                        return s.filter(f => f.name !== file.name);
-                    }
-                });
-            }
-        }
-    }
-
+const Item = React.memo(function Item({ file, isSelected, isGrid }) {
     function getFileType(file) {
         if (file.type === "dir") {
             return "directory-item";
@@ -335,16 +404,6 @@ const Item = React.memo(function Item({ file, isSelected, setSelected, onDoubleC
           isClickable isCompact
           isPlain
           isSelected={isSelected}
-          onClick={ev => handleClick(ev, file)}
-          onContextMenu={(e) => {
-              e.stopPropagation();
-              setSelected((oldSelected) => {
-                  if (oldSelected.length === 1 || !oldSelected.includes(file))
-                      return [file];
-                  return oldSelected;
-              });
-          }}
-          onDoubleClick={() => onDoubleClickNavigate(file)}
         >
             <CardHeader
               selectableActions={{

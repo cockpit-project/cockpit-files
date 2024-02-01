@@ -436,6 +436,12 @@ class TestNavigator(testlib.MachineCase):
         b.click("button.pf-m-danger")
         b.wait_not_present("[data-item='newfile']")
 
+        # The list view also supports a contextmenu
+        m.execute("touch /home/admin/testfile")
+        b.click("button[aria-label='Display as a list']")
+        b.mouse("[data-item='testfile']", "contextmenu")
+        b.wait_in_text(".contextMenu li:nth-child(6) button", "Create link")
+
     def testRename(self):
         b = self.browser
         m = self.machine
