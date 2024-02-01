@@ -24,12 +24,19 @@ import {
     Gallery,
     Icon,
     CardTitle, Spinner, CardHeader,
+    MenuItem, MenuList,
+    Divider,
 } from "@patternfly/react-core";
 import { FileIcon, FolderIcon } from "@patternfly/react-icons";
 
 import cockpit from "cockpit";
 import { useDialogs } from "dialogs.jsx";
 import { ListingTable } from "cockpit-components-table.jsx";
+
+import { ContextMenu } from "./context-menu.jsx";
+import {
+    copyItem, createDirectory, createLink, deleteItem, editPermissions, pasteItem, renameItem
+} from "./fileActions.jsx";
 
 const _ = cockpit.gettext;
 
@@ -75,7 +82,91 @@ const compare = (sortBy) => {
     }
 };
 
+// eslint-disable-next-line max-len
+const ContextMenuItems = ({ path, currentDir, selected, selectedContext, setSelected, setHistory, setHistoryIndex, addAlert, rootInfo, clipboard, setClipboard, files }) => {
+    const Dialogs = useDialogs();
+
+    const _createDirectory = () => createDirectory(Dialogs, currentDir, selectedContext || selected);
+    const _createLink = () => createLink(Dialogs, currentDir, files, selectedContext);
+    const _copyItem = () => {
+        copyItem(setClipboard, selected.length > 1
+            ? selected.map(s => currentDir + s.name)
+            : [currentDir + selectedContext.name]);
+    };
+    const _pasteItem = (targetPath, asSymlink) => pasteItem(clipboard, targetPath.join("/") + "/", asSymlink, addAlert);
+    const _renameItem = () => renameItem(Dialogs, { selected: selectedContext, path, setHistory, setHistoryIndex });
+    const _editPermissions = () => editPermissions(Dialogs, { selected: selectedContext || rootInfo, path });
+    const _deleteItem = () => {
+        deleteItem(
+            Dialogs,
+            {
+                selected,
+                itemPath: currentDir + selectedContext.name,
+                setHistory,
+                setHistoryIndex,
+                path: currentDir,
+                setSelected
+            }
+        );
+    };
+
+    return (
+        <MenuList>
+            {
+                (!selectedContext
+                    ? [
+                    // eslint-disable-next-line max-len
+                        { title: _("Paste"), onClick: () => _pasteItem(path, false), isDisabled: clipboard === undefined },
+                        {
+                            title: _("Paste as symlink"),
+                            onClick: () => _pasteItem(path, true),
+                            isDisabled: clipboard === undefined
+                        },
+                        { type: "divider" },
+                        { title: _("Create directory"), onClick: _createDirectory },
+                        { title: _("Create link"), onClick: _createLink },
+                        { type: "divider" },
+                        { title: _("Edit permissions"), onClick: _editPermissions }
+                    ]
+                    : selected.length > 1 && selected.includes(selectedContext)
+                    // eslint-disable-next-line max-len
+                        ? [{ title: _("Copy"), onClick: _copyItem }, { title: _("Delete"), onClick: _deleteItem, className: "pf-m-danger" }]
+                        : [
+                            { title: _("Copy"), onClick: _copyItem },
+                            ...(selectedContext.type === "dir")
+                                ? [
+                                    {
+                                        title: _("Paste into directory"),
+                                        onClick: () => _pasteItem([...path, selectedContext.name], false),
+                                        isDisabled: clipboard === undefined
+                                    }
+                                ]
+                                : [],
+                            { type: "divider" },
+                            { title: _("Edit permissions"), onClick: _editPermissions },
+                            { title: _("Rename"), onClick: _renameItem },
+                            { type: "divider" },
+                            { title: _("Create link"), onClick: _createLink },
+                            { type: "divider" },
+                            { title: cockpit.format(_("Delete")), onClick: _deleteItem, className: "pf-m-danger" },
+                        ])
+                        .map((item, i) => item.type !== "divider"
+                            ? (
+                                <MenuItem
+                                  className={"context-menu-option " + item.className} key={item.title}
+                                  onClick={item.onClick} isDisabled={item.isDisabled}
+                                >
+                                    <div className="context-menu-name">{item.title}</div>
+                                </MenuItem>
+                            )
+                            : <Divider key={i} />)
+            }
+        </MenuList>
+    );
+};
+
 export const NavigatorCardBody = ({
+    currentDir,
     currentFilter,
     files,
     historyIndex,
@@ -87,7 +178,13 @@ export const NavigatorCardBody = ({
     setSelected,
     setSelectedContext,
     sortBy,
-    loadingFiles
+    loadingFiles,
+    clipboard,
+    setClipboard,
+    addAlert,
+    allFiles,
+    selectedContext,
+    rootInfo,
 }) => {
     const [boxPerRow, setBoxPerRow] = useState(0);
     const Dialogs = useDialogs();
@@ -280,23 +377,53 @@ export const NavigatorCardBody = ({
                 <Spinner />
             </Flex>
         );
+
+    const contextMenu = (
+        <ContextMenu
+          parentId="folder-view"
+          contextMenuItems={
+              <ContextMenuItems
+                path={path}
+                currentDir={currentDir}
+                selected={selected}
+                setSelected={setSelected}
+                selectedContext={selectedContext}
+                setHistory={setHistory}
+                setHistoryIndex={setHistoryIndex}
+                addAlert={addAlert}
+                clipboard={clipboard}
+                setClipboard={setClipboard}
+                files={allFiles}
+                rootInfo={rootInfo}
+              />
+          }
+          setSelectedContext={setSelectedContext}
+        />
+    );
+
     if (isGrid) {
         return (
-            <CardBody onClick={resetSelected} id="navigator-card-body">
-                <Gallery id="folder-view">
-                    {sortedFiles.map(file => <Item file={file} key={file.name} />)}
-                </Gallery>
-            </CardBody>
+            <>
+                {contextMenu}
+                <CardBody onClick={resetSelected} id="navigator-card-body">
+                    <Gallery id="folder-view">
+                        {sortedFiles.map(file => <Item file={file} key={file.name} />)}
+                    </Gallery>
+                </CardBody>
+            </>
         );
     } else {
         return (
-            <ListingTable
-              id="folder-view"
-              className="pf-m-no-border-rows"
-              variant="compact"
-              columns={[_("Name")]}
-              rows={sortedFiles.map(file => ({ columns: [{ title: <Item file={file} key={file.name} /> }] }))}
-            />
+            <>
+                {contextMenu}
+                <ListingTable
+                  id="folder-view"
+                  className="pf-m-no-border-rows"
+                  variant="compact"
+                  columns={[_("Name")]}
+                  rows={sortedFiles.map(file => ({ columns: [{ title: <Item file={file} key={file.name} /> }] }))}
+                />
+            </>
         );
     }
 };
