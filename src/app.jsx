@@ -49,7 +49,6 @@ export const Application = () => {
     const [isGrid, setIsGrid] = useState(true);
     const [sortBy, setSortBy] = useState(localStorage.getItem("cockpit-navigator.sort") || "az");
     const [selected, setSelected] = useState([]);
-    const [selectedContext, setSelectedContext] = useState(null);
     const [showHidden, setShowHidden] = useState(localStorage.getItem("cockpit-navigator.showHiddenFiles") === "true");
     const [history, setHistory] = useState([]);
     const [historyIndex, setHistoryIndex] = useState(0);
@@ -122,11 +121,7 @@ export const Application = () => {
               setHistory={setHistory} history={history}
               historyIndex={historyIndex} setHistoryIndex={setHistoryIndex}
             />
-            <PageSection onContextMenu={() => {
-                setSelectedContext(null);
-                setSelected([{ name: sel }]);
-            }}
-            >
+            <PageSection>
                 <Sidebar isPanelRight hasGutter>
                     <SidebarContent>
                         <Card>
@@ -142,8 +137,7 @@ export const Application = () => {
                               currentDir={currentDir}
                               isGrid={isGrid} sortBy={sortBy}
                               selected={selected} setSelected={setSelected}
-                              selectedContext={selectedContext}
-                              setSelectedContext={setSelectedContext} setHistory={setHistory}
+                              setHistory={setHistory}
                               setHistoryIndex={setHistoryIndex} historyIndex={historyIndex}
                               loadingFiles={loadingFiles}
                               clipboard={clipboard}

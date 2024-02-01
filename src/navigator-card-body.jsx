@@ -176,17 +176,16 @@ export const NavigatorCardBody = ({
     setHistory,
     setHistoryIndex,
     setSelected,
-    setSelectedContext,
     sortBy,
     loadingFiles,
     clipboard,
     setClipboard,
     addAlert,
     allFiles,
-    selectedContext,
     rootInfo,
 }) => {
     const [boxPerRow, setBoxPerRow] = useState(0);
+    const [selectedContext, setSelectedContext] = useState(null);
     const Dialogs = useDialogs();
     const sortedFiles = useMemo(() => {
         const compareFunc = compare(sortBy);
@@ -319,6 +318,12 @@ export const NavigatorCardBody = ({
         }
     };
 
+    const handleContextMenu = () => {
+        setSelectedContext(null);
+        const sel = path ? path[path.length - 1] : undefined;
+        setSelected([{ name: sel }]);
+    };
+
     const Item = ({ file }) => {
         const getFileType = (file) => {
             if (file.type === "dir") {
@@ -405,7 +410,11 @@ export const NavigatorCardBody = ({
         return (
             <>
                 {contextMenu}
-                <CardBody onClick={resetSelected} id="navigator-card-body">
+                <CardBody
+                  id="navigator-card-body"
+                  onClick={resetSelected}
+                  onContextMenu={handleContextMenu}
+                >
                     <Gallery id="folder-view">
                         {sortedFiles.map(file => <Item file={file} key={file.name} />)}
                     </Gallery>
@@ -422,6 +431,7 @@ export const NavigatorCardBody = ({
                   variant="compact"
                   columns={[_("Name")]}
                   rows={sortedFiles.map(file => ({ columns: [{ title: <Item file={file} key={file.name} /> }] }))}
+                  onContextMenu={handleContextMenu}
                 />
             </>
         );
