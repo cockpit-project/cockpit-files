@@ -94,7 +94,7 @@ const ContextMenuItems = ({ path, currentDir, selected, selectedContext, setSele
             : [currentDir + selected[0].name]);
     };
     const _pasteItem = (targetPath, asSymlink) => pasteItem(clipboard, targetPath.join("/") + "/", asSymlink, addAlert);
-    const _renameItem = () => renameItem(Dialogs, { selected: selectedContext, path, setHistory, setHistoryIndex });
+    const _renameItem = () => renameItem(Dialogs, { selected: selected[0], path, setHistory, setHistoryIndex });
     const _editPermissions = () => editPermissions(Dialogs, { selected: selectedContext || rootInfo, path });
     const _deleteItem = () => {
         deleteItem(
