@@ -315,9 +315,7 @@ const DropdownWithKebab = ({
             id: "edit-permissions",
             onClick: () => {
                 editPermissions(Dialogs, {
-                    selected: selected.length === 0
-                        ? null
-                        : selected[0],
+                    selected: selected[0] || currentDirectory,
                     path
                 });
             },
