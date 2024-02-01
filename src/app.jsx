@@ -45,6 +45,7 @@ export const Application = () => {
     const [errorMessage, setErrorMessage] = useState();
     const [currentFilter, setCurrentFilter] = useState("");
     const [files, setFiles] = useState([]);
+    // eslint-disable-next-line no-unused-vars
     const [rootInfo, setRootInfo] = useState();
     const [isGrid, setIsGrid] = useState(true);
     const [sortBy, setSortBy] = useState(localStorage.getItem("cockpit-navigator.sort") || "az");
@@ -143,7 +144,6 @@ export const Application = () => {
                               clipboard={clipboard}
                               setClipboard={setClipboard}
                               addAlert={addAlert}
-                              rootInfo={rootInfo}
                               allFiles={files}
                             />
                             <AlertGroup isToast isLiveRegion>
