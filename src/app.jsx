@@ -19,36 +19,27 @@
 
 import cockpit from "cockpit";
 import { superuser } from "superuser";
-import { useDialogs } from "dialogs.jsx";
 import React, { useEffect, useState } from "react";
 import {
     Card,
-    MenuItem, MenuList,
     Page, PageSection,
     Sidebar, SidebarPanel, SidebarContent,
-    Divider, AlertGroup, Alert, AlertActionCloseButton
+    AlertGroup, Alert, AlertActionCloseButton
 } from "@patternfly/react-core";
 import { ExclamationCircleIcon } from "@patternfly/react-icons";
 
 import { EmptyStatePanel } from "cockpit-components-empty-state.jsx";
-import { ContextMenu } from "./context-menu.jsx";
 import { NavigatorBreadcrumbs } from "./navigatorBreadcrumbs.jsx";
 import { NavigatorCardBody } from "./navigator-card-body.jsx";
-import {
-    copyItem, createDirectory, createLink, deleteItem, editPermissions, pasteItem, renameItem
-} from "./fileActions.jsx";
 import { SidebarPanelDetails } from "./sidebar.jsx";
 import { NavigatorCardHeader } from "./header.jsx";
 import { usePageLocation } from "hooks.js";
 import { fsinfo } from "./fsinfo";
 
-const _ = cockpit.gettext;
-
 superuser.reload_page_on_change();
 
 export const Application = () => {
     const { options } = usePageLocation();
-    const Dialogs = useDialogs();
     const [loading, setLoading] = useState(true);
     const [loadingFiles, setLoadingFiles] = useState(true);
     const [errorMessage, setErrorMessage] = useState();
@@ -120,86 +111,8 @@ export const Application = () => {
         ? files.filter(file => !file.name.startsWith("."))
         : files;
 
-    const _createDirectory = () => createDirectory(Dialogs, currentDir, selectedContext || selected);
-    const _createLink = () => createLink(Dialogs, currentDir, files, selectedContext);
-    const _copyItem = () => {
-        copyItem(setClipboard, selected.length > 1
-            ? selected.map(s => currentDir + s.name)
-            : [currentDir + selectedContext.name]);
-    };
-    const _pasteItem = (targetPath, asSymlink) => pasteItem(clipboard, targetPath.join("/") + "/", asSymlink, addAlert);
-    const _renameItem = () => renameItem(Dialogs, { selected: selectedContext, path, setHistory, setHistoryIndex });
-    const _editPermissions = () => editPermissions(Dialogs, { selected: selectedContext || rootInfo, path });
-    const _deleteItem = () => {
-        deleteItem(
-            Dialogs,
-            {
-                selected,
-                itemPath: currentDir + selectedContext.name,
-                setHistory,
-                setHistoryIndex,
-                path: currentDir,
-                setSelected
-            }
-        );
-    };
-
     const addAlert = (title, variant, key) => setAlerts(prevAlerts => [...prevAlerts, { title, variant, key }]);
     const removeAlert = (key) => setAlerts(prevAlerts => [...prevAlerts.filter(alert => alert.key !== key)]);
-
-    const contextMenuItems = (
-        <MenuList>
-            {
-                (!selectedContext
-                    ? [
-                        // eslint-disable-next-line max-len
-                        { title: _("Paste"), onClick: () => _pasteItem(path, false), isDisabled: clipboard === undefined },
-                        {
-                            title: _("Paste as symlink"),
-                            onClick: () => _pasteItem(path, true),
-                            isDisabled: clipboard === undefined
-                        },
-                        { type: "divider" },
-                        { title: _("Create directory"), onClick: _createDirectory },
-                        { title: _("Create link"), onClick: _createLink },
-                        { type: "divider" },
-                        { title: _("Edit permissions"), onClick: _editPermissions }
-                    ]
-                    : selected.length > 1 && selected.includes(selectedContext)
-                    // eslint-disable-next-line max-len
-                        ? [{ title: _("Copy"), onClick: _copyItem }, { title: _("Delete"), onClick: _deleteItem, className: "pf-m-danger" }]
-                        : [
-                            { title: _("Copy"), onClick: _copyItem },
-                            ...(selectedContext.type === "dir")
-                                ? [
-                                    {
-                                        title: _("Paste into directory"),
-                                        onClick: () => _pasteItem([...path, selectedContext.name], false),
-                                        isDisabled: clipboard === undefined
-                                    }
-                                ]
-                                : [],
-                            { type: "divider" },
-                            { title: _("Edit permissions"), onClick: _editPermissions },
-                            { title: _("Rename"), onClick: _renameItem },
-                            { type: "divider" },
-                            { title: _("Create link"), onClick: _createLink },
-                            { type: "divider" },
-                            { title: cockpit.format(_("Delete")), onClick: _deleteItem, className: "pf-m-danger" },
-                        ])
-                        .map((item, i) => item.type !== "divider"
-                            ? (
-                                <MenuItem
-                                  className={"context-menu-option " + item.className} key={item.title}
-                                  onClick={item.onClick} isDisabled={item.isDisabled}
-                                >
-                                    <div className="context-menu-name">{item.title}</div>
-                                </MenuItem>
-                            )
-                            : <Divider key={i} />)
-            }
-        </MenuList>
-    );
 
     return (
         <Page>
@@ -229,15 +142,16 @@ export const Application = () => {
                               currentDir={currentDir}
                               isGrid={isGrid} sortBy={sortBy}
                               selected={selected} setSelected={setSelected}
+                              selectedContext={selectedContext}
                               setSelectedContext={setSelectedContext} setHistory={setHistory}
                               setHistoryIndex={setHistoryIndex} historyIndex={historyIndex}
                               loadingFiles={loadingFiles}
+                              clipboard={clipboard}
+                              setClipboard={setClipboard}
+                              addAlert={addAlert}
+                              rootInfo={rootInfo}
+                              allFiles={files}
                             />
-                            {!loadingFiles &&
-                            <ContextMenu
-                              parentId="folder-view" contextMenuItems={contextMenuItems}
-                              setSelectedContext={setSelectedContext}
-                            />}
                             <AlertGroup isToast isLiveRegion>
                                 {alerts.map(alert => (
                                     <Alert
