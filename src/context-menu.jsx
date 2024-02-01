@@ -23,7 +23,7 @@ import { Menu, MenuContent } from "@patternfly/react-core";
 
 import "./context-menu.scss";
 
-export const ContextMenu = ({ parentId, contextMenuItems, setSelectedContext }) => {
+export const ContextMenu = ({ parentId, contextMenuItems }) => {
     const [visible, setVisible] = React.useState(false);
     const [event, setEvent] = React.useState(null);
     const root = React.useRef(null);
@@ -41,7 +41,6 @@ export const ContextMenu = ({ parentId, contextMenuItems, setSelectedContext }) 
 
                 if (wasOutside) {
                     setVisible(false);
-                    setSelectedContext(null);
                 }
             }
         };
@@ -54,7 +53,7 @@ export const ContextMenu = ({ parentId, contextMenuItems, setSelectedContext }) 
             parent.removeEventListener("contextmenu", _handleContextMenu);
             document.removeEventListener("click", _handleClick);
         };
-    }, [parentId, setSelectedContext]);
+    }, [parentId]);
 
     React.useEffect(() => {
         if (!event)
