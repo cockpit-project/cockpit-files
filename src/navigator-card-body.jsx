@@ -86,7 +86,7 @@ const compare = (sortBy) => {
 const ContextMenuItems = ({ path, currentDir, selected, selectedContext, setSelected, setHistory, setHistoryIndex, addAlert, rootInfo, clipboard, setClipboard, files }) => {
     const Dialogs = useDialogs();
 
-    const _createDirectory = () => createDirectory(Dialogs, currentDir, selectedContext || selected);
+    const _createDirectory = () => createDirectory(Dialogs, currentDir);
     const _createLink = () => createLink(Dialogs, currentDir, files, selectedContext);
     const _copyItem = () => {
         copyItem(setClipboard, selected.length > 1

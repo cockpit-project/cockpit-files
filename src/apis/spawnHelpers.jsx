@@ -89,13 +89,8 @@ export const spawnRenameItem = ({ selected, name, path, Dialogs, setErrorMessage
             }, err => setErrorMessage(err.message));
 };
 
-export const spawnCreateDirectory = ({ name, currentPath, selected, Dialogs, setErrorMessage }) => {
-    let path;
-    if (selected.icons_cnt || selected.type === "dir") {
-        path = currentPath + selected.name + "/" + name;
-    } else {
-        path = currentPath + name;
-    }
+export const spawnCreateDirectory = ({ name, currentPath, Dialogs, setErrorMessage }) => {
+    const path = currentPath + name;
     cockpit.spawn(["mkdir", path], options)
             .then(Dialogs.close, err => setErrorMessage(err.message));
 };
