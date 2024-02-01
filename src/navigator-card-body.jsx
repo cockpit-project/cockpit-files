@@ -101,7 +101,6 @@ const ContextMenuItems = ({ path, currentDir, selected, selectedContext, setSele
             Dialogs,
             {
                 selected,
-                itemPath: currentDir + selectedContext.name,
                 setHistory,
                 setHistoryIndex,
                 path: currentDir,
