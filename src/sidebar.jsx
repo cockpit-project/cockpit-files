@@ -300,7 +300,7 @@ const DropdownWithKebab = ({
             ? [
                 {
                     id: "create-item",
-                    onClick: () => createDirectory(Dialogs, currentPath, selected),
+                    onClick: () => createDirectory(Dialogs, currentPath),
                     title: _("Create directory")
                 }
             ]

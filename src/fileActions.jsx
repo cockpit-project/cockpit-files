@@ -52,8 +52,8 @@ import { map_permissions, inode_types } from "./common";
 
 const _ = cockpit.gettext;
 
-export const createDirectory = (Dialogs, currentPath, selected) => {
-    Dialogs.show(<CreateDirectoryModal currentPath={currentPath} selected={selected} />);
+export const createDirectory = (Dialogs, currentPath) => {
+    Dialogs.show(<CreateDirectoryModal currentPath={currentPath} />);
 };
 
 export const createLink = (Dialogs, currentPath, files, selected) => {
@@ -206,12 +206,12 @@ export const ForceDeleteModal = ({ selected, itemPath, initialError }) => {
     );
 };
 
-export const CreateDirectoryModal = ({ selected, currentPath }) => {
+export const CreateDirectoryModal = ({ currentPath }) => {
     const Dialogs = useDialogs();
     const [name, setName] = useState("");
     const [errorMessage, setErrorMessage] = useState(undefined);
     const createDirectory = () => {
-        spawnCreateDirectory({ Dialogs, selected, currentPath, name, setErrorMessage });
+        spawnCreateDirectory({ Dialogs, currentPath, name, setErrorMessage });
     };
 
     return (
