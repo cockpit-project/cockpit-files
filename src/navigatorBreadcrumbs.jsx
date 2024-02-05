@@ -17,12 +17,37 @@
  * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
  */
 import cockpit from "cockpit";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { Button, Flex, FlexItem, PageBreadcrumb } from "@patternfly/react-core";
 import { ArrowLeftIcon, ArrowRightIcon } from "@patternfly/react-icons";
 
 export const NavigatorBreadcrumbs = ({ currentDir, path, history, setHistory, historyIndex, setHistoryIndex }) => {
+    const [hostnameData, setHostnameData] = useState(undefined);
+
+    useEffect(() => {
+        const client = cockpit.dbus('org.freedesktop.hostname1');
+        const hostnameProxy = client.proxy('org.freedesktop.hostname1', '/org/freedesktop/hostname1');
+        hostnameProxy.addEventListener("changed", data => {
+            setHostnameData(data.detail);
+        });
+    }, []);
+
+    const hostnameText = () => {
+        if (!hostnameData)
+            return undefined;
+
+        const pretty_hostname = hostnameData.PrettyHostname;
+        const static_hostname = hostnameData.StaticHostname;
+        let str = hostnameData.Hostname;
+        if (pretty_hostname && static_hostname && static_hostname !== pretty_hostname)
+            str = pretty_hostname + " (" + static_hostname + ")";
+        else if (static_hostname)
+            str = static_hostname;
+
+        return str || '';
+    };
+
     const navigateBack = () => {
         if (historyIndex > 0) {
             cockpit.location.go("/", { path: encodeURIComponent(history[historyIndex - 1].join("/")) });
@@ -65,17 +90,19 @@ export const NavigatorBreadcrumbs = ({ currentDir, path, history, setHistory, hi
                 <FlexItem>
                     <Flex spaceItems={{ default: "spaceItemsXs" }}>
                         {path.map((dir, i) => {
+                            console.log(dir);
                             return (
-                                <React.Fragment key={dir || "/"}>
+                                <React.Fragment key={dir || hostnameText()}>
                                     {i !== path.length - 1 &&
                                         <Button
                                           variant="link" onClick={() => { navigateBreadcrumb(i + 1) }}
                                           key={dir} className="breadcrumb-button"
                                         >
-                                            {dir || "/"}
+                                            {dir || hostnameText()}
                                         </Button>}
-                                    {i === path.length - 1 && <p className="last-breadcrumb-button">{dir || "/"}</p>}
-                                    {dir !== "" && <p key={i}>/</p>}
+                                    {i === path.length - 1 &&
+                                    <p className="last-breadcrumb-button">{dir || hostnameText()}</p>}
+                                    <p key={i}>/</p>
                                 </React.Fragment>
                             );
                         })}
