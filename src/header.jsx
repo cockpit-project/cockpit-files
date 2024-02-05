@@ -94,7 +94,10 @@ const ViewSelector = ({ isGrid, setIsGrid, sortBy, setSortBy }) => {
                               ? _("Display as a list")
                               : _("Display as a grid")}
                           key="view-toggle-action"
-                          onClick={() => setIsGrid(!isGrid)}
+                          onClick={() => setIsGrid(isGrid => {
+                              localStorage.setItem("navigator:isGrid", !isGrid ? "true" : "false");
+                              return !isGrid;
+                          })}
                         >
                             {isGrid
                                 ? <ListIcon className="view-toggle-icon" />
