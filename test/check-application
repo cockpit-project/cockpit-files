@@ -136,6 +136,11 @@ class TestNavigator(testlib.MachineCase):
         b.set_input_text("input[placeholder='Filter directory']", "")
         self.browser.wait_js_cond("ph_count('#folder-view tbody tr') > 1")
 
+        # Selected view is saved in localStorage
+        b.reload()
+        b.enter_page("/navigator")
+        b.wait_visible("button[aria-label='Display as a grid']")
+
         # deleted files and directories are auto-detected
         m.execute("rmdir /home/admin/newdir")
         m.execute("rm /home/admin/newfile")
