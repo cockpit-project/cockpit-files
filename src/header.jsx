@@ -26,19 +26,21 @@ import {
     Flex,
     MenuToggle,
     MenuToggleAction,
-    SearchInput,
     Select,
     SelectList,
     SelectOption,
     Text,
-    TextContent,
-    TextVariants
+    TextContent, TextVariants, TextInputGroup, TextInputGroupMain, TextInputGroupUtilities,
+    Button,
 } from "@patternfly/react-core";
-import { GripVerticalIcon, ListIcon } from "@patternfly/react-icons";
+import { GripVerticalIcon, ListIcon, SearchIcon, TimesIcon } from "@patternfly/react-icons";
 
 const _ = cockpit.gettext;
 
-export const NavigatorCardHeader = ({ currentFilter, onFilterChange, isGrid, setIsGrid, sortBy, setSortBy }) => {
+export const NavigatorCardHeader = ({
+    currentFilter, setCurrentFilter, onFilterChange, isGrid, setIsGrid, sortBy,
+    setSortBy
+}) => {
     return (
         <CardHeader className="card-actionbar">
             <CardTitle component="h2" id="navigator-card-header">
@@ -49,10 +51,23 @@ export const NavigatorCardHeader = ({ currentFilter, onFilterChange, isGrid, set
                 </TextContent>
             </CardTitle>
             <Flex flexWrap={{ default: "nowrap" }} alignItems={{ default: "alignItemsCenter" }}>
-                <SearchInput
-                  placeholder={_("Filter directory")} value={currentFilter}
-                  onChange={onFilterChange}
-                />
+                <TextInputGroup>
+                    <TextInputGroupMain
+                      icon={<SearchIcon />} value={currentFilter}
+                      onChange={onFilterChange}
+                    />
+                    <TextInputGroupUtilities>
+
+                        <Button
+                          variant="plain" onClick={_ => setCurrentFilter("")}
+                          aria-label="Clear button and input"
+                        >
+                            <TimesIcon />
+                        </Button>
+
+                    </TextInputGroupUtilities>
+
+                </TextInputGroup>
                 <ViewSelector
                   isGrid={isGrid} setIsGrid={setIsGrid}
                   setSortBy={setSortBy} sortBy={sortBy}

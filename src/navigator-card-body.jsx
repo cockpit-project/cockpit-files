@@ -24,19 +24,18 @@ import {
     Gallery,
     Icon,
     CardTitle, Spinner, CardHeader,
-    MenuItem, MenuList,
-    Divider,
+    Button,
+    EmptyState,
+    EmptyStateHeader,
+    EmptyStateFooter,
+    EmptyStateActions,
+    EmptyStateIcon,
 } from "@patternfly/react-core";
-import { FileIcon, FolderIcon } from "@patternfly/react-icons";
+import { FileIcon, FolderIcon, SearchIcon } from "@patternfly/react-icons";
 
 import cockpit from "cockpit";
 import { useDialogs } from "dialogs.jsx";
 import { ListingTable } from "cockpit-components-table.jsx";
-
-import { ContextMenu } from "./context-menu.jsx";
-import {
-    copyItem, createDirectory, createLink, deleteItem, editPermissions, pasteItem, renameItem
-} from "./fileActions.jsx";
 
 const _ = cockpit.gettext;
 
@@ -82,103 +81,9 @@ const compare = (sortBy) => {
     }
 };
 
-// eslint-disable-next-line max-len
-const ContextMenuItems = ({ path, currentDir, selected, setSelected, setHistory, setHistoryIndex, addAlert, clipboard, setClipboard, files }) => {
-    const Dialogs = useDialogs();
-
-    const _createDirectory = () => createDirectory(Dialogs, currentDir);
-    const _createLink = () => createLink(Dialogs, currentDir, files, selected[0]);
-    const _copyItem = () => {
-        copyItem(setClipboard, selected.length > 1
-            ? selected.map(s => currentDir + s.name)
-            : [currentDir + selected[0].name]);
-    };
-    const _pasteItem = (targetPath, asSymlink) => pasteItem(clipboard, targetPath.join("/") + "/", asSymlink, addAlert);
-    const _renameItem = () => renameItem(Dialogs, { selected: selected[0], path, setHistory, setHistoryIndex });
-    const _editPermissions = () => editPermissions(Dialogs, { selected: selected[0], path });
-    const _deleteItem = () => {
-        deleteItem(
-            Dialogs,
-            {
-                selected,
-                setHistory,
-                setHistoryIndex,
-                path: currentDir,
-                setSelected
-            }
-        );
-    };
-
-    if (selected.length === 0)
-        return null;
-
-    const menuItems = [];
-
-    // HACK: No item selected but the current folder, this depends on
-    // `selected` contained the currently viewed directory which is plain wrong
-    // from a state perspective. `selected` should be the actually "selected"
-    // items and not the current path. Refactor this later.
-    if (selected.length === 1 && selected[0].name === path[path.length - 1]) {
-        menuItems.push(
-            { title: _("Paste"), onClick: () => _pasteItem(path, false), isDisabled: clipboard === undefined },
-            {
-                title: _("Paste as symlink"),
-                onClick: () => _pasteItem(path, true),
-                isDisabled: clipboard === undefined
-            },
-            { type: "divider" },
-            { title: _("Create directory"), onClick: _createDirectory },
-            { title: _("Create link"), onClick: _createLink },
-            { type: "divider" },
-            { title: _("Edit permissions"), onClick: _editPermissions }
-        );
-    } else if (selected.length === 1) {
-        menuItems.push(
-            { title: _("Copy"), onClick: _copyItem },
-            ...(selected[0].type === "dir")
-                ? [
-                    {
-                        title: _("Paste into directory"),
-                        onClick: () => _pasteItem([...path, selected[0].name], false),
-                        isDisabled: clipboard === undefined
-                    }
-                ]
-                : [],
-            { type: "divider" },
-            { title: _("Edit permissions"), onClick: _editPermissions },
-            { title: _("Rename"), onClick: _renameItem },
-            { type: "divider" },
-            { title: _("Create link"), onClick: _createLink },
-            { type: "divider" },
-            { title: cockpit.format(_("Delete")), onClick: _deleteItem, className: "pf-m-danger" },
-        );
-    } else if (selected.length > 1) {
-        menuItems.push(
-            { title: _("Copy"), onClick: _copyItem },
-            { title: _("Delete"), onClick: _deleteItem, className: "pf-m-danger" }
-        );
-    }
-
-    return (
-        <MenuList>
-            {menuItems.map((item, i) =>
-                item.type !== "divider"
-                    ? (
-                        <MenuItem
-                          className={"context-menu-option " + item.className} key={item.title}
-                          onClick={item.onClick} isDisabled={item.isDisabled}
-                        >
-                            <div className="context-menu-name">{item.title}</div>
-                        </MenuItem>
-                    )
-                    : <Divider key={i} />)}
-        </MenuList>
-    );
-};
-
 export const NavigatorCardBody = ({
-    currentDir,
     currentFilter,
+    setCurrentFilter,
     files,
     historyIndex,
     isGrid,
@@ -187,12 +92,9 @@ export const NavigatorCardBody = ({
     setHistory,
     setHistoryIndex,
     setSelected,
+    setSelectedContext,
     sortBy,
-    loadingFiles,
-    clipboard,
-    setClipboard,
-    addAlert,
-    allFiles,
+    loadingFiles
 }) => {
     const [boxPerRow, setBoxPerRow] = useState(0);
     const Dialogs = useDialogs();
@@ -327,11 +229,6 @@ export const NavigatorCardBody = ({
         }
     };
 
-    const handleContextMenu = () => {
-        const sel = path ? path[path.length - 1] : undefined;
-        setSelected([{ name: sel }]);
-    };
-
     const Item = ({ file }) => {
         const getFileType = (file) => {
             if (file.type === "dir") {
@@ -354,6 +251,7 @@ export const NavigatorCardBody = ({
               onClick={ev => handleClick(ev, file)}
               onContextMenu={(e) => {
                   e.stopPropagation();
+                  setSelectedContext(file);
                   if (selected.length === 1 || !selected.includes(file))
                       setSelected([file]);
               }}
@@ -389,55 +287,40 @@ export const NavigatorCardBody = ({
                 <Spinner />
             </Flex>
         );
-
-    const contextMenu = (
-        <ContextMenu
-          parentId="folder-view"
-          contextMenuItems={
-              <ContextMenuItems
-                path={path}
-                currentDir={currentDir}
-                selected={selected}
-                setSelected={setSelected}
-                setHistory={setHistory}
-                setHistoryIndex={setHistoryIndex}
-                addAlert={addAlert}
-                clipboard={clipboard}
-                setClipboard={setClipboard}
-                files={allFiles}
-              />
-          }
-        />
-    );
-
-    if (isGrid) {
+    const clearFilter = () => {
+        setCurrentFilter("");
+    };
+    if (sortedFiles.length === 0 && currentFilter !== "") {
         return (
-            <>
-                {contextMenu}
-                <CardBody
-                  id="navigator-card-body"
-                  onClick={resetSelected}
-                  onContextMenu={handleContextMenu}
-                >
-                    <Gallery id="folder-view">
-                        {sortedFiles.map(file => <Item file={file} key={file.name} />)}
-                    </Gallery>
-                </CardBody>
-            </>
+            <EmptyState>
+                <EmptyStateHeader
+                  titleText={_("No results found")} headingLevel="h4"
+                  icon={<EmptyStateIcon icon={SearchIcon} />}
+                />
+                <EmptyStateFooter>
+                    <EmptyStateActions>
+                        <Button variant="link" onClick={clearFilter}>Clear search</Button>
+                    </EmptyStateActions>
+                </EmptyStateFooter>
+            </EmptyState>
+        );
+    } else if (isGrid) {
+        return (
+            <CardBody onClick={resetSelected} id="navigator-card-body">
+                <Gallery id="folder-view">
+                    {sortedFiles.map(file => <Item file={file} key={file.name} />)}
+                </Gallery>
+            </CardBody>
         );
     } else {
         return (
-            <>
-                {contextMenu}
-                <ListingTable
-                  id="folder-view"
-                  className="pf-m-no-border-rows"
-                  variant="compact"
-                  columns={[_("Name")]}
-                  rows={sortedFiles.map(file => ({ columns: [{ title: <Item file={file} key={file.name} /> }] }))}
-                  onContextMenu={handleContextMenu}
-                />
-            </>
+            <ListingTable
+              id="folder-view"
+              className="pf-m-no-border-rows"
+              variant="compact"
+              columns={[_("Name")]}
+              rows={sortedFiles.map(file => ({ columns: [{ title: <Item file={file} key={file.name} /> }] }))}
+            />
         );
     }
 };
