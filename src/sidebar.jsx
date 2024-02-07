@@ -114,7 +114,6 @@ export const SidebarPanelDetails = ({
     setPath,
     showHidden,
     setSelected,
-    currentDirectory,
     clipboard,
     setClipboard,
     addAlert
@@ -132,9 +131,9 @@ export const SidebarPanelDetails = ({
     }, [path, selected]);
 
     const Dialogs = useDialogs();
-    const hidden_count = currentDirectory.items_cnt.hidden;
-    let shown_items = cockpit.format(cockpit.ngettext("$0 item", "$0 items", currentDirectory.items_cnt.all),
-                                     currentDirectory.items_cnt.all);
+    const directory_name = path[path.length - 1];
+    const hidden_count = files.filter(file => file.name.startsWith(".")).length;
+    let shown_items = cockpit.format(cockpit.ngettext("$0 item", "$0 items", files.length), files.length);
     if (!showHidden)
         shown_items += " " + cockpit.format(cockpit.ngettext("($0 hidden)", "($0 hidden)", hidden_count), hidden_count);
 
@@ -145,7 +144,7 @@ export const SidebarPanelDetails = ({
                     <TextContent>
                         <Text component={TextVariants.h2}>{selected.length === 1
                             ? selected[0].name
-                            : currentDirectory.name}
+                            : directory_name}
                         </Text>
                         {selected.length === 0 &&
                             <Text component={TextVariants.small}>
@@ -167,7 +166,7 @@ export const SidebarPanelDetails = ({
                   setHistory={setHistory}
                   setHistoryIndex={setHistoryIndex} files={files}
                   clipboard={clipboard} setClipboard={setClipboard}
-                  setSelected={setSelected} currentDirectory={currentDirectory}
+                  setSelected={setSelected}
                   addAlert={addAlert}
                 />
             </CardHeader>
@@ -204,11 +203,11 @@ const DropdownWithKebab = ({
     clipboard,
     setClipboard,
     setSelected,
-    currentDirectory,
     addAlert
 }) => {
     const Dialogs = useDialogs();
     const [isOpen, setIsOpen] = useState(false);
+    const directory_name = path[path.length - 1];
 
     const onToggleClick = () => setIsOpen(!isOpen);
     const onSelect = (_event, itemId) => setIsOpen(false);
@@ -276,7 +275,7 @@ const DropdownWithKebab = ({
             id: "edit-permissions",
             onClick: () => {
                 editPermissions(Dialogs, {
-                    selected: selected[0] || currentDirectory,
+                    selected: selected[0] || { name: directory_name, type: "dir" },
                     path
                 });
             },
@@ -285,7 +284,12 @@ const DropdownWithKebab = ({
         {
             id: "rename-item",
             onClick: () => {
-                renameItem(Dialogs, { selected: selected[0] || currentDirectory, path, setHistory, setHistoryIndex });
+                renameItem(Dialogs, {
+                    selected: selected[0] || { name: directory_name, type: "dir" },
+                    path,
+                    setHistory,
+                    setHistoryIndex
+                });
             },
             title: _("Rename")
         },

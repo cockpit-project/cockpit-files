@@ -169,15 +169,6 @@ export const Application = () => {
                         <SidebarPanelDetails
                           path={path}
                           selected={selected.map(s => files.find(f => f.name === s.name)).filter(s => s !== undefined)}
-                          currentDirectory={
-                              {
-                                  name: path[path.length - 1],
-                                  items_cnt: {
-                                      all: files.length,
-                                      hidden: files.length - files.filter(file => !file.name.startsWith(".")).length
-                                  }
-                              }
-                          }
                           setHistory={setHistory} setHistoryIndex={setHistoryIndex}
                           showHidden={showHidden} setSelected={setSelected}
                           clipboard={clipboard} setClipboard={setClipboard}
