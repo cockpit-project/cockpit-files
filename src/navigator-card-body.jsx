@@ -88,11 +88,7 @@ const ContextMenuItems = ({ path, currentDir, selected, setSelected, setHistory,
 
     const _createDirectory = () => createDirectory(Dialogs, currentDir);
     const _createLink = () => createLink(Dialogs, currentDir, files, selected[0]);
-    const _copyItems = () => {
-        copyItems(setClipboard, selected.length > 1
-            ? selected.map(s => currentDir + s.name)
-            : [currentDir + selected[0].name]);
-    };
+    const _copyItems = () => copyItems(setClipboard, selected.map(s => currentDir + s.name));
     const _pasteItem = (targetPath, asSymlink) => pasteItem(clipboard, targetPath.join("/") + "/", asSymlink, addAlert);
     const _renameItem = () => renameItem(Dialogs, { selected: selected[0], path, setHistory, setHistoryIndex });
     const _editPermissions = () => editPermissions(Dialogs, { selected: selected[0], path });
