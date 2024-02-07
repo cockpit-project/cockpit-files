@@ -84,7 +84,7 @@ export const Application = () => {
             }
 
             const info = fsinfo(
-                `/${currentDir}`,
+                `/${currentPath}`,
                 ["type", "mode", "size", "mtime", "user", "group", "target", "entries", "targets"]
             );
             return info.effect(state => {
@@ -101,7 +101,7 @@ export const Application = () => {
                 setFiles(files);
             });
         },
-        [currentDir, sel]
+        [currentPath, sel]
     );
 
     if (loading)
