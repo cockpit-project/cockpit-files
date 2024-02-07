@@ -409,8 +409,8 @@ class TestNavigator(testlib.MachineCase):
 
         # Create folder from context menu
         b.mouse("#folder-view", "contextmenu")
-        b.wait_in_text(".context-menu li:nth-child(4) button", "Create directory")
-        b.click(".context-menu button:contains('Create directory')")
+        b.wait_in_text(".contextMenu li:nth-child(4) button", "Create directory")
+        b.click(".contextMenu button:contains('Create directory')")
         b.set_input_text("#create-directory-input", "newdir")
         b.click("button.pf-m-primary")
         b.wait_visible("[data-item='newdir']")
@@ -418,7 +418,7 @@ class TestNavigator(testlib.MachineCase):
         # Opening context menu from empty space deselects item
         b.click("[data-item='newdir']")
         b.mouse("#folder-view", "contextmenu")
-        b.click(".context-menu button:contains('Create directory')")
+        b.click(".contextMenu button:contains('Create directory')")
         b.set_input_text("#create-directory-input", "newdir2")
         b.click("button.pf-m-primary")
         b.wait_visible("[data-item='newdir2']")
@@ -426,8 +426,8 @@ class TestNavigator(testlib.MachineCase):
 
         # Rename folder from context menu
         b.mouse("[data-item='newdir']", "contextmenu")
-        b.wait_in_text(".context-menu li:nth-child(5) button", "Rename")
-        b.click(".context-menu button:contains('Rename')")
+        b.wait_in_text(".contextMenu li:nth-child(5) button", "Rename")
+        b.click(".contextMenu button:contains('Rename')")
         b.set_input_text("#rename-item-input", "newdir1")
         b.click("button.pf-m-primary")
         b.wait_visible("[data-item='newdir1']")
@@ -436,31 +436,31 @@ class TestNavigator(testlib.MachineCase):
         m.execute("useradd testuser")
         b.click("[data-item='newdir1']")
         b.mouse("[data-item='newdir1']", "contextmenu")
-        b.wait_in_text(".context-menu li:nth-child(4) button", "Edit permissions")
-        b.click(".context-menu button:contains('Edit permissions')")
+        b.wait_in_text(".contextMenu li:nth-child(4) button", "Edit permissions")
+        b.click(".contextMenu button:contains('Edit permissions')")
         b.select_from_dropdown("#edit-permissions-owner", "testuser")
         b.click("button.pf-m-primary")
         b.wait_text("#description-list-owner dd", "testuser")
 
         # Delete folder from context menu
         b.mouse("[data-item='newdir1']", "contextmenu")
-        b.wait_in_text(".context-menu li:nth-child(9) button", "Delete")
-        b.click(".context-menu button:contains('Delete')")
+        b.wait_in_text(".contextMenu li:nth-child(9) button", "Delete")
+        b.click(".contextMenu button:contains('Delete')")
         b.click("button.pf-m-danger")
         b.wait_not_present("[data-item='newdir1']")
 
         # Check file name is pre-selected when creating link
         m.execute("touch /home/admin/newfile")
         b.mouse("[data-item='newfile']", "contextmenu")
-        b.wait_in_text(".context-menu li:nth-child(6) button", "Create link")
-        b.click(".context-menu button:contains('Create link')")
+        b.wait_in_text(".contextMenu li:nth-child(6) button", "Create link")
+        b.click(".contextMenu button:contains('Create link')")
         b.wait_val("#create-link-original-wrapper input", "/home/admin/newfile")
         b.click("button.pf-m-link:contains('Cancel')")
 
         # Delete button text should match item type: directory/file
         b.mouse("[data-item='newfile']", "contextmenu")
-        b.wait_in_text(".context-menu li:nth-child(8) button", "Delete")
-        b.click(".context-menu button:contains('Delete')")
+        b.wait_in_text(".contextMenu li:nth-child(8) button", "Delete")
+        b.click(".contextMenu button:contains('Delete')")
         b.click("button.pf-m-danger")
         b.wait_not_present("[data-item='newfile']")
 
@@ -688,8 +688,8 @@ class TestNavigator(testlib.MachineCase):
         b.wait_visible("[data-item='file2'].pf-m-selected")
         b.wait_text("#sidebar-card-header", "admin2 items selected")
         b.mouse("[data-item='file1']", "contextmenu")
-        b.wait_in_text(".context-menu li:nth-child(2) button", "Delete")
-        b.click(".context-menu button:contains('Delete')")
+        b.wait_in_text(".contextMenu li:nth-child(2) button", "Delete")
+        b.click(".contextMenu button:contains('Delete')")
         b.wait_in_text("h1.pf-v5-c-modal-box__title", "Delete 2 items?")
         b.click("button.pf-m-danger")
         b.wait_not_present("[data-item='file1']")
