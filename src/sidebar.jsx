@@ -244,15 +244,6 @@ const DropdownWithKebab = ({
         ...selected.length === 0
             ? [{ id: "show-hidden-items", onClick: onToggleHidden, title: showHiddenItems }]
             : [],
-        {
-            id: "copy-path",
-            onClick: () => {
-                navigator.clipboard.writeText(path.join("/") + "/" + (selected.length === 1
-                    ? selected[0].name
-                    : ""));
-            },
-            title: _("Copy full path")
-        },
         { type: "divider" },
         ...selected.length === 1
             ? [
