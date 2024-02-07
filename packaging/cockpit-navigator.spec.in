@@ -32,7 +32,7 @@ rm -rf dist
 %endif
 
 %build
-ESLINT=0 NODE_ENV=production make
+NODE_ENV=production make
 
 %install
 %make_install PREFIX=/usr
