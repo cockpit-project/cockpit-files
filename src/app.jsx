@@ -171,7 +171,6 @@ export const Application = () => {
                           selected={selected.map(s => files.find(f => f.name === s.name)).filter(s => s !== undefined)}
                           currentDirectory={
                               {
-                                  has_error: errorMessage,
                                   name: path[path.length - 1],
                                   items_cnt: {
                                       all: files.length,

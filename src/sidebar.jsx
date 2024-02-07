@@ -147,7 +147,7 @@ export const SidebarPanelDetails = ({
                             ? selected[0].name
                             : currentDirectory.name}
                         </Text>
-                        {selected.length === 0 && !currentDirectory.has_error &&
+                        {selected.length === 0 &&
                             <Text component={TextVariants.small}>
                                 {shown_items}
                             </Text>}
