@@ -49,7 +49,7 @@ import * as timeformat from "timeformat";
 import { useDialogs } from "dialogs.jsx";
 
 import {
-    copyItem, createDirectory, createLink, deleteItem, editPermissions, pasteItem, renameItem
+    copyItems, createDirectory, createLink, deleteItem, editPermissions, pasteItem, renameItem
 } from "./fileActions.jsx";
 import { get_permissions } from "./common";
 
@@ -219,7 +219,7 @@ const DropdownWithKebab = ({
             ? [
                 {
                     id: "copy-item",
-                    onClick: () => copyItem(setClipboard, [path.join("/") + "/" + selected[0].name]),
+                    onClick: () => copyItems(setClipboard, [path.join("/") + "/" + selected[0].name]),
                     title: _("Copy"),
                 }
             ]
@@ -313,7 +313,7 @@ const DropdownWithKebab = ({
     const multiDropdownOptions = [
         {
             id: "copy-item",
-            onClick: () => copyItem(setClipboard, selected.map(s => path.join("/") + "/" + s.name)),
+            onClick: () => copyItems(setClipboard, selected.map(s => path.join("/") + "/" + s.name)),
             title: _("Copy")
         },
         {

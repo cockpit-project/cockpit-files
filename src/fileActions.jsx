@@ -98,8 +98,8 @@ export const editPermissions = (Dialogs, options) => {
     );
 };
 
-export const copyItem = (setClipboard, sourcePath) => {
-    setClipboard(sourcePath);
+export const copyItems = (setClipboard, sourcePaths) => {
+    setClipboard(sourcePaths);
 };
 
 export const pasteItem = (clipboard, targetPath, asSymlink, addAlert) => {
