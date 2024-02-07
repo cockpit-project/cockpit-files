@@ -121,6 +121,7 @@ export const Application = () => {
               currentDir={currentDir}
               setHistory={setHistory} history={history}
               historyIndex={historyIndex} setHistoryIndex={setHistoryIndex}
+              showHidden={showHidden} setShowHidden={setShowHidden}
             />
             <PageSection>
                 <Sidebar isPanelRight hasGutter>
@@ -180,7 +181,6 @@ export const Application = () => {
                           }
                           setHistory={setHistory} setHistoryIndex={setHistoryIndex}
                           showHidden={showHidden} setSelected={setSelected}
-                          setShowHidden={setShowHidden}
                           clipboard={clipboard} setClipboard={setClipboard}
                           files={files} addAlert={addAlert}
                         />

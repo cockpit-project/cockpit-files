@@ -507,7 +507,7 @@ class TestNavigator(testlib.MachineCase):
         b.wait_in_text("#sidebar-card-header", "2 items (1 hidden)")
 
         # Show hidden items
-        b.click("#dropdown-menu")
+        b.click("#global-settings-menu")
         b.click("#show-hidden-items")
         b.wait_visible("[data-item='f1']")
         b.wait_visible("[data-item='.f2']")
@@ -518,11 +518,6 @@ class TestNavigator(testlib.MachineCase):
         b.enter_page("/navigator")
         b.wait_visible("[data-item='f1']")
         b.wait_visible("[data-item='.f2']")
-
-        # Button shouldn't be visible when a file is selected
-        b.click("[data-item='f1']")
-        b.click("#dropdown-menu")
-        b.wait_not_present("#show-hidden-items")
 
     def testCreateLink(self):
         b = self.browser

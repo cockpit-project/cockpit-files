@@ -35,9 +35,6 @@ import {
     Dropdown,
     DropdownItem,
     DropdownList,
-    Flex,
-    FlexItem,
-    Icon,
     MenuToggle,
     Text,
     TextContent,
@@ -45,7 +42,6 @@ import {
 } from "@patternfly/react-core";
 
 import {
-    CheckIcon,
     EllipsisVIcon,
 } from "@patternfly/react-icons";
 
@@ -116,7 +112,6 @@ export const SidebarPanelDetails = ({
     setHistory,
     setHistoryIndex,
     setPath,
-    setShowHidden,
     showHidden,
     setSelected,
     currentDirectory,
@@ -168,8 +163,8 @@ export const SidebarPanelDetails = ({
                 </CardTitle>
                 <DropdownWithKebab
                   selected={selected} path={path}
-                  setPath={setPath} showHidden={showHidden}
-                  setShowHidden={setShowHidden} setHistory={setHistory}
+                  setPath={setPath}
+                  setHistory={setHistory}
                   setHistoryIndex={setHistoryIndex} files={files}
                   clipboard={clipboard} setClipboard={setClipboard}
                   setSelected={setSelected} currentDirectory={currentDirectory}
@@ -203,8 +198,6 @@ export const SidebarPanelDetails = ({
 const DropdownWithKebab = ({
     selected,
     path,
-    showHidden,
-    setShowHidden,
     setHistory,
     setHistoryIndex,
     files,
@@ -219,32 +212,9 @@ const DropdownWithKebab = ({
 
     const onToggleClick = () => setIsOpen(!isOpen);
     const onSelect = (_event, itemId) => setIsOpen(false);
-    const onToggleHidden = () => {
-        setShowHidden(showHidden => {
-            localStorage.setItem("cockpit-navigator.showHiddenFiles", !showHidden ? "true" : "false");
-            return !showHidden;
-        });
-    };
-
     const currentPath = path.join("/") + "/";
 
-    const showHiddenItems = (
-        <Flex justifyContent={{ default: "justifyContentSpaceBetween" }}>
-            <FlexItem>{_("Show hidden items")}</FlexItem>
-            <FlexItem>
-                {showHidden &&
-                <Icon size="sm">
-                    <CheckIcon className="check-icon" />
-                </Icon>}
-            </FlexItem>
-        </Flex>
-    );
-
     const singleDropdownOptions = [
-        ...selected.length === 0
-            ? [{ id: "show-hidden-items", onClick: onToggleHidden, title: showHiddenItems }]
-            : [],
-        { type: "divider" },
         ...selected.length === 1
             ? [
                 {
