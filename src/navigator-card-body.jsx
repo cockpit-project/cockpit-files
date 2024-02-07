@@ -35,7 +35,7 @@ import { ListingTable } from "cockpit-components-table.jsx";
 
 import { ContextMenu } from "cockpit-components-context-menu.jsx";
 import {
-    copyItem, createDirectory, createLink, deleteItem, editPermissions, pasteItem, renameItem
+    copyItems, createDirectory, createLink, deleteItem, editPermissions, pasteItem, renameItem
 } from "./fileActions.jsx";
 
 const _ = cockpit.gettext;
@@ -88,8 +88,8 @@ const ContextMenuItems = ({ path, currentDir, selected, setSelected, setHistory,
 
     const _createDirectory = () => createDirectory(Dialogs, currentDir);
     const _createLink = () => createLink(Dialogs, currentDir, files, selected[0]);
-    const _copyItem = () => {
-        copyItem(setClipboard, selected.length > 1
+    const _copyItems = () => {
+        copyItems(setClipboard, selected.length > 1
             ? selected.map(s => currentDir + s.name)
             : [currentDir + selected[0].name]);
     };
@@ -134,7 +134,7 @@ const ContextMenuItems = ({ path, currentDir, selected, setSelected, setHistory,
         );
     } else if (selected.length === 1) {
         menuItems.push(
-            { title: _("Copy"), onClick: _copyItem },
+            { title: _("Copy"), onClick: _copyItems },
             ...(selected[0].type === "dir")
                 ? [
                     {
@@ -154,7 +154,7 @@ const ContextMenuItems = ({ path, currentDir, selected, setSelected, setHistory,
         );
     } else if (selected.length > 1) {
         menuItems.push(
-            { title: _("Copy"), onClick: _copyItem },
+            { title: _("Copy"), onClick: _copyItems },
             { title: _("Delete"), onClick: _deleteItem, className: "pf-m-danger" }
         );
     }
