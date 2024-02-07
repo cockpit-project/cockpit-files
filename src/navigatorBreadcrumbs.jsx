@@ -86,14 +86,13 @@ const SettingsDropdown = ({ showHidden, setShowHidden }) => {
 };
 
 export const NavigatorBreadcrumbs = ({
-    currentDir,
     path,
     history,
     setHistory,
     historyIndex,
     setHistoryIndex,
     showHidden,
-    setShowHidden
+    setShowHidden,
 }) => {
     const navigateBack = () => {
         if (historyIndex > 0) {

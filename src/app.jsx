@@ -118,7 +118,6 @@ export const Application = () => {
         <Page>
             <NavigatorBreadcrumbs
               path={path}
-              currentDir={currentDir}
               setHistory={setHistory} history={history}
               historyIndex={historyIndex} setHistoryIndex={setHistoryIndex}
               showHidden={showHidden} setShowHidden={setShowHidden}
