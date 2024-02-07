@@ -17,12 +17,84 @@
  * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
  */
 import cockpit from "cockpit";
-import React from "react";
+import React, { useState } from "react";
 
-import { Button, Flex, FlexItem, PageBreadcrumb } from "@patternfly/react-core";
-import { ArrowLeftIcon, ArrowRightIcon } from "@patternfly/react-icons";
+import {
+    Button,
+    Dropdown,
+    DropdownItem,
+    DropdownList,
+    Flex,
+    FlexItem,
+    PageBreadcrumb,
+    Icon,
+    MenuToggle,
+} from "@patternfly/react-core";
+import { ArrowLeftIcon, ArrowRightIcon, CheckIcon, EllipsisVIcon } from "@patternfly/react-icons";
 
-export const NavigatorBreadcrumbs = ({ currentDir, path, history, setHistory, historyIndex, setHistoryIndex }) => {
+const _ = cockpit.gettext;
+
+const SettingsDropdown = ({ showHidden, setShowHidden }) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const onToggleClick = () => setIsOpen(!isOpen);
+    const onSelect = (_event, _itemId) => setIsOpen(false);
+
+    const onToggleHidden = () => {
+        setShowHidden(showHidden => {
+            localStorage.setItem("cockpit-navigator.showHiddenFiles", !showHidden ? "true" : "false");
+            return !showHidden;
+        });
+    };
+
+    const showHiddenItems = (
+        <Flex justifyContent={{ default: "justifyContentSpaceBetween" }}>
+            <FlexItem>{_("Show hidden items")}</FlexItem>
+            <FlexItem>
+                {showHidden &&
+                <Icon size="sm">
+                    <CheckIcon className="check-icon" />
+                </Icon>}
+            </FlexItem>
+        </Flex>
+    );
+
+    return (
+        <Dropdown
+          isOpen={isOpen}
+          onSelect={onSelect}
+          onOpenChange={setIsOpen}
+          popperProps={{ position: "right" }}
+          toggle={toggleRef =>
+              <MenuToggle
+                ref={toggleRef} variant="plain"
+                onClick={onToggleClick} isExpanded={isOpen}
+                id="global-settings-menu"
+              >
+                  <EllipsisVIcon />
+              </MenuToggle>}
+        >
+            <DropdownList>
+                <DropdownItem
+                  id="show-hidden-items"
+                  onClick={onToggleHidden}
+                >
+                    {showHiddenItems}
+                </DropdownItem>
+            </DropdownList>
+        </Dropdown>
+    );
+};
+
+export const NavigatorBreadcrumbs = ({
+    currentDir,
+    path,
+    history,
+    setHistory,
+    historyIndex,
+    setHistoryIndex,
+    showHidden,
+    setShowHidden
+}) => {
     const navigateBack = () => {
         if (historyIndex > 0) {
             cockpit.location.go("/", { path: encodeURIComponent(history[historyIndex - 1].join("/")) });
@@ -80,6 +152,9 @@ export const NavigatorBreadcrumbs = ({ currentDir, path, history, setHistory, hi
                             );
                         })}
                     </Flex>
+                </FlexItem>
+                <FlexItem align={{ default: 'alignRight' }}>
+                    <SettingsDropdown showHidden={showHidden} setShowHidden={setShowHidden} />
                 </FlexItem>
             </Flex>
         </PageBreadcrumb>
