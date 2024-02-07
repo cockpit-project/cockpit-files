@@ -33,7 +33,7 @@ import cockpit from "cockpit";
 import { useDialogs } from "dialogs.jsx";
 import { ListingTable } from "cockpit-components-table.jsx";
 
-import { ContextMenu } from "./context-menu.jsx";
+import { ContextMenu } from "cockpit-components-context-menu.jsx";
 import {
     copyItem, createDirectory, createLink, deleteItem, editPermissions, pasteItem, renameItem
 } from "./fileActions.jsx";
@@ -391,23 +391,20 @@ export const NavigatorCardBody = ({
         );
 
     const contextMenu = (
-        <ContextMenu
-          parentId="folder-view"
-          contextMenuItems={
-              <ContextMenuItems
-                path={path}
-                currentDir={currentDir}
-                selected={selected}
-                setSelected={setSelected}
-                setHistory={setHistory}
-                setHistoryIndex={setHistoryIndex}
-                addAlert={addAlert}
-                clipboard={clipboard}
-                setClipboard={setClipboard}
-                files={allFiles}
-              />
-          }
-        />
+        <ContextMenu parentId="folder-view">
+            <ContextMenuItems
+              path={path}
+              currentDir={currentDir}
+              selected={selected}
+              setSelected={setSelected}
+              setHistory={setHistory}
+              setHistoryIndex={setHistoryIndex}
+              addAlert={addAlert}
+              clipboard={clipboard}
+              setClipboard={setClipboard}
+              files={allFiles}
+            />
+        </ContextMenu>
     );
 
     if (isGrid) {
