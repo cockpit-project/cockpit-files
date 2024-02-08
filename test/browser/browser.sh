@@ -21,9 +21,6 @@ if grep -q platform:el8 /etc/os-release; then
     dnf module switch-to -y nodejs:16
 fi
 
-# Install cockpit from git main (for fsinfo)
-TMPDIR=/var/tmp pip install git+https://github.com/cockpit-project/cockpit.git@main
-
 # create user account for logging in
 if ! id admin 2>/dev/null; then
     useradd -c Administrator -G wheel admin
