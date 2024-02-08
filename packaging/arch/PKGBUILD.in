@@ -5,7 +5,7 @@ pkgdesc='A filesystem browser for Cockpit'
 arch=('any')
 url='https://github.com/cockpit-project/cockpit-navigator'
 license=(LGPL)
-depends=(cockpit)
+depends=(cockpit>=310.1)
 source=("SOURCE")
 sha256sums=('SKIP')
 
