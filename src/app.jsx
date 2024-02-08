@@ -125,7 +125,7 @@ export const Application = () => {
             <PageSection>
                 <Sidebar isPanelRight hasGutter>
                     <SidebarContent>
-                        <Card>
+                        <Card id="navigator-card">
                             <NavigatorCardHeader
                               currentFilter={currentFilter} onFilterChange={onFilterChange}
                               isGrid={isGrid} setIsGrid={setIsGrid}

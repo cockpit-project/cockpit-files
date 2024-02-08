@@ -391,7 +391,7 @@ export const NavigatorCardBody = ({
         );
 
     const contextMenu = (
-        <ContextMenu parentId="folder-view">
+        <ContextMenu parentId="navigator-card">
             <ContextMenuItems
               path={path}
               currentDir={currentDir}
