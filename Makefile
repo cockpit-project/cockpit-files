@@ -168,12 +168,7 @@ rpm: $(TARFILE) $(NODE_CACHE) $(SPEC)
 	rm -r "`pwd`/rpmbuild"
 	rm -r "`pwd`/output" "`pwd`/build"
 
-# HACK: we need the 'fsinfo' channel supported only in the Python bridge, and
-# only on the `main` branch of Cockpit (and not in any released version yet).
-# We can re-engage our 'pybridge' scenario logic, which creates and installs a
-# wheel from upstream cockpit git. We should remove this once we get all of our
-# images with the updated version of the bridge.
-ifeq ("pybridge","pybridge")
+ifeq ("$(TEST_SCENARIO)","pybridge")
 COCKPIT_PYBRIDGE_REF = main
 COCKPIT_WHEEL = cockpit-0-py3-none-any.whl
 
@@ -181,13 +176,13 @@ $(COCKPIT_WHEEL):
 	pip wheel git+https://github.com/cockpit-project/cockpit.git@${COCKPIT_PYBRIDGE_REF}
 
 VM_DEPENDS = $(COCKPIT_WHEEL)
-VM_CUSTOMIZE_FLAGS = --upload $(COCKPIT_WHEEL):/var/tmp --script test/install-wheel
+VM_CUSTOMIZE_FLAGS = --install $(COCKPIT_WHEEL)
 endif
 
 # build a VM with locally built distro pkgs installed
 # disable networking, VM images have mock/pbuilder with the common build dependencies pre-installed
 $(VM_IMAGE): $(TARFILE) $(NODE_CACHE) packaging/arch/PKGBUILD bots test/vm.install $(VM_DEPENDS)
-	bots/image-customize --fresh \
+	bots/image-customize --no-network --fresh \
 		$(VM_CUSTOMIZE_FLAGS) \
 		--upload $(NODE_CACHE):/var/tmp/ --build $(TARFILE) \
 		--script $(CURDIR)/test/vm.install $(TEST_OS)
