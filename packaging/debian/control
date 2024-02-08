@@ -15,7 +15,7 @@ Package: cockpit-navigator
 Architecture: all
 Multi-Arch: foreign
 Depends: ${misc:Depends},
-         cockpit-bridge (>= 294),
+         cockpit-bridge (>= 310.1),
 Description: A filesystem browser for Cockpit
  The Cockpit Web Console enables users to administer GNU/Linux servers using a
  web browser.

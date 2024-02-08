@@ -16,7 +16,7 @@ BuildRequires: gettext
 BuildRequires: libappstream-glib-devel
 %endif
 
-Requires: cockpit-bridge
+Requires: cockpit-bridge >= 310
 
 %{NPM_PROVIDES}
 
