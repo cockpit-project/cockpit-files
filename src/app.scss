@@ -10,8 +10,7 @@
 }
 
 .breadcrumb-button {
-    padding-left: 0;
-    padding-right: 0;
+    padding-inline: 0;
 }
 
 .view-toggle-group {
@@ -23,7 +22,7 @@
 
 .grid-file-name {
     text-align: center;
-    width: 10em;
+    inline-size: 10em;
 }
 
 .check-icon {
@@ -36,7 +35,7 @@
     // Background bleeds through, so we need we need to add a local background
     background: var(--pf-v5-global--BackgroundColor--100);
     // Breadcrumb header size + padding?
-    top: calc(var(--pf-v5-global--spacer--md) * 3.5);
+    inset-block-start: calc(var(--pf-v5-global--spacer--md) * 3.5);
     // Lift up above icon content
     z-index: 1;
 }
@@ -132,11 +131,11 @@
 
 .sidebar-panel {
     background-color: var(--pf-c-page__main-section--BackgroundColor);
-    top: 3rem;
+    inset-block-start: 3rem;
 }
 
 #description-list-sidebar {
-    margin-bottom: 1rem;
+    margin-block-end: 1rem;
 }
 
 .item-button {
