@@ -24,10 +24,10 @@ import { ForceDeleteModal } from "../fileActions";
 
 const options = { err: "message", superuser: "try" };
 
-const renameCommand = ({ selected, path, name }) => {
-    return selected.items_cnt
-        ? ["mv", path.join("/"), path.slice(0, -1).join("/") + "/" + name]
-        : ["mv", path.join("/") + "/" + selected.name, path.join("/") + "/" + name];
+const renameCommand = (selected, path, newPath, is_current_dir) => {
+    return is_current_dir
+        ? ["mv", path.join("/"), newPath]
+        : ["mv", path.join("/") + "/" + selected.name, newPath];
 };
 
 export const spawnDeleteItem = ({ path, selected, Dialogs, setSelected, setHistory, setHistoryIndex }) => {
@@ -71,13 +71,15 @@ export const spawnForceDelete = ({ selected, path, Dialogs, setDeleteFailed, set
 };
 
 export const spawnRenameItem = ({ selected, name, path, Dialogs, setErrorMessage, setHistory, setHistoryIndex }) => {
-    const newPath = selected.items_cnt
+    console.log(selected);
+    const is_current_dir = path.at(-1) === selected.name;
+    const newPath = is_current_dir
         ? path.slice(0, -1).join("/") + "/" + name
         : path.join("/") + "/" + name;
 
-    cockpit.spawn(renameCommand({ selected, path, name }), options)
+    cockpit.spawn(renameCommand(selected, path, newPath, is_current_dir), options)
             .then(() => {
-                if (selected.items_cnt) {
+                if (is_current_dir) {
                     cockpit.location.go("/", { path: encodeURIComponent(newPath) });
                     setHistory(h => h.slice(0, -1));
                     setHistoryIndex(i => i - 1);

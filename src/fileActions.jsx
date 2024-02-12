@@ -124,7 +124,7 @@ export const ConfirmDeletionDialog = ({
             modalTitle = cockpit.format(_("Delete file $0?"), selectedItem.name);
         } else if (selectedItem.type === "lnk") {
             modalTitle = cockpit.format(_("Delete link $0?"), selectedItem.name);
-        } else if (selectedItem.type === "dir" || selectedItem.items_cnt) {
+        } else if (selectedItem.type === "dir") {
             modalTitle = cockpit.format(_("Delete directory $0?"), selectedItem.name);
         } else {
             modalTitle = cockpit.format(_("Delete $0?"), selectedItem.name);
@@ -169,7 +169,7 @@ export const ForceDeleteModal = ({ selected, path, initialError }) => {
             modalTitle = cockpit.format(_("Force delete file $0?"), selectedItem.name);
         } else if (selectedItem.type === "lnk") {
             modalTitle = cockpit.format(_("Force delete link $0?"), selectedItem.name);
-        } else if (selectedItem.type === "dir" || selectedItem.items_cnt) {
+        } else if (selectedItem.type === "dir") {
             modalTitle = cockpit.format(_("Force delete directory $0?"), selectedItem.name);
         } else {
             modalTitle = _("Force delete $0?", selectedItem.name);
@@ -272,7 +272,7 @@ export const RenameItemModal = ({ path, selected, setHistory, setHistoryIndex })
         title = cockpit.format(_("Rename file $0"), selected.name);
     } else if (selected.type === "lnk") {
         title = cockpit.format(_("Rename link $0"), selected.name);
-    } else if (selected.type === "dir" || selected.items_cnt) {
+    } else if (selected.type === "dir") {
         title = cockpit.format(_("Rename directory $0"), selected.name);
     } else {
         title = _("Rename $0", selected.name);
