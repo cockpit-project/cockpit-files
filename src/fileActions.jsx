@@ -128,7 +128,7 @@ export const ConfirmDeletionDialog = ({
     }
 
     const deleteItem = () => {
-        spawnDeleteItem({ Dialogs, selected, path, setSelected });
+        spawnDeleteItem(path, selected, setSelected, Dialogs);
     };
 
     return (
@@ -173,7 +173,7 @@ export const ForceDeleteModal = ({ selected, path, initialError }) => {
     }
 
     const forceDeleteItem = () => {
-        spawnForceDelete({ Dialogs, selected, path, setDeleteFailed, setErrorMessage });
+        spawnForceDelete(path, selected, setDeleteFailed, setErrorMessage, Dialogs);
     };
 
     return (
@@ -204,9 +204,7 @@ export const CreateDirectoryModal = ({ currentPath }) => {
     const [name, setName] = useState("");
     const [nameError, setNameError] = useState(null);
     const [errorMessage, setErrorMessage] = useState(undefined);
-    const createDirectory = () => {
-        spawnCreateDirectory({ Dialogs, currentPath, name, setErrorMessage });
-    };
+    const createDirectory = () => spawnCreateDirectory(name, currentPath, Dialogs, setErrorMessage);
 
     return (
         <Modal
@@ -275,7 +273,7 @@ export const RenameItemModal = ({ path, selected }) => {
     }
 
     const renameItem = () => {
-        spawnRenameItem({ Dialogs, path, selected, name, setErrorMessage });
+        spawnRenameItem(selected, name, path, Dialogs, setErrorMessage);
     };
 
     return (
@@ -328,7 +326,7 @@ export const CreateLinkModal = ({ currentPath, selected }) => {
     const [errorMessage, setErrorMessage] = useState(undefined);
 
     const createLink = () => {
-        spawnCreateLink({ Dialogs, currentPath, type, originalName, newName, setErrorMessage });
+        spawnCreateLink(type, currentPath, originalName, newName, Dialogs, setErrorMessage);
     };
 
     return (
@@ -436,16 +434,6 @@ export const EditPermissionsModal = ({ selected, path }) => {
         }
     };
 
-    const options = {
-        Dialogs,
-        group,
-        mode,
-        owner,
-        path,
-        selected,
-        setErrorMessage
-    };
-
     function permissions_options() {
         return [
             ...map_permissions((value, label) => (
@@ -471,7 +459,7 @@ export const EditPermissionsModal = ({ selected, path }) => {
               <>
                   <Button
                     variant="primary"
-                    onClick={() => spawnEditPermissions({ ...options, changeAll: false })}
+                    onClick={() => spawnEditPermissions(mode, path, selected, owner, group, Dialogs, setErrorMessage)}
                   >
                       {_("Change")}
                   </Button>

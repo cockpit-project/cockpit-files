@@ -30,7 +30,7 @@ const renameCommand = (selected, path, newPath, is_current_dir) => {
         : ["mv", path.join("/") + "/" + selected.name, newPath];
 };
 
-export const spawnDeleteItem = ({ path, selected, Dialogs, setSelected }) => {
+export const spawnDeleteItem = (path, selected, setSelected, Dialogs) => {
     cockpit.spawn([
         "rm",
         "-r",
@@ -51,7 +51,7 @@ export const spawnDeleteItem = ({ path, selected, Dialogs, setSelected }) => {
             });
 };
 
-export const spawnForceDelete = ({ selected, path, Dialogs, setDeleteFailed, setErrorMessage }) => {
+export const spawnForceDelete = (path, selected, setDeleteFailed, setErrorMessage, Dialogs) => {
     cockpit.spawn([
         "rm",
         "-r",
@@ -63,7 +63,7 @@ export const spawnForceDelete = ({ selected, path, Dialogs, setDeleteFailed, set
             });
 };
 
-export const spawnRenameItem = ({ selected, name, path, Dialogs, setErrorMessage }) => {
+export const spawnRenameItem = (selected, name, path, Dialogs, setErrorMessage) => {
     const is_current_dir = path.at(-1) === selected.name;
     const newPath = is_current_dir
         ? path.slice(0, -1).join("/") + "/" + name
@@ -78,13 +78,13 @@ export const spawnRenameItem = ({ selected, name, path, Dialogs, setErrorMessage
             }, err => setErrorMessage(err.message));
 };
 
-export const spawnCreateDirectory = ({ name, currentPath, Dialogs, setErrorMessage }) => {
+export const spawnCreateDirectory = (name, currentPath, Dialogs, setErrorMessage) => {
     const path = currentPath + name;
     cockpit.spawn(["mkdir", path], options)
             .then(Dialogs.close, err => setErrorMessage(err.message));
 };
 
-export const spawnCreateLink = ({ type, currentPath, originalName, newName, Dialogs, setErrorMessage }) => {
+export const spawnCreateLink = (type, currentPath, originalName, newName, Dialogs, setErrorMessage) => {
     cockpit.spawn([
         "ln",
         ...(type === "symbolic"
@@ -96,7 +96,7 @@ export const spawnCreateLink = ({ type, currentPath, originalName, newName, Dial
             .then(Dialogs.close, (err) => { setErrorMessage(err.message) });
 };
 
-export const spawnEditPermissions = ({ mode, path, selected, owner, group, Dialogs, setErrorMessage }) => {
+export const spawnEditPermissions = (mode, path, selected, owner, group, Dialogs, setErrorMessage) => {
     const permissionChanged = mode !== selected.mode;
     const ownerChanged = owner !== selected.user || group !== selected.group;
 
