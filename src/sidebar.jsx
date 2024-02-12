@@ -109,7 +109,6 @@ export const SidebarPanelDetails = ({
     files,
     path,
     selected,
-    setPath,
     showHidden,
     setSelected,
     clipboard,
