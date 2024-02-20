@@ -11,14 +11,14 @@ jobs:
   source:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/cockpit-project/unit-tests
+      image: quay.io/cockpit/tasks:latest
       options: --user root
     permissions:
       # create GitHub release
       contents: write
     steps:
       - name: Clone repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
