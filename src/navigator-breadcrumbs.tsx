@@ -24,8 +24,6 @@ import { Button, Flex, FlexItem, PageBreadcrumb } from "@patternfly/react-core";
 
 import { SettingsDropdown } from "./settings-dropdown.jsx";
 
-type setShowHiddenType = typeof React.useState<boolean>
-
 function useHostname() {
     const [hostname, setHostname] = React.useState<string | null>(null);
 
@@ -50,7 +48,7 @@ function useHostname() {
 }
 
 // eslint-disable-next-line max-len
-export function NavigatorBreadcrumbs({ path, showHidden, setShowHidden }: { path: string[], showHidden: boolean, setShowHidden: setShowHiddenType }) {
+export function NavigatorBreadcrumbs({ path, showHidden, setShowHidden }: { path: string[], showHidden: boolean, setShowHidden: React.Dispatch<React.SetStateAction<boolean>>}) {
     const hostname = useHostname();
 
     function navigate(n_parts: number) {
