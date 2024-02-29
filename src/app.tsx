@@ -24,7 +24,7 @@ import {
     Card,
     Page, PageSection,
     Sidebar, SidebarPanel, SidebarContent,
-    AlertGroup, Alert, AlertActionCloseButton
+    AlertGroup, Alert, AlertVariant, AlertActionCloseButton
 } from "@patternfly/react-core";
 import { ExclamationCircleIcon } from "@patternfly/react-icons";
 
@@ -34,28 +34,39 @@ import { NavigatorCardBody } from "./navigator-card-body.jsx";
 import { SidebarPanelDetails } from "./sidebar.jsx";
 import { NavigatorCardHeader } from "./header.jsx";
 import { usePageLocation } from "hooks.js";
-import { fsinfo } from "./fsinfo";
+import { fsinfo, FileInfo } from "./fsinfo";
 
 superuser.reload_page_on_change();
+
+interface Alert {
+    key: string,
+    title: string,
+    variant: AlertVariant,
+}
+
+interface NavigatorFileInfo extends FileInfo {
+    name: string,
+    to: string | null,
+}
 
 export const Application = () => {
     const { options } = usePageLocation();
     const [loading, setLoading] = useState(true);
     const [loadingFiles, setLoadingFiles] = useState(true);
-    const [errorMessage, setErrorMessage] = useState();
+    const [errorMessage, setErrorMessage] = useState("");
     const [currentFilter, setCurrentFilter] = useState("");
-    const [files, setFiles] = useState([]);
+    const [files, setFiles] = useState<NavigatorFileInfo[]>([]);
     // eslint-disable-next-line no-unused-vars
-    const [rootInfo, setRootInfo] = useState();
+    const [rootInfo, setRootInfo] = useState<FileInfo | null>();
     const [isGrid, setIsGrid] = useState(true);
     const [sortBy, setSortBy] = useState(localStorage.getItem("cockpit-navigator.sort") || "az");
-    const [selected, setSelected] = useState([]);
+    const [selected, setSelected] = useState<NavigatorFileInfo[]>([]);
     const [showHidden, setShowHidden] = useState(localStorage.getItem("cockpit-navigator.showHiddenFiles") === "true");
     const [clipboard, setClipboard] = useState(undefined);
-    const [alerts, setAlerts] = useState([]);
+    const [alerts, setAlerts] = useState<Alert[]>([]);
 
-    const onFilterChange = (_, value) => setCurrentFilter(value);
-    const currentPath = decodeURIComponent(options.path || "");
+    const onFilterChange = (_event: React.FormEvent<HTMLInputElement>, value: string) => setCurrentFilter(value);
+    const currentPath = decodeURIComponent(options.path?.toString() || "");
     const path = currentPath?.split("/");
     const currentDir = path.join("/") + "/";
     const sel = (
@@ -106,8 +117,10 @@ export const Application = () => {
         ? files.filter(file => !file.name.startsWith("."))
         : files;
 
-    const addAlert = (title, variant, key) => setAlerts(prevAlerts => [...prevAlerts, { title, variant, key }]);
-    const removeAlert = (key) => setAlerts(prevAlerts => [...prevAlerts.filter(alert => alert.key !== key)]);
+    const addAlert = (title: string, variant: AlertVariant, key: string) => {
+        setAlerts(prevAlerts => [...prevAlerts, { title, variant, key }]);
+    };
+    const removeAlert = (key: string) => setAlerts(prevAlerts => [...prevAlerts.filter(alert => alert.key !== key)]);
 
     return (
         <Page>

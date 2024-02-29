@@ -25,7 +25,7 @@ function json_merge(current: cockpit.JsonValue, patch: cockpit.JsonValue): cockp
     }
 }
 
-interface FileInfo {
+export interface FileInfo {
     type?: string;
     tag?: string;
     mode?: number;
