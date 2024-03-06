@@ -292,78 +292,9 @@ export const NavigatorCardBody = ({
         }
     };
 
-    const handleClick = (ev, file) => {
-        if (ev.detail > 1) {
-            onDoubleClickNavigate(file);
-        } else {
-            if (!ev.ctrlKey || selected === path[path.length - 1]) {
-                setSelected([file]);
-            } else {
-                setSelected(s => {
-                    if (!s.find(f => f.name === file.name)) {
-                        return [...s, file];
-                    } else {
-                        return s.filter(f => f.name !== file.name);
-                    }
-                });
-            }
-        }
-    };
-
     const handleContextMenu = () => {
         const sel = path ? path[path.length - 1] : undefined;
         setSelected([{ name: sel }]);
-    };
-
-    const Item = ({ file }) => {
-        const getFileType = (file) => {
-            if (file.type === "dir") {
-                return "directory-item";
-            } else if (file.type === "lnk" && file?.to === "dir") {
-                return "directory-item";
-            } else {
-                return "file-item";
-            }
-        };
-
-        return (
-            <Card
-              className={"item-button " + getFileType(file)}
-              data-item={file.name}
-              id={"card-item-" + file.name + file.type}
-              isClickable isCompact
-              isPlain
-              isSelected={selected.find(s => s.name === file.name)}
-              onClick={ev => handleClick(ev, file)}
-              onContextMenu={(e) => {
-                  e.stopPropagation();
-                  if (selected.length === 1 || !selected.includes(file))
-                      setSelected([file]);
-              }}
-              onDoubleClick={() => onDoubleClickNavigate(file)}
-            >
-                <CardHeader
-                  selectableActions={{
-                      name: file.name,
-                      selectableActionAriaLabelledby: "card-item-" + file.name + file.type,
-                      selectableActionId: "card-item-" + file.name + file.type + "-selectable-action",
-                  }}
-                >
-                    <Icon
-                      size={isGrid
-                          ? "xl"
-                          : "lg"} isInline
-                    >
-                        {file.type === "dir" || file.to === "dir"
-                            ? <FolderIcon />
-                            : <FileIcon />}
-                    </Icon>
-                    <CardTitle>
-                        {file.name}
-                    </CardTitle>
-                </CardHeader>
-            </Card>
-        );
     };
 
     if (loadingFiles)
@@ -398,7 +329,13 @@ export const NavigatorCardBody = ({
                   onContextMenu={handleContextMenu}
                 >
                     <Gallery id="folder-view">
-                        {sortedFiles.map(file => <Item file={file} key={file.name} />)}
+                        {sortedFiles.map(file =>
+                            <Item
+                              file={file} key={file.name}
+                              selected={selected} setSelected={setSelected}
+                              onDoubleClickNavigate={onDoubleClickNavigate}
+                              isGrid={isGrid}
+                            />)}
                     </Gallery>
                 </CardBody>
             </>
@@ -412,10 +349,92 @@ export const NavigatorCardBody = ({
                   className="pf-m-no-border-rows"
                   variant="compact"
                   columns={[_("Name")]}
-                  rows={sortedFiles.map(file => ({ columns: [{ title: <Item file={file} key={file.name} /> }] }))}
+                  rows={sortedFiles.map(file => ({
+                      columns: [
+                          {
+                              title:
+    <Item
+      file={file} key={file.name}
+      selected={selected}
+      setSelected={setSelected}
+      onDoubleClickNavigate={onDoubleClickNavigate}
+      isGrid={isGrid}
+    />
+                          }
+                      ]
+                  }))}
                   onContextMenu={handleContextMenu}
                 />
             </>
         );
     }
 };
+
+function Item({ file, selected, setSelected, onDoubleClickNavigate, isGrid }) {
+    function handleClick(ev, file) {
+        if (ev.detail > 1) {
+            onDoubleClickNavigate(file);
+        } else {
+            if (!ev.ctrlKey || selected === path[path.length - 1]) {
+                setSelected([file]);
+            } else {
+                setSelected(s => {
+                    if (!s.find(f => f.name === file.name)) {
+                        return [...s, file];
+                    } else {
+                        return s.filter(f => f.name !== file.name);
+                    }
+                });
+            }
+        }
+    }
+
+    function getFileType(file) {
+        if (file.type === "dir") {
+            return "directory-item";
+        } else if (file.type === "lnk" && file?.to === "dir") {
+            return "directory-item";
+        } else {
+            return "file-item";
+        }
+    }
+
+    return (
+        <Card
+          className={"item-button " + getFileType(file)}
+          data-item={file.name}
+          id={"card-item-" + file.name + file.type}
+          isClickable isCompact
+          isPlain
+          isSelected={selected.find(s => s.name === file.name)}
+          onClick={ev => handleClick(ev, file)}
+          onContextMenu={(e) => {
+              e.stopPropagation();
+              if (selected.length === 1 || !selected.includes(file))
+                  setSelected([file]);
+          }}
+          onDoubleClick={() => onDoubleClickNavigate(file)}
+        >
+            <CardHeader
+              selectableActions={{
+                  name: file.name,
+                  selectableActionAriaLabelledby: "card-item-" + file.name + file.type,
+                  selectableActionId: "card-item-" + file.name + file.type + "-selectable-action",
+              }}
+            >
+                <Icon
+                  size={isGrid
+                      ? "xl"
+                      : "lg"} isInline
+                >
+                    {file.type === "dir" || file.to === "dir"
+                        ? <FolderIcon />
+                        : <FileIcon />}
+                </Icon>
+                <CardTitle>
+                    {file.name}
+                </CardTitle>
+            </CardHeader>
+        </Card>
+    );
+}
