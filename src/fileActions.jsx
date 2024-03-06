@@ -53,58 +53,15 @@ import { map_permissions, inode_types } from "./common";
 
 const _ = cockpit.gettext;
 
-export const createDirectory = (Dialogs, currentPath) => {
-    Dialogs.show(<CreateDirectoryModal currentPath={currentPath} />);
-};
-
-export const createLink = (Dialogs, currentPath, files, selected) => {
-    Dialogs.show(
-        <CreateLinkModal
-          currentPath={currentPath} selected={selected}
-          files={files.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase())
-              ? 1
-              : ((b.name.toLowerCase() > a.name.toLowerCase())
-                  ? -1
-                  : 0))}
-        />
-    );
-};
-
-export const deleteItem = (Dialogs, options) => {
-    Dialogs.show(
-        <ConfirmDeletionDialog
-          selected={options.selected}
-          path={options.path} setSelected={options.setSelected}
-        />
-    );
-};
-
-export const renameItem = (Dialogs, options) => {
-    Dialogs.show(
-        <RenameItemModal
-          path={options.path}
-          selected={options.selected}
-        />
-    );
-};
-
-export const editPermissions = (Dialogs, options) => {
+export const editPermissions = (Dialogs, selected, path) => {
     Dialogs.show(
         <EditPermissionsModal
-          selected={options.selected} path={options.path}
+          selected={selected} path={path}
         />
     );
 };
 
-export const copyItems = (setClipboard, sourcePaths) => {
-    setClipboard(sourcePaths);
-};
-
-export const pasteItem = (clipboard, targetPath, asSymlink, addAlert) => {
-    spawnPaste(clipboard, targetPath, asSymlink, addAlert);
-};
-
-export const ConfirmDeletionDialog = ({
+const ConfirmDeletionDialog = ({
     path,
     selected,
     setSelected,
@@ -199,7 +156,7 @@ export const ForceDeleteModal = ({ selected, path, initialError }) => {
     );
 };
 
-export const CreateDirectoryModal = ({ currentPath }) => {
+const CreateDirectoryModal = ({ currentPath }) => {
     const Dialogs = useDialogs();
     const [name, setName] = useState("");
     const [nameError, setNameError] = useState(null);
@@ -255,7 +212,7 @@ export const CreateDirectoryModal = ({ currentPath }) => {
     );
 };
 
-export const RenameItemModal = ({ path, selected }) => {
+const RenameItemModal = ({ path, selected }) => {
     const Dialogs = useDialogs();
     const [name, setName] = useState(selected.name);
     const [nameError, setNameError] = useState(null);
@@ -318,7 +275,7 @@ export const RenameItemModal = ({ path, selected }) => {
     );
 };
 
-export const CreateLinkModal = ({ currentPath, selected }) => {
+const CreateLinkModal = ({ currentPath, selected }) => {
     const Dialogs = useDialogs();
     const [originalName, setOriginalName] = useState(selected?.name || "");
     const [newName, setNewName] = useState("");
@@ -384,7 +341,7 @@ export const CreateLinkModal = ({ currentPath, selected }) => {
     );
 };
 
-export const EditPermissionsModal = ({ selected, path }) => {
+const EditPermissionsModal = ({ selected, path }) => {
     const Dialogs = useDialogs();
     const [owner, setOwner] = useState(selected.user);
     const [mode, setMode] = useState(selected.mode);
@@ -393,6 +350,11 @@ export const EditPermissionsModal = ({ selected, path }) => {
     const accounts = useFile("/etc/passwd", { syntax: etcPasswdSyntax });
     const groups = useFile("/etc/group", { syntax: etcGroupSyntax });
     const logindef = useFile("/etc/login.defs", { superuser: true });
+
+    if (!selected) {
+        const directory_name = path[path.length - 1];
+        selected = { name: directory_name, type: "dir" };
+    }
 
     //  Handle also the case where logindef == null, i.e. the file does not exist.
     //  While that's unusual, "empty /etc" is a goal, and it shouldn't crash the page.
@@ -562,4 +524,135 @@ const setDirectoryName = (val, setName, setNameError, setErrorMessage) => {
     } else {
         setNameError(null);
     }
+};
+
+export const fileActions = (path, files, selected, setSelected, clipboard, setClipboard, addAlert, Dialogs) => {
+    const currentPath = path.join("/") + "/";
+    const menuItems = [];
+
+    const createLink = (currentPath, files, selected) => {
+        Dialogs.show(
+            <CreateLinkModal
+              currentPath={currentPath} selected={selected}
+              files={files.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase())
+                  ? 1
+                  : ((b.name.toLowerCase() > a.name.toLowerCase())
+                      ? -1
+                      : 0))}
+            />
+        );
+    };
+
+    if (selected.length === 0 || selected[0].name === path[path.length - 1]) {
+        menuItems.push(
+            {
+                id: "paste-item",
+                title: _("Paste"),
+                onClick: () => spawnPaste(clipboard, currentPath, false, addAlert),
+                isDisabled: clipboard === undefined
+            },
+            {
+                id: "paste-as-symlink",
+                title: _("Paste as symlink"),
+                onClick: () => spawnPaste(clipboard, currentPath, true, addAlert),
+                isDisabled: clipboard === undefined
+            },
+            { type: "divider" },
+            {
+                id: "create-item",
+                title: _("Create directory"),
+                onClick: () => Dialogs.show(<CreateDirectoryModal currentPath={currentPath} />),
+            },
+            {
+                id: "create-link",
+                title: _("Create link"),
+                onClick: () => createLink(currentPath, files, selected || {})
+            },
+            { type: "divider" },
+            {
+                id: "edit-permissions",
+                title: _("Edit permissions"),
+                onClick: () => editPermissions(Dialogs, selected[0], path)
+            }
+        );
+    } else if (selected.length === 1) {
+        menuItems.push(
+            {
+                id: "copy-item",
+                title: _("Copy"),
+                onClick: () => setClipboard([currentPath + selected[0].name]),
+            },
+            ...(selected[0].type === "dir")
+                ? [
+                    {
+                        id: "paste-into-directory",
+                        title: _("Paste into directory"),
+                        onClick: () => spawnPaste(clipboard, [currentPath + selected[0].name], false, addAlert),
+                        isDisabled: clipboard === undefined
+                    }
+                ]
+                : [],
+            { type: "divider" },
+            {
+                id: "edit-permissions",
+                title: _("Edit permissions"),
+                onClick: () => editPermissions(Dialogs, selected[0], path)
+            },
+            {
+                id: "rename-item",
+                title: _("Rename"),
+                onClick: () => {
+                    Dialogs.show(
+                        <RenameItemModal
+                          path={path}
+                          selected={selected[0]}
+                        />
+                    );
+                },
+            },
+            { type: "divider" },
+            {
+                id: "create-link",
+                title: _("Create link"),
+                onClick: () => createLink(currentPath, files, selected[0]),
+            },
+            { type: "divider" },
+            {
+                id: "delete-item",
+                title: _("Delete"),
+                className: "pf-m-danger",
+                onClick: () => {
+                    Dialogs.show(
+                        <ConfirmDeletionDialog
+                          selected={selected} path={currentPath}
+                          setSelected={setSelected}
+                        />
+                    );
+                }
+            },
+        );
+    } else if (selected.length > 1) {
+        menuItems.push(
+            {
+                id: "copy-item",
+                title: _("Copy"),
+                onClick: () => setClipboard(selected.map(s => path.join("/") + "/" + s.name)),
+            },
+            {
+                id: "delete-item",
+                title: _("Delete"),
+                className: "pf-m-danger",
+                onClick: () => {
+                    Dialogs.show(
+                        <ConfirmDeletionDialog
+                          selected={selected} path={currentPath}
+                          setSelected={setSelected}
+                        />
+                    );
+                },
+            }
+        );
+    }
+
+    return menuItems;
 };

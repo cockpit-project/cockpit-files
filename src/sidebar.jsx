@@ -48,9 +48,7 @@ import {
 import * as timeformat from "timeformat";
 import { useDialogs } from "dialogs.jsx";
 
-import {
-    copyItems, createDirectory, createLink, deleteItem, editPermissions, pasteItem, renameItem
-} from "./fileActions.jsx";
+import { editPermissions, fileActions } from "./fileActions.jsx";
 import { get_permissions } from "./common";
 
 const _ = cockpit.gettext;
@@ -179,7 +177,7 @@ export const SidebarPanelDetails = ({
                 <Button
                   variant="secondary"
                   onClick={() => {
-                      editPermissions(Dialogs, { selected: selected[0], path });
+                      editPermissions(Dialogs, selected[0], path);
                   }}
                 >
                     {_("Edit permissions")}
@@ -200,132 +198,11 @@ const DropdownWithKebab = ({
 }) => {
     const Dialogs = useDialogs();
     const [isOpen, setIsOpen] = useState(false);
-    const directory_name = path[path.length - 1];
 
     const onToggleClick = () => setIsOpen(!isOpen);
     const onSelect = (_event, itemId) => setIsOpen(false);
-    const currentPath = path.join("/") + "/";
-
-    const singleDropdownOptions = [
-        ...selected.length === 1
-            ? [
-                {
-                    id: "copy-item",
-                    onClick: () => copyItems(setClipboard, [path.join("/") + "/" + selected[0].name]),
-                    title: _("Copy"),
-                }
-            ]
-            : [],
-        ...selected.length === 0
-            ? [
-                {
-                    id: "paste-item",
-                    onClick: () => pasteItem(clipboard, path.join("/") + "/", false, addAlert),
-                    title: _("Paste"),
-                    isDisabled: clipboard === undefined
-                }
-            ]
-            : [],
-        ...(selected.length === 1 && selected[0].type === "dir")
-            ? [
-                {
-                    id: "paste-into-directory",
-                    onClick: () => {
-                        pasteItem(clipboard, path.join("/") + "/" + selected[0].name + "/", false, addAlert);
-                    },
-                    title: _("Paste into directory"),
-                    isDisabled: clipboard === undefined
-                }
-            ]
-            : [],
-        ...selected.length === 0
-            ? [
-                {
-                    id: "paste-as-symlink",
-                    onClick: () => pasteItem(clipboard, path.join("/") + "/", true, addAlert),
-                    title: _("Paste as symlink"),
-                    isDisabled: clipboard === undefined
-                }
-            ]
-            : [],
-        { type: "divider" },
-        ...selected.length === 0
-            ? [
-                {
-                    id: "create-item",
-                    onClick: () => createDirectory(Dialogs, currentPath),
-                    title: _("Create directory")
-                }
-            ]
-            : [],
-        {
-            id: "create-link",
-            onClick: () => createLink(Dialogs, currentPath, files, selected[0]),
-            title: _("Create link")
-        },
-        { type: "divider" },
-        {
-            id: "edit-permissions",
-            onClick: () => {
-                editPermissions(Dialogs, {
-                    selected: selected[0] || { name: directory_name, type: "dir" },
-                    path
-                });
-            },
-            title: _("Edit permissions")
-        },
-        {
-            id: "rename-item",
-            onClick: () => {
-                renameItem(Dialogs, {
-                    selected: selected[0] || { name: directory_name, type: "dir" },
-                    path,
-                });
-            },
-            title: _("Rename")
-        },
-        ...selected.length !== 0
-            ? [
-                { type: "divider" },
-                {
-                    id: "delete-item",
-                    onClick: () => {
-                        deleteItem(Dialogs, {
-                            selected,
-                            path: currentPath,
-                            setSelected,
-                        });
-                    },
-                    title: _("Delete"),
-                    className:"pf-m-danger"
-                }
-            ]
-            : [],
-    ];
-
-    const multiDropdownOptions = [
-        {
-            id: "copy-item",
-            onClick: () => copyItems(setClipboard, selected.map(s => path.join("/") + "/" + s.name)),
-            title: _("Copy")
-        },
-        {
-            id: "delete-item",
-            onClick: () => {
-                deleteItem(Dialogs, {
-                    selected,
-                    path: currentPath,
-                    setSelected
-                });
-            },
-            title:_("Delete"),
-            className:"pf-m-danger"
-        }
-    ];
-
-    const dropdownOptions = selected.length > 1
-        ? multiDropdownOptions
-        : singleDropdownOptions;
+    const menuItems = fileActions(path, files, selected, setSelected,
+                                  clipboard, setClipboard, addAlert, Dialogs);
 
     return (
         <Dropdown
@@ -343,7 +220,7 @@ const DropdownWithKebab = ({
               </MenuToggle>}
         >
             <DropdownList>
-                {dropdownOptions.map((option, i) => {
+                {menuItems.map((option, i) => {
                     if (option.type === "divider")
                         return <Divider key={i} />;
                     return (
