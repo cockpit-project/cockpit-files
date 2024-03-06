@@ -332,7 +332,7 @@ export const NavigatorCardBody = ({
                         {sortedFiles.map(file =>
                             <Item
                               file={file} key={file.name}
-                              selected={selected} setSelected={setSelected}
+                              isSelected={!!selected.find(s => s.name === file.name)} setSelected={setSelected}
                               onDoubleClickNavigate={onDoubleClickNavigate}
                               isGrid={isGrid}
                             />)}
@@ -355,7 +355,7 @@ export const NavigatorCardBody = ({
                               title:
     <Item
       file={file} key={file.name}
-      selected={selected}
+      isSelected={!!selected.find(s => s.name === file.name)}
       setSelected={setSelected}
       onDoubleClickNavigate={onDoubleClickNavigate}
       isGrid={isGrid}
@@ -370,7 +370,8 @@ export const NavigatorCardBody = ({
     }
 };
 
-function Item({ file, selected, setSelected, onDoubleClickNavigate, isGrid }) {
+// Memoize the Item component as rendering thousands of them on each render of parent component is costly.
+const Item = React.memo(function Item({ file, isSelected, setSelected, onDoubleClickNavigate, isGrid }) {
     function handleClick(ev, file) {
         if (ev.detail > 1) {
             onDoubleClickNavigate(file);
@@ -406,12 +407,15 @@ function Item({ file, selected, setSelected, onDoubleClickNavigate, isGrid }) {
           id={"card-item-" + file.name + file.type}
           isClickable isCompact
           isPlain
-          isSelected={selected.find(s => s.name === file.name)}
+          isSelected={isSelected}
           onClick={ev => handleClick(ev, file)}
           onContextMenu={(e) => {
               e.stopPropagation();
-              if (selected.length === 1 || !selected.includes(file))
-                  setSelected([file]);
+              setSelected((oldSelected) => {
+                  if (oldSelected.length === 1 || !oldSelected.includes(file))
+                      return [file];
+                  return oldSelected;
+              });
           }}
           onDoubleClick={() => onDoubleClickNavigate(file)}
         >
@@ -437,4 +441,4 @@ function Item({ file, selected, setSelected, onDoubleClickNavigate, isGrid }) {
             </CardHeader>
         </Card>
     );
-}
+});

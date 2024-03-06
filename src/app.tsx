@@ -67,7 +67,9 @@ export const Application = () => {
 
     const onFilterChange = (_event: React.FormEvent<HTMLInputElement>, value: string) => setCurrentFilter(value);
     const currentPath = decodeURIComponent(options.path?.toString() || "");
-    const path = currentPath?.split("/");
+    // the function itself is not expensive, but `path` is later used in expensive computation
+    // and changing its reference value on every render causes performance issues
+    const path = useMemo(() => currentPath?.split("/"), [currentPath]);
     const currentDir = path.join("/") + "/";
     const sel = (
         options.path !== undefined
