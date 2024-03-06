@@ -288,13 +288,10 @@ export const NavigatorCardBody = ({
 
     const resetSelected = e => {
         if (e.target.id === "folder-view" || e.target.id === "navigator-card-body") {
-            setSelected([]);
+            if (selected.length !== 0) {
+                setSelected([]);
+            }
         }
-    };
-
-    const handleContextMenu = () => {
-        const sel = path ? path[path.length - 1] : undefined;
-        setSelected([{ name: sel }]);
     };
 
     if (loadingFiles)
@@ -325,7 +322,7 @@ export const NavigatorCardBody = ({
                 <CardBody
                   id="navigator-card-body"
                   onClick={resetSelected}
-                  onContextMenu={handleContextMenu}
+                  onContextMenu={resetSelected}
                 >
                     <Gallery id="folder-view">
                         {sortedFiles.map(file =>
@@ -344,6 +341,8 @@ export const NavigatorCardBody = ({
             <>
                 {contextMenu}
                 <ListingTable
+                  onClick={resetSelected}
+                  onContextMenu={resetSelected}
                   id="folder-view"
                   className="pf-m-no-border-rows"
                   variant="compact"
@@ -362,7 +361,6 @@ export const NavigatorCardBody = ({
                           }
                       ]
                   }))}
-                  onContextMenu={handleContextMenu}
                 />
             </>
         );
