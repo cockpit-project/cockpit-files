@@ -446,6 +446,8 @@ class TestNavigator(testlib.MachineCase):
         self.enter_navigator()
 
         # validation
+        m.execute("touch /home/admin/newfile")
+        b.click("[data-item='newfile']")
         b.click("#dropdown-menu")
         b.click("#rename-item")
         b.set_input_text("#rename-item-input", "test")
@@ -461,7 +463,6 @@ class TestNavigator(testlib.MachineCase):
         b.click(".pf-v5-c-modal-box__footer button.pf-m-link")  # cancel
 
         # Rename file
-        m.execute("touch /home/admin/newfile")
         self.rename_item(b, "newfile", "newfile1")
         b.wait_visible("[data-item='newfile1']")
         m.execute("rm /home/admin/newfile1")
@@ -475,26 +476,13 @@ class TestNavigator(testlib.MachineCase):
         self.rename_item(b, "newdir1", "new dir1")
         b.wait_visible("[data-item='new dir1']")
 
-        # Rename current folder
-        b.mouse("[data-item='new dir1']", "dblclick")
-        b.click("#dropdown-menu")
-        b.click("#rename-item")
-        b.wait_in_text("h1.pf-v5-c-modal-box__title", "Rename")
-        b.set_input_text("#rename-item-input", "newdir2")
-        b.click("button.pf-m-primary")
-        b.wait_in_text("#sidebar-card-header", "newdir2")
-        b.wait_text(self.last_breadcrumb_sel(), "newdir2")
-
-        # Go back to home folder
-        b.click(".breadcrumb-button:nth-of-type(3)")
-
         # Renaming protected item should give an error
-        m.execute("sudo chattr +i /home/admin/newdir2")
-        self.rename_item(b, "newdir2", "testdir")
-        alert_text = "mv: cannot move '/home/admin/newdir2' to '/home/admin/testdir': Operation not permitted"
+        m.execute("sudo chattr +i /home/admin/new\\ dir1")
+        self.rename_item(b, "new dir1", "testdir")
+        alert_text = "mv: cannot move '/home/admin/new dir1' to '/home/admin/testdir': Operation not permitted"
         self.wait_modal_inline_alert(b, alert_text)
         b.click("div.pf-v5-c-modal-box__close")
-        m.execute("sudo chattr -i /home/admin/newdir2")
+        m.execute("sudo chattr -i /home/admin/new\\ dir1")
 
     def testHiddenItems(self):
         b = self.browser

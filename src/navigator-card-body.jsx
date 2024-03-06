@@ -34,9 +34,7 @@ import { useDialogs } from "dialogs.jsx";
 import { ListingTable } from "cockpit-components-table.jsx";
 
 import { ContextMenu } from "cockpit-components-context-menu.jsx";
-import {
-    copyItems, createDirectory, createLink, deleteItem, editPermissions, pasteItem, renameItem
-} from "./fileActions.jsx";
+import { fileActions } from "./fileActions.jsx";
 
 const _ = cockpit.gettext;
 
@@ -85,74 +83,8 @@ const compare = (sortBy) => {
 // eslint-disable-next-line max-len
 const ContextMenuItems = ({ path, selected, setSelected, addAlert, clipboard, setClipboard, files }) => {
     const Dialogs = useDialogs();
-    const currentDir = path.join("/") + "/";
-
-    const _createDirectory = () => createDirectory(Dialogs, currentDir);
-    const _createLink = () => createLink(Dialogs, currentDir, files, selected[0]);
-    const _copyItems = () => copyItems(setClipboard, selected.map(s => currentDir + s.name));
-    const _pasteItem = (targetPath, asSymlink) => pasteItem(clipboard, targetPath.join("/") + "/", asSymlink, addAlert);
-    const _renameItem = () => renameItem(Dialogs, { selected: selected[0], path });
-    const _editPermissions = () => editPermissions(Dialogs, { selected: selected[0], path });
-    const _deleteItem = () => {
-        deleteItem(
-            Dialogs,
-            {
-                selected,
-                path: currentDir,
-                setSelected
-            }
-        );
-    };
-
-    if (selected.length === 0)
-        return null;
-
-    const menuItems = [];
-
-    // HACK: No item selected but the current folder, this depends on
-    // `selected` contained the currently viewed directory which is plain wrong
-    // from a state perspective. `selected` should be the actually "selected"
-    // items and not the current path. Refactor this later.
-    if (selected.length === 1 && selected[0].name === path[path.length - 1]) {
-        menuItems.push(
-            { title: _("Paste"), onClick: () => _pasteItem(path, false), isDisabled: clipboard === undefined },
-            {
-                title: _("Paste as symlink"),
-                onClick: () => _pasteItem(path, true),
-                isDisabled: clipboard === undefined
-            },
-            { type: "divider" },
-            { title: _("Create directory"), onClick: _createDirectory },
-            { title: _("Create link"), onClick: _createLink },
-            { type: "divider" },
-            { title: _("Edit permissions"), onClick: _editPermissions }
-        );
-    } else if (selected.length === 1) {
-        menuItems.push(
-            { title: _("Copy"), onClick: _copyItems },
-            ...(selected[0].type === "dir")
-                ? [
-                    {
-                        title: _("Paste into directory"),
-                        onClick: () => _pasteItem([...path, selected[0].name], false),
-                        isDisabled: clipboard === undefined
-                    }
-                ]
-                : [],
-            { type: "divider" },
-            { title: _("Edit permissions"), onClick: _editPermissions },
-            { title: _("Rename"), onClick: _renameItem },
-            { type: "divider" },
-            { title: _("Create link"), onClick: _createLink },
-            { type: "divider" },
-            { title: cockpit.format(_("Delete")), onClick: _deleteItem, className: "pf-m-danger" },
-        );
-    } else if (selected.length > 1) {
-        menuItems.push(
-            { title: _("Copy"), onClick: _copyItems },
-            { title: _("Delete"), onClick: _deleteItem, className: "pf-m-danger" }
-        );
-    }
+    const menuItems = fileActions(path, files, selected, setSelected,
+                                  clipboard, setClipboard, addAlert, Dialogs);
 
     return (
         <MenuList>
