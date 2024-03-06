@@ -375,7 +375,7 @@ function Item({ file, selected, setSelected, onDoubleClickNavigate, isGrid }) {
         if (ev.detail > 1) {
             onDoubleClickNavigate(file);
         } else {
-            if (!ev.ctrlKey || selected === path[path.length - 1]) {
+            if (!ev.ctrlKey) {
                 setSelected([file]);
             } else {
                 setSelected(s => {
