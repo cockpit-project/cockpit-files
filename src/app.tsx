@@ -130,6 +130,22 @@ export const Application = () => {
 
     return (
         <Page>
+            <AlertGroup isToast isLiveRegion>
+                {alerts.map(alert => (
+                    <Alert
+                      variant={alert.variant}
+                      title={alert.title}
+                      actionClose={
+                          <AlertActionCloseButton
+                            title={alert.title}
+                            variantLabel={`${alert.variant} alert`}
+                            onClose={() => removeAlert(alert.key)}
+                          />
+                      }
+                      key={alert.key}
+                    />
+                ))}
+            </AlertGroup>
             <NavigatorBreadcrumbs
               path={path}
               showHidden={showHidden} setShowHidden={setShowHidden}
@@ -156,22 +172,6 @@ export const Application = () => {
                               addAlert={addAlert}
                               allFiles={files}
                             />
-                            <AlertGroup isToast isLiveRegion>
-                                {alerts.map(alert => (
-                                    <Alert
-                                      variant={alert.variant}
-                                      title={alert.title}
-                                      actionClose={
-                                          <AlertActionCloseButton
-                                            title={alert.title}
-                                            variantLabel={`${alert.variant} alert`}
-                                            onClose={() => removeAlert(alert.key)}
-                                          />
-                                      }
-                                      key={alert.key}
-                                    />
-                                ))}
-                            </AlertGroup>
                         </Card>
                     </SidebarContent>
                     <SidebarPanel className="sidebar-panel" width={{ default: "width_25" }}>
