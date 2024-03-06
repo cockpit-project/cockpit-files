@@ -19,7 +19,7 @@
 
 import cockpit from "cockpit";
 import { superuser } from "superuser";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
     Card,
     Page, PageSection,
@@ -110,12 +110,16 @@ export const Application = () => {
         [currentPath, sel]
     );
 
+    // the files in DOM are rendered from this list, creating a new array on
+    // every render can cause performance issues, so memoize it.
+    const visibleFiles = useMemo(() => {
+        return !showHidden
+            ? files.filter(file => !file.name.startsWith("."))
+            : files;
+    }, [files, showHidden]);
+
     if (loading)
         return <EmptyStatePanel loading />;
-
-    const visibleFiles = !showHidden
-        ? files.filter(file => !file.name.startsWith("."))
-        : files;
 
     const addAlert = (title: string, variant: AlertVariant, key: string) => {
         setAlerts(prevAlerts => [...prevAlerts, { title, variant, key }]);
