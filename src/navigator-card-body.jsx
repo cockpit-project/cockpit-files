@@ -83,8 +83,9 @@ const compare = (sortBy) => {
 };
 
 // eslint-disable-next-line max-len
-const ContextMenuItems = ({ path, currentDir, selected, setSelected, addAlert, clipboard, setClipboard, files }) => {
+const ContextMenuItems = ({ path, selected, setSelected, addAlert, clipboard, setClipboard, files }) => {
     const Dialogs = useDialogs();
+    const currentDir = path.join("/") + "/";
 
     const _createDirectory = () => createDirectory(Dialogs, currentDir);
     const _createLink = () => createLink(Dialogs, currentDir, files, selected[0]);
@@ -171,7 +172,6 @@ const ContextMenuItems = ({ path, currentDir, selected, setSelected, addAlert, c
 };
 
 export const NavigatorCardBody = ({
-    currentDir,
     currentFilter,
     files,
     isGrid,
@@ -308,7 +308,6 @@ export const NavigatorCardBody = ({
         <ContextMenu parentId="folder-view">
             <ContextMenuItems
               path={path}
-              currentDir={currentDir}
               selected={selected}
               setSelected={setSelected}
               addAlert={addAlert}

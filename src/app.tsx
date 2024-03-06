@@ -70,7 +70,6 @@ export const Application = () => {
     // the function itself is not expensive, but `path` is later used in expensive computation
     // and changing its reference value on every render causes performance issues
     const path = useMemo(() => currentPath?.split("/"), [currentPath]);
-    const currentDir = path.join("/") + "/";
     const sel = (
         options.path !== undefined
             ? path[path.length - 1]
@@ -163,7 +162,6 @@ export const Application = () => {
                             <NavigatorCardBody
                               currentFilter={currentFilter} files={visibleFiles}
                               path={path}
-                              currentDir={currentDir}
                               isGrid={isGrid} sortBy={sortBy}
                               selected={selected} setSelected={setSelected}
                               loadingFiles={loadingFiles}
