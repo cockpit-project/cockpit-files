@@ -70,11 +70,6 @@ export const Application = () => {
     // the function itself is not expensive, but `path` is later used in expensive computation
     // and changing its reference value on every render causes performance issues
     const path = useMemo(() => currentPath?.split("/"), [currentPath]);
-    const sel = (
-        options.path !== undefined
-            ? path[path.length - 1]
-            : undefined
-    );
 
     useEffect(() => {
         cockpit.user().then(user => {
@@ -86,7 +81,7 @@ export const Application = () => {
 
     useEffect(
         () => {
-            if (sel === undefined) {
+            if (options.path === undefined) {
                 return;
             }
 
@@ -108,7 +103,7 @@ export const Application = () => {
                 setFiles(files);
             });
         },
-        [currentPath, sel]
+        [options, currentPath]
     );
 
     // the files in DOM are rendered from this list, creating a new array on
