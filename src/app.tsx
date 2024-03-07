@@ -106,14 +106,6 @@ export const Application = () => {
         [options, currentPath]
     );
 
-    // the files in DOM are rendered from this list, creating a new array on
-    // every render can cause performance issues, so memoize it.
-    const visibleFiles = useMemo(() => {
-        return !showHidden
-            ? files.filter(file => !file.name.startsWith("."))
-            : files;
-    }, [files, showHidden]);
-
     if (loading)
         return <EmptyStatePanel loading />;
 
@@ -155,7 +147,7 @@ export const Application = () => {
                             />
                             {errorMessage && <EmptyStatePanel paragraph={errorMessage} icon={ExclamationCircleIcon} />}
                             <NavigatorCardBody
-                              currentFilter={currentFilter} files={visibleFiles}
+                              currentFilter={currentFilter} files={files}
                               path={path}
                               isGrid={isGrid} sortBy={sortBy}
                               selected={selected} setSelected={setSelected}
@@ -163,7 +155,7 @@ export const Application = () => {
                               clipboard={clipboard}
                               setClipboard={setClipboard}
                               addAlert={addAlert}
-                              allFiles={files}
+                              showHidden={showHidden}
                             />
                         </Card>
                     </SidebarContent>
