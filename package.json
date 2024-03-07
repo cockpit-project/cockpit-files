@@ -16,7 +16,7 @@
   },
   "devDependencies": {
     "@types/react": "18.2.64",
-    "@types/react-dom": "18.2.20",
+    "@types/react-dom": "18.2.21",
     "@typescript-eslint/eslint-plugin": "7.1.1",
     "argparse": "2.0.1",
     "chrome-remote-interface": "0.33.0",
