@@ -114,20 +114,18 @@ export const NavigatorCardBody = ({
     loadingFiles,
     clipboard,
     setClipboard,
+    showHidden,
     addAlert,
-    allFiles,
 }) => {
     const [boxPerRow, setBoxPerRow] = useState(0);
     const Dialogs = useDialogs();
-    const sortedFiles = useMemo(() => {
-        const compareFunc = compare(sortBy);
 
+    const sortedFiles = useMemo(() => {
         return files
-                .filter(file => {
-                    return file.name.toLowerCase().includes(currentFilter.toLowerCase());
-                })
-                .sort(compareFunc);
-    }, [files, currentFilter, sortBy]);
+                .filter(file => showHidden ? true : !file.name.startsWith("."))
+                .filter(file => file.name.toLowerCase().includes(currentFilter.toLowerCase()))
+                .sort(compare(sortBy));
+    }, [files, showHidden, currentFilter, sortBy]);
     const isMounted = useRef(null);
 
     function calculateBoxPerRow () {
@@ -242,7 +240,7 @@ export const NavigatorCardBody = ({
               addAlert={addAlert}
               clipboard={clipboard}
               setClipboard={setClipboard}
-              files={allFiles}
+              files={files}
             />
         </ContextMenu>
     );
