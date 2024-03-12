@@ -41,3 +41,9 @@ ignore = [
 [tool.ruff.lint.flake8-pytest-style]
 fixture-parentheses = false
 mark-parentheses = false
+
+[tool.vulture]
+ignore_names = [
+   "setUpClass",
+   "test[A-Z0-9]*",
+]
