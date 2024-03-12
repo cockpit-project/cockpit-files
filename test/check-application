@@ -15,7 +15,7 @@ import testlib
 @testlib.nondestructive
 class TestNavigator(testlib.MachineCase):
     @classmethod
-    def setUpClass(cls):
+    def setUpClass(_cls):
         # Run browser in UTC as the displayed time is in the browser's timezone
         os.environ['TZ'] = 'UTC'
 
@@ -32,9 +32,6 @@ class TestNavigator(testlib.MachineCase):
         b.click(f"{selector_button}:not([disabled]):not([aria-disabled=true])")
         select_entry = f"{selector} ul button:contains('{value}')"
         b.click(select_entry)
-
-    def last_breadcrumb_sel(self):
-        return ".pf-v5-c-page__main-breadcrumb > div > button:last-of-type"
 
     def delete_item(self, b, filetype, filename, expect_success=True):
         b.click(f"[data-item='{filename}']")
