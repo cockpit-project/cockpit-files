@@ -141,16 +141,22 @@ export const Application = () => {
                     <SidebarContent>
                         <Card>
                             <NavigatorCardHeader
-                              currentFilter={currentFilter} onFilterChange={onFilterChange}
-                              isGrid={isGrid} setIsGrid={setIsGrid}
-                              sortBy={sortBy} setSortBy={setSortBy}
+                              currentFilter={currentFilter}
+                              onFilterChange={onFilterChange}
+                              isGrid={isGrid}
+                              setIsGrid={setIsGrid}
+                              sortBy={sortBy}
+                              setSortBy={setSortBy}
                             />
                             {errorMessage && <EmptyStatePanel paragraph={errorMessage} icon={ExclamationCircleIcon} />}
                             <NavigatorCardBody
-                              currentFilter={currentFilter} files={files}
+                              files={files}
+                              currentFilter={currentFilter}
                               path={path}
-                              isGrid={isGrid} sortBy={sortBy}
-                              selected={selected} setSelected={setSelected}
+                              isGrid={isGrid}
+                              sortBy={sortBy}
+                              selected={selected}
+                              setSelected={setSelected}
                               loadingFiles={loadingFiles}
                               clipboard={clipboard}
                               setClipboard={setClipboard}
