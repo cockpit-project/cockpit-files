@@ -549,13 +549,13 @@ export const fileActions = (path, files, selected, setSelected, clipboard, setCl
                 id: "paste-item",
                 title: _("Paste"),
                 onClick: () => spawnPaste(clipboard, currentPath, false, addAlert),
-                isDisabled: clipboard === undefined
+                isDisabled: clipboard.length === 0
             },
             {
                 id: "paste-as-symlink",
                 title: _("Paste as symlink"),
                 onClick: () => spawnPaste(clipboard, currentPath, true, addAlert),
-                isDisabled: clipboard === undefined
+                isDisabled: clipboard.length === 0
             },
             { type: "divider" },
             {
@@ -588,7 +588,7 @@ export const fileActions = (path, files, selected, setSelected, clipboard, setCl
                         id: "paste-into-directory",
                         title: _("Paste into directory"),
                         onClick: () => spawnPaste(clipboard, [currentPath + selected[0].name], false, addAlert),
-                        isDisabled: clipboard === undefined
+                        isDisabled: clipboard.length === 0
                     }
                 ]
                 : [],
