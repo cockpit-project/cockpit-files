@@ -62,7 +62,7 @@ export const Application = () => {
     const [sortBy, setSortBy] = useState(localStorage.getItem("cockpit-navigator.sort") || "az");
     const [selected, setSelected] = useState<NavigatorFileInfo[]>([]);
     const [showHidden, setShowHidden] = useState(localStorage.getItem("cockpit-navigator.showHiddenFiles") === "true");
-    const [clipboard, setClipboard] = useState(undefined);
+    const [clipboard, setClipboard] = useState([]);
     const [alerts, setAlerts] = useState<Alert[]>([]);
 
     const onFilterChange = (_event: React.FormEvent<HTMLInputElement>, value: string) => setCurrentFilter(value);
