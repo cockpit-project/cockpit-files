@@ -32,6 +32,7 @@ import { FileIcon, FolderIcon } from "@patternfly/react-icons";
 import cockpit from "cockpit";
 import { useDialogs } from "dialogs.jsx";
 import { ListingTable } from "cockpit-components-table.jsx";
+import { EmptyStatePanel } from "cockpit-components-empty-state.jsx";
 
 import { ContextMenu } from "cockpit-components-context-menu.jsx";
 import { fileActions } from "./fileActions.jsx";
@@ -347,6 +348,7 @@ export const NavigatorCardBody = ({
               id={navigator_parent_id}
               ref={folderViewRef}
             >
+                {sortedFiles.length === 0 && <EmptyStatePanel paragraph={_("Directory is empty")} />}
                 {isGrid &&
                     <CardBody id="navigator-card-body">
                         <Gallery id="folder-view">
