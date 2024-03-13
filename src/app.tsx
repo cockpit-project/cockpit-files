@@ -21,7 +21,6 @@ import cockpit from "cockpit";
 import { superuser } from "superuser";
 import React, { useEffect, useMemo, useState } from "react";
 import {
-    Card,
     Page, PageSection,
     Sidebar, SidebarPanel, SidebarContent,
     AlertGroup, Alert, AlertVariant, AlertActionCloseButton
@@ -30,9 +29,8 @@ import { ExclamationCircleIcon } from "@patternfly/react-icons";
 
 import { EmptyStatePanel } from "cockpit-components-empty-state.jsx";
 import { NavigatorBreadcrumbs } from "./navigator-breadcrumbs";
-import { NavigatorCardBody } from "./navigator-card-body.jsx";
 import { SidebarPanelDetails } from "./sidebar.jsx";
-import { NavigatorCardHeader } from "./header.jsx";
+import { NavigatorFolderView } from "./navigator-folder-view";
 import { usePageLocation } from "hooks.js";
 import { fsinfo, FileInfo } from "./fsinfo";
 
@@ -44,7 +42,7 @@ interface Alert {
     variant: AlertVariant,
 }
 
-interface NavigatorFileInfo extends FileInfo {
+export interface NavigatorFileInfo extends FileInfo {
     name: string,
     to: string | null,
 }
@@ -54,18 +52,14 @@ export const Application = () => {
     const [loading, setLoading] = useState(true);
     const [loadingFiles, setLoadingFiles] = useState(true);
     const [errorMessage, setErrorMessage] = useState("");
-    const [currentFilter, setCurrentFilter] = useState("");
     const [files, setFiles] = useState<NavigatorFileInfo[]>([]);
     // eslint-disable-next-line no-unused-vars
     const [rootInfo, setRootInfo] = useState<FileInfo | null>();
-    const [isGrid, setIsGrid] = useState(true);
-    const [sortBy, setSortBy] = useState(localStorage.getItem("cockpit-navigator.sort") || "az");
     const [selected, setSelected] = useState<NavigatorFileInfo[]>([]);
     const [showHidden, setShowHidden] = useState(localStorage.getItem("cockpit-navigator.showHiddenFiles") === "true");
-    const [clipboard, setClipboard] = useState([]);
+    const [clipboard, setClipboard] = useState<string[]>([]);
     const [alerts, setAlerts] = useState<Alert[]>([]);
 
-    const onFilterChange = (_event: React.FormEvent<HTMLInputElement>, value: string) => setCurrentFilter(value);
     const currentPath = decodeURIComponent(options.path?.toString() || "");
     // the function itself is not expensive, but `path` is later used in expensive computation
     // and changing its reference value on every render causes performance issues
@@ -139,31 +133,19 @@ export const Application = () => {
             <PageSection>
                 <Sidebar isPanelRight hasGutter>
                     <SidebarContent>
-                        <Card>
-                            <NavigatorCardHeader
-                              currentFilter={currentFilter}
-                              onFilterChange={onFilterChange}
-                              isGrid={isGrid}
-                              setIsGrid={setIsGrid}
-                              sortBy={sortBy}
-                              setSortBy={setSortBy}
-                            />
-                            {errorMessage && <EmptyStatePanel paragraph={errorMessage} icon={ExclamationCircleIcon} />}
-                            <NavigatorCardBody
-                              files={files}
-                              currentFilter={currentFilter}
-                              path={path}
-                              isGrid={isGrid}
-                              sortBy={sortBy}
-                              selected={selected}
-                              setSelected={setSelected}
-                              loadingFiles={loadingFiles}
-                              clipboard={clipboard}
-                              setClipboard={setClipboard}
-                              addAlert={addAlert}
-                              showHidden={showHidden}
-                            />
-                        </Card>
+                        {errorMessage && <EmptyStatePanel paragraph={errorMessage} icon={ExclamationCircleIcon} />}
+                        {!errorMessage &&
+                        <NavigatorFolderView
+                          path={path}
+                          files={files}
+                          loadingFiles={loadingFiles}
+                          showHidden={showHidden}
+                          selected={selected}
+                          setSelected={setSelected}
+                          clipboard={clipboard}
+                          setClipboard={setClipboard}
+                          addAlert={addAlert}
+                        />}
                     </SidebarContent>
                     <SidebarPanel className="sidebar-panel" width={{ default: "width_25" }}>
                         <SidebarPanelDetails
