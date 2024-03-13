@@ -84,6 +84,9 @@ class TestNavigator(testlib.MachineCase):
         hidden_files_cnt = m.execute(r'ls -A /home/admin | grep "^\." | wc -l').strip()
         b.wait_text("#sidebar-card-header", f"admin{files_cnt} items ({hidden_files_cnt} hidden)")
 
+        # default directory is empty
+        b.wait_text(".pf-v5-c-empty-state__body", "Directory is empty")
+
         # new files are auto-detected
         m.execute("touch --date @1641038400 /home/admin/newfile")
         b.wait_visible("[data-item='newfile']")
