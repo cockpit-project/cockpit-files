@@ -39,7 +39,7 @@ export const SettingsDropdown = ({ showHidden, setShowHidden }) => {
 
     const onToggleHidden = () => {
         setShowHidden(prevShowHidden => {
-            localStorage.setItem("cockpit-navigator.showHiddenFiles", !showHidden ? "true" : "false");
+            localStorage.setItem("navigator:showHiddenFiles", !showHidden ? "true" : "false");
             return !prevShowHidden;
         });
     };
