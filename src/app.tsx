@@ -56,7 +56,7 @@ export const Application = () => {
     // eslint-disable-next-line no-unused-vars
     const [rootInfo, setRootInfo] = useState<FileInfo | null>();
     const [selected, setSelected] = useState<NavigatorFileInfo[]>([]);
-    const [showHidden, setShowHidden] = useState(localStorage.getItem("cockpit-navigator.showHiddenFiles") === "true");
+    const [showHidden, setShowHidden] = useState(localStorage.getItem("navigator:showHiddenFiles") === "true");
     const [clipboard, setClipboard] = useState<string[]>([]);
     const [alerts, setAlerts] = useState<Alert[]>([]);
 

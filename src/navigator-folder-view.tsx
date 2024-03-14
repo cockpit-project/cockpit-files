@@ -47,7 +47,7 @@ export const NavigatorFolderView = ({
 }) => {
     const [currentFilter, setCurrentFilter] = useState("");
     const [isGrid, setIsGrid] = useState(localStorage.getItem("navigator:isGrid") !== "false");
-    const [sortBy, setSortBy] = useState(localStorage.getItem("cockpit-navigator.sort") || "az");
+    const [sortBy, setSortBy] = useState(localStorage.getItem("navigator:sort") || "az");
     const onFilterChange = (_event: React.FormEvent<HTMLInputElement>, value: string) => setCurrentFilter(value);
 
     return (
