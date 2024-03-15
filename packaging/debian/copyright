@@ -1,6 +1,6 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: cockpit-navigator
-Source: https://github.com/cockpit-project/cockpit-navigator
+Upstream-Name: cockpit-files
+Source: https://github.com/cockpit-project/cockpit-files
 Comment:
  This does not directly cover the files in dist/*. These are "minified" and
  compressed JavaScript/HTML files built from src/, lib/, po/, and node_modules/

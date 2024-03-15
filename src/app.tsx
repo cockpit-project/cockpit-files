@@ -28,9 +28,9 @@ import {
 import { ExclamationCircleIcon } from "@patternfly/react-icons";
 
 import { EmptyStatePanel } from "cockpit-components-empty-state.jsx";
-import { NavigatorBreadcrumbs } from "./navigator-breadcrumbs";
+import { FilesBreadcrumbs } from "./files-breadcrumbs";
 import { SidebarPanelDetails } from "./sidebar.jsx";
-import { NavigatorFolderView } from "./navigator-folder-view";
+import { FilesFolderView } from "./files-folder-view";
 import { usePageLocation } from "hooks.js";
 import { fsinfo, FileInfo } from "./fsinfo";
 
@@ -42,7 +42,7 @@ interface Alert {
     variant: AlertVariant,
 }
 
-export interface NavigatorFileInfo extends FileInfo {
+export interface FolderFileInfo extends FileInfo {
     name: string,
     to: string | null,
 }
@@ -52,11 +52,11 @@ export const Application = () => {
     const [loading, setLoading] = useState(true);
     const [loadingFiles, setLoadingFiles] = useState(true);
     const [errorMessage, setErrorMessage] = useState("");
-    const [files, setFiles] = useState<NavigatorFileInfo[]>([]);
+    const [files, setFiles] = useState<FolderFileInfo[]>([]);
     // eslint-disable-next-line no-unused-vars
     const [rootInfo, setRootInfo] = useState<FileInfo | null>();
-    const [selected, setSelected] = useState<NavigatorFileInfo[]>([]);
-    const [showHidden, setShowHidden] = useState(localStorage.getItem("navigator:showHiddenFiles") === "true");
+    const [selected, setSelected] = useState<FolderFileInfo[]>([]);
+    const [showHidden, setShowHidden] = useState(localStorage.getItem("files:showHiddenFiles") === "true");
     const [clipboard, setClipboard] = useState<string[]>([]);
     const [alerts, setAlerts] = useState<Alert[]>([]);
 
@@ -126,7 +126,7 @@ export const Application = () => {
                     />
                 ))}
             </AlertGroup>
-            <NavigatorBreadcrumbs
+            <FilesBreadcrumbs
               path={path}
               showHidden={showHidden} setShowHidden={setShowHidden}
             />
@@ -135,7 +135,7 @@ export const Application = () => {
                     <SidebarContent>
                         {errorMessage && <EmptyStatePanel paragraph={errorMessage} icon={ExclamationCircleIcon} />}
                         {!errorMessage &&
-                        <NavigatorFolderView
+                        <FilesFolderView
                           path={path}
                           files={files}
                           loadingFiles={loadingFiles}

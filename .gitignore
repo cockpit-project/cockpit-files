@@ -17,7 +17,7 @@
 /*.whl
 /bots
 /cockpit-*.tar.xz
-/cockpit-navigator.spec
+/cockpit-files.spec
 /dist/
 /package-lock.json
 /pkg/

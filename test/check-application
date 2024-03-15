@@ -13,7 +13,7 @@ import testlib
 # in Packit, Fedora, and RHEL dist-git gating They must not permanently change
 # any file or configuration on the system in a way that influences other tests.
 @testlib.nondestructive
-class TestNavigator(testlib.MachineCase):
+class TestFiles(testlib.MachineCase):
     @classmethod
     def setUpClass(_cls):
         # Run browser in UTC as the displayed time is in the browser's timezone
@@ -23,8 +23,8 @@ class TestNavigator(testlib.MachineCase):
         super().setUp()
         self.restore_dir("/home/admin")
 
-    def enter_navigator(self):
-        self.login_and_go("/navigator")
+    def enter_files(self):
+        self.login_and_go("/files")
         self.browser.wait_not_present(".pf-c-empty-state")
 
     # FIXME: Move to testlib.py
@@ -77,9 +77,9 @@ class TestNavigator(testlib.MachineCase):
         b = self.browser
         m = self.machine
 
-        self.enter_navigator()
+        self.enter_files()
         # expected heading
-        b.wait_text("#navigator-card-header", "Directories & files")
+        b.wait_text("#files-card-header", "Directories & files")
         files_cnt = m.execute("ls -A /home/admin | wc -l").strip()
         hidden_files_cnt = m.execute(r'ls -A /home/admin | grep "^\." | wc -l').strip()
         b.wait_text("#sidebar-card-header", f"admin{files_cnt} items ({hidden_files_cnt} hidden)")
@@ -141,7 +141,7 @@ class TestNavigator(testlib.MachineCase):
 
         # Selected view is saved in localStorage
         b.logout()
-        self.enter_navigator()
+        self.enter_files()
         b.wait_visible("button[aria-label='Display as a grid']")
 
         # deleted files and directories are auto-detected
@@ -167,7 +167,7 @@ class TestNavigator(testlib.MachineCase):
         b = self.browser
         m = self.machine
 
-        self.enter_navigator()
+        self.enter_files()
 
         hostname = m.execute("hostname").strip()
         b.wait_text(".breadcrumb-button:nth-of-type(1)", hostname)
@@ -223,7 +223,7 @@ class TestNavigator(testlib.MachineCase):
         b.wait_not_present("[data-item='newdir']")
         b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "newdir2")
         b.eval_js("window.history.forward()")
-        b.click("#navigator-card-body")  # unselect
+        b.click("#files-card-body")  # unselect
         b.wait_in_text("#sidebar-card-header", "home")
         b.wait_not_present("[data-item='newdir']")
         b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "home")
@@ -233,10 +233,10 @@ class TestNavigator(testlib.MachineCase):
         b = self.browser
         m = self.machine
 
-        self.enter_navigator()
+        self.enter_files()
 
         # Expected heading
-        b.wait_text("#navigator-card-header", "Directories & files")
+        b.wait_text("#files-card-header", "Directories & files")
 
         # Create test files and folders
         m.execute("touch -d '3 hours ago' /home/admin/aaa")
@@ -284,7 +284,7 @@ class TestNavigator(testlib.MachineCase):
         b.wait_text(".item-button:nth-of-type(2)", "BBB")
         b.wait_text(".item-button:nth-of-type(3)", "aaa")
         b.reload()
-        b.enter_page("/navigator")
+        b.enter_page("/files")
         b.wait_text(".item-button:nth-of-type(1)", "ccc")
         b.wait_text(".item-button:nth-of-type(2)", "BBB")
         b.wait_text(".item-button:nth-of-type(3)", "aaa")
@@ -293,7 +293,7 @@ class TestNavigator(testlib.MachineCase):
         b = self.browser
         m = self.machine
 
-        self.enter_navigator()
+        self.enter_files()
 
         self.allow_journal_messages("rm: cannot remove '/home/admin/newdir/newfile': Permission denied",
                                     "rm: cannot remove '/home/admin/newfile': Operation not permitted")
@@ -339,7 +339,7 @@ class TestNavigator(testlib.MachineCase):
         b = self.browser
         m = self.machine
 
-        self.enter_navigator()
+        self.enter_files()
 
         # Create folder
         self.create_directory(b, "newdir")
@@ -385,7 +385,7 @@ class TestNavigator(testlib.MachineCase):
         b = self.browser
         m = self.machine
 
-        self.enter_navigator()
+        self.enter_files()
 
         # Create folder from context menu
         b.mouse("#folder-view", "contextmenu")
@@ -454,7 +454,7 @@ class TestNavigator(testlib.MachineCase):
         b = self.browser
         m = self.machine
 
-        self.enter_navigator()
+        self.enter_files()
 
         # validation
         m.execute("touch /home/admin/newfile")
@@ -499,7 +499,7 @@ class TestNavigator(testlib.MachineCase):
         b = self.browser
         m = self.machine
 
-        self.enter_navigator()
+        self.enter_files()
 
         # Check hidden item count
         m.execute("mkdir /home/admin/newdir")
@@ -518,7 +518,7 @@ class TestNavigator(testlib.MachineCase):
 
         # Selected option is saved in localStorage
         b.reload()
-        b.enter_page("/navigator")
+        b.enter_page("/files")
         b.wait_visible("[data-item='f1']")
         b.wait_visible("[data-item='.f2']")
 
@@ -526,7 +526,7 @@ class TestNavigator(testlib.MachineCase):
         b = self.browser
         m = self.machine
 
-        self.enter_navigator()
+        self.enter_files()
 
         m.execute("touch /home/admin/test")
         m.execute("mkdir /home/admin/testdir")
@@ -570,7 +570,7 @@ class TestNavigator(testlib.MachineCase):
             b.select_from_dropdown("#edit-permissions-group-access", access)
             b.select_from_dropdown("#edit-permissions-other-access", access)
 
-        self.enter_navigator()
+        self.enter_files()
 
         # Check sidebar info
         m.execute("touch /home/admin/newfile")
@@ -616,7 +616,7 @@ class TestNavigator(testlib.MachineCase):
         b = self.browser
         m = self.machine
 
-        self.enter_navigator()
+        self.enter_files()
 
         m.execute("mkdir /home/admin/testdir && chmod 400 /home/admin/testdir")
         b.mouse("[data-item='testdir']", "dblclick")
@@ -628,7 +628,7 @@ class TestNavigator(testlib.MachineCase):
         b = self.browser
         m = self.machine
 
-        self.enter_navigator()
+        self.enter_files()
 
         # Check control-clicking
         m.execute("touch /home/admin/file1 && touch /home/admin/file2")
@@ -679,7 +679,7 @@ class TestNavigator(testlib.MachineCase):
         b = self.browser
         m = self.machine
 
-        self.enter_navigator()
+        self.enter_files()
 
         # Copy/paste file
         m.execute("""
@@ -737,7 +737,7 @@ class TestNavigator(testlib.MachineCase):
         b.click(".breadcrumb-button:nth-of-type(3)")
 
         # Check error alerts
-        b.click("#navigator-card-body")  # unselect
+        b.click("#files-card-body")  # unselect
         b.click("#dropdown-menu")
         b.click("#paste-item")
         b.wait_in_text("h4.pf-v5-c-alert__title",

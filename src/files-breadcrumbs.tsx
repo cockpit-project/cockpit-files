@@ -48,7 +48,7 @@ function useHostname() {
 }
 
 // eslint-disable-next-line max-len
-export function NavigatorBreadcrumbs({ path, showHidden, setShowHidden }: { path: string[], showHidden: boolean, setShowHidden: React.Dispatch<React.SetStateAction<boolean>>}) {
+export function FilesBreadcrumbs({ path, showHidden, setShowHidden }: { path: string[], showHidden: boolean, setShowHidden: React.Dispatch<React.SetStateAction<boolean>>}) {
     const hostname = useHostname();
 
     function navigate(n_parts: number) {

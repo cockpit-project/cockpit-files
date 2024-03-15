@@ -104,7 +104,7 @@ const ContextMenuItems = ({ path, selected, setSelected, addAlert, clipboard, se
     );
 };
 
-export const NavigatorCardBody = ({
+export const FilesCardBody = ({
     currentFilter,
     files,
     isGrid,
@@ -160,7 +160,7 @@ export const NavigatorCardBody = ({
         let folderViewElem = null;
 
         const resetSelected = e => {
-            if (e.target.id === "folder-view" || e.target.id === "navigator-card-body") {
+            if (e.target.id === "folder-view" || e.target.id === "files-card-body") {
                 if (selected.length !== 0) {
                     setSelected([]);
                 }
@@ -326,9 +326,9 @@ export const NavigatorCardBody = ({
             </Flex>
         );
 
-    const navigator_parent_id = "navigator-card-parent";
+    const files_parent_id = "files-card-parent";
     const contextMenu = (
-        <ContextMenu parentId={navigator_parent_id}>
+        <ContextMenu parentId={files_parent_id}>
             <ContextMenuItems
               path={path}
               selected={selected}
@@ -342,14 +342,14 @@ export const NavigatorCardBody = ({
     );
 
     return (
-        <div id={navigator_parent_id}>
+        <div id={files_parent_id}>
             {contextMenu}
             <div
               ref={folderViewRef}
             >
                 {sortedFiles.length === 0 && <EmptyStatePanel paragraph={_("Directory is empty")} />}
                 {isGrid &&
-                    <CardBody id="navigator-card-body">
+                    <CardBody id="files-card-body">
                         <Gallery id="folder-view">
                             {sortedFiles.map(file =>
                                 <Item

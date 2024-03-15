@@ -1,9 +1,9 @@
-pkgname=cockpit-navigator
+pkgname=cockpit-files
 pkgver=VERSION
 pkgrel=1
 pkgdesc='A filesystem browser for Cockpit'
 arch=('any')
-url='https://github.com/cockpit-project/cockpit-navigator'
+url='https://github.com/cockpit-project/cockpit-files'
 license=(LGPL)
 depends=(cockpit>=310.1)
 source=("SOURCE")

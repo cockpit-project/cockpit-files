@@ -2,7 +2,7 @@ name: cockpit-lib-update
 on:
   schedule:
     - cron: '0 2 * * 4'
-  # can be run manually on https://github.com/cockpit-project/cockpit-navigator/actions
+  # can be run manually on https://github.com/cockpit-project/cockpit-files/actions
   workflow_dispatch:
 jobs:
   cockpit-lib-update:
