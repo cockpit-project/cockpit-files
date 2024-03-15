@@ -1,14 +1,9 @@
 summary:
     Run browser integration tests on the host
 require:
+  - podman
   - cockpit-ws
   - cockpit-system
-  - bzip2
-  - git-core
   - glibc-langpack-de
-  - libvirt-python3
-  - make
-  - npm
-  - python3
 test: ./browser.sh
 duration: 60m
