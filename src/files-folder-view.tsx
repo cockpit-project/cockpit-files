@@ -20,11 +20,11 @@
 import React, { useState } from "react";
 import { AlertVariant, Card } from "@patternfly/react-core";
 
-import { NavigatorFileInfo } from "./app";
-import { NavigatorCardBody } from "./navigator-card-body.jsx";
-import { NavigatorCardHeader } from "./header.jsx";
+import { FolderFileInfo } from "./app";
+import { FilesCardBody } from "./files-card-body.jsx";
+import { FilesCardHeader } from "./header.jsx";
 
-export const NavigatorFolderView = ({
+export const FilesFolderView = ({
     path,
     files,
     loadingFiles,
@@ -36,23 +36,23 @@ export const NavigatorFolderView = ({
     addAlert,
 }: {
     path: string[],
-    files: NavigatorFileInfo[],
+    files: FolderFileInfo[],
     loadingFiles: boolean,
     showHidden: boolean,
-    selected: NavigatorFileInfo[],
-    setSelected: React.Dispatch<React.SetStateAction<NavigatorFileInfo[]>>,
+    selected: FolderFileInfo[],
+    setSelected: React.Dispatch<React.SetStateAction<FolderFileInfo[]>>,
     clipboard: string[],
     setClipboard: React.Dispatch<React.SetStateAction<string[]>>,
     addAlert: (title: string, variant: AlertVariant, key: string) => void,
 }) => {
     const [currentFilter, setCurrentFilter] = useState("");
-    const [isGrid, setIsGrid] = useState(localStorage.getItem("navigator:isGrid") !== "false");
-    const [sortBy, setSortBy] = useState(localStorage.getItem("navigator:sort") || "az");
+    const [isGrid, setIsGrid] = useState(localStorage.getItem("files:isGrid") !== "false");
+    const [sortBy, setSortBy] = useState(localStorage.getItem("files:sort") || "az");
     const onFilterChange = (_event: React.FormEvent<HTMLInputElement>, value: string) => setCurrentFilter(value);
 
     return (
         <Card>
-            <NavigatorCardHeader
+            <FilesCardHeader
               currentFilter={currentFilter}
               onFilterChange={onFilterChange}
               isGrid={isGrid}
@@ -60,7 +60,7 @@ export const NavigatorFolderView = ({
               sortBy={sortBy}
               setSortBy={setSortBy}
             />
-            <NavigatorCardBody
+            <FilesCardBody
               files={files}
               currentFilter={currentFilter}
               path={path}

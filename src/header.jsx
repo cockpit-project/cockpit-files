@@ -38,10 +38,10 @@ import { GripVerticalIcon, ListIcon } from "@patternfly/react-icons";
 
 const _ = cockpit.gettext;
 
-export const NavigatorCardHeader = ({ currentFilter, onFilterChange, isGrid, setIsGrid, sortBy, setSortBy }) => {
+export const FilesCardHeader = ({ currentFilter, onFilterChange, isGrid, setIsGrid, sortBy, setSortBy }) => {
     return (
         <CardHeader className="card-actionbar">
-            <CardTitle component="h2" id="navigator-card-header">
+            <CardTitle component="h2" id="files-card-header">
                 <TextContent>
                     <Text component={TextVariants.h2}>
                         {_("Directories & files")}
@@ -68,7 +68,7 @@ const ViewSelector = ({ isGrid, setIsGrid, sortBy, setSortBy }) => {
     const onSelect = (ev, itemId) => {
         setIsOpen(false);
         setSortBy(itemId);
-        localStorage.setItem("navigator:sort", itemId);
+        localStorage.setItem("files:sort", itemId);
     };
 
     return (
@@ -95,7 +95,7 @@ const ViewSelector = ({ isGrid, setIsGrid, sortBy, setSortBy }) => {
                               : _("Display as a grid")}
                           key="view-toggle-action"
                           onClick={() => setIsGrid(isGrid => {
-                              localStorage.setItem("navigator:isGrid", !isGrid ? "true" : "false");
+                              localStorage.setItem("files:isGrid", !isGrid ? "true" : "false");
                               return !isGrid;
                           })}
                         >

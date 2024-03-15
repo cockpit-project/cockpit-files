@@ -8,7 +8,7 @@
           "label": "File browser",
           "keywords": [
 		{
-			"matches": ["files", "navigator", "explorer", "filesystem"]
+			"matches": ["files", "explorer", "filesystem"]
 		}
 	  ]
       }

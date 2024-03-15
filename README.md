@@ -1,4 +1,4 @@
-# Cockpit Navigator
+# Cockpit Files
 
 # Development dependencies
 
@@ -16,8 +16,8 @@ On Fedora:
 These commands check out the source and build it into the `dist/` directory:
 
 ```
-git clone https://github.com/cockpit-project/cockpit-navigator.git
-cd cockpit-navigator
+git clone https://github.com/cockpit-project/cockpit-files.git
+cd cockpit-files
 make
 ```
 
@@ -37,7 +37,7 @@ this manually:
 
 ```
 mkdir -p ~/.local/share/cockpit
-ln -s `pwd`/dist ~/.local/share/cockpit/cockpit-navigator
+ln -s `pwd`/dist ~/.local/share/cockpit/cockpit-files
 ```
 
 After changing the code and running `make` again, reload the Cockpit page in
@@ -68,11 +68,11 @@ set to upload code changes to `~/.local/share/cockpit/` instead of
 To "uninstall" the locally installed version, run `make devel-uninstall`, or
 remove manually the symlink:
 
-    rm ~/.local/share/cockpit/cockpit-navigator
+    rm ~/.local/share/cockpit/cockpit-files
 
 # Running eslint
 
-Cockpit Navigator uses [ESLint](https://eslint.org/) to automatically check
+Cockpit Files uses [ESLint](https://eslint.org/) to automatically check
 JavaScript code style in `.js` and `.jsx` files.
 
 eslint is executed as part of `test/static-code`, aka. `make codecheck`.

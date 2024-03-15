@@ -1,4 +1,4 @@
-Source: cockpit-navigator
+Source: cockpit-files
 Section: admin
 Priority: optional
 Maintainer: Utopia Maintenance Team <pkg-utopia-maintainers@lists.alioth.debian.org>
@@ -7,11 +7,11 @@ Build-Depends: debhelper-compat (= 13),
                gettext (>= 0.21),
 Standards-Version: 4.6.2
 Rules-Requires-Root: no
-Homepage: https://github.com/cockpit-project/cockpit-navigator
-Vcs-Git: https://salsa.debian.org/debian/cockpit-navigator.git
-Vcs-Browser: https://salsa.debian.org/debian/cockpit-navigator
+Homepage: https://github.com/cockpit-project/cockpit-files
+Vcs-Git: https://salsa.debian.org/debian/cockpit-files.git
+Vcs-Browser: https://salsa.debian.org/debian/cockpit-files
 
-Package: cockpit-navigator
+Package: cockpit-files
 Architecture: all
 Multi-Arch: foreign
 Depends: ${misc:Depends},
