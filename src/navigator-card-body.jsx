@@ -342,10 +342,9 @@ export const NavigatorCardBody = ({
     );
 
     return (
-        <>
+        <div id={navigator_parent_id}>
             {contextMenu}
             <div
-              id={navigator_parent_id}
               ref={folderViewRef}
             >
                 {sortedFiles.length === 0 && <EmptyStatePanel paragraph={_("Directory is empty")} />}
@@ -382,7 +381,7 @@ export const NavigatorCardBody = ({
                       }))}
                     />}
             </div>
-        </>
+        </div>
     );
 };
 
