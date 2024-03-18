@@ -223,6 +223,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_not_present("[data-item='newdir']")
         b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "newdir2")
         b.eval_js("window.history.forward()")
+        b.wait_visible("#card-item-admindir.pf-m-selected")
         b.click("#files-card-body")  # unselect
         b.wait_in_text("#sidebar-card-header", "home")
         b.wait_not_present("[data-item='newdir']")
