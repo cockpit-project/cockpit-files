@@ -27,12 +27,6 @@ class TestFiles(testlib.MachineCase):
         self.login_and_go("/files")
         self.browser.wait_not_present(".pf-c-empty-state")
 
-    # FIXME: Move to testlib.py
-    def select_PF5(self, b, selector_button: str, selector: str, value):
-        b.click(f"{selector_button}:not([disabled]):not([aria-disabled=true])")
-        select_entry = f"{selector} ul button:contains('{value}')"
-        b.click(select_entry)
-
     def delete_item(self, b, filetype, filename, expect_success=True):
         b.click(f"[data-item='{filename}']")
         b.click("#dropdown-menu")
@@ -254,14 +248,14 @@ class TestFiles(testlib.MachineCase):
         b.wait_text(".item-button:nth-of-type(3)", "ccc")
 
         # Sort by reverse alphabet
-        self.select_PF5(b, "#sort-menu-toggle", "#sort-menu", "Z-A")
+        b.select_PF5("#sort-menu-toggle", "#sort-menu", "Z-A")
         # Alphabet sorts should be case insensetive
         b.wait_text(".item-button:nth-of-type(1)", "ccc")
         b.wait_text(".item-button:nth-of-type(2)", "BBB")
         b.wait_text(".item-button:nth-of-type(3)", "aaa")
 
         # Sort by last modified
-        self.select_PF5(b, "#sort-menu-toggle", "#sort-menu", "Last modified")
+        b.select_PF5("#sort-menu-toggle", "#sort-menu", "Last modified")
         b.wait_text(".item-button:nth-of-type(1)", "ccc")
         b.wait_text(".item-button:nth-of-type(2)", "aaa")
         b.wait_text(".item-button:nth-of-type(3)", "BBB")
@@ -274,13 +268,13 @@ class TestFiles(testlib.MachineCase):
         b.wait_text(".item-button:nth-of-type(3)", "BBB")
 
         # Sort by first modified
-        self.select_PF5(b, "#sort-menu-toggle", "#sort-menu", "First modified")
+        b.select_PF5("#sort-menu-toggle", "#sort-menu", "First modified")
         b.wait_text(".item-button:nth-of-type(1)", "BBB")
         b.wait_text(".item-button:nth-of-type(2)", "ccc")
         b.wait_text(".item-button:nth-of-type(3)", "aaa")
 
         # Sort option should be saved in localStorage
-        self.select_PF5(b, "#sort-menu-toggle", "#sort-menu", "Z-A")
+        b.select_PF5("#sort-menu-toggle", "#sort-menu", "Z-A")
         b.wait_text(".item-button:nth-of-type(1)", "ccc")
         b.wait_text(".item-button:nth-of-type(2)", "BBB")
         b.wait_text(".item-button:nth-of-type(3)", "aaa")
