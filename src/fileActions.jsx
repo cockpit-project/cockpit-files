@@ -526,6 +526,22 @@ const setDirectoryName = (val, setName, setNameError, setErrorMessage) => {
     }
 };
 
+const downloadFile = (currentPath, selected) => {
+    const query = window.btoa(JSON.stringify({
+        payload: "fsread1",
+        binary: "raw",
+        path: `${currentPath}/${selected.name}`,
+        superuser: "try",
+        external: {
+            "content-disposition": `attachment; filename="${selected.name}"`,
+            "content-type": "application/octet-stream",
+        }
+    }));
+
+    const prefix = (new URL(cockpit.transport.uri("channel/" + cockpit.transport.csrf_token))).pathname;
+    window.open(`${prefix}?${query}`);
+};
+
 export const fileActions = (path, files, selected, setSelected, clipboard, setClipboard, addAlert, Dialogs) => {
     const currentPath = path.join("/") + "/";
     const menuItems = [];
@@ -630,7 +646,14 @@ export const fileActions = (path, files, selected, setSelected, clipboard, setCl
                     );
                 }
             },
+            { type: "divider" },
         );
+        if (selected[0].type === "reg")
+            menuItems.push({
+                id: "download-item",
+                title: _("Download"),
+                onClick: () => downloadFile(currentPath, selected[0])
+            });
     } else if (selected.length > 1) {
         menuItems.push(
             {

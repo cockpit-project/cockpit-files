@@ -67,11 +67,26 @@ class TestFiles(testlib.MachineCase):
         b.click(f"#create-link-{filetype}")
         b.click("button.pf-m-primary")
 
+    def waitDownloadFile(self, filename, expected_size=None, content=None):
+        b = self.browser
+        filepath = os.path.join(b.cdp.download_dir, filename)
+
+        # Big downloads can take a while
+        with b.wait_timeout(120):
+            testlib.wait(lambda: os.path.exists(filepath))
+        if expected_size is not None:
+            testlib.wait(lambda: os.stat(filepath).st_size == expected_size)
+
+        if content is not None:
+            with open(filepath) as fp:
+                self.assertEqual(fp.read(), content)
+
     def testBasic(self):
         b = self.browser
         m = self.machine
 
         self.enter_files()
+        b.allow_download()
         # expected heading
         b.wait_text("#files-card-header", "Directories & files")
         files_cnt = m.execute("ls -A /home/admin | wc -l").strip()
@@ -132,6 +147,14 @@ class TestFiles(testlib.MachineCase):
         self.browser.wait_js_cond("ph_count('#folder-view tbody tr') == 1")
         b.set_input_text("input[placeholder='Filter directory']", "")
         self.browser.wait_js_cond("ph_count('#folder-view tbody tr') > 1")
+
+        # Big file downloads fine, runs in this test as running two downloads
+        # in the same test causes issues with Chromium. This takes ~ 40 seconds.
+        m.execute("truncate -s 1500M /home/admin/test.iso")
+        b.wait_visible("[data-item='test.iso']")
+        b.mouse("[data-item='test.iso']", "contextmenu")
+        b.click(".contextMenu button:contains('Download')")
+        self.waitDownloadFile("test.iso", 1500 * 1024 * 1024)
 
         # Selected view is saved in localStorage
         b.logout()
@@ -381,6 +404,7 @@ class TestFiles(testlib.MachineCase):
         m = self.machine
 
         self.enter_files()
+        b.allow_download()
 
         # Create folder from context menu
         b.mouse("#folder-view", "contextmenu")
@@ -425,12 +449,18 @@ class TestFiles(testlib.MachineCase):
         b.wait_not_present("[data-item='newdir1']")
 
         # Check file name is pre-selected when creating link
-        m.execute("touch /home/admin/newfile")
+        m.execute("echo 'some content' > /home/admin/newfile")
         b.mouse("[data-item='newfile']", "contextmenu")
         b.wait_in_text(".contextMenu li:nth-child(6) button", "Create link")
         b.click(".contextMenu button:contains('Create link')")
         b.wait_val("#create-link-original-wrapper input", "/home/admin/newfile")
         b.click("button.pf-m-link:contains('Cancel')")
+
+        b.mouse("[data-item='newfile']", "contextmenu")
+        b.wait_in_text(".contextMenu li:nth-child(10) button", "Download")
+        b.click(".contextMenu button:contains('Download')")
+        size = int(m.execute("stat --format '%s' /home/admin/newfile").strip())
+        self.waitDownloadFile("newfile", size, "some content\n")
 
         # Delete button text should match item type: directory/file
         b.mouse("[data-item='newfile']", "contextmenu")
@@ -444,6 +474,20 @@ class TestFiles(testlib.MachineCase):
         b.click("button[aria-label='Display as a list']")
         b.mouse("[data-item='testfile']", "contextmenu")
         b.wait_in_text(".contextMenu li:nth-child(6) button", "Create link")
+
+    def testDownload(self):
+        b = self.browser
+        m = self.machine
+
+        self.enter_files()
+        b.allow_download()
+
+        # Big file downloads fine
+        m.execute("truncate -s 1500M /home/admin/test.iso")
+        b.wait_visible("[data-item='test.iso']")
+        b.mouse("[data-item='test.iso']", "contextmenu")
+        b.click(".contextMenu button:contains('Download')")
+        self.waitDownloadFile("test.iso", 1500 * 1024 * 1024)
 
     def testRename(self):
         b = self.browser
