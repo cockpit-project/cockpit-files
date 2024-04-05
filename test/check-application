@@ -27,6 +27,11 @@ class TestFiles(testlib.MachineCase):
         self.login_and_go("/files")
         self.browser.wait_not_present(".pf-c-empty-state")
 
+    # TODO: move to testlib.py
+    def press_special_key(self, name):
+        args = {"type": "keyDown", "key": name}
+        self.browser.cdp.invoke("Input.dispatchKeyEvent", **args)
+
     def delete_item(self, b, filetype, filename, expect_success=True):
         b.click(f"[data-item='{filename}']")
         b.click("#dropdown-menu")
@@ -790,6 +795,46 @@ class TestFiles(testlib.MachineCase):
                        "cannot create regular file '/home/admin/locked/newfile3': Operation not permitted")
         b.click(".breadcrumb-button:nth-of-type(3)")
         m.execute("chattr -i /home/admin/locked")
+
+    def testKeyboardNav(self):
+        b = self.browser
+        m = self.machine
+
+        self.enter_files()
+
+        create_files = ""
+        for i in range(0, 4):
+            create_files += f"touch /home/admin/file{i}; "
+        m.execute(create_files)
+
+        # Focus the iframe for global keybindings in Files.
+        b.eval_js("window.focus()")
+
+        b.click("[data-item='file0']")
+        b.wait_visible("[data-item='file0'].pf-m-selected")
+
+        self.press_special_key("ArrowRight")
+        b.wait_visible("[data-item='file1'].pf-m-selected")
+        self.press_special_key("ArrowLeft")
+        b.wait_visible("[data-item='file0'].pf-m-selected")
+
+        # Up / Down depends on the layout, this is tested on mobile where the
+        # width is two cards.
+        b.set_layout("mobile")
+        b.click("[data-item='file0']")
+        b.wait_visible("[data-item='file0'].pf-m-selected")
+
+        self.press_special_key("ArrowDown")
+        b.wait_visible("[data-item='file2'].pf-m-selected")
+        self.press_special_key("ArrowUp")
+        b.wait_visible("[data-item='file0'].pf-m-selected")
+
+        m.execute("mkdir /home/admin/foo")
+        b.click("[data-item='foo']")
+
+        b.wait_visible("[data-item='foo'].pf-m-selected")
+        self.press_special_key("Enter")
+        b.wait_text(".breadcrumb-button:nth-of-type(4)", "foo")
 
 
 if __name__ == '__main__':
