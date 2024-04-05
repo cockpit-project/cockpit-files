@@ -35,7 +35,7 @@ import { ListingTable } from "cockpit-components-table.jsx";
 import { EmptyStatePanel } from "cockpit-components-empty-state.jsx";
 
 import { ContextMenu } from "cockpit-components-context-menu.jsx";
-import { fileActions } from "./fileActions.jsx";
+import { fileActions, ConfirmDeletionDialog } from "./fileActions.jsx";
 
 const _ = cockpit.gettext;
 
@@ -259,6 +259,14 @@ export const FilesCardBody = ({
                 });
             } else if (e.key === "Enter" && selected.length === 1) {
                 onDoubleClickNavigate(selected[0]);
+            } else if (e.key === "Delete" && selected.length !== 0) {
+                const currentPath = path.join("/") + "/";
+                Dialogs.show(
+                    <ConfirmDeletionDialog
+                      selected={selected} path={currentPath}
+                      setSelected={setSelected}
+                    />
+                );
             }
         };
 
