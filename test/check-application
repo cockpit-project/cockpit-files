@@ -358,6 +358,20 @@ class TestFiles(testlib.MachineCase):
         m.execute("sudo chattr -i /home/admin/newfile")
         self.delete_item(b, "file", "newfile")
 
+        # Delete using keyboard shortcut
+        m.execute("touch /home/admin/delete1 /home/admin/delete2")
+        b.click("[data-item='delete1']")
+        b.mouse("[data-item='delete2']", "click", ctrlKey=True)
+        b.wait_visible("[data-item='delete1'].pf-m-selected")
+        b.wait_visible("[data-item='delete2'].pf-m-selected")
+        self.press_special_key("Delete")
+        b.wait_in_text("h1.pf-v5-c-modal-box__title", "Delete 2 items?")
+        b.click("button.pf-m-danger")
+
+        b.wait_not_present(".pf-v5-c-modal-box")
+        b.wait_not_present("[data-item='delete1']")
+        b.wait_not_present("[data-item='delete2']")
+
     def testCreate(self):
         b = self.browser
         m = self.machine

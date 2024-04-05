@@ -61,7 +61,7 @@ export const editPermissions = (Dialogs, selected, path) => {
     );
 };
 
-const ConfirmDeletionDialog = ({
+export const ConfirmDeletionDialog = ({
     path,
     selected,
     setSelected,
