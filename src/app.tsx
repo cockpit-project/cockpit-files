@@ -54,7 +54,6 @@ export const Application = () => {
     const [errorMessage, setErrorMessage] = useState("");
     const [files, setFiles] = useState<FolderFileInfo[]>([]);
     // eslint-disable-next-line no-unused-vars
-    const [rootInfo, setRootInfo] = useState<FileInfo | null>();
     const [selected, setSelected] = useState<FolderFileInfo[]>([]);
     const [showHidden, setShowHidden] = useState(localStorage.getItem("files:showHiddenFiles") === "true");
     const [clipboard, setClipboard] = useState<string[]>([]);
@@ -86,7 +85,6 @@ export const Application = () => {
             return info.effect(state => {
                 setLoading(false);
                 setLoadingFiles(!(state.info || state.error));
-                setRootInfo(state.info);
                 setErrorMessage(state.error?.message ?? "");
                 const entries = Object.entries(state?.info?.entries || {});
                 const files = entries.map(([name, attrs]) => ({

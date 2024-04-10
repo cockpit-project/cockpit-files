@@ -39,7 +39,7 @@ COCKPIT_REPO_FILES = \
 	$(NULL)
 
 COCKPIT_REPO_URL = https://github.com/cockpit-project/cockpit.git
-COCKPIT_REPO_COMMIT = 4c4356e4ddbd9e716b5f364a5c4fed748589595a # 314 + 7 commits
+COCKPIT_REPO_COMMIT = 3ec539a4e0f78dab6ef77f88aa717d4d7a448fbd # #19842
 
 $(COCKPIT_REPO_FILES): $(COCKPIT_REPO_STAMP)
 COCKPIT_REPO_TREE = '$(strip $(COCKPIT_REPO_COMMIT))^{tree}'
@@ -196,11 +196,6 @@ print-vm:
 	@echo $(VM_IMAGE)
 
 codecheck: test/static-code $(NODE_MODULES_TEST)
-	# https://github.com/microsoft/TypeScript/issues/30511
-	# We can't tell tsc to ignore the .d.ts in node_modules/ and check our
-	# own cockpit.d.ts, so we do two separate invocations as a workaround:
-	node_modules/.bin/tsc --typeRoots /dev/null --strict src/cockpit.d.ts
-	node_modules/.bin/tsc --checkJs false --skipLibCheck
 	test/static-code
 
 # convenience target to setup all the bits needed for the integration tests
