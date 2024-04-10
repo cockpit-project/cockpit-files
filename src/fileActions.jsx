@@ -43,9 +43,7 @@ import { FileAutoComplete } from "../pkg/lib/cockpit-components-file-autocomplet
 import {
     spawnCreateDirectory,
     spawnCreateLink,
-    spawnDeleteItem,
     spawnEditPermissions,
-    spawnForceDelete,
     spawnPaste,
     spawnRenameItem
 } from "./apis/spawnHelpers";
@@ -67,25 +65,43 @@ export const ConfirmDeletionDialog = ({
     setSelected,
 }) => {
     const Dialogs = useDialogs();
+    const [errorMessage, setErrorMessage] = useState(null);
+    const [forceDelete, setForceDelete] = useState(false);
 
     let modalTitle;
     if (selected.length > 1) {
-        modalTitle = cockpit.format(_("Delete $0 items?"), selected.length);
+        modalTitle = cockpit.format(forceDelete ? _("Force delete $0 items") : _("Delete $0 items?"), selected.length);
     } else {
         const selectedItem = selected[0];
         if (selectedItem.type === "reg") {
-            modalTitle = cockpit.format(_("Delete file $0?"), selectedItem.name);
+            modalTitle = cockpit.format(
+                forceDelete ? _("Force delete file $0?") : _("Delete file $0?"), selectedItem.name
+            );
         } else if (selectedItem.type === "lnk") {
-            modalTitle = cockpit.format(_("Delete link $0?"), selectedItem.name);
+            modalTitle = cockpit.format(
+                forceDelete ? _("Force delete link $0?") : _("Delete link $0?"), selectedItem.name
+            );
         } else if (selectedItem.type === "dir") {
-            modalTitle = cockpit.format(_("Delete directory $0?"), selectedItem.name);
+            modalTitle = cockpit.format(
+                forceDelete ? _("Force delete directory $0?") : _("Delete directory $0?"), selectedItem.name
+            );
         } else {
-            modalTitle = cockpit.format(_("Delete $0?"), selectedItem.name);
+            modalTitle = cockpit.format(forceDelete ? _("Force delete $0") : _("Delete $0?"), selectedItem.name);
         }
     }
 
     const deleteItem = () => {
-        spawnDeleteItem(path, selected, setSelected, Dialogs);
+        const args = ["rm", "-r"];
+        // TODO: Make force more sensible https://github.com/cockpit-project/cockpit-files/issues/363
+        cockpit.spawn([...args, ...selected.map(f => path + f.name)], { err: "message", superuser: "try" })
+                .then(() => {
+                    setSelected([]);
+                    Dialogs.close();
+                })
+                .catch(err => {
+                    setErrorMessage(err.message);
+                    setForceDelete(true);
+                });
     };
 
     return (
@@ -102,56 +118,13 @@ export const ConfirmDeletionDialog = ({
                   <Button variant="link" onClick={Dialogs.close}>{_("Cancel")}</Button>
               </>
           }
-        />
-    );
-};
-
-export const ForceDeleteModal = ({ selected, path, initialError }) => {
-    const Dialogs = useDialogs();
-    const [errorMessage, setErrorMessage] = useState(initialError);
-    const [deleteFailed, setDeleteFailed] = useState(false);
-
-    let modalTitle;
-    if (selected.length > 1)
-        modalTitle = cockpit.format(_("Force delete $0 items?"), selected.length);
-    else {
-        const selectedItem = Array.isArray(selected)
-            ? selected[0]
-            : selected;
-        if (selectedItem.type === "reg") {
-            modalTitle = cockpit.format(_("Force delete file $0?"), selectedItem.name);
-        } else if (selectedItem.type === "lnk") {
-            modalTitle = cockpit.format(_("Force delete link $0?"), selectedItem.name);
-        } else if (selectedItem.type === "dir") {
-            modalTitle = cockpit.format(_("Force delete directory $0?"), selectedItem.name);
-        } else {
-            modalTitle = _("Force delete $0?", selectedItem.name);
-        }
-    }
-
-    const forceDeleteItem = () => {
-        spawnForceDelete(path, selected, setDeleteFailed, setErrorMessage, Dialogs);
-    };
-
-    return (
-        <Modal
-          position="top"
-          title={modalTitle}
-          titleIconVariant="warning"
-          variant={ModalVariant.small}
-          isOpen
-          onClose={Dialogs.close}
-          footer={!deleteFailed &&
-          <>
-              <Button variant="danger" onClick={forceDeleteItem}>{_("Force delete")}</Button>
-              <Button variant="link" onClick={Dialogs.close}>{_("Cancel")}</Button>
-          </>}
         >
+            {errorMessage &&
             <InlineNotification
               type="danger"
               text={errorMessage}
               isInline
-            />
+            />}
         </Modal>
     );
 };
