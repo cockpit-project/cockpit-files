@@ -18,9 +18,6 @@
  */
 
 import cockpit from "cockpit";
-import React from "react";
-
-import { ForceDeleteModal } from "../fileActions";
 
 const options = { err: "message", superuser: "try" };
 
@@ -28,39 +25,6 @@ const renameCommand = (selected, path, newPath, is_current_dir) => {
     return is_current_dir
         ? ["mv", path.join("/"), newPath]
         : ["mv", path.join("/") + "/" + selected.name, newPath];
-};
-
-export const spawnDeleteItem = (path, selected, setSelected, Dialogs) => {
-    cockpit.spawn([
-        "rm",
-        "-r",
-        ...selected.map(f => path + f.name)
-    ], options)
-            .then(() => {
-                setSelected([]);
-            })
-            .finally(Dialogs.close)
-            .catch(err => {
-                Dialogs.show(
-                    <ForceDeleteModal
-                      path={path}
-                      selected={selected}
-                      initialError={err.message}
-                    />
-                );
-            });
-};
-
-export const spawnForceDelete = (path, selected, setDeleteFailed, setErrorMessage, Dialogs) => {
-    cockpit.spawn([
-        "rm",
-        "-r",
-        ...selected.map(f => path + f.name)
-    ], options)
-            .then(Dialogs.close, err => {
-                setDeleteFailed(true);
-                setErrorMessage(err.message);
-            });
 };
 
 export const spawnRenameItem = (selected, name, path, Dialogs, setErrorMessage) => {
