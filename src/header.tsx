@@ -38,7 +38,11 @@ import { GripVerticalIcon, ListIcon } from "@patternfly/react-icons";
 
 const _ = cockpit.gettext;
 
-export const FilesCardHeader = ({ currentFilter, onFilterChange, isGrid, setIsGrid, sortBy, setSortBy }) => {
+export const FilesCardHeader = ({ currentFilter, onFilterChange, isGrid, setIsGrid, sortBy, setSortBy }:
+    { currentFilter: string, onFilterChange: (_event: React.FormEvent<HTMLInputElement>, value: string) => void,
+      isGrid: boolean, setIsGrid: React.Dispatch<React.SetStateAction<boolean>>,
+      sortBy: string, setSortBy: React.Dispatch<React.SetStateAction<string>>
+    }) => {
     return (
         <CardHeader className="card-actionbar">
             <CardTitle component="h2" id="files-card-header">
@@ -62,10 +66,13 @@ export const FilesCardHeader = ({ currentFilter, onFilterChange, isGrid, setIsGr
     );
 };
 
-const ViewSelector = ({ isGrid, setIsGrid, sortBy, setSortBy }) => {
-    const [isOpen, setIsOpen] = useState(false);
-    const onToggleClick = isOpen => setIsOpen(!isOpen);
-    const onSelect = (ev, itemId) => {
+const ViewSelector = ({ isGrid, setIsGrid, sortBy, setSortBy }:
+    { isGrid: boolean, setIsGrid: React.Dispatch<React.SetStateAction<boolean>>,
+      sortBy: string, setSortBy: React.Dispatch<React.SetStateAction<string>>}) => {
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const onToggleClick = (isOpen: boolean) => setIsOpen(!isOpen);
+    const onSelect = (_ev?: React.MouseEvent, itemId?: string | number) => {
+        cockpit.assert(typeof itemId === "string", "itemId is not a string");
         setIsOpen(false);
         setSortBy(itemId);
         localStorage.setItem("files:sort", itemId);
