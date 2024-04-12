@@ -17,9 +17,16 @@ updates:
       esbuild:
         patterns:
           - "esbuild*"
+      react:
+        patterns:
+          - "react*"
       stylelint:
         patterns:
           - "stylelint*"
+      types:
+        patterns:
+          - "@types*"
+          - "types*"
       xterm:
         patterns:
           - "xterm*"
