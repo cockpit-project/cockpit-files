@@ -322,7 +322,7 @@ const EditPermissionsModal = ({ selected, path }) => {
     const [errorMessage, setErrorMessage] = useState(undefined);
     const accounts = useFile("/etc/passwd", { syntax: etcPasswdSyntax });
     const groups = useFile("/etc/group", { syntax: etcGroupSyntax });
-    const logindef = useFile("/etc/login.defs", { superuser: true });
+    const logindef = useFile("/etc/login.defs");
 
     if (!selected) {
         const directory_name = path[path.length - 1];
