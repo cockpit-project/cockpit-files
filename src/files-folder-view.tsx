@@ -57,6 +57,7 @@ export const FilesFolderView = ({
               setIsGrid={setIsGrid}
               sortBy={sortBy}
               setSortBy={setSortBy}
+              path={path}
             />
             <FilesCardBody
               files={files}

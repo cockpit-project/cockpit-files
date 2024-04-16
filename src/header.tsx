@@ -23,6 +23,7 @@ import React, { useState } from "react";
 import {
     CardHeader,
     CardTitle,
+    Divider,
     Flex,
     MenuToggle,
     MenuToggleAction,
@@ -36,13 +37,25 @@ import {
 } from "@patternfly/react-core";
 import { GripVerticalIcon, ListIcon } from "@patternfly/react-icons";
 
+import { UploadButton } from "./upload-button";
+
 const _ = cockpit.gettext;
 
-export const FilesCardHeader = ({ currentFilter, onFilterChange, isGrid, setIsGrid, sortBy, setSortBy }:
-    { currentFilter: string, onFilterChange: (_event: React.FormEvent<HTMLInputElement>, value: string) => void,
-      isGrid: boolean, setIsGrid: React.Dispatch<React.SetStateAction<boolean>>,
-      sortBy: string, setSortBy: React.Dispatch<React.SetStateAction<string>>
-    }) => {
+export const FilesCardHeader = ({
+    currentFilter,
+    onFilterChange,
+    isGrid,
+    setIsGrid,
+    sortBy,
+    setSortBy,
+    path
+}: {
+    currentFilter: string,
+    onFilterChange: (_event: React.FormEvent<HTMLInputElement>, value: string) => void,
+    isGrid: boolean, setIsGrid: React.Dispatch<React.SetStateAction<boolean>>,
+    sortBy: string, setSortBy: React.Dispatch<React.SetStateAction<string>>
+    path: string[],
+}) => {
     return (
         <CardHeader className="card-actionbar">
             <CardTitle component="h2" id="files-card-header">
@@ -60,6 +73,10 @@ export const FilesCardHeader = ({ currentFilter, onFilterChange, isGrid, setIsGr
                 <ViewSelector
                   isGrid={isGrid} setIsGrid={setIsGrid}
                   setSortBy={setSortBy} sortBy={sortBy}
+                />
+                <Divider orientation={{ default: "vertical" }} />
+                <UploadButton
+                  path={path}
                 />
             </Flex>
         </CardHeader>

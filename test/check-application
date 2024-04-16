@@ -4,6 +4,10 @@
 # "class Browser" and "class MachineCase" for the available API.
 
 import os
+import re
+import subprocess
+import tempfile
+from pathlib import Path
 
 # import Cockpit's machinery for test VMs and its browser test API
 import testlib
@@ -943,6 +947,258 @@ class TestFiles(testlib.MachineCase):
         b.mouse("[data-item='newdir']", "dblclick")
         b.wait_visible("[data-item='newfile2']")
         b.click(".breadcrumb-button:nth-of-type(3)")
+
+    @testlib.skipBrowser(".upload_files() doesn't work on Firefox", "firefox")
+    @testlib.skipImage("Debian-testing has Cockpit 311 without new upload support in fsreplace1", "debian-testing")
+    def testUpload(self):
+        b = self.browser
+        m = self.machine
+
+        self.enter_files()
+
+        def get_piechart_progress(sel):
+            b.wait_visible(sel)
+            style = b.attr(sel, "style")
+            m = re.search(r"--progress: (\d+).\d+%;", style)
+            assert m is not None
+            return int(m.group(1))
+
+        def dir_file_count(directory):
+            return int(m.execute(f"find {directory} -mindepth 1 -maxdepth 1 | wc -l").strip())
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            # Test cancelling of upload
+            big_file = str(Path(tmpdir) / "bigfile.img")
+            subprocess.check_call(["truncate", "-s", "1500MB", big_file])
+
+            m.execute("runuser -u admin mkdir /home/admin/Downloads")
+            b.wait_visible("[data-item='Downloads']")
+            b.mouse("[data-item='Downloads']", "dblclick")
+            b.wait_not_present(".pf-v5-c-empty-state")
+
+            b.click("#upload-file-btn")
+            b.upload_files("#upload-file-btn + input[type='file']", [big_file])
+            b.wait_visible("#upload-file-btn:disabled")
+
+            # Wait for some progress and cancel
+            b.click("#upload-progress-btn")
+            b.wait(lambda: get_piechart_progress("#upload-progress-btn") >= 2)
+            b.wait_in_text(".upload-progress-0", "bigfile.img")
+            b.wait(lambda: b.get_pf_progress_value(".upload-progress-0") >= 2)
+
+            b.click(".cancel-button-0")
+
+            b.wait_not_present("#upload-progress-btn")
+            b.wait_visible("#upload-file-btn")
+            b.wait_in_text(".pf-v5-c-alert__description", "Cancelled upload of bigfile.img")
+            b.click(".pf-v5-c-alert__action button")
+            b.wait_not_present(".pf-v5-c-alert__action")
+            self.assertEqual(dir_file_count("/home/admin/Downloads"), 0)
+
+            # Early ENOSPC error (before we would block on 'ack')
+            m.execute("mkdir -p /mnt/upload; mount -t tmpfs -o size=1M none /mnt/upload;")
+            # TODO: cockpit-bridge keeps a handle on /mnt/upload, pkill is a hack
+            self.addCleanup(m.execute, """
+                pkill cockpit-bridge || true;
+                while mountpoint -q /mnt/upload && ! umount /mnt/upload; do sleep 0.2; done;
+                rmdir /mnt/upload;
+            """)
+
+            b.go("/files#/?path=/mnt/upload")
+            self.browser.wait_not_present(".pf-c-empty-state")
+            b.click("#upload-file-btn")
+            b.upload_files("#upload-file-btn + input[type='file']", [big_file])
+
+            b.wait_in_text(".pf-v5-c-alert__description", "No space left on device")
+            b.click(".pf-v5-c-alert__action button")
+            b.wait_not_present(".pf-v5-c-alert__action")
+            self.assertEqual(dir_file_count("/home/admin/Downloads"), 0)
+
+            # Multi upload
+            dest_dir = "/home/admin/project"
+            m.execute(['runuser', '-u', 'admin', 'mkdir', dest_dir])
+            b.go(f"/files#/?path={dest_dir}")
+            self.browser.wait_not_present(".pf-c-empty-state")
+
+            files = [str(Path(tmpdir) / f"{i}.txt") for i in range(0, 5)]
+            test_data = "this is a test"
+            for file in files:
+                with open(file, "w") as fp:
+                    fp.write(test_data)
+
+            def verify_uploaded_files(changed=False):
+                for f in files:
+                    contents = m.execute(f"cat {dest_dir}/{os.path.basename(f)}")
+                    if changed:
+                        self.assertNotEqual(contents, test_data)
+                    else:
+                        self.assertEqual(contents, test_data)
+
+            b.click("#upload-file-btn")
+            b.upload_files("#upload-file-btn + input[type='file']", [str(Path(tmpdir) / file) for file in files])
+            with b.wait_timeout(30):
+                b.wait(lambda: int(m.execute(f"ls {dest_dir} | wc -l").strip()) == len(files))
+
+            b.wait_in_text(".pf-v5-c-alert__description", "Successfully uploaded file")
+            b.click(".pf-v5-c-alert__action button")
+            b.wait_not_present(".pf-v5-c-alert__action")
+
+            # Verify ownership
+            filename = os.path.basename(files[0])
+            b.click(f"[data-item='{filename}']")
+            b.wait_text("#sidebar-card-header", filename)
+            b.wait_text("#description-list-owner dd", "admin")
+            b.wait_text("#description-list-group dd", "admin")
+
+            # Conflict handling
+            # change the content of the files locally so we can detect
+            # overwrites and make it noticably bigger so we can assert that in
+            # the dialog details
+            for f in files:
+                with open(f, "w") as fp:
+                    fp.write("new content" * 20)
+
+            # Cancel does not overwrite
+            b.click("#upload-file-btn")
+            b.upload_files("#upload-file-btn + input[type='file']", [files[0]])
+            b.wait_in_text("h1.pf-v5-c-modal-box__title", f"Replace file {filename}?")
+            # TODO: Validate the contents of the dialog
+            b.click("button.pf-m-link:contains('Cancel')")
+            # content did not change as we cancelled
+            self.assertEqual(m.execute(f"cat {dest_dir}/{filename}"), "this is a test")
+
+            # Overwrite
+            b.click("#upload-file-btn")
+            b.upload_files("#upload-file-btn + input[type='file']", [files[0]])
+            b.wait_in_text("h1.pf-v5-c-modal-box__title", f"Replace file {filename}?")
+            b.click("button.pf-m-warning:contains('Replace')")
+            b.wait_not_present(".pf-v5-c-modal-box")
+
+            b.wait_in_text(".pf-v5-c-alert__description", "Successfully uploaded file")
+            b.click(".pf-v5-c-alert__action button")
+            b.wait_not_present(".pf-v5-c-alert__action")
+
+            self.assertEqual(m.execute(f"cat {dest_dir}/{filename}"),
+                            subprocess.check_output(["cat", files[0]]).decode())
+            # reset test file
+            m.execute(f"echo -n this is a test > {dest_dir}/{filename}")
+
+            # Multiple files
+
+            # Cancel all
+            b.click("#upload-file-btn")
+            b.upload_files("#upload-file-btn + input[type='file']", files)
+
+            b.wait_in_text("h1.pf-v5-c-modal-box__title", f"Replace file {filename}?")
+            b.wait_in_text(".pf-v5-c-check__label", "Apply this action to all conflicting files")
+            # Cancelling calls all
+            b.click("button.pf-m-link:contains('Cancel')")
+            b.wait_not_present(".pf-v5-c-modal-box")
+
+            verify_uploaded_files()
+
+            # Keep original for all
+
+            b.click("#upload-file-btn")
+            b.upload_files("#upload-file-btn + input[type='file']", files)
+
+            b.wait_in_text("h1.pf-v5-c-modal-box__title", f"Replace file {filename}?")
+            b.wait_in_text(".pf-v5-c-check__label", "Apply this action to all conflicting files")
+            b.set_checked("#replace-all", True)
+            b.click("button.pf-m-secondary:contains('Keep original')")
+            b.wait_not_present(".pf-v5-c-modal-box")
+
+            verify_uploaded_files()
+
+            # Replace all
+            b.click("#upload-file-btn")
+            b.upload_files("#upload-file-btn + input[type='file']", files)
+
+            b.wait_in_text("h1.pf-v5-c-modal-box__title", f"Replace file {filename}?")
+            b.wait_in_text(".pf-v5-c-check__label", "Apply this action to all conflicting files")
+            b.set_checked("#replace-all", True)
+            b.click("button.pf-m-warning:contains('Replace')")
+            b.wait_not_present(".pf-v5-c-modal-box")
+
+            b.wait_in_text(".pf-v5-c-alert__description", "Successfully uploaded file")
+            b.click(".pf-v5-c-alert__action button")
+            b.wait_not_present(".pf-v5-c-alert__action")
+
+            verify_uploaded_files(changed=True)
+
+            # Upload one file new file which is uploaded automatically
+            newfile = str(Path(tmpdir) / "newfile.txt")
+            with open(newfile, "w") as fp:
+                fp.write("bazinga")
+
+            files.append(newfile)
+
+            b.click("#upload-file-btn")
+            b.upload_files("#upload-file-btn + input[type='file']", files)
+
+            # We only get asked about existing files
+            for file in files:
+                filename = os.path.basename(file)
+                if file != files[-1]:
+                    b.wait_in_text("h1.pf-v5-c-modal-box__title", f"Replace file {filename}?")
+                    b.click("button.pf-m-secondary:contains('Keep original')")
+
+            b.wait_not_present(".pf-v5-c-modal-box")
+            b.wait_in_text(".pf-v5-c-alert__description", "Successfully uploaded file")
+            b.click(".pf-v5-c-alert__action button")
+            b.wait_not_present(".pf-v5-c-alert__action")
+
+            b.wait_visible(f"[data-item='{os.path.basename(newfile)}']")
+
+            # Replace a the last file
+
+            with open(newfile, "w") as fp:
+                fp.write("new content")
+
+            b.click("#upload-file-btn")
+            b.upload_files("#upload-file-btn + input[type='file']", files)
+
+            # We only get asked about existing files
+            for file in files:
+                filename = os.path.basename(file)
+                b.wait_in_text("h1.pf-v5-c-modal-box__title", f"Replace file {filename}?")
+                if file == files[-1]:
+                    b.click("button.pf-m-warning:contains('Replace')")
+                else:
+                    b.click("button.pf-m-secondary:contains('Keep original')")
+
+            b.wait_not_present(".pf-v5-c-modal-box")
+            b.wait_in_text(".pf-v5-c-alert__description", "Successfully uploaded file")
+            b.click(".pf-v5-c-alert__action button")
+            b.wait_not_present(".pf-v5-c-alert__action")
+
+            self.assertEqual(m.execute(f"cat {dest_dir}/{filename}"), "new content")
+
+            # Non-admin session
+            b.drop_superuser()
+            m.execute(f"rm {dest_dir}/{filename}; touch {dest_dir}/update.txt")
+            b.wait_not_present(f"[data-item='{filename}']")
+            # Wait for the update to appear so uploading doesn't flake
+            b.wait_visible("[data-item='update.txt']")
+
+            b.click("#upload-file-btn")
+            b.upload_files("#upload-file-btn + input[type='file']", [files[-1]])
+
+            b.wait_in_text(".pf-v5-c-alert__description", "Successfully uploaded file")
+            b.click(".pf-v5-c-alert__action button")
+            b.wait_not_present(".pf-v5-c-alert__action")
+
+            b.wait_visible(f"[data-item='{filename}']")
+
+            # Permission error
+            b.go("/files#/?path=/")
+            self.browser.wait_not_present(".pf-c-empty-state")
+
+            b.click("#upload-file-btn")
+            b.upload_files("#upload-file-btn + input[type='file']", [files[0]])
+            b.wait_in_text(".pf-v5-c-alert__description", "UploadError: Not permitted to perform this action")
+            b.click(".pf-v5-c-alert__action button")
+            b.wait_not_present(".pf-v5-c-alert__action")
 
 
 if __name__ == '__main__':
