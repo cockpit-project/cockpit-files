@@ -41,6 +41,7 @@ interface Alert {
     key: string,
     title: string,
     variant: AlertVariant,
+    detail?: string,
 }
 
 export interface FolderFileInfo extends FileInfo {
@@ -49,7 +50,7 @@ export interface FolderFileInfo extends FileInfo {
 }
 
 interface FilesContextType {
-    addAlert: (title: string, variant: AlertVariant, key: string) => void,
+    addAlert: (title: string, variant: AlertVariant, key: string, detail?: string) => void,
     cwdInfo: FileInfo | null,
 }
 
@@ -118,8 +119,8 @@ export const Application = () => {
     if (loading)
         return <EmptyStatePanel loading />;
 
-    const addAlert = (title: string, variant: AlertVariant, key: string) => {
-        setAlerts(prevAlerts => [...prevAlerts, { title, variant, key }]);
+    const addAlert = (title: string, variant: AlertVariant, key: string, detail?: string) => {
+        setAlerts(prevAlerts => [...prevAlerts, { title, variant, key, detail, }]);
     };
     const removeAlert = (key: string) => setAlerts(prevAlerts => prevAlerts.filter(alert => alert.key !== key));
 
@@ -140,7 +141,9 @@ export const Application = () => {
                                   />
                               }
                               key={alert.key}
-                            />
+                            >
+                                {alert.detail}
+                            </Alert>
                         ))}
                     </AlertGroup>
                     <FilesBreadcrumbs
