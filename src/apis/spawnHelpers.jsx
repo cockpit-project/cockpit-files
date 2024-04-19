@@ -42,12 +42,6 @@ export const spawnRenameItem = (selected, name, path, Dialogs, setErrorMessage) 
             }, err => setErrorMessage(err.message));
 };
 
-export const spawnCreateDirectory = (name, currentPath, Dialogs, setErrorMessage) => {
-    const path = currentPath + name;
-    cockpit.spawn(["mkdir", path], options)
-            .then(Dialogs.close, err => setErrorMessage(err.message));
-};
-
 export const spawnCreateLink = (type, currentPath, originalName, newName, Dialogs, setErrorMessage) => {
     cockpit.spawn([
         "ln",
