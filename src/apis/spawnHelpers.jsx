@@ -42,18 +42,6 @@ export const spawnRenameItem = (selected, name, path, Dialogs, setErrorMessage) 
             }, err => setErrorMessage(err.message));
 };
 
-export const spawnCreateLink = (type, currentPath, originalName, newName, Dialogs, setErrorMessage) => {
-    cockpit.spawn([
-        "ln",
-        ...(type === "symbolic"
-            ? ["-s"]
-            : []),
-        currentPath + originalName.slice(originalName.lastIndexOf("/") + 1),
-        currentPath + newName
-    ], options)
-            .then(Dialogs.close, (err) => { setErrorMessage(err.message) });
-};
-
 export const spawnEditPermissions = async (mode, path, selected, owner, group, Dialogs, setErrorMessage) => {
     const permissionChanged = mode !== selected.mode;
     const ownerChanged = owner !== selected.user || group !== selected.group;

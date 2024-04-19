@@ -41,7 +41,6 @@ import {
 } from "pam_user_parser.js";
 import { FileAutoComplete } from "../pkg/lib/cockpit-components-file-autocomplete";
 import {
-    spawnCreateLink,
     spawnEditPermissions,
     spawnPaste,
     spawnRenameItem
@@ -259,7 +258,12 @@ const CreateLinkModal = ({ currentPath, selected }) => {
     const [errorMessage, setErrorMessage] = useState(undefined);
 
     const createLink = () => {
-        spawnCreateLink(type, currentPath, originalName, newName, Dialogs, setErrorMessage);
+        cockpit.spawn([
+            "ln", ...(type === "symbolic" ? ["-s"] : []),
+            currentPath + originalName.slice(originalName.lastIndexOf("/") + 1),
+            currentPath + newName
+        ], { superuser: "try", err: "message" })
+                .then(Dialogs.close, (err) => { setErrorMessage(err.message) });
     };
 
     return (
