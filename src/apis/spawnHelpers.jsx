@@ -60,21 +60,21 @@ export const spawnCreateLink = (type, currentPath, originalName, newName, Dialog
             .then(Dialogs.close, (err) => { setErrorMessage(err.message) });
 };
 
-export const spawnEditPermissions = (mode, path, selected, owner, group, Dialogs, setErrorMessage) => {
+export const spawnEditPermissions = async (mode, path, selected, owner, group, Dialogs, setErrorMessage) => {
     const permissionChanged = mode !== selected.mode;
     const ownerChanged = owner !== selected.user || group !== selected.group;
 
-    Promise.resolve()
-            .then(() => {
-                if (permissionChanged)
-                    return cockpit.spawn(["chmod", mode.toString(8), path.join("/") + "/" + selected.name], options);
-            })
-            .then(() => {
-                if (ownerChanged) {
-                    return cockpit.spawn(["chown", owner + ":" + group, path.join("/") + "/" + selected.name], options);
-                }
-            })
-            .then(Dialogs.close, err => setErrorMessage(err.message));
+    try {
+        if (permissionChanged)
+            await cockpit.spawn(["chmod", mode.toString(8), path.join("/") + "/" + selected.name], options);
+
+        if (ownerChanged)
+            await cockpit.spawn(["chown", owner + ":" + group, path.join("/") + "/" + selected.name], options);
+
+        Dialogs.close();
+    } catch (err) {
+        setErrorMessage(err.message);
+    }
 };
 
 export const spawnPaste = (sourcePath, targetPath, asSymlink, addAlert) => {
