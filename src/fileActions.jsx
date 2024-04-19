@@ -43,7 +43,6 @@ import { FileAutoComplete } from "../pkg/lib/cockpit-components-file-autocomplet
 import {
     spawnEditPermissions,
     spawnPaste,
-    spawnRenameItem
 } from "./apis/spawnHelpers";
 import { map_permissions, inode_types } from "./common";
 
@@ -205,7 +204,21 @@ const RenameItemModal = ({ path, selected }) => {
     }
 
     const renameItem = () => {
-        spawnRenameItem(selected, name, path, Dialogs, setErrorMessage);
+        const is_current_dir = path.at(-1) === selected.name;
+        const newPath = is_current_dir
+            ? path.slice(0, -1).join("/") + "/" + name
+            : path.join("/") + "/" + name;
+
+        cockpit.spawn(is_current_dir
+            ? ["mv", path.join("/"), newPath]
+            : ["mv", path.join("/") + "/" + selected.name, newPath],
+                      { superuser: "try", err: "message" })
+                .then(() => {
+                    if (is_current_dir) {
+                        cockpit.location.go("/", { path: encodeURIComponent(newPath) });
+                    }
+                    Dialogs.close();
+                }, err => setErrorMessage(err.message));
     };
 
     return (
