@@ -82,7 +82,6 @@ const compare = (sortBy) => {
     }
 };
 
-// eslint-disable-next-line max-len
 const ContextMenuItems = ({ path, selected, setSelected, clipboard, setClipboard, files }) => {
     const Dialogs = useDialogs();
     const { addAlert } = useContext(FilesContext);
