@@ -191,7 +191,7 @@ export const FilesCardBody = ({
             if (ev.detail > 1) {
                 onDoubleClickNavigate(file);
             } else {
-                if (!ev.ctrlKey || selected === path[path.length - 1]) {
+                if (!ev.ctrlKey) {
                     setSelected([file]);
                 } else {
                     setSelected(s => {
