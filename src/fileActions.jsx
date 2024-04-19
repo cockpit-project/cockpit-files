@@ -41,7 +41,6 @@ import {
 } from "pam_user_parser.js";
 import { FileAutoComplete } from "../pkg/lib/cockpit-components-file-autocomplete";
 import {
-    spawnCreateDirectory,
     spawnCreateLink,
     spawnEditPermissions,
     spawnPaste,
@@ -134,7 +133,11 @@ const CreateDirectoryModal = ({ currentPath }) => {
     const [name, setName] = useState("");
     const [nameError, setNameError] = useState(null);
     const [errorMessage, setErrorMessage] = useState(undefined);
-    const createDirectory = () => spawnCreateDirectory(name, currentPath, Dialogs, setErrorMessage);
+    const createDirectory = () => {
+        const path = currentPath + name;
+        cockpit.spawn(["mkdir", path], { superuser: "try", err: "message" })
+                .then(Dialogs.close, err => setErrorMessage(err.message));
+    };
 
     return (
         <Modal
