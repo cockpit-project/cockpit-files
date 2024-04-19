@@ -18,7 +18,7 @@
  */
 
 import React, { useState } from "react";
-import { AlertVariant, Card } from "@patternfly/react-core";
+import { Card } from "@patternfly/react-core";
 
 import { FolderFileInfo } from "./app";
 import { FilesCardBody } from "./files-card-body.jsx";
@@ -33,7 +33,6 @@ export const FilesFolderView = ({
     setSelected,
     clipboard,
     setClipboard,
-    addAlert,
 }: {
     path: string[],
     files: FolderFileInfo[],
@@ -43,7 +42,6 @@ export const FilesFolderView = ({
     setSelected: React.Dispatch<React.SetStateAction<FolderFileInfo[]>>,
     clipboard: string[],
     setClipboard: React.Dispatch<React.SetStateAction<string[]>>,
-    addAlert: (title: string, variant: AlertVariant, key: string) => void,
 }) => {
     const [currentFilter, setCurrentFilter] = useState("");
     const [isGrid, setIsGrid] = useState(localStorage.getItem("files:isGrid") !== "false");
@@ -71,7 +69,6 @@ export const FilesFolderView = ({
               loadingFiles={loadingFiles}
               clipboard={clipboard}
               setClipboard={setClipboard}
-              addAlert={addAlert}
               showHidden={showHidden}
             />
         </Card>

@@ -17,7 +17,7 @@
  * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React, { useCallback, useEffect, useMemo, useState, useRef } from "react";
+import React, { useCallback, useEffect, useMemo, useState, useRef, useContext } from "react";
 import {
     Card, CardBody,
     Flex,
@@ -36,6 +36,7 @@ import { EmptyStatePanel } from "cockpit-components-empty-state.jsx";
 
 import { ContextMenu } from "cockpit-components-context-menu.jsx";
 import { fileActions, ConfirmDeletionDialog } from "./fileActions.jsx";
+import { FilesContext } from "./app";
 
 const _ = cockpit.gettext;
 
@@ -82,8 +83,9 @@ const compare = (sortBy) => {
 };
 
 // eslint-disable-next-line max-len
-const ContextMenuItems = ({ path, selected, setSelected, addAlert, clipboard, setClipboard, files }) => {
+const ContextMenuItems = ({ path, selected, setSelected, clipboard, setClipboard, files }) => {
     const Dialogs = useDialogs();
+    const { addAlert } = useContext(FilesContext);
     const menuItems = fileActions(path, files, selected, setSelected,
                                   clipboard, setClipboard, addAlert, Dialogs);
 
@@ -116,7 +118,6 @@ export const FilesCardBody = ({
     clipboard,
     setClipboard,
     showHidden,
-    addAlert,
 }) => {
     const [boxPerRow, setBoxPerRow] = useState(0);
     const Dialogs = useDialogs();
@@ -341,7 +342,6 @@ export const FilesCardBody = ({
               path={path}
               selected={selected}
               setSelected={setSelected}
-              addAlert={addAlert}
               clipboard={clipboard}
               setClipboard={setClipboard}
               files={files}

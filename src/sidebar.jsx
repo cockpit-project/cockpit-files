@@ -19,7 +19,7 @@
 
 import cockpit from "cockpit";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import {
     Button,
@@ -50,6 +50,7 @@ import { useDialogs } from "dialogs.jsx";
 
 import { editPermissions, fileActions } from "./fileActions.jsx";
 import { get_permissions } from "./common";
+import { FilesContext } from "./app";
 
 const _ = cockpit.gettext;
 
@@ -111,7 +112,6 @@ export const SidebarPanelDetails = ({
     setSelected,
     clipboard,
     setClipboard,
-    addAlert
 }) => {
     const [info, setInfo] = useState(null);
 
@@ -160,7 +160,6 @@ export const SidebarPanelDetails = ({
                   files={files}
                   clipboard={clipboard} setClipboard={setClipboard}
                   setSelected={setSelected}
-                  addAlert={addAlert}
                 />
             </CardHeader>
             {selected.length === 1 &&
@@ -194,10 +193,10 @@ const DropdownWithKebab = ({
     clipboard,
     setClipboard,
     setSelected,
-    addAlert
 }) => {
     const Dialogs = useDialogs();
     const [isOpen, setIsOpen] = useState(false);
+    const { addAlert } = useContext(FilesContext);
 
     const onToggleClick = () => setIsOpen(!isOpen);
     const onSelect = (_event, itemId) => setIsOpen(false);
