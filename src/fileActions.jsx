@@ -42,7 +42,6 @@ import {
 import { FileAutoComplete } from "../pkg/lib/cockpit-components-file-autocomplete";
 import {
     spawnEditPermissions,
-    spawnPaste,
 } from "./apis/spawnHelpers";
 import { map_permissions, inode_types } from "./common";
 
@@ -552,18 +551,36 @@ export const fileActions = (path, files, selected, setSelected, clipboard, setCl
         );
     };
 
+    const spawnPaste = (sourcePath, targetPath, asSymlink) => {
+        if (asSymlink) {
+            cockpit.spawn([
+                "ln",
+                "-s",
+                ...sourcePath,
+                targetPath
+            ]).catch(err => addAlert(err.message, "danger", new Date().getTime()));
+        } else {
+            cockpit.spawn([
+                "cp",
+                "-R",
+                ...sourcePath,
+                targetPath
+            ]).catch(err => addAlert(err.message, "danger", new Date().getTime()));
+        }
+    };
+
     if (selected.length === 0 || selected[0].name === path[path.length - 1]) {
         menuItems.push(
             {
                 id: "paste-item",
                 title: _("Paste"),
-                onClick: () => spawnPaste(clipboard, currentPath, false, addAlert),
+                onClick: () => spawnPaste(clipboard, currentPath, false),
                 isDisabled: clipboard.length === 0
             },
             {
                 id: "paste-as-symlink",
                 title: _("Paste as symlink"),
-                onClick: () => spawnPaste(clipboard, currentPath, true, addAlert),
+                onClick: () => spawnPaste(clipboard, currentPath, true),
                 isDisabled: clipboard.length === 0
             },
             { type: "divider" },
@@ -596,7 +613,7 @@ export const fileActions = (path, files, selected, setSelected, clipboard, setCl
                     {
                         id: "paste-into-directory",
                         title: _("Paste into directory"),
-                        onClick: () => spawnPaste(clipboard, [currentPath + selected[0].name], false, addAlert),
+                        onClick: () => spawnPaste(clipboard, [currentPath + selected[0].name], false),
                         isDisabled: clipboard.length === 0
                     }
                 ]
