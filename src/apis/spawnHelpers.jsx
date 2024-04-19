@@ -21,27 +21,6 @@ import cockpit from "cockpit";
 
 const options = { err: "message", superuser: "try" };
 
-const renameCommand = (selected, path, newPath, is_current_dir) => {
-    return is_current_dir
-        ? ["mv", path.join("/"), newPath]
-        : ["mv", path.join("/") + "/" + selected.name, newPath];
-};
-
-export const spawnRenameItem = (selected, name, path, Dialogs, setErrorMessage) => {
-    const is_current_dir = path.at(-1) === selected.name;
-    const newPath = is_current_dir
-        ? path.slice(0, -1).join("/") + "/" + name
-        : path.join("/") + "/" + name;
-
-    cockpit.spawn(renameCommand(selected, path, newPath, is_current_dir), options)
-            .then(() => {
-                if (is_current_dir) {
-                    cockpit.location.go("/", { path: encodeURIComponent(newPath) });
-                }
-                Dialogs.close();
-            }, err => setErrorMessage(err.message));
-};
-
 export const spawnEditPermissions = async (mode, path, selected, owner, group, Dialogs, setErrorMessage) => {
     const permissionChanged = mode !== selected.mode;
     const ownerChanged = owner !== selected.user || group !== selected.group;
