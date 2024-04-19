@@ -40,9 +40,6 @@ import {
     etc_passwd_syntax as etcPasswdSyntax
 } from "pam_user_parser.js";
 import { FileAutoComplete } from "../pkg/lib/cockpit-components-file-autocomplete";
-import {
-    spawnEditPermissions,
-} from "./apis/spawnHelpers";
 import { map_permissions, inode_types } from "./common";
 
 const _ = cockpit.gettext;
@@ -388,6 +385,25 @@ const EditPermissionsModal = ({ selected, path }) => {
         }
     };
 
+    const spawnEditPermissions = async () => {
+        const permissionChanged = mode !== selected.mode;
+        const ownerChanged = owner !== selected.user || group !== selected.group;
+
+        try {
+            if (permissionChanged)
+                await cockpit.spawn(["chmod", mode.toString(8), path.join("/") + "/" + selected.name],
+                                    { superuser: "try", err: "message" });
+
+            if (ownerChanged)
+                await cockpit.spawn(["chown", owner + ":" + group, path.join("/") + "/" + selected.name],
+                                    { superuser: "try", err: "message" });
+
+            Dialogs.close();
+        } catch (err) {
+            setErrorMessage(err.message);
+        }
+    };
+
     function permissions_options() {
         return [
             ...map_permissions((value, label) => (
@@ -413,7 +429,7 @@ const EditPermissionsModal = ({ selected, path }) => {
               <>
                   <Button
                     variant="primary"
-                    onClick={() => spawnEditPermissions(mode, path, selected, owner, group, Dialogs, setErrorMessage)}
+                    onClick={() => spawnEditPermissions()}
                   >
                       {_("Change")}
                   </Button>
