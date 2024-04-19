@@ -47,6 +47,12 @@ export interface FolderFileInfo extends FileInfo {
     to: string | null,
 }
 
+export const FilesContext = React.createContext({
+    // eslint-disable-next-line no-unused-vars
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    addAlert: (title: string, variant: AlertVariant, key: string) => console.warn("FilesContext not initialized")
+});
+
 export const Application = () => {
     const { options } = usePageLocation();
     const [loading, setLoading] = useState(true);
@@ -108,54 +114,56 @@ export const Application = () => {
 
     return (
         <Page>
-            <AlertGroup isToast isLiveRegion>
-                {alerts.map(alert => (
-                    <Alert
-                      variant={alert.variant}
-                      title={alert.title}
-                      actionClose={
-                          <AlertActionCloseButton
-                            title={alert.title}
-                            variantLabel={`${alert.variant} alert`}
-                            onClose={() => removeAlert(alert.key)}
-                          />
-                      }
-                      key={alert.key}
-                    />
-                ))}
-            </AlertGroup>
-            <FilesBreadcrumbs
-              path={path}
-              showHidden={showHidden} setShowHidden={setShowHidden}
-            />
-            <PageSection>
-                <Sidebar isPanelRight hasGutter>
-                    <SidebarContent>
-                        {errorMessage && <EmptyStatePanel paragraph={errorMessage} icon={ExclamationCircleIcon} />}
-                        {!errorMessage &&
-                        <FilesFolderView
-                          path={path}
-                          files={files}
-                          loadingFiles={loadingFiles}
-                          showHidden={showHidden}
-                          selected={selected}
-                          setSelected={setSelected}
-                          clipboard={clipboard}
-                          setClipboard={setClipboard}
-                          addAlert={addAlert}
-                        />}
-                    </SidebarContent>
-                    <SidebarPanel className="sidebar-panel" width={{ default: "width_25" }}>
-                        <SidebarPanelDetails
-                          path={path}
-                          selected={selected.map(s => files.find(f => f.name === s.name)).filter(s => s !== undefined)}
-                          showHidden={showHidden} setSelected={setSelected}
-                          clipboard={clipboard} setClipboard={setClipboard}
-                          files={files} addAlert={addAlert}
+            <FilesContext.Provider value={{ addAlert }}>
+                <AlertGroup isToast isLiveRegion>
+                    {alerts.map(alert => (
+                        <Alert
+                          variant={alert.variant}
+                          title={alert.title}
+                          actionClose={
+                              <AlertActionCloseButton
+                                title={alert.title}
+                                variantLabel={`${alert.variant} alert`}
+                                onClose={() => removeAlert(alert.key)}
+                              />
+                          }
+                          key={alert.key}
                         />
-                    </SidebarPanel>
-                </Sidebar>
-            </PageSection>
+                    ))}
+                </AlertGroup>
+                <FilesBreadcrumbs
+                  path={path}
+                  showHidden={showHidden} setShowHidden={setShowHidden}
+                />
+                <PageSection>
+                    <Sidebar isPanelRight hasGutter>
+                        <SidebarContent>
+                            {errorMessage && <EmptyStatePanel paragraph={errorMessage} icon={ExclamationCircleIcon} />}
+                            {!errorMessage &&
+                            <FilesFolderView
+                              path={path}
+                              files={files}
+                              loadingFiles={loadingFiles}
+                              showHidden={showHidden}
+                              selected={selected}
+                              setSelected={setSelected}
+                              clipboard={clipboard}
+                              setClipboard={setClipboard}
+                            />}
+                        </SidebarContent>
+                        <SidebarPanel className="sidebar-panel" width={{ default: "width_25" }}>
+                            <SidebarPanelDetails
+                              path={path}
+                              selected={selected.map(s => files.find(f => f.name === s.name))
+                                      .filter(s => s !== undefined)}
+                              showHidden={showHidden} setSelected={setSelected}
+                              clipboard={clipboard} setClipboard={setClipboard}
+                              files={files}
+                            />
+                        </SidebarPanel>
+                    </Sidebar>
+                </PageSection>
+            </FilesContext.Provider>
         </Page>
     );
 };
