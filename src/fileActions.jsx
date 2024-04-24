@@ -672,14 +672,16 @@ export const fileActions = (path, files, selected, setSelected, clipboard, setCl
                     );
                 }
             },
-            { type: "divider" },
         );
         if (selected[0].type === "reg")
-            menuItems.push({
-                id: "download-item",
-                title: _("Download"),
-                onClick: () => downloadFile(currentPath, selected[0])
-            });
+            menuItems.push(
+                { type: "divider" },
+                {
+                    id: "download-item",
+                    title: _("Download"),
+                    onClick: () => downloadFile(currentPath, selected[0])
+                }
+            );
     } else if (selected.length > 1) {
         menuItems.push(
             {
