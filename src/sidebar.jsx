@@ -76,13 +76,7 @@ const getDescriptionListItems = selected => {
                 {
                     id: "description-list-size",
                     label: _("Size"),
-                    value: cockpit.format(
-                        "$0 $1",
-                        cockpit.format_bytes(selected.size),
-                        selected.size < 1000
-                            ? "B"
-                            : "",
-                    )
+                    value: cockpit.format_bytes(selected.size),
                 },
             ]
             : []),
