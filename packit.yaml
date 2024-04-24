@@ -33,6 +33,13 @@ jobs:
       - fedora-development
       - fedora-latest-stable
 
+  - job: copr_build
+    trigger: commit
+    branch: "^main$"
+    owner: "@cockpit"
+    project: "main-builds"
+    preserve_project: True
+
   # Build releases in COPR: https://packit.dev/docs/configuration/#copr_build
   #- job: copr_build
   #  trigger: release
