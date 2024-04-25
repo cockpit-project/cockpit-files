@@ -206,8 +206,8 @@ const RenameItemModal = ({ path, selected }) => {
             : path.join("/") + "/" + name;
 
         cockpit.spawn(is_current_dir
-            ? ["mv", path.join("/"), newPath]
-            : ["mv", path.join("/") + "/" + selected.name, newPath],
+            ? ["mv", "--no-target-directory", "--no-clobber", path.join("/"), newPath]
+            : ["mv", "--no-target-directory", "--no-clobber", path.join("/") + "/" + selected.name, newPath],
                       { superuser: "try", err: "message" })
                 .then(() => {
                     if (is_current_dir) {
