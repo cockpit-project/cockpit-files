@@ -203,7 +203,7 @@ const RenameItemModal = ({ path, selected }) => {
     const renameItem = () => {
         const newPath = path.join("/") + "/" + name;
 
-        cockpit.spawn(["mv", path.join("/") + "/" + selected.name, newPath],
+        cockpit.spawn(["mv", "--no-target-directory", path.join("/") + "/" + selected.name, newPath],
                       { superuser: "try", err: "message" })
                 .then(() => {
                     Dialogs.close();
