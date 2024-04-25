@@ -544,6 +544,18 @@ class TestFiles(testlib.MachineCase):
         self.rename_item(b, "newdir1", "new dir1")
         b.wait_visible("[data-item='new dir1']")
 
+        # Rename to an existing directory should not move the file into the directory
+        m.execute("""
+        touch /home/admin/newfile
+        mkdir /home/admin/dest
+        """)
+        b.wait_visible("[data-item='newfile']")
+        b.wait_visible("[data-item='dest']")
+        self.rename_item(b, "newfile", "dest")
+        self.wait_modal_inline_alert(b, "mv: cannot overwrite directory '/home/admin/dest' with non-directory")
+        b.click("button.pf-m-link:contains('Cancel')")
+        b.wait_not_present(".pf-v5-c-modal-box")
+
         # Renaming protected item should give an error
         m.execute("sudo chattr +i /home/admin/new\\ dir1")
         self.rename_item(b, "new dir1", "testdir")
