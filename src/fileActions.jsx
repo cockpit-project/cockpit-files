@@ -200,19 +200,11 @@ const RenameItemModal = ({ path, selected }) => {
     }
 
     const renameItem = () => {
-        const is_current_dir = path.at(-1) === selected.name;
-        const newPath = is_current_dir
-            ? path.slice(0, -1).join("/") + "/" + name
-            : path.join("/") + "/" + name;
+        const newPath = path.join("/") + "/" + name;
 
-        cockpit.spawn(is_current_dir
-            ? ["mv", path.join("/"), newPath]
-            : ["mv", path.join("/") + "/" + selected.name, newPath],
+        cockpit.spawn(["mv", path.join("/") + "/" + selected.name, newPath],
                       { superuser: "try", err: "message" })
                 .then(() => {
-                    if (is_current_dir) {
-                        cockpit.location.go("/", { path: encodeURIComponent(newPath) });
-                    }
                     Dialogs.close();
                 }, err => setErrorMessage(err.message));
     };
