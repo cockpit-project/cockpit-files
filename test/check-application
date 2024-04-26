@@ -347,6 +347,13 @@ class TestFiles(testlib.MachineCase):
         b.wait_visible("[data-item='newdir']")
         self.delete_item(b, "directory", "newdir")
 
+        # Delete symlink
+        m.execute("""
+        touch /home/admin/target
+        ln -s /home/admin/target /home/admin/link
+        """)
+        self.delete_item(b, "link", "link")
+
         # Deleting protected file should give an error
         m.execute("touch /home/admin/newfile")
         m.execute("sudo chattr +i /home/admin/newfile")
