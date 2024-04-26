@@ -252,6 +252,11 @@ class TestFiles(testlib.MachineCase):
         b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "home")
         b.wait_visible("[data-item='admin']")
 
+        # Changing hostname updates breadcrumb
+        self.restore_file("/etc/hostname")
+        m.execute("hostnamectl set-hostname files")
+        b.wait_text(".breadcrumb-button:nth-of-type(1)", "files")
+
     def testSorting(self):
         b = self.browser
         m = self.machine
