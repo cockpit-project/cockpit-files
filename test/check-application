@@ -634,6 +634,32 @@ class TestFiles(testlib.MachineCase):
         self.assertEqual(m.execute("ls -l /home/admin/newfile")[:10], "-rwxrwxrwx")
         wait_permissions("Read, write and execute")
 
+        # As normal user you cannot change user/group permissions
+        b.drop_superuser()
+
+        m.execute("touch /home/admin/adminfile; chown admin: /home/admin/adminfile")
+        b.click("[data-item='adminfile']")
+        b.click("button:contains('Edit permissions')")
+        select_access("7")
+        # A user cannot change ownership
+        b.wait_not_in_text(".pf-v5-c-modal-box__body", "Ownership")
+        b.click("button.pf-m-primary")
+        self.assertEqual(m.execute("ls -l /home/admin/adminfile")[:10], "-rwxrwxrwx")
+        wait_permissions("Read, write and execute")
+        # Does not change ownership
+        b.wait_text("#description-list-owner dd", "admin")
+        b.wait_text("#description-list-group dd", "admin")
+
+        # Cannot change permission of /home
+        b.click(".breadcrumb-button:nth-of-type(1)")
+        b.click("[data-item='home']")
+        b.click("button:contains('Edit permissions')")
+        select_access("7")
+        b.click("button.pf-m-primary")
+        self.wait_modal_inline_alert(b, "chmod: changing permissions of '/home': Operation not permitted")
+        b.click("button.pf-m-link")
+        b.wait_not_present(".pf-v5-c-modal-box")
+
     def testErrors(self):
         b = self.browser
         m = self.machine
