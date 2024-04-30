@@ -38,6 +38,8 @@ import {
     etc_group_syntax as etcGroupSyntax,
     etc_passwd_syntax as etcPasswdSyntax
 } from "pam_user_parser.js";
+import { superuser } from "superuser";
+
 import { map_permissions, inode_types } from "./common";
 
 const _ = cockpit.gettext;
@@ -364,6 +366,7 @@ const EditPermissionsModal = ({ selected, path }) => {
                   isInline
                 />}
                 <Form isHorizontal>
+                    {superuser.allowed &&
                     <FormSection title={_("Ownership")}>
                         <FormGroup label={_("Owner")} fieldId="edit-permissions-owner">
                             <FormSelect
@@ -395,7 +398,7 @@ const EditPermissionsModal = ({ selected, path }) => {
                                 })}
                             </FormSelect>
                         </FormGroup>
-                    </FormSection>
+                    </FormSection>}
                     <FormSection title={_("Access")}>
                         <FormGroup
                           label={_("Owner access")}
