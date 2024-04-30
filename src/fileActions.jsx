@@ -26,7 +26,6 @@ import {
     FormSelect,
     FormSelectOption,
     Modal, ModalVariant,
-    Radio,
     Stack,
     TextInput,
 } from "@patternfly/react-core";
@@ -39,7 +38,6 @@ import {
     etc_group_syntax as etcGroupSyntax,
     etc_passwd_syntax as etcPasswdSyntax
 } from "pam_user_parser.js";
-import { FileAutoComplete } from "../pkg/lib/cockpit-components-file-autocomplete";
 import { map_permissions, inode_types } from "./common";
 
 const _ = cockpit.gettext;
@@ -244,77 +242,6 @@ const RenameItemModal = ({ path, selected }) => {
                           id="rename-item-input"
                         />
                         <FormHelper fieldId="rename-item-input" helperTextInvalid={nameError} />
-                    </FormGroup>
-                </Form>
-            </Stack>
-        </Modal>
-    );
-};
-
-const CreateLinkModal = ({ currentPath, selected }) => {
-    const Dialogs = useDialogs();
-    const [originalName, setOriginalName] = useState(selected?.name || "");
-    const [newName, setNewName] = useState("");
-    const [type, setType] = useState("symbolic");
-    const [errorMessage, setErrorMessage] = useState(undefined);
-
-    const createLink = () => {
-        cockpit.spawn([
-            "ln", ...(type === "symbolic" ? ["-s"] : []),
-            currentPath + originalName.slice(originalName.lastIndexOf("/") + 1),
-            currentPath + newName
-        ], { superuser: "try", err: "message" })
-                .then(Dialogs.close, (err) => { setErrorMessage(err.message) });
-    };
-
-    return (
-        <Modal
-          position="top"
-          variant={ModalVariant.small}
-          title={_("New link")}
-          isOpen
-          onClose={Dialogs.close}
-          footer={
-              <>
-                  <Button variant="primary" onClick={createLink}>{_("Create link")}</Button>
-                  <Button variant="link" onClick={Dialogs.close}>{_("Cancel")}</Button>
-              </>
-          }
-        >
-            <Stack>
-                {errorMessage !== undefined &&
-                <InlineNotification
-                  type="danger"
-                  text={errorMessage}
-                  isInline
-                />}
-                <Form isHorizontal>
-                    <FormGroup label={_("Original")}>
-                        <div id="create-link-original-wrapper">
-                            <FileAutoComplete
-                              onChange={setOriginalName} placeholder={_("Path to file")}
-                              superuser="try" value={currentPath + originalName}
-                              id="create-link-original"
-                            />
-                        </div>
-                    </FormGroup>
-                    <FormGroup label={_("New")}>
-                        <TextInput
-                          value={newName} onChange={(_, val) => setNewName(val)}
-                          id="create-link-new"
-                        />
-                    </FormGroup>
-                    <FormGroup label={_("Link type")} isInline>
-                        <Radio
-                          name="create-link-type" label={_("Symbolic")}
-                          value="symbolic" onChange={() => { setType("symbolic") }}
-                          id="create-link-symbolic" isChecked={type === "symbolic"}
-                        />
-                        <Radio
-                          name="create-link-type" label={_("Hard")}
-                          value="new" onChange={() => { setType("hard") }}
-                          id="create-link-hard" isChecked={type === "hard"}
-                        />
                     </FormGroup>
                 </Form>
             </Stack>
@@ -548,35 +475,13 @@ export const fileActions = (path, files, selected, setSelected, clipboard, setCl
     const currentPath = path.join("/") + "/";
     const menuItems = [];
 
-    const createLink = (currentPath, files, selected) => {
-        Dialogs.show(
-            <CreateLinkModal
-              currentPath={currentPath} selected={selected}
-              files={files.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase())
-                  ? 1
-                  : ((b.name.toLowerCase() > a.name.toLowerCase())
-                      ? -1
-                      : 0))}
-            />
-        );
-    };
-
-    const spawnPaste = (sourcePath, targetPath, asSymlink) => {
-        if (asSymlink) {
-            cockpit.spawn([
-                "ln",
-                "-s",
-                ...sourcePath,
-                targetPath
-            ]).catch(err => addAlert(err.message, "danger", new Date().getTime()));
-        } else {
-            cockpit.spawn([
-                "cp",
-                "-R",
-                ...sourcePath,
-                targetPath
-            ]).catch(err => addAlert(err.message, "danger", new Date().getTime()));
-        }
+    const spawnPaste = (sourcePath, targetPath) => {
+        cockpit.spawn([
+            "cp",
+            "-R",
+            ...sourcePath,
+            targetPath
+        ]).catch(err => addAlert(err.message, "danger", new Date().getTime()));
     };
 
     if (selected.length === 0 || selected[0].name === path[path.length - 1]) {
@@ -584,13 +489,7 @@ export const fileActions = (path, files, selected, setSelected, clipboard, setCl
             {
                 id: "paste-item",
                 title: _("Paste"),
-                onClick: () => spawnPaste(clipboard, currentPath, false),
-                isDisabled: clipboard.length === 0
-            },
-            {
-                id: "paste-as-symlink",
-                title: _("Paste as symlink"),
-                onClick: () => spawnPaste(clipboard, currentPath, true),
+                onClick: () => spawnPaste(clipboard, currentPath),
                 isDisabled: clipboard.length === 0
             },
             { type: "divider" },
@@ -598,11 +497,6 @@ export const fileActions = (path, files, selected, setSelected, clipboard, setCl
                 id: "create-item",
                 title: _("Create directory"),
                 onClick: () => Dialogs.show(<CreateDirectoryModal currentPath={currentPath} />),
-            },
-            {
-                id: "create-link",
-                title: _("Create link"),
-                onClick: () => createLink(currentPath, files, selected || {})
             },
             { type: "divider" },
             {
@@ -623,7 +517,7 @@ export const fileActions = (path, files, selected, setSelected, clipboard, setCl
                     {
                         id: "paste-into-directory",
                         title: _("Paste into directory"),
-                        onClick: () => spawnPaste(clipboard, [currentPath + selected[0].name], false),
+                        onClick: () => spawnPaste(clipboard, [currentPath + selected[0].name]),
                         isDisabled: clipboard.length === 0
                     }
                 ]
@@ -645,12 +539,6 @@ export const fileActions = (path, files, selected, setSelected, clipboard, setCl
                         />
                     );
                 },
-            },
-            { type: "divider" },
-            {
-                id: "create-link",
-                title: _("Create link"),
-                onClick: () => createLink(currentPath, files, selected[0]),
             },
             { type: "divider" },
             {
