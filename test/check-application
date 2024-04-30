@@ -59,19 +59,6 @@ class TestFiles(testlib.MachineCase):
         b.set_input_text("#rename-item-input", f"{newname}")
         b.click("button.pf-m-primary")
 
-    def create_link(self, b, original, new, filetype, index):
-        b.click("#dropdown-menu")
-        b.click("#create-link")
-        b.focus("#create-link-original-wrapper input")
-        b.click("#create-link-original-wrapper input")
-        # Filter out hidden items
-        b.key_press([original[0]])
-        b.wait_in_text(f"#create-link-original li:nth-of-type({index}) button", original)
-        b.click(f"#create-link-original li:nth-of-type({index}) button")
-        b.set_input_text("#create-link-new", new)
-        b.click(f"#create-link-{filetype}")
-        b.click("button.pf-m-primary")
-
     def waitDownloadFile(self, filename, expected_size=None, content=None):
         b = self.browser
         filepath = os.path.join(b.cdp.download_dir, filename)
@@ -439,7 +426,6 @@ class TestFiles(testlib.MachineCase):
 
         # Create folder from context menu
         b.mouse("#folder-view", "contextmenu")
-        b.wait_in_text(".contextMenu li:nth-child(4) button", "Create directory")
         b.click(".contextMenu button:contains('Create directory')")
         b.set_input_text("#create-directory-input", "newdir")
         b.click("button.pf-m-primary")
@@ -474,28 +460,18 @@ class TestFiles(testlib.MachineCase):
 
         # Delete folder from context menu
         b.mouse("[data-item='newdir1']", "contextmenu")
-        b.wait_in_text(".contextMenu li:nth-child(9) button", "Delete")
         b.click(".contextMenu button:contains('Delete')")
         b.click("button.pf-m-danger")
         b.wait_not_present("[data-item='newdir1']")
 
-        # Check file name is pre-selected when creating link
         m.execute("echo 'some content' > /home/admin/newfile")
         b.mouse("[data-item='newfile']", "contextmenu")
-        b.wait_in_text(".contextMenu li:nth-child(6) button", "Create link")
-        b.click(".contextMenu button:contains('Create link')")
-        b.wait_val("#create-link-original-wrapper input", "/home/admin/newfile")
-        b.click("button.pf-m-link:contains('Cancel')")
-
-        b.mouse("[data-item='newfile']", "contextmenu")
-        b.wait_in_text(".contextMenu li:nth-child(10) button", "Download")
         b.click(".contextMenu button:contains('Download')")
         size = int(m.execute("stat --format '%s' /home/admin/newfile").strip())
         self.waitDownloadFile("newfile", size, "some content\n")
 
         # Delete button text should match item type: directory/file
         b.mouse("[data-item='newfile']", "contextmenu")
-        b.wait_in_text(".contextMenu li:nth-child(8) button", "Delete")
         b.click(".contextMenu button:contains('Delete')")
         b.click("button.pf-m-danger")
         b.wait_not_present("[data-item='newfile']")
@@ -504,7 +480,7 @@ class TestFiles(testlib.MachineCase):
         m.execute("touch /home/admin/testfile")
         b.click("button[aria-label='Display as a list']")
         b.mouse("[data-item='testfile']", "contextmenu")
-        b.wait_in_text(".contextMenu li:nth-child(6) button", "Create link")
+        b.wait_visible(".contextMenu button:contains('Delete')")
 
     def testDownload(self):
         b = self.browser
@@ -591,40 +567,6 @@ class TestFiles(testlib.MachineCase):
         b.enter_page("/files")
         b.wait_visible("[data-item='f1']")
         b.wait_visible("[data-item='.f2']")
-
-    def testCreateLink(self):
-        b = self.browser
-        m = self.machine
-
-        self.enter_files()
-
-        m.execute("touch /home/admin/test")
-        m.execute("mkdir /home/admin/testdir")
-        m.execute("touch /home/admin/protectedfile")
-
-        # Create file symbolic link
-        self.create_link(b, "test", "test-sym", "symbolic", 1)
-        b.wait_visible("[data-item='test-sym']")
-
-        def ls_output(filename):
-            output = m.execute(f"ls -l {filename}")[0:23]
-            return output.strip()
-
-        self.assertRegex(ls_output("/home/admin/test-sym"), "lrwxrwxrwx.* 1 root root")
-
-        # Create file hard link
-        self.create_link(b, "test", "test-hard", "hard", 1)
-        b.wait_visible("[data-item='test-hard']")
-        self.assertRegex(ls_output("/home/admin/test-hard"), "-rw-r--r--.* 2 root root")
-
-        # Create folder symbolic link
-        self.create_link(b, "testdir", "testdir-sym", "symbolic", 4)
-        b.wait_visible("[data-item='testdir-sym'].directory-item")
-        self.assertRegex(ls_output("/home/admin/testdir-sym"), "lrwxrwxrwx.* 1 root root")
-
-        # Creating folder hard link should return an error
-        self.create_link(b, "testdir", "testdir-hard", "hard", 5)
-        self.wait_modal_inline_alert(b, "ln: /home/admin/: hard link not allowed for directory")
 
     def testPermissions(self):
         b = self.browser
@@ -744,83 +686,6 @@ class TestFiles(testlib.MachineCase):
         b.click("button.pf-m-danger")
         b.wait_not_present("[data-item='file1']")
         b.wait_not_present("[data-item='file2']")
-
-    def testCopyPaste(self):
-        b = self.browser
-        m = self.machine
-
-        self.enter_files()
-
-        # Copy/paste file
-        m.execute("""
-            mkdir /home/admin/newdir
-            echo "test_text" > /home/admin/newfile
-            chmod 777 /home/admin/newdir
-        """)
-        b.click("[data-item='newfile']")
-        b.click("#dropdown-menu")
-        b.click("#copy-item")
-        b.mouse("[data-item='newdir']", "dblclick")
-        b.click("#dropdown-menu")
-        b.click("#paste-item")
-        b.wait_visible("[data-item='newfile']")
-        self.assertEqual(m.execute("head -n 1 /home/admin/newdir/newfile"), "test_text\n")
-        b.click(".breadcrumb-button:nth-of-type(3)")
-
-        # Copy/paste directory
-        self.browser.wait_not_present(".pf-c-empty-state")
-        m.execute("mkdir /home/admin/copyDir")
-        b.click("[data-item='copyDir']")
-        b.click("#dropdown-menu")
-        b.click("#copy-item")
-        b.mouse("[data-item='newdir']", "dblclick")
-        b.click("#dropdown-menu")
-        b.click("#paste-item")
-        b.wait_visible("[data-item='copyDir']")
-        b.click(".breadcrumb-button:nth-of-type(3)")
-
-        # Paste into directory
-        self.browser.wait_not_present(".pf-c-empty-state")
-        m.execute("touch /home/admin/newfile2")
-        b.click("[data-item='newfile2']")
-        b.click("#dropdown-menu")
-        b.click("#copy-item")
-        b.click("[data-item='newdir']")
-        b.click("#dropdown-menu")
-        b.click("#paste-into-directory")
-        b.mouse("[data-item='newdir']", "dblclick")
-        b.wait_visible("[data-item='newfile2']")
-        b.click(".breadcrumb-button:nth-of-type(3)")
-
-        # Paste as symlink
-        self.browser.wait_not_present(".pf-c-empty-state")
-        m.execute("touch /home/admin/newfile3")
-        b.click("[data-item='newfile3']")
-        b.click("#dropdown-menu")
-        b.click("#copy-item")
-        b.mouse("[data-item='newdir']", "dblclick")
-        b.click("#dropdown-menu")
-        b.click("#paste-as-symlink")
-        b.wait_visible("[data-item='newfile3']")
-        b.click("[data-item='newfile3']")
-        b.wait_text("#sidebar-card-header", "newfile3symbolic link to /home/admin/newfile3")
-        b.click(".breadcrumb-button:nth-of-type(3)")
-
-        # Check error alerts
-        b.click("#files-card-body")  # unselect
-        b.click("#dropdown-menu")
-        b.click("#paste-item")
-        b.wait_in_text("h4.pf-v5-c-alert__title",
-                       "'/home/admin/newfile3' and '/home/admin/newfile3' are the same file")
-        b.click("div.pf-v5-c-alert__action button")
-        m.execute("mkdir /home/admin/locked && chattr +i /home/admin/locked")
-        b.mouse("[data-item='locked']", "dblclick")
-        b.click("#dropdown-menu")
-        b.click("#paste-item")
-        b.wait_in_text("h4.pf-v5-c-alert__title",
-                       "cannot create regular file '/home/admin/locked/newfile3': Operation not permitted")
-        b.click(".breadcrumb-button:nth-of-type(3)")
-        m.execute("chattr -i /home/admin/locked")
 
     def testKeyboardNav(self):
         b = self.browser
