@@ -98,6 +98,7 @@ const context = await esbuild.context({
             assets: [
                 { from: ['./src/manifest.json'], to: ['./manifest.json'] },
                 { from: ['./src/index.html'], to: ['./index.html'] },
+                { from: ['./src/images/file-o.svg'], to: ['./file-o.svg'] },
             ]
         }),
         ...esbuildStylesPlugins,

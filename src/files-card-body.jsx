@@ -420,15 +420,10 @@ const Item = React.memo(function Item({ file, isSelected, isGrid }) {
                   selectableActionId: "card-item-" + file.name + file.type + "-selectable-action",
               }}
             >
-                <Icon
-                  size={isGrid
-                      ? "xl"
-                      : "lg"} isInline
-                >
-                    {file.type === "dir" || file.to === "dir"
-                        ? <FolderIcon />
-                        : <FileIcon />}
-                </Icon>
+                <object
+                  type="image/svg+xml" className="file-icon"
+                  data="file-o.svg"
+                />
                 <CardTitle>
                     {file.name}
                 </CardTitle>
