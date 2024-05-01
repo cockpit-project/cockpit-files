@@ -521,6 +521,8 @@ const setDirectoryName = (val, setName, setNameError, setErrorMessage) => {
         setNameError(_("Directory name cannot be empty."));
     } else if (val.length >= 256) {
         setNameError(_("Directory name too long."));
+    } else if (val.includes("/")) {
+        setNameError(_("Directory name cannot include a /."));
     } else {
         setNameError(null);
     }

@@ -405,6 +405,11 @@ class TestFiles(testlib.MachineCase):
         b.set_input_text("#create-directory-input", "a" * 256)
         b.wait_visible("button.pf-m-primary:disabled")
         b.wait_in_text("#create-directory-input-helper", "Directory name too long.")
+
+        b.set_input_text("#create-directory-input", "foo/bar")
+        b.wait_visible("button.pf-m-primary:disabled")
+        b.wait_in_text("#create-directory-input-helper", "Directory name cannot include a /.")
+
         b.set_input_text("#create-directory-input", "test")
         b.wait_visible("button.pf-m-primary:not(:disabled)")
         b.click(".pf-v5-c-modal-box__footer button.pf-m-link")  # cancel
@@ -539,6 +544,11 @@ class TestFiles(testlib.MachineCase):
         b.set_input_text("#rename-item-input", "a" * 256)
         b.wait_visible("button.pf-m-primary:disabled")
         b.wait_in_text("#rename-item-input-helper", "Directory name too long.")
+
+        b.set_input_text("#rename-item-input", "foo/bar")
+        b.wait_visible("button.pf-m-primary:disabled")
+        b.wait_in_text("#rename-item-input-helper", "Directory name cannot include a /.")
+
         b.set_input_text("#rename-item-input", "test")
         b.wait_visible("button.pf-m-primary:not(:disabled)")
         b.click(".pf-v5-c-modal-box__footer button.pf-m-link")  # cancel
