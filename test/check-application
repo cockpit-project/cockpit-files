@@ -169,7 +169,7 @@ class TestFiles(testlib.MachineCase):
 
         # List root directory
         # Click "/" on the breadcrumb
-        b.click(".breadcrumb-button:nth-of-type(1)")
+        b.click(".breadcrumb-button:nth-of-type(2)")
         b.wait_visible("[data-item='home']")
 
     def testNavigation(self):
@@ -179,14 +179,14 @@ class TestFiles(testlib.MachineCase):
         self.enter_files()
 
         hostname = m.execute("hostname").strip()
-        b.wait_text(".breadcrumb-button:nth-of-type(1)", hostname)
-        b.wait_text(".breadcrumb-button:nth-of-type(2)", "home")
-        b.wait_text(".breadcrumb-button:nth-of-type(3)", "admin")
+        b.wait_text(".breadcrumb-button:nth-of-type(2)", hostname)
+        b.wait_text(".breadcrumb-button:nth-of-type(3)", "home")
+        b.wait_text(".breadcrumb-button:nth-of-type(4)", "admin")
 
         # clicking on the home button should take us to the home directory
-        b.click(".breadcrumb-button:nth-of-type(2)")
-        b.wait_visible(".breadcrumb-button:nth-of-type(2):disabled")
-        b.wait_text(".breadcrumb-button:nth-of-type(2)", "home")
+        b.click(".breadcrumb-button:nth-of-type(3)")
+        b.wait_visible(".breadcrumb-button:nth-of-type(3):disabled")
+        b.wait_text(".breadcrumb-button:nth-of-type(3)", "home")
         b.wait_visible("[data-item='admin']")
 
         # show folder info in sidebar
@@ -219,7 +219,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_visible("[data-item='newdir2']")
         b.mouse("[data-item='newdir2']", "dblclick")
         b.wait_not_present("[data-item='newdir']")
-        b.click(".breadcrumb-button:nth-of-type(2)")
+        b.click(".breadcrumb-button:nth-of-type(3)")
         b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "home")
         b.wait_visible("[data-item='admin']")
         # navigate back
@@ -253,7 +253,55 @@ class TestFiles(testlib.MachineCase):
         # Changing hostname updates breadcrumb
         self.restore_file("/etc/hostname")
         m.execute("hostnamectl set-hostname files")
-        b.wait_text(".breadcrumb-button:nth-of-type(1)", "files")
+        b.wait_text(".breadcrumb-button:nth-of-type(2)", "files")
+
+        # Navigation via editing the path
+        path_input = "#new-path-input"
+        edit_button = ".breadcrumb-edit-button"
+        apply_button = ".breadcrumb-edit-apply-button"
+        cancel_button = ".breadcrumb-edit-cancel-button"
+
+        # Cancel
+
+        # Via escape
+        b.click(edit_button)
+        b.wait_val(path_input, "/home")
+        b.set_input_text(path_input, "/home/admin")
+        b.wait_visible(path_input)
+        b.focus(path_input)
+        self.press_special_key("Escape")
+        b.wait_not_present(path_input)
+
+        # Via cancel button
+        b.click(edit_button)
+        # Cancelled edit should not save the path
+        b.wait_val(path_input, "/home")
+        b.click(cancel_button)
+        b.wait_not_present(path_input)
+
+        # Change path
+
+        # Via Enter key
+        b.click(edit_button)
+        b.set_input_text(path_input, "/opt")
+        b.focus(path_input)
+        self.press_special_key("Enter")
+        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "opt")
+
+        # Via apply button
+        b.click(edit_button)
+        b.set_input_text(path_input, "/var")
+        b.click(apply_button)
+        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "var")
+
+        # Editing and cancelling does not remember input
+        b.click(edit_button)
+        b.set_input_text(path_input, "/path/to/nowhere")
+        b.click(cancel_button)
+        b.wait_not_present(path_input)
+        b.click(edit_button)
+        b.wait_visible(path_input)
+        b.wait_val(path_input, "/var")
 
     def testSorting(self):
         b = self.browser
@@ -737,7 +785,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_text("#description-list-group dd", "admin")
 
         # Cannot change permission of /home
-        b.click(".breadcrumb-button:nth-of-type(1)")
+        b.click(".breadcrumb-button:nth-of-type(2)")
         b.click("[data-item='home']")
         b.click("button:contains('Edit permissions')")
         select_access("7")
@@ -847,7 +895,7 @@ class TestFiles(testlib.MachineCase):
 
         b.wait_visible("[data-item='foo'].pf-m-selected")
         self.press_special_key("Enter")
-        b.wait_text(".breadcrumb-button:nth-of-type(4)", "foo")
+        b.wait_text(".breadcrumb-button:nth-of-type(5)", "foo")
 
 
 if __name__ == '__main__':
