@@ -13,6 +13,22 @@
     padding-inline: 0;
 }
 
+button.pf-m-secondary.breadcrumb-edit-button {
+    margin-inline-end: var(--pf-v5-global--spacer--sm);
+}
+
+button.breadcrumb-edit-apply-button {
+    padding-inline-end: var(--pf-v5-global--spacer--sm);
+}
+
+button.breadcrumb-edit-cancel-button {
+    padding-inline-start: var(--pf-v5-global--spacer--sm);
+}
+
+.breadcrumb-edit-apply-icon {
+    color: var(--pf-v5-c-button--m-link--Color);
+}
+
 .view-toggle-group {
     .pf-c-menu-toggle__button {
         display: flex;

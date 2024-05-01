@@ -18,9 +18,9 @@
  */
 import cockpit from "cockpit";
 import React from "react";
-import { HddIcon } from "@patternfly/react-icons";
+import { CheckIcon, HddIcon, PencilAltIcon, TimesIcon } from "@patternfly/react-icons";
 
-import { Button, Flex, FlexItem, PageBreadcrumb } from "@patternfly/react-core";
+import { Button, Flex, FlexItem, PageBreadcrumb, TextInput } from "@patternfly/react-core";
 
 import { SettingsDropdown } from "./settings-dropdown.jsx";
 
@@ -49,11 +49,46 @@ function useHostname() {
 
 // eslint-disable-next-line max-len
 export function FilesBreadcrumbs({ path, showHidden, setShowHidden }: { path: string[], showHidden: boolean, setShowHidden: React.Dispatch<React.SetStateAction<boolean>>}) {
+    const [editMode, setEditMode] = React.useState(false);
+    const [newPath, setNewPath] = React.useState<string | null>(null);
     const hostname = useHostname();
 
     function navigate(n_parts: number) {
         cockpit.location.go("/", { path: encodeURIComponent(path.slice(0, n_parts).join("/")) });
     }
+
+    const handleInputKey = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        // Don't propogate navigation specific events
+        if (event.key === "ArrowDown" || event.key === "ArrowUp" ||
+            event.key === "ArrowLeft" || event.key === "ArrowRight" ||
+            event.key === "Delete") {
+            event.stopPropagation();
+        }
+        if (event.key === "Enter") {
+            event.stopPropagation();
+            changePath();
+        } else if (event.key === "Escape") {
+            cancelPathEdit();
+        }
+    };
+
+    const enableEditMode = () => {
+        setEditMode(true);
+        setNewPath(path.join("/"));
+    };
+
+    const changePath = () => {
+        setEditMode(false);
+        cockpit.assert(newPath !== null, "newPath cannot be null");
+        // HACK: strip trailing / to circumvent the path being `//` in breadcrumbs
+        cockpit.location.go("/", { path: encodeURIComponent(newPath.replace(/\/$/, '')) });
+        setNewPath(null);
+    };
+
+    const cancelPathEdit = () => {
+        setNewPath(null);
+        setEditMode(false);
+    };
 
     const fullPath = path.slice(1);
     fullPath.unshift(hostname || "server");
@@ -61,7 +96,14 @@ export function FilesBreadcrumbs({ path, showHidden, setShowHidden }: { path: st
     return (
         <PageBreadcrumb stickyOnBreakpoint={{ default: "top" }}>
             <Flex spaceItems={{ default: "spaceItemsXs" }}>
-                {fullPath.map((dir, i) => {
+                {!editMode &&
+                    <Button
+                      variant="secondary"
+                      icon={<PencilAltIcon />}
+                      onClick={() => enableEditMode()}
+                      className="breadcrumb-edit-button"
+                    />}
+                {!editMode && fullPath.map((dir, i) => {
                     return (
                         <React.Fragment key={dir || "/"}>
                             <Button
@@ -76,7 +118,33 @@ export function FilesBreadcrumbs({ path, showHidden, setShowHidden }: { path: st
                         </React.Fragment>
                     );
                 })}
+                {editMode && newPath !== null &&
+                    <FlexItem flex={{ default: "flex_1" }}>
+                        <TextInput
+                          autoFocus // eslint-disable-line jsx-a11y/no-autofocus
+                          id="new-path-input"
+                          value={newPath}
+                          onFocus={(event) => event.target.select()}
+                          onKeyDown={handleInputKey}
+                          onChange={(_event, value) => setNewPath(value)}
+                        />
+                    </FlexItem>}
                 <FlexItem align={{ default: 'alignRight' }}>
+                    {editMode &&
+                    <>
+                        <Button
+                          variant="plain"
+                          icon={<CheckIcon className="breadcrumb-edit-apply-icon" />}
+                          onClick={changePath}
+                          className="breadcrumb-edit-apply-button"
+                        />
+                        <Button
+                          variant="plain"
+                          icon={<TimesIcon />}
+                          onClick={() => cancelPathEdit()}
+                          className="breadcrumb-edit-cancel-button"
+                        />
+                    </>}
                     <SettingsDropdown showHidden={showHidden} setShowHidden={setShowHidden} />
                 </FlexItem>
             </Flex>
