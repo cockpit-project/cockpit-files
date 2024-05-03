@@ -635,8 +635,42 @@ class TestFiles(testlib.MachineCase):
         self.assertEqual(m.execute("ls -l /home/admin/newfile")[:10], "-rwxrwxrwx")
         wait_permissions("Read, write and execute")
 
+        # Test changing CWD permissions
+        test_dir = "/home/admin/testdir"
+        m.execute(['runuser', '-u', 'admin', 'mkdir', test_dir])
+        b.wait_visible("[data-item='testdir']")
+        b.mouse("[data-item='testdir']", "dblclick")
+        b.wait_not_present(".pf-v5-c-empty-state")
+
+        # Via contextmenu
+        b.mouse("#folder-view", "contextmenu")
+        b.click(".contextMenu button:contains('Edit permissions')")
+        b.wait_in_text(".pf-v5-c-modal-box__title-text", "testdir")
+        b.select_from_dropdown("#edit-permissions-owner-access", "6")
+        b.select_from_dropdown("#edit-permissions-group-access", "4")
+        b.select_from_dropdown("#edit-permissions-other-access", "4")
+        b.click("button.pf-m-primary")
+        b.wait_not_present(".pf-v5-c-modal-box")
+
+        self.assertEqual(m.execute(f"ls -ld {test_dir}")[:10], "drw-r--r--")
+
+        # Via kebab
+        b.click("#dropdown-menu")
+        b.click("button:contains('Edit permissions')")
+        b.wait_in_text(".pf-v5-c-modal-box__title-text", "testdir")
+        b.select_from_dropdown("#edit-permissions-owner-access", "7")
+        b.select_from_dropdown("#edit-permissions-group-access", "5")
+        b.select_from_dropdown("#edit-permissions-other-access", "5")
+        b.click("button.pf-m-primary")
+        b.wait_not_present(".pf-v5-c-modal-box")
+
+        self.assertEqual(m.execute(f"ls -ld {test_dir}")[:10], "drwxr-xr-x")
+
         # As normal user you cannot change user/group permissions
         b.drop_superuser()
+
+        b.click(".breadcrumb-button:nth-of-type(3)")
+        b.wait_not_present(".pf-v5-c-empty-state")
 
         m.execute("touch /home/admin/adminfile; chown admin: /home/admin/adminfile")
         b.click("[data-item='adminfile']")

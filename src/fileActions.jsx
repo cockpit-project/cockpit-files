@@ -254,6 +254,14 @@ const RenameItemModal = ({ path, selected }) => {
 
 const EditPermissionsModal = ({ selected, path }) => {
     const Dialogs = useDialogs();
+    const { cwdInfo } = useFilesContext();
+
+    // Nothing selected means we act on the current working directory
+    if (!selected) {
+        const directory_name = path[path.length - 1];
+        selected = { ...cwdInfo, isCwd: true, name: directory_name };
+    }
+
     const [owner, setOwner] = useState(selected.user);
     const [mode, setMode] = useState(selected.mode);
     const [group, setGroup] = useState(selected.group);
@@ -261,11 +269,6 @@ const EditPermissionsModal = ({ selected, path }) => {
     const accounts = useFile("/etc/passwd", { syntax: etcPasswdSyntax });
     const groups = useFile("/etc/group", { syntax: etcGroupSyntax });
     const logindef = useFile("/etc/login.defs");
-
-    if (!selected) {
-        const directory_name = path[path.length - 1];
-        selected = { name: directory_name, type: "dir" };
-    }
 
     //  Handle also the case where logindef == null, i.e. the file does not exist.
     //  While that's unusual, "empty /etc" is a goal, and it shouldn't crash the page.
@@ -312,12 +315,13 @@ const EditPermissionsModal = ({ selected, path }) => {
         const ownerChanged = owner !== selected.user || group !== selected.group;
 
         try {
+            const directory = selected?.isCwd ? path.join("/") : path.join("/") + "/" + selected.name;
             if (permissionChanged)
-                await cockpit.spawn(["chmod", mode.toString(8), path.join("/") + "/" + selected.name],
+                await cockpit.spawn(["chmod", mode.toString(8), directory],
                                     { superuser: "try", err: "message" });
 
             if (ownerChanged)
-                await cockpit.spawn(["chown", owner + ":" + group, path.join("/") + "/" + selected.name],
+                await cockpit.spawn(["chown", owner + ":" + group, directory],
                                     { superuser: "try", err: "message" });
 
             Dialogs.close();
