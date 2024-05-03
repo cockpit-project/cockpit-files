@@ -60,7 +60,6 @@ export const Application = () => {
     const [loadingFiles, setLoadingFiles] = useState(true);
     const [errorMessage, setErrorMessage] = useState("");
     const [files, setFiles] = useState<FolderFileInfo[]>([]);
-    // eslint-disable-next-line no-unused-vars
     const [selected, setSelected] = useState<FolderFileInfo[]>([]);
     const [showHidden, setShowHidden] = useState(localStorage.getItem("files:showHiddenFiles") === "true");
     const [clipboard, setClipboard] = useState<string[]>([]);
