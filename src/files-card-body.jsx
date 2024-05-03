@@ -82,10 +82,10 @@ const compare = (sortBy) => {
     }
 };
 
-const ContextMenuItems = ({ path, selected, setSelected, clipboard, setClipboard, files }) => {
+const ContextMenuItems = ({ path, selected, setSelected, clipboard, setClipboard }) => {
     const Dialogs = useDialogs();
     const { addAlert } = useContext(FilesContext);
-    const menuItems = fileActions(path, files, selected, setSelected,
+    const menuItems = fileActions(path, selected, setSelected,
                                   clipboard, setClipboard, addAlert, Dialogs);
 
     return (
@@ -343,7 +343,6 @@ export const FilesCardBody = ({
               setSelected={setSelected}
               clipboard={clipboard}
               setClipboard={setClipboard}
-              files={files}
             />
         </ContextMenu>
     );
