@@ -27,6 +27,7 @@ import {
 } from "@patternfly/react-core";
 import { ExclamationCircleIcon } from "@patternfly/react-icons";
 
+import { WithDialogs } from "dialogs.jsx";
 import { EmptyStatePanel } from "cockpit-components-empty-state.jsx";
 import { FilesBreadcrumbs } from "./files-breadcrumbs";
 import { SidebarPanelDetails } from "./sidebar.jsx";
@@ -115,54 +116,60 @@ export const Application = () => {
     return (
         <Page>
             <FilesContext.Provider value={{ addAlert }}>
-                <AlertGroup isToast isLiveRegion>
-                    {alerts.map(alert => (
-                        <Alert
-                          variant={alert.variant}
-                          title={alert.title}
-                          actionClose={
-                              <AlertActionCloseButton
-                                title={alert.title}
-                                variantLabel={`${alert.variant} alert`}
-                                onClose={() => removeAlert(alert.key)}
-                              />
-                          }
-                          key={alert.key}
-                        />
-                    ))}
-                </AlertGroup>
-                <FilesBreadcrumbs
-                  path={path}
-                  showHidden={showHidden} setShowHidden={setShowHidden}
-                />
-                <PageSection>
-                    <Sidebar isPanelRight hasGutter>
-                        <SidebarContent>
-                            {errorMessage && <EmptyStatePanel paragraph={errorMessage} icon={ExclamationCircleIcon} />}
-                            {!errorMessage &&
-                            <FilesFolderView
-                              path={path}
-                              files={files}
-                              loadingFiles={loadingFiles}
-                              showHidden={showHidden}
-                              selected={selected}
-                              setSelected={setSelected}
-                              clipboard={clipboard}
-                              setClipboard={setClipboard}
-                            />}
-                        </SidebarContent>
-                        <SidebarPanel className="sidebar-panel" width={{ default: "width_25" }}>
-                            <SidebarPanelDetails
-                              path={path}
-                              selected={selected.map(s => files.find(f => f.name === s.name))
-                                      .filter(s => s !== undefined)}
-                              showHidden={showHidden} setSelected={setSelected}
-                              clipboard={clipboard} setClipboard={setClipboard}
-                              files={files}
+                <WithDialogs>
+                    <AlertGroup isToast isLiveRegion>
+                        {alerts.map(alert => (
+                            <Alert
+                              variant={alert.variant}
+                              title={alert.title}
+                              actionClose={
+                                  <AlertActionCloseButton
+                                    title={alert.title}
+                                    variantLabel={`${alert.variant} alert`}
+                                    onClose={() => removeAlert(alert.key)}
+                                  />
+                              }
+                              key={alert.key}
                             />
-                        </SidebarPanel>
-                    </Sidebar>
-                </PageSection>
+                        ))}
+                    </AlertGroup>
+                    <FilesBreadcrumbs
+                      path={path}
+                      showHidden={showHidden} setShowHidden={setShowHidden}
+                    />
+                    <PageSection>
+                        <Sidebar isPanelRight hasGutter>
+                            <SidebarContent>
+                                {errorMessage &&
+                                <EmptyStatePanel
+                                  paragraph={errorMessage}
+                                  icon={ExclamationCircleIcon}
+                                />}
+                                {!errorMessage &&
+                                <FilesFolderView
+                                  path={path}
+                                  files={files}
+                                  loadingFiles={loadingFiles}
+                                  showHidden={showHidden}
+                                  selected={selected}
+                                  setSelected={setSelected}
+                                  clipboard={clipboard}
+                                  setClipboard={setClipboard}
+                                />}
+                            </SidebarContent>
+                            <SidebarPanel className="sidebar-panel" width={{ default: "width_25" }}>
+                                <SidebarPanelDetails
+                                  path={path}
+                                  selected={selected.map(s => files.find(f => f.name === s.name))
+                                          .filter(s => s !== undefined)}
+                                  showHidden={showHidden} setSelected={setSelected}
+                                  clipboard={clipboard} setClipboard={setClipboard}
+                                  files={files}
+                                />
+                            </SidebarPanel>
+                        </Sidebar>
+                    </PageSection>
+                </WithDialogs>
             </FilesContext.Provider>
         </Page>
     );
