@@ -212,8 +212,7 @@ export const FilesCardBody = ({
             }
 
             if (sel === null) {
-                sel = path ? path[path.length - 1] : undefined;
-                setSelected([{ name: sel }]);
+                setSelected([]);
             } else {
                 sel = sortedFiles?.find(file => file.name === sel);
                 setSelected([sel]);
