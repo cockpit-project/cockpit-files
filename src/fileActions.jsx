@@ -41,6 +41,7 @@ import {
 import { superuser } from "superuser";
 
 import { map_permissions, inode_types } from "./common";
+import { useFilesContext } from "./app";
 
 const _ = cockpit.gettext;
 

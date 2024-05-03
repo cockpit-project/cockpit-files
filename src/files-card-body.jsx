@@ -17,7 +17,7 @@
  * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React, { useCallback, useEffect, useMemo, useState, useRef, useContext } from "react";
+import React, { useCallback, useEffect, useMemo, useState, useRef } from "react";
 import {
     Card, CardBody,
     Flex,
@@ -36,7 +36,7 @@ import { EmptyStatePanel } from "cockpit-components-empty-state.jsx";
 
 import { ContextMenu } from "cockpit-components-context-menu.jsx";
 import { fileActions, ConfirmDeletionDialog } from "./fileActions.jsx";
-import { FilesContext } from "./app";
+import { useFilesContext } from "./app";
 
 const _ = cockpit.gettext;
 
@@ -84,7 +84,7 @@ const compare = (sortBy) => {
 
 const ContextMenuItems = ({ path, selected, setSelected, clipboard, setClipboard }) => {
     const Dialogs = useDialogs();
-    const { addAlert } = useContext(FilesContext);
+    const { addAlert } = useFilesContext();
     const menuItems = fileActions(path, selected, setSelected,
                                   clipboard, setClipboard, addAlert, Dialogs);
 

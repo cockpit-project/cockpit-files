@@ -19,7 +19,7 @@
 
 import cockpit from "cockpit";
 import { superuser } from "superuser";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import {
     Page, PageSection,
     Sidebar, SidebarPanel, SidebarContent,
@@ -48,11 +48,17 @@ export interface FolderFileInfo extends FileInfo {
     to: string | null,
 }
 
+interface FilesContextType {
+    addAlert: (title: string, variant: AlertVariant, key: string) => void,
+    cwdInfo: FileInfo | null,
+}
+
 export const FilesContext = React.createContext({
-    // eslint-disable-next-line no-unused-vars
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    addAlert: (title: string, variant: AlertVariant, key: string) => console.warn("FilesContext not initialized")
-});
+    addAlert: () => console.warn("FilesContext not initialized"),
+    cwdInfo: null,
+} as FilesContextType);
+
+export const useFilesContext = () => useContext(FilesContext);
 
 export const Application = () => {
     const { options } = usePageLocation();
@@ -64,6 +70,7 @@ export const Application = () => {
     const [showHidden, setShowHidden] = useState(localStorage.getItem("files:showHiddenFiles") === "true");
     const [clipboard, setClipboard] = useState<string[]>([]);
     const [alerts, setAlerts] = useState<Alert[]>([]);
+    const [cwdInfo, setCwdInfo] = useState<FileInfo | null>(null);
 
     const currentPath = decodeURIComponent(options.path?.toString() || "");
     // the function itself is not expensive, but `path` is later used in expensive computation
@@ -91,6 +98,7 @@ export const Application = () => {
             return info.effect(state => {
                 setLoading(false);
                 setLoadingFiles(!(state.info || state.error));
+                setCwdInfo(state.info);
                 setErrorMessage(state.error?.message ?? "");
                 const entries = Object.entries(state?.info?.entries || {});
                 const files = entries.map(([name, attrs]) => ({
@@ -114,7 +122,7 @@ export const Application = () => {
 
     return (
         <Page>
-            <FilesContext.Provider value={{ addAlert }}>
+            <FilesContext.Provider value={{ addAlert, cwdInfo }}>
                 <WithDialogs>
                     <AlertGroup isToast isLiveRegion>
                         {alerts.map(alert => (
