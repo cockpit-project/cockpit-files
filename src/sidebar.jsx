@@ -19,7 +19,7 @@
 
 import cockpit from "cockpit";
 
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 
 import {
     Button,
@@ -50,7 +50,7 @@ import { useDialogs } from "dialogs.jsx";
 
 import { editPermissions, fileActions } from "./fileActions.jsx";
 import { get_permissions } from "./common";
-import { FilesContext } from "./app";
+import { useFilesContext } from "./app";
 
 const _ = cockpit.gettext;
 
@@ -188,7 +188,7 @@ const DropdownWithKebab = ({
 }) => {
     const Dialogs = useDialogs();
     const [isOpen, setIsOpen] = useState(false);
-    const { addAlert } = useContext(FilesContext);
+    const { addAlert } = useFilesContext();
 
     const onToggleClick = () => setIsOpen(!isOpen);
     const onSelect = (_event, itemId) => setIsOpen(false);
