@@ -151,7 +151,6 @@ export const SidebarPanelDetails = ({
                 </CardTitle>
                 <DropdownWithKebab
                   selected={selected} path={path}
-                  files={files}
                   clipboard={clipboard} setClipboard={setClipboard}
                   setSelected={setSelected}
                 />
@@ -183,7 +182,6 @@ export const SidebarPanelDetails = ({
 const DropdownWithKebab = ({
     selected,
     path,
-    files,
     clipboard,
     setClipboard,
     setSelected,
@@ -194,7 +192,7 @@ const DropdownWithKebab = ({
 
     const onToggleClick = () => setIsOpen(!isOpen);
     const onSelect = (_event, itemId) => setIsOpen(false);
-    const menuItems = fileActions(path, files, selected, setSelected,
+    const menuItems = fileActions(path, selected, setSelected,
                                   clipboard, setClipboard, addAlert, Dialogs);
 
     return (

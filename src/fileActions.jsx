@@ -474,7 +474,7 @@ const downloadFile = (currentPath, selected) => {
     window.open(`${prefix}?${query}`);
 };
 
-export const fileActions = (path, files, selected, setSelected, clipboard, setClipboard, addAlert, Dialogs) => {
+export const fileActions = (path, selected, setSelected, clipboard, setClipboard, addAlert, Dialogs) => {
     const currentPath = path.join("/") + "/";
     const menuItems = [];
 
