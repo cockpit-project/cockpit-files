@@ -18,7 +18,7 @@
  */
 
 import cockpit from "cockpit";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
     Button,
     Form, FormGroup,
@@ -268,45 +268,13 @@ const EditPermissionsModal = ({ selected, path }) => {
     const [errorMessage, setErrorMessage] = useState(undefined);
     const accounts = useFile("/etc/passwd", { syntax: etcPasswdSyntax });
     const groups = useFile("/etc/group", { syntax: etcGroupSyntax });
-    const logindef = useFile("/etc/login.defs");
-
-    //  Handle also the case where logindef == null, i.e. the file does not exist.
-    //  While that's unusual, "empty /etc" is a goal, and it shouldn't crash the page.
-    const [minGid, setMinGid] = useState(500);
-    const [maxGid, setMaxGid] = useState(60000);
-    const [minUid, setMinUid] = useState(500);
-    const [maxUid, setMaxUid] = useState(60000);
-    useEffect(() => {
-        if (!logindef)
-            return;
-
-        const minGid = parseInt(logindef.match(/^GID_MIN\s+(\d+)/m)[1]);
-        const maxGid = parseInt(logindef.match(/^GID_MAX\s+(\d+)/m)[1]);
-        const minUid = parseInt(logindef.match(/^UID_MIN\s+(\d+)/m)[1]);
-        const maxUid = parseInt(logindef.match(/^UID_MAX\s+(\d+)/m)[1]);
-
-        if (minGid)
-            setMinGid(minGid);
-        if (maxGid)
-            setMaxGid(maxGid);
-        if (minUid)
-            setMinUid(minUid);
-        if (maxUid)
-            setMaxUid(maxUid);
-    }, [logindef]);
-
-    let filteredAccounts, filteredGroups;
-    if (accounts && groups) {
-        filteredAccounts = accounts.filter(a => a.uid >= minUid && a.uid <= maxUid);
-        filteredGroups = groups.filter(g => g.gid >= minGid && g.gid <= maxGid);
-    }
 
     const changeOwner = (owner) => {
         setOwner(owner);
-        const currentOwner = filteredAccounts.find(a => a.name === owner);
-        const currentGroup = filteredGroups.find(g => g.name === group);
+        const currentOwner = accounts.find(a => a.name === owner);
+        const currentGroup = groups.find(g => g.name === group);
         if (currentGroup?.gid !== currentOwner?.gid && !currentGroup?.userlist.includes(currentOwner?.name)) {
-            setGroup(filteredGroups.find(g => g.gid === currentOwner.gid).name);
+            setGroup(groups.find(g => g.gid === currentOwner.gid).name);
         }
     };
 
@@ -378,7 +346,7 @@ const EditPermissionsModal = ({ selected, path }) => {
                               onChange={(_, val) => changeOwner(val)} id="edit-permissions-owner"
                               value={owner}
                             >
-                                {filteredAccounts?.map(a => {
+                                {accounts?.map(a => {
                                     return (
                                         <FormSelectOption
                                           key={a.name} label={a.name}
@@ -393,7 +361,7 @@ const EditPermissionsModal = ({ selected, path }) => {
                               onChange={(_, val) => setGroup(val)} id="edit-permissions-group"
                               value={group}
                             >
-                                {filteredGroups?.map(g => {
+                                {groups?.map(g => {
                                     return (
                                         <FormSelectOption
                                           key={g.name} label={g.name}

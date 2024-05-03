@@ -666,10 +666,21 @@ class TestFiles(testlib.MachineCase):
 
         self.assertEqual(m.execute(f"ls -ld {test_dir}")[:10], "drwxr-xr-x")
 
+        b.go("/files#/?path=/")
+        b.wait_not_present(".pf-v5-c-empty-state")
+
+        # Shows root user owns "bin"
+        b.click("[data-item='bin']")
+        b.click("#dropdown-menu")
+        b.click("#edit-permissions")
+        b.wait_in_text(".pf-v5-c-modal-box__title-text", "bin")
+        b.wait_in_text("#edit-permissions-owner", "root")
+        b.wait_in_text("#edit-permissions-group", "root")
+
         # As normal user you cannot change user/group permissions
         b.drop_superuser()
 
-        b.click(".breadcrumb-button:nth-of-type(3)")
+        b.go("/files#/?path=/home/admin")
         b.wait_not_present(".pf-v5-c-empty-state")
 
         m.execute("touch /home/admin/adminfile; chown admin: /home/admin/adminfile")
