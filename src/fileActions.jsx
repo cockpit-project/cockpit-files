@@ -310,6 +310,10 @@ const EditPermissionsModal = ({ selected, path }) => {
         ];
     }
 
+    function sortByName(a, b) {
+        return a.name.localeCompare(b.name);
+    }
+
     return (
         <Modal
           position="top"
@@ -346,7 +350,7 @@ const EditPermissionsModal = ({ selected, path }) => {
                               onChange={(_, val) => changeOwner(val)} id="edit-permissions-owner"
                               value={owner}
                             >
-                                {accounts?.map(a => {
+                                {accounts?.sort(sortByName).map(a => {
                                     return (
                                         <FormSelectOption
                                           key={a.name} label={a.name}
@@ -361,7 +365,7 @@ const EditPermissionsModal = ({ selected, path }) => {
                               onChange={(_, val) => setGroup(val)} id="edit-permissions-group"
                               value={group}
                             >
-                                {groups?.map(g => {
+                                {groups?.sort(sortByName).map(g => {
                                     return (
                                         <FormSelectOption
                                           key={g.name} label={g.name}
