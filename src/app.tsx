@@ -91,6 +91,9 @@ export const Application = () => {
                 return;
             }
 
+            // Reset selected when path changes
+            setSelected([]);
+
             const info = fsinfo(
                 `/${currentPath}`,
                 ["type", "mode", "size", "mtime", "user", "group", "target", "entries", "targets"]
