@@ -110,7 +110,7 @@ export const Application = () => {
     const addAlert = (title: string, variant: AlertVariant, key: string) => {
         setAlerts(prevAlerts => [...prevAlerts, { title, variant, key }]);
     };
-    const removeAlert = (key: string) => setAlerts(prevAlerts => [...prevAlerts.filter(alert => alert.key !== key)]);
+    const removeAlert = (key: string) => setAlerts(prevAlerts => prevAlerts.filter(alert => alert.key !== key));
 
     return (
         <Page>
