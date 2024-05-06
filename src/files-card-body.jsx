@@ -55,15 +55,11 @@ const compare = (sortBy) => {
     switch (sortBy) {
     case "az":
         return (a, b) => compareFileType(a, b) === 0
-            ? (a.name.toLowerCase() < b.name.toLowerCase()
-                ? -1
-                : 1)
+            ? a.name.localeCompare(b.name)
             : compareFileType(a, b);
     case "za":
         return (a, b) => compareFileType(a, b) === 0
-            ? (a.name.toLowerCase() > b.name.toLowerCase()
-                ? -1
-                : 1)
+            ? b.name.localeCompare(a.name)
             : compareFileType(a, b);
     case "last_modified":
         return (a, b) => compareFileType(a, b) === 0
