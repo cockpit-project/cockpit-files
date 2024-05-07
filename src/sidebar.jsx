@@ -32,21 +32,15 @@ import {
     DescriptionListGroup,
     DescriptionListTerm,
     Divider,
-    Dropdown,
     DropdownItem,
-    DropdownList,
-    MenuToggle,
     Text,
     TextContent,
     TextVariants,
 } from "@patternfly/react-core";
 
-import {
-    EllipsisVIcon,
-} from "@patternfly/react-icons";
-
 import * as timeformat from "timeformat";
 import { useDialogs } from "dialogs.jsx";
+import { KebabDropdown } from "cockpit-components-dropdown";
 
 import { editPermissions, fileActions } from "./fileActions.jsx";
 import { get_permissions } from "./common";
@@ -108,6 +102,7 @@ export const SidebarPanelDetails = ({
     setClipboard,
 }) => {
     const [info, setInfo] = useState(null);
+    const { addAlert } = useFilesContext();
 
     useEffect(() => {
         if (selected.length === 1) {
@@ -125,6 +120,22 @@ export const SidebarPanelDetails = ({
     let shown_items = cockpit.format(cockpit.ngettext("$0 item", "$0 items", files.length), files.length);
     if (!showHidden)
         shown_items += " " + cockpit.format(cockpit.ngettext("($0 hidden)", "($0 hidden)", hidden_count), hidden_count);
+
+    const menuItems = fileActions(path, selected, setSelected,
+                                  clipboard, setClipboard,
+                                  addAlert, Dialogs).map((option, i) => {
+        if (option.type === "divider")
+            return <Divider key={i} />;
+        return (
+            <DropdownItem
+              id={option.id} key={option.id}
+              className={option.className} onClick={option.onClick}
+              isDisabled={option.isDisabled}
+            >
+                {option.title}
+            </DropdownItem>
+        );
+    });
 
     return (
         <Card className="sidebar-card">
@@ -149,11 +160,7 @@ export const SidebarPanelDetails = ({
                             </Text>}
                     </TextContent>
                 </CardTitle>
-                <DropdownWithKebab
-                  selected={selected} path={path}
-                  clipboard={clipboard} setClipboard={setClipboard}
-                  setSelected={setSelected}
-                />
+                <KebabDropdown toggleButtonId="dropdown-menu" dropdownItems={menuItems} />
             </CardHeader>
             {selected.length === 1 &&
             <CardBody>
@@ -176,55 +183,5 @@ export const SidebarPanelDetails = ({
                 </Button>
             </CardBody>}
         </Card>
-    );
-};
-
-const DropdownWithKebab = ({
-    selected,
-    path,
-    clipboard,
-    setClipboard,
-    setSelected,
-}) => {
-    const Dialogs = useDialogs();
-    const [isOpen, setIsOpen] = useState(false);
-    const { addAlert } = useFilesContext();
-
-    const onToggleClick = () => setIsOpen(!isOpen);
-    const onSelect = (_event, itemId) => setIsOpen(false);
-    const menuItems = fileActions(path, selected, setSelected,
-                                  clipboard, setClipboard, addAlert, Dialogs);
-
-    return (
-        <Dropdown
-          isOpen={isOpen}
-          onSelect={onSelect}
-          onOpenChange={setIsOpen}
-          popperProps={{ position: "right" }}
-          toggle={toggleRef =>
-              <MenuToggle
-                ref={toggleRef} variant="plain"
-                onClick={onToggleClick} isExpanded={isOpen}
-                id="dropdown-menu"
-              >
-                  <EllipsisVIcon />
-              </MenuToggle>}
-        >
-            <DropdownList>
-                {menuItems.map((option, i) => {
-                    if (option.type === "divider")
-                        return <Divider key={i} />;
-                    return (
-                        <DropdownItem
-                          id={option.id} key={option.id}
-                          className={option.className} onClick={option.onClick}
-                          isDisabled={option.isDisabled}
-                        >
-                            {option.title}
-                        </DropdownItem>
-                    );
-                })}
-            </DropdownList>
-        </Dropdown>
     );
 };
