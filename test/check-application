@@ -201,6 +201,16 @@ class TestFiles(testlib.MachineCase):
         # navigating into a directory resets the sidebar
         b.wait_in_text("#sidebar-card-header", "admin")
 
+        # double-clicking on a symlink to a directory also takes us into it
+        m.execute("ln -s /tmp /home/admin/tmplink")
+        b.click("[data-item='tmplink']")
+        b.wait_in_text("#sidebar-card-header", "symbolic link to /tmp")
+        b.mouse(".directory-item[data-item='tmplink']", "dblclick")
+        b.wait_not_present("[data-item='tmplink']")
+        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "tmplink")
+        b.go("/files#/?path=/home/admin")
+        b.wait_not_present(".pf-v5-c-empty-state")
+
         # create folders and test navigation history buttons
         m.execute("mkdir /home/admin/newdir")
         m.execute("mkdir /home/admin/newdir/newdir2")
