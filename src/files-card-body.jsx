@@ -40,8 +40,11 @@ import { useFilesContext } from "./app";
 
 const _ = cockpit.gettext;
 
-const compare = (sortBy) => {
+const compare = (files, sortBy) => {
     const compareFileType = (a, b) => {
+        a = files[a];
+        b = files[b];
+        // TODO: info.target(name)?.type
         const aIsDir = (a.type === "dir" || a?.to === "dir");
         const bIsDir = (b.type === "dir" || b?.to === "dir");
 
@@ -55,21 +58,21 @@ const compare = (sortBy) => {
     switch (sortBy) {
     case "az":
         return (a, b) => compareFileType(a, b) === 0
-            ? a.name.localeCompare(b.name)
+            ? a.localeCompare(b)
             : compareFileType(a, b);
     case "za":
         return (a, b) => compareFileType(a, b) === 0
-            ? b.name.localeCompare(a.name)
+            ? b.localeCompare(a)
             : compareFileType(a, b);
     case "last_modified":
         return (a, b) => compareFileType(a, b) === 0
-            ? (a.mtime > b.mtime
+            ? (files[a].mtime > files[b].mtime
                 ? -1
                 : 1)
             : compareFileType(a, b);
     case "first_modified":
         return (a, b) => compareFileType(a, b) === 0
-            ? (a.mtime < b.mtime
+            ? (files[a].mtime < files[b].mtime
                 ? -1
                 : 1)
             : compareFileType(a, b);
@@ -78,10 +81,10 @@ const compare = (sortBy) => {
     }
 };
 
-const ContextMenuItems = ({ path, selected, setSelected, clipboard, setClipboard }) => {
+const ContextMenuItems = ({ files, path, selected, setSelected, clipboard, setClipboard }) => {
     const Dialogs = useDialogs();
     const { addAlert } = useFilesContext();
-    const menuItems = fileActions(path, selected, setSelected,
+    const menuItems = fileActions(files, path, selected, setSelected,
                                   clipboard, setClipboard, addAlert, Dialogs);
 
     return (
@@ -118,10 +121,10 @@ export const FilesCardBody = ({
     const Dialogs = useDialogs();
 
     const sortedFiles = useMemo(() => {
-        return files
-                .filter(file => showHidden ? true : !file.name.startsWith("."))
-                .filter(file => file.name.toLowerCase().includes(currentFilter.toLowerCase()))
-                .sort(compare(sortBy));
+        return Object.keys(files)
+                .filter(filename => showHidden ? true : !filename.startsWith("."))
+                .filter(filename => filename?.toLowerCase().includes(currentFilter.toLowerCase()))
+                .sort(compare(files, sortBy));
     }, [files, showHidden, currentFilter, sortBy]);
     const isMounted = useRef(null);
     const folderViewRef = React.useRef();
@@ -137,12 +140,13 @@ export const FilesCardBody = ({
         }
     }
 
-    const onDoubleClickNavigate = useCallback((file) => {
-        const newPath = [...path, file.name].join("/");
-        if (file.type === "dir" || file.to === "dir") {
+    const onDoubleClickNavigate = useCallback((filename) => {
+        const newPath = [...path, filename].join("/");
+        const file = files[filename];
+        if (files && (file.type === "dir" || file.to === "dir")) {
             cockpit.location.go("/", { path: encodeURIComponent(newPath) });
         }
-    }, [path]);
+    }, [files, path]);
 
     useEffect(() => {
         calculateBoxPerRow();
@@ -165,7 +169,7 @@ export const FilesCardBody = ({
 
         const handleDoubleClick = (ev) => {
             const name = getFilenameForEvent(ev);
-            const file = sortedFiles?.find(file => file.name === name);
+            const file = sortedFiles?.find(filename => filename === name);
             if (!file)
                 return null;
             if (!file) {
@@ -178,7 +182,7 @@ export const FilesCardBody = ({
 
         const handleClick = (ev) => {
             const name = getFilenameForEvent(ev);
-            const file = sortedFiles?.find(file => file.name === name);
+            const file = sortedFiles?.find(filename => filename === name);
             if (!file) {
                 resetSelected(ev);
                 return;
@@ -191,10 +195,10 @@ export const FilesCardBody = ({
                     setSelected([file]);
                 } else {
                     setSelected(s => {
-                        if (!s.find(f => f.name === file.name)) {
+                        if (!s.find(f => f === name)) {
                             return [...s, file];
                         } else {
-                            return s.filter(f => f.name !== file.name);
+                            return s.filter(f => f !== name);
                         }
                     });
                 }
@@ -210,7 +214,7 @@ export const FilesCardBody = ({
             if (sel === null) {
                 setSelected([]);
             } else {
-                sel = sortedFiles?.find(file => file.name === sel);
+                sel = sortedFiles?.find(filename => filename === sel);
                 setSelected([sel]);
             }
         };
@@ -218,8 +222,8 @@ export const FilesCardBody = ({
         const onKeyboardNav = (e) => {
             if (e.key === "ArrowRight") {
                 setSelected(_selected => {
-                    const firstSelectedName = _selected?.[0]?.name;
-                    const selectedIdx = sortedFiles?.findIndex(file => file.name === firstSelectedName);
+                    const firstSelectedName = _selected?.[0];
+                    const selectedIdx = sortedFiles?.findIndex(filename => filename === firstSelectedName);
                     const newIdx = selectedIdx < sortedFiles.length - 1
                         ? selectedIdx + 1
                         : 0;
@@ -228,8 +232,8 @@ export const FilesCardBody = ({
                 });
             } else if (e.key === "ArrowLeft") {
                 setSelected(_selected => {
-                    const firstSelectedName = _selected?.[0]?.name;
-                    const selectedIdx = sortedFiles?.findIndex(file => file.name === firstSelectedName);
+                    const firstSelectedName = _selected?.[0];
+                    const selectedIdx = sortedFiles?.findIndex(filename => filename === firstSelectedName);
                     const newIdx = selectedIdx > 0
                         ? selectedIdx - 1
                         : sortedFiles.length - 1;
@@ -238,16 +242,16 @@ export const FilesCardBody = ({
                 });
             } else if (e.key === "ArrowUp") {
                 setSelected(_selected => {
-                    const firstSelectedName = _selected?.[0]?.name;
-                    const selectedIdx = sortedFiles?.findIndex(file => file.name === firstSelectedName);
+                    const firstSelectedName = _selected?.[0];
+                    const selectedIdx = sortedFiles?.findIndex(filename => filename === firstSelectedName);
                     const newIdx = Math.max(selectedIdx - boxPerRow, 0);
 
                     return [sortedFiles[newIdx]];
                 });
             } else if (e.key === "ArrowDown") {
                 setSelected(_selected => {
-                    const firstSelectedName = _selected?.[0]?.name;
-                    const selectedIdx = sortedFiles?.findIndex(file => file.name === firstSelectedName);
+                    const firstSelectedName = _selected?.[0];
+                    const selectedIdx = sortedFiles?.findIndex(filename => filename === firstSelectedName);
                     const newIdx = Math.min(selectedIdx + boxPerRow, sortedFiles.length - 1);
 
                     return [sortedFiles[newIdx]];
@@ -258,7 +262,9 @@ export const FilesCardBody = ({
                 const currentPath = path.join("/") + "/";
                 Dialogs.show(
                     <ConfirmDeletionDialog
-                      selected={selected} path={currentPath}
+                      path={currentPath}
+                      files={files}
+                      selected={selected}
                       setSelected={setSelected}
                     />
                 );
@@ -295,6 +301,7 @@ export const FilesCardBody = ({
         onDoubleClickNavigate,
         Dialogs,
         path,
+        files,
     ]);
 
     // Generic event handler to look up the corresponding `data-item` for a click event when
@@ -333,6 +340,7 @@ export const FilesCardBody = ({
     const contextMenu = (
         <ContextMenu parentId={files_parent_id}>
             <ContextMenuItems
+              files={files}
               path={path}
               selected={selected}
               setSelected={setSelected}
@@ -352,11 +360,12 @@ export const FilesCardBody = ({
                 {isGrid &&
                     <CardBody id="files-card-body">
                         <Gallery id="folder-view">
-                            {sortedFiles.map(file =>
+                            {sortedFiles.map(filename =>
                                 <Item
-                                  file={file}
-                                  key={file.name}
-                                  isSelected={!!selected.find(s => s.name === file.name)}
+                                  filename={filename}
+                                  file={files[filename]}
+                                  key={filename}
+                                  isSelected={!!selected.find(s => s === filename)}
                                   isGrid={isGrid}
                                 />)}
                         </Gallery>
@@ -367,14 +376,15 @@ export const FilesCardBody = ({
                       className="pf-m-no-border-rows"
                       variant="compact"
                       columns={[_("Name")]}
-                      rows={sortedFiles.map(file => ({
+                      rows={sortedFiles.map(filename => ({
                           columns: [
                               {
                                   title: (
                                       <Item
-                                        file={file}
-                                        key={file.name}
-                                        isSelected={!!selected.find(s => s.name === file.name)}
+                                        filename={filename}
+                                        file={files[filename]}
+                                        key={filename}
+                                        isSelected={!!selected.find(s => s === filename)}
                                         isGrid={isGrid}
                                       />)
                               }
@@ -387,11 +397,14 @@ export const FilesCardBody = ({
 };
 
 // Memoize the Item component as rendering thousands of them on each render of parent component is costly.
-const Item = React.memo(function Item({ file, isSelected, isGrid }) {
+const Item = React.memo(function Item({ file, filename, isSelected, isGrid }) {
+    const { cwdInfo } = useFilesContext();
+    console.log(cwdInfo);
     function getFileType(file) {
         if (file.type === "dir") {
             return "directory-item";
-        } else if (file.type === "lnk" && file?.to === "dir") {
+        // TODO: info.target(name)?.type
+        } else if (file.type === "lnk" && cwdInfo?.targets[filename]?.type === "dir") {
             return "directory-item";
         } else {
             return "file-item";
@@ -401,17 +414,17 @@ const Item = React.memo(function Item({ file, isSelected, isGrid }) {
     return (
         <Card
           className={"item-button " + getFileType(file)}
-          data-item={file.name}
-          id={"card-item-" + file.name + file.type}
+          data-item={filename}
+          id={"card-item-" + filename + file.type}
           isClickable isCompact
           isPlain
           isSelected={isSelected}
         >
             <CardHeader
               selectableActions={{
-                  name: file.name,
-                  selectableActionAriaLabelledby: "card-item-" + file.name + file.type,
-                  selectableActionId: "card-item-" + file.name + file.type + "-selectable-action",
+                  name: filename,
+                  selectableActionAriaLabelledby: "card-item-" + filename + file.type,
+                  selectableActionId: "card-item-" + filename + file.type + "-selectable-action",
               }}
             >
                 <Icon
@@ -419,12 +432,12 @@ const Item = React.memo(function Item({ file, isSelected, isGrid }) {
                       ? "xl"
                       : "lg"} isInline
                 >
-                    {file.type === "dir" || file.to === "dir"
+                    {getFileType(file) === "directory-item"
                         ? <FolderIcon />
                         : <FileIcon />}
                 </Icon>
                 <CardTitle>
-                    {file.name}
+                    {filename}
                 </CardTitle>
             </CardHeader>
         </Card>

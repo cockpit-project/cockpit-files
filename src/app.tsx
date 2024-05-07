@@ -43,9 +43,8 @@ interface Alert {
     variant: AlertVariant,
 }
 
-export interface FolderFileInfo extends FileInfo {
-    name: string,
-    to: string | null,
+export interface FolderInfoMap {
+    [key: string]: FileInfo | null
 }
 
 interface FilesContextType {
@@ -65,8 +64,8 @@ export const Application = () => {
     const [loading, setLoading] = useState(true);
     const [loadingFiles, setLoadingFiles] = useState(true);
     const [errorMessage, setErrorMessage] = useState("");
-    const [files, setFiles] = useState<FolderFileInfo[]>([]);
-    const [selected, setSelected] = useState<FolderFileInfo[]>([]);
+    const [files, setFiles] = useState<FolderInfoMap>({});
+    const [selected, setSelected] = useState<string[]>([]);
     const [showHidden, setShowHidden] = useState(localStorage.getItem("files:showHiddenFiles") === "true");
     const [clipboard, setClipboard] = useState<string[]>([]);
     const [alerts, setAlerts] = useState<Alert[]>([]);
@@ -103,13 +102,8 @@ export const Application = () => {
                 setLoadingFiles(!(state.info || state.error));
                 setCwdInfo(state.info);
                 setErrorMessage(state.error?.message ?? "");
-                const entries = Object.entries(state?.info?.entries || {});
-                const files = entries.map(([name, attrs]) => ({
-                    ...attrs,
-                    name,
-                    to: info.target(name)?.type ?? null
-                }));
-                setFiles(files);
+                // to: info.target(name)?.type ?? null
+                setFiles(state?.info?.entries || {});
             });
         },
         [options, currentPath]
@@ -170,8 +164,7 @@ export const Application = () => {
                             <SidebarPanel className="sidebar-panel" width={{ default: "width_25" }}>
                                 <SidebarPanelDetails
                                   path={path}
-                                  selected={selected.map(s => files.find(f => f.name === s.name))
-                                          .filter(s => s !== undefined)}
+                                  selected={selected}
                                   showHidden={showHidden} setSelected={setSelected}
                                   clipboard={clipboard} setClipboard={setClipboard}
                                   files={files}

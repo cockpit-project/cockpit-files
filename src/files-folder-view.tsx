@@ -20,7 +20,7 @@
 import React, { useState } from "react";
 import { Card } from "@patternfly/react-core";
 
-import { FolderFileInfo } from "./app";
+import { FolderInfoMap } from "./app";
 import { FilesCardBody } from "./files-card-body.jsx";
 import { FilesCardHeader } from "./header.jsx";
 
@@ -35,11 +35,11 @@ export const FilesFolderView = ({
     setClipboard,
 }: {
     path: string[],
-    files: FolderFileInfo[],
+    files: FolderInfoMap,
     loadingFiles: boolean,
     showHidden: boolean,
-    selected: FolderFileInfo[],
-    setSelected: React.Dispatch<React.SetStateAction<FolderFileInfo[]>>,
+    selected: string[],
+    setSelected: React.Dispatch<React.SetStateAction<string[]>>,
     clipboard: string[],
     setClipboard: React.Dispatch<React.SetStateAction<string[]>>,
 }) => {
