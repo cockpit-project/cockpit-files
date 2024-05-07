@@ -315,6 +315,24 @@ class TestFiles(testlib.MachineCase):
         b.wait_text(".item-button:nth-of-type(2)", "BBB")
         b.wait_text(".item-button:nth-of-type(3)", "aaa")
 
+        m.execute("""
+            ln -s /tmp /home/admin/ddd
+            mkdir /home/admin/eee
+            mkdir /home/admin/Eee
+        """)
+        b.wait_visible("[data-item='ddd']")
+        b.wait_visible("[data-item='eee']")
+        b.wait_visible("[data-item='Eee']")
+
+        # Directories are sorted first
+        b.select_PF5("#sort-menu-toggle", "#sort-menu", "A-Z")
+        b.wait_text(".item-button:nth-of-type(1)", "ddd")
+        b.wait_text(".item-button:nth-of-type(2)", "eee")
+        b.wait_text(".item-button:nth-of-type(3)", "Eee")
+        b.wait_text(".item-button:nth-of-type(4)", "aaa")
+        b.wait_text(".item-button:nth-of-type(5)", "BBB")
+        b.wait_text(".item-button:nth-of-type(6)", "ccc")
+
     def testDelete(self):
         b = self.browser
         m = self.machine
