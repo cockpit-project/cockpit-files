@@ -45,16 +45,19 @@ import { useFilesContext } from "./app";
 
 const _ = cockpit.gettext;
 
-export const editPermissions = (Dialogs, selected, path) => {
+export const editPermissions = (Dialogs, files, selected, path) => {
     Dialogs.show(
         <EditPermissionsModal
-          selected={selected} path={path}
+          files={files}
+          selected={selected}
+          path={path}
         />
     );
 };
 
 export const ConfirmDeletionDialog = ({
     path,
+    files,
     selected,
     setSelected,
 }) => {
@@ -66,28 +69,28 @@ export const ConfirmDeletionDialog = ({
     if (selected.length > 1) {
         modalTitle = cockpit.format(forceDelete ? _("Force delete $0 items") : _("Delete $0 items?"), selected.length);
     } else {
-        const selectedItem = selected[0];
-        if (selectedItem.type === "reg") {
+        const fileInfo = files[selected[0]];
+        if (fileInfo?.type === "reg") {
             modalTitle = cockpit.format(
-                forceDelete ? _("Force delete file $0?") : _("Delete file $0?"), selectedItem.name
+                forceDelete ? _("Force delete file $0?") : _("Delete file $0?"), selected[0]
             );
-        } else if (selectedItem.type === "lnk") {
+        } else if (fileInfo?.type === "lnk") {
             modalTitle = cockpit.format(
-                forceDelete ? _("Force delete link $0?") : _("Delete link $0?"), selectedItem.name
+                forceDelete ? _("Force delete link $0?") : _("Delete link $0?"), selected[0]
             );
-        } else if (selectedItem.type === "dir") {
+        } else if (fileInfo?.type === "dir") {
             modalTitle = cockpit.format(
-                forceDelete ? _("Force delete directory $0?") : _("Delete directory $0?"), selectedItem.name
+                forceDelete ? _("Force delete directory $0?") : _("Delete directory $0?"), selected[0]
             );
         } else {
-            modalTitle = cockpit.format(forceDelete ? _("Force delete $0") : _("Delete $0?"), selectedItem.name);
+            modalTitle = cockpit.format(forceDelete ? _("Force delete $0") : _("Delete $0?"), selected[0]);
         }
     }
 
     const deleteItem = () => {
         const args = ["rm", "-r"];
         // TODO: Make force more sensible https://github.com/cockpit-project/cockpit-files/issues/363
-        cockpit.spawn([...args, ...selected.map(f => path + f.name)], { err: "message", superuser: "try" })
+        cockpit.spawn([...args, ...selected.map(f => path + f)], { err: "message", superuser: "try" })
                 .then(() => {
                     setSelected([]);
                     Dialogs.close();
@@ -183,27 +186,29 @@ const CreateDirectoryModal = ({ currentPath }) => {
     );
 };
 
-const RenameItemModal = ({ path, selected }) => {
+const RenameItemModal = ({ path, files, selected }) => {
     const Dialogs = useDialogs();
-    const [name, setName] = useState(selected.name);
+    const [name, setName] = useState(selected);
     const [nameError, setNameError] = useState(null);
     const [errorMessage, setErrorMessage] = useState(undefined);
 
+    const fileInfo = files[selected];
+
     let title;
-    if (selected.type === "reg") {
-        title = cockpit.format(_("Rename file $0"), selected.name);
-    } else if (selected.type === "lnk") {
-        title = cockpit.format(_("Rename link $0"), selected.name);
-    } else if (selected.type === "dir") {
-        title = cockpit.format(_("Rename directory $0"), selected.name);
+    if (fileInfo?.type === "reg") {
+        title = cockpit.format(_("Rename file $0"), selected);
+    } else if (fileInfo?.type === "lnk") {
+        title = cockpit.format(_("Rename link $0"), selected);
+    } else if (fileInfo?.type === "dir") {
+        title = cockpit.format(_("Rename directory $0"), selected);
     } else {
-        title = _("Rename $0", selected.name);
+        title = _("Rename $0", selected);
     }
 
     const renameItem = () => {
         const newPath = path.join("/") + "/" + name;
 
-        cockpit.spawn(["mv", path.join("/") + "/" + selected.name, newPath],
+        cockpit.spawn(["mv", path.join("/") + "/" + selected, newPath],
                       { superuser: "try", err: "message" })
                 .then(() => {
                     Dialogs.close();
@@ -252,19 +257,23 @@ const RenameItemModal = ({ path, selected }) => {
     );
 };
 
-const EditPermissionsModal = ({ selected, path }) => {
+const EditPermissionsModal = ({ files, selected, path }) => {
     const Dialogs = useDialogs();
     const { cwdInfo } = useFilesContext();
 
+    let fileInfo = files[selected[0]];
+    let filename = selected[0];
     // Nothing selected means we act on the current working directory
-    if (!selected) {
+    if (selected.length === 0) {
         const directory_name = path[path.length - 1];
-        selected = { ...cwdInfo, isCwd: true, name: directory_name };
+        fileInfo = { ...cwdInfo, isCwd: true };
+        filename = directory_name;
     }
+    cockpit.assert(fileInfo, `cannot obtain file information for ${filename}`);
 
-    const [owner, setOwner] = useState(selected.user);
-    const [mode, setMode] = useState(selected.mode);
-    const [group, setGroup] = useState(selected.group);
+    const [owner, setOwner] = useState(fileInfo.user);
+    const [mode, setMode] = useState(fileInfo.mode);
+    const [group, setGroup] = useState(fileInfo.group);
     const [errorMessage, setErrorMessage] = useState(undefined);
     const accounts = useFile("/etc/passwd", { syntax: etcPasswdSyntax });
     const groups = useFile("/etc/group", { syntax: etcGroupSyntax });
@@ -279,11 +288,11 @@ const EditPermissionsModal = ({ selected, path }) => {
     };
 
     const spawnEditPermissions = async () => {
-        const permissionChanged = mode !== selected.mode;
-        const ownerChanged = owner !== selected.user || group !== selected.group;
+        const permissionChanged = mode !== fileInfo.mode;
+        const ownerChanged = owner !== fileInfo.user || group !== fileInfo.group;
 
         try {
-            const directory = selected?.isCwd ? path.join("/") : path.join("/") + "/" + selected.name;
+            const directory = fileInfo?.isCwd ? path.join("/") : path.join("/") + "/" + filename;
             if (permissionChanged)
                 await cockpit.spawn(["chmod", mode.toString(8), directory],
                                     { superuser: "try", err: "message" });
@@ -319,8 +328,8 @@ const EditPermissionsModal = ({ selected, path }) => {
           position="top"
           variant={ModalVariant.small}
           /* Translators: $0 represents a filename */
-          title={cockpit.format(_("“$0” permissions"), selected.name)}
-          description={inode_types[selected.type] || "Unknown type"}
+          title={cockpit.format(_("“$0” permissions"), filename)}
+          description={inode_types[fileInfo.type] || "Unknown type"}
           isOpen
           onClose={Dialogs.close}
           footer={
@@ -435,14 +444,14 @@ const setDirectoryName = (val, setName, setNameError, setErrorMessage) => {
     }
 };
 
-const downloadFile = (currentPath, selected) => {
+const downloadFile = (currentPath, filename) => {
     const query = window.btoa(JSON.stringify({
         payload: "fsread1",
         binary: "raw",
-        path: `${currentPath}/${selected.name}`,
+        path: `${currentPath}/${filename}`,
         superuser: "try",
         external: {
-            "content-disposition": `attachment; filename="${selected.name}"`,
+            "content-disposition": `attachment; filename="${filename}"`,
             "content-type": "application/octet-stream",
         }
     }));
@@ -451,7 +460,7 @@ const downloadFile = (currentPath, selected) => {
     window.open(`${prefix}?${query}`);
 };
 
-export const fileActions = (path, selected, setSelected, clipboard, setClipboard, addAlert, Dialogs) => {
+export const fileActions = (files, path, selected, setSelected, clipboard, setClipboard, addAlert, Dialogs) => {
     const currentPath = path.join("/") + "/";
     const menuItems = [];
 
@@ -464,7 +473,7 @@ export const fileActions = (path, selected, setSelected, clipboard, setClipboard
         ]).catch(err => addAlert(err.message, "danger", new Date().getTime()));
     };
 
-    if (selected.length === 0 || selected[0].name === path[path.length - 1]) {
+    if (selected.length === 0 || selected[0] === path[path.length - 1]) {
         menuItems.push(
             {
                 id: "paste-item",
@@ -482,22 +491,23 @@ export const fileActions = (path, selected, setSelected, clipboard, setClipboard
             {
                 id: "edit-permissions",
                 title: _("Edit permissions"),
-                onClick: () => editPermissions(Dialogs, selected[0], path)
+                onClick: () => editPermissions(Dialogs, files, selected, path)
             }
         );
     } else if (selected.length === 1) {
+        const fileInfo = files[selected[0]];
         menuItems.push(
             {
                 id: "copy-item",
                 title: _("Copy"),
-                onClick: () => setClipboard([currentPath + selected[0].name]),
+                onClick: () => setClipboard([currentPath + selected[0]]),
             },
-            ...(selected[0].type === "dir")
+            ...(fileInfo?.type === "dir")
                 ? [
                     {
                         id: "paste-into-directory",
                         title: _("Paste into directory"),
-                        onClick: () => spawnPaste(clipboard, [currentPath + selected[0].name]),
+                        onClick: () => spawnPaste(clipboard, [currentPath + selected[0]]),
                         isDisabled: clipboard.length === 0
                     }
                 ]
@@ -506,7 +516,7 @@ export const fileActions = (path, selected, setSelected, clipboard, setClipboard
             {
                 id: "edit-permissions",
                 title: _("Edit permissions"),
-                onClick: () => editPermissions(Dialogs, selected[0], path)
+                onClick: () => editPermissions(Dialogs, files, selected, path)
             },
             {
                 id: "rename-item",
@@ -514,8 +524,9 @@ export const fileActions = (path, selected, setSelected, clipboard, setClipboard
                 onClick: () => {
                     Dialogs.show(
                         <RenameItemModal
+                          files={files}
                           path={path}
-                          selected={selected[0]}
+                          selected={selected}
                         />
                     );
                 },
@@ -528,14 +539,16 @@ export const fileActions = (path, selected, setSelected, clipboard, setClipboard
                 onClick: () => {
                     Dialogs.show(
                         <ConfirmDeletionDialog
-                          selected={selected} path={currentPath}
+                          files={files}
+                          selected={selected}
+                          path={currentPath}
                           setSelected={setSelected}
                         />
                     );
                 }
             },
         );
-        if (selected[0].type === "reg")
+        if (fileInfo?.type === "reg")
             menuItems.push(
                 { type: "divider" },
                 {
@@ -549,7 +562,7 @@ export const fileActions = (path, selected, setSelected, clipboard, setClipboard
             {
                 id: "copy-item",
                 title: _("Copy"),
-                onClick: () => setClipboard(selected.map(s => path.join("/") + "/" + s.name)),
+                onClick: () => setClipboard(selected.map(s => path.join("/") + "/" + s)),
             },
             {
                 id: "delete-item",
@@ -558,7 +571,9 @@ export const fileActions = (path, selected, setSelected, clipboard, setClipboard
                 onClick: () => {
                     Dialogs.show(
                         <ConfirmDeletionDialog
-                          selected={selected} path={currentPath}
+                          path={currentPath}
+                          files={files}
+                          selected={selected}
                           setSelected={setSelected}
                         />
                     );

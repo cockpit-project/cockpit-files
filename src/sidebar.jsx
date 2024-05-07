@@ -111,7 +111,7 @@ export const SidebarPanelDetails = ({
 
     useEffect(() => {
         if (selected.length === 1) {
-            const filePath = path.join("/") + "/" + selected[0]?.name;
+            const filePath = path.join("/") + "/" + selected[0];
 
             cockpit.spawn(["file", "--brief", filePath], { superuser: "try", error: "message" })
                     .then(res => setInfo(res?.trim()))
@@ -121,8 +121,9 @@ export const SidebarPanelDetails = ({
 
     const Dialogs = useDialogs();
     const directory_name = path[path.length - 1];
-    const hidden_count = files.filter(file => file.name.startsWith(".")).length;
-    let shown_items = cockpit.format(cockpit.ngettext("$0 item", "$0 items", files.length), files.length);
+    const filenames = Object.keys(files);
+    const hidden_count = filenames.filter(filename => filename.startsWith(".")).length;
+    let shown_items = cockpit.format(cockpit.ngettext("$0 item", "$0 items", filenames.length), filenames.length);
     if (!showHidden)
         shown_items += " " + cockpit.format(cockpit.ngettext("($0 hidden)", "($0 hidden)", hidden_count), hidden_count);
 
@@ -132,7 +133,7 @@ export const SidebarPanelDetails = ({
                 <CardTitle component="h2" id="sidebar-card-header">
                     <TextContent>
                         <Text component={TextVariants.h2}>{selected.length === 1
-                            ? selected[0].name
+                            ? selected[0]
                             : directory_name}
                         </Text>
                         {selected.length === 0 &&
@@ -150,15 +151,16 @@ export const SidebarPanelDetails = ({
                     </TextContent>
                 </CardTitle>
                 <DropdownWithKebab
+                  files={files}
                   selected={selected} path={path}
                   clipboard={clipboard} setClipboard={setClipboard}
                   setSelected={setSelected}
                 />
             </CardHeader>
-            {selected.length === 1 &&
+            {selected.length === 1 && files[selected[0]] &&
             <CardBody>
                 <DescriptionList isHorizontal id="description-list-sidebar">
-                    {getDescriptionListItems(selected[0]).map((item, index) => (
+                    {getDescriptionListItems(files[selected[0]]).map((item, index) => (
                         <DescriptionListGroup key={item.id} id={item.id}>
                             <DescriptionListTerm>{item.label}</DescriptionListTerm>
                             <DescriptionListDescription>
@@ -169,7 +171,7 @@ export const SidebarPanelDetails = ({
                 <Button
                   variant="secondary"
                   onClick={() => {
-                      editPermissions(Dialogs, selected[0], path);
+                      editPermissions(Dialogs, files, selected, path);
                   }}
                 >
                     {_("Edit permissions")}
@@ -180,6 +182,7 @@ export const SidebarPanelDetails = ({
 };
 
 const DropdownWithKebab = ({
+    files,
     selected,
     path,
     clipboard,
@@ -192,7 +195,7 @@ const DropdownWithKebab = ({
 
     const onToggleClick = () => setIsOpen(!isOpen);
     const onSelect = (_event, itemId) => setIsOpen(false);
-    const menuItems = fileActions(path, selected, setSelected,
+    const menuItems = fileActions(files, path, selected, setSelected,
                                   clipboard, setClipboard, addAlert, Dialogs);
 
     return (
