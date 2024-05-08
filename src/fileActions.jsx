@@ -33,7 +33,7 @@ import {
 import { useDialogs } from "dialogs.jsx";
 import { InlineNotification } from "cockpit-components-inline-notification";
 import { FormHelper } from 'cockpit-components-form-helper.jsx';
-import { useFile } from "hooks.js";
+import { useInit } from "hooks.js";
 import {
     etc_group_syntax as etcGroupSyntax,
     etc_passwd_syntax as etcPasswdSyntax
@@ -266,8 +266,24 @@ const EditPermissionsModal = ({ selected, path }) => {
     const [mode, setMode] = useState(selected.mode);
     const [group, setGroup] = useState(selected.group);
     const [errorMessage, setErrorMessage] = useState(undefined);
-    const accounts = useFile("/etc/passwd", { syntax: etcPasswdSyntax });
-    const groups = useFile("/etc/group", { syntax: etcGroupSyntax });
+    const [accounts, setAccounts] = useState(null);
+    const [groups, setGroups] = useState(null);
+
+    useInit(async () => {
+        try {
+            const passwd = await cockpit.spawn(["getent", "passwd"], { err: "message" });
+            setAccounts(etcPasswdSyntax.parse(passwd));
+        } catch (exc) {
+            console.error("Cannot obtain users from getent passwd", exc);
+        }
+
+        try {
+            const group = await cockpit.spawn(["getent", "group"], { err: "message" });
+            setGroups(etcGroupSyntax.parse(group));
+        } catch (exc) {
+            console.error("Cannot obtain users from getent group", exc);
+        }
+    });
 
     const changeOwner = (owner) => {
         setOwner(owner);
