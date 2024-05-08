@@ -359,7 +359,7 @@ const EditPermissionsModal = ({ selected, path }) => {
                   isInline
                 />}
                 <Form isHorizontal>
-                    {superuser.allowed &&
+                    {superuser.allowed && accounts && groups &&
                     <FormSection title={_("Ownership")}>
                         <FormGroup label={_("Owner")} fieldId="edit-permissions-owner">
                             <FormSelect
