@@ -897,6 +897,53 @@ class TestFiles(testlib.MachineCase):
         self.press_special_key("Enter")
         b.wait_text(".breadcrumb-button:nth-of-type(5)", "foo")
 
+    def testCopyPaste(self):
+        b = self.browser
+        m = self.machine
+
+        self.enter_files()
+
+        # Copy/paste file
+        m.execute("""
+            runuser -u admin mkdir /home/admin/newdir
+            runuser -u admin echo "test_text" > /home/admin/newfile
+        """)
+        b.click("[data-item='newfile']")
+        b.click("#dropdown-menu")
+        b.click("#copy-item")
+        b.mouse("[data-item='newdir']", "dblclick")
+        b.click("#dropdown-menu")
+        b.click("#paste-item")
+        b.wait_visible("[data-item='newfile']")
+        self.assertEqual(m.execute("head -n 1 /home/admin/newdir/newfile"), "test_text\n")
+        b.click(".breadcrumb-button:nth-of-type(4)")
+
+        # Copy/paste directory
+        self.browser.wait_not_present(".pf-c-empty-state")
+        m.execute("runuser -u admin mkdir /home/admin/copyDir")
+        b.click("[data-item='newfile']")
+        b.click("#dropdown-menu")
+        b.click("#copy-item")
+        b.mouse("[data-item='newdir']", "dblclick")
+        b.click("#dropdown-menu")
+        b.click("#paste-item")
+        b.wait_visible("[data-item='newfile']")
+        self.assertEqual(m.execute("head -n 1 /home/admin/newdir/newfile"), "test_text\n")
+        b.click(".breadcrumb-button:nth-of-type(4)")
+
+        # Paste into directory
+        self.browser.wait_not_present(".pf-c-empty-state")
+        m.execute("runuser -u admin touch /home/admin/newfile2")
+        b.click("[data-item='newfile2']")
+        b.click("#dropdown-menu")
+        b.click("#copy-item")
+        b.click("[data-item='newdir']")
+        b.click("#dropdown-menu")
+        b.click("#paste-into-directory")
+        b.mouse("[data-item='newdir']", "dblclick")
+        b.wait_visible("[data-item='newfile2']")
+        b.click(".breadcrumb-button:nth-of-type(3)")
+
 
 if __name__ == '__main__':
     testlib.test_main()
