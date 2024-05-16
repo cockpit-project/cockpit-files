@@ -105,12 +105,12 @@ export function FilesBreadcrumbs({ path, showHidden, setShowHidden }: { path: st
                     />}
                 {!editMode && fullPath.map((dir, i) => {
                     return (
-                        <React.Fragment key={dir || "/"}>
+                        <React.Fragment key={fullPath.slice(0, i).join("/") || "/"}>
                             <Button
                               isDisabled={i === path.length - 1}
                               icon={i === 0 ? <HddIcon /> : null}
                               variant="link" onClick={() => { navigate(i + 1) }}
-                              key={dir} className="breadcrumb-button"
+                              className="breadcrumb-button"
                             >
                                 {dir || "/"}
                             </Button>
