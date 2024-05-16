@@ -458,6 +458,15 @@ class TestFiles(testlib.MachineCase):
         self.create_directory(b, "newdir")
         b.wait_visible("[data-item='newdir']")
 
+        # Assert permissions
+        b.click("[data-item='newdir']")
+        b.wait_text("#description-list-owner dd", "admin")
+        b.wait_text("#description-list-group dd", "admin")
+
+        # Unselect
+        b.click("#folder-view")
+        b.wait_not_present("[data-item='newdir'].pf-m-selected")
+
         # validation
         b.click("#dropdown-menu")
         b.click("#create-item")
@@ -498,6 +507,28 @@ class TestFiles(testlib.MachineCase):
         b.click("div.pf-v5-c-modal-box__close button.pf-v5-c-button")
         b.click(".breadcrumb-button:nth-of-type(3)")
         m.execute("sudo chattr -i /home/admin/newdir")
+
+        # Creating folders as superuser
+        b.go("/files#/?path=/")
+        b.wait_not_present(".pf-v5-c-empty-state")
+        self.addCleanup(m.execute, "rm -rf /test")
+        self.create_directory(b, "test")
+
+        b.click("[data-item='test']")
+        b.wait_text("#description-list-owner dd", "root")
+        b.wait_text("#description-list-group dd", "root")
+
+        shared_folder = "/shared"
+        self.addCleanup(m.execute, f"rm -rf {shared_folder}")
+        m.execute(f"mkdir {shared_folder}; chown admin:users {shared_folder}")
+
+        b.mouse("[data-item='shared']", "dblclick")
+        b.wait_not_present(".pf-v5-c-empty-state")
+
+        self.create_directory(b, "test")
+        b.click("[data-item='test']")
+        b.wait_text("#description-list-owner dd", "admin")
+        b.wait_text("#description-list-group dd", "admin")
 
     def testContextMenu(self):
         b = self.browser

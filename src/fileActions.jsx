@@ -128,10 +128,33 @@ const CreateDirectoryModal = ({ currentPath }) => {
     const [name, setName] = useState("");
     const [nameError, setNameError] = useState(null);
     const [errorMessage, setErrorMessage] = useState(undefined);
-    const createDirectory = () => {
+    const { cwdInfo } = useFilesContext();
+
+    const createDirectory = async () => {
         const path = currentPath + name;
-        cockpit.spawn(["mkdir", path], { superuser: "try", err: "message" })
-                .then(Dialogs.close, err => setErrorMessage(err.message));
+        const options = { err: "message" };
+
+        if (superuser.allowed) {
+            options.superuser = "try";
+        }
+
+        try {
+            await cockpit.spawn(["mkdir", path], options);
+        } catch (err) {
+            setErrorMessage(err.message);
+            return;
+        }
+
+        if (superuser.allowed && cwdInfo.user) {
+            try {
+                await cockpit.spawn(["chown", `${cwdInfo.user}:`, path], options);
+            } catch (err) {
+                setErrorMessage(err.message);
+                return;
+            }
+        }
+
+        Dialogs.close();
     };
 
     return (
