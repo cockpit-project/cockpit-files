@@ -128,6 +128,7 @@ const CreateDirectoryModal = ({ currentPath }) => {
     const [name, setName] = useState("");
     const [nameError, setNameError] = useState(null);
     const [errorMessage, setErrorMessage] = useState(undefined);
+    const { cwdInfo } = useFilesContext();
     const createDirectory = () => {
         const path = currentPath + name;
         cockpit.spawn(["mkdir", path], { superuser: "try", err: "message" })
@@ -172,7 +173,7 @@ const CreateDirectoryModal = ({ currentPath }) => {
                         <TextInput
                           validated={nameError ? "error" : "default"}
                           value={name}
-                          onChange={(_, val) => setDirectoryName(val, setName, setNameError, setErrorMessage)}
+                          onChange={(_, val) => setInputName(val, setName, setNameError, setErrorMessage, cwdInfo)}
                           id="create-directory-input" autoFocus // eslint-disable-line jsx-a11y/no-autofocus
                         />
                         <FormHelper fieldId="create-directory-input" helperTextInvalid={nameError} />
@@ -185,6 +186,7 @@ const CreateDirectoryModal = ({ currentPath }) => {
 
 const RenameItemModal = ({ path, selected }) => {
     const Dialogs = useDialogs();
+    const { cwdInfo } = useFilesContext();
     const [name, setName] = useState(selected.name);
     const [nameError, setNameError] = useState(null);
     const [errorMessage, setErrorMessage] = useState(undefined);
@@ -241,7 +243,7 @@ const RenameItemModal = ({ path, selected }) => {
                     <FormGroup fieldId="rename-item-input" label={_("New name")}>
                         <TextInput
                           value={name}
-                          onChange={(_, val) => setDirectoryName(val, setName, setNameError, setErrorMessage)}
+                          onChange={(_, val) => setInputName(val, setName, setNameError, setErrorMessage, cwdInfo)}
                           id="rename-item-input"
                         />
                         <FormHelper fieldId="rename-item-input" helperTextInvalid={nameError} />
@@ -436,7 +438,7 @@ const EditPermissionsModal = ({ selected, path }) => {
     );
 };
 
-const setDirectoryName = (val, setName, setNameError, setErrorMessage) => {
+const setInputName = (val, setName, setNameError, setErrorMessage, cwdInfo) => {
     setErrorMessage(undefined);
     setName(val);
 
@@ -446,6 +448,8 @@ const setDirectoryName = (val, setName, setNameError, setErrorMessage) => {
         setNameError(_("Name too long."));
     } else if (val.includes("/")) {
         setNameError(_("Name cannot include a /."));
+    } else if (cwdInfo?.entries[val]) {
+        setNameError(_("File or directory already exists"));
     } else {
         setNameError(null);
     }
