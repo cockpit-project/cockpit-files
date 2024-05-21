@@ -34,6 +34,12 @@ class TestFiles(testlib.MachineCase):
     def stat(self, fmt: str, path: str) -> str:
         return self.machine.execute(['stat', f'--format={fmt}', path]).strip()
 
+    def assert_stat(self, fmt: str, path: str, expected: str) -> None:
+        self.assertEqual(self.stat(fmt, path), expected)
+
+    def assert_owner(self, path: str, owner: str) -> None:
+        self.assert_stat('%U:%G', path, owner)
+
     # TODO: move to testlib.py
     def press_special_key(self, name):
         args = {"type": "keyDown", "key": name}
@@ -501,7 +507,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_not_present("[data-item='delete1']")
         b.wait_not_present("[data-item='delete2']")
 
-    def testCreate(self):
+    def testCreateDirectory(self):
         b = self.browser
         m = self.machine
 
@@ -510,6 +516,7 @@ class TestFiles(testlib.MachineCase):
         # Create folder
         self.create_directory(b, "newdir")
         b.wait_visible("[data-item='newdir']")
+        self.assert_owner('/home/admin/newdir', 'admin:admin')
 
         # validation
         b.click("#dropdown-menu")
@@ -517,26 +524,24 @@ class TestFiles(testlib.MachineCase):
         b.set_input_text("#create-directory-input", "test")
         b.set_input_text("#create-directory-input", "")
         b.wait_visible("button.pf-m-primary:disabled")
-        b.wait_in_text("#create-directory-input-helper", "Name cannot be empty.")
+        b.wait_in_text("#create-directory-input-helper", "Directory name cannot be empty.")
 
         b.set_input_text("#create-directory-input", "a" * 256)
         b.wait_visible("button.pf-m-primary:disabled")
-        b.wait_in_text("#create-directory-input-helper", "Name too long.")
+        b.wait_in_text("#create-directory-input-helper", "Directory name too long.")
 
         b.set_input_text("#create-directory-input", "foo/bar")
         b.wait_visible("button.pf-m-primary:disabled")
-        b.wait_in_text("#create-directory-input-helper", "Name cannot include a /.")
+        b.wait_in_text("#create-directory-input-helper", "Directory name cannot include a /.")
 
         b.set_input_text("#create-directory-input", "test")
         b.wait_visible("button.pf-m-primary:not(:disabled)")
         b.click(".pf-v5-c-modal-box__footer button.pf-m-link")  # cancel
 
         # Creating folder with duplicate name should return an error
-        b.click("#dropdown-menu")
-        b.click("#create-item")
-        b.set_input_text("#create-directory-input", "newdir")
-        b.wait_in_text("#create-directory-input-helper", "File or directory already exists")
-        b.click(".pf-v5-c-modal-box__footer button.pf-m-link")  # cancel
+        self.create_directory(b, "newdir")
+        self.wait_modal_inline_alert(b, "mkdir: cannot create directory ‘/home/admin/newdir’: File exists")
+        b.click("div.pf-v5-c-modal-box__close button.pf-v5-c-button")
 
         # Creating folder with empty name should return an error
         self.create_directory(b, "")
@@ -553,6 +558,27 @@ class TestFiles(testlib.MachineCase):
         b.click("div.pf-v5-c-modal-box__close button.pf-v5-c-button")
         b.click(".breadcrumb-button:nth-of-type(3)")
         m.execute("sudo chattr -i /home/admin/newdir")
+
+        b.go("/files#/?path=/root")
+        b.wait_not_present(".pf-v5-c-empty-state")
+        self.addCleanup(m.execute, ['rm', '-rf', '/root/newdir'])
+        self.create_directory(b, "newdir")
+        b.wait_visible("[data-item='newdir']")
+        self.assert_owner('/root/newdir', 'root:root')
+
+        m.execute('useradd -m testuser')
+        b.go('/files#/?path=/home/testuser')
+        b.wait_not_present('.pf-v5-c-empty-state')
+        self.create_directory(b, 'newdir')
+        b.wait_visible("[data-item='newdir']")
+        self.assert_owner('/home/testuser', 'testuser:testuser')
+
+        b.go('/files#/?path=/tmp')
+        b.wait_not_present('.pf-v5-c-empty-state')
+        self.addCleanup(m.execute, ['rm', '-rf', '/tmp/newdir'])
+        self.create_directory(b, 'newdir')
+        b.wait_visible("[data-item='newdir']")
+        self.assert_owner('/tmp/newdir', 'root:root')
 
     def testContextMenu(self):
         b = self.browser

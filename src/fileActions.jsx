@@ -42,6 +42,7 @@ import { superuser } from "superuser";
 
 import { map_permissions, inode_types, basename } from "./common";
 import { useFilesContext } from "./app";
+import { CreateDirectoryModal } from "./dialogs/mkdir";
 
 const _ = cockpit.gettext;
 
@@ -119,67 +120,6 @@ export const ConfirmDeletionDialog = ({
               text={errorMessage}
               isInline
             />}
-        </Modal>
-    );
-};
-
-const CreateDirectoryModal = ({ currentPath }) => {
-    const Dialogs = useDialogs();
-    const [name, setName] = useState("");
-    const [nameError, setNameError] = useState(null);
-    const [errorMessage, setErrorMessage] = useState(undefined);
-    const { cwdInfo } = useFilesContext();
-    const createDirectory = () => {
-        const path = currentPath + name;
-        cockpit.spawn(["mkdir", path], { superuser: "try", err: "message" })
-                .then(Dialogs.close, err => setErrorMessage(err.message));
-    };
-
-    return (
-        <Modal
-          position="top"
-          title={_("Create directory")}
-          isOpen
-          onClose={Dialogs.close}
-          variant={ModalVariant.small}
-          footer={
-              <>
-                  <Button
-                    variant="primary"
-                    onClick={createDirectory}
-                    isDisabled={errorMessage !== undefined || nameError !== null}
-                  >
-                      {_("Create")}
-                  </Button>
-                  <Button variant="link" onClick={Dialogs.close}>{_("Cancel")}</Button>
-              </>
-          }
-        >
-            <Stack>
-                {errorMessage !== undefined &&
-                <InlineNotification
-                  type="danger"
-                  text={errorMessage}
-                  isInline
-                />}
-                <Form
-                  isHorizontal onSubmit={e => {
-                      createDirectory();
-                      e.preventDefault();
-                      return false;
-                  }}
-                >
-                    <FormGroup fieldId="create-directory-input" label={_("Directory name")}>
-                        <TextInput
-                          validated={nameError ? "error" : "default"}
-                          value={name}
-                          onChange={(_, val) => setInputName(val, setName, setNameError, setErrorMessage, cwdInfo)}
-                          id="create-directory-input" autoFocus // eslint-disable-line jsx-a11y/no-autofocus
-                        />
-                        <FormHelper fieldId="create-directory-input" helperTextInvalid={nameError} />
-                    </FormGroup>
-                </Form>
-            </Stack>
         </Modal>
     );
 };
