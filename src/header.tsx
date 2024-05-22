@@ -69,6 +69,7 @@ export const FilesCardHeader = ({
                 <SearchInput
                   placeholder={_("Filter directory")} value={currentFilter}
                   onChange={onFilterChange}
+                  onClear={event => onFilterChange(event as React.FormEvent<HTMLInputElement>, "")}
                 />
                 <ViewSelector
                   isGrid={isGrid} setIsGrid={setIsGrid}
