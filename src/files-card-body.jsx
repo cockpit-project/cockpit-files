@@ -348,7 +348,10 @@ export const FilesCardBody = ({
             <div
               ref={folderViewRef}
             >
-                {sortedFiles.length === 0 && <EmptyStatePanel paragraph={_("Directory is empty")} />}
+                {sortedFiles.length === 0 &&
+                <EmptyStatePanel
+                  paragraph={currentFilter ? _("No matching results") : _("Directory is empty")}
+                />}
                 {isGrid &&
                     <CardBody id="files-card-body">
                         <Gallery id="folder-view">
