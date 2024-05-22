@@ -138,6 +138,12 @@ class TestFiles(testlib.MachineCase):
         b.set_input_text("input[placeholder='Filter directory']", "newfile")
         self.browser.wait_js_cond("ph_count('#folder-view > .pf-v5-c-card') == 1")
 
+        # no results when filtering
+        b.set_input_text("input[placeholder='Filter directory']", "absolutelynothing")
+        self.browser.wait_js_cond("ph_count('#folder-view > .pf-v5-c-card') == 0")
+        b.wait_text(".pf-v5-c-empty-state__body", "No matching results")
+        b.set_input_text("input[placeholder='Filter directory']", "newfile")
+
         # filtering persists when changing view
         b.click("button[aria-label='Display as a list']")
         self.browser.wait_js_cond("ph_count('#folder-view tbody tr') == 1")
