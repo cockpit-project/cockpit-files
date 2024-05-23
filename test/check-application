@@ -924,10 +924,22 @@ class TestFiles(testlib.MachineCase):
         b.wait_visible("[data-item='newfile']")
         self.assertEqual(m.execute("head -n 1 /home/admin/newdir/newfile"), "test_text\n")
         b.click(".breadcrumb-button:nth-of-type(4)")
+        self.browser.wait_not_present(".pf-c-empty-state")
 
         # Copy/paste directory
-        self.browser.wait_not_present(".pf-c-empty-state")
         m.execute("runuser -u admin mkdir /home/admin/copyDir")
+        b.click("[data-item='copyDir']")
+        b.click("#dropdown-menu")
+        b.click("#copy-item")
+        b.mouse("[data-item='newdir']", "dblclick")
+        b.click("#dropdown-menu")
+        b.click("#paste-item")
+        b.wait_visible("[data-item='copyDir']")
+        b.click(".breadcrumb-button:nth-of-type(4)")
+        self.browser.wait_not_present(".pf-c-empty-state")
+
+        # File already exists error
+        m.execute("runuser -u admin echo 'changed' > /home/admin/newfile")
         b.click("[data-item='newfile']")
         b.click("#dropdown-menu")
         b.click("#copy-item")
@@ -936,7 +948,10 @@ class TestFiles(testlib.MachineCase):
         b.click("#paste-item")
         b.wait_visible("[data-item='newfile']")
         self.assertEqual(m.execute("head -n 1 /home/admin/newdir/newfile"), "test_text\n")
+        b.wait_in_text("h4.pf-v5-c-alert__title", "Pasting failed")
+        b.wait_in_text(".pf-v5-c-alert__description", "\"newfile\" exists")
         b.click(".breadcrumb-button:nth-of-type(4)")
+        self.browser.wait_not_present(".pf-c-empty-state")
 
     @testlib.skipBrowser(".upload_files() doesn't work on Firefox", "firefox")
     @testlib.skipImage("Debian-testing has Cockpit 311 without new upload support in fsreplace1", "debian-testing")
