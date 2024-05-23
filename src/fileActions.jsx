@@ -512,16 +512,6 @@ export const fileActions = (path, selected, setSelected, clipboard, setClipboard
                 title: _("Copy"),
                 onClick: () => setClipboard([currentPath + selected[0].name]),
             },
-            ...(selected[0].type === "dir")
-                ? [
-                    {
-                        id: "paste-into-directory",
-                        title: _("Paste into directory"),
-                        onClick: () => spawnPaste(clipboard, [currentPath + selected[0].name]),
-                        isDisabled: clipboard.length === 0
-                    }
-                ]
-                : [],
             { type: "divider" },
             {
                 id: "edit-permissions",
