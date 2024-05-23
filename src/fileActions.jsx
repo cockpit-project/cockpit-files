@@ -40,7 +40,7 @@ import {
 } from "pam_user_parser.js";
 import { superuser } from "superuser";
 
-import { map_permissions, inode_types } from "./common";
+import { map_permissions, inode_types, basename } from "./common";
 import { useFilesContext } from "./app";
 
 const _ = cockpit.gettext;
@@ -471,11 +471,18 @@ const downloadFile = (currentPath, selected) => {
     window.open(`${prefix}?${query}`);
 };
 
-export const fileActions = (path, selected, setSelected, clipboard, setClipboard, addAlert, Dialogs) => {
+export const fileActions = (path, selected, setSelected, clipboard, setClipboard, cwdInfo, addAlert, Dialogs) => {
     const currentPath = path.join("/") + "/";
     const menuItems = [];
 
     const spawnPaste = (sourcePaths, targetPath) => {
+        const existingFiles = sourcePaths.filter(sourcePath => cwdInfo?.entries[basename(sourcePath)]);
+        if (existingFiles.length > 0) {
+            addAlert(_("Pasting failed"), "danger", "paste-error",
+                     cockpit.format(_("\"$0\" exists, not overwriting with paste."),
+                                    existingFiles.map(basename).join(", ")));
+            return;
+        }
         cockpit.spawn([
             "cp",
             "-R",

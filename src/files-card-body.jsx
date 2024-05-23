@@ -80,9 +80,9 @@ const compare = (sortBy) => {
 
 const ContextMenuItems = ({ path, selected, setSelected, clipboard, setClipboard }) => {
     const Dialogs = useDialogs();
-    const { addAlert } = useFilesContext();
+    const { addAlert, cwdInfo } = useFilesContext();
     const menuItems = fileActions(path, selected, setSelected,
-                                  clipboard, setClipboard, addAlert, Dialogs);
+                                  clipboard, setClipboard, cwdInfo, addAlert, Dialogs);
 
     return (
         <MenuList>

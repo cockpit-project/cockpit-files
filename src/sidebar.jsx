@@ -123,7 +123,7 @@ export const SidebarPanelDetails = ({
 
     const menuItems = fileActions(path, selected, setSelected,
                                   clipboard, setClipboard,
-                                  addAlert, Dialogs).map((option, i) => {
+                                  cwdInfo, addAlert, Dialogs).map((option, i) => {
         if (option.type === "divider")
             return <Divider key={i} />;
         return (
