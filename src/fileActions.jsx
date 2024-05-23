@@ -475,11 +475,11 @@ export const fileActions = (path, selected, setSelected, clipboard, setClipboard
     const currentPath = path.join("/") + "/";
     const menuItems = [];
 
-    const spawnPaste = (sourcePath, targetPath) => {
+    const spawnPaste = (sourcePaths, targetPath) => {
         cockpit.spawn([
             "cp",
             "-R",
-            ...sourcePath,
+            ...sourcePaths,
             targetPath
         ]).catch(err => addAlert(err.message, "danger", new Date().getTime()));
     };
