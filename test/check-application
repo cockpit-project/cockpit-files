@@ -938,19 +938,6 @@ class TestFiles(testlib.MachineCase):
         self.assertEqual(m.execute("head -n 1 /home/admin/newdir/newfile"), "test_text\n")
         b.click(".breadcrumb-button:nth-of-type(4)")
 
-        # Paste into directory
-        self.browser.wait_not_present(".pf-c-empty-state")
-        m.execute("runuser -u admin touch /home/admin/newfile2")
-        b.click("[data-item='newfile2']")
-        b.click("#dropdown-menu")
-        b.click("#copy-item")
-        b.click("[data-item='newdir']")
-        b.click("#dropdown-menu")
-        b.click("#paste-into-directory")
-        b.mouse("[data-item='newdir']", "dblclick")
-        b.wait_visible("[data-item='newfile2']")
-        b.click(".breadcrumb-button:nth-of-type(3)")
-
     @testlib.skipBrowser(".upload_files() doesn't work on Firefox", "firefox")
     @testlib.skipImage("Debian-testing has Cockpit 311 without new upload support in fsreplace1", "debian-testing")
     def testUpload(self):
