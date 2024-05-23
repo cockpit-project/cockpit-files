@@ -102,7 +102,7 @@ export const SidebarPanelDetails = ({
     setClipboard,
 }) => {
     const [info, setInfo] = useState(null);
-    const { addAlert } = useFilesContext();
+    const { addAlert, cwdInfo } = useFilesContext();
 
     useEffect(() => {
         if (selected.length === 1) {
@@ -160,7 +160,10 @@ export const SidebarPanelDetails = ({
                             </Text>}
                     </TextContent>
                 </CardTitle>
-                <KebabDropdown toggleButtonId="dropdown-menu" dropdownItems={menuItems} />
+                <KebabDropdown
+                  toggleButtonId="dropdown-menu" dropdownItems={menuItems}
+                  isDisabled={cwdInfo === null}
+                />
             </CardHeader>
             {selected.length === 1 &&
             <CardBody>
