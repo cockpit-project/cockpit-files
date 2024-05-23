@@ -172,6 +172,11 @@ class TestFiles(testlib.MachineCase):
         b.click(".breadcrumb-button:nth-of-type(2)")
         b.wait_visible("[data-item='home']")
 
+        # Non-existing directory
+        b.go("/files#/?path=/doesnotexists")
+        b.wait_in_text(".pf-v5-c-empty-state__body", "No such file or directory")
+        b.wait_visible("#dropdown-menu:disabled")
+
     def testNavigation(self):
         b = self.browser
         m = self.machine
