@@ -73,6 +73,12 @@ const compare = (sortBy) => {
                 ? -1
                 : 1)
             : compareFileType(a, b);
+    case "size":
+        return (a, b) => compareFileType(a, b) === 0
+            ? (a.size > b.size
+                ? -1
+                : 1)
+            : compareFileType(a, b) * -1;
     default:
         break;
     }

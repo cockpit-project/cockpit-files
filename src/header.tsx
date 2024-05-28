@@ -138,6 +138,7 @@ const ViewSelector = ({ isGrid, setIsGrid, sortBy, setSortBy }:
                 <SelectOption itemId="za">{_("Z-A")}</SelectOption>
                 <SelectOption itemId="last_modified">{_("Last modified")}</SelectOption>
                 <SelectOption itemId="first_modified">{_("First modified")}</SelectOption>
+                <SelectOption itemId="size">{_("Size")}</SelectOption>
             </SelectList>
         </Select>
     );
