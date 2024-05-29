@@ -65,6 +65,7 @@ export const FilesFolderView = ({
               path={path}
               isGrid={isGrid}
               sortBy={sortBy}
+              setSortBy={setSortBy}
               selected={selected}
               setSelected={setSelected}
               loadingFiles={loadingFiles}

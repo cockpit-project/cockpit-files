@@ -122,7 +122,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_in_text("#description-list-last-modified ", "Jan 1, 2022, 12:00 PM")
 
         # clicking empty space resets sidebar
-        b.click("#folder-view")
+        b.click("#folder-view tbody")
         b.wait_in_text("#sidebar-card-header", "admin")
 
         # folder information doesn't contain size
@@ -134,13 +134,13 @@ class TestFiles(testlib.MachineCase):
         b.wait_text("#description-list-last-modified dd", "Jan 1, 2022, 12:00 PM")
 
         # filtering works
-        self.browser.wait_js_cond("ph_count('#folder-view > .pf-v5-c-card') > 1")
+        self.browser.wait_js_cond("ph_count('#folder-view tbody tr') > 1")
         b.set_input_text("input[placeholder='Filter directory']", "newfile")
-        self.browser.wait_js_cond("ph_count('#folder-view > .pf-v5-c-card') == 1")
+        self.browser.wait_js_cond("ph_count('#folder-view tbody tr') == 1")
 
         # no results when filtering
         b.set_input_text("input[placeholder='Filter directory']", "absolutelynothing")
-        self.browser.wait_js_cond("ph_count('#folder-view > .pf-v5-c-card') == 0")
+        self.browser.wait_js_cond("ph_count('#folder-view tbody tr') == 0")
         b.wait_text(".pf-v5-c-empty-state__body", "No matching results")
 
         # clear using input button
@@ -224,7 +224,7 @@ class TestFiles(testlib.MachineCase):
         m.execute("ln -s /tmp /home/admin/tmplink")
         b.click("[data-item='tmplink']")
         b.wait_in_text("#sidebar-card-header", "symbolic link to /tmp")
-        b.mouse(".directory-item[data-item='tmplink']", "dblclick")
+        b.mouse("[data-item='tmplink']", "dblclick")
         b.wait_not_present("[data-item='tmplink']")
         b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "tmplink")
         b.go("/files#/?path=/home/admin")
@@ -262,8 +262,8 @@ class TestFiles(testlib.MachineCase):
         b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "newdir2")
         b.eval_js("window.history.forward()")
         # Switching navigation resets selected state
-        b.wait_visible("#card-item-admindir")
-        b.wait_not_present("#card-item-admindir.pf-m-selected")
+        b.wait_visible("[data-item='admin']")
+        b.wait_not_present("[data-item='admin'].row-selected")
         b.wait_in_text("#sidebar-card-header", "home")
         b.wait_not_present("[data-item='newdir']")
         b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "home")
@@ -351,46 +351,61 @@ class TestFiles(testlib.MachineCase):
 
         # Default sort is A-Z
         # Alphabet sorts should be case insensetive
-        b.wait_text(".item-button:nth-of-type(1)", "aaa")
-        b.wait_text(".item-button:nth-of-type(2)", "BBB")
-        b.wait_text(".item-button:nth-of-type(3)", "ccc")
+        b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "aaa")
+        b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "BBB")
+        b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-name", "ccc")
 
         # Sort by reverse alphabet
         b.select_PF5("#sort-menu-toggle", "#sort-menu", "Z-A")
         # Alphabet sorts should be case insensetive
-        b.wait_text(".item-button:nth-of-type(1)", "ccc")
-        b.wait_text(".item-button:nth-of-type(2)", "BBB")
-        b.wait_text(".item-button:nth-of-type(3)", "aaa")
+        b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "ccc")
+        b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "BBB")
+        b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-name", "aaa")
 
         # Sort by last modified
         b.select_PF5("#sort-menu-toggle", "#sort-menu", "Last modified")
-        b.wait_text(".item-button:nth-of-type(1)", "ccc")
-        b.wait_text(".item-button:nth-of-type(2)", "aaa")
-        b.wait_text(".item-button:nth-of-type(3)", "BBB")
+        b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "ccc")
+        b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "aaa")
+        b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-name", "BBB")
 
         # Update content of files
         m.execute('echo "update" > /home/admin/aaa')
 
-        b.wait_text(".item-button:nth-of-type(1)", "aaa")
-        b.wait_text(".item-button:nth-of-type(2)", "ccc")
-        b.wait_text(".item-button:nth-of-type(3)", "BBB")
+        b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "aaa")
+        b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "ccc")
+        b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-name", "BBB")
 
         # Sort by first modified
         b.select_PF5("#sort-menu-toggle", "#sort-menu", "First modified")
-        b.wait_text(".item-button:nth-of-type(1)", "BBB")
-        b.wait_text(".item-button:nth-of-type(2)", "ccc")
-        b.wait_text(".item-button:nth-of-type(3)", "aaa")
+        b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "BBB")
+        b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "ccc")
+        b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-name", "aaa")
 
         # Sort option should be saved in localStorage
         b.select_PF5("#sort-menu-toggle", "#sort-menu", "Z-A")
-        b.wait_text(".item-button:nth-of-type(1)", "ccc")
-        b.wait_text(".item-button:nth-of-type(2)", "BBB")
-        b.wait_text(".item-button:nth-of-type(3)", "aaa")
+        b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "ccc")
+        b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "BBB")
+        b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-name", "aaa")
         b.reload()
         b.enter_page("/files")
-        b.wait_text(".item-button:nth-of-type(1)", "ccc")
-        b.wait_text(".item-button:nth-of-type(2)", "BBB")
-        b.wait_text(".item-button:nth-of-type(3)", "aaa")
+        b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "ccc")
+        b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "BBB")
+        b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-name", "aaa")
+
+        # Sort on size
+        m.execute("""
+            echo 'lol' > /home/admin/aaa
+            truncate -s 10M /home/admin/BBB
+        """)
+        b.select_PF5("#sort-menu-toggle", "#sort-menu", "Largest size")
+        b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "BBB")
+        b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "aaa")
+        b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-name", "ccc")
+
+        b.select_PF5("#sort-menu-toggle", "#sort-menu", "Smallest size")
+        b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "ccc")
+        b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "aaa")
+        b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-name", "BBB")
 
         m.execute("""
             ln -s /tmp /home/admin/ddd
@@ -403,12 +418,12 @@ class TestFiles(testlib.MachineCase):
 
         # Directories are sorted first
         b.select_PF5("#sort-menu-toggle", "#sort-menu", "A-Z")
-        b.wait_text(".item-button:nth-of-type(1)", "ddd")
-        b.wait_text(".item-button:nth-of-type(2)", "eee")
-        b.wait_text(".item-button:nth-of-type(3)", "Eee")
-        b.wait_text(".item-button:nth-of-type(4)", "aaa")
-        b.wait_text(".item-button:nth-of-type(5)", "BBB")
-        b.wait_text(".item-button:nth-of-type(6)", "ccc")
+        b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "ddd")
+        b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "eee")
+        b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-name", "Eee")
+        b.wait_text("#folder-view tbody tr:nth-of-type(4) .item-name", "aaa")
+        b.wait_text("#folder-view tbody tr:nth-of-type(5) .item-name", "BBB")
+        b.wait_text("#folder-view tbody tr:nth-of-type(6) .item-name", "ccc")
 
     def testDelete(self):
         b = self.browser
@@ -467,8 +482,8 @@ class TestFiles(testlib.MachineCase):
         m.execute("touch /home/admin/delete1 /home/admin/delete2")
         b.click("[data-item='delete1']")
         b.mouse("[data-item='delete2']", "click", ctrlKey=True)
-        b.wait_visible("[data-item='delete1'].pf-m-selected")
-        b.wait_visible("[data-item='delete2'].pf-m-selected")
+        b.wait_visible("[data-item='delete1'].row-selected")
+        b.wait_visible("[data-item='delete2'].row-selected")
         self.press_special_key("Delete")
         b.wait_in_text("h1.pf-v5-c-modal-box__title", "Delete 2 items?")
         b.click("button.pf-m-danger")
@@ -538,7 +553,7 @@ class TestFiles(testlib.MachineCase):
         b.allow_download()
 
         # Create folder from context menu
-        b.mouse("#folder-view", "contextmenu")
+        b.mouse("#files-card-parent", "contextmenu")
         b.click(".contextMenu button:contains('Create directory')")
         b.set_input_text("#create-directory-input", "newdir")
         b.click("button.pf-m-primary")
@@ -546,7 +561,7 @@ class TestFiles(testlib.MachineCase):
 
         # Opening context menu from empty space deselects item
         b.click("[data-item='newdir']")
-        b.mouse("#folder-view", "contextmenu")
+        b.mouse("#files-card-parent tbody", "contextmenu")
         b.click(".contextMenu button:contains('Create directory')")
         b.set_input_text("#create-directory-input", "newdir2")
         b.click("button.pf-m-primary")
@@ -763,7 +778,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_not_present(".pf-v5-c-empty-state")
 
         # Via contextmenu
-        b.mouse("#folder-view", "contextmenu")
+        b.mouse("#files-card-parent", "contextmenu")
         b.click(".contextMenu button:contains('Edit permissions')")
         b.wait_in_text(".pf-v5-c-modal-box__title-text", "testdir")
         b.select_from_dropdown("#edit-permissions-owner-access", "6")
@@ -848,27 +863,27 @@ class TestFiles(testlib.MachineCase):
         m.execute("touch /home/admin/file1 && touch /home/admin/file2")
         b.click("[data-item='file1']")
         b.mouse("[data-item='file2']", "click", ctrlKey=True)
-        b.wait_visible("[data-item='file1'].pf-m-selected")
-        b.wait_visible("[data-item='file2'].pf-m-selected")
+        b.wait_visible("[data-item='file1'].row-selected")
+        b.wait_visible("[data-item='file2'].row-selected")
         b.wait_text("#sidebar-card-header", "admin2 items selected")
 
         b.mouse("[data-item='file2']", "click", ctrlKey=True)
-        b.wait_visible("[data-item='file1'].pf-m-selected")
-        b.wait_not_present("[data-item='file2'].pf-m-selected")
+        b.wait_visible("[data-item='file1'].row-selected")
+        b.wait_not_present("[data-item='file2'].row-selected")
         b.wait_text("#sidebar-card-header", "file1empty")
 
         b.mouse("[data-item='file1']", "click", ctrlKey=True)
-        b.wait_not_present("[data-item='file1'].pf-m-selected")
+        b.wait_not_present("[data-item='file1'].row-selected")
         b.wait_in_text("#sidebar-card-header", "admin")
 
         # Control-clicking when nothing is selected should select item normally
         b.mouse("[data-item='file1']", "click", ctrlKey=True)
-        b.wait_visible("[data-item='file1'].pf-m-selected")
+        b.wait_visible("[data-item='file1'].row-selected")
         b.wait_text("#sidebar-card-header", "file1empty")
 
         # Check context menu
         b.mouse("[data-item='file2']", "click", ctrlKey=True)
-        b.wait_visible("[data-item='file2'].pf-m-selected")
+        b.wait_visible("[data-item='file2'].row-selected")
         b.wait_text("#sidebar-card-header", "admin2 items selected")
         b.mouse("[data-item='file1']", "contextmenu")
         b.wait_in_text(".contextMenu li:nth-child(2) button", "Delete")
@@ -904,28 +919,28 @@ class TestFiles(testlib.MachineCase):
         b.eval_js("window.focus()")
 
         b.click("[data-item='file0']")
-        b.wait_visible("[data-item='file0'].pf-m-selected")
+        b.wait_visible("[data-item='file0'].row-selected")
 
         self.press_special_key("ArrowRight")
-        b.wait_visible("[data-item='file1'].pf-m-selected")
+        b.wait_visible("[data-item='file1'].row-selected")
         self.press_special_key("ArrowLeft")
-        b.wait_visible("[data-item='file0'].pf-m-selected")
+        b.wait_visible("[data-item='file0'].row-selected")
 
         # Up / Down depends on the layout, this is tested on mobile where the
         # width is two cards.
         b.set_layout("mobile")
         b.click("[data-item='file0']")
-        b.wait_visible("[data-item='file0'].pf-m-selected")
+        b.wait_visible("[data-item='file0'].row-selected")
 
         self.press_special_key("ArrowDown")
-        b.wait_visible("[data-item='file2'].pf-m-selected")
+        b.wait_visible("[data-item='file2'].row-selected")
         self.press_special_key("ArrowUp")
-        b.wait_visible("[data-item='file0'].pf-m-selected")
+        b.wait_visible("[data-item='file0'].row-selected")
 
         m.execute("mkdir /home/admin/foo")
         b.click("[data-item='foo']")
 
-        b.wait_visible("[data-item='foo'].pf-m-selected")
+        b.wait_visible("[data-item='foo'].row-selected")
         self.press_special_key("Enter")
         b.wait_text(".breadcrumb-button:nth-of-type(5)", "foo")
 

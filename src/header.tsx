@@ -35,11 +35,55 @@ import {
     TextContent,
     TextVariants
 } from "@patternfly/react-core";
+import { SortByDirection } from '@patternfly/react-table';
 import { GripVerticalIcon, ListIcon } from "@patternfly/react-icons";
 
 import { UploadButton } from "./upload-button";
 
 const _ = cockpit.gettext;
+
+export const filterColumns = [
+    {
+        title: _("Name"),
+        [SortByDirection.asc]: {
+            itemId: "az",
+            label: _("A-Z"),
+        },
+        [SortByDirection.desc]: {
+            itemId: "za",
+            label: _("Z-A"),
+        }
+    },
+    {
+        title: _("Size"),
+        [SortByDirection.asc]: {
+            itemId: "largest_size",
+            label: _("Largest size"),
+        },
+        [SortByDirection.desc]: {
+            itemId: "smallest_size",
+            label: _("Smallest size"),
+        }
+    },
+    {
+        title: _("Modified"),
+        [SortByDirection.asc]: {
+            itemId: "first_modified",
+            label: _("First modified"),
+        },
+        [SortByDirection.desc]: {
+            itemId: "last_modified",
+            label: _("Last modified"),
+        },
+    },
+];
+
+// { itemId: [index, sortdirection] }
+export const filterColumnMapping = filterColumns.reduce((a, v, i) => ({
+    ...a,
+    [v[SortByDirection.asc].itemId]: [i, SortByDirection.asc],
+    [v[SortByDirection.desc].itemId]: [i, SortByDirection.desc]
+}), {});
 
 export const FilesCardHeader = ({
     currentFilter,
@@ -135,10 +179,15 @@ const ViewSelector = ({ isGrid, setIsGrid, sortBy, setSortBy }:
           )}
         >
             <SelectList>
-                <SelectOption itemId="az">{_("A-Z")}</SelectOption>
-                <SelectOption itemId="za">{_("Z-A")}</SelectOption>
-                <SelectOption itemId="last_modified">{_("Last modified")}</SelectOption>
-                <SelectOption itemId="first_modified">{_("First modified")}</SelectOption>
+                {filterColumns.map((column, rowIndex) =>
+                    <React.Fragment key={rowIndex}>
+                        <SelectOption itemId={column[SortByDirection.asc].itemId}>
+                            {column[SortByDirection.asc].label}
+                        </SelectOption>
+                        <SelectOption itemId={column[SortByDirection.desc].itemId}>
+                            {column[SortByDirection.desc].label}
+                        </SelectOption>
+                    </React.Fragment>)}
             </SelectList>
         </Select>
     );
