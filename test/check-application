@@ -31,6 +31,9 @@ class TestFiles(testlib.MachineCase):
         self.login_and_go("/files")
         self.browser.wait_not_present(".pf-c-empty-state")
 
+    def stat(self, fmt: str, path: str) -> str:
+        return self.machine.execute(['stat', f'--format={fmt}', path]).strip()
+
     # TODO: move to testlib.py
     def press_special_key(self, name):
         args = {"type": "keyDown", "key": name}
@@ -599,7 +602,7 @@ class TestFiles(testlib.MachineCase):
         m.execute("echo 'some content' > /home/admin/newfile")
         b.mouse("[data-item='newfile']", "contextmenu")
         b.click(".contextMenu button:contains('Download')")
-        size = int(m.execute("stat --format '%s' /home/admin/newfile").strip())
+        size = int(self.stat('%s', '/home/admin/newfile'))
         self.waitDownloadFile("newfile", size, "some content\n")
 
         # Delete button text should match item type: directory/file
