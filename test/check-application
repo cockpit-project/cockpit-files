@@ -533,7 +533,6 @@ class TestFiles(testlib.MachineCase):
 
         # Rename folder from context menu
         b.mouse("[data-item='newdir']", "contextmenu")
-        b.wait_in_text(".contextMenu li:nth-child(5) button", "Rename")
         b.click(".contextMenu button:contains('Rename')")
         b.set_input_text("#rename-item-input", "newdir1")
         b.click("button.pf-m-primary")
@@ -543,7 +542,6 @@ class TestFiles(testlib.MachineCase):
         m.execute("useradd testuser")
         b.click("[data-item='newdir1']")
         b.mouse("[data-item='newdir1']", "contextmenu")
-        b.wait_in_text(".contextMenu li:nth-child(4) button", "Edit permissions")
         b.click(".contextMenu button:contains('Edit permissions')")
         b.select_from_dropdown("#edit-permissions-owner", "testuser")
         b.click("button.pf-m-primary")
