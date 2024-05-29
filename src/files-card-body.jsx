@@ -19,24 +19,25 @@
 
 import React, { useCallback, useEffect, useMemo, useState, useRef } from "react";
 import {
-    Card, CardBody,
     Flex,
-    Gallery,
-    Icon,
-    CardTitle, Spinner, CardHeader,
-    MenuItem, MenuList,
+    Spinner,
+    MenuItem,
+    MenuList,
     Divider,
 } from "@patternfly/react-core";
-import { FileIcon, FolderIcon } from "@patternfly/react-icons";
+import { Table, Thead, Tr, Th, Tbody, Td } from '@patternfly/react-table';
 
 import cockpit from "cockpit";
 import { useDialogs } from "dialogs.jsx";
-import { ListingTable } from "cockpit-components-table.jsx";
 import { EmptyStatePanel } from "cockpit-components-empty-state.jsx";
 
+import * as timeformat from "timeformat";
 import { ContextMenu } from "cockpit-components-context-menu.jsx";
 import { fileActions, ConfirmDeletionDialog } from "./fileActions.jsx";
+import { filterColumnMapping, filterColumns } from "./header";
 import { useFilesContext } from "./app";
+
+import "./files-card-body.scss";
 
 const _ = cockpit.gettext;
 
@@ -73,6 +74,10 @@ const compare = (sortBy) => {
                 ? -1
                 : 1)
             : compareFileType(a, b);
+    case "largest_size":
+        return (a, b) => b.size - a.size;
+    case "smallest_size":
+        return (a, b) => a.size - b.size;
     default:
         break;
     }
@@ -109,6 +114,7 @@ export const FilesCardBody = ({
     selected,
     setSelected,
     sortBy,
+    setSortBy,
     loadingFiles,
     clipboard,
     setClipboard,
@@ -127,7 +133,7 @@ export const FilesCardBody = ({
     const folderViewRef = React.useRef();
 
     function calculateBoxPerRow () {
-        const boxes = document.querySelectorAll(".item-button");
+        const boxes = document.querySelectorAll(".fileview tbody > tr");
         if (boxes.length > 1) {
             let i = 0;
             const total = boxes.length;
@@ -139,7 +145,7 @@ export const FilesCardBody = ({
 
     const onDoubleClickNavigate = useCallback((file) => {
         const newPath = [...path, file.name].join("/");
-        if (file.type === "dir" || file.to === "dir") {
+        if (file.to === "dir") {
             cockpit.location.go("/", { path: encodeURIComponent(newPath) });
         }
     }, [path]);
@@ -156,7 +162,8 @@ export const FilesCardBody = ({
         let folderViewElem = null;
 
         const resetSelected = e => {
-            if (e.target.id === "folder-view" || e.target.id === "files-card-body") {
+            if (e.target.id === "folder-view" || e.target.id === "files-card-parent" ||
+              (e.target.parentElement && e.target.parentElement.id === "folder-view")) {
                 if (selected.length !== 0) {
                     setSelected([]);
                 }
@@ -164,6 +171,7 @@ export const FilesCardBody = ({
         };
 
         const handleDoubleClick = (ev) => {
+            ev.preventDefault();
             const name = getFilenameForEvent(ev);
             const file = sortedFiles?.find(file => file.name === name);
             if (!file)
@@ -177,6 +185,7 @@ export const FilesCardBody = ({
         };
 
         const handleClick = (ev) => {
+            ev.preventDefault();
             const name = getFilenameForEvent(ev);
             const file = sortedFiles?.find(file => file.name === name);
             if (!file) {
@@ -342,94 +351,95 @@ export const FilesCardBody = ({
         </ContextMenu>
     );
 
+    const sortColumn = (columnIndex) => ({
+        sortBy: {
+            index: filterColumnMapping[sortBy][0],
+            direction: filterColumnMapping[sortBy][1],
+        },
+        onSort: (_event, index, direction) => {
+            setSortBy(filterColumns[index][direction].itemId);
+        },
+        columnIndex,
+    });
+
     return (
-        <div id={files_parent_id}>
+        <div id={files_parent_id} ref={folderViewRef}>
             {contextMenu}
-            <div
-              ref={folderViewRef}
-            >
-                {sortedFiles.length === 0 &&
+            {sortedFiles.length === 0 &&
                 <EmptyStatePanel
                   paragraph={currentFilter ? _("No matching results") : _("Directory is empty")}
                 />}
-                {isGrid &&
-                    <CardBody id="files-card-body">
-                        <Gallery id="folder-view">
-                            {sortedFiles.map(file =>
-                                <Item
-                                  file={file}
-                                  key={file.name}
-                                  isSelected={!!selected.find(s => s.name === file.name)}
-                                  isGrid={isGrid}
-                                />)}
-                        </Gallery>
-                    </CardBody>}
-                {!isGrid &&
-                    <ListingTable
-                      id="folder-view"
-                      className="pf-m-no-border-rows"
-                      variant="compact"
-                      columns={[_("Name")]}
-                      rows={sortedFiles.map(file => ({
-                          columns: [
-                              {
-                                  title: (
-                                      <Item
-                                        file={file}
-                                        key={file.name}
-                                        isSelected={!!selected.find(s => s.name === file.name)}
-                                        isGrid={isGrid}
-                                      />)
-                              }
-                          ]
-                      }))}
-                    />}
-            </div>
+            {sortedFiles.length !== 0 &&
+                <Table
+                  id="folder-view"
+                  className={`pf-m-no-border-rows fileview ${isGrid ? 'view-grid' : 'view-details'}`}
+                  variant="compact"
+                >
+                    <Thead>
+                        <Tr>
+                            <Th sort={sortColumn(0)} className="col-name">{_("Name")}</Th>
+                            <Th sort={sortColumn(1)} className="col-size">{_("Size")}</Th>
+                            <Th
+                              sort={sortColumn(2)} className="col-date"
+                              modifier="nowrap"
+                            >{_("Modified")}
+                            </Th>
+                        </Tr>
+                    </Thead>
+                    <Tbody>
+                        {sortedFiles.map((file, rowIndex) =>
+                            <Row
+                              key={rowIndex}
+                              file={file}
+                              isSelected={selected.some(s => s.name === file.name)}
+                            />)}
+                    </Tbody>
+                </Table>}
         </div>
     );
 };
 
-// Memoize the Item component as rendering thousands of them on each render of parent component is costly.
-const Item = React.memo(function Item({ file, isSelected, isGrid }) {
-    function getFileType(file) {
-        if (file.type === "dir") {
-            return "directory-item";
-        } else if (file.type === "lnk" && file?.to === "dir") {
-            return "directory-item";
-        } else {
-            return "file-item";
-        }
+const getFileType = (file) => {
+    if (file.to === "dir") {
+        return "folder";
+    } else {
+        return "file";
     }
+};
+
+// Memoize the Item component as rendering thousands of them on each render of parent component is costly.
+const Row = React.memo(function Item({ file, isSelected }) {
+    const fileType = getFileType(file);
+    let className = fileType;
+    if (isSelected)
+        className += " row-selected";
+    if (file.type === "lnk")
+        className += " symlink";
 
     return (
-        <Card
-          className={"item-button " + getFileType(file)}
+        <Tr
+          className={className}
           data-item={file.name}
-          id={"card-item-" + file.name + file.type}
-          isClickable isCompact
-          isPlain
-          isSelected={isSelected}
         >
-            <CardHeader
-              selectableActions={{
-                  name: file.name,
-                  selectableActionAriaLabelledby: "card-item-" + file.name + file.type,
-                  selectableActionId: "card-item-" + file.name + file.type + "-selectable-action",
-              }}
+            <Td
+              className="item-name"
+              dataLabel={fileType}
             >
-                <Icon
-                  size={isGrid
-                      ? "xl"
-                      : "lg"} isInline
-                >
-                    {file.type === "dir" || file.to === "dir"
-                        ? <FolderIcon />
-                        : <FileIcon />}
-                </Icon>
-                <CardTitle>
-                    {file.name}
-                </CardTitle>
-            </CardHeader>
-        </Card>
+                <a href="#">{file.name}</a>
+            </Td>
+            <Td
+              className="item-size"
+              dataLabel="size"
+            >
+                {cockpit.format_bytes(file.size)}
+            </Td>
+            <Td
+              className="item-date"
+              dataLabel="date"
+              modifier="nowrap"
+            >
+                {timeformat.dateTime(file.mtime * 1000)}
+            </Td>
+        </Tr>
     );
 });
