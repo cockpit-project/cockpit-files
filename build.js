@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env -S node --import tsx/esm
 
 import fs from 'node:fs';
 import path from 'node:path';
@@ -11,6 +11,7 @@ import { cockpitCompressPlugin } from './pkg/lib/esbuild-compress-plugin.js';
 import { cockpitPoEsbuildPlugin } from './pkg/lib/cockpit-po-plugin.js';
 import { cockpitRsyncEsbuildPlugin } from './pkg/lib/cockpit-rsync-plugin.js';
 import { esbuildStylesPlugins } from './pkg/lib/esbuild-common.js';
+import { filetype_plugin } from './src/filetype-plugin';
 
 const useWasm = os.arch() !== 'x64';
 const esbuild = (await import(useWasm ? 'esbuild-wasm' : 'esbuild')).default;
@@ -100,6 +101,7 @@ const context = await esbuild.context({
                 { from: ['./src/index.html'], to: ['./index.html'] },
             ]
         }),
+        filetype_plugin,
         ...esbuildStylesPlugins,
         cockpitPoEsbuildPlugin(),
         ...production ? [cockpitCompressPlugin()] : [],
