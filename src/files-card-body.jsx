@@ -402,6 +402,8 @@ export const FilesCardBody = ({
 const getFileType = (file) => {
     if (file.to === "dir") {
         return "folder";
+    } else if (file.category.class) {
+        return file.category.class;
     } else {
         return "file";
     }

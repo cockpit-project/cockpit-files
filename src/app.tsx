@@ -35,6 +35,9 @@ import { FilesFolderView } from "./files-folder-view";
 import { usePageLocation } from "hooks.js";
 import { fsinfo, FileInfo } from "./fsinfo";
 
+import { CategoryMetadata, filetype_lookup } from './filetype-lookup';
+import filetype_data from './filetype-data';
+
 superuser.reload_page_on_change();
 
 interface Alert {
@@ -47,6 +50,7 @@ interface Alert {
 export interface FolderFileInfo extends FileInfo {
     name: string,
     to: string | null,
+    category: CategoryMetadata | null,
 }
 
 interface FilesContextType {
@@ -99,17 +103,18 @@ export const Application = () => {
                 `/${currentPath}`,
                 ["type", "mode", "size", "mtime", "user", "group", "target", "entries", "targets"]
             );
+
             return info.effect(state => {
                 setLoading(false);
                 setLoadingFiles(!(state.info || state.error));
                 setCwdInfo(state.info);
                 setErrorMessage(state.error?.message ?? "");
                 const entries = Object.entries(state?.info?.entries || {});
-                const files = entries.map(([name, attrs]) => ({
-                    ...attrs,
-                    name,
-                    to: info.target(name)?.type ?? null
-                }));
+                const files = entries.map(([name, attrs]) => {
+                    const to = info.target(name)?.type ?? null;
+                    const category = to === 'reg' ? filetype_lookup(filetype_data, name) : null;
+                    return { ...attrs, name, to, category };
+                });
                 setFiles(files);
             });
         },
