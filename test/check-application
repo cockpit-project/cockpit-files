@@ -321,6 +321,16 @@ class TestFiles(testlib.MachineCase):
         b.click(edit_button)
         b.wait_visible(path_input)
         b.wait_val(path_input, "/var")
+        b.click(cancel_button)
+
+        # Editing / shows / in the input
+        b.click(edit_button)
+        b.set_input_text(path_input, "/")
+        b.click(apply_button)
+        b.wait_text("button.pf-m-disabled.breadcrumb-button + p", "/")
+        b.click(edit_button)
+        b.wait_val(path_input, "/")
+        b.click(cancel_button)
 
     def testSorting(self):
         b = self.browser

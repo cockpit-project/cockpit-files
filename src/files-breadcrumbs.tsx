@@ -74,7 +74,7 @@ export function FilesBreadcrumbs({ path, showHidden, setShowHidden }: { path: st
 
     const enableEditMode = () => {
         setEditMode(true);
-        setNewPath(path.join("/"));
+        setNewPath(path.join("/") || "/");
     };
 
     const changePath = () => {
