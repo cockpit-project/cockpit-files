@@ -179,10 +179,17 @@ VM_DEPENDS = $(COCKPIT_WHEEL)
 VM_CUSTOMIZE_FLAGS = --install $(COCKPIT_WHEEL)
 endif
 
+# HACK: temporary bump Cockpit on Debian-testing to get > 316
+ifeq ("$(TEST_OS)","debian-testing")
+VM_CUSTOMIZE_FLAGS = --run-command "apt update && apt-get install -y -t unstable cockpit"
+else
+VM_CUSTOMIZE_FLAGS = --no-network
+endif
+
 # build a VM with locally built distro pkgs installed
 # disable networking, VM images have mock/pbuilder with the common build dependencies pre-installed
 $(VM_IMAGE): $(TARFILE) $(NODE_CACHE) packaging/arch/PKGBUILD bots test/vm.install $(VM_DEPENDS)
-	bots/image-customize --no-network --fresh \
+	bots/image-customize --fresh \
 		$(VM_CUSTOMIZE_FLAGS) \
 		--upload $(NODE_CACHE):/var/tmp/ --build $(TARFILE) \
 		--script $(CURDIR)/test/vm.install $(TEST_OS)
