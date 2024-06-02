@@ -18,7 +18,7 @@
     "@types/deep-equal": "^1.0.4",
     "@types/react": "18.3.3",
     "@types/react-dom": "18.3.0",
-    "@typescript-eslint/eslint-plugin": "7.10.0",
+    "@typescript-eslint/eslint-plugin": "7.11.0",
     "argparse": "2.0.1",
     "chrome-remote-interface": "0.33.0",
     "esbuild": "0.20.2",
