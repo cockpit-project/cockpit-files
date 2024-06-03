@@ -167,7 +167,7 @@ export const SidebarPanelDetails = ({
             </CardHeader>
             {selected.length === 1 &&
             <CardBody>
-                <DescriptionList isHorizontal id="description-list-sidebar">
+                <DescriptionList id="description-list-sidebar">
                     {getDescriptionListItems(selected[0]).map((item, index) => (
                         <DescriptionListGroup key={item.id} id={item.id}>
                             <DescriptionListTerm>{item.label}</DescriptionListTerm>
