@@ -188,6 +188,7 @@ endif
 
 # build a VM with locally built distro pkgs installed
 # disable networking, VM images have mock/pbuilder with the common build dependencies pre-installed
+$(VM_IMAGE): export XZ_OPT=-0
 $(VM_IMAGE): $(TARFILE) $(NODE_CACHE) packaging/arch/PKGBUILD bots test/vm.install $(VM_DEPENDS)
 	bots/image-customize --fresh \
 		$(VM_CUSTOMIZE_FLAGS) \
