@@ -103,6 +103,8 @@ export function fsinfo(path: string, attrs: string[], options?: cockpit.JsonObje
             const target = entry?.target;
             if (!target)
                 return entry;
+            if (target === '.')
+                return self.state.info;
             entry = entries[target] ?? targets[target] ?? null;
         }
         return null; // ELOOP
