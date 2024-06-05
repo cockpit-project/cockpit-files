@@ -7,7 +7,6 @@ TEST_OS = fedora-40
 endif
 export TEST_OS
 TARFILE=$(RPM_NAME)-$(VERSION).tar.xz
-NODE_CACHE=$(RPM_NAME)-node-$(VERSION).tar.xz
 SPEC=$(RPM_NAME).spec
 PREFIX ?= /usr/local
 APPSTREAMFILE=org.cockpit-project.$(PACKAGE_NAME).metainfo.xml
@@ -36,6 +35,7 @@ COCKPIT_REPO_FILES = \
 	pkg/lib \
 	test/common \
 	test/static-code \
+	tools/node-modules \
 	$(NULL)
 
 COCKPIT_REPO_URL = https://github.com/cockpit-project/cockpit.git
@@ -87,8 +87,8 @@ $(SPEC): packaging/$(SPEC).in $(NODE_MODULES_TEST)
 	provides=$$(npm ls --omit dev --package-lock-only --depth=Infinity | grep -Eo '[^[:space:]]+@[^[:space:]]+' | sort -u | sed 's/^/Provides: bundled(npm(/; s/\(.*\)@/\1)) = /'); \
 	awk -v p="$$provides" '{gsub(/%{VERSION}/, "$(VERSION)"); $(SUB_NODE_ENV) gsub(/%{NPM_PROVIDES}/, p)}1' $< > $@
 
-$(DIST_TEST): $(NODE_MODULES_TEST) $(COCKPIT_REPO_STAMP) $(shell find src/ -type f) package.json build.js
-	NODE_ENV=$(NODE_ENV) ./build.js
+$(DIST_TEST): $(COCKPIT_REPO_STAMP) $(shell find src/ -type f) package.json build.js
+	$(MAKE) package-lock.json && NODE_ENV=$(NODE_ENV) ./build.js
 
 packaging/arch/PKGBUILD: packaging/arch/PKGBUILD.in
 	sed 's/VERSION/$(VERSION)/; s/SOURCE/$(TARFILE)/' $< > $@
@@ -140,20 +140,15 @@ $(TARFILE): $(DIST_TEST) $(SPEC) packaging/arch/PKGBUILD packaging/debian/change
 		$$(git ls-files) $(COCKPIT_REPO_FILES) $(NODE_MODULES_TEST) $(SPEC) \
 		packaging/arch/PKGBUILD packaging/debian/changelog dist/
 
-$(NODE_CACHE): $(NODE_MODULES_TEST)
-	tar --xz $(TAR_ARGS) -cf $@ node_modules
-
-node-cache: $(NODE_CACHE)
-
 # convenience target for developers
-srpm: $(TARFILE) $(NODE_CACHE) $(SPEC)
+srpm: $(TARFILE) $(SPEC)
 	rpmbuild -bs \
 	  --define "_sourcedir `pwd`" \
 	  --define "_srcrpmdir `pwd`" \
 	  $(SPEC)
 
 # convenience target for developers
-rpm: $(TARFILE) $(NODE_CACHE) $(SPEC)
+rpm: $(TARFILE) $(SPEC)
 	mkdir -p "`pwd`/output"
 	mkdir -p "`pwd`/rpmbuild"
 	rpmbuild -bb \
@@ -189,10 +184,10 @@ endif
 # build a VM with locally built distro pkgs installed
 # disable networking, VM images have mock/pbuilder with the common build dependencies pre-installed
 $(VM_IMAGE): export XZ_OPT=-0
-$(VM_IMAGE): $(TARFILE) $(NODE_CACHE) packaging/arch/PKGBUILD bots test/vm.install $(VM_DEPENDS)
+$(VM_IMAGE): $(TARFILE) packaging/arch/PKGBUILD bots test/vm.install $(VM_DEPENDS)
 	bots/image-customize --fresh \
 		$(VM_CUSTOMIZE_FLAGS) \
-		--upload $(NODE_CACHE):/var/tmp/ --build $(TARFILE) \
+		--build $(TARFILE) \
 		--script $(CURDIR)/test/vm.install $(TEST_OS)
 
 # convenience target for the above
@@ -219,11 +214,10 @@ check: prepare-check
 bots: test/common
 	test/common/make-bots
 
-$(NODE_MODULES_TEST): package.json
-	# if it exists already, npm install won't update it; force that so that we always get up-to-date packages
-	rm -f package-lock.json
-	# unset NODE_ENV, skips devDependencies otherwise
-	env -u NODE_ENV npm install --ignore-scripts
-	env -u NODE_ENV npm prune
+# We want tools/node-modules to run every time package-lock.json is requested
+# See https://www.gnu.org/software/make/manual/html_node/Force-Targets.html
+FORCE:
+package-lock.json: FORCE $(COCKPIT_REPO_STAMP)
+	tools/node-modules make_package_lock_json
 
-.PHONY: all clean install devel-install devel-uninstall print-version dist node-cache rpm prepare-check check vm print-vm
+.PHONY: all clean install devel-install devel-uninstall print-version dist rpm prepare-check check vm print-vm
