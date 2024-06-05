@@ -201,6 +201,10 @@ class TestFiles(testlib.MachineCase):
         b.click(".breadcrumb-button:nth-of-type(2)")
         b.wait_visible("[data-item='home']")
 
+        # Enter /dev to make sure we can show special files properly
+        b.mouse("[data-item='dev']", "dblclick")
+        b.wait_visible("[data-item='urandom']")
+
         # Non-existing directory
         b.go("/files#/?path=/doesnotexists")
         b.wait_in_text(".pf-v5-c-empty-state__body", "No such file or directory")
