@@ -105,9 +105,11 @@ class TestFiles(testlib.MachineCase):
         b.wait_visible("[data-item='not-hidden']")
         b.wait_not_present("[data-item='.hiddenfile']")
 
-        # Symlink to `.` works and gets shown as directory
+        # Symlink to `.` and `..` work and get shown as directories
         m.execute("ln -sf . /home/admin/dot")
         b.wait_visible("[data-item='dot'].symlink.folder")
+        m.execute("ln -sf .. /home/admin/dotdot")
+        b.wait_visible("[data-item='dotdot'].symlink.folder")
 
         # file sidebar information
         b.click("[data-item='newfile']")
