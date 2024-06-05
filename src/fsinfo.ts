@@ -105,6 +105,10 @@ export function fsinfo(path: string, attrs: string[], options?: cockpit.JsonObje
                 return entry;
             if (target === '.')
                 return self.state.info;
+            // HACK: fsinfo should return this, but doesn't.
+            // We know we only need `.type`, so hardcode it.
+            if (target === '..')
+                return { type: 'dir' };
             entry = entries[target] ?? targets[target] ?? null;
         }
         return null; // ELOOP
