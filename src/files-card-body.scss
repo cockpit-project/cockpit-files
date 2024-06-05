@@ -1,17 +1,4 @@
-/* Stretch the view to fill the page */
-.pf-v5-c-sidebar__main,
-.pf-v5-c-sidebar__content,
-.pf-v5-c-sidebar__content > .pf-v5-c-card,
-.files-contextmenu-area
-{
-    block-size: 100%;
-}
-
 .fileview {
-    .row-selected {
-      background-color: var(--pf-v5-c-card--m-selectable--m-selected--BackgroundColor);
-    }
-
     --icon-size: 32px;
     border-collapse: collapse;
     inline-size: 100%;
@@ -19,8 +6,11 @@
     line-height: var(--pf-v5-global--LineHeight--md);
     font-family: var(--pf-v5-global--FontFamily--text);
     font-size: var(--pf-v5-global--FontSize--md);
-    block-size: 100%;
     overflow: auto;
+
+    .row-selected {
+      background-color: var(--pf-v5-c-card--m-selectable--m-selected--BackgroundColor);
+    }
 
     th {
         text-align: start;
@@ -138,9 +128,9 @@
 
     &.view-details {
         --icon-size: 16px;
-        inline-size: calc(100% - var(--pf-v5-global--spacer--md));
-        margin-block: var(--pf-v5-global--spacer--sm);
-        margin-inline: auto;
+        inline-size: 100%;
+        margin: 0;
+
 
         tbody tr {
             border-block: 1px solid var(--pf-v5-global--BorderColor--100);
@@ -171,6 +161,14 @@
                 inline-size: 100%;
                 justify-content: end;
             }
+        }
+
+        :first-child:is(td, th) {
+            padding-inline-start: var(--pf-v5-global--spacer--lg);
+        }
+
+        :last-child:is(td, th) {
+            padding-inline-end: var(--pf-v5-global--spacer--lg);
         }
     }
 
@@ -222,8 +220,8 @@
             }
 
             .item-size {
-                font-size: 0.8em;
-                color: #888;
+                font-size: var(--pf-v5-global--FontSize--xs);
+                color: var(--pf-v5-global--Color--200);
             }
 
             .item-date {
@@ -234,6 +232,16 @@
                 background-color: var(--pf-v5-global--BackgroundColor--200);
                 outline: 1px solid var(--pf-v5-global--BackgroundColor--300);
             }
+        }
+    }
+
+    .pf-v5-c-table__thead {
+        position: sticky;
+        inset-block-start: 0;
+        z-index: 1;
+
+        th {
+            background-color: var(--pf-v5-global--BackgroundColor--100);
         }
     }
 }

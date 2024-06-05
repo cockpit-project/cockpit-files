@@ -365,7 +365,7 @@ export const FilesCardBody = ({
     return (
         <div
           id={files_parent_id}
-          className="files-contextmenu-area"
+          className="fileview-wrapper"
           ref={folderViewRef}
         >
             {contextMenu}
