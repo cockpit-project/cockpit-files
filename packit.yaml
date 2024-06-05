@@ -13,9 +13,6 @@ srpm_build_deps:
 actions:
   post-upstream-clone:
     - make cockpit-files.spec
-    # replace Source1 manually, as create-archive: can't handle multiple tarballs
-    - make node-cache
-    - sh -c 'sed -i "/^Source1:/ s/https:.*/$(ls *-node*.tar.xz)/" cockpit-*.spec'
   create-archive: make dist
   # files.git has no release tags; your project can drop this once you have a release
   get-current-version: make print-version
