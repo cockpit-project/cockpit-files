@@ -4,6 +4,69 @@
 
 @import "@patternfly/patternfly/components/Button/button.css";
 
+// Use the page as the toplevel container
+.pf-v5-c-page {
+    container-type: size;
+}
+
+// Passthrough for layout and styling purposes, to enable main page parts to participate in the grid
+.pf-v5-c-page__main-section,
+.pf-v5-c-sidebar,
+.pf-v5-c-sidebar__main,
+.pf-v5-c-sidebar__content {
+    display: contents;
+}
+
+// Move the scrollbar to the content area.
+// Do this by triggering the overflow on the fileview wrapper and sidebar panel when content doesn't fit. (Parent card is also needed to overflow, else the children won't here in this context.)
+.pf-v5-c-sidebar__content > .pf-v5-c-card,
+.fileview-wrapper,
+.sidebar-panel {
+    overflow: auto;
+}
+
+// Content area sould stretch, so context menu works even when the content doesn't fill the area
+.fileview-wrapper {
+    block-size: 100%;
+}
+
+.pf-v5-c-page__main {
+    display: grid;
+    grid-template:
+        "topbar topbar topbar topbar" auto
+        ". content sidebar ." 1fr
+        ". . . ." 0
+        / 0 1fr 18rem 0;
+    gap: var(--pf-v5-global--spacer--md);
+    inline-size: 100vw;
+    block-size: 100vh;
+}
+
+.pf-v5-c-page__main-breadcrumb {
+    grid-area: topbar;
+}
+
+.pf-v5-c-sidebar__content > .pf-v5-c-card {
+    grid-area: content;
+}
+
+.sidebar-panel {
+    grid-area: sidebar;
+}
+
+@container (width < 768px) {
+    // Change the general layout in smaller screen sizes
+    .pf-v5-c-page__main {
+        grid-template:
+            "topbar" auto
+            "." var(--pf-v5-global--spacer--md)
+            "content" 1fr
+            "sidebar" 8rem
+            / 1fr;
+        row-gap: 0;
+    }
+}
+
 /* Style the list cards as ct-cards */
 .pf-c-page__main-section > .pf-c-card {
     @extend .ct-card;
@@ -40,22 +103,6 @@ button.breadcrumb-edit-cancel-button {
     color: var(--pf-global--primary-color--100);
 }
 
-// Make the card heading sticky
-.card-actionbar {
-    position: sticky;
-    // Background bleeds through, so we need we need to add a local background
-    background: var(--pf-v5-global--BackgroundColor--100);
-    // Breadcrumb header size + padding?
-    inset-block-start: calc(var(--pf-v5-global--spacer--md) * 3.5);
-    // Lift up above icon content
-    z-index: 1;
-}
-
-// Make the sidebar sticky
-.pf-v5-c-sidebar__panel {
-    --pf-v5-c-sidebar__panel--Position: sticky;
-}
-
 .pf-v5-l-gallery {
     --pf-v5-l-gallery--GridTemplateColumns--max: 10rem;
     align-items: start;
@@ -69,12 +116,13 @@ button.breadcrumb-edit-cancel-button {
 }
 
 .sidebar-panel {
-    background-color: var(--pf-c-page__main-section--BackgroundColor);
-    inset-block-start: 3rem;
+    background-color: unset;
 }
 
-#description-list-sidebar {
-    margin-block-end: 1rem;
+.sidebar-details {
+    margin-block-end: var(--pf-v5-global--spacer--md);
+    // Wrap on demand
+    grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
 }
 
 // Improve header layout and wrap header text
