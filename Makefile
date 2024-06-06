@@ -142,7 +142,7 @@ $(TARFILE): $(DIST_TEST) $(SPEC) packaging/arch/PKGBUILD packaging/debian/change
 		packaging/arch/PKGBUILD packaging/debian/changelog dist/
 
 $(NODE_CACHE): $(NODE_MODULES_TEST)
-	tar --xz $(TAR_ARGS) -cf $@ node_modules
+	tar --xz $(TAR_ARGS) -cf $@ --exclude .git node_modules
 
 node-cache: $(NODE_CACHE)
 
