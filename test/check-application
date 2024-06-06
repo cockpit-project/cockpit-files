@@ -444,6 +444,37 @@ class TestFiles(testlib.MachineCase):
         b.wait_text("#folder-view tbody tr:nth-of-type(5) .item-name", "BBB")
         b.wait_text("#folder-view tbody tr:nth-of-type(6) .item-name", "ccc")
 
+        # Sort headers also work in the list view
+        b.click("button[aria-label='Display as a list']")
+        b.wait_visible("th[aria-sort='ascending'].pf-m-selected button:contains(Name)")
+
+        # clicking reverse sort order
+        b.click("th.pf-m-selected button")
+        b.wait_visible("th[aria-sort='descending'].pf-m-selected button:contains(Name)")
+        b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "Eee")
+        b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "eee")
+        b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-name", "ddd")
+        b.wait_text("#folder-view tbody tr:nth-of-type(4) .item-name", "ccc")
+        b.wait_text("#folder-view tbody tr:nth-of-type(5) .item-name", "BBB")
+        b.wait_text("#folder-view tbody tr:nth-of-type(6) .item-name", "aaa")
+
+        b.click("th button:contains(Modified)")
+        b.wait_visible("th[aria-sort='ascending'].pf-m-selected button:contains(Modified)")
+        b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "ddd")
+        b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "eee")
+        b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-name", "Eee")
+        b.wait_text("#folder-view tbody tr:nth-of-type(4) .item-name", "ccc")
+        b.wait_text("#folder-view tbody tr:nth-of-type(5) .item-name", "aaa")
+        b.wait_text("#folder-view tbody tr:nth-of-type(6) .item-name", "BBB")
+
+        b.click("th button:contains(Size)")
+        b.wait_visible("th[aria-sort='ascending'].pf-m-selected button:contains(Size)")
+        b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "BBB")
+        b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "aaa")
+        b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-name", "ddd")
+        b.wait_text("#folder-view tbody tr:nth-of-type(4) .item-name", "ccc")
+        # TODO: both Eee and eee are the same size so order isn't guarranteed
+
     def testDelete(self):
         b = self.browser
         m = self.machine
