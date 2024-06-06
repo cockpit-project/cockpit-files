@@ -42,42 +42,23 @@ import "./files-card-body.scss";
 const _ = cockpit.gettext;
 
 const compare = (sortBy) => {
-    const compareFileType = (a, b) => {
-        const aIsDir = (a.type === "dir" || a?.to === "dir");
-        const bIsDir = (b.type === "dir" || b?.to === "dir");
-
-        if (aIsDir && !bIsDir)
-            return -1;
-        if (!aIsDir && bIsDir)
-            return 1;
-        return 0;
+    const dir_sort = (a, b) => {
+        return Number(b.to === "dir") - Number(a.to === "dir");
     };
 
     switch (sortBy) {
     case "az":
-        return (a, b) => compareFileType(a, b) === 0
-            ? a.name.localeCompare(b.name)
-            : compareFileType(a, b);
+        return (a, b) => dir_sort(a, b) || a.name.localeCompare(b.name);
     case "za":
-        return (a, b) => compareFileType(a, b) === 0
-            ? b.name.localeCompare(a.name)
-            : compareFileType(a, b);
-    case "last_modified":
-        return (a, b) => compareFileType(a, b) === 0
-            ? (a.mtime > b.mtime
-                ? -1
-                : 1)
-            : compareFileType(a, b);
+        return (a, b) => dir_sort(a, b) || b.name.localeCompare(a.name);
     case "first_modified":
-        return (a, b) => compareFileType(a, b) === 0
-            ? (a.mtime < b.mtime
-                ? -1
-                : 1)
-            : compareFileType(a, b);
+        return (a, b) => dir_sort(a, b) || (a.mtime - b.mtime);
+    case "last_modified":
+        return (a, b) => dir_sort(a, b) || (b.mtime - a.mtime);
     case "largest_size":
-        return (a, b) => b.size - a.size;
+        return (a, b) => dir_sort(a, b) || (b.size - a.size);
     case "smallest_size":
-        return (a, b) => a.size - b.size;
+        return (a, b) => dir_sort(a, b) || (a.size - b.size);
     default:
         break;
     }
