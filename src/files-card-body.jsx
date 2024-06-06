@@ -418,7 +418,7 @@ const Row = React.memo(function Item({ file, isSelected }) {
               className="item-size"
               dataLabel="size"
             >
-                {cockpit.format_bytes(file.size)}
+                {file.type === 'reg' && cockpit.format_bytes(file.size)}
             </Td>
             <Td
               className="item-date"
