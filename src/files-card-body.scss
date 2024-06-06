@@ -16,25 +16,53 @@
         text-align: start;
     }
 
-    tr {
+    tbody tr {
         --color-folder: var(--pf-v5-global--primary-color--100);
         --color-icon: var(--pf-v5-global--Color--400);
+        --focus-width: 1px;
+        --focus-solidity: solid;
 
-        &:focus,
+        // We're handling focus state with focus-within below the focus ring at the tr
+        a:focus {
+            outline: none;
+        }
+
+        // Turn focus ring back on at the tr level for selected and focused items
+        &.row-selected,
+        &.row-selected:hover,
         &:focus-within {
+            outline: var(--focus-width) var(--focus-solidity) var(--pf-v5-global--active-color--300);
+        }
+
+        // Hovered items, for both views
+        &:hover {
+            // Propogate the hovering via variables to the link and cursor
+            --pf-v5-global--link--Color: var(--pf-v5-global--link--Color--hover);
+            --pf-v5-global--link--TextDecoration: var(--pf-v5-global--link--TextDecoration--hover);
+            // Show an interactive cursor
+            cursor: pointer;
+            // Standard PF hover color
+            background-color: var(--pf-v5-global--BackgroundColor--200);
+        }
+
+        // When focused, show thicker ring and darker colors for icons
+        &:focus-within {
+            --focus-width: 2px;
             --color-folder: var(--pf-v5-global--primary-color--200);
             --color-icon: var(--pf-v5-global--Color--300);
         }
-    }
 
-    a:focus:not(:focus-visible) {
-        outline: none;
-    }
-
-    a:focus-within {
-        outline-offset: var(--pf-v5-global--spacer--sm);
-        border-radius: var(--pf-v5-global--BorderWidth--md);
-        outline-style: dashed;
+        // Selected icons should have light blue selected color
+        // (to distinguish from hovered items)
+        &.row-selected,
+        &.row-selected:hover {
+            --pf-v5-global--link--Color: var(--pf-v5-global--link--Color--hover);
+            background-color: color-mix(
+                in srgb,
+                var(--pf-v5-global--link--Color--light) 15%,
+                var(--pf-v5-global--BackgroundColor--100)
+            );
+        }
     }
 
     .item-name {
@@ -102,13 +130,6 @@
         color: inherit;
     }
 
-    // Propogate the hovering via variables to the link and cursor
-    tr:hover {
-        --pf-v5-global--link--Color: var(--pf-v5-global--link--Color--hover);
-        --pf-v5-global--link--TextDecoration: var(--pf-v5-global--link--TextDecoration--hover);
-        cursor: pointer;
-    }
-
     &.view-details .item-name a::before {
         display: inline-block;
         margin-inline-end: var(--pf-v5-global--spacer--sm);
@@ -134,10 +155,6 @@
 
         tbody tr {
             border-block: 1px solid var(--pf-v5-global--BorderColor--100);
-        }
-
-        tbody > tr:hover {
-            background-color: var(--pf-v5-global--BackgroundColor--200);
         }
 
         th, td {
@@ -188,6 +205,10 @@
             grid-template-columns: repeat(auto-fill, minmax(8rem,1fr));
             justify-content: space-between;
             margin: var(--pf-v5-global--spacer--sm);
+
+            tr {
+                border-radius: var(--pf-v5-global--BorderWidth--xl);
+            }
         }
 
         tr {
@@ -229,7 +250,6 @@
             }
 
             &:hover {
-                background-color: var(--pf-v5-global--BackgroundColor--200);
                 outline: 1px solid var(--pf-v5-global--BackgroundColor--300);
             }
         }
