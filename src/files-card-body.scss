@@ -1,7 +1,9 @@
 /* Stretch the view to fill the page */
 .pf-v5-c-sidebar__main,
 .pf-v5-c-sidebar__content,
-.pf-v5-c-sidebar__content > .pf-v5-c-card {
+.pf-v5-c-sidebar__content > .pf-v5-c-card,
+.files-contextmenu-area
+{
     block-size: 100%;
 }
 
