@@ -591,8 +591,16 @@ class TestFiles(testlib.MachineCase):
         self.enter_files()
         b.allow_download()
 
-        # Create folder from context menu
-        b.mouse("#files-card-parent", "contextmenu")
+        # We should be able to click anywhere in this div.
+        body_size = b.eval_js("""
+            [
+              document.getElementById('files-card-parent').offsetWidth,
+              document.getElementById('files-card-parent').offsetHeight
+            ]
+        """)
+
+        # Create folder from context menu, click in the middle to assert we can click everywhere.
+        b.mouse("#files-card-parent", "contextmenu", body_size[0] / 2, body_size[0] / 2)
         b.click(".contextMenu button:contains('Create directory')")
         b.set_input_text("#create-directory-input", "newdir")
         b.click("button.pf-m-primary")

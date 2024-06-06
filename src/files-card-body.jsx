@@ -363,7 +363,11 @@ export const FilesCardBody = ({
     });
 
     return (
-        <div id={files_parent_id} ref={folderViewRef}>
+        <div
+          id={files_parent_id}
+          className="files-contextmenu-area"
+          ref={folderViewRef}
+        >
             {contextMenu}
             {sortedFiles.length === 0 &&
                 <EmptyStatePanel
