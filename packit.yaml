@@ -26,12 +26,14 @@ jobs:
     targets:
       - fedora-development
       - fedora-latest-stable
+      - fedora-latest-stable-aarch64
 
   - job: tests
     trigger: pull_request
     targets:
       - fedora-development
       - fedora-latest-stable
+      - fedora-latest-stable-aarch64
 
   - job: copr_build
     trigger: commit
