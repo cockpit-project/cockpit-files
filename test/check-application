@@ -3,8 +3,10 @@
 # See https://github.com/cockpit-project/cockpit/blob/main/test/common/testlib.py
 # "class Browser" and "class MachineCase" for the available API.
 
+import datetime
 import os
 import re
+import shlex
 import subprocess
 import tempfile
 from pathlib import Path
@@ -1291,6 +1293,96 @@ class TestFiles(testlib.MachineCase):
             b.wait_in_text(".pf-v5-c-alert__description", "UploadError: Not permitted to perform this action")
             b.click(".pf-v5-c-alert__action button")
             b.wait_not_present(".pf-v5-c-alert__action")
+
+    def testFileTypes(self):
+        m = self.machine
+        b = self.browser
+
+        exts = {
+            '': 'file',
+            '.tar.gz': 'archive-file',
+            '.ogg': 'audio-file',
+            '.py': 'code-file',
+            '.png': 'image-file',
+            '.txt': 'text-file',
+            '.mkv': 'video-file',
+        }
+
+        files = m.execute(fr"""
+            cd ~admin
+
+            # for each different file category, as per extension recognition...
+            for ext in {shlex.join(exts)}; do
+                # ... create one of each of the 7 fundamental types, minus symlinks
+                mkdir "dir$ext"
+                truncate -s1234 "file$ext"
+                mkfifo "fifo$ext"
+                python3 -c "import socket; socket.socket(socket.AF_UNIX).bind('sock$ext')"
+                mknod "chrdev$ext" c 0 0
+                mknod "blkdev$ext" b 0 0
+
+                # different types of broken symlink
+                ln -sf "loop$ext" "loop$ext"
+                ln -sf /bzzt "broken$ext"
+            done
+
+            # create some symlinks to those things
+            for source in *; do
+                ln -sf "$source" sym-"$source"
+                ln -sf "sym-$source" sym-sym-"$source"
+            done
+
+            ls /home/admin  # get the result
+        """).split()
+
+        # Make sure we created what we expected:
+        #   - len(exts) extension types; times
+        #   - 6 fundamental types plus 2 broken symlinks; times
+        #   - 3 levels of additional symlinking ('file', 'sym-file', 'sym-sym-file')
+        self.assertEqual(len(files), len(exts) * (6 + 2) * 3)
+
+        self.enter_files()
+        b.click("button[aria-label='Display as a list']")
+
+        # For each file we created, assert various things about how we expect
+        # it to be displayed.
+        for name in files:
+            selector = f"[data-item='{name}']"
+            classes = b.attr(selector, 'class').split()
+            self.assertEqual(b.text(f'{selector} .item-name'), name)
+            size = b.text(f'{selector} [data-label="size"]')
+            date = b.text(f'{selector} [data-label="date"]')
+
+            if 'dir' in name:
+                # directories are shown with folder icon, regardless of extension
+                self.assertIn('folder', classes)
+            elif 'file' in name:
+                _, dot, ext = name.partition('.')
+                self.assertIn(exts[dot + ext], classes)
+            else:
+                # specials are shown with file icon (for now), regardless of extension
+                # that includes broken symlinks ('loop*', 'broken*')
+                self.assertIn('file', classes)
+
+            # check if the symlink icon is present/missing, as apropriate
+            if name.startswith(('sym', 'loop', 'broken')):
+                self.assertIn('symlink', classes)
+            else:
+                self.assertNotIn('symlink', classes)
+
+            # check the size field — it should only be present directly on
+            # files and not on symlinks to files (like 'sym-file.txt', etc) and
+            # definitely not shown for any other file type
+            if name.startswith('file'):
+                self.assertEqual(size, '1.23 kB')
+            else:
+                self.assertEqual(size, '')
+
+            # we should always have a reasonable date — make sure it parses
+            datetime.datetime.strptime(date + ' +0000', '%b %d, %Y, %I:%M %p %z')
+
+        # Make sure nothing else was present
+        b.wait_js_cond(f"ph_count('#folder-view tbody tr') == {len(files)}")
 
 
 if __name__ == '__main__':
