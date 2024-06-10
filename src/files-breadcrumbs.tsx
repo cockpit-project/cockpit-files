@@ -18,15 +18,24 @@
  */
 import React from "react";
 
+import { AlertVariant } from "@patternfly/react-core";
 import { Button } from "@patternfly/react-core/dist/esm/components/Button";
+import { Divider } from "@patternfly/react-core/dist/esm/components/Divider";
+import { Dropdown, DropdownItem, DropdownList } from "@patternfly/react-core/dist/esm/components/Dropdown";
+import { MenuToggle, MenuToggleElement } from "@patternfly/react-core/dist/esm/components/MenuToggle";
 import { PageBreadcrumb } from "@patternfly/react-core/dist/esm/components/Page";
 import { TextInput } from "@patternfly/react-core/dist/esm/components/TextInput";
 import { Flex, FlexItem } from "@patternfly/react-core/dist/esm/layouts/Flex";
-import { CheckIcon, HddIcon, PencilAltIcon, TimesIcon } from "@patternfly/react-icons";
+import { CheckIcon, HddIcon, PencilAltIcon, StarIcon, TimesIcon } from "@patternfly/react-icons";
+import { useInit } from "hooks.js";
 
 import cockpit from "cockpit";
 
+import { useFilesContext } from "./app";
+import { basename } from "./common";
 import { SettingsDropdown } from "./settings-dropdown";
+
+const _ = cockpit.gettext;
 
 function useHostname() {
     const [hostname, setHostname] = React.useState<string | null>(null);
@@ -49,6 +58,145 @@ function useHostname() {
     }, []);
 
     return hostname;
+}
+
+function BookmarkButton({ path }: { path: string[] }) {
+    const [isOpen, setIsOpen] = React.useState(false);
+    const [user, setUser] = React.useState<cockpit.UserInfo | null>(null);
+    const [bookmarks, setBookmarks] = React.useState<string[]>([]);
+    const [bookmarkHandle, setBookmarkHandle] = React.useState<cockpit.FileHandle<string> | null>(null);
+
+    const { addAlert, cwdInfo } = useFilesContext();
+
+    const currentPath = path.join("/") || "/";
+    const defaultBookmarks = [];
+    if (user?.home)
+        defaultBookmarks.push({ name: _("Home"), loc: user?.home }); // TODO: add trash
+
+    const parse_uri = (line: string) => {
+        // Drop everything after the space, we don't show renames
+        line = line.replace(/\s.*/, '');
+
+        // Drop the file:/// prefix
+        line = line.replace('file://', '');
+
+        // Nautilus decodes urls as paths can contain spaces
+        return line.split('/').map(part => decodeURIComponent(part))
+                .join('/');
+    };
+
+    useInit(async () => {
+        const user_info = await cockpit.user();
+        setUser(user_info);
+
+        const handle = cockpit.file(`${user_info.home}/.config/gtk-3.0/bookmarks`);
+        setBookmarkHandle(handle);
+
+        handle.watch((content) => {
+            if (content !== null) {
+                setBookmarks(content.trim().split("\n")
+                        .filter(line => line.startsWith("file://"))
+                        .map(parse_uri));
+            } else {
+                setBookmarks([]);
+            }
+        });
+
+        return [handle];
+    });
+
+    const saveBookmark = async () => {
+        cockpit.assert(user !== null, "user is null while saving bookmarks");
+        cockpit.assert(bookmarkHandle !== null, "bookmarkHandle is null while saving bookmarks");
+        const bookmark_file = basename(bookmarkHandle.path);
+        const config_dir = bookmarkHandle.path.replace(bookmark_file, "");
+
+        try {
+            await cockpit.spawn(["mkdir", "-p", config_dir]);
+        } catch (err) {
+            const exc = err as cockpit.BasicError; // HACK: You can't easily type an error in typescript
+            addAlert(_("Unable to create bookmark directory"), AlertVariant.danger, "bookmark-error",
+                     exc.message);
+            return;
+        }
+
+        try {
+            await bookmarkHandle.modify((old_content: string) => {
+                if (bookmarks.includes(currentPath)) {
+                    return old_content.split('\n').filter(line => parse_uri(line) !== currentPath)
+                            .join('\n');
+                } else {
+                    const newBoomark = "file://" + path.map(part => encodeURIComponent(part))
+                            .join('/') + "\n";
+                    return (old_content || '') + newBoomark;
+                }
+            });
+        } catch (err) {
+            const exc = err as cockpit.BasicError; // HACK: You can't easily type an error in typescript
+            addAlert(_("Unable to save bookmark file"), AlertVariant.danger, "bookmark-error",
+                     exc.message);
+        }
+    };
+
+    const handleSelect = (_event: React.MouseEvent<Element, MouseEvent> | undefined,
+        value: string| number | undefined) => {
+        if (value === "bookmark-action") {
+            saveBookmark();
+        } else {
+            cockpit.location.go("/", { path: encodeURIComponent((value as string)) });
+        }
+        setIsOpen(false);
+    };
+
+    if (user === null)
+        return null;
+
+    let actionText = null;
+    if (currentPath !== user.home) {
+        if (bookmarks.includes(currentPath)) {
+            actionText = _("Remove current directory");
+        } else if (cwdInfo !== null) {
+            actionText = _("Add bookmark");
+        }
+    }
+
+    return (
+        <Dropdown
+          isOpen={isOpen}
+          onOpenChange={(isOpen: boolean) => setIsOpen(isOpen)}
+          onSelect={handleSelect}
+          toggle={(toggleRef: React.Ref<MenuToggleElement>) => (
+              <MenuToggle
+                id="bookmark-btn"
+                variant="secondary"
+                icon={<StarIcon />}
+                ref={toggleRef}
+                onClick={() => setIsOpen(!isOpen)}
+                isExpanded={isOpen}
+              />
+          )}
+        >
+            <DropdownList>
+                {defaultBookmarks.map(defaultBookmark =>
+                    <DropdownItem key={defaultBookmark.loc} value={defaultBookmark.loc}>
+                        {defaultBookmark.name}
+                    </DropdownItem>)}
+                {bookmarks.length !== 0 &&
+                    <Divider key="bookmark-divider" />}
+                {bookmarks.map((bookmark: string) => (
+                    <DropdownItem key={bookmark} value={bookmark}>
+                        {bookmark}
+                    </DropdownItem>))}
+                {actionText !== null &&
+                <>
+                    <Divider key="bookmarks-divider" />
+                    <DropdownItem key="bookmark-action" value="bookmark-action">
+                        {actionText}
+                    </DropdownItem>
+                </>}
+            </DropdownList>
+        </Dropdown>
+    );
 }
 
 // eslint-disable-next-line max-len
@@ -99,7 +247,8 @@ export function FilesBreadcrumbs({ path, showHidden, setShowHidden }: { path: st
 
     return (
         <PageBreadcrumb stickyOnBreakpoint={{ default: "top" }}>
-            <Flex spaceItems={{ default: "spaceItemsXs" }}>
+            <Flex spaceItems={{ default: "spaceItemsSm" }}>
+                <BookmarkButton path={path} />
                 {!editMode &&
                     <Button
                       variant="secondary"

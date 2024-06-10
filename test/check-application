@@ -955,7 +955,7 @@ class TestFiles(testlib.MachineCase):
         b.assert_pixels(".pf-v5-c-page__main", "error-folder-view")
 
         # clicking on the home button should take us to the home directory
-        b.click(".breadcrumb-button:nth-of-type(4)")
+        b.click(".breadcrumb-2")
 
         # Now set a+r.  We will be able to enter the directory now, and see the
         # files present, but not read any information about them (not +x).
@@ -1463,6 +1463,183 @@ class TestFiles(testlib.MachineCase):
         # Make sure nothing else was present
         b.wait_js_cond(f"ph_count('#folder-view tbody tr') == {len(files)}")
         b.assert_pixels("#files-card-parent", "icon-list-view", mock={".item-date": "Jun 19, 2024, 11:30 AM"})
+
+    def testBookmark(self) -> None:
+        b = self.browser
+        m = self.machine
+        config_file = "/home/admin/.config/gtk-3.0/bookmarks"
+
+        def read_config() -> str:
+            return m.execute(f"cat {config_file}")
+
+        self.enter_files()
+
+        b.click("#bookmark-btn")
+        b.wait_in_text(".pf-v5-c-menu .pf-v5-c-menu__list-item", "Home")
+        # Home directory cannot be added or removed as bookmark
+        b.wait_not_present(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add bookmark)")
+        b.wait_not_present(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Remove current directory)")
+        b.click("#bookmark-btn")
+        b.wait_not_present(".pf-v5-c-menu .pf-v5-c-menu__list-item")
+
+        # Add a bookmark
+        b.go("/files#/?path=/etc")
+        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "etc")
+        b.wait_visible("[data-item='passwd']")
+
+        b.click("#bookmark-btn")
+        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add bookmark) button")
+        b.wait_not_present(".pf-v5-c-menu")
+
+        # Remove bookmark
+        b.click("#bookmark-btn")
+        b.wait_visible(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('/etc') button")
+        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('Remove current directory') button")
+        b.wait_not_present(".pf-v5-c-menu")
+
+        b.click("#bookmark-btn")
+        b.wait_not_present(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('/etc') button")
+        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add bookmark) button")
+        b.wait_not_present(".pf-v5-c-menu")
+
+        b.go("/files#/?path=/proc")
+        b.wait_not_present(".pf-v5-c-empty-state")
+
+        # Go to bookmark
+        b.click("#bookmark-btn")
+        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('/etc') button")
+        b.wait_not_present(".pf-v5-c-empty-state")
+        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "etc")
+
+        # Bookmarks from nautilus are supported
+        m.execute("""
+            runuser -u admin mkdir '/home/admin/This is a-test'
+            runuser -u admin echo "file:///home/admin/This%20is%20a%2dtest" >> /home/admin/.config/gtk-3.0/bookmarks
+            runuser -u admin echo "file:///tmp Temporary Directory" >> /home/admin/.config/gtk-3.0/bookmarks
+        """)
+        b.click("#bookmark-btn")
+        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('This is a-test') button")
+        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "This is a-test")
+
+        # Removing directory with spaces or aliases
+        b.click("#bookmark-btn")
+        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('Remove current directory') button")
+        b.wait_not_present(".pf-v5-c-menu")
+
+        # Bookmarking a directory with spaces encodes it correctly
+        prev_size = self.stat('%s', config_file)
+        b.click("#bookmark-btn")
+        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add bookmark) button")
+
+        testlib.wait(lambda: self.stat('%s', config_file) != prev_size, tries=15)
+        self.assertIn("file:///home/admin/This%20is%20a-test\n", read_config())
+
+        prev_size = self.stat('%s', config_file)
+
+        b.click("#bookmark-btn")
+        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('tmp') button")
+        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "tmp")
+
+        b.click("#bookmark-btn")
+        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('Remove current directory') button")
+        b.wait_not_present(".pf-v5-c-menu")
+
+        # Wait till file has changed until comparing
+        testlib.wait(lambda: self.stat('%s', config_file) != prev_size, tries=15)
+        self.assertEqual(read_config(), "file:///etc\nfile:///home/admin/This%20is%20a-test\n")
+
+        # Add a directory with special characters
+        special_dir = "super#special*1 2><.,ß"
+        m.execute(f"runuser -u admin mkdir '/home/admin/{special_dir}'")
+        b.go("/files#/?path=/home/admin")
+        b.wait_visible(f"[data-item='{special_dir}'")
+        b.mouse(f"[data-item='{special_dir}']", "dblclick")
+        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", special_dir)
+
+        prev_size = self.stat('%s', config_file)
+        b.click("#bookmark-btn")
+        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add bookmark) button")
+
+        testlib.wait(lambda: self.stat('%s', config_file) != prev_size, tries=15)
+        self.assertEqual("file:///etc\nfile:///home/admin/This%20is%20a-test\nfile:///home/admin/super%23special*1%202%3E%3C.%2C%C3%9F\n",
+                         read_config())
+
+        b.click(".breadcrumb-2")
+        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "admin")
+
+        b.click("#bookmark-btn")
+        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('super#special') button")
+        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", special_dir)
+
+        prev_size = self.stat('%s', config_file)
+        b.click("#bookmark-btn")
+        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('Remove current directory') button")
+        b.wait_not_present(".pf-v5-c-menu")
+
+        testlib.wait(lambda: self.stat('%s', config_file) != prev_size, tries=15)
+        self.assertEqual(read_config(), "file:///etc\nfile:///home/admin/This%20is%20a-test\n")
+
+        # Modifications outside of Cockpit are shown
+        m.execute("""
+            runuser -u admin echo "nfs://lalala" >> /home/admin/.config/gtk-3.0/bookmarks
+            runuser -u admin echo "file:///var" >> /home/admin/.config/gtk-3.0/bookmarks
+        """)
+
+        b.click("#bookmark-btn")
+        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('/var') button")
+        b.wait_not_present(".pf-v5-c-empty-state")
+        b.wait_not_present(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('lalala') button")
+        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "var")
+
+        # Removing bookmarks file removes all bookmarks
+        m.execute("rm -rf /home/admin/.config/gtk-3.0/bookmarks")
+        b.click("#bookmark-btn")
+        b.wait_not_present(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('/etc') button")
+        b.click("#bookmark-btn")
+        b.wait_not_present(".pf-v5-c-menu")
+
+        # Remove a bookmark when the directory is removed
+        m.execute("runuser -u admin echo 'file:///tmp/non-existant' > /home/admin/.config/gtk-3.0/bookmarks")
+        b.click("#bookmark-btn")
+        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('non-existant') button")
+        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "non-existant")
+        b.click("#bookmark-btn")
+        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('Remove current directory') button")
+        b.wait_not_present(".pf-v5-c-menu")
+        # Removing the last bookmark, empties the file
+        testlib.wait(lambda: m.execute(
+                        "if ! test -e /home/admin/.config/gtk-3.0/bookmarks; then echo gone; fi").strip() == "gone")
+
+        b.click("#bookmark-btn")
+        b.wait_not_present(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('Add bookmark') button")
+        b.click("#bookmark-btn")
+        b.wait_not_present(".pf-v5-c-menu")
+
+        # Error conditions
+
+        # When we can't create the directory
+        m.execute("""
+            rm -fr /home/admin/.config/gtk-3.0
+            chattr +i /home/admin/.config
+        """)
+
+        b.go("/files#/?path=/var")
+        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "var")
+
+        b.click("#bookmark-btn")
+        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add bookmark) button")
+        self.wait_modal_inline_alert(b, "Unable to create bookmark directory")
+        b.click(".pf-v5-c-alert__action button")
+        b.wait_not_present(".pf-v5-c-alert__action")
+        m.execute("chattr -i /home/admin/.config")
+
+        # When directory is not writable for us
+        m.execute("mkdir /home/admin/.config/gtk-3.0")
+        b.click("#bookmark-btn")
+        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add bookmark) button")
+        self.wait_modal_inline_alert(b, "Unable to save bookmark file")
+        b.click(".pf-v5-c-alert__action button")
+        b.wait_not_present(".pf-v5-c-alert__action")
 
 
 if __name__ == '__main__':
