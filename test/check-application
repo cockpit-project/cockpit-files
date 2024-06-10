@@ -42,11 +42,6 @@ class TestFiles(testlib.MachineCase):
     def assert_owner(self, path: str, owner: str) -> None:
         self.assert_stat('%U:%G', path, owner)
 
-    # TODO: move to testlib.py
-    def press_special_key(self, name):
-        args = {"type": "keyDown", "key": name}
-        self.browser.cdp.invoke("Input.dispatchKeyEvent", **args)
-
     def delete_item(self, b, filetype, filename, expect_success=True):
         b.click(f"[data-item='{filename}']")
         b.click("#dropdown-menu")
@@ -309,7 +304,7 @@ class TestFiles(testlib.MachineCase):
         b.set_input_text(path_input, "/home/admin")
         b.wait_visible(path_input)
         b.focus(path_input)
-        self.press_special_key("Escape")
+        b.key("Escape")
         b.wait_not_present(path_input)
 
         # Via cancel button
@@ -325,7 +320,7 @@ class TestFiles(testlib.MachineCase):
         b.click(edit_button)
         b.set_input_text(path_input, "/opt")
         b.focus(path_input)
-        self.press_special_key("Enter")
+        b.key("Enter")
         b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "opt")
 
         # Via apply button
@@ -538,7 +533,7 @@ class TestFiles(testlib.MachineCase):
         b.mouse("[data-item='delete2']", "click", ctrlKey=True)
         b.wait_visible("[data-item='delete1'].row-selected")
         b.wait_visible("[data-item='delete2'].row-selected")
-        self.press_special_key("Delete")
+        b.key("Delete")
         b.wait_in_text("h1.pf-v5-c-modal-box__title", "Delete 2 items?")
         b.click("button.pf-m-danger")
 
@@ -1003,9 +998,9 @@ class TestFiles(testlib.MachineCase):
         b.click("[data-item='file0']")
         b.wait_visible("[data-item='file0'].row-selected")
 
-        self.press_special_key("ArrowRight")
+        b.key("ArrowRight")
         b.wait_visible("[data-item='file1'].row-selected")
-        self.press_special_key("ArrowLeft")
+        b.key("ArrowLeft")
         b.wait_visible("[data-item='file0'].row-selected")
 
         # Up / Down depends on the layout, this is tested on mobile where the
@@ -1014,16 +1009,16 @@ class TestFiles(testlib.MachineCase):
         b.click("[data-item='file0']")
         b.wait_visible("[data-item='file0'].row-selected")
 
-        self.press_special_key("ArrowDown")
+        b.key("ArrowDown")
         b.wait_visible("[data-item='file2'].row-selected")
-        self.press_special_key("ArrowUp")
+        b.key("ArrowUp")
         b.wait_visible("[data-item='file0'].row-selected")
 
         m.execute("mkdir /home/admin/foo")
         b.click("[data-item='foo']")
 
         b.wait_visible("[data-item='foo'].row-selected")
-        self.press_special_key("Enter")
+        b.key("Enter")
         b.wait_text(".breadcrumb-button:nth-of-type(5)", "foo")
 
     def testCopyPaste(self):
