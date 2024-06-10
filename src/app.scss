@@ -78,6 +78,11 @@
 
 button.pf-m-secondary.breadcrumb-edit-button {
     margin-inline-end: var(--pf-v5-global--spacer--sm);
+
+    // PatternFly doesn't expect icons in buttons in breadcrumbs, so we need to adjust for that
+    > .pf-v5-c-button__icon {
+        margin-inline: 0;
+    }
 }
 
 button.breadcrumb-edit-apply-button {
@@ -142,4 +147,9 @@ button.breadcrumb-edit-cancel-button {
 // Wrap titles of modals (instead of truncating long filenames)
 .pf-v5-c-modal-box__title, .pf-v5-c-modal-box__title-text {
     white-space: break-spaces;
+}
+
+// Menu toggles should also not have extra space between the content and dropmarker
+.pf-v5-c-menu-toggle > .pf-v5-c-menu-toggle__controls {
+    padding-inline-start: 0;
 }
