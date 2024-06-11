@@ -9,7 +9,12 @@ BuildArch: noarch
 ExclusiveArch: %{nodejs_arches} noarch
 BuildRequires: nodejs
 BuildRequires: make
-BuildRequires: libappstream-glib
+%if 0%{?suse_version}
+# Suse's package has a different name
+BuildRequires:  appstream-glib
+%else
+BuildRequires:  libappstream-glib
+%endif
 BuildRequires: gettext
 %if 0%{?rhel} && 0%{?rhel} <= 8
 BuildRequires: libappstream-glib-devel
