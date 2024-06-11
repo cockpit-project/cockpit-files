@@ -28,6 +28,7 @@ const parser = (await import('argparse')).default.ArgumentParser();
 /* eslint-disable max-len */
 parser.add_argument('-r', '--rsync', { help: "rsync bundles to ssh target after build", metavar: "HOST" });
 parser.add_argument('-w', '--watch', { action: 'store_true', help: "Enable watch mode", default: process.env.ESBUILD_WATCH === "true" });
+parser.add_argument('-m', '--metafile', { help: "Enable bundle size information file", metavar: "FILE" });
 /* eslint-enable max-len */
 const args = parser.parse_args();
 
@@ -90,6 +91,7 @@ const context = await esbuild.context({
     minify: production,
     nodePaths,
     outdir,
+    metafile: !!args.metafile,
     target: ['es2020'],
     plugins: [
         cleanPlugin(),
@@ -111,7 +113,10 @@ const context = await esbuild.context({
 });
 
 try {
-    await context.rebuild();
+    const result = await context.rebuild();
+    if (args.metafile) {
+        fs.writeFileSync(args.metafile, JSON.stringify(result.metafile));
+    }
 } catch (e) {
     if (!args.watch)
         process.exit(1);
