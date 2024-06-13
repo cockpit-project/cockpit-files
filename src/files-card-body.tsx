@@ -17,7 +17,7 @@
  * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React, { useCallback, useEffect, useMemo, useState, useRef } from "react";
+import React, { useCallback, useEffect, useMemo, useState, useRef, useContext } from "react";
 
 import { Divider } from "@patternfly/react-core/dist/esm/components/Divider";
 import { MenuItem, MenuList } from "@patternfly/react-core/dist/esm/components/Menu";
@@ -40,6 +40,7 @@ import { get_permissions, permissionShortStr } from "./common.ts";
 import { confirm_delete } from "./dialogs/delete.tsx";
 import { show_create_directory_dialog } from "./dialogs/mkdir.tsx";
 import { show_rename_dialog } from "./dialogs/rename.tsx";
+import { UploadContext } from "./files-folder-view.tsx";
 import { Sort, filterColumnMapping, filterColumns } from "./header.tsx";
 import { get_menu_items, pasteFromClipboard } from "./menu.tsx";
 import "./files-card-body.scss";
@@ -143,6 +144,7 @@ export const FilesCardBody = ({
     setClipboard,
     showHidden,
     setShowHidden,
+    setDragDropActive,
 } : {
     currentFilter: string,
     setCurrentFilter: React.Dispatch<React.SetStateAction<string>>,
@@ -155,10 +157,12 @@ export const FilesCardBody = ({
     clipboard: string[], setClipboard: React.Dispatch<React.SetStateAction<string[]>>,
     showHidden: boolean,
     setShowHidden: React.Dispatch<React.SetStateAction<boolean>>,
+    setDragDropActive: React.Dispatch<React.SetStateAction<boolean>>,
 }) => {
     const [boxPerRow, setBoxPerRow] = useState(0);
     const dialogs = useDialogs();
     const { addAlert, cwdInfo } = useFilesContext();
+    const { uploadedFiles } = useContext(UploadContext);
 
     const sortedFiles = useMemo(() => {
         return files
@@ -170,7 +174,7 @@ export const FilesCardBody = ({
         return files.filter(file => file.name.startsWith(".")).length;
     }, [files]);
     const isMounted = useRef<boolean>();
-    const folderViewRef = React.useRef<HTMLDivElement>(null);
+    const folderViewRef = useRef<HTMLDivElement>(null);
 
     function calculateBoxPerRow () {
         const boxes = document.querySelectorAll(".fileview tbody > tr") as NodeListOf<HTMLElement>;
@@ -206,7 +210,7 @@ export const FilesCardBody = ({
     });
 
     useEffect(() => {
-        let folderViewElem = null;
+        let folderViewElem: HTMLDivElement | null = null;
 
         const resetSelected = (e: MouseEvent) => {
             if ((e.target instanceof HTMLElement)) {
@@ -424,6 +428,8 @@ export const FilesCardBody = ({
         cwdInfo,
         clipboard,
         setClipboard,
+        uploadedFiles,
+        setDragDropActive,
     ]);
 
     // Generic event handler to look up the corresponding `data-item` for a click event when
