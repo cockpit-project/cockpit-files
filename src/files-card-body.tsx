@@ -170,7 +170,7 @@ export const FilesCardBody = ({
         return files.filter(file => file.name.startsWith(".")).length;
     }, [files]);
     const isMounted = useRef<boolean>();
-    const folderViewRef = React.useRef<HTMLDivElement>(null);
+    const folderViewRef = useRef<HTMLDivElement>(null);
 
     function calculateBoxPerRow () {
         const boxes = document.querySelectorAll(".fileview tbody > tr") as NodeListOf<HTMLElement>;
@@ -206,7 +206,7 @@ export const FilesCardBody = ({
     });
 
     useEffect(() => {
-        let folderViewElem = null;
+        let folderViewElem: HTMLDivElement | null = null;
 
         const resetSelected = (e: MouseEvent) => {
             if ((e.target instanceof HTMLElement)) {

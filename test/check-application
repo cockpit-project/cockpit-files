@@ -979,7 +979,7 @@ class TestFiles(testlib.MachineCase):
 
         # Opening context menu from empty space deselects item
         b.click("[data-item='newdir']")
-        b.mouse("#files-card-parent tbody", "contextmenu", body_size[1] / 2, body_size[1] / 2)
+        b.mouse("#files-card-parent tbody", "contextmenu", body_size[1] / 4, body_size[1] / 4)
         b.assert_pixels(".contextMenu", "overview-context-menu")
         b.click(".contextMenu button:contains('Create directory')")
         b.set_input_text("#create-directory-input", "newdir2")
@@ -2357,6 +2357,114 @@ class TestFiles(testlib.MachineCase):
             b.wait_in_text(".pf-v5-c-alert__description", "UploadError: Not permitted to perform this action")
             b.click(".pf-v5-c-alert__action button")
             b.wait_not_present(".pf-v5-c-alert__action")
+
+            b.click("button[aria-label='Display as a list']")
+            b.go("/files#/?path=/home/admin")
+
+            # Test drag & drop upload
+            b.eval_js('''
+                      function dragFileEvent(sel, eventType, filename) {
+                          const el = window.ph_find(sel);
+
+                          let dataTransfer = null;
+                          if (filename) {
+                              // Synthetize a file DataTransfer action
+                              const content = "Random file content: 4";
+                              const file = new File([content], filename, { type: "text/plain" });
+                              dataTransfer = new DataTransfer();
+                              dataTransfer.dropEffect = "move";
+
+                              Object.defineProperty(dataTransfer, 'files', {
+                                  value: [file],
+                                  writable: false,
+                              });
+                          }
+
+                          const ev = new DragEvent(eventType, { bubbles: true, dataTransfer: dataTransfer });
+                          el.dispatchEvent(ev);
+                      }''')
+
+            def drag_file_event(selector: str, dragType: str, filename: str | None = None) -> None:
+                b.wait_visible(selector)
+                b.call_js_func('dragFileEvent', selector, dragType, filename)
+
+            b.wait_not_present(".drag-drop-upload")
+            drag_file_event(".fileview-wrapper", 'dragenter')
+            b.wait_visible(".drag-drop-upload")
+            b.assert_pixels(".files-card", "drag-drop-upload-dropzone",
+                            mock={".item-date": "Jun 19, 2024, 11:30 AM"})
+            drag_file_event(".fileview-wrapper", 'drop', 'drag-drop-testfile.txt')
+            b.wait_in_text(".pf-v5-c-alert__title", "File uploaded")
+            b.click(".pf-v5-c-alert__action button")
+            b.wait_visible("[data-item='drag-drop-testfile.txt']")
+            b.wait_not_present(".pf-v5-c-alert__action")
+            b.wait_not_present(".drag-drop-upload")
+
+            # Upload same file again - warning should show up
+            drag_file_event(".fileview-wrapper", 'dragenter')
+            b.wait_visible(".drag-drop-upload")
+            drag_file_event(".fileview-wrapper", 'dragover')
+            drag_file_event(".fileview-wrapper", 'drop', 'drag-drop-testfile.txt')
+            b.wait_in_text("h1.pf-v5-c-modal-box__title", "Replace file drag-drop-testfile.txt?")
+            b.click(".pf-v5-c-modal-box button.pf-m-link")
+            b.wait_not_present(".pf-v5-c-modal-box")
+
+            # Drag file around to test if upload icon shows up and hides accordingly
+            drag_file_event(".fileview-wrapper", 'dragenter')
+            b.wait_visible(".drag-drop-upload")
+            drag_file_event(".fileview-wrapper", 'dragleave')
+            b.wait_not_present(".drag-drop-upload")
+
+            drag_file_event(".fileview-wrapper", 'dragenter')
+            b.wait_visible(".drag-drop-upload")
+            # Hover over element which is a child of .fileview-wrapper
+            drag_file_event(".fileview-wrapper [data-item='Downloads'] .item-name", 'dragenter')
+            drag_file_event(".fileview-wrapper", 'dragleave')
+            b.wait_visible(".drag-drop-upload")
+            drag_file_event(".fileview-wrapper [data-item='project'] .item-name", 'dragenter')
+            drag_file_event(".fileview-wrapper [data-item='Downloads'] .item-name", 'dragleave')
+            b.wait_visible(".drag-drop-upload")
+            # Drag away from the .fileview-wrapper
+            drag_file_event(".fileview-wrapper [data-item='project'] .item-name", 'dragleave')
+            b.wait_not_present(".drag-drop-upload")
+            drag_file_event(".fileview-wrapper", 'dragenter')
+            b.wait_visible(".drag-drop-upload")
+            drag_file_event(".fileview-wrapper", 'dragleave')
+            b.wait_not_present(".drag-drop-upload")
+
+            # Drag & drop is disabled when upload is in progress
+            b.click("#upload-file-btn")
+            b.upload_files("#upload-file-btn + input[type='file']", [big_file])
+            b.wait_visible("#upload-file-btn:disabled")
+            b.wait_not_present(".drag-drop-upload")
+            drag_file_event(".fileview-wrapper", 'dragenter')
+            b.wait_visible(".drag-drop-upload-blocked")
+            b.assert_pixels(".files-card", "drag-drop-upload-dropzone-blocked",
+                            mock={".item-date": "Jun 19, 2024, 11:30 AM"})
+            drag_file_event(".fileview-wrapper", 'dragleave')
+            b.wait_not_present(".drag-drop-upload-blocked")
+            # Dropping the file does nothing
+            drag_file_event(".fileview-wrapper", 'dragenter')
+            b.wait_visible(".drag-drop-upload-blocked")
+            drag_file_event(".fileview-wrapper", 'drop', 'drag-drop-file-2.txt')
+            b.wait_not_present(".drag-drop-upload")
+            b.click("#upload-progress-btn")
+            b.wait_in_text(".upload-progress-0", "bigfile.img")
+            b.wait_not_present("[data-item='drag-drop-file-2.txt']")
+            b.click("#upload-progress-btn")
+            b.click(".cancel-button-0")
+            b.click(".pf-v5-c-alert__action button")
+
+            # Change directory and upload
+            b.mouse("[data-item='project']", "dblclick")
+            drag_file_event(".fileview-wrapper", 'dragenter')
+            b.wait_visible(".drag-drop-upload")
+            drag_file_event(".fileview-wrapper", 'drop', 'drag-drop-testfile.txt')
+            b.wait_in_text(".pf-v5-c-alert__title", "File uploaded")
+            b.click(".pf-v5-c-alert__action button")
+            b.wait_visible("[data-item='drag-drop-testfile.txt']")
+            b.wait_not_present(".pf-v5-c-alert__action")
+            b.wait_not_present(".drag-drop-upload")
 
     def testFileTypes(self) -> None:
         m = self.machine
