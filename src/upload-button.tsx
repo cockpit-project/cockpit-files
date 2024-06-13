@@ -267,7 +267,7 @@ export const UploadButton = ({
     };
 
     const isUploading = Object.keys(uploadedFiles).length !== 0;
-    let icon;
+    let popover;
 
     if (isUploading) {
         let totalSize = 0;
@@ -281,25 +281,7 @@ export const UploadButton = ({
 
         const overallProgress = ((totalSent / totalSize) * 100).toFixed(2);
 
-        icon = (
-            <Button
-              onClick={() => setPopover(true)}
-              className="progress-wrapper"
-              variant="plain"
-              icon={
-                  <div
-                    id="upload-progress-btn"
-                    className="progress-pie"
-                    title={cockpit.format(_("Upload $0% completed"), overallProgress)}
-                    style={{ "--progress": `${overallProgress}%` } as React.CSSProperties}
-                  />
-              }
-            />
-        );
-    }
-
-    return (
-        <>
+        popover = (
             <Popover
               className="upload-popover"
               position={PopoverPosition.bottom}
@@ -331,8 +313,26 @@ export const UploadButton = ({
               isVisible={showPopover}
               shouldClose={() => setPopover(false)}
             >
-                {icon}
+                <Button
+                  onClick={() => setPopover(true)}
+                  className="progress-wrapper"
+                  variant="plain"
+                  icon={
+                      <div
+                        id="upload-progress-btn"
+                        className="progress-pie"
+                        title={cockpit.format(_("Upload $0% completed"), overallProgress)}
+                        style={{ "--progress": `${overallProgress}%` } as React.CSSProperties}
+                      />
+                  }
+                />
             </Popover>
+        );
+    }
+
+    return (
+        <>
+            {popover}
             <Button
               id="upload-file-btn"
               className="upload-button"
