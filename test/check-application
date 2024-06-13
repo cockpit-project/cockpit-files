@@ -21,15 +21,15 @@ import testlib
 @testlib.nondestructive
 class TestFiles(testlib.MachineCase):
     @classmethod
-    def setUpClass(_cls):
+    def setUpClass(_cls) -> None:
         # Run browser in UTC as the displayed time is in the browser's timezone
         os.environ['TZ'] = 'UTC'
 
-    def setUp(self):
+    def setUp(self) -> None:  # type: ignore[override]
         super().setUp()
         self.restore_dir("/home/admin")
 
-    def enter_files(self):
+    def enter_files(self) -> None:
         self.login_and_go("/files")
         self.browser.wait_not_present(".pf-c-empty-state")
 
@@ -42,7 +42,7 @@ class TestFiles(testlib.MachineCase):
     def assert_owner(self, path: str, owner: str) -> None:
         self.assert_stat('%U:%G', path, owner)
 
-    def delete_item(self, b, filetype, filename, expect_success=True):
+    def delete_item(self, b: testlib.Browser, filetype: str, filename: str, *, expect_success: bool = True) -> None:
         b.click(f"[data-item='{filename}']")
         b.click("#dropdown-menu")
         b.click("#delete-item")
@@ -52,16 +52,16 @@ class TestFiles(testlib.MachineCase):
             b.wait_not_present(".pf-v5-c-modal-box")
             b.wait_not_present(f"[data-item='{filename}']")
 
-    def create_directory(self, b, filename):
+    def create_directory(self, b: testlib.Browser, filename: str) -> None:
         b.click("#dropdown-menu")
         b.click("#create-item")
         b.set_input_text("#create-directory-input", f"{filename}")
         b.click("button.pf-m-primary")
 
-    def wait_modal_inline_alert(self, b, msg):
+    def wait_modal_inline_alert(self, b: testlib.Browser, msg: str) -> None:
         b.wait_in_text("h4.pf-v5-c-alert__title", msg)
 
-    def rename_item(self, b, itemname, newname):
+    def rename_item(self, b: testlib.Browser, itemname: str, newname: str) -> None:
         b.click(f"[data-item='{itemname}']")
         b.click("#dropdown-menu")
         b.click("#rename-item")
@@ -69,7 +69,7 @@ class TestFiles(testlib.MachineCase):
         b.set_input_text("#rename-item-input", f"{newname}")
         b.click("button.pf-m-primary")
 
-    def waitDownloadFile(self, filename, expected_size=None, content=None):
+    def waitDownloadFile(self, filename: str, expected_size: int | None = None, content: str | None = None) -> None:
         b = self.browser
         filepath = os.path.join(b.cdp.download_dir, filename)
 
@@ -83,7 +83,7 @@ class TestFiles(testlib.MachineCase):
             with open(filepath) as fp:
                 self.assertEqual(fp.read(), content)
 
-    def testBasic(self):
+    def testBasic(self) -> None:
         b = self.browser
         m = self.machine
 
@@ -207,7 +207,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_in_text(".pf-v5-c-empty-state__body", "No such file or directory")
         b.wait_visible("#dropdown-menu:disabled")
 
-    def testNavigation(self):
+    def testNavigation(self) -> None:
         b = self.browser
         m = self.machine
 
@@ -348,7 +348,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_val(path_input, "/")
         b.click(cancel_button)
 
-    def testSorting(self):
+    def testSorting(self) -> None:
         b = self.browser
         m = self.machine
 
@@ -474,7 +474,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_text("#folder-view tbody tr:nth-of-type(5) .item-name", "aaa")
         b.wait_text("#folder-view tbody tr:nth-of-type(6) .item-name", "ccc")
 
-    def testDelete(self):
+    def testDelete(self) -> None:
         b = self.browser
         m = self.machine
 
@@ -541,7 +541,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_not_present("[data-item='delete1']")
         b.wait_not_present("[data-item='delete2']")
 
-    def testCreateDirectory(self):
+    def testCreateDirectory(self) -> None:
         b = self.browser
         m = self.machine
 
@@ -614,7 +614,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_visible("[data-item='newdir']")
         self.assert_owner('/tmp/newdir', 'root:root')
 
-    def testContextMenu(self):
+    def testContextMenu(self) -> None:
         b = self.browser
         m = self.machine
 
@@ -685,7 +685,7 @@ class TestFiles(testlib.MachineCase):
         b.mouse("[data-item='testfile']", "contextmenu")
         b.wait_visible(".contextMenu button:contains('Delete')")
 
-    def testDownload(self):
+    def testDownload(self) -> None:
         b = self.browser
         m = self.machine
 
@@ -699,7 +699,7 @@ class TestFiles(testlib.MachineCase):
         b.click(".contextMenu button:contains('Download')")
         self.waitDownloadFile("test.iso", 1500 * 1024 * 1024)
 
-    def testRename(self):
+    def testRename(self) -> None:
         b = self.browser
         m = self.machine
 
@@ -764,7 +764,7 @@ class TestFiles(testlib.MachineCase):
         b.click("div.pf-v5-c-modal-box__close")
         m.execute("sudo chattr -i /home/admin/new\\ dir1")
 
-    def testHiddenItems(self):
+    def testHiddenItems(self) -> None:
         b = self.browser
         m = self.machine
 
@@ -791,16 +791,16 @@ class TestFiles(testlib.MachineCase):
         b.wait_visible("[data-item='f1']")
         b.wait_visible("[data-item='.f2']")
 
-    def testPermissions(self):
+    def testPermissions(self) -> None:
         b = self.browser
         m = self.machine
 
-        def wait_permissions(permission):
+        def wait_permissions(permission: str) -> None:
             b.wait_text("#description-list-owner-permissions dd", permission)
             b.wait_text("#description-list-group-permissions dd", permission)
             b.wait_text("#description-list-other-permissions dd", permission)
 
-        def select_access(access):
+        def select_access(access: str) -> None:
             b.select_from_dropdown("#edit-permissions-owner-access", access)
             b.select_from_dropdown("#edit-permissions-group-access", access)
             b.select_from_dropdown("#edit-permissions-other-access", access)
@@ -918,7 +918,7 @@ class TestFiles(testlib.MachineCase):
         b.click("button.pf-m-link")
         b.wait_not_present(".pf-v5-c-modal-box")
 
-    def testErrors(self):
+    def testErrors(self) -> None:
         b = self.browser
         m = self.machine
 
@@ -930,7 +930,7 @@ class TestFiles(testlib.MachineCase):
         b.drop_superuser()
         b.wait_in_text(".pf-v5-c-empty-state", "Permission denied")
 
-    def testMultiSelect(self):
+    def testMultiSelect(self) -> None:
         b = self.browser
         m = self.machine
 
@@ -981,7 +981,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_not_present("[data-item='file1']")
         b.wait_not_present("[data-item='file2']")
 
-    def testKeyboardNav(self):
+    def testKeyboardNav(self) -> None:
         b = self.browser
         m = self.machine
 
@@ -1021,7 +1021,7 @@ class TestFiles(testlib.MachineCase):
         b.key("Enter")
         b.wait_text(".breadcrumb-button:nth-of-type(5)", "foo")
 
-    def testCopyPaste(self):
+    def testCopyPaste(self) -> None:
         b = self.browser
         m = self.machine
 
@@ -1072,20 +1072,20 @@ class TestFiles(testlib.MachineCase):
 
     @testlib.skipBrowser(".upload_files() doesn't work on Firefox", "firefox")
     @testlib.skipImage("Debian-testing has Cockpit 311 without new upload support in fsreplace1", "debian-testing")
-    def testUpload(self):
+    def testUpload(self) -> None:
         b = self.browser
         m = self.machine
 
         self.enter_files()
 
-        def get_piechart_progress(sel):
+        def get_piechart_progress(sel: str) -> int:
             b.wait_visible(sel)
             style = b.attr(sel, "style")
             m = re.search(r"--progress: (\d+).\d+%;", style)
             assert m is not None
             return int(m.group(1))
 
-        def dir_file_count(directory):
+        def dir_file_count(directory: str) -> int:
             return int(m.execute(f"find {directory} -mindepth 1 -maxdepth 1 | wc -l").strip())
 
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1148,7 +1148,7 @@ class TestFiles(testlib.MachineCase):
                 with open(file, "w") as fp:
                     fp.write(test_data)
 
-            def verify_uploaded_files(changed=False):
+            def verify_uploaded_files(*, changed: bool = False) -> None:
                 for f in files:
                     contents = m.execute(f"cat {dest_dir}/{os.path.basename(f)}")
                     if changed:
@@ -1322,7 +1322,7 @@ class TestFiles(testlib.MachineCase):
             b.click(".pf-v5-c-alert__action button")
             b.wait_not_present(".pf-v5-c-alert__action")
 
-    def testFileTypes(self):
+    def testFileTypes(self) -> None:
         m = self.machine
         b = self.browser
 

@@ -6,6 +6,8 @@ mypy_path = 'test/common:bots'
 exclude = [
     "bots"
 ]
+strict = true
+warn_return_any = false # https://github.com/python/mypy/issues/17380
 
 [tool.ruff]
 exclude = [
