@@ -1,6 +1,27 @@
-"use strict";
+/*
+ * This file is part of Cockpit.
+ *
+ * Copyright (C) 2024 Red Hat, Inc.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
 
-import cockpit from "cockpit";
+'use strict';
+
+import cockpit from 'cockpit';
+
+import { EventEmitter } from './event';
 
 function is_json_dict(value: cockpit.JsonValue): value is cockpit.JsonObject {
     return value?.constructor === Object;
@@ -35,68 +56,70 @@ export interface FileInfo {
     gid?: number;
     group?: string | number;
     mtime?: number;
-    content?: string;
     target?: string;
-    entries?: {
-        [filename: string]: FileInfo;
-    };
-    targets?: {
-        [filename: string]: FileInfo;
-    };
+    entries?: Record<string, FileInfo>;
+    targets?: Record<string, FileInfo>;
 }
 
-interface FsInfoError {
-    problem?: string;
-    message?: string;
-    errno?: string;
+export interface FsInfoError {
+    problem: string;
+    message: string;
+    errno: string;
 }
 
-interface FileInfoState {
-    info: FileInfo | null;
-    error: FsInfoError | null;
+export interface FsInfoState {
+    info?: FileInfo;
+    error?: FsInfoError;
     loading: boolean;
 }
 
-interface FsInfoHandle {
+export interface FsInfoEvents {
+    change(state: FsInfoState): void;
     close(): void;
-    effect(callback: ((state: FileInfoState) => void)): void;
-    entry(name: string): FileInfo | null;
-    state: FileInfoState;
-    target(name: string): FileInfo | null;
 }
 
-export function fsinfo(path: string, attrs: string[], options?: cockpit.JsonObject) {
-    const self: FsInfoHandle = {
-        close,
-        effect,
-        entry,
-        state: {
-            info: null,
-            error: null,
-            loading: true,
-        },
-        target,
-    };
+export class FsInfoClient extends EventEmitter<FsInfoEvents> {
+    state: FsInfoState = { loading: true };
 
-    const callbacks: ((state: FileInfoState) => void)[] = [];
+    private partial_state: cockpit.JsonValue = null;
+    private channel: cockpit.Channel<string>;
 
-    function close() {
-        channel.close();
+    constructor(path: string, attrs: (keyof FileInfo)[], options?: cockpit.JsonObject) {
+        super();
+
+        this.channel = cockpit.channel({
+            payload: "fsinfo",
+            path,
+            attrs,
+            watch: true,
+            ...options
+        });
+
+        this.channel.addEventListener("message", (_event, payload) => {
+            this.partial_state = json_merge(this.partial_state, JSON.parse(payload));
+
+            if (is_json_dict(this.partial_state) && !this.partial_state.partial) {
+                this.state = { ...this.partial_state, loading: false };
+                this.emit('change', this.state);
+            }
+        });
+
+        this.channel.addEventListener("close", () => {
+            this.emit('close');
+        });
     }
 
-    function effect(callback: (state: FileInfoState) => void) {
-        callback(self.state);
-        callbacks.push(callback);
-        return () => callbacks.splice(callbacks.indexOf(callback), 1);
+    close() {
+        this.channel.close();
     }
 
-    function entry(name: string): FileInfo | null {
-        return self.state.info?.entries?.[name] ?? null;
+    static entry(info: FileInfo, name: string): FileInfo | null {
+        return info.entries?.[name] ?? null;
     }
 
-    function target(name: string): FileInfo | null {
-        const entries = self.state.info?.entries ?? {};
-        const targets = self.state.info?.targets ?? {};
+    static target(info: FileInfo, name: string): FileInfo | null {
+        const entries = info.entries ?? {};
+        const targets = info.targets ?? {};
 
         let entry = entries[name] ?? null;
         for (let i = 0; i < 40; i++) {
@@ -104,7 +127,7 @@ export function fsinfo(path: string, attrs: string[], options?: cockpit.JsonObje
             if (!target)
                 return entry;
             if (target === '.')
-                return self.state.info;
+                return info;
             // HACK: fsinfo should return this, but doesn't.
             // We know we only need `.type`, so hardcode it.
             if (target === '..')
@@ -113,33 +136,17 @@ export function fsinfo(path: string, attrs: string[], options?: cockpit.JsonObje
         }
         return null; // ELOOP
     }
+}
 
-    const channel = cockpit.channel({
-        superuser: "try",
-        payload: "fsinfo",
-        path,
-        attrs,
-        "close-on-error": false,
-        watch: true,
-        ...options
-    });
-
-    let state: cockpit.JsonValue = null;
-    channel.addEventListener("message", (_event: CustomEvent, payload: string) => {
-        state = json_merge(state, JSON.parse(payload));
-
-        if (is_json_dict(state) && !state.partial) {
-            self.state = {
-                info: is_json_dict(state.info) ? state.info : null,
-                error: is_json_dict(state.error) ? state.error : null,
-                loading: false
-            };
-
-            for (const callback of callbacks) {
-                callback(self.state);
+export function fsinfo(path: string, attrs: (keyof FileInfo)[], options?: cockpit.JsonObject): Promise<FileInfo> {
+    return new Promise((resolve, reject) => {
+        const client = new FsInfoClient(path, attrs, { ...options, watch: false });
+        client.on('close', () => {
+            if (client.state.info) {
+                resolve(client.state.info);
+            } else {
+                reject(client.state.error);
             }
-        }
+        });
     });
-
-    return self;
 }
