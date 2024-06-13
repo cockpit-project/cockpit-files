@@ -9,7 +9,7 @@ export enum Category {
     VIDEO,
 }
 
-export interface CategoryMetadata {
+export interface CategoryMetadata extends Record<string, string> {
     name: string;
     class: string;
 }
