@@ -105,7 +105,7 @@ export const Application = () => {
                 { superuser: 'try' }
             );
 
-            return client.on('change', (state) => {
+            const disconnect = client.on('change', (state) => {
                 setLoading(false);
                 setLoadingFiles(!(state.info || state.error));
                 setCwdInfo(state.info || null);
@@ -118,6 +118,11 @@ export const Application = () => {
                 });
                 setFiles(files);
             });
+
+            return () => {
+                disconnect();
+                client.close();
+            };
         },
         [options, currentPath]
     );
