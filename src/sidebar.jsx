@@ -17,27 +17,21 @@
  * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
  */
 
-import cockpit from "cockpit";
-
 import React, { useState, useEffect } from "react";
 
+import { Button } from "@patternfly/react-core/dist/esm/components/Button";
+import { Card, CardBody, CardHeader, CardTitle } from "@patternfly/react-core/dist/esm/components/Card";
 import {
-    Button,
-    Card,
-    CardBody,
-    CardHeader,
-    CardTitle,
     DescriptionList,
     DescriptionListDescription,
     DescriptionListGroup,
-    DescriptionListTerm,
-    Divider,
-    DropdownItem,
-    Text,
-    TextContent,
-    TextVariants,
-} from "@patternfly/react-core";
+    DescriptionListTerm
+} from "@patternfly/react-core/dist/esm/components/DescriptionList";
+import { Divider } from "@patternfly/react-core/dist/esm/components/Divider";
+import { DropdownItem } from "@patternfly/react-core/dist/esm/components/Dropdown";
+import { Text, TextContent, TextVariants } from "@patternfly/react-core/dist/esm/components/Text";
 
+import cockpit from "cockpit";
 import * as timeformat from "timeformat";
 import { useDialogs } from "dialogs.jsx";
 import { KebabDropdown } from "cockpit-components-dropdown";

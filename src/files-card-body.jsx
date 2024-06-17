@@ -18,13 +18,10 @@
  */
 
 import React, { useCallback, useEffect, useMemo, useState, useRef } from "react";
-import {
-    Flex,
-    Spinner,
-    MenuItem,
-    MenuList,
-    Divider,
-} from "@patternfly/react-core";
+import { Divider } from "@patternfly/react-core/dist/esm/components/Divider";
+import { Flex } from "@patternfly/react-core/dist/esm/layouts/Flex";
+import { Spinner } from "@patternfly/react-core/dist/esm/components/Spinner";
+import { MenuItem, MenuList } from "@patternfly/react-core/dist/esm/components/Menu";
 import { Table, Thead, Tr, Th, Tbody, Td } from '@patternfly/react-table';
 
 import cockpit from "cockpit";

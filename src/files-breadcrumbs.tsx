@@ -16,11 +16,15 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
  */
-import cockpit from "cockpit";
 import React from "react";
-import { CheckIcon, HddIcon, PencilAltIcon, TimesIcon } from "@patternfly/react-icons";
 
-import { Button, Flex, FlexItem, PageBreadcrumb, TextInput } from "@patternfly/react-core";
+import { CheckIcon, HddIcon, PencilAltIcon, TimesIcon } from "@patternfly/react-icons";
+import { Button } from "@patternfly/react-core/dist/esm/components/Button";
+import { Flex, FlexItem } from "@patternfly/react-core/dist/esm/layouts/Flex";
+import { PageBreadcrumb } from "@patternfly/react-core/dist/esm/components/Page";
+import { TextInput } from "@patternfly/react-core/dist/esm/components/TextInput";
+
+import cockpit from "cockpit";
 
 import { SettingsDropdown } from "./settings-dropdown.jsx";
 

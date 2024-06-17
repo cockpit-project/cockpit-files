@@ -17,16 +17,17 @@
  * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
  */
 
-import cockpit from "cockpit";
-import { superuser } from "superuser";
 import React, { useContext, useEffect, useMemo, useState } from "react";
+
+import { Page, PageSection } from "@patternfly/react-core/dist/esm/components/Page";
+import { Sidebar, SidebarPanel, SidebarContent } from "@patternfly/react-core/dist/esm/components/Sidebar";
 import {
-    Page, PageSection,
-    Sidebar, SidebarPanel, SidebarContent,
     AlertGroup, Alert, AlertVariant, AlertActionCloseButton
-} from "@patternfly/react-core";
+} from "@patternfly/react-core/dist/esm/components/Alert";
 import { ExclamationCircleIcon } from "@patternfly/react-icons";
 
+import cockpit from "cockpit";
+import { superuser } from "superuser";
 import { WithDialogs } from "dialogs.jsx";
 import { EmptyStatePanel } from "cockpit-components-empty-state.jsx";
 import { FilesBreadcrumbs } from "./files-breadcrumbs";

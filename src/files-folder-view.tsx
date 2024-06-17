@@ -18,7 +18,8 @@
  */
 
 import React, { useState } from "react";
-import { Card } from "@patternfly/react-core";
+
+import { Card } from '@patternfly/react-core/dist/esm/components/Card';
 
 import { FolderFileInfo } from "./app";
 import { FilesCardBody } from "./files-card-body.jsx";
