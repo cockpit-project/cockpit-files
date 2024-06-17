@@ -17,24 +17,19 @@
  * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
  */
 
-import cockpit from "cockpit";
 import React, { useState, useRef } from "react";
 
-import {
-    AlertVariant,
-    Button,
-    Checkbox,
-    Divider,
-    Modal,
-    ModalVariant,
-    Popover,
-    PopoverPosition,
-    Progress,
-    Flex,
-    FlexItem,
-} from "@patternfly/react-core";
+import { AlertVariant } from "@patternfly/react-core/dist/esm/components/Alert";
+import { Button } from "@patternfly/react-core/dist/esm/components/Button";
+import { Checkbox } from "@patternfly/react-core/dist/esm/components/Checkbox";
+import { Divider } from "@patternfly/react-core/dist/esm/components/Divider";
+import { Flex, FlexItem } from "@patternfly/react-core/dist/esm/layouts/Flex";
+import { Modal, ModalVariant } from "@patternfly/react-core/dist/esm/components/Modal";
+import { Popover, PopoverPosition } from "@patternfly/react-core/dist/esm/components/Popover";
+import { Progress } from "@patternfly/react-core/dist/esm/components/Progress";
 import { TrashIcon } from "@patternfly/react-icons";
 
+import cockpit from "cockpit";
 import { upload } from "cockpit-upload-helper";
 import { fmt_to_fragments } from "utils.jsx";
 import { useDialogs } from "dialogs.jsx";

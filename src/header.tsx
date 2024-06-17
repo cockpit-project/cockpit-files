@@ -20,21 +20,13 @@
 import cockpit from "cockpit";
 import React, { useState } from "react";
 
-import {
-    CardHeader,
-    CardTitle,
-    Divider,
-    Flex,
-    MenuToggle,
-    MenuToggleAction,
-    SearchInput,
-    Select,
-    SelectList,
-    SelectOption,
-    Text,
-    TextContent,
-    TextVariants
-} from "@patternfly/react-core";
+import { CardHeader, CardTitle } from "@patternfly/react-core/dist/esm/components/Card";
+import { Divider } from "@patternfly/react-core/dist/esm/components/Divider";
+import { Flex } from "@patternfly/react-core/dist/esm/layouts/Flex";
+import { MenuToggle, MenuToggleAction } from "@patternfly/react-core/dist/esm/components/MenuToggle";
+import { SearchInput } from "@patternfly/react-core/dist/esm/components/SearchInput";
+import { Select, SelectList, SelectOption } from "@patternfly/react-core/dist/esm/components/Select";
+import { Text, TextContent, TextVariants } from "@patternfly/react-core/dist/esm/components/Text";
 import { SortByDirection } from '@patternfly/react-table';
 import { GripVerticalIcon, ListIcon } from "@patternfly/react-icons";
 

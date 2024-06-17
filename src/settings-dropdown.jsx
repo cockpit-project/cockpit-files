@@ -16,20 +16,14 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
  */
-import cockpit from "cockpit";
 import React, { useState } from "react";
 import { CheckIcon, EllipsisVIcon } from "@patternfly/react-icons";
+import { Dropdown, DropdownItem, DropdownList } from "@patternfly/react-core/dist/esm/components/Dropdown";
+import { Flex, FlexItem } from "@patternfly/react-core/dist/esm/layouts/Flex";
+import { Icon } from "@patternfly/react-core/dist/esm/components/Icon";
+import { MenuToggle } from "@patternfly/react-core/dist/esm/components/MenuToggle";
 
-import {
-    Dropdown,
-    DropdownItem,
-    DropdownList,
-    Flex,
-    FlexItem,
-    Icon,
-    MenuToggle
-} from "@patternfly/react-core";
-
+import cockpit from "cockpit";
 const _ = cockpit.gettext;
 
 export const SettingsDropdown = ({ showHidden, setShowHidden }) => {

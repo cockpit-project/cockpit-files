@@ -17,19 +17,15 @@
  * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
  */
 
-import cockpit from "cockpit";
 import React, { useState } from "react";
-import {
-    Button,
-    Form, FormGroup,
-    FormSection,
-    FormSelect,
-    FormSelectOption,
-    Modal, ModalVariant,
-    Stack,
-    TextInput,
-} from "@patternfly/react-core";
+import { Button } from "@patternfly/react-core/dist/esm/components/Button";
+import { Form, FormGroup, FormSection } from "@patternfly/react-core/dist/esm/components/Form";
+import { FormSelect, FormSelectOption } from "@patternfly/react-core/dist/esm/components/FormSelect";
+import { Modal, ModalVariant } from "@patternfly/react-core/dist/esm/components/Modal";
+import { Stack } from "@patternfly/react-core/dist/esm/layouts/Stack";
+import { TextInput } from "@patternfly/react-core/dist/esm/components/TextInput";
 
+import cockpit from "cockpit";
 import { useDialogs } from "dialogs.jsx";
 import { InlineNotification } from "cockpit-components-inline-notification";
 import { FormHelper } from 'cockpit-components-form-helper.jsx';
