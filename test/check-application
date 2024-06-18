@@ -88,6 +88,7 @@ class TestFiles(testlib.MachineCase):
         m = self.machine
 
         self.enter_files()
+
         b.allow_download()
         # expected heading
         b.wait_text("#files-card-header", "Directories & files")
@@ -97,6 +98,7 @@ class TestFiles(testlib.MachineCase):
 
         # default directory is empty
         b.wait_text(".pf-v5-c-empty-state__body", "Directory is empty")
+        b.assert_pixels(".pf-v5-c-page__main", "empty-folder-view")
 
         # new files are auto-detected
         m.execute("touch --date @1641038400 /home/admin/newfile")
@@ -116,6 +118,8 @@ class TestFiles(testlib.MachineCase):
         b.wait_visible("[data-item='dot'].symlink.folder")
         m.execute("ln -sf .. /home/admin/dotdot")
         b.wait_visible("[data-item='dotdot'].symlink.folder")
+
+        b.assert_pixels("#files-card-parent", "folder-view")
 
         # file sidebar information
         b.click("[data-item='newfile']")
@@ -446,6 +450,7 @@ class TestFiles(testlib.MachineCase):
 
         # Sort headers also work in the list view
         b.click("button[aria-label='Display as a list']")
+        b.assert_pixels("#files-card-parent", "list-view", ignore=[".item-date"])
         b.wait_visible("th[aria-sort='ascending'].pf-m-selected button:contains(Name)")
 
         # clicking reverse sort order
@@ -517,6 +522,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_visible("[data-item='newfile']")
         self.delete_item(b, "file", "newfile", expect_success=False)
         b.wait_in_text("h1.pf-v5-c-modal-box__title", "Force delete file newfile?")
+        b.assert_pixels(".pf-v5-c-modal-box", "delete-modal-error")
         self.wait_modal_inline_alert(b, "rm: cannot remove '/home/admin/newfile': Operation not permitted")
         b.click("button.pf-m-danger")
         b.wait_in_text("h1.pf-v5-c-modal-box__title", "Force delete file newfile?")
@@ -535,6 +541,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_visible("[data-item='delete2'].row-selected")
         b.key("Delete")
         b.wait_in_text("h1.pf-v5-c-modal-box__title", "Delete 2 items?")
+        b.assert_pixels(".pf-v5-c-modal-box", "delete-modal")
         b.click("button.pf-m-danger")
 
         b.wait_not_present(".pf-v5-c-modal-box")
@@ -555,6 +562,7 @@ class TestFiles(testlib.MachineCase):
         # validation
         b.click("#dropdown-menu")
         b.click("#create-item")
+        b.assert_pixels(".pf-v5-c-modal-box", "create-modal")
         b.set_input_text("#create-directory-input", "test")
         b.set_input_text("#create-directory-input", "")
         b.wait_visible("button.pf-m-primary:disabled")
@@ -639,6 +647,7 @@ class TestFiles(testlib.MachineCase):
         # Opening context menu from empty space deselects item
         b.click("[data-item='newdir']")
         b.mouse("#files-card-parent tbody", "contextmenu")
+        b.assert_pixels(".contextMenu", "overview-context-menu")
         b.click(".contextMenu button:contains('Create directory')")
         b.set_input_text("#create-directory-input", "newdir2")
         b.click("button.pf-m-primary")
@@ -647,6 +656,7 @@ class TestFiles(testlib.MachineCase):
 
         # Rename folder from context menu
         b.mouse("[data-item='newdir']", "contextmenu")
+        b.assert_pixels(".contextMenu", "folder-context-menu")
         b.click(".contextMenu button:contains('Rename')")
         b.set_input_text("#rename-item-input", "newdir1")
         b.click("button.pf-m-primary")
@@ -669,6 +679,7 @@ class TestFiles(testlib.MachineCase):
 
         m.execute("echo 'some content' > /home/admin/newfile")
         b.mouse("[data-item='newfile']", "contextmenu")
+        b.assert_pixels(".contextMenu", "file-context-menu")
         b.click(".contextMenu button:contains('Download')")
         size = int(self.stat('%s', '/home/admin/newfile'))
         self.waitDownloadFile("newfile", size, "some content\n")
@@ -714,6 +725,7 @@ class TestFiles(testlib.MachineCase):
         b.set_input_text("#rename-item-input", "")
         b.wait_visible("button.pf-m-primary:disabled")
         b.wait_in_text("#rename-item-input-helper", "Name cannot be empty.")
+        b.assert_pixels(".pf-v5-c-modal-box", "rename-modal-error")
 
         b.set_input_text("#rename-item-input", "a" * 256)
         b.wait_visible("button.pf-m-primary:disabled")
@@ -725,6 +737,7 @@ class TestFiles(testlib.MachineCase):
 
         b.set_input_text("#rename-item-input", "test")
         b.wait_visible("button.pf-m-primary:not(:disabled)")
+        b.assert_pixels(".pf-v5-c-modal-box", "rename-modal")
         b.click(".pf-v5-c-modal-box__footer button.pf-m-link")  # cancel
 
         # Rename file
@@ -818,6 +831,7 @@ class TestFiles(testlib.MachineCase):
         # Test changing owner/group
         m.execute("useradd testuser")
         b.click("button:contains('Edit permissions')")
+        b.assert_pixels(".pf-v5-c-modal-box", "permissions-modal")
         # Changing owner should change group if user is not in the group
         b.select_from_dropdown("#edit-permissions-owner", "testuser")
         b.wait_in_text("#edit-permissions-group", "testuser")
@@ -929,6 +943,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_not_present(".pf-v5-c-empty-state")
         b.drop_superuser()
         b.wait_in_text(".pf-v5-c-empty-state", "Permission denied")
+        b.assert_pixels(".pf-v5-c-page__main", "error-folder-view")
 
     def testMultiSelect(self) -> None:
         b = self.browser
@@ -942,6 +957,7 @@ class TestFiles(testlib.MachineCase):
         b.mouse("[data-item='file2']", "click", ctrlKey=True)
         b.wait_visible("[data-item='file1'].row-selected")
         b.wait_visible("[data-item='file2'].row-selected")
+        b.assert_pixels("#files-card-parent", "multi-select-folder-view")
         b.wait_text("#sidebar-card-header", "admin2 items selected")
 
         b.mouse("[data-item='file2']", "click", ctrlKey=True)
@@ -1113,6 +1129,9 @@ class TestFiles(testlib.MachineCase):
             b.click("#upload-progress-btn")
             b.wait(lambda: get_piechart_progress("#upload-progress-btn") >= 2)
             b.wait_in_text(".upload-progress-0", "bigfile.img")
+            b.assert_pixels(".upload-popover", "upload-popover",
+                            ignore=[".upload-progress-0"],
+                            skip_layouts=["mobile", "rtl"])
             b.wait(lambda: b.get_pf_progress_value(".upload-progress-0") >= 2)
 
             b.click(".cancel-button-0")
@@ -1420,6 +1439,7 @@ class TestFiles(testlib.MachineCase):
 
         # Make sure nothing else was present
         b.wait_js_cond(f"ph_count('#folder-view tbody tr') == {len(files)}")
+        b.assert_pixels("#files-card-parent", "icon-list-view", ignore=[".item-date"])
 
 
 if __name__ == '__main__':
