@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
  */
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 
 import { AlertVariant } from "@patternfly/react-core/dist/esm/components/Alert";
 import { Breadcrumb, BreadcrumbItem } from "@patternfly/react-core/dist/esm/components/Breadcrumb";
@@ -254,6 +254,19 @@ export function FilesBreadcrumbs({ path }: { path: string }) {
     const [editMode, setEditMode] = React.useState(false);
     const [newPath, setNewPath] = React.useState<string | null>(null);
 
+    const enableEditMode = useCallback(() => {
+        setEditMode(true);
+        setNewPath(path);
+    }, [path]);
+
+    useEffect(() => {
+        document.addEventListener("manual-change-dir", enableEditMode);
+
+        return () => {
+            document.removeEventListener("manual-change-dir", enableEditMode);
+        };
+    }, [enableEditMode]);
+
     const handleInputKey = (event: React.KeyboardEvent<HTMLInputElement>) => {
         // Don't propogate navigation specific events
         if (event.key === "ArrowDown" || event.key === "ArrowUp" ||
@@ -267,11 +280,6 @@ export function FilesBreadcrumbs({ path }: { path: string }) {
         } else if (event.key === "Escape") {
             cancelPathEdit();
         }
-    };
-
-    const enableEditMode = () => {
-        setEditMode(true);
-        setNewPath(path);
     };
 
     const changePath = () => {
