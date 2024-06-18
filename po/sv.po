@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-21 02:47+0000\n"
+"POT-Creation-Date: 2024-06-18 02:49+0000\n"
 "PO-Revision-Date: 2024-05-21 03:36+0000\n"
 "Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
 "memory@weblate.org>\n"
@@ -26,6 +26,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1\n"
 "X-Generator: Weblate 5.5.5\n"
+
+#: src/fileActions.jsx:422
+msgid "\"$0\" exists, not overwriting with paste."
+msgstr ""
 
 #: src/sidebar.jsx:120
 msgid "$0 item"
@@ -43,120 +47,202 @@ msgstr[1] "($0 dolda)"
 msgid "A file system browser for Cockpit."
 msgstr "En filsystembläddrare för Cockpit."
 
-#: src/fileActions.jsx:395
+#: src/upload-button.tsx:96
+msgid ""
+"A file with the same name already exists in \"$0\". Replacing it will "
+"overwrite its content."
+msgstr ""
+
+#: src/header.tsx:50
+msgid "A-Z"
+msgstr ""
+
+#: src/fileActions.jsx:337
 msgid "Access"
 msgstr "Åtkomst"
 
-#: src/fileActions.jsx:112 src/fileActions.jsx:153 src/fileActions.jsx:229
-#: src/fileActions.jsx:350
+#: src/upload-button.tsx:119
+msgid "Apply this action to all conflicting files"
+msgstr ""
+
+#: src/common.ts:36
+msgid "Block device"
+msgstr ""
+
+#: src/upload-button.tsx:90 src/dialogs/mkdir.tsx:83 src/fileActions.jsx:113
+#: src/fileActions.jsx:171 src/fileActions.jsx:292
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: src/fileActions.jsx:348
+#: src/upload-button.tsx:307
+msgid "Cancel upload of $0"
+msgstr ""
+
+#: src/upload-button.tsx:245
+#, fuzzy
+#| msgid "Cancel"
+msgid "Cancelled"
+msgstr "Avbryt"
+
+#: src/upload-button.tsx:246
+msgid "Cancelled upload of $0"
+msgstr ""
+
+#: src/fileActions.jsx:290
 msgid "Change"
 msgstr "Ändra"
+
+#: src/common.ts:37
+msgid "Character device"
+msgstr ""
 
 #: src/index.html:20
 msgid "Cockpit Files"
 msgstr "Cockpit filer"
 
-#: src/fileActions.jsx:508 src/fileActions.jsx:567
+#: src/fileActions.jsx:459 src/fileActions.jsx:508
 msgid "Copy"
 msgstr "Kopiera"
 
-#: src/fileActions.jsx:151
+#: src/dialogs/mkdir.tsx:81
 msgid "Create"
 msgstr "Skapa"
 
-#: src/fileActions.jsx:140 src/fileActions.jsx:494
+#: src/dialogs/mkdir.tsx:67 src/fileActions.jsx:445
 msgid "Create directory"
 msgstr "Skapa katalog"
 
-#: src/fileActions.jsx:111 src/fileActions.jsx:542 src/fileActions.jsx:572
+#: src/fileActions.jsx:112 src/fileActions.jsx:483 src/fileActions.jsx:513
 msgid "Delete"
 msgstr "Ta bort"
 
-#: src/fileActions.jsx:67
+#: src/fileActions.jsx:68
 msgid "Delete $0 items?"
 msgstr "Radera $0 objekt?"
 
-#: src/fileActions.jsx:83
+#: src/fileActions.jsx:84
 msgid "Delete $0?"
 msgstr "Radera $0?"
 
-#: src/fileActions.jsx:80
+#: src/fileActions.jsx:81
 msgid "Delete directory $0?"
 msgstr "Radera katalog $0?"
 
-#: src/fileActions.jsx:72
+#: src/fileActions.jsx:73
 msgid "Delete file $0?"
 msgstr "Radera fil $0?"
 
-#: src/fileActions.jsx:76
+#: src/fileActions.jsx:77
 msgid "Delete link $0?"
 msgstr "Radera länk $0?"
 
-#: src/files-card-body.jsx:351
+#: src/header.tsx:108
+#, fuzzy
+#| msgid "Directory is empty"
+msgid "Directories & files"
+msgstr "Katalog är tom"
+
+#: src/common.ts:38
+#, fuzzy
+#| msgid "Directory name"
+msgid "Directory"
+msgstr "Katalognamn"
+
+#: src/files-card-body.jsx:355
 msgid "Directory is empty"
 msgstr "Katalog är tom"
 
-#: src/fileActions.jsx:171
+#: src/dialogs/mkdir.tsx:101
 msgid "Directory name"
 msgstr "Katalognamn"
 
-#: src/fileActions.jsx:444
+#: src/dialogs/mkdir.tsx:23
 msgid "Directory name cannot be empty."
 msgstr "Katalognamn kan inte vara tomt."
 
-#: src/fileActions.jsx:448
+#: src/dialogs/mkdir.tsx:27
 msgid "Directory name cannot include a /."
 msgstr "Katalognamn kan inte inkludera ett /."
 
-#: src/fileActions.jsx:446
+#: src/dialogs/mkdir.tsx:25
 msgid "Directory name too long."
 msgstr "Katalognamn för långt."
 
-#: src/fileActions.jsx:559
+#: src/dialogs/mkdir.tsx:115
+#, fuzzy
+#| msgid "Directory name"
+msgid "Directory owner"
+msgstr "Katalognamn"
+
+#: src/header.tsx:164
+msgid "Display as a grid"
+msgstr ""
+
+#: src/header.tsx:163
+msgid "Display as a list"
+msgstr ""
+
+#: src/fileActions.jsx:500
 msgid "Download"
 msgstr "Hämta"
 
-#: src/fileActions.jsx:500 src/fileActions.jsx:524 src/sidebar.jsx:182
+#: src/fileActions.jsx:451 src/fileActions.jsx:465 src/sidebar.jsx:185
 msgid "Edit permissions"
 msgstr "Redigera behörigheter"
+
+#: src/common.ts:26
+msgid "Execute-only"
+msgstr ""
 
 #: src/manifest.json:0
 msgid "File browser"
 msgstr "Filbläddrare"
 
+#: src/fileActions.jsx:392
+msgid "File or directory already exists"
+msgstr ""
+
 #: org.cockpit-project.files.metainfo.xml:5
 msgid "Files"
 msgstr "Filer"
 
-#: src/fileActions.jsx:83
+#: src/header.tsx:114
+#, fuzzy
+#| msgid "Create directory"
+msgid "Filter directory"
+msgstr "Skapa katalog"
+
+#: src/header.tsx:72
+#, fuzzy
+#| msgid "Last modified"
+msgid "First modified"
+msgstr "Senast modifierad"
+
+#: src/fileActions.jsx:84
 msgid "Force delete $0"
 msgstr "Tvinga radering $0"
 
-#: src/fileActions.jsx:67
+#: src/fileActions.jsx:68
 msgid "Force delete $0 items"
 msgstr "Tvinga radering $0 objekt"
 
-#: src/fileActions.jsx:80
+#: src/fileActions.jsx:81
 msgid "Force delete directory $0?"
 msgstr "Tvinga radering av katalog $0?"
 
-#: src/fileActions.jsx:72
+#: src/fileActions.jsx:73
 msgid "Force delete file $0?"
 msgstr "Tvinga radering av fil $0?"
 
-#: src/fileActions.jsx:76
+#: src/fileActions.jsx:77
 msgid "Force delete link $0?"
 msgstr "Tvinga radering av länk $0?"
 
-#: src/fileActions.jsx:379 src/sidebar.jsx:65
+#: src/fileActions.jsx:321 src/sidebar.jsx:65
 msgid "Group"
 msgstr "Grupp"
 
-#: src/fileActions.jsx:409
+#: src/fileActions.jsx:351
 msgid "Group access"
 msgstr "Gruppåtkomst"
 
@@ -164,31 +250,85 @@ msgstr "Gruppåtkomst"
 msgid "Group permissions"
 msgstr "Gruppbehörigheter"
 
-#: src/sidebar.jsx:55
+#: src/upload-button.tsx:89
+msgid "Keep original"
+msgstr ""
+
+#: src/header.tsx:61
+msgid "Largest size"
+msgstr ""
+
+#: src/header.tsx:76 src/sidebar.jsx:55
 msgid "Last modified"
 msgstr "Senast modifierad"
 
-#: src/files-card-body.jsx:369
+#: src/header.tsx:69 src/files-card-body.jsx:370
+#, fuzzy
+#| msgid "Last modified"
+msgid "Modified"
+msgstr "Senast modifierad"
+
+#: src/header.tsx:47 src/files-card-body.jsx:365
 msgid "Name"
 msgstr "Namn"
 
-#: src/fileActions.jsx:241
+#: src/fileActions.jsx:386
+#, fuzzy
+#| msgid "Directory name cannot be empty."
+msgid "Name cannot be empty."
+msgstr "Katalognamn kan inte vara tomt."
+
+#: src/fileActions.jsx:390
+#, fuzzy
+#| msgid "Directory name cannot include a /."
+msgid "Name cannot include a /."
+msgstr "Katalognamn kan inte inkludera ett /."
+
+#: src/fileActions.jsx:388
+#, fuzzy
+#| msgid "Directory name too long."
+msgid "Name too long."
+msgstr "Katalognamn för långt."
+
+#: src/common.ts:39
+msgid "Named pipe"
+msgstr ""
+
+#: src/upload-button.tsx:105
+#, fuzzy
+#| msgid "New name"
+msgid "New file"
+msgstr "Nytt namn"
+
+#: src/fileActions.jsx:183
 msgid "New name"
 msgstr "Nytt namn"
+
+#: src/files-card-body.jsx:355
+msgid "No matching results"
+msgstr ""
+
+#: src/common.ts:25
+msgid "None"
+msgstr ""
+
+#: src/upload-button.tsx:110
+msgid "Original file on server"
+msgstr ""
 
 #: src/sidebar.jsx:89
 msgid "Other permissions"
 msgstr "Andra behörigheter"
 
-#: src/fileActions.jsx:421
+#: src/fileActions.jsx:363
 msgid "Others access"
 msgstr "Andra tillgång"
 
-#: src/fileActions.jsx:364 src/sidebar.jsx:60
+#: src/fileActions.jsx:306 src/sidebar.jsx:60
 msgid "Owner"
 msgstr "Ägare"
 
-#: src/fileActions.jsx:397
+#: src/fileActions.jsx:339
 msgid "Owner access"
 msgstr "Ägare tillgång"
 
@@ -196,41 +336,122 @@ msgstr "Ägare tillgång"
 msgid "Owner permissions"
 msgstr "Ägare behörigheter"
 
-#: src/fileActions.jsx:363
+#: src/fileActions.jsx:305
 msgid "Ownership"
 msgstr "Ägarskap"
 
-#: src/fileActions.jsx:487
+#: src/fileActions.jsx:438
 msgid "Paste"
 msgstr "Klistra in"
 
-#: src/fileActions.jsx:515
-msgid "Paste into directory"
-msgstr "Klistra in i katalog"
+#: src/fileActions.jsx:421
+msgid "Pasting failed"
+msgstr ""
 
-#: src/fileActions.jsx:227 src/fileActions.jsx:529
+#: src/common.ts:30
+msgid "Read and execute"
+msgstr ""
+
+#: src/common.ts:31
+msgid "Read and write"
+msgstr ""
+
+#: src/common.ts:32
+msgid "Read, write and execute"
+msgstr ""
+
+#: src/common.ts:29
+msgid "Read-only"
+msgstr ""
+
+#: src/common.ts:41
+#, fuzzy
+#| msgid "Rename file $0"
+msgid "Regular file"
+msgstr "Byt namn på fil $0"
+
+#: src/fileActions.jsx:169 src/fileActions.jsx:470
 msgid "Rename"
 msgstr "Byt namn"
 
-#: src/fileActions.jsx:198
+#: src/fileActions.jsx:140
 msgid "Rename directory $0"
 msgstr "Byt namn på katalog $0"
 
-#: src/fileActions.jsx:194
+#: src/fileActions.jsx:136
 msgid "Rename file $0"
 msgstr "Byt namn på fil $0"
 
-#: src/fileActions.jsx:196
+#: src/fileActions.jsx:138
 msgid "Rename link $0"
 msgstr "Byt namn på länk $0"
+
+#: src/upload-button.tsx:87
+msgid "Replace"
+msgstr ""
+
+#: src/upload-button.tsx:80
+#, fuzzy
+#| msgid "Rename file $0"
+msgid "Replace file $0?"
+msgstr "Byt namn på fil $0"
 
 #: src/settings-dropdown.jsx:49
 msgid "Show hidden items"
 msgstr "Visa dolda objekt"
 
-#: src/sidebar.jsx:72
+#: src/header.tsx:58 src/files-card-body.jsx:366 src/sidebar.jsx:72
 msgid "Size"
 msgstr "Storlek"
+
+#: src/header.tsx:65
+msgid "Smallest size"
+msgstr ""
+
+#: src/common.ts:42
+msgid "Socket"
+msgstr ""
+
+#: src/upload-button.tsx:265
+msgid "Successfully uploaded file(s)"
+msgstr ""
+
+#: src/common.ts:40
+msgid "Symbolic link"
+msgstr ""
+
+#: src/upload-button.tsx:343
+msgid "Upload"
+msgstr ""
+
+#: src/upload-button.tsx:324
+#, c-format
+msgid "Upload $0% completed"
+msgstr ""
+
+#: src/upload-button.tsx:265
+msgid "Upload complete"
+msgstr ""
+
+#: src/upload-button.tsx:248
+msgid "Upload error"
+msgstr ""
+
+#: src/upload-button.tsx:288
+msgid "Uploads"
+msgstr ""
+
+#: src/common.ts:28
+msgid "Write and execute"
+msgstr ""
+
+#: src/common.ts:27
+msgid "Write-only"
+msgstr ""
+
+#: src/header.tsx:54
+msgid "Z-A"
+msgstr ""
 
 #: src/manifest.json:0
 msgid "explorer"
@@ -245,6 +466,9 @@ msgid "filesystem"
 msgstr "filsystem"
 
 #. Translators: $0 represents a filename
-#: src/fileActions.jsx:338
+#: src/fileActions.jsx:280
 msgid "“$0” permissions"
 msgstr "“$0“ behörigheter"
+
+#~ msgid "Paste into directory"
+#~ msgstr "Klistra in i katalog"
