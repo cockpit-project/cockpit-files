@@ -145,6 +145,28 @@ export const Application = () => {
         [options, path]
     );
 
+    useEffect(() => {
+        const onKeyboardNav = (e: KeyboardEvent) => {
+            switch (e.key) {
+            case "L":
+                if (e.ctrlKey && !e.altKey) {
+                    e.preventDefault();
+                    document.dispatchEvent(new Event("manual-change-dir"));
+                }
+                break;
+
+            default:
+                break;
+            }
+        };
+
+        document.addEventListener("keydown", onKeyboardNav);
+
+        return () => {
+            document.removeEventListener("keydown", onKeyboardNav);
+        };
+    }, []);
+
     if (loading)
         return <EmptyStatePanel loading />;
 

@@ -30,7 +30,9 @@ import { EyeIcon, EyeSlashIcon, GripVerticalIcon, ListIcon } from "@patternfly/r
 import { SortByDirection } from '@patternfly/react-table';
 
 import cockpit from "cockpit";
+import { useDialogs } from "dialogs";
 
+import { KeyboardShortcutsHelp } from "./dialogs/keyboardShortcutsHelp";
 import { UploadButton } from "./upload-button";
 
 const _ = cockpit.gettext;
@@ -162,12 +164,16 @@ const ViewSelector = ({ isGrid, setIsGrid, sortBy, setSortBy, showHidden, setSho
     }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const onToggleClick = (isOpen: boolean) => setIsOpen(!isOpen);
+    const dialogs = useDialogs();
+
     const onSelect = (_ev?: React.MouseEvent, itemId?: string | number) => {
         if (itemId === "hidden-toggle") {
             setShowHidden(prevShowHidden => {
                 localStorage.setItem("files:showHiddenFiles", !showHidden ? "true" : "false");
                 return !prevShowHidden;
             });
+        } else if (itemId === "shortcuts-help") {
+            dialogs.show(<KeyboardShortcutsHelp />);
         } else {
             const sort = as_sort(itemId);
             setSortBy(sort);
@@ -229,6 +235,10 @@ const ViewSelector = ({ isGrid, setIsGrid, sortBy, setSortBy, showHidden, setSho
                 <Divider />
                 <SelectOption icon={showHidden ? <EyeSlashIcon /> : <EyeIcon />} itemId="hidden-toggle">
                     {showHidden ? _("Hide hidden items") : _("Show hidden items")}
+                </SelectOption>
+                <Divider />
+                <SelectOption itemId="shortcuts-help">
+                    {_("Show keyboard shortcuts")}
                 </SelectOption>
             </SelectList>
         </Select>
