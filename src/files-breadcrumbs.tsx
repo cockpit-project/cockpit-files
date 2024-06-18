@@ -263,7 +263,7 @@ export function FilesBreadcrumbs({ path, showHidden, setShowHidden }: { path: st
                               isDisabled={i === path.length - 1}
                               icon={i === 0 ? <HddIcon /> : null}
                               variant="link" onClick={() => { navigate(i + 1) }}
-                              className="breadcrumb-button"
+                              className={`breadcrumb-button breadcrumb-button-${i}`}
                             >
                                 {dir || "/"}
                             </Button>
