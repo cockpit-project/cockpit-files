@@ -137,7 +137,7 @@ $(TARFILE): export NODE_ENV ?= production
 $(TARFILE): $(DIST_TEST) $(SPEC) packaging/arch/PKGBUILD packaging/debian/changelog
 	if type appstream-util >/dev/null 2>&1; then appstream-util validate-relax --nonet *.metainfo.xml; fi
 	tar --xz $(TAR_ARGS) -cf $(TARFILE) --transform 's,^,$(RPM_NAME)/,' \
-		--exclude packaging/$(SPEC).in --exclude node_modules \
+		--exclude packaging/$(SPEC).in --exclude node_modules --exclude test/reference \
 		$$(git ls-files) $(COCKPIT_REPO_FILES) $(NODE_MODULES_TEST) $(SPEC) \
 		packaging/arch/PKGBUILD packaging/debian/changelog dist/
 
@@ -202,7 +202,7 @@ codecheck: test/static-code $(NODE_MODULES_TEST)
 
 # convenience target to setup all the bits needed for the integration tests
 # without actually running them
-prepare-check: $(NODE_MODULES_TEST) $(VM_IMAGE) test/common
+prepare-check: $(NODE_MODULES_TEST) $(VM_IMAGE) test/common test/reference
 
 # run the browser integration tests
 # this will run all tests/check-* and format them as TAP
@@ -212,6 +212,9 @@ check: prepare-check
 # checkout Cockpit's bots for standard test VM images and API to launch them
 bots: test/common
 	test/common/make-bots
+
+test/reference: test/common
+	test/common/pixel-tests pull
 
 # We want tools/node-modules to run every time package-lock.json is requested
 # See https://www.gnu.org/software/make/manual/html_node/Force-Targets.html
