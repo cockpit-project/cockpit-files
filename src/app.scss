@@ -260,3 +260,63 @@
         padding-inline-start: var(--pf-v5-global--spacer--sm);
     }
 }
+
+.shortcuts-dialog {
+    h2 + .pf-v5-c-description-list {
+        margin-block-start: var(--pf-v5-global--spacer--md);
+    }
+
+    .pf-v5-l-flex {
+        // Add standard spacing between the description lists that are in a flex
+        // (PF Flex does odd stuff by default)
+        gap: var(--pf-v5-global--spacer--lg) var(--pf-v5-global--spacer--md);
+
+        > .pf-v5-c-content {
+            // Have the content prefer 20em and wrap if too narrow
+            flex: 1 1 20em;
+        }
+    }
+
+    .pf-v5-c-description-list {
+        // PF's gap is weirdly too big; let's use the PF standard size that's used everywhere else
+        --pf-v5-c-content--dl--ColumnGap: var(--pf-v5-global--spacer--md);
+        // We're setting this up as a table on the list, so they're consistent
+        display: grid;
+        // Fixing the width to the keyboard shortcuts
+        grid-template-columns: auto 1fr;
+        // Fix PF's negative margin at the end bug (as it's handled by grid layout anyway)
+        margin-block-end: 0;
+
+        .pf-v5-c-description-list__group {
+            // Ignore the grid of the group and use the grid from the description list, so everything lines up properly
+            display: contents;
+        }
+    }
+
+    kbd {
+        // Description lists bold the dt; we don't want the keys too look too bold
+        font-weight: normal;
+    }
+
+    // Style key combos
+    .keystroke {
+        display: flex;
+        align-items: center;
+        color: var(--pf-v5-global--Color--200);
+        font-size: var(--pf-v5-global--FontSize--xs);
+        gap: var(--pf-v5-global--spacer--xs);
+    }
+
+    // Style individual keys
+    .key {
+        display: inline-block;
+        background-color: var(--pf-v5-global--BackgroundColor--200);
+        border-radius: var(--pf-v5-global--BorderRadius--sm);
+        border: 1px solid var(--pf-v5-global--BorderColor--100);
+        color: var(--pf-v5-global--Color--100);
+        padding-block: var(--pf-v5-global--spacer--xs);
+        padding-inline: var(--pf-v5-global--spacer--sm);
+        box-shadow: inset 1px 1px 0 var(--pf-v5-global--BackgroundColor--100);
+        white-space: nowrap;
+    }
+}

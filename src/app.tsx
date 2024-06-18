@@ -31,7 +31,7 @@ import cockpit from "cockpit";
 import { FsInfoClient, FileInfo } from "cockpit/fsinfo.ts";
 import { EmptyStatePanel } from "cockpit-components-empty-state";
 import { WithDialogs } from "dialogs";
-import { usePageLocation } from "hooks";
+import { useInit, usePageLocation } from "hooks";
 import { superuser } from "superuser";
 
 import { FilesBreadcrumbs } from "./files-breadcrumbs.tsx";
@@ -144,6 +144,21 @@ export const Application = () => {
         },
         [options, path]
     );
+
+    useInit(() => {
+        const onKeyboardNav = (e: KeyboardEvent) => {
+            if (e.key === "L" && e.ctrlKey && !e.altKey) {
+                e.preventDefault();
+                document.dispatchEvent(new Event("manual-change-dir"));
+            }
+        };
+
+        document.addEventListener("keydown", onKeyboardNav);
+
+        return () => {
+            document.removeEventListener("keydown", onKeyboardNav);
+        };
+    }, []);
 
     if (loading)
         return <EmptyStatePanel loading />;

@@ -31,15 +31,17 @@ import { SortByDirection, Table, Thead, Tr, Th, Tbody, Td } from '@patternfly/re
 import cockpit from "cockpit";
 import { ContextMenu } from "cockpit-components-context-menu";
 import { EmptyStatePanel } from "cockpit-components-empty-state";
+import { dirname } from "cockpit-path.ts";
 import { useDialogs } from "dialogs";
 import * as timeformat from "timeformat";
 
 import { FolderFileInfo, useFilesContext } from "./app.tsx";
 import { get_permissions } from "./common.ts";
 import { confirm_delete } from "./dialogs/delete.tsx";
+import { show_create_directory_dialog } from "./dialogs/mkdir.tsx";
+import { show_rename_dialog } from "./dialogs/rename.tsx";
 import { Sort, filterColumnMapping, filterColumns } from "./header.tsx";
-import { get_menu_items } from "./menu.tsx";
-
+import { get_menu_items, pasteFromClipboard } from "./menu.tsx";
 import "./files-card-body.scss";
 
 const _ = cockpit.gettext;
@@ -156,6 +158,7 @@ export const FilesCardBody = ({
 }) => {
     const [boxPerRow, setBoxPerRow] = useState(0);
     const dialogs = useDialogs();
+    const { addAlert, cwdInfo } = useFilesContext();
 
     const sortedFiles = useMemo(() => {
         return files
@@ -183,6 +186,13 @@ export const FilesCardBody = ({
     const onDoubleClickNavigate = useCallback((file: FolderFileInfo) => {
         const newPath = path + file.name;
         if (file.to === "dir") {
+            cockpit.location.go("/", { path: encodeURIComponent(newPath) });
+        }
+    }, [path]);
+
+    const goUpOneDir = useCallback(() => {
+        if (path !== "/") {
+            const newPath = dirname(path);
             cockpit.location.go("/", { path: encodeURIComponent(newPath) });
         }
     }, [path]);
@@ -263,47 +273,119 @@ export const FilesCardBody = ({
             }
         };
 
+        const hasNoKeydownModifiers = (event: KeyboardEvent) => {
+            return !event.shiftKey && !event.ctrlKey && !event.altKey && !event.metaKey;
+        };
+
         const onKeyboardNav = (e: KeyboardEvent) => {
-            if (e.key === "ArrowRight") {
-                setSelected(_selected => {
-                    const firstSelectedName = _selected?.[0]?.name;
-                    const selectedIdx = sortedFiles?.findIndex(file => file.name === firstSelectedName);
-                    const newIdx = selectedIdx < sortedFiles.length - 1
-                        ? selectedIdx + 1
-                        : 0;
+            switch (e.key) {
+            case "ArrowRight":
+                if (hasNoKeydownModifiers(e)) {
+                    setSelected(_selected => {
+                        const firstSelectedName = _selected?.[0]?.name;
+                        const selectedIdx = sortedFiles?.findIndex(file => file.name === firstSelectedName);
+                        const newIdx = selectedIdx < sortedFiles.length - 1
+                            ? selectedIdx + 1
+                            : 0;
 
-                    return [sortedFiles[newIdx]];
-                });
-            } else if (e.key === "ArrowLeft") {
-                setSelected(_selected => {
-                    const firstSelectedName = _selected?.[0]?.name;
-                    const selectedIdx = sortedFiles?.findIndex(file => file.name === firstSelectedName);
-                    const newIdx = selectedIdx > 0
-                        ? selectedIdx - 1
-                        : sortedFiles.length - 1;
+                        return [sortedFiles[newIdx]];
+                    });
+                }
+                break;
 
-                    return [sortedFiles[newIdx]];
-                });
-            } else if (e.key === "ArrowUp") {
-                setSelected(_selected => {
-                    const firstSelectedName = _selected?.[0]?.name;
-                    const selectedIdx = sortedFiles?.findIndex(file => file.name === firstSelectedName);
-                    const newIdx = Math.max(selectedIdx - boxPerRow, 0);
+            case "ArrowLeft":
+                if (hasNoKeydownModifiers(e)) {
+                    setSelected(_selected => {
+                        const firstSelectedName = _selected?.[0]?.name;
+                        const selectedIdx = sortedFiles?.findIndex(file => file.name === firstSelectedName);
+                        const newIdx = selectedIdx > 0
+                            ? selectedIdx - 1
+                            : sortedFiles.length - 1;
 
-                    return [sortedFiles[newIdx]];
-                });
-            } else if (e.key === "ArrowDown") {
-                setSelected(_selected => {
-                    const firstSelectedName = _selected?.[0]?.name;
-                    const selectedIdx = sortedFiles?.findIndex(file => file.name === firstSelectedName);
-                    const newIdx = Math.min(selectedIdx + boxPerRow, sortedFiles.length - 1);
+                        return [sortedFiles[newIdx]];
+                    });
+                }
+                break;
 
-                    return [sortedFiles[newIdx]];
-                });
-            } else if (e.key === "Enter" && selected.length === 1) {
-                onDoubleClickNavigate(selected[0]);
-            } else if (e.key === "Delete" && selected.length !== 0) {
-                confirm_delete(dialogs, path, selected, setSelected);
+            case "ArrowUp":
+                if (e.altKey && !e.shiftKey && !e.ctrlKey) {
+                    goUpOneDir();
+                } else if (hasNoKeydownModifiers(e)) {
+                    setSelected(_selected => {
+                        const firstSelectedName = _selected?.[0]?.name;
+                        const selectedIdx = sortedFiles?.findIndex(file => file.name === firstSelectedName);
+                        const newIdx = Math.max(selectedIdx - boxPerRow, 0);
+
+                        return [sortedFiles[newIdx]];
+                    });
+                }
+                break;
+
+            case "ArrowDown":
+                if (e.altKey && !e.shiftKey && !e.ctrlKey && selected.length === 1) {
+                    onDoubleClickNavigate(selected[0]);
+                } else if (hasNoKeydownModifiers(e)) {
+                    setSelected(_selected => {
+                        const firstSelectedName = _selected?.[0]?.name;
+                        const selectedIdx = sortedFiles?.findIndex(file => file.name === firstSelectedName);
+                        const newIdx = Math.min(selectedIdx + boxPerRow, sortedFiles.length - 1);
+
+                        return [sortedFiles[newIdx]];
+                    });
+                }
+                break;
+
+            case "Enter":
+                if (hasNoKeydownModifiers(e) && selected.length === 1) {
+                    onDoubleClickNavigate(selected[0]);
+                }
+                break;
+
+            case "Delete":
+                if (hasNoKeydownModifiers(e) && selected.length !== 0) {
+                    confirm_delete(dialogs, path, selected, setSelected);
+                }
+                break;
+
+            case "F2":
+                if (hasNoKeydownModifiers(e) && selected.length === 1) {
+                    show_rename_dialog(dialogs, path, selected[0]);
+                }
+                break;
+
+            case "a":
+                // Keep standard text editing behavior by excluding input fields
+                if (e.ctrlKey && !e.shiftKey && !e.altKey && !(e.target instanceof HTMLInputElement)) {
+                    e.preventDefault();
+                    setSelected(sortedFiles);
+                }
+                break;
+
+            case "c":
+                // Keep standard text editing behavior by excluding input fields
+                if (e.ctrlKey && !e.shiftKey && !e.altKey && !(e.target instanceof HTMLInputElement)) {
+                    e.preventDefault();
+                    setClipboard(selected.map(s => path + s.name));
+                }
+                break;
+
+            case "v":
+                // Keep standard text editing behavior by excluding input fields
+                if (e.ctrlKey && !e.shiftKey && !e.altKey && !(e.target instanceof HTMLInputElement)) {
+                    e.preventDefault();
+                    pasteFromClipboard(clipboard, cwdInfo, path, addAlert);
+                }
+                break;
+
+            case "N":
+                if (!e.ctrlKey && !e.altKey) {
+                    e.preventDefault();
+                    show_create_directory_dialog(dialogs, path);
+                }
+                break;
+
+            default:
+                break;
             }
         };
 
@@ -336,7 +418,12 @@ export const FilesCardBody = ({
         selected,
         onDoubleClickNavigate,
         dialogs,
+        goUpOneDir,
         path,
+        addAlert,
+        cwdInfo,
+        clipboard,
+        setClipboard,
     ]);
 
     // Generic event handler to look up the corresponding `data-item` for a click event when

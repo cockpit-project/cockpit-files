@@ -34,6 +34,7 @@ import { KebabDropdown } from "cockpit-components-dropdown";
 import { useDialogs } from "dialogs";
 
 import { FolderFileInfo, useFilesContext } from "./app.tsx";
+import { showKeyboardShortcuts } from "./dialogs/keyboardShortcutsHelp.tsx";
 import { get_menu_items } from "./menu.tsx";
 import { UploadButton } from "./upload-button.tsx";
 
@@ -154,7 +155,19 @@ export const FilesCardHeader = ({
 
     const menuItems = get_menu_items(
         path, selected, setSelected, clipboard, setClipboard, cwdInfo, addAlert, dialogs
-    ).map((option, i) => {
+    );
+
+    // This button only needs to be in the global menu
+    menuItems.push(
+        { type: "divider" },
+        {
+            id: "shortcuts-help",
+            title: _("Show keyboard shortcuts"),
+            onClick: () => showKeyboardShortcuts(dialogs)
+        }
+    );
+
+    const dropdownItems = menuItems.map((option, i) => {
         if (option.type === 'divider')
             return <Divider key={i} />;
         return (
@@ -196,7 +209,7 @@ export const FilesCardHeader = ({
                       path={path}
                     />
                     <KebabDropdown
-                      toggleButtonId="dropdown-menu" dropdownItems={menuItems}
+                      toggleButtonId="dropdown-menu" dropdownItems={dropdownItems}
                       isDisabled={cwdInfo === null} position="right"
                     />
                 </div>
