@@ -199,7 +199,7 @@ class TestFiles(testlib.MachineCase):
 
         # List root directory
         # Click "/" on the breadcrumb
-        b.click(".breadcrumb-button:nth-of-type(2)")
+        b.click(".breadcrumb-0")
         b.wait_visible("[data-item='home']")
 
         # Enter /dev to make sure we can show special files properly
@@ -218,14 +218,14 @@ class TestFiles(testlib.MachineCase):
         self.enter_files()
 
         hostname = m.execute("hostname").strip()
-        b.wait_text(".breadcrumb-button:nth-of-type(2)", hostname)
-        b.wait_text(".breadcrumb-button:nth-of-type(3)", "home")
-        b.wait_text(".breadcrumb-button:nth-of-type(4)", "admin")
+        b.wait_text(".breadcrumb-0", hostname)
+        b.wait_text(".breadcrumb-1", "home")
+        b.wait_text(".breadcrumb-2", "admin")
 
         # clicking on the home button should take us to the home directory
-        b.click(".breadcrumb-button:nth-of-type(3)")
-        b.wait_visible(".breadcrumb-button:nth-of-type(3):disabled")
-        b.wait_text(".breadcrumb-button:nth-of-type(3)", "home")
+        b.click(".breadcrumb-1")
+        b.wait_visible(".breadcrumb-1:disabled")
+        b.wait_text(".breadcrumb-1", "home")
         b.wait_visible("[data-item='admin']")
 
         # show folder info in sidebar
@@ -258,7 +258,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_visible("[data-item='newdir2']")
         b.mouse("[data-item='newdir2']", "dblclick")
         b.wait_not_present("[data-item='newdir']")
-        b.click(".breadcrumb-button:nth-of-type(3)")
+        b.click(".breadcrumb-1")
         b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "home")
         b.wait_visible("[data-item='admin']")
         # navigate back
@@ -293,7 +293,7 @@ class TestFiles(testlib.MachineCase):
         original_hostname = m.execute('hostnamectl hostname').strip()
         self.addCleanup(m.execute, ['hostnamectl', 'set-hostname', original_hostname])
         m.execute("hostnamectl set-hostname files")
-        b.wait_text(".breadcrumb-button:nth-of-type(2)", "files")
+        b.wait_text(".breadcrumb-0", "files")
 
         # Navigation via editing the path
         path_input = "#new-path-input"
@@ -606,7 +606,7 @@ class TestFiles(testlib.MachineCase):
         alert_text = "mkdir: cannot create directory ‘/home/admin/newdir/test’: Operation not permitted"
         self.wait_modal_inline_alert(b, alert_text)
         b.click("div.pf-v5-c-modal-box__close button.pf-v5-c-button")
-        b.click(".breadcrumb-button:nth-of-type(3)")
+        b.click(".breadcrumb-1")
         m.execute("sudo chattr -i /home/admin/newdir")
 
         b.go("/files#/?path=/root")
@@ -931,7 +931,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_text("#description-list-group dd", "admin")
 
         # Cannot change permission of /home
-        b.click(".breadcrumb-button:nth-of-type(2)")
+        b.click(".breadcrumb-0")
         b.click("[data-item='home']")
         b.click("button:contains('Edit permissions')")
         select_access("7")
@@ -1058,7 +1058,7 @@ class TestFiles(testlib.MachineCase):
 
         b.wait_visible("[data-item='foo'].row-selected")
         b.key("Enter")
-        b.wait_text(".breadcrumb-button:nth-of-type(5)", "foo")
+        b.wait_text(".breadcrumb-3", "foo")
 
     def testCopyPaste(self) -> None:
         b = self.browser
@@ -1081,7 +1081,7 @@ class TestFiles(testlib.MachineCase):
         b.click("#paste-item")
         b.wait_visible("[data-item='newfile']")
         self.assertEqual(m.execute("head -n 1 /home/admin/newdir/newfile"), "test_text\n")
-        b.click(".breadcrumb-button:nth-of-type(4)")
+        b.click(".breadcrumb-2")
         b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "admin")
         # original file still exists
         b.wait_visible("[data-item='newfile']")
@@ -1098,7 +1098,7 @@ class TestFiles(testlib.MachineCase):
         b.click("#dropdown-menu")
         b.click("#paste-item")
         b.wait_visible("[data-item='copyDir']")
-        b.click(".breadcrumb-button:nth-of-type(4)")
+        b.click(".breadcrumb-2")
         b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "admin")
         b.wait_visible("[data-item='copyDir']")
 
@@ -1114,7 +1114,7 @@ class TestFiles(testlib.MachineCase):
         self.assertEqual(m.execute("head -n 1 /home/admin/newdir/newfile"), "test_text\n")
         b.wait_in_text("h4.pf-v5-c-alert__title", "Pasting failed")
         b.wait_in_text(".pf-v5-c-alert__description", "\"newfile\" exists")
-        b.click(".breadcrumb-button:nth-of-type(4)")
+        b.click(".breadcrumb-2")
         b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "admin")
 
     @testlib.skipBrowser(".upload_files() doesn't work on Firefox", "firefox")
