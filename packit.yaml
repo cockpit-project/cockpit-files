@@ -40,29 +40,43 @@ jobs:
     project: "main-builds"
     preserve_project: True
 
-  # Build releases in COPR: https://packit.dev/docs/configuration/#copr_build
-  #- job: copr_build
-  #  trigger: release
-  #  owner: your_copr_login
-  #  project: your_copr_project
-  #  preserve_project: True
-  #  targets:
-  #    - fedora-all
-  #    - centos-stream-9-x86_64
+  - job: copr_build
+    trigger: release
+    owner: "@cockpit"
+    project: "cockpit-preview"
+    preserve_project: True
+    actions:
+      post-upstream-clone: make cockpit-files.spec
+      # HACK: tarball for releases (copr_build, koji, etc.), copying spec's Source0; this
+      # really should be the default, see https://github.com/packit/packit-service/issues/1505
+      create-archive:
+        - sh -exc "curl -L -O https://github.com/cockpit-project/cockpit-files/releases/download/${PACKIT_PROJECT_VERSION}/${PACKIT_PROJECT_NAME_VERSION}.tar.xz"
+        - sh -exc "ls ${PACKIT_PROJECT_NAME_VERSION}.tar.xz"
 
-  # Build releases in Fedora: https://packit.dev/docs/configuration/#propose_downstream
-  #- job: propose_downstream
-  #  trigger: release
-  #  dist_git_branches:
-  #    - fedora-all
+  - job: copr_build
+    trigger: commit
+    branch: "^main$"
+    owner: "@cockpit"
+    project: "main-builds"
+    preserve_project: True
 
-  #- job: koji_build
-  #  trigger: commit
-  #  dist_git_branches:
-  #    - fedora-all
+  - job: propose_downstream
+    trigger: release
+    dist_git_branches:
+      - fedora-development
+      - fedora-39
+      - fedora-40
 
-  #- job: bodhi_update
-  #  trigger: commit
-  #  dist_git_branches:
-  #    # rawhide updates are created automatically
-  #    - fedora-branched
+  - job: koji_build
+    trigger: commit
+    dist_git_branches:
+      - fedora-development
+      - fedora-39
+      - fedora-40
+
+  - job: bodhi_update
+    trigger: commit
+    dist_git_branches:
+      # rawhide updates are created automatically
+      - fedora-39
+      - fedora-40
