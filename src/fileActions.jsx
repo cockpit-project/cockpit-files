@@ -38,8 +38,7 @@ import {
 import { superuser } from "superuser";
 
 import { useFilesContext } from "./app";
-import { map_permissions, inode_types, basename } from "./common";
-import { CreateDirectoryModal } from "./dialogs/mkdir";
+import { map_permissions, inode_types } from "./common";
 
 const _ = cockpit.gettext;
 
@@ -121,7 +120,7 @@ export const ConfirmDeletionDialog = ({
     );
 };
 
-const RenameItemModal = ({ path, selected }) => {
+export const RenameItemModal = ({ path, selected }) => {
     const Dialogs = useDialogs();
     const { cwdInfo } = useFilesContext();
     const [name, setName] = useState(selected.name);
@@ -392,7 +391,7 @@ const setInputName = (val, setName, setNameError, setErrorMessage, cwdInfo) => {
     }
 };
 
-const downloadFile = (currentPath, selected) => {
+export const downloadFile = (currentPath, selected) => {
     const query = window.btoa(JSON.stringify({
         payload: "fsread1",
         binary: "raw",
@@ -406,120 +405,4 @@ const downloadFile = (currentPath, selected) => {
 
     const prefix = (new URL(cockpit.transport.uri("channel/" + cockpit.transport.csrf_token))).pathname;
     window.open(`${prefix}?${query}`);
-};
-
-export const fileActions = (path, selected, setSelected, clipboard, setClipboard, cwdInfo, addAlert, Dialogs) => {
-    const currentPath = path.join("/") + "/";
-    const menuItems = [];
-
-    const spawnPaste = (sourcePaths, targetPath) => {
-        const existingFiles = sourcePaths.filter(sourcePath => cwdInfo?.entries[basename(sourcePath)]);
-        if (existingFiles.length > 0) {
-            addAlert(_("Pasting failed"), "danger", "paste-error",
-                     cockpit.format(_("\"$0\" exists, not overwriting with paste."),
-                                    existingFiles.map(basename).join(", ")));
-            return;
-        }
-        cockpit.spawn([
-            "cp",
-            "-R",
-            ...sourcePaths,
-            targetPath
-        ]).catch(err => addAlert(err.message, "danger", new Date().getTime()));
-    };
-
-    if (selected.length === 0 || selected[0].name === path[path.length - 1]) {
-        menuItems.push(
-            {
-                id: "paste-item",
-                title: _("Paste"),
-                onClick: () => spawnPaste(clipboard, currentPath),
-                isDisabled: clipboard.length === 0
-            },
-            { type: "divider" },
-            {
-                id: "create-item",
-                title: _("Create directory"),
-                onClick: () => Dialogs.show(<CreateDirectoryModal currentPath={currentPath} />),
-            },
-            { type: "divider" },
-            {
-                id: "edit-permissions",
-                title: _("Edit permissions"),
-                onClick: () => editPermissions(Dialogs, selected[0], path)
-            }
-        );
-    } else if (selected.length === 1) {
-        menuItems.push(
-            {
-                id: "copy-item",
-                title: _("Copy"),
-                onClick: () => setClipboard([currentPath + selected[0].name]),
-            },
-            { type: "divider" },
-            {
-                id: "edit-permissions",
-                title: _("Edit permissions"),
-                onClick: () => editPermissions(Dialogs, selected[0], path)
-            },
-            {
-                id: "rename-item",
-                title: _("Rename"),
-                onClick: () => {
-                    Dialogs.show(
-                        <RenameItemModal
-                          path={path}
-                          selected={selected[0]}
-                        />
-                    );
-                },
-            },
-            { type: "divider" },
-            {
-                id: "delete-item",
-                title: _("Delete"),
-                className: "pf-m-danger",
-                onClick: () => {
-                    Dialogs.show(
-                        <ConfirmDeletionDialog
-                          selected={selected} path={currentPath}
-                          setSelected={setSelected}
-                        />
-                    );
-                }
-            },
-        );
-        if (selected[0].type === "reg")
-            menuItems.push(
-                { type: "divider" },
-                {
-                    id: "download-item",
-                    title: _("Download"),
-                    onClick: () => downloadFile(currentPath, selected[0])
-                }
-            );
-    } else if (selected.length > 1) {
-        menuItems.push(
-            {
-                id: "copy-item",
-                title: _("Copy"),
-                onClick: () => setClipboard(selected.map(s => path.join("/") + "/" + s.name)),
-            },
-            {
-                id: "delete-item",
-                title: _("Delete"),
-                className: "pf-m-danger",
-                onClick: () => {
-                    Dialogs.show(
-                        <ConfirmDeletionDialog
-                          selected={selected} path={currentPath}
-                          setSelected={setSelected}
-                        />
-                    );
-                },
-            }
-        );
-    }
-
-    return menuItems;
 };

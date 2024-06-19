@@ -32,8 +32,9 @@ import { useDialogs } from "dialogs";
 import * as timeformat from "timeformat";
 
 import { useFilesContext } from "./app";
-import { fileActions, ConfirmDeletionDialog } from "./fileActions";
+import { ConfirmDeletionDialog } from "./fileActions";
 import { filterColumnMapping, filterColumns } from "./header";
+import { get_menu_items } from "./menu";
 
 import "./files-card-body.scss";
 
@@ -65,17 +66,20 @@ const compare = (sortBy) => {
 const ContextMenuItems = ({ path, selected, setSelected, clipboard, setClipboard }) => {
     const Dialogs = useDialogs();
     const { addAlert, cwdInfo } = useFilesContext();
-    const menuItems = fileActions(path, selected, setSelected,
-                                  clipboard, setClipboard, cwdInfo, addAlert, Dialogs);
+    const menuItems = get_menu_items(
+        path, selected, setSelected, clipboard, setClipboard, cwdInfo, addAlert, Dialogs
+    );
 
     return (
         <MenuList>
             {menuItems.map((item, i) =>
-                item.type !== "divider"
+                item.type !== 'divider'
                     ? (
                         <MenuItem
-                          className={"context-menu-option " + item.className} key={item.title}
-                          onClick={item.onClick} isDisabled={item.isDisabled}
+                          key={item.id}
+                          className={"context-menu-option " + (item.className || '')}
+                          isDisabled={item.isDisabled || false}
+                          onClick={item.onClick}
                         >
                             <div className="context-menu-name">{item.title}</div>
                         </MenuItem>
