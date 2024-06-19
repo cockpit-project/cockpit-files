@@ -42,6 +42,7 @@ const _ = cockpit.gettext;
 
 function compare(sortBy: Sort): (a: FolderFileInfo, b: FolderFileInfo) => number {
     const dir_sort = (a: FolderFileInfo, b: FolderFileInfo) => Number(b.to === "dir") - Number(a.to === "dir");
+    const name_sort = (a: FolderFileInfo, b: FolderFileInfo) => a.name.localeCompare(b.name);
 
     // treat non-regular files and infos with missing 'size' field as having size of zero
     const size = (a: FolderFileInfo) => (a.type === "reg" && a.size) || 0;
@@ -49,17 +50,17 @@ function compare(sortBy: Sort): (a: FolderFileInfo, b: FolderFileInfo) => number
 
     switch (sortBy) {
     case Sort.az:
-        return (a, b) => dir_sort(a, b) || a.name.localeCompare(b.name);
+        return (a, b) => dir_sort(a, b) || name_sort(a, b);
     case Sort.za:
-        return (a, b) => dir_sort(a, b) || b.name.localeCompare(a.name);
+        return (a, b) => dir_sort(a, b) || name_sort(b, a);
     case Sort.first_modified:
-        return (a, b) => dir_sort(a, b) || (mtime(a) - mtime(b));
+        return (a, b) => dir_sort(a, b) || (mtime(a) - mtime(b)) || name_sort(a, b);
     case Sort.last_modified:
-        return (a, b) => dir_sort(a, b) || (mtime(b) - mtime(a));
+        return (a, b) => dir_sort(a, b) || (mtime(b) - mtime(a)) || name_sort(a, b);
     case Sort.largest_size:
-        return (a, b) => dir_sort(a, b) || (size(b) - size(a));
+        return (a, b) => dir_sort(a, b) || (size(b) - size(a)) || name_sort(a, b);
     case Sort.smallest_size:
-        return (a, b) => dir_sort(a, b) || (size(a) - size(b));
+        return (a, b) => dir_sort(a, b) || (size(a) - size(b)) || name_sort(a, b);
     }
 }
 
