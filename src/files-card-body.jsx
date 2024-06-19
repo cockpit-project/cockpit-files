@@ -413,13 +413,13 @@ const Row = React.memo(function Item({ file, isSelected }) {
                 <a href="#">{file.name}</a>
             </Td>
             <Td
-              className="item-size"
+              className="item-size pf-v5-m-tabular-nums"
               dataLabel="size"
             >
                 {file.type === 'reg' && cockpit.format_bytes(file.size)}
             </Td>
             <Td
-              className="item-date"
+              className="item-date pf-v5-m-tabular-nums"
               dataLabel="date"
               modifier="nowrap"
             >
