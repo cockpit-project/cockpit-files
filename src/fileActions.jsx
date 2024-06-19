@@ -18,26 +18,27 @@
  */
 
 import React, { useState } from "react";
+
 import { Button } from "@patternfly/react-core/dist/esm/components/Button";
 import { Form, FormGroup, FormSection } from "@patternfly/react-core/dist/esm/components/Form";
 import { FormSelect, FormSelectOption } from "@patternfly/react-core/dist/esm/components/FormSelect";
 import { Modal, ModalVariant } from "@patternfly/react-core/dist/esm/components/Modal";
-import { Stack } from "@patternfly/react-core/dist/esm/layouts/Stack";
 import { TextInput } from "@patternfly/react-core/dist/esm/components/TextInput";
+import { Stack } from "@patternfly/react-core/dist/esm/layouts/Stack";
 
 import cockpit from "cockpit";
-import { useDialogs } from "dialogs.jsx";
+import { FormHelper } from 'cockpit-components-form-helper';
 import { InlineNotification } from "cockpit-components-inline-notification";
-import { FormHelper } from 'cockpit-components-form-helper.jsx';
-import { useInit } from "hooks.js";
+import { useDialogs } from "dialogs";
+import { useInit } from "hooks";
 import {
     etc_group_syntax as etcGroupSyntax,
     etc_passwd_syntax as etcPasswdSyntax
 } from "pam_user_parser.js";
 import { superuser } from "superuser";
 
-import { map_permissions, inode_types, basename } from "./common";
 import { useFilesContext } from "./app";
+import { map_permissions, inode_types, basename } from "./common";
 import { CreateDirectoryModal } from "./dialogs/mkdir";
 
 const _ = cockpit.gettext;

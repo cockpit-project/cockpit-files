@@ -17,13 +17,15 @@
  * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
  */
 import React, { useState } from "react";
-import { CheckIcon, EllipsisVIcon } from "@patternfly/react-icons";
+
 import { Dropdown, DropdownItem, DropdownList } from "@patternfly/react-core/dist/esm/components/Dropdown";
-import { Flex, FlexItem } from "@patternfly/react-core/dist/esm/layouts/Flex";
 import { Icon } from "@patternfly/react-core/dist/esm/components/Icon";
 import { MenuToggle } from "@patternfly/react-core/dist/esm/components/MenuToggle";
+import { Flex, FlexItem } from "@patternfly/react-core/dist/esm/layouts/Flex";
+import { CheckIcon, EllipsisVIcon } from "@patternfly/react-icons";
 
 import cockpit from "cockpit";
+
 const _ = cockpit.gettext;
 
 export const SettingsDropdown = ({ showHidden, setShowHidden }) => {

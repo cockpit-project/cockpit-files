@@ -19,25 +19,25 @@
 
 import React, { useContext, useEffect, useMemo, useState } from "react";
 
-import { Page, PageSection } from "@patternfly/react-core/dist/esm/components/Page";
-import { Sidebar, SidebarPanel, SidebarContent } from "@patternfly/react-core/dist/esm/components/Sidebar";
 import {
     AlertGroup, Alert, AlertVariant, AlertActionCloseButton
 } from "@patternfly/react-core/dist/esm/components/Alert";
+import { Page, PageSection } from "@patternfly/react-core/dist/esm/components/Page";
+import { Sidebar, SidebarPanel, SidebarContent } from "@patternfly/react-core/dist/esm/components/Sidebar";
 import { ExclamationCircleIcon } from "@patternfly/react-icons";
 
 import cockpit from "cockpit";
+import { EmptyStatePanel } from "cockpit-components-empty-state";
+import { WithDialogs } from "dialogs";
+import { usePageLocation } from "hooks";
 import { superuser } from "superuser";
-import { WithDialogs } from "dialogs.jsx";
-import { EmptyStatePanel } from "cockpit-components-empty-state.jsx";
-import { FilesBreadcrumbs } from "./files-breadcrumbs";
-import { SidebarPanelDetails } from "./sidebar.jsx";
-import { FilesFolderView } from "./files-folder-view";
-import { usePageLocation } from "hooks.js";
-import { FsInfoClient, FileInfo } from "./fsinfo";
 
-import { filetype_lookup } from './filetype-lookup';
+import { FilesBreadcrumbs } from "./files-breadcrumbs";
+import { FilesFolderView } from "./files-folder-view";
 import filetype_data from './filetype-data';
+import { filetype_lookup } from './filetype-lookup';
+import { FsInfoClient, FileInfo } from "./fsinfo";
+import { SidebarPanelDetails } from "./sidebar";
 
 superuser.reload_page_on_change();
 

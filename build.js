@@ -1,16 +1,16 @@
 #!/usr/bin/env -S node --import tsx/esm
 
 import fs from 'node:fs';
-import path from 'node:path';
 import os from 'node:os';
+import path from 'node:path';
 
 import copy from 'esbuild-plugin-copy';
 
-import { cleanPlugin } from './pkg/lib/esbuild-cleanup-plugin.js';
-import { cockpitCompressPlugin } from './pkg/lib/esbuild-compress-plugin.js';
-import { cockpitPoEsbuildPlugin } from './pkg/lib/cockpit-po-plugin.js';
-import { cockpitRsyncEsbuildPlugin } from './pkg/lib/cockpit-rsync-plugin.js';
-import { esbuildStylesPlugins } from './pkg/lib/esbuild-common.js';
+import { cockpitPoEsbuildPlugin } from './pkg/lib/cockpit-po-plugin';
+import { cockpitRsyncEsbuildPlugin } from './pkg/lib/cockpit-rsync-plugin';
+import { cleanPlugin } from './pkg/lib/esbuild-cleanup-plugin';
+import { esbuildStylesPlugins } from './pkg/lib/esbuild-common';
+import { cockpitCompressPlugin } from './pkg/lib/esbuild-compress-plugin';
 import { filetype_plugin } from './src/filetype-plugin';
 
 const useWasm = os.arch() !== 'x64';
