@@ -1,17 +1,17 @@
 {
-  "requires": {
-      "cockpit": "310"
-  },
+    "requires": {
+        "cockpit": "310"
+    },
 
-  "tools": {
-      "index": {
-          "label": "File browser",
-          "keywords": [
-		{
-			"matches": ["files", "explorer", "filesystem"]
-		}
-	  ]
-      }
-  },
-  "content-security-policy": "img-src 'self' data:; frame-src 'self' data:"
+    "tools": {
+        "index": {
+            "label": "File browser",
+            "keywords": [
+                {
+                    "matches": ["files", "explorer", "filesystem"]
+                }
+            ]
+        }
+    },
+    "content-security-policy": "img-src 'self' data:; frame-src 'self' data:"
 }
