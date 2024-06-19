@@ -18,21 +18,22 @@
  */
 
 import React, { useCallback, useEffect, useMemo, useState, useRef } from "react";
+
 import { Divider } from "@patternfly/react-core/dist/esm/components/Divider";
-import { Flex } from "@patternfly/react-core/dist/esm/layouts/Flex";
-import { Spinner } from "@patternfly/react-core/dist/esm/components/Spinner";
 import { MenuItem, MenuList } from "@patternfly/react-core/dist/esm/components/Menu";
+import { Spinner } from "@patternfly/react-core/dist/esm/components/Spinner";
+import { Flex } from "@patternfly/react-core/dist/esm/layouts/Flex";
 import { Table, Thead, Tr, Th, Tbody, Td } from '@patternfly/react-table';
 
 import cockpit from "cockpit";
-import { useDialogs } from "dialogs.jsx";
-import { EmptyStatePanel } from "cockpit-components-empty-state.jsx";
-
+import { ContextMenu } from "cockpit-components-context-menu";
+import { EmptyStatePanel } from "cockpit-components-empty-state";
+import { useDialogs } from "dialogs";
 import * as timeformat from "timeformat";
-import { ContextMenu } from "cockpit-components-context-menu.jsx";
-import { fileActions, ConfirmDeletionDialog } from "./fileActions.jsx";
-import { filterColumnMapping, filterColumns } from "./header";
+
 import { useFilesContext } from "./app";
+import { fileActions, ConfirmDeletionDialog } from "./fileActions";
+import { filterColumnMapping, filterColumns } from "./header";
 
 import "./files-card-body.scss";
 

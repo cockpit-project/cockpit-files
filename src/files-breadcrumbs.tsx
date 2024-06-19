@@ -18,15 +18,15 @@
  */
 import React from "react";
 
-import { CheckIcon, HddIcon, PencilAltIcon, TimesIcon } from "@patternfly/react-icons";
 import { Button } from "@patternfly/react-core/dist/esm/components/Button";
-import { Flex, FlexItem } from "@patternfly/react-core/dist/esm/layouts/Flex";
 import { PageBreadcrumb } from "@patternfly/react-core/dist/esm/components/Page";
 import { TextInput } from "@patternfly/react-core/dist/esm/components/TextInput";
+import { Flex, FlexItem } from "@patternfly/react-core/dist/esm/layouts/Flex";
+import { CheckIcon, HddIcon, PencilAltIcon, TimesIcon } from "@patternfly/react-icons";
 
 import cockpit from "cockpit";
 
-import { SettingsDropdown } from "./settings-dropdown.jsx";
+import { SettingsDropdown } from "./settings-dropdown";
 
 function useHostname() {
     const [hostname, setHostname] = React.useState<string | null>(null);

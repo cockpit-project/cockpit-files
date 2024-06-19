@@ -11,6 +11,17 @@
     "plugins": ["react", "react-hooks", "jsx-a11y"],
     "rules": {
         "array-bracket-newline": ["error", { "multiline": true }],
+        "import/extensions": ["error", "never", { "json": "always" }],
+        "import/order": ["error",
+            {
+                "alphabetize": { "order": "asc" },
+                "groups": ["builtin", "external", "internal", "parent", "sibling"],
+                "newlines-between": "always",
+                "pathGroupsExcludedImportTypes": ["react"],
+                "pathGroups": [
+                    { "pattern": "react", "group": "builtin", "position": "before" }
+                ]
+            }],
         "indent": ["error", 4,
             {
                 "ObjectExpression": "first",
@@ -61,6 +72,10 @@
       "parserOptions": {
         "project": ["./tsconfig.json"]
       }
+    }],
+    "settings": {
+        "import/resolver": {
+            "node": { "moduleDirectory": [ "pkg/lib" ], "extensions": [ ".js", ".jsx", ".ts", ".tsx" ] }
+        }
     }
-  ]
 }

@@ -22,8 +22,8 @@ import React, { useState } from "react";
 import { Card } from '@patternfly/react-core/dist/esm/components/Card';
 
 import { FolderFileInfo } from "./app";
-import { FilesCardBody } from "./files-card-body.jsx";
-import { FilesCardHeader } from "./header.jsx";
+import { FilesCardBody } from "./files-card-body";
+import { FilesCardHeader } from "./header";
 
 export const FilesFolderView = ({
     path,

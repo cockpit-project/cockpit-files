@@ -4,17 +4,17 @@ import { Button } from "@patternfly/react-core/dist/esm/components/Button";
 import { Form, FormGroup } from "@patternfly/react-core/dist/esm/components/Form";
 import { FormSelect, FormSelectOption } from "@patternfly/react-core/dist/esm/components/FormSelect";
 import { Modal, ModalVariant } from "@patternfly/react-core/dist/esm/components/Modal";
-import { Stack } from "@patternfly/react-core/dist/esm/layouts/Stack";
 import { TextInput } from "@patternfly/react-core/dist/esm/components/TextInput";
+import { Stack } from "@patternfly/react-core/dist/esm/layouts/Stack";
 
 import cockpit from 'cockpit';
-import { useDialogs } from 'dialogs';
-import { InlineNotification } from 'cockpit-components-inline-notification';
 import { FormHelper } from 'cockpit-components-form-helper';
+import { InlineNotification } from 'cockpit-components-inline-notification';
+import { useDialogs } from 'dialogs';
 import { superuser } from 'superuser';
 
-import { useId, get_owner_candidates } from '../ownership';
 import { useFilesContext } from '../app';
+import { useId, get_owner_candidates } from '../ownership';
 
 const _ = cockpit.gettext;
 

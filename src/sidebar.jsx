@@ -32,13 +32,13 @@ import { DropdownItem } from "@patternfly/react-core/dist/esm/components/Dropdow
 import { Text, TextContent, TextVariants } from "@patternfly/react-core/dist/esm/components/Text";
 
 import cockpit from "cockpit";
-import * as timeformat from "timeformat";
-import { useDialogs } from "dialogs.jsx";
 import { KebabDropdown } from "cockpit-components-dropdown";
+import { useDialogs } from "dialogs";
+import * as timeformat from "timeformat";
 
-import { editPermissions, fileActions } from "./fileActions.jsx";
-import { get_permissions } from "./common";
 import { useFilesContext } from "./app";
+import { get_permissions } from "./common";
+import { editPermissions, fileActions } from "./fileActions";
 
 const _ = cockpit.gettext;
 
