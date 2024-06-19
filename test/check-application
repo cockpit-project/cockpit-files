@@ -1079,7 +1079,6 @@ class TestFiles(testlib.MachineCase):
         b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "admin")
 
     @testlib.skipBrowser(".upload_files() doesn't work on Firefox", "firefox")
-    @testlib.skipImage("Debian-testing has Cockpit 311 without new upload support in fsreplace1", "debian-testing")
     def testUpload(self) -> None:
         b = self.browser
         m = self.machine
