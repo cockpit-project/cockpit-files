@@ -38,7 +38,8 @@ import * as timeformat from "timeformat";
 
 import { useFilesContext } from "./app";
 import { get_permissions } from "./common";
-import { editPermissions, fileActions } from "./fileActions";
+import { editPermissions } from "./fileActions";
+import { get_menu_items } from "./menu";
 
 const _ = cockpit.gettext;
 
@@ -115,16 +116,17 @@ export const SidebarPanelDetails = ({
     if (!showHidden)
         shown_items += " " + cockpit.format(cockpit.ngettext("($0 hidden)", "($0 hidden)", hidden_count), hidden_count);
 
-    const menuItems = fileActions(path, selected, setSelected,
-                                  clipboard, setClipboard,
-                                  cwdInfo, addAlert, Dialogs).map((option, i) => {
-        if (option.type === "divider")
+    const menuItems = get_menu_items(
+        path, selected, setSelected, clipboard, setClipboard, cwdInfo, addAlert, Dialogs
+    ).map((option, i) => {
+        if (option.type === 'divider')
             return <Divider key={i} />;
         return (
             <DropdownItem
               id={option.id} key={option.id}
-              className={option.className} onClick={option.onClick}
-              isDisabled={option.isDisabled}
+              {... option.className && { className: option.className }}
+              onClick={option.onClick}
+              isDisabled={option.isDisabled || false}
             >
                 {option.title}
             </DropdownItem>
