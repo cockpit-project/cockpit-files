@@ -480,7 +480,9 @@ class TestFiles(testlib.MachineCase):
 
         b.click("th button:contains(Size)")
         b.wait_visible("th[aria-sort='ascending'].pf-m-selected button:contains(Size)")
-        # TODO: order of Eee eee and ddd is not guaranteed (all directories)
+        b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "ddd")
+        b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "eee")
+        b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-name", "Eee")
         b.wait_text("#folder-view tbody tr:nth-of-type(4) .item-name", "BBB")
         b.wait_text("#folder-view tbody tr:nth-of-type(5) .item-name", "aaa")
         b.wait_text("#folder-view tbody tr:nth-of-type(6) .item-name", "ccc")
