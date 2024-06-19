@@ -35,48 +35,65 @@ import { UploadButton } from "./upload-button";
 
 const _ = cockpit.gettext;
 
+export enum Sort {
+    az = 'az',
+    za = 'za',
+    largest_size = 'largest_size',
+    smallest_size = 'smallest_size',
+    first_modified = 'first_modified',
+    last_modified = 'last_modified',
+}
+
+export function is_sort(x: unknown): x is Sort {
+    return typeof x === 'string' && x in Sort;
+}
+
+export function as_sort(x: unknown): Sort {
+    return is_sort(x) ? x : Sort.az;
+}
+
 export const filterColumns = [
     {
         title: _("Name"),
         [SortByDirection.asc]: {
-            itemId: "az",
+            itemId: Sort.az,
             label: _("A-Z"),
         },
         [SortByDirection.desc]: {
-            itemId: "za",
+            itemId: Sort.za,
             label: _("Z-A"),
         }
     },
     {
         title: _("Size"),
         [SortByDirection.asc]: {
-            itemId: "largest_size",
+            itemId: Sort.largest_size,
             label: _("Largest size"),
         },
         [SortByDirection.desc]: {
-            itemId: "smallest_size",
+            itemId: Sort.smallest_size,
             label: _("Smallest size"),
         }
     },
     {
         title: _("Modified"),
         [SortByDirection.asc]: {
-            itemId: "first_modified",
+            itemId: Sort.first_modified,
             label: _("First modified"),
         },
         [SortByDirection.desc]: {
-            itemId: "last_modified",
+            itemId: Sort.last_modified,
             label: _("Last modified"),
         },
     },
-];
+] as const;
 
 // { itemId: [index, sortdirection] }
 export const filterColumnMapping = filterColumns.reduce((a, v, i) => ({
     ...a,
     [v[SortByDirection.asc].itemId]: [i, SortByDirection.asc],
     [v[SortByDirection.desc].itemId]: [i, SortByDirection.desc]
-}), {});
+}), {}) as Record<Sort, [number, SortByDirection]>;
 
 export const FilesCardHeader = ({
     currentFilter,
@@ -90,7 +107,7 @@ export const FilesCardHeader = ({
     currentFilter: string,
     onFilterChange: (_event: React.FormEvent<HTMLInputElement>, value: string) => void,
     isGrid: boolean, setIsGrid: React.Dispatch<React.SetStateAction<boolean>>,
-    sortBy: string, setSortBy: React.Dispatch<React.SetStateAction<string>>
+    sortBy: Sort, setSortBy: React.Dispatch<React.SetStateAction<Sort>>
     path: string[],
 }) => {
     return (
@@ -123,14 +140,14 @@ export const FilesCardHeader = ({
 
 const ViewSelector = ({ isGrid, setIsGrid, sortBy, setSortBy }:
     { isGrid: boolean, setIsGrid: React.Dispatch<React.SetStateAction<boolean>>,
-      sortBy: string, setSortBy: React.Dispatch<React.SetStateAction<string>>}) => {
+      sortBy: Sort, setSortBy: React.Dispatch<React.SetStateAction<Sort>>}) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const onToggleClick = (isOpen: boolean) => setIsOpen(!isOpen);
     const onSelect = (_ev?: React.MouseEvent, itemId?: string | number) => {
-        cockpit.assert(typeof itemId === "string", "itemId is not a string");
+        const sort = as_sort(itemId);
         setIsOpen(false);
-        setSortBy(itemId);
-        localStorage.setItem("files:sort", itemId);
+        setSortBy(sort);
+        localStorage.setItem("files:sort", sort);
     };
 
     return (

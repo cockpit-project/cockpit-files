@@ -23,7 +23,7 @@ import { Divider } from "@patternfly/react-core/dist/esm/components/Divider";
 import { MenuItem, MenuList } from "@patternfly/react-core/dist/esm/components/Menu";
 import { Spinner } from "@patternfly/react-core/dist/esm/components/Spinner";
 import { Flex } from "@patternfly/react-core/dist/esm/layouts/Flex";
-import { Table, Thead, Tr, Th, Tbody, Td } from '@patternfly/react-table';
+import { SortByDirection, Table, Thead, Tr, Th, Tbody, Td } from '@patternfly/react-table';
 
 import cockpit from "cockpit";
 import { ContextMenu } from "cockpit-components-context-menu";
@@ -31,39 +31,43 @@ import { EmptyStatePanel } from "cockpit-components-empty-state";
 import { useDialogs } from "dialogs";
 import * as timeformat from "timeformat";
 
-import { useFilesContext } from "./app";
+import { FolderFileInfo, useFilesContext } from "./app";
 import { ConfirmDeletionDialog } from "./fileActions";
-import { filterColumnMapping, filterColumns } from "./header";
+import { Sort, filterColumnMapping, filterColumns } from "./header";
 import { get_menu_items } from "./menu";
 
 import "./files-card-body.scss";
 
 const _ = cockpit.gettext;
 
-const compare = (sortBy) => {
-    const dir_sort = (a, b) => {
-        return Number(b.to === "dir") - Number(a.to === "dir");
-    };
+function compare(sortBy: Sort): (a: FolderFileInfo, b: FolderFileInfo) => number {
+    const dir_sort = (a: FolderFileInfo, b: FolderFileInfo) => Number(b.to === "dir") - Number(a.to === "dir");
+
+    // treat non-regular files and infos with missing 'size' field as having size of zero
+    const size = (a: FolderFileInfo) => (a.type === "reg" && a.size) || 0;
+    const mtime = (a: FolderFileInfo) => a.mtime || 0; // fallbak for missing .mtime field
 
     switch (sortBy) {
-    case "az":
+    case Sort.az:
         return (a, b) => dir_sort(a, b) || a.name.localeCompare(b.name);
-    case "za":
+    case Sort.za:
         return (a, b) => dir_sort(a, b) || b.name.localeCompare(a.name);
-    case "first_modified":
-        return (a, b) => dir_sort(a, b) || (a.mtime - b.mtime);
-    case "last_modified":
-        return (a, b) => dir_sort(a, b) || (b.mtime - a.mtime);
-    case "largest_size":
-        return (a, b) => dir_sort(a, b) || (b.size - a.size);
-    case "smallest_size":
-        return (a, b) => dir_sort(a, b) || (a.size - b.size);
-    default:
-        break;
+    case Sort.first_modified:
+        return (a, b) => dir_sort(a, b) || (mtime(a) - mtime(b));
+    case Sort.last_modified:
+        return (a, b) => dir_sort(a, b) || (mtime(b) - mtime(a));
+    case Sort.largest_size:
+        return (a, b) => dir_sort(a, b) || (size(b) - size(a));
+    case Sort.smallest_size:
+        return (a, b) => dir_sort(a, b) || (size(a) - size(b));
     }
-};
+}
 
-const ContextMenuItems = ({ path, selected, setSelected, clipboard, setClipboard }) => {
+const ContextMenuItems = ({ path, selected, setSelected, clipboard, setClipboard } : {
+    path: string[],
+    selected: FolderFileInfo[], setSelected: React.Dispatch<React.SetStateAction<FolderFileInfo[]>>,
+    clipboard: string[], setClipboard: React.Dispatch<React.SetStateAction<string[]>>,
+}) => {
     const Dialogs = useDialogs();
     const { addAlert, cwdInfo } = useFilesContext();
     const menuItems = get_menu_items(
@@ -102,6 +106,16 @@ export const FilesCardBody = ({
     clipboard,
     setClipboard,
     showHidden,
+} : {
+    currentFilter: string,
+    files: FolderFileInfo[],
+    isGrid: boolean,
+    path: string[],
+    selected: FolderFileInfo[], setSelected: React.Dispatch<React.SetStateAction<FolderFileInfo[]>>,
+    sortBy: Sort, setSortBy: React.Dispatch<React.SetStateAction<Sort>>,
+    loadingFiles: boolean,
+    clipboard: string[], setClipboard: React.Dispatch<React.SetStateAction<string[]>>,
+    showHidden: boolean,
 }) => {
     const [boxPerRow, setBoxPerRow] = useState(0);
     const Dialogs = useDialogs();
@@ -112,11 +126,11 @@ export const FilesCardBody = ({
                 .filter(file => file.name.toLowerCase().includes(currentFilter.toLowerCase()))
                 .sort(compare(sortBy));
     }, [files, showHidden, currentFilter, sortBy]);
-    const isMounted = useRef(null);
-    const folderViewRef = React.useRef();
+    const isMounted = useRef<boolean>();
+    const folderViewRef = React.useRef<HTMLDivElement>(null);
 
     function calculateBoxPerRow () {
-        const boxes = document.querySelectorAll(".fileview tbody > tr");
+        const boxes = document.querySelectorAll(".fileview tbody > tr") as NodeListOf<HTMLElement>;
         if (boxes.length > 1) {
             let i = 0;
             const total = boxes.length;
@@ -126,7 +140,7 @@ export const FilesCardBody = ({
         }
     }
 
-    const onDoubleClickNavigate = useCallback((file) => {
+    const onDoubleClickNavigate = useCallback((file: FolderFileInfo) => {
         const newPath = [...path, file.name].join("/");
         if (file.to === "dir") {
             cockpit.location.go("/", { path: encodeURIComponent(newPath) });
@@ -137,23 +151,25 @@ export const FilesCardBody = ({
         calculateBoxPerRow();
         window.onresize = calculateBoxPerRow;
         return () => {
-            window.onresize = undefined;
+            window.onresize = null;
         };
     });
 
     useEffect(() => {
         let folderViewElem = null;
 
-        const resetSelected = e => {
-            if (e.target.id === "folder-view" || e.target.id === "files-card-parent" ||
-              (e.target.parentElement && e.target.parentElement.id === "folder-view")) {
-                if (selected.length !== 0) {
-                    setSelected([]);
+        const resetSelected = (e: MouseEvent) => {
+            if ((e.target instanceof HTMLElement)) {
+                if (e.target.id === "folder-view" || e.target.id === "files-card-parent" ||
+                  (e.target.parentElement && e.target.parentElement.id === "folder-view")) {
+                    if (selected.length !== 0) {
+                        setSelected([]);
+                    }
                 }
             }
         };
 
-        const handleDoubleClick = (ev) => {
+        const handleDoubleClick = (ev: MouseEvent) => {
             ev.preventDefault();
             const name = getFilenameForEvent(ev);
             const file = sortedFiles?.find(file => file.name === name);
@@ -167,7 +183,7 @@ export const FilesCardBody = ({
             onDoubleClickNavigate(file);
         };
 
-        const handleClick = (ev) => {
+        const handleClick = (ev: MouseEvent) => {
             ev.preventDefault();
             const name = getFilenameForEvent(ev);
             const file = sortedFiles?.find(file => file.name === name);
@@ -193,21 +209,21 @@ export const FilesCardBody = ({
             }
         };
 
-        const handleContextMenu = (event) => {
-            let sel = getFilenameForEvent(event);
-            if (sel !== null && selected.length > 1) {
+        const handleContextMenu = (event: MouseEvent) => {
+            const name = getFilenameForEvent(event);
+            if (name !== null && selected.length > 1) {
                 return;
             }
 
-            if (sel === null) {
-                setSelected([]);
-            } else {
-                sel = sortedFiles?.find(file => file.name === sel);
+            const sel = sortedFiles?.find(file => file.name === name);
+            if (sel) {
                 setSelected([sel]);
+            } else {
+                setSelected([]);
             }
         };
 
-        const onKeyboardNav = (e) => {
+        const onKeyboardNav = (e: KeyboardEvent) => {
             if (e.key === "ArrowRight") {
                 setSelected(_selected => {
                     const firstSelectedName = _selected?.[0]?.name;
@@ -296,9 +312,9 @@ export const FilesCardBody = ({
     // performance, this does require us to walk up the DOM until we find the
     // required `data-item` but this is a fairly trivial at the benefit of the
     // performance gains.
-    const getFilenameForEvent = event => {
+    const getFilenameForEvent = (event: Event) => {
         let data_item = null;
-        let elem = event.target;
+        let elem = event.target as HTMLElement;
         // Limit iterating to ten parents
         for (let i = 0; i < 10; i++) {
             data_item = elem.getAttribute("data-item");
@@ -334,12 +350,12 @@ export const FilesCardBody = ({
         </ContextMenu>
     );
 
-    const sortColumn = (columnIndex) => ({
+    const sortColumn = (columnIndex: number) => ({
         sortBy: {
             index: filterColumnMapping[sortBy][0],
             direction: filterColumnMapping[sortBy][1],
         },
-        onSort: (_event, index, direction) => {
+        onSort: (_event: unknown, index: number, direction: SortByDirection) => {
             setSortBy(filterColumns[index][direction].itemId);
         },
         columnIndex,
@@ -386,7 +402,7 @@ export const FilesCardBody = ({
     );
 };
 
-const getFileType = (file) => {
+const getFileType = (file: FolderFileInfo) => {
     if (file.to === "dir") {
         return "folder";
     } else if (file.category?.class) {
@@ -397,7 +413,10 @@ const getFileType = (file) => {
 };
 
 // Memoize the Item component as rendering thousands of them on each render of parent component is costly.
-const Row = React.memo(function Item({ file, isSelected }) {
+const Row = React.memo(function Item({ file, isSelected } : {
+    file: FolderFileInfo,
+    isSelected: boolean
+}) {
     const fileType = getFileType(file);
     let className = fileType;
     if (isSelected)
@@ -427,7 +446,7 @@ const Row = React.memo(function Item({ file, isSelected }) {
               dataLabel="date"
               modifier="nowrap"
             >
-                {timeformat.dateTime(file.mtime * 1000)}
+                {file.mtime ? timeformat.dateTime(file.mtime * 1000) : null}
             </Td>
         </Tr>
     );

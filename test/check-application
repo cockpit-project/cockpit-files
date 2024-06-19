@@ -359,6 +359,11 @@ class TestFiles(testlib.MachineCase):
 
         self.enter_files()
 
+        # set a bogus sort value in localStorage to make sure we handle it gracefully
+        b.eval_js("""window.localStorage.setItem("files:sort", 'bzzt')""")
+        b.reload()
+        self.enter_files()
+
         # Expected heading
         b.wait_text("#files-card-header", "Directories & files")
 
@@ -370,7 +375,7 @@ class TestFiles(testlib.MachineCase):
         m.execute("touch -d '2 hours ago' /home/admin/ccc")
         b.wait_visible("[data-item='ccc']")
 
-        # Default sort is A-Z
+        # Default sort is A-Z (also used for invalid value found in localStorage)
         # Alphabet sorts should be case insensetive
         b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "aaa")
         b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "BBB")
