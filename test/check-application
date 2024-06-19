@@ -290,7 +290,8 @@ class TestFiles(testlib.MachineCase):
         b.wait_visible("[data-item='admin']")
 
         # Changing hostname updates breadcrumb
-        self.restore_file("/etc/hostname")
+        original_hostname = m.execute('hostnamectl hostname').strip()
+        self.addCleanup(m.execute, ['hostnamectl', 'set-hostname', original_hostname])
         m.execute("hostnamectl set-hostname files")
         b.wait_text(".breadcrumb-button:nth-of-type(2)", "files")
 
