@@ -118,7 +118,7 @@ export function FilesBreadcrumbs({ path, showHidden, setShowHidden }: { path: st
                             >
                                 {dir || "/"}
                             </Button>
-                            {dir !== "" && <p key={i}>/</p>}
+                            {dir !== "" && <p className="path-divider" key={i}>/</p>}
                         </React.Fragment>
                     );
                 })}

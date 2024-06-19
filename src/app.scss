@@ -92,6 +92,10 @@ button.breadcrumb-edit-cancel-button {
     color: var(--pf-v5-c-button--m-link--Color);
 }
 
+.path-divider {
+    color: var(--pf-v5-global--Color--200);
+}
+
 .view-toggle-group {
     .pf-c-menu-toggle__button {
         display: flex;
