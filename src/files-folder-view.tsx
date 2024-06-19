@@ -23,7 +23,7 @@ import { Card } from '@patternfly/react-core/dist/esm/components/Card';
 
 import { FolderFileInfo } from "./app";
 import { FilesCardBody } from "./files-card-body";
-import { FilesCardHeader } from "./header";
+import { as_sort, FilesCardHeader } from "./header";
 
 export const FilesFolderView = ({
     path,
@@ -39,14 +39,12 @@ export const FilesFolderView = ({
     files: FolderFileInfo[],
     loadingFiles: boolean,
     showHidden: boolean,
-    selected: FolderFileInfo[],
-    setSelected: React.Dispatch<React.SetStateAction<FolderFileInfo[]>>,
-    clipboard: string[],
-    setClipboard: React.Dispatch<React.SetStateAction<string[]>>,
+    selected: FolderFileInfo[], setSelected: React.Dispatch<React.SetStateAction<FolderFileInfo[]>>,
+    clipboard: string[], setClipboard: React.Dispatch<React.SetStateAction<string[]>>,
 }) => {
     const [currentFilter, setCurrentFilter] = useState("");
     const [isGrid, setIsGrid] = useState(localStorage.getItem("files:isGrid") !== "false");
-    const [sortBy, setSortBy] = useState(localStorage.getItem("files:sort") || "az");
+    const [sortBy, setSortBy] = useState(as_sort(localStorage.getItem("files:sort")));
     const onFilterChange = (_event: React.FormEvent<HTMLInputElement>, value: string) => setCurrentFilter(value);
 
     return (
