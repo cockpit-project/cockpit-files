@@ -28,10 +28,11 @@ import cockpit from "cockpit";
 
 const _ = cockpit.gettext;
 
-export const SettingsDropdown = ({ showHidden, setShowHidden }) => {
+export const SettingsDropdown = ({ showHidden, setShowHidden } : {
+    showHidden: boolean, setShowHidden: React.Dispatch<React.SetStateAction<boolean>>
+}) => {
     const [isOpen, setIsOpen] = useState(false);
     const onToggleClick = () => setIsOpen(!isOpen);
-    const onSelect = (_event, _itemId) => setIsOpen(false);
 
     const onToggleHidden = () => {
         setShowHidden(prevShowHidden => {
@@ -55,7 +56,7 @@ export const SettingsDropdown = ({ showHidden, setShowHidden }) => {
     return (
         <Dropdown
           isOpen={isOpen}
-          onSelect={onSelect}
+          onSelect={() => setIsOpen(false)}
           onOpenChange={setIsOpen}
           popperProps={{ position: "right" }}
           toggle={toggleRef =>
