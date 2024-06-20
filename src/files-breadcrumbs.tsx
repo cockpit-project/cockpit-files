@@ -98,15 +98,15 @@ export function FilesBreadcrumbs({ path, showHidden, setShowHidden }: { path: st
     fullPath.unshift(hostname || "server");
 
     return (
-        <PageBreadcrumb stickyOnBreakpoint={{ default: "top" }}>
+        <PageBreadcrumb>
             <Flex spaceItems={{ default: "spaceItemsXs" }}>
                 {!editMode &&
-                    <Button
-                      variant="secondary"
-                      icon={<PencilAltIcon />}
-                      onClick={() => enableEditMode()}
-                      className="breadcrumb-edit-button"
-                    />}
+                <Button
+                  variant="secondary"
+                  icon={<PencilAltIcon />}
+                  onClick={() => enableEditMode()}
+                  className="breadcrumb-edit-button"
+                />}
                 {!editMode && fullPath.map((dir, i) => {
                     return (
                         <React.Fragment key={fullPath.slice(0, i).join("/") || "/"}>
@@ -123,16 +123,16 @@ export function FilesBreadcrumbs({ path, showHidden, setShowHidden }: { path: st
                     );
                 })}
                 {editMode && newPath !== null &&
-                    <FlexItem flex={{ default: "flex_1" }}>
-                        <TextInput
-                          autoFocus // eslint-disable-line jsx-a11y/no-autofocus
-                          id="new-path-input"
-                          value={newPath}
-                          onFocus={(event) => event.target.select()}
-                          onKeyDown={handleInputKey}
-                          onChange={(_event, value) => setNewPath(value)}
-                        />
-                    </FlexItem>}
+                <FlexItem flex={{ default: "flex_1" }}>
+                    <TextInput
+                      autoFocus // eslint-disable-line jsx-a11y/no-autofocus
+                      id="new-path-input"
+                      value={newPath}
+                      onFocus={(event) => event.target.select()}
+                      onKeyDown={handleInputKey}
+                      onChange={(_event, value) => setNewPath(value)}
+                    />
+                </FlexItem>}
                 <FlexItem align={{ default: 'alignRight' }}>
                     {editMode &&
                     <>
