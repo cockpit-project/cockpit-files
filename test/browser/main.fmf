@@ -2,6 +2,7 @@ summary:
     Run browser integration tests on the host
 require:
   - podman
+  - cockpit-files
   - cockpit-ws
   - cockpit-system
   - glibc-langpack-de
