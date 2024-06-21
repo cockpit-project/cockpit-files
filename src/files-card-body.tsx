@@ -32,7 +32,7 @@ import { useDialogs } from "dialogs";
 import * as timeformat from "timeformat";
 
 import { FolderFileInfo, useFilesContext } from "./app";
-import { ConfirmDeletionDialog } from "./dialogs/delete";
+import { confirm_delete } from "./dialogs/delete";
 import { Sort, filterColumnMapping, filterColumns } from "./header";
 import { get_menu_items } from "./menu";
 
@@ -264,13 +264,7 @@ export const FilesCardBody = ({
             } else if (e.key === "Enter" && selected.length === 1) {
                 onDoubleClickNavigate(selected[0]);
             } else if (e.key === "Delete" && selected.length !== 0) {
-                const currentPath = path.join("/") + "/";
-                Dialogs.show(
-                    <ConfirmDeletionDialog
-                      selected={selected} path={currentPath}
-                      setSelected={setSelected}
-                    />
-                );
+                confirm_delete(Dialogs, path.join("/") + "/", selected, setSelected);
             }
         };
 

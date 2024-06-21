@@ -24,17 +24,17 @@ import { Modal, ModalVariant } from '@patternfly/react-core/dist/esm/components/
 
 import cockpit from 'cockpit';
 import { InlineNotification } from 'cockpit-components-inline-notification';
-import { useDialogs } from 'dialogs';
+import type { Dialogs, DialogResult } from 'dialogs';
 
 import type { FolderFileInfo } from '../app';
 
 const _ = cockpit.gettext;
 
-export const ConfirmDeletionDialog = ({ path, selected, setSelected } : {
+const ConfirmDeletionDialog = ({ dialogResult, path, selected, setSelected } : {
+    dialogResult: DialogResult<void>
     path: string,
     selected: FolderFileInfo[], setSelected: React.Dispatch<React.SetStateAction<FolderFileInfo[]>>,
 }) => {
-    const Dialogs = useDialogs();
     const [errorMessage, setErrorMessage] = useState(null);
     const [forceDelete, setForceDelete] = useState(false);
 
@@ -66,7 +66,7 @@ export const ConfirmDeletionDialog = ({ path, selected, setSelected } : {
         cockpit.spawn([...args, ...selected.map(f => path + f.name)], { err: "message", superuser: "try" })
                 .then(() => {
                     setSelected([]);
-                    Dialogs.close();
+                    dialogResult.resolve();
                 })
                 .catch(err => {
                     setErrorMessage(err.message);
@@ -81,11 +81,11 @@ export const ConfirmDeletionDialog = ({ path, selected, setSelected } : {
           titleIconVariant="warning"
           variant={ModalVariant.medium}
           isOpen
-          onClose={Dialogs.close}
+          onClose={() => dialogResult.resolve()}
           footer={
               <>
                   <Button variant="danger" onClick={deleteItem}>{_("Delete")}</Button>
-                  <Button variant="link" onClick={Dialogs.close}>{_("Cancel")}</Button>
+                  <Button variant="link" onClick={() => dialogResult.resolve()}>{_("Cancel")}</Button>
               </>
           }
         >
@@ -98,3 +98,12 @@ export const ConfirmDeletionDialog = ({ path, selected, setSelected } : {
         </Modal>
     );
 };
+
+export function confirm_delete(
+    dialogs: Dialogs,
+    path: string,
+    selected: FolderFileInfo[],
+    setSelected: React.Dispatch<React.SetStateAction<FolderFileInfo[]>>
+) {
+    dialogs.run(ConfirmDeletionDialog, { path, selected, setSelected });
+}

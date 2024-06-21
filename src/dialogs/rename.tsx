@@ -28,7 +28,7 @@ import { Stack } from '@patternfly/react-core/dist/esm/layouts/Stack';
 import cockpit from 'cockpit';
 import { FormHelper } from 'cockpit-components-form-helper';
 import { InlineNotification } from 'cockpit-components-inline-notification';
-import { useDialogs } from 'dialogs';
+import type { Dialogs, DialogResult } from 'dialogs';
 
 import { FolderFileInfo, useFilesContext } from '../app';
 
@@ -48,11 +48,11 @@ function check_name(candidate: string, entries: Record<string, unknown>) {
     }
 }
 
-export const RenameItemModal = ({ path, selected } : {
+const RenameItemModal = ({ dialogResult, path, selected } : {
+    dialogResult: DialogResult<void>
     path: string[],
-    selected: FolderFileInfo
+    selected: FolderFileInfo,
 }) => {
-    const Dialogs = useDialogs();
     const { cwdInfo } = useFilesContext();
     const [name, setName] = useState(selected.name);
     const [nameError, setNameError] = useState<string | null>(null);
@@ -75,7 +75,7 @@ export const RenameItemModal = ({ path, selected } : {
         cockpit.spawn(["mv", "--no-target-directory", path.join("/") + "/" + selected.name, newPath],
                       { superuser: "try", err: "message" })
                 .then(() => {
-                    Dialogs.close();
+                    dialogResult.resolve();
                 }, err => setErrorMessage(err.message));
     };
 
@@ -85,7 +85,7 @@ export const RenameItemModal = ({ path, selected } : {
           title={title}
           variant={ModalVariant.small}
           isOpen
-          onClose={Dialogs.close}
+          onClose={() => dialogResult.resolve()}
           footer={
               <>
                   <Button
@@ -95,7 +95,7 @@ export const RenameItemModal = ({ path, selected } : {
                   >
                       {_("Rename")}
                   </Button>
-                  <Button variant="link" onClick={Dialogs.close}>{_("Cancel")}</Button>
+                  <Button variant="link" onClick={() => dialogResult.resolve()}>{_("Cancel")}</Button>
               </>
           }
         >
@@ -124,3 +124,7 @@ export const RenameItemModal = ({ path, selected } : {
         </Modal>
     );
 };
+
+export function show_rename_dialog(dialogs: Dialogs, path: string[], selected: FolderFileInfo) {
+    dialogs.run(RenameItemModal, { path, selected });
+}
