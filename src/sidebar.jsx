@@ -109,7 +109,7 @@ export const SidebarPanelDetails = ({
         }
     }, [path, selected]);
 
-    const Dialogs = useDialogs();
+    const dialogs = useDialogs();
     const directory_name = path[path.length - 1];
     const hidden_count = files.filter(file => file.name.startsWith(".")).length;
     let shown_items = cockpit.format(cockpit.ngettext("$0 item", "$0 items", files.length), files.length);
@@ -117,7 +117,7 @@ export const SidebarPanelDetails = ({
         shown_items += " " + cockpit.format(cockpit.ngettext("($0 hidden)", "($0 hidden)", hidden_count), hidden_count);
 
     const menuItems = get_menu_items(
-        path, selected, setSelected, clipboard, setClipboard, cwdInfo, addAlert, Dialogs
+        path, selected, setSelected, clipboard, setClipboard, cwdInfo, addAlert, dialogs
     ).map((option, i) => {
         if (option.type === 'divider')
             return <Divider key={i} />;
@@ -175,7 +175,7 @@ export const SidebarPanelDetails = ({
                 <Button
                   variant="secondary"
                   onClick={() => {
-                      edit_permissions(Dialogs, selected[0], path);
+                      edit_permissions(dialogs, selected[0], path);
                   }}
                 >
                     {_("Edit permissions")}
