@@ -32,11 +32,11 @@ import { TrashIcon } from "@patternfly/react-icons";
 import cockpit from "cockpit";
 import { upload } from "cockpit-upload-helper";
 import { useDialogs } from "dialogs";
+import { FileInfo } from "fsinfo";
 import * as timeformat from "timeformat";
 import { fmt_to_fragments } from "utils";
 
 import { useFilesContext } from "./app";
-import { FileInfo } from "./fsinfo";
 
 import "./upload-button.scss";
 

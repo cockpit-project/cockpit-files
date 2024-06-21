@@ -1,8 +1,7 @@
 import React from 'react';
 
 import cockpit from 'cockpit';
-
-import { FileInfo } from './fsinfo';
+import { FileInfo } from 'fsinfo';
 
 interface Id {
     id: number;
