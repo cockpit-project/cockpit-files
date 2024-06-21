@@ -35,7 +35,13 @@ import { Application } from "./app";
  */
 import "./app.scss";
 
-document.addEventListener("DOMContentLoaded", function () {
-    const root = createRoot(document.getElementById("app"));
+declare global {
+    interface Window {
+        debugging?: string;
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const root = createRoot(document.getElementById("app")!);
     root.render(<Application />);
 });
