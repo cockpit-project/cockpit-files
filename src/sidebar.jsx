@@ -48,42 +48,46 @@ const getDescriptionListItems = selected => {
         {
             id: "description-list-last-modified",
             label: _("Last modified"),
-            value: timeformat.dateTime(selected.mtime * 1000)
+            value: 'mtime' in selected ? timeformat.dateTime(selected.mtime * 1000) : _('unknown')
         },
         {
             id: "description-list-owner",
             label: _("Owner"),
-            value: selected.user
+            value: 'user' in selected ? selected.user : _('unknown')
         },
         {
             id: "description-list-group",
             label: _("Group"),
-            value: selected.group
+            value: 'group' in selected ? selected.group : _('unknown')
         },
         ...(selected.type === "reg"
             ? [
                 {
                     id: "description-list-size",
                     label: _("Size"),
-                    value: cockpit.format_bytes(selected.size),
+                    value: cockpit.format_bytes(selected.size) || _('unknown'),
                 },
             ]
             : []),
-        {
-            id: "description-list-owner-permissions",
-            label: _("Owner permissions"),
-            value: get_permissions(selected.mode >> 6),
-        },
-        {
-            id: "description-list-group-permissions",
-            label: _("Group permissions"),
-            value: get_permissions(selected.mode >> 3),
-        },
-        {
-            id: "description-list-other-permissions",
-            label: _("Other permissions"),
-            value: get_permissions(selected.mode >> 0),
-        },
+        ...('mode' in selected
+            ? [
+                {
+                    id: "description-list-owner-permissions",
+                    label: _("Owner permissions"),
+                    value: get_permissions(selected.mode >> 6),
+                },
+                {
+                    id: "description-list-group-permissions",
+                    label: _("Group permissions"),
+                    value: get_permissions(selected.mode >> 3),
+                },
+                {
+                    id: "description-list-other-permissions",
+                    label: _("Other permissions"),
+                    value: get_permissions(selected.mode >> 0),
+                },
+            ]
+            : [])
     ]);
 };
 

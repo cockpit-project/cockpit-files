@@ -946,12 +946,27 @@ class TestFiles(testlib.MachineCase):
 
         self.enter_files()
 
+        # Make a directory that's not readable to the admin user
         m.execute("mkdir /home/admin/testdir && chmod 400 /home/admin/testdir")
         b.mouse("[data-item='testdir']", "dblclick")
         b.wait_not_present(".pf-v5-c-empty-state")
         b.drop_superuser()
         b.wait_in_text(".pf-v5-c-empty-state", "Permission denied")
         b.assert_pixels(".pf-v5-c-page__main", "error-folder-view")
+
+        # clicking on the home button should take us to the home directory
+        b.click(".breadcrumb-button:nth-of-type(4)")
+
+        # Now set a+r.  We will be able to enter the directory now, and see the
+        # files present, but not read any information about them (not +x).
+        m.execute('touch /home/admin/testdir/testfile && chmod a+r /home/admin/testdir')
+        b.mouse("[data-item='testdir']", "dblclick")
+        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "testdir")
+        b.click("[data-item='testfile']")
+        b.wait_in_text("#sidebar-card-header", "testfile")
+        b.wait_text("#description-list-owner dd", "unknown")
+        b.wait_text("#description-list-group dd", "unknown")
+        b.wait_text("#description-list-last-modified dd", "unknown")
 
     def testMultiSelect(self) -> None:
         b = self.browser
