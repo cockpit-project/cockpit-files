@@ -31,7 +31,7 @@ import { TrashIcon } from "@patternfly/react-icons";
 
 import cockpit from "cockpit";
 import { upload } from "cockpit-upload-helper";
-import { useDialogs } from "dialogs";
+import { DialogResult, useDialogs } from "dialogs";
 import { FileInfo } from "fsinfo";
 import * as timeformat from "timeformat";
 import { fmt_to_fragments } from "utils";
@@ -42,30 +42,37 @@ import "./upload-button.scss";
 
 const _ = cockpit.gettext;
 
+interface ConflictResult {
+    replace?: true;
+    skip?: true;
+    applyToAll: boolean;
+}
+
 const FileConflictDialog = ({
     path,
     file,
     uploadFile,
     isMultiUpload,
+    dialogResult
 }: {
     path: string[];
     file: FileInfo,
     uploadFile: File,
     isMultiUpload: boolean,
+    dialogResult: DialogResult<ConflictResult>
 }) => {
-    const Dialogs = useDialogs();
     const [applyToAll, setApplyToAll] = React.useState<boolean>(false);
 
     const handleReplace = () => {
-        Dialogs.close({ replace: true, applyToAll });
+        dialogResult.resolve({ replace: true, applyToAll });
     };
 
     const handleSkip = () => {
-        Dialogs.close({ skip: true, applyToAll });
+        dialogResult.resolve({ skip: true, applyToAll });
     };
 
     const handleCancel = () => {
-        Dialogs.reject(new Error("cancelled"));
+        dialogResult.reject(new Error("cancelled"));
     };
 
     return (
@@ -161,23 +168,18 @@ export const UploadButton = ({
         let replaceAll = false;
         let skipAll = false;
         for (let i = 0; i < event.target.files.length; i++) {
-            const inputFile = event.target.files[i];
-            const file = cwdInfo?.entries[inputFile.name];
+            const uploadFile = event.target.files[i];
+            const file = cwdInfo?.entries[uploadFile.name];
 
             if (replaceAll)
-                toUploadFiles.push(inputFile);
+                toUploadFiles.push(uploadFile);
             else if (file && skipAll) {
                 continue;
             } else if (file) {
                 try {
-                    resolution = await Dialogs.show(
-                        <FileConflictDialog
-                          path={path}
-                          file={file}
-                          uploadFile={inputFile}
-                          isMultiUpload={event.target.files.length > 1}
-                        />
-                    );
+                    resolution = await Dialogs.run(FileConflictDialog, {
+                        path, file, uploadFile, isMultiUpload: event.target.files.length > 1
+                    });
                 } catch (exc) {
                     resetInput();
                     return;
@@ -192,9 +194,9 @@ export const UploadButton = ({
                 if (resolution.applyToAll && resolution.replace)
                     replaceAll = true;
 
-                toUploadFiles.push(inputFile);
+                toUploadFiles.push(uploadFile);
             } else {
-                toUploadFiles.push(inputFile);
+                toUploadFiles.push(uploadFile);
             }
         }
 
