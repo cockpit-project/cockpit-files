@@ -22,6 +22,7 @@ import React, { useContext, useEffect, useMemo, useState } from "react";
 import {
     AlertGroup, Alert, AlertVariant, AlertActionCloseButton
 } from "@patternfly/react-core/dist/esm/components/Alert";
+import { Card } from "@patternfly/react-core/dist/esm/components/Card";
 import { Page, PageSection } from "@patternfly/react-core/dist/esm/components/Page";
 import { Sidebar, SidebarPanel, SidebarContent } from "@patternfly/react-core/dist/esm/components/Sidebar";
 import { ExclamationCircleIcon } from "@patternfly/react-icons";
@@ -166,10 +167,12 @@ export const Application = () => {
                         <Sidebar isPanelRight hasGutter>
                             <SidebarContent>
                                 {errorMessage &&
-                                <EmptyStatePanel
-                                  paragraph={errorMessage}
-                                  icon={ExclamationCircleIcon}
-                                />}
+                                <Card>
+                                    <EmptyStatePanel
+                                      paragraph={errorMessage}
+                                      icon={ExclamationCircleIcon}
+                                    />
+                                </Card>}
                                 {!errorMessage &&
                                 <FilesFolderView
                                   path={path}
