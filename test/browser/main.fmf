@@ -6,4 +6,4 @@ require:
   - cockpit-system
   - glibc-langpack-de
 test: ./browser.sh
-duration: 60m
+duration: 30m
