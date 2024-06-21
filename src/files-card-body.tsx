@@ -32,7 +32,7 @@ import { useDialogs } from "dialogs";
 import * as timeformat from "timeformat";
 
 import { FolderFileInfo, useFilesContext } from "./app";
-import { ConfirmDeletionDialog } from "./fileActions";
+import { ConfirmDeletionDialog } from "./dialogs/delete";
 import { Sort, filterColumnMapping, filterColumns } from "./header";
 import { get_menu_items } from "./menu";
 

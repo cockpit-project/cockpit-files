@@ -27,13 +27,11 @@ import type { FileInfo } from "fsinfo";
 
 import type { FolderFileInfo } from "./app";
 import { basename } from "./common";
-import { CreateDirectoryModal } from "./dialogs/mkdir";
-import {
-    ConfirmDeletionDialog,
-    RenameItemModal,
-    editPermissions,
-    downloadFile
-} from "./fileActions";
+import { ConfirmDeletionDialog } from './dialogs/delete';
+import { CreateDirectoryModal } from './dialogs/mkdir';
+import { editPermissions } from './dialogs/permissions';
+import { RenameItemModal } from './dialogs/rename';
+import { downloadFile } from './download';
 
 const _ = cockpit.gettext;
 
