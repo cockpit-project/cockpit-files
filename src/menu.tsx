@@ -22,6 +22,7 @@ import React from "react";
 import { AlertVariant } from "@patternfly/react-core/dist/esm/components/Alert";
 
 import cockpit from "cockpit";
+import type { FileInfo } from "fsinfo";
 
 import type { FolderFileInfo } from "./app";
 import { basename } from "./common";
@@ -32,7 +33,6 @@ import {
     editPermissions,
     downloadFile
 } from "./fileActions";
-import type { FileInfo } from "./fsinfo";
 
 const _ = cockpit.gettext;
 

@@ -30,6 +30,7 @@ import { ExclamationCircleIcon } from "@patternfly/react-icons";
 import cockpit from "cockpit";
 import { EmptyStatePanel } from "cockpit-components-empty-state";
 import { WithDialogs } from "dialogs";
+import { FsInfoClient, FileInfo } from "fsinfo";
 import { usePageLocation } from "hooks";
 import { superuser } from "superuser";
 
@@ -37,7 +38,6 @@ import { FilesBreadcrumbs } from "./files-breadcrumbs";
 import { FilesFolderView } from "./files-folder-view";
 import filetype_data from './filetype-data';
 import { filetype_lookup } from './filetype-lookup';
-import { FsInfoClient, FileInfo } from "./fsinfo";
 import { SidebarPanelDetails } from "./sidebar";
 
 superuser.reload_page_on_change();
