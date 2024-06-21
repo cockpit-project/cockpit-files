@@ -182,7 +182,7 @@ export const Application = () => {
                                   setClipboard={setClipboard}
                                 />}
                             </SidebarContent>
-                            <SidebarPanel className="sidebar-panel" width={{ default: "width_25" }}>
+                            <SidebarPanel className="sidebar-panel">
                                 <SidebarPanelDetails
                                   path={path}
                                   selected={selected.map(s => files.find(f => f.name === s.name))
