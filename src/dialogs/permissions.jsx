@@ -17,178 +17,25 @@
  * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import { Button } from "@patternfly/react-core/dist/esm/components/Button";
-import { Form, FormGroup, FormSection } from "@patternfly/react-core/dist/esm/components/Form";
-import { FormSelect, FormSelectOption } from "@patternfly/react-core/dist/esm/components/FormSelect";
-import { Modal, ModalVariant } from "@patternfly/react-core/dist/esm/components/Modal";
-import { TextInput } from "@patternfly/react-core/dist/esm/components/TextInput";
-import { Stack } from "@patternfly/react-core/dist/esm/layouts/Stack";
+import { Button } from '@patternfly/react-core/dist/esm/components/Button';
+import { Form, FormGroup, FormSection } from '@patternfly/react-core/dist/esm/components/Form';
+import { FormSelect, FormSelectOption } from '@patternfly/react-core/dist/esm/components/FormSelect';
+import { Modal, ModalVariant } from '@patternfly/react-core/dist/esm/components/Modal';
+import { Stack } from '@patternfly/react-core/dist/esm/layouts/Stack';
 
-import cockpit from "cockpit";
-import { FormHelper } from 'cockpit-components-form-helper';
-import { InlineNotification } from "cockpit-components-inline-notification";
-import { useDialogs } from "dialogs";
-import { useInit } from "hooks";
-import {
-    etc_group_syntax as etcGroupSyntax,
-    etc_passwd_syntax as etcPasswdSyntax
-} from "pam_user_parser.js";
-import { superuser } from "superuser";
+import cockpit from 'cockpit';
+import { InlineNotification } from 'cockpit-components-inline-notification';
+import { useDialogs } from 'dialogs';
+import { useInit } from 'hooks';
+import { etc_group_syntax, etc_passwd_syntax } from 'pam_user_parser';
+import { superuser } from 'superuser';
 
-import { useFilesContext } from "./app";
-import { map_permissions, inode_types } from "./common";
+import { useFilesContext } from '../app';
+import { map_permissions, inode_types } from '../common';
 
 const _ = cockpit.gettext;
-
-export const editPermissions = (Dialogs, selected, path) => {
-    Dialogs.show(
-        <EditPermissionsModal
-          selected={selected} path={path}
-        />
-    );
-};
-
-export const ConfirmDeletionDialog = ({
-    path,
-    selected,
-    setSelected,
-}) => {
-    const Dialogs = useDialogs();
-    const [errorMessage, setErrorMessage] = useState(null);
-    const [forceDelete, setForceDelete] = useState(false);
-
-    let modalTitle;
-    if (selected.length > 1) {
-        modalTitle = cockpit.format(forceDelete ? _("Force delete $0 items") : _("Delete $0 items?"), selected.length);
-    } else {
-        const selectedItem = selected[0];
-        if (selectedItem.type === "reg") {
-            modalTitle = cockpit.format(
-                forceDelete ? _("Force delete file $0?") : _("Delete file $0?"), selectedItem.name
-            );
-        } else if (selectedItem.type === "lnk") {
-            modalTitle = cockpit.format(
-                forceDelete ? _("Force delete link $0?") : _("Delete link $0?"), selectedItem.name
-            );
-        } else if (selectedItem.type === "dir") {
-            modalTitle = cockpit.format(
-                forceDelete ? _("Force delete directory $0?") : _("Delete directory $0?"), selectedItem.name
-            );
-        } else {
-            modalTitle = cockpit.format(forceDelete ? _("Force delete $0") : _("Delete $0?"), selectedItem.name);
-        }
-    }
-
-    const deleteItem = () => {
-        const args = ["rm", "-r"];
-        // TODO: Make force more sensible https://github.com/cockpit-project/cockpit-files/issues/363
-        cockpit.spawn([...args, ...selected.map(f => path + f.name)], { err: "message", superuser: "try" })
-                .then(() => {
-                    setSelected([]);
-                    Dialogs.close();
-                })
-                .catch(err => {
-                    setErrorMessage(err.message);
-                    setForceDelete(true);
-                });
-    };
-
-    return (
-        <Modal
-          position="top"
-          title={modalTitle}
-          titleIconVariant="warning"
-          variant={ModalVariant.medium}
-          isOpen
-          onClose={Dialogs.close}
-          footer={
-              <>
-                  <Button variant="danger" onClick={deleteItem}>{_("Delete")}</Button>
-                  <Button variant="link" onClick={Dialogs.close}>{_("Cancel")}</Button>
-              </>
-          }
-        >
-            {errorMessage &&
-            <InlineNotification
-              type="danger"
-              text={errorMessage}
-              isInline
-            />}
-        </Modal>
-    );
-};
-
-export const RenameItemModal = ({ path, selected }) => {
-    const Dialogs = useDialogs();
-    const { cwdInfo } = useFilesContext();
-    const [name, setName] = useState(selected.name);
-    const [nameError, setNameError] = useState(null);
-    const [errorMessage, setErrorMessage] = useState(undefined);
-
-    let title;
-    if (selected.type === "reg") {
-        title = cockpit.format(_("Rename file $0"), selected.name);
-    } else if (selected.type === "lnk") {
-        title = cockpit.format(_("Rename link $0"), selected.name);
-    } else if (selected.type === "dir") {
-        title = cockpit.format(_("Rename directory $0"), selected.name);
-    } else {
-        title = _("Rename $0", selected.name);
-    }
-
-    const renameItem = () => {
-        const newPath = path.join("/") + "/" + name;
-
-        cockpit.spawn(["mv", "--no-target-directory", path.join("/") + "/" + selected.name, newPath],
-                      { superuser: "try", err: "message" })
-                .then(() => {
-                    Dialogs.close();
-                }, err => setErrorMessage(err.message));
-    };
-
-    return (
-        <Modal
-          position="top"
-          title={title}
-          variant={ModalVariant.small}
-          isOpen
-          onClose={Dialogs.close}
-          footer={
-              <>
-                  <Button
-                    variant="primary"
-                    onClick={renameItem}
-                    isDisabled={errorMessage !== undefined || nameError !== null}
-                  >
-                      {_("Rename")}
-                  </Button>
-                  <Button variant="link" onClick={Dialogs.close}>{_("Cancel")}</Button>
-              </>
-          }
-        >
-            <Stack>
-                {errorMessage !== undefined &&
-                <InlineNotification
-                  type="danger"
-                  text={errorMessage}
-                  isInline
-                />}
-                <Form isHorizontal>
-                    <FormGroup fieldId="rename-item-input" label={_("New name")}>
-                        <TextInput
-                          value={name}
-                          onChange={(_, val) => setInputName(val, setName, setNameError, setErrorMessage, cwdInfo)}
-                          id="rename-item-input"
-                        />
-                        <FormHelper fieldId="rename-item-input" helperTextInvalid={nameError} />
-                    </FormGroup>
-                </Form>
-            </Stack>
-        </Modal>
-    );
-};
 
 const EditPermissionsModal = ({ selected, path }) => {
     const Dialogs = useDialogs();
@@ -210,14 +57,14 @@ const EditPermissionsModal = ({ selected, path }) => {
     useInit(async () => {
         try {
             const passwd = await cockpit.spawn(["getent", "passwd"], { err: "message" });
-            setAccounts(etcPasswdSyntax.parse(passwd));
+            setAccounts(etc_passwd_syntax.parse(passwd));
         } catch (exc) {
             console.error("Cannot obtain users from getent passwd", exc);
         }
 
         try {
             const group = await cockpit.spawn(["getent", "group"], { err: "message" });
-            setGroups(etcGroupSyntax.parse(group));
+            setGroups(etc_group_syntax.parse(group));
         } catch (exc) {
             console.error("Cannot obtain users from getent group", exc);
         }
@@ -374,35 +221,6 @@ const EditPermissionsModal = ({ selected, path }) => {
     );
 };
 
-const setInputName = (val, setName, setNameError, setErrorMessage, cwdInfo) => {
-    setErrorMessage(undefined);
-    setName(val);
-
-    if (val === "") {
-        setNameError(_("Name cannot be empty."));
-    } else if (val.length >= 256) {
-        setNameError(_("Name too long."));
-    } else if (val.includes("/")) {
-        setNameError(_("Name cannot include a /."));
-    } else if (cwdInfo?.entries[val]) {
-        setNameError(_("File or directory already exists"));
-    } else {
-        setNameError(null);
-    }
-};
-
-export const downloadFile = (currentPath, selected) => {
-    const query = window.btoa(JSON.stringify({
-        payload: "fsread1",
-        binary: "raw",
-        path: `${currentPath}/${selected.name}`,
-        superuser: "try",
-        external: {
-            "content-disposition": `attachment; filename="${selected.name}"`,
-            "content-type": "application/octet-stream",
-        }
-    }));
-
-    const prefix = (new URL(cockpit.transport.uri("channel/" + cockpit.transport.csrf_token))).pathname;
-    window.open(`${prefix}?${query}`);
-};
+export function editPermissions(dialogs, selected, path) {
+    dialogs.run(EditPermissionsModal, { selected, path });
+}

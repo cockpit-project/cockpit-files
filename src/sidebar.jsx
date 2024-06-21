@@ -38,7 +38,7 @@ import * as timeformat from "timeformat";
 
 import { useFilesContext } from "./app";
 import { get_permissions } from "./common";
-import { editPermissions } from "./fileActions";
+import { editPermissions } from "./dialogs/permissions";
 import { get_menu_items } from "./menu";
 
 const _ = cockpit.gettext;
