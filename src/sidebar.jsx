@@ -38,7 +38,7 @@ import * as timeformat from "timeformat";
 
 import { useFilesContext } from "./app";
 import { get_permissions } from "./common";
-import { editPermissions } from "./dialogs/permissions";
+import { edit_permissions } from "./dialogs/permissions";
 import { get_menu_items } from "./menu";
 
 const _ = cockpit.gettext;
@@ -175,7 +175,7 @@ export const SidebarPanelDetails = ({
                 <Button
                   variant="secondary"
                   onClick={() => {
-                      editPermissions(Dialogs, selected[0], path);
+                      edit_permissions(Dialogs, selected[0], path);
                   }}
                 >
                     {_("Edit permissions")}

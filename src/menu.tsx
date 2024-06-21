@@ -27,10 +27,10 @@ import type { FileInfo } from "fsinfo";
 
 import type { FolderFileInfo } from "./app";
 import { basename } from "./common";
-import { ConfirmDeletionDialog } from './dialogs/delete';
-import { CreateDirectoryModal } from './dialogs/mkdir';
-import { editPermissions } from './dialogs/permissions';
-import { RenameItemModal } from './dialogs/rename';
+import { confirm_delete } from './dialogs/delete';
+import { show_create_directory_dialog } from './dialogs/mkdir';
+import { edit_permissions } from './dialogs/permissions';
+import { show_rename_dialog } from './dialogs/rename';
 import { downloadFile } from './download';
 
 const _ = cockpit.gettext;
@@ -81,13 +81,13 @@ export function get_menu_items(
             {
                 id: "create-item",
                 title: _("Create directory"),
-                onClick: () => dialogs.show(<CreateDirectoryModal currentPath={currentPath} />),
+                onClick: () => show_create_directory_dialog(dialogs, currentPath)
             },
             { type: "divider" },
             {
                 id: "edit-permissions",
                 title: _("Edit permissions"),
-                onClick: () => editPermissions(dialogs, null, path)
+                onClick: () => edit_permissions(dialogs, null, path)
             }
         );
     } else if (selected.length === 1) {
@@ -101,28 +101,19 @@ export function get_menu_items(
             {
                 id: "edit-permissions",
                 title: _("Edit permissions"),
-                onClick: () => editPermissions(dialogs, selected[0], path)
+                onClick: () => edit_permissions(dialogs, selected[0], path)
             },
             {
                 id: "rename-item",
                 title: _("Rename"),
-                onClick: () => {
-                    dialogs.show(<RenameItemModal path={path} selected={selected[0]} />);
-                },
+                onClick: () => show_rename_dialog(dialogs, path, selected[0])
             },
             { type: "divider" },
             {
                 id: "delete-item",
                 title: _("Delete"),
                 className: "pf-m-danger",
-                onClick: () => {
-                    dialogs.show(
-                        <ConfirmDeletionDialog
-                          selected={selected} path={currentPath}
-                          setSelected={setSelected}
-                        />
-                    );
-                }
+                onClick: () => confirm_delete(dialogs, currentPath, selected, setSelected)
             },
         );
         if (selected[0].type === "reg")
@@ -145,14 +136,7 @@ export function get_menu_items(
                 id: "delete-item",
                 title: _("Delete"),
                 className: "pf-m-danger",
-                onClick: () => {
-                    dialogs.show(
-                        <ConfirmDeletionDialog
-                          selected={selected} path={currentPath}
-                          setSelected={setSelected}
-                        />
-                    );
-                },
+                onClick: () => confirm_delete(dialogs, currentPath, selected, setSelected)
             }
         );
     }

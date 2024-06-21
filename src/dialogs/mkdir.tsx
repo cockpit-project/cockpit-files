@@ -1,3 +1,22 @@
+/*
+ * This file is part of Cockpit.
+ *
+ * Copyright (C) 2024 Red Hat, Inc.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 import React, { useState } from 'react';
 
 import { Button } from "@patternfly/react-core/dist/esm/components/Button";
@@ -10,7 +29,7 @@ import { Stack } from "@patternfly/react-core/dist/esm/layouts/Stack";
 import cockpit from 'cockpit';
 import { FormHelper } from 'cockpit-components-form-helper';
 import { InlineNotification } from 'cockpit-components-inline-notification';
-import { useDialogs } from 'dialogs';
+import type { Dialogs, DialogResult } from 'dialogs';
 import { superuser } from 'superuser';
 
 import { useFilesContext } from '../app';
@@ -40,15 +59,17 @@ async function create_directory(path: string, owner?: string) {
     }
 }
 
-export const CreateDirectoryModal = ({ currentPath }: { currentPath: string }) => {
-    const Dialogs = useDialogs();
+const CreateDirectoryModal = ({ currentPath, dialogResult } : {
+    currentPath: string,
+    dialogResult: DialogResult<void>
+}) => {
     const [name, setName] = useState("");
     const [nameError, setNameError] = useState<string | undefined>();
     const [errorMessage, setErrorMessage] = useState<string | undefined>();
     const [owner, setOwner] = useState<string | undefined>();
     const createDirectory = () => {
         const path = currentPath + name;
-        create_directory(path, owner).then(Dialogs.close, err => setErrorMessage(err.message));
+        create_directory(path, owner).then(dialogResult.resolve, err => setErrorMessage(err.message));
     };
     const id = useId();
     const { cwdInfo } = useFilesContext();
@@ -66,7 +87,7 @@ export const CreateDirectoryModal = ({ currentPath }: { currentPath: string }) =
           position="top"
           title={_("Create directory")}
           isOpen
-          onClose={Dialogs.close}
+          onClose={() => dialogResult.resolve()}
           variant={ModalVariant.small}
           footer={
               <>
@@ -80,7 +101,7 @@ export const CreateDirectoryModal = ({ currentPath }: { currentPath: string }) =
                   >
                       {_("Create")}
                   </Button>
-                  <Button variant="link" onClick={Dialogs.close}>{_("Cancel")}</Button>
+                  <Button variant="link" onClick={() => dialogResult.resolve()}>{_("Cancel")}</Button>
               </>
           }
         >
@@ -131,3 +152,7 @@ export const CreateDirectoryModal = ({ currentPath }: { currentPath: string }) =
         </Modal>
     );
 };
+
+export function show_create_directory_dialog(dialogs: Dialogs, currentPath: string) {
+    dialogs.run(CreateDirectoryModal, { currentPath });
+}

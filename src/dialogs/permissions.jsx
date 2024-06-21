@@ -27,7 +27,6 @@ import { Stack } from '@patternfly/react-core/dist/esm/layouts/Stack';
 
 import cockpit from 'cockpit';
 import { InlineNotification } from 'cockpit-components-inline-notification';
-import { useDialogs } from 'dialogs';
 import { useInit } from 'hooks';
 import { etc_group_syntax, etc_passwd_syntax } from 'pam_user_parser';
 import { superuser } from 'superuser';
@@ -37,8 +36,7 @@ import { map_permissions, inode_types } from '../common';
 
 const _ = cockpit.gettext;
 
-const EditPermissionsModal = ({ selected, path }) => {
-    const Dialogs = useDialogs();
+const EditPermissionsModal = ({ dialogResult, selected, path }) => {
     const { cwdInfo } = useFilesContext();
 
     // Nothing selected means we act on the current working directory
@@ -93,7 +91,7 @@ const EditPermissionsModal = ({ selected, path }) => {
                 await cockpit.spawn(["chown", owner + ":" + group, directory],
                                     { superuser: "try", err: "message" });
 
-            Dialogs.close();
+            dialogResult.resolve();
         } catch (err) {
             setErrorMessage(err.message);
         }
@@ -123,7 +121,7 @@ const EditPermissionsModal = ({ selected, path }) => {
           title={cockpit.format(_("“$0” permissions"), selected.name)}
           description={inode_types[selected.type] || "Unknown type"}
           isOpen
-          onClose={Dialogs.close}
+          onClose={dialogResult.resolve}
           footer={
               <>
                   <Button
@@ -132,7 +130,7 @@ const EditPermissionsModal = ({ selected, path }) => {
                   >
                       {_("Change")}
                   </Button>
-                  <Button variant="link" onClick={Dialogs.close}>{_("Cancel")}</Button>
+                  <Button variant="link" onClick={dialogResult.resolve}>{_("Cancel")}</Button>
               </>
           }
         >
@@ -221,6 +219,6 @@ const EditPermissionsModal = ({ selected, path }) => {
     );
 };
 
-export function editPermissions(dialogs, selected, path) {
+export function edit_permissions(dialogs, selected, path) {
     dialogs.run(EditPermissionsModal, { selected, path });
 }
