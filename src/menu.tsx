@@ -22,6 +22,7 @@ import React from "react";
 import { AlertVariant } from "@patternfly/react-core/dist/esm/components/Alert";
 
 import cockpit from "cockpit";
+import type { Dialogs } from 'dialogs';
 import type { FileInfo } from "fsinfo";
 
 import type { FolderFileInfo } from "./app";
@@ -51,7 +52,7 @@ export function get_menu_items(
     clipboard: string[], setClipboard: React.Dispatch<React.SetStateAction<string[]>>,
     cwdInfo: FileInfo | null,
     addAlert: (title: string, variant: AlertVariant, key: string, detail?: string) => void,
-    Dialogs: { show(element: React.JSX.Element): void }
+    dialogs: Dialogs,
 ) {
     const currentPath = path.join("/") + "/";
     const menuItems: MenuItem[] = [];
@@ -82,13 +83,13 @@ export function get_menu_items(
             {
                 id: "create-item",
                 title: _("Create directory"),
-                onClick: () => Dialogs.show(<CreateDirectoryModal currentPath={currentPath} />),
+                onClick: () => dialogs.show(<CreateDirectoryModal currentPath={currentPath} />),
             },
             { type: "divider" },
             {
                 id: "edit-permissions",
                 title: _("Edit permissions"),
-                onClick: () => editPermissions(Dialogs, null, path)
+                onClick: () => editPermissions(dialogs, null, path)
             }
         );
     } else if (selected.length === 1) {
@@ -102,18 +103,13 @@ export function get_menu_items(
             {
                 id: "edit-permissions",
                 title: _("Edit permissions"),
-                onClick: () => editPermissions(Dialogs, selected[0], path)
+                onClick: () => editPermissions(dialogs, selected[0], path)
             },
             {
                 id: "rename-item",
                 title: _("Rename"),
                 onClick: () => {
-                    Dialogs.show(
-                        <RenameItemModal
-                          path={path}
-                          selected={selected[0]}
-                        />
-                    );
+                    dialogs.show(<RenameItemModal path={path} selected={selected[0]} />);
                 },
             },
             { type: "divider" },
@@ -122,7 +118,7 @@ export function get_menu_items(
                 title: _("Delete"),
                 className: "pf-m-danger",
                 onClick: () => {
-                    Dialogs.show(
+                    dialogs.show(
                         <ConfirmDeletionDialog
                           selected={selected} path={currentPath}
                           setSelected={setSelected}
@@ -152,7 +148,7 @@ export function get_menu_items(
                 title: _("Delete"),
                 className: "pf-m-danger",
                 onClick: () => {
-                    Dialogs.show(
+                    dialogs.show(
                         <ConfirmDeletionDialog
                           selected={selected} path={currentPath}
                           setSelected={setSelected}
