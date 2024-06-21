@@ -107,7 +107,7 @@ export const SidebarPanelDetails = ({
         if (selected.length === 1) {
             const filePath = path.join("/") + "/" + selected[0]?.name;
 
-            cockpit.spawn(["file", "--brief", filePath], { superuser: "try", error: "message" })
+            cockpit.spawn(["file", "--brief", filePath], { superuser: "try", err: "message" })
                     .then(res => setInfo(res?.trim()))
                     .catch(error => console.warn(`Failed to run file --brief on ${filePath}: ${error.toString()}`));
         }
