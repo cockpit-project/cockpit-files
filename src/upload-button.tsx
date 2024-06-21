@@ -133,7 +133,7 @@ export const UploadButton = ({
 }) => {
     const ref = useRef<HTMLInputElement>(null);
     const { addAlert, cwdInfo } = useFilesContext();
-    const Dialogs = useDialogs();
+    const dialogs = useDialogs();
     const [showPopover, setPopover] = React.useState(false);
     const [uploadedFiles, setUploadedFiles] = useState<{[name: string]:
                                                         {file: File, progress: number, cancel:() => void}}>({});
@@ -177,7 +177,7 @@ export const UploadButton = ({
                 continue;
             } else if (file) {
                 try {
-                    resolution = await Dialogs.run(FileConflictDialog, {
+                    resolution = await dialogs.run(FileConflictDialog, {
                         path, file, uploadFile, isMultiUpload: event.target.files.length > 1
                     });
                 } catch (exc) {

@@ -69,10 +69,10 @@ const ContextMenuItems = ({ path, selected, setSelected, clipboard, setClipboard
     selected: FolderFileInfo[], setSelected: React.Dispatch<React.SetStateAction<FolderFileInfo[]>>,
     clipboard: string[], setClipboard: React.Dispatch<React.SetStateAction<string[]>>,
 }) => {
-    const Dialogs = useDialogs();
+    const dialogs = useDialogs();
     const { addAlert, cwdInfo } = useFilesContext();
     const menuItems = get_menu_items(
-        path, selected, setSelected, clipboard, setClipboard, cwdInfo, addAlert, Dialogs
+        path, selected, setSelected, clipboard, setClipboard, cwdInfo, addAlert, dialogs
     );
 
     return (
@@ -119,7 +119,7 @@ export const FilesCardBody = ({
     showHidden: boolean,
 }) => {
     const [boxPerRow, setBoxPerRow] = useState(0);
-    const Dialogs = useDialogs();
+    const dialogs = useDialogs();
 
     const sortedFiles = useMemo(() => {
         return files
@@ -264,7 +264,7 @@ export const FilesCardBody = ({
             } else if (e.key === "Enter" && selected.length === 1) {
                 onDoubleClickNavigate(selected[0]);
             } else if (e.key === "Delete" && selected.length !== 0) {
-                confirm_delete(Dialogs, path.join("/") + "/", selected, setSelected);
+                confirm_delete(dialogs, path.join("/") + "/", selected, setSelected);
             }
         };
 
@@ -275,11 +275,11 @@ export const FilesCardBody = ({
             folderViewElem.addEventListener("contextmenu", handleContextMenu);
         }
 
-        if (!isMounted.current && !Dialogs.isActive()) {
+        if (!isMounted.current && !dialogs.isActive()) {
             isMounted.current = true;
             document.addEventListener("keydown", onKeyboardNav);
         }
-        if (Dialogs.isActive())
+        if (dialogs.isActive())
             document.removeEventListener("keydown", onKeyboardNav);
         return () => {
             isMounted.current = false;
@@ -296,7 +296,7 @@ export const FilesCardBody = ({
         boxPerRow,
         selected,
         onDoubleClickNavigate,
-        Dialogs,
+        dialogs,
         path,
     ]);
 
