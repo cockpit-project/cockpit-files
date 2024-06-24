@@ -88,7 +88,7 @@ export function get_menu_items(
             {
                 id: "edit-permissions",
                 title: _("Edit permissions"),
-                onClick: () => editPermissions(Dialogs, selected[0], path)
+                onClick: () => editPermissions(Dialogs, null, path)
             }
         );
     } else if (selected.length === 1) {
