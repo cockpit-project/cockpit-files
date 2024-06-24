@@ -297,9 +297,9 @@ class TestFiles(testlib.MachineCase):
 
         # Navigation via editing the path
         path_input = "#new-path-input"
-        edit_button = ".breadcrumb-edit-button"
-        apply_button = ".breadcrumb-edit-apply-button"
-        cancel_button = ".breadcrumb-edit-cancel-button"
+        edit_button = ".breadcrumb-button-edit"
+        apply_button = ".breadcrumb-button-edit-apply"
+        cancel_button = ".breadcrumb-button-edit-cancel"
 
         # Cancel
 
