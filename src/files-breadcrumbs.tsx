@@ -254,7 +254,7 @@ export function FilesBreadcrumbs({ path, showHidden, setShowHidden }: { path: st
                       variant="secondary"
                       icon={<PencilAltIcon />}
                       onClick={() => enableEditMode()}
-                      className="breadcrumb-edit-button"
+                      className="breadcrumb-button-edit"
                     />}
                 {!editMode && fullPath.map((dir, i) => {
                     return (
@@ -263,7 +263,7 @@ export function FilesBreadcrumbs({ path, showHidden, setShowHidden }: { path: st
                               isDisabled={i === path.length - 1}
                               icon={i === 0 ? <HddIcon /> : null}
                               variant="link" onClick={() => { navigate(i + 1) }}
-                              className={`breadcrumb-button breadcrumb-button-${i}`}
+                              className={`breadcrumb-button breadcrumb-${i}`}
                             >
                                 {dir || "/"}
                             </Button>
@@ -289,13 +289,13 @@ export function FilesBreadcrumbs({ path, showHidden, setShowHidden }: { path: st
                           variant="plain"
                           icon={<CheckIcon className="breadcrumb-edit-apply-icon" />}
                           onClick={changePath}
-                          className="breadcrumb-edit-apply-button"
+                          className="breadcrumb-button-edit-apply"
                         />
                         <Button
                           variant="plain"
                           icon={<TimesIcon />}
                           onClick={() => cancelPathEdit()}
-                          className="breadcrumb-edit-cancel-button"
+                          className="breadcrumb-button-edit-cancel"
                         />
                     </>}
                     <SettingsDropdown showHidden={showHidden} setShowHidden={setShowHidden} />

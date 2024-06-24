@@ -18,7 +18,9 @@
 }
 
 // Move the scrollbar to the content area.
-// Do this by triggering the overflow on the fileview wrapper and sidebar panel when content doesn't fit. (Parent card is also needed to overflow, else the children won't here in this context.)
+// Do this by triggering the overflow on the fileview wrapper and sidebar panel
+// when content doesn't fit. (Parent card is also needed to overflow, else the
+// children won't here in this context.)
 .pf-v5-c-sidebar__content > .pf-v5-c-card,
 .fileview-wrapper,
 .sidebar-panel {
@@ -72,29 +74,54 @@
     @extend .ct-card;
 }
 
-.breadcrumb-button {
-    padding-inline: 0;
-}
+// We have to override PatternFly assumptions, as PatternFly does not expect
+// widgets other than breadcrumbs within a breadcrumbs bar. We should probably
+// reparent these and separate the breadcrumb into its own widget on the top
+// bar instead.
+.pf-v5-c-page__main-breadcrumb {
+    .pf-v5-c-button:not(.breadcrumb-button):has(.pf-v5-svg:last-child) {
+        // PatternFly doesn't expect icons in buttons in breadcrumbs, so we need to adjust for that
+        >.pf-v5-c-button__icon {
+            margin-inline: 0;
+        }
+    }
 
-button.pf-m-secondary.breadcrumb-edit-button {
-    margin-inline-end: var(--pf-v5-global--spacer--sm);
-
-    // PatternFly doesn't expect icons in buttons in breadcrumbs, so we need to adjust for that
-    > .pf-v5-c-button__icon {
-        margin-inline: 0;
+    .pf-v5-c-menu-toggle {
+        padding-inline: var(--pf-v5-global--spacer--md) calc(var(--pf-v5-global--spacer--md) * 0.75);
     }
 }
 
-button.breadcrumb-edit-apply-button {
-    padding-inline-end: var(--pf-v5-global--spacer--sm);
-}
+.breadcrumb {
+    &-button {
+        padding-inline: 0;
 
-button.breadcrumb-edit-cancel-button {
-    padding-inline-start: var(--pf-v5-global--spacer--sm);
-}
+        &.breadcrumb-0 {
+            margin-inline-start: var(--pf-v5-global--spacer--sm);
+        }
 
-.breadcrumb-edit-apply-icon {
-    color: var(--pf-v5-c-button--m-link--Color);
+        &-edit-apply,
+        &-edit-cancel {
+            padding-inline: var(--pf-v5-global--spacer--sm);
+        }
+
+        &-edit-apply {
+            svg {
+                color: var(--pf-v5-c-button--m-link--Color);
+            }
+
+            &:focus svg {
+                color: var(--pf-v5-c-button--m-link--focus--Color);
+            }
+
+            &:hover svg {
+                color: var(--pf-v5-c-button--m-link--hover--Color);
+            }
+
+            &:active svg {
+                color: var(--pf-v5-c-button--m-link--active--Color);
+            }
+        }
+    }
 }
 
 .path-divider {
