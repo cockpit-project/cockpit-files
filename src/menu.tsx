@@ -56,7 +56,7 @@ export function get_menu_items(
     const currentPath = path.join("/") + "/";
     const menuItems: MenuItem[] = [];
 
-    if (selected.length === 0 || selected[0].name === path[path.length - 1]) {
+    if (selected.length === 0) {
         menuItems.push(
             {
                 id: "paste-item",
