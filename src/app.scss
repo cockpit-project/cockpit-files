@@ -180,3 +180,51 @@
 .pf-v5-c-menu-toggle > .pf-v5-c-menu-toggle__controls {
     padding-inline-start: 0;
 }
+
+.shortcuts-dialog {
+    .pf-v5-c-content + .pf-v5-c-description-list {
+        margin: 1rem 0 0;
+    }
+
+    .pf-v5-l-flex {
+        gap: var(--pf-v5-global--spacer--lg) var(--pf-v5-global--spacer--md);
+
+        > .pf-v5-c-content {
+            // Have the content prefer 18em and wrap if too narrow
+            flex: 1 1 18em;
+        }
+    }
+
+    .pf-v5-c-description-list {
+        // Fix an overflow bug caused by PF adding -16px bottom margin
+        // (despite it being called RowGap, it's actually used as a margin at the bottom)
+        --pf-v5-c-description-list--RowGap: 0;
+    }
+
+    .pf-v5-c-description-list__group {
+        grid-template-columns: auto 1fr;
+    }
+
+    kbd {
+        font-weight: normal;
+    }
+
+    .keystroke {
+        align-items: center;
+        display: flex;
+        font-size: var(--pf-v5-global--FontSize--xs);
+        gap: var(--pf-v5-global--spacer--xs);
+        color: var(--pf-v5-global--Color--200);
+    }
+
+    .key {
+        color: var(--pf-v5-global--Color--100);
+        background-color: var(--pf-v5-global--BackgroundColor--200);
+        border-radius: var(--pf-v5-global--BorderRadius--sm);
+        border: 1px solid var(--pf-v5-global--BorderColor--100);
+        display: inline-block;
+        padding-block: var(--pf-v5-global--spacer--xs);
+        padding-inline: var(--pf-v5-global--spacer--sm);
+        white-space: nowrap;
+    }
+}
