@@ -36,14 +36,14 @@ import { KebabDropdown } from "cockpit-components-dropdown";
 import { useDialogs } from "dialogs";
 import * as timeformat from "timeformat";
 
-import { useFilesContext } from "./app";
+import { FolderFileInfo, useFilesContext } from "./app";
 import { get_permissions } from "./common";
 import { edit_permissions } from "./dialogs/permissions";
 import { get_menu_items } from "./menu";
 
 const _ = cockpit.gettext;
 
-const getDescriptionListItems = selected => {
+function getDescriptionListItems(selected: FolderFileInfo) {
     return ([
         {
             id: "description-list-last-modified",
@@ -89,18 +89,16 @@ const getDescriptionListItems = selected => {
             ]
             : [])
     ]);
-};
+}
 
-export const SidebarPanelDetails = ({
-    files,
-    path,
-    selected,
-    showHidden,
-    setSelected,
-    clipboard,
-    setClipboard,
+export const SidebarPanelDetails = ({ files, path, selected, setSelected, showHidden, clipboard, setClipboard } : {
+    files: FolderFileInfo[],
+    path: string[],
+    selected: FolderFileInfo[], setSelected: React.Dispatch<React.SetStateAction<FolderFileInfo[]>>,
+    showHidden: boolean,
+    clipboard: string[], setClipboard: React.Dispatch<React.SetStateAction<string[]>>
 }) => {
-    const [info, setInfo] = useState(null);
+    const [info, setInfo] = useState<string | null>(null);
     const { addAlert, cwdInfo } = useFilesContext();
 
     useEffect(() => {
@@ -168,7 +166,7 @@ export const SidebarPanelDetails = ({
             {selected.length === 1 &&
             <CardBody>
                 <DescriptionList id="description-list-sidebar" className="sidebar-details">
-                    {getDescriptionListItems(selected[0]).map((item, index) => (
+                    {getDescriptionListItems(selected[0]).map(item => (
                         <DescriptionListGroup key={item.id} id={item.id}>
                             <DescriptionListTerm>{item.label}</DescriptionListTerm>
                             <DescriptionListDescription>
