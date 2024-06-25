@@ -28,6 +28,7 @@ import type { Dialogs } from 'dialogs';
 import type { FolderFileInfo } from "./app";
 import { basename } from "./common";
 import { confirm_delete } from './dialogs/delete';
+import { edit_file } from './dialogs/editor';
 import { show_create_directory_dialog } from './dialogs/mkdir';
 import { edit_permissions } from './dialogs/permissions';
 import { show_rename_dialog } from './dialogs/rename';
@@ -90,38 +91,49 @@ export function get_menu_items(
             }
         );
     } else if (selected.length === 1) {
+        const item = selected[0];
+
+        if (item.type === 'reg' && item.size && item.size < 1000000) // 1MB
+            menuItems.push(
+                {
+                    id: "open-file",
+                    title: _("Open text file"),
+                    onClick: () => edit_file(dialogs, path + item.name)
+                },
+                { type: "divider" },
+            );
         menuItems.push(
             {
                 id: "copy-item",
                 title: _("Copy"),
-                onClick: () => setClipboard([path + selected[0].name]),
+                onClick: () => setClipboard([path + item.name])
             },
             { type: "divider" },
             {
                 id: "edit-permissions",
                 title: _("Edit permissions"),
-                onClick: () => edit_permissions(dialogs, selected[0], path)
+                onClick: () => edit_permissions(dialogs, item, path)
             },
             {
                 id: "rename-item",
                 title: _("Rename"),
-                onClick: () => show_rename_dialog(dialogs, path, selected[0])
+                onClick: () => show_rename_dialog(dialogs, path, item)
             },
             { type: "divider" },
             {
                 id: "delete-item",
                 title: _("Delete"),
                 className: "pf-m-danger",
-                onClick: () => confirm_delete(dialogs, path, selected, setSelected)
+                onClick: () => confirm_delete(dialogs, path, [item], setSelected)
             },
         );
-        if (selected[0].type === "reg")
+        if (item.type === "reg")
             menuItems.push(
                 { type: "divider" },
                 {
                     id: "download-item",
                     title: _("Download"),
-                    onClick: () => downloadFile(path, selected[0])
+                    onClick: () => downloadFile(path, item)
                 }
             );
     } else if (selected.length > 1) {
