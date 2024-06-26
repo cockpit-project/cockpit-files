@@ -1064,6 +1064,13 @@ class TestFiles(testlib.MachineCase):
             create_files += f"touch /home/admin/file{i}; "
         m.execute(create_files)
 
+        # view shortcuts help dialog
+        b.click("#global-settings-menu")
+        b.click("#show-shortcuts-help")
+        b.wait_in_text(".shortcuts-dialog .pf-v5-c-modal-box__title-text", "Keyboard shortcuts")
+        b.click(".shortcuts-dialog button.pf-m-secondary")
+        b.wait_not_present(".shortcuts-dialog")
+
         # Focus the iframe for global keybindings in Files.
         b.eval_js("window.focus()")
 
@@ -1183,6 +1190,48 @@ class TestFiles(testlib.MachineCase):
         b.wait_in_text(".pf-v5-c-alert__description", "\"newfile\" exists")
         b.click(".breadcrumb-2")
         b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "admin")
+        b.click(".pf-v5-c-alert__action button")
+
+        # Copy/paste with keybinds
+        b.eval_js("window.focus()")
+        m.execute("runuser -u admin mkdir -p /home/admin/kbdCopy")
+        b.mouse("[data-item='newdir']", "dblclick")
+        b.click("[data-item='copyDir']")
+        b.key("c", modifiers=2)
+        b.click(".breadcrumb-button:nth-of-type(4)")
+        b.mouse("[data-item='kbdCopy']", "dblclick")
+        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "kbdCopy")
+        b.key("v", modifiers=2)
+        b.wait_visible("[data-item='copyDir']")
+        b.click(".breadcrumb-button:nth-of-type(4)")
+        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "admin")
+        m.execute("runuser -u admin echo 'keybindings good' > /home/admin/newdir/newfile")
+        b.mouse("[data-item='newdir']", "dblclick")
+        b.click("[data-item='loaded']")
+        b.mouse("[data-item='newfile']", "click", ctrlKey=True)
+        b.wait_visible("[data-item='loaded'].row-selected")
+        b.wait_visible("[data-item='newfile'].row-selected")
+        b.key("c", modifiers=2)
+        b.click(".breadcrumb-button:nth-of-type(4)")
+        b.mouse("[data-item='kbdCopy']", "dblclick")
+        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "kbdCopy")
+        b.key("v", modifiers=2)
+        b.wait_visible("[data-item='loaded']")
+        b.wait_visible("[data-item='newfile']")
+        self.assertEqual(m.execute("head -n 1 /home/admin/kbdCopy/newfile"), "keybindings good\n")
+
+        # File already exists error with keybinds
+        b.click(".breadcrumb-button:nth-of-type(4)")
+        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "admin")
+        m.execute("runuser -u admin echo 'changed' > /home/admin/newdir/newfile")
+        b.click("[data-item='newfile']")
+        b.key("c", modifiers=2)
+        b.mouse("[data-item='kbdCopy']", "dblclick")
+        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "kbdCopy")
+        b.key("v", modifiers=2)
+        b.wait_in_text("h4.pf-v5-c-alert__title", "Pasting failed")
+        b.wait_in_text(".pf-v5-c-alert__description", "\"newfile\" exists")
+        self.assertEqual(m.execute("head -n 1 /home/admin/kbdCopy/newfile"), "keybindings good\n")
 
     @testlib.skipBrowser(".upload_files() doesn't work on Firefox", "firefox")
     def testUpload(self) -> None:

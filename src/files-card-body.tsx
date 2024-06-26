@@ -35,7 +35,7 @@ import { FolderFileInfo, useFilesContext } from "./app";
 import { confirm_delete } from "./dialogs/delete";
 import { show_create_directory_dialog } from "./dialogs/mkdir";
 import { Sort, filterColumnMapping, filterColumns } from "./header";
-import { get_menu_items } from "./menu";
+import { copyToClipboard, get_menu_items, pasteFromClipboard } from "./menu";
 import "./files-card-body.scss";
 import { show_rename_dialog } from "./dialogs/rename";
 
@@ -121,6 +121,7 @@ export const FilesCardBody = ({
 }) => {
     const [boxPerRow, setBoxPerRow] = useState(0);
     const dialogs = useDialogs();
+    const { addAlert, cwdInfo } = useFilesContext();
 
     const sortedFiles = useMemo(() => {
         return files
@@ -315,9 +316,24 @@ export const FilesCardBody = ({
                 break;
 
             case "a":
-                if (e.ctrlKey && !e.shiftKey && !e.altKey && !(e.target instanceof HTMLInputElement)) {
+                if (e.ctrlKey && !e.shiftKey && !e.altKey) {
                     e.preventDefault();
                     setSelected(sortedFiles);
+                }
+                break;
+
+            case "c":
+                if (e.ctrlKey && !e.shiftKey && !e.altKey) {
+                    e.preventDefault();
+                    copyToClipboard(selected, path, setClipboard);
+                }
+                break;
+
+            case "v":
+                // if (e.ctrlKey && !e.shiftKey && !e.altKey && !(e.target instanceof HTMLInputElement)) {
+                if (e.ctrlKey && !e.shiftKey && !e.altKey) {
+                    e.preventDefault();
+                    pasteFromClipboard(clipboard, cwdInfo, currentPath, addAlert);
                 }
                 break;
 
@@ -371,6 +387,10 @@ export const FilesCardBody = ({
         dialogs,
         goUpOneDir,
         path,
+        addAlert,
+        cwdInfo,
+        clipboard,
+        setClipboard,
     ]);
 
     // Generic event handler to look up the corresponding `data-item` for a click event when

@@ -44,6 +44,35 @@ type MenuItem = { type: "divider" } | {
     className?: string;
 };
 
+export function copyToClipboard(
+    selected: FolderFileInfo[],
+    path: string[],
+    setClipboard: React.Dispatch<React.SetStateAction<string[]>>
+) {
+    setClipboard(selected.map(s => path.join("/") + "/" + s.name));
+}
+
+export function pasteFromClipboard(
+    clipboard: string[],
+    cwdInfo: FileInfo | null,
+    currentPath: string,
+    addAlert: (title: string, variant: AlertVariant, key: string, detail?: string) => void,
+) {
+    const existingFiles = clipboard.filter(sourcePath => cwdInfo?.entries?.[basename(sourcePath)]);
+    if (existingFiles.length > 0) {
+        addAlert(_("Pasting failed"), AlertVariant.danger, "paste-error",
+                 cockpit.format(_("\"$0\" exists, not overwriting with paste."),
+                                existingFiles.map(basename).join(", ")));
+        return;
+    }
+    cockpit.spawn([
+        "cp",
+        "-R",
+        ...clipboard,
+        currentPath
+    ]).catch(err => addAlert(err.message, AlertVariant.danger, `${new Date().getTime()}`));
+}
+
 export function get_menu_items(
     path: string[],
     selected: FolderFileInfo[], setSelected: React.Dispatch<React.SetStateAction<FolderFileInfo[]>>,
@@ -61,21 +90,7 @@ export function get_menu_items(
                 id: "paste-item",
                 title: _("Paste"),
                 isDisabled: clipboard.length === 0,
-                onClick: () => {
-                    const existingFiles = clipboard.filter(sourcePath => cwdInfo?.entries?.[basename(sourcePath)]);
-                    if (existingFiles.length > 0) {
-                        addAlert(_("Pasting failed"), AlertVariant.danger, "paste-error",
-                                 cockpit.format(_("\"$0\" exists, not overwriting with paste."),
-                                                existingFiles.map(basename).join(", ")));
-                        return;
-                    }
-                    cockpit.spawn([
-                        "cp",
-                        "-R",
-                        ...clipboard,
-                        currentPath
-                    ]).catch(err => addAlert(err.message, AlertVariant.danger, `${new Date().getTime()}`));
-                }
+                onClick: () => pasteFromClipboard(clipboard, cwdInfo, currentPath, addAlert),
             },
             { type: "divider" },
             {
@@ -95,7 +110,7 @@ export function get_menu_items(
             {
                 id: "copy-item",
                 title: _("Copy"),
-                onClick: () => setClipboard([currentPath + selected[0].name]),
+                onClick: () => copyToClipboard(selected, path, setClipboard),
             },
             { type: "divider" },
             {
@@ -130,7 +145,7 @@ export function get_menu_items(
             {
                 id: "copy-item",
                 title: _("Copy"),
-                onClick: () => setClipboard(selected.map(s => path.join("/") + "/" + s.name)),
+                onClick: () => copyToClipboard(selected, path, setClipboard),
             },
             {
                 id: "delete-item",

@@ -6,7 +6,7 @@ import {
 } from "@patternfly/react-core/dist/esm/components/DescriptionList/index";
 import { Modal, ModalVariant } from "@patternfly/react-core/dist/esm/components/Modal";
 import { Text, TextContent, TextVariants } from "@patternfly/react-core/dist/esm/components/Text";
-import { Flex, FlexItem } from "@patternfly/react-core/dist/esm/layouts/Flex";
+import { Flex, } from "@patternfly/react-core/dist/esm/layouts/Flex";
 
 import cockpit from 'cockpit';
 import { useDialogs } from 'dialogs';
@@ -37,19 +37,24 @@ export const KeyboardShortcutsHelp = () => {
             _("Go up a directory")
         ], [
             <kbd className="keystroke" key="go-back">
-                <kbd className="key">Alt</kbd> + <kbd className="key">{'\u{2190}'}</kbd></kbd>,
+                <kbd className="key">Alt</kbd> + <kbd className="key">{'\u{2190}'}</kbd>
+            </kbd>,
             _("Go back")
         ], [
             <kbd className="keystroke" key="go-forward">
-                <kbd className="key">Alt</kbd> + <kbd className="key">{'\u{2192}'}</kbd></kbd>,
+                <kbd className="key">Alt</kbd> + <kbd className="key">{'\u{2192}'}</kbd>
+            </kbd>,
             _("Go forward")
         ], [
             <kbd className="keystroke" key="activate">
-                <kbd className="key">Alt</kbd> + <kbd className="key">{'\u{2193}'}</kbd></kbd>,
+                <kbd className="key">Alt</kbd> + <kbd className="key">{'\u{2193}'}</kbd>
+            </kbd>,
             _("Activate selected item, enter directory")
         ], [
             <kbd className="keystroke" key="activate-enter">
-                <kbd className="key">Enter</kbd></kbd>, _("Activate selected item, enter directory")
+                <kbd className="key">Enter</kbd>
+            </kbd>,
+            _("Activate selected item, enter directory")
         ], [
             <kbd className="keystroke" key="edit-path">
                 <kbd className="key">Ctrl</kbd> +
@@ -103,13 +108,13 @@ export const KeyboardShortcutsHelp = () => {
             <Flex>
                 <TextContent>
                     <Text component={TextVariants.h2}>{_("Navigation")}</Text>
-                    <DescriptionList isHorizontal isFluid isFillColumns >
+                    <DescriptionList isHorizontal isFluid isFillColumns>
                         <DescriptionListGroup>{navShortcuts.map(toDescriptionListItems)}</DescriptionListGroup>
                     </DescriptionList>
                 </TextContent>
                 <TextContent>
                     <Text component={TextVariants.h2}>{_("Editing")}</Text>
-                    <DescriptionList isHorizontal isFluid isFillColumns >
+                    <DescriptionList isHorizontal isFluid isFillColumns>
                         <DescriptionListGroup>{editShortcuts.map(toDescriptionListItems)}</DescriptionListGroup>
                     </DescriptionList>
                 </TextContent>

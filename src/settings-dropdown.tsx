@@ -80,6 +80,7 @@ export const SettingsDropdown = ({ showHidden, setShowHidden } : {
                     {showHiddenItems}
                 </DropdownItem>
                 <DropdownItem
+                  id="show-shortcuts-help"
                   onClick={() => Dialogs.show(<KeyboardShortcutsHelp />)}
                 >
                     {_("Show keyboard shortcuts")}
