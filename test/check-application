@@ -718,6 +718,15 @@ class TestFiles(testlib.MachineCase):
         b.click(".contextMenu button:contains('Download')")
         self.waitDownloadFile("test.iso", 1500 * 1024 * 1024)
 
+        # non-latin1 file is fine
+        m.execute("echo 'non-latin filename' > /home/admin/漢字")
+        b.wait_visible("[data-item='漢字']")
+        b.mouse("[data-item='漢字']", "contextmenu")
+        b.click(".contextMenu button:contains('Download')")
+        size = int(self.stat('%s', '/home/admin/漢字'))
+        self.waitDownloadFile("漢字", size, "non-latin filename\n")
+        m.execute("rm /home/admin/漢字")
+
     def testRename(self) -> None:
         b = self.browser
         m = self.machine
