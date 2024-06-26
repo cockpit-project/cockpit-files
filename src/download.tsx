@@ -22,7 +22,7 @@ import cockpit from 'cockpit';
 import type { FolderFileInfo } from './app';
 
 export function downloadFile(currentPath: string, selected: FolderFileInfo) {
-    const query = window.btoa(JSON.stringify({
+    const payload = JSON.stringify({
         payload: "fsread1",
         binary: "raw",
         path: `${currentPath}/${selected.name}`,
@@ -31,7 +31,10 @@ export function downloadFile(currentPath: string, selected: FolderFileInfo) {
             "content-disposition": `attachment; filename="${selected.name}"`,
             "content-type": "application/octet-stream",
         }
-    }));
+    });
+
+    const encodedPayload = new TextEncoder().encode(payload);
+    const query = window.btoa(String.fromCharCode(...encodedPayload));
 
     const prefix = (new URL(cockpit.transport.uri("channel/" + cockpit.transport.csrf_token))).pathname;
     window.open(`${prefix}?${query}`);
