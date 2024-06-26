@@ -195,12 +195,6 @@
         }
     }
 
-    .pf-v5-c-description-list {
-        // Fix an overflow bug caused by PF adding -16px bottom margin
-        // (despite it being called RowGap, it's actually used as a margin at the bottom)
-        --pf-v5-c-description-list--RowGap: 0;
-    }
-
     .pf-v5-c-description-list__group {
         grid-template-columns: auto 1fr;
     }

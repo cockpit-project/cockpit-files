@@ -20,78 +20,94 @@ export const KeyboardShortcutsHelp = () => {
         <Button variant="secondary" onClick={Dialogs.close}>{_("Close")}</Button>
     );
 
-    const toDescriptionListItems = (item: [React.JSX.Element, string]) => {
+    const toDescriptionListGroups = (item: [React.JSX.Element, string, string]) => {
         return (
-            <>
-                <DescriptionListTerm>{item[0]}</DescriptionListTerm>
-                <DescriptionListDescription>{item[1]}</DescriptionListDescription>
-            </>
+            <DescriptionListGroup key={item[2] + "-listgroup"}>
+                <DescriptionListTerm>
+                    {item[0]}
+                </DescriptionListTerm>
+                <DescriptionListDescription>
+                    {item[1]}
+                </DescriptionListDescription>
+            </DescriptionListGroup>
         );
     };
 
-    const navShortcuts: Array<[React.JSX.Element, string]> = [
+    const navShortcuts: Array<[React.JSX.Element, string, string]> = [
         [
             <kbd className="keystroke" key="go-up">
                 <kbd className="key">Alt</kbd> + <kbd className="key">{'\u{2191}'}</kbd>
             </kbd>,
-            _("Go up a directory")
+            _("Go up a directory"),
+            "go-up",
         ], [
             <kbd className="keystroke" key="go-back">
                 <kbd className="key">Alt</kbd> + <kbd className="key">{'\u{2190}'}</kbd>
             </kbd>,
-            _("Go back")
+            _("Go back"),
+            "go-back",
         ], [
             <kbd className="keystroke" key="go-forward">
                 <kbd className="key">Alt</kbd> + <kbd className="key">{'\u{2192}'}</kbd>
             </kbd>,
-            _("Go forward")
+            _("Go forward"),
+            "go-forward",
         ], [
             <kbd className="keystroke" key="activate">
                 <kbd className="key">Alt</kbd> + <kbd className="key">{'\u{2193}'}</kbd>
             </kbd>,
-            _("Activate selected item, enter directory")
+            _("Activate selected item, enter directory"),
+            "activate",
         ], [
             <kbd className="keystroke" key="activate-enter">
                 <kbd className="key">Enter</kbd>
             </kbd>,
-            _("Activate selected item, enter directory")
+            _("Activate selected item, enter directory"),
+            "activate-enter",
         ], [
             <kbd className="keystroke" key="edit-path">
                 <kbd className="key">Ctrl</kbd> +
                 <kbd className="key">Shift</kbd> +
                 <kbd className="key">L</kbd>
             </kbd>,
-            _("Edit path")
+            _("Edit path"),
+            "edit-path",
         ]
     ];
 
-    const editShortcuts: Array<[React.JSX.Element, string]> = [
+    const editShortcuts: Array<[React.JSX.Element, string, string]> = [
         [
             <kbd className="key" key="rename">F2</kbd>,
-            _("Rename selected file or directory")
+            _("Rename selected file or directory"),
+            "rename",
         ], [
             <kbd className="key" key="mkdir">N</kbd>,
-            _("Create new directory")
+            _("Create new directory"),
+            "mkdir",
         ], [
             <kbd className="keystroke" key="copy">
                 <kbd className="key">Ctrl</kbd> + <kbd className="key">C</kbd>
             </kbd>,
-            _("Copy selected file or directory")
+            _("Copy selected file or directory"),
+            "copy",
         ], [
             <kbd className="keystroke" key="cut">
                 <kbd className="key">Ctrl</kbd> + <kbd className="key">X</kbd>
             </kbd>,
-            _("Cut selected file or directory")
+            _("Cut selected file or directory"),
+            "cut",
         ], [
             <kbd className="keystroke" key="paste">
                 <kbd className="key">Ctrl</kbd> + <kbd className="key">V</kbd>
             </kbd>,
-            _("Paste file or directory")
+            _("Paste file or directory"),
+            "paste",
         ], [
             <kbd className="keystroke" key="select-all">
                 <kbd className="key">Ctrl</kbd> + <kbd className="key">A</kbd>
             </kbd>,
-            _("Select all")
+            _("Select all"),
+            "select-all",
         ]
     ];
 
@@ -108,14 +124,22 @@ export const KeyboardShortcutsHelp = () => {
             <Flex>
                 <TextContent>
                     <Text component={TextVariants.h2}>{_("Navigation")}</Text>
-                    <DescriptionList isHorizontal isFluid isFillColumns>
-                        <DescriptionListGroup>{navShortcuts.map(toDescriptionListItems)}</DescriptionListGroup>
+                    <DescriptionList
+                      isHorizontal
+                      isFluid
+                      isFillColumns
+                    >
+                        {navShortcuts.map(toDescriptionListGroups)}
                     </DescriptionList>
                 </TextContent>
                 <TextContent>
                     <Text component={TextVariants.h2}>{_("Editing")}</Text>
-                    <DescriptionList isHorizontal isFluid isFillColumns>
-                        <DescriptionListGroup>{editShortcuts.map(toDescriptionListItems)}</DescriptionListGroup>
+                    <DescriptionList
+                      isHorizontal
+                      isFluid
+                      isFillColumns
+                    >
+                        {editShortcuts.map(toDescriptionListGroups)}
                     </DescriptionList>
                 </TextContent>
             </Flex>
