@@ -29,23 +29,47 @@ import cockpit from 'cockpit';
 import { FormHelper } from 'cockpit-components-form-helper';
 import { InlineNotification } from 'cockpit-components-inline-notification';
 import type { Dialogs, DialogResult } from 'dialogs';
+import { FileInfo } from 'fsinfo';
+import { fmt_to_fragments } from 'utils';
 
 import { FolderFileInfo, useFilesContext } from '../app';
 
 const _ = cockpit.gettext;
 
-function check_name(candidate: string, entries: Record<string, unknown>) {
+function checkName(candidate: string, entries: Record<string, FileInfo>, selectedFile: FolderFileInfo) {
     if (candidate === "") {
         return _("Name cannot be empty.");
     } else if (candidate.length >= 256) {
         return _("Name too long.");
     } else if (candidate.includes("/")) {
         return _("Name cannot include a /.");
+    } else if (selectedFile.name === candidate) {
+        return _("Filename is the same as original name");
     } else if (candidate in entries) {
-        return _("File or directory already exists");
+        if (entries[candidate].type === "dir") {
+            return _("Directory with the same name exists");
+        }
+        return _("File exists");
     } else {
         return null;
     }
+}
+
+function checkCanOverride(candidate: string, entries: Record<string, FileInfo>, selectedFile: FolderFileInfo) {
+    if (candidate in entries) {
+        const conflictFile = entries[candidate];
+        // only allow overwriting regular files
+        if (conflictFile.type !== "reg") {
+            return false;
+        }
+
+        // don't allow overwrite when the filename is unchanged
+        if (selectedFile.type === "reg" && candidate !== selectedFile.name) {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 const RenameItemModal = ({ dialogResult, path, selected } : {
@@ -57,47 +81,53 @@ const RenameItemModal = ({ dialogResult, path, selected } : {
     const [name, setName] = useState(selected.name);
     const [nameError, setNameError] = useState<string | null>(null);
     const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
+    const [overrideFileName, setOverrideFileName] = useState(false);
 
-    let title;
-    if (selected.type === "reg") {
-        title = cockpit.format(_("Rename file $0"), selected.name);
-    } else if (selected.type === "lnk") {
-        title = cockpit.format(_("Rename link $0"), selected.name);
-    } else if (selected.type === "dir") {
-        title = cockpit.format(_("Rename directory $0"), selected.name);
-    } else {
-        title = _("Rename $0", selected.name);
-    }
-
-    const renameItem = () => {
+    const renameItem = (force = false) => {
         const newPath = path.join("/") + "/" + name;
+        const mvCmd = ["mv", "--no-target-directory"];
+        if (force) {
+            mvCmd.push("--force");
+        }
+        mvCmd.push(path.join("/") + "/" + selected.name, newPath);
 
-        cockpit.spawn(["mv", "--no-target-directory", path.join("/") + "/" + selected.name, newPath],
-                      { superuser: "try", err: "message" })
+        cockpit.spawn(mvCmd, { superuser: "try", err: "message" })
                 .then(() => {
                     dialogResult.resolve();
                 }, err => setErrorMessage(err.message));
     };
 
+    const footer = (
+        <>
+            <Button
+              variant="primary"
+              onClick={() => renameItem()}
+              isDisabled={errorMessage !== undefined || nameError !== null}
+            >
+                {_("Rename")}
+            </Button>
+            {overrideFileName &&
+                <Button
+                  variant="danger"
+                  onClick={() => renameItem(true)}
+                >
+                    {_("Overwrite")}
+                </Button>}
+            <Button variant="link" onClick={() => dialogResult.resolve()}>{_("Cancel")}</Button>
+        </>
+    );
+
+    const label = selected.type !== "dir" ? _("New filename") : _("New name");
+
     return (
         <Modal
           position="top"
-          title={title}
+          // @ts-expect-error incorrect PatternFly typing https://github.com/patternfly/patternfly-react/issues/10361
+          title={fmt_to_fragments(_("Rename $0?"), <b>{selected.name}</b>)}
           variant={ModalVariant.small}
           isOpen
           onClose={() => dialogResult.resolve()}
-          footer={
-              <>
-                  <Button
-                    variant="primary"
-                    onClick={renameItem}
-                    isDisabled={errorMessage !== undefined || nameError !== null}
-                  >
-                      {_("Rename")}
-                  </Button>
-                  <Button variant="link" onClick={() => dialogResult.resolve()}>{_("Cancel")}</Button>
-              </>
-          }
+          footer={footer}
         >
             <Stack>
                 {errorMessage !== undefined &&
@@ -107,11 +137,12 @@ const RenameItemModal = ({ dialogResult, path, selected } : {
                   isInline
                 />}
                 <Form isHorizontal>
-                    <FormGroup fieldId="rename-item-input" label={_("New name")}>
+                    <FormGroup fieldId="rename-item-input" label={label}>
                         <TextInput
                           value={name}
                           onChange={(_, val) => {
-                              setNameError(check_name(val, cwdInfo?.entries || {}));
+                              setNameError(checkName(val, cwdInfo?.entries || {}, selected));
+                              setOverrideFileName(checkCanOverride(val, cwdInfo?.entries || {}, selected));
                               setErrorMessage(undefined);
                               setName(val);
                           }}

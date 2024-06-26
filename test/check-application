@@ -87,6 +87,12 @@ class TestFiles(testlib.MachineCase):
             with open(filepath) as fp:
                 self.assertEqual(fp.read(), content)
 
+    def file_action_modal(self, filename: str, action: str) -> None:
+        b = self.browser
+        b.click(f"[data-item='{filename}']")
+        b.click("#dropdown-menu")
+        b.click(f"#dropdown-menu + .pf-v5-c-menu button:contains('{action}')")
+
     def testBasic(self) -> None:
         b = self.browser
         m = self.machine
@@ -802,7 +808,7 @@ class TestFiles(testlib.MachineCase):
         b.click("#dropdown-menu")
         b.click("#rename-item")
         b.set_input_text("#rename-item-input", "dest")
-        b.wait_in_text("#rename-item-input-helper", "File or directory already exists")
+        b.wait_in_text("#rename-item-input-helper", "Directory with the same name exists")
         b.click("button.pf-m-link:contains('Cancel')")
         b.wait_not_present(".pf-v5-c-modal-box")
 
@@ -811,8 +817,96 @@ class TestFiles(testlib.MachineCase):
         self.rename_item("new dir1", "testdir")
         alert_text = "mv: cannot move '/home/admin/new dir1' to '/home/admin/testdir': Operation not permitted"
         self.wait_modal_inline_alert(alert_text)
-        b.click("div.pf-v5-c-modal-box__close")
+        b.click("div.pf-v5-c-modal-box__close > button")
         m.execute("sudo chattr -i /home/admin/new\\ dir1")
+
+        basedir = '/home/admin'
+        # Force overwrite rename on normal file
+        m.execute(f"""
+        echo 'foo text' > {basedir}/foo.txt
+        echo 'bar text' > {basedir}/bar.txt
+        mkdir {basedir}/foodir
+        mkdir {basedir}/bardir
+        """)
+        b.wait_visible("[data-item='foo.txt']")
+        b.wait_visible("[data-item='bar.txt']")
+        b.wait_visible("[data-item='foodir']")
+        b.wait_visible("[data-item='bardir']")
+
+        # Overwrite regular file
+        self.file_action_modal('foo.txt', 'Rename')
+        b.set_input_text("#rename-item-input", "bar.txt")
+        b.wait_in_text("#rename-item-input-helper", "File exists")
+        b.wait_visible("button.pf-m-primary:disabled")
+        b.click("button.pf-m-danger")
+        b.wait_not_present("[data-item='foo.txt']")
+        b.wait_visible("[data-item='bar.txt']")
+        contents = m.execute(f"cat {basedir}/bar.txt").strip()
+        self.assertEqual(contents, 'foo text')
+
+        # Don't allow force overwrite on directory
+        self.file_action_modal('foodir', 'Rename')
+        b.set_input_text("#rename-item-input", "bardir")
+        b.wait_in_text("#rename-item-input-helper", "Directory with the same name exists")
+        b.wait_visible("button.pf-m-primary:disabled")
+        b.wait_not_present("button.pf-m-danger")
+        b.click("div.pf-v5-c-modal-box__close > button")
+
+        # Trying to overwrite normal file to directory name shows error
+        self.file_action_modal('bar.txt', 'Rename')
+        b.set_input_text("#rename-item-input", "bardir")
+        b.wait_in_text("#rename-item-input-helper", "Directory with the same name exists")
+        b.wait_visible("button.pf-m-primary:disabled")
+        b.wait_not_present("button.pf-m-danger")
+        b.click("div.pf-v5-c-modal-box__close > button")
+
+        # Overwriting symlinks is not supported
+        m.execute(f"""
+        echo 'foo text' > {basedir}/foo.txt
+        echo 'bar text' > {basedir}/bar.txt
+        ln -s {basedir}/foo.txt {basedir}/foolink.txt
+        ln -s {basedir}/bar.txt {basedir}/barlink.txt
+        """)
+        self.file_action_modal('foolink.txt', 'Rename')
+        b.set_input_text("#rename-item-input", "barlink.txt")
+        b.wait_in_text("#rename-item-input-helper", "File exists")
+        b.wait_visible("button.pf-m-primary:disabled")
+        b.wait_not_present("button.pf-m-danger")
+        b.click("div.pf-v5-c-modal-box__close > button")
+
+        # Trying to overwrite symlink to directory name shows error
+        m.execute(f"""
+        ln -s {basedir}/foodir {basedir}/foodirlink
+        """)
+        self.file_action_modal('foodirlink', 'Rename')
+        b.set_input_text("#rename-item-input", "bardir")
+        b.wait_in_text("#rename-item-input-helper", "Directory with the same name exists")
+        b.wait_visible("button.pf-m-primary:disabled")
+        b.wait_not_present("button.pf-m-danger")
+        b.click("div.pf-v5-c-modal-box__close > button")
+
+        # Do not overwrite symlinks to directory with another file
+        self.file_action_modal('bardir', 'Rename')
+        b.set_input_text("#rename-item-input", "foodirlink")
+        b.wait_in_text("#rename-item-input-helper", "File exists")
+        b.wait_visible("button.pf-m-primary:disabled")
+        b.wait_not_present("button.pf-m-danger")
+        b.click("div.pf-v5-c-modal-box__close > button")
+        self.file_action_modal('foo.txt', 'Rename')
+        b.set_input_text("#rename-item-input", "foodirlink")
+        b.wait_in_text("#rename-item-input-helper", "File exists")
+        b.wait_visible("button.pf-m-primary:disabled")
+        b.wait_not_present("button.pf-m-danger")
+        b.click("div.pf-v5-c-modal-box__close > button")
+
+        # Rename back to the original name
+        self.file_action_modal('foo.txt', 'Rename')
+        b.set_input_text("#rename-item-input", "bar.txt")
+        b.wait_in_text("#rename-item-input-helper", "File exists")
+        b.wait_visible("button.pf-m-primary:disabled")
+        b.set_input_text("#rename-item-input", "foo.txt")
+        b.wait_in_text("#rename-item-input-helper", "Filename is the same as original name")
+        b.click("div.pf-v5-c-modal-box__close > button")
 
     def testHiddenItems(self) -> None:
         b = self.browser
