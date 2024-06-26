@@ -115,7 +115,7 @@ export const KeyboardShortcutsHelp = () => {
         <Modal
           position="top"
           title={_("Keyboard shortcuts")}
-          variant={ModalVariant.medium}
+          variant={ModalVariant.large}
           className="shortcuts-dialog"
           onClose={Dialogs.close}
           footer={footer}
