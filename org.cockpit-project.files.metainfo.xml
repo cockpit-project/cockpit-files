@@ -3,6 +3,7 @@
   <id>org.cockpit_project.cockpit_files</id>
   <metadata_license>CC0-1.0</metadata_license>
   <name>Files</name>
+  <summary>Manage your files</summary>
   <description>
     <p>
         A file system browser for Cockpit.
