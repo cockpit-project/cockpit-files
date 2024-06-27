@@ -64,7 +64,8 @@ class TestFiles(testlib.MachineCase):
         b = self.browser
         b.wait_in_text("h4.pf-v5-c-alert__title", msg)
 
-    def rename_item(self, b: testlib.Browser, itemname: str, newname: str) -> None:
+    def rename_item(self, itemname: str, newname: str) -> None:
+        b = self.browser
         b.click(f"[data-item='{itemname}']")
         b.click("#dropdown-menu")
         b.click("#rename-item")
@@ -752,17 +753,17 @@ class TestFiles(testlib.MachineCase):
         b.click(".pf-v5-c-modal-box__footer button.pf-m-link")  # cancel
 
         # Rename file
-        self.rename_item(b, "newfile", "newfile1")
+        self.rename_item("newfile", "newfile1")
         b.wait_visible("[data-item='newfile1']")
         m.execute("rm /home/admin/newfile1")
 
         # Rename directory
         m.execute("mkdir /home/admin/newdir")
-        self.rename_item(b, "newdir", "newdir1")
+        self.rename_item("newdir", "newdir1")
         b.wait_visible("[data-item='newdir1']")
 
         # Rename with space
-        self.rename_item(b, "newdir1", "new dir1")
+        self.rename_item("newdir1", "new dir1")
         b.wait_visible("[data-item='new dir1']")
 
         # Rename to an existing directory should not move the file into the directory
@@ -782,7 +783,7 @@ class TestFiles(testlib.MachineCase):
 
         # Renaming protected item should give an error
         m.execute("sudo chattr +i /home/admin/new\\ dir1")
-        self.rename_item(b, "new dir1", "testdir")
+        self.rename_item("new dir1", "testdir")
         alert_text = "mv: cannot move '/home/admin/new dir1' to '/home/admin/testdir': Operation not permitted"
         self.wait_modal_inline_alert(alert_text)
         b.click("div.pf-v5-c-modal-box__close")
