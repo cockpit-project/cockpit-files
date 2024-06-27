@@ -1090,7 +1090,7 @@ class TestFiles(testlib.MachineCase):
         # Go up and down in directory hierarchy
         b.click("[data-item='testdir']")
         b.key("ArrowDown", modifiers=1)
-        b.wait_text(".breadcrumb-button:nth-of-type(5)", "testdir")
+        b.wait_text(".breadcrumb-button:nth-of-type(6)", "testdir")
         b.key("ArrowUp", modifiers=1)
         b.wait_visible("[data-item='testdir']")
 
@@ -1098,13 +1098,13 @@ class TestFiles(testlib.MachineCase):
         b.key("L", modifiers=2)
         b.input_text("/home/admin/anotherdir")
         b.key("Enter")
-        b.wait_text(".breadcrumb-button:nth-of-type(5)", "anotherdir")
+        b.wait_text(".breadcrumb-button:nth-of-type(6)", "anotherdir")
 
         # Go back in history twice
         # b.key("ArrowLeft", repeat=2, modifiers=1)
         b.eval_js("window.history.back()")
         b.eval_js("window.history.back()")
-        b.wait_text(".breadcrumb-button:nth-of-type(5)", "testdir")
+        b.wait_text(".breadcrumb-button:nth-of-type(6)", "testdir")
 
         # Go forward in history
         # b.key("ArrowRight", repeat=1, modifiers=1)
@@ -1198,12 +1198,12 @@ class TestFiles(testlib.MachineCase):
         b.mouse("[data-item='newdir']", "dblclick")
         b.click("[data-item='copyDir']")
         b.key("c", modifiers=2)
-        b.click(".breadcrumb-button:nth-of-type(4)")
+        b.click(".breadcrumb-button:nth-of-type(5)")
         b.mouse("[data-item='kbdCopy']", "dblclick")
         b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "kbdCopy")
         b.key("v", modifiers=2)
         b.wait_visible("[data-item='copyDir']")
-        b.click(".breadcrumb-button:nth-of-type(4)")
+        b.click(".breadcrumb-button:nth-of-type(5)")
         b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "admin")
         m.execute("runuser -u admin echo 'keybindings good' > /home/admin/newdir/newfile")
         b.mouse("[data-item='newdir']", "dblclick")
@@ -1212,7 +1212,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_visible("[data-item='loaded'].row-selected")
         b.wait_visible("[data-item='newfile'].row-selected")
         b.key("c", modifiers=2)
-        b.click(".breadcrumb-button:nth-of-type(4)")
+        b.click(".breadcrumb-button:nth-of-type(5)")
         b.mouse("[data-item='kbdCopy']", "dblclick")
         b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "kbdCopy")
         b.key("v", modifiers=2)
@@ -1221,7 +1221,7 @@ class TestFiles(testlib.MachineCase):
         self.assertEqual(m.execute("head -n 1 /home/admin/kbdCopy/newfile"), "keybindings good\n")
 
         # File already exists error with keybinds
-        b.click(".breadcrumb-button:nth-of-type(4)")
+        b.click(".breadcrumb-button:nth-of-type(5)")
         b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "admin")
         m.execute("runuser -u admin echo 'changed' > /home/admin/newdir/newfile")
         b.click("[data-item='newfile']")

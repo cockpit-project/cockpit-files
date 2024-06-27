@@ -34,10 +34,10 @@ import * as timeformat from "timeformat";
 import { FolderFileInfo, useFilesContext } from "./app";
 import { confirm_delete } from "./dialogs/delete";
 import { show_create_directory_dialog } from "./dialogs/mkdir";
+import { show_rename_dialog } from "./dialogs/rename";
 import { Sort, filterColumnMapping, filterColumns } from "./header";
 import { copyToClipboard, get_menu_items, pasteFromClipboard } from "./menu";
 import "./files-card-body.scss";
-import { show_rename_dialog } from "./dialogs/rename";
 
 const _ = cockpit.gettext;
 
@@ -311,7 +311,7 @@ export const FilesCardBody = ({
 
             case "F2":
                 if (hasNoKeydownModifiers(e) && selected.length === 1) {
-                    show_rename_dialog(dialogs, path, selected[0])
+                    show_rename_dialog(dialogs, path, selected[0]);
                 }
                 break;
 
@@ -330,7 +330,6 @@ export const FilesCardBody = ({
                 break;
 
             case "v":
-                // if (e.ctrlKey && !e.shiftKey && !e.altKey && !(e.target instanceof HTMLInputElement)) {
                 if (e.ctrlKey && !e.shiftKey && !e.altKey) {
                     e.preventDefault();
                     pasteFromClipboard(clipboard, cwdInfo, currentPath, addAlert);
