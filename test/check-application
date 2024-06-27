@@ -58,7 +58,8 @@ class TestFiles(testlib.MachineCase):
         b.set_input_text("#create-directory-input", f"{filename}")
         b.click("button.pf-m-primary")
 
-    def wait_modal_inline_alert(self, b: testlib.Browser, msg: str) -> None:
+    def wait_modal_inline_alert(self, msg: str) -> None:
+        b = self.browser
         b.wait_in_text("h4.pf-v5-c-alert__title", msg)
 
     def rename_item(self, b: testlib.Browser, itemname: str, newname: str) -> None:
@@ -531,10 +532,10 @@ class TestFiles(testlib.MachineCase):
         self.delete_item(b, "file", "newfile", expect_success=False)
         b.wait_in_text("h1.pf-v5-c-modal-box__title", "Force delete file newfile?")
         b.assert_pixels(".pf-v5-c-modal-box", "delete-modal-error")
-        self.wait_modal_inline_alert(b, "rm: cannot remove '/home/admin/newfile': Operation not permitted")
+        self.wait_modal_inline_alert("rm: cannot remove '/home/admin/newfile': Operation not permitted")
         b.click("button.pf-m-danger")
         b.wait_in_text("h1.pf-v5-c-modal-box__title", "Force delete file newfile?")
-        self.wait_modal_inline_alert(b, "rm: cannot remove '/home/admin/newfile': Operation not permitted")
+        self.wait_modal_inline_alert("rm: cannot remove '/home/admin/newfile': Operation not permitted")
         b.click("div.pf-v5-c-modal-box__close button")
         b.wait_not_present(".pf-v5-c-modal-box")
         b.wait_visible("[data-item='newfile']")
@@ -590,12 +591,12 @@ class TestFiles(testlib.MachineCase):
 
         # Creating folder with duplicate name should return an error
         self.create_directory(b, "newdir")
-        self.wait_modal_inline_alert(b, "mkdir: cannot create directory ‘/home/admin/newdir’: File exists")
+        self.wait_modal_inline_alert("mkdir: cannot create directory ‘/home/admin/newdir’: File exists")
         b.click("div.pf-v5-c-modal-box__close button.pf-v5-c-button")
 
         # Creating folder with empty name should return an error
         self.create_directory(b, "")
-        self.wait_modal_inline_alert(b, "mkdir: cannot create directory ‘/home/admin/’: File exists")
+        self.wait_modal_inline_alert("mkdir: cannot create directory ‘/home/admin/’: File exists")
         b.click("div.pf-v5-c-modal-box__close button.pf-v5-c-button")
 
         # Creating folder inside protected folder should return an error
@@ -604,7 +605,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_not_present("[data-item='newdir']")
         self.create_directory(b, "test")
         alert_text = "mkdir: cannot create directory ‘/home/admin/newdir/test’: Operation not permitted"
-        self.wait_modal_inline_alert(b, alert_text)
+        self.wait_modal_inline_alert(alert_text)
         b.click("div.pf-v5-c-modal-box__close button.pf-v5-c-button")
         b.click(".breadcrumb-1")
         m.execute("sudo chattr -i /home/admin/newdir")
@@ -781,7 +782,7 @@ class TestFiles(testlib.MachineCase):
         m.execute("sudo chattr +i /home/admin/new\\ dir1")
         self.rename_item(b, "new dir1", "testdir")
         alert_text = "mv: cannot move '/home/admin/new dir1' to '/home/admin/testdir': Operation not permitted"
-        self.wait_modal_inline_alert(b, alert_text)
+        self.wait_modal_inline_alert(alert_text)
         b.click("div.pf-v5-c-modal-box__close")
         m.execute("sudo chattr -i /home/admin/new\\ dir1")
 
@@ -936,7 +937,7 @@ class TestFiles(testlib.MachineCase):
         b.click("button:contains('Edit permissions')")
         select_access("7")
         b.click("button.pf-m-primary")
-        self.wait_modal_inline_alert(b, "chmod: changing permissions of '/home': Operation not permitted")
+        self.wait_modal_inline_alert("chmod: changing permissions of '/home': Operation not permitted")
         b.click("button.pf-m-link")
         b.wait_not_present(".pf-v5-c-modal-box")
 
@@ -1628,7 +1629,7 @@ class TestFiles(testlib.MachineCase):
 
         b.click("#bookmark-btn")
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add bookmark) button")
-        self.wait_modal_inline_alert(b, "Unable to create bookmark directory")
+        self.wait_modal_inline_alert("Unable to create bookmark directory")
         b.click(".pf-v5-c-alert__action button")
         b.wait_not_present(".pf-v5-c-alert__action")
         m.execute("chattr -i /home/admin/.config")
@@ -1637,7 +1638,7 @@ class TestFiles(testlib.MachineCase):
         m.execute("mkdir /home/admin/.config/gtk-3.0")
         b.click("#bookmark-btn")
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add bookmark) button")
-        self.wait_modal_inline_alert(b, "Unable to save bookmark file")
+        self.wait_modal_inline_alert("Unable to save bookmark file")
         b.click(".pf-v5-c-alert__action button")
         b.wait_not_present(".pf-v5-c-alert__action")
 
