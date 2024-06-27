@@ -42,7 +42,8 @@ class TestFiles(testlib.MachineCase):
     def assert_owner(self, path: str, owner: str) -> None:
         self.assert_stat('%U:%G', path, owner)
 
-    def delete_item(self, b: testlib.Browser, filetype: str, filename: str, *, expect_success: bool = True) -> None:
+    def delete_item(self, filetype: str, filename: str, *, expect_success: bool = True) -> None:
+        b = self.browser
         b.click(f"[data-item='{filename}']")
         b.click("#dropdown-menu")
         b.click("#delete-item")
@@ -500,36 +501,36 @@ class TestFiles(testlib.MachineCase):
         # Delete file
         m.execute("touch /home/admin/newfile")
         b.wait_visible("[data-item='newfile']")
-        self.delete_item(b, "file", "newfile")
+        self.delete_item("file", "newfile")
 
         # Delete file with space in the file name
         m.execute(r"touch /home/admin/new\ file")
         b.wait_visible("[data-item='new file']")
-        self.delete_item(b, "file", "new file")
+        self.delete_item("file", "new file")
 
         # Delete empty directory
         m.execute("mkdir /home/admin/newdir")
         b.wait_visible("[data-item='newdir']")
-        self.delete_item(b, "directory", "newdir")
+        self.delete_item("directory", "newdir")
 
         # Delete full directory
         m.execute("mkdir /home/admin/newdir")
         m.execute("touch /home/admin/newdir/newfile")
         b.wait_visible("[data-item='newdir']")
-        self.delete_item(b, "directory", "newdir")
+        self.delete_item("directory", "newdir")
 
         # Delete symlink
         m.execute("""
         touch /home/admin/target
         ln -s /home/admin/target /home/admin/link
         """)
-        self.delete_item(b, "link", "link")
+        self.delete_item("link", "link")
 
         # Deleting protected file should give an error
         m.execute("touch /home/admin/newfile")
         m.execute("sudo chattr +i /home/admin/newfile")
         b.wait_visible("[data-item='newfile']")
-        self.delete_item(b, "file", "newfile", expect_success=False)
+        self.delete_item("file", "newfile", expect_success=False)
         b.wait_in_text("h1.pf-v5-c-modal-box__title", "Force delete file newfile?")
         b.assert_pixels(".pf-v5-c-modal-box", "delete-modal-error")
         self.wait_modal_inline_alert("rm: cannot remove '/home/admin/newfile': Operation not permitted")
@@ -540,7 +541,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_not_present(".pf-v5-c-modal-box")
         b.wait_visible("[data-item='newfile']")
         m.execute("sudo chattr -i /home/admin/newfile")
-        self.delete_item(b, "file", "newfile")
+        self.delete_item("file", "newfile")
 
         # Delete using keyboard shortcut
         m.execute("touch /home/admin/delete1 /home/admin/delete2")
