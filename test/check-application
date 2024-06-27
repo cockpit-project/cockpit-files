@@ -53,7 +53,8 @@ class TestFiles(testlib.MachineCase):
             b.wait_not_present(".pf-v5-c-modal-box")
             b.wait_not_present(f"[data-item='{filename}']")
 
-    def create_directory(self, b: testlib.Browser, filename: str) -> None:
+    def create_directory(self, filename: str) -> None:
+        b = self.browser
         b.click("#dropdown-menu")
         b.click("#create-item")
         b.set_input_text("#create-directory-input", f"{filename}")
@@ -565,7 +566,7 @@ class TestFiles(testlib.MachineCase):
         self.enter_files()
 
         # Create folder
-        self.create_directory(b, "newdir")
+        self.create_directory("newdir")
         b.wait_visible("[data-item='newdir']")
         self.assert_owner('/home/admin/newdir', 'admin:admin')
 
@@ -591,12 +592,12 @@ class TestFiles(testlib.MachineCase):
         b.click(".pf-v5-c-modal-box__footer button.pf-m-link")  # cancel
 
         # Creating folder with duplicate name should return an error
-        self.create_directory(b, "newdir")
+        self.create_directory("newdir")
         self.wait_modal_inline_alert("mkdir: cannot create directory ‘/home/admin/newdir’: File exists")
         b.click("div.pf-v5-c-modal-box__close button.pf-v5-c-button")
 
         # Creating folder with empty name should return an error
-        self.create_directory(b, "")
+        self.create_directory("")
         self.wait_modal_inline_alert("mkdir: cannot create directory ‘/home/admin/’: File exists")
         b.click("div.pf-v5-c-modal-box__close button.pf-v5-c-button")
 
@@ -604,7 +605,7 @@ class TestFiles(testlib.MachineCase):
         m.execute("sudo chattr +i /home/admin/newdir")
         b.mouse("[data-item='newdir']", "dblclick")
         b.wait_not_present("[data-item='newdir']")
-        self.create_directory(b, "test")
+        self.create_directory("test")
         alert_text = "mkdir: cannot create directory ‘/home/admin/newdir/test’: Operation not permitted"
         self.wait_modal_inline_alert(alert_text)
         b.click("div.pf-v5-c-modal-box__close button.pf-v5-c-button")
@@ -614,21 +615,21 @@ class TestFiles(testlib.MachineCase):
         b.go("/files#/?path=/root")
         b.wait_not_present(".pf-v5-c-empty-state")
         self.addCleanup(m.execute, ['rm', '-rf', '/root/newdir'])
-        self.create_directory(b, "newdir")
+        self.create_directory("newdir")
         b.wait_visible("[data-item='newdir']")
         self.assert_owner('/root/newdir', 'root:root')
 
         m.execute('useradd -m testuser')
         b.go('/files#/?path=/home/testuser')
         b.wait_not_present('.pf-v5-c-empty-state')
-        self.create_directory(b, 'newdir')
+        self.create_directory('newdir')
         b.wait_visible("[data-item='newdir']")
         self.assert_owner('/home/testuser', 'testuser:testuser')
 
         b.go('/files#/?path=/tmp')
         b.wait_not_present('.pf-v5-c-empty-state')
         self.addCleanup(m.execute, ['rm', '-rf', '/tmp/newdir'])
-        self.create_directory(b, 'newdir')
+        self.create_directory('newdir')
         b.wait_visible("[data-item='newdir']")
         self.assert_owner('/tmp/newdir', 'root:root')
 
