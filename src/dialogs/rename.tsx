@@ -57,10 +57,14 @@ function checkName(candidate: string, entries: Record<string, FileInfo>, selecte
 
 function checkCanOverride(candidate: string, entries: Record<string, FileInfo>, selectedFile: FolderFileInfo) {
     if (candidate in entries) {
-        if (entries[candidate].type === "dir") {
+        const conflictFile = entries[candidate];
+        // only allow overwriting regular files
+        if (conflictFile.type !== "reg") {
             return false;
         }
-        if (selectedFile.type === "reg" || (selectedFile.type === "lnk" && selectedFile.to === "reg")) {
+
+        // don't allow overwrite when the filename is unchanged
+        if (selectedFile.type === "reg" && candidate !== selectedFile.name) {
             return true;
         }
     }
@@ -113,6 +117,8 @@ const RenameItemModal = ({ dialogResult, path, selected } : {
         </>
     );
 
+    const label = selected.type !== "dir" ? _("New filename") : _("New name");
+
     return (
         <Modal
           position="top"
@@ -131,7 +137,7 @@ const RenameItemModal = ({ dialogResult, path, selected } : {
                   isInline
                 />}
                 <Form isHorizontal>
-                    <FormGroup fieldId="rename-item-input" label={_("New filename")}>
+                    <FormGroup fieldId="rename-item-input" label={label}>
                         <TextInput
                           value={name}
                           onChange={(_, val) => {

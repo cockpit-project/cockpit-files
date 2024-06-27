@@ -817,6 +817,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_visible("[data-item='foodir']")
         b.wait_visible("[data-item='bardir']")
 
+        # Overwrite regular file
         self.file_action_modal('foo.txt', 'Rename')
         b.set_input_text("#rename-item-input", "bar.txt")
         b.wait_in_text("#rename-item-input-helper", "File exists")
@@ -843,7 +844,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_not_present("button.pf-m-danger")
         b.click("div.pf-v5-c-modal-box__close > button")
 
-        # Overwrite symlink to file
+        # Overwriting symlinks shows error
         m.execute(f"""
         echo 'foo text' > {basedir}/foo.txt
         echo 'bar text' > {basedir}/bar.txt
@@ -853,11 +854,9 @@ class TestFiles(testlib.MachineCase):
         self.file_action_modal('foolink.txt', 'Rename')
         b.set_input_text("#rename-item-input", "barlink.txt")
         b.wait_in_text("#rename-item-input-helper", "File exists")
-        b.click("button.pf-m-danger")
-        b.wait_not_present("[data-item='foolink.txt']")
-        b.wait_visible("[data-item='barlink.txt']")
-        contents = m.execute(f"cat {basedir}/barlink.txt").strip()
-        self.assertEqual(contents, 'foo text')
+        b.wait_visible("button.pf-m-primary:disabled")
+        b.wait_not_present("button.pf-m-danger")
+        b.click("div.pf-v5-c-modal-box__close > button")
 
         # Trying to overwrite symlink to directory name shows error
         m.execute(f"""
@@ -866,6 +865,20 @@ class TestFiles(testlib.MachineCase):
         self.file_action_modal('foodirlink', 'Rename')
         b.set_input_text("#rename-item-input", "bardir")
         b.wait_in_text("#rename-item-input-helper", "Directory with the same name exists")
+        b.wait_visible("button.pf-m-primary:disabled")
+        b.wait_not_present("button.pf-m-danger")
+        b.click("div.pf-v5-c-modal-box__close > button")
+
+        # Do not overwrite symlinks to directory with another file
+        self.file_action_modal('bardir', 'Rename')
+        b.set_input_text("#rename-item-input", "foodirlink")
+        b.wait_in_text("#rename-item-input-helper", "File exists")
+        b.wait_visible("button.pf-m-primary:disabled")
+        b.wait_not_present("button.pf-m-danger")
+        b.click("div.pf-v5-c-modal-box__close > button")
+        self.file_action_modal('foo.txt', 'Rename')
+        b.set_input_text("#rename-item-input", "foodirlink")
+        b.wait_in_text("#rename-item-input-helper", "File exists")
         b.wait_visible("button.pf-m-primary:disabled")
         b.wait_not_present("button.pf-m-danger")
         b.click("div.pf-v5-c-modal-box__close > button")
