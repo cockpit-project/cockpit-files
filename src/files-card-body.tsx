@@ -316,21 +316,21 @@ export const FilesCardBody = ({
                 break;
 
             case "a":
-                if (e.ctrlKey && !e.shiftKey && !e.altKey) {
+                if (e.ctrlKey && !e.shiftKey && !e.altKey && !(e.target instanceof HTMLInputElement)) {
                     e.preventDefault();
                     setSelected(sortedFiles);
                 }
                 break;
 
             case "c":
-                if (e.ctrlKey && !e.shiftKey && !e.altKey) {
+                if (e.ctrlKey && !e.shiftKey && !e.altKey && !(e.target instanceof HTMLInputElement)) {
                     e.preventDefault();
                     copyToClipboard(selected, path, setClipboard);
                 }
                 break;
 
             case "v":
-                if (e.ctrlKey && !e.shiftKey && !e.altKey) {
+                if (e.ctrlKey && !e.shiftKey && !e.altKey && !(e.target instanceof HTMLInputElement)) {
                     e.preventDefault();
                     pasteFromClipboard(clipboard, cwdInfo, currentPath, addAlert);
                 }
