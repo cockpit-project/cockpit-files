@@ -141,10 +141,14 @@ export const FilesCardBody = ({
         }
     }
 
-    const onDoubleClickNavigate = useCallback((file: FolderFileInfo) => {
+    const onClickNavigate = useCallback((file: FolderFileInfo, newTab: boolean = false) => {
         const newPath = [...path, file.name].join("/");
         if (file.to === "dir") {
-            cockpit.location.go("/", { path: encodeURIComponent(newPath) });
+            if (newTab) {
+                open(`#/?path=${newPath}`);
+            } else {
+                cockpit.location.go("/", { path: encodeURIComponent(newPath) });
+            }
         }
     }, [path]);
 
@@ -181,7 +185,7 @@ export const FilesCardBody = ({
                 return;
             }
 
-            onDoubleClickNavigate(file);
+            onClickNavigate(file);
         };
 
         const handleClick = (ev: MouseEvent) => {
@@ -194,7 +198,7 @@ export const FilesCardBody = ({
             }
 
             if (ev.detail > 1) {
-                onDoubleClickNavigate(file);
+                onClickNavigate(file);
             } else {
                 if (!ev.ctrlKey) {
                     setSelected([file]);
@@ -206,6 +210,21 @@ export const FilesCardBody = ({
                             return s.filter(f => f.name !== file.name);
                         }
                     });
+                    onClickNavigate(file, true);
+                }
+            }
+        };
+
+        const handleAuxClick = (ev: MouseEvent) => {
+            // capture middle click
+            if (ev.button === 1) {
+                ev.preventDefault();
+                const name = getFilenameForEvent(ev);
+                const file = sortedFiles?.find(file => file.name === name);
+
+                if (file) {
+                    setSelected([file]);
+                    onClickNavigate(file, true);
                 }
             }
         };
@@ -262,7 +281,7 @@ export const FilesCardBody = ({
                     return [sortedFiles[newIdx]];
                 });
             } else if (e.key === "Enter" && selected.length === 1) {
-                onDoubleClickNavigate(selected[0]);
+                onClickNavigate(selected[0]);
             } else if (e.key === "Delete" && selected.length !== 0) {
                 confirm_delete(dialogs, path.join("/") + "/", selected, setSelected);
             }
@@ -273,6 +292,7 @@ export const FilesCardBody = ({
             folderViewElem.addEventListener("click", handleClick);
             folderViewElem.addEventListener("dblclick", handleDoubleClick);
             folderViewElem.addEventListener("contextmenu", handleContextMenu);
+            folderViewElem.addEventListener("auxclick", handleAuxClick);
         }
 
         if (!isMounted.current && !dialogs.isActive()) {
@@ -288,6 +308,7 @@ export const FilesCardBody = ({
                 folderViewElem.removeEventListener("click", handleClick);
                 folderViewElem.removeEventListener("dblclick", handleDoubleClick);
                 folderViewElem.removeEventListener("contextmenu", handleContextMenu);
+                folderViewElem.removeEventListener("auxclick", handleAuxClick);
             }
         };
     }, [
@@ -295,7 +316,7 @@ export const FilesCardBody = ({
         sortedFiles,
         boxPerRow,
         selected,
-        onDoubleClickNavigate,
+        onClickNavigate,
         dialogs,
         path,
     ]);
