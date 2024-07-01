@@ -242,6 +242,8 @@ export function FilesBreadcrumbs({ path, showHidden, setShowHidden }: { path: st
         setEditMode(false);
     };
 
+    addEventListener("manual-change-dir", enableEditMode);
+
     const fullPath = path.slice(1);
     fullPath.unshift(hostname || "server");
 

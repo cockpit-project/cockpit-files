@@ -795,8 +795,22 @@ class TestFiles(testlib.MachineCase):
         self.rename_item("new dir1", "testdir")
         alert_text = "mv: cannot move '/home/admin/new dir1' to '/home/admin/testdir': Operation not permitted"
         self.wait_modal_inline_alert(alert_text)
-        b.click("div.pf-v5-c-modal-box__close")
+        b.click("div.pf-v5-c-modal-box__close button")
         m.execute("sudo chattr -i /home/admin/new\\ dir1")
+
+        # Rename file
+        b.click("[data-item='newfile']")
+        b.key("F2")
+        b.wait_in_text(".pf-v5-c-modal-box__title-text", "Rename file newfile")
+        b.set_input_text("#rename-item-input", "teddybear.txt")
+        b.click(".pf-v5-c-button.pf-m-primary")
+        b.wait_visible("[data-item='teddybear.txt']")
+
+        # Rename modal does not open when multiple files are selected
+        b.mouse("[data-item='dest']", "click", ctrlKey=True)
+        b.mouse("[data-item='new dir1']", "click", ctrlKey=True)
+        b.key("F2")
+        b.wait_not_present(".pf-v5-c-modal-box__title-text")
 
     def testHiddenItems(self) -> None:
         b = self.browser
@@ -988,7 +1002,10 @@ class TestFiles(testlib.MachineCase):
         self.enter_files()
 
         # Check control-clicking
-        m.execute("touch /home/admin/file1 && touch /home/admin/file2")
+        create_files = "touch"
+        for filename in ["file1", "file2", "file3"]:
+            create_files += f" /home/admin/{filename}"
+        m.execute(create_files)
         b.click("[data-item='file1']")
         b.mouse("[data-item='file2']", "click", ctrlKey=True)
         b.wait_visible("[data-item='file1'].row-selected")
@@ -1010,7 +1027,15 @@ class TestFiles(testlib.MachineCase):
         b.wait_visible("[data-item='file1'].row-selected")
         b.wait_text("#sidebar-card-header", "file1empty")
 
+        # Select all keybind
+        b.eval_js("window.focus()")
+        b.key("a", modifiers=2)
+        b.wait_visible("[data-item='file1'].row-selected")
+        b.wait_visible("[data-item='file2'].row-selected")
+        b.wait_visible("[data-item='file3'].row-selected")
+
         # Check context menu
+        b.click("[data-item='file1']")
         b.mouse("[data-item='file2']", "click", ctrlKey=True)
         b.wait_visible("[data-item='file2'].row-selected")
         b.wait_text("#sidebar-card-header", "admin2 items selected")
@@ -1039,13 +1064,29 @@ class TestFiles(testlib.MachineCase):
 
         self.enter_files()
 
+        create_dirs = "mkdir -p"
+        for dirname in ["testdir", "anotherdir"]:
+            create_dirs += f" /home/admin/{dirname}"
+        m.execute(create_dirs)
         create_files = ""
         for i in range(0, 4):
             create_files += f"touch /home/admin/file{i}; "
         m.execute(create_files)
 
+        # view shortcuts help dialog
+        b.click("#global-settings-menu")
+        b.click("#show-shortcuts-help")
+        b.wait_in_text(".shortcuts-dialog .pf-v5-c-modal-box__title-text", "Keyboard shortcuts")
+        b.click(".shortcuts-dialog button.pf-m-secondary")
+        b.wait_not_present(".shortcuts-dialog")
+
         # Focus the iframe for global keybindings in Files.
         b.eval_js("window.focus()")
+
+        # Pressing ArrowRight will select first item when nothing is selected
+        b.wait_visible(".pf-v5-c-table__tbody tr:nth-child(1)")
+        b.key("ArrowRight")
+        b.wait_visible(".pf-v5-c-table__tbody tr:nth-child(1).row-selected")
 
         b.click("[data-item='file0']")
         b.wait_visible("[data-item='file0'].row-selected")
@@ -1054,6 +1095,35 @@ class TestFiles(testlib.MachineCase):
         b.wait_visible("[data-item='file1'].row-selected")
         b.key("ArrowLeft")
         b.wait_visible("[data-item='file0'].row-selected")
+
+        # Go up and down in directory hierarchy
+        b.click("[data-item='testdir']")
+        b.key("ArrowDown", modifiers=1)
+        b.wait_text(".breadcrumb-button:nth-of-type(6)", "testdir")
+        b.key("ArrowUp", modifiers=1)
+        b.wait_visible("[data-item='testdir']")
+
+        # Manually edit path
+        b.key("L", modifiers=2)
+        b.input_text("/home/admin/anotherdir")
+        b.key("Enter")
+        b.wait_text(".breadcrumb-button:nth-of-type(6)", "anotherdir")
+
+        # Go back in history twice
+        # b.key("ArrowLeft", repeat=2, modifiers=1)
+        b.eval_js("window.history.back()")
+        b.eval_js("window.history.back()")
+        b.wait_text(".breadcrumb-button:nth-of-type(6)", "testdir")
+
+        # Go forward in history
+        # b.key("ArrowRight", repeat=1, modifiers=1)
+        b.eval_js("window.history.forward()")
+        b.wait_visible("[data-item='testdir']")
+
+        b.key("N")
+        b.set_input_text("#create-directory-input", "foodir")
+        b.click("button.pf-m-primary")
+        b.wait_visible("[data-item='foodir']")
 
         # Up / Down depends on the layout, this is tested on mobile where the
         # width is two cards.
@@ -1129,6 +1199,48 @@ class TestFiles(testlib.MachineCase):
         b.wait_in_text(".pf-v5-c-alert__description", "\"newfile\" exists")
         b.click(".breadcrumb-2")
         b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "admin")
+        b.click(".pf-v5-c-alert__action button")
+
+        # Copy/paste with keybinds
+        b.eval_js("window.focus()")
+        m.execute("runuser -u admin mkdir -p /home/admin/kbdCopy")
+        b.mouse("[data-item='newdir']", "dblclick")
+        b.click("[data-item='copyDir']")
+        b.key("c", modifiers=2)
+        b.click(".breadcrumb-button:nth-of-type(5)")
+        b.mouse("[data-item='kbdCopy']", "dblclick")
+        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "kbdCopy")
+        b.key("v", modifiers=2)
+        b.wait_visible("[data-item='copyDir']")
+        b.click(".breadcrumb-button:nth-of-type(5)")
+        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "admin")
+        m.execute("runuser -u admin echo 'keybindings good' > /home/admin/newdir/newfile")
+        b.mouse("[data-item='newdir']", "dblclick")
+        b.click("[data-item='loaded']")
+        b.mouse("[data-item='newfile']", "click", ctrlKey=True)
+        b.wait_visible("[data-item='loaded'].row-selected")
+        b.wait_visible("[data-item='newfile'].row-selected")
+        b.key("c", modifiers=2)
+        b.click(".breadcrumb-button:nth-of-type(5)")
+        b.mouse("[data-item='kbdCopy']", "dblclick")
+        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "kbdCopy")
+        b.key("v", modifiers=2)
+        b.wait_visible("[data-item='loaded']")
+        b.wait_visible("[data-item='newfile']")
+        self.assertEqual(m.execute("head -n 1 /home/admin/kbdCopy/newfile"), "keybindings good\n")
+
+        # File already exists error with keybinds
+        b.click(".breadcrumb-button:nth-of-type(5)")
+        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "admin")
+        m.execute("runuser -u admin echo 'changed' > /home/admin/newdir/newfile")
+        b.click("[data-item='newfile']")
+        b.key("c", modifiers=2)
+        b.mouse("[data-item='kbdCopy']", "dblclick")
+        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "kbdCopy")
+        b.key("v", modifiers=2)
+        b.wait_in_text("h4.pf-v5-c-alert__title", "Pasting failed")
+        b.wait_in_text(".pf-v5-c-alert__description", "\"newfile\" exists")
+        self.assertEqual(m.execute("head -n 1 /home/admin/kbdCopy/newfile"), "keybindings good\n")
 
     @testlib.skipBrowser(".upload_files() doesn't work on Firefox", "firefox")
     def testUpload(self) -> None:

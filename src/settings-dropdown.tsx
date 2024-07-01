@@ -25,12 +25,16 @@ import { Flex, FlexItem } from "@patternfly/react-core/dist/esm/layouts/Flex";
 import { CheckIcon, EllipsisVIcon } from "@patternfly/react-icons";
 
 import cockpit from "cockpit";
+import { useDialogs } from 'dialogs';
+
+import { KeyboardShortcutsHelp } from "./dialogs/keyboardShortcutsHelp";
 
 const _ = cockpit.gettext;
 
 export const SettingsDropdown = ({ showHidden, setShowHidden } : {
     showHidden: boolean, setShowHidden: React.Dispatch<React.SetStateAction<boolean>>
 }) => {
+    const Dialogs = useDialogs();
     const [isOpen, setIsOpen] = useState(false);
     const onToggleClick = () => setIsOpen(!isOpen);
 
@@ -74,6 +78,12 @@ export const SettingsDropdown = ({ showHidden, setShowHidden } : {
                   onClick={onToggleHidden}
                 >
                     {showHiddenItems}
+                </DropdownItem>
+                <DropdownItem
+                  id="show-shortcuts-help"
+                  onClick={() => Dialogs.show(<KeyboardShortcutsHelp />)}
+                >
+                    {_("Show keyboard shortcuts")}
                 </DropdownItem>
             </DropdownList>
         </Dropdown>
