@@ -17,7 +17,7 @@
  * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Card } from '@patternfly/react-core/dist/esm/components/Card';
 
@@ -46,6 +46,11 @@ export const FilesFolderView = ({
     const [isGrid, setIsGrid] = useState(localStorage.getItem("files:isGrid") !== "false");
     const [sortBy, setSortBy] = useState(as_sort(localStorage.getItem("files:sort")));
     const onFilterChange = (_event: React.FormEvent<HTMLInputElement>, value: string) => setCurrentFilter(value);
+
+    // Reset the search filter on path changes
+    useEffect(() => {
+        setCurrentFilter("");
+    }, [path]);
 
     return (
         <Card>
