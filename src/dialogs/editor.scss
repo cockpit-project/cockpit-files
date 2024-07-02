@@ -25,6 +25,11 @@
 }
 
 .file-editor {
-  font-family: monospace;
   block-size: 100%;
+
+  textarea {
+    font-family: monospace;
+    hyphens: none;
+    white-space: wrap break-spaces;
+  }
 }
