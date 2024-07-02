@@ -20,7 +20,7 @@ fi
 # disable detection of affected tests; testing takes too long as there is no parallelization
 mv .git dot-git
 
-. /etc/os-release
+. /run/host/usr/lib/os-release
 export TEST_OS="${ID}-${VERSION_ID/./-}"
 
 if [ "${TEST_OS#centos-}" != "$TEST_OS" ]; then
