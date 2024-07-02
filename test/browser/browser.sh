@@ -3,6 +3,8 @@
 set -eux
 cd "${0%/*}/../.."
 
+. /usr/lib/os-release
+
 # allow test to set up things on the machine
 mkdir -p /root/.ssh
 curl https://raw.githubusercontent.com/cockpit-project/bots/main/machine/identity.pub >> /root/.ssh/authorized_keys
@@ -35,5 +37,6 @@ exec podman \
         --env='TEST_*' \
         --volume="${TMT_TEST_DATA}":/logs:rw,U --env=LOGS=/logs \
         --volume="$(pwd)":/source:rw,U --env=SOURCE=/source \
+        --volume=/usr/lib/os-release:/run/host/usr/lib/os-release:ro \
         "${CONTAINER}" \
             sh /source/test/browser/run-test.sh "$@"
