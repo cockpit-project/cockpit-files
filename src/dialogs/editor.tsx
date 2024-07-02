@@ -158,7 +158,7 @@ export const EditFileModal = ({ dialogResult, path } : {
                       {_("Save")}
                   </Button>
                   <Button variant="link" onClick={() => dialogResult.resolve()}>
-                      {modified ? _("Cancel (discard changes)") : _("Cancel")}
+                      {modified ? _("Cancel") : _("Close")}
                   </Button>
               </>
           }
