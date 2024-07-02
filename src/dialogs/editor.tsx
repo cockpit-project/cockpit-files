@@ -136,11 +136,11 @@ export const EditFileModal = ({ dialogResult, path } : {
     return (
         <Modal
           position="top"
-          title={(modified ? "⭐ " : "") + title}
+          title={title}
           isOpen
           onClose={() => dialogResult.resolve()}
           variant={ModalVariant.large}
-          className='file-editor-modal'
+          className={`file-editor-modal ${modified ? 'is-modified' : ''}`}
           footer={
               state?.writable &&
               <>

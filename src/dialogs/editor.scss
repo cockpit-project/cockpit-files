@@ -1,5 +1,27 @@
 .file-editor-modal {
   block-size: 100%;
+
+  &.is-modified {
+    // Add a background highlight on the modal itself
+    &::after {
+      background: linear-gradient(to bottom, var(--pf-v5-global--warning-color--100), transparent 0.33em);
+      content: '';
+      inset: 0;
+      pointer-events: none;
+      position: absolute;
+    }
+
+    // Add a circle to indicate that there are changes
+    .pf-v5-c-modal-box__title-text::after {
+      aspect-ratio: 1;
+      background: var(--pf-v5-global--warning-color--100);
+      block-size: 1cap;
+      border-radius: 0.5cap;
+      content: '';
+      display: inline-block;
+      margin-inline-start: 0.5cap;
+    }
+  }
 }
 
 .file-editor {
