@@ -22,6 +22,7 @@ import { AlertVariant } from "@patternfly/react-core";
 import { Button } from "@patternfly/react-core/dist/esm/components/Button";
 import { Divider } from "@patternfly/react-core/dist/esm/components/Divider";
 import { Dropdown, DropdownItem, DropdownList } from "@patternfly/react-core/dist/esm/components/Dropdown";
+import { Icon } from "@patternfly/react-core/dist/esm/components/Icon";
 import { MenuToggle, MenuToggleElement } from "@patternfly/react-core/dist/esm/components/MenuToggle";
 import { PageBreadcrumb } from "@patternfly/react-core/dist/esm/components/Page";
 import { TextInput } from "@patternfly/react-core/dist/esm/components/TextInput";
@@ -30,10 +31,10 @@ import { CheckIcon, HddIcon, PencilAltIcon, StarIcon, TimesIcon } from "@pattern
 import { useInit } from "hooks.js";
 
 import cockpit from "cockpit";
+import { KebabDropdown } from "cockpit-components-dropdown";
 
 import { useFilesContext } from "./app";
 import { basename } from "./common";
-import { SettingsDropdown } from "./settings-dropdown";
 
 const _ = cockpit.gettext;
 
@@ -242,6 +243,13 @@ export function FilesBreadcrumbs({ path, showHidden, setShowHidden }: { path: st
         setEditMode(false);
     };
 
+    const onToggleHidden = () => {
+        setShowHidden(prevShowHidden => {
+            localStorage.setItem("files:showHiddenFiles", !showHidden ? "true" : "false");
+            return !prevShowHidden;
+        });
+    };
+
     const fullPath = path.slice(1);
     fullPath.unshift(hostname || "server");
 
@@ -298,7 +306,25 @@ export function FilesBreadcrumbs({ path, showHidden, setShowHidden }: { path: st
                           className="breadcrumb-button-edit-cancel"
                         />
                     </>}
-                    <SettingsDropdown showHidden={showHidden} setShowHidden={setShowHidden} />
+                    <KebabDropdown
+                      toggleButtonId="global-settings-menu" dropdownItems={[
+                          <DropdownItem
+                            key="show-hidden-items"
+                            id="show-hidden-items"
+                            onClick={onToggleHidden}
+                          >
+                              <Flex justifyContent={{ default: "justifyContentSpaceBetween" }}>
+                                  <FlexItem>{_("Show hidden items")}</FlexItem>
+                                  <FlexItem>
+                                      {showHidden &&
+                                      <Icon size="sm">
+                                          <CheckIcon className="check-icon" />
+                                      </Icon>}
+                                  </FlexItem>
+                              </Flex>
+                          </DropdownItem>
+                      ]}
+                    />
                 </FlexItem>
             </Flex>
         </PageBreadcrumb>
