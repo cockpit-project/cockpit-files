@@ -1599,6 +1599,18 @@ class TestFiles(testlib.MachineCase):
 
         self.enter_files()
 
+        def assert_bookmark(bookmark: str, *, exists: bool = True) -> None:
+            b.click("#bookmark-btn")
+            b.wait_visible(".pf-v5-c-menu")
+            if exists:
+                b.wait_visible(f".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('{bookmark}') button")
+            else:
+                # Has to wait on file.watch() (inotify) to re-read the bookmarks
+                b.wait_not_in_text(".pf-v5-c-menu", bookmark)
+
+            b.click("#bookmark-btn")
+            b.wait_not_present(".pf-v5-c-menu .pf-v5-c-menu__list-item")
+
         b.click("#bookmark-btn")
         b.wait_in_text(".pf-v5-c-menu .pf-v5-c-menu__list-item", "Home")
         # Home directory cannot be added or removed as bookmark
@@ -1616,12 +1628,17 @@ class TestFiles(testlib.MachineCase):
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add bookmark) button")
         b.wait_not_present(".pf-v5-c-menu")
 
+        assert_bookmark("/etc", exists=True)
+
         # Remove bookmark
         b.click("#bookmark-btn")
         b.wait_visible(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('/etc') button")
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('Remove current directory') button")
         b.wait_not_present(".pf-v5-c-menu")
 
+        assert_bookmark("/etc", exists=False)
+
+        # Go to bookmark
         b.click("#bookmark-btn")
         b.wait_not_present(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('/etc') button")
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add bookmark) button")
@@ -1630,7 +1647,6 @@ class TestFiles(testlib.MachineCase):
         b.go("/files#/?path=/proc")
         b.wait_not_present(".pf-v5-c-empty-state")
 
-        # Go to bookmark
         b.click("#bookmark-btn")
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('/etc') button")
         b.wait_not_present(".pf-v5-c-empty-state")
@@ -1651,16 +1667,16 @@ class TestFiles(testlib.MachineCase):
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('Remove current directory') button")
         b.wait_not_present(".pf-v5-c-menu")
 
+        assert_bookmark("This is a-test", exists=False)
+
         # Bookmarking a directory with spaces encodes it correctly
-        prev_size = self.stat('%s', config_file)
         b.click("#bookmark-btn")
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add bookmark) button")
 
-        testlib.wait(lambda: self.stat('%s', config_file) != prev_size, tries=15)
+        assert_bookmark("This is a-test", exists=True)
         self.assertIn("file:///home/admin/This%20is%20a-test\n", read_config())
 
-        prev_size = self.stat('%s', config_file)
-
+        # Removing /tmp bookmark keeps bookmark with spaces
         b.click("#bookmark-btn")
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('tmp') button")
         b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "tmp")
@@ -1669,8 +1685,7 @@ class TestFiles(testlib.MachineCase):
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('Remove current directory') button")
         b.wait_not_present(".pf-v5-c-menu")
 
-        # Wait till file has changed until comparing
-        testlib.wait(lambda: self.stat('%s', config_file) != prev_size, tries=15)
+        assert_bookmark("/tmp", exists=False)
         self.assertEqual(read_config(), "file:///etc\nfile:///home/admin/This%20is%20a-test\n")
 
         # Add a directory with special characters
@@ -1681,11 +1696,10 @@ class TestFiles(testlib.MachineCase):
         b.mouse(f"[data-item='{special_dir}']", "dblclick")
         b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", special_dir)
 
-        prev_size = self.stat('%s', config_file)
         b.click("#bookmark-btn")
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add bookmark) button")
 
-        testlib.wait(lambda: self.stat('%s', config_file) != prev_size, tries=15)
+        assert_bookmark(special_dir, exists=True)
         self.assertEqual("file:///etc\nfile:///home/admin/This%20is%20a-test\nfile:///home/admin/super%23special*1%202%3E%3C.%2C%C3%9F\n",
                          read_config())
 
@@ -1696,12 +1710,11 @@ class TestFiles(testlib.MachineCase):
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('super#special') button")
         b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", special_dir)
 
-        prev_size = self.stat('%s', config_file)
         b.click("#bookmark-btn")
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('Remove current directory') button")
         b.wait_not_present(".pf-v5-c-menu")
 
-        testlib.wait(lambda: self.stat('%s', config_file) != prev_size, tries=15)
+        assert_bookmark(special_dir, exists=False)
         self.assertEqual(read_config(), "file:///etc\nfile:///home/admin/This%20is%20a-test\n")
 
         # Modifications outside of Cockpit are shown
