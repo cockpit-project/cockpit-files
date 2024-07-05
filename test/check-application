@@ -1166,13 +1166,15 @@ class TestFiles(testlib.MachineCase):
         b.wait_visible("[data-item='file0'].row-selected")
 
         # Up / Down depends on the layout, this is tested on mobile where the
-        # width is two cards.
+        # width is two or three columns.
         b.set_layout("mobile")
         b.click("[data-item='file0']")
         b.wait_visible("[data-item='file0'].row-selected")
 
         b.key("ArrowDown")
-        b.wait_visible("[data-item='file2'].row-selected")
+        b.wait_js_cond("""ph_is_visible("[data-item='file2'].row-selected") ||
+                          ph_is_visible("[data-item='file3'].row-selected")""")
+
         b.key("ArrowUp")
         b.wait_visible("[data-item='file0'].row-selected")
 
