@@ -5,7 +5,7 @@ Maintainer: Utopia Maintenance Team <pkg-utopia-maintainers@lists.alioth.debian.
 Uploaders: Martin Pitt <mpitt@debian.org>,
 Build-Depends: debhelper-compat (= 13),
                gettext (>= 0.21),
-Standards-Version: 4.6.2
+Standards-Version: 4.7.0
 Rules-Requires-Root: no
 Homepage: https://github.com/cockpit-project/cockpit-files
 Vcs-Git: https://salsa.debian.org/debian/cockpit-files.git
@@ -16,8 +16,9 @@ Architecture: all
 Multi-Arch: foreign
 Depends: ${misc:Depends},
          cockpit-bridge (>= 318),
-Description: A filesystem browser for Cockpit
+Description: Cockpit component for file management
  The Cockpit Web Console enables users to administer GNU/Linux servers using a
  web browser.
  .
- This package adds an user interface for browsing the filesystem.
+  This package adds an user interface for managing, uploading, and downloading
+ files, with a similar experience as a desktop file manager.
