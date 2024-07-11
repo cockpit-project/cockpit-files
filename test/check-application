@@ -1178,11 +1178,18 @@ class TestFiles(testlib.MachineCase):
         b.wait_visible("[data-item='file0'].row-selected")
 
         b.key("ArrowDown")
-        b.wait_js_cond("""ph_is_visible("[data-item='file2'].row-selected") ||
-                          ph_is_visible("[data-item='file3'].row-selected")""")
+        b.wait_visible("[data-item='file2'].row-selected")
 
         b.key("ArrowUp")
         b.wait_visible("[data-item='file0'].row-selected")
+
+        # Test with very long hostnames
+        original_hostname = m.execute('hostnamectl hostname').strip()
+        self.addCleanup(m.execute, ['hostnamectl', 'set-hostname', original_hostname])
+        # length of testing farm hostname
+        m.execute('hostnamectl set-hostname aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeee.testing-farm')
+        b.key("ArrowDown")
+        b.wait_visible("[data-item='file2'].row-selected")
 
         m.execute("mkdir /home/admin/foo")
         b.click("[data-item='foo']")
