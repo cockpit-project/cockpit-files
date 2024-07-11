@@ -235,8 +235,7 @@ class TestFiles(testlib.MachineCase):
 
         self.enter_files()
 
-        hostname = m.execute("hostname").strip()
-        b.wait_text(".breadcrumb-0", hostname)
+        b.wait_text(".breadcrumb-0", "/")
         b.wait_text(".breadcrumb-1", "home")
         b.wait_text(".breadcrumb-2", "admin")
 
@@ -307,12 +306,6 @@ class TestFiles(testlib.MachineCase):
         b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "home")
         b.wait_visible("[data-item='admin']")
 
-        # Changing hostname updates breadcrumb
-        original_hostname = m.execute('hostnamectl hostname').strip()
-        self.addCleanup(m.execute, ['hostnamectl', 'set-hostname', original_hostname])
-        m.execute("hostnamectl set-hostname files")
-        b.wait_text(".breadcrumb-0", "files")
-
         # Navigation via editing the path
         path_input = "#new-path-input"
         edit_button = ".breadcrumb-button-edit"
@@ -366,7 +359,7 @@ class TestFiles(testlib.MachineCase):
         b.click(edit_button)
         b.set_input_text(path_input, "/")
         b.click(apply_button)
-        b.wait_text("button.pf-m-disabled.breadcrumb-button + p", "/")
+        b.wait_text("button.pf-m-disabled.breadcrumb-button", "/")
         b.click(edit_button)
         b.wait_val(path_input, "/")
         b.click(cancel_button)
@@ -384,7 +377,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "sys")
 
         b.click(".breadcrumb-0")
-        b.wait_text("button.pf-m-disabled.breadcrumb-button + p", "/")
+        b.wait_text("button.pf-m-disabled.breadcrumb-button", "/")
         b.wait_val("input[placeholder='Filter directory']", "")
 
     def testSorting(self) -> None:

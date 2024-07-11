@@ -39,29 +39,6 @@ import { basename } from "./common";
 
 const _ = cockpit.gettext;
 
-function useHostname() {
-    const [hostname, setHostname] = React.useState<string | null>(null);
-
-    React.useEffect(() => {
-        const client = cockpit.dbus('org.freedesktop.hostname1');
-        const hostname1 = client.proxy('org.freedesktop.hostname1', '/org/freedesktop/hostname1');
-
-        function changed() {
-            if (hostname1.valid && typeof hostname1.Hostname === 'string') {
-                setHostname(hostname1.Hostname);
-            }
-        }
-
-        hostname1.addEventListener("changed", changed);
-        return () => {
-            hostname1.removeEventListener("changed", changed);
-            client.close();
-        };
-    }, []);
-
-    return hostname;
-}
-
 function BookmarkButton({ path }: { path: string[] }) {
     const [isOpen, setIsOpen] = React.useState(false);
     const [user, setUser] = React.useState<cockpit.UserInfo | null>(null);
@@ -211,7 +188,6 @@ function BookmarkButton({ path }: { path: string[] }) {
 export function FilesBreadcrumbs({ path, showHidden, setShowHidden }: { path: string[], showHidden: boolean, setShowHidden: React.Dispatch<React.SetStateAction<boolean>>}) {
     const [editMode, setEditMode] = React.useState(false);
     const [newPath, setNewPath] = React.useState<string | null>(null);
-    const hostname = useHostname();
 
     function navigate(n_parts: number) {
         cockpit.location.go("/", { path: encodeURIComponent(path.slice(0, n_parts).join("/")) });
@@ -257,9 +233,6 @@ export function FilesBreadcrumbs({ path, showHidden, setShowHidden }: { path: st
         });
     };
 
-    const fullPath = path.slice(1);
-    fullPath.unshift(hostname || "server");
-
     return (
         <PageBreadcrumb stickyOnBreakpoint={{ default: "top" }}>
             <Flex spaceItems={{ default: "spaceItemsSm" }}>
@@ -273,14 +246,15 @@ export function FilesBreadcrumbs({ path, showHidden, setShowHidden }: { path: st
                           className="breadcrumb-button-edit"
                         />
                     </Tooltip>}
-                {!editMode && fullPath.map((dir, i) => {
+                {!editMode && path.map((dir, i) => {
                     return (
-                        <React.Fragment key={fullPath.slice(0, i).join("/") || "/"}>
+                        <React.Fragment key={i === 0 ? "__fsroot" : path.slice(0, i).join("/")}>
                             <Button
                               isDisabled={i === path.length - 1}
                               icon={i === 0 ? <OutlinedHddIcon /> : null}
                               variant="link" onClick={() => { navigate(i + 1) }}
                               className={`breadcrumb-button breadcrumb-${i}`}
+                              aria-label={_("File system")}
                             >
                                 {dir || "/"}
                             </Button>
