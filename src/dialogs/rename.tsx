@@ -139,6 +139,7 @@ const RenameItemModal = ({ dialogResult, path, selected } : {
                 <Form isHorizontal>
                     <FormGroup fieldId="rename-item-input" label={label}>
                         <TextInput
+                          autoFocus // eslint-disable-line jsx-a11y/no-autofocus
                           value={name}
                           onChange={(_, val) => {
                               setNameError(checkName(val, cwdInfo?.entries || {}, selected));
