@@ -26,6 +26,7 @@ import { Icon } from "@patternfly/react-core/dist/esm/components/Icon";
 import { MenuToggle, MenuToggleElement } from "@patternfly/react-core/dist/esm/components/MenuToggle";
 import { PageBreadcrumb } from "@patternfly/react-core/dist/esm/components/Page";
 import { TextInput } from "@patternfly/react-core/dist/esm/components/TextInput";
+import { Tooltip, TooltipPosition } from "@patternfly/react-core/dist/esm/components/Tooltip";
 import { Flex, FlexItem } from "@patternfly/react-core/dist/esm/layouts/Flex";
 import { CheckIcon, HddIcon, PencilAltIcon, StarIcon, TimesIcon } from "@patternfly/react-icons";
 import { useInit } from "hooks.js";
@@ -167,14 +168,16 @@ function BookmarkButton({ path }: { path: string[] }) {
           onOpenChange={(isOpen: boolean) => setIsOpen(isOpen)}
           onSelect={handleSelect}
           toggle={(toggleRef: React.Ref<MenuToggleElement>) => (
-              <MenuToggle
-                id="bookmark-btn"
-                variant="secondary"
-                icon={<StarIcon />}
-                ref={toggleRef}
-                onClick={() => setIsOpen(!isOpen)}
-                isExpanded={isOpen}
-              />
+              <Tooltip content={_("Bookmarks")} position={TooltipPosition.bottom}>
+                  <MenuToggle
+                    id="bookmark-btn"
+                    variant="secondary"
+                    icon={<StarIcon />}
+                    ref={toggleRef}
+                    onClick={() => setIsOpen(!isOpen)}
+                    isExpanded={isOpen}
+                  />
+              </Tooltip>
           )}
         >
             <DropdownList>
@@ -258,12 +261,14 @@ export function FilesBreadcrumbs({ path, showHidden, setShowHidden }: { path: st
             <Flex spaceItems={{ default: "spaceItemsSm" }}>
                 <BookmarkButton path={path} />
                 {!editMode &&
-                    <Button
-                      variant="secondary"
-                      icon={<PencilAltIcon />}
-                      onClick={() => enableEditMode()}
-                      className="breadcrumb-button-edit"
-                    />}
+                    <Tooltip content={_("Edit path")} position={TooltipPosition.bottom}>
+                        <Button
+                          variant="secondary"
+                          icon={<PencilAltIcon />}
+                          onClick={() => enableEditMode()}
+                          className="breadcrumb-button-edit"
+                        />
+                    </Tooltip>}
                 {!editMode && fullPath.map((dir, i) => {
                     return (
                         <React.Fragment key={fullPath.slice(0, i).join("/") || "/"}>
