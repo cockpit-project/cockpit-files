@@ -1390,7 +1390,9 @@ class TestFiles(testlib.MachineCase):
             b.click("#upload-file-btn")
             b.upload_files("#upload-file-btn + input[type='file']", [files[0]])
             b.wait_in_text("h1.pf-v5-c-modal-box__title", f"Replace file {filename}?")
-            # TODO: Validate the contents of the dialog
+            b.assert_pixels(".pf-v5-c-modal-box.pf-m-warning", "upload-replace-dialog",
+                            mock={".new-file-date": "Jun 19, 2024, 11:30 AM",
+                                  ".original-file-date": "Jun 19, 2024, 11:30 AM"})
             b.click("button.pf-m-link:contains('Cancel')")
             # content did not change as we cancelled
             self.assertEqual(m.execute(f"cat {dest_dir}/{filename}"), "this is a test")
