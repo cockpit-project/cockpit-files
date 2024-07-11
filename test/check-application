@@ -53,11 +53,13 @@ class TestFiles(testlib.MachineCase):
             b.wait_not_present(".pf-v5-c-modal-box")
             b.wait_not_present(f"[data-item='{filename}']")
 
-    def create_directory(self, filename: str) -> None:
+    def create_directory(self, filename: str, owner: str | None = None) -> None:
         b = self.browser
         b.click("#dropdown-menu")
         b.click("#create-item")
         b.set_input_text("#create-directory-input", f"{filename}")
+        if owner:
+            b.select_from_dropdown("#create-directory-owner", owner)
         b.click("button.pf-m-primary")
 
     def wait_modal_inline_alert(self, msg: str) -> None:
@@ -641,6 +643,7 @@ class TestFiles(testlib.MachineCase):
         b.click(".breadcrumb-1")
         m.execute("sudo chattr -i /home/admin/newdir")
 
+        # Creating folder as superuser a non-logged in owned directory has the expected folder permissions
         b.go("/files#/?path=/root")
         b.wait_not_present(".pf-v5-c-empty-state")
         self.addCleanup(m.execute, ['rm', '-rf', '/root/newdir'])
@@ -661,6 +664,20 @@ class TestFiles(testlib.MachineCase):
         self.create_directory('newdir')
         b.wait_visible("[data-item='newdir']")
         self.assert_owner('/tmp/newdir', 'root:root')
+
+        # Create as superuser but owned by admin:admin
+        self.addCleanup(m.execute, ['rm', '-rf', '/tmp/admindir'])
+        self.create_directory('admindir', 'admin:admin')
+        b.wait_visible("[data-item='admindir']")
+        self.assert_owner('/tmp/admindir', 'admin:admin')
+
+        # Creating folder as user without administrator privileges
+        b.drop_superuser()
+        b.go('/files#/?path=/home/admin')
+        b.wait_not_present('.pf-v5-c-empty-state')
+        self.create_directory('admindir')
+        b.wait_visible("[data-item='admindir']")
+        self.assert_owner('/home/admin/admindir', 'admin:admin')
 
     def testContextMenu(self) -> None:
         b = self.browser
