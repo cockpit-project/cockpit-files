@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Button } from "@patternfly/react-core/dist/esm/components/Button";
 import { Form, FormGroup } from "@patternfly/react-core/dist/esm/components/Form";
@@ -33,7 +33,7 @@ import type { Dialogs, DialogResult } from 'dialogs';
 import { superuser } from 'superuser';
 
 import { useFilesContext } from '../app';
-import { useId, get_owner_candidates } from '../ownership';
+import { get_owner_candidates } from '../ownership';
 
 const _ = cockpit.gettext;
 
@@ -67,16 +67,20 @@ const CreateDirectoryModal = ({ currentPath, dialogResult } : {
     const [nameError, setNameError] = useState<string | undefined>();
     const [errorMessage, setErrorMessage] = useState<string | undefined>();
     const [owner, setOwner] = useState<string | undefined>();
+    const [user, setUser] = useState<cockpit.UserInfo| undefined>();
     const createDirectory = () => {
         const path = currentPath + name;
         create_directory(path, owner).then(dialogResult.resolve, err => setErrorMessage(err.message));
     };
-    const id = useId();
     const { cwdInfo } = useFilesContext();
 
+    useEffect(() => {
+        cockpit.user().then(user => setUser(user));
+    }, []);
+
     const candidates = [];
-    if (superuser.allowed && id && cwdInfo) {
-        candidates.push(...get_owner_candidates(id, cwdInfo));
+    if (superuser.allowed && user && cwdInfo) {
+        candidates.push(...get_owner_candidates(user, cwdInfo));
         if (owner === undefined) {
             setOwner(candidates[0]);
         }
@@ -96,7 +100,7 @@ const CreateDirectoryModal = ({ currentPath, dialogResult } : {
                     onClick={createDirectory}
                     isDisabled={errorMessage !== undefined ||
                         nameError !== undefined ||
-                        id === null ||
+                        user === null ||
                         cwdInfo === null}
                   >
                       {_("Create")}
