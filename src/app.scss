@@ -94,6 +94,12 @@
 .breadcrumb {
     &-button {
         padding-inline: 0;
+        // HACK: override PF button behaviour, breadcrumbs should
+        // be links not button and then we should be able to remove these
+        // overrides.
+        // https://github.com/cockpit-project/cockpit-files/issues/641
+        overflow-wrap: break-word;
+        white-space: normal;
 
         &.breadcrumb-0 {
             margin-inline-start: var(--pf-v5-global--spacer--sm);
