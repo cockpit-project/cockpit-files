@@ -106,13 +106,13 @@ const FileConflictDialog = ({
                 <FlexItem>
                     <b>{_("New file")}</b>
                     <p>{cockpit.format_bytes(uploadFile.size)}</p>
-                    <p>{timeformat.dateTime(uploadFile.lastModified)}</p>
+                    <p className="new-file-date">{timeformat.dateTime(uploadFile.lastModified)}</p>
                 </FlexItem>
                 <FlexItem>
                     <b>{_("Original file on server")}</b>
                     <p>{cockpit.format_bytes(file.size)}</p>
                     {file.mtime &&
-                    <p>{timeformat.dateTime(file.mtime * 1000)}</p>}
+                    <p className="original-file-date">{timeformat.dateTime(file.mtime * 1000)}</p>}
                 </FlexItem>
             </Flex>
             {isMultiUpload &&
