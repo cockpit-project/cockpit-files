@@ -930,6 +930,16 @@ class TestFiles(testlib.MachineCase):
         b.set_input_text("#rename-item-input", "foo.txt")
         b.wait_in_text("#rename-item-input-helper", "Filename is the same as original name")
         b.click("div.pf-v5-c-modal-box__close > button")
+        b.wait_not_present(".pf-v5-c-modal-box")
+
+        # Enter allows renaming.
+        self.file_action_modal('foo.txt', 'Rename')
+        b.key('Enter')
+        b.wait_in_text("#rename-item-input-helper", "Filename is the same as original name")
+        b.set_input_text("#rename-item-input", "renamed-foo.txt", blur=False)
+        b.key('Enter')
+        b.wait_not_present(".pf-v5-c-modal-box")
+        b.wait_visible("[data-item='renamed-foo.txt']")
 
     def testHiddenItems(self) -> None:
         b = self.browser
