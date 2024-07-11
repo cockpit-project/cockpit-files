@@ -227,6 +227,15 @@ export const FilesCardBody = ({
             }
         };
 
+        const handleAuxClick = (ev: MouseEvent) => {
+            const name = getFilenameForEvent(ev);
+            const file = sortedFiles?.find(file => file.name === name);
+
+            if (ev.button === 1 && file?.to !== "dir") {
+                ev.preventDefault();
+            }
+        };
+
         const handleContextMenu = (event: MouseEvent) => {
             const name = getFilenameForEvent(event);
             if (name !== null && selected.length > 1) {
@@ -290,6 +299,7 @@ export const FilesCardBody = ({
             folderViewElem.addEventListener("click", handleClick);
             folderViewElem.addEventListener("dblclick", handleDoubleClick);
             folderViewElem.addEventListener("contextmenu", handleContextMenu);
+            folderViewElem.addEventListener("auxclick", handleAuxClick);
         }
 
         if (!isMounted.current && !dialogs.isActive()) {
@@ -305,6 +315,7 @@ export const FilesCardBody = ({
                 folderViewElem.removeEventListener("click", handleClick);
                 folderViewElem.removeEventListener("dblclick", handleDoubleClick);
                 folderViewElem.removeEventListener("contextmenu", handleContextMenu);
+                folderViewElem.removeEventListener("auxclick", handleAuxClick);
             }
         };
     }, [
@@ -430,6 +441,7 @@ export const FilesCardBody = ({
                             <Row
                               key={rowIndex}
                               file={file}
+                              path={path}
                               isSelected={selected.some(s => s.name === file.name)}
                             />)}
                     </Tbody>
@@ -506,8 +518,9 @@ const FilePermissions = ({ file } : {
 };
 
 // Memoize the Item component as rendering thousands of them on each render of parent component is costly.
-const Row = React.memo(function Item({ file, isSelected } : {
+const Row = React.memo(function Item({ file, path, isSelected } : {
     file: FolderFileInfo,
+    path: string,
     isSelected: boolean
 }) {
     const fileType = getFileType(file);
@@ -516,6 +529,8 @@ const Row = React.memo(function Item({ file, isSelected } : {
         className += " row-selected";
     if (file.type === "lnk")
         className += " symlink";
+    const filePath = (file.type === "dir" &&
+        `${cockpit.transport.origin}/files#/?path=${encodeURIComponent([path, file.name].join("/"))}`) || "#";
 
     return (
         <Tr
@@ -526,7 +541,7 @@ const Row = React.memo(function Item({ file, isSelected } : {
               className="item-name"
               dataLabel={fileType}
             >
-                <a href="#">{file.name}</a>
+                <a href={filePath}>{file.name}</a>
             </Td>
             <Td
               className="item-size pf-v5-m-tabular-nums"
