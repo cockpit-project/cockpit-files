@@ -18,7 +18,7 @@
  */
 import React from "react";
 
-import { AlertVariant } from "@patternfly/react-core";
+import { AlertVariant } from "@patternfly/react-core/dist/esm/components/Alert";
 import { Button } from "@patternfly/react-core/dist/esm/components/Button";
 import { Divider } from "@patternfly/react-core/dist/esm/components/Divider";
 import { Dropdown, DropdownItem, DropdownList } from "@patternfly/react-core/dist/esm/components/Dropdown";
