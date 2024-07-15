@@ -31,7 +31,7 @@ class TestFiles(testlib.MachineCase):
 
     def enter_files(self) -> None:
         self.login_and_go("/files")
-        self.browser.wait_text(".pf-v5-c-empty-state__body", "Directory is empty")
+        self.browser.wait_text(".pf-v5-c-empty-state__title-text", "Directory is empty")
 
     def stat(self, fmt: str, path: str) -> str:
         return self.machine.execute(['stat', f'--format={fmt}', path]).strip()
@@ -112,8 +112,25 @@ class TestFiles(testlib.MachineCase):
         m.execute("runuser -u admin mkdir /home/admin/empty")
         m.execute("runuser -u admin touch /home/admin/empty/.hiddenfile")
         b.mouse("[data-item='empty']", "dblclick")
-        b.wait_text(".pf-v5-c-empty-state__body", "Directory is empty")
+        b.wait_text(".pf-v5-c-empty-state__title-text", "Directory is empty")
+        b.wait_in_text(".pf-v5-c-empty-state__body", "1 item is hidden")
         b.assert_pixels(".pf-v5-c-page__main", "empty-folder-view")
+
+        # Clicking `show hidden items` shows it
+        b.click(".pf-v5-c-empty-state button:contains('Show hidden items')")
+        b.wait_visible("[data-item='.hiddenfile']")
+
+        # Reset global setting
+        b.click("#global-settings-menu")
+        b.click("#show-hidden-items")
+        b.wait_not_present("[data-item='.hiddenfile']")
+        b.wait_text(".pf-v5-c-empty-state__title-text", "Directory is empty")
+
+        # removing the empty file shows empty directory again
+        m.execute("rm /home/admin/empty/.hiddenfile")
+        b.wait_text(".pf-v5-c-empty-state__title-text", "Directory is empty")
+        b.wait_not_in_text(".pf-v5-c-empty-state", "1 item is hidden")
+
         b.click(".breadcrumb-2")  # go back to home dir
         m.execute("rm -r /home/admin/empty")
         b.wait_not_present("[data-item='empty']")
@@ -175,9 +192,18 @@ class TestFiles(testlib.MachineCase):
         # no results when filtering
         b.set_input_text("input[placeholder='Filter directory']", "absolutelynothing")
         self.browser.wait_js_cond("ph_count('#folder-view tbody tr') == 0")
-        b.wait_text(".pf-v5-c-empty-state__body", "No matching results")
+        b.wait_text(".pf-v5-c-empty-state__title-text", "No matching results")
+
+        # clear using empty-state
+        b.click(".pf-v5-c-empty-state button:contains('Clear filter')")
+        b.wait_text("input[placeholder='Filter directory']", "")
+        self.browser.wait_js_cond("ph_count('#folder-view tbody tr') != 0")
 
         # clear using input button
+        b.set_input_text("input[placeholder='Filter directory']", "absolutelynothing")
+        self.browser.wait_js_cond("ph_count('#folder-view tbody tr') == 0")
+        b.wait_text(".pf-v5-c-empty-state__title-text", "No matching results")
+
         b.click("input[aria-label='Search input']")
         b.wait_text("input[placeholder='Filter directory']", "")
 
@@ -1343,7 +1369,7 @@ class TestFiles(testlib.MachineCase):
 
             b.go("/files#/?path=/mnt/upload")
             b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "upload")
-            b.wait_text(".pf-v5-c-empty-state__body", "Directory is empty")
+            b.wait_text(".pf-v5-c-empty-state__title-text", "Directory is empty")
             b.click("#upload-file-btn")
             b.upload_files("#upload-file-btn + input[type='file']", [big_file])
 
@@ -1357,7 +1383,7 @@ class TestFiles(testlib.MachineCase):
             m.execute(['runuser', '-u', 'admin', 'mkdir', dest_dir])
             b.go(f"/files#/?path={dest_dir}")
             b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "project")
-            b.wait_text(".pf-v5-c-empty-state__body", "Directory is empty")
+            b.wait_text(".pf-v5-c-empty-state__title-text", "Directory is empty")
 
             files = [str(Path(tmpdir) / f"{i}.txt") for i in range(0, 5)]
             test_data = "this is a test"

@@ -179,6 +179,7 @@ export const Application = () => {
                                   files={files}
                                   loadingFiles={loadingFiles}
                                   showHidden={showHidden}
+                                  setShowHidden={setShowHidden}
                                   selected={selected}
                                   setSelected={setSelected}
                                   clipboard={clipboard}
