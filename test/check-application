@@ -934,6 +934,7 @@ class TestFiles(testlib.MachineCase):
 
         # Enter allows renaming.
         self.file_action_modal('foo.txt', 'Rename')
+        b.wait_val("#rename-item-input", 'foo.txt')
         b.key('Enter')
         b.wait_in_text("#rename-item-input-helper", "Filename is the same as original name")
         b.set_input_text("#rename-item-input", "renamed-foo.txt", blur=False)
