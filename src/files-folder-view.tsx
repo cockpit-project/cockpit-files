@@ -34,11 +34,13 @@ export const FilesFolderView = ({
     setSelected,
     clipboard,
     setClipboard,
+    setShowHidden,
 }: {
     path: string[],
     files: FolderFileInfo[],
     loadingFiles: boolean,
     showHidden: boolean,
+    setShowHidden: React.Dispatch<React.SetStateAction<boolean>>,
     selected: FolderFileInfo[], setSelected: React.Dispatch<React.SetStateAction<FolderFileInfo[]>>,
     clipboard: string[], setClipboard: React.Dispatch<React.SetStateAction<string[]>>,
 }) => {
@@ -76,6 +78,8 @@ export const FilesFolderView = ({
               clipboard={clipboard}
               setClipboard={setClipboard}
               showHidden={showHidden}
+              setShowHidden={setShowHidden}
+              setCurrentFilter={setCurrentFilter}
             />
         </Card>
     );

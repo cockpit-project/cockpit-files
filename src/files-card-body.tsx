@@ -23,6 +23,7 @@ import { Divider } from "@patternfly/react-core/dist/esm/components/Divider";
 import { MenuItem, MenuList } from "@patternfly/react-core/dist/esm/components/Menu";
 import { Spinner } from "@patternfly/react-core/dist/esm/components/Spinner";
 import { Flex } from "@patternfly/react-core/dist/esm/layouts/Flex";
+import { FolderIcon, SearchIcon } from '@patternfly/react-icons';
 import { SortByDirection, Table, Thead, Tr, Th, Tbody, Td } from '@patternfly/react-table';
 
 import cockpit from "cockpit";
@@ -96,6 +97,7 @@ const ContextMenuItems = ({ path, selected, setSelected, clipboard, setClipboard
 
 export const FilesCardBody = ({
     currentFilter,
+    setCurrentFilter,
     files,
     isGrid,
     path,
@@ -107,8 +109,10 @@ export const FilesCardBody = ({
     clipboard,
     setClipboard,
     showHidden,
+    setShowHidden,
 } : {
     currentFilter: string,
+    setCurrentFilter: React.Dispatch<React.SetStateAction<string>>,
     files: FolderFileInfo[],
     isGrid: boolean,
     path: string[],
@@ -117,6 +121,7 @@ export const FilesCardBody = ({
     loadingFiles: boolean,
     clipboard: string[], setClipboard: React.Dispatch<React.SetStateAction<string[]>>,
     showHidden: boolean,
+    setShowHidden: React.Dispatch<React.SetStateAction<boolean>>,
 }) => {
     const [boxPerRow, setBoxPerRow] = useState(0);
     const dialogs = useDialogs();
@@ -127,6 +132,9 @@ export const FilesCardBody = ({
                 .filter(file => file.name.toLowerCase().includes(currentFilter.toLowerCase()))
                 .sort(compare(sortBy));
     }, [files, showHidden, currentFilter, sortBy]);
+    const hiddenFilesCount = useMemo(() => {
+        return files.filter(file => file.name.startsWith(".")).length;
+    }, [files]);
     const isMounted = useRef<boolean>();
     const folderViewRef = React.useRef<HTMLDivElement>(null);
 
@@ -363,9 +371,28 @@ export const FilesCardBody = ({
           ref={folderViewRef}
         >
             {contextMenu}
-            {sortedFiles.length === 0 &&
+            {sortedFiles.length === 0 && currentFilter &&
                 <EmptyStatePanel
-                  paragraph={currentFilter ? _("No matching results") : _("Directory is empty")}
+                  icon={SearchIcon}
+                  title={_("No matching results")}
+                  action={_("Clear filter")}
+                  onAction={() => setCurrentFilter("")}
+                  actionVariant="link"
+                />}
+            {sortedFiles.length === 0 && !currentFilter &&
+                <EmptyStatePanel
+                  icon={FolderIcon}
+                  title={_("Directory is empty")}
+                  paragraph={hiddenFilesCount === 0
+                      ? null
+                      : cockpit.format(
+                          cockpit.ngettext(
+                              "$0 item is hidden", "$0 items are hidden", hiddenFilesCount
+                          ), hiddenFilesCount
+                      )}
+                  action={hiddenFilesCount === 0 ? null : _("Show hidden items")}
+                  onAction={() => setShowHidden(true)}
+                  actionVariant="link"
                 />}
             {sortedFiles.length !== 0 &&
                 <Table
