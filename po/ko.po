@@ -14,17 +14,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-28 02:50+0000\n"
-"PO-Revision-Date: 2024-06-28 13:54+0000\n"
-"Last-Translator: 김인수 <simmon@nplob.com>\n"
-"Language-Team: Korean <https://translate.fedoraproject.org/projects/"
-"cockpit-files/cockpit-files/ko/>\n"
+"POT-Creation-Date: 2024-07-12 02:50+0000\n"
+"PO-Revision-Date: 2024-07-12 11:38+0000\n"
+"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
+"memory@weblate.org>\n"
+"Language-Team: Korean <https://translate.fedoraproject.org/projects/cockpit-"
+"files/cockpit-files/ko/>\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
-"X-Generator: Weblate 5.5.5\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #: src/menu.tsx:68
 msgid "\"$0\" exists, not overwriting with paste."
@@ -60,7 +61,7 @@ msgstr "A-Z"
 msgid "Access"
 msgstr "접근"
 
-#: src/files-breadcrumbs.tsx:159
+#: src/files-breadcrumbs.tsx:160
 msgid "Add bookmark"
 msgstr "즐겨찾기 추가"
 
@@ -72,9 +73,8 @@ msgstr "모든 충돌하는 파일에 이와 같은 동작을 적용합니다"
 msgid "Block device"
 msgstr "블록 장치"
 
-#: src/dialogs/mkdir.tsx:104 src/dialogs/rename.tsx:98
-#: src/dialogs/delete.tsx:88 src/dialogs/permissions.jsx:133
-#: src/upload-button.tsx:92
+#: src/upload-button.tsx:92 src/dialogs/mkdir.tsx:108 src/dialogs/delete.tsx:88
+#: src/dialogs/permissions.jsx:133 src/dialogs/rename.tsx:116
 msgid "Cancel"
 msgstr "취소"
 
@@ -106,11 +106,11 @@ msgstr "Cockpit 파일"
 msgid "Copy"
 msgstr "복사"
 
-#: src/dialogs/mkdir.tsx:102
+#: src/dialogs/mkdir.tsx:106
 msgid "Create"
 msgstr "생성"
 
-#: src/dialogs/mkdir.tsx:88 src/menu.tsx:83
+#: src/dialogs/mkdir.tsx:92 src/menu.tsx:83
 msgid "Create directory"
 msgstr "디렉토리 생성"
 
@@ -150,7 +150,7 @@ msgstr "디렉토리"
 msgid "Directory is empty"
 msgstr "디렉토리가 비었습니다"
 
-#: src/dialogs/mkdir.tsx:122
+#: src/dialogs/mkdir.tsx:126
 msgid "Directory name"
 msgstr "디렉토리 이름"
 
@@ -166,9 +166,13 @@ msgstr "디렉토리 이름은 /를 포함 할 수 없습니다."
 msgid "Directory name too long."
 msgstr "디렉토리 이름이 너무 길어요."
 
-#: src/dialogs/mkdir.tsx:136
+#: src/dialogs/mkdir.tsx:140
 msgid "Directory owner"
 msgstr "디렉토리 소유자"
+
+#: src/dialogs/rename.tsx:50
+msgid "Directory with the same name exists"
+msgstr "동일한 이름을 갖는 디렉토리가 존재합니다"
 
 #: src/header.tsx:174
 msgid "Display as a grid"
@@ -194,9 +198,13 @@ msgstr "실행-전용"
 msgid "File browser"
 msgstr "파일 탐색기"
 
-#: src/dialogs/rename.tsx:45
-msgid "File or directory already exists"
-msgstr "파일 또는 디렉토리가 이미 존재합니다"
+#: src/dialogs/rename.tsx:52
+msgid "File exists"
+msgstr "파일이 존재합니다"
+
+#: src/dialogs/rename.tsx:47
+msgid "Filename is the same as original name"
+msgstr "파일이름이 원래의 이름과 동일합니다"
 
 #: org.cockpit-project.files.metainfo.xml:5
 msgid "Files"
@@ -242,7 +250,7 @@ msgstr "그룹 접근"
 msgid "Group permissions"
 msgstr "그룹 권한"
 
-#: src/files-breadcrumbs.tsx:74
+#: src/files-breadcrumbs.tsx:75
 msgid "Home"
 msgstr "홈"
 
@@ -262,23 +270,23 @@ msgstr "마지막으로 수정됨"
 msgid "Manage your files"
 msgstr "자신의 파일을 관리합니다"
 
-#: src/files-card-body.tsx:383 src/header.tsx:79
+#: src/header.tsx:79 src/files-card-body.tsx:383
 msgid "Modified"
 msgstr "수정됨"
 
-#: src/files-card-body.tsx:378 src/header.tsx:57
+#: src/header.tsx:57 src/files-card-body.tsx:378
 msgid "Name"
 msgstr "이름"
 
-#: src/dialogs/rename.tsx:39
+#: src/dialogs/rename.tsx:41
 msgid "Name cannot be empty."
 msgstr "이름은 비워 둘 수 없습니다."
 
-#: src/dialogs/rename.tsx:43
+#: src/dialogs/rename.tsx:45
 msgid "Name cannot include a /."
 msgstr "이름은 /를 포함 할 수 없습니다."
 
-#: src/dialogs/rename.tsx:41
+#: src/dialogs/rename.tsx:43
 msgid "Name too long."
 msgstr "이름이 너무 길어요."
 
@@ -290,7 +298,11 @@ msgstr "이름이 지정된 파이프"
 msgid "New file"
 msgstr "신규 파일"
 
-#: src/dialogs/rename.tsx:110
+#: src/dialogs/rename.tsx:120
+msgid "New filename"
+msgstr "신규 파일이름"
+
+#: src/dialogs/rename.tsx:120
 msgid "New name"
 msgstr "신규 이름"
 
@@ -313,6 +325,10 @@ msgstr "기타 권한"
 #: src/dialogs/permissions.jsx:204
 msgid "Others access"
 msgstr "기타 접근"
+
+#: src/dialogs/rename.tsx:114
+msgid "Overwrite"
+msgstr "덮어쓰기"
 
 #: src/dialogs/permissions.jsx:147 src/sidebar.tsx:55
 msgid "Owner"
@@ -358,25 +374,17 @@ msgstr "읽기-전용"
 msgid "Regular file"
 msgstr "일반 파일"
 
-#: src/files-breadcrumbs.tsx:157
+#: src/files-breadcrumbs.tsx:158
 msgid "Remove current directory"
 msgstr "현재 디렉토리를 제거합니다"
 
-#: src/dialogs/rename.tsx:96 src/menu.tsx:108
+#: src/dialogs/rename.tsx:107 src/menu.tsx:108
 msgid "Rename"
 msgstr "이름변경"
 
-#: src/dialogs/rename.tsx:67
-msgid "Rename directory $0"
-msgstr "디렉토리 $0 이름변경"
-
-#: src/dialogs/rename.tsx:63
-msgid "Rename file $0"
-msgstr "파일 $0 이름변경"
-
-#: src/dialogs/rename.tsx:65
-msgid "Rename link $0"
-msgstr "링크 $0 이름변경"
+#: src/dialogs/rename.tsx:126
+msgid "Rename $0?"
+msgstr "$0 이름변경?"
 
 #: src/upload-button.tsx:89
 msgid "Replace"
@@ -386,11 +394,11 @@ msgstr "교체"
 msgid "Replace file $0?"
 msgstr "파일 $0를 교체합니까?"
 
-#: src/settings-dropdown.tsx:46
+#: src/files-breadcrumbs.tsx:317
 msgid "Show hidden items"
 msgstr "숨겨진 항목 표시"
 
-#: src/files-card-body.tsx:379 src/header.tsx:68 src/sidebar.tsx:67
+#: src/header.tsx:68 src/files-card-body.tsx:379 src/sidebar.tsx:67
 msgid "Size"
 msgstr "크기"
 
@@ -410,11 +418,11 @@ msgstr "성공적으로 파일이 올려짐"
 msgid "Symbolic link"
 msgstr "심볼릭 링크"
 
-#: src/files-breadcrumbs.tsx:118
+#: src/files-breadcrumbs.tsx:119
 msgid "Unable to create bookmark directory"
 msgstr "즐겨찾기 디렉토리를 생성 할 수 없음"
 
-#: src/files-breadcrumbs.tsx:136
+#: src/files-breadcrumbs.tsx:137
 msgid "Unable to save bookmark file"
 msgstr "즐겨찾기 파일을 저장 할 수 없음"
 
@@ -466,6 +474,15 @@ msgstr "파일시스템"
 #: src/dialogs/permissions.jsx:121
 msgid "“$0” permissions"
 msgstr "“$0” 권한"
+
+#~ msgid "File or directory already exists"
+#~ msgstr "파일 또는 디렉토리가 이미 존재합니다"
+
+#~ msgid "Rename directory $0"
+#~ msgstr "디렉토리 $0 이름변경"
+
+#~ msgid "Rename link $0"
+#~ msgstr "링크 $0 이름변경"
 
 #~ msgid "Paste into directory"
 #~ msgstr "디렉토리에 붙여넣기"

@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-28 02:50+0000\n"
-"PO-Revision-Date: 2024-06-28 08:36+0000\n"
+"POT-Creation-Date: 2024-07-12 02:50+0000\n"
+"PO-Revision-Date: 2024-07-12 11:38+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
 "Language-Team: Turkish <https://translate.fedoraproject.org/projects/cockpit-"
 "files/cockpit-files/tr/>\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1\n"
-"X-Generator: Weblate 5.5.5\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #: src/menu.tsx:68
 msgid "\"$0\" exists, not overwriting with paste."
@@ -62,7 +62,7 @@ msgstr "A-Z"
 msgid "Access"
 msgstr "Erişim"
 
-#: src/files-breadcrumbs.tsx:159
+#: src/files-breadcrumbs.tsx:160
 msgid "Add bookmark"
 msgstr "Yer imi ekle"
 
@@ -74,9 +74,8 @@ msgstr "Bu eylemi çakışan tüm dosyalara uygula"
 msgid "Block device"
 msgstr "Blok aygıtı"
 
-#: src/dialogs/mkdir.tsx:104 src/dialogs/rename.tsx:98
-#: src/dialogs/delete.tsx:88 src/dialogs/permissions.jsx:133
-#: src/upload-button.tsx:92
+#: src/upload-button.tsx:92 src/dialogs/mkdir.tsx:108 src/dialogs/delete.tsx:88
+#: src/dialogs/permissions.jsx:133 src/dialogs/rename.tsx:116
 msgid "Cancel"
 msgstr "İptal"
 
@@ -108,11 +107,11 @@ msgstr "Cockpit Dosyalar"
 msgid "Copy"
 msgstr "Kopyala"
 
-#: src/dialogs/mkdir.tsx:102
+#: src/dialogs/mkdir.tsx:106
 msgid "Create"
 msgstr "Oluştur"
 
-#: src/dialogs/mkdir.tsx:88 src/menu.tsx:83
+#: src/dialogs/mkdir.tsx:92 src/menu.tsx:83
 msgid "Create directory"
 msgstr "Dizin oluştur"
 
@@ -152,7 +151,7 @@ msgstr "Dizin"
 msgid "Directory is empty"
 msgstr "Dizin boş"
 
-#: src/dialogs/mkdir.tsx:122
+#: src/dialogs/mkdir.tsx:126
 msgid "Directory name"
 msgstr "Dizin adı"
 
@@ -168,9 +167,13 @@ msgstr "Dizin adı / karakteri içeremez."
 msgid "Directory name too long."
 msgstr "Dizin adı çok uzun."
 
-#: src/dialogs/mkdir.tsx:136
+#: src/dialogs/mkdir.tsx:140
 msgid "Directory owner"
 msgstr "Dizin sahibi"
+
+#: src/dialogs/rename.tsx:50
+msgid "Directory with the same name exists"
+msgstr "Aynı ada sahip dizin var"
 
 #: src/header.tsx:174
 msgid "Display as a grid"
@@ -196,9 +199,13 @@ msgstr "Yalnızca çalıştır"
 msgid "File browser"
 msgstr "Dosya gezgini"
 
-#: src/dialogs/rename.tsx:45
-msgid "File or directory already exists"
-msgstr "Dosya veya dizin zaten var"
+#: src/dialogs/rename.tsx:52
+msgid "File exists"
+msgstr "Dosya var"
+
+#: src/dialogs/rename.tsx:47
+msgid "Filename is the same as original name"
+msgstr "Dosya adı ilk adıyla aynı"
 
 #: org.cockpit-project.files.metainfo.xml:5
 msgid "Files"
@@ -244,7 +251,7 @@ msgstr "Grup erişimi"
 msgid "Group permissions"
 msgstr "Grup izinleri"
 
-#: src/files-breadcrumbs.tsx:74
+#: src/files-breadcrumbs.tsx:75
 msgid "Home"
 msgstr "Ev dizini"
 
@@ -264,23 +271,23 @@ msgstr "Son değiştirilme"
 msgid "Manage your files"
 msgstr "Dosyalarınızı yönetin"
 
-#: src/files-card-body.tsx:383 src/header.tsx:79
+#: src/header.tsx:79 src/files-card-body.tsx:383
 msgid "Modified"
 msgstr "Değiştirilme"
 
-#: src/files-card-body.tsx:378 src/header.tsx:57
+#: src/header.tsx:57 src/files-card-body.tsx:378
 msgid "Name"
 msgstr "Ad"
 
-#: src/dialogs/rename.tsx:39
+#: src/dialogs/rename.tsx:41
 msgid "Name cannot be empty."
 msgstr "Ad boş olamaz."
 
-#: src/dialogs/rename.tsx:43
+#: src/dialogs/rename.tsx:45
 msgid "Name cannot include a /."
 msgstr "Ad / karakteri içeremez."
 
-#: src/dialogs/rename.tsx:41
+#: src/dialogs/rename.tsx:43
 msgid "Name too long."
 msgstr "Ad çok uzun."
 
@@ -292,7 +299,11 @@ msgstr "Adlı boru (pipe)"
 msgid "New file"
 msgstr "Yeni dosya"
 
-#: src/dialogs/rename.tsx:110
+#: src/dialogs/rename.tsx:120
+msgid "New filename"
+msgstr "Yeni dosya adı"
+
+#: src/dialogs/rename.tsx:120
 msgid "New name"
 msgstr "Yeni ad"
 
@@ -315,6 +326,10 @@ msgstr "Diğer izinler"
 #: src/dialogs/permissions.jsx:204
 msgid "Others access"
 msgstr "Diğerlerinin erişimi"
+
+#: src/dialogs/rename.tsx:114
+msgid "Overwrite"
+msgstr "Üzerine yaz"
 
 #: src/dialogs/permissions.jsx:147 src/sidebar.tsx:55
 msgid "Owner"
@@ -360,25 +375,17 @@ msgstr "Yalnızca oku"
 msgid "Regular file"
 msgstr "Normal dosya"
 
-#: src/files-breadcrumbs.tsx:157
+#: src/files-breadcrumbs.tsx:158
 msgid "Remove current directory"
 msgstr "Geçerli dizini kaldır"
 
-#: src/dialogs/rename.tsx:96 src/menu.tsx:108
+#: src/dialogs/rename.tsx:107 src/menu.tsx:108
 msgid "Rename"
 msgstr "Yeniden adlandır"
 
-#: src/dialogs/rename.tsx:67
-msgid "Rename directory $0"
-msgstr "$0 dizinini yeniden adlandır"
-
-#: src/dialogs/rename.tsx:63
-msgid "Rename file $0"
-msgstr "$0 dosyasını yeniden adlandır"
-
-#: src/dialogs/rename.tsx:65
-msgid "Rename link $0"
-msgstr "$0 bağlantısını yeniden adlandır"
+#: src/dialogs/rename.tsx:126
+msgid "Rename $0?"
+msgstr "$0 yeniden adlandırılsın mı?"
 
 #: src/upload-button.tsx:89
 msgid "Replace"
@@ -388,11 +395,11 @@ msgstr "Değiştir"
 msgid "Replace file $0?"
 msgstr "$0 dosyası değiştirilsin mi?"
 
-#: src/settings-dropdown.tsx:46
+#: src/files-breadcrumbs.tsx:317
 msgid "Show hidden items"
 msgstr "Gizli ögeleri göster"
 
-#: src/files-card-body.tsx:379 src/header.tsx:68 src/sidebar.tsx:67
+#: src/header.tsx:68 src/files-card-body.tsx:379 src/sidebar.tsx:67
 msgid "Size"
 msgstr "Boyut"
 
@@ -412,11 +419,11 @@ msgstr "Dosya(lar) başarıyla karşıya yüklendi"
 msgid "Symbolic link"
 msgstr "Sembolik bağlantı"
 
-#: src/files-breadcrumbs.tsx:118
+#: src/files-breadcrumbs.tsx:119
 msgid "Unable to create bookmark directory"
 msgstr "Yer imi dizini oluşturulamıyor"
 
-#: src/files-breadcrumbs.tsx:136
+#: src/files-breadcrumbs.tsx:137
 msgid "Unable to save bookmark file"
 msgstr "Yer imi dosyası kaydedilemiyor"
 
@@ -468,6 +475,15 @@ msgstr "dosya sistemi"
 #: src/dialogs/permissions.jsx:121
 msgid "“$0” permissions"
 msgstr "“$0” izinleri"
+
+#~ msgid "File or directory already exists"
+#~ msgstr "Dosya veya dizin zaten var"
+
+#~ msgid "Rename directory $0"
+#~ msgstr "$0 dizinini yeniden adlandır"
+
+#~ msgid "Rename link $0"
+#~ msgstr "$0 bağlantısını yeniden adlandır"
 
 #~ msgid "Paste into directory"
 #~ msgstr "Dizinin içine yapıştır"
