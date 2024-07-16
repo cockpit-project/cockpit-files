@@ -168,7 +168,11 @@ function BookmarkButton({ path }: { path: string[] }) {
           onOpenChange={(isOpen: boolean) => setIsOpen(isOpen)}
           onSelect={handleSelect}
           toggle={(toggleRef: React.Ref<MenuToggleElement>) => (
-              <Tooltip content={_("Bookmarks")} position={TooltipPosition.bottom}>
+              <Tooltip
+                content={_("Bookmarks")}
+                position={TooltipPosition.bottom}
+                className={isOpen ? 'tooltip-hidden' : ''}
+              >
                   <MenuToggle
                     id="bookmark-btn"
                     variant="secondary"
