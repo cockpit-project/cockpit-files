@@ -186,3 +186,8 @@
 .pf-v5-c-menu-toggle > .pf-v5-c-menu-toggle__controls {
     padding-inline-start: 0;
 }
+
+.tooltip-hidden {
+    visibility: hidden;
+    pointer-events: none;
+}
