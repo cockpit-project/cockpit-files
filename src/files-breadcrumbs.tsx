@@ -28,7 +28,7 @@ import { PageBreadcrumb } from "@patternfly/react-core/dist/esm/components/Page"
 import { TextInput } from "@patternfly/react-core/dist/esm/components/TextInput";
 import { Tooltip, TooltipPosition } from "@patternfly/react-core/dist/esm/components/Tooltip";
 import { Flex, FlexItem } from "@patternfly/react-core/dist/esm/layouts/Flex";
-import { CheckIcon, HddIcon, PencilAltIcon, StarIcon, TimesIcon } from "@patternfly/react-icons";
+import { CheckIcon, OutlinedHddIcon, PencilAltIcon, StarIcon, TimesIcon } from "@patternfly/react-icons";
 import { useInit } from "hooks.js";
 
 import cockpit from "cockpit";
@@ -278,7 +278,7 @@ export function FilesBreadcrumbs({ path, showHidden, setShowHidden }: { path: st
                         <React.Fragment key={fullPath.slice(0, i).join("/") || "/"}>
                             <Button
                               isDisabled={i === path.length - 1}
-                              icon={i === 0 ? <HddIcon /> : null}
+                              icon={i === 0 ? <OutlinedHddIcon /> : null}
                               variant="link" onClick={() => { navigate(i + 1) }}
                               className={`breadcrumb-button breadcrumb-${i}`}
                             >
