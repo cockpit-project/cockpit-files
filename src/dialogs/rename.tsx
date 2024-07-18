@@ -26,10 +26,10 @@ import { TextInput } from '@patternfly/react-core/dist/esm/components/TextInput'
 import { Stack } from '@patternfly/react-core/dist/esm/layouts/Stack';
 
 import cockpit from 'cockpit';
+import { FileInfo } from "cockpit/fsinfo";
 import { FormHelper } from 'cockpit-components-form-helper';
 import { InlineNotification } from 'cockpit-components-inline-notification';
 import type { Dialogs, DialogResult } from 'dialogs';
-import { FileInfo } from 'fsinfo';
 import { fmt_to_fragments } from 'utils';
 
 import { FolderFileInfo, useFilesContext } from '../app';
@@ -135,7 +135,6 @@ const RenameItemModal = ({ dialogResult, path, selected } : {
                   type="danger"
                   text={errorMessage}
                   isInline
-                  isLiveRegion={false} // HACK: temporary https://github.com/cockpit-project/cockpit/pull/20772
                 />}
                 <Form
                   isHorizontal onSubmit={e => {

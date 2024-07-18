@@ -28,9 +28,9 @@ import { Sidebar, SidebarPanel, SidebarContent } from "@patternfly/react-core/di
 import { ExclamationCircleIcon } from "@patternfly/react-icons";
 
 import cockpit from "cockpit";
+import { FsInfoClient, FileInfo } from "cockpit/fsinfo";
 import { EmptyStatePanel } from "cockpit-components-empty-state";
 import { WithDialogs } from "dialogs";
-import { FsInfoClient, FileInfo } from "fsinfo";
 import { usePageLocation } from "hooks";
 import { superuser } from "superuser";
 
