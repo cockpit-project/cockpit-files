@@ -94,7 +94,6 @@ const ConfirmDeletionDialog = ({ dialogResult, path, selected, setSelected } : {
               type="danger"
               text={errorMessage}
               isInline
-              isLiveRegion={false} // HACK: temporary https://github.com/cockpit-project/cockpit/pull/20772
             />}
         </Modal>
     );

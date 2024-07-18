@@ -30,9 +30,9 @@ import { Flex, FlexItem } from "@patternfly/react-core/dist/esm/layouts/Flex";
 import { TrashIcon } from "@patternfly/react-icons";
 
 import cockpit from "cockpit";
+import type { FileInfo } from "cockpit/fsinfo";
 import { upload } from "cockpit-upload-helper";
 import { DialogResult, useDialogs } from "dialogs";
-import type { FileInfo } from "fsinfo";
 import * as timeformat from "timeformat";
 import { fmt_to_fragments } from "utils";
 
