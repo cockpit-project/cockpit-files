@@ -442,14 +442,14 @@ class TestFiles(testlib.MachineCase):
         b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-name", "ccc")
 
         # Sort by reverse alphabet
-        b.select_PF5("#sort-menu-toggle", "#sort-menu", "Z-A")
+        b.select_PF("#sort-menu-toggle", "Z-A")
         # Alphabet sorts should be case insensetive
         b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "ccc")
         b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "BBB")
         b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-name", "aaa")
 
         # Sort by last modified
-        b.select_PF5("#sort-menu-toggle", "#sort-menu", "Last modified")
+        b.select_PF("#sort-menu-toggle", "Last modified")
         b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "ccc")
         b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "aaa")
         b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-name", "BBB")
@@ -462,13 +462,13 @@ class TestFiles(testlib.MachineCase):
         b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-name", "BBB")
 
         # Sort by first modified
-        b.select_PF5("#sort-menu-toggle", "#sort-menu", "First modified")
+        b.select_PF("#sort-menu-toggle", "First modified")
         b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "BBB")
         b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "ccc")
         b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-name", "aaa")
 
         # Sort option should be saved in localStorage
-        b.select_PF5("#sort-menu-toggle", "#sort-menu", "Z-A")
+        b.select_PF("#sort-menu-toggle", "Z-A")
         b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "ccc")
         b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "BBB")
         b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-name", "aaa")
@@ -484,12 +484,12 @@ class TestFiles(testlib.MachineCase):
             sleep 0.01   # make sure these get different timestamps on the filesystem
             truncate -s 10M /home/admin/BBB
         """)
-        b.select_PF5("#sort-menu-toggle", "#sort-menu", "Largest size")
+        b.select_PF("#sort-menu-toggle", "Largest size")
         b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "BBB")
         b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "aaa")
         b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-name", "ccc")
 
-        b.select_PF5("#sort-menu-toggle", "#sort-menu", "Smallest size")
+        b.select_PF("#sort-menu-toggle", "Smallest size")
         b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "ccc")
         b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "aaa")
         b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-name", "BBB")
@@ -506,7 +506,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_visible("[data-item='Eee']")
 
         # Directories are sorted first
-        b.select_PF5("#sort-menu-toggle", "#sort-menu", "A-Z")
+        b.select_PF("#sort-menu-toggle", "A-Z")
         b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "ddd")
         b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "eee")
         b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-name", "Eee")
