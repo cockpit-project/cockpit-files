@@ -1039,6 +1039,14 @@ class TestFiles(testlib.MachineCase):
         b.wait_text("#description-list-owner dd", "admin")
         b.wait_text("#description-list-group dd", "testuser")
 
+        # Change the group to admin
+        b.click("button:contains('Edit permissions')")
+        b.select_from_dropdown("#edit-permissions-group", "admin")
+        b.wait_in_text("#edit-permissions-group", "admin")
+        b.click("button.pf-m-primary")
+        b.wait_text("#description-list-owner dd", "admin")
+        b.wait_text("#description-list-group dd", "admin")
+
         # Test changing permissions
         b.click("button:contains('Edit permissions')")
         select_access("0")
