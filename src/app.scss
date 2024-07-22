@@ -44,9 +44,18 @@
     block-size: 100vh;
 }
 
-.pf-v5-c-page__main-breadcrumb {
+.files-overview-header {
     grid-area: topbar;
+
+    /* Chrome specific alignment issue */
+    align-items: center;
+
+    /* Override different background color from the <PageBreadCrumb> */
+    .pf-v5-c-page__main-breadcrumb {
+        background-color: unset
+    }
 }
+
 
 .pf-v5-c-sidebar__content > .pf-v5-c-card {
     grid-area: content;
@@ -74,37 +83,64 @@
     @extend .ct-card;
 }
 
-// We have to override PatternFly assumptions, as PatternFly does not expect
-// widgets other than breadcrumbs within a breadcrumbs bar. We should probably
-// reparent these and separate the breadcrumb into its own widget on the top
-// bar instead.
-.pf-v5-c-page__main-breadcrumb {
-    .pf-v5-c-button:not(.breadcrumb-button):has(.pf-v5-svg:last-child) {
-        // PatternFly doesn't expect icons in buttons in breadcrumbs, so we need to adjust for that
-        >.pf-v5-c-button__icon {
-            margin-inline: 0;
+.files-overview-header {
+  gap: var(--pf-v5-global--spacer--sm);
+  display: flex;
+  /* Align page breadcrumb centered */
+  align-items: baseline;
+
+  /* Drop PF padding */
+  .pf-v5-c-page__main-breadcrumb {
+      padding: 0;
+      display: inline-block;
+  }
+
+  .pf-v5-c-breadcrumb {
+      margin-block: 0;
+      margin-inline: var(--pf-v5-global--spacer--sm);
+  }
+}
+
+.pf-v5-c-breadcrumb {
+    margin-block: 0;
+    margin-inline: var(--pf-v5-global--spacer--md);
+}
+
+.pf-v5-c-breadcrumb__list {
+    // Make sure all breadcrumb text is aligned properly, even if different heights (including icon)
+    align-items: baseline;
+
+    // Style the breadcrumb component as a path
+    .pf-v5-c-breadcrumb__item-divider {
+        > svg { 
+            display: none;
+        }
+
+        &::after { 
+            content: "/"; 
         }
     }
 
-    .pf-v5-c-menu-toggle {
-        padding-inline: var(--pf-v5-global--spacer--md) calc(var(--pf-v5-global--spacer--md) * 0.75);
+    .pf-v5-c-breadcrumb__item {
+        // Use the default font size, not the smaller size
+        font-size: var(--pf-v5-global--FontSize--md);
+    }
+
+    // Size, align, and space icon correctly
+    .breadcrumb-hdd-icon {
+        // Set the size to a large icon
+        block-size: var(--pf-v5-global--icon--FontSize--lg);
+        // Width should resolve itself based on height and aspect ratio
+        inline-size: auto;
+        // Align to the middle (as one would expect)
+        vertical-align: middle;
+        // Fix the offset problem so it's properly aligned to middle
+        margin-block-start: calc(1ex - 1cap);
     }
 }
 
 .breadcrumb {
     &-button {
-        padding-inline: 0;
-        // HACK: override PF button behaviour, breadcrumbs should
-        // be links not button and then we should be able to remove these
-        // overrides.
-        // https://github.com/cockpit-project/cockpit-files/issues/641
-        overflow-wrap: break-word;
-        white-space: normal;
-
-        &.breadcrumb-0 {
-            margin-inline-start: var(--pf-v5-global--spacer--sm);
-        }
-
         &-edit-apply,
         &-edit-cancel {
             padding-inline: var(--pf-v5-global--spacer--sm);
@@ -128,10 +164,6 @@
             }
         }
     }
-}
-
-.path-divider {
-    color: var(--pf-v5-global--Color--200);
 }
 
 .view-toggle-group {
@@ -197,4 +229,16 @@
     .pf-v5-c-menu__group-title {
         padding-block-start: 0;
     }
+}
+
+// // FIXME: Promote the CSS below to overrides, open PF issues // //
+
+// PatternFly always adds a margin after images inside of widgets with pf-m-end, which is incorrect when it's the last element
+.pf-v5-c-button__icon.pf-m-start:last-child {
+    margin-inline-end: 0;
+}
+
+// PF menu toggles are no longer spaced consistently
+.pf-v5-c-menu-toggle {
+    padding-inline: var(--pf-v5-global--spacer--md) calc(var(--pf-v5-global--spacer--md) * 0.75);
 }
