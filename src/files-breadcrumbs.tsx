@@ -19,15 +19,15 @@
 import React from "react";
 
 import { AlertVariant } from "@patternfly/react-core/dist/esm/components/Alert";
+import { Breadcrumb, BreadcrumbItem } from "@patternfly/react-core/dist/esm/components/Breadcrumb";
 import { Button } from "@patternfly/react-core/dist/esm/components/Button";
 import { Divider } from "@patternfly/react-core/dist/esm/components/Divider";
 import { Dropdown, DropdownItem, DropdownList } from "@patternfly/react-core/dist/esm/components/Dropdown";
 import { MenuToggle, MenuToggleElement } from "@patternfly/react-core/dist/esm/components/MenuToggle";
-import { PageBreadcrumb } from "@patternfly/react-core/dist/esm/components/Page";
+import { PageBreadcrumb, PageSection, PageSectionVariants } from "@patternfly/react-core/dist/esm/components/Page";
 import { TextInput } from "@patternfly/react-core/dist/esm/components/TextInput";
 import { Tooltip, TooltipPosition } from "@patternfly/react-core/dist/esm/components/Tooltip";
-import { Flex, FlexItem } from "@patternfly/react-core/dist/esm/layouts/Flex";
-import { CheckIcon, HddIcon, PencilAltIcon, StarIcon, TimesIcon } from "@patternfly/react-icons";
+import { CheckIcon, OutlinedHddIcon, PencilAltIcon, StarIcon, TimesIcon } from "@patternfly/react-icons";
 import { useInit } from "hooks.js";
 
 import cockpit from "cockpit";
@@ -36,29 +36,6 @@ import { useFilesContext } from "./app";
 import { basename } from "./common";
 
 const _ = cockpit.gettext;
-
-function useHostname() {
-    const [hostname, setHostname] = React.useState<string | null>(null);
-
-    React.useEffect(() => {
-        const client = cockpit.dbus('org.freedesktop.hostname1');
-        const hostname1 = client.proxy('org.freedesktop.hostname1', '/org/freedesktop/hostname1');
-
-        function changed() {
-            if (hostname1.valid && typeof hostname1.Hostname === 'string') {
-                setHostname(hostname1.Hostname);
-            }
-        }
-
-        hostname1.addEventListener("changed", changed);
-        return () => {
-            hostname1.removeEventListener("changed", changed);
-            client.close();
-        };
-    }, []);
-
-    return hostname;
-}
 
 function BookmarkButton({ path }: { path: string[] }) {
     const [isOpen, setIsOpen] = React.useState(false);
@@ -205,15 +182,71 @@ function BookmarkButton({ path }: { path: string[] }) {
     );
 }
 
+const PathBreadcrumbs = ({ path }: { path: string[] }) => {
+    // HACK: strip extraneous slashes as PF's breadcrumb can't handle them
+    // Refactor the path to be the fullpath not an array of strings
+    if (path.length >= 2 && path[0] === '' && path[1] === '') {
+        path = path.slice(1);
+    }
+
+    if (path.length > 1 && path[path.length - 1] === '') {
+        path = path.slice(path.length - 1);
+    }
+
+    function navigate(event: React.MouseEvent<HTMLElement>) {
+        const { button, ctrlKey, metaKey } = event;
+        const target = event.target as HTMLButtonElement;
+        const isAnchor = target.matches("a");
+
+        if (!target.parentElement)
+            return;
+        const link = target.parentElement.getAttribute("data-location");
+
+        // Let the browser natively handle non-primary click events
+        // or if the control or meta (Mac) keys are pressed
+        // ...this lets opening in a new tab or window work by default.
+        if (isAnchor && link && (button === 0 && !ctrlKey && !metaKey)) {
+            event.preventDefault();
+            cockpit.location.go("/", { path: encodeURIComponent(link) });
+        }
+    }
+
+    return (
+        <Breadcrumb onClick={(event) => navigate(event)}>
+            {path.map((dir, i) => {
+                const url_path = path.slice(0, i + 1).join("/") || '/';
+                // We can't use a relative path as that will use the iframe's
+                // url while we want the outer shell url. And we can't obtain
+                // the full path of the shell easily, so a middle click will
+                // open a files page without the shell.
+                const link = `${window.location.pathname}#/?path=${url_path}`;
+
+                return (
+                    <BreadcrumbItem
+                      key={url_path}
+                      data-location={url_path}
+                      to={link}
+                      isActive={i === path.length - 1}
+                    >
+                        {i === 0 &&
+                            <Tooltip
+                              content={_("Filesystem")}
+                              position={TooltipPosition.bottom}
+                            >
+                                <OutlinedHddIcon className="breadcrumb-hdd-icon" />
+                            </Tooltip>}
+                        {i !== 0 && dir}
+                    </BreadcrumbItem>
+                );
+            })}
+        </Breadcrumb>
+    );
+};
+
 // eslint-disable-next-line max-len
 export function FilesBreadcrumbs({ path }: { path: string[] }) {
     const [editMode, setEditMode] = React.useState(false);
     const [newPath, setNewPath] = React.useState<string | null>(null);
-    const hostname = useHostname();
-
-    function navigate(n_parts: number) {
-        cockpit.location.go("/", { path: encodeURIComponent(path.slice(0, n_parts).join("/")) });
-    }
 
     const handleInputKey = (event: React.KeyboardEvent<HTMLInputElement>) => {
         // Don't propogate navigation specific events
@@ -248,14 +281,15 @@ export function FilesBreadcrumbs({ path }: { path: string[] }) {
         setEditMode(false);
     };
 
-    const fullPath = path.slice(1);
-    fullPath.unshift(hostname || "server");
-
     return (
-        <PageBreadcrumb stickyOnBreakpoint={{ default: "top" }}>
-            <Flex spaceItems={{ default: "spaceItemsSm" }}>
-                <BookmarkButton path={path} />
-                {!editMode &&
+        <PageSection
+          variant={PageSectionVariants.light}
+          className="files-overview-header"
+          padding={{ default: "padding" }}
+        >
+            <BookmarkButton path={path} />
+            {!editMode &&
+                <>
                     <Tooltip content={_("Edit path")} position={TooltipPosition.bottom}>
                         <Button
                           variant="secondary"
@@ -263,51 +297,35 @@ export function FilesBreadcrumbs({ path }: { path: string[] }) {
                           onClick={() => enableEditMode()}
                           className="breadcrumb-button-edit"
                         />
-                    </Tooltip>}
-                {!editMode && fullPath.map((dir, i) => {
-                    return (
-                        <React.Fragment key={fullPath.slice(0, i).join("/") || "/"}>
-                            <Button
-                              isDisabled={i === path.length - 1}
-                              icon={i === 0 ? <HddIcon /> : null}
-                              variant="link" onClick={() => { navigate(i + 1) }}
-                              className={`breadcrumb-button breadcrumb-${i}`}
-                            >
-                                {dir || "/"}
-                            </Button>
-                            {dir !== "" && <p className="path-divider" key={i}>/</p>}
-                        </React.Fragment>
-                    );
-                })}
-                {editMode && newPath !== null &&
-                    <FlexItem flex={{ default: "flex_1" }}>
-                        <TextInput
-                          autoFocus // eslint-disable-line jsx-a11y/no-autofocus
-                          id="new-path-input"
-                          value={newPath}
-                          onFocus={(event) => event.target.select()}
-                          onKeyDown={handleInputKey}
-                          onChange={(_event, value) => setNewPath(value)}
-                        />
-                    </FlexItem>}
-                <FlexItem align={{ default: 'alignRight' }}>
-                    {editMode &&
-                    <>
-                        <Button
-                          variant="plain"
-                          icon={<CheckIcon className="breadcrumb-edit-apply-icon" />}
-                          onClick={changePath}
-                          className="breadcrumb-button-edit-apply"
-                        />
-                        <Button
-                          variant="plain"
-                          icon={<TimesIcon />}
-                          onClick={() => cancelPathEdit()}
-                          className="breadcrumb-button-edit-cancel"
-                        />
-                    </>}
-                </FlexItem>
-            </Flex>
-        </PageBreadcrumb>
+                    </Tooltip>
+                    <PageBreadcrumb>
+                        <PathBreadcrumbs path={path} />
+                    </PageBreadcrumb>
+                </>}
+            {editMode && newPath !== null &&
+                <TextInput
+                  autoFocus // eslint-disable-line jsx-a11y/no-autofocus
+                  id="new-path-input"
+                  value={newPath}
+                  onFocus={(event) => event.target.select()}
+                  onKeyDown={handleInputKey}
+                  onChange={(_event, value) => setNewPath(value)}
+                />}
+            {editMode &&
+                <>
+                    <Button
+                      variant="plain"
+                      icon={<CheckIcon className="breadcrumb-edit-apply-icon" />}
+                      onClick={changePath}
+                      className="breadcrumb-button-edit-apply"
+                    />
+                    <Button
+                      variant="plain"
+                      icon={<TimesIcon />}
+                      onClick={() => cancelPathEdit()}
+                      className="breadcrumb-button-edit-cancel"
+                    />
+                </>}
+        </PageSection>
     );
 }

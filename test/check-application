@@ -42,6 +42,12 @@ class TestFiles(testlib.MachineCase):
     def assert_owner(self, path: str, owner: str) -> None:
         self.assert_stat('%U:%G', path, owner)
 
+    def assert_last_breadcrumb(self, directory: str) -> None:
+        if directory == '/':
+            self.browser.wait_visible("a.pf-v5-c-breadcrumb__link.pf-m-current svg.breadcrumb-hdd-icon")
+        else:
+            self.browser.wait_text(".pf-v5-c-page__main-breadcrumb a.pf-m-current", directory)
+
     def delete_item(self, filetype: str, filename: str, *, expect_success: bool = True) -> None:
         b = self.browser
         b.click(f"[data-item='{filename}']")
@@ -130,7 +136,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_text(".pf-v5-c-empty-state__title-text", "Directory is empty")
         b.wait_not_in_text(".pf-v5-c-empty-state", "1 item is hidden")
 
-        b.click(".breadcrumb-2")  # go back to home dir
+        b.click("li[data-location='/home/admin'] a")  # go back to home dir
         m.execute("rm -r /home/admin/empty")
         b.wait_not_present("[data-item='empty']")
 
@@ -242,7 +248,7 @@ class TestFiles(testlib.MachineCase):
 
         # List root directory
         # Click "/" on the breadcrumb
-        b.click(".breadcrumb-0")
+        b.click("li[data-location='/'] a")  # go back to home dir
         b.wait_visible("[data-item='home']")
 
         # Enter /dev to make sure we can show special files properly
@@ -260,15 +266,13 @@ class TestFiles(testlib.MachineCase):
 
         self.enter_files()
 
-        hostname = m.execute("hostname").strip()
-        b.wait_text(".breadcrumb-0", hostname)
-        b.wait_text(".breadcrumb-1", "home")
-        b.wait_text(".breadcrumb-2", "admin")
+        b.wait_text("li[data-location='/home']", "home")
+        b.wait_text("li[data-location='/home/admin']", "admin")
 
         # clicking on the home button should take us to the home directory
-        b.click(".breadcrumb-1")
-        b.wait_visible(".breadcrumb-1:disabled")
-        b.wait_text(".breadcrumb-1", "home")
+        b.click("li[data-location='/home'] a")
+        b.wait_visible("li[data-location='/home'] a.pf-m-current")
+        b.wait_text("li[data-location='/home']", "home")
         b.wait_visible("[data-item='admin']")
 
         # show folder info in sidebar
@@ -278,7 +282,7 @@ class TestFiles(testlib.MachineCase):
         # double-clicking on a directory should take us into it
         b.mouse("[data-item='admin']", "dblclick")
         b.wait_not_present("[data-item='admin']")
-        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "admin")
+        self.assert_last_breadcrumb("admin")
 
         # navigating into a directory resets the sidebar
         b.wait_in_text("#sidebar-card-header", "admin")
@@ -289,7 +293,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_in_text("#sidebar-card-header", "symbolic link to /tmp")
         b.mouse("[data-item='tmplink']", "dblclick")
         b.wait_not_present("[data-item='tmplink']")
-        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "tmplink")
+        self.assert_last_breadcrumb("tmplink")
         b.go("/files#/?path=/home/admin")
         b.wait_not_present(".pf-v5-c-empty-state")
 
@@ -301,8 +305,8 @@ class TestFiles(testlib.MachineCase):
         b.wait_visible("[data-item='newdir2']")
         b.mouse("[data-item='newdir2']", "dblclick")
         b.wait_not_present("[data-item='newdir']")
-        b.click(".breadcrumb-1")
-        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "home")
+        b.click("li[data-location='/home'] a")
+        self.assert_last_breadcrumb("home")
         b.wait_visible("[data-item='admin']")
         # navigate back
         b.eval_js("window.history.back()")
@@ -318,25 +322,19 @@ class TestFiles(testlib.MachineCase):
         b.eval_js("window.history.forward()")
         b.wait_in_text("#sidebar-card-header", "newdir")
         b.wait_not_present("[data-item='admin']")
-        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "newdir")
+        self.assert_last_breadcrumb("newdir")
         b.eval_js("window.history.forward()")
         b.wait_in_text("#sidebar-card-header", "newdir2")
         b.wait_not_present("[data-item='newdir']")
-        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "newdir2")
+        self.assert_last_breadcrumb("newdir2")
         b.eval_js("window.history.forward()")
         # Switching navigation resets selected state
         b.wait_visible("[data-item='admin']")
         b.wait_not_present("[data-item='admin'].row-selected")
         b.wait_in_text("#sidebar-card-header", "home")
         b.wait_not_present("[data-item='newdir']")
-        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "home")
+        self.assert_last_breadcrumb("home")
         b.wait_visible("[data-item='admin']")
-
-        # Changing hostname updates breadcrumb
-        original_hostname = m.execute('hostnamectl hostname').strip()
-        self.addCleanup(m.execute, ['hostnamectl', 'set-hostname', original_hostname])
-        m.execute("hostnamectl set-hostname files")
-        b.wait_text(".breadcrumb-0", "files")
 
         # Navigation via editing the path
         path_input = "#new-path-input"
@@ -369,13 +367,13 @@ class TestFiles(testlib.MachineCase):
         b.set_input_text(path_input, "/opt")
         b.focus(path_input)
         b.key("Enter")
-        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "opt")
+        self.assert_last_breadcrumb("opt")
 
         # Via apply button
         b.click(edit_button)
         b.set_input_text(path_input, "/var")
         b.click(apply_button)
-        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "var")
+        self.assert_last_breadcrumb("var")
 
         # Editing and cancelling does not remember input
         b.click(edit_button)
@@ -391,7 +389,7 @@ class TestFiles(testlib.MachineCase):
         b.click(edit_button)
         b.set_input_text(path_input, "/")
         b.click(apply_button)
-        b.wait_text("button.pf-m-disabled.breadcrumb-button + p", "/")
+        self.assert_last_breadcrumb("/")
         b.click(edit_button)
         b.wait_val(path_input, "/")
         b.click(cancel_button)
@@ -401,15 +399,15 @@ class TestFiles(testlib.MachineCase):
         self.browser.wait_js_cond("ph_count('#folder-view tbody tr') == 1")
 
         b.mouse("[data-item='sys']", "dblclick")
-        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "sys")
+        self.assert_last_breadcrumb("sys")
         b.wait_val("input[placeholder='Filter directory']", "")
 
         b.set_input_text("input[placeholder='Filter directory']", "no-matches-at-all")
         self.browser.wait_js_cond("ph_count('#folder-view tbody tr') == 0")
-        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "sys")
+        self.assert_last_breadcrumb("sys")
 
-        b.click(".breadcrumb-0")
-        b.wait_text("button.pf-m-disabled.breadcrumb-button + p", "/")
+        b.click("li[data-location='/'] a")
+        self.assert_last_breadcrumb("/")
         b.wait_val("input[placeholder='Filter directory']", "")
 
     def testSorting(self) -> None:
@@ -733,12 +731,11 @@ class TestFiles(testlib.MachineCase):
         alert_text = "mkdir: cannot create directory ‘/home/admin/newdir/test’: Operation not permitted"
         self.wait_modal_inline_alert(alert_text)
         b.click("div.pf-v5-c-modal-box__close button.pf-v5-c-button")
-        b.click(".breadcrumb-1")
         m.execute("sudo chattr -i /home/admin/newdir")
 
         # Creating folder as superuser a non-logged in owned directory has the expected folder permissions
         b.go("/files#/?path=/root")
-        b.wait_not_present(".pf-v5-c-empty-state")
+        self.assert_last_breadcrumb("root")
         self.addCleanup(m.execute, ['rm', '-rf', '/root/newdir'])
         self.create_directory("newdir")
         b.wait_visible("[data-item='newdir']")
@@ -1191,12 +1188,12 @@ class TestFiles(testlib.MachineCase):
         b.wait_text("#description-list-group dd", "admin")
 
         # Cannot change permission of /home
-        b.click(".breadcrumb-0")
+        b.click("li[data-location='/'] a")
         b.click("[data-item='home']")
         b.click("button:contains('Edit permissions')")
         select_access("7")
         b.click("button.pf-m-primary")
-        self.wait_modal_inline_alert("chmod: changing permissions of '/home': Operation not permitted")
+        self.wait_modal_inline_alert("chmod: changing permissions of '//home': Operation not permitted")
         b.click("button.pf-m-link")
         b.wait_not_present(".pf-v5-c-modal-box")
 
@@ -1292,13 +1289,13 @@ class TestFiles(testlib.MachineCase):
         b.assert_pixels(".pf-v5-c-page__main", "error-folder-view")
 
         # clicking on the home button should take us to the home directory
-        b.click(".breadcrumb-2")
+        b.click("li[data-location='/home/admin'] a")
 
         # Now set a+r.  We will be able to enter the directory now, and see the
         # files present, but not read any information about them (not +x).
         m.execute('touch /home/admin/testdir/testfile && chmod a+r /home/admin/testdir')
         b.mouse("[data-item='testdir']", "dblclick")
-        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "testdir")
+        self.assert_last_breadcrumb("testdir")
         b.click("[data-item='testfile']")
         b.wait_in_text("#sidebar-card-header", "testfile")
         b.wait_text("#description-list-owner dd", "unknown")
@@ -1404,7 +1401,7 @@ class TestFiles(testlib.MachineCase):
 
         b.wait_visible("[data-item='foo'].row-selected")
         b.key("Enter")
-        b.wait_text(".breadcrumb-3", "foo")
+        self.assert_last_breadcrumb("foo")
 
     def testCopyPaste(self) -> None:
         b = self.browser
@@ -1421,14 +1418,14 @@ class TestFiles(testlib.MachineCase):
         b.click("#dropdown-menu")
         b.click("#copy-item")
         b.mouse("[data-item='newdir']", "dblclick")
-        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "newdir")
+        self.assert_last_breadcrumb("newdir")
         b.wait_in_text(".pf-v5-c-empty-state", "Directory is empty")
         b.click("#dropdown-menu")
         b.click("#paste-item")
         b.wait_visible("[data-item='newfile']")
         self.assertEqual(m.execute("head -n 1 /home/admin/newdir/newfile"), "test_text\n")
-        b.click(".breadcrumb-2")
-        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "admin")
+        b.click("li[data-location='/home/admin'] a")
+        self.assert_last_breadcrumb("admin")
         # original file still exists
         b.wait_visible("[data-item='newfile']")
 
@@ -1439,13 +1436,13 @@ class TestFiles(testlib.MachineCase):
         b.click("#dropdown-menu")
         b.click("#copy-item")
         b.mouse("[data-item='newdir']", "dblclick")
-        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "newdir")
+        self.assert_last_breadcrumb("newdir")
         b.wait_visible("[data-item='loaded']")
         b.click("#dropdown-menu")
         b.click("#paste-item")
         b.wait_visible("[data-item='copyDir']")
-        b.click(".breadcrumb-2")
-        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "admin")
+        b.click("li[data-location='/home/admin'] a")
+        self.assert_last_breadcrumb("admin")
         b.wait_visible("[data-item='copyDir']")
 
         # File already exists error
@@ -1460,8 +1457,8 @@ class TestFiles(testlib.MachineCase):
         self.assertEqual(m.execute("head -n 1 /home/admin/newdir/newfile"), "test_text\n")
         b.wait_in_text("h4.pf-v5-c-alert__title", "Pasting failed")
         b.wait_in_text(".pf-v5-c-alert__description", "\"newfile\" exists")
-        b.click(".breadcrumb-2")
-        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "admin")
+        b.click("li[data-location='/home/admin'] a")
+        self.assert_last_breadcrumb("admin")
 
     @testlib.skipBrowser(".upload_files() doesn't work on Firefox", "firefox")
     def testUpload(self) -> None:
@@ -1522,7 +1519,7 @@ class TestFiles(testlib.MachineCase):
             """)
 
             b.go("/files#/?path=/mnt/upload")
-            b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "upload")
+            self.assert_last_breadcrumb("upload")
             b.wait_text(".pf-v5-c-empty-state__title-text", "Directory is empty")
             b.click("#upload-file-btn")
             b.upload_files("#upload-file-btn + input[type='file']", [big_file])
@@ -1536,7 +1533,7 @@ class TestFiles(testlib.MachineCase):
             dest_dir = "/home/admin/project"
             m.execute(['runuser', '-u', 'admin', 'mkdir', dest_dir])
             b.go(f"/files#/?path={dest_dir}")
-            b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "project")
+            self.assert_last_breadcrumb("project")
             b.wait_text(".pf-v5-c-empty-state__title-text", "Directory is empty")
 
             files = [str(Path(tmpdir) / f"{i}.txt") for i in range(0, 5)]
@@ -1844,7 +1841,7 @@ class TestFiles(testlib.MachineCase):
 
         # Add a bookmark
         b.go("/files#/?path=/etc")
-        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "etc")
+        self.assert_last_breadcrumb("etc")
         b.wait_visible("[data-item='passwd']")
 
         b.click("#bookmark-btn")
@@ -1873,7 +1870,7 @@ class TestFiles(testlib.MachineCase):
         b.click("#bookmark-btn")
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('/etc') button")
         b.wait_not_present(".pf-v5-c-empty-state")
-        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "etc")
+        self.assert_last_breadcrumb("etc")
 
         # Bookmarks from nautilus are supported
         m.execute("""
@@ -1883,7 +1880,7 @@ class TestFiles(testlib.MachineCase):
         """)
         b.click("#bookmark-btn")
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('This is a-test') button")
-        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "This is a-test")
+        self.assert_last_breadcrumb("This is a-test")
 
         # Removing directory with spaces or aliases
         b.click("#bookmark-btn")
@@ -1902,7 +1899,7 @@ class TestFiles(testlib.MachineCase):
         # Removing /tmp bookmark keeps bookmark with spaces
         b.click("#bookmark-btn")
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('tmp') button")
-        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "tmp")
+        self.assert_last_breadcrumb("tmp")
 
         b.click("#bookmark-btn")
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('Remove current directory') button")
@@ -1917,7 +1914,7 @@ class TestFiles(testlib.MachineCase):
         b.go("/files#/?path=/home/admin")
         b.wait_visible(f"[data-item='{special_dir}'")
         b.mouse(f"[data-item='{special_dir}']", "dblclick")
-        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", special_dir)
+        self.assert_last_breadcrumb(special_dir)
 
         b.click("#bookmark-btn")
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add bookmark) button")
@@ -1926,12 +1923,12 @@ class TestFiles(testlib.MachineCase):
         self.assertEqual("file:///etc\nfile:///home/admin/This%20is%20a-test\nfile:///home/admin/super%23special*1%202%3E%3C.%2C%C3%9F\n",
                          read_config())
 
-        b.click(".breadcrumb-2")
-        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "admin")
+        b.click("li[data-location='/home/admin'] a")
+        self.assert_last_breadcrumb("admin")
 
         b.click("#bookmark-btn")
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('super#special') button")
-        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", special_dir)
+        self.assert_last_breadcrumb(special_dir)
 
         b.click("#bookmark-btn")
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('Remove current directory') button")
@@ -1950,7 +1947,7 @@ class TestFiles(testlib.MachineCase):
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('/var') button")
         b.wait_not_present(".pf-v5-c-empty-state")
         b.wait_not_present(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('lalala') button")
-        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "var")
+        self.assert_last_breadcrumb("var")
 
         # Removing bookmarks file removes all bookmarks
         m.execute("rm -rf /home/admin/.config/gtk-3.0/bookmarks")
@@ -1963,7 +1960,7 @@ class TestFiles(testlib.MachineCase):
         m.execute("runuser -u admin echo 'file:///tmp/non-existant' > /home/admin/.config/gtk-3.0/bookmarks")
         b.click("#bookmark-btn")
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('non-existant') button")
-        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "non-existant")
+        self.assert_last_breadcrumb("non-existant")
         b.click("#bookmark-btn")
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('Remove current directory') button")
         b.wait_not_present(".pf-v5-c-menu")
@@ -1985,7 +1982,7 @@ class TestFiles(testlib.MachineCase):
         """)
 
         b.go("/files#/?path=/var")
-        b.wait_text(".pf-v5-c-page__main-breadcrumb > div > button:last-of-type", "var")
+        self.assert_last_breadcrumb("var")
 
         b.click("#bookmark-btn")
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add bookmark) button")
