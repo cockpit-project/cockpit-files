@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-12 02:50+0000\n"
+"POT-Creation-Date: 2024-07-23 02:51+0000\n"
 "PO-Revision-Date: 2024-07-12 11:38+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
 "Language-Team: Turkish <https://translate.fedoraproject.org/projects/cockpit-"
@@ -35,6 +35,15 @@ msgid "$0 item"
 msgid_plural "$0 items"
 msgstr[0] "$0 öge"
 msgstr[1] "$0 öge"
+
+#: src/files-card-body.tsx:390
+#, fuzzy
+#| msgid "($0 hidden)"
+#| msgid_plural "($0 hidden)"
+msgid "$0 item is hidden"
+msgid_plural "$0 items are hidden"
+msgstr[0] "($0 gizli)"
+msgstr[1] "($0 gizli)"
 
 #: src/sidebar.tsx:119
 msgid "($0 hidden)"
@@ -62,7 +71,7 @@ msgstr "A-Z"
 msgid "Access"
 msgstr "Erişim"
 
-#: src/files-breadcrumbs.tsx:160
+#: src/files-breadcrumbs.tsx:161
 msgid "Add bookmark"
 msgstr "Yer imi ekle"
 
@@ -73,6 +82,12 @@ msgstr "Bu eylemi çakışan tüm dosyalara uygula"
 #: src/common.ts:36
 msgid "Block device"
 msgstr "Blok aygıtı"
+
+#: src/files-breadcrumbs.tsx:172
+#, fuzzy
+#| msgid "Add bookmark"
+msgid "Bookmarks"
+msgstr "Yer imi ekle"
 
 #: src/upload-button.tsx:92 src/dialogs/mkdir.tsx:108 src/dialogs/delete.tsx:88
 #: src/dialogs/permissions.jsx:133 src/dialogs/rename.tsx:116
@@ -98,6 +113,12 @@ msgstr "Değiştir"
 #: src/common.ts:37
 msgid "Character device"
 msgstr "Karakter aygıtı"
+
+#: src/files-card-body.tsx:378
+#, fuzzy
+#| msgid "Regular file"
+msgid "Clear filter"
+msgstr "Normal dosya"
 
 #: src/index.html:20
 msgid "Cockpit Files"
@@ -147,7 +168,7 @@ msgstr "Dizinler ve dosyalar"
 msgid "Directory"
 msgstr "Dizin"
 
-#: src/files-card-body.tsx:368
+#: src/files-card-body.tsx:385
 msgid "Directory is empty"
 msgstr "Dizin boş"
 
@@ -186,6 +207,10 @@ msgstr "Liste olarak görüntüle"
 #: src/menu.tsx:124
 msgid "Download"
 msgstr "İndir"
+
+#: src/files-breadcrumbs.tsx:268
+msgid "Edit path"
+msgstr ""
 
 #: src/menu.tsx:89 src/menu.tsx:103 src/sidebar.tsx:183
 msgid "Edit permissions"
@@ -251,7 +276,7 @@ msgstr "Grup erişimi"
 msgid "Group permissions"
 msgstr "Grup izinleri"
 
-#: src/files-breadcrumbs.tsx:75
+#: src/files-breadcrumbs.tsx:76
 msgid "Home"
 msgstr "Ev dizini"
 
@@ -271,11 +296,11 @@ msgstr "Son değiştirilme"
 msgid "Manage your files"
 msgstr "Dosyalarınızı yönetin"
 
-#: src/header.tsx:79 src/files-card-body.tsx:383
+#: src/header.tsx:79 src/files-card-body.tsx:410
 msgid "Modified"
 msgstr "Değiştirilme"
 
-#: src/header.tsx:57 src/files-card-body.tsx:378
+#: src/header.tsx:57 src/files-card-body.tsx:405
 msgid "Name"
 msgstr "Ad"
 
@@ -307,7 +332,7 @@ msgstr "Yeni dosya adı"
 msgid "New name"
 msgstr "Yeni ad"
 
-#: src/files-card-body.tsx:368
+#: src/files-card-body.tsx:377
 msgid "No matching results"
 msgstr "Eşleşen sonuç yok"
 
@@ -375,7 +400,7 @@ msgstr "Yalnızca oku"
 msgid "Regular file"
 msgstr "Normal dosya"
 
-#: src/files-breadcrumbs.tsx:158
+#: src/files-breadcrumbs.tsx:159
 msgid "Remove current directory"
 msgstr "Geçerli dizini kaldır"
 
@@ -395,11 +420,11 @@ msgstr "Değiştir"
 msgid "Replace file $0?"
 msgstr "$0 dosyası değiştirilsin mi?"
 
-#: src/files-breadcrumbs.tsx:317
+#: src/files-breadcrumbs.tsx:326 src/files-card-body.tsx:393
 msgid "Show hidden items"
 msgstr "Gizli ögeleri göster"
 
-#: src/header.tsx:68 src/files-card-body.tsx:379 src/sidebar.tsx:67
+#: src/header.tsx:68 src/files-card-body.tsx:406 src/sidebar.tsx:67
 msgid "Size"
 msgstr "Boyut"
 
@@ -419,11 +444,11 @@ msgstr "Dosya(lar) başarıyla karşıya yüklendi"
 msgid "Symbolic link"
 msgstr "Sembolik bağlantı"
 
-#: src/files-breadcrumbs.tsx:119
+#: src/files-breadcrumbs.tsx:120
 msgid "Unable to create bookmark directory"
 msgstr "Yer imi dizini oluşturulamıyor"
 
-#: src/files-breadcrumbs.tsx:137
+#: src/files-breadcrumbs.tsx:138
 msgid "Unable to save bookmark file"
 msgstr "Yer imi dosyası kaydedilemiyor"
 

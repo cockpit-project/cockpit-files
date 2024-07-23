@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-12 02:50+0000\n"
+"POT-Creation-Date: 2024-07-23 02:51+0000\n"
 "PO-Revision-Date: 2024-07-12 11:38+0000\n"
 "Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
 "memory@weblate.org>\n"
@@ -35,6 +35,14 @@ msgstr "\"$0\" 존재하며, 붙여서 덮어쓰지 않습니다."
 msgid "$0 item"
 msgid_plural "$0 items"
 msgstr[0] "$0 항목"
+
+#: src/files-card-body.tsx:390
+#, fuzzy
+#| msgid "($0 hidden)"
+#| msgid_plural "($0 hidden)"
+msgid "$0 item is hidden"
+msgid_plural "$0 items are hidden"
+msgstr[0] "($0 숨김)"
 
 #: src/sidebar.tsx:119
 msgid "($0 hidden)"
@@ -61,7 +69,7 @@ msgstr "A-Z"
 msgid "Access"
 msgstr "접근"
 
-#: src/files-breadcrumbs.tsx:160
+#: src/files-breadcrumbs.tsx:161
 msgid "Add bookmark"
 msgstr "즐겨찾기 추가"
 
@@ -72,6 +80,12 @@ msgstr "모든 충돌하는 파일에 이와 같은 동작을 적용합니다"
 #: src/common.ts:36
 msgid "Block device"
 msgstr "블록 장치"
+
+#: src/files-breadcrumbs.tsx:172
+#, fuzzy
+#| msgid "Add bookmark"
+msgid "Bookmarks"
+msgstr "즐겨찾기 추가"
 
 #: src/upload-button.tsx:92 src/dialogs/mkdir.tsx:108 src/dialogs/delete.tsx:88
 #: src/dialogs/permissions.jsx:133 src/dialogs/rename.tsx:116
@@ -97,6 +111,12 @@ msgstr "변경"
 #: src/common.ts:37
 msgid "Character device"
 msgstr "문자 장치"
+
+#: src/files-card-body.tsx:378
+#, fuzzy
+#| msgid "Regular file"
+msgid "Clear filter"
+msgstr "일반 파일"
 
 #: src/index.html:20
 msgid "Cockpit Files"
@@ -146,7 +166,7 @@ msgstr "디렉토리 및 파일"
 msgid "Directory"
 msgstr "디렉토리"
 
-#: src/files-card-body.tsx:368
+#: src/files-card-body.tsx:385
 msgid "Directory is empty"
 msgstr "디렉토리가 비었습니다"
 
@@ -185,6 +205,10 @@ msgstr "목록으로 표시"
 #: src/menu.tsx:124
 msgid "Download"
 msgstr "내려받기"
+
+#: src/files-breadcrumbs.tsx:268
+msgid "Edit path"
+msgstr ""
 
 #: src/menu.tsx:89 src/menu.tsx:103 src/sidebar.tsx:183
 msgid "Edit permissions"
@@ -250,7 +274,7 @@ msgstr "그룹 접근"
 msgid "Group permissions"
 msgstr "그룹 권한"
 
-#: src/files-breadcrumbs.tsx:75
+#: src/files-breadcrumbs.tsx:76
 msgid "Home"
 msgstr "홈"
 
@@ -270,11 +294,11 @@ msgstr "마지막으로 수정됨"
 msgid "Manage your files"
 msgstr "자신의 파일을 관리합니다"
 
-#: src/header.tsx:79 src/files-card-body.tsx:383
+#: src/header.tsx:79 src/files-card-body.tsx:410
 msgid "Modified"
 msgstr "수정됨"
 
-#: src/header.tsx:57 src/files-card-body.tsx:378
+#: src/header.tsx:57 src/files-card-body.tsx:405
 msgid "Name"
 msgstr "이름"
 
@@ -306,7 +330,7 @@ msgstr "신규 파일이름"
 msgid "New name"
 msgstr "신규 이름"
 
-#: src/files-card-body.tsx:368
+#: src/files-card-body.tsx:377
 msgid "No matching results"
 msgstr "일치하는 결과를 찾을 수 없습니다"
 
@@ -374,7 +398,7 @@ msgstr "읽기-전용"
 msgid "Regular file"
 msgstr "일반 파일"
 
-#: src/files-breadcrumbs.tsx:158
+#: src/files-breadcrumbs.tsx:159
 msgid "Remove current directory"
 msgstr "현재 디렉토리를 제거합니다"
 
@@ -394,11 +418,11 @@ msgstr "교체"
 msgid "Replace file $0?"
 msgstr "파일 $0를 교체합니까?"
 
-#: src/files-breadcrumbs.tsx:317
+#: src/files-breadcrumbs.tsx:326 src/files-card-body.tsx:393
 msgid "Show hidden items"
 msgstr "숨겨진 항목 표시"
 
-#: src/header.tsx:68 src/files-card-body.tsx:379 src/sidebar.tsx:67
+#: src/header.tsx:68 src/files-card-body.tsx:406 src/sidebar.tsx:67
 msgid "Size"
 msgstr "크기"
 
@@ -418,11 +442,11 @@ msgstr "성공적으로 파일이 올려짐"
 msgid "Symbolic link"
 msgstr "심볼릭 링크"
 
-#: src/files-breadcrumbs.tsx:119
+#: src/files-breadcrumbs.tsx:120
 msgid "Unable to create bookmark directory"
 msgstr "즐겨찾기 디렉토리를 생성 할 수 없음"
 
-#: src/files-breadcrumbs.tsx:137
+#: src/files-breadcrumbs.tsx:138
 msgid "Unable to save bookmark file"
 msgstr "즐겨찾기 파일을 저장 할 수 없음"
 
