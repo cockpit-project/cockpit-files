@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-12 02:50+0000\n"
+"POT-Creation-Date: 2024-07-23 02:51+0000\n"
 "PO-Revision-Date: 2024-07-12 11:38+0000\n"
 "Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
 "memory@weblate.org>\n"
@@ -36,6 +36,15 @@ msgid "$0 item"
 msgid_plural "$0 items"
 msgstr[0] "$0 objekt"
 msgstr[1] "$0 objekt"
+
+#: src/files-card-body.tsx:390
+#, fuzzy
+#| msgid "($0 hidden)"
+#| msgid_plural "($0 hidden)"
+msgid "$0 item is hidden"
+msgid_plural "$0 items are hidden"
+msgstr[0] "($0 dold)"
+msgstr[1] "($0 dolda)"
 
 #: src/sidebar.tsx:119
 msgid "($0 hidden)"
@@ -63,7 +72,7 @@ msgstr "A-Z"
 msgid "Access"
 msgstr "Åtkomst"
 
-#: src/files-breadcrumbs.tsx:160
+#: src/files-breadcrumbs.tsx:161
 msgid "Add bookmark"
 msgstr "Lägg till bokmärke"
 
@@ -74,6 +83,12 @@ msgstr "Tillämpa den här åtgärden på alla konfliktfiler"
 #: src/common.ts:36
 msgid "Block device"
 msgstr "Blockenhet"
+
+#: src/files-breadcrumbs.tsx:172
+#, fuzzy
+#| msgid "Add bookmark"
+msgid "Bookmarks"
+msgstr "Lägg till bokmärke"
 
 #: src/upload-button.tsx:92 src/dialogs/mkdir.tsx:108 src/dialogs/delete.tsx:88
 #: src/dialogs/permissions.jsx:133 src/dialogs/rename.tsx:116
@@ -99,6 +114,12 @@ msgstr "Ändra"
 #: src/common.ts:37
 msgid "Character device"
 msgstr "Teckenenhet"
+
+#: src/files-card-body.tsx:378
+#, fuzzy
+#| msgid "Regular file"
+msgid "Clear filter"
+msgstr "Vanlig fil"
 
 #: src/index.html:20
 msgid "Cockpit Files"
@@ -148,7 +169,7 @@ msgstr "Kataloger & filer"
 msgid "Directory"
 msgstr "Katalog"
 
-#: src/files-card-body.tsx:368
+#: src/files-card-body.tsx:385
 msgid "Directory is empty"
 msgstr "Katalog är tom"
 
@@ -187,6 +208,10 @@ msgstr "Visa som en lista"
 #: src/menu.tsx:124
 msgid "Download"
 msgstr "Hämta"
+
+#: src/files-breadcrumbs.tsx:268
+msgid "Edit path"
+msgstr ""
 
 #: src/menu.tsx:89 src/menu.tsx:103 src/sidebar.tsx:183
 msgid "Edit permissions"
@@ -252,7 +277,7 @@ msgstr "Gruppåtkomst"
 msgid "Group permissions"
 msgstr "Gruppbehörigheter"
 
-#: src/files-breadcrumbs.tsx:75
+#: src/files-breadcrumbs.tsx:76
 msgid "Home"
 msgstr "Hem"
 
@@ -272,11 +297,11 @@ msgstr "Senast modifierad"
 msgid "Manage your files"
 msgstr "Hantera dina filer"
 
-#: src/header.tsx:79 src/files-card-body.tsx:383
+#: src/header.tsx:79 src/files-card-body.tsx:410
 msgid "Modified"
 msgstr "Modifierad"
 
-#: src/header.tsx:57 src/files-card-body.tsx:378
+#: src/header.tsx:57 src/files-card-body.tsx:405
 msgid "Name"
 msgstr "Namn"
 
@@ -308,7 +333,7 @@ msgstr "Nytt filnamn"
 msgid "New name"
 msgstr "Nytt namn"
 
-#: src/files-card-body.tsx:368
+#: src/files-card-body.tsx:377
 msgid "No matching results"
 msgstr "Inga matchande resultat"
 
@@ -376,7 +401,7 @@ msgstr "Läs-endast"
 msgid "Regular file"
 msgstr "Vanlig fil"
 
-#: src/files-breadcrumbs.tsx:158
+#: src/files-breadcrumbs.tsx:159
 msgid "Remove current directory"
 msgstr "Ta bort aktuell katalog"
 
@@ -396,11 +421,11 @@ msgstr "Ersätt"
 msgid "Replace file $0?"
 msgstr "Ersätt fil $0?"
 
-#: src/files-breadcrumbs.tsx:317
+#: src/files-breadcrumbs.tsx:326 src/files-card-body.tsx:393
 msgid "Show hidden items"
 msgstr "Visa dolda objekt"
 
-#: src/header.tsx:68 src/files-card-body.tsx:379 src/sidebar.tsx:67
+#: src/header.tsx:68 src/files-card-body.tsx:406 src/sidebar.tsx:67
 msgid "Size"
 msgstr "Storlek"
 
@@ -420,11 +445,11 @@ msgstr "Fil(er) som har laddats upp framgångsrikt"
 msgid "Symbolic link"
 msgstr "Symbolisk länk"
 
-#: src/files-breadcrumbs.tsx:119
+#: src/files-breadcrumbs.tsx:120
 msgid "Unable to create bookmark directory"
 msgstr "Kan inte skapa en bokmärkeskatalog"
 
-#: src/files-breadcrumbs.tsx:137
+#: src/files-breadcrumbs.tsx:138
 msgid "Unable to save bookmark file"
 msgstr "Kan inte spara bokmärkesfilen"
 
