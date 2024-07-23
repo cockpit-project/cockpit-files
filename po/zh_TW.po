@@ -1,0 +1,492 @@
+# #-#-#-#-#  files.js.pot (PACKAGE VERSION)  #-#-#-#-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# #-#-#-#-#  files.metainfo.pot (PACKAGE VERSION)  #-#-#-#-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-07-23 02:51+0000\n"
+"PO-Revision-Date: 2024-07-23 15:07+0000\n"
+"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
+"memory@weblate.org>\n"
+"Language-Team: Chinese (Traditional) <https://translate.fedoraproject.org/"
+"projects/cockpit-files/cockpit-files/zh_TW/>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"X-Generator: Weblate 5.6.2\n"
+
+#: src/menu.tsx:68
+msgid "\"$0\" exists, not overwriting with paste."
+msgstr "\"$0\" 已存在，將不會貼上以免遭覆寫。"
+
+#: src/sidebar.tsx:117
+msgid "$0 item"
+msgid_plural "$0 items"
+msgstr[0] "$0 個項目"
+
+#: src/files-card-body.tsx:390
+msgid "$0 item is hidden"
+msgid_plural "$0 items are hidden"
+msgstr[0] "$0 個已隱藏的項目"
+
+#: src/sidebar.tsx:119
+msgid "($0 hidden)"
+msgid_plural "($0 hidden)"
+msgstr[0] "(已隱藏 $0 個)"
+
+#: org.cockpit-project.files.metainfo.xml:8
+msgid "A file system browser for Cockpit."
+msgstr "一個適用於 Cockpit 的檔案系統瀏覽器。"
+
+#: src/upload-button.tsx:98
+msgid ""
+"A file with the same name already exists in \"$0\". Replacing it will "
+"overwrite its content."
+msgstr "一個相同名稱的檔案已於 \"$0\" 存在。 若將其取代將覆寫其內容。"
+
+#: src/header.tsx:60
+msgid "A-Z"
+msgstr "由 A 到 Z"
+
+#: src/dialogs/permissions.jsx:178
+msgid "Access"
+msgstr "存取權限"
+
+#: src/files-breadcrumbs.tsx:161
+msgid "Add bookmark"
+msgstr "新增書籤"
+
+#: src/upload-button.tsx:121
+msgid "Apply this action to all conflicting files"
+msgstr "套用此動作至所有發生衝突的檔案"
+
+#: src/common.ts:36
+msgid "Block device"
+msgstr "區塊裝置"
+
+#: src/files-breadcrumbs.tsx:172
+msgid "Bookmarks"
+msgstr "書籤"
+
+#: src/upload-button.tsx:92 src/dialogs/mkdir.tsx:108 src/dialogs/delete.tsx:88
+#: src/dialogs/permissions.jsx:133 src/dialogs/rename.tsx:116
+msgid "Cancel"
+msgstr "取消"
+
+#: src/upload-button.tsx:304
+msgid "Cancel upload of $0"
+msgstr "取消上傳 $0"
+
+#: src/upload-button.tsx:242
+msgid "Cancelled"
+msgstr "已取消"
+
+#: src/upload-button.tsx:243
+msgid "Cancelled upload of $0"
+msgstr "已取消上傳 $0"
+
+#: src/dialogs/permissions.jsx:131
+msgid "Change"
+msgstr "變更"
+
+#: src/common.ts:37
+msgid "Character device"
+msgstr "字元裝置"
+
+#: src/files-card-body.tsx:378
+msgid "Clear filter"
+msgstr "清除篩選器"
+
+#: src/index.html:20
+msgid "Cockpit Files"
+msgstr "Cockpit Files"
+
+#: src/menu.tsx:97 src/menu.tsx:132
+msgid "Copy"
+msgstr "複製"
+
+#: src/dialogs/mkdir.tsx:106
+msgid "Create"
+msgstr "建立"
+
+#: src/dialogs/mkdir.tsx:92 src/menu.tsx:83
+msgid "Create directory"
+msgstr "建立目錄"
+
+#: src/dialogs/delete.tsx:87 src/menu.tsx:114 src/menu.tsx:137
+msgid "Delete"
+msgstr "刪除"
+
+#: src/dialogs/delete.tsx:43
+msgid "Delete $0 items?"
+msgstr "刪除 $0 個項目？"
+
+#: src/dialogs/delete.tsx:59
+msgid "Delete $0?"
+msgstr "刪除 $0 ？"
+
+#: src/dialogs/delete.tsx:56
+msgid "Delete directory $0?"
+msgstr "刪除目錄 $0 ？"
+
+#: src/dialogs/delete.tsx:48
+msgid "Delete file $0?"
+msgstr "刪除檔案 $0 ？"
+
+#: src/dialogs/delete.tsx:52
+msgid "Delete link $0?"
+msgstr "刪除連結 $0 ？"
+
+#: src/header.tsx:118
+msgid "Directories & files"
+msgstr "目錄與檔案"
+
+#: src/common.ts:38
+msgid "Directory"
+msgstr "目錄"
+
+#: src/files-card-body.tsx:385
+msgid "Directory is empty"
+msgstr "目錄是空的"
+
+#: src/dialogs/mkdir.tsx:126
+msgid "Directory name"
+msgstr "目錄名稱"
+
+#: src/dialogs/mkdir.tsx:42
+msgid "Directory name cannot be empty."
+msgstr "目錄名稱不能是空值。"
+
+#: src/dialogs/mkdir.tsx:46
+msgid "Directory name cannot include a /."
+msgstr "目錄名稱不能包含 / 。"
+
+#: src/dialogs/mkdir.tsx:44
+msgid "Directory name too long."
+msgstr "目錄名稱太長。"
+
+#: src/dialogs/mkdir.tsx:140
+msgid "Directory owner"
+msgstr "目錄擁有者"
+
+#: src/dialogs/rename.tsx:50
+msgid "Directory with the same name exists"
+msgstr "相同名稱的目錄已存在"
+
+#: src/header.tsx:174
+msgid "Display as a grid"
+msgstr "以網格顯示"
+
+#: src/header.tsx:173
+msgid "Display as a list"
+msgstr "以清單顯示"
+
+#: src/menu.tsx:124
+msgid "Download"
+msgstr "下載"
+
+#: src/files-breadcrumbs.tsx:268
+msgid "Edit path"
+msgstr "編輯路徑"
+
+#: src/menu.tsx:89 src/menu.tsx:103 src/sidebar.tsx:183
+msgid "Edit permissions"
+msgstr "編輯權限"
+
+#: src/common.ts:26
+msgid "Execute-only"
+msgstr "只能執行"
+
+#: src/manifest.json:0
+msgid "File browser"
+msgstr "檔案瀏覽器"
+
+#: src/dialogs/rename.tsx:52
+msgid "File exists"
+msgstr "檔案已存在"
+
+#: src/dialogs/rename.tsx:47
+msgid "Filename is the same as original name"
+msgstr "檔案名稱與原本相同"
+
+#: org.cockpit-project.files.metainfo.xml:5
+msgid "Files"
+msgstr "檔案"
+
+#: src/header.tsx:124
+msgid "Filter directory"
+msgstr "篩選目錄"
+
+#: src/header.tsx:82
+msgid "First modified"
+msgstr "初次修改於"
+
+#: src/dialogs/delete.tsx:59
+msgid "Force delete $0"
+msgstr "強制刪除 $0"
+
+#: src/dialogs/delete.tsx:43
+msgid "Force delete $0 items"
+msgstr "強制刪除 $0 個項目"
+
+#: src/dialogs/delete.tsx:56
+msgid "Force delete directory $0?"
+msgstr "強制刪除目錄 $0 ？"
+
+#: src/dialogs/delete.tsx:48
+msgid "Force delete file $0?"
+msgstr "強制刪除檔案 $0 ？"
+
+#: src/dialogs/delete.tsx:52
+msgid "Force delete link $0?"
+msgstr "強制刪除連結 $0 ？"
+
+#: src/dialogs/permissions.jsx:162 src/sidebar.tsx:60
+msgid "Group"
+msgstr "群組"
+
+#: src/dialogs/permissions.jsx:192
+msgid "Group access"
+msgstr "群組存取權限"
+
+#: src/sidebar.tsx:81
+msgid "Group permissions"
+msgstr "群組權限"
+
+#: src/files-breadcrumbs.tsx:76
+msgid "Home"
+msgstr "家目錄"
+
+#: src/upload-button.tsx:91
+msgid "Keep original"
+msgstr "保留原本的"
+
+#: src/header.tsx:71
+msgid "Largest size"
+msgstr "大小最大"
+
+#: src/header.tsx:86 src/sidebar.tsx:50
+msgid "Last modified"
+msgstr "最後修改於"
+
+#: org.cockpit-project.files.metainfo.xml:6
+msgid "Manage your files"
+msgstr "管理您的檔案"
+
+#: src/header.tsx:79 src/files-card-body.tsx:410
+msgid "Modified"
+msgstr "被修改"
+
+#: src/header.tsx:57 src/files-card-body.tsx:405
+msgid "Name"
+msgstr "名稱"
+
+#: src/dialogs/rename.tsx:41
+msgid "Name cannot be empty."
+msgstr "名稱不能為空值。"
+
+#: src/dialogs/rename.tsx:45
+msgid "Name cannot include a /."
+msgstr "名稱不能包含 / 。"
+
+#: src/dialogs/rename.tsx:43
+msgid "Name too long."
+msgstr "名稱太長。"
+
+#: src/common.ts:39
+msgid "Named pipe"
+msgstr "named pipe"
+
+#: src/upload-button.tsx:107
+msgid "New file"
+msgstr ""
+
+#: src/dialogs/rename.tsx:120
+msgid "New filename"
+msgstr ""
+
+#: src/dialogs/rename.tsx:120
+msgid "New name"
+msgstr ""
+
+#: src/files-card-body.tsx:377
+msgid "No matching results"
+msgstr ""
+
+#: src/common.ts:25
+msgid "None"
+msgstr ""
+
+#: src/upload-button.tsx:112
+msgid "Original file on server"
+msgstr ""
+
+#: src/sidebar.tsx:86
+msgid "Other permissions"
+msgstr ""
+
+#: src/dialogs/permissions.jsx:204
+msgid "Others access"
+msgstr ""
+
+#: src/dialogs/rename.tsx:114
+msgid "Overwrite"
+msgstr ""
+
+#: src/dialogs/permissions.jsx:147 src/sidebar.tsx:55
+msgid "Owner"
+msgstr ""
+
+#: src/dialogs/permissions.jsx:180
+msgid "Owner access"
+msgstr ""
+
+#: src/sidebar.tsx:76
+msgid "Owner permissions"
+msgstr ""
+
+#: src/dialogs/permissions.jsx:146
+msgid "Ownership"
+msgstr ""
+
+#: src/menu.tsx:62
+msgid "Paste"
+msgstr ""
+
+#: src/menu.tsx:67
+msgid "Pasting failed"
+msgstr ""
+
+#: src/common.ts:30
+msgid "Read and execute"
+msgstr ""
+
+#: src/common.ts:31
+msgid "Read and write"
+msgstr ""
+
+#: src/common.ts:32
+msgid "Read, write and execute"
+msgstr ""
+
+#: src/common.ts:29
+msgid "Read-only"
+msgstr ""
+
+#: src/common.ts:41
+msgid "Regular file"
+msgstr ""
+
+#: src/files-breadcrumbs.tsx:159
+msgid "Remove current directory"
+msgstr ""
+
+#: src/dialogs/rename.tsx:107 src/menu.tsx:108
+msgid "Rename"
+msgstr ""
+
+#: src/dialogs/rename.tsx:126
+msgid "Rename $0?"
+msgstr ""
+
+#: src/upload-button.tsx:89
+msgid "Replace"
+msgstr ""
+
+#: src/upload-button.tsx:82
+msgid "Replace file $0?"
+msgstr ""
+
+#: src/files-breadcrumbs.tsx:326 src/files-card-body.tsx:393
+msgid "Show hidden items"
+msgstr ""
+
+#: src/header.tsx:68 src/files-card-body.tsx:406 src/sidebar.tsx:67
+msgid "Size"
+msgstr ""
+
+#: src/header.tsx:75
+msgid "Smallest size"
+msgstr ""
+
+#: src/common.ts:42
+msgid "Socket"
+msgstr ""
+
+#: src/upload-button.tsx:262
+msgid "Successfully uploaded file(s)"
+msgstr ""
+
+#: src/common.ts:40
+msgid "Symbolic link"
+msgstr ""
+
+#: src/files-breadcrumbs.tsx:120
+msgid "Unable to create bookmark directory"
+msgstr ""
+
+#: src/files-breadcrumbs.tsx:138
+msgid "Unable to save bookmark file"
+msgstr ""
+
+#: src/upload-button.tsx:340
+msgid "Upload"
+msgstr ""
+
+#
+#: src/upload-button.tsx:321
+msgid "Upload $0% completed"
+msgstr ""
+
+#: src/upload-button.tsx:262
+msgid "Upload complete"
+msgstr ""
+
+#: src/upload-button.tsx:245
+msgid "Upload error"
+msgstr ""
+
+#: src/upload-button.tsx:285
+msgid "Uploads"
+msgstr ""
+
+#: src/common.ts:28
+msgid "Write and execute"
+msgstr ""
+
+#: src/common.ts:27
+msgid "Write-only"
+msgstr ""
+
+#: src/header.tsx:64
+msgid "Z-A"
+msgstr ""
+
+#: src/manifest.json:0
+msgid "explorer"
+msgstr ""
+
+#: src/manifest.json:0
+msgid "files"
+msgstr ""
+
+#: src/manifest.json:0
+msgid "filesystem"
+msgstr ""
+
+#. Translators: $0 represents a filename
+#: src/dialogs/permissions.jsx:121
+msgid "“$0” permissions"
+msgstr ""
