@@ -22,22 +22,22 @@ import cockpit from "cockpit";
 import type { FolderFileInfo } from "./app";
 
 export function downloadFile(currentPath: string, selected: FolderFileInfo) {
-	const payload = JSON.stringify({
-		payload: "fsread1",
-		binary: "raw",
-		path: `${currentPath}/${selected.name}`,
-		superuser: "try",
-		external: {
-			"content-disposition": `attachment; filename="${selected.name}"`,
-			"content-type": "application/octet-stream",
-		},
-	});
+    const payload = JSON.stringify({
+        payload: "fsread1",
+        binary: "raw",
+        path: `${currentPath}/${selected.name}`,
+        superuser: "try",
+        external: {
+            "content-disposition": `attachment; filename="${selected.name}"`,
+            "content-type": "application/octet-stream",
+        },
+    });
 
-	const encodedPayload = new TextEncoder().encode(payload);
-	const query = window.btoa(String.fromCharCode(...encodedPayload));
+    const encodedPayload = new TextEncoder().encode(payload);
+    const query = window.btoa(String.fromCharCode(...encodedPayload));
 
-	const prefix = new URL(
-		cockpit.transport.uri("channel/" + cockpit.transport.csrf_token),
-	).pathname;
-	window.open(`${prefix}?${query}`);
+    const prefix = new URL(
+        cockpit.transport.uri("channel/" + cockpit.transport.csrf_token),
+    ).pathname;
+    window.open(`${prefix}?${query}`);
 }

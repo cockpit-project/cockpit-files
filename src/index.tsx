@@ -36,6 +36,6 @@ import { Application } from "./app";
 import "./app.scss";
 
 document.addEventListener("DOMContentLoaded", () => {
-	const root = createRoot(document.getElementById("app")!);
-	root.render(<Application />);
+    const root = createRoot(document.getElementById("app")!);
+    root.render(<Application />);
 });

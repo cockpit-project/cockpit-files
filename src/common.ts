@@ -22,41 +22,41 @@ import cockpit from "cockpit";
 const _ = cockpit.gettext;
 
 export const permissions = [
-	/* 0 */ _("None"),
-	/* 1 */ _("Execute-only"),
-	/* 2 */ _("Write-only"),
-	/* 3 */ _("Write and execute"),
-	/* 4 */ _("Read-only"),
-	/* 5 */ _("Read and execute"),
-	/* 6 */ _("Read and write"),
-	/* 7 */ _("Read, write and execute"),
+    /* 0 */ _("None"),
+    /* 1 */ _("Execute-only"),
+    /* 2 */ _("Write-only"),
+    /* 3 */ _("Write and execute"),
+    /* 4 */ _("Read-only"),
+    /* 5 */ _("Read and execute"),
+    /* 6 */ _("Read and write"),
+    /* 7 */ _("Read, write and execute"),
 ];
 
 export const inode_types = {
-	blk: _("Block device"),
-	chr: _("Character device"),
-	dir: _("Directory"),
-	fifo: _("Named pipe"),
-	lnk: _("Symbolic link"),
-	reg: _("Regular file"),
-	sock: _("Socket"),
+    blk: _("Block device"),
+    chr: _("Character device"),
+    dir: _("Directory"),
+    fifo: _("Named pipe"),
+    lnk: _("Symbolic link"),
+    reg: _("Regular file"),
+    sock: _("Socket"),
 };
 
 export function get_permissions(n: number) {
-	return permissions[n & 0o7];
+    return permissions[n & 0o7];
 }
 
 export function* map_permissions<T>(func: (value: number, label: string) => T) {
-	for (const [value, label] of permissions.entries()) {
-		yield func(value, label);
-	}
+    for (const [value, label] of permissions.entries()) {
+        yield func(value, label);
+    }
 }
 
 export function basename(path: string) {
-	const elements = path.split("/");
-	if (elements.length === 0) {
-		return "/";
-	} else {
-		return elements[elements.length - 1];
-	}
+    const elements = path.split("/");
+    if (elements.length === 0) {
+        return "/";
+    } else {
+        return elements[elements.length - 1];
+    }
 }
