@@ -1,5 +1,5 @@
 {
-	"$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
+	"$schema": "node_modules/@biomejs/biome/configuration_schema.json",
 	"organizeImports": { "enabled": true },
 	"linter": {
 		"enabled": true,
@@ -123,14 +123,17 @@
 				"useGetterReturn": "error",
 				"useValidTypeof": "error"
 			}
-		},
-		"ignore": ["node_modules/*", "pkg/lib/*", "bots/*"]
+		}
 	},
 	"javascript": {
 		"globals": ["require", "module", "document", "navigator", "window"]
 	},
-	"overrides": [{ "include": ["**/*.ts", "**/*.tsx"] }],
 	"formatter": {
+		"indentStyle":"space",
+		"indentWidth":4
+	},
+	"overrides": [{ "include": ["**/*.ts", "**/*.tsx"] }],
+	"files": {
 		"ignore": ["node_modules/*", "pkg/lib/*", "bots/*"]
 	}
 }
