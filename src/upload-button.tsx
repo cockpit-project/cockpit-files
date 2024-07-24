@@ -110,10 +110,8 @@ const FileConflictDialog = ({
             }
         >
             <p>
-                {cockpit.format(
-                    _(
-                        'A file with the same name already exists in "$0". Replacing it will overwrite its content.',
-                    ),
+                {cockpit.format( 
+                    _("A file with the same name already exists in \"$0\". Replacing it will overwrite its content."), // biome-ignore format: don't break gettext
                     path.join("/"),
                 )}
             </p>
