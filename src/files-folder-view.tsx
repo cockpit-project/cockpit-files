@@ -64,6 +64,8 @@ export const FilesFolderView = ({
               sortBy={sortBy}
               setSortBy={setSortBy}
               path={path}
+              showHidden={showHidden}
+              setShowHidden={setShowHidden}
             />
             <FilesCardBody
               files={files}

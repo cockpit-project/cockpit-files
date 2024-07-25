@@ -121,8 +121,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_visible("[data-item='.hiddenfile']")
 
         # Reset global setting
-        b.click("#global-settings-menu")
-        b.click("#show-hidden-items")
+        b.select_PF("#sort-menu-toggle", "Hide hidden items")
         b.wait_not_present("[data-item='.hiddenfile']")
         b.wait_text(".pf-v5-c-empty-state__title-text", "Directory is empty")
 
@@ -982,9 +981,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_not_present("[data-item='.f2']")
         b.wait_in_text("#sidebar-card-header", "2 items (1 hidden)")
 
-        # Show hidden items
-        b.click("#global-settings-menu")
-        b.click("#show-hidden-items")
+        b.select_PF("#sort-menu-toggle", "Show hidden items")
         b.wait_visible("[data-item='f1']")
         b.wait_visible("[data-item='.f2']")
         b.wait_in_text("#sidebar-card-header", "2 items")
@@ -994,6 +991,10 @@ class TestFiles(testlib.MachineCase):
         b.enter_page("/files")
         b.wait_visible("[data-item='f1']")
         b.wait_visible("[data-item='.f2']")
+
+        b.select_PF("#sort-menu-toggle", "Hide hidden items")
+        b.wait_visible("[data-item='f1']")
+        b.wait_not_present("[data-item='.f2']")
 
     def testPermissions(self) -> None:
         b = self.browser

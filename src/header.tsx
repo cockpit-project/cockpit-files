@@ -23,10 +23,10 @@ import { CardHeader, CardTitle } from "@patternfly/react-core/dist/esm/component
 import { Divider } from "@patternfly/react-core/dist/esm/components/Divider";
 import { MenuToggle, MenuToggleAction } from "@patternfly/react-core/dist/esm/components/MenuToggle";
 import { SearchInput } from "@patternfly/react-core/dist/esm/components/SearchInput";
-import { Select, SelectList, SelectOption } from "@patternfly/react-core/dist/esm/components/Select";
+import { Select, SelectGroup, SelectList, SelectOption } from "@patternfly/react-core/dist/esm/components/Select";
 import { Text, TextContent, TextVariants } from "@patternfly/react-core/dist/esm/components/Text";
 import { Flex } from "@patternfly/react-core/dist/esm/layouts/Flex";
-import { GripVerticalIcon, ListIcon } from "@patternfly/react-icons";
+import { EyeIcon, EyeSlashIcon, GripVerticalIcon, ListIcon } from "@patternfly/react-icons";
 import { SortByDirection } from '@patternfly/react-table';
 
 import cockpit from "cockpit";
@@ -102,12 +102,15 @@ export const FilesCardHeader = ({
     setIsGrid,
     sortBy,
     setSortBy,
-    path
+    showHidden,
+    setShowHidden,
+    path,
 }: {
     currentFilter: string,
     onFilterChange: (_event: React.FormEvent<HTMLInputElement>, value: string) => void,
     isGrid: boolean, setIsGrid: React.Dispatch<React.SetStateAction<boolean>>,
     sortBy: Sort, setSortBy: React.Dispatch<React.SetStateAction<Sort>>
+    showHidden: boolean, setShowHidden: React.Dispatch<React.SetStateAction<boolean>>,
     path: string[],
 }) => {
     return (
@@ -128,6 +131,7 @@ export const FilesCardHeader = ({
                 <ViewSelector
                   isGrid={isGrid} setIsGrid={setIsGrid}
                   setSortBy={setSortBy} sortBy={sortBy}
+                  showHidden={showHidden} setShowHidden={setShowHidden}
                 />
                 <Divider orientation={{ default: "vertical" }} />
                 <UploadButton
@@ -138,16 +142,25 @@ export const FilesCardHeader = ({
     );
 };
 
-const ViewSelector = ({ isGrid, setIsGrid, sortBy, setSortBy }:
+const ViewSelector = ({ isGrid, setIsGrid, sortBy, setSortBy, showHidden, setShowHidden }:
     { isGrid: boolean, setIsGrid: React.Dispatch<React.SetStateAction<boolean>>,
-      sortBy: Sort, setSortBy: React.Dispatch<React.SetStateAction<Sort>>}) => {
+      sortBy: Sort, setSortBy: React.Dispatch<React.SetStateAction<Sort>>
+      showHidden: boolean, setShowHidden: React.Dispatch<React.SetStateAction<boolean>>,
+    }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const onToggleClick = (isOpen: boolean) => setIsOpen(!isOpen);
     const onSelect = (_ev?: React.MouseEvent, itemId?: string | number) => {
-        const sort = as_sort(itemId);
+        if (itemId === "hidden-toggle") {
+            setShowHidden(prevShowHidden => {
+                localStorage.setItem("files:showHiddenFiles", !showHidden ? "true" : "false");
+                return !prevShowHidden;
+            });
+        } else {
+            const sort = as_sort(itemId);
+            setSortBy(sort);
+            localStorage.setItem("files:sort", sort);
+        }
         setIsOpen(false);
-        setSortBy(sort);
-        localStorage.setItem("files:sort", sort);
     };
 
     return (
@@ -189,15 +202,21 @@ const ViewSelector = ({ isGrid, setIsGrid, sortBy, setSortBy }:
           )}
         >
             <SelectList>
-                {filterColumns.map((column, rowIndex) =>
-                    <React.Fragment key={rowIndex}>
-                        <SelectOption itemId={column[SortByDirection.asc].itemId}>
-                            {column[SortByDirection.asc].label}
-                        </SelectOption>
-                        <SelectOption itemId={column[SortByDirection.desc].itemId}>
-                            {column[SortByDirection.desc].label}
-                        </SelectOption>
-                    </React.Fragment>)}
+                <SelectGroup key="sort-selectgroup" label={_("Sort")}>
+                    {filterColumns.map((column, rowIndex) =>
+                        <React.Fragment key={rowIndex}>
+                            <SelectOption itemId={column[SortByDirection.asc].itemId}>
+                                {column[SortByDirection.asc].label}
+                            </SelectOption>
+                            <SelectOption itemId={column[SortByDirection.desc].itemId}>
+                                {column[SortByDirection.desc].label}
+                            </SelectOption>
+                        </React.Fragment>)}
+                </SelectGroup>
+                <Divider />
+                <SelectOption icon={showHidden ? <EyeSlashIcon /> : <EyeIcon />} itemId="hidden-toggle">
+                    {showHidden ? _("Hide hidden items") : _("Show hidden items")}
+                </SelectOption>
             </SelectList>
         </Select>
     );
