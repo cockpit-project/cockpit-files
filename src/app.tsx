@@ -161,7 +161,6 @@ export const Application = () => {
                     </AlertGroup>
                     <FilesBreadcrumbs
                       path={path}
-                      showHidden={showHidden} setShowHidden={setShowHidden}
                     />
                     <PageSection>
                         <Sidebar isPanelRight hasGutter>

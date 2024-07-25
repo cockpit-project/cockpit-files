@@ -191,3 +191,10 @@
     visibility: hidden;
     pointer-events: none;
 }
+
+// First Menu SelectGroup item in the sort menu should have no top padding
+.pf-v5-c-menu__list section:first-of-type {
+    .pf-v5-c-menu__group-title {
+        padding-block-start: 0;
+    }
+}
