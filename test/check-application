@@ -434,6 +434,12 @@ class TestFiles(testlib.MachineCase):
         m.execute("touch -d '2 hours ago' /home/admin/ccc")
         b.wait_visible("[data-item='ccc']")
 
+        # Pixel test the menu
+        b.click("#sort-menu-toggle")
+        b.assert_pixels("#sort-menu", "sort-menu")
+        b.click("#sort-menu-toggle")
+        b.wait_not_present("#sort-menu")
+
         # Default sort is A-Z (also used for invalid value found in localStorage)
         # Alphabet sorts should be case insensetive
         b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "aaa")
