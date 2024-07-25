@@ -17,23 +17,32 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
 import { Button } from "@patternfly/react-core/dist/esm/components/Button";
-import { Form, FormGroup } from "@patternfly/react-core/dist/esm/components/Form";
-import { FormSelect, FormSelectOption } from "@patternfly/react-core/dist/esm/components/FormSelect";
-import { Modal, ModalVariant } from "@patternfly/react-core/dist/esm/components/Modal";
+import {
+    Form,
+    FormGroup,
+} from "@patternfly/react-core/dist/esm/components/Form";
+import {
+    FormSelect,
+    FormSelectOption,
+} from "@patternfly/react-core/dist/esm/components/FormSelect";
+import {
+    Modal,
+    ModalVariant,
+} from "@patternfly/react-core/dist/esm/components/Modal";
 import { TextInput } from "@patternfly/react-core/dist/esm/components/TextInput";
 import { Stack } from "@patternfly/react-core/dist/esm/layouts/Stack";
 
-import cockpit from 'cockpit';
-import { FormHelper } from 'cockpit-components-form-helper';
-import { InlineNotification } from 'cockpit-components-inline-notification';
-import type { Dialogs, DialogResult } from 'dialogs';
-import { superuser } from 'superuser';
+import cockpit from "cockpit";
+import { FormHelper } from "cockpit-components-form-helper";
+import { InlineNotification } from "cockpit-components-inline-notification";
+import type { Dialogs, DialogResult } from "dialogs";
+import { superuser } from "superuser";
 
-import { useFilesContext } from '../app';
-import { get_owner_candidates } from '../ownership';
+import { useFilesContext } from "../app";
+import { get_owner_candidates } from "../ownership";
 
 const _ = cockpit.gettext;
 
@@ -59,23 +68,28 @@ async function create_directory(path: string, owner?: string) {
     }
 }
 
-const CreateDirectoryModal = ({ currentPath, dialogResult } : {
-    currentPath: string,
-    dialogResult: DialogResult<void>
+const CreateDirectoryModal = ({
+    currentPath,
+    dialogResult,
+}: {
+    currentPath: string;
+    dialogResult: DialogResult<void>;
 }) => {
     const [name, setName] = useState("");
     const [nameError, setNameError] = useState<string | undefined>();
     const [errorMessage, setErrorMessage] = useState<string | undefined>();
     const [owner, setOwner] = useState<string | undefined>();
-    const [user, setUser] = useState<cockpit.UserInfo| undefined>();
+    const [user, setUser] = useState<cockpit.UserInfo | undefined>();
     const createDirectory = () => {
         const path = currentPath + name;
-        create_directory(path, owner).then(dialogResult.resolve, err => setErrorMessage(err.message));
+        create_directory(path, owner).then(dialogResult.resolve, (err) =>
+            setErrorMessage(err.message),
+        );
     };
     const { cwdInfo } = useFilesContext();
 
     useEffect(() => {
-        cockpit.user().then(user => setUser(user));
+        cockpit.user().then((user) => setUser(user));
     }, []);
 
     const candidates = [];
@@ -88,75 +102,99 @@ const CreateDirectoryModal = ({ currentPath, dialogResult } : {
 
     return (
         <Modal
-          position="top"
-          title={_("Create directory")}
-          isOpen
-          onClose={() => dialogResult.resolve()}
-          variant={ModalVariant.small}
-          footer={
-              <>
-                  <Button
-                    variant="primary"
-                    onClick={createDirectory}
-                    isDisabled={errorMessage !== undefined ||
-                        nameError !== undefined ||
-                        user === null ||
-                        cwdInfo === null}
-                  >
-                      {_("Create")}
-                  </Button>
-                  <Button variant="link" onClick={() => dialogResult.resolve()}>{_("Cancel")}</Button>
-              </>
-          }
+            position="top"
+            title={_("Create directory")}
+            isOpen
+            onClose={() => dialogResult.resolve()}
+            variant={ModalVariant.small}
+            footer={
+                <>
+                    <Button
+                        variant="primary"
+                        onClick={createDirectory}
+                        isDisabled={
+                            errorMessage !== undefined ||
+                            nameError !== undefined ||
+                            user === null ||
+                            cwdInfo === null
+                        }
+                    >
+                        {_("Create")}
+                    </Button>
+                    <Button
+                        variant="link"
+                        onClick={() => dialogResult.resolve()}
+                    >
+                        {_("Cancel")}
+                    </Button>
+                </>
+            }
         >
             <Stack>
-                {errorMessage !== undefined &&
-                <InlineNotification
-                  type="danger"
-                  text={errorMessage}
-                  isInline
-                />}
+                {errorMessage !== undefined && (
+                    <InlineNotification
+                        type="danger"
+                        text={errorMessage}
+                        isInline
+                    />
+                )}
                 <Form
-                  isHorizontal onSubmit={e => {
-                      createDirectory();
-                      e.preventDefault();
-                      return false;
-                  }}
+                    isHorizontal
+                    onSubmit={(e) => {
+                        createDirectory();
+                        e.preventDefault();
+                        return false;
+                    }}
                 >
-                    <FormGroup fieldId="create-directory-input" label={_("Directory name")}>
+                    <FormGroup
+                        fieldId="create-directory-input"
+                        label={_("Directory name")}
+                    >
                         <TextInput
-                          validated={nameError ? "error" : "default"}
-                          value={name}
-                          onChange={(_, val) => {
-                              setNameError(check_name(val));
-                              setErrorMessage(undefined);
-                              setName(val);
-                          }}
-                          id="create-directory-input" autoFocus // eslint-disable-line jsx-a11y/no-autofocus
+                            validated={nameError ? "error" : "default"}
+                            value={name}
+                            onChange={(_, val) => {
+                                setNameError(check_name(val));
+                                setErrorMessage(undefined);
+                                setName(val);
+                            }}
+                            id="create-directory-input"
+                            autoFocus // eslint-disable-line jsx-a11y/no-autofocus
                         />
-                        <FormHelper fieldId="create-directory-input" helperTextInvalid={nameError} />
+                        <FormHelper
+                            fieldId="create-directory-input"
+                            helperTextInvalid={nameError}
+                        />
                     </FormGroup>
-                    {candidates.length > 0 &&
-                        <FormGroup fieldId="create-directory-owner" label={_("Directory owner")}>
+                    {candidates.length > 0 && (
+                        <FormGroup
+                            fieldId="create-directory-owner"
+                            label={_("Directory owner")}
+                        >
                             <FormSelect
-                              id='create-directory-owner'
-                              value={owner}
-                              onChange={(_ev, val) => setOwner(val)}
+                                id="create-directory-owner"
+                                value={owner}
+                                onChange={(_ev, val) => setOwner(val)}
                             >
-                                {candidates.map(owner =>
+                                {candidates.map((owner) => (
                                     <FormSelectOption
-                                      key={owner}
-                                      value={owner}
-                                      label={owner}
-                                    />)}
+                                        key={owner}
+                                        value={owner}
+                                        label={owner}
+                                    />
+                                ))}
                             </FormSelect>
-                        </FormGroup>}
+                        </FormGroup>
+                    )}
                 </Form>
             </Stack>
         </Modal>
     );
 };
 
-export function show_create_directory_dialog(dialogs: Dialogs, currentPath: string) {
+export function show_create_directory_dialog(
+    dialogs: Dialogs,
+    currentPath: string,
+) {
     dialogs.run(CreateDirectoryModal, { currentPath });
 }

@@ -23,33 +23,42 @@ import { AlertVariant } from "@patternfly/react-core/dist/esm/components/Alert";
 
 import cockpit from "cockpit";
 import type { FileInfo } from "cockpit/fsinfo";
-import type { Dialogs } from 'dialogs';
+import type { Dialogs } from "dialogs";
 
 import type { FolderFileInfo } from "./app";
 import { basename } from "./common";
-import { confirm_delete } from './dialogs/delete';
-import { show_create_directory_dialog } from './dialogs/mkdir';
-import { edit_permissions } from './dialogs/permissions';
-import { show_rename_dialog } from './dialogs/rename';
-import { downloadFile } from './download';
+import { confirm_delete } from "./dialogs/delete";
+import { show_create_directory_dialog } from "./dialogs/mkdir";
+import { edit_permissions } from "./dialogs/permissions";
+import { show_rename_dialog } from "./dialogs/rename";
+import { downloadFile } from "./download";
 
 const _ = cockpit.gettext;
 
-type MenuItem = { type: "divider" } | {
-    type?: never,
-    title: string,
-    id: string,
-    onClick: () => void;
-    isDisabled?: boolean;
-    className?: string;
-};
+type MenuItem =
+    | { type: "divider" }
+    | {
+          type?: never;
+          title: string;
+          id: string;
+          onClick: () => void;
+          isDisabled?: boolean;
+          className?: string;
+      };
 
 export function get_menu_items(
     path: string[],
-    selected: FolderFileInfo[], setSelected: React.Dispatch<React.SetStateAction<FolderFileInfo[]>>,
-    clipboard: string[], setClipboard: React.Dispatch<React.SetStateAction<string[]>>,
+    selected: FolderFileInfo[],
+    setSelected: React.Dispatch<React.SetStateAction<FolderFileInfo[]>>,
+    clipboard: string[],
+    setClipboard: React.Dispatch<React.SetStateAction<string[]>>,
     cwdInfo: FileInfo | null,
-    addAlert: (title: string, variant: AlertVariant, key: string, detail?: string) => void,
+    addAlert: (
+        title: string,
+        variant: AlertVariant,
+        key: string,
+        detail?: string,
+    ) => void,
     dialogs: Dialogs,
 ) {
     const currentPath = path.join("/") + "/";
@@ -62,33 +71,46 @@ export function get_menu_items(
                 title: _("Paste"),
                 isDisabled: clipboard.length === 0,
                 onClick: () => {
-                    const existingFiles = clipboard.filter(sourcePath => cwdInfo?.entries?.[basename(sourcePath)]);
+                    const existingFiles = clipboard.filter(
+                        (sourcePath) =>
+                            cwdInfo?.entries?.[basename(sourcePath)],
+                    );
                     if (existingFiles.length > 0) {
-                        addAlert(_("Pasting failed"), AlertVariant.danger, "paste-error",
-                                 cockpit.format(_("\"$0\" exists, not overwriting with paste."),
-                                                existingFiles.map(basename).join(", ")));
+                        addAlert(
+                            _("Pasting failed"),
+                            AlertVariant.danger,
+                            "paste-error",
+                            cockpit.format(
+                                _('"$0" exists, not overwriting with paste.'),
+                                existingFiles.map(basename).join(", "),
+                            ),
+                        );
                         return;
                     }
-                    cockpit.spawn([
-                        "cp",
-                        "-R",
-                        ...clipboard,
-                        currentPath
-                    ]).catch(err => addAlert(err.message, AlertVariant.danger, `${new Date().getTime()}`));
-                }
+                    cockpit
+                        .spawn(["cp", "-R", ...clipboard, currentPath])
+                        .catch((err) =>
+                            addAlert(
+                                err.message,
+                                AlertVariant.danger,
+                                `${new Date().getTime()}`,
+                            ),
+                        );
+                },
             },
             { type: "divider" },
             {
                 id: "create-item",
                 title: _("Create directory"),
-                onClick: () => show_create_directory_dialog(dialogs, currentPath)
+                onClick: () =>
+                    show_create_directory_dialog(dialogs, currentPath),
             },
             { type: "divider" },
             {
                 id: "edit-permissions",
                 title: _("Edit permissions"),
-                onClick: () => edit_permissions(dialogs, null, path)
-            }
+                onClick: () => edit_permissions(dialogs, null, path),
+            },
         );
     } else if (selected.length === 1) {
         menuItems.push(
@@ -101,19 +123,20 @@ export function get_menu_items(
             {
                 id: "edit-permissions",
                 title: _("Edit permissions"),
-                onClick: () => edit_permissions(dialogs, selected[0], path)
+                onClick: () => edit_permissions(dialogs, selected[0], path),
             },
             {
                 id: "rename-item",
                 title: _("Rename"),
-                onClick: () => show_rename_dialog(dialogs, path, selected[0])
+                onClick: () => show_rename_dialog(dialogs, path, selected[0]),
             },
             { type: "divider" },
             {
                 id: "delete-item",
                 title: _("Delete"),
                 className: "pf-m-danger",
-                onClick: () => confirm_delete(dialogs, currentPath, selected, setSelected)
+                onClick: () =>
+                    confirm_delete(dialogs, currentPath, selected, setSelected),
             },
         );
         if (selected[0].type === "reg")
@@ -122,22 +145,26 @@ export function get_menu_items(
                 {
                     id: "download-item",
                     title: _("Download"),
-                    onClick: () => downloadFile(currentPath, selected[0])
-                }
+                    onClick: () => downloadFile(currentPath, selected[0]),
+                },
             );
     } else if (selected.length > 1) {
         menuItems.push(
             {
                 id: "copy-item",
                 title: _("Copy"),
-                onClick: () => setClipboard(selected.map(s => path.join("/") + "/" + s.name)),
+                onClick: () =>
+                    setClipboard(
+                        selected.map((s) => path.join("/") + "/" + s.name),
+                    ),
             },
             {
                 id: "delete-item",
                 title: _("Delete"),
                 className: "pf-m-danger",
-                onClick: () => confirm_delete(dialogs, currentPath, selected, setSelected)
-            }
+                onClick: () =>
+                    confirm_delete(dialogs, currentPath, selected, setSelected),
+            },
         );
     }
 

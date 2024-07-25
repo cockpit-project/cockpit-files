@@ -19,7 +19,7 @@
 
 import React, { useEffect, useState } from "react";
 
-import { Card } from '@patternfly/react-core/dist/esm/components/Card';
+import { Card } from "@patternfly/react-core/dist/esm/components/Card";
 
 import type { FolderFileInfo } from "./app";
 import { FilesCardBody } from "./files-card-body";
@@ -36,18 +36,27 @@ export const FilesFolderView = ({
     setClipboard,
     setShowHidden,
 }: {
-    path: string[],
-    files: FolderFileInfo[],
-    loadingFiles: boolean,
-    showHidden: boolean,
-    setShowHidden: React.Dispatch<React.SetStateAction<boolean>>,
-    selected: FolderFileInfo[], setSelected: React.Dispatch<React.SetStateAction<FolderFileInfo[]>>,
-    clipboard: string[], setClipboard: React.Dispatch<React.SetStateAction<string[]>>,
+    path: string[];
+    files: FolderFileInfo[];
+    loadingFiles: boolean;
+    showHidden: boolean;
+    setShowHidden: React.Dispatch<React.SetStateAction<boolean>>;
+    selected: FolderFileInfo[];
+    setSelected: React.Dispatch<React.SetStateAction<FolderFileInfo[]>>;
+    clipboard: string[];
+    setClipboard: React.Dispatch<React.SetStateAction<string[]>>;
 }) => {
     const [currentFilter, setCurrentFilter] = useState("");
-    const [isGrid, setIsGrid] = useState(localStorage.getItem("files:isGrid") !== "false");
-    const [sortBy, setSortBy] = useState(as_sort(localStorage.getItem("files:sort")));
-    const onFilterChange = (_event: React.FormEvent<HTMLInputElement>, value: string) => setCurrentFilter(value);
+    const [isGrid, setIsGrid] = useState(
+        localStorage.getItem("files:isGrid") !== "false",
+    );
+    const [sortBy, setSortBy] = useState(
+        as_sort(localStorage.getItem("files:sort")),
+    );
+    const onFilterChange = (
+        _event: React.FormEvent<HTMLInputElement>,
+        value: string,
+    ) => setCurrentFilter(value);
 
     // Reset the search filter on path changes
     useEffect(() => {
@@ -57,29 +66,29 @@ export const FilesFolderView = ({
     return (
         <Card>
             <FilesCardHeader
-              currentFilter={currentFilter}
-              onFilterChange={onFilterChange}
-              isGrid={isGrid}
-              setIsGrid={setIsGrid}
-              sortBy={sortBy}
-              setSortBy={setSortBy}
-              path={path}
+                currentFilter={currentFilter}
+                onFilterChange={onFilterChange}
+                isGrid={isGrid}
+                setIsGrid={setIsGrid}
+                sortBy={sortBy}
+                setSortBy={setSortBy}
+                path={path}
             />
             <FilesCardBody
-              files={files}
-              currentFilter={currentFilter}
-              path={path}
-              isGrid={isGrid}
-              sortBy={sortBy}
-              setSortBy={setSortBy}
-              selected={selected}
-              setSelected={setSelected}
-              loadingFiles={loadingFiles}
-              clipboard={clipboard}
-              setClipboard={setClipboard}
-              showHidden={showHidden}
-              setShowHidden={setShowHidden}
-              setCurrentFilter={setCurrentFilter}
+                files={files}
+                currentFilter={currentFilter}
+                path={path}
+                isGrid={isGrid}
+                sortBy={sortBy}
+                setSortBy={setSortBy}
+                selected={selected}
+                setSelected={setSelected}
+                loadingFiles={loadingFiles}
+                clipboard={clipboard}
+                setClipboard={setClipboard}
+                showHidden={showHidden}
+                setShowHidden={setShowHidden}
+                setCurrentFilter={setCurrentFilter}
             />
         </Card>
     );

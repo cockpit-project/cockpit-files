@@ -46,16 +46,16 @@ export function get_permissions(n: number) {
     return permissions[n & 0o7];
 }
 
-export function * map_permissions<T>(func: (value: number, label: string) => T) {
+export function* map_permissions<T>(func: (value: number, label: string) => T) {
     for (const [value, label] of permissions.entries()) {
         yield func(value, label);
     }
 }
 
 export function basename(path: string) {
-    const elements = path.split('/');
+    const elements = path.split("/");
     if (elements.length === 0) {
-        return '/';
+        return "/";
     } else {
         return elements[elements.length - 1];
     }

@@ -23,8 +23,14 @@ import { AlertVariant } from "@patternfly/react-core/dist/esm/components/Alert";
 import { Button } from "@patternfly/react-core/dist/esm/components/Button";
 import { Checkbox } from "@patternfly/react-core/dist/esm/components/Checkbox";
 import { Divider } from "@patternfly/react-core/dist/esm/components/Divider";
-import { Modal, ModalVariant } from "@patternfly/react-core/dist/esm/components/Modal";
-import { Popover, PopoverPosition } from "@patternfly/react-core/dist/esm/components/Popover";
+import {
+    Modal,
+    ModalVariant,
+} from "@patternfly/react-core/dist/esm/components/Modal";
+import {
+    Popover,
+    PopoverPosition,
+} from "@patternfly/react-core/dist/esm/components/Popover";
 import { Progress } from "@patternfly/react-core/dist/esm/components/Progress";
 import { Flex, FlexItem } from "@patternfly/react-core/dist/esm/layouts/Flex";
 import { TrashIcon } from "@patternfly/react-icons";
@@ -53,13 +59,13 @@ const FileConflictDialog = ({
     file,
     uploadFile,
     isMultiUpload,
-    dialogResult
+    dialogResult,
 }: {
     path: string[];
-    file: FileInfo,
-    uploadFile: File,
-    isMultiUpload: boolean,
-    dialogResult: DialogResult<ConflictResult>
+    file: FileInfo;
+    uploadFile: File;
+    isMultiUpload: boolean;
+    dialogResult: DialogResult<ConflictResult>;
 }) => {
     const [applyToAll, setApplyToAll] = React.useState<boolean>(false);
 
@@ -77,66 +83,83 @@ const FileConflictDialog = ({
 
     return (
         <Modal
-          position="top"
-          // @ts-expect-error incorrect PatternFly typing https://github.com/patternfly/patternfly-react/issues/10361
-          title={fmt_to_fragments(_("Replace file $0?"), <b>{uploadFile.name}</b>)}
-          titleIconVariant="warning"
-          variant={ModalVariant.medium}
-          onClose={handleCancel}
-          isOpen
-          footer={
-              <>
-                  <Button variant="warning" onClick={handleReplace}>{_("Replace")}</Button>
-                  {isMultiUpload &&
-                  <Button variant="secondary" onClick={handleSkip}>{_("Keep original")}</Button>}
-                  <Button variant="link" onClick={handleCancel}>{_("Cancel")}</Button>
-              </>
-          }
+            position="top"
+            // @ts-expect-error incorrect PatternFly typing https://github.com/patternfly/patternfly-react/issues/10361
+            title={fmt_to_fragments(
+                _("Replace file $0?"),
+                <b>{uploadFile.name}</b>,
+            )}
+            titleIconVariant="warning"
+            variant={ModalVariant.medium}
+            onClose={handleCancel}
+            isOpen
+            footer={
+                <>
+                    <Button variant="warning" onClick={handleReplace}>
+                        {_("Replace")}
+                    </Button>
+                    {isMultiUpload && (
+                        <Button variant="secondary" onClick={handleSkip}>
+                            {_("Keep original")}
+                        </Button>
+                    )}
+                    <Button variant="link" onClick={handleCancel}>
+                        {_("Cancel")}
+                    </Button>
+                </>
+            }
         >
             <p>
-                {cockpit.format(
-                    _("A file with the same name already exists in \"$0\". Replacing it will overwrite its content."),
-                    path.join('/')
+                {cockpit.format( 
+                    _("A file with the same name already exists in \"$0\". Replacing it will overwrite its content."), // biome-ignore format: don't break gettext
+                    path.join("/"),
                 )}
             </p>
             <Flex
-              spaceItems={{ default: "spaceItems3xl" }}
-              className="conflict-modal-files"
+                spaceItems={{ default: "spaceItems3xl" }}
+                className="conflict-modal-files"
             >
                 <FlexItem>
                     <b>{_("New file")}</b>
                     <p>{cockpit.format_bytes(uploadFile.size)}</p>
-                    <p className="new-file-date">{timeformat.dateTime(uploadFile.lastModified)}</p>
+                    <p className="new-file-date">
+                        {timeformat.dateTime(uploadFile.lastModified)}
+                    </p>
                 </FlexItem>
                 <FlexItem>
                     <b>{_("Original file on server")}</b>
                     <p>{cockpit.format_bytes(file.size)}</p>
-                    {file.mtime &&
-                    <p className="original-file-date">{timeformat.dateTime(file.mtime * 1000)}</p>}
+                    {file.mtime && (
+                        <p className="original-file-date">
+                            {timeformat.dateTime(file.mtime * 1000)}
+                        </p>
+                    )}
                 </FlexItem>
             </Flex>
-            {isMultiUpload &&
-            <Checkbox
-              id="replace-all"
-              label={_("Apply this action to all conflicting files")}
-              isChecked={applyToAll}
-              onChange={() => setApplyToAll(!applyToAll)}
-            />}
+            {isMultiUpload && (
+                <Checkbox
+                    id="replace-all"
+                    label={_("Apply this action to all conflicting files")}
+                    isChecked={applyToAll}
+                    onChange={() => setApplyToAll(!applyToAll)}
+                />
+            )}
         </Modal>
     );
 };
 
 export const UploadButton = ({
     path,
-} : {
-    path: string[],
+}: {
+    path: string[];
 }) => {
     const ref = useRef<HTMLInputElement>(null);
     const { addAlert, cwdInfo } = useFilesContext();
     const dialogs = useDialogs();
     const [showPopover, setPopover] = React.useState(false);
-    const [uploadedFiles, setUploadedFiles] = useState<{[name: string]:
-                                                        {file: File, progress: number, cancel:() => void}}>({});
+    const [uploadedFiles, setUploadedFiles] = useState<{
+        [name: string]: { file: File; progress: number; cancel: () => void };
+    }>({});
 
     const handleClick = () => {
         if (ref.current) {
@@ -159,8 +182,8 @@ export const UploadButton = ({
         const toUploadFiles = [];
 
         const resetInput = () => {
-        // Reset input field in the case a download was cancelled and has to be re-uploaded
-        // https://stackoverflow.com/questions/26634616/filereader-upload-same-file-again-not-working
+            // Reset input field in the case a download was cancelled and has to be re-uploaded
+            // https://stackoverflow.com/questions/26634616/filereader-upload-same-file-again-not-working
             event.target.value = "";
         };
 
@@ -171,14 +194,16 @@ export const UploadButton = ({
             const uploadFile = event.target.files[i];
             const file = cwdInfo?.entries[uploadFile.name];
 
-            if (replaceAll)
-                toUploadFiles.push(uploadFile);
+            if (replaceAll) toUploadFiles.push(uploadFile);
             else if (file && skipAll) {
                 continue;
             } else if (file) {
                 try {
                     resolution = await dialogs.run(FileConflictDialog, {
-                        path, file, uploadFile, isMultiUpload: event.target.files.length > 1
+                        path,
+                        file,
+                        uploadFile,
+                        isMultiUpload: event.target.files.length > 1,
                     });
                 } catch (exc) {
                     resetInput();
@@ -186,8 +211,7 @@ export const UploadButton = ({
                 }
 
                 if (resolution.skip) {
-                    if (resolution.applyToAll)
-                        skipAll = true;
+                    if (resolution.applyToAll) skipAll = true;
                     continue;
                 }
 
@@ -208,58 +232,91 @@ export const UploadButton = ({
         window.addEventListener("beforeunload", beforeUnloadHandler);
 
         const cancelledUploads = [];
-        await Promise.allSettled(toUploadFiles.map(async (file: File) => {
-            const tmp_path = path.slice();
-            tmp_path.push(file.name);
-            const destination = tmp_path.join('/');
-            const abort = new AbortController();
+        await Promise.allSettled(
+            toUploadFiles.map(async (file: File) => {
+                const tmp_path = path.slice();
+                tmp_path.push(file.name);
+                const destination = tmp_path.join("/");
+                const abort = new AbortController();
 
-            setUploadedFiles(oldFiles => {
-                return {
-                    [file.name]: { file, progress: 0, cancel: () => abort.abort() },
-                    ...oldFiles,
-                };
-            });
-
-            try {
-                await upload(destination, file, (progress) => {
-                    const now = performance.now();
-                    if (now < next_progress)
-                        return;
-                    next_progress = now + 200; // only rerender every 200ms
-                    setUploadedFiles(oldFiles => {
-                        const oldFile = oldFiles[file.name];
-                        return {
-                            ...oldFiles,
-                            [file.name]: { ...oldFile, progress },
-                        };
-                    });
-                }, abort.signal);
-                // TODO: pass { superuser: try } depending on directory owner
-            } catch (exc) {
-                cockpit.assert(exc instanceof Error, "Unknown exception type");
-                if (exc instanceof DOMException && exc.name === 'AbortError') {
-                    addAlert(_("Cancelled"), AlertVariant.warning, "upload",
-                             cockpit.format(_("Cancelled upload of $0"), file.name));
-                } else {
-                    addAlert(_("Upload error"), AlertVariant.danger, "upload-error", exc.toString());
-                }
-                cancelledUploads.push(file);
-            } finally {
-                setUploadedFiles(oldFiles => {
-                    const copy = { ...oldFiles };
-                    delete copy[file.name];
-                    return copy;
+                setUploadedFiles((oldFiles) => {
+                    return {
+                        [file.name]: {
+                            file,
+                            progress: 0,
+                            cancel: () => abort.abort(),
+                        },
+                        ...oldFiles,
+                    };
                 });
-            }
-        }));
+
+                try {
+                    await upload(
+                        destination,
+                        file,
+                        (progress) => {
+                            const now = performance.now();
+                            if (now < next_progress) return;
+                            next_progress = now + 200; // only rerender every 200ms
+                            setUploadedFiles((oldFiles) => {
+                                const oldFile = oldFiles[file.name];
+                                return {
+                                    ...oldFiles,
+                                    [file.name]: { ...oldFile, progress },
+                                };
+                            });
+                        },
+                        abort.signal,
+                    );
+                    // TODO: pass { superuser: try } depending on directory owner
+                } catch (exc) {
+                    cockpit.assert(
+                        exc instanceof Error,
+                        "Unknown exception type",
+                    );
+                    if (
+                        exc instanceof DOMException &&
+                        exc.name === "AbortError"
+                    ) {
+                        addAlert(
+                            _("Cancelled"),
+                            AlertVariant.warning,
+                            "upload",
+                            cockpit.format(
+                                _("Cancelled upload of $0"),
+                                file.name,
+                            ),
+                        );
+                    } else {
+                        addAlert(
+                            _("Upload error"),
+                            AlertVariant.danger,
+                            "upload-error",
+                            exc.toString(),
+                        );
+                    }
+                    cancelledUploads.push(file);
+                } finally {
+                    setUploadedFiles((oldFiles) => {
+                        const copy = { ...oldFiles };
+                        delete copy[file.name];
+                        return copy;
+                    });
+                }
+            }),
+        );
 
         resetInput();
         window.removeEventListener("beforeunload", beforeUnloadHandler);
 
         // If all uploads are cancelled, don't show an alert
         if (cancelledUploads.length !== toUploadFiles.length) {
-            addAlert(_("Upload complete"), AlertVariant.success, "upload-success", _("Successfully uploaded file(s)"));
+            addAlert(
+                _("Upload complete"),
+                AlertVariant.success,
+                "upload-success",
+                _("Successfully uploaded file(s)"),
+            );
         }
     };
 
@@ -280,48 +337,61 @@ export const UploadButton = ({
 
         popover = (
             <Popover
-              className="upload-popover"
-              position={PopoverPosition.bottom}
-              headerContent={<p>{_("Uploads")}</p>}
-              bodyContent={Object.keys(uploadedFiles).map((key, index) => {
-                  const file = uploadedFiles[key];
-                  return (
-                      <React.Fragment key={index}>
-                          <Divider />
-                          <Flex className="upload-progress-flex" flexWrap={{ default: 'nowrap' }}>
-                              <Progress
-                                key={file.file.name}
-                                className={`upload-progress-${index} upload-progress pf-v5-m-tabular-nums`}
-                                value={file.progress}
-                                title={file.file.name}
-                                max={file.file.size}
-                              />
-                              <Button
-                                variant="plain"
-                                icon={<TrashIcon />}
-                                className={`cancel-button-${index} cancel-button`}
-                                onClick={file.cancel}
-                                aria-label={cockpit.format(_("Cancel upload of $0"), file.file.name)}
-                              />
-                          </Flex>
-                      </React.Fragment>
-                  );
-              })}
-              isVisible={showPopover}
-              shouldClose={() => setPopover(false)}
+                className="upload-popover"
+                position={PopoverPosition.bottom}
+                headerContent={<p>{_("Uploads")}</p>}
+                bodyContent={Object.keys(uploadedFiles).map((key, index) => {
+                    const file = uploadedFiles[key];
+                    return (
+                        <React.Fragment key={index}>
+                            <Divider />
+                            <Flex
+                                className="upload-progress-flex"
+                                flexWrap={{ default: "nowrap" }}
+                            >
+                                <Progress
+                                    key={file.file.name}
+                                    className={`upload-progress-${index} upload-progress pf-v5-m-tabular-nums`}
+                                    value={file.progress}
+                                    title={file.file.name}
+                                    max={file.file.size}
+                                />
+                                <Button
+                                    variant="plain"
+                                    icon={<TrashIcon />}
+                                    className={`cancel-button-${index} cancel-button`}
+                                    onClick={file.cancel}
+                                    aria-label={cockpit.format(
+                                        _("Cancel upload of $0"),
+                                        file.file.name,
+                                    )}
+                                />
+                            </Flex>
+                        </React.Fragment>
+                    );
+                })}
+                isVisible={showPopover}
+                shouldClose={() => setPopover(false)}
             >
                 <Button
-                  onClick={() => setPopover(true)}
-                  className="progress-wrapper"
-                  variant="plain"
-                  icon={
-                      <div
-                        id="upload-progress-btn"
-                        className="progress-pie"
-                        title={cockpit.format(_("Upload $0% completed"), overallProgress)}
-                        style={{ "--progress": `${overallProgress}%` } as React.CSSProperties}
-                      />
-                  }
+                    onClick={() => setPopover(true)}
+                    className="progress-wrapper"
+                    variant="plain"
+                    icon={
+                        <div
+                            id="upload-progress-btn"
+                            className="progress-pie"
+                            title={cockpit.format(
+                                _("Upload $0% completed"),
+                                overallProgress,
+                            )}
+                            style={
+                                {
+                                    "--progress": `${overallProgress}%`,
+                                } as React.CSSProperties
+                            }
+                        />
+                    }
                 />
             </Popover>
         );
@@ -331,21 +401,15 @@ export const UploadButton = ({
         <>
             {popover}
             <Button
-              id="upload-file-btn"
-              className="upload-button"
-              variant="secondary"
-              isDisabled={isUploading || cwdInfo?.entries === undefined}
-              onClick={handleClick}
+                id="upload-file-btn"
+                className="upload-button"
+                variant="secondary"
+                isDisabled={isUploading || cwdInfo?.entries === undefined}
+                onClick={handleClick}
             >
                 {_("Upload")}
             </Button>
-            <input
-              ref={ref}
-              type="file"
-              hidden
-              multiple
-              onChange={onUpload}
-            />
+            <input ref={ref} type="file" hidden multiple onChange={onUpload} />
         </>
     );
 };

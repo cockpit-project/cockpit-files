@@ -17,9 +17,9 @@
  * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
  */
 
-import cockpit from 'cockpit';
+import cockpit from "cockpit";
 
-import type { FolderFileInfo } from './app';
+import type { FolderFileInfo } from "./app";
 
 export function downloadFile(currentPath: string, selected: FolderFileInfo) {
     const payload = JSON.stringify({
@@ -30,12 +30,14 @@ export function downloadFile(currentPath: string, selected: FolderFileInfo) {
         external: {
             "content-disposition": `attachment; filename="${selected.name}"`,
             "content-type": "application/octet-stream",
-        }
+        },
     });
 
     const encodedPayload = new TextEncoder().encode(payload);
     const query = window.btoa(String.fromCharCode(...encodedPayload));
 
-    const prefix = (new URL(cockpit.transport.uri("channel/" + cockpit.transport.csrf_token))).pathname;
+    const prefix = new URL(
+        cockpit.transport.uri("channel/" + cockpit.transport.csrf_token),
+    ).pathname;
     window.open(`${prefix}?${query}`);
 }

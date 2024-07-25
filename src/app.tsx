@@ -20,11 +20,21 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
 
 import {
-    AlertGroup, Alert, AlertVariant, AlertActionCloseButton
+    AlertGroup,
+    Alert,
+    AlertVariant,
+    AlertActionCloseButton,
 } from "@patternfly/react-core/dist/esm/components/Alert";
 import { Card } from "@patternfly/react-core/dist/esm/components/Card";
-import { Page, PageSection } from "@patternfly/react-core/dist/esm/components/Page";
-import { Sidebar, SidebarPanel, SidebarContent } from "@patternfly/react-core/dist/esm/components/Sidebar";
+import {
+    Page,
+    PageSection,
+} from "@patternfly/react-core/dist/esm/components/Page";
+import {
+    Sidebar,
+    SidebarPanel,
+    SidebarContent,
+} from "@patternfly/react-core/dist/esm/components/Sidebar";
 import { ExclamationCircleIcon } from "@patternfly/react-icons";
 
 import cockpit from "cockpit";
@@ -36,28 +46,33 @@ import { superuser } from "superuser";
 
 import { FilesBreadcrumbs } from "./files-breadcrumbs";
 import { FilesFolderView } from "./files-folder-view";
-import filetype_data from './filetype-data';
-import { filetype_lookup } from './filetype-lookup';
+import filetype_data from "./filetype-data";
+import { filetype_lookup } from "./filetype-lookup";
 import { SidebarPanelDetails } from "./sidebar";
 
 superuser.reload_page_on_change();
 
 interface Alert {
-    key: string,
-    title: string,
-    variant: AlertVariant,
-    detail?: string,
+    key: string;
+    title: string;
+    variant: AlertVariant;
+    detail?: string;
 }
 
 export interface FolderFileInfo extends FileInfo {
-    name: string,
-    to: string | null,
-    category: { class: string } | null,
+    name: string;
+    to: string | null;
+    category: { class: string } | null;
 }
 
 interface FilesContextType {
-    addAlert: (title: string, variant: AlertVariant, key: string, detail?: string) => void,
-    cwdInfo: FileInfo | null,
+    addAlert: (
+        title: string,
+        variant: AlertVariant,
+        key: string,
+        detail?: string,
+    ) => void;
+    cwdInfo: FileInfo | null;
 }
 
 export const FilesContext = React.createContext({
@@ -74,7 +89,9 @@ export const Application = () => {
     const [errorMessage, setErrorMessage] = useState("");
     const [files, setFiles] = useState<FolderFileInfo[]>([]);
     const [selected, setSelected] = useState<FolderFileInfo[]>([]);
-    const [showHidden, setShowHidden] = useState(localStorage.getItem("files:showHiddenFiles") === "true");
+    const [showHidden, setShowHidden] = useState(
+        localStorage.getItem("files:showHiddenFiles") === "true",
+    );
     const [clipboard, setClipboard] = useState<string[]>([]);
     const [alerts, setAlerts] = useState<Alert[]>([]);
     const [cwdInfo, setCwdInfo] = useState<FileInfo | null>(null);
@@ -85,115 +102,145 @@ export const Application = () => {
     const path = useMemo(() => currentPath?.split("/"), [currentPath]);
 
     useEffect(() => {
-        cockpit.user().then(user => {
+        cockpit.user().then((user) => {
             if (options.path === undefined) {
-                cockpit.location.replace("/", { path: encodeURIComponent(user.home) });
+                cockpit.location.replace("/", {
+                    path: encodeURIComponent(user.home),
+                });
             }
         });
     }, [options]);
 
-    useEffect(
-        () => {
-            if (options.path === undefined) {
-                return;
-            }
+    useEffect(() => {
+        if (options.path === undefined) {
+            return;
+        }
 
-            // Reset selected when path changes
-            setSelected([]);
+        // Reset selected when path changes
+        setSelected([]);
 
-            const client = new FsInfoClient(
-                `/${currentPath}`,
-                ["type", "mode", "size", "mtime", "user", "group", "target", "entries", "targets"],
-                { superuser: 'try' }
-            );
+        const client = new FsInfoClient(
+            `/${currentPath}`,
+            [
+                "type",
+                "mode",
+                "size",
+                "mtime",
+                "user",
+                "group",
+                "target",
+                "entries",
+                "targets",
+            ],
+            { superuser: "try" },
+        );
 
-            const disconnect = client.on('change', (state) => {
-                setLoading(false);
-                setLoadingFiles(!(state.info || state.error));
-                setCwdInfo(state.info || null);
-                setErrorMessage(state.error?.message ?? "");
-                const entries = Object.entries(state?.info?.entries || {});
-                const files = entries.map(([name, attrs]) => {
-                    const to = FsInfoClient.target(state.info!, name)?.type ?? null;
-                    const category = to === 'reg' ? filetype_lookup(filetype_data, name) : null;
-                    return { ...attrs, name, to, category };
-                });
-                setFiles(files);
+        const disconnect = client.on("change", (state) => {
+            setLoading(false);
+            setLoadingFiles(!(state.info || state.error));
+            setCwdInfo(state.info || null);
+            setErrorMessage(state.error?.message ?? "");
+            const entries = Object.entries(state?.info?.entries || {});
+            const files = entries.map(([name, attrs]) => {
+                const to = FsInfoClient.target(state.info!, name)?.type ?? null;
+                const category =
+                    to === "reg" ? filetype_lookup(filetype_data, name) : null;
+                return { ...attrs, name, to, category };
             });
+            setFiles(files);
+        });
 
-            return () => {
-                disconnect();
-                client.close();
-            };
-        },
-        [options, currentPath]
-    );
+        return () => {
+            disconnect();
+            client.close();
+        };
+    }, [options, currentPath]);
 
-    if (loading)
-        return <EmptyStatePanel loading />;
+    if (loading) return <EmptyStatePanel loading />;
 
-    const addAlert = (title: string, variant: AlertVariant, key: string, detail?: string) => {
-        setAlerts(prevAlerts => [...prevAlerts, { title, variant, key, ...detail && { detail }, }]);
+    const addAlert = (
+        title: string,
+        variant: AlertVariant,
+        key: string,
+        detail?: string,
+    ) => {
+        setAlerts((prevAlerts) => [
+            ...prevAlerts,
+            { title, variant, key, ...(detail && { detail }) },
+        ]);
     };
-    const removeAlert = (key: string) => setAlerts(prevAlerts => prevAlerts.filter(alert => alert.key !== key));
+    const removeAlert = (key: string) =>
+        setAlerts((prevAlerts) =>
+            prevAlerts.filter((alert) => alert.key !== key),
+        );
 
     return (
         <Page>
             <FilesContext.Provider value={{ addAlert, cwdInfo }}>
                 <WithDialogs>
                     <AlertGroup isToast isLiveRegion>
-                        {alerts.map(alert => (
+                        {alerts.map((alert) => (
                             <Alert
-                              variant={alert.variant}
-                              title={alert.title}
-                              actionClose={
-                                  <AlertActionCloseButton
-                                    title={alert.title}
-                                    variantLabel={`${alert.variant} alert`}
-                                    onClose={() => removeAlert(alert.key)}
-                                  />
-                              }
-                              key={alert.key}
+                                variant={alert.variant}
+                                title={alert.title}
+                                actionClose={
+                                    <AlertActionCloseButton
+                                        title={alert.title}
+                                        variantLabel={`${alert.variant} alert`}
+                                        onClose={() => removeAlert(alert.key)}
+                                    />
+                                }
+                                key={alert.key}
                             >
                                 {alert.detail}
                             </Alert>
                         ))}
                     </AlertGroup>
                     <FilesBreadcrumbs
-                      path={path}
-                      showHidden={showHidden} setShowHidden={setShowHidden}
+                        path={path}
+                        showHidden={showHidden}
+                        setShowHidden={setShowHidden}
                     />
                     <PageSection>
                         <Sidebar isPanelRight hasGutter>
                             <SidebarContent>
-                                {errorMessage &&
-                                <Card>
-                                    <EmptyStatePanel
-                                      paragraph={errorMessage}
-                                      icon={ExclamationCircleIcon}
+                                {errorMessage && (
+                                    <Card>
+                                        <EmptyStatePanel
+                                            paragraph={errorMessage}
+                                            icon={ExclamationCircleIcon}
+                                        />
+                                    </Card>
+                                )}
+                                {!errorMessage && (
+                                    <FilesFolderView
+                                        path={path}
+                                        files={files}
+                                        loadingFiles={loadingFiles}
+                                        showHidden={showHidden}
+                                        setShowHidden={setShowHidden}
+                                        selected={selected}
+                                        setSelected={setSelected}
+                                        clipboard={clipboard}
+                                        setClipboard={setClipboard}
                                     />
-                                </Card>}
-                                {!errorMessage &&
-                                <FilesFolderView
-                                  path={path}
-                                  files={files}
-                                  loadingFiles={loadingFiles}
-                                  showHidden={showHidden}
-                                  setShowHidden={setShowHidden}
-                                  selected={selected}
-                                  setSelected={setSelected}
-                                  clipboard={clipboard}
-                                  setClipboard={setClipboard}
-                                />}
+                                )}
                             </SidebarContent>
                             <SidebarPanel className="sidebar-panel">
                                 <SidebarPanelDetails
-                                  path={path}
-                                  selected={selected.map(s => files.find(f => f.name === s.name))
-                                          .filter(s => s !== undefined)}
-                                  showHidden={showHidden} setSelected={setSelected}
-                                  clipboard={clipboard} setClipboard={setClipboard}
-                                  files={files}
+                                    path={path}
+                                    selected={selected
+                                        .map((s) =>
+                                            files.find(
+                                                (f) => f.name === s.name,
+                                            ),
+                                        )
+                                        .filter((s) => s !== undefined)}
+                                    showHidden={showHidden}
+                                    setSelected={setSelected}
+                                    clipboard={clipboard}
+                                    setClipboard={setClipboard}
+                                    files={files}
                                 />
                             </SidebarPanel>
                         </Sidebar>
