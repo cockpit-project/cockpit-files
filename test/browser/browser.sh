@@ -21,6 +21,12 @@ mkdir -p /root/.ssh
 curl https://raw.githubusercontent.com/cockpit-project/bots/main/machine/identity.pub >> /root/.ssh/authorized_keys
 chmod 600 /root/.ssh/authorized_keys
 
+# HACK: broken shadow-utils
+if grep -q 'platform:f41' /etc/os-release; then
+    rpm -q shadow-utils
+    dnf update -y shadow-utils
+fi
+
 # create user account for logging in
 if ! id admin 2>/dev/null; then
     useradd -c Administrator -G wheel admin
