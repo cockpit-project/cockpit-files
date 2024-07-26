@@ -17,7 +17,7 @@
  * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import {
     AlertGroup, Alert, AlertVariant, AlertActionCloseButton
@@ -67,6 +67,25 @@ export const FilesContext = React.createContext({
 
 export const useFilesContext = () => useContext(FilesContext);
 
+export const usePath = () => {
+    const { options } = usePageLocation();
+    let currentPath = decodeURIComponent(options.path?.toString() || "/");
+
+    // Trim all trailing slashes
+    currentPath = currentPath.replace(/\/+$/, '');
+
+    // Our path will always be `/foo/` formatted
+    if (!currentPath.endsWith("/")) {
+        currentPath += "/";
+    }
+
+    if (!currentPath.startsWith("/")) {
+        currentPath = `/${currentPath}`;
+    }
+
+    return currentPath;
+};
+
 export const Application = () => {
     const { options } = usePageLocation();
     const [loading, setLoading] = useState(true);
@@ -79,10 +98,7 @@ export const Application = () => {
     const [alerts, setAlerts] = useState<Alert[]>([]);
     const [cwdInfo, setCwdInfo] = useState<FileInfo | null>(null);
 
-    const currentPath = decodeURIComponent(options.path?.toString() || "");
-    // the function itself is not expensive, but `path` is later used in expensive computation
-    // and changing its reference value on every render causes performance issues
-    const path = useMemo(() => currentPath?.split("/"), [currentPath]);
+    const path = usePath();
 
     useEffect(() => {
         cockpit.user().then(user => {
@@ -102,7 +118,7 @@ export const Application = () => {
             setSelected([]);
 
             const client = new FsInfoClient(
-                `/${currentPath}`,
+                path,
                 ["type", "mode", "size", "mtime", "user", "group", "target", "entries", "targets"],
                 { superuser: 'try' }
             );
@@ -126,7 +142,7 @@ export const Application = () => {
                 client.close();
             };
         },
-        [options, currentPath]
+        [options, path]
     );
 
     if (loading)
@@ -159,9 +175,7 @@ export const Application = () => {
                             </Alert>
                         ))}
                     </AlertGroup>
-                    <FilesBreadcrumbs
-                      path={path}
-                    />
+                    <FilesBreadcrumbs path={path} />
                     <PageSection>
                         <Sidebar isPanelRight hasGutter>
                             <SidebarContent>

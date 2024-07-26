@@ -74,7 +74,7 @@ function checkCanOverride(candidate: string, entries: Record<string, FileInfo>, 
 
 const RenameItemModal = ({ dialogResult, path, selected } : {
     dialogResult: DialogResult<void>
-    path: string[],
+    path: string,
     selected: FolderFileInfo,
 }) => {
     const { cwdInfo } = useFilesContext();
@@ -84,12 +84,12 @@ const RenameItemModal = ({ dialogResult, path, selected } : {
     const [overrideFileName, setOverrideFileName] = useState(false);
 
     const renameItem = (force = false) => {
-        const newPath = path.join("/") + "/" + name;
+        const newPath = path + name;
         const mvCmd = ["mv", "--no-target-directory"];
         if (force) {
             mvCmd.push("--force");
         }
-        mvCmd.push(path.join("/") + "/" + selected.name, newPath);
+        mvCmd.push(path + selected.name, newPath);
 
         cockpit.spawn(mvCmd, { superuser: "try", err: "message" })
                 .then(() => {
@@ -167,6 +167,6 @@ const RenameItemModal = ({ dialogResult, path, selected } : {
     );
 };
 
-export function show_rename_dialog(dialogs: Dialogs, path: string[], selected: FolderFileInfo) {
+export function show_rename_dialog(dialogs: Dialogs, path: string, selected: FolderFileInfo) {
     dialogs.run(RenameItemModal, { path, selected });
 }

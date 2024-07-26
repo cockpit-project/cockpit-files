@@ -37,7 +37,7 @@ export const FilesFolderView = ({
     setClipboard,
     setShowHidden,
 }: {
-    path: string[],
+    path: string,
     files: FolderFileInfo[],
     loadingFiles: boolean,
     showHidden: boolean,

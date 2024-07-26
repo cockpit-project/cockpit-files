@@ -37,7 +37,7 @@ import { useDialogs } from "dialogs";
 import * as timeformat from "timeformat";
 
 import { FolderFileInfo, useFilesContext } from "./app";
-import { get_permissions } from "./common";
+import { basename, get_permissions } from "./common";
 import { edit_permissions } from "./dialogs/permissions";
 import { get_menu_items } from "./menu";
 
@@ -93,7 +93,7 @@ function getDescriptionListItems(selected: FolderFileInfo) {
 
 export const SidebarPanelDetails = ({ files, path, selected, setSelected, showHidden, clipboard, setClipboard } : {
     files: FolderFileInfo[],
-    path: string[],
+    path: string,
     selected: FolderFileInfo[], setSelected: React.Dispatch<React.SetStateAction<FolderFileInfo[]>>,
     showHidden: boolean,
     clipboard: string[], setClipboard: React.Dispatch<React.SetStateAction<string[]>>
@@ -103,7 +103,7 @@ export const SidebarPanelDetails = ({ files, path, selected, setSelected, showHi
 
     useEffect(() => {
         if (selected.length === 1) {
-            const filePath = path.join("/") + "/" + selected[0]?.name;
+            const filePath = path + selected[0]?.name;
 
             cockpit.spawn(["file", "--brief", filePath], { superuser: "try", err: "message" })
                     .then(res => setInfo(res?.trim()))
@@ -112,7 +112,7 @@ export const SidebarPanelDetails = ({ files, path, selected, setSelected, showHi
     }, [path, selected]);
 
     const dialogs = useDialogs();
-    const directory_name = path[path.length - 1];
+    const directory_name = basename(path);
     const hidden_count = files.filter(file => file.name.startsWith(".")).length;
     let shown_items = cockpit.format(cockpit.ngettext("$0 item", "$0 items", files.length), files.length);
     if (!showHidden)

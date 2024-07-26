@@ -45,14 +45,13 @@ type MenuItem = { type: "divider" } | {
 };
 
 export function get_menu_items(
-    path: string[],
+    path: string,
     selected: FolderFileInfo[], setSelected: React.Dispatch<React.SetStateAction<FolderFileInfo[]>>,
     clipboard: string[], setClipboard: React.Dispatch<React.SetStateAction<string[]>>,
     cwdInfo: FileInfo | null,
     addAlert: (title: string, variant: AlertVariant, key: string, detail?: string) => void,
     dialogs: Dialogs,
 ) {
-    const currentPath = path.join("/") + "/";
     const menuItems: MenuItem[] = [];
 
     if (selected.length === 0) {
@@ -73,7 +72,7 @@ export function get_menu_items(
                         "cp",
                         "-R",
                         ...clipboard,
-                        currentPath
+                        path
                     ]).catch(err => addAlert(err.message, AlertVariant.danger, `${new Date().getTime()}`));
                 }
             },
@@ -81,7 +80,7 @@ export function get_menu_items(
             {
                 id: "create-item",
                 title: _("Create directory"),
-                onClick: () => show_create_directory_dialog(dialogs, currentPath)
+                onClick: () => show_create_directory_dialog(dialogs, path)
             },
             { type: "divider" },
             {
@@ -95,7 +94,7 @@ export function get_menu_items(
             {
                 id: "copy-item",
                 title: _("Copy"),
-                onClick: () => setClipboard([currentPath + selected[0].name]),
+                onClick: () => setClipboard([path + selected[0].name]),
             },
             { type: "divider" },
             {
@@ -113,7 +112,7 @@ export function get_menu_items(
                 id: "delete-item",
                 title: _("Delete"),
                 className: "pf-m-danger",
-                onClick: () => confirm_delete(dialogs, currentPath, selected, setSelected)
+                onClick: () => confirm_delete(dialogs, path, selected, setSelected)
             },
         );
         if (selected[0].type === "reg")
@@ -122,7 +121,7 @@ export function get_menu_items(
                 {
                     id: "download-item",
                     title: _("Download"),
-                    onClick: () => downloadFile(currentPath, selected[0])
+                    onClick: () => downloadFile(path, selected[0])
                 }
             );
     } else if (selected.length > 1) {
@@ -130,13 +129,13 @@ export function get_menu_items(
             {
                 id: "copy-item",
                 title: _("Copy"),
-                onClick: () => setClipboard(selected.map(s => path.join("/") + "/" + s.name)),
+                onClick: () => setClipboard(selected.map(s => path + s.name)),
             },
             {
                 id: "delete-item",
                 title: _("Delete"),
                 className: "pf-m-danger",
-                onClick: () => confirm_delete(dialogs, currentPath, selected, setSelected)
+                onClick: () => confirm_delete(dialogs, path, selected, setSelected)
             }
         );
     }
