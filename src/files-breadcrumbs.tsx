@@ -37,7 +37,7 @@ import { basename } from "./common";
 
 const _ = cockpit.gettext;
 
-function BookmarkButton({ path }: { path: string[] }) {
+function BookmarkButton({ path }: { path: string }) {
     const [isOpen, setIsOpen] = React.useState(false);
     const [user, setUser] = React.useState<cockpit.UserInfo | null>(null);
     const [bookmarks, setBookmarks] = React.useState<string[]>([]);
@@ -45,10 +45,12 @@ function BookmarkButton({ path }: { path: string[] }) {
 
     const { addAlert, cwdInfo } = useFilesContext();
 
-    const currentPath = path.join("/") || "/";
     const defaultBookmarks = [];
-    if (user?.home)
-        defaultBookmarks.push({ name: _("Home"), loc: user?.home }); // TODO: add trash
+    if (user?.home) {
+        // Ensure the home dir has a trailing / like the path
+        const home_dir = user.home.endsWith('/') ? user.home : `${user.home}/`;
+        defaultBookmarks.push({ name: _("Home"), loc: home_dir }); // TODO: add trash
+    }
 
     const parse_uri = (line: string) => {
         // Drop everything after the space, we don't show renames
@@ -58,8 +60,15 @@ function BookmarkButton({ path }: { path: string[] }) {
         line = line.replace('file://', '');
 
         // Nautilus decodes urls as paths can contain spaces
-        return line.split('/').map(part => decodeURIComponent(part))
+        let bookmark_path = line.split('/').map(part => decodeURIComponent(part))
                 .join('/');
+
+        // Ensure the bookmark has a trailing slash
+        if (!bookmark_path.endsWith('/')) {
+            bookmark_path = `${bookmark_path}/`;
+        }
+
+        return bookmark_path;
     };
 
     useInit(async () => {
@@ -99,11 +108,11 @@ function BookmarkButton({ path }: { path: string[] }) {
 
         try {
             await bookmarkHandle.modify((old_content: string) => {
-                if (bookmarks.includes(currentPath)) {
-                    return old_content.split('\n').filter(line => parse_uri(line) !== currentPath)
+                if (bookmarks.includes(path)) {
+                    return old_content.split('\n').filter(line => parse_uri(line) !== path)
                             .join('\n');
                 } else {
-                    const newBoomark = "file://" + path.map(part => encodeURIComponent(part))
+                    const newBoomark = "file://" + path.split('/').map(part => encodeURIComponent(part))
                             .join('/') + "\n";
                     return (old_content || '') + newBoomark;
                 }
@@ -129,8 +138,8 @@ function BookmarkButton({ path }: { path: string[] }) {
         return null;
 
     let actionText = null;
-    if (currentPath !== user.home) {
-        if (bookmarks.includes(currentPath)) {
+    if (!defaultBookmarks.some(bkmark => bkmark.loc === path)) {
+        if (bookmarks.includes(path)) {
             actionText = _("Remove current directory");
         } else if (cwdInfo !== null) {
             actionText = _("Add bookmark");
@@ -182,16 +191,11 @@ function BookmarkButton({ path }: { path: string[] }) {
     );
 }
 
-const PathBreadcrumbs = ({ path }: { path: string[] }) => {
-    // HACK: strip extraneous slashes as PF's breadcrumb can't handle them
-    // Refactor the path to be the fullpath not an array of strings
-    if (path.length >= 2 && path[0] === '' && path[1] === '') {
-        path = path.slice(1);
-    }
-
-    if (path.length > 1 && path[path.length - 1] === '') {
-        path = path.slice(path.length - 1);
-    }
+const PathBreadcrumbs = ({ path }: { path: string }) => {
+    // Strip the trailing slash as it gets in the way when splitting paths and
+    // adds an extra trailing slash in the UI which we don't want to show and
+    // causes duplicate keys for the path `/`.
+    const path_array = path.replace(/\/$/, "").split("/");
 
     function navigate(event: React.MouseEvent<HTMLElement>) {
         const { button, ctrlKey, metaKey } = event;
@@ -213,8 +217,8 @@ const PathBreadcrumbs = ({ path }: { path: string[] }) => {
 
     return (
         <Breadcrumb onClick={(event) => navigate(event)}>
-            {path.map((dir, i) => {
-                const url_path = path.slice(0, i + 1).join("/") || '/';
+            {path_array.map((dir, i) => {
+                const url_path = path_array.slice(0, i + 1).join("/") || '/';
                 // We can't use a relative path as that will use the iframe's
                 // url while we want the outer shell url. And we can't obtain
                 // the full path of the shell easily, so a middle click will
@@ -226,7 +230,7 @@ const PathBreadcrumbs = ({ path }: { path: string[] }) => {
                       key={url_path}
                       data-location={url_path}
                       to={link}
-                      isActive={i === path.length - 1}
+                      isActive={i === path_array.length - 1}
                     >
                         {i === 0 &&
                             <Tooltip
@@ -244,7 +248,7 @@ const PathBreadcrumbs = ({ path }: { path: string[] }) => {
 };
 
 // eslint-disable-next-line max-len
-export function FilesBreadcrumbs({ path }: { path: string[] }) {
+export function FilesBreadcrumbs({ path }: { path: string }) {
     const [editMode, setEditMode] = React.useState(false);
     const [newPath, setNewPath] = React.useState<string | null>(null);
 
@@ -265,7 +269,7 @@ export function FilesBreadcrumbs({ path }: { path: string[] }) {
 
     const enableEditMode = () => {
         setEditMode(true);
-        setNewPath(path.join("/") || "/");
+        setNewPath(path);
     };
 
     const changePath = () => {

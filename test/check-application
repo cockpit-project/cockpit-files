@@ -260,6 +260,10 @@ class TestFiles(testlib.MachineCase):
         b.wait_in_text(".pf-v5-c-empty-state__body", "No such file or directory")
         b.wait_visible("#dropdown-menu:disabled")
 
+        # Path with multiple slashes is normalized
+        b.go("/files#/?path=/////")
+        b.wait_text("li[data-location='/']", "")
+
     def testNavigation(self) -> None:
         b = self.browser
         m = self.machine
@@ -346,7 +350,7 @@ class TestFiles(testlib.MachineCase):
 
         # Via escape
         b.click(edit_button)
-        b.wait_val(path_input, "/home")
+        b.wait_val(path_input, "/home/")
         b.set_input_text(path_input, "/home/admin")
         b.wait_visible(path_input)
         b.focus(path_input)
@@ -356,7 +360,7 @@ class TestFiles(testlib.MachineCase):
         # Via cancel button
         b.click(edit_button)
         # Cancelled edit should not save the path
-        b.wait_val(path_input, "/home")
+        b.wait_val(path_input, "/home/")
         b.click(cancel_button)
         b.wait_not_present(path_input)
 
@@ -382,7 +386,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_not_present(path_input)
         b.click(edit_button)
         b.wait_visible(path_input)
-        b.wait_val(path_input, "/var")
+        b.wait_val(path_input, "/var/")
         b.click(cancel_button)
 
         # Editing / shows / in the input
@@ -1193,7 +1197,7 @@ class TestFiles(testlib.MachineCase):
         b.click("button:contains('Edit permissions')")
         select_access("7")
         b.click("button.pf-m-primary")
-        self.wait_modal_inline_alert("chmod: changing permissions of '//home': Operation not permitted")
+        self.wait_modal_inline_alert("chmod: changing permissions of '/home': Operation not permitted")
         b.click("button.pf-m-link")
         b.wait_not_present(".pf-v5-c-modal-box")
 
@@ -1832,6 +1836,7 @@ class TestFiles(testlib.MachineCase):
             b.wait_not_present(".pf-v5-c-menu .pf-v5-c-menu__list-item")
 
         b.click("#bookmark-btn")
+        # There is only one menu item
         b.wait_in_text(".pf-v5-c-menu .pf-v5-c-menu__list-item", "Home")
         # Home directory cannot be added or removed as bookmark
         b.wait_not_present(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add bookmark)")
@@ -1894,7 +1899,7 @@ class TestFiles(testlib.MachineCase):
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add bookmark) button")
 
         assert_bookmark("This is a-test", exists=True)
-        self.assertIn("file:///home/admin/This%20is%20a-test\n", read_config())
+        self.assertIn("file:///home/admin/This%20is%20a-test/\n", read_config())
 
         # Removing /tmp bookmark keeps bookmark with spaces
         b.click("#bookmark-btn")
@@ -1906,7 +1911,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_not_present(".pf-v5-c-menu")
 
         assert_bookmark("/tmp", exists=False)
-        self.assertEqual(read_config(), "file:///etc\nfile:///home/admin/This%20is%20a-test\n")
+        self.assertEqual(read_config(), "file:///etc/\nfile:///home/admin/This%20is%20a-test/\n")
 
         # Add a directory with special characters
         special_dir = "super#special*1 2><.,ß"
@@ -1920,7 +1925,7 @@ class TestFiles(testlib.MachineCase):
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add bookmark) button")
 
         assert_bookmark(special_dir, exists=True)
-        self.assertEqual("file:///etc\nfile:///home/admin/This%20is%20a-test\nfile:///home/admin/super%23special*1%202%3E%3C.%2C%C3%9F\n",
+        self.assertEqual("file:///etc/\nfile:///home/admin/This%20is%20a-test/\nfile:///home/admin/super%23special*1%202%3E%3C.%2C%C3%9F/\n",
                          read_config())
 
         b.click("li[data-location='/home/admin'] a")
@@ -1935,7 +1940,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_not_present(".pf-v5-c-menu")
 
         assert_bookmark(special_dir, exists=False)
-        self.assertEqual(read_config(), "file:///etc\nfile:///home/admin/This%20is%20a-test\n")
+        self.assertEqual(read_config(), "file:///etc/\nfile:///home/admin/This%20is%20a-test/\n")
 
         # Modifications outside of Cockpit are shown
         m.execute("""

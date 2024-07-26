@@ -32,7 +32,7 @@ import { etc_group_syntax, etc_passwd_syntax } from 'pam_user_parser';
 import { superuser } from 'superuser';
 
 import { useFilesContext } from '../app';
-import { map_permissions, inode_types } from '../common';
+import { map_permissions, inode_types, basename } from '../common';
 
 const _ = cockpit.gettext;
 
@@ -41,7 +41,7 @@ const EditPermissionsModal = ({ dialogResult, selected, path }) => {
 
     // Nothing selected means we act on the current working directory
     if (!selected) {
-        const directory_name = path[path.length - 1];
+        const directory_name = basename(path);
         selected = { ...cwdInfo, isCwd: true, name: directory_name };
     }
 
@@ -82,7 +82,7 @@ const EditPermissionsModal = ({ dialogResult, selected, path }) => {
         const ownerChanged = owner !== selected.user || group !== selected.group;
 
         try {
-            const directory = selected?.isCwd ? path.join("/") : path.join("/") + "/" + selected.name;
+            const directory = selected?.isCwd ? path : path + selected.name;
             if (permissionChanged)
                 await cockpit.spawn(["chmod", mode.toString(8), directory],
                                     { superuser: "try", err: "message" });

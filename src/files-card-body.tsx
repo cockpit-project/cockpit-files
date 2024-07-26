@@ -75,7 +75,7 @@ function compare(sortBy: Sort): (a: FolderFileInfo, b: FolderFileInfo) => number
 }
 
 const ContextMenuItems = ({ path, selected, setSelected, clipboard, setClipboard } : {
-    path: string[],
+    path: string,
     selected: FolderFileInfo[], setSelected: React.Dispatch<React.SetStateAction<FolderFileInfo[]>>,
     clipboard: string[], setClipboard: React.Dispatch<React.SetStateAction<string[]>>,
 }) => {
@@ -124,7 +124,7 @@ export const FilesCardBody = ({
     setCurrentFilter: React.Dispatch<React.SetStateAction<string>>,
     files: FolderFileInfo[],
     isGrid: boolean,
-    path: string[],
+    path: string,
     selected: FolderFileInfo[], setSelected: React.Dispatch<React.SetStateAction<FolderFileInfo[]>>,
     sortBy: Sort, setSortBy: React.Dispatch<React.SetStateAction<Sort>>,
     loadingFiles: boolean,
@@ -159,7 +159,7 @@ export const FilesCardBody = ({
     }
 
     const onDoubleClickNavigate = useCallback((file: FolderFileInfo) => {
-        const newPath = [...path, file.name].join("/");
+        const newPath = path + file.name;
         if (file.to === "dir") {
             cockpit.location.go("/", { path: encodeURIComponent(newPath) });
         }
@@ -281,7 +281,7 @@ export const FilesCardBody = ({
             } else if (e.key === "Enter" && selected.length === 1) {
                 onDoubleClickNavigate(selected[0]);
             } else if (e.key === "Delete" && selected.length !== 0) {
-                confirm_delete(dialogs, path.join("/") + "/", selected, setSelected);
+                confirm_delete(dialogs, path, selected, setSelected);
             }
         };
 

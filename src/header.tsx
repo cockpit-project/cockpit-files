@@ -124,7 +124,7 @@ export const FilesCardHeader = ({
     isGrid: boolean, setIsGrid: React.Dispatch<React.SetStateAction<boolean>>,
     sortBy: Sort, setSortBy: React.Dispatch<React.SetStateAction<Sort>>
     showHidden: boolean, setShowHidden: React.Dispatch<React.SetStateAction<boolean>>,
-    path: string[],
+    path: string,
 }) => {
     return (
         <CardHeader className="card-actionbar">

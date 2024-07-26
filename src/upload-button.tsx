@@ -55,7 +55,7 @@ const FileConflictDialog = ({
     isMultiUpload,
     dialogResult
 }: {
-    path: string[];
+    path: string;
     file: FileInfo,
     uploadFile: File,
     isMultiUpload: boolean,
@@ -96,7 +96,7 @@ const FileConflictDialog = ({
             <p>
                 {cockpit.format(
                     _("A file with the same name already exists in \"$0\". Replacing it will overwrite its content."),
-                    path.join('/')
+                    path
                 )}
             </p>
             <Flex
@@ -129,7 +129,7 @@ const FileConflictDialog = ({
 export const UploadButton = ({
     path,
 } : {
-    path: string[],
+    path: string,
 }) => {
     const ref = useRef<HTMLInputElement>(null);
     const { addAlert, cwdInfo } = useFilesContext();
@@ -209,9 +209,7 @@ export const UploadButton = ({
 
         const cancelledUploads = [];
         await Promise.allSettled(toUploadFiles.map(async (file: File) => {
-            const tmp_path = path.slice();
-            tmp_path.push(file.name);
-            const destination = tmp_path.join('/');
+            const destination = path + file.name;
             const abort = new AbortController();
 
             setUploadedFiles(oldFiles => {
