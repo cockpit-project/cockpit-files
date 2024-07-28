@@ -17,7 +17,7 @@
   "devDependencies": {
     "@types/react": "18.3.3",
     "@types/react-dom": "18.3.0",
-    "@typescript-eslint/eslint-plugin": "7.16.1",
+    "@typescript-eslint/eslint-plugin": "7.17.0",
     "argparse": "2.0.1",
     "chrome-remote-interface": "0.33.0",
     "esbuild": "0.23.0",
@@ -49,7 +49,7 @@
     "stylelint-formatter-pretty": "4.0.0",
     "stylelint-use-logical-spec": "^5.0.1",
     "tsx": "4.16.2",
-    "typescript": "5.5.3"
+    "typescript": "5.5.4"
   },
   "dependencies": {
     "@patternfly/patternfly": "5.3.1",
