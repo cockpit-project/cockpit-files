@@ -20,6 +20,7 @@
 import React, { useEffect, useState } from "react";
 
 import { Card } from '@patternfly/react-core/dist/esm/components/Card';
+import { debounce } from "throttle-debounce";
 
 import type { FolderFileInfo } from "./app";
 import { FilesCardBody } from "./files-card-body";
@@ -47,7 +48,9 @@ export const FilesFolderView = ({
     const [currentFilter, setCurrentFilter] = useState("");
     const [isGrid, setIsGrid] = useState(localStorage.getItem("files:isGrid") !== "false");
     const [sortBy, setSortBy] = useState(as_sort(localStorage.getItem("files:sort")));
-    const onFilterChange = (_event: React.FormEvent<HTMLInputElement>, value: string) => setCurrentFilter(value);
+    const onFilterChange = debounce(300,
+                                    (_event: React.FormEvent<HTMLInputElement>, value: string) =>
+                                        setCurrentFilter(value));
 
     // Reset the search filter on path changes
     useEffect(() => {
