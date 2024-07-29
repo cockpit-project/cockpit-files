@@ -42,6 +42,8 @@ export enum Sort {
     smallest_size = 'smallest_size',
     first_modified = 'first_modified',
     last_modified = 'last_modified',
+    most_permissive = 'most_permissive',
+    least_permissive = 'least_permissive',
 }
 
 export function is_sort(x: unknown): x is Sort {
@@ -84,6 +86,17 @@ export const filterColumns = [
         [SortByDirection.desc]: {
             itemId: Sort.last_modified,
             label: _("Last modified"),
+        },
+    },
+    {
+        title: _("Permissions"),
+        [SortByDirection.asc]: {
+            itemId: Sort.most_permissive,
+            label: _("Most permissive"),
+        },
+        [SortByDirection.desc]: {
+            itemId: Sort.least_permissive,
+            label: _("Least permissive"),
         },
     },
 ] as const;
