@@ -29,7 +29,7 @@ export const permissions = [
     /* 4 */ _("Read-only"),
     /* 5 */ _("Read and execute"),
     /* 6 */ _("Read and write"),
-    /* 7 */ _("Read, write and execute"),
+    /* 7 */ _("Read, write, and execute"),
 ];
 
 export const inode_types = {

@@ -22,6 +22,8 @@ import React, { useCallback, useEffect, useMemo, useState, useRef } from "react"
 import { Divider } from "@patternfly/react-core/dist/esm/components/Divider";
 import { MenuItem, MenuList } from "@patternfly/react-core/dist/esm/components/Menu";
 import { Spinner } from "@patternfly/react-core/dist/esm/components/Spinner";
+import { Text, TextVariants } from "@patternfly/react-core/dist/esm/components/Text";
+import { Tooltip } from "@patternfly/react-core/dist/esm/components/Tooltip";
 import { Flex } from "@patternfly/react-core/dist/esm/layouts/Flex";
 import { FolderIcon, SearchIcon } from '@patternfly/react-icons';
 import { SortByDirection, Table, Thead, Tr, Th, Tbody, Td } from '@patternfly/react-table';
@@ -33,6 +35,7 @@ import { useDialogs } from "dialogs";
 import * as timeformat from "timeformat";
 
 import { FolderFileInfo, useFilesContext } from "./app";
+import { get_permissions } from "./common";
 import { confirm_delete } from "./dialogs/delete";
 import { Sort, filterColumnMapping, filterColumns } from "./header";
 import { get_menu_items } from "./menu";
@@ -48,6 +51,8 @@ function compare(sortBy: Sort): (a: FolderFileInfo, b: FolderFileInfo) => number
     // treat non-regular files and infos with missing 'size' field as having size of zero
     const size = (a: FolderFileInfo) => (a.type === "reg" && a.size) || 0;
     const mtime = (a: FolderFileInfo) => a.mtime || 0; // fallbak for missing .mtime field
+    // mask special bits when sorting
+    const perms = (a: FolderFileInfo) => a.mode ? (a.mode & (~(0b111 << 9))) : 0;
 
     switch (sortBy) {
     case Sort.az:
@@ -62,6 +67,10 @@ function compare(sortBy: Sort): (a: FolderFileInfo, b: FolderFileInfo) => number
         return (a, b) => dir_sort(a, b) || (size(b) - size(a)) || name_sort(a, b);
     case Sort.smallest_size:
         return (a, b) => dir_sort(a, b) || (size(a) - size(b)) || name_sort(a, b);
+    case Sort.most_permissive:
+        return (a, b) => dir_sort(a, b) || (perms(b) - perms(a)) || name_sort(a, b);
+    case Sort.least_permissive:
+        return (a, b) => dir_sort(a, b) || (perms(a) - perms(b)) || name_sort(a, b);
     }
 }
 
@@ -409,6 +418,11 @@ export const FilesCardBody = ({
                               modifier="nowrap"
                             >{_("Modified")}
                             </Th>
+                            <Th
+                              sort={sortColumn(3)} className="col-perms"
+                              modifier="nowrap"
+                            >{_("Permissions")}
+                            </Th>
                         </Tr>
                     </Thead>
                     <Tbody>
@@ -432,6 +446,63 @@ const getFileType = (file: FolderFileInfo) => {
     } else {
         return "file";
     }
+};
+
+const FilePermissions = ({ file } : {
+    file: FolderFileInfo,
+}) => {
+    function permissionShortStr(mode: number) {
+        const specialBits = (mode >> 9) & 0b111;
+        const permsStr = [];
+        for (let i = 2; i >= 0; i--) {
+            const offset = i * 3;
+            let shortStr = "";
+            shortStr += (mode & (0b1 << (offset + 2))) ? "r" : "-";
+            shortStr += (mode & (0b1 << (offset + 1))) ? "w" : "-";
+
+            if (mode & (1 << offset)) {
+                if (specialBits & (0b1 << i)) {
+                    shortStr += (i === 0) ? "t" : "s";
+                } else {
+                    shortStr += "x";
+                }
+            } else {
+                if (specialBits & (0b1 << i)) {
+                    shortStr += (i === 0) ? "T" : "S";
+                } else {
+                    shortStr += "-";
+                }
+            }
+
+            permsStr.push(shortStr);
+        }
+
+        return permsStr.join(" ");
+    }
+
+    const mode = file.mode;
+    if (mode === undefined) {
+        return null;
+    }
+    const permsGroups = [_("Owner"), _("Group"), _("Others")];
+    const tooltip = (
+        <dl className="permissions-tooltip-text">
+            {permsGroups.map((permGroup, i) => {
+                return (
+                    <React.Fragment key={file.name + "-" + permGroup}>
+                        <dt>{permGroup + ":"}</dt>
+                        <dd>{get_permissions(mode >> (6 - 3 * i)).toLowerCase()}</dd>
+                    </React.Fragment>
+                );
+            })}
+        </dl>
+    );
+
+    return (
+        <Tooltip content={tooltip}>
+            <Text component={TextVariants.pre}>{permissionShortStr(mode)}</Text>
+        </Tooltip>
+    );
 };
 
 // Memoize the Item component as rendering thousands of them on each render of parent component is costly.
@@ -469,6 +540,12 @@ const Row = React.memo(function Item({ file, isSelected } : {
               modifier="nowrap"
             >
                 {file.mtime ? timeformat.dateTime(file.mtime * 1000) : null}
+            </Td>
+            <Td
+              className="item-perms"
+              modifier="nowrap"
+            >
+                <FilePermissions file={file} />
             </Td>
         </Tr>
     );

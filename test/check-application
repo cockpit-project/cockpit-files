@@ -552,6 +552,68 @@ class TestFiles(testlib.MachineCase):
         b.wait_text("#folder-view tbody tr:nth-of-type(5) .item-name", "aaa")
         b.wait_text("#folder-view tbody tr:nth-of-type(6) .item-name", "ccc")
 
+        # Test sorting by permissions
+        basedir = "/home/admin"
+        m.execute(f"""
+        chmod 0754 {basedir}/eee
+        chmod 0755 {basedir}/Eee
+        chmod 0500 {basedir}/BBB
+        chmod 0477 {basedir}/aaa
+        chmod 0511 {basedir}/ccc
+        """)
+
+        b.click("th button:contains(Permissions)")
+        b.wait_visible("th[aria-sort='ascending'].pf-m-selected button:contains(Permissions)")
+        b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "ddd")
+        b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "Eee")
+        b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-name", "eee")
+        b.wait_text("#folder-view tbody tr:nth-of-type(4) .item-name", "ccc")
+        b.wait_text("#folder-view tbody tr:nth-of-type(5) .item-name", "BBB")
+        b.wait_text("#folder-view tbody tr:nth-of-type(6) .item-name", "aaa")
+
+        # Directories are sorted first
+        m.execute(f"""
+        chmod 0755 {basedir}/eee
+        chmod 0123 {basedir}/Eee
+        chmod 0777 {basedir}/BBB
+        chmod 0640 {basedir}/aaa
+        chmod 0600 {basedir}/ccc
+        """)
+
+        b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "ddd")
+        b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "eee")
+        b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-name", "Eee")
+        b.wait_text("#folder-view tbody tr:nth-of-type(4) .item-name", "BBB")
+        b.wait_text("#folder-view tbody tr:nth-of-type(5) .item-name", "aaa")
+        b.wait_text("#folder-view tbody tr:nth-of-type(6) .item-name", "ccc")
+
+        # Clicking again inverts the list
+        # Directories are still sorted first
+        b.click("th button:contains(Permissions)")
+        b.wait_visible("th[aria-sort='descending'].pf-m-selected button:contains(Permissions)")
+        b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "Eee")
+        b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "eee")
+        b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-name", "ddd")
+        b.wait_text("#folder-view tbody tr:nth-of-type(4) .item-name", "ccc")
+        b.wait_text("#folder-view tbody tr:nth-of-type(5) .item-name", "aaa")
+        b.wait_text("#folder-view tbody tr:nth-of-type(6) .item-name", "BBB")
+
+        # Special bits are not used for sorting
+        m.execute(f"""
+        chmod 6755 {basedir}/eee
+        chmod 0755 {basedir}/Eee
+        chmod 1700 {basedir}/BBB
+        chmod 3700 {basedir}/aaa
+        chmod 0701 {basedir}/ccc
+        """)
+
+        b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "Eee")
+        b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "eee")
+        b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-name", "ddd")
+        b.wait_text("#folder-view tbody tr:nth-of-type(4) .item-name", "aaa")
+        b.wait_text("#folder-view tbody tr:nth-of-type(5) .item-name", "BBB")
+        b.wait_text("#folder-view tbody tr:nth-of-type(6) .item-name", "ccc")
+
     def testDelete(self) -> None:
         b = self.browser
         m = self.machine
@@ -1065,7 +1127,7 @@ class TestFiles(testlib.MachineCase):
         select_access("7")
         b.click("button.pf-m-primary")
         self.assertEqual(m.execute("ls -l /home/admin/newfile")[:10], "-rwxrwxrwx")
-        wait_permissions("Read, write and execute")
+        wait_permissions("Read, write, and execute")
 
         # Test changing CWD permissions
         test_dir = "/home/admin/testdir"
@@ -1123,7 +1185,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_not_in_text(".pf-v5-c-modal-box__body", "Ownership")
         b.click("button.pf-m-primary")
         self.assertEqual(m.execute("ls -l /home/admin/adminfile")[:10], "-rwxrwxrwx")
-        wait_permissions("Read, write and execute")
+        wait_permissions("Read, write, and execute")
         # Does not change ownership
         b.wait_text("#description-list-owner dd", "admin")
         b.wait_text("#description-list-group dd", "admin")
@@ -1137,6 +1199,83 @@ class TestFiles(testlib.MachineCase):
         self.wait_modal_inline_alert("chmod: changing permissions of '/home': Operation not permitted")
         b.click("button.pf-m-link")
         b.wait_not_present(".pf-v5-c-modal-box")
+
+        # Test permissions in details view
+        b.go("/files#/?path=/home/admin")
+        b.wait_not_present(".pf-v5-c-empty-state")
+        b.click("button[aria-label='Display as a list']")
+        basedir = "/home/admin"
+        for i in range(8):
+            m.execute(f"runuser -u admin touch {basedir}/file{i}")
+
+        def check_perms_match(file: str, basedir: str) -> None:
+            ls = m.execute(f"ls -l {basedir}/{file}")[:10]
+            ui = b.text(f"[data-item='{file}'] td:nth-child(4) pre").replace(" ", "")
+            self.assertEqual(ls[1:], ui)
+
+        # Simple permissions
+        m.execute(f"""
+        chmod 000 {basedir}/file0
+        chmod 111 {basedir}/file1
+        chmod 222 {basedir}/file2
+        chmod 333 {basedir}/file3
+        chmod 444 {basedir}/file4
+        chmod 555 {basedir}/file5
+        chmod 666 {basedir}/file6
+        chmod 777 {basedir}/file7
+        """)
+
+        b.mouse("[data-item='file6'] .item-perms pre", "mouseenter")
+        b.wait_in_text(".pf-v5-c-tooltip dd:nth-of-type(1)", "read and write")
+        b.wait_in_text(".pf-v5-c-tooltip dd:nth-of-type(2)", "read and write")
+        b.wait_in_text(".pf-v5-c-tooltip dd:nth-of-type(3)", "read and write")
+        b.mouse("[data-item='file6'] .item-perms pre", "mouseleave")
+
+        for i in range(8):
+            check_perms_match(f"file{i}", basedir)
+
+        # Test different permissions for owner/group/others
+        m.execute(f"""
+        chmod 411 {basedir}/file0
+        chmod 546 {basedir}/file1
+        chmod 337 {basedir}/file2
+        chmod 755 {basedir}/file3
+        chmod 613 {basedir}/file4
+        chmod 711 {basedir}/file5
+        chmod 531 {basedir}/file6
+        chmod 740 {basedir}/file7
+        """)
+
+        b.mouse("[data-item='file4'] .item-perms pre", "mouseenter")
+        b.wait_in_text(".pf-v5-c-tooltip dd:nth-of-type(1)", "read and write")
+        b.wait_in_text(".pf-v5-c-tooltip dd:nth-of-type(2)", "execute-only")
+        b.wait_in_text(".pf-v5-c-tooltip dd:nth-of-type(3)", "write and execute")
+        b.assert_pixels(".pf-v5-c-page__main", "permissions-tooltip", mock={".item-date": "Jun 19, 2024, 11:30 AM"})
+        b.mouse("[data-item='file4'] .item-perms pre", "mouseleave")
+
+        for i in range(8):
+            check_perms_match(f"file{i}", basedir)
+
+        # Test permissions with setuid, setgid, sticky
+        m.execute(f"""
+        chmod 1000 {basedir}/file0
+        chmod 2111 {basedir}/file1
+        chmod 3222 {basedir}/file2
+        chmod 4333 {basedir}/file3
+        chmod 5444 {basedir}/file4
+        chmod 6555 {basedir}/file5
+        chmod 7666 {basedir}/file6
+        chmod 3777 {basedir}/file7
+        """)
+
+        b.mouse("[data-item='file7'] .item-perms pre", "mouseenter")
+        b.wait_in_text(".pf-v5-c-tooltip dd:nth-of-type(1)", "read, write, and execute")
+        b.wait_in_text(".pf-v5-c-tooltip dd:nth-of-type(2)", "read, write, and execute")
+        b.wait_in_text(".pf-v5-c-tooltip dd:nth-of-type(3)", "read, write, and execute")
+        b.mouse("[data-item='file7'] .item-perms pre", "mouseleave")
+
+        for i in range(8):
+            check_perms_match(f"file{i}", basedir)
 
     def testErrors(self) -> None:
         b = self.browser

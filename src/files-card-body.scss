@@ -197,13 +197,15 @@
         }
 
         .col-size, .item-size,
-        .col-date, .item-date {
+        .col-date, .item-date,
+        .col-perms, .item-perms {
             inline-size: 12ch;
             text-align: end;
         }
 
         // Remove the extra padding on the end of the column and button, as the icon has padding already
-        .col-size, .col-date {
+        .col-size, .col-date,
+        .col-perms {
             &, .pf-v5-c-table__button {
                 padding-inline-end: 0;
             }
@@ -218,7 +220,7 @@
             padding-inline-start: var(--pf-v5-global--spacer--lg);
         }
 
-        :last-child:is(td, th) {
+        :last-child:is(td, th):not(.pf-v5-c-table__sort) {
             padding-inline-end: var(--pf-v5-global--spacer--lg);
         }
     }
@@ -279,7 +281,7 @@
                 color: var(--pf-v5-global--Color--200);
             }
 
-            .item-date {
+            .item-date, .item-perms {
                 display: none;
             }
 
@@ -298,4 +300,11 @@
             background-color: var(--pf-v5-global--BackgroundColor--100);
         }
     }
+}
+
+.pf-v5-c-tooltip .permissions-tooltip-text {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: var(--pf-v5-global--spacer--sm);
+    text-align: start;
 }
