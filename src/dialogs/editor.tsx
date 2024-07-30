@@ -127,6 +127,9 @@ export const EditFileModal = ({ dialogResult, path } : {
     React.useEffect(() => {
         const before_unload = (event: BeforeUnloadEvent) => {
             event.preventDefault();
+
+            // Included for legacy support, e.g. Chrome/Edge < 119
+            event.returnValue = true;
         };
         if (modified) {
             window.addEventListener('beforeunload', before_unload);
