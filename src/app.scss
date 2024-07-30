@@ -44,19 +44,6 @@
     block-size: 100vh;
 }
 
-.files-overview-header {
-    grid-area: topbar;
-
-    /* Chrome specific alignment issue */
-    align-items: center;
-
-    /* Override different background color from the <PageBreadCrumb> */
-    .pf-v5-c-page__main-breadcrumb {
-        background-color: unset
-    }
-}
-
-
 .pf-v5-c-sidebar__content > .pf-v5-c-card {
     grid-area: content;
 }
@@ -84,10 +71,17 @@
 }
 
 .files-overview-header {
+  grid-area: topbar;
+
+    /* Override different background color from the <PageBreadCrumb> */
+  .pf-v5-c-page__main-breadcrumb {
+      background-color: unset
+  }
+
   gap: var(--pf-v5-global--spacer--sm);
   display: flex;
   /* Align page breadcrumb centered */
-  align-items: baseline;
+  align-items: center;
 
   /* Drop PF padding */
   .pf-v5-c-page__main-breadcrumb {
