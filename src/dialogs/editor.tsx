@@ -25,6 +25,7 @@ import { Label } from '@patternfly/react-core/dist/esm/components/Label';
 import { Modal, ModalVariant } from '@patternfly/react-core/dist/esm/components/Modal';
 import { TextArea } from '@patternfly/react-core/dist/esm/components/TextArea';
 import { Stack } from '@patternfly/react-core/dist/esm/layouts/Stack';
+import { debounce } from "throttle-debounce";
 
 import cockpit from 'cockpit';
 import type { Dialogs, DialogResult } from 'dialogs';
@@ -82,9 +83,11 @@ class Editor extends EventEmitter<{ updated(state: EditorState): void }> {
                 .then(() => this.update({ writable: true }))
                 .catch(() => this.update({ writable: false }));
 
-        this.file.watch((_content, tag_now) => {
+        const handle_watch = debounce(500, (_content: string | null, tag_now: string | null) => {
             this.update({ tag_now });
-        }, { read: false });
+        });
+
+        this.file.watch(handle_watch, { read: false });
     }
 
     async save() {
