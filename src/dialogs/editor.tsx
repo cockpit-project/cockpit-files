@@ -73,12 +73,12 @@ class Editor extends EventEmitter<{ updated(state: EditorState): void }> {
 
     constructor(filename: string) {
         super();
-        this.file = cockpit.file(filename, { max_read_size: MAX_EDITOR_FILE_SIZE });
+        this.file = cockpit.file(filename, { max_read_size: MAX_EDITOR_FILE_SIZE, superuser: "try" });
         this.state = new EditorState();
 
         this.load_file();
 
-        cockpit.spawn(['test', '-w', filename])
+        cockpit.spawn(['test', '-w', filename], { superuser: "try" })
                 .then(() => this.update({ writable: true }))
                 .catch(() => this.update({ writable: false }));
 
