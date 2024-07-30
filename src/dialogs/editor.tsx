@@ -34,6 +34,9 @@ import "./editor.scss";
 
 const _ = cockpit.gettext;
 
+// 1MB
+export const MAX_EDITOR_FILE_SIZE = 1000000;
+
 class EditorState {
     error: string | null = null; // if there is an error to show
     modified: boolean = false; // if there are unsaved changes
@@ -70,7 +73,7 @@ class Editor extends EventEmitter<{ updated(state: EditorState): void }> {
 
     constructor(filename: string) {
         super();
-        this.file = cockpit.file(filename);
+        this.file = cockpit.file(filename, { max_read_size: MAX_EDITOR_FILE_SIZE });
         this.state = new EditorState();
 
         this.load_file();

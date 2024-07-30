@@ -28,7 +28,7 @@ import type { Dialogs } from 'dialogs';
 import type { FolderFileInfo } from "./app";
 import { basename } from "./common";
 import { confirm_delete } from './dialogs/delete';
-import { edit_file } from './dialogs/editor';
+import { edit_file, MAX_EDITOR_FILE_SIZE } from './dialogs/editor';
 import { show_create_directory_dialog } from './dialogs/mkdir';
 import { edit_permissions } from './dialogs/permissions';
 import { show_rename_dialog } from './dialogs/rename';
@@ -93,7 +93,7 @@ export function get_menu_items(
     } else if (selected.length === 1) {
         const item = selected[0];
 
-        if (item.type === 'reg' && item.size && item.size < 1000000) // 1MB
+        if (item.type === 'reg' && item.size && item.size < MAX_EDITOR_FILE_SIZE)
             menuItems.push(
                 {
                     id: "open-file",
