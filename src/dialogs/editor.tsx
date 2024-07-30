@@ -123,7 +123,7 @@ export const EditFileModal = ({ dialogResult, path } : {
         };
     }, [path]);
 
-    const modified = state.modified;
+    const { modified } = state;
     React.useEffect(() => {
         const before_unload = (event: BeforeUnloadEvent) => {
             event.preventDefault();
