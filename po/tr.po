@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-23 02:51+0000\n"
-"PO-Revision-Date: 2024-07-12 11:38+0000\n"
+"POT-Creation-Date: 2024-07-25 02:52+0000\n"
+"PO-Revision-Date: 2024-07-24 15:38+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
 "Language-Team: Turkish <https://translate.fedoraproject.org/projects/cockpit-"
 "files/cockpit-files/tr/>\n"
@@ -37,13 +37,10 @@ msgstr[0] "$0 öge"
 msgstr[1] "$0 öge"
 
 #: src/files-card-body.tsx:390
-#, fuzzy
-#| msgid "($0 hidden)"
-#| msgid_plural "($0 hidden)"
 msgid "$0 item is hidden"
 msgid_plural "$0 items are hidden"
-msgstr[0] "($0 gizli)"
-msgstr[1] "($0 gizli)"
+msgstr[0] "$0 gizli öge"
+msgstr[1] "$0 gizli öge"
 
 #: src/sidebar.tsx:119
 msgid "($0 hidden)"
@@ -84,12 +81,10 @@ msgid "Block device"
 msgstr "Blok aygıtı"
 
 #: src/files-breadcrumbs.tsx:172
-#, fuzzy
-#| msgid "Add bookmark"
 msgid "Bookmarks"
-msgstr "Yer imi ekle"
+msgstr "Yer imleri"
 
-#: src/upload-button.tsx:92 src/dialogs/mkdir.tsx:108 src/dialogs/delete.tsx:88
+#: src/upload-button.tsx:92 src/dialogs/delete.tsx:88 src/dialogs/mkdir.tsx:108
 #: src/dialogs/permissions.jsx:133 src/dialogs/rename.tsx:116
 msgid "Cancel"
 msgstr "İptal"
@@ -115,10 +110,8 @@ msgid "Character device"
 msgstr "Karakter aygıtı"
 
 #: src/files-card-body.tsx:378
-#, fuzzy
-#| msgid "Regular file"
 msgid "Clear filter"
-msgstr "Normal dosya"
+msgstr "Filtreyi temizle"
 
 #: src/index.html:20
 msgid "Cockpit Files"
@@ -132,11 +125,11 @@ msgstr "Kopyala"
 msgid "Create"
 msgstr "Oluştur"
 
-#: src/dialogs/mkdir.tsx:92 src/menu.tsx:83
+#: src/menu.tsx:83 src/dialogs/mkdir.tsx:92
 msgid "Create directory"
 msgstr "Dizin oluştur"
 
-#: src/dialogs/delete.tsx:87 src/menu.tsx:114 src/menu.tsx:137
+#: src/menu.tsx:114 src/menu.tsx:137 src/dialogs/delete.tsx:87
 msgid "Delete"
 msgstr "Sil"
 
@@ -210,7 +203,7 @@ msgstr "İndir"
 
 #: src/files-breadcrumbs.tsx:268
 msgid "Edit path"
-msgstr ""
+msgstr "Yolu düzenle"
 
 #: src/menu.tsx:89 src/menu.tsx:103 src/sidebar.tsx:183
 msgid "Edit permissions"
@@ -296,11 +289,11 @@ msgstr "Son değiştirilme"
 msgid "Manage your files"
 msgstr "Dosyalarınızı yönetin"
 
-#: src/header.tsx:79 src/files-card-body.tsx:410
+#: src/files-card-body.tsx:410 src/header.tsx:79
 msgid "Modified"
 msgstr "Değiştirilme"
 
-#: src/header.tsx:57 src/files-card-body.tsx:405
+#: src/files-card-body.tsx:405 src/header.tsx:57
 msgid "Name"
 msgstr "Ad"
 
@@ -404,7 +397,7 @@ msgstr "Normal dosya"
 msgid "Remove current directory"
 msgstr "Geçerli dizini kaldır"
 
-#: src/dialogs/rename.tsx:107 src/menu.tsx:108
+#: src/menu.tsx:108 src/dialogs/rename.tsx:107
 msgid "Rename"
 msgstr "Yeniden adlandır"
 
@@ -424,7 +417,7 @@ msgstr "$0 dosyası değiştirilsin mi?"
 msgid "Show hidden items"
 msgstr "Gizli ögeleri göster"
 
-#: src/header.tsx:68 src/files-card-body.tsx:406 src/sidebar.tsx:67
+#: src/files-card-body.tsx:406 src/header.tsx:68 src/sidebar.tsx:67
 msgid "Size"
 msgstr "Boyut"
 

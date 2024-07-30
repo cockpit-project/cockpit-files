@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-23 02:51+0000\n"
-"PO-Revision-Date: 2024-07-23 15:07+0000\n"
+"POT-Creation-Date: 2024-07-25 02:52+0000\n"
+"PO-Revision-Date: 2024-07-24 15:38+0000\n"
 "Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
 "memory@weblate.org>\n"
 "Language-Team: Chinese (Traditional) <https://translate.fedoraproject.org/"
@@ -80,7 +80,7 @@ msgstr "區塊裝置"
 msgid "Bookmarks"
 msgstr "書籤"
 
-#: src/upload-button.tsx:92 src/dialogs/mkdir.tsx:108 src/dialogs/delete.tsx:88
+#: src/upload-button.tsx:92 src/dialogs/delete.tsx:88 src/dialogs/mkdir.tsx:108
 #: src/dialogs/permissions.jsx:133 src/dialogs/rename.tsx:116
 msgid "Cancel"
 msgstr "取消"
@@ -121,11 +121,11 @@ msgstr "複製"
 msgid "Create"
 msgstr "建立"
 
-#: src/dialogs/mkdir.tsx:92 src/menu.tsx:83
+#: src/menu.tsx:83 src/dialogs/mkdir.tsx:92
 msgid "Create directory"
 msgstr "建立目錄"
 
-#: src/dialogs/delete.tsx:87 src/menu.tsx:114 src/menu.tsx:137
+#: src/menu.tsx:114 src/menu.tsx:137 src/dialogs/delete.tsx:87
 msgid "Delete"
 msgstr "刪除"
 
@@ -285,11 +285,11 @@ msgstr "最後修改於"
 msgid "Manage your files"
 msgstr "管理您的檔案"
 
-#: src/header.tsx:79 src/files-card-body.tsx:410
+#: src/files-card-body.tsx:410 src/header.tsx:79
 msgid "Modified"
 msgstr "被修改"
 
-#: src/header.tsx:57 src/files-card-body.tsx:405
+#: src/files-card-body.tsx:405 src/header.tsx:57
 msgid "Name"
 msgstr "名稱"
 
@@ -307,186 +307,186 @@ msgstr "名稱太長。"
 
 #: src/common.ts:39
 msgid "Named pipe"
-msgstr "named pipe"
+msgstr "Named pipe"
 
 #: src/upload-button.tsx:107
 msgid "New file"
-msgstr ""
+msgstr "新的檔案"
 
 #: src/dialogs/rename.tsx:120
 msgid "New filename"
-msgstr ""
+msgstr "新檔案名稱"
 
 #: src/dialogs/rename.tsx:120
 msgid "New name"
-msgstr ""
+msgstr "新名稱"
 
 #: src/files-card-body.tsx:377
 msgid "No matching results"
-msgstr ""
+msgstr "沒有找到相符的結果"
 
 #: src/common.ts:25
 msgid "None"
-msgstr ""
+msgstr "無"
 
 #: src/upload-button.tsx:112
 msgid "Original file on server"
-msgstr ""
+msgstr "伺服器上原有的檔案"
 
 #: src/sidebar.tsx:86
 msgid "Other permissions"
-msgstr ""
+msgstr "其他權限"
 
 #: src/dialogs/permissions.jsx:204
 msgid "Others access"
-msgstr ""
+msgstr "其他人的存取權限"
 
 #: src/dialogs/rename.tsx:114
 msgid "Overwrite"
-msgstr ""
+msgstr "覆寫"
 
 #: src/dialogs/permissions.jsx:147 src/sidebar.tsx:55
 msgid "Owner"
-msgstr ""
+msgstr "擁有者"
 
 #: src/dialogs/permissions.jsx:180
 msgid "Owner access"
-msgstr ""
+msgstr "擁有者存取權限"
 
 #: src/sidebar.tsx:76
 msgid "Owner permissions"
-msgstr ""
+msgstr "擁有者權限"
 
 #: src/dialogs/permissions.jsx:146
 msgid "Ownership"
-msgstr ""
+msgstr "所有權"
 
 #: src/menu.tsx:62
 msgid "Paste"
-msgstr ""
+msgstr "貼上"
 
 #: src/menu.tsx:67
 msgid "Pasting failed"
-msgstr ""
+msgstr "貼上失敗"
 
 #: src/common.ts:30
 msgid "Read and execute"
-msgstr ""
+msgstr "讀取與執行"
 
 #: src/common.ts:31
 msgid "Read and write"
-msgstr ""
+msgstr "讀取與寫入"
 
 #: src/common.ts:32
 msgid "Read, write and execute"
-msgstr ""
+msgstr "讀取、寫入與執行"
 
 #: src/common.ts:29
 msgid "Read-only"
-msgstr ""
+msgstr "只能讀取"
 
 #: src/common.ts:41
 msgid "Regular file"
-msgstr ""
+msgstr "一般檔案"
 
 #: src/files-breadcrumbs.tsx:159
 msgid "Remove current directory"
-msgstr ""
+msgstr "移除目前的目錄"
 
-#: src/dialogs/rename.tsx:107 src/menu.tsx:108
+#: src/menu.tsx:108 src/dialogs/rename.tsx:107
 msgid "Rename"
-msgstr ""
+msgstr "重新命名"
 
 #: src/dialogs/rename.tsx:126
 msgid "Rename $0?"
-msgstr ""
+msgstr "將 $0 重新命名？"
 
 #: src/upload-button.tsx:89
 msgid "Replace"
-msgstr ""
+msgstr "取代"
 
 #: src/upload-button.tsx:82
 msgid "Replace file $0?"
-msgstr ""
+msgstr "取代檔案 $0 ？"
 
 #: src/files-breadcrumbs.tsx:326 src/files-card-body.tsx:393
 msgid "Show hidden items"
-msgstr ""
+msgstr "顯示隱藏的項目"
 
-#: src/header.tsx:68 src/files-card-body.tsx:406 src/sidebar.tsx:67
+#: src/files-card-body.tsx:406 src/header.tsx:68 src/sidebar.tsx:67
 msgid "Size"
-msgstr ""
+msgstr "大小"
 
 #: src/header.tsx:75
 msgid "Smallest size"
-msgstr ""
+msgstr "大小最小"
 
 #: src/common.ts:42
 msgid "Socket"
-msgstr ""
+msgstr "Socket"
 
 #: src/upload-button.tsx:262
 msgid "Successfully uploaded file(s)"
-msgstr ""
+msgstr "檔案上傳成功"
 
 #: src/common.ts:40
 msgid "Symbolic link"
-msgstr ""
+msgstr "符號連結"
 
 #: src/files-breadcrumbs.tsx:120
 msgid "Unable to create bookmark directory"
-msgstr ""
+msgstr "無法建立書籤的存放目錄"
 
 #: src/files-breadcrumbs.tsx:138
 msgid "Unable to save bookmark file"
-msgstr ""
+msgstr "無法儲存書籤的存放檔案"
 
 #: src/upload-button.tsx:340
 msgid "Upload"
-msgstr ""
+msgstr "上傳"
 
 #
 #: src/upload-button.tsx:321
 msgid "Upload $0% completed"
-msgstr ""
+msgstr "上傳 $0% 完成"
 
 #: src/upload-button.tsx:262
 msgid "Upload complete"
-msgstr ""
+msgstr "上傳已完成"
 
 #: src/upload-button.tsx:245
 msgid "Upload error"
-msgstr ""
+msgstr "上傳失敗"
 
 #: src/upload-button.tsx:285
 msgid "Uploads"
-msgstr ""
+msgstr "上傳項目"
 
 #: src/common.ts:28
 msgid "Write and execute"
-msgstr ""
+msgstr "寫入與執行"
 
 #: src/common.ts:27
 msgid "Write-only"
-msgstr ""
+msgstr "只能寫入"
 
 #: src/header.tsx:64
 msgid "Z-A"
-msgstr ""
+msgstr "由 Z 到 A"
 
 #: src/manifest.json:0
 msgid "explorer"
-msgstr ""
+msgstr "瀏覽器"
 
 #: src/manifest.json:0
 msgid "files"
-msgstr ""
+msgstr "檔案"
 
 #: src/manifest.json:0
 msgid "filesystem"
-msgstr ""
+msgstr "檔案系統"
 
 #. Translators: $0 represents a filename
 #: src/dialogs/permissions.jsx:121
 msgid "“$0” permissions"
-msgstr ""
+msgstr "“$0” 的權限"
