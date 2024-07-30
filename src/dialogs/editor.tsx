@@ -181,7 +181,7 @@ export const EditFileModal = ({ dialogResult, path } : {
             <Stack>
                 {state.error !== null &&
                 <Alert
-                  type="danger"
+                  variant="danger"
                   title={state.error}
                   isInline
                 />}
