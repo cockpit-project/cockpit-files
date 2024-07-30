@@ -160,6 +160,11 @@
     }
 }
 
+// HACK: https://github.com/patternfly/patternfly/issues/6933
+.pf-v5-c-menu-toggle.pf-m-secondary {
+  background-color: var(--pf-v5-c-button--m-secondary--BackgroundColor);
+}
+
 .view-toggle-group {
     .pf-c-menu-toggle__button {
         display: flex;
