@@ -193,10 +193,10 @@ export const EditFileModal = ({ dialogResult, path } : {
                   actionLinks={
                       <>
                           <AlertActionLink onClick={() => editor && editor.load_file()}>
-                              {_("Reload file (abandon our changes)")}
+                              {_("Reload file (abandon your changes)")}
                           </AlertActionLink>
                           <AlertActionLink onClick={() => editor && editor.save()}>
-                              {_("Overwrite with our changes")}
+                              {_("Overwrite with your changes")}
                           </AlertActionLink>
                       </>
                   }
