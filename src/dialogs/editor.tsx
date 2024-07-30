@@ -202,8 +202,8 @@ export const EditFileModal = ({ dialogResult, path } : {
                   }
                 />}
                 <TextArea
-                  id='editor-text-area'
-                  className='file-editor'
+                  id="editor-text-area"
+                  className="file-editor"
                   isDisabled={!state.writable}
                   value={state.content}
                   onChange={(_ev, content) => editor && editor.modify(content)}
