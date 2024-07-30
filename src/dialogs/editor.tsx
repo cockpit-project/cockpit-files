@@ -88,8 +88,10 @@ class Editor extends EventEmitter<{ updated(state: EditorState): void }> {
     }
 
     async save() {
-        if (!this.state.tag_now)
+        if (!this.state.tag_now) {
+            console.error("Unable to save as 'tag_now' is not initialised");
             return;
+        }
 
         try {
             this.update({ saving: true });
