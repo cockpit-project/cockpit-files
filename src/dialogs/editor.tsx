@@ -21,6 +21,7 @@ import React from 'react';
 
 import { Alert, AlertActionLink } from '@patternfly/react-core/dist/esm/components/Alert';
 import { Button } from '@patternfly/react-core/dist/esm/components/Button';
+import { Label } from '@patternfly/react-core/dist/esm/components/Label';
 import { Modal, ModalVariant } from '@patternfly/react-core/dist/esm/components/Modal';
 import { TextArea } from '@patternfly/react-core/dist/esm/components/TextArea';
 import { Stack } from '@patternfly/react-core/dist/esm/layouts/Stack';
@@ -131,19 +132,24 @@ export const EditFileModal = ({ dialogResult, path } : {
     }, [modified]);
 
     /* Translators: $0 represents a filename */
-    const title = cockpit.format(state?.writable ? _("Editing “$0”") : _("Viewing “$0”"), path);
+    let title = <>{cockpit.format(state?.writable ? _("Edit “$0”") : _("View “$0”"), path)}</>;
+    if (!state.writable) {
+        // TODO: dark mode and lack of spacing
+        title = (<>{title}<Label variant="filled">{_("Read-only")}</Label></>);
+    }
 
     return (
         <Modal
           position="top"
+          // @ts-expect-error incorrect PatternFly typing https://github.com/patternfly/patternfly-react/issues/10361
           title={title}
           isOpen
           onClose={() => dialogResult.resolve()}
           variant={ModalVariant.large}
           className={`file-editor-modal ${modified ? 'is-modified' : ''}`}
           footer={
-              state?.writable &&
               <>
+                  {state?.writable &&
                   <Button
                     variant="primary"
                     isDisabled={
@@ -156,8 +162,9 @@ export const EditFileModal = ({ dialogResult, path } : {
                     onClick={() => editor && editor.save()}
                   >
                       {_("Save")}
-                  </Button>
-                  <Button variant="link" onClick={() => dialogResult.resolve()}>
+                  </Button>}
+
+                  <Button variant={state.writable ? "link" : "secondary"} onClick={() => dialogResult.resolve()}>
                       {modified ? _("Cancel") : _("Close")}
                   </Button>
               </>
@@ -174,7 +181,7 @@ export const EditFileModal = ({ dialogResult, path } : {
                 <Alert
                   isInline
                   variant="warning"
-                  title="The file has changed on disk"
+                  title={_("The file has changed on disk")}
                   actionLinks={
                       <>
                           <AlertActionLink onClick={() => editor && editor.load_file()}>
