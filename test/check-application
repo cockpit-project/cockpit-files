@@ -439,14 +439,14 @@ class TestFiles(testlib.MachineCase):
         b.wait_not_present("#sort-menu")
 
         # Default sort is A-Z (also used for invalid value found in localStorage)
-        # Alphabet sorts should be case insensetive
+        # Alphabet sorts should be case insensitive
         b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "aaa")
         b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "BBB")
         b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-name", "ccc")
 
         # Sort by reverse alphabet
         b.select_PF("#sort-menu-toggle", "Z-A")
-        # Alphabet sorts should be case insensetive
+        # Alphabet sorts should be case insensitive
         b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "ccc")
         b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "BBB")
         b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-name", "aaa")
@@ -1568,7 +1568,7 @@ class TestFiles(testlib.MachineCase):
 
             # Conflict handling
             # change the content of the files locally so we can detect
-            # overwrites and make it noticably bigger so we can assert that in
+            # overwrites and make it noticeably bigger so we can assert that in
             # the dialog details
             for f in files:
                 with open(f, "w") as fp:
@@ -1788,7 +1788,7 @@ class TestFiles(testlib.MachineCase):
                 # that includes broken symlinks ('loop*', 'broken*')
                 self.assertIn('file', classes)
 
-            # check if the symlink icon is present/missing, as apropriate
+            # check if the symlink icon is present/missing, as appropriate
             if name.startswith(('sym', 'loop', 'broken')):
                 self.assertIn('symlink', classes)
             else:
@@ -1957,10 +1957,10 @@ class TestFiles(testlib.MachineCase):
         b.wait_not_present(".pf-v5-c-menu")
 
         # Remove a bookmark when the directory is removed
-        m.execute("runuser -u admin echo 'file:///tmp/non-existant' > /home/admin/.config/gtk-3.0/bookmarks")
+        m.execute("runuser -u admin echo 'file:///tmp/non-existent' > /home/admin/.config/gtk-3.0/bookmarks")
         b.click("#bookmark-btn")
-        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('non-existant') button")
-        self.assert_last_breadcrumb("non-existant")
+        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('non-existent') button")
+        self.assert_last_breadcrumb("non-existent")
         b.click("#bookmark-btn")
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('Remove current directory') button")
         b.wait_not_present(".pf-v5-c-menu")
