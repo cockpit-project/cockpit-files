@@ -17,7 +17,7 @@
  * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import { AlertVariant } from "@patternfly/react-core/dist/esm/components/Alert";
 import { Button } from "@patternfly/react-core/dist/esm/components/Button";
@@ -39,6 +39,7 @@ import { fmt_to_fragments } from "utils";
 import { useFilesContext } from "./app";
 
 import "./upload-button.scss";
+import { useInit } from "hooks";
 
 const _ = cockpit.gettext;
 
@@ -138,6 +139,19 @@ export const UploadButton = ({
     const [uploadedFiles, setUploadedFiles] = useState<{[name: string]:
                                                         {file: File, progress: number, cancel:() => void}}>({});
 
+    const handleFilesDrop = (event: CustomEvent) => {
+        console.log(event);
+        onUpload(event.detail);
+    };
+
+    useInit(() => {
+        console.log('doing the fun');
+        window.addEventListener("files-drop", handleFilesDrop);
+        return () => {
+            window.removeEventListener("files-drop", handleFilesDrop);
+        };
+    });
+
     const handleClick = () => {
         if (ref.current) {
             ref.current.click();
@@ -152,8 +166,8 @@ export const UploadButton = ({
         event.returnValue = true;
     };
 
-    const onUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
-        cockpit.assert(event.target.files, "not an <input type='file'>?");
+    const onUpload = async (files: FileList, event?: React.ChangeEvent<HTMLInputElement>) => {
+        console.log(files);
         cockpit.assert(cwdInfo?.entries, "cwdInfo.entries is undefined");
         let next_progress = 0;
         const toUploadFiles = [];
@@ -161,14 +175,15 @@ export const UploadButton = ({
         const resetInput = () => {
         // Reset input field in the case a download was cancelled and has to be re-uploaded
         // https://stackoverflow.com/questions/26634616/filereader-upload-same-file-again-not-working
-            event.target.value = "";
+            if (event)
+                event.target.value = "";
         };
 
         let resolution;
         let replaceAll = false;
         let skipAll = false;
-        for (let i = 0; i < event.target.files.length; i++) {
-            const uploadFile = event.target.files[i];
+        for (let i = 0; i < files.length; i++) {
+            const uploadFile = files[i];
             const file = cwdInfo?.entries[uploadFile.name];
 
             if (replaceAll)
@@ -178,7 +193,7 @@ export const UploadButton = ({
             } else if (file) {
                 try {
                     resolution = await dialogs.run(FileConflictDialog, {
-                        path, file, uploadFile, isMultiUpload: event.target.files.length > 1
+                        path, file, uploadFile, isMultiUpload: files.length > 1
                     });
                 } catch (exc) {
                     resetInput();
@@ -342,7 +357,10 @@ export const UploadButton = ({
               type="file"
               hidden
               multiple
-              onChange={onUpload}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                  cockpit.assert(event?.target.files, "not an <input type='file'>?");
+                  onUpload(event.target.files, event);
+              }}
             />
         </>
     );
