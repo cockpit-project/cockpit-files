@@ -92,8 +92,13 @@ export function get_menu_items(
         );
     } else if (selected.length === 1) {
         const item = selected[0];
-
-        if (item.type === 'reg' && item.size && item.size < MAX_EDITOR_FILE_SIZE)
+        // Only allow code, text and unknown file types as we detect things by
+        // extensions, so not allowing unknown file types would disallow one
+        // from editing for example /etc/hostname
+        const allowed_edit_types = ["code-file", "text-file", "file"];
+        if (item.type === 'reg' &&
+            allowed_edit_types.includes(item?.category?.class || "") &&
+            item.size && item.size < MAX_EDITOR_FILE_SIZE)
             menuItems.push(
                 {
                     id: "open-file",

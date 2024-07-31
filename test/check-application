@@ -2018,10 +2018,17 @@ class TestFiles(testlib.MachineCase):
             runuser -u admin -- bash -c "echo test > /home/admin/test.txt"
             runuser -u admin -- bash -c "echo planes > /home/admin/notes.txt"
             runuser -u admin -- truncate -s 2M /home/admin/big.txt
+            runuser -u admin -- touch /home/admin/archive.tar.gz
         """)
 
         # Don't allow opening big text files
         b.mouse("[data-item='big.txt']", "contextmenu")
+        b.wait_not_in_text(".contextMenu", "Open text file")
+        b.click("#files-card-parent tbody")
+        b.wait_not_present(".contextMenu")
+
+        # A tarball cannot be edited
+        b.mouse("[data-item='archive.tar.gz']", "contextmenu")
         b.wait_not_in_text(".contextMenu", "Open text file")
         b.click("#files-card-parent tbody")
         b.wait_not_present(".contextMenu")
