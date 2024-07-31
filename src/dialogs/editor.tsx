@@ -28,8 +28,8 @@ import { Stack } from '@patternfly/react-core/dist/esm/layouts/Stack';
 import { debounce } from "throttle-debounce";
 
 import cockpit from 'cockpit';
+import { EventEmitter } from 'cockpit/event';
 import type { Dialogs, DialogResult } from 'dialogs';
-import { EventEmitter } from 'event';
 
 import "./editor.scss";
 
