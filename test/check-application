@@ -2004,6 +2004,139 @@ class TestFiles(testlib.MachineCase):
         b.click(".pf-v5-c-alert__action button")
         b.wait_not_present(".pf-v5-c-alert__action")
 
+    def testEditor(self) -> None:
+        b = self.browser
+        m = self.machine
+
+        self.enter_files()
+
+        def open_editor(file: str) -> None:
+            b.mouse(f"[data-item='{file}']", "contextmenu")
+            b.click(".contextMenu button:contains('Open text file')")
+
+        m.execute("""
+            runuser -u admin -- bash -c "echo test > /home/admin/test.txt"
+            runuser -u admin -- bash -c "echo planes > /home/admin/notes.txt"
+            runuser -u admin -- truncate -s 2M /home/admin/big.txt
+        """)
+
+        # Don't allow opening big text files
+        b.mouse("[data-item='big.txt']", "contextmenu")
+        b.wait_not_in_text(".contextMenu", "Open text file")
+        b.click("#files-card-parent tbody")
+        b.wait_not_present(".contextMenu")
+
+        # Opening an test file, editing and closing (discard)
+        open_editor("test.txt")
+        b.wait_text(".pf-v5-c-modal-box__title", "Edit “/home/admin/test.txt”")
+        b.wait_text(".file-editor-modal textarea", "test\n")
+
+        # Save button is disabled when not editing yet
+        b.wait_visible(".pf-v5-c-modal-box__footer .pf-m-primary.pf-m-disabled")
+        b.set_input_text(".file-editor-modal textarea", "foobar", append=True, value_check=False)
+        b.wait_val(".file-editor-modal textarea", "test\nfoobar")
+
+        # b.assert_pixels(".file-editor-modal", "editor-modal-changed")
+        b.wait_visible(".pf-v5-c-modal-box__footer .pf-m-primary:not(:disabled)")
+
+        b.click(".pf-v5-c-button.pf-m-link")
+        b.wait_not_present(".file-editor-modal")
+        self.assertEqual(m.execute("cat /home/admin/test.txt"), "test\n")
+
+        self.assert_owner('/home/admin/test.txt', 'admin:admin')
+
+        # Opening a test file, add text and save
+        open_editor("test.txt")
+        b.set_input_text(".file-editor-modal textarea", "foobar", append=True, value_check=False)
+        b.wait_val(".file-editor-modal textarea", "test\nfoobar")
+        b.click(".pf-v5-c-button.pf-m-primary")
+        b.wait_visible(".pf-v5-c-modal-box__footer .pf-m-primary:disabled")
+
+        b.click(".pf-v5-c-button.pf-m-link")
+        b.wait_not_present(".file-editor-modal")
+
+        # Open editor and validate the changes are shown
+        open_editor("test.txt")
+        b.wait_val(".file-editor-modal textarea", "test\nfoobar")
+        b.click(".pf-v5-c-button.pf-m-link")
+        b.wait_not_present(".file-editor-modal")
+
+        # validate on disk
+        self.assertEqual(m.execute("cat /home/admin/test.txt"), "test\nfoobar")
+
+        # Validate text file is still owned by admin:admin
+        self.assert_owner('/home/admin/test.txt', 'admin:admin')
+
+        # Opening a test file, edit text and someone else changes it while we are editing
+        open_editor("test.txt")
+        b.set_input_text(".file-editor-modal textarea", "roll\n", append=True, value_check=False)
+        b.wait_val(".file-editor-modal textarea", "test\nfoobarroll\n")
+        b.wait_visible(".pf-v5-c-modal-box__footer .pf-m-primary:not(:disabled)")
+
+        m.execute("runuser -u admin echo 'testing' > /home/admin/test.txt")
+        b.wait_in_text(".pf-v5-c-alert__title", "The file has changed on disk")
+
+        # Abort, reload
+        b.click("button:contains('Reload file')")
+        b.wait_val(".file-editor-modal textarea", "testing\n")
+
+        # Let someone else edit again and overwrite
+        b.set_input_text(".file-editor-modal textarea", "roll\n", append=True, value_check=False)
+        b.wait_val(".file-editor-modal textarea", "testing\nroll\n")
+        m.execute("echo 'testing' > /home/admin/test.txt")
+        b.wait_in_text(".pf-v5-c-alert__title", "The file has changed on disk")
+
+        b.click("button:contains('Overwrite with your changes')")
+        b.wait_not_present(".pf-v5-c-alert__title")
+        b.click(".pf-v5-c-button.pf-m-link")
+        b.wait_not_present(".file-editor-modal")
+
+        # Open editor and validate the changes are shown
+        open_editor("test.txt")
+        b.wait_val(".file-editor-modal textarea", "testing\nroll\n")
+        b.click(".pf-v5-c-button.pf-m-link")
+        b.wait_not_present(".file-editor-modal")
+
+        # validate on disk
+        self.assertEqual(m.execute("cat /home/admin/test.txt"), "testing\nroll\n")
+        self.assert_owner('/home/admin/test.txt', 'admin:admin')
+
+        # Change ownership during editing
+        open_editor("test.txt")
+        b.wait_val(".file-editor-modal textarea", "testing\nroll\n")
+        m.execute("chown root: /home/admin/test.txt")
+        b.set_input_text(".file-editor-modal textarea", "reset")
+        b.click(".pf-v5-c-modal-box__footer .pf-m-primary")
+        # TODO: this is wrong!!!
+        b.wait_in_text(".pf-v5-c-alert.pf-m-danger", "change-conflict")
+
+        b.click(".pf-v5-c-button.pf-m-link")
+        b.wait_not_present(".file-editor-modal")
+
+        # Remove file during editing
+        open_editor("notes.txt")
+        b.wait_val(".file-editor-modal textarea", "planes\n")
+        b.set_input_text(".file-editor-modal textarea", "reset")
+        m.execute("rm /home/admin/notes.txt")
+        b.click(".pf-v5-c-modal-box__footer .pf-m-primary")
+        # TODO: convert ...
+        b.wait_in_text(".pf-v5-c-alert.pf-m-danger", "not-found")
+
+        b.click(".pf-v5-c-button.pf-m-link")
+        b.wait_not_present(".file-editor-modal")
+
+        # As unprivileged user
+        b.drop_superuser()
+
+        # View a file
+        b.go("/files#/?path=/etc")
+        self.assert_last_breadcrumb("etc")
+        open_editor("hostname")
+        b.wait_text(".pf-v5-c-modal-box__title", "View “/etc/hostname”Read-only")
+
+        b.click(".pf-v5-c-modal-box__footer button.pf-m-secondary")
+        b.wait_not_present(".file-editor-modal")
+
 
 if __name__ == '__main__':
     testlib.test_main()
