@@ -264,6 +264,10 @@ class TestFiles(testlib.MachineCase):
         b.go("/files#/?path=/////")
         b.wait_text("li[data-location='/']", "")
 
+        # Path without a forward slash does get one
+        b.go("/files#/?path=etc")
+        b.wait_text("li[data-location='/etc']", "etc")
+
     def testNavigation(self) -> None:
         b = self.browser
         m = self.machine
