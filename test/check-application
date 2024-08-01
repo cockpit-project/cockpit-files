@@ -2052,7 +2052,7 @@ class TestFiles(testlib.MachineCase):
         b.set_input_text(".file-editor-modal textarea", "foobar", append=True, value_check=False)
         b.wait_val(".file-editor-modal textarea", "test\nfoobar")
 
-        # b.assert_pixels(".file-editor-modal", "editor-modal-changed")
+        b.assert_pixels(".file-editor-modal", "editor-modal-changed")
         b.wait_visible(".pf-v5-c-modal-box__footer .pf-m-primary:not(:disabled)")
 
         b.click(".pf-v5-c-button.pf-m-link")
@@ -2065,8 +2065,10 @@ class TestFiles(testlib.MachineCase):
         open_editor("test.txt")
         b.set_input_text(".file-editor-modal textarea", "foobar", append=True, value_check=False)
         b.wait_val(".file-editor-modal textarea", "test\nfoobar")
+        b.wait_visible(".file-editor-modal.is-modified")
         b.click(".pf-v5-c-button.pf-m-primary")
-        b.wait_visible(".pf-v5-c-modal-box__footer .pf-m-primary:disabled")
+        # Saving resets modified state so should not be shown
+        b.wait_not_present(".file-editor-modal.is-modified")
 
         b.click(".pf-v5-c-button.pf-m-link")
         b.wait_not_present(".file-editor-modal")
@@ -2122,8 +2124,8 @@ class TestFiles(testlib.MachineCase):
 
         # Save, file was gone but we write it again
         b.click(".pf-v5-c-modal-box__footer .pf-v5-c-button.pf-m-primary")
-        # testlib.sit()
-        # TODO: still show an error!
+        # Saving resets modified state so should not be shown
+        b.wait_not_present(".file-editor-modal.is-modified")
 
         b.click(".pf-v5-c-modal-box__footer .pf-v5-c-button.pf-m-link")
         b.wait_not_present(".file-editor-modal")
@@ -2134,10 +2136,13 @@ class TestFiles(testlib.MachineCase):
         b.drop_superuser()
 
         # View a file
+        m.execute("echo 'this is a config file' > /etc/cockpit-files-test.cfg")
+        self.addCleanup(m.execute, "rm /etc/cockpit-files-test.cfg")
         b.go("/files#/?path=/etc")
         self.assert_last_breadcrumb("etc")
-        open_editor("hostname")
-        b.wait_text(".pf-v5-c-modal-box__title", "View “/etc/hostname”Read-only")
+        open_editor("cockpit-files-test.cfg")
+        b.wait_text(".pf-v5-c-modal-box__title", "View “/etc/cockpit-files-test.cfg”Read-only")
+        b.assert_pixels(".file-editor-modal", "editor-modal-read-only")
 
         b.click(".pf-v5-c-modal-box__footer button.pf-m-secondary")
         b.wait_not_present(".file-editor-modal")
