@@ -38,8 +38,18 @@ const _ = cockpit.gettext;
 // 1MB
 export const MAX_EDITOR_FILE_SIZE = 1000000;
 
+/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+function translate_error(error: any) {
+    if (error.problem === "not-found") {
+        return _("The file has been removed on disk");
+    } else {
+        return cockpit.message(error);
+    }
+}
+
 class EditorState {
-    error: string | null = null; // if there is an error to show
+    /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+    error: any | null = null; // if there is an error to show
     modified: boolean = false; // if there are unsaved changes
     saving: boolean = false; // saving in progress?
     tag_at_load: string | null = null; // the one we loaded
@@ -67,15 +77,7 @@ class Editor extends EventEmitter<{ updated(state: EditorState): void }> {
                 .then(((content: string, tag: string) => {
                     this.update({ content, tag_now: tag, tag_at_load: tag });
                 }) as any /* eslint-disable-line @typescript-eslint/no-explicit-any */)
-                .catch(error => {
-                    if (error.problem === "not-found") {
-                        this.update({ error: _("The file has been removed on disk") });
-                    } else if (error.problem === "change-conflict") {
-                        this.update({ error: _("The file has changed on disk") });
-                    } else {
-                        this.update({ error: cockpit.message(error) });
-                    }
-                });
+                .catch(error => this.update({ error }));
     }
 
     constructor(filename: string) {
@@ -104,16 +106,13 @@ class Editor extends EventEmitter<{ updated(state: EditorState): void }> {
 
         try {
             this.update({ saving: true });
-            const tag = await this.file.replace(this.state.content, this.state.tag_now);
+            console.log("save", this.state.content, this.state.tag_now);
+            const tag = await this.file.replace(this.state.content, this.state.error?.problem === "not-found"
+                ? "-"
+                : this.state.tag_now);
             this.update({ saving: false, modified: false, tag_now: tag, tag_at_load: tag });
         } catch (exc: any /* eslint-disable-line @typescript-eslint/no-explicit-any */) {
-            if (exc.problem === "not-found") {
-                this.update({ error: _("The file has been removed on disk"), saving: false });
-            } else if (exc.problem === "change-conflict") {
-                this.update({ error: _("The file has changed on disk"), saving: false });
-            } else {
-                this.update({ error: cockpit.message(exc), saving: false });
-            }
+            this.update({ error: exc, saving: false });
         }
     }
 
@@ -126,6 +125,7 @@ export const EditFileModal = ({ dialogResult, path } : {
     dialogResult: DialogResult<void>,
     path: string
 }) => {
+    const [last_tag, setLastTag] = React.useState<string | null>(null);
     const [state, setState] = React.useState(new EditorState());
     const [editor, setEditor] = React.useState<Editor | null>(null);
 
@@ -154,12 +154,25 @@ export const EditFileModal = ({ dialogResult, path } : {
         }
     }, [modified]);
 
+    const handleEscape = (event: KeyboardEvent) => {
+        if (state?.modified) {
+            event.preventDefault();
+        } else {
+            dialogResult.resolve();
+        }
+    };
+
     /* Translators: $0 represents a filename */
     let title = <>{cockpit.format(state?.writable ? _("Edit “$0”") : _("View “$0”"), path)}</>;
     if (!state.writable) {
         // TODO: dark mode and lack of spacing
         title = (<>{title}<Label variant="filled">{_("Read-only")}</Label></>);
     }
+
+    // File has changed on disk while editing.
+    const change_conflict = state.tag_now !== state.tag_at_load;
+    const file_removed = state.error?.problem === "not-found" || state.tag_now === "-";
+    console.log(state, state.error?.problem);
 
     return (
         <Modal
@@ -170,23 +183,29 @@ export const EditFileModal = ({ dialogResult, path } : {
           onClose={() => dialogResult.resolve()}
           variant={ModalVariant.large}
           className={`file-editor-modal ${modified ? 'is-modified' : ''}`}
+          onEscapePress={handleEscape}
           footer={
               <>
-                  {state?.writable &&
+                  {change_conflict && !file_removed &&
+                  <Button
+                    variant="warning"
+                    onClick={() => editor && editor.save()}
+                  >
+                      {_("Overwrite")}
+                  </Button>}
+                  {state?.writable && (!change_conflict || file_removed) &&
                   <Button
                     variant="primary"
                     isDisabled={
                         !editor ||
                             state.saving ||
                             !modified ||
-                            !state.writable ||
-                            state.tag_now !== state.tag_at_load
+                            !state.writable
                     }
                     onClick={() => editor && editor.save()}
                   >
                       {_("Save")}
                   </Button>}
-
                   <Button variant={state.writable ? "link" : "secondary"} onClick={() => dialogResult.resolve()}>
                       {modified ? _("Cancel") : _("Close")}
                   </Button>
@@ -194,24 +213,29 @@ export const EditFileModal = ({ dialogResult, path } : {
           }
         >
             <Stack>
-                {state.error !== null &&
+                {state.tag_now === state.tag_at_load && state.error !== null &&
                 <Alert
+                  className="file-editor-alert"
                   variant="danger"
-                  title={state.error}
+                  title={translate_error(state.error)}
                   isInline
                 />}
-                {state.tag_now !== state.tag_at_load &&
+                {state.tag_now !== state.tag_at_load && last_tag !== state.tag_now &&
                 <Alert
+                  className="file-editor-alert"
                   isInline
                   variant="warning"
-                  title={_("The file has changed on disk")}
+                  title={file_removed
+                      ? _("The file has been removed on disk")
+                      : _("The file has changed on disk")}
                   actionLinks={
                       <>
+                          {!file_removed &&
                           <AlertActionLink onClick={() => editor && editor.load_file()}>
-                              {_("Reload file (abandon your changes)")}
-                          </AlertActionLink>
-                          <AlertActionLink onClick={() => editor && editor.save()}>
-                              {_("Overwrite with your changes")}
+                              {_("Reload")}
+                          </AlertActionLink>}
+                          <AlertActionLink onClick={() => setLastTag(state.tag_now)}>
+                              {_("Ignore")}
                           </AlertActionLink>
                       </>
                   }

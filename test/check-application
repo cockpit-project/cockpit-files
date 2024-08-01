@@ -2014,6 +2014,15 @@ class TestFiles(testlib.MachineCase):
             b.mouse(f"[data-item='{file}']", "contextmenu")
             b.click(".contextMenu button:contains('Open text file')")
 
+        def validate_content(file: str, content: str) -> None:
+            open_editor(file)
+            b.wait_val(".file-editor-modal textarea", content)
+            b.click(".pf-v5-c-button.pf-m-link")
+            b.wait_not_present(".file-editor-modal")
+
+            # validate on disk
+            self.assertEqual(m.execute(f"cat /home/admin/{file}"), content)
+
         m.execute("""
             runuser -u admin -- bash -c "echo test > /home/admin/test.txt"
             runuser -u admin -- bash -c "echo planes > /home/admin/notes.txt"
@@ -2062,16 +2071,7 @@ class TestFiles(testlib.MachineCase):
         b.click(".pf-v5-c-button.pf-m-link")
         b.wait_not_present(".file-editor-modal")
 
-        # Open editor and validate the changes are shown
-        open_editor("test.txt")
-        b.wait_val(".file-editor-modal textarea", "test\nfoobar")
-        b.click(".pf-v5-c-button.pf-m-link")
-        b.wait_not_present(".file-editor-modal")
-
-        # validate on disk
-        self.assertEqual(m.execute("cat /home/admin/test.txt"), "test\nfoobar")
-
-        # Validate text file is still owned by admin:admin
+        validate_content("test.txt", "test\nfoobar")
         self.assert_owner('/home/admin/test.txt', 'admin:admin')
 
         # Opening a test file, edit text and someone else changes it while we are editing
@@ -2084,7 +2084,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_in_text(".pf-v5-c-alert__title", "The file has changed on disk")
 
         # Abort, reload
-        b.click("button:contains('Reload file')")
+        b.click(".file-editor-modal button:contains('Reload')")
         b.wait_val(".file-editor-modal textarea", "testing\n")
 
         # Let someone else edit again and overwrite
@@ -2093,19 +2093,12 @@ class TestFiles(testlib.MachineCase):
         m.execute("echo 'testing' > /home/admin/test.txt")
         b.wait_in_text(".pf-v5-c-alert__title", "The file has changed on disk")
 
-        b.click("button:contains('Overwrite with your changes')")
+        b.click(".pf-v5-c-modal-box__footer .pf-m-warning")
         b.wait_not_present(".pf-v5-c-alert__title")
         b.click(".pf-v5-c-button.pf-m-link")
         b.wait_not_present(".file-editor-modal")
 
-        # Open editor and validate the changes are shown
-        open_editor("test.txt")
-        b.wait_val(".file-editor-modal textarea", "testing\nroll\n")
-        b.click(".pf-v5-c-button.pf-m-link")
-        b.wait_not_present(".file-editor-modal")
-
-        # validate on disk
-        self.assertEqual(m.execute("cat /home/admin/test.txt"), "testing\nroll\n")
+        validate_content("test.txt", "testing\nroll\n")
         self.assert_owner('/home/admin/test.txt', 'admin:admin')
 
         # Change ownership during editing
@@ -2114,10 +2107,9 @@ class TestFiles(testlib.MachineCase):
         m.execute("chown root: /home/admin/test.txt")
         b.set_input_text(".file-editor-modal textarea", "reset")
         b.click(".pf-v5-c-modal-box__footer .pf-m-primary")
-        # TODO: shows two alerts
-        b.wait_in_text(".pf-v5-c-alert.pf-m-danger", "The file has changed on disk")
+        b.wait_in_text(".pf-v5-c-alert.pf-m-warning", "The file has changed on disk")
 
-        b.click(".pf-v5-c-button.pf-m-link")
+        b.click(".pf-v5-c-modal-box__footer .pf-v5-c-button.pf-m-link")
         b.wait_not_present(".file-editor-modal")
 
         # Remove file during editing
@@ -2128,8 +2120,15 @@ class TestFiles(testlib.MachineCase):
         b.click(".pf-v5-c-modal-box__footer .pf-m-primary")
         b.wait_in_text(".pf-v5-c-alert.pf-m-danger", "The file has been removed on disk")
 
-        b.click(".pf-v5-c-button.pf-m-link")
+        # Save, file was gone but we write it again
+        b.click(".pf-v5-c-modal-box__footer .pf-v5-c-button.pf-m-primary")
+        # testlib.sit()
+        # TODO: still show an error!
+
+        b.click(".pf-v5-c-modal-box__footer .pf-v5-c-button.pf-m-link")
         b.wait_not_present(".file-editor-modal")
+
+        validate_content("notes.txt", "reset")
 
         # As unprivileged user
         b.drop_superuser()
