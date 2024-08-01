@@ -107,6 +107,7 @@ class Editor extends EventEmitter<{ updated(state: EditorState): void }> {
         try {
             this.update({ saving: true });
             console.log("save", this.state.content, this.state.tag_now);
+            // Force the tag to be "-" when the file is not found to allow the user to write the file.
             const tag = await this.file.replace(this.state.content, this.state.error?.problem === "not-found"
                 ? "-"
                 : this.state.tag_now);
