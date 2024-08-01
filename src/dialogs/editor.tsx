@@ -68,7 +68,13 @@ class Editor extends EventEmitter<{ updated(state: EditorState): void }> {
                     this.update({ content, tag_now: tag, tag_at_load: tag });
                 }) as any /* eslint-disable-line @typescript-eslint/no-explicit-any */)
                 .catch(error => {
-                    this.update({ error: cockpit.message(error) });
+                    if (error.problem === "not-found") {
+                        this.update({ error: _("The file has been removed on disk") });
+                    } else if (error.problem === "change-conflict") {
+                        this.update({ error: _("The file has changed on disk") });
+                    } else {
+                        this.update({ error: cockpit.message(error) });
+                    }
                 });
     }
 
@@ -101,7 +107,13 @@ class Editor extends EventEmitter<{ updated(state: EditorState): void }> {
             const tag = await this.file.replace(this.state.content, this.state.tag_now);
             this.update({ saving: false, modified: false, tag_now: tag, tag_at_load: tag });
         } catch (exc: any /* eslint-disable-line @typescript-eslint/no-explicit-any */) {
-            this.update({ error: cockpit.message(exc), saving: false });
+            if (exc.problem === "not-found") {
+                this.update({ error: _("The file has been removed on disk"), saving: false });
+            } else if (exc.problem === "change-conflict") {
+                this.update({ error: _("The file has changed on disk"), saving: false });
+            } else {
+                this.update({ error: cockpit.message(exc), saving: false });
+            }
         }
     }
 

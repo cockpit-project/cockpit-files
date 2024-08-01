@@ -2114,8 +2114,8 @@ class TestFiles(testlib.MachineCase):
         m.execute("chown root: /home/admin/test.txt")
         b.set_input_text(".file-editor-modal textarea", "reset")
         b.click(".pf-v5-c-modal-box__footer .pf-m-primary")
-        # TODO: this is wrong!!!
-        b.wait_in_text(".pf-v5-c-alert.pf-m-danger", "change-conflict")
+        # TODO: shows two alerts
+        b.wait_in_text(".pf-v5-c-alert.pf-m-danger", "The file has changed on disk")
 
         b.click(".pf-v5-c-button.pf-m-link")
         b.wait_not_present(".file-editor-modal")
@@ -2126,8 +2126,7 @@ class TestFiles(testlib.MachineCase):
         b.set_input_text(".file-editor-modal textarea", "reset")
         m.execute("rm /home/admin/notes.txt")
         b.click(".pf-v5-c-modal-box__footer .pf-m-primary")
-        # TODO: convert ...
-        b.wait_in_text(".pf-v5-c-alert.pf-m-danger", "not-found")
+        b.wait_in_text(".pf-v5-c-alert.pf-m-danger", "The file has been removed on disk")
 
         b.click(".pf-v5-c-button.pf-m-link")
         b.wait_not_present(".file-editor-modal")
