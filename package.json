@@ -40,7 +40,7 @@
     "htmlparser": "1.7.7",
     "jed": "1.1.1",
     "language-map": "1.5.0",
-    "mime-db": "1.52.0",
+    "mime-db": "1.53.0",
     "sass": "1.77.6",
     "sizzle": "2.3.10",
     "stylelint": "16.3.1",
