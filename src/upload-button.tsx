@@ -180,7 +180,7 @@ export const UploadButton = ({
                     resolution = await dialogs.run(FileConflictDialog, {
                         path, file, uploadFile, isMultiUpload: event.target.files.length > 1
                     });
-                } catch (exc) {
+                } catch (_exc) { // eslint-disable-line @typescript-eslint/no-unused-vars
                     resetInput();
                     return;
                 }
