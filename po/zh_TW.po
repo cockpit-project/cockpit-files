@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-25 02:52+0000\n"
+"POT-Creation-Date: 2024-08-07 02:52+0000\n"
 "PO-Revision-Date: 2024-07-24 15:38+0000\n"
 "Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
 "memory@weblate.org>\n"
@@ -27,7 +27,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0\n"
 "X-Generator: Weblate 5.6.2\n"
 
-#: src/menu.tsx:68
+#: src/menu.tsx:67
 msgid "\"$0\" exists, not overwriting with paste."
 msgstr "\"$0\" 已存在，將不會貼上以免遭覆寫。"
 
@@ -36,7 +36,7 @@ msgid "$0 item"
 msgid_plural "$0 items"
 msgstr[0] "$0 個項目"
 
-#: src/files-card-body.tsx:390
+#: src/files-card-body.tsx:399
 msgid "$0 item is hidden"
 msgid_plural "$0 items are hidden"
 msgstr[0] "$0 個已隱藏的項目"
@@ -56,7 +56,7 @@ msgid ""
 "overwrite its content."
 msgstr "一個相同名稱的檔案已於 \"$0\" 存在。 若將其取代將覆寫其內容。"
 
-#: src/header.tsx:60
+#: src/header.tsx:62
 msgid "A-Z"
 msgstr "由 A 到 Z"
 
@@ -64,7 +64,7 @@ msgstr "由 A 到 Z"
 msgid "Access"
 msgstr "存取權限"
 
-#: src/files-breadcrumbs.tsx:161
+#: src/files-breadcrumbs.tsx:145
 msgid "Add bookmark"
 msgstr "新增書籤"
 
@@ -76,24 +76,25 @@ msgstr "套用此動作至所有發生衝突的檔案"
 msgid "Block device"
 msgstr "區塊裝置"
 
-#: src/files-breadcrumbs.tsx:172
+#: src/files-breadcrumbs.tsx:156
 msgid "Bookmarks"
 msgstr "書籤"
 
-#: src/upload-button.tsx:92 src/dialogs/delete.tsx:88 src/dialogs/mkdir.tsx:108
-#: src/dialogs/permissions.jsx:133 src/dialogs/rename.tsx:116
+#: src/upload-button.tsx:92 src/dialogs/mkdir.tsx:108
+#: src/dialogs/rename.tsx:116 src/dialogs/delete.tsx:88
+#: src/dialogs/permissions.jsx:133
 msgid "Cancel"
 msgstr "取消"
 
-#: src/upload-button.tsx:304
+#: src/upload-button.tsx:302
 msgid "Cancel upload of $0"
 msgstr "取消上傳 $0"
 
-#: src/upload-button.tsx:242
+#: src/upload-button.tsx:240
 msgid "Cancelled"
 msgstr "已取消"
 
-#: src/upload-button.tsx:243
+#: src/upload-button.tsx:241
 msgid "Cancelled upload of $0"
 msgstr "已取消上傳 $0"
 
@@ -105,7 +106,7 @@ msgstr "變更"
 msgid "Character device"
 msgstr "字元裝置"
 
-#: src/files-card-body.tsx:378
+#: src/files-card-body.tsx:387
 msgid "Clear filter"
 msgstr "清除篩選器"
 
@@ -113,7 +114,7 @@ msgstr "清除篩選器"
 msgid "Cockpit Files"
 msgstr "Cockpit Files"
 
-#: src/menu.tsx:97 src/menu.tsx:132
+#: src/menu.tsx:96 src/menu.tsx:131
 msgid "Copy"
 msgstr "複製"
 
@@ -121,11 +122,11 @@ msgstr "複製"
 msgid "Create"
 msgstr "建立"
 
-#: src/menu.tsx:83 src/dialogs/mkdir.tsx:92
+#: src/menu.tsx:82 src/dialogs/mkdir.tsx:92
 msgid "Create directory"
 msgstr "建立目錄"
 
-#: src/menu.tsx:114 src/menu.tsx:137 src/dialogs/delete.tsx:87
+#: src/menu.tsx:113 src/menu.tsx:136 src/dialogs/delete.tsx:87
 msgid "Delete"
 msgstr "刪除"
 
@@ -149,7 +150,7 @@ msgstr "刪除檔案 $0 ？"
 msgid "Delete link $0?"
 msgstr "刪除連結 $0 ？"
 
-#: src/header.tsx:118
+#: src/header.tsx:134
 msgid "Directories & files"
 msgstr "目錄與檔案"
 
@@ -157,7 +158,7 @@ msgstr "目錄與檔案"
 msgid "Directory"
 msgstr "目錄"
 
-#: src/files-card-body.tsx:385
+#: src/files-card-body.tsx:394
 msgid "Directory is empty"
 msgstr "目錄是空的"
 
@@ -185,23 +186,23 @@ msgstr "目錄擁有者"
 msgid "Directory with the same name exists"
 msgstr "相同名稱的目錄已存在"
 
-#: src/header.tsx:174
+#: src/header.tsx:200
 msgid "Display as a grid"
 msgstr "以網格顯示"
 
-#: src/header.tsx:173
+#: src/header.tsx:199
 msgid "Display as a list"
 msgstr "以清單顯示"
 
-#: src/menu.tsx:124
+#: src/menu.tsx:123
 msgid "Download"
 msgstr "下載"
 
-#: src/files-breadcrumbs.tsx:268
+#: src/files-breadcrumbs.tsx:297
 msgid "Edit path"
 msgstr "編輯路徑"
 
-#: src/menu.tsx:89 src/menu.tsx:103 src/sidebar.tsx:183
+#: src/menu.tsx:88 src/menu.tsx:102 src/sidebar.tsx:183
 msgid "Edit permissions"
 msgstr "編輯權限"
 
@@ -225,11 +226,17 @@ msgstr "檔案名稱與原本相同"
 msgid "Files"
 msgstr "檔案"
 
-#: src/header.tsx:124
+#: src/files-breadcrumbs.tsx:237
+#, fuzzy
+#| msgid "filesystem"
+msgid "Filesystem"
+msgstr "檔案系統"
+
+#: src/header.tsx:140
 msgid "Filter directory"
 msgstr "篩選目錄"
 
-#: src/header.tsx:82
+#: src/header.tsx:84
 msgid "First modified"
 msgstr "初次修改於"
 
@@ -253,7 +260,8 @@ msgstr "強制刪除檔案 $0 ？"
 msgid "Force delete link $0?"
 msgstr "強制刪除連結 $0 ？"
 
-#: src/dialogs/permissions.jsx:162 src/sidebar.tsx:60
+#: src/dialogs/permissions.jsx:162 src/files-card-body.tsx:487
+#: src/sidebar.tsx:60
 msgid "Group"
 msgstr "群組"
 
@@ -265,7 +273,13 @@ msgstr "群組存取權限"
 msgid "Group permissions"
 msgstr "群組權限"
 
-#: src/files-breadcrumbs.tsx:76
+#: src/header.tsx:231
+#, fuzzy
+#| msgid "Show hidden items"
+msgid "Hide hidden items"
+msgstr "顯示隱藏的項目"
+
+#: src/files-breadcrumbs.tsx:52
 msgid "Home"
 msgstr "家目錄"
 
@@ -273,23 +287,35 @@ msgstr "家目錄"
 msgid "Keep original"
 msgstr "保留原本的"
 
-#: src/header.tsx:71
+#: src/header.tsx:73
 msgid "Largest size"
 msgstr "大小最大"
 
-#: src/header.tsx:86 src/sidebar.tsx:50
+#: src/header.tsx:88 src/sidebar.tsx:50
 msgid "Last modified"
 msgstr "最後修改於"
+
+#: src/header.tsx:99
+#, fuzzy
+#| msgid "Edit permissions"
+msgid "Least permissive"
+msgstr "編輯權限"
 
 #: org.cockpit-project.files.metainfo.xml:6
 msgid "Manage your files"
 msgstr "管理您的檔案"
 
-#: src/files-card-body.tsx:410 src/header.tsx:79
+#: src/header.tsx:81 src/files-card-body.tsx:419
 msgid "Modified"
 msgstr "被修改"
 
-#: src/files-card-body.tsx:405 src/header.tsx:57
+#: src/header.tsx:95
+#, fuzzy
+#| msgid "Edit permissions"
+msgid "Most permissive"
+msgstr "編輯權限"
+
+#: src/header.tsx:59 src/files-card-body.tsx:414
 msgid "Name"
 msgstr "名稱"
 
@@ -321,7 +347,7 @@ msgstr "新檔案名稱"
 msgid "New name"
 msgstr "新名稱"
 
-#: src/files-card-body.tsx:377
+#: src/files-card-body.tsx:386
 msgid "No matching results"
 msgstr "沒有找到相符的結果"
 
@@ -337,6 +363,12 @@ msgstr "伺服器上原有的檔案"
 msgid "Other permissions"
 msgstr "其他權限"
 
+#: src/files-card-body.tsx:487
+#, fuzzy
+#| msgid "Others access"
+msgid "Others"
+msgstr "其他人的存取權限"
+
 #: src/dialogs/permissions.jsx:204
 msgid "Others access"
 msgstr "其他人的存取權限"
@@ -345,7 +377,8 @@ msgstr "其他人的存取權限"
 msgid "Overwrite"
 msgstr "覆寫"
 
-#: src/dialogs/permissions.jsx:147 src/sidebar.tsx:55
+#: src/dialogs/permissions.jsx:147 src/files-card-body.tsx:487
+#: src/sidebar.tsx:55
 msgid "Owner"
 msgstr "擁有者"
 
@@ -361,13 +394,19 @@ msgstr "擁有者權限"
 msgid "Ownership"
 msgstr "所有權"
 
-#: src/menu.tsx:62
+#: src/menu.tsx:61
 msgid "Paste"
 msgstr "貼上"
 
-#: src/menu.tsx:67
+#: src/menu.tsx:66
 msgid "Pasting failed"
 msgstr "貼上失敗"
+
+#: src/header.tsx:92 src/files-card-body.tsx:424
+#, fuzzy
+#| msgid "Edit permissions"
+msgid "Permissions"
+msgstr "編輯權限"
 
 #: src/common.ts:30
 msgid "Read and execute"
@@ -378,7 +417,9 @@ msgid "Read and write"
 msgstr "讀取與寫入"
 
 #: src/common.ts:32
-msgid "Read, write and execute"
+#, fuzzy
+#| msgid "Read, write and execute"
+msgid "Read, write, and execute"
 msgstr "讀取、寫入與執行"
 
 #: src/common.ts:29
@@ -389,11 +430,11 @@ msgstr "只能讀取"
 msgid "Regular file"
 msgstr "一般檔案"
 
-#: src/files-breadcrumbs.tsx:159
+#: src/files-breadcrumbs.tsx:143
 msgid "Remove current directory"
 msgstr "移除目前的目錄"
 
-#: src/menu.tsx:108 src/dialogs/rename.tsx:107
+#: src/menu.tsx:107 src/dialogs/rename.tsx:107
 msgid "Rename"
 msgstr "重新命名"
 
@@ -409,15 +450,15 @@ msgstr "取代"
 msgid "Replace file $0?"
 msgstr "取代檔案 $0 ？"
 
-#: src/files-breadcrumbs.tsx:326 src/files-card-body.tsx:393
+#: src/header.tsx:231 src/files-card-body.tsx:402
 msgid "Show hidden items"
 msgstr "顯示隱藏的項目"
 
-#: src/files-card-body.tsx:406 src/header.tsx:68 src/sidebar.tsx:67
+#: src/header.tsx:70 src/files-card-body.tsx:415 src/sidebar.tsx:67
 msgid "Size"
 msgstr "大小"
 
-#: src/header.tsx:75
+#: src/header.tsx:77
 msgid "Smallest size"
 msgstr "大小最小"
 
@@ -425,7 +466,11 @@ msgstr "大小最小"
 msgid "Socket"
 msgstr "Socket"
 
-#: src/upload-button.tsx:262
+#: src/header.tsx:218
+msgid "Sort"
+msgstr ""
+
+#: src/upload-button.tsx:260
 msgid "Successfully uploaded file(s)"
 msgstr "檔案上傳成功"
 
@@ -433,32 +478,32 @@ msgstr "檔案上傳成功"
 msgid "Symbolic link"
 msgstr "符號連結"
 
-#: src/files-breadcrumbs.tsx:120
+#: src/files-breadcrumbs.tsx:104
 msgid "Unable to create bookmark directory"
 msgstr "無法建立書籤的存放目錄"
 
-#: src/files-breadcrumbs.tsx:138
+#: src/files-breadcrumbs.tsx:122
 msgid "Unable to save bookmark file"
 msgstr "無法儲存書籤的存放檔案"
 
-#: src/upload-button.tsx:340
+#: src/upload-button.tsx:338
 msgid "Upload"
 msgstr "上傳"
 
 #
-#: src/upload-button.tsx:321
+#: src/upload-button.tsx:319
 msgid "Upload $0% completed"
 msgstr "上傳 $0% 完成"
 
-#: src/upload-button.tsx:262
+#: src/upload-button.tsx:260
 msgid "Upload complete"
 msgstr "上傳已完成"
 
-#: src/upload-button.tsx:245
+#: src/upload-button.tsx:243
 msgid "Upload error"
 msgstr "上傳失敗"
 
-#: src/upload-button.tsx:285
+#: src/upload-button.tsx:283
 msgid "Uploads"
 msgstr "上傳項目"
 
@@ -470,7 +515,7 @@ msgstr "寫入與執行"
 msgid "Write-only"
 msgstr "只能寫入"
 
-#: src/header.tsx:64
+#: src/header.tsx:66
 msgid "Z-A"
 msgstr "由 Z 到 A"
 

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-25 02:52+0000\n"
+"POT-Creation-Date: 2024-08-07 02:52+0000\n"
 "PO-Revision-Date: 2024-07-24 15:38+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
 "Language-Team: Turkish <https://translate.fedoraproject.org/projects/cockpit-"
@@ -26,7 +26,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1\n"
 "X-Generator: Weblate 5.6.2\n"
 
-#: src/menu.tsx:68
+#: src/menu.tsx:67
 msgid "\"$0\" exists, not overwriting with paste."
 msgstr "\"$0\" var, yapıştırma ile üzerine yazılmıyor."
 
@@ -36,7 +36,7 @@ msgid_plural "$0 items"
 msgstr[0] "$0 öge"
 msgstr[1] "$0 öge"
 
-#: src/files-card-body.tsx:390
+#: src/files-card-body.tsx:399
 msgid "$0 item is hidden"
 msgid_plural "$0 items are hidden"
 msgstr[0] "$0 gizli öge"
@@ -60,7 +60,7 @@ msgstr ""
 "Aynı ada sahip bir dosya \"$0\" içinde zaten var. Değiştirmek içeriğinin "
 "üzerine yazacaktır."
 
-#: src/header.tsx:60
+#: src/header.tsx:62
 msgid "A-Z"
 msgstr "A-Z"
 
@@ -68,7 +68,7 @@ msgstr "A-Z"
 msgid "Access"
 msgstr "Erişim"
 
-#: src/files-breadcrumbs.tsx:161
+#: src/files-breadcrumbs.tsx:145
 msgid "Add bookmark"
 msgstr "Yer imi ekle"
 
@@ -80,24 +80,25 @@ msgstr "Bu eylemi çakışan tüm dosyalara uygula"
 msgid "Block device"
 msgstr "Blok aygıtı"
 
-#: src/files-breadcrumbs.tsx:172
+#: src/files-breadcrumbs.tsx:156
 msgid "Bookmarks"
 msgstr "Yer imleri"
 
-#: src/upload-button.tsx:92 src/dialogs/delete.tsx:88 src/dialogs/mkdir.tsx:108
-#: src/dialogs/permissions.jsx:133 src/dialogs/rename.tsx:116
+#: src/upload-button.tsx:92 src/dialogs/mkdir.tsx:108
+#: src/dialogs/rename.tsx:116 src/dialogs/delete.tsx:88
+#: src/dialogs/permissions.jsx:133
 msgid "Cancel"
 msgstr "İptal"
 
-#: src/upload-button.tsx:304
+#: src/upload-button.tsx:302
 msgid "Cancel upload of $0"
 msgstr "$0 karşıya yüklenmesini iptal et"
 
-#: src/upload-button.tsx:242
+#: src/upload-button.tsx:240
 msgid "Cancelled"
 msgstr "İptal edildi"
 
-#: src/upload-button.tsx:243
+#: src/upload-button.tsx:241
 msgid "Cancelled upload of $0"
 msgstr "$0 karşıya yüklenmesi iptal edildi"
 
@@ -109,7 +110,7 @@ msgstr "Değiştir"
 msgid "Character device"
 msgstr "Karakter aygıtı"
 
-#: src/files-card-body.tsx:378
+#: src/files-card-body.tsx:387
 msgid "Clear filter"
 msgstr "Filtreyi temizle"
 
@@ -117,7 +118,7 @@ msgstr "Filtreyi temizle"
 msgid "Cockpit Files"
 msgstr "Cockpit Dosyalar"
 
-#: src/menu.tsx:97 src/menu.tsx:132
+#: src/menu.tsx:96 src/menu.tsx:131
 msgid "Copy"
 msgstr "Kopyala"
 
@@ -125,11 +126,11 @@ msgstr "Kopyala"
 msgid "Create"
 msgstr "Oluştur"
 
-#: src/menu.tsx:83 src/dialogs/mkdir.tsx:92
+#: src/menu.tsx:82 src/dialogs/mkdir.tsx:92
 msgid "Create directory"
 msgstr "Dizin oluştur"
 
-#: src/menu.tsx:114 src/menu.tsx:137 src/dialogs/delete.tsx:87
+#: src/menu.tsx:113 src/menu.tsx:136 src/dialogs/delete.tsx:87
 msgid "Delete"
 msgstr "Sil"
 
@@ -153,7 +154,7 @@ msgstr "$0 dosyası silinsin mi?"
 msgid "Delete link $0?"
 msgstr "$0 bağlantısı silinsin mi?"
 
-#: src/header.tsx:118
+#: src/header.tsx:134
 msgid "Directories & files"
 msgstr "Dizinler ve dosyalar"
 
@@ -161,7 +162,7 @@ msgstr "Dizinler ve dosyalar"
 msgid "Directory"
 msgstr "Dizin"
 
-#: src/files-card-body.tsx:385
+#: src/files-card-body.tsx:394
 msgid "Directory is empty"
 msgstr "Dizin boş"
 
@@ -189,23 +190,23 @@ msgstr "Dizin sahibi"
 msgid "Directory with the same name exists"
 msgstr "Aynı ada sahip dizin var"
 
-#: src/header.tsx:174
+#: src/header.tsx:200
 msgid "Display as a grid"
 msgstr "Izgara olarak görüntüle"
 
-#: src/header.tsx:173
+#: src/header.tsx:199
 msgid "Display as a list"
 msgstr "Liste olarak görüntüle"
 
-#: src/menu.tsx:124
+#: src/menu.tsx:123
 msgid "Download"
 msgstr "İndir"
 
-#: src/files-breadcrumbs.tsx:268
+#: src/files-breadcrumbs.tsx:297
 msgid "Edit path"
 msgstr "Yolu düzenle"
 
-#: src/menu.tsx:89 src/menu.tsx:103 src/sidebar.tsx:183
+#: src/menu.tsx:88 src/menu.tsx:102 src/sidebar.tsx:183
 msgid "Edit permissions"
 msgstr "İzinleri düzenle"
 
@@ -229,11 +230,17 @@ msgstr "Dosya adı ilk adıyla aynı"
 msgid "Files"
 msgstr "Dosyalar"
 
-#: src/header.tsx:124
+#: src/files-breadcrumbs.tsx:237
+#, fuzzy
+#| msgid "filesystem"
+msgid "Filesystem"
+msgstr "dosya sistemi"
+
+#: src/header.tsx:140
 msgid "Filter directory"
 msgstr "Dizini filtrele"
 
-#: src/header.tsx:82
+#: src/header.tsx:84
 msgid "First modified"
 msgstr "İlk değiştirilme"
 
@@ -257,7 +264,8 @@ msgstr "$0 dosyası silmeye zorlansın mı?"
 msgid "Force delete link $0?"
 msgstr "$0 bağlantısı silmeye zorlansın mı?"
 
-#: src/dialogs/permissions.jsx:162 src/sidebar.tsx:60
+#: src/dialogs/permissions.jsx:162 src/files-card-body.tsx:487
+#: src/sidebar.tsx:60
 msgid "Group"
 msgstr "Grup"
 
@@ -269,7 +277,13 @@ msgstr "Grup erişimi"
 msgid "Group permissions"
 msgstr "Grup izinleri"
 
-#: src/files-breadcrumbs.tsx:76
+#: src/header.tsx:231
+#, fuzzy
+#| msgid "Show hidden items"
+msgid "Hide hidden items"
+msgstr "Gizli ögeleri göster"
+
+#: src/files-breadcrumbs.tsx:52
 msgid "Home"
 msgstr "Ev dizini"
 
@@ -277,23 +291,35 @@ msgstr "Ev dizini"
 msgid "Keep original"
 msgstr "Orijinali sakla"
 
-#: src/header.tsx:71
+#: src/header.tsx:73
 msgid "Largest size"
 msgstr "En büyük boyut"
 
-#: src/header.tsx:86 src/sidebar.tsx:50
+#: src/header.tsx:88 src/sidebar.tsx:50
 msgid "Last modified"
 msgstr "Son değiştirilme"
+
+#: src/header.tsx:99
+#, fuzzy
+#| msgid "Edit permissions"
+msgid "Least permissive"
+msgstr "İzinleri düzenle"
 
 #: org.cockpit-project.files.metainfo.xml:6
 msgid "Manage your files"
 msgstr "Dosyalarınızı yönetin"
 
-#: src/files-card-body.tsx:410 src/header.tsx:79
+#: src/header.tsx:81 src/files-card-body.tsx:419
 msgid "Modified"
 msgstr "Değiştirilme"
 
-#: src/files-card-body.tsx:405 src/header.tsx:57
+#: src/header.tsx:95
+#, fuzzy
+#| msgid "Edit permissions"
+msgid "Most permissive"
+msgstr "İzinleri düzenle"
+
+#: src/header.tsx:59 src/files-card-body.tsx:414
 msgid "Name"
 msgstr "Ad"
 
@@ -325,7 +351,7 @@ msgstr "Yeni dosya adı"
 msgid "New name"
 msgstr "Yeni ad"
 
-#: src/files-card-body.tsx:377
+#: src/files-card-body.tsx:386
 msgid "No matching results"
 msgstr "Eşleşen sonuç yok"
 
@@ -341,6 +367,12 @@ msgstr "Sunucudaki orijinal dosya"
 msgid "Other permissions"
 msgstr "Diğer izinler"
 
+#: src/files-card-body.tsx:487
+#, fuzzy
+#| msgid "Others access"
+msgid "Others"
+msgstr "Diğerlerinin erişimi"
+
 #: src/dialogs/permissions.jsx:204
 msgid "Others access"
 msgstr "Diğerlerinin erişimi"
@@ -349,7 +381,8 @@ msgstr "Diğerlerinin erişimi"
 msgid "Overwrite"
 msgstr "Üzerine yaz"
 
-#: src/dialogs/permissions.jsx:147 src/sidebar.tsx:55
+#: src/dialogs/permissions.jsx:147 src/files-card-body.tsx:487
+#: src/sidebar.tsx:55
 msgid "Owner"
 msgstr "Sahibi"
 
@@ -365,13 +398,19 @@ msgstr "Sahibinin izinleri"
 msgid "Ownership"
 msgstr "Sahiplik"
 
-#: src/menu.tsx:62
+#: src/menu.tsx:61
 msgid "Paste"
 msgstr "Yapıştır"
 
-#: src/menu.tsx:67
+#: src/menu.tsx:66
 msgid "Pasting failed"
 msgstr "Yapıştırma başarısız oldu"
+
+#: src/header.tsx:92 src/files-card-body.tsx:424
+#, fuzzy
+#| msgid "Edit permissions"
+msgid "Permissions"
+msgstr "İzinleri düzenle"
 
 #: src/common.ts:30
 msgid "Read and execute"
@@ -382,7 +421,9 @@ msgid "Read and write"
 msgstr "Oku ve yaz"
 
 #: src/common.ts:32
-msgid "Read, write and execute"
+#, fuzzy
+#| msgid "Read, write and execute"
+msgid "Read, write, and execute"
 msgstr "Oku, yaz ve çalıştır"
 
 #: src/common.ts:29
@@ -393,11 +434,11 @@ msgstr "Yalnızca oku"
 msgid "Regular file"
 msgstr "Normal dosya"
 
-#: src/files-breadcrumbs.tsx:159
+#: src/files-breadcrumbs.tsx:143
 msgid "Remove current directory"
 msgstr "Geçerli dizini kaldır"
 
-#: src/menu.tsx:108 src/dialogs/rename.tsx:107
+#: src/menu.tsx:107 src/dialogs/rename.tsx:107
 msgid "Rename"
 msgstr "Yeniden adlandır"
 
@@ -413,15 +454,15 @@ msgstr "Değiştir"
 msgid "Replace file $0?"
 msgstr "$0 dosyası değiştirilsin mi?"
 
-#: src/files-breadcrumbs.tsx:326 src/files-card-body.tsx:393
+#: src/header.tsx:231 src/files-card-body.tsx:402
 msgid "Show hidden items"
 msgstr "Gizli ögeleri göster"
 
-#: src/files-card-body.tsx:406 src/header.tsx:68 src/sidebar.tsx:67
+#: src/header.tsx:70 src/files-card-body.tsx:415 src/sidebar.tsx:67
 msgid "Size"
 msgstr "Boyut"
 
-#: src/header.tsx:75
+#: src/header.tsx:77
 msgid "Smallest size"
 msgstr "En küçük boyut"
 
@@ -429,7 +470,11 @@ msgstr "En küçük boyut"
 msgid "Socket"
 msgstr "Soket"
 
-#: src/upload-button.tsx:262
+#: src/header.tsx:218
+msgid "Sort"
+msgstr ""
+
+#: src/upload-button.tsx:260
 msgid "Successfully uploaded file(s)"
 msgstr "Dosya(lar) başarıyla karşıya yüklendi"
 
@@ -437,31 +482,31 @@ msgstr "Dosya(lar) başarıyla karşıya yüklendi"
 msgid "Symbolic link"
 msgstr "Sembolik bağlantı"
 
-#: src/files-breadcrumbs.tsx:120
+#: src/files-breadcrumbs.tsx:104
 msgid "Unable to create bookmark directory"
 msgstr "Yer imi dizini oluşturulamıyor"
 
-#: src/files-breadcrumbs.tsx:138
+#: src/files-breadcrumbs.tsx:122
 msgid "Unable to save bookmark file"
 msgstr "Yer imi dosyası kaydedilemiyor"
 
-#: src/upload-button.tsx:340
+#: src/upload-button.tsx:338
 msgid "Upload"
 msgstr "Karşıya yükle"
 
-#: src/upload-button.tsx:321
+#: src/upload-button.tsx:319
 msgid "Upload $0% completed"
 msgstr "Karşıya yükleme %$0 tamamlandı"
 
-#: src/upload-button.tsx:262
+#: src/upload-button.tsx:260
 msgid "Upload complete"
 msgstr "Karşıya yükleme tamamlandı"
 
-#: src/upload-button.tsx:245
+#: src/upload-button.tsx:243
 msgid "Upload error"
 msgstr "Karşıya yükleme hatası"
 
-#: src/upload-button.tsx:285
+#: src/upload-button.tsx:283
 msgid "Uploads"
 msgstr "Yüklenenler"
 
@@ -473,7 +518,7 @@ msgstr "Yaz ve çalıştır"
 msgid "Write-only"
 msgstr "Yalnızca yaz"
 
-#: src/header.tsx:64
+#: src/header.tsx:66
 msgid "Z-A"
 msgstr "Z-A"
 
