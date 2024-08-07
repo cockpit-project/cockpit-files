@@ -22,7 +22,7 @@ import React, { useCallback, useEffect, useMemo, useState, useRef } from "react"
 import { Divider } from "@patternfly/react-core/dist/esm/components/Divider";
 import { MenuItem, MenuList } from "@patternfly/react-core/dist/esm/components/Menu";
 import { Spinner } from "@patternfly/react-core/dist/esm/components/Spinner";
-import { Text, TextVariants } from "@patternfly/react-core/dist/esm/components/Text";
+import { Text, TextContent, TextVariants } from "@patternfly/react-core/dist/esm/components/Text";
 import { Tooltip } from "@patternfly/react-core/dist/esm/components/Tooltip";
 import { Flex } from "@patternfly/react-core/dist/esm/layouts/Flex";
 import { FolderIcon, SearchIcon } from '@patternfly/react-icons';
@@ -47,6 +47,22 @@ const _ = cockpit.gettext;
 function compare(sortBy: Sort): (a: FolderFileInfo, b: FolderFileInfo) => number {
     const dir_sort = (a: FolderFileInfo, b: FolderFileInfo) => Number(b.to === "dir") - Number(a.to === "dir");
     const name_sort = (a: FolderFileInfo, b: FolderFileInfo) => a.name.localeCompare(b.name);
+    const owner_sort = (a: string | number | undefined, b: string | number | undefined) => {
+        if (a === undefined || b === undefined) {
+            return 0;
+        }
+        if (typeof a === "string" && typeof b === "string") {
+            return a.localeCompare(b);
+        } else if (typeof a === "string" && typeof b === "number") {
+            // Sort numbers after known names
+            return -1;
+        } else if (typeof a === "number" && typeof b === "string") {
+            // Sort numbers after known names
+            return 1;
+        } else if (typeof a === "number" && typeof b === "number") {
+            return a - b;
+        }
+    };
 
     // treat non-regular files and infos with missing 'size' field as having size of zero
     const size = (a: FolderFileInfo) => (a.type === "reg" && a.size) || 0;
@@ -71,6 +87,12 @@ function compare(sortBy: Sort): (a: FolderFileInfo, b: FolderFileInfo) => number
         return (a, b) => dir_sort(a, b) || (perms(b) - perms(a)) || name_sort(a, b);
     case Sort.least_permissive:
         return (a, b) => dir_sort(a, b) || (perms(a) - perms(b)) || name_sort(a, b);
+    case Sort.owner_asc:
+        return (a, b) => dir_sort(a, b) || owner_sort(a.user, b.user) ||
+                owner_sort(a.group, b.group) || name_sort(a, b);
+    case Sort.owner_desc:
+        return (a, b) => dir_sort(a, b) || owner_sort(b.user, a.user) ||
+                owner_sort(b.group, a.group) || name_sort(b, a);
     }
 }
 
@@ -419,7 +441,12 @@ export const FilesCardBody = ({
                             >{_("Modified")}
                             </Th>
                             <Th
-                              sort={sortColumn(3)} className="col-perms"
+                              sort={sortColumn(3)} className="col-owner"
+                              modifier="nowrap"
+                            >{_("Owner")}
+                            </Th>
+                            <Th
+                              sort={sortColumn(4)} className="col-perms"
                               modifier="nowrap"
                             >{_("Permissions")}
                             </Th>
@@ -505,6 +532,20 @@ const FilePermissions = ({ file } : {
     );
 };
 
+const FileOwnership = ({ file } : { file: FolderFileInfo, }) => {
+    const ownerText = (file.user === file.group)
+        ? file.user
+        : `${file.user}:${file.group}`;
+
+    return (
+        <TextContent>
+            <Text>
+                {ownerText}
+            </Text>
+        </TextContent>
+    );
+};
+
 // Memoize the Item component as rendering thousands of them on each render of parent component is costly.
 const Row = React.memo(function Item({ file, isSelected } : {
     file: FolderFileInfo,
@@ -540,6 +581,12 @@ const Row = React.memo(function Item({ file, isSelected } : {
               modifier="nowrap"
             >
                 {file.mtime ? timeformat.dateTime(file.mtime * 1000) : null}
+            </Td>
+            <Td
+              className="item-owner"
+              modifier="nowrap"
+            >
+                <FileOwnership file={file} />
             </Td>
             <Td
               className="item-perms"

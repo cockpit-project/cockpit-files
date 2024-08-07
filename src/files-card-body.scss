@@ -198,6 +198,7 @@
 
         .col-size, .item-size,
         .col-date, .item-date,
+        .col-owner, .item-owner,
         .col-perms, .item-perms {
             inline-size: 12ch;
             text-align: end;
@@ -205,7 +206,7 @@
 
         // Remove the extra padding on the end of the column and button, as the icon has padding already
         .col-size, .col-date,
-        .col-perms {
+        .col-perms, .col-owner {
             &, .pf-v5-c-table__button {
                 padding-inline-end: 0;
             }
@@ -281,7 +282,7 @@
                 color: var(--pf-v5-global--Color--200);
             }
 
-            .item-date, .item-perms {
+            .item-date, .item-perms, .item-owner {
                 display: none;
             }
 
