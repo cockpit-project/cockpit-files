@@ -198,6 +198,7 @@
 
         .col-size, .item-size,
         .col-date, .item-date,
+        .col-owner, .item-owner,
         .col-perms, .item-perms {
             inline-size: 12ch;
             text-align: end;
@@ -281,7 +282,7 @@
                 color: var(--pf-v5-global--Color--200);
             }
 
-            .item-date, .item-perms {
+            .item-date, .item-perms, .item-owner {
                 display: none;
             }
 

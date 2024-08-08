@@ -42,6 +42,8 @@ export enum Sort {
     smallest_size = 'smallest_size',
     first_modified = 'first_modified',
     last_modified = 'last_modified',
+    owner_asc = 'owner_asc',
+    owner_desc = 'owner_desc',
     most_permissive = 'most_permissive',
     least_permissive = 'least_permissive',
 }
@@ -86,6 +88,17 @@ export const filterColumns = [
         [SortByDirection.desc]: {
             itemId: Sort.last_modified,
             label: _("Last modified"),
+        },
+    },
+    {
+        title: _("Owner"),
+        [SortByDirection.asc]: {
+            itemId: Sort.owner_asc,
+            label: _("Owner ascending"),
+        },
+        [SortByDirection.desc]: {
+            itemId: Sort.owner_desc,
+            label: _("Owner descending"),
         },
     },
     {

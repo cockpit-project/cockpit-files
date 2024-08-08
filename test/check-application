@@ -620,6 +620,78 @@ class TestFiles(testlib.MachineCase):
         b.wait_text("#folder-view tbody tr:nth-of-type(5) .item-name", "BBB")
         b.wait_text("#folder-view tbody tr:nth-of-type(6) .item-name", "ccc")
 
+        # Sorting by file ownership
+        # Files are primarily sorted by user
+        m.execute(f"""
+        chown admin:root {basedir}/aaa
+        chown fedora:root {basedir}/BBB
+        chown builder:root {basedir}/ccc
+        chown qemu:fedora {basedir}/eee
+        chown redis:clevis {basedir}/Eee
+        """)
+        b.click("th button:contains(Owner)")
+
+        # Verify order
+        b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "eee")
+        b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "Eee")
+        b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-name", "ddd")
+        b.wait_text("#folder-view tbody tr:nth-of-type(4) .item-name", "aaa")
+        b.wait_text("#folder-view tbody tr:nth-of-type(5) .item-name", "ccc")
+        b.wait_text("#folder-view tbody tr:nth-of-type(6) .item-name", "BBB")
+
+        # Verify owner is displayed correctly
+        b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-owner", "qemu:fedora")
+        b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-owner", "redis:clevis")
+        b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-owner", "root")
+        b.wait_text("#folder-view tbody tr:nth-of-type(4) .item-owner", "admin:root")
+        b.wait_text("#folder-view tbody tr:nth-of-type(5) .item-owner", "builder:root")
+        b.wait_text("#folder-view tbody tr:nth-of-type(6) .item-owner", "fedora:root")
+
+        # Reverse sorting
+        b.click("th button:contains(Owner)")
+        b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "ddd")
+        b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "Eee")
+        b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-name", "eee")
+        b.wait_text("#folder-view tbody tr:nth-of-type(4) .item-name", "BBB")
+        b.wait_text("#folder-view tbody tr:nth-of-type(5) .item-name", "ccc")
+        b.wait_text("#folder-view tbody tr:nth-of-type(6) .item-name", "aaa")
+
+        # Files are sorted by group when user is the same
+        m.execute(f"""
+        chown admin:root {basedir}/aaa
+        chown admin:fedora {basedir}/BBB
+        chown admin:games {basedir}/ccc
+        chown --no-dereference fedora:pcp {basedir}/ddd
+        chown fedora:fedora {basedir}/eee
+        chown fedora:abrt {basedir}/Eee
+        """)
+        b.click("th button:contains(Owner)")
+
+        # Verify order
+        b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "Eee")
+        b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "eee")
+        b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-name", "ddd")
+        b.wait_text("#folder-view tbody tr:nth-of-type(4) .item-name", "BBB")
+        b.wait_text("#folder-view tbody tr:nth-of-type(5) .item-name", "ccc")
+        b.wait_text("#folder-view tbody tr:nth-of-type(6) .item-name", "aaa")
+
+        # Verify owner is displayed correctly
+        b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-owner", "fedora:abrt")
+        b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-owner", "fedora")
+        b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-owner", "fedora:pcp")
+        b.wait_text("#folder-view tbody tr:nth-of-type(4) .item-owner", "admin:fedora")
+        b.wait_text("#folder-view tbody tr:nth-of-type(5) .item-owner", "admin:games")
+        b.wait_text("#folder-view tbody tr:nth-of-type(6) .item-owner", "admin:root")
+
+        # Reverse sorting
+        b.click("th button:contains(Owner)")
+        b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "ddd")
+        b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "eee")
+        b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-name", "Eee")
+        b.wait_text("#folder-view tbody tr:nth-of-type(4) .item-name", "aaa")
+        b.wait_text("#folder-view tbody tr:nth-of-type(5) .item-name", "ccc")
+        b.wait_text("#folder-view tbody tr:nth-of-type(6) .item-name", "BBB")
+
     def testDelete(self) -> None:
         b = self.browser
         m = self.machine
@@ -1215,7 +1287,7 @@ class TestFiles(testlib.MachineCase):
 
         def check_perms_match(file: str, basedir: str) -> None:
             ls = m.execute(f"ls -l {basedir}/{file}")[:10]
-            ui = b.text(f"[data-item='{file}'] td:nth-child(4) pre").replace(" ", "")
+            ui = b.text(f"[data-item='{file}'] .item-perms pre").replace(" ", "")
             self.assertEqual(ls[1:], ui)
 
         # Simple permissions
