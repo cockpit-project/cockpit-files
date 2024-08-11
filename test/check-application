@@ -83,17 +83,16 @@ class TestFiles(testlib.MachineCase):
 
     def waitDownloadFile(self, filename: str, expected_size: int | None = None, content: str | None = None) -> None:
         b = self.browser
-        filepath = os.path.join(b.cdp.download_dir, filename)
+        filepath = b.driver.download_dir / filename
 
         # Big downloads can take a while
         with b.wait_timeout(120):
-            testlib.wait(lambda: os.path.exists(filepath))
+            testlib.wait(filepath.exists)
         if expected_size is not None:
-            testlib.wait(lambda: os.stat(filepath).st_size == expected_size)
+            testlib.wait(lambda: filepath.stat().st_size == expected_size)
 
         if content is not None:
-            with open(filepath) as fp:
-                self.assertEqual(fp.read(), content)
+            self.assertEqual(filepath.read_text(), content)
 
     def file_action_modal(self, filename: str, action: str) -> None:
         b = self.browser
