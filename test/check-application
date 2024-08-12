@@ -1570,7 +1570,7 @@ class TestFiles(testlib.MachineCase):
             # Verify ownership
             filename = os.path.basename(files[0])
             b.click(f"[data-item='{filename}']")
-            b.wait_text("#sidebar-card-header", filename)
+            b.wait_text("#sidebar-card-header h2", filename)
             b.wait_text("#description-list-owner dd", "admin")
             b.wait_text("#description-list-group dd", "admin")
 
