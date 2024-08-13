@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-07 02:52+0000\n"
-"PO-Revision-Date: 2024-07-26 00:38+0000\n"
+"POT-Creation-Date: 2024-08-13 02:53+0000\n"
+"PO-Revision-Date: 2024-08-08 06:40+0000\n"
 "Last-Translator: 김인수 <simmon@nplob.com>\n"
 "Language-Team: Korean <https://translate.fedoraproject.org/projects/cockpit-"
 "files/cockpit-files/ko/>\n"
@@ -81,9 +81,9 @@ msgstr "블록 장치"
 msgid "Bookmarks"
 msgstr "즐겨찾기"
 
-#: src/upload-button.tsx:92 src/dialogs/mkdir.tsx:108
-#: src/dialogs/rename.tsx:116 src/dialogs/delete.tsx:88
-#: src/dialogs/permissions.jsx:133
+#: src/dialogs/permissions.jsx:133 src/dialogs/delete.tsx:88
+#: src/dialogs/rename.tsx:116 src/dialogs/mkdir.tsx:108
+#: src/upload-button.tsx:92
 msgid "Cancel"
 msgstr "취소"
 
@@ -228,8 +228,6 @@ msgid "Files"
 msgstr "파일"
 
 #: src/files-breadcrumbs.tsx:237
-#, fuzzy
-#| msgid "filesystem"
 msgid "Filesystem"
 msgstr "파일시스템"
 
@@ -261,7 +259,7 @@ msgstr "파일 $0 삭제를 강제할까요?"
 msgid "Force delete link $0?"
 msgstr "링크 $0 삭제를 강제할까요?"
 
-#: src/dialogs/permissions.jsx:162 src/files-card-body.tsx:487
+#: src/files-card-body.tsx:487 src/dialogs/permissions.jsx:162
 #: src/sidebar.tsx:60
 msgid "Group"
 msgstr "그룹"
@@ -275,10 +273,8 @@ msgid "Group permissions"
 msgstr "그룹 권한"
 
 #: src/header.tsx:231
-#, fuzzy
-#| msgid "Show hidden items"
 msgid "Hide hidden items"
-msgstr "숨겨진 항목 표시"
+msgstr "숨겨진 항목 감추기"
 
 #: src/files-breadcrumbs.tsx:52
 msgid "Home"
@@ -297,26 +293,22 @@ msgid "Last modified"
 msgstr "마지막으로 수정됨"
 
 #: src/header.tsx:99
-#, fuzzy
-#| msgid "Edit permissions"
 msgid "Least permissive"
-msgstr "권한을 편집합니다"
+msgstr "최소 허용"
 
 #: org.cockpit-project.files.metainfo.xml:6
 msgid "Manage your files"
 msgstr "자신의 파일을 관리합니다"
 
-#: src/header.tsx:81 src/files-card-body.tsx:419
+#: src/files-card-body.tsx:419 src/header.tsx:81
 msgid "Modified"
 msgstr "수정됨"
 
 #: src/header.tsx:95
-#, fuzzy
-#| msgid "Edit permissions"
 msgid "Most permissive"
-msgstr "권한을 편집합니다"
+msgstr "관대한 허용"
 
-#: src/header.tsx:59 src/files-card-body.tsx:414
+#: src/files-card-body.tsx:414 src/header.tsx:59
 msgid "Name"
 msgstr "이름"
 
@@ -365,10 +357,8 @@ msgid "Other permissions"
 msgstr "기타 권한"
 
 #: src/files-card-body.tsx:487
-#, fuzzy
-#| msgid "Others access"
 msgid "Others"
-msgstr "기타 접근"
+msgstr "기타"
 
 #: src/dialogs/permissions.jsx:204
 msgid "Others access"
@@ -378,7 +368,7 @@ msgstr "기타 접근"
 msgid "Overwrite"
 msgstr "덮어쓰기"
 
-#: src/dialogs/permissions.jsx:147 src/files-card-body.tsx:487
+#: src/files-card-body.tsx:487 src/dialogs/permissions.jsx:147
 #: src/sidebar.tsx:55
 msgid "Owner"
 msgstr "소유자"
@@ -403,11 +393,9 @@ msgstr "붙여넣기"
 msgid "Pasting failed"
 msgstr "붙여넣기 실패함"
 
-#: src/header.tsx:92 src/files-card-body.tsx:424
-#, fuzzy
-#| msgid "Edit permissions"
+#: src/files-card-body.tsx:424 src/header.tsx:92
 msgid "Permissions"
-msgstr "권한을 편집합니다"
+msgstr "권한"
 
 #: src/common.ts:30
 msgid "Read and execute"
@@ -418,8 +406,6 @@ msgid "Read and write"
 msgstr "일기 및 쓰기"
 
 #: src/common.ts:32
-#, fuzzy
-#| msgid "Read, write and execute"
 msgid "Read, write, and execute"
 msgstr "읽기, 쓰기 및 실행"
 
@@ -451,11 +437,11 @@ msgstr "교체"
 msgid "Replace file $0?"
 msgstr "파일 $0를 교체합니까?"
 
-#: src/header.tsx:231 src/files-card-body.tsx:402
+#: src/files-card-body.tsx:402 src/header.tsx:231
 msgid "Show hidden items"
 msgstr "숨겨진 항목 표시"
 
-#: src/header.tsx:70 src/files-card-body.tsx:415 src/sidebar.tsx:67
+#: src/files-card-body.tsx:415 src/header.tsx:70 src/sidebar.tsx:67
 msgid "Size"
 msgstr "크기"
 
@@ -469,7 +455,7 @@ msgstr "소켓"
 
 #: src/header.tsx:218
 msgid "Sort"
-msgstr ""
+msgstr "정렬"
 
 #: src/upload-button.tsx:260
 msgid "Successfully uploaded file(s)"
