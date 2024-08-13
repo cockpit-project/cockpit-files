@@ -14,10 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-07 02:52+0000\n"
-"PO-Revision-Date: 2024-07-24 15:38+0000\n"
-"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
-"memory@weblate.org>\n"
+"POT-Creation-Date: 2024-08-13 02:53+0000\n"
+"PO-Revision-Date: 2024-08-07 06:21+0000\n"
+"Last-Translator: Luna Jernberg <bittin@reimu.nl>\n"
 "Language-Team: Swedish <https://translate.fedoraproject.org/projects/cockpit-"
 "files/cockpit-files/sv/>\n"
 "Language: sv\n"
@@ -85,9 +84,9 @@ msgstr "Blockenhet"
 msgid "Bookmarks"
 msgstr "Bokmärken"
 
-#: src/upload-button.tsx:92 src/dialogs/mkdir.tsx:108
-#: src/dialogs/rename.tsx:116 src/dialogs/delete.tsx:88
-#: src/dialogs/permissions.jsx:133
+#: src/dialogs/permissions.jsx:133 src/dialogs/delete.tsx:88
+#: src/dialogs/rename.tsx:116 src/dialogs/mkdir.tsx:108
+#: src/upload-button.tsx:92
 msgid "Cancel"
 msgstr "Avbryt"
 
@@ -232,10 +231,8 @@ msgid "Files"
 msgstr "Filer"
 
 #: src/files-breadcrumbs.tsx:237
-#, fuzzy
-#| msgid "filesystem"
 msgid "Filesystem"
-msgstr "filsystem"
+msgstr "Filsystem"
 
 #: src/header.tsx:140
 msgid "Filter directory"
@@ -265,7 +262,7 @@ msgstr "Tvinga radering av fil $0?"
 msgid "Force delete link $0?"
 msgstr "Tvinga radering av länk $0?"
 
-#: src/dialogs/permissions.jsx:162 src/files-card-body.tsx:487
+#: src/files-card-body.tsx:487 src/dialogs/permissions.jsx:162
 #: src/sidebar.tsx:60
 msgid "Group"
 msgstr "Grupp"
@@ -279,10 +276,8 @@ msgid "Group permissions"
 msgstr "Gruppbehörigheter"
 
 #: src/header.tsx:231
-#, fuzzy
-#| msgid "Show hidden items"
 msgid "Hide hidden items"
-msgstr "Visa dolda objekt"
+msgstr "Dölj dolda objekt"
 
 #: src/files-breadcrumbs.tsx:52
 msgid "Home"
@@ -301,26 +296,22 @@ msgid "Last modified"
 msgstr "Senast modifierad"
 
 #: src/header.tsx:99
-#, fuzzy
-#| msgid "Edit permissions"
 msgid "Least permissive"
-msgstr "Redigera behörigheter"
+msgstr "Minst tillåtande"
 
 #: org.cockpit-project.files.metainfo.xml:6
 msgid "Manage your files"
 msgstr "Hantera dina filer"
 
-#: src/header.tsx:81 src/files-card-body.tsx:419
+#: src/files-card-body.tsx:419 src/header.tsx:81
 msgid "Modified"
 msgstr "Modifierad"
 
 #: src/header.tsx:95
-#, fuzzy
-#| msgid "Edit permissions"
 msgid "Most permissive"
-msgstr "Redigera behörigheter"
+msgstr "Mest tillåtande"
 
-#: src/header.tsx:59 src/files-card-body.tsx:414
+#: src/files-card-body.tsx:414 src/header.tsx:59
 msgid "Name"
 msgstr "Namn"
 
@@ -369,10 +360,8 @@ msgid "Other permissions"
 msgstr "Andra behörigheter"
 
 #: src/files-card-body.tsx:487
-#, fuzzy
-#| msgid "Others access"
 msgid "Others"
-msgstr "Andra tillgång"
+msgstr "Andra"
 
 #: src/dialogs/permissions.jsx:204
 msgid "Others access"
@@ -382,7 +371,7 @@ msgstr "Andra tillgång"
 msgid "Overwrite"
 msgstr "Skriv över"
 
-#: src/dialogs/permissions.jsx:147 src/files-card-body.tsx:487
+#: src/files-card-body.tsx:487 src/dialogs/permissions.jsx:147
 #: src/sidebar.tsx:55
 msgid "Owner"
 msgstr "Ägare"
@@ -407,11 +396,9 @@ msgstr "Klistra in"
 msgid "Pasting failed"
 msgstr "Inklistring misslyckades"
 
-#: src/header.tsx:92 src/files-card-body.tsx:424
-#, fuzzy
-#| msgid "Edit permissions"
+#: src/files-card-body.tsx:424 src/header.tsx:92
 msgid "Permissions"
-msgstr "Redigera behörigheter"
+msgstr "Behörigheter"
 
 #: src/common.ts:30
 msgid "Read and execute"
@@ -422,10 +409,8 @@ msgid "Read and write"
 msgstr "Läs och skriv"
 
 #: src/common.ts:32
-#, fuzzy
-#| msgid "Read, write and execute"
 msgid "Read, write, and execute"
-msgstr "Läs, skriv och exekvera"
+msgstr "Läs, skriv, och exekvera"
 
 #: src/common.ts:29
 msgid "Read-only"
@@ -455,11 +440,11 @@ msgstr "Ersätt"
 msgid "Replace file $0?"
 msgstr "Ersätt fil $0?"
 
-#: src/header.tsx:231 src/files-card-body.tsx:402
+#: src/files-card-body.tsx:402 src/header.tsx:231
 msgid "Show hidden items"
 msgstr "Visa dolda objekt"
 
-#: src/header.tsx:70 src/files-card-body.tsx:415 src/sidebar.tsx:67
+#: src/files-card-body.tsx:415 src/header.tsx:70 src/sidebar.tsx:67
 msgid "Size"
 msgstr "Storlek"
 
@@ -473,7 +458,7 @@ msgstr "Uttag"
 
 #: src/header.tsx:218
 msgid "Sort"
-msgstr ""
+msgstr "Sortera"
 
 #: src/upload-button.tsx:260
 msgid "Successfully uploaded file(s)"
