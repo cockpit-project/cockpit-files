@@ -86,8 +86,7 @@ class TestFiles(testlib.MachineCase):
         filepath = b.driver.download_dir / filename
 
         # Big downloads can take a while
-        with b.wait_timeout(120):
-            testlib.wait(filepath.exists)
+        testlib.wait(filepath.exists, tries=120)
         if expected_size is not None:
             testlib.wait(lambda: filepath.stat().st_size == expected_size)
 
