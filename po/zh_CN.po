@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-13 02:53+0000\n"
-"PO-Revision-Date: 2024-08-13 09:50+0000\n"
+"POT-Creation-Date: 2024-08-15 02:49+0000\n"
+"PO-Revision-Date: 2024-08-15 13:14+0000\n"
 "Last-Translator: Watson Xu <xuhuashan@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <https://translate.fedoraproject.org/"
 "projects/cockpit-files/cockpit-files/zh_CN/>\n"
@@ -235,7 +235,7 @@ msgstr "筛选目录"
 
 #: src/header.tsx:84
 msgid "First modified"
-msgstr "初次修改时间"
+msgstr "最先修改"
 
 #: src/dialogs/delete.tsx:59
 msgid "Force delete $0"
@@ -288,7 +288,7 @@ msgstr "尺寸最大"
 
 #: src/header.tsx:88 src/sidebar.tsx:50
 msgid "Last modified"
-msgstr "最后修改时间"
+msgstr "最后修改"
 
 #: src/header.tsx:99
 msgid "Least permissive"
