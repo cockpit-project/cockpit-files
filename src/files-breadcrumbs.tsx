@@ -107,14 +107,16 @@ function BookmarkButton({ path }: { path: string }) {
         }
 
         try {
-            await bookmarkHandle.modify((old_content: string) => {
+            await bookmarkHandle.modify(old_content => {
+                old_content ||= ''; // we treat a missing file the same as an empty one
+
                 if (bookmarks.includes(path)) {
                     return old_content.split('\n').filter(line => parse_uri(line) !== path)
                             .join('\n');
                 } else {
                     const newBoomark = "file://" + path.split('/').map(part => encodeURIComponent(part))
                             .join('/') + "\n";
-                    return (old_content || '') + newBoomark;
+                    return old_content + newBoomark;
                 }
             });
         } catch (err) {
