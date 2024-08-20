@@ -176,7 +176,9 @@ class TestFiles(testlib.MachineCase):
         b.wait_in_text("#description-list-last-modified ", "Jan 1, 2022, 12:00 PM")
 
         # clicking empty space resets sidebar
-        b.click("#folder-view tbody")
+        # Firefox/BiDi clicks in the middle by default, which catches/selects a file;
+        # so explicitly click in the corner
+        b.mouse("#folder-view tbody", "click", x=1, y=1)
         b.wait_in_text("#sidebar-card-header", "admin")
 
         # folder information doesn't contain size
