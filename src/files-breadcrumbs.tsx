@@ -28,12 +28,12 @@ import { PageBreadcrumb, PageSection, PageSectionVariants } from "@patternfly/re
 import { TextInput } from "@patternfly/react-core/dist/esm/components/TextInput";
 import { Tooltip, TooltipPosition } from "@patternfly/react-core/dist/esm/components/Tooltip";
 import { CheckIcon, OutlinedHddIcon, PencilAltIcon, StarIcon, TimesIcon } from "@patternfly/react-icons";
-import { useInit } from "hooks.js";
 
 import cockpit from "cockpit";
+import { useInit } from "hooks";
 
-import { useFilesContext } from "./app";
-import { basename } from "./common";
+import { useFilesContext } from "./app.tsx";
+import { basename } from "./common.ts";
 
 const _ = cockpit.gettext;
 

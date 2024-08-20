@@ -31,7 +31,7 @@ import { SortByDirection } from '@patternfly/react-table';
 
 import cockpit from "cockpit";
 
-import { UploadButton } from "./upload-button";
+import { UploadButton } from "./upload-button.tsx";
 
 const _ = cockpit.gettext;
 

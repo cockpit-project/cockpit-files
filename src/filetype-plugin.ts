@@ -28,7 +28,7 @@ import { Plugin, PluginBuild } from 'esbuild';
 import language_map from 'language-map';
 import mime_db from 'mime-db/db.json';
 
-import { Category, FileTypeData } from './filetype-lookup';
+import { Category, FileTypeData } from './filetype-lookup.ts';
 
 export function create_filetype_data() : FileTypeData {
     const categories = {

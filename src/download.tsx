@@ -19,7 +19,7 @@
 
 import cockpit from 'cockpit';
 
-import type { FolderFileInfo } from './app';
+import type { FolderFileInfo } from './app.ts';
 
 export function downloadFile(currentPath: string, selected: FolderFileInfo) {
     const payload = JSON.stringify({
