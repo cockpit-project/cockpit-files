@@ -2108,8 +2108,7 @@ class TestFiles(testlib.MachineCase):
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('Remove current directory') button")
         b.wait_not_present(".pf-v5-c-menu")
         # Removing the last bookmark, empties the file
-        testlib.wait(lambda: m.execute(
-                        f"if ! test -e {config_file}; then echo gone; fi").strip() == "gone")
+        m.execute(f"until [ $(stat -c '%s' {config_file}) -eq 0 ]; do sleep 1; done")
 
         b.click("#bookmark-btn")
         b.wait_not_present(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('Add bookmark') button")
