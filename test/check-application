@@ -2012,7 +2012,7 @@ class TestFiles(testlib.MachineCase):
 
         # Bookmarks from nautilus are supported
         m.execute("runuser -u admin mkdir '/home/admin/This is a-test'")
-        m.write('/home/admin/.config/gtk-3.0/bookmarks',
+        m.write(config_file,
                 "file:///home/admin/This%20is%20a%2dtest\n"
                 "file:///tmp Temporary Directory\n",
                 append=True, owner='admin:admin')
@@ -2076,7 +2076,7 @@ class TestFiles(testlib.MachineCase):
         self.assertEqual(read_config(), "file:///etc/\nfile:///home/admin/This%20is%20a-test/\n")
 
         # Modifications outside of Cockpit are shown
-        m.write('/home/admin/.config/gtk-3.0/bookmarks',
+        m.write(config_file,
                 "nfs://lalala\n"
                 "file:///var\n",
                 append=True, owner='admin:admin')
@@ -2088,14 +2088,14 @@ class TestFiles(testlib.MachineCase):
         self.assert_last_breadcrumb("var")
 
         # Removing bookmarks file removes all bookmarks
-        m.execute("rm -rf /home/admin/.config/gtk-3.0/bookmarks")
+        m.execute(['rm', '-rf', config_file])
         b.click("#bookmark-btn")
         b.wait_not_present(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('/etc') button")
         b.click("#bookmark-btn")
         b.wait_not_present(".pf-v5-c-menu")
 
         # Remove a bookmark when the directory is removed
-        m.write('/home/admin/.config/gtk-3.0/bookmarks',
+        m.write(config_file,
                 "file:///tmp/non-existent\n",
                 owner='admin:admin')
 
@@ -2107,7 +2107,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_not_present(".pf-v5-c-menu")
         # Removing the last bookmark, empties the file
         testlib.wait(lambda: m.execute(
-                        "if ! test -e /home/admin/.config/gtk-3.0/bookmarks; then echo gone; fi").strip() == "gone")
+                        f"if ! test -e {config_file}; then echo gone; fi").strip() == "gone")
 
         b.click("#bookmark-btn")
         b.wait_not_present(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('Add bookmark') button")
