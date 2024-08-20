@@ -24,11 +24,11 @@
  * with the return value of the `create_filetype_data()` function`.
  */
 
-import { Plugin, PluginBuild } from 'esbuild';
-import language_map from 'language-map';
-import mime_db from 'mime-db/db.json';
+import type { Plugin, PluginBuild } from 'esbuild';
+import language_map from 'language-map' with { type: 'json' };
+import mime_db from 'mime-db/db.json' with { type: 'json' };
 
-import { Category, FileTypeData } from './filetype-lookup.ts';
+import { Category, type FileTypeData } from './filetype-lookup.ts';
 
 export function create_filetype_data() : FileTypeData {
     const categories = {

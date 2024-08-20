@@ -12,6 +12,7 @@
     "paths": {
         "*": ["./pkg/lib/*"]
     },
+    "module": "preserve",
     "moduleResolution": "bundler",
     "noEmit": true,
     "strict": true,
