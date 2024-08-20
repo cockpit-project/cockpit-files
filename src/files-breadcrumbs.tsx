@@ -114,9 +114,9 @@ function BookmarkButton({ path }: { path: string }) {
                     return old_content.split('\n').filter(line => parse_uri(line) !== path)
                             .join('\n');
                 } else {
-                    const newBoomark = "file://" + path.split('/').map(part => encodeURIComponent(part))
+                    const newBookmark = "file://" + path.split('/').map(part => encodeURIComponent(part))
                             .join('/') + "\n";
-                    return old_content + newBoomark;
+                    return old_content + newBookmark;
                 }
             });
         } catch (err) {
