@@ -22,9 +22,9 @@ import React, { useEffect, useState } from "react";
 import { Card } from '@patternfly/react-core/dist/esm/components/Card';
 import { debounce } from "throttle-debounce";
 
-import type { FolderFileInfo } from "./app";
-import { FilesCardBody } from "./files-card-body";
-import { as_sort, FilesCardHeader } from "./header";
+import type { FolderFileInfo } from "./app.tsx";
+import { FilesCardBody } from "./files-card-body.tsx";
+import { as_sort, FilesCardHeader } from "./header.tsx";
 
 export const FilesFolderView = ({
     path,

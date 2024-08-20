@@ -36,7 +36,7 @@ import { DialogResult, useDialogs } from "dialogs";
 import * as timeformat from "timeformat";
 import { fmt_to_fragments } from "utils";
 
-import { useFilesContext } from "./app";
+import { useFilesContext } from "./app.tsx";
 
 import "./upload-button.scss";
 

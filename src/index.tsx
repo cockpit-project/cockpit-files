@@ -24,7 +24,7 @@ import React from "react";
 
 import { createRoot } from "react-dom/client";
 
-import { Application } from "./app";
+import { Application } from "./app.tsx";
 
 /*
  * PF4 overrides need to come after the JSX components imports because

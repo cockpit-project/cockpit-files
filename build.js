@@ -7,12 +7,12 @@ import process from 'node:process';
 
 import copy from 'esbuild-plugin-copy';
 
-import { cockpitPoEsbuildPlugin } from './pkg/lib/cockpit-po-plugin';
-import { cockpitRsyncEsbuildPlugin } from './pkg/lib/cockpit-rsync-plugin';
-import { cleanPlugin } from './pkg/lib/esbuild-cleanup-plugin';
-import { esbuildStylesPlugins } from './pkg/lib/esbuild-common';
-import { cockpitCompressPlugin } from './pkg/lib/esbuild-compress-plugin';
-import { filetype_plugin } from './src/filetype-plugin';
+import { cockpitPoEsbuildPlugin } from './pkg/lib/cockpit-po-plugin.js';
+import { cockpitRsyncEsbuildPlugin } from './pkg/lib/cockpit-rsync-plugin.js';
+import { cleanPlugin } from './pkg/lib/esbuild-cleanup-plugin.js';
+import { esbuildStylesPlugins } from './pkg/lib/esbuild-common.js';
+import { cockpitCompressPlugin } from './pkg/lib/esbuild-compress-plugin.js';
+import { filetype_plugin } from './src/filetype-plugin.ts';
 
 const useWasm = os.arch() !== 'x64';
 const esbuild = (await import(useWasm ? 'esbuild-wasm' : 'esbuild')).default;

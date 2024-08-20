@@ -36,10 +36,10 @@ import { KebabDropdown } from "cockpit-components-dropdown";
 import { useDialogs } from "dialogs";
 import * as timeformat from "timeformat";
 
-import { FolderFileInfo, useFilesContext } from "./app";
-import { basename, get_permissions } from "./common";
-import { edit_permissions } from "./dialogs/permissions";
-import { get_menu_items } from "./menu";
+import { FolderFileInfo, useFilesContext } from "./app.tsx";
+import { basename, get_permissions } from "./common.ts";
+import { edit_permissions } from "./dialogs/permissions.jsx";
+import { get_menu_items } from "./menu.tsx";
 
 const _ = cockpit.gettext;
 

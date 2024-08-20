@@ -26,12 +26,12 @@ import type { FileInfo } from "cockpit/fsinfo";
 import type { Dialogs } from 'dialogs';
 
 import type { FolderFileInfo } from "./app";
-import { basename } from "./common";
-import { confirm_delete } from './dialogs/delete';
-import { show_create_directory_dialog } from './dialogs/mkdir';
-import { edit_permissions } from './dialogs/permissions';
-import { show_rename_dialog } from './dialogs/rename';
-import { downloadFile } from './download';
+import { basename } from "./common.ts";
+import { confirm_delete } from './dialogs/delete.tsx';
+import { show_create_directory_dialog } from './dialogs/mkdir.tsx';
+import { edit_permissions } from './dialogs/permissions.jsx';
+import { show_rename_dialog } from './dialogs/rename.tsx';
+import { downloadFile } from './download.tsx';
 
 const _ = cockpit.gettext;
 

@@ -1,5 +1,5 @@
 import cockpit from 'cockpit';
-import type { FileInfo } from 'cockpit/fsinfo';
+import type { FileInfo } from 'cockpit/fsinfo.ts';
 
 // Determine the potential ownerships that a new item created in a particular
 // directory might have, in case we have admin access.  If superuser mode is

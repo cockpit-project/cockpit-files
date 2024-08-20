@@ -28,17 +28,17 @@ import { Sidebar, SidebarPanel, SidebarContent } from "@patternfly/react-core/di
 import { ExclamationCircleIcon } from "@patternfly/react-icons";
 
 import cockpit from "cockpit";
-import { FsInfoClient, FileInfo } from "cockpit/fsinfo";
+import { FsInfoClient, FileInfo } from "cockpit/fsinfo.ts";
 import { EmptyStatePanel } from "cockpit-components-empty-state";
 import { WithDialogs } from "dialogs";
 import { usePageLocation } from "hooks";
 import { superuser } from "superuser";
 
-import { FilesBreadcrumbs } from "./files-breadcrumbs";
-import { FilesFolderView } from "./files-folder-view";
-import filetype_data from './filetype-data';
-import { filetype_lookup } from './filetype-lookup';
-import { SidebarPanelDetails } from "./sidebar";
+import { FilesBreadcrumbs } from "./files-breadcrumbs.tsx";
+import { FilesFolderView } from "./files-folder-view.tsx";
+import filetype_data from './filetype-data'; // eslint-disable-line import/extensions
+import { filetype_lookup } from './filetype-lookup.ts';
+import { SidebarPanelDetails } from "./sidebar.tsx";
 
 superuser.reload_page_on_change();
 

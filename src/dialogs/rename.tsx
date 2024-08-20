@@ -26,13 +26,13 @@ import { TextInput } from '@patternfly/react-core/dist/esm/components/TextInput'
 import { Stack } from '@patternfly/react-core/dist/esm/layouts/Stack';
 
 import cockpit from 'cockpit';
-import { FileInfo } from "cockpit/fsinfo";
+import { FileInfo } from "cockpit/fsinfo.ts";
 import { FormHelper } from 'cockpit-components-form-helper';
 import { InlineNotification } from 'cockpit-components-inline-notification';
 import type { Dialogs, DialogResult } from 'dialogs';
 import { fmt_to_fragments } from 'utils';
 
-import { FolderFileInfo, useFilesContext } from '../app';
+import { FolderFileInfo, useFilesContext } from '../app.tsx';
 
 const _ = cockpit.gettext;
 

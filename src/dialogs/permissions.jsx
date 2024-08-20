@@ -31,8 +31,8 @@ import { useInit } from 'hooks';
 import { etc_group_syntax, etc_passwd_syntax } from 'pam_user_parser';
 import { superuser } from 'superuser';
 
-import { useFilesContext } from '../app';
-import { map_permissions, inode_types, basename } from '../common';
+import { useFilesContext } from '../app.tsx';
+import { map_permissions, inode_types, basename } from '../common.ts';
 
 const _ = cockpit.gettext;
 

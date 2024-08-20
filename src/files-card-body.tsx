@@ -34,11 +34,11 @@ import { EmptyStatePanel } from "cockpit-components-empty-state";
 import { useDialogs } from "dialogs";
 import * as timeformat from "timeformat";
 
-import { FolderFileInfo, useFilesContext } from "./app";
-import { get_permissions } from "./common";
-import { confirm_delete } from "./dialogs/delete";
-import { Sort, filterColumnMapping, filterColumns } from "./header";
-import { get_menu_items } from "./menu";
+import { FolderFileInfo, useFilesContext } from "./app.tsx";
+import { get_permissions } from "./common.ts";
+import { confirm_delete } from "./dialogs/delete.tsx";
+import { Sort, filterColumnMapping, filterColumns } from "./header.tsx";
+import { get_menu_items } from "./menu.tsx";
 
 import "./files-card-body.scss";
 
