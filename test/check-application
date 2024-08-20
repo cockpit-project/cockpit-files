@@ -1549,10 +1549,8 @@ class TestFiles(testlib.MachineCase):
         self.enter_files()
 
         # Copy/paste file
-        m.execute("""
-            runuser -u admin mkdir /home/admin/newdir
-            runuser -u admin echo "test_text" > /home/admin/newfile
-        """)
+        m.execute("runuser -u admin mkdir /home/admin/newdir")
+        m.write('/home/admin/newfile', 'test_text\n', owner='admin:admin')
         b.click("[data-item='newfile']")
         b.click("#dropdown-menu")
         b.click("#copy-item")
@@ -1585,7 +1583,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_visible("[data-item='copyDir']")
 
         # File already exists error
-        m.execute("runuser -u admin echo 'changed' > /home/admin/newfile")
+        m.write('/home/admin/newfile', 'changed', owner='admin:admin')
         b.click("[data-item='newfile']")
         b.click("#dropdown-menu")
         b.click("#copy-item")
@@ -2013,11 +2011,11 @@ class TestFiles(testlib.MachineCase):
         self.assert_last_breadcrumb("etc")
 
         # Bookmarks from nautilus are supported
-        m.execute("""
-            runuser -u admin mkdir '/home/admin/This is a-test'
-            runuser -u admin echo "file:///home/admin/This%20is%20a%2dtest" >> /home/admin/.config/gtk-3.0/bookmarks
-            runuser -u admin echo "file:///tmp Temporary Directory" >> /home/admin/.config/gtk-3.0/bookmarks
-        """)
+        m.execute("runuser -u admin mkdir '/home/admin/This is a-test'")
+        m.write('/home/admin/.config/gtk-3.0/bookmarks',
+                "file:///home/admin/This%20is%20a%2dtest\n"
+                "file:///tmp Temporary Directory\n",
+                append=True, owner='admin:admin')
         b.click("#bookmark-btn")
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('This is a-test') button")
         self.assert_last_breadcrumb("This is a-test")
@@ -2078,10 +2076,10 @@ class TestFiles(testlib.MachineCase):
         self.assertEqual(read_config(), "file:///etc/\nfile:///home/admin/This%20is%20a-test/\n")
 
         # Modifications outside of Cockpit are shown
-        m.execute("""
-            runuser -u admin echo "nfs://lalala" >> /home/admin/.config/gtk-3.0/bookmarks
-            runuser -u admin echo "file:///var" >> /home/admin/.config/gtk-3.0/bookmarks
-        """)
+        m.write('/home/admin/.config/gtk-3.0/bookmarks',
+                "nfs://lalala\n"
+                "file:///var\n",
+                append=True, owner='admin:admin')
 
         b.click("#bookmark-btn")
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('/var') button")
@@ -2097,7 +2095,10 @@ class TestFiles(testlib.MachineCase):
         b.wait_not_present(".pf-v5-c-menu")
 
         # Remove a bookmark when the directory is removed
-        m.execute("runuser -u admin echo 'file:///tmp/non-existent' > /home/admin/.config/gtk-3.0/bookmarks")
+        m.write('/home/admin/.config/gtk-3.0/bookmarks',
+                "file:///tmp/non-existent\n",
+                owner='admin:admin')
+
         b.click("#bookmark-btn")
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('non-existent') button")
         self.assert_last_breadcrumb("non-existent")
