@@ -9,6 +9,10 @@ exclude = [
 strict = true
 warn_return_any = false # https://github.com/python/mypy/issues/17380
 
+[tool.pyright]
+strict = ["**"]
+extraPaths = ["test/common", "bots"]
+
 [tool.ruff]
 exclude = [
     ".git/",
