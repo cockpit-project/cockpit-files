@@ -28,6 +28,7 @@ import type { Dialogs } from 'dialogs';
 import type { FolderFileInfo } from "./app";
 import { basename } from "./common.ts";
 import { confirm_delete } from './dialogs/delete.tsx';
+import { edit_file, MAX_EDITOR_FILE_SIZE } from './dialogs/editor.tsx';
 import { show_create_directory_dialog } from './dialogs/mkdir.tsx';
 import { edit_permissions } from './dialogs/permissions.jsx';
 import { show_rename_dialog } from './dialogs/rename.tsx';
@@ -90,38 +91,54 @@ export function get_menu_items(
             }
         );
     } else if (selected.length === 1) {
+        const item = selected[0];
+        // Only allow code, text and unknown file types as we detect things by
+        // extensions, so not allowing unknown file types would disallow one
+        // from editing for example /etc/hostname
+        const allowed_edit_types = ["code-file", "text-file", "file"];
+        if (item.type === 'reg' &&
+            allowed_edit_types.includes(item?.category?.class || "") &&
+            item.size !== undefined && item.size < MAX_EDITOR_FILE_SIZE)
+            menuItems.push(
+                {
+                    id: "open-file",
+                    title: _("Open text file"),
+                    onClick: () => edit_file(dialogs, path + item.name)
+                },
+                { type: "divider" },
+            );
         menuItems.push(
             {
                 id: "copy-item",
                 title: _("Copy"),
-                onClick: () => setClipboard([path + selected[0].name]),
+                onClick: () => setClipboard([path + item.name])
             },
             { type: "divider" },
             {
                 id: "edit-permissions",
                 title: _("Edit permissions"),
-                onClick: () => edit_permissions(dialogs, selected[0], path)
+                onClick: () => edit_permissions(dialogs, item, path)
             },
             {
                 id: "rename-item",
                 title: _("Rename"),
-                onClick: () => show_rename_dialog(dialogs, path, selected[0])
+                onClick: () => show_rename_dialog(dialogs, path, item)
             },
             { type: "divider" },
             {
                 id: "delete-item",
                 title: _("Delete"),
                 className: "pf-m-danger",
-                onClick: () => confirm_delete(dialogs, path, selected, setSelected)
+                onClick: () => confirm_delete(dialogs, path, [item], setSelected)
             },
         );
-        if (selected[0].type === "reg")
+        if (item.type === "reg")
             menuItems.push(
                 { type: "divider" },
                 {
                     id: "download-item",
                     title: _("Download"),
-                    onClick: () => downloadFile(path, selected[0])
+                    onClick: () => downloadFile(path, item)
                 }
             );
     } else if (selected.length > 1) {
