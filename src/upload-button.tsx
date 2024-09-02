@@ -78,7 +78,6 @@ const FileConflictDialog = ({
     return (
         <Modal
           position="top"
-          // @ts-expect-error incorrect PatternFly typing https://github.com/patternfly/patternfly-react/issues/10361
           title={fmt_to_fragments(_("Replace file $0?"), <b>{uploadFile.name}</b>)}
           titleIconVariant="warning"
           variant={ModalVariant.medium}
