@@ -122,7 +122,6 @@ const RenameItemModal = ({ dialogResult, path, selected } : {
     return (
         <Modal
           position="top"
-          // @ts-expect-error incorrect PatternFly typing https://github.com/patternfly/patternfly-react/issues/10361
           title={fmt_to_fragments(_("Rename $0?"), <b>{selected.name}</b>)}
           variant={ModalVariant.small}
           isOpen
