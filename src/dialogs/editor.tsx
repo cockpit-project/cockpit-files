@@ -178,7 +178,6 @@ export const EditFileModal = ({ dialogResult, path } : {
     return (
         <Modal
           position="top"
-          // @ts-expect-error incorrect PatternFly typing https://github.com/patternfly/patternfly-react/issues/10361
           title={title}
           isOpen
           onClose={() => dialogResult.resolve()}
