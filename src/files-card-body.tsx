@@ -263,6 +263,31 @@ export const FilesCardBody = ({
             }
         };
 
+        const handleDragEnter = (event: DragEvent) => {
+            event.preventDefault();
+            event.stopPropagation();
+            folderViewElem.classList.add("files-drag-hover");
+        };
+
+        const handleDragLeave = (event: DragEvent) => {
+            event.preventDefault();
+            event.stopPropagation();
+            folderViewElem.classList.remove("files-drag-hover");
+        };
+
+        const handleDrop = (event: DragEvent) => {
+            cockpit.assert(event.dataTransfer !== null, "dataTransfer cannot be null");
+            dispatchEvent(new CustomEvent('files-drop', { detail: event.dataTransfer.files }));
+            console.log("drop", event.dataTransfer.files);
+            event.preventDefault();
+            event.stopPropagation();
+        };
+
+        const handleDragOver = (event: DragEvent) => {
+            event.preventDefault();
+            event.stopPropagation();
+        };
+
         const onKeyboardNav = (e: KeyboardEvent) => {
             if (e.key === "ArrowRight") {
                 setSelected(_selected => {
@@ -312,6 +337,10 @@ export const FilesCardBody = ({
             folderViewElem.addEventListener("click", handleClick);
             folderViewElem.addEventListener("dblclick", handleDoubleClick);
             folderViewElem.addEventListener("contextmenu", handleContextMenu);
+            folderViewElem.addEventListener("dragenter", handleDragEnter, false);
+            folderViewElem.addEventListener("dragleave", handleDragLeave, false);
+            folderViewElem.addEventListener("dragover", handleDragOver, false);
+            folderViewElem.addEventListener("drop", handleDrop, false);
         }
 
         if (!isMounted.current && !dialogs.isActive()) {
@@ -327,6 +356,10 @@ export const FilesCardBody = ({
                 folderViewElem.removeEventListener("click", handleClick);
                 folderViewElem.removeEventListener("dblclick", handleDoubleClick);
                 folderViewElem.removeEventListener("contextmenu", handleContextMenu);
+                folderViewElem.removeEventListener("dragenter", handleDragEnter);
+                folderViewElem.removeEventListener("dragover", handleDragOver);
+                folderViewElem.removeEventListener("dragleave", handleDragLeave);
+                folderViewElem.removeEventListener("drop", handleDrop);
             }
         };
     }, [
