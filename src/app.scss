@@ -240,3 +240,23 @@
 .pf-v5-c-menu-toggle {
     padding-inline: var(--pf-v5-global--spacer--md) calc(var(--pf-v5-global--spacer--md) * 0.75);
 }
+
+// Toolbar actions styling
+.header-toolbar {
+    display: flex;
+    flex-flow: row wrap;
+    gap: var(--pf-v5-global--spacer--md);
+
+    .files-search {
+        flex: 15ch;
+    }
+
+    .header-actions {
+        display: flex;
+        gap: var(--pf-v5-global--spacer--md);
+    }
+
+    #dropdown-menu.pf-v5-c-menu-toggle {
+        padding-inline-start: var(--pf-v5-global--spacer--sm);
+    }
+}

@@ -256,9 +256,10 @@ class TestFiles(testlib.MachineCase):
         b.wait_visible("[data-item='urandom']")
 
         # Non-existing directory
+        b.wait_visible("#dropdown-menu")
         b.go("/files#/?path=/doesnotexists")
         b.wait_in_text(".pf-v5-c-empty-state__body", "No such file or directory")
-        b.wait_visible("#dropdown-menu:disabled")
+        b.wait_not_present("#dropdown-menu")
 
         # Path with multiple slashes is normalized
         b.go("/files#/?path=/////")

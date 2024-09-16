@@ -69,6 +69,10 @@ export const FilesFolderView = ({
               path={path}
               showHidden={showHidden}
               setShowHidden={setShowHidden}
+              selected={selected}
+              setSelected={setSelected}
+              clipboard={clipboard}
+              setClipboard={setClipboard}
             />
             <FilesCardBody
               files={files}
