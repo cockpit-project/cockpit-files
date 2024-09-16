@@ -204,8 +204,7 @@ export const Application = () => {
                                   path={path}
                                   selected={selected.map(s => files.find(f => f.name === s.name))
                                           .filter(s => s !== undefined)}
-                                  showHidden={showHidden} setSelected={setSelected}
-                                  clipboard={clipboard} setClipboard={setClipboard}
+                                  showHidden={showHidden}
                                   files={files}
                                 />
                             </SidebarPanel>

@@ -27,20 +27,16 @@ import {
     DescriptionListGroup,
     DescriptionListTerm
 } from "@patternfly/react-core/dist/esm/components/DescriptionList";
-import { Divider } from "@patternfly/react-core/dist/esm/components/Divider";
-import { DropdownItem } from "@patternfly/react-core/dist/esm/components/Dropdown";
 import { Text, TextContent, TextVariants } from "@patternfly/react-core/dist/esm/components/Text";
 
 import cockpit from "cockpit";
-import { KebabDropdown } from "cockpit-components-dropdown";
 import { basename } from "cockpit-path";
 import { useDialogs } from "dialogs";
 import * as timeformat from "timeformat";
 
-import { FolderFileInfo, useFilesContext } from "./app.tsx";
+import { FolderFileInfo } from "./app.tsx";
 import { get_permissions } from "./common.ts";
 import { edit_permissions } from "./dialogs/permissions.jsx";
-import { get_menu_items } from "./menu.tsx";
 
 const _ = cockpit.gettext;
 
@@ -92,15 +88,13 @@ function getDescriptionListItems(selected: FolderFileInfo) {
     ]);
 }
 
-export const SidebarPanelDetails = ({ files, path, selected, setSelected, showHidden, clipboard, setClipboard } : {
+export const SidebarPanelDetails = ({ files, path, selected, showHidden } : {
     files: FolderFileInfo[],
     path: string,
-    selected: FolderFileInfo[], setSelected: React.Dispatch<React.SetStateAction<FolderFileInfo[]>>,
+    selected: FolderFileInfo[],
     showHidden: boolean,
-    clipboard: string[], setClipboard: React.Dispatch<React.SetStateAction<string[]>>
 }) => {
     const [info, setInfo] = useState<string | null>(null);
-    const { addAlert, cwdInfo } = useFilesContext();
 
     useEffect(() => {
         if (selected.length === 1) {
@@ -118,23 +112,6 @@ export const SidebarPanelDetails = ({ files, path, selected, setSelected, showHi
     let shown_items = cockpit.format(cockpit.ngettext("$0 item", "$0 items", files.length), files.length);
     if (!showHidden)
         shown_items += " " + cockpit.format(cockpit.ngettext("($0 hidden)", "($0 hidden)", hidden_count), hidden_count);
-
-    const menuItems = get_menu_items(
-        path, selected, setSelected, clipboard, setClipboard, cwdInfo, addAlert, dialogs
-    ).map((option, i) => {
-        if (option.type === 'divider')
-            return <Divider key={i} />;
-        return (
-            <DropdownItem
-              id={option.id} key={option.id}
-              {... option.className && { className: option.className }}
-              onClick={option.onClick}
-              isDisabled={option.isDisabled || false}
-            >
-                {option.title}
-            </DropdownItem>
-        );
-    });
 
     return (
         <Card className="sidebar-card">
@@ -159,10 +136,6 @@ export const SidebarPanelDetails = ({ files, path, selected, setSelected, showHi
                             </Text>}
                     </TextContent>
                 </CardTitle>
-                <KebabDropdown
-                  toggleButtonId="dropdown-menu" dropdownItems={menuItems}
-                  isDisabled={cwdInfo === null}
-                />
             </CardHeader>
             {selected.length === 1 &&
             <CardBody>

@@ -21,16 +21,20 @@ import React, { useState } from "react";
 
 import { CardHeader, CardTitle } from "@patternfly/react-core/dist/esm/components/Card";
 import { Divider } from "@patternfly/react-core/dist/esm/components/Divider";
+import { DropdownItem } from "@patternfly/react-core/dist/esm/components/Dropdown";
 import { MenuToggle, MenuToggleAction } from "@patternfly/react-core/dist/esm/components/MenuToggle";
 import { SearchInput } from "@patternfly/react-core/dist/esm/components/SearchInput";
 import { Select, SelectGroup, SelectList, SelectOption } from "@patternfly/react-core/dist/esm/components/Select";
 import { Text, TextContent, TextVariants } from "@patternfly/react-core/dist/esm/components/Text";
-import { Flex } from "@patternfly/react-core/dist/esm/layouts/Flex";
 import { EyeIcon, EyeSlashIcon, GripVerticalIcon, ListIcon } from "@patternfly/react-icons";
 import { SortByDirection } from '@patternfly/react-table';
 
 import cockpit from "cockpit";
+import { KebabDropdown } from "cockpit-components-dropdown";
+import { useDialogs } from "dialogs";
 
+import { FolderFileInfo, useFilesContext } from "./app.tsx";
+import { get_menu_items } from "./menu.tsx";
 import { UploadButton } from "./upload-button.tsx";
 
 const _ = cockpit.gettext;
@@ -130,6 +134,10 @@ export const FilesCardHeader = ({
     setSortBy,
     showHidden,
     setShowHidden,
+    selected,
+    setSelected,
+    clipboard,
+    setClipboard,
     path,
 }: {
     currentFilter: string,
@@ -137,8 +145,30 @@ export const FilesCardHeader = ({
     isGrid: boolean, setIsGrid: React.Dispatch<React.SetStateAction<boolean>>,
     sortBy: Sort, setSortBy: React.Dispatch<React.SetStateAction<Sort>>
     showHidden: boolean, setShowHidden: React.Dispatch<React.SetStateAction<boolean>>,
+    selected: FolderFileInfo[], setSelected: React.Dispatch<React.SetStateAction<FolderFileInfo[]>>,
+    clipboard: string[], setClipboard: React.Dispatch<React.SetStateAction<string[]>>
     path: string,
 }) => {
+    const { addAlert, cwdInfo } = useFilesContext();
+    const dialogs = useDialogs();
+
+    const menuItems = get_menu_items(
+        path, selected, setSelected, clipboard, setClipboard, cwdInfo, addAlert, dialogs
+    ).map((option, i) => {
+        if (option.type === 'divider')
+            return <Divider key={i} />;
+        return (
+            <DropdownItem
+              id={option.id} key={option.id}
+              {... option.className && { className: option.className }}
+              onClick={option.onClick}
+              isDisabled={option.isDisabled || false}
+            >
+                {option.title}
+            </DropdownItem>
+        );
+    });
+
     return (
         <CardHeader className="card-actionbar">
             <CardTitle component="h2" id="files-card-header">
@@ -148,22 +178,29 @@ export const FilesCardHeader = ({
                     </Text>
                 </TextContent>
             </CardTitle>
-            <Flex flexWrap={{ default: "nowrap" }} alignItems={{ default: "alignItemsCenter" }}>
+            <div className="header-toolbar">
                 <SearchInput
+                  className="files-search"
                   placeholder={_("Filter directory")} value={currentFilter}
                   onChange={onFilterChange}
                   onClear={event => onFilterChange(event as React.FormEvent<HTMLInputElement>, "")}
                 />
-                <ViewSelector
-                  isGrid={isGrid} setIsGrid={setIsGrid}
-                  setSortBy={setSortBy} sortBy={sortBy}
-                  showHidden={showHidden} setShowHidden={setShowHidden}
-                />
-                <Divider orientation={{ default: "vertical" }} />
-                <UploadButton
-                  path={path}
-                />
-            </Flex>
+                <div className="header-actions">
+                    <ViewSelector
+                      isGrid={isGrid} setIsGrid={setIsGrid}
+                      setSortBy={setSortBy} sortBy={sortBy}
+                      showHidden={showHidden} setShowHidden={setShowHidden}
+                    />
+                    <Divider orientation={{ default: "vertical" }} />
+                    <UploadButton
+                      path={path}
+                    />
+                    <KebabDropdown
+                      toggleButtonId="dropdown-menu" dropdownItems={menuItems}
+                      isDisabled={cwdInfo === null} position="right"
+                    />
+                </div>
+            </div>
         </CardHeader>
     );
 };
@@ -196,7 +233,7 @@ const ViewSelector = ({ isGrid, setIsGrid, sortBy, setSortBy, showHidden, setSho
           selected={sortBy}
           onSelect={onSelect}
           onOpenChange={setIsOpen}
-          popperProps={{ position: "right" }}
+          popperProps={{ position: "right", preventOverflow: true }}
           toggle={toggleRef => (
               <MenuToggle
                 id="sort-menu-toggle"
