@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-15 02:49+0000\n"
-"PO-Revision-Date: 2024-08-07 06:21+0000\n"
-"Last-Translator: Luna Jernberg <bittin@reimu.nl>\n"
+"POT-Creation-Date: 2024-09-17 02:47+0000\n"
+"PO-Revision-Date: 2024-09-12 19:38+0000\n"
+"Last-Translator: Göran Uddeborg <goeran@uddeborg.se>\n"
 "Language-Team: Swedish <https://translate.fedoraproject.org/projects/cockpit-"
 "files/cockpit-files/sv/>\n"
 "Language: sv\n"
@@ -24,9 +24,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.7.2\n"
 
-#: src/menu.tsx:67
+#: src/menu.tsx:68
 msgid "\"$0\" exists, not overwriting with paste."
 msgstr "\"$0\" existerar, skriver inte över med klistra in."
 
@@ -36,7 +36,7 @@ msgid_plural "$0 items"
 msgstr[0] "$0 objekt"
 msgstr[1] "$0 objekt"
 
-#: src/files-card-body.tsx:399
+#: src/files-card-body.tsx:421
 msgid "$0 item is hidden"
 msgid_plural "$0 items are hidden"
 msgstr[0] "($0 objekt är dolt)"
@@ -52,7 +52,7 @@ msgstr[1] "($0 dolda)"
 msgid "A file system browser for Cockpit."
 msgstr "En filsystembläddrare för Cockpit."
 
-#: src/upload-button.tsx:98
+#: src/upload-button.tsx:97
 msgid ""
 "A file with the same name already exists in \"$0\". Replacing it will "
 "overwrite its content."
@@ -60,7 +60,7 @@ msgstr ""
 "En fil med samma namn finns redan i \"$0\". Om du ersätter den kommer dess "
 "innehåll att skrivas över."
 
-#: src/header.tsx:62
+#: src/header.tsx:64
 msgid "A-Z"
 msgstr "A-Z"
 
@@ -68,11 +68,11 @@ msgstr "A-Z"
 msgid "Access"
 msgstr "Åtkomst"
 
-#: src/files-breadcrumbs.tsx:145
+#: src/files-breadcrumbs.tsx:147
 msgid "Add bookmark"
 msgstr "Lägg till bokmärke"
 
-#: src/upload-button.tsx:121
+#: src/upload-button.tsx:120
 msgid "Apply this action to all conflicting files"
 msgstr "Tillämpa den här åtgärden på alla konfliktfiler"
 
@@ -80,25 +80,25 @@ msgstr "Tillämpa den här åtgärden på alla konfliktfiler"
 msgid "Block device"
 msgstr "Blockenhet"
 
-#: src/files-breadcrumbs.tsx:156
+#: src/files-breadcrumbs.tsx:158
 msgid "Bookmarks"
 msgstr "Bokmärken"
 
-#: src/dialogs/permissions.jsx:133 src/dialogs/delete.tsx:88
-#: src/dialogs/rename.tsx:116 src/dialogs/mkdir.tsx:108
-#: src/upload-button.tsx:92
+#: src/upload-button.tsx:91 src/dialogs/rename.tsx:116
+#: src/dialogs/mkdir.tsx:108 src/dialogs/delete.tsx:88
+#: src/dialogs/permissions.jsx:133 src/dialogs/editor.tsx:210
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: src/upload-button.tsx:302
+#: src/upload-button.tsx:301
 msgid "Cancel upload of $0"
 msgstr "Avbryt uppladdning av $0"
 
-#: src/upload-button.tsx:240
+#: src/upload-button.tsx:239
 msgid "Cancelled"
 msgstr "Avbruten"
 
-#: src/upload-button.tsx:241
+#: src/upload-button.tsx:240
 msgid "Cancelled upload of $0"
 msgstr "Avbruten uppladdning av $0"
 
@@ -110,15 +110,19 @@ msgstr "Ändra"
 msgid "Character device"
 msgstr "Teckenenhet"
 
-#: src/files-card-body.tsx:387
+#: src/files-card-body.tsx:409
 msgid "Clear filter"
 msgstr "Rensa filter"
+
+#: src/dialogs/editor.tsx:210
+msgid "Close"
+msgstr "Stäng"
 
 #: src/index.html:20
 msgid "Cockpit Files"
 msgstr "Cockpit filer"
 
-#: src/menu.tsx:96 src/menu.tsx:131
+#: src/menu.tsx:113 src/menu.tsx:148
 msgid "Copy"
 msgstr "Kopiera"
 
@@ -126,11 +130,11 @@ msgstr "Kopiera"
 msgid "Create"
 msgstr "Skapa"
 
-#: src/menu.tsx:82 src/dialogs/mkdir.tsx:92
+#: src/dialogs/mkdir.tsx:92 src/menu.tsx:83
 msgid "Create directory"
 msgstr "Skapa katalog"
 
-#: src/menu.tsx:113 src/menu.tsx:136 src/dialogs/delete.tsx:87
+#: src/dialogs/delete.tsx:87 src/menu.tsx:130 src/menu.tsx:153
 msgid "Delete"
 msgstr "Ta bort"
 
@@ -154,7 +158,7 @@ msgstr "Radera fil $0?"
 msgid "Delete link $0?"
 msgstr "Radera länk $0?"
 
-#: src/header.tsx:134
+#: src/header.tsx:147
 msgid "Directories & files"
 msgstr "Kataloger & filer"
 
@@ -162,7 +166,7 @@ msgstr "Kataloger & filer"
 msgid "Directory"
 msgstr "Katalog"
 
-#: src/files-card-body.tsx:394
+#: src/files-card-body.tsx:416
 msgid "Directory is empty"
 msgstr "Katalog är tom"
 
@@ -190,25 +194,30 @@ msgstr "Katalogägare"
 msgid "Directory with the same name exists"
 msgstr "Katalog med samma namn existerar"
 
-#: src/header.tsx:200
+#: src/header.tsx:213
 msgid "Display as a grid"
 msgstr "Visa som ett rutnät"
 
-#: src/header.tsx:199
+#: src/header.tsx:212
 msgid "Display as a list"
 msgstr "Visa som en lista"
 
-#: src/menu.tsx:123
+#: src/menu.tsx:140
 msgid "Download"
 msgstr "Hämta"
 
-#: src/files-breadcrumbs.tsx:297
+#: src/files-breadcrumbs.tsx:299
 msgid "Edit path"
 msgstr "Redigera sökväg"
 
-#: src/menu.tsx:88 src/menu.tsx:102 src/sidebar.tsx:183
+#: src/sidebar.tsx:183 src/menu.tsx:89 src/menu.tsx:119
 msgid "Edit permissions"
 msgstr "Redigera behörigheter"
+
+#. Translators: This is the title of a modal dialog.  $0 represents a filename.
+#: src/dialogs/editor.tsx:168
+msgid "Edit “$0”"
+msgstr "Redigera ”$0”"
 
 #: src/common.ts:26
 msgid "Execute-only"
@@ -230,15 +239,15 @@ msgstr "Filnamn är samma som originalnamn"
 msgid "Files"
 msgstr "Filer"
 
-#: src/files-breadcrumbs.tsx:237
+#: src/files-breadcrumbs.tsx:239
 msgid "Filesystem"
 msgstr "Filsystem"
 
-#: src/header.tsx:140
+#: src/header.tsx:153
 msgid "Filter directory"
 msgstr "Filtrera katalog"
 
-#: src/header.tsx:84
+#: src/header.tsx:86
 msgid "First modified"
 msgstr "Först modifierad"
 
@@ -262,8 +271,8 @@ msgstr "Tvinga radering av fil $0?"
 msgid "Force delete link $0?"
 msgstr "Tvinga radering av länk $0?"
 
-#: src/files-card-body.tsx:487 src/dialogs/permissions.jsx:162
-#: src/sidebar.tsx:60
+#: src/files-card-body.tsx:514 src/sidebar.tsx:60
+#: src/dialogs/permissions.jsx:162
 msgid "Group"
 msgstr "Grupp"
 
@@ -275,7 +284,7 @@ msgstr "Gruppåtkomst"
 msgid "Group permissions"
 msgstr "Gruppbehörigheter"
 
-#: src/header.tsx:231
+#: src/header.tsx:244
 msgid "Hide hidden items"
 msgstr "Dölj dolda objekt"
 
@@ -283,19 +292,23 @@ msgstr "Dölj dolda objekt"
 msgid "Home"
 msgstr "Hem"
 
-#: src/upload-button.tsx:91
+#: src/dialogs/editor.tsx:238
+msgid "Ignore"
+msgstr "Ignorera"
+
+#: src/upload-button.tsx:90
 msgid "Keep original"
 msgstr "Behåll original"
 
-#: src/header.tsx:73
+#: src/header.tsx:75
 msgid "Largest size"
 msgstr "Störst storlek"
 
-#: src/header.tsx:88 src/sidebar.tsx:50
+#: src/header.tsx:90 src/sidebar.tsx:50
 msgid "Last modified"
 msgstr "Senast modifierad"
 
-#: src/header.tsx:99
+#: src/header.tsx:112
 msgid "Least permissive"
 msgstr "Minst tillåtande"
 
@@ -303,15 +316,15 @@ msgstr "Minst tillåtande"
 msgid "Manage your files"
 msgstr "Hantera dina filer"
 
-#: src/files-card-body.tsx:419 src/header.tsx:81
+#: src/files-card-body.tsx:441 src/header.tsx:83
 msgid "Modified"
 msgstr "Modifierad"
 
-#: src/header.tsx:95
+#: src/header.tsx:108
 msgid "Most permissive"
 msgstr "Mest tillåtande"
 
-#: src/files-card-body.tsx:414 src/header.tsx:59
+#: src/files-card-body.tsx:436 src/header.tsx:61
 msgid "Name"
 msgstr "Namn"
 
@@ -331,7 +344,7 @@ msgstr "Namn för långt."
 msgid "Named pipe"
 msgstr "Namngivet rör"
 
-#: src/upload-button.tsx:107
+#: src/upload-button.tsx:106
 msgid "New file"
 msgstr "Ny fil"
 
@@ -343,7 +356,7 @@ msgstr "Nytt filnamn"
 msgid "New name"
 msgstr "Nytt namn"
 
-#: src/files-card-body.tsx:386
+#: src/files-card-body.tsx:408
 msgid "No matching results"
 msgstr "Inga matchande resultat"
 
@@ -351,7 +364,11 @@ msgstr "Inga matchande resultat"
 msgid "None"
 msgstr "Inga"
 
-#: src/upload-button.tsx:112
+#: src/menu.tsx:105
+msgid "Open text file"
+msgstr "Öppna en textfil"
+
+#: src/upload-button.tsx:111
 msgid "Original file on server"
 msgstr "Original fil på server"
 
@@ -359,7 +376,7 @@ msgstr "Original fil på server"
 msgid "Other permissions"
 msgstr "Andra behörigheter"
 
-#: src/files-card-body.tsx:487
+#: src/files-card-body.tsx:514
 msgid "Others"
 msgstr "Andra"
 
@@ -367,18 +384,26 @@ msgstr "Andra"
 msgid "Others access"
 msgstr "Andra tillgång"
 
-#: src/dialogs/rename.tsx:114
+#: src/dialogs/rename.tsx:114 src/dialogs/editor.tsx:194
 msgid "Overwrite"
 msgstr "Skriv över"
 
-#: src/files-card-body.tsx:487 src/dialogs/permissions.jsx:147
-#: src/sidebar.tsx:55
+#: src/files-card-body.tsx:446 src/files-card-body.tsx:514 src/header.tsx:94
+#: src/sidebar.tsx:55 src/dialogs/permissions.jsx:147
 msgid "Owner"
 msgstr "Ägare"
 
 #: src/dialogs/permissions.jsx:180
 msgid "Owner access"
 msgstr "Ägare tillgång"
+
+#: src/header.tsx:97
+msgid "Owner ascending"
+msgstr "Ägare ökande"
+
+#: src/header.tsx:101
+msgid "Owner descending"
+msgstr "Ägare minskande"
 
 #: src/sidebar.tsx:76
 msgid "Owner permissions"
@@ -388,15 +413,15 @@ msgstr "Ägare behörigheter"
 msgid "Ownership"
 msgstr "Ägarskap"
 
-#: src/menu.tsx:61
+#: src/menu.tsx:62
 msgid "Paste"
 msgstr "Klistra in"
 
-#: src/menu.tsx:66
+#: src/menu.tsx:67
 msgid "Pasting failed"
 msgstr "Inklistring misslyckades"
 
-#: src/files-card-body.tsx:424 src/header.tsx:92
+#: src/files-card-body.tsx:451 src/header.tsx:105
 msgid "Permissions"
 msgstr "Behörigheter"
 
@@ -412,7 +437,7 @@ msgstr "Läs och skriv"
 msgid "Read, write, and execute"
 msgstr "Läs, skriv, och exekvera"
 
-#: src/common.ts:29
+#: src/dialogs/editor.tsx:171 src/common.ts:29
 msgid "Read-only"
 msgstr "Läs-endast"
 
@@ -420,35 +445,43 @@ msgstr "Läs-endast"
 msgid "Regular file"
 msgstr "Vanlig fil"
 
-#: src/files-breadcrumbs.tsx:143
+#: src/dialogs/editor.tsx:235
+msgid "Reload"
+msgstr "Ladda om"
+
+#: src/files-breadcrumbs.tsx:145
 msgid "Remove current directory"
 msgstr "Ta bort aktuell katalog"
 
-#: src/menu.tsx:107 src/dialogs/rename.tsx:107
+#: src/dialogs/rename.tsx:107 src/menu.tsx:124
 msgid "Rename"
 msgstr "Byt namn"
 
-#: src/dialogs/rename.tsx:126
+#: src/dialogs/rename.tsx:125
 msgid "Rename $0?"
 msgstr "Byt namn på $0?"
 
-#: src/upload-button.tsx:89
+#: src/upload-button.tsx:88
 msgid "Replace"
 msgstr "Ersätt"
 
-#: src/upload-button.tsx:82
+#: src/upload-button.tsx:81
 msgid "Replace file $0?"
 msgstr "Ersätt fil $0?"
 
-#: src/files-card-body.tsx:402 src/header.tsx:231
+#: src/dialogs/editor.tsx:207
+msgid "Save"
+msgstr "Spara"
+
+#: src/files-card-body.tsx:424 src/header.tsx:244
 msgid "Show hidden items"
 msgstr "Visa dolda objekt"
 
-#: src/files-card-body.tsx:415 src/header.tsx:70 src/sidebar.tsx:67
+#: src/files-card-body.tsx:437 src/header.tsx:72 src/sidebar.tsx:67
 msgid "Size"
 msgstr "Storlek"
 
-#: src/header.tsx:77
+#: src/header.tsx:79
 msgid "Smallest size"
 msgstr "Minsta storlek"
 
@@ -456,11 +489,11 @@ msgstr "Minsta storlek"
 msgid "Socket"
 msgstr "Uttag"
 
-#: src/header.tsx:218
+#: src/header.tsx:231
 msgid "Sort"
 msgstr "Sortera"
 
-#: src/upload-button.tsx:260
+#: src/upload-button.tsx:259
 msgid "Successfully uploaded file(s)"
 msgstr "Fil(er) som har laddats upp framgångsrikt"
 
@@ -468,33 +501,49 @@ msgstr "Fil(er) som har laddats upp framgångsrikt"
 msgid "Symbolic link"
 msgstr "Symbolisk länk"
 
+#: src/dialogs/editor.tsx:57
+msgid "The existing file changed unexpectedly"
+msgstr "Den befintliga filen ändrades oväntat"
+
+#: src/dialogs/editor.tsx:55 src/dialogs/editor.tsx:229
+msgid "The file has been removed on disk"
+msgstr "Filen har tagits bort på disken"
+
+#: src/dialogs/editor.tsx:230
+msgid "The file has changed on disk"
+msgstr "Filen har ändrats på disken"
+
 #: src/files-breadcrumbs.tsx:104
 msgid "Unable to create bookmark directory"
 msgstr "Kan inte skapa en bokmärkeskatalog"
 
-#: src/files-breadcrumbs.tsx:122
+#: src/files-breadcrumbs.tsx:124
 msgid "Unable to save bookmark file"
 msgstr "Kan inte spara bokmärkesfilen"
 
-#: src/upload-button.tsx:338
+#: src/upload-button.tsx:337
 msgid "Upload"
 msgstr "Ladda upp"
 
-#: src/upload-button.tsx:319
+#: src/upload-button.tsx:318
 msgid "Upload $0% completed"
 msgstr "Uppladdning $0% slutförd"
 
-#: src/upload-button.tsx:260
+#: src/upload-button.tsx:259
 msgid "Upload complete"
 msgstr "Uppladdningen har slutförts"
 
-#: src/upload-button.tsx:243
+#: src/upload-button.tsx:242
 msgid "Upload error"
 msgstr "Uppladdningsfel"
 
-#: src/upload-button.tsx:283
+#: src/upload-button.tsx:282
 msgid "Uploads"
 msgstr "Uppladdningar"
+
+#: src/dialogs/editor.tsx:168
+msgid "View “$0”"
+msgstr "Visa ”$0”"
 
 #: src/common.ts:28
 msgid "Write and execute"
@@ -504,7 +553,7 @@ msgstr "Skriv och exekvera"
 msgid "Write-only"
 msgstr "Skriv-endast"
 
-#: src/header.tsx:66
+#: src/header.tsx:68
 msgid "Z-A"
 msgstr "Z-A"
 
