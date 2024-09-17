@@ -1,0 +1,577 @@
+# #-#-#-#-#  files.js.pot (PACKAGE VERSION)  #-#-#-#-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# #-#-#-#-#  files.metainfo.pot (PACKAGE VERSION)  #-#-#-#-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-17 02:47+0000\n"
+"PO-Revision-Date: 2024-09-17 08:38+0000\n"
+"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
+"memory@weblate.org>\n"
+"Language-Team: Finnish <https://translate.fedoraproject.org/projects/cockpit-"
+"files/cockpit-files/fi/>\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1\n"
+"X-Generator: Weblate 5.7.2\n"
+
+#: src/menu.tsx:68
+msgid "\"$0\" exists, not overwriting with paste."
+msgstr "\"$0\" on olemassa, eikä sitä korvata liittämällä."
+
+#: src/sidebar.tsx:117
+msgid "$0 item"
+msgid_plural "$0 items"
+msgstr[0] "$0 kohde"
+msgstr[1] "$0 kohdetta"
+
+#: src/files-card-body.tsx:421
+msgid "$0 item is hidden"
+msgid_plural "$0 items are hidden"
+msgstr[0] "$0 kohde on piilotettu"
+msgstr[1] "$0 kohdetta on piilotettu"
+
+#: src/sidebar.tsx:119
+msgid "($0 hidden)"
+msgid_plural "($0 hidden)"
+msgstr[0] "($0 piilotettu)"
+msgstr[1] "($0 piilotettua)"
+
+#: org.cockpit-project.files.metainfo.xml:8
+msgid "A file system browser for Cockpit."
+msgstr "Tiedostojärjestelmäselain Cockpitille."
+
+#: src/upload-button.tsx:97
+msgid ""
+"A file with the same name already exists in \"$0\". Replacing it will "
+"overwrite its content."
+msgstr ""
+"Samanniminen tiedosto on jo olemassa \"$0\":ssa. Sen vaihtaminen korvaa sen "
+"sisällön."
+
+#: src/header.tsx:64
+msgid "A-Z"
+msgstr "A-Z"
+
+#: src/dialogs/permissions.jsx:178
+msgid "Access"
+msgstr "Pääsy"
+
+#: src/files-breadcrumbs.tsx:147
+msgid "Add bookmark"
+msgstr "Lisää kirjanmerkki"
+
+#: src/upload-button.tsx:120
+msgid "Apply this action to all conflicting files"
+msgstr "Käytä tätä toimintoa kaikkiin ristiriitaisiin tiedostoihin"
+
+#: src/common.ts:36
+msgid "Block device"
+msgstr "Lohkolaite"
+
+#: src/files-breadcrumbs.tsx:158
+msgid "Bookmarks"
+msgstr "Kirjanmerkit"
+
+#: src/upload-button.tsx:91 src/dialogs/rename.tsx:116
+#: src/dialogs/mkdir.tsx:108 src/dialogs/delete.tsx:88
+#: src/dialogs/permissions.jsx:133 src/dialogs/editor.tsx:210
+msgid "Cancel"
+msgstr "Peru"
+
+#: src/upload-button.tsx:301
+msgid "Cancel upload of $0"
+msgstr "Peru $0:n uloslataus"
+
+#: src/upload-button.tsx:239
+msgid "Cancelled"
+msgstr "Peruttu"
+
+#: src/upload-button.tsx:240
+msgid "Cancelled upload of $0"
+msgstr "$0:n uloslataus peruttu"
+
+#: src/dialogs/permissions.jsx:131
+msgid "Change"
+msgstr "Vaihda"
+
+#: src/common.ts:37
+msgid "Character device"
+msgstr "Merkkilaite"
+
+#: src/files-card-body.tsx:409
+msgid "Clear filter"
+msgstr "Tyhjennä suodatin"
+
+#: src/dialogs/editor.tsx:210
+msgid "Close"
+msgstr "Sulje"
+
+#: src/index.html:20
+msgid "Cockpit Files"
+msgstr "Cockpit-tiedostot"
+
+#: src/menu.tsx:113 src/menu.tsx:148
+msgid "Copy"
+msgstr "Kopio"
+
+#: src/dialogs/mkdir.tsx:106
+msgid "Create"
+msgstr "Luo"
+
+#: src/dialogs/mkdir.tsx:92 src/menu.tsx:83
+msgid "Create directory"
+msgstr "Luo hakemisto"
+
+#: src/dialogs/delete.tsx:87 src/menu.tsx:130 src/menu.tsx:153
+msgid "Delete"
+msgstr "Poista"
+
+#: src/dialogs/delete.tsx:43
+msgid "Delete $0 items?"
+msgstr "Poistetaanko $0 kohdetta?"
+
+#: src/dialogs/delete.tsx:59
+msgid "Delete $0?"
+msgstr "Poistetaanko $0?"
+
+#: src/dialogs/delete.tsx:56
+msgid "Delete directory $0?"
+msgstr "Poistetaanko hakemisto $0?"
+
+#: src/dialogs/delete.tsx:48
+msgid "Delete file $0?"
+msgstr "Poistetaanko tiedosto $0?"
+
+#: src/dialogs/delete.tsx:52
+msgid "Delete link $0?"
+msgstr "Poistetaanko linkki $0?"
+
+#: src/header.tsx:147
+msgid "Directories & files"
+msgstr "Hakemistot ja tiedostot"
+
+#: src/common.ts:38
+msgid "Directory"
+msgstr "Hakemisto"
+
+#: src/files-card-body.tsx:416
+msgid "Directory is empty"
+msgstr "Hakemisto on tyhjä"
+
+#: src/dialogs/mkdir.tsx:126
+msgid "Directory name"
+msgstr "Hakemiston nimi"
+
+#: src/dialogs/mkdir.tsx:42
+msgid "Directory name cannot be empty."
+msgstr "Hakemiston nimi ei voi olla tyhjä."
+
+#: src/dialogs/mkdir.tsx:46
+msgid "Directory name cannot include a /."
+msgstr "Hakemiston nimessä ei voi olla \"/\"."
+
+#: src/dialogs/mkdir.tsx:44
+msgid "Directory name too long."
+msgstr "Hakemiston nimi liian pitkä."
+
+#: src/dialogs/mkdir.tsx:140
+msgid "Directory owner"
+msgstr "Hakemiston omistaja"
+
+#: src/dialogs/rename.tsx:50
+msgid "Directory with the same name exists"
+msgstr "Samanniminen hakemisto on olemassa"
+
+#: src/header.tsx:213
+msgid "Display as a grid"
+msgstr "Näytä ruudukkona"
+
+#: src/header.tsx:212
+msgid "Display as a list"
+msgstr "Näytä luettelona"
+
+#: src/menu.tsx:140
+msgid "Download"
+msgstr "Lataus"
+
+#: src/files-breadcrumbs.tsx:299
+msgid "Edit path"
+msgstr "Muokkaa polkua"
+
+#: src/sidebar.tsx:183 src/menu.tsx:89 src/menu.tsx:119
+msgid "Edit permissions"
+msgstr "Muokkaa käyttöoikeuksia"
+
+#. Translators: This is the title of a modal dialog.  $0 represents a filename.
+#: src/dialogs/editor.tsx:168
+msgid "Edit “$0”"
+msgstr "Muokkaa \"$0\":ta"
+
+#: src/common.ts:26
+msgid "Execute-only"
+msgstr "Vain suoritettavaksi"
+
+#: src/manifest.json:0
+msgid "File browser"
+msgstr "Tiedostoselain"
+
+#: src/dialogs/rename.tsx:52
+msgid "File exists"
+msgstr "Tiedosto on olemassa"
+
+#: src/dialogs/rename.tsx:47
+msgid "Filename is the same as original name"
+msgstr "Tiedostonimi on sama kuin alkuperäinen nimi"
+
+#: org.cockpit-project.files.metainfo.xml:5
+msgid "Files"
+msgstr "Tiedostot"
+
+#: src/files-breadcrumbs.tsx:239
+msgid "Filesystem"
+msgstr "Tiedostojärjestelmä"
+
+#: src/header.tsx:153
+msgid "Filter directory"
+msgstr "Suodata hakemisto"
+
+#: src/header.tsx:86
+msgid "First modified"
+msgstr "Ensin muokattu"
+
+#: src/dialogs/delete.tsx:59
+msgid "Force delete $0"
+msgstr "Pakota $0:n poisto"
+
+#: src/dialogs/delete.tsx:43
+msgid "Force delete $0 items"
+msgstr "Pakota $0:n kohteiden poisto"
+
+#: src/dialogs/delete.tsx:56
+msgid "Force delete directory $0?"
+msgstr "Pakottaako hakemiston $0 poisto?"
+
+#: src/dialogs/delete.tsx:48
+msgid "Force delete file $0?"
+msgstr "Pakottaako tiedoston $0 poisto?"
+
+#: src/dialogs/delete.tsx:52
+msgid "Force delete link $0?"
+msgstr "Pakottaako linkin $0 poisto?"
+
+#: src/files-card-body.tsx:514 src/sidebar.tsx:60
+#: src/dialogs/permissions.jsx:162
+msgid "Group"
+msgstr "Ryhmä"
+
+#: src/dialogs/permissions.jsx:192
+msgid "Group access"
+msgstr "Ryhmään pääsy"
+
+#: src/sidebar.tsx:81
+msgid "Group permissions"
+msgstr "Ryhmän käyttöoikeudet"
+
+#: src/header.tsx:244
+msgid "Hide hidden items"
+msgstr "Piilota piilotetut kohteet"
+
+#: src/files-breadcrumbs.tsx:52
+msgid "Home"
+msgstr "Koti"
+
+#: src/dialogs/editor.tsx:238
+msgid "Ignore"
+msgstr "Ohita"
+
+#: src/upload-button.tsx:90
+msgid "Keep original"
+msgstr "Säilytä alkuperäinen"
+
+#: src/header.tsx:75
+msgid "Largest size"
+msgstr "Suurin koko"
+
+#: src/header.tsx:90 src/sidebar.tsx:50
+msgid "Last modified"
+msgstr "Viimeksi muokattu"
+
+#: src/header.tsx:112
+msgid "Least permissive"
+msgstr "Vähiten salliva"
+
+#: org.cockpit-project.files.metainfo.xml:6
+msgid "Manage your files"
+msgstr "Hallitse tiedostojasi"
+
+#: src/files-card-body.tsx:441 src/header.tsx:83
+msgid "Modified"
+msgstr "Muokattu"
+
+#: src/header.tsx:108
+msgid "Most permissive"
+msgstr "Eniten salliva"
+
+#: src/files-card-body.tsx:436 src/header.tsx:61
+msgid "Name"
+msgstr "Nimi"
+
+#: src/dialogs/rename.tsx:41
+msgid "Name cannot be empty."
+msgstr "Nimi ei voi olla tyhjä."
+
+#: src/dialogs/rename.tsx:45
+msgid "Name cannot include a /."
+msgstr "Nimessä ei saa olla \"/\"."
+
+#: src/dialogs/rename.tsx:43
+msgid "Name too long."
+msgstr "Nimi liian pitkä."
+
+#: src/common.ts:39
+msgid "Named pipe"
+msgstr "Nimetty putki"
+
+#: src/upload-button.tsx:106
+msgid "New file"
+msgstr "Uusi tiedosto"
+
+#: src/dialogs/rename.tsx:120
+msgid "New filename"
+msgstr "Uusi tiedostonimi"
+
+#: src/dialogs/rename.tsx:120
+msgid "New name"
+msgstr "Uusi nimi"
+
+#: src/files-card-body.tsx:408
+msgid "No matching results"
+msgstr "Ei vastaavia tuloksia"
+
+#: src/common.ts:25
+msgid "None"
+msgstr "Ei mitään"
+
+#: src/menu.tsx:105
+msgid "Open text file"
+msgstr "Avaa tekstitiedosto"
+
+#: src/upload-button.tsx:111
+msgid "Original file on server"
+msgstr "Alkuperäinen tiedosto palvelimella"
+
+#: src/sidebar.tsx:86
+msgid "Other permissions"
+msgstr "Muut käyttöoikeudet"
+
+#: src/files-card-body.tsx:514
+msgid "Others"
+msgstr "Muut"
+
+#: src/dialogs/permissions.jsx:204
+msgid "Others access"
+msgstr "Muiden pääsy"
+
+#: src/dialogs/rename.tsx:114 src/dialogs/editor.tsx:194
+msgid "Overwrite"
+msgstr "Korvaa"
+
+#: src/files-card-body.tsx:446 src/files-card-body.tsx:514 src/header.tsx:94
+#: src/sidebar.tsx:55 src/dialogs/permissions.jsx:147
+msgid "Owner"
+msgstr "Omistaja"
+
+#: src/dialogs/permissions.jsx:180
+msgid "Owner access"
+msgstr "Omistajan pääsy"
+
+#: src/header.tsx:97
+msgid "Owner ascending"
+msgstr "Omistaja nouseva"
+
+#: src/header.tsx:101
+msgid "Owner descending"
+msgstr "Omistaja laskeva"
+
+#: src/sidebar.tsx:76
+msgid "Owner permissions"
+msgstr "Omistajan käyttöoikeudet"
+
+#: src/dialogs/permissions.jsx:146
+msgid "Ownership"
+msgstr "Omistajuus"
+
+#: src/menu.tsx:62
+msgid "Paste"
+msgstr "Liitä"
+
+#: src/menu.tsx:67
+msgid "Pasting failed"
+msgstr "Liittäminen epäonnistui"
+
+#: src/files-card-body.tsx:451 src/header.tsx:105
+msgid "Permissions"
+msgstr "Käyttöoikeudet"
+
+#: src/common.ts:30
+msgid "Read and execute"
+msgstr "Luku ja suoritus"
+
+#: src/common.ts:31
+msgid "Read and write"
+msgstr "Luku ja kirjoitus"
+
+#: src/common.ts:32
+msgid "Read, write, and execute"
+msgstr "Luku, kirjoitus ja suoritus"
+
+#: src/dialogs/editor.tsx:171 src/common.ts:29
+msgid "Read-only"
+msgstr "Vain luku"
+
+#: src/common.ts:41
+msgid "Regular file"
+msgstr "Säännöllinen tiedosto"
+
+#: src/dialogs/editor.tsx:235
+msgid "Reload"
+msgstr "Lataa uudelleen"
+
+#: src/files-breadcrumbs.tsx:145
+msgid "Remove current directory"
+msgstr "Poista nykyinen hakemisto"
+
+#: src/dialogs/rename.tsx:107 src/menu.tsx:124
+msgid "Rename"
+msgstr "Nimeä uudelleen"
+
+#: src/dialogs/rename.tsx:125
+msgid "Rename $0?"
+msgstr "Nimetäänkö $0 uudelleen?"
+
+#: src/upload-button.tsx:88
+msgid "Replace"
+msgstr "Vaihda"
+
+#: src/upload-button.tsx:81
+msgid "Replace file $0?"
+msgstr "Vaihdetaanko tiedosto $0?"
+
+#: src/dialogs/editor.tsx:207
+msgid "Save"
+msgstr "Tallenna"
+
+#: src/files-card-body.tsx:424 src/header.tsx:244
+msgid "Show hidden items"
+msgstr "Näytä piilotetut kohteet"
+
+#: src/files-card-body.tsx:437 src/header.tsx:72 src/sidebar.tsx:67
+msgid "Size"
+msgstr "Koko"
+
+#: src/header.tsx:79
+msgid "Smallest size"
+msgstr "Pienin koko"
+
+#: src/common.ts:42
+msgid "Socket"
+msgstr "Pistoke"
+
+#: src/header.tsx:231
+msgid "Sort"
+msgstr "Järjestele"
+
+#: src/upload-button.tsx:259
+msgid "Successfully uploaded file(s)"
+msgstr "Tiedosto(t) ulosladattu onnistuneesti"
+
+#: src/common.ts:40
+msgid "Symbolic link"
+msgstr "Symbolinen linkki"
+
+#: src/dialogs/editor.tsx:57
+msgid "The existing file changed unexpectedly"
+msgstr "Olemassa oleva tiedosto muuttui odottamatta"
+
+#: src/dialogs/editor.tsx:55 src/dialogs/editor.tsx:229
+msgid "The file has been removed on disk"
+msgstr "Tiedosto on poistettu levyltä"
+
+#: src/dialogs/editor.tsx:230
+msgid "The file has changed on disk"
+msgstr "Tiedosto on muuttunut levyllä"
+
+#: src/files-breadcrumbs.tsx:104
+msgid "Unable to create bookmark directory"
+msgstr "Kirjanmerkkihakemistoa ei voi luoda"
+
+#: src/files-breadcrumbs.tsx:124
+msgid "Unable to save bookmark file"
+msgstr "Kirjanmerkkitiedostoa ei voi tallentaa"
+
+#: src/upload-button.tsx:337
+msgid "Upload"
+msgstr "Uloslataa"
+
+#
+#: src/upload-button.tsx:318
+msgid "Upload $0% completed"
+msgstr "Uloslataus $0 % valmis"
+
+#: src/upload-button.tsx:259
+msgid "Upload complete"
+msgstr "Uloslataus valmis"
+
+#: src/upload-button.tsx:242
+msgid "Upload error"
+msgstr "Uloslatausvirhe"
+
+#: src/upload-button.tsx:282
+msgid "Uploads"
+msgstr "Uloslataukset"
+
+#: src/dialogs/editor.tsx:168
+msgid "View “$0”"
+msgstr "Näytä \"$0\""
+
+#: src/common.ts:28
+msgid "Write and execute"
+msgstr "Kirjoitus ja suoritus"
+
+#: src/common.ts:27
+msgid "Write-only"
+msgstr "Vain kirjoitus"
+
+#: src/header.tsx:68
+msgid "Z-A"
+msgstr "Z-A"
+
+#: src/manifest.json:0
+msgid "explorer"
+msgstr "selain"
+
+#: src/manifest.json:0
+msgid "files"
+msgstr "tiedostot"
+
+#: src/manifest.json:0
+msgid "filesystem"
+msgstr "tiedostojärjestelmä"
+
+#. Translators: $0 represents a filename
+#: src/dialogs/permissions.jsx:121
+msgid "“$0” permissions"
+msgstr "\"$0\" käyttöoikeudet"
