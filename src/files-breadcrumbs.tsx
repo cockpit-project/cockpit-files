@@ -30,10 +30,10 @@ import { Tooltip, TooltipPosition } from "@patternfly/react-core/dist/esm/compon
 import { CheckIcon, OutlinedHddIcon, PencilAltIcon, StarIcon, TimesIcon } from "@patternfly/react-icons";
 
 import cockpit from "cockpit";
+import { basename } from "cockpit-path";
 import { useInit } from "hooks";
 
 import { useFilesContext } from "./app.tsx";
-import { basename } from "./common.ts";
 
 const _ = cockpit.gettext;
 

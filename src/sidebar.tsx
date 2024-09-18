@@ -33,11 +33,12 @@ import { Text, TextContent, TextVariants } from "@patternfly/react-core/dist/esm
 
 import cockpit from "cockpit";
 import { KebabDropdown } from "cockpit-components-dropdown";
+import { basename } from "cockpit-path";
 import { useDialogs } from "dialogs";
 import * as timeformat from "timeformat";
 
 import { FolderFileInfo, useFilesContext } from "./app.tsx";
-import { basename, get_permissions } from "./common.ts";
+import { get_permissions } from "./common.ts";
 import { edit_permissions } from "./dialogs/permissions.jsx";
 import { get_menu_items } from "./menu.tsx";
 

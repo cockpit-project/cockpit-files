@@ -51,16 +51,3 @@ export function * map_permissions<T>(func: (value: number, label: string) => T) 
         yield func(value, label);
     }
 }
-
-export function basename(path: string) {
-    if (path === '/') {
-        return path;
-    }
-
-    const elements = path.replace(/\/$/, '').split('/');
-    if (elements.length === 0) {
-        return '/';
-    } else {
-        return elements[elements.length - 1];
-    }
-}
