@@ -27,12 +27,13 @@ import { Stack } from '@patternfly/react-core/dist/esm/layouts/Stack';
 
 import cockpit from 'cockpit';
 import { InlineNotification } from 'cockpit-components-inline-notification';
+import { basename } from "cockpit-path";
 import { useInit } from 'hooks';
 import { etc_group_syntax, etc_passwd_syntax } from 'pam_user_parser';
 import { superuser } from 'superuser';
 
 import { useFilesContext } from '../app.tsx';
-import { map_permissions, inode_types, basename } from '../common.ts';
+import { map_permissions, inode_types } from '../common.ts';
 
 const _ = cockpit.gettext;
 

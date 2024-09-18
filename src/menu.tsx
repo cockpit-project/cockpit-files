@@ -23,10 +23,10 @@ import { AlertVariant } from "@patternfly/react-core/dist/esm/components/Alert";
 
 import cockpit from "cockpit";
 import type { FileInfo } from "cockpit/fsinfo";
+import { basename } from "cockpit-path";
 import type { Dialogs } from 'dialogs';
 
 import type { FolderFileInfo } from "./app";
-import { basename } from "./common.ts";
 import { confirm_delete } from './dialogs/delete.tsx';
 import { edit_file, MAX_EDITOR_FILE_SIZE } from './dialogs/editor.tsx';
 import { show_create_directory_dialog } from './dialogs/mkdir.tsx';
