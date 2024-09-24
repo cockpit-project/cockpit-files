@@ -14,9 +14,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-17 02:47+0000\n"
-"PO-Revision-Date: 2024-08-09 08:40+0000\n"
-"Last-Translator: JW Wang <v72807647@gmail.com>\n"
+"POT-Creation-Date: 2024-09-18 02:59+0000\n"
+"PO-Revision-Date: 2024-09-18 18:29+0000\n"
+"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
+"memory@weblate.org>\n"
 "Language-Team: Chinese (Traditional) <https://translate.fedoraproject.org/"
 "projects/cockpit-files/cockpit-files/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -24,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.7.2\n"
 
 #: src/menu.tsx:68
 msgid "\"$0\" exists, not overwriting with paste."
@@ -111,7 +112,7 @@ msgstr "清除篩選器"
 
 #: src/dialogs/editor.tsx:210
 msgid "Close"
-msgstr ""
+msgstr "關閉"
 
 #: src/index.html:20
 msgid "Cockpit Files"
@@ -212,7 +213,7 @@ msgstr "編輯權限"
 #. Translators: This is the title of a modal dialog.  $0 represents a filename.
 #: src/dialogs/editor.tsx:168
 msgid "Edit “$0”"
-msgstr ""
+msgstr "編輯 \"$0\""
 
 #: src/common.ts:26
 msgid "Execute-only"
@@ -289,7 +290,7 @@ msgstr "家目錄"
 
 #: src/dialogs/editor.tsx:238
 msgid "Ignore"
-msgstr ""
+msgstr "忽略"
 
 #: src/upload-button.tsx:90
 msgid "Keep original"
@@ -361,7 +362,7 @@ msgstr "無"
 
 #: src/menu.tsx:105
 msgid "Open text file"
-msgstr ""
+msgstr "開啟文字檔案"
 
 #: src/upload-button.tsx:111
 msgid "Original file on server"
@@ -393,16 +394,12 @@ msgid "Owner access"
 msgstr "擁有者存取權限"
 
 #: src/header.tsx:97
-#, fuzzy
-#| msgid "Owner access"
 msgid "Owner ascending"
-msgstr "擁有者存取權限"
+msgstr "擁有者遞增排序"
 
 #: src/header.tsx:101
-#, fuzzy
-#| msgid "Owner permissions"
 msgid "Owner descending"
-msgstr "擁有者權限"
+msgstr "擁有者遞減排序"
 
 #: src/sidebar.tsx:76
 msgid "Owner permissions"
@@ -445,10 +442,8 @@ msgid "Regular file"
 msgstr "一般檔案"
 
 #: src/dialogs/editor.tsx:235
-#, fuzzy
-#| msgid "Upload"
 msgid "Reload"
-msgstr "上傳"
+msgstr "重新載入"
 
 #: src/files-breadcrumbs.tsx:145
 msgid "Remove current directory"
@@ -472,7 +467,7 @@ msgstr "取代檔案 $0 ？"
 
 #: src/dialogs/editor.tsx:207
 msgid "Save"
-msgstr ""
+msgstr "儲存"
 
 #: src/files-card-body.tsx:424 src/header.tsx:244
 msgid "Show hidden items"
@@ -504,15 +499,15 @@ msgstr "符號連結"
 
 #: src/dialogs/editor.tsx:57
 msgid "The existing file changed unexpectedly"
-msgstr ""
+msgstr "既存的檔案有意料外的變更"
 
 #: src/dialogs/editor.tsx:55 src/dialogs/editor.tsx:229
 msgid "The file has been removed on disk"
-msgstr ""
+msgstr "該檔案已被從磁碟上移除"
 
 #: src/dialogs/editor.tsx:230
 msgid "The file has changed on disk"
-msgstr ""
+msgstr "該檔案已在磁碟上被變更"
 
 #: src/files-breadcrumbs.tsx:104
 msgid "Unable to create bookmark directory"
@@ -545,7 +540,7 @@ msgstr "上傳項目"
 
 #: src/dialogs/editor.tsx:168
 msgid "View “$0”"
-msgstr ""
+msgstr "檢視 \"$0\""
 
 #: src/common.ts:28
 msgid "Write and execute"
