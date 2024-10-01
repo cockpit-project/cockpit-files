@@ -158,7 +158,7 @@ export const Application = () => {
         return () => {
             document.removeEventListener("keydown", onKeyboardNav);
         };
-    }, []);
+    });
 
     if (loading)
         return <EmptyStatePanel loading />;
