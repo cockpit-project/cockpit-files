@@ -168,7 +168,6 @@ class TestFiles(testlib.MachineCase):
         b.wait_text("#description-list-last-modified dd", "Jan 1, 2022, 12:00 PM")
 
         # saving a file updates sidebar info
-        # FIXME: Size does not update
         m.execute("head -c 7 /dev/zero > /home/admin/newfile")
         b.wait_text("#description-list-size dd", "7 B")
         b.wait_not_in_text("#description-list-last-modified ", "Jan 1, 2022, 12:00 PM")
