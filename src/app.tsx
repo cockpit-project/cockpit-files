@@ -34,6 +34,7 @@ import { WithDialogs } from "dialogs";
 import { useInit, usePageLocation } from "hooks";
 import { superuser } from "superuser";
 
+import { testIsAppleDevice } from "./common.ts";
 import { FilesBreadcrumbs } from "./files-breadcrumbs.tsx";
 import { FilesFolderView } from "./files-folder-view.tsx";
 import filetype_data from './filetype-data'; // eslint-disable-line import/extensions
@@ -146,8 +147,10 @@ export const Application = () => {
     );
 
     useInit(() => {
+        const isApple = testIsAppleDevice();
+
         const onKeyboardNav = (e: KeyboardEvent) => {
-            if (e.key === "L" && e.ctrlKey && !e.altKey) {
+            if (e.key === "L" && (isApple ? e.metaKey : e.ctrlKey) && !e.altKey) {
                 e.preventDefault();
                 document.dispatchEvent(new Event("manual-change-dir"));
             }

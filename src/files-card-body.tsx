@@ -36,7 +36,7 @@ import { useDialogs } from "dialogs";
 import * as timeformat from "timeformat";
 
 import { FolderFileInfo, useFilesContext } from "./app.tsx";
-import { get_permissions } from "./common.ts";
+import { get_permissions, testIsAppleDevice } from "./common.ts";
 import { confirm_delete } from "./dialogs/delete.tsx";
 import { show_create_directory_dialog } from "./dialogs/mkdir.tsx";
 import { show_rename_dialog } from "./dialogs/rename.tsx";
@@ -207,6 +207,7 @@ export const FilesCardBody = ({
 
     useEffect(() => {
         let folderViewElem = null;
+        const isApple = testIsAppleDevice();
 
         const resetSelected = (e: MouseEvent) => {
             if ((e.target instanceof HTMLElement)) {
@@ -273,14 +274,16 @@ export const FilesCardBody = ({
             }
         };
 
-        const hasNoKeydownModifiers = (event: KeyboardEvent) => {
-            return !event.shiftKey && !event.ctrlKey && !event.altKey && !event.metaKey;
+        const hasNoKeydownModifiers = (event: KeyboardEvent, ctrlKey: boolean) => {
+            return !event.shiftKey && !ctrlKey && !event.altKey && !event.metaKey;
         };
 
         const onKeyboardNav = (e: KeyboardEvent) => {
+            const ctrlKey = isApple ? e.metaKey : e.ctrlKey;
+
             switch (e.key) {
             case "ArrowRight":
-                if (hasNoKeydownModifiers(e)) {
+                if (hasNoKeydownModifiers(e, ctrlKey)) {
                     setSelected(_selected => {
                         const firstSelectedName = _selected?.[0]?.name;
                         const selectedIdx = sortedFiles?.findIndex(file => file.name === firstSelectedName);
@@ -294,7 +297,7 @@ export const FilesCardBody = ({
                 break;
 
             case "ArrowLeft":
-                if (hasNoKeydownModifiers(e)) {
+                if (hasNoKeydownModifiers(e, ctrlKey)) {
                     setSelected(_selected => {
                         const firstSelectedName = _selected?.[0]?.name;
                         const selectedIdx = sortedFiles?.findIndex(file => file.name === firstSelectedName);
@@ -308,9 +311,9 @@ export const FilesCardBody = ({
                 break;
 
             case "ArrowUp":
-                if (e.altKey && !e.shiftKey && !e.ctrlKey) {
+                if (e.altKey && !e.shiftKey && !ctrlKey) {
                     goUpOneDir();
-                } else if (hasNoKeydownModifiers(e)) {
+                } else if (hasNoKeydownModifiers(e, ctrlKey)) {
                     setSelected(_selected => {
                         const firstSelectedName = _selected?.[0]?.name;
                         const selectedIdx = sortedFiles?.findIndex(file => file.name === firstSelectedName);
@@ -322,9 +325,9 @@ export const FilesCardBody = ({
                 break;
 
             case "ArrowDown":
-                if (e.altKey && !e.shiftKey && !e.ctrlKey && selected.length === 1) {
+                if (e.altKey && !e.shiftKey && !ctrlKey && selected.length === 1) {
                     onDoubleClickNavigate(selected[0]);
-                } else if (hasNoKeydownModifiers(e)) {
+                } else if (hasNoKeydownModifiers(e, ctrlKey)) {
                     setSelected(_selected => {
                         const firstSelectedName = _selected?.[0]?.name;
                         const selectedIdx = sortedFiles?.findIndex(file => file.name === firstSelectedName);
@@ -336,26 +339,26 @@ export const FilesCardBody = ({
                 break;
 
             case "Enter":
-                if (hasNoKeydownModifiers(e) && selected.length === 1) {
+                if (hasNoKeydownModifiers(e, ctrlKey) && selected.length === 1) {
                     onDoubleClickNavigate(selected[0]);
                 }
                 break;
 
             case "Delete":
-                if (hasNoKeydownModifiers(e) && selected.length !== 0) {
+                if (hasNoKeydownModifiers(e, ctrlKey) && selected.length !== 0) {
                     confirm_delete(dialogs, path, selected, setSelected);
                 }
                 break;
 
             case "F2":
-                if (hasNoKeydownModifiers(e) && selected.length === 1) {
+                if (hasNoKeydownModifiers(e, ctrlKey) && selected.length === 1) {
                     show_rename_dialog(dialogs, path, selected[0]);
                 }
                 break;
 
             case "a":
                 // Keep standard text editing behavior by excluding input fields
-                if (e.ctrlKey && !e.shiftKey && !e.altKey && !(e.target instanceof HTMLInputElement)) {
+                if (ctrlKey && !e.shiftKey && !e.altKey && !(e.target instanceof HTMLInputElement)) {
                     e.preventDefault();
                     setSelected(sortedFiles);
                 }
@@ -363,7 +366,7 @@ export const FilesCardBody = ({
 
             case "c":
                 // Keep standard text editing behavior by excluding input fields
-                if (e.ctrlKey && !e.shiftKey && !e.altKey && !(e.target instanceof HTMLInputElement)) {
+                if (ctrlKey && !e.shiftKey && !e.altKey && !(e.target instanceof HTMLInputElement)) {
                     e.preventDefault();
                     setClipboard(selected.map(s => path + s.name));
                 }
@@ -371,14 +374,14 @@ export const FilesCardBody = ({
 
             case "v":
                 // Keep standard text editing behavior by excluding input fields
-                if (e.ctrlKey && !e.shiftKey && !e.altKey && !(e.target instanceof HTMLInputElement)) {
+                if (ctrlKey && !e.shiftKey && !e.altKey && !(e.target instanceof HTMLInputElement)) {
                     e.preventDefault();
                     pasteFromClipboard(clipboard, cwdInfo, path, addAlert);
                 }
                 break;
 
             case "N":
-                if (!e.ctrlKey && !e.altKey) {
+                if (!ctrlKey && !e.altKey) {
                     e.preventDefault();
                     show_create_directory_dialog(dialogs, path);
                 }
