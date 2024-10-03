@@ -35,7 +35,7 @@ import { dirname } from "cockpit-path.ts";
 import { useDialogs } from "dialogs";
 import * as timeformat from "timeformat";
 
-import { get_permissions, permissionShortStr, useFilesContext } from "./common.ts";
+import { get_permissions, permissionShortStr, testIsAppleDevice, useFilesContext } from "./common.ts";
 import type { ClipboardInfo, FolderFileInfo } from "./common.ts";
 import { confirm_delete } from "./dialogs/delete.tsx";
 import { show_create_directory_dialog } from "./dialogs/mkdir.tsx";
@@ -207,6 +207,7 @@ export const FilesCardBody = ({
 
     useEffect(() => {
         let folderViewElem: HTMLDivElement | null = null;
+        const isApple = testIsAppleDevice();
 
         const resetSelected = (e: MouseEvent) => {
             if ((e.target instanceof HTMLElement)) {
@@ -273,14 +274,38 @@ export const FilesCardBody = ({
             }
         };
 
-        const hasNoKeydownModifiers = (event: KeyboardEvent) => {
+        const hasNoModifiers = (event: KeyboardEvent) => {
             return !event.shiftKey && !event.ctrlKey && !event.altKey && !event.metaKey;
+        };
+
+        const dirNavigationModifiers = (e: KeyboardEvent) => {
+            if (isApple) {
+                // use both meta and alt key on apple devices to support external non-apple keyboards
+                return !e.ctrlKey && !e.shiftKey && (e.altKey || e.metaKey);
+            } else {
+                return !e.ctrlKey && !e.shiftKey && e.altKey && !e.metaKey;
+            }
+        };
+
+        // Modifiers used for copy, paste and select all shortcuts
+        const editingModifiers = (e: KeyboardEvent) => {
+            // Keep standard text editing behavior by excluding input fields
+            if (e.target instanceof HTMLInputElement) {
+                return false;
+            }
+
+            if (isApple) {
+                // use both meta and ctrl key on apple devices to support external non-apple keyboards
+                return !e.shiftKey && !e.altKey && (e.ctrlKey || e.metaKey);
+            } else {
+                return !e.shiftKey && !e.altKey && e.ctrlKey && !e.metaKey;
+            }
         };
 
         const onKeyboardNav = (e: KeyboardEvent) => {
             switch (e.key) {
             case "ArrowRight":
-                if (hasNoKeydownModifiers(e)) {
+                if (hasNoModifiers(e) && sortedFiles.length > 0) {
                     setSelected(_selected => {
                         const firstSelectedName = _selected?.[0]?.name;
                         const selectedIdx = sortedFiles?.findIndex(file => file.name === firstSelectedName);
@@ -294,7 +319,7 @@ export const FilesCardBody = ({
                 break;
 
             case "ArrowLeft":
-                if (hasNoKeydownModifiers(e)) {
+                if (hasNoModifiers(e) && sortedFiles.length > 0) {
                     setSelected(_selected => {
                         const firstSelectedName = _selected?.[0]?.name;
                         const selectedIdx = sortedFiles?.findIndex(file => file.name === firstSelectedName);
@@ -308,9 +333,9 @@ export const FilesCardBody = ({
                 break;
 
             case "ArrowUp":
-                if (e.altKey && !e.shiftKey && !e.ctrlKey) {
+                if (dirNavigationModifiers(e)) {
                     goUpOneDir();
-                } else if (hasNoKeydownModifiers(e)) {
+                } else if (hasNoModifiers(e) && sortedFiles.length > 0) {
                     setSelected(_selected => {
                         const firstSelectedName = _selected?.[0]?.name;
                         const selectedIdx = sortedFiles?.findIndex(file => file.name === firstSelectedName);
@@ -318,13 +343,14 @@ export const FilesCardBody = ({
 
                         return [sortedFiles[newIdx]];
                     });
+                    e.preventDefault();
                 }
                 break;
 
             case "ArrowDown":
-                if (e.altKey && !e.shiftKey && !e.ctrlKey && selected.length === 1) {
+                if (selected.length === 1 && dirNavigationModifiers(e)) {
                     onDoubleClickNavigate(selected[0]);
-                } else if (hasNoKeydownModifiers(e)) {
+                } else if (hasNoModifiers(e) && sortedFiles.length > 0) {
                     setSelected(_selected => {
                         const firstSelectedName = _selected?.[0]?.name;
                         const selectedIdx = sortedFiles?.findIndex(file => file.name === firstSelectedName);
@@ -332,54 +358,51 @@ export const FilesCardBody = ({
 
                         return [sortedFiles[newIdx]];
                     });
+                    e.preventDefault();
                 }
                 break;
 
             case "Enter":
-                if (hasNoKeydownModifiers(e) && selected.length === 1) {
+                if (hasNoModifiers(e) && selected.length === 1) {
                     onDoubleClickNavigate(selected[0]);
                 }
                 break;
 
             case "Delete":
-                if (hasNoKeydownModifiers(e) && selected.length !== 0) {
+                if (hasNoModifiers(e) && selected.length !== 0) {
                     confirm_delete(dialogs, path, selected, setSelected);
                 }
                 break;
 
             case "F2":
-                if (hasNoKeydownModifiers(e) && selected.length === 1) {
+                if (hasNoModifiers(e) && selected.length === 1) {
                     show_rename_dialog(dialogs, path, selected[0]);
                 }
                 break;
 
             case "a":
-                // Keep standard text editing behavior by excluding input fields
-                if (e.ctrlKey && !e.shiftKey && !e.altKey && !(e.target instanceof HTMLInputElement)) {
+                if (editingModifiers(e)) {
                     e.preventDefault();
                     setSelected(sortedFiles);
                 }
                 break;
 
             case "c":
-                // Keep standard text editing behavior by excluding input fields
-                if (e.ctrlKey && !e.shiftKey && !e.altKey && !(e.target instanceof HTMLInputElement)) {
+                if (editingModifiers(e)) {
                     e.preventDefault();
                     setClipboard({ path, files: selected });
                 }
                 break;
 
             case "v":
-                // Keep standard text editing behavior by excluding input fields
-                if (e.ctrlKey && !e.shiftKey && !e.altKey && clipboard.files.length > 0 &&
-                        !(e.target instanceof HTMLInputElement)) {
+                if (editingModifiers(e) && clipboard.files.length > 0) {
                     e.preventDefault();
                     pasteFromClipboard(clipboard, cwdInfo, path, dialogs, addAlert);
                 }
                 break;
 
             case "N":
-                if (!e.ctrlKey && !e.altKey) {
+                if (e.shiftKey && !e.ctrlKey && !e.altKey && !e.metaKey) {
                     e.preventDefault();
                     show_create_directory_dialog(dialogs, path);
                 }

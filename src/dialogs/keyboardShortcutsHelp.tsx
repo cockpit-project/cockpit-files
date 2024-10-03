@@ -30,9 +30,15 @@ import { Flex, } from "@patternfly/react-core/dist/esm/layouts/Flex";
 import cockpit from 'cockpit';
 import { DialogResult, Dialogs } from 'dialogs';
 
+import { testIsAppleDevice } from '../common.ts';
+
 const _ = cockpit.gettext;
 
 const KeyboardShortcutsHelp = ({ dialogResult } : { dialogResult: DialogResult<void> }) => {
+    const isApple = testIsAppleDevice();
+    const ctrlString = isApple ? "Command" : "Ctrl";
+    const altString = isApple ? "Command" : "Alt";
+
     const footer = (
         <Button variant="secondary" onClick={() => dialogResult.resolve()}>{_("Close")}</Button>
     );
@@ -53,25 +59,25 @@ const KeyboardShortcutsHelp = ({ dialogResult } : { dialogResult: DialogResult<v
     const navShortcuts: Array<[React.JSX.Element, string, string]> = [
         [
             <kbd className="keystroke" key="go-up">
-                <kbd className="key">Alt</kbd> + <kbd className="key">{'\u{2191}'}</kbd>
+                <kbd className="key">{altString}</kbd> + <kbd className="key">{'\u{2191}'}</kbd>
             </kbd>,
             _("Go up a directory"),
             "go-up",
         ], [
             <kbd className="keystroke" key="go-back">
-                <kbd className="key">Alt</kbd> + <kbd className="key">{'\u{2190}'}</kbd>
+                <kbd className="key">{altString}</kbd> + <kbd className="key">{'\u{2190}'}</kbd>
             </kbd>,
             _("Go back"),
             "go-back",
         ], [
             <kbd className="keystroke" key="go-forward">
-                <kbd className="key">Alt</kbd> + <kbd className="key">{'\u{2192}'}</kbd>
+                <kbd className="key">{altString}</kbd> + <kbd className="key">{'\u{2192}'}</kbd>
             </kbd>,
             _("Go forward"),
             "go-forward",
         ], [
             <kbd className="keystroke" key="activate">
-                <kbd className="key">Alt</kbd> + <kbd className="key">{'\u{2193}'}</kbd>
+                <kbd className="key">{altString}</kbd> + <kbd className="key">{'\u{2193}'}</kbd>
             </kbd>,
             _("Activate selected item, enter directory"),
             "activate",
@@ -83,9 +89,9 @@ const KeyboardShortcutsHelp = ({ dialogResult } : { dialogResult: DialogResult<v
             "activate-enter",
         ], [
             <kbd className="keystroke" key="edit-path">
-                <kbd className="key">Ctrl</kbd> +
+                <kbd className="key">{ctrlString}</kbd> +
                 <kbd className="key">Shift</kbd> +
-                <kbd className="key">L</kbd>
+                <kbd className="key">{isApple ? "J" : "L"}</kbd>
             </kbd>,
             _("Edit path"),
             "edit-path",
@@ -106,19 +112,19 @@ const KeyboardShortcutsHelp = ({ dialogResult } : { dialogResult: DialogResult<v
             "mkdir",
         ], [
             <kbd className="keystroke" key="copy">
-                <kbd className="key">Ctrl</kbd> + <kbd className="key">C</kbd>
+                <kbd className="key">{ctrlString}</kbd> + <kbd className="key">C</kbd>
             </kbd>,
             _("Copy selected file or directory"),
             "copy",
         ], [
             <kbd className="keystroke" key="paste">
-                <kbd className="key">Ctrl</kbd> + <kbd className="key">V</kbd>
+                <kbd className="key">{ctrlString}</kbd> + <kbd className="key">V</kbd>
             </kbd>,
             _("Paste file or directory"),
             "paste",
         ], [
             <kbd className="keystroke" key="select-all">
-                <kbd className="key">Ctrl</kbd> + <kbd className="key">A</kbd>
+                <kbd className="key">{ctrlString}</kbd> + <kbd className="key">A</kbd>
             </kbd>,
             _("Select all"),
             "select-all",

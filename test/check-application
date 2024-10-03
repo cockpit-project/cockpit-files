@@ -1948,14 +1948,14 @@ class TestFiles(testlib.MachineCase):
         b.wait_visible("[data-item='testdir']")
 
         # Manually edit path
-        b.key("L", modifiers=["Control"])
+        b.key("L", modifiers=["Control", "Shift"])
         b.input_text("/home/admin/anotherdir")
         b.key("Enter")
         self.assert_last_breadcrumb("anotherdir")
         b.go("/files#/?path=/home/admin")
         self.assert_last_breadcrumb("admin")
 
-        b.key("N")
+        b.key("N", modifiers=["Shift"])
         b.set_input_text("#create-directory-input", "foodir")
         b.click("button.pf-m-primary")
         b.wait_visible("[data-item='foodir']")
