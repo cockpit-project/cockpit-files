@@ -1178,7 +1178,7 @@ class TestFiles(testlib.MachineCase):
 
         # Rename file using keyboard shortcut
         b.click("[data-item='newfile']")
-        b.key("\uE032")  # F2
+        b.key("F2")
         b.wait_in_text(".pf-v5-c-modal-box__title-text", "Rename newfile")
         b.set_input_text("#rename-item-input", "teddybear.txt")
         b.click(".pf-v5-c-button.pf-m-primary")
@@ -1187,7 +1187,7 @@ class TestFiles(testlib.MachineCase):
         # Rename modal does not open when multiple files are selected
         b.mouse("[data-item='dest']", "click", ctrlKey=True)
         b.mouse("[data-item='new dir1']", "click", ctrlKey=True)
-        b.key("\uE032")  # F2
+        b.key("F2")
         b.wait_not_present(".pf-v5-c-modal-box__title-text")
 
     def testHiddenItems(self) -> None:
