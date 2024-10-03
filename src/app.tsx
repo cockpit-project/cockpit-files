@@ -35,7 +35,7 @@ import { WithDialogs } from "dialogs";
 import { useInit, usePageLocation } from "hooks";
 import { superuser } from "superuser";
 
-import { FilesContext, usePath } from "./common.ts";
+import { FilesContext, testIsAppleDevice, usePath } from "./common.ts";
 import type { ClipboardInfo, FolderFileInfo } from "./common.ts";
 import { FilesBreadcrumbs } from "./files-breadcrumbs.tsx";
 import { FilesFolderView } from "./files-folder-view.tsx";
@@ -113,8 +113,20 @@ export const Application = () => {
     );
 
     useInit(() => {
+        const isApple = testIsAppleDevice();
+        const editPathKey = isApple ? "j" : "l";
+
+        const editPathModifiers = (e: KeyboardEvent) => {
+            if (isApple) {
+                // use both meta and ctrl key on apple devices to support external non-apple keyboards
+                return ((e.ctrlKey || e.metaKey) && e.shiftKey && !e.altKey);
+            } else {
+                return (e.ctrlKey && e.shiftKey && !e.altKey && !e.metaKey);
+            }
+        };
+
         const onKeyboardNav = (e: KeyboardEvent) => {
-            if (e.key === "L" && e.ctrlKey && !e.altKey) {
+            if (e.key.toLowerCase() === editPathKey && editPathModifiers(e)) {
                 e.preventDefault();
                 document.dispatchEvent(new Event("manual-change-dir"));
             }

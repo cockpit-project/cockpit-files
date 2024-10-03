@@ -149,3 +149,7 @@ export function debug(...args: unknown[]) {
         console.debug("files:", ...args);
     }
 }
+
+export function testIsAppleDevice() {
+    return /Mac|iPhone|iPad|iPod/.test(navigator.platform);
+}
