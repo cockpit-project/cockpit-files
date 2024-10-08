@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-18 02:59+0000\n"
+"POT-Creation-Date: 2024-10-05 03:02+0000\n"
 "PO-Revision-Date: 2024-09-18 18:29+0000\n"
 "Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
 "memory@weblate.org>\n"
@@ -27,21 +27,21 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0\n"
 "X-Generator: Weblate 5.7.2\n"
 
-#: src/menu.tsx:68
+#: src/menu.tsx:57
 msgid "\"$0\" exists, not overwriting with paste."
 msgstr "\"$0\" 已存在，將不會貼上以免遭覆寫。"
 
-#: src/sidebar.tsx:117
+#: src/sidebar.tsx:112
 msgid "$0 item"
 msgid_plural "$0 items"
 msgstr[0] "$0 個項目"
 
-#: src/files-card-body.tsx:421
+#: src/files-card-body.tsx:508
 msgid "$0 item is hidden"
 msgid_plural "$0 items are hidden"
 msgstr[0] "$0 個已隱藏的項目"
 
-#: src/sidebar.tsx:119
+#: src/sidebar.tsx:114
 msgid "($0 hidden)"
 msgid_plural "($0 hidden)"
 msgstr[0] "(已隱藏 $0 個)"
@@ -56,13 +56,18 @@ msgid ""
 "overwrite its content."
 msgstr "一個相同名稱的檔案已於 \"$0\" 存在。 若將其取代將覆寫其內容。"
 
-#: src/header.tsx:64
+#: src/header.tsx:69
 msgid "A-Z"
 msgstr "由 A 到 Z"
 
-#: src/dialogs/permissions.jsx:178
+#: src/dialogs/permissions.jsx:179
 msgid "Access"
 msgstr "存取權限"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:57
+#: src/dialogs/keyboardShortcutsHelp.tsx:63
+msgid "Activate selected item, enter directory"
+msgstr ""
 
 #: src/files-breadcrumbs.tsx:147
 msgid "Add bookmark"
@@ -80,9 +85,9 @@ msgstr "區塊裝置"
 msgid "Bookmarks"
 msgstr "書籤"
 
-#: src/upload-button.tsx:91 src/dialogs/rename.tsx:116
-#: src/dialogs/mkdir.tsx:108 src/dialogs/delete.tsx:88
-#: src/dialogs/permissions.jsx:133 src/dialogs/editor.tsx:210
+#: src/dialogs/mkdir.tsx:108 src/dialogs/editor.tsx:210
+#: src/dialogs/permissions.jsx:134 src/dialogs/rename.tsx:116
+#: src/dialogs/delete.tsx:88 src/upload-button.tsx:91
 msgid "Cancel"
 msgstr "取消"
 
@@ -98,7 +103,7 @@ msgstr "已取消"
 msgid "Cancelled upload of $0"
 msgstr "已取消上傳 $0"
 
-#: src/dialogs/permissions.jsx:131
+#: src/dialogs/permissions.jsx:132
 msgid "Change"
 msgstr "變更"
 
@@ -106,11 +111,11 @@ msgstr "變更"
 msgid "Character device"
 msgstr "字元裝置"
 
-#: src/files-card-body.tsx:409
+#: src/files-card-body.tsx:496
 msgid "Clear filter"
 msgstr "清除篩選器"
 
-#: src/dialogs/editor.tsx:210
+#: src/dialogs/editor.tsx:210 src/dialogs/keyboardShortcutsHelp.tsx:18
 msgid "Close"
 msgstr "關閉"
 
@@ -118,19 +123,29 @@ msgstr "關閉"
 msgid "Cockpit Files"
 msgstr "Cockpit Files"
 
-#: src/menu.tsx:113 src/menu.tsx:148
+#: src/menu.tsx:120 src/menu.tsx:155
 msgid "Copy"
 msgstr "複製"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:92
+msgid "Copy selected file or directory"
+msgstr ""
 
 #: src/dialogs/mkdir.tsx:106
 msgid "Create"
 msgstr "建立"
 
-#: src/dialogs/mkdir.tsx:92 src/menu.tsx:83
+#: src/menu.tsx:90 src/dialogs/mkdir.tsx:92
 msgid "Create directory"
 msgstr "建立目錄"
 
-#: src/dialogs/delete.tsx:87 src/menu.tsx:130 src/menu.tsx:153
+#: src/dialogs/keyboardShortcutsHelp.tsx:86
+#, fuzzy
+#| msgid "Create directory"
+msgid "Create new directory"
+msgstr "建立目錄"
+
+#: src/menu.tsx:137 src/menu.tsx:160 src/dialogs/delete.tsx:87
 msgid "Delete"
 msgstr "刪除"
 
@@ -154,7 +169,7 @@ msgstr "刪除檔案 $0 ？"
 msgid "Delete link $0?"
 msgstr "刪除連結 $0 ？"
 
-#: src/header.tsx:147
+#: src/header.tsx:190
 msgid "Directories & files"
 msgstr "目錄與檔案"
 
@@ -162,7 +177,7 @@ msgstr "目錄與檔案"
 msgid "Directory"
 msgstr "目錄"
 
-#: src/files-card-body.tsx:416
+#: src/files-card-body.tsx:503
 msgid "Directory is empty"
 msgstr "目錄是空的"
 
@@ -190,23 +205,23 @@ msgstr "目錄擁有者"
 msgid "Directory with the same name exists"
 msgstr "相同名稱的目錄已存在"
 
-#: src/header.tsx:213
+#: src/header.tsx:263
 msgid "Display as a grid"
 msgstr "以網格顯示"
 
-#: src/header.tsx:212
+#: src/header.tsx:262
 msgid "Display as a list"
 msgstr "以清單顯示"
 
-#: src/menu.tsx:140
+#: src/menu.tsx:147
 msgid "Download"
 msgstr "下載"
 
-#: src/files-breadcrumbs.tsx:299
+#: src/files-breadcrumbs.tsx:307 src/dialogs/keyboardShortcutsHelp.tsx:71
 msgid "Edit path"
 msgstr "編輯路徑"
 
-#: src/sidebar.tsx:183 src/menu.tsx:89 src/menu.tsx:119
+#: src/menu.tsx:96 src/menu.tsx:126 src/sidebar.tsx:157
 msgid "Edit permissions"
 msgstr "編輯權限"
 
@@ -214,6 +229,10 @@ msgstr "編輯權限"
 #: src/dialogs/editor.tsx:168
 msgid "Edit “$0”"
 msgstr "編輯 \"$0\""
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:131
+msgid "Editing"
+msgstr ""
 
 #: src/common.ts:26
 msgid "Execute-only"
@@ -239,11 +258,11 @@ msgstr "檔案"
 msgid "Filesystem"
 msgstr "檔案系統"
 
-#: src/header.tsx:153
+#: src/header.tsx:197
 msgid "Filter directory"
 msgstr "篩選目錄"
 
-#: src/header.tsx:86
+#: src/header.tsx:91
 msgid "First modified"
 msgstr "初次修改於"
 
@@ -267,20 +286,34 @@ msgstr "強制刪除檔案 $0 ？"
 msgid "Force delete link $0?"
 msgstr "強制刪除連結 $0 ？"
 
-#: src/files-card-body.tsx:514 src/sidebar.tsx:60
-#: src/dialogs/permissions.jsx:162
+#: src/dialogs/keyboardShortcutsHelp.tsx:45
+msgid "Go back"
+msgstr ""
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:51
+msgid "Go forward"
+msgstr ""
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:39
+#, fuzzy
+#| msgid "Create directory"
+msgid "Go up a directory"
+msgstr "建立目錄"
+
+#: src/files-card-body.tsx:601 src/dialogs/permissions.jsx:163
+#: src/sidebar.tsx:57
 msgid "Group"
 msgstr "群組"
 
-#: src/dialogs/permissions.jsx:192
+#: src/dialogs/permissions.jsx:193
 msgid "Group access"
 msgstr "群組存取權限"
 
-#: src/sidebar.tsx:81
+#: src/sidebar.tsx:78
 msgid "Group permissions"
 msgstr "群組權限"
 
-#: src/header.tsx:244
+#: src/header.tsx:294
 msgid "Hide hidden items"
 msgstr "不顯示隱藏的項目"
 
@@ -296,15 +329,19 @@ msgstr "忽略"
 msgid "Keep original"
 msgstr "保留原本的"
 
-#: src/header.tsx:75
+#: src/dialogs/keyboardShortcutsHelp.tsx:112
+msgid "Keyboard shortcuts"
+msgstr ""
+
+#: src/header.tsx:80
 msgid "Largest size"
 msgstr "大小最大"
 
-#: src/header.tsx:90 src/sidebar.tsx:50
+#: src/sidebar.tsx:47 src/header.tsx:95
 msgid "Last modified"
 msgstr "最後修改於"
 
-#: src/header.tsx:112
+#: src/header.tsx:117
 msgid "Least permissive"
 msgstr "最不寬鬆的權限"
 
@@ -312,15 +349,15 @@ msgstr "最不寬鬆的權限"
 msgid "Manage your files"
 msgstr "管理您的檔案"
 
-#: src/files-card-body.tsx:441 src/header.tsx:83
+#: src/files-card-body.tsx:528 src/header.tsx:88
 msgid "Modified"
 msgstr "被修改"
 
-#: src/header.tsx:108
+#: src/header.tsx:113
 msgid "Most permissive"
 msgstr "最寬鬆的權限"
 
-#: src/files-card-body.tsx:436 src/header.tsx:61
+#: src/files-card-body.tsx:523 src/header.tsx:66
 msgid "Name"
 msgstr "名稱"
 
@@ -340,6 +377,10 @@ msgstr "名稱太長。"
 msgid "Named pipe"
 msgstr "Named pipe"
 
+#: src/dialogs/keyboardShortcutsHelp.tsx:121
+msgid "Navigation"
+msgstr ""
+
 #: src/upload-button.tsx:106
 msgid "New file"
 msgstr "新的檔案"
@@ -352,7 +393,7 @@ msgstr "新檔案名稱"
 msgid "New name"
 msgstr "新名稱"
 
-#: src/files-card-body.tsx:408
+#: src/files-card-body.tsx:495
 msgid "No matching results"
 msgstr "沒有找到相符的結果"
 
@@ -360,7 +401,7 @@ msgstr "沒有找到相符的結果"
 msgid "None"
 msgstr "無"
 
-#: src/menu.tsx:105
+#: src/menu.tsx:112
 msgid "Open text file"
 msgstr "開啟文字檔案"
 
@@ -368,56 +409,62 @@ msgstr "開啟文字檔案"
 msgid "Original file on server"
 msgstr "伺服器上原有的檔案"
 
-#: src/sidebar.tsx:86
+#: src/sidebar.tsx:83
 msgid "Other permissions"
 msgstr "其他權限"
 
-#: src/files-card-body.tsx:514
+#: src/files-card-body.tsx:601
 msgid "Others"
 msgstr "其他人"
 
-#: src/dialogs/permissions.jsx:204
+#: src/dialogs/permissions.jsx:205
 msgid "Others access"
 msgstr "其他人的存取權限"
 
-#: src/dialogs/rename.tsx:114 src/dialogs/editor.tsx:194
+#: src/dialogs/editor.tsx:194 src/dialogs/rename.tsx:114
 msgid "Overwrite"
 msgstr "覆寫"
 
-#: src/files-card-body.tsx:446 src/files-card-body.tsx:514 src/header.tsx:94
-#: src/sidebar.tsx:55 src/dialogs/permissions.jsx:147
+#: src/files-card-body.tsx:533 src/files-card-body.tsx:601
+#: src/dialogs/permissions.jsx:148 src/sidebar.tsx:52 src/header.tsx:99
 msgid "Owner"
 msgstr "擁有者"
 
-#: src/dialogs/permissions.jsx:180
+#: src/dialogs/permissions.jsx:181
 msgid "Owner access"
 msgstr "擁有者存取權限"
 
-#: src/header.tsx:97
+#: src/header.tsx:102
 msgid "Owner ascending"
 msgstr "擁有者遞增排序"
 
-#: src/header.tsx:101
+#: src/header.tsx:106
 msgid "Owner descending"
 msgstr "擁有者遞減排序"
 
-#: src/sidebar.tsx:76
+#: src/sidebar.tsx:73
 msgid "Owner permissions"
 msgstr "擁有者權限"
 
-#: src/dialogs/permissions.jsx:146
+#: src/dialogs/permissions.jsx:147
 msgid "Ownership"
 msgstr "所有權"
 
-#: src/menu.tsx:62
+#: src/menu.tsx:83
 msgid "Paste"
 msgstr "貼上"
 
-#: src/menu.tsx:67
+#: src/dialogs/keyboardShortcutsHelp.tsx:98
+#, fuzzy
+#| msgid "Filter directory"
+msgid "Paste file or directory"
+msgstr "篩選目錄"
+
+#: src/menu.tsx:56
 msgid "Pasting failed"
 msgstr "貼上失敗"
 
-#: src/files-card-body.tsx:451 src/header.tsx:105
+#: src/files-card-body.tsx:538 src/header.tsx:110
 msgid "Permissions"
 msgstr "權限"
 
@@ -449,13 +496,17 @@ msgstr "重新載入"
 msgid "Remove current directory"
 msgstr "移除目前的目錄"
 
-#: src/dialogs/rename.tsx:107 src/menu.tsx:124
+#: src/menu.tsx:131 src/dialogs/rename.tsx:107
 msgid "Rename"
 msgstr "重新命名"
 
 #: src/dialogs/rename.tsx:125
 msgid "Rename $0?"
 msgstr "將 $0 重新命名？"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:79
+msgid "Rename selected file or directory"
+msgstr ""
 
 #: src/upload-button.tsx:88
 msgid "Replace"
@@ -469,15 +520,23 @@ msgstr "取代檔案 $0 ？"
 msgid "Save"
 msgstr "儲存"
 
-#: src/files-card-body.tsx:424 src/header.tsx:244
+#: src/dialogs/keyboardShortcutsHelp.tsx:104
+msgid "Select all"
+msgstr ""
+
+#: src/files-card-body.tsx:511 src/header.tsx:294
 msgid "Show hidden items"
 msgstr "顯示隱藏的項目"
 
-#: src/files-card-body.tsx:437 src/header.tsx:72 src/sidebar.tsx:67
+#: src/header.tsx:165
+msgid "Show keyboard shortcuts"
+msgstr ""
+
+#: src/files-card-body.tsx:524 src/sidebar.tsx:64 src/header.tsx:77
 msgid "Size"
 msgstr "大小"
 
-#: src/header.tsx:79
+#: src/header.tsx:84
 msgid "Smallest size"
 msgstr "大小最小"
 
@@ -485,7 +544,7 @@ msgstr "大小最小"
 msgid "Socket"
 msgstr "Socket"
 
-#: src/header.tsx:231
+#: src/header.tsx:281
 msgid "Sort"
 msgstr "排序"
 
@@ -550,7 +609,7 @@ msgstr "寫入與執行"
 msgid "Write-only"
 msgstr "只能寫入"
 
-#: src/header.tsx:68
+#: src/header.tsx:73
 msgid "Z-A"
 msgstr "由 Z 到 A"
 
@@ -567,6 +626,6 @@ msgid "filesystem"
 msgstr "檔案系統"
 
 #. Translators: $0 represents a filename
-#: src/dialogs/permissions.jsx:121
+#: src/dialogs/permissions.jsx:122
 msgid "“$0” permissions"
 msgstr "“$0” 的權限"

@@ -14,9 +14,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-18 02:59+0000\n"
-"PO-Revision-Date: 2024-09-13 03:12+0000\n"
-"Last-Translator: 김인수 <simmon@nplob.com>\n"
+"POT-Creation-Date: 2024-10-05 03:02+0000\n"
+"PO-Revision-Date: 2024-10-05 15:38+0000\n"
+"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
+"memory@weblate.org>\n"
 "Language-Team: Korean <https://translate.fedoraproject.org/projects/cockpit-"
 "files/cockpit-files/ko/>\n"
 "Language: ko\n"
@@ -26,21 +27,21 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0\n"
 "X-Generator: Weblate 5.7.2\n"
 
-#: src/menu.tsx:68
+#: src/menu.tsx:57
 msgid "\"$0\" exists, not overwriting with paste."
 msgstr "\"$0\" 존재하며, 붙여서 덮어쓰지 않습니다."
 
-#: src/sidebar.tsx:117
+#: src/sidebar.tsx:112
 msgid "$0 item"
 msgid_plural "$0 items"
 msgstr[0] "$0 항목"
 
-#: src/files-card-body.tsx:421
+#: src/files-card-body.tsx:508
 msgid "$0 item is hidden"
 msgid_plural "$0 items are hidden"
 msgstr[0] "$0 항목이 숨겨졌습니다"
 
-#: src/sidebar.tsx:119
+#: src/sidebar.tsx:114
 msgid "($0 hidden)"
 msgid_plural "($0 hidden)"
 msgstr[0] "($0 숨김)"
@@ -57,13 +58,18 @@ msgstr ""
 "동일한 이름을 갖는 파일은 이미 \"$0\"에 존재합니다. 이 대체하기는 해당 내용"
 "을 덮어씁니다."
 
-#: src/header.tsx:64
+#: src/header.tsx:69
 msgid "A-Z"
 msgstr "A-Z"
 
-#: src/dialogs/permissions.jsx:178
+#: src/dialogs/permissions.jsx:179
 msgid "Access"
 msgstr "접근"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:57
+#: src/dialogs/keyboardShortcutsHelp.tsx:63
+msgid "Activate selected item, enter directory"
+msgstr "선택된 항목을 활성화 하고, 디렉토리를 입력합니다"
 
 #: src/files-breadcrumbs.tsx:147
 msgid "Add bookmark"
@@ -81,9 +87,9 @@ msgstr "블록 장치"
 msgid "Bookmarks"
 msgstr "즐겨찾기"
 
-#: src/upload-button.tsx:91 src/dialogs/rename.tsx:116
-#: src/dialogs/mkdir.tsx:108 src/dialogs/delete.tsx:88
-#: src/dialogs/permissions.jsx:133 src/dialogs/editor.tsx:210
+#: src/dialogs/mkdir.tsx:108 src/dialogs/editor.tsx:210
+#: src/dialogs/permissions.jsx:134 src/dialogs/rename.tsx:116
+#: src/dialogs/delete.tsx:88 src/upload-button.tsx:91
 msgid "Cancel"
 msgstr "취소"
 
@@ -99,7 +105,7 @@ msgstr "취소됨"
 msgid "Cancelled upload of $0"
 msgstr "$0 올려주기 취소됨"
 
-#: src/dialogs/permissions.jsx:131
+#: src/dialogs/permissions.jsx:132
 msgid "Change"
 msgstr "변경"
 
@@ -107,11 +113,11 @@ msgstr "변경"
 msgid "Character device"
 msgstr "문자 장치"
 
-#: src/files-card-body.tsx:409
+#: src/files-card-body.tsx:496
 msgid "Clear filter"
 msgstr "필터 지우기"
 
-#: src/dialogs/editor.tsx:210
+#: src/dialogs/editor.tsx:210 src/dialogs/keyboardShortcutsHelp.tsx:18
 msgid "Close"
 msgstr "종료"
 
@@ -119,19 +125,27 @@ msgstr "종료"
 msgid "Cockpit Files"
 msgstr "Cockpit 파일"
 
-#: src/menu.tsx:113 src/menu.tsx:148
+#: src/menu.tsx:120 src/menu.tsx:155
 msgid "Copy"
 msgstr "복사"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:92
+msgid "Copy selected file or directory"
+msgstr "선택된 파일 또는 디렉토리를 복사"
 
 #: src/dialogs/mkdir.tsx:106
 msgid "Create"
 msgstr "생성"
 
-#: src/dialogs/mkdir.tsx:92 src/menu.tsx:83
+#: src/menu.tsx:90 src/dialogs/mkdir.tsx:92
 msgid "Create directory"
 msgstr "디렉토리 생성"
 
-#: src/dialogs/delete.tsx:87 src/menu.tsx:130 src/menu.tsx:153
+#: src/dialogs/keyboardShortcutsHelp.tsx:86
+msgid "Create new directory"
+msgstr "신규 디렉토리 생성"
+
+#: src/menu.tsx:137 src/menu.tsx:160 src/dialogs/delete.tsx:87
 msgid "Delete"
 msgstr "삭제"
 
@@ -155,7 +169,7 @@ msgstr "파일 $0를 삭제할까요?"
 msgid "Delete link $0?"
 msgstr "링크 $0를 삭제할까요?"
 
-#: src/header.tsx:147
+#: src/header.tsx:190
 msgid "Directories & files"
 msgstr "디렉토리 및 파일"
 
@@ -163,7 +177,7 @@ msgstr "디렉토리 및 파일"
 msgid "Directory"
 msgstr "디렉토리"
 
-#: src/files-card-body.tsx:416
+#: src/files-card-body.tsx:503
 msgid "Directory is empty"
 msgstr "디렉토리가 비었습니다"
 
@@ -191,23 +205,23 @@ msgstr "디렉토리 소유자"
 msgid "Directory with the same name exists"
 msgstr "동일한 이름을 갖는 디렉토리가 존재합니다"
 
-#: src/header.tsx:213
+#: src/header.tsx:263
 msgid "Display as a grid"
 msgstr "그리드로 표시"
 
-#: src/header.tsx:212
+#: src/header.tsx:262
 msgid "Display as a list"
 msgstr "목록으로 표시"
 
-#: src/menu.tsx:140
+#: src/menu.tsx:147
 msgid "Download"
 msgstr "내려받기"
 
-#: src/files-breadcrumbs.tsx:299
+#: src/files-breadcrumbs.tsx:307 src/dialogs/keyboardShortcutsHelp.tsx:71
 msgid "Edit path"
 msgstr "경로 편집"
 
-#: src/sidebar.tsx:183 src/menu.tsx:89 src/menu.tsx:119
+#: src/menu.tsx:96 src/menu.tsx:126 src/sidebar.tsx:157
 msgid "Edit permissions"
 msgstr "권한을 편집합니다"
 
@@ -215,6 +229,10 @@ msgstr "권한을 편집합니다"
 #: src/dialogs/editor.tsx:168
 msgid "Edit “$0”"
 msgstr "“$0” 편집"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:131
+msgid "Editing"
+msgstr "편집하기"
 
 #: src/common.ts:26
 msgid "Execute-only"
@@ -240,11 +258,11 @@ msgstr "파일"
 msgid "Filesystem"
 msgstr "파일시스템"
 
-#: src/header.tsx:153
+#: src/header.tsx:197
 msgid "Filter directory"
 msgstr "필터 디렉토리"
 
-#: src/header.tsx:86
+#: src/header.tsx:91
 msgid "First modified"
 msgstr "처음 수정됨"
 
@@ -268,20 +286,32 @@ msgstr "파일 $0 삭제를 강제할까요?"
 msgid "Force delete link $0?"
 msgstr "링크 $0 삭제를 강제할까요?"
 
-#: src/files-card-body.tsx:514 src/sidebar.tsx:60
-#: src/dialogs/permissions.jsx:162
+#: src/dialogs/keyboardShortcutsHelp.tsx:45
+msgid "Go back"
+msgstr "뒤로 이동"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:51
+msgid "Go forward"
+msgstr "앞으로 가기"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:39
+msgid "Go up a directory"
+msgstr "상위 디렉토리로 이동"
+
+#: src/files-card-body.tsx:601 src/dialogs/permissions.jsx:163
+#: src/sidebar.tsx:57
 msgid "Group"
 msgstr "그룹"
 
-#: src/dialogs/permissions.jsx:192
+#: src/dialogs/permissions.jsx:193
 msgid "Group access"
 msgstr "그룹 접근"
 
-#: src/sidebar.tsx:81
+#: src/sidebar.tsx:78
 msgid "Group permissions"
 msgstr "그룹 권한"
 
-#: src/header.tsx:244
+#: src/header.tsx:294
 msgid "Hide hidden items"
 msgstr "숨겨진 항목 감추기"
 
@@ -297,15 +327,19 @@ msgstr "무시"
 msgid "Keep original"
 msgstr "원본 유지"
 
-#: src/header.tsx:75
+#: src/dialogs/keyboardShortcutsHelp.tsx:112
+msgid "Keyboard shortcuts"
+msgstr "키보드 단축키"
+
+#: src/header.tsx:80
 msgid "Largest size"
 msgstr "최대 크기"
 
-#: src/header.tsx:90 src/sidebar.tsx:50
+#: src/sidebar.tsx:47 src/header.tsx:95
 msgid "Last modified"
 msgstr "마지막으로 수정됨"
 
-#: src/header.tsx:112
+#: src/header.tsx:117
 msgid "Least permissive"
 msgstr "최소 허용"
 
@@ -313,15 +347,15 @@ msgstr "최소 허용"
 msgid "Manage your files"
 msgstr "자신의 파일을 관리합니다"
 
-#: src/files-card-body.tsx:441 src/header.tsx:83
+#: src/files-card-body.tsx:528 src/header.tsx:88
 msgid "Modified"
 msgstr "수정됨"
 
-#: src/header.tsx:108
+#: src/header.tsx:113
 msgid "Most permissive"
 msgstr "관대한 허용"
 
-#: src/files-card-body.tsx:436 src/header.tsx:61
+#: src/files-card-body.tsx:523 src/header.tsx:66
 msgid "Name"
 msgstr "이름"
 
@@ -341,6 +375,10 @@ msgstr "이름이 너무 길어요."
 msgid "Named pipe"
 msgstr "이름이 지정된 파이프"
 
+#: src/dialogs/keyboardShortcutsHelp.tsx:121
+msgid "Navigation"
+msgstr "탐색"
+
 #: src/upload-button.tsx:106
 msgid "New file"
 msgstr "신규 파일"
@@ -353,7 +391,7 @@ msgstr "신규 파일이름"
 msgid "New name"
 msgstr "신규 이름"
 
-#: src/files-card-body.tsx:408
+#: src/files-card-body.tsx:495
 msgid "No matching results"
 msgstr "일치하는 결과를 찾을 수 없습니다"
 
@@ -361,7 +399,7 @@ msgstr "일치하는 결과를 찾을 수 없습니다"
 msgid "None"
 msgstr "없음"
 
-#: src/menu.tsx:105
+#: src/menu.tsx:112
 msgid "Open text file"
 msgstr "텍스트 파일 열기"
 
@@ -369,56 +407,60 @@ msgstr "텍스트 파일 열기"
 msgid "Original file on server"
 msgstr "서버에서 원본 파일"
 
-#: src/sidebar.tsx:86
+#: src/sidebar.tsx:83
 msgid "Other permissions"
 msgstr "기타 권한"
 
-#: src/files-card-body.tsx:514
+#: src/files-card-body.tsx:601
 msgid "Others"
 msgstr "기타"
 
-#: src/dialogs/permissions.jsx:204
+#: src/dialogs/permissions.jsx:205
 msgid "Others access"
 msgstr "기타 접근"
 
-#: src/dialogs/rename.tsx:114 src/dialogs/editor.tsx:194
+#: src/dialogs/editor.tsx:194 src/dialogs/rename.tsx:114
 msgid "Overwrite"
 msgstr "덮어쓰기"
 
-#: src/files-card-body.tsx:446 src/files-card-body.tsx:514 src/header.tsx:94
-#: src/sidebar.tsx:55 src/dialogs/permissions.jsx:147
+#: src/files-card-body.tsx:533 src/files-card-body.tsx:601
+#: src/dialogs/permissions.jsx:148 src/sidebar.tsx:52 src/header.tsx:99
 msgid "Owner"
 msgstr "소유자"
 
-#: src/dialogs/permissions.jsx:180
+#: src/dialogs/permissions.jsx:181
 msgid "Owner access"
 msgstr "소유자 접근"
 
-#: src/header.tsx:97
+#: src/header.tsx:102
 msgid "Owner ascending"
 msgstr "소유자 오름차순"
 
-#: src/header.tsx:101
+#: src/header.tsx:106
 msgid "Owner descending"
 msgstr "소유자 내림차순"
 
-#: src/sidebar.tsx:76
+#: src/sidebar.tsx:73
 msgid "Owner permissions"
 msgstr "소유자 권한"
 
-#: src/dialogs/permissions.jsx:146
+#: src/dialogs/permissions.jsx:147
 msgid "Ownership"
 msgstr "소유권"
 
-#: src/menu.tsx:62
+#: src/menu.tsx:83
 msgid "Paste"
 msgstr "붙여넣기"
 
-#: src/menu.tsx:67
+#: src/dialogs/keyboardShortcutsHelp.tsx:98
+msgid "Paste file or directory"
+msgstr "파일 또는 디렉토리 붙여넣기"
+
+#: src/menu.tsx:56
 msgid "Pasting failed"
 msgstr "붙여넣기 실패함"
 
-#: src/files-card-body.tsx:451 src/header.tsx:105
+#: src/files-card-body.tsx:538 src/header.tsx:110
 msgid "Permissions"
 msgstr "권한"
 
@@ -450,13 +492,17 @@ msgstr "재적재"
 msgid "Remove current directory"
 msgstr "현재 디렉토리를 제거합니다"
 
-#: src/dialogs/rename.tsx:107 src/menu.tsx:124
+#: src/menu.tsx:131 src/dialogs/rename.tsx:107
 msgid "Rename"
 msgstr "이름변경"
 
 #: src/dialogs/rename.tsx:125
 msgid "Rename $0?"
 msgstr "$0 이름변경?"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:79
+msgid "Rename selected file or directory"
+msgstr "선택된 파일 또는 디렉토리 이름변경"
 
 #: src/upload-button.tsx:88
 msgid "Replace"
@@ -470,15 +516,23 @@ msgstr "파일 $0를 교체합니까?"
 msgid "Save"
 msgstr "저장"
 
-#: src/files-card-body.tsx:424 src/header.tsx:244
+#: src/dialogs/keyboardShortcutsHelp.tsx:104
+msgid "Select all"
+msgstr "모두 선택"
+
+#: src/files-card-body.tsx:511 src/header.tsx:294
 msgid "Show hidden items"
 msgstr "숨겨진 항목 표시"
 
-#: src/files-card-body.tsx:437 src/header.tsx:72 src/sidebar.tsx:67
+#: src/header.tsx:165
+msgid "Show keyboard shortcuts"
+msgstr "키보드 단축키 표시"
+
+#: src/files-card-body.tsx:524 src/sidebar.tsx:64 src/header.tsx:77
 msgid "Size"
 msgstr "크기"
 
-#: src/header.tsx:79
+#: src/header.tsx:84
 msgid "Smallest size"
 msgstr "최소 크기"
 
@@ -486,7 +540,7 @@ msgstr "최소 크기"
 msgid "Socket"
 msgstr "소켓"
 
-#: src/header.tsx:231
+#: src/header.tsx:281
 msgid "Sort"
 msgstr "정렬"
 
@@ -550,7 +604,7 @@ msgstr "쓰기 및 실행"
 msgid "Write-only"
 msgstr "쓰기-전용"
 
-#: src/header.tsx:68
+#: src/header.tsx:73
 msgid "Z-A"
 msgstr "Z-A"
 
@@ -567,7 +621,7 @@ msgid "filesystem"
 msgstr "파일시스템"
 
 #. Translators: $0 represents a filename
-#: src/dialogs/permissions.jsx:121
+#: src/dialogs/permissions.jsx:122
 msgid "“$0” permissions"
 msgstr "“$0” 권한"
 
@@ -579,6 +633,3 @@ msgstr "“$0” 권한"
 
 #~ msgid "Rename link $0"
 #~ msgstr "링크 $0 이름변경"
-
-#~ msgid "Paste into directory"
-#~ msgstr "디렉토리에 붙여넣기"
