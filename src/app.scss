@@ -11,58 +11,36 @@
 
 // Passthrough for layout and styling purposes, to enable main page parts to participate in the grid
 .pf-v5-c-page__main-section,
-.pf-v5-c-sidebar,
-.pf-v5-c-sidebar__main,
-.pf-v5-c-sidebar__content {
+.files-view-stack {
     display: contents;
-}
-
-// Move the scrollbar to the content area.
-// Do this by triggering the overflow on the fileview wrapper and sidebar panel
-// when content doesn't fit. (Parent card is also needed to overflow, else the
-// children won't here in this context.)
-.pf-v5-c-sidebar__content > .pf-v5-c-card,
-.fileview-wrapper,
-.sidebar-panel {
-    overflow: auto;
-}
-
-// Content area should stretch, so context menu works even when the content doesn't fill the area
-.fileview-wrapper {
-    block-size: 100%;
 }
 
 .pf-v5-c-page__main {
     gap: var(--pf-v5-global--spacer--md);
     display: grid;
-    grid-template:
-        "topbar topbar topbar topbar" auto
-        ". content sidebar ." 1fr
-        ". . . ." 0
-        / 0 1fr 18rem 0;
-    inline-size: 100vw;
-    block-size: 100vh;
+    grid-template-rows: auto 1fr auto 0;
+    grid-template-columns: [header-start] 0 [content-start] 1fr [content-end] 0 [header-end];
 }
 
-.pf-v5-c-sidebar__content > .pf-v5-c-card {
-    grid-area: content;
-}
-
-.sidebar-panel {
-    grid-area: sidebar;
-}
-
+// Remove gaps on the left/right side of file view on small screens
 @container (width < 768px) {
-    // Change the general layout in smaller screen sizes
     .pf-v5-c-page__main {
-        grid-template:
-            "topbar" auto
-            "." var(--pf-v5-global--spacer--md)
-            "content" 1fr
-            "sidebar" 8rem
-            / 1fr;
-        row-gap: 0;
+        column-gap: 0;
     }
+}
+
+.files-empty-state,
+.files-view-stack > .pf-v5-c-card,
+.files-view-stack > .files-footer-info {
+    grid-column: content;
+}
+
+.files-view-stack > .pf-v5-c-card {
+    overflow: auto;
+}
+
+.files-view-stack > .files-footer-info {
+    margin-block-start: 0;
 }
 
 /* Style the list cards as ct-cards */
@@ -71,27 +49,27 @@
 }
 
 .files-overview-header {
-  grid-area: topbar;
-  gap: var(--pf-v5-global--spacer--sm);
-  display: flex;
-  /* Align page breadcrumb centered */
-  align-items: center;
+    grid-column: header;
+    gap: var(--pf-v5-global--spacer--sm);
+    display: flex;
+    /* Align page breadcrumb centered */
+    align-items: center;
 
     /* Override different background color from the <PageBreadCrumb> */
-  .pf-v5-c-page__main-breadcrumb {
-      background-color: unset
-  }
+    .pf-v5-c-page__main-breadcrumb {
+        background-color: unset
+    }
 
   /* Drop PF padding */
-  .pf-v5-c-page__main-breadcrumb {
-      padding: 0;
-      display: inline-block;
-  }
+    .pf-v5-c-page__main-breadcrumb {
+        padding: 0;
+        display: inline-block;
+    }
 
-  .pf-v5-c-breadcrumb {
-      margin-block: 0;
-      margin-inline: var(--pf-v5-global--spacer--sm);
-  }
+    .pf-v5-c-breadcrumb {
+        margin-block: 0;
+        margin-inline: var(--pf-v5-global--spacer--sm);
+    }
 }
 
 .pf-v5-c-breadcrumb {
@@ -105,12 +83,12 @@
 
     // Style the breadcrumb component as a path
     .pf-v5-c-breadcrumb__item-divider {
-        > svg { 
+        > svg {
             display: none;
         }
 
-        &::after { 
-            content: "/"; 
+        &::after {
+            content: "/";
         }
     }
 
@@ -182,31 +160,6 @@
     grid-template-columns: repeat(auto-fill, minmax(var(--pf-v5-l-gallery--GridTemplateColumns--max), 1fr));
 }
 
-.sidebar-card {
-    background: inherit;
-    box-shadow: none;
-}
-
-.sidebar-panel {
-    background-color: unset;
-}
-
-.sidebar-details {
-    margin-block-end: var(--pf-v5-global--spacer--md);
-    // Wrap on demand
-    grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
-}
-
-// Improve header layout and wrap header text
-.sidebar-panel {
-    .pf-v5-c-card__header-main {
-        display: grid !important;
-        grid-template: 1fr / 1fr auto;
-        overflow-wrap: anywhere;
-        align-items: start;
-    }
-}
-
 // Wrap titles of modals (instead of truncating long filenames)
 .pf-v5-c-modal-box__title, .pf-v5-c-modal-box__title-text {
     white-space: break-spaces;
@@ -246,9 +199,11 @@
     display: flex;
     flex-flow: row wrap;
     gap: var(--pf-v5-global--spacer--md);
+    justify-content: space-between;
+    font-family: var(--pf-v5-global--FontFamily--text);
 
     .files-search {
-        flex: 15ch;
+        flex: min-content;
     }
 
     .header-actions {
@@ -318,5 +273,22 @@
         padding-inline: var(--pf-v5-global--spacer--sm);
         box-shadow: inset 1px 1px 0 var(--pf-v5-global--BackgroundColor--100);
         white-space: nowrap;
+    }
+}
+
+// Files footer styling
+.files-footer-info {
+    display: flex;
+    flex-flow: row wrap;
+    column-gap: var(--pf-v5-global--spacer--md);
+    margin-block-start: var(--pf-v5-global--spacer--sm);
+    margin-inline-start: var(--pf-v5-global--spacer--md);
+
+    .files-footer-mtime {
+        color: var(--pf-v5-global--Color--200);
+    }
+
+    .files-footer-permissions {
+        color: var(--pf-v5-global--link--Color);
     }
 }

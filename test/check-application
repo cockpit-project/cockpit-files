@@ -109,10 +109,7 @@ class TestFiles(testlib.MachineCase):
 
         b.allow_download()
         # expected heading
-        b.wait_text("#files-card-header", "Directories & files")
-        files_cnt = m.execute("ls -A /home/admin | wc -l").strip()
-        hidden_files_cnt = m.execute(r'ls -A /home/admin | grep "^\." | wc -l').strip()
-        b.wait_text("#sidebar-card-header", f"admin{files_cnt} items ({hidden_files_cnt} hidden)")
+        b.wait_visible(".header-toolbar")
 
         # empty directory with one hidden file
         m.execute("runuser -u admin mkdir /home/admin/empty")
@@ -160,35 +157,6 @@ class TestFiles(testlib.MachineCase):
         b.wait_visible("[data-item='dotdot'].symlink.folder")
 
         b.assert_pixels("#files-card-parent", "folder-view")
-
-        # file sidebar information
-        b.click("[data-item='newfile']")
-        b.wait_text("#sidebar-card-header", "newfileempty")
-        b.wait_text("#description-list-owner dd", "root")
-        b.wait_text("#description-list-group dd", "root")
-        b.wait_text("#description-list-size dd", "0 B")
-        b.wait_text("#description-list-last-modified dd", "Jan 1, 2022, 12:00 PM")
-
-        # saving a file updates sidebar info
-        m.execute("head -c 7 /dev/zero > /home/admin/newfile")
-        b.wait_text("#description-list-size dd", "7 B")
-        b.wait_not_in_text("#description-list-last-modified ", "Jan 1, 2022, 12:00 PM")
-        m.execute("touch --date @1641038400 /home/admin/newfile")
-        b.wait_in_text("#description-list-last-modified ", "Jan 1, 2022, 12:00 PM")
-
-        # clicking empty space resets sidebar
-        # Firefox/BiDi clicks in the middle by default, which catches/selects a file;
-        # so explicitly click in the corner
-        b.mouse("#folder-view tbody", "click", x=1, y=1)
-        b.wait_in_text("#sidebar-card-header", "admin")
-
-        # folder information doesn't contain size
-        b.click("[data-item='newdir']")
-        b.wait_text("#sidebar-card-header", "newdirdirectory")
-        b.wait_text("#description-list-owner dd", "root")
-        b.wait_text("#description-list-group dd", "root")
-        b.wait_not_present("#description-list-size")
-        b.wait_text("#description-list-last-modified dd", "Jan 1, 2022, 12:00 PM")
 
         # filtering works
         self.browser.wait_js_cond("ph_count('#folder-view tbody tr') > 1")
@@ -239,14 +207,6 @@ class TestFiles(testlib.MachineCase):
         b.wait_not_present("[data-item='newdir']")
         b.wait_not_present("[data-item='newfile']")
 
-        # current directory sidebar item count is updated
-        files_cnt = m.execute("ls -A /home/admin | wc -l").strip()
-        hidden_files_cnt = m.execute(r'ls -A /home/admin | grep "^\." | wc -l').strip()
-        b.wait_text("#sidebar-card-header", f"admin{files_cnt} items ({hidden_files_cnt} hidden)")
-
-        # sidebar is reset when files are removed
-        b.wait_in_text("#sidebar-card-header", "admin")
-
         # List root directory
         # Click "/" on the breadcrumb
         b.click("li[data-location='/'] a")  # go back to home dir
@@ -285,22 +245,39 @@ class TestFiles(testlib.MachineCase):
         b.wait_text("li[data-location='/home']", "home")
         b.wait_visible("[data-item='admin']")
 
-        # show folder info in sidebar
-        b.click("[data-item='admin']")
-        b.wait_in_text("#sidebar-card-header", "admin")
+        dir_cnt = int(m.execute(r'''
+            find /home -mindepth 1 -maxdepth 1 -type d \( -name ".*" -prune -o -print \) | wc -l
+        ''').strip())
+        hidden_cnt = int(m.execute(r'ls -A /home | grep "^\." | wc -l').strip())
+        # -1 to ignore first line of output which is not a file
+        files_cnt = int(m.execute(r'ls -lA /home | wc -l').strip()) - dir_cnt - hidden_cnt - 1
+        b.wait_in_text(".files-footer-info",
+                       f"Directory contains {dir_cnt} directories, {files_cnt} files, {hidden_cnt} hidden")
 
         # double-clicking on a directory should take us into it
         b.mouse("[data-item='admin']", "dblclick")
         b.wait_not_present("[data-item='admin']")
         self.assert_last_breadcrumb("admin")
 
-        # navigating into a directory resets the sidebar
-        b.wait_in_text("#sidebar-card-header", "admin")
+        # cwd info is updated when navigating to a new directory
+        dir_cnt = int(m.execute(r'''
+            find /home/admin -mindepth 1 -maxdepth 1 -type d \( -name ".*" -prune -o -print \) | wc -l
+        ''').strip())
+        hidden_cnt = int(m.execute(r'ls -A /home/admin | grep "^\." | wc -l').strip())
+        files_cnt = int(m.execute(r'ls -lA /home/admin | wc -l').strip()) - dir_cnt - hidden_cnt - 1
+        b.wait_in_text(".files-footer-info",
+                       f"Directory contains {dir_cnt} directories, {files_cnt} files, {hidden_cnt} hidden")
+
+        # Enabling "show hidden files" changes the counters in files footer
+        dir_cnt = int(m.execute("ls -lA /home/admin | grep '^d' | wc -l").strip())
+        files_cnt = int(m.execute("ls -lA /home/admin | grep '^-' | wc -l").strip())
+        b.select_PF("#sort-menu-toggle", "Show hidden items")
+        b.wait_in_text(".files-footer-info",
+                       f"Directory contains {dir_cnt} directories, {files_cnt} files")
+        b.select_PF("#sort-menu-toggle", "Hide hidden items")
 
         # double-clicking on a symlink to a directory also takes us into it
         m.execute("ln -s /tmp /home/admin/tmplink")
-        b.click("[data-item='tmplink']")
-        b.wait_in_text("#sidebar-card-header", "symbolic link to /tmp")
         b.mouse("[data-item='tmplink']", "dblclick")
         b.wait_not_present("[data-item='tmplink']")
         self.assert_last_breadcrumb("tmplink")
@@ -320,31 +297,70 @@ class TestFiles(testlib.MachineCase):
         b.wait_visible("[data-item='admin']")
         # navigate back
         b.eval_js("window.history.back()")
-        b.wait_in_text("#sidebar-card-header", "newdir2")
+        self.assert_last_breadcrumb("newdir2")
         b.wait_not_present("[data-item='admin']")
         b.eval_js("window.history.back()")
-        b.wait_in_text("#sidebar-card-header", "newdir")
+        self.assert_last_breadcrumb("newdir")
         b.wait_visible("[data-item='newdir2']")
         b.eval_js("window.history.back()")
-        b.wait_in_text("#sidebar-card-header", "admin")
+        self.assert_last_breadcrumb("admin")
         b.wait_visible("[data-item='newdir']")
         # navigate forward
         b.eval_js("window.history.forward()")
-        b.wait_in_text("#sidebar-card-header", "newdir")
         b.wait_not_present("[data-item='admin']")
         self.assert_last_breadcrumb("newdir")
         b.eval_js("window.history.forward()")
-        b.wait_in_text("#sidebar-card-header", "newdir2")
         b.wait_not_present("[data-item='newdir']")
         self.assert_last_breadcrumb("newdir2")
         b.eval_js("window.history.forward()")
         # Switching navigation resets selected state
         b.wait_visible("[data-item='admin']")
         b.wait_not_present("[data-item='admin'].row-selected")
-        b.wait_in_text("#sidebar-card-header", "home")
         b.wait_not_present("[data-item='newdir']")
         self.assert_last_breadcrumb("home")
         b.wait_visible("[data-item='admin']")
+
+        # Change permissions of cwd and see that files-footer-info is updated
+        b.go("/files#/?path=/home/admin/newdir")
+        self.assert_last_breadcrumb("newdir")
+        b.wait_in_text(".files-footer-info .pf-m-link", "rwx r-x r-x")
+        m.execute("chmod 700 /home/admin/newdir")
+        b.wait_in_text(".files-footer-info .pf-m-link", "rwx --- ---")
+
+        # Also check popover
+        b.click(".files-footer-info .pf-m-link")
+        b.wait_in_text(".pf-v5-c-popover dl div:nth-child(1) > dd", "read, write, and execute")
+        b.wait_in_text(".pf-v5-c-popover dl div:nth-child(2) > dd", "none")
+        b.wait_in_text(".pf-v5-c-popover dl div:nth-child(3) > dd", "none")
+        b.click(".pf-v5-c-popover__close > button")
+        b.wait_not_present(".pf-v5-c-popover")
+
+        # Change last edit time on cwd
+        m.execute("touch -d '2 hours ago' /home/admin/newdir")
+        b.wait_in_text(".files-footer-mtime", "2 hours ago")
+        m.execute("touch /home/admin/newdir")
+        b.wait_in_text(".files-footer-mtime", "less than a minute ago")
+        # mock edit time for tooltip
+        m.execute("touch -d '1995/12/21' /home/admin/newdir")
+        b.mouse(".files-footer-mtime", "mouseenter")
+        b.wait_in_text(".pf-v5-c-tooltip", "Dec 21, 1995")
+        b.mouse(".files-footer-mtime", "mouseleave")
+        b.go("/files#/?path=/home/admin")
+        self.assert_last_breadcrumb("admin")
+
+        # Selecting one file shows its info in the footer
+        b.click("[data-item='newdir']")
+        b.wait_in_text(".files-footer-info", "newdir")
+        b.wait_in_text(".files-footer-info .pf-m-link", "rwx --- ---")
+
+        # Select multiple files
+        m.execute("touch /home/admin/newfile.txt")
+        b.mouse("[data-item='newfile.txt']", "click", ctrlKey=True)
+        b.wait_in_text(".files-footer-info", "2 files selected")
+        b.mouse("[data-item='tmplink']", "click", ctrlKey=True)
+        b.wait_in_text(".files-footer-info", "3 files selected")
+        b.go("/files#/?path=/home")
+        self.assert_last_breadcrumb("home")
 
         # Navigation via editing the path
         path_input = "#new-path-input"
@@ -432,7 +448,7 @@ class TestFiles(testlib.MachineCase):
         self.enter_files()
 
         # Expected heading
-        b.wait_text("#files-card-header", "Directories & files")
+        b.wait_visible(".header-toolbar")
 
         # Create test files and folders
         m.execute("touch -d '3 hours ago' /home/admin/aaa")
@@ -931,6 +947,8 @@ class TestFiles(testlib.MachineCase):
             ]
         """)
 
+        b.click("button[aria-label='Display as a list']")
+
         # Create folder from context menu, click in the middle to assert we can click everywhere.
         b.mouse("#files-card-parent", "contextmenu", body_size[0] / 2, body_size[0] / 2)
         b.click(".contextMenu button:contains('Create directory')")
@@ -940,7 +958,7 @@ class TestFiles(testlib.MachineCase):
 
         # Opening context menu from empty space deselects item
         b.click("[data-item='newdir']")
-        b.mouse("#files-card-parent tbody", "contextmenu")
+        b.mouse("#files-card-parent tbody", "contextmenu", body_size[1] / 2, body_size[1] / 2)
         b.assert_pixels(".contextMenu", "overview-context-menu")
         b.click(".contextMenu button:contains('Create directory')")
         b.set_input_text("#create-directory-input", "newdir2")
@@ -963,7 +981,7 @@ class TestFiles(testlib.MachineCase):
         b.click(".contextMenu button:contains('Edit permissions')")
         b.select_from_dropdown("#edit-permissions-owner", "testuser")
         b.click("button.pf-m-primary")
-        b.wait_text("#description-list-owner dd", "testuser")
+        b.wait_in_text("[data-item='newdir1'] .item-owner", "testuser")
 
         # Delete folder from context menu
         b.mouse("[data-item='newdir1']", "contextmenu")
@@ -984,9 +1002,9 @@ class TestFiles(testlib.MachineCase):
         b.click("button.pf-m-danger")
         b.wait_not_present("[data-item='newfile']")
 
-        # The list view also supports a contextmenu
+        # The grid view also supports a contextmenu
         m.execute("touch /home/admin/testfile")
-        b.click("button[aria-label='Display as a list']")
+        b.click("button[aria-label='Display as a grid']")
         b.mouse("[data-item='testfile']", "contextmenu")
         b.wait_visible(".contextMenu button:contains('Delete')")
 
@@ -1205,12 +1223,11 @@ class TestFiles(testlib.MachineCase):
         b.mouse("[data-item='newdir']", "dblclick")
         b.wait_visible("[data-item='f1']")
         b.wait_not_present("[data-item='.f2']")
-        b.wait_in_text("#sidebar-card-header", "2 items (1 hidden)")
+        b.wait_in_text(".files-footer-info", "Directory contains 0 directories, 1 files, 1 hidden")
 
         b.select_PF("#sort-menu-toggle", "Show hidden items")
         b.wait_visible("[data-item='f1']")
         b.wait_visible("[data-item='.f2']")
-        b.wait_in_text("#sidebar-card-header", "2 items")
 
         # Selected option is saved in localStorage
         b.reload()
@@ -1227,11 +1244,6 @@ class TestFiles(testlib.MachineCase):
         m = self.machine
         has_selinux = not any(img in m.image for img in ["arch", "debian", "ubuntu", "suse"])
 
-        def wait_permissions(permission: str) -> None:
-            b.wait_text("#description-list-owner-permissions dd", permission)
-            b.wait_text("#description-list-group-permissions dd", permission)
-            b.wait_text("#description-list-other-permissions dd", permission)
-
         def select_access(access: str) -> None:
             b.select_from_dropdown("#edit-permissions-owner-access", access)
             b.select_from_dropdown("#edit-permissions-group-access", access)
@@ -1239,60 +1251,63 @@ class TestFiles(testlib.MachineCase):
 
         def open_permissions_dialog(filename: str) -> None:
             b.wait_visible(f"[data-item='{filename}']")
-            b.click(f"[data-item='{filename}']")
-            b.click("button:contains('Edit permissions')")
+            b.mouse(f"[data-item='{filename}']", "contextmenu")
+            b.click(".contextMenu button:contains('Edit permissions')")
             b.wait_in_text(".pf-v5-c-modal-box__title-text", filename)
 
+        def check_perms_match(filename: str, basedir: str) -> None:
+            ls = m.execute(f"ls -l {basedir}/{filename}")[:10]
+            # format ls output with spaces to match string in UI
+            spaced_ls = f"{ls[1:4]} {ls[4:7]} {ls[7:10]}"
+            b.wait_in_text(f"[data-item='{filename}'] .item-perms pre", spaced_ls)
+
         self.enter_files()
+
+        b.click("button[aria-label='Display as a list']")
 
         # Check sidebar info
         m.execute("touch /home/admin/newfile")
         b.click("[data-item='newfile']")
         self.assertEqual(m.execute("ls -l /home/admin/newfile")[:10], "-rw-r--r--")
-        b.wait_text("#description-list-owner-permissions dd", "Read and write")
-        b.wait_text("#description-list-group-permissions dd", "Read-only")
-        b.wait_text("#description-list-other-permissions dd", "Read-only")
+        check_perms_match('newfile', '/home/admin')
 
         # Test changing owner/group
         m.execute("useradd testuser")
-        b.click("button:contains('Edit permissions')")
+        open_permissions_dialog('newfile')
         b.assert_pixels(".pf-v5-c-modal-box", "permissions-modal")
         # Changing owner should change group if user is not in the group
         b.select_from_dropdown("#edit-permissions-owner", "testuser")
         b.wait_in_text("#edit-permissions-group", "testuser")
-        b.click("button.pf-m-primary")
-        b.wait_text("#description-list-owner dd", "testuser")
-        b.wait_text("#description-list-group dd", "testuser")
+        b.click(".pf-v5-c-modal-box button.pf-m-primary")
+        b.wait_in_text("[data-item='newfile'] .item-owner", "testuser")
 
         m.execute("usermod -a -G testuser admin")
-        b.click("button:contains('Edit permissions')")
+        open_permissions_dialog('newfile')
         # Changing owner shouldn't change group if user is in the group
         b.select_from_dropdown("#edit-permissions-owner", "admin")
         b.wait_in_text("#edit-permissions-group", "testuser")
-        b.click("button.pf-m-primary")
-        b.wait_text("#description-list-owner dd", "admin")
-        b.wait_text("#description-list-group dd", "testuser")
+        b.click(".pf-v5-c-modal-box button.pf-m-primary")
+        b.wait_in_text("[data-item='newfile'] .item-owner", "admin:testuser")
 
         # Change the group to admin
-        b.click("button:contains('Edit permissions')")
+        open_permissions_dialog('newfile')
         b.select_from_dropdown("#edit-permissions-group", "admin")
         b.wait_in_text("#edit-permissions-group", "admin")
-        b.click("button.pf-m-primary")
-        b.wait_text("#description-list-owner dd", "admin")
-        b.wait_text("#description-list-group dd", "admin")
+        b.click(".pf-v5-c-modal-box button.pf-m-primary")
+        b.wait_in_text("[data-item='newfile'] .item-owner", "admin")
 
         # Test changing permissions
-        b.click("button:contains('Edit permissions')")
+        open_permissions_dialog('newfile')
         select_access("no-access")
-        b.click("button.pf-m-primary")
+        b.click(".pf-v5-c-modal-box button.pf-m-primary")
         self.assertEqual(m.execute("ls -l /home/admin/newfile")[:10], "----------")
-        wait_permissions("None")
+        check_perms_match('newfile', '/home/admin')
 
-        b.click("button:contains('Edit permissions')")
+        open_permissions_dialog('newfile')
         select_access("read-write")
-        b.click("button.pf-m-primary")
+        b.click(".pf-v5-c-modal-box button.pf-m-primary")
         self.assertEqual(m.execute("ls -l /home/admin/newfile")[:10], "-rw-rw-rw-")
-        wait_permissions("Read and write")
+        check_perms_match('newfile', '/home/admin')
 
         # Test changing CWD permissions
         test_dir = "/home/admin/testdir"
@@ -1308,7 +1323,7 @@ class TestFiles(testlib.MachineCase):
         b.select_from_dropdown("#edit-permissions-owner-access", "read-write")
         b.select_from_dropdown("#edit-permissions-group-access", "read-only")
         b.select_from_dropdown("#edit-permissions-other-access", "read-only")
-        b.click("button.pf-m-primary")
+        b.click(".pf-v5-c-modal-box button.pf-m-primary")
         b.wait_not_present(".pf-v5-c-modal-box")
 
         self.assertEqual(m.execute(f"ls -ld {test_dir}")[:10], "drwxr-xr-x")
@@ -1320,7 +1335,7 @@ class TestFiles(testlib.MachineCase):
         b.select_from_dropdown("#edit-permissions-owner-access", "read-only")
         b.select_from_dropdown("#edit-permissions-group-access", "no-access")
         b.select_from_dropdown("#edit-permissions-other-access", "no-access")
-        b.click("button.pf-m-primary")
+        b.click(".pf-v5-c-modal-box button.pf-m-primary")
         b.wait_not_present(".pf-v5-c-modal-box")
 
         self.assertEqual(m.execute(f"ls -ld {test_dir}")[:10], "dr-x------")
@@ -1344,15 +1359,13 @@ class TestFiles(testlib.MachineCase):
         self.assertFalse(b.get_checked("#is-executable"))
 
         b.set_checked("#is-executable", True)
-        b.click("button.pf-m-primary")
+        b.click(".pf-v5-c-modal-box button.pf-m-primary")
         b.wait_not_present(".pf-v5-c-modal-box")
 
-        b.wait_text("#description-list-owner-permissions dd", "Read, write, and execute")
-        b.wait_text("#description-list-group-permissions dd", "Read and execute")
-        b.wait_text("#description-list-other-permissions dd", "Read and execute")
         self.assertEqual(m.execute(f"ls -ld /home/admin/{shell_script}")[:10], "-rwxr-xr-x")
+        check_perms_match(shell_script, '/home/admin')
 
-        b.click("button:contains('Edit permissions')")
+        open_permissions_dialog(shell_script)
         b.wait_in_text(".pf-v5-c-modal-box__title-text", shell_script)
 
         # Permissions did not change visually only executable is checked now
@@ -1362,7 +1375,7 @@ class TestFiles(testlib.MachineCase):
         self.assertTrue(b.get_checked("#is-executable"))
 
         b.set_checked("#is-executable", False)
-        b.click("button.pf-m-primary")
+        b.click(".pf-v5-c-modal-box button.pf-m-primary")
         b.wait_not_present(".pf-v5-c-modal-box")
         self.assertEqual(m.execute(f"ls -l /home/admin/{shell_script}")[:10], "-rw-r--r--")
 
@@ -1391,12 +1404,10 @@ class TestFiles(testlib.MachineCase):
 
         open_permissions_dialog(executable_file)
         b.set_checked("#is-executable", True)
-        b.click("button.pf-m-primary")
+        b.click(".pf-v5-c-modal-box button.pf-m-primary")
         b.wait_not_present(".pf-v5-c-modal-box")
 
-        b.wait_text("#description-list-owner-permissions dd", "Read, write, and execute")
-        b.wait_text("#description-list-group-permissions dd", "Read and execute")
-        b.wait_text("#description-list-other-permissions dd", "Read and execute")
+        check_perms_match(executable_file, '/home/admin')
 
         # Special file access permission cases
 
@@ -1405,10 +1416,8 @@ class TestFiles(testlib.MachineCase):
         # are retained.
         m.execute(['chmod', '532', f'/home/admin/{shell_script}'])
         b.click(f"[data-item='{shell_script}']")
-        b.wait_text("#description-list-owner-permissions dd", "Read and execute")
-        b.wait_text("#description-list-group-permissions dd", "Write and execute")
-        b.wait_text("#description-list-other-permissions dd", "Write-only")
-        b.click("button:contains('Edit permissions')")
+        check_perms_match(shell_script, '/home/admin')
+        open_permissions_dialog(shell_script)
 
         b.wait_in_text(".pf-v5-c-modal-box__title-text", shell_script)
         b.wait_val("#edit-permissions-owner-access", "read-only")
@@ -1418,7 +1427,7 @@ class TestFiles(testlib.MachineCase):
 
         b.select_from_dropdown("#edit-permissions-group-access", "read-write")
         b.select_from_dropdown("#edit-permissions-other-access", "no-access")
-        b.click("button.pf-m-primary")
+        b.click(".pf-v5-c-modal-box button.pf-m-primary")
         b.wait_not_present(".pf-v5-c-modal-box")
         self.assertEqual(m.execute(f"ls -l /home/admin/{shell_script}")[:10], "-r-xrw----")
 
@@ -1440,42 +1449,33 @@ class TestFiles(testlib.MachineCase):
         b.wait_not_present(".pf-v5-c-empty-state")
 
         m.execute("touch /home/admin/adminfile; chown admin: /home/admin/adminfile")
-        b.click("[data-item='adminfile']")
-        b.click("button:contains('Edit permissions')")
+        open_permissions_dialog('adminfile')
         select_access("read-write")
         # A user cannot change ownership
         b.wait_not_in_text(".pf-v5-c-modal-box__body", "Ownership")
-        b.click("button.pf-m-primary")
+        b.click(".pf-v5-c-modal-box button.pf-m-primary")
         self.assertEqual(m.execute("ls -l /home/admin/adminfile")[:10], "-rw-rw-rw-")
-        wait_permissions("Read and write")
+        check_perms_match('adminfile', '/home/admin')
         # Does not change ownership
-        b.wait_text("#description-list-owner dd", "admin")
-        b.wait_text("#description-list-group dd", "admin")
+        b.wait_in_text("[data-item='adminfile'] .item-owner", "admin")
 
         # Cannot change permission of /home
         b.click("li[data-location='/'] a")
-        b.click("[data-item='home']")
-        b.click("button:contains('Edit permissions')")
+        open_permissions_dialog('home')
         select_access("read-only")
         if has_selinux:
             b.wait_val("#selinux-context", "system_u:object_r:home_root_t:s0")
-        b.click("button.pf-m-primary")
+        b.click(".pf-v5-c-modal-box button.pf-m-primary")
         self.wait_modal_inline_alert("chmod: changing permissions of '/home': Operation not permitted")
-        b.click("button.pf-m-link")
+        b.click(".pf-v5-c-modal-box button.pf-m-link")
         b.wait_not_present(".pf-v5-c-modal-box")
 
         # Test permissions in details view
         b.go("/files#/?path=/home/admin")
         b.wait_not_present(".pf-v5-c-empty-state")
-        b.click("button[aria-label='Display as a list']")
         basedir = "/home/admin"
         for i in range(8):
             m.execute(f"runuser -u admin touch {basedir}/file{i}")
-
-        def check_perms_match(file: str, basedir: str) -> None:
-            ls = m.execute(f"ls -l {basedir}/{file}")[:10]
-            ui = b.text(f"[data-item='{file}'] .item-perms pre").replace(" ", "")
-            self.assertEqual(ls[1:], ui)
 
         # Simple permissions
         m.execute(f"""
@@ -1563,11 +1563,9 @@ class TestFiles(testlib.MachineCase):
         m.execute('touch /home/admin/testdir/testfile && chmod a+r /home/admin/testdir')
         b.mouse("[data-item='testdir']", "dblclick")
         self.assert_last_breadcrumb("testdir")
-        b.click("[data-item='testfile']")
-        b.wait_in_text("#sidebar-card-header", "testfile")
-        b.wait_text("#description-list-owner dd", "unknown")
-        b.wait_text("#description-list-group dd", "unknown")
-        b.wait_text("#description-list-last-modified dd", "unknown")
+        b.click("button[aria-label='Display as a list']")
+        b.wait_in_text("[data-item='testfile'] .item-owner", "")
+        b.wait_in_text("[data-item='testfile'] .item-date", "")
 
     def testMultiSelect(self) -> None:
         b = self.browser
@@ -1593,26 +1591,21 @@ class TestFiles(testlib.MachineCase):
         b.wait_visible("[data-item='file1'].row-selected")
         b.wait_visible("[data-item='file2'].row-selected")
         b.assert_pixels("#files-card-parent", "multi-select-folder-view")
-        b.wait_text("#sidebar-card-header", "admin2 items selected")
 
         b.mouse("[data-item='file2']", "click", ctrlKey=True)
         b.wait_visible("[data-item='file1'].row-selected")
         b.wait_not_present("[data-item='file2'].row-selected")
-        b.wait_text("#sidebar-card-header", "file1empty")
 
         b.mouse("[data-item='file1']", "click", ctrlKey=True)
         b.wait_not_present("[data-item='file1'].row-selected")
-        b.wait_in_text("#sidebar-card-header", "admin")
 
         # Control-clicking when nothing is selected should select item normally
         b.mouse("[data-item='file1']", "click", ctrlKey=True)
         b.wait_visible("[data-item='file1'].row-selected")
-        b.wait_text("#sidebar-card-header", "file1empty")
 
         # Check context menu
         b.mouse("[data-item='file2']", "click", ctrlKey=True)
         b.wait_visible("[data-item='file2'].row-selected")
-        b.wait_text("#sidebar-card-header", "admin2 items selected")
         b.mouse("[data-item='file1']", "contextmenu")
         b.wait_in_text(".contextMenu li:nth-child(2) button", "Delete")
         b.click(".contextMenu button:contains('Delete')")
@@ -1920,10 +1913,9 @@ class TestFiles(testlib.MachineCase):
 
             # Verify ownership
             filename = os.path.basename(files[0])
-            b.click(f"[data-item='{filename}']")
-            b.wait_text("#sidebar-card-header h2", filename)
-            b.wait_text("#description-list-owner dd", "admin")
-            b.wait_text("#description-list-group dd", "admin")
+            b.click("button[aria-label='Display as a list']")
+            b.wait_in_text(f"[data-item='{filename}'] .item-owner", "admin")
+            b.click("button[aria-label='Display as a grid']")
 
             # Conflict handling
             # change the content of the files locally so we can detect
@@ -2374,7 +2366,7 @@ class TestFiles(testlib.MachineCase):
         def validate_content(file: str, content: str) -> None:
             open_editor(file)
             b.wait_val(".file-editor-modal textarea", content)
-            b.click(".pf-v5-c-button.pf-m-link")
+            b.click(".file-editor-modal button.pf-m-link")
             b.wait_not_present(".file-editor-modal")
 
             # validate on disk
@@ -2412,7 +2404,7 @@ class TestFiles(testlib.MachineCase):
         b.assert_pixels(".file-editor-modal", "editor-modal-changed")
         b.wait_visible(".pf-v5-c-modal-box__footer .pf-m-primary:not(:disabled)")
 
-        b.click(".pf-v5-c-button.pf-m-link")
+        b.click(".file-editor-modal button.pf-m-link")
         b.wait_not_present(".file-editor-modal")
         self.assertEqual(m.execute("cat /home/admin/test.txt"), "test\n")
 
@@ -2423,11 +2415,11 @@ class TestFiles(testlib.MachineCase):
         b.set_input_text(".file-editor-modal textarea", "foobar", append=True, value_check=False)
         b.wait_val(".file-editor-modal textarea", "test\nfoobar")
         b.wait_visible(".file-editor-modal.is-modified")
-        b.click(".pf-v5-c-button.pf-m-primary")
+        b.click(".file-editor-modal button.pf-m-primary")
         # Saving resets modified state so should not be shown
         b.wait_not_present(".file-editor-modal.is-modified")
 
-        b.click(".pf-v5-c-button.pf-m-link")
+        b.click(".file-editor-modal button.pf-m-link")
         b.wait_not_present(".file-editor-modal")
 
         validate_content("test.txt", "test\nfoobar\n")
@@ -2454,7 +2446,7 @@ class TestFiles(testlib.MachineCase):
 
         b.click(".pf-v5-c-modal-box__footer .pf-m-warning")
         b.wait_not_present(".pf-v5-c-alert__title")
-        b.click(".pf-v5-c-button.pf-m-link")
+        b.click(".file-editor-modal button.pf-m-link")
         b.wait_not_present(".file-editor-modal")
 
         validate_content("test.txt", "testing\nroll\n")
