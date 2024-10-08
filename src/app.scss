@@ -190,9 +190,11 @@
     display: flex;
     flex-flow: row wrap;
     gap: var(--pf-v5-global--spacer--md);
+    justify-content: space-between;
+    font-family: RedHatText;
 
     .files-search {
-        flex: 15ch;
+        flex: fit-content;
     }
 
     .header-actions {

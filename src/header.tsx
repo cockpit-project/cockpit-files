@@ -183,14 +183,7 @@ export const FilesCardHeader = ({
     });
 
     return (
-        <CardHeader className="card-actionbar">
-            <CardTitle component="h2" id="files-card-header">
-                <TextContent>
-                    <Text component={TextVariants.h2}>
-                        {_("Directories & files")}
-                    </Text>
-                </TextContent>
-            </CardTitle>
+        <CardTitle className="card-actionbar">
             <div className="header-toolbar">
                 <SearchInput
                   className="files-search"
@@ -214,7 +207,7 @@ export const FilesCardHeader = ({
                     />
                 </div>
             </div>
-        </CardHeader>
+        </CardTitle>
     );
 };
 
