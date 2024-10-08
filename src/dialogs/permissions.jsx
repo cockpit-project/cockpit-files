@@ -20,6 +20,7 @@
 import React, { useState } from 'react';
 
 import { Button } from '@patternfly/react-core/dist/esm/components/Button';
+import { Checkbox } from '@patternfly/react-core/dist/esm/components/Checkbox';
 import { Form, FormGroup, FormSection } from '@patternfly/react-core/dist/esm/components/Form';
 import { FormSelect, FormSelectOption } from '@patternfly/react-core/dist/esm/components/FormSelect';
 import { Modal, ModalVariant } from '@patternfly/react-core/dist/esm/components/Modal';
@@ -34,9 +35,27 @@ import { superuser } from 'superuser';
 import { fmt_to_fragments } from 'utils.tsx';
 
 import { useFilesContext } from '../app.tsx';
-import { map_permissions, inode_types } from '../common.ts';
+import { inode_types } from '../common.ts';
 
 const _ = cockpit.gettext;
+
+const PERMISSION_OPTIONS = {
+    0: "no-access",
+    1: "no-access",
+    2: "write-only",
+    3: "write-only",
+    4: "read-only",
+    5: "read-only",
+    6: "read-write",
+    7: "read-write",
+};
+
+const OPTIONS_PERMISSIONS = {
+    "no-access": 0,
+    "write-only": 2,
+    "read-only": 4,
+    "read-write": 6,
+};
 
 const EditPermissionsModal = ({ dialogResult, selected, path }) => {
     const { cwdInfo } = useFilesContext();
@@ -47,12 +66,17 @@ const EditPermissionsModal = ({ dialogResult, selected, path }) => {
         selected = { ...cwdInfo, isCwd: true, name: directory_name };
     }
 
+    const isExecutableBitSet = (mode, shift) => (((mode >> shift) & 7) & 1) === 1;
+
+    console.log(selected);
+
     const [owner, setOwner] = useState(selected.user);
     const [mode, setMode] = useState(selected.mode);
     const [group, setGroup] = useState(selected.group);
     const [errorMessage, setErrorMessage] = useState(undefined);
     const [accounts, setAccounts] = useState(null);
     const [groups, setGroups] = useState(null);
+    const [isExecutable, setIsExecutable] = useState();
 
     useInit(async () => {
         try {
@@ -67,6 +91,14 @@ const EditPermissionsModal = ({ dialogResult, selected, path }) => {
             setGroups(etc_group_syntax.parse(group));
         } catch (exc) {
             console.error("Cannot obtain users from getent group", exc);
+        }
+
+        // All should be set to +x, test with bitmask
+        for (const shift_mode of [6, 3, 0]) {
+            if (isExecutableBitSet(selected.mode, shift_mode)) {
+                setIsExecutable(true);
+                break;
+            }
         }
     });
 
@@ -99,21 +131,66 @@ const EditPermissionsModal = ({ dialogResult, selected, path }) => {
         }
     };
 
-    function permissions_options() {
-        return [
-            ...map_permissions((value, label) => (
-                <FormSelectOption
-                  key={value}
-                  value={value}
-                  label={label}
-                />
-            ))
+    function permissions_options(mode, type) {
+        const options = [
+            <FormSelectOption
+              key="read-write"
+              value="read-write"
+              label={_("Read and write")}
+            />,
+            <FormSelectOption
+              key="read-only"
+              value="read-only"
+              label={_("Read-only")}
+            />,
+            <FormSelectOption
+              key="no-access"
+              value="no-access"
+              label={_("No access")}
+            />
         ];
+
+        // Show write-only when such a file exists, but never offer this as a default option.
+        if (mode === 2) {
+            options.push(
+                <FormSelectOption
+                  key="write-only"
+                  value="write-only"
+                  label={_("Write-only")}
+                />
+            );
+        }
+
+        return options;
+    }
+
+    function setPermissions(mask, shift, option) {
+        let val = OPTIONS_PERMISSIONS[option];
+        if ((selected.type === 'reg' && isExecutable) || (selected.type === 'dir' && option !== "no-access")) {
+            val += 1;
+        }
+
+        setMode((mode & mask) | (val << shift));
+    }
+
+    function setExecutableBits(shouldBeExecutable) {
+        setIsExecutable(shouldBeExecutable);
+
+        // Strip / add executable bits
+        if (shouldBeExecutable) {
+            setMode(mode | 0b001001001);
+        } else {
+            setMode(mode & ~0b001001001);
+        }
     }
 
     function sortByName(a, b) {
         return a.name.localeCompare(b.name);
     }
+
+    console.log((mode >> 6) & 7);
+    console.log((mode >> 3) & 7);
+    console.log((mode >> 0) & 7);
 
     return (
         <Modal
@@ -183,11 +260,11 @@ const EditPermissionsModal = ({ dialogResult, selected, path }) => {
                           fieldId="edit-permissions-owner-access"
                         >
                             <FormSelect
-                              value={(mode >> 6) & 7}
-                              onChange={(_, val) => { setMode((mode & 0o077) | (val << 6)) }}
+                              value={PERMISSION_OPTIONS[(mode >> 6) & 7]}
+                              onChange={(_, val) => { setPermissions(0o077, 6, val) }}
                               id="edit-permissions-owner-access"
                             >
-                                {permissions_options()}
+                                {permissions_options((mode >> 6) & 7, selected.type)}
                             </FormSelect>
                         </FormGroup>
                         <FormGroup
@@ -195,11 +272,11 @@ const EditPermissionsModal = ({ dialogResult, selected, path }) => {
                           fieldId="edit-permissions-group-access"
                         >
                             <FormSelect
-                              value={(mode >> 3) & 7}
-                              onChange={(_, val) => { setMode((mode & 0o707) | (val << 3)) }}
+                              value={PERMISSION_OPTIONS[(mode >> 3) & 7]}
+                              onChange={(_, val) => { setPermissions(0o707, 3, val) }}
                               id="edit-permissions-group-access"
                             >
-                                {permissions_options()}
+                                {permissions_options((mode >> 3) & 7, selected.type)}
                             </FormSelect>
                         </FormGroup>
                         <FormGroup
@@ -207,14 +284,22 @@ const EditPermissionsModal = ({ dialogResult, selected, path }) => {
                           fieldId="edit-permissions-other-access"
                         >
                             <FormSelect
-                              value={mode & 7}
-                              onChange={(_, val) => { setMode((mode & 0o770) | val) }}
+                              value={PERMISSION_OPTIONS[(mode) & 7]}
+                              onChange={(_, val) => { setPermissions(0o770, 0, val) }}
                               id="edit-permissions-other-access"
                             >
-                                {permissions_options()}
+                                {permissions_options(mode & 7, selected.type)}
                             </FormSelect>
                         </FormGroup>
                     </FormSection>
+                    {selected.type === "reg" &&
+                    <Checkbox
+                      id="is-executable"
+                      label={_("Set executable as program")}
+                      isChecked={isExecutable}
+                      onChange={() => setExecutableBits(!isExecutable)}
+                    />}
+                    <FormSection />
                 </Form>
             </Stack>
         </Modal>
