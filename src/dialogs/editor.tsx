@@ -30,6 +30,7 @@ import { debounce } from "throttle-debounce";
 import cockpit from 'cockpit';
 import { EventEmitter } from 'cockpit/event.ts';
 import type { Dialogs, DialogResult } from 'dialogs';
+import { fmt_to_fragments } from 'utils';
 
 import "./editor.scss";
 
@@ -165,7 +166,7 @@ export const EditFileModal = ({ dialogResult, path } : {
     };
 
     /* Translators: This is the title of a modal dialog.  $0 represents a filename. */
-    let title = <>{cockpit.format(state?.writable ? _("Edit “$0”") : _("View “$0”"), path)}</>;
+    let title = <>{fmt_to_fragments(state?.writable ? _("Edit $0") : _("View $0"), <b>{path}</b>)}</>;
     if (!state.writable) {
         // TODO: dark mode and lack of spacing
         title = (<>{title}<Label className="file-editor-title-label" variant="filled">{_("Read-only")}</Label></>);

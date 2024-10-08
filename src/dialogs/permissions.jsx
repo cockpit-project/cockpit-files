@@ -31,6 +31,7 @@ import { basename } from "cockpit-path";
 import { useInit } from 'hooks';
 import { etc_group_syntax, etc_passwd_syntax } from 'pam_user_parser';
 import { superuser } from 'superuser';
+import { fmt_to_fragments } from 'utils.tsx';
 
 import { useFilesContext } from '../app.tsx';
 import { map_permissions, inode_types } from '../common.ts';
@@ -119,7 +120,7 @@ const EditPermissionsModal = ({ dialogResult, selected, path }) => {
           position="top"
           variant={ModalVariant.small}
           /* Translators: $0 represents a filename */
-          title={cockpit.format(_("“$0” permissions"), selected.name)}
+          title={fmt_to_fragments(_("$0 permissions"), <b>{selected.name}</b>)}
           description={inode_types[selected.type] || "Unknown type"}
           isOpen
           onClose={dialogResult.resolve}

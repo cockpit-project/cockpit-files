@@ -25,6 +25,7 @@ import { Modal, ModalVariant } from '@patternfly/react-core/dist/esm/components/
 import cockpit from 'cockpit';
 import { InlineNotification } from 'cockpit-components-inline-notification';
 import type { Dialogs, DialogResult } from 'dialogs';
+import { fmt_to_fragments } from 'utils';
 
 import type { FolderFileInfo } from '../app';
 
@@ -40,23 +41,25 @@ const ConfirmDeletionDialog = ({ dialogResult, path, selected, setSelected } : {
 
     let modalTitle;
     if (selected.length > 1) {
-        modalTitle = cockpit.format(forceDelete ? _("Force delete $0 items") : _("Delete $0 items?"), selected.length);
+        const selectedJSX = <b>{selected.length}</b>;
+        modalTitle = fmt_to_fragments(forceDelete ? _("Force delete $0 items") : _("Delete $0 items?"), selectedJSX);
     } else {
         const selectedItem = selected[0];
+        const selectedJSX = <b>{selectedItem.name}</b>;
         if (selectedItem.type === "reg") {
-            modalTitle = cockpit.format(
-                forceDelete ? _("Force delete file $0?") : _("Delete file $0?"), selectedItem.name
+            modalTitle = fmt_to_fragments(
+                forceDelete ? _("Force delete file $0?") : _("Delete file $0?"), selectedJSX
             );
         } else if (selectedItem.type === "lnk") {
-            modalTitle = cockpit.format(
-                forceDelete ? _("Force delete link $0?") : _("Delete link $0?"), selectedItem.name
+            modalTitle = fmt_to_fragments(
+                forceDelete ? _("Force delete link $0?") : _("Delete link $0?"), selectedJSX
             );
         } else if (selectedItem.type === "dir") {
-            modalTitle = cockpit.format(
-                forceDelete ? _("Force delete directory $0?") : _("Delete directory $0?"), selectedItem.name
+            modalTitle = fmt_to_fragments(
+                forceDelete ? _("Force delete directory $0?") : _("Delete directory $0?"), selectedJSX
             );
         } else {
-            modalTitle = cockpit.format(forceDelete ? _("Force delete $0") : _("Delete $0?"), selectedItem.name);
+            modalTitle = fmt_to_fragments(forceDelete ? _("Force delete $0") : _("Delete $0?"), selectedJSX);
         }
     }
 
