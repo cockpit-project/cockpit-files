@@ -2292,7 +2292,7 @@ class TestFiles(testlib.MachineCase):
 
         # Opening an test file, editing and closing (discard)
         open_editor("test.txt")
-        b.wait_text(".pf-v5-c-modal-box__title", "Edit “/home/admin/test.txt”")
+        b.wait_text(".pf-v5-c-modal-box__title", "Edit /home/admin/test.txt")
         b.wait_text(".file-editor-modal textarea", "test\n")
 
         # Save button is disabled when not editing yet
@@ -2401,7 +2401,7 @@ class TestFiles(testlib.MachineCase):
         b.go("/files#/?path=/etc")
         self.assert_last_breadcrumb("etc")
         open_editor("cockpit-files-test.cfg")
-        b.wait_text(".pf-v5-c-modal-box__title", "View “/etc/cockpit-files-test.cfg”Read-only")
+        b.wait_text(".pf-v5-c-modal-box__title", "View /etc/cockpit-files-test.cfgRead-only")
         b.assert_pixels(".file-editor-modal", "editor-modal-read-only")
 
         b.click(".pf-v5-c-modal-box__footer button.pf-m-secondary")
