@@ -36,7 +36,7 @@ import { useDialogs } from "dialogs";
 import * as timeformat from "timeformat";
 
 import { FolderFileInfo, useFilesContext } from "./app.tsx";
-import { get_permissions } from "./common.ts";
+import { get_permissions, permissionShortStr } from "./common.ts";
 import { confirm_delete } from "./dialogs/delete.tsx";
 import { show_create_directory_dialog } from "./dialogs/mkdir.tsx";
 import { show_rename_dialog } from "./dialogs/rename.tsx";
@@ -565,35 +565,6 @@ const getFileType = (file: FolderFileInfo) => {
 const FilePermissions = ({ file } : {
     file: FolderFileInfo,
 }) => {
-    function permissionShortStr(mode: number) {
-        const specialBits = (mode >> 9) & 0b111;
-        const permsStr = [];
-        for (let i = 2; i >= 0; i--) {
-            const offset = i * 3;
-            let shortStr = "";
-            shortStr += (mode & (0b1 << (offset + 2))) ? "r" : "-";
-            shortStr += (mode & (0b1 << (offset + 1))) ? "w" : "-";
-
-            if (mode & (1 << offset)) {
-                if (specialBits & (0b1 << i)) {
-                    shortStr += (i === 0) ? "t" : "s";
-                } else {
-                    shortStr += "x";
-                }
-            } else {
-                if (specialBits & (0b1 << i)) {
-                    shortStr += (i === 0) ? "T" : "S";
-                } else {
-                    shortStr += "-";
-                }
-            }
-
-            permsStr.push(shortStr);
-        }
-
-        return permsStr.join(" ");
-    }
-
     const mode = file.mode;
     if (mode === undefined) {
         return null;
