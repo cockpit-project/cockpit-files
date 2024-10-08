@@ -39,6 +39,7 @@ import { FilesFolderView } from "./files-folder-view.tsx";
 import filetype_data from './filetype-data'; // eslint-disable-line import/extensions
 import { filetype_lookup } from './filetype-lookup.ts';
 import { SidebarPanelDetails } from "./sidebar.tsx";
+import { Stack } from "@patternfly/react-core";
 
 superuser.reload_page_on_change();
 
@@ -192,38 +193,28 @@ export const Application = () => {
                     </AlertGroup>
                     <FilesBreadcrumbs path={path} />
                     <PageSection>
-                        <Sidebar isPanelRight hasGutter>
-                            <SidebarContent>
-                                {errorMessage &&
-                                <Card>
-                                    <EmptyStatePanel
-                                      paragraph={errorMessage}
-                                      icon={ExclamationCircleIcon}
-                                    />
-                                </Card>}
-                                {!errorMessage &&
-                                <FilesFolderView
-                                  path={path}
-                                  files={files}
-                                  loadingFiles={loadingFiles}
-                                  showHidden={showHidden}
-                                  setShowHidden={setShowHidden}
-                                  selected={selected}
-                                  setSelected={setSelected}
-                                  clipboard={clipboard}
-                                  setClipboard={setClipboard}
-                                />}
-                            </SidebarContent>
-                            <SidebarPanel className="sidebar-panel">
-                                <SidebarPanelDetails
-                                  path={path}
-                                  selected={selected.map(s => files.find(f => f.name === s.name))
-                                          .filter(s => s !== undefined)}
-                                  showHidden={showHidden}
-                                  files={files}
-                                />
-                            </SidebarPanel>
-                        </Sidebar>
+                        {errorMessage &&
+                        <Card>
+                            <EmptyStatePanel
+                              paragraph={errorMessage}
+                              icon={ExclamationCircleIcon}
+                            />
+                        </Card>}
+                        {!errorMessage &&
+                        <Stack>
+                            <FilesFolderView
+                              path={path}
+                              files={files}
+                              loadingFiles={loadingFiles}
+                              showHidden={showHidden}
+                              setShowHidden={setShowHidden}
+                              selected={selected}
+                              setSelected={setSelected}
+                              clipboard={clipboard}
+                              setClipboard={setClipboard}
+                            />
+                                <div>Directory Contains 7 directories 5 files lorem ipsum</div>
+                        </Stack>}
                     </PageSection>
                 </WithDialogs>
             </FilesContext.Provider>
