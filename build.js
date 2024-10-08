@@ -60,8 +60,7 @@ function watch_dirs(dir, on_change) {
     const callback = (ev, dir, fname) => {
         // only listen for "change" events, as renames are noisy
         // ignore hidden files
-        const isHidden = /^\./.test(fname);
-        if (ev !== "change" || isHidden) {
+        if (ev !== "change" || fname.startsWith('.')) {
             return;
         }
         on_change(path.join(dir, fname));
