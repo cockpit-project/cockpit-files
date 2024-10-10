@@ -27,6 +27,7 @@ export function downloadFile(currentPath: string, selected: FolderFileInfo) {
         binary: "raw",
         path: `${currentPath}/${selected.name}`,
         superuser: "try",
+        host: cockpit.transport.host,
         external: {
             "content-disposition": `attachment; filename="${selected.name}"`,
             "content-type": "application/octet-stream",
