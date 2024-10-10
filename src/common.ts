@@ -32,6 +32,16 @@ export const permissions = [
     /* 7 */ _("Read, write, and execute"),
 ];
 
+export const simple_permissions = [
+    /* 0 */ _("No access"),
+    /* 4 */ _("Read-only"),
+    /* 6 */ _("Read and write"),
+];
+
+// _("Read and write"), // 6/7
+// _("Read-only"), // 4/5
+// _("None"), // 1/0
+
 export const inode_types = {
     blk: _("Block device"),
     chr: _("Character device"),
@@ -47,7 +57,7 @@ export function get_permissions(n: number) {
 }
 
 export function * map_permissions<T>(func: (value: number, label: string) => T) {
-    for (const [value, label] of permissions.entries()) {
+    for (const [value, label] of simple_permissions.entries()) {
         yield func(value, label);
     }
 }
