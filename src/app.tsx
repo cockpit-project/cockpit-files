@@ -40,6 +40,7 @@ import filetype_data from './filetype-data'; // eslint-disable-line import/exten
 import { filetype_lookup } from './filetype-lookup.ts';
 import { SidebarPanelDetails } from "./sidebar.tsx";
 import { Stack } from "@patternfly/react-core";
+import { CurrentDirDetail } from "./current-dir-detail.tsx";
 
 superuser.reload_page_on_change();
 
@@ -201,7 +202,7 @@ export const Application = () => {
                             />
                         </Card>}
                         {!errorMessage &&
-                        <Stack>
+                        <Stack className="stack-classname">
                             <FilesFolderView
                               path={path}
                               files={files}
@@ -213,7 +214,9 @@ export const Application = () => {
                               clipboard={clipboard}
                               setClipboard={setClipboard}
                             />
-                                <div>Directory Contains 7 directories 5 files lorem ipsum</div>
+                            <CurrentDirDetail
+                              files={files}
+                            />
                         </Stack>}
                     </PageSection>
                 </WithDialogs>

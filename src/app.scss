@@ -266,3 +266,20 @@
         white-space: nowrap;
     }
 }
+
+// Cwd info styling
+.cwd-info {
+    display: flex;
+    flex-flow: row wrap;
+    column-gap: var(--pf-v5-global--spacer--md);
+    margin-block-start: var(--pf-v5-global--spacer--sm);
+    margin-inline-start: var(--pf-v5-global--spacer--md);
+
+    .cwd-mtime {
+        color: var(--pf-v5-global--Color--200);
+    }
+
+    .cwd-permissions {
+        color: var(--pf-v5-global--link--Color);
+    }
+}
