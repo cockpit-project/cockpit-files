@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="addon">
-  <id>org.cockpit_project.cockpit_files</id>
+  <id>org.cockpit_project.files</id>
   <metadata_license>CC0-1.0</metadata_license>
   <name>Files</name>
   <summary>Manage your files</summary>
   <description>
     <p>
-        A file system browser for Cockpit.
+        A file system UI for Cockpit.
+
+        You can browse directories, upload and download files, and change their properties.
+        It also includes a simple file editor.
     </p>
   </description>
   <extends>org.cockpit_project.cockpit</extends>
@@ -14,4 +17,7 @@
   <url type="homepage">https://github.com/cockpit-project/cockpit-files</url>
   <url type="bugtracker">https://github.com/cockpit-project/cockpit-files/issues</url>
   <update_contact>cockpit-devel_AT_lists.fedorahosted.org</update_contact>
+  <developer id="org.cockpit-project">
+    <name>Cockpit Project</name>
+  </developer>
 </component>
