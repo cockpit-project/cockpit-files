@@ -194,7 +194,7 @@
     flex-flow: row wrap;
     gap: var(--pf-v5-global--spacer--md);
     justify-content: space-between;
-    font-family: RedHatText;
+    font-family: var(--pf-v5-global--FontFamily--text);
 
     .files-search {
         flex: fit-content;

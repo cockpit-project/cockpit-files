@@ -565,7 +565,6 @@ const getFileType = (file: FolderFileInfo) => {
 const FilePermissions = ({ file } : {
     file: FolderFileInfo,
 }) => {
-
     const mode = file.mode;
     if (mode === undefined) {
         return null;

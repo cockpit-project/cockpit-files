@@ -19,13 +19,12 @@
 
 import React, { useState } from "react";
 
-import { CardHeader, CardTitle } from "@patternfly/react-core/dist/esm/components/Card";
+import { CardTitle } from "@patternfly/react-core/dist/esm/components/Card";
 import { Divider } from "@patternfly/react-core/dist/esm/components/Divider";
 import { DropdownItem } from "@patternfly/react-core/dist/esm/components/Dropdown";
 import { MenuToggle, MenuToggleAction } from "@patternfly/react-core/dist/esm/components/MenuToggle";
 import { SearchInput } from "@patternfly/react-core/dist/esm/components/SearchInput";
 import { Select, SelectGroup, SelectList, SelectOption } from "@patternfly/react-core/dist/esm/components/Select";
-import { Text, TextContent, TextVariants } from "@patternfly/react-core/dist/esm/components/Text";
 import { EyeIcon, EyeSlashIcon, GripVerticalIcon, ListIcon } from "@patternfly/react-icons";
 import { SortByDirection } from '@patternfly/react-table';
 
