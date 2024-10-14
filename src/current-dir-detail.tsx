@@ -27,7 +27,7 @@ export const CurrentDirDetail = ({
         (acc, file) => {
             if (file.name.startsWith(".")) {
                 acc[1] += 1
-            } else if (file.type === "dir") {
+            } else if (file.type === "dir" || (file.type === "lnk" && file.to === "dir")) {
                 acc[0] += 1;
             } else {
                 acc[2] += 1;
@@ -38,8 +38,8 @@ export const CurrentDirDetail = ({
         [0, 0, 0]
     );
 
-    const cwdInfoText = cockpit.format(_("Directory contains $0 directories, $1 hidden, $2 files"),
-                                        dirCnt, hiddenCnt, restCnt);
+    const cwdInfoText = cockpit.format(_("Directory contains $0 directories, $1 files, $2 hidden"),
+                                        dirCnt, restCnt, hiddenCnt);
 
     return (
         <div className="cwd-info">
