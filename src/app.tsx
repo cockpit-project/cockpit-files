@@ -202,7 +202,7 @@ export const Application = () => {
                             />
                         </Card>}
                         {!errorMessage &&
-                        <Stack className="stack-classname">
+                        <Stack className="files-view-stack">
                             <FilesFolderView
                               path={path}
                               files={files}

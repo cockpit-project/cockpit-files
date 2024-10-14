@@ -11,8 +11,11 @@
 
 // Content area should stretch, so context menu works even when the content doesn't fill the area
 .fileview-wrapper {
-    display: contents;
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+    // TODO FIXME: make card scrollable instead of scrolling the whole page
+    // this only partially works, doesn't work on smaller screen when cwdInfo is wrapped
+    block-size: 81vh;
 }
 
 .pf-v5-c-page__main {
