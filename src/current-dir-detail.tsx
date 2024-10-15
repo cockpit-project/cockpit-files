@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Text, TextVariants } from "@patternfly/react-core/dist/esm/components/Text";
+import { Tooltip } from "@patternfly/react-core/dist/esm/components/Tooltip";
 
 import cockpit from "cockpit";
 import * as timeformat from "timeformat";
@@ -47,9 +48,12 @@ export const CurrentDirDetail = ({
     return (
         <div className="cwd-info">
             {cwdInfoText}
-            <Text className="cwd-mtime">
-                {cwdInfo.mtime ? timeformat.distanceToNow(cwdInfo.mtime * 1000) : null}
-            </Text>
+            {cwdInfo.mtime &&
+            <Tooltip content={timeformat.dateTimeSeconds(cwdInfo.mtime * 1000)}>
+                <Text className="cwd-mtime">
+                    {timeformat.distanceToNow(cwdInfo.mtime * 1000)}
+                </Text>
+            </Tooltip>}
             {cwdInfo.mode !== undefined &&
                 <Text
                   className="cwd-permissions"
