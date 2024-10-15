@@ -249,7 +249,8 @@ class TestFiles(testlib.MachineCase):
         hidden_cnt = int(m.execute(r'ls -A /home | grep "^\." | wc -l').strip())
         # -1 to ignore first line of output which is not a file
         files_cnt = int(m.execute(r'ls -lA /home | wc -l').strip()) - dir_cnt - hidden_cnt - 1
-        b.wait_in_text(".cwd-info", f"Directory contains {dir_cnt} directories, {files_cnt} files, {hidden_cnt} hidden")
+        b.wait_in_text(".cwd-info",
+                       f"Directory contains {dir_cnt} directories, {files_cnt} files, {hidden_cnt} hidden")
 
         # double-clicking on a directory should take us into it
         b.mouse("[data-item='admin']", "dblclick")
@@ -262,7 +263,8 @@ class TestFiles(testlib.MachineCase):
         ''').strip())
         hidden_cnt = int(m.execute(r'ls -A /home/admin | grep "^\." | wc -l').strip())
         files_cnt = int(m.execute(r'ls -lA /home/admin | wc -l').strip()) - dir_cnt - hidden_cnt - 1
-        b.wait_in_text(".cwd-info", f"Directory contains {dir_cnt} directories, {files_cnt} files, {hidden_cnt} hidden")
+        b.wait_in_text(".cwd-info",
+                       f"Directory contains {dir_cnt} directories, {files_cnt} files, {hidden_cnt} hidden")
 
         # double-clicking on a symlink to a directory also takes us into it
         m.execute("ln -s /tmp /home/admin/tmplink")
