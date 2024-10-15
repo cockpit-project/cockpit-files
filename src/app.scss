@@ -221,7 +221,7 @@
     font-family: var(--pf-v5-global--FontFamily--text);
 
     .files-search {
-        flex: fit-content;
+        flex: min-content;
     }
 
     .header-actions {
