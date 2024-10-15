@@ -9,18 +9,39 @@
     container-type: size;
 }
 
+// Passthrough for layout and styling purposes, to enable main page parts to participate in the grid
+.pf-v5-c-page__main-section,
+.files-view-stack {
+    display: contents;
+}
+
 // Content area should stretch, so context menu works even when the content doesn't fill the area
+.files-view-stack .pf-v5-c-card,
 .fileview-wrapper {
-    overflow-x: hidden;
-    overflow-y: auto;
-    // TODO FIXME: make card scrollable instead of scrolling the whole page
-    // this only partially works, doesn't work on smaller screen when cwdInfo is wrapped
-    block-size: 81vh;
+    block-size: 100%;
+    overflow: auto;
 }
 
 .pf-v5-c-page__main {
+    gap: var(--pf-v5-global--spacer--md);
+    display: grid;
+    grid-template:
+        "topbar topbar topbar" auto
+        ". content ." 1fr
+        ". cwd-info ." auto
+        ". . ." 0
+        / 0 1fr 0;
     inline-size: 100vw;
     block-size: 100vh;
+}
+
+.files-view-stack > .pf-v5-c-card {
+    grid-area: content;
+}
+
+.files-view-stack > .cwd-info {
+    margin-block-start: 0;
+    grid-area: cwd-info;
 }
 
 // TODO probably remove
