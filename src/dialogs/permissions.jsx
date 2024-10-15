@@ -24,6 +24,7 @@ import { Checkbox } from '@patternfly/react-core/dist/esm/components/Checkbox';
 import { Form, FormGroup, FormSection } from '@patternfly/react-core/dist/esm/components/Form';
 import { FormSelect, FormSelectOption } from '@patternfly/react-core/dist/esm/components/FormSelect';
 import { Modal, ModalVariant } from '@patternfly/react-core/dist/esm/components/Modal';
+import { TextInput } from '@patternfly/react-core/dist/esm/components/TextInput';
 import { Stack } from '@patternfly/react-core/dist/esm/layouts/Stack';
 
 import cockpit from 'cockpit';
@@ -31,11 +32,14 @@ import { InlineNotification } from 'cockpit-components-inline-notification';
 import { basename } from "cockpit-path";
 import { useInit } from 'hooks';
 import { etc_group_syntax, etc_passwd_syntax } from 'pam_user_parser';
+import * as python from "python.js";
 import { superuser } from 'superuser';
 import { fmt_to_fragments } from 'utils.tsx';
 
 import { useFilesContext } from '../app.tsx';
 import { inode_types } from '../common.ts';
+
+import read_selinux_context from './read-selinux.py';
 
 const _ = cockpit.gettext;
 
@@ -73,6 +77,7 @@ const EditPermissionsModal = ({ dialogResult, selected, path }) => {
     const [accounts, setAccounts] = useState(null);
     const [groups, setGroups] = useState(null);
     const [isExecutable, setIsExecutable] = useState((mode & 0b001001001) === 0b001001001);
+    const [selinuxContext, setSELinuxContext] = useState(null);
 
     const executable_file_types = ["code-file", "file"];
 
@@ -89,6 +94,15 @@ const EditPermissionsModal = ({ dialogResult, selected, path }) => {
             setGroups(etc_group_syntax.parse(group));
         } catch (exc) {
             console.error("Cannot obtain users from getent group", exc);
+        }
+
+        try {
+            const full_path = selected?.isCwd ? path : path + selected.name;
+            const selinux_context = await python.spawn(read_selinux_context, full_path);
+            setSELinuxContext(selinux_context);
+        } catch (exc) {
+            if (exc.exit_status !== 2)
+                console.error("Cannot obtain SELinux context", exc);
         }
     });
 
@@ -277,6 +291,16 @@ const EditPermissionsModal = ({ dialogResult, selected, path }) => {
                                 {permissions_options(mode & 7)}
                             </FormSelect>
                         </FormGroup>
+                        {selinuxContext !== null &&
+                        <FormGroup
+                          label={_("Security context")}
+                        >
+                            <TextInput
+                              id="selinux-context"
+                              value={selinuxContext}
+                              readOnlyVariant="plain"
+                            />
+                        </FormGroup>}
                     </FormSection>
                     {selected.type === "reg" && executable_file_types.includes(selected?.category?.class || "file") &&
                         <Checkbox
