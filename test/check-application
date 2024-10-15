@@ -1222,6 +1222,7 @@ class TestFiles(testlib.MachineCase):
     def testPermissions(self) -> None:
         b = self.browser
         m = self.machine
+        has_selinux = not any(img in m.image for img in ["arch", "debian", "ubuntu", "suse"])
 
         def wait_permissions(permission: str) -> None:
             b.wait_text("#description-list-owner-permissions dd", permission)
@@ -1333,6 +1334,10 @@ class TestFiles(testlib.MachineCase):
         b.wait_val("#edit-permissions-owner-access", "read-write")
         b.wait_val("#edit-permissions-group-access", "read-only")
         b.wait_val("#edit-permissions-other-access", "read-only")
+        if has_selinux:
+            b.wait_val("#selinux-context", "unconfined_u:object_r:user_home_t:s0")
+        else:
+            b.wait_not_present("#selinux-content")
         self.assertFalse(b.get_checked("#is-executable"))
 
         b.set_checked("#is-executable", True)
@@ -1449,6 +1454,8 @@ class TestFiles(testlib.MachineCase):
         b.click("[data-item='home']")
         b.click("button:contains('Edit permissions')")
         select_access("read-only")
+        if has_selinux:
+            b.wait_val("#selinux-context", "system_u:object_r:home_root_t:s0")
         b.click("button.pf-m-primary")
         self.wait_modal_inline_alert("chmod: changing permissions of '/home': Operation not permitted")
         b.click("button.pf-m-link")
