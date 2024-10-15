@@ -44,20 +44,23 @@
     grid-area: cwd-info;
 }
 
-// TODO probably remove
-/* @container (width < 768px) { */
-/*     // Change the general layout in smaller screen sizes */
-/*     .pf-v5-c-page__main { */
-/*         grid-template: */
-/*             "topbar" auto */
-/*             "." var(--pf-v5-global--spacer--md) */
-/*             "content" 1fr */
-/*             "sidebar" 8rem */
-/*             / 1fr; */
-/*         row-gap: 0; */
-/*     } */
-/* } */
+@container (width < 768px) {
+    // Change the general layout in smaller screen sizes
+    .pf-v5-c-page__main {
+        gap: var(--pf-v5-global--spacer--sm);
+        grid-template:
+            "topbar" auto
+            "." var(--pf-v5-global--spacer--md)
+            "content" 1fr
+            "cwd-info" auto
+            / 1fr;
+        row-gap: 0;
+    }
 
+    .files-view-stack > .cwd-info {
+        margin-block: var(--pf-v5-global--spacer--sm);
+    }
+}
 /* Style the list cards as ct-cards */
 .pf-c-page__main-section > .pf-c-card {
     @extend .ct-card;
