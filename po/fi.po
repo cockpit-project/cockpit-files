@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-05 03:02+0000\n"
+"POT-Creation-Date: 2024-10-14 03:08+0000\n"
 "PO-Revision-Date: 2024-09-17 08:38+0000\n"
 "Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
 "memory@weblate.org>\n"
@@ -43,15 +43,25 @@ msgid_plural "$0 items are hidden"
 msgstr[0] "$0 kohde on piilotettu"
 msgstr[1] "$0 kohdetta on piilotettu"
 
+#. Translators: $0 represents a filename
+#: src/dialogs/permissions.jsx:123
+#, fuzzy
+#| msgid "“$0” permissions"
+msgid "$0 permissions"
+msgstr "\"$0\" käyttöoikeudet"
+
 #: src/sidebar.tsx:114
 msgid "($0 hidden)"
 msgid_plural "($0 hidden)"
 msgstr[0] "($0 piilotettu)"
 msgstr[1] "($0 piilotettua)"
 
-#: org.cockpit-project.files.metainfo.xml:8
-msgid "A file system browser for Cockpit."
-msgstr "Tiedostojärjestelmäselain Cockpitille."
+#: org.cockpit_project.files.metainfo.xml:8
+msgid ""
+"A file system UI for Cockpit. You can browse directories, upload and "
+"download files, and change their properties. It also includes a simple file "
+"editor."
+msgstr ""
 
 #: src/upload-button.tsx:97
 msgid ""
@@ -65,7 +75,7 @@ msgstr ""
 msgid "A-Z"
 msgstr "A-Z"
 
-#: src/dialogs/permissions.jsx:179
+#: src/dialogs/permissions.jsx:180
 msgid "Access"
 msgstr "Pääsy"
 
@@ -90,9 +100,9 @@ msgstr "Lohkolaite"
 msgid "Bookmarks"
 msgstr "Kirjanmerkit"
 
-#: src/dialogs/mkdir.tsx:108 src/dialogs/editor.tsx:210
-#: src/dialogs/permissions.jsx:134 src/dialogs/rename.tsx:116
-#: src/dialogs/delete.tsx:88 src/upload-button.tsx:91
+#: src/dialogs/editor.tsx:211 src/dialogs/delete.tsx:91
+#: src/dialogs/permissions.jsx:135 src/dialogs/rename.tsx:116
+#: src/dialogs/mkdir.tsx:108 src/upload-button.tsx:91
 msgid "Cancel"
 msgstr "Peru"
 
@@ -108,7 +118,7 @@ msgstr "Peruttu"
 msgid "Cancelled upload of $0"
 msgstr "$0:n uloslataus peruttu"
 
-#: src/dialogs/permissions.jsx:132
+#: src/dialogs/permissions.jsx:133
 msgid "Change"
 msgstr "Vaihda"
 
@@ -120,7 +130,7 @@ msgstr "Merkkilaite"
 msgid "Clear filter"
 msgstr "Tyhjennä suodatin"
 
-#: src/dialogs/editor.tsx:210 src/dialogs/keyboardShortcutsHelp.tsx:18
+#: src/dialogs/keyboardShortcutsHelp.tsx:18 src/dialogs/editor.tsx:211
 msgid "Close"
 msgstr "Sulje"
 
@@ -150,27 +160,27 @@ msgstr "Luo hakemisto"
 msgid "Create new directory"
 msgstr "Luo hakemisto"
 
-#: src/menu.tsx:137 src/menu.tsx:160 src/dialogs/delete.tsx:87
+#: src/menu.tsx:137 src/menu.tsx:160 src/dialogs/delete.tsx:90
 msgid "Delete"
 msgstr "Poista"
 
-#: src/dialogs/delete.tsx:43
+#: src/dialogs/delete.tsx:45
 msgid "Delete $0 items?"
 msgstr "Poistetaanko $0 kohdetta?"
 
-#: src/dialogs/delete.tsx:59
+#: src/dialogs/delete.tsx:62
 msgid "Delete $0?"
 msgstr "Poistetaanko $0?"
 
-#: src/dialogs/delete.tsx:56
+#: src/dialogs/delete.tsx:59
 msgid "Delete directory $0?"
 msgstr "Poistetaanko hakemisto $0?"
 
-#: src/dialogs/delete.tsx:48
+#: src/dialogs/delete.tsx:51
 msgid "Delete file $0?"
 msgstr "Poistetaanko tiedosto $0?"
 
-#: src/dialogs/delete.tsx:52
+#: src/dialogs/delete.tsx:55
 msgid "Delete link $0?"
 msgstr "Poistetaanko linkki $0?"
 
@@ -222,6 +232,13 @@ msgstr "Näytä luettelona"
 msgid "Download"
 msgstr "Lataus"
 
+#. Translators: This is the title of a modal dialog.  $0 represents a filename.
+#: src/dialogs/editor.tsx:169
+#, fuzzy
+#| msgid "Edit “$0”"
+msgid "Edit $0"
+msgstr "Muokkaa \"$0\":ta"
+
 #: src/files-breadcrumbs.tsx:307 src/dialogs/keyboardShortcutsHelp.tsx:71
 msgid "Edit path"
 msgstr "Muokkaa polkua"
@@ -229,11 +246,6 @@ msgstr "Muokkaa polkua"
 #: src/menu.tsx:96 src/menu.tsx:126 src/sidebar.tsx:157
 msgid "Edit permissions"
 msgstr "Muokkaa käyttöoikeuksia"
-
-#. Translators: This is the title of a modal dialog.  $0 represents a filename.
-#: src/dialogs/editor.tsx:168
-msgid "Edit “$0”"
-msgstr "Muokkaa \"$0\":ta"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:131
 msgid "Editing"
@@ -255,7 +267,7 @@ msgstr "Tiedosto on olemassa"
 msgid "Filename is the same as original name"
 msgstr "Tiedostonimi on sama kuin alkuperäinen nimi"
 
-#: org.cockpit-project.files.metainfo.xml:5
+#: org.cockpit_project.files.metainfo.xml:5
 msgid "Files"
 msgstr "Tiedostot"
 
@@ -271,23 +283,23 @@ msgstr "Suodata hakemisto"
 msgid "First modified"
 msgstr "Ensin muokattu"
 
-#: src/dialogs/delete.tsx:59
+#: src/dialogs/delete.tsx:62
 msgid "Force delete $0"
 msgstr "Pakota $0:n poisto"
 
-#: src/dialogs/delete.tsx:43
+#: src/dialogs/delete.tsx:45
 msgid "Force delete $0 items"
 msgstr "Pakota $0:n kohteiden poisto"
 
-#: src/dialogs/delete.tsx:56
+#: src/dialogs/delete.tsx:59
 msgid "Force delete directory $0?"
 msgstr "Pakottaako hakemiston $0 poisto?"
 
-#: src/dialogs/delete.tsx:48
+#: src/dialogs/delete.tsx:51
 msgid "Force delete file $0?"
 msgstr "Pakottaako tiedoston $0 poisto?"
 
-#: src/dialogs/delete.tsx:52
+#: src/dialogs/delete.tsx:55
 msgid "Force delete link $0?"
 msgstr "Pakottaako linkin $0 poisto?"
 
@@ -305,12 +317,12 @@ msgstr ""
 msgid "Go up a directory"
 msgstr "Luo hakemisto"
 
-#: src/files-card-body.tsx:601 src/dialogs/permissions.jsx:163
+#: src/files-card-body.tsx:601 src/dialogs/permissions.jsx:164
 #: src/sidebar.tsx:57
 msgid "Group"
 msgstr "Ryhmä"
 
-#: src/dialogs/permissions.jsx:193
+#: src/dialogs/permissions.jsx:194
 msgid "Group access"
 msgstr "Ryhmään pääsy"
 
@@ -326,7 +338,7 @@ msgstr "Piilota piilotetut kohteet"
 msgid "Home"
 msgstr "Koti"
 
-#: src/dialogs/editor.tsx:238
+#: src/dialogs/editor.tsx:239
 msgid "Ignore"
 msgstr "Ohita"
 
@@ -350,7 +362,7 @@ msgstr "Viimeksi muokattu"
 msgid "Least permissive"
 msgstr "Vähiten salliva"
 
-#: org.cockpit-project.files.metainfo.xml:6
+#: org.cockpit_project.files.metainfo.xml:6
 msgid "Manage your files"
 msgstr "Hallitse tiedostojasi"
 
@@ -422,20 +434,20 @@ msgstr "Muut käyttöoikeudet"
 msgid "Others"
 msgstr "Muut"
 
-#: src/dialogs/permissions.jsx:205
+#: src/dialogs/permissions.jsx:206
 msgid "Others access"
 msgstr "Muiden pääsy"
 
-#: src/dialogs/editor.tsx:194 src/dialogs/rename.tsx:114
+#: src/dialogs/editor.tsx:195 src/dialogs/rename.tsx:114
 msgid "Overwrite"
 msgstr "Korvaa"
 
 #: src/files-card-body.tsx:533 src/files-card-body.tsx:601
-#: src/dialogs/permissions.jsx:148 src/sidebar.tsx:52 src/header.tsx:99
+#: src/dialogs/permissions.jsx:149 src/sidebar.tsx:52 src/header.tsx:99
 msgid "Owner"
 msgstr "Omistaja"
 
-#: src/dialogs/permissions.jsx:181
+#: src/dialogs/permissions.jsx:182
 msgid "Owner access"
 msgstr "Omistajan pääsy"
 
@@ -451,7 +463,7 @@ msgstr "Omistaja laskeva"
 msgid "Owner permissions"
 msgstr "Omistajan käyttöoikeudet"
 
-#: src/dialogs/permissions.jsx:147
+#: src/dialogs/permissions.jsx:148
 msgid "Ownership"
 msgstr "Omistajuus"
 
@@ -485,7 +497,7 @@ msgstr "Luku ja kirjoitus"
 msgid "Read, write, and execute"
 msgstr "Luku, kirjoitus ja suoritus"
 
-#: src/dialogs/editor.tsx:171 src/common.ts:29
+#: src/common.ts:29 src/dialogs/editor.tsx:172
 msgid "Read-only"
 msgstr "Vain luku"
 
@@ -493,7 +505,7 @@ msgstr "Vain luku"
 msgid "Regular file"
 msgstr "Säännöllinen tiedosto"
 
-#: src/dialogs/editor.tsx:235
+#: src/dialogs/editor.tsx:236
 msgid "Reload"
 msgstr "Lataa uudelleen"
 
@@ -521,7 +533,7 @@ msgstr "Vaihda"
 msgid "Replace file $0?"
 msgstr "Vaihdetaanko tiedosto $0?"
 
-#: src/dialogs/editor.tsx:207
+#: src/dialogs/editor.tsx:208
 msgid "Save"
 msgstr "Tallenna"
 
@@ -561,15 +573,15 @@ msgstr "Tiedosto(t) ulosladattu onnistuneesti"
 msgid "Symbolic link"
 msgstr "Symbolinen linkki"
 
-#: src/dialogs/editor.tsx:57
+#: src/dialogs/editor.tsx:58
 msgid "The existing file changed unexpectedly"
 msgstr "Olemassa oleva tiedosto muuttui odottamatta"
 
-#: src/dialogs/editor.tsx:55 src/dialogs/editor.tsx:229
+#: src/dialogs/editor.tsx:56 src/dialogs/editor.tsx:230
 msgid "The file has been removed on disk"
 msgstr "Tiedosto on poistettu levyltä"
 
-#: src/dialogs/editor.tsx:230
+#: src/dialogs/editor.tsx:231
 msgid "The file has changed on disk"
 msgstr "Tiedosto on muuttunut levyllä"
 
@@ -602,8 +614,10 @@ msgstr "Uloslatausvirhe"
 msgid "Uploads"
 msgstr "Uloslataukset"
 
-#: src/dialogs/editor.tsx:168
-msgid "View “$0”"
+#: src/dialogs/editor.tsx:169
+#, fuzzy
+#| msgid "View “$0”"
+msgid "View $0"
 msgstr "Näytä \"$0\""
 
 #: src/common.ts:28
@@ -630,7 +644,5 @@ msgstr "tiedostot"
 msgid "filesystem"
 msgstr "tiedostojärjestelmä"
 
-#. Translators: $0 represents a filename
-#: src/dialogs/permissions.jsx:122
-msgid "“$0” permissions"
-msgstr "\"$0\" käyttöoikeudet"
+#~ msgid "A file system browser for Cockpit."
+#~ msgstr "Tiedostojärjestelmäselain Cockpitille."

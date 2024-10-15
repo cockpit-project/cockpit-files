@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-05 03:02+0000\n"
-"PO-Revision-Date: 2024-10-05 15:38+0000\n"
+"POT-Creation-Date: 2024-10-14 03:08+0000\n"
+"PO-Revision-Date: 2024-10-12 08:25+0000\n"
 "Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech <https://translate.fedoraproject.org/projects/cockpit-"
 "files/cockpit-files/cs/>\n"
@@ -44,6 +44,11 @@ msgstr[0] "$0 položka je skrytá"
 msgstr[1] "$0 položky jsou skryté"
 msgstr[2] "$0 položek je skryto"
 
+#. Translators: $0 represents a filename
+#: src/dialogs/permissions.jsx:123
+msgid "$0 permissions"
+msgstr "oprávnění $0"
+
 #: src/sidebar.tsx:114
 msgid "($0 hidden)"
 msgid_plural "($0 hidden)"
@@ -51,9 +56,15 @@ msgstr[0] "($0 skrytá)"
 msgstr[1] "($0 skryté)"
 msgstr[2] "($0 skrytých)"
 
-#: org.cockpit-project.files.metainfo.xml:8
-msgid "A file system browser for Cockpit."
-msgstr "Prohlížeč souborového systému pro Cockpit."
+#: org.cockpit_project.files.metainfo.xml:8
+msgid ""
+"A file system UI for Cockpit. You can browse directories, upload and "
+"download files, and change their properties. It also includes a simple file "
+"editor."
+msgstr ""
+"Uživatelské rozhraní pro souborový systém pro Cockpit. Je možné procházet "
+"složky, nahrávat a stahovat si soubory a měnit jejich vlastnosti. Také "
+"obsahuje jednoduchý textový editor."
 
 #: src/upload-button.tsx:97
 msgid ""
@@ -66,7 +77,7 @@ msgstr ""
 msgid "A-Z"
 msgstr "A-Z"
 
-#: src/dialogs/permissions.jsx:179
+#: src/dialogs/permissions.jsx:180
 msgid "Access"
 msgstr "Přístup"
 
@@ -91,9 +102,9 @@ msgstr "Blokové zařízení"
 msgid "Bookmarks"
 msgstr "Záložka"
 
-#: src/dialogs/mkdir.tsx:108 src/dialogs/editor.tsx:210
-#: src/dialogs/permissions.jsx:134 src/dialogs/rename.tsx:116
-#: src/dialogs/delete.tsx:88 src/upload-button.tsx:91
+#: src/dialogs/editor.tsx:211 src/dialogs/delete.tsx:91
+#: src/dialogs/permissions.jsx:135 src/dialogs/rename.tsx:116
+#: src/dialogs/mkdir.tsx:108 src/upload-button.tsx:91
 msgid "Cancel"
 msgstr "Storno"
 
@@ -109,7 +120,7 @@ msgstr "Zrušeno"
 msgid "Cancelled upload of $0"
 msgstr "Zrušeno nahrávání $0"
 
-#: src/dialogs/permissions.jsx:132
+#: src/dialogs/permissions.jsx:133
 msgid "Change"
 msgstr "Změna"
 
@@ -121,7 +132,7 @@ msgstr "Znakové zařízení"
 msgid "Clear filter"
 msgstr "Vyčistit filtr"
 
-#: src/dialogs/editor.tsx:210 src/dialogs/keyboardShortcutsHelp.tsx:18
+#: src/dialogs/keyboardShortcutsHelp.tsx:18 src/dialogs/editor.tsx:211
 msgid "Close"
 msgstr "Zavřít"
 
@@ -149,27 +160,27 @@ msgstr "Vytvořit složku"
 msgid "Create new directory"
 msgstr "Vytvořit novou složku"
 
-#: src/menu.tsx:137 src/menu.tsx:160 src/dialogs/delete.tsx:87
+#: src/menu.tsx:137 src/menu.tsx:160 src/dialogs/delete.tsx:90
 msgid "Delete"
 msgstr "Smazat"
 
-#: src/dialogs/delete.tsx:43
+#: src/dialogs/delete.tsx:45
 msgid "Delete $0 items?"
 msgstr "Smazat $0 položek?"
 
-#: src/dialogs/delete.tsx:59
+#: src/dialogs/delete.tsx:62
 msgid "Delete $0?"
 msgstr "Smazat $0?"
 
-#: src/dialogs/delete.tsx:56
+#: src/dialogs/delete.tsx:59
 msgid "Delete directory $0?"
 msgstr "Smazat složku $0?"
 
-#: src/dialogs/delete.tsx:48
+#: src/dialogs/delete.tsx:51
 msgid "Delete file $0?"
 msgstr "Smazat soubor $0?"
 
-#: src/dialogs/delete.tsx:52
+#: src/dialogs/delete.tsx:55
 msgid "Delete link $0?"
 msgstr "Smazat odkaz $0?"
 
@@ -221,6 +232,11 @@ msgstr "Zobrazit jako seznam"
 msgid "Download"
 msgstr "Stáhnout"
 
+#. Translators: This is the title of a modal dialog.  $0 represents a filename.
+#: src/dialogs/editor.tsx:169
+msgid "Edit $0"
+msgstr "Upravit $0"
+
 #: src/files-breadcrumbs.tsx:307 src/dialogs/keyboardShortcutsHelp.tsx:71
 msgid "Edit path"
 msgstr "Upravit popis umístění"
@@ -228,11 +244,6 @@ msgstr "Upravit popis umístění"
 #: src/menu.tsx:96 src/menu.tsx:126 src/sidebar.tsx:157
 msgid "Edit permissions"
 msgstr "Upravit oprávnění"
-
-#. Translators: This is the title of a modal dialog.  $0 represents a filename.
-#: src/dialogs/editor.tsx:168
-msgid "Edit “$0”"
-msgstr "Upravit „$0“"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:131
 msgid "Editing"
@@ -254,7 +265,7 @@ msgstr "Soubor existuje"
 msgid "Filename is the same as original name"
 msgstr "Tento název souboru je stejný jako ten předchozí"
 
-#: org.cockpit-project.files.metainfo.xml:5
+#: org.cockpit_project.files.metainfo.xml:5
 msgid "Files"
 msgstr "Soubory"
 
@@ -270,23 +281,23 @@ msgstr "Filtrovat složku"
 msgid "First modified"
 msgstr "Poprvé upraveno"
 
-#: src/dialogs/delete.tsx:59
+#: src/dialogs/delete.tsx:62
 msgid "Force delete $0"
 msgstr "Vynutit smazání $0"
 
-#: src/dialogs/delete.tsx:43
+#: src/dialogs/delete.tsx:45
 msgid "Force delete $0 items"
 msgstr "Vynutit smazání $0 položek"
 
-#: src/dialogs/delete.tsx:56
+#: src/dialogs/delete.tsx:59
 msgid "Force delete directory $0?"
 msgstr "Vynutit smazání složky $0?"
 
-#: src/dialogs/delete.tsx:48
+#: src/dialogs/delete.tsx:51
 msgid "Force delete file $0?"
 msgstr "Vynutit smazání souboru $0?"
 
-#: src/dialogs/delete.tsx:52
+#: src/dialogs/delete.tsx:55
 msgid "Force delete link $0?"
 msgstr "Vynutit smazání odkazu $0?"
 
@@ -302,12 +313,12 @@ msgstr "Přejít vpřed"
 msgid "Go up a directory"
 msgstr "Do nadřazené složky"
 
-#: src/files-card-body.tsx:601 src/dialogs/permissions.jsx:163
+#: src/files-card-body.tsx:601 src/dialogs/permissions.jsx:164
 #: src/sidebar.tsx:57
 msgid "Group"
 msgstr "Skupina"
 
-#: src/dialogs/permissions.jsx:193
+#: src/dialogs/permissions.jsx:194
 msgid "Group access"
 msgstr "Přístup skupiny"
 
@@ -323,7 +334,7 @@ msgstr "Skrýt skryté položky"
 msgid "Home"
 msgstr "Domů"
 
-#: src/dialogs/editor.tsx:238
+#: src/dialogs/editor.tsx:239
 msgid "Ignore"
 msgstr "Ignorovat"
 
@@ -347,7 +358,7 @@ msgstr "Naposledy změněno"
 msgid "Least permissive"
 msgstr "Nejméně přístupné"
 
-#: org.cockpit-project.files.metainfo.xml:6
+#: org.cockpit_project.files.metainfo.xml:6
 msgid "Manage your files"
 msgstr "Spravujte své soubory"
 
@@ -419,20 +430,20 @@ msgstr "Ostatní oprávnění"
 msgid "Others"
 msgstr "Ostatní"
 
-#: src/dialogs/permissions.jsx:205
+#: src/dialogs/permissions.jsx:206
 msgid "Others access"
 msgstr "Přístup ostatních"
 
-#: src/dialogs/editor.tsx:194 src/dialogs/rename.tsx:114
+#: src/dialogs/editor.tsx:195 src/dialogs/rename.tsx:114
 msgid "Overwrite"
 msgstr "Přepsat"
 
 #: src/files-card-body.tsx:533 src/files-card-body.tsx:601
-#: src/dialogs/permissions.jsx:148 src/sidebar.tsx:52 src/header.tsx:99
+#: src/dialogs/permissions.jsx:149 src/sidebar.tsx:52 src/header.tsx:99
 msgid "Owner"
 msgstr "Vlastník"
 
-#: src/dialogs/permissions.jsx:181
+#: src/dialogs/permissions.jsx:182
 msgid "Owner access"
 msgstr "Přístup vlastníka"
 
@@ -448,7 +459,7 @@ msgstr "Podle vlastníka sestupně"
 msgid "Owner permissions"
 msgstr "Oprávnění vlastníka"
 
-#: src/dialogs/permissions.jsx:147
+#: src/dialogs/permissions.jsx:148
 msgid "Ownership"
 msgstr "Vlastnictví"
 
@@ -480,7 +491,7 @@ msgstr "Číst a zapisovat"
 msgid "Read, write, and execute"
 msgstr "Číst, zapisovat a spouštět"
 
-#: src/dialogs/editor.tsx:171 src/common.ts:29
+#: src/common.ts:29 src/dialogs/editor.tsx:172
 msgid "Read-only"
 msgstr "Pouze pro čtení"
 
@@ -488,7 +499,7 @@ msgstr "Pouze pro čtení"
 msgid "Regular file"
 msgstr "Obyčejný soubor"
 
-#: src/dialogs/editor.tsx:235
+#: src/dialogs/editor.tsx:236
 msgid "Reload"
 msgstr "Načíst znovu"
 
@@ -516,7 +527,7 @@ msgstr "Nahradit"
 msgid "Replace file $0?"
 msgstr "Nahradit soubor $0?"
 
-#: src/dialogs/editor.tsx:207
+#: src/dialogs/editor.tsx:208
 msgid "Save"
 msgstr "Uložit"
 
@@ -556,15 +567,15 @@ msgstr "Soubory úspěšně nahrány"
 msgid "Symbolic link"
 msgstr "Symbolický odkaz"
 
-#: src/dialogs/editor.tsx:57
+#: src/dialogs/editor.tsx:58
 msgid "The existing file changed unexpectedly"
 msgstr "Existující soubor byl mezitím neočekávaně změněn"
 
-#: src/dialogs/editor.tsx:55 src/dialogs/editor.tsx:229
+#: src/dialogs/editor.tsx:56 src/dialogs/editor.tsx:230
 msgid "The file has been removed on disk"
 msgstr "Soubor byl odebrán z úložiště"
 
-#: src/dialogs/editor.tsx:230
+#: src/dialogs/editor.tsx:231
 msgid "The file has changed on disk"
 msgstr "Soubor byl na úložišti změněn"
 
@@ -596,9 +607,9 @@ msgstr "Chyba nahrávání"
 msgid "Uploads"
 msgstr "Nahrání"
 
-#: src/dialogs/editor.tsx:168
-msgid "View “$0”"
-msgstr "Zobrazit „$0“"
+#: src/dialogs/editor.tsx:169
+msgid "View $0"
+msgstr "Zobrazit $0"
 
 #: src/common.ts:28
 msgid "Write and execute"
@@ -624,7 +635,5 @@ msgstr "soubory"
 msgid "filesystem"
 msgstr "souborový systém"
 
-#. Translators: $0 represents a filename
-#: src/dialogs/permissions.jsx:122
-msgid "“$0” permissions"
-msgstr "oprávnění „$0“"
+#~ msgid "A file system browser for Cockpit."
+#~ msgstr "Prohlížeč souborového systému pro Cockpit."

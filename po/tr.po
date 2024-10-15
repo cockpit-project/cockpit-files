@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-05 03:02+0000\n"
-"PO-Revision-Date: 2024-10-05 15:38+0000\n"
+"POT-Creation-Date: 2024-10-14 03:08+0000\n"
+"PO-Revision-Date: 2024-10-12 08:25+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
 "Language-Team: Turkish <https://translate.fedoraproject.org/projects/cockpit-"
 "files/cockpit-files/tr/>\n"
@@ -42,15 +42,26 @@ msgid_plural "$0 items are hidden"
 msgstr[0] "$0 gizli öge"
 msgstr[1] "$0 gizli öge"
 
+#. Translators: $0 represents a filename
+#: src/dialogs/permissions.jsx:123
+msgid "$0 permissions"
+msgstr "$0 izinleri"
+
 #: src/sidebar.tsx:114
 msgid "($0 hidden)"
 msgid_plural "($0 hidden)"
 msgstr[0] "($0 gizli)"
 msgstr[1] "($0 gizli)"
 
-#: org.cockpit-project.files.metainfo.xml:8
-msgid "A file system browser for Cockpit."
-msgstr "Cockpit için bir dosya sistemi gezgini."
+#: org.cockpit_project.files.metainfo.xml:8
+msgid ""
+"A file system UI for Cockpit. You can browse directories, upload and "
+"download files, and change their properties. It also includes a simple file "
+"editor."
+msgstr ""
+"Cockpit için bir dosya sistemi kullanıcı arayüzü. Dizinlere göz atabilir, "
+"dosya yükleyebilir ve indirebilir, özelliklerini değiştirebilirsiniz. Ayrıca "
+"basit bir dosya düzenleyici içerir."
 
 #: src/upload-button.tsx:97
 msgid ""
@@ -64,7 +75,7 @@ msgstr ""
 msgid "A-Z"
 msgstr "A-Z"
 
-#: src/dialogs/permissions.jsx:179
+#: src/dialogs/permissions.jsx:180
 msgid "Access"
 msgstr "Erişim"
 
@@ -89,9 +100,9 @@ msgstr "Blok aygıtı"
 msgid "Bookmarks"
 msgstr "Yer imleri"
 
-#: src/dialogs/mkdir.tsx:108 src/dialogs/editor.tsx:210
-#: src/dialogs/permissions.jsx:134 src/dialogs/rename.tsx:116
-#: src/dialogs/delete.tsx:88 src/upload-button.tsx:91
+#: src/dialogs/editor.tsx:211 src/dialogs/delete.tsx:91
+#: src/dialogs/permissions.jsx:135 src/dialogs/rename.tsx:116
+#: src/dialogs/mkdir.tsx:108 src/upload-button.tsx:91
 msgid "Cancel"
 msgstr "İptal"
 
@@ -107,7 +118,7 @@ msgstr "İptal edildi"
 msgid "Cancelled upload of $0"
 msgstr "$0 karşıya yüklenmesi iptal edildi"
 
-#: src/dialogs/permissions.jsx:132
+#: src/dialogs/permissions.jsx:133
 msgid "Change"
 msgstr "Değiştir"
 
@@ -119,7 +130,7 @@ msgstr "Karakter aygıtı"
 msgid "Clear filter"
 msgstr "Filtreyi temizle"
 
-#: src/dialogs/editor.tsx:210 src/dialogs/keyboardShortcutsHelp.tsx:18
+#: src/dialogs/keyboardShortcutsHelp.tsx:18 src/dialogs/editor.tsx:211
 msgid "Close"
 msgstr "Kapat"
 
@@ -147,27 +158,27 @@ msgstr "Dizin oluştur"
 msgid "Create new directory"
 msgstr "Yeni dizin oluştur"
 
-#: src/menu.tsx:137 src/menu.tsx:160 src/dialogs/delete.tsx:87
+#: src/menu.tsx:137 src/menu.tsx:160 src/dialogs/delete.tsx:90
 msgid "Delete"
 msgstr "Sil"
 
-#: src/dialogs/delete.tsx:43
+#: src/dialogs/delete.tsx:45
 msgid "Delete $0 items?"
 msgstr "$0 öge silinsin mi?"
 
-#: src/dialogs/delete.tsx:59
+#: src/dialogs/delete.tsx:62
 msgid "Delete $0?"
 msgstr "$0 silinsin mi?"
 
-#: src/dialogs/delete.tsx:56
+#: src/dialogs/delete.tsx:59
 msgid "Delete directory $0?"
 msgstr "$0 dizini silinsin mi?"
 
-#: src/dialogs/delete.tsx:48
+#: src/dialogs/delete.tsx:51
 msgid "Delete file $0?"
 msgstr "$0 dosyası silinsin mi?"
 
-#: src/dialogs/delete.tsx:52
+#: src/dialogs/delete.tsx:55
 msgid "Delete link $0?"
 msgstr "$0 bağlantısı silinsin mi?"
 
@@ -219,6 +230,11 @@ msgstr "Liste olarak görüntüle"
 msgid "Download"
 msgstr "İndir"
 
+#. Translators: This is the title of a modal dialog.  $0 represents a filename.
+#: src/dialogs/editor.tsx:169
+msgid "Edit $0"
+msgstr "$0 dosyasını düzenle"
+
 #: src/files-breadcrumbs.tsx:307 src/dialogs/keyboardShortcutsHelp.tsx:71
 msgid "Edit path"
 msgstr "Yolu düzenle"
@@ -226,11 +242,6 @@ msgstr "Yolu düzenle"
 #: src/menu.tsx:96 src/menu.tsx:126 src/sidebar.tsx:157
 msgid "Edit permissions"
 msgstr "İzinleri düzenle"
-
-#. Translators: This is the title of a modal dialog.  $0 represents a filename.
-#: src/dialogs/editor.tsx:168
-msgid "Edit “$0”"
-msgstr "“$0” dosyasını düzenle"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:131
 msgid "Editing"
@@ -252,7 +263,7 @@ msgstr "Dosya var"
 msgid "Filename is the same as original name"
 msgstr "Dosya adı ilk adıyla aynı"
 
-#: org.cockpit-project.files.metainfo.xml:5
+#: org.cockpit_project.files.metainfo.xml:5
 msgid "Files"
 msgstr "Dosyalar"
 
@@ -268,23 +279,23 @@ msgstr "Dizini filtrele"
 msgid "First modified"
 msgstr "İlk değiştirilme"
 
-#: src/dialogs/delete.tsx:59
+#: src/dialogs/delete.tsx:62
 msgid "Force delete $0"
 msgstr "$0 ögesini silmeye zorla"
 
-#: src/dialogs/delete.tsx:43
+#: src/dialogs/delete.tsx:45
 msgid "Force delete $0 items"
 msgstr "$0 ögeyi silmeye zorla"
 
-#: src/dialogs/delete.tsx:56
+#: src/dialogs/delete.tsx:59
 msgid "Force delete directory $0?"
 msgstr "$0 dizini silmeye zorlansın mı?"
 
-#: src/dialogs/delete.tsx:48
+#: src/dialogs/delete.tsx:51
 msgid "Force delete file $0?"
 msgstr "$0 dosyası silmeye zorlansın mı?"
 
-#: src/dialogs/delete.tsx:52
+#: src/dialogs/delete.tsx:55
 msgid "Force delete link $0?"
 msgstr "$0 bağlantısı silmeye zorlansın mı?"
 
@@ -300,12 +311,12 @@ msgstr "İleri git"
 msgid "Go up a directory"
 msgstr "Bir dizin yukarı git"
 
-#: src/files-card-body.tsx:601 src/dialogs/permissions.jsx:163
+#: src/files-card-body.tsx:601 src/dialogs/permissions.jsx:164
 #: src/sidebar.tsx:57
 msgid "Group"
 msgstr "Grup"
 
-#: src/dialogs/permissions.jsx:193
+#: src/dialogs/permissions.jsx:194
 msgid "Group access"
 msgstr "Grup erişimi"
 
@@ -321,7 +332,7 @@ msgstr "Gizli ögeleri gizle"
 msgid "Home"
 msgstr "Ev dizini"
 
-#: src/dialogs/editor.tsx:238
+#: src/dialogs/editor.tsx:239
 msgid "Ignore"
 msgstr "Yok say"
 
@@ -345,7 +356,7 @@ msgstr "Son değiştirilme"
 msgid "Least permissive"
 msgstr "En az izin veren"
 
-#: org.cockpit-project.files.metainfo.xml:6
+#: org.cockpit_project.files.metainfo.xml:6
 msgid "Manage your files"
 msgstr "Dosyalarınızı yönetin"
 
@@ -417,20 +428,20 @@ msgstr "Diğer izinler"
 msgid "Others"
 msgstr "Diğerleri"
 
-#: src/dialogs/permissions.jsx:205
+#: src/dialogs/permissions.jsx:206
 msgid "Others access"
 msgstr "Diğerlerinin erişimi"
 
-#: src/dialogs/editor.tsx:194 src/dialogs/rename.tsx:114
+#: src/dialogs/editor.tsx:195 src/dialogs/rename.tsx:114
 msgid "Overwrite"
 msgstr "Üzerine yaz"
 
 #: src/files-card-body.tsx:533 src/files-card-body.tsx:601
-#: src/dialogs/permissions.jsx:148 src/sidebar.tsx:52 src/header.tsx:99
+#: src/dialogs/permissions.jsx:149 src/sidebar.tsx:52 src/header.tsx:99
 msgid "Owner"
 msgstr "Sahibi"
 
-#: src/dialogs/permissions.jsx:181
+#: src/dialogs/permissions.jsx:182
 msgid "Owner access"
 msgstr "Sahibinin erişimi"
 
@@ -446,7 +457,7 @@ msgstr "Sahibine göre azalan"
 msgid "Owner permissions"
 msgstr "Sahibinin izinleri"
 
-#: src/dialogs/permissions.jsx:147
+#: src/dialogs/permissions.jsx:148
 msgid "Ownership"
 msgstr "Sahiplik"
 
@@ -478,7 +489,7 @@ msgstr "Oku ve yaz"
 msgid "Read, write, and execute"
 msgstr "Oku, yaz ve çalıştır"
 
-#: src/dialogs/editor.tsx:171 src/common.ts:29
+#: src/common.ts:29 src/dialogs/editor.tsx:172
 msgid "Read-only"
 msgstr "Yalnızca oku"
 
@@ -486,7 +497,7 @@ msgstr "Yalnızca oku"
 msgid "Regular file"
 msgstr "Normal dosya"
 
-#: src/dialogs/editor.tsx:235
+#: src/dialogs/editor.tsx:236
 msgid "Reload"
 msgstr "Yeniden yükle"
 
@@ -514,7 +525,7 @@ msgstr "Değiştir"
 msgid "Replace file $0?"
 msgstr "$0 dosyası değiştirilsin mi?"
 
-#: src/dialogs/editor.tsx:207
+#: src/dialogs/editor.tsx:208
 msgid "Save"
 msgstr "Kaydet"
 
@@ -554,15 +565,15 @@ msgstr "Dosya(lar) başarıyla karşıya yüklendi"
 msgid "Symbolic link"
 msgstr "Sembolik bağlantı"
 
-#: src/dialogs/editor.tsx:57
+#: src/dialogs/editor.tsx:58
 msgid "The existing file changed unexpectedly"
 msgstr "Var olan dosya beklenmedik şekilde değişti"
 
-#: src/dialogs/editor.tsx:55 src/dialogs/editor.tsx:229
+#: src/dialogs/editor.tsx:56 src/dialogs/editor.tsx:230
 msgid "The file has been removed on disk"
 msgstr "Dosya diskten kaldırıldı"
 
-#: src/dialogs/editor.tsx:230
+#: src/dialogs/editor.tsx:231
 msgid "The file has changed on disk"
 msgstr "Dosya disk üzerinde değişti"
 
@@ -594,9 +605,9 @@ msgstr "Karşıya yükleme hatası"
 msgid "Uploads"
 msgstr "Yüklenenler"
 
-#: src/dialogs/editor.tsx:168
-msgid "View “$0”"
-msgstr "“$0” dosyasını görüntüle"
+#: src/dialogs/editor.tsx:169
+msgid "View $0"
+msgstr "$0 dosyasını görüntüle"
 
 #: src/common.ts:28
 msgid "Write and execute"
@@ -622,10 +633,8 @@ msgstr "dosyalar"
 msgid "filesystem"
 msgstr "dosya sistemi"
 
-#. Translators: $0 represents a filename
-#: src/dialogs/permissions.jsx:122
-msgid "“$0” permissions"
-msgstr "“$0” izinleri"
+#~ msgid "A file system browser for Cockpit."
+#~ msgstr "Cockpit için bir dosya sistemi gezgini."
 
 #~ msgid "File or directory already exists"
 #~ msgstr "Dosya veya dizin zaten var"
