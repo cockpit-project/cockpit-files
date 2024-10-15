@@ -214,6 +214,7 @@ export const Application = () => {
                             />
                             <CurrentDirDetail
                               files={files}
+                              showHidden={showHidden}
                             />
                         </Stack>}
                     </PageSection>
