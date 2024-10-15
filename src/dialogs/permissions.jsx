@@ -19,7 +19,9 @@
 
 import React, { useState } from 'react';
 
+import { TextInput } from '@patternfly/react-core';
 import { Button } from '@patternfly/react-core/dist/esm/components/Button';
+import { Checkbox } from '@patternfly/react-core/dist/esm/components/Checkbox';
 import { Form, FormGroup, FormSection } from '@patternfly/react-core/dist/esm/components/Form';
 import { FormSelect, FormSelectOption } from '@patternfly/react-core/dist/esm/components/FormSelect';
 import { Modal, ModalVariant } from '@patternfly/react-core/dist/esm/components/Modal';
@@ -30,13 +32,34 @@ import { InlineNotification } from 'cockpit-components-inline-notification';
 import { basename } from "cockpit-path";
 import { useInit } from 'hooks';
 import { etc_group_syntax, etc_passwd_syntax } from 'pam_user_parser';
+import * as python from "python.js";
 import { superuser } from 'superuser';
 import { fmt_to_fragments } from 'utils.tsx';
 
 import { useFilesContext } from '../app.tsx';
-import { map_permissions, inode_types } from '../common.ts';
+import { inode_types } from '../common.ts';
+
+import read_selinux_context from './read-selinux.py';
 
 const _ = cockpit.gettext;
+
+const PERMISSION_OPTIONS = {
+    0: "no-access",
+    1: "no-access",
+    2: "write-only",
+    3: "write-only",
+    4: "read-only",
+    5: "read-only",
+    6: "read-write",
+    7: "read-write",
+};
+
+const OPTIONS_PERMISSIONS = {
+    "no-access": 0,
+    "write-only": 2,
+    "read-only": 4,
+    "read-write": 6,
+};
 
 const EditPermissionsModal = ({ dialogResult, selected, path }) => {
     const { cwdInfo } = useFilesContext();
@@ -53,6 +76,10 @@ const EditPermissionsModal = ({ dialogResult, selected, path }) => {
     const [errorMessage, setErrorMessage] = useState(undefined);
     const [accounts, setAccounts] = useState(null);
     const [groups, setGroups] = useState(null);
+    const [isExecutable, setIsExecutable] = useState((mode & 0b001001001) === 0b001001001);
+    const [selinuxContext, setSELinuxContext] = useState(null);
+
+    const executable_file_types = ["code-file", "file"];
 
     useInit(async () => {
         try {
@@ -67,6 +94,15 @@ const EditPermissionsModal = ({ dialogResult, selected, path }) => {
             setGroups(etc_group_syntax.parse(group));
         } catch (exc) {
             console.error("Cannot obtain users from getent group", exc);
+        }
+
+        try {
+            const full_path = selected?.isCwd ? path : path + selected.name;
+            const selinux_context = await python.spawn(read_selinux_context, full_path);
+            setSELinuxContext(selinux_context);
+        } catch (exc) {
+            if (exc.exit_status !== 2)
+                console.error("Cannot obtain SELinux context", exc);
         }
     });
 
@@ -99,16 +135,57 @@ const EditPermissionsModal = ({ dialogResult, selected, path }) => {
         }
     };
 
-    function permissions_options() {
-        return [
-            ...map_permissions((value, label) => (
-                <FormSelectOption
-                  key={value}
-                  value={value}
-                  label={label}
-                />
-            ))
+    function permissions_options(mode) {
+        const options = [
+            <FormSelectOption
+              key="read-write"
+              value="read-write"
+              label={_("Read and write")}
+            />,
+            <FormSelectOption
+              key="read-only"
+              value="read-only"
+              label={_("Read-only")}
+            />,
+            <FormSelectOption
+              key="no-access"
+              value="no-access"
+              label={_("No access")}
+            />
         ];
+
+        // Show write-only when such a file exists, but never offer this as a default option.
+        if (mode === 2 || mode === 3) {
+            options.push(
+                <FormSelectOption
+                  key="write-only"
+                  value="write-only"
+                  label={_("Write-only")}
+                />
+            );
+        }
+
+        return options;
+    }
+
+    function setPermissions(mask, shift, option) {
+        let val = OPTIONS_PERMISSIONS[option];
+        if ((selected.type === 'reg' && isExecutable) || (selected.type === 'dir' && option !== "no-access")) {
+            val += 1;
+        }
+
+        setMode((mode & mask) | (val << shift));
+    }
+
+    function setExecutableBits(shouldBeExecutable) {
+        setIsExecutable(shouldBeExecutable);
+
+        // Strip / add executable bits
+        if (shouldBeExecutable) {
+            setMode(mode | 0b001001001);
+        } else {
+            setMode(mode & ~0b001001001);
+        }
     }
 
     function sortByName(a, b) {
@@ -183,11 +260,11 @@ const EditPermissionsModal = ({ dialogResult, selected, path }) => {
                           fieldId="edit-permissions-owner-access"
                         >
                             <FormSelect
-                              value={(mode >> 6) & 7}
-                              onChange={(_, val) => { setMode((mode & 0o077) | (val << 6)) }}
+                              value={PERMISSION_OPTIONS[(mode >> 6) & 7]}
+                              onChange={(_, val) => { setPermissions(0o077, 6, val) }}
                               id="edit-permissions-owner-access"
                             >
-                                {permissions_options()}
+                                {permissions_options((mode >> 6) & 7)}
                             </FormSelect>
                         </FormGroup>
                         <FormGroup
@@ -195,11 +272,11 @@ const EditPermissionsModal = ({ dialogResult, selected, path }) => {
                           fieldId="edit-permissions-group-access"
                         >
                             <FormSelect
-                              value={(mode >> 3) & 7}
-                              onChange={(_, val) => { setMode((mode & 0o707) | (val << 3)) }}
+                              value={PERMISSION_OPTIONS[(mode >> 3) & 7]}
+                              onChange={(_, val) => { setPermissions(0o707, 3, val) }}
                               id="edit-permissions-group-access"
                             >
-                                {permissions_options()}
+                                {permissions_options((mode >> 3) & 7)}
                             </FormSelect>
                         </FormGroup>
                         <FormGroup
@@ -207,14 +284,30 @@ const EditPermissionsModal = ({ dialogResult, selected, path }) => {
                           fieldId="edit-permissions-other-access"
                         >
                             <FormSelect
-                              value={mode & 7}
-                              onChange={(_, val) => { setMode((mode & 0o770) | val) }}
+                              value={PERMISSION_OPTIONS[(mode) & 7]}
+                              onChange={(_, val) => { setPermissions(0o770, 0, val) }}
                               id="edit-permissions-other-access"
                             >
-                                {permissions_options()}
+                                {permissions_options(mode & 7)}
                             </FormSelect>
                         </FormGroup>
+                        {selinuxContext !== null &&
+                        <FormGroup
+                          label={_("Security context")}
+                        >
+                            <TextInput
+                              isDisabled
+                              value={selinuxContext}
+                            />
+                        </FormGroup>}
                     </FormSection>
+                    {selected.type === "reg" && executable_file_types.includes(selected?.category?.class || "file") &&
+                        <Checkbox
+                          id="is-executable"
+                          label={_("Set executable as program")}
+                          isChecked={isExecutable}
+                          onChange={() => setExecutableBits(!isExecutable)}
+                        />}
                 </Form>
             </Stack>
         </Modal>
