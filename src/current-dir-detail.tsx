@@ -1,6 +1,11 @@
 import React from "react";
 
-import { Text, TextVariants } from "@patternfly/react-core/dist/esm/components/Text";
+import { Button } from "@patternfly/react-core/dist/esm/components/Button";
+import {
+    DescriptionList, DescriptionListDescription, DescriptionListGroup, DescriptionListTerm
+} from "@patternfly/react-core/dist/esm/components/DescriptionList";
+import { Popover } from "@patternfly/react-core/dist/esm/components/Popover";
+import { Text } from "@patternfly/react-core/dist/esm/components/Text";
 import { Tooltip } from "@patternfly/react-core/dist/esm/components/Tooltip";
 
 import cockpit from "cockpit";
@@ -8,7 +13,7 @@ import * as timeformat from "timeformat";
 
 import { useFilesContext } from './app.tsx';
 import type { FolderFileInfo } from "./app.tsx";
-import { permissionShortStr } from "./common.ts";
+import { get_permissions, permissionShortStr } from "./common.ts";
 
 const _ = cockpit.gettext;
 
@@ -45,6 +50,46 @@ export const CurrentDirDetail = ({
         : cockpit.format(_("Directory contains $0 directories, $1 files, $2 hidden"),
                          dirCnt, restCnt, hiddenCnt);
 
+    let cwdPermsPopover = null;
+    if (cwdInfo.mode !== undefined) {
+        const mode = cwdInfo.mode;
+        const popoverBody = [_("Owner"), _("Group"), _("Others")].map((permGroup, i) => {
+            return (
+                <DescriptionListGroup key={permGroup}>
+                    <DescriptionListTerm>
+                        {permGroup}
+                    </DescriptionListTerm>
+                    <DescriptionListDescription>
+                        {get_permissions(mode >> (6 - 3 * i)).toLowerCase()}
+                    </DescriptionListDescription>
+                </DescriptionListGroup>
+            );
+        });
+
+        cwdPermsPopover = (
+            <Popover
+              id="cwd-info-popover"
+              hasAutoWidth
+              bodyContent={
+                  <DescriptionList
+                    isHorizontal
+                    isCompact
+                  >
+                      {popoverBody}
+                  </DescriptionList>
+              }
+            >
+                <Button
+                  variant="link"
+                  isInline
+                  component="pre"
+                >
+                    {permissionShortStr(cwdInfo.mode)}
+                </Button>
+            </Popover>
+        );
+    }
+
     return (
         <div className="cwd-info">
             {cwdInfoText}
@@ -54,13 +99,7 @@ export const CurrentDirDetail = ({
                     {timeformat.distanceToNow(cwdInfo.mtime * 1000)}
                 </Text>
             </Tooltip>}
-            {cwdInfo.mode !== undefined &&
-                <Text
-                  className="cwd-permissions"
-                  component={TextVariants.pre}
-                >
-                    {permissionShortStr(cwdInfo.mode)}
-                </Text>}
+            {cwdPermsPopover}
         </div>
     );
 };
