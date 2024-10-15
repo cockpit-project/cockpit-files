@@ -14,10 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-05 03:02+0000\n"
-"PO-Revision-Date: 2024-10-05 15:38+0000\n"
-"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
-"memory@weblate.org>\n"
+"POT-Creation-Date: 2024-10-14 03:08+0000\n"
+"PO-Revision-Date: 2024-10-14 16:38+0000\n"
+"Last-Translator: Luna Jernberg <bittin@reimu.nl>\n"
 "Language-Team: Swedish <https://translate.fedoraproject.org/projects/cockpit-"
 "files/cockpit-files/sv/>\n"
 "Language: sv\n"
@@ -43,15 +42,23 @@ msgid_plural "$0 items are hidden"
 msgstr[0] "($0 objekt är dolt)"
 msgstr[1] "($0 objekt är dolda)"
 
+#. Translators: $0 represents a filename
+#: src/dialogs/permissions.jsx:123
+msgid "$0 permissions"
+msgstr "$0 behörigheter"
+
 #: src/sidebar.tsx:114
 msgid "($0 hidden)"
 msgid_plural "($0 hidden)"
 msgstr[0] "($0 dold)"
 msgstr[1] "($0 dolda)"
 
-#: org.cockpit-project.files.metainfo.xml:8
-msgid "A file system browser for Cockpit."
-msgstr "En filsystembläddrare för Cockpit."
+#: org.cockpit_project.files.metainfo.xml:8
+msgid ""
+"A file system UI for Cockpit. You can browse directories, upload and "
+"download files, and change their properties. It also includes a simple file "
+"editor."
+msgstr ""
 
 #: src/upload-button.tsx:97
 msgid ""
@@ -65,7 +72,7 @@ msgstr ""
 msgid "A-Z"
 msgstr "A-Z"
 
-#: src/dialogs/permissions.jsx:179
+#: src/dialogs/permissions.jsx:180
 msgid "Access"
 msgstr "Åtkomst"
 
@@ -90,9 +97,9 @@ msgstr "Blockenhet"
 msgid "Bookmarks"
 msgstr "Bokmärken"
 
-#: src/dialogs/mkdir.tsx:108 src/dialogs/editor.tsx:210
-#: src/dialogs/permissions.jsx:134 src/dialogs/rename.tsx:116
-#: src/dialogs/delete.tsx:88 src/upload-button.tsx:91
+#: src/dialogs/editor.tsx:211 src/dialogs/delete.tsx:91
+#: src/dialogs/permissions.jsx:135 src/dialogs/rename.tsx:116
+#: src/dialogs/mkdir.tsx:108 src/upload-button.tsx:91
 msgid "Cancel"
 msgstr "Avbryt"
 
@@ -108,7 +115,7 @@ msgstr "Avbruten"
 msgid "Cancelled upload of $0"
 msgstr "Avbruten uppladdning av $0"
 
-#: src/dialogs/permissions.jsx:132
+#: src/dialogs/permissions.jsx:133
 msgid "Change"
 msgstr "Ändra"
 
@@ -120,7 +127,7 @@ msgstr "Teckenenhet"
 msgid "Clear filter"
 msgstr "Rensa filter"
 
-#: src/dialogs/editor.tsx:210 src/dialogs/keyboardShortcutsHelp.tsx:18
+#: src/dialogs/keyboardShortcutsHelp.tsx:18 src/dialogs/editor.tsx:211
 msgid "Close"
 msgstr "Stäng"
 
@@ -148,27 +155,27 @@ msgstr "Skapa katalog"
 msgid "Create new directory"
 msgstr "Skapa ny katalog"
 
-#: src/menu.tsx:137 src/menu.tsx:160 src/dialogs/delete.tsx:87
+#: src/menu.tsx:137 src/menu.tsx:160 src/dialogs/delete.tsx:90
 msgid "Delete"
 msgstr "Ta bort"
 
-#: src/dialogs/delete.tsx:43
+#: src/dialogs/delete.tsx:45
 msgid "Delete $0 items?"
 msgstr "Radera $0 objekt?"
 
-#: src/dialogs/delete.tsx:59
+#: src/dialogs/delete.tsx:62
 msgid "Delete $0?"
 msgstr "Radera $0?"
 
-#: src/dialogs/delete.tsx:56
+#: src/dialogs/delete.tsx:59
 msgid "Delete directory $0?"
 msgstr "Radera katalog $0?"
 
-#: src/dialogs/delete.tsx:48
+#: src/dialogs/delete.tsx:51
 msgid "Delete file $0?"
 msgstr "Radera fil $0?"
 
-#: src/dialogs/delete.tsx:52
+#: src/dialogs/delete.tsx:55
 msgid "Delete link $0?"
 msgstr "Radera länk $0?"
 
@@ -220,6 +227,11 @@ msgstr "Visa som en lista"
 msgid "Download"
 msgstr "Hämta"
 
+#. Translators: This is the title of a modal dialog.  $0 represents a filename.
+#: src/dialogs/editor.tsx:169
+msgid "Edit $0"
+msgstr "Redigera $0"
+
 #: src/files-breadcrumbs.tsx:307 src/dialogs/keyboardShortcutsHelp.tsx:71
 msgid "Edit path"
 msgstr "Redigera sökväg"
@@ -227,11 +239,6 @@ msgstr "Redigera sökväg"
 #: src/menu.tsx:96 src/menu.tsx:126 src/sidebar.tsx:157
 msgid "Edit permissions"
 msgstr "Redigera behörigheter"
-
-#. Translators: This is the title of a modal dialog.  $0 represents a filename.
-#: src/dialogs/editor.tsx:168
-msgid "Edit “$0”"
-msgstr "Redigera ”$0”"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:131
 msgid "Editing"
@@ -253,7 +260,7 @@ msgstr "Fil existerar"
 msgid "Filename is the same as original name"
 msgstr "Filnamn är samma som originalnamn"
 
-#: org.cockpit-project.files.metainfo.xml:5
+#: org.cockpit_project.files.metainfo.xml:5
 msgid "Files"
 msgstr "Filer"
 
@@ -269,23 +276,23 @@ msgstr "Filtrera katalog"
 msgid "First modified"
 msgstr "Först modifierad"
 
-#: src/dialogs/delete.tsx:59
+#: src/dialogs/delete.tsx:62
 msgid "Force delete $0"
 msgstr "Tvinga radering $0"
 
-#: src/dialogs/delete.tsx:43
+#: src/dialogs/delete.tsx:45
 msgid "Force delete $0 items"
 msgstr "Tvinga radering $0 objekt"
 
-#: src/dialogs/delete.tsx:56
+#: src/dialogs/delete.tsx:59
 msgid "Force delete directory $0?"
 msgstr "Tvinga radering av katalog $0?"
 
-#: src/dialogs/delete.tsx:48
+#: src/dialogs/delete.tsx:51
 msgid "Force delete file $0?"
 msgstr "Tvinga radering av fil $0?"
 
-#: src/dialogs/delete.tsx:52
+#: src/dialogs/delete.tsx:55
 msgid "Force delete link $0?"
 msgstr "Tvinga radering av länk $0?"
 
@@ -301,12 +308,12 @@ msgstr "Gå framåt"
 msgid "Go up a directory"
 msgstr "Gå upp en katalog"
 
-#: src/files-card-body.tsx:601 src/dialogs/permissions.jsx:163
+#: src/files-card-body.tsx:601 src/dialogs/permissions.jsx:164
 #: src/sidebar.tsx:57
 msgid "Group"
 msgstr "Grupp"
 
-#: src/dialogs/permissions.jsx:193
+#: src/dialogs/permissions.jsx:194
 msgid "Group access"
 msgstr "Gruppåtkomst"
 
@@ -322,7 +329,7 @@ msgstr "Dölj dolda objekt"
 msgid "Home"
 msgstr "Hem"
 
-#: src/dialogs/editor.tsx:238
+#: src/dialogs/editor.tsx:239
 msgid "Ignore"
 msgstr "Ignorera"
 
@@ -346,7 +353,7 @@ msgstr "Senast modifierad"
 msgid "Least permissive"
 msgstr "Minst tillåtande"
 
-#: org.cockpit-project.files.metainfo.xml:6
+#: org.cockpit_project.files.metainfo.xml:6
 msgid "Manage your files"
 msgstr "Hantera dina filer"
 
@@ -418,20 +425,20 @@ msgstr "Andra behörigheter"
 msgid "Others"
 msgstr "Andra"
 
-#: src/dialogs/permissions.jsx:205
+#: src/dialogs/permissions.jsx:206
 msgid "Others access"
 msgstr "Andra tillgång"
 
-#: src/dialogs/editor.tsx:194 src/dialogs/rename.tsx:114
+#: src/dialogs/editor.tsx:195 src/dialogs/rename.tsx:114
 msgid "Overwrite"
 msgstr "Skriv över"
 
 #: src/files-card-body.tsx:533 src/files-card-body.tsx:601
-#: src/dialogs/permissions.jsx:148 src/sidebar.tsx:52 src/header.tsx:99
+#: src/dialogs/permissions.jsx:149 src/sidebar.tsx:52 src/header.tsx:99
 msgid "Owner"
 msgstr "Ägare"
 
-#: src/dialogs/permissions.jsx:181
+#: src/dialogs/permissions.jsx:182
 msgid "Owner access"
 msgstr "Ägare tillgång"
 
@@ -447,7 +454,7 @@ msgstr "Ägare minskande"
 msgid "Owner permissions"
 msgstr "Ägare behörigheter"
 
-#: src/dialogs/permissions.jsx:147
+#: src/dialogs/permissions.jsx:148
 msgid "Ownership"
 msgstr "Ägarskap"
 
@@ -479,7 +486,7 @@ msgstr "Läs och skriv"
 msgid "Read, write, and execute"
 msgstr "Läs, skriv, och exekvera"
 
-#: src/dialogs/editor.tsx:171 src/common.ts:29
+#: src/common.ts:29 src/dialogs/editor.tsx:172
 msgid "Read-only"
 msgstr "Läs-endast"
 
@@ -487,7 +494,7 @@ msgstr "Läs-endast"
 msgid "Regular file"
 msgstr "Vanlig fil"
 
-#: src/dialogs/editor.tsx:235
+#: src/dialogs/editor.tsx:236
 msgid "Reload"
 msgstr "Ladda om"
 
@@ -515,7 +522,7 @@ msgstr "Ersätt"
 msgid "Replace file $0?"
 msgstr "Ersätt fil $0?"
 
-#: src/dialogs/editor.tsx:207
+#: src/dialogs/editor.tsx:208
 msgid "Save"
 msgstr "Spara"
 
@@ -555,15 +562,15 @@ msgstr "Fil(er) som har laddats upp framgångsrikt"
 msgid "Symbolic link"
 msgstr "Symbolisk länk"
 
-#: src/dialogs/editor.tsx:57
+#: src/dialogs/editor.tsx:58
 msgid "The existing file changed unexpectedly"
 msgstr "Den befintliga filen ändrades oväntat"
 
-#: src/dialogs/editor.tsx:55 src/dialogs/editor.tsx:229
+#: src/dialogs/editor.tsx:56 src/dialogs/editor.tsx:230
 msgid "The file has been removed on disk"
 msgstr "Filen har tagits bort på disken"
 
-#: src/dialogs/editor.tsx:230
+#: src/dialogs/editor.tsx:231
 msgid "The file has changed on disk"
 msgstr "Filen har ändrats på disken"
 
@@ -595,9 +602,9 @@ msgstr "Uppladdningsfel"
 msgid "Uploads"
 msgstr "Uppladdningar"
 
-#: src/dialogs/editor.tsx:168
-msgid "View “$0”"
-msgstr "Visa ”$0”"
+#: src/dialogs/editor.tsx:169
+msgid "View $0"
+msgstr "Visa $0"
 
 #: src/common.ts:28
 msgid "Write and execute"
@@ -623,10 +630,8 @@ msgstr "filer"
 msgid "filesystem"
 msgstr "filsystem"
 
-#. Translators: $0 represents a filename
-#: src/dialogs/permissions.jsx:122
-msgid "“$0” permissions"
-msgstr "“$0“ behörigheter"
+#~ msgid "A file system browser for Cockpit."
+#~ msgstr "En filsystembläddrare för Cockpit."
 
 #~ msgid "File or directory already exists"
 #~ msgstr "Fil eller katalog finns redan"

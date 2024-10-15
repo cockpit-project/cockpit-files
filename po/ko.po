@@ -14,10 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-05 03:02+0000\n"
-"PO-Revision-Date: 2024-10-05 15:38+0000\n"
-"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
-"memory@weblate.org>\n"
+"POT-Creation-Date: 2024-10-14 03:08+0000\n"
+"PO-Revision-Date: 2024-10-13 09:38+0000\n"
+"Last-Translator: 김인수 <simmon@nplob.com>\n"
 "Language-Team: Korean <https://translate.fedoraproject.org/projects/cockpit-"
 "files/cockpit-files/ko/>\n"
 "Language: ko\n"
@@ -41,14 +40,25 @@ msgid "$0 item is hidden"
 msgid_plural "$0 items are hidden"
 msgstr[0] "$0 항목이 숨겨졌습니다"
 
+#. Translators: $0 represents a filename
+#: src/dialogs/permissions.jsx:123
+msgid "$0 permissions"
+msgstr "$0 권한"
+
 #: src/sidebar.tsx:114
 msgid "($0 hidden)"
 msgid_plural "($0 hidden)"
 msgstr[0] "($0 숨김)"
 
-#: org.cockpit-project.files.metainfo.xml:8
-msgid "A file system browser for Cockpit."
-msgstr "Cockpit를 위한 파일 시스템 탐색기."
+#: org.cockpit_project.files.metainfo.xml:8
+msgid ""
+"A file system UI for Cockpit. You can browse directories, upload and "
+"download files, and change their properties. It also includes a simple file "
+"editor."
+msgstr ""
+"Cockpit을 위한 파일 시스템 UI. 당신은 디렉토리를 검색하고, 파일을 올리고 내려"
+"받을 수 있으며, 이들 특성을 변경 할 수 있습니다. 이는 단순 파일 편집기도 포함"
+"합니다."
 
 #: src/upload-button.tsx:97
 msgid ""
@@ -62,7 +72,7 @@ msgstr ""
 msgid "A-Z"
 msgstr "A-Z"
 
-#: src/dialogs/permissions.jsx:179
+#: src/dialogs/permissions.jsx:180
 msgid "Access"
 msgstr "접근"
 
@@ -87,9 +97,9 @@ msgstr "블록 장치"
 msgid "Bookmarks"
 msgstr "즐겨찾기"
 
-#: src/dialogs/mkdir.tsx:108 src/dialogs/editor.tsx:210
-#: src/dialogs/permissions.jsx:134 src/dialogs/rename.tsx:116
-#: src/dialogs/delete.tsx:88 src/upload-button.tsx:91
+#: src/dialogs/editor.tsx:211 src/dialogs/delete.tsx:91
+#: src/dialogs/permissions.jsx:135 src/dialogs/rename.tsx:116
+#: src/dialogs/mkdir.tsx:108 src/upload-button.tsx:91
 msgid "Cancel"
 msgstr "취소"
 
@@ -105,7 +115,7 @@ msgstr "취소됨"
 msgid "Cancelled upload of $0"
 msgstr "$0 올려주기 취소됨"
 
-#: src/dialogs/permissions.jsx:132
+#: src/dialogs/permissions.jsx:133
 msgid "Change"
 msgstr "변경"
 
@@ -117,7 +127,7 @@ msgstr "문자 장치"
 msgid "Clear filter"
 msgstr "필터 지우기"
 
-#: src/dialogs/editor.tsx:210 src/dialogs/keyboardShortcutsHelp.tsx:18
+#: src/dialogs/keyboardShortcutsHelp.tsx:18 src/dialogs/editor.tsx:211
 msgid "Close"
 msgstr "종료"
 
@@ -145,27 +155,27 @@ msgstr "디렉토리 생성"
 msgid "Create new directory"
 msgstr "신규 디렉토리 생성"
 
-#: src/menu.tsx:137 src/menu.tsx:160 src/dialogs/delete.tsx:87
+#: src/menu.tsx:137 src/menu.tsx:160 src/dialogs/delete.tsx:90
 msgid "Delete"
 msgstr "삭제"
 
-#: src/dialogs/delete.tsx:43
+#: src/dialogs/delete.tsx:45
 msgid "Delete $0 items?"
 msgstr "$0 항목을 삭제할까요?"
 
-#: src/dialogs/delete.tsx:59
+#: src/dialogs/delete.tsx:62
 msgid "Delete $0?"
 msgstr "$0 삭제?"
 
-#: src/dialogs/delete.tsx:56
+#: src/dialogs/delete.tsx:59
 msgid "Delete directory $0?"
 msgstr "디렉토리 $0를 삭제할까요?"
 
-#: src/dialogs/delete.tsx:48
+#: src/dialogs/delete.tsx:51
 msgid "Delete file $0?"
 msgstr "파일 $0를 삭제할까요?"
 
-#: src/dialogs/delete.tsx:52
+#: src/dialogs/delete.tsx:55
 msgid "Delete link $0?"
 msgstr "링크 $0를 삭제할까요?"
 
@@ -217,6 +227,11 @@ msgstr "목록으로 표시"
 msgid "Download"
 msgstr "내려받기"
 
+#. Translators: This is the title of a modal dialog.  $0 represents a filename.
+#: src/dialogs/editor.tsx:169
+msgid "Edit $0"
+msgstr "$0 편집"
+
 #: src/files-breadcrumbs.tsx:307 src/dialogs/keyboardShortcutsHelp.tsx:71
 msgid "Edit path"
 msgstr "경로 편집"
@@ -224,11 +239,6 @@ msgstr "경로 편집"
 #: src/menu.tsx:96 src/menu.tsx:126 src/sidebar.tsx:157
 msgid "Edit permissions"
 msgstr "권한을 편집합니다"
-
-#. Translators: This is the title of a modal dialog.  $0 represents a filename.
-#: src/dialogs/editor.tsx:168
-msgid "Edit “$0”"
-msgstr "“$0” 편집"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:131
 msgid "Editing"
@@ -250,7 +260,7 @@ msgstr "파일이 존재합니다"
 msgid "Filename is the same as original name"
 msgstr "파일이름이 원래의 이름과 동일합니다"
 
-#: org.cockpit-project.files.metainfo.xml:5
+#: org.cockpit_project.files.metainfo.xml:5
 msgid "Files"
 msgstr "파일"
 
@@ -266,23 +276,23 @@ msgstr "필터 디렉토리"
 msgid "First modified"
 msgstr "처음 수정됨"
 
-#: src/dialogs/delete.tsx:59
+#: src/dialogs/delete.tsx:62
 msgid "Force delete $0"
 msgstr "$0를 삭제를 강제합니다"
 
-#: src/dialogs/delete.tsx:43
+#: src/dialogs/delete.tsx:45
 msgid "Force delete $0 items"
 msgstr "$0 항목 삭제를 강제합니다"
 
-#: src/dialogs/delete.tsx:56
+#: src/dialogs/delete.tsx:59
 msgid "Force delete directory $0?"
 msgstr "디렉토리 $0 삭제를 강제할까요?"
 
-#: src/dialogs/delete.tsx:48
+#: src/dialogs/delete.tsx:51
 msgid "Force delete file $0?"
 msgstr "파일 $0 삭제를 강제할까요?"
 
-#: src/dialogs/delete.tsx:52
+#: src/dialogs/delete.tsx:55
 msgid "Force delete link $0?"
 msgstr "링크 $0 삭제를 강제할까요?"
 
@@ -298,12 +308,12 @@ msgstr "앞으로 가기"
 msgid "Go up a directory"
 msgstr "상위 디렉토리로 이동"
 
-#: src/files-card-body.tsx:601 src/dialogs/permissions.jsx:163
+#: src/files-card-body.tsx:601 src/dialogs/permissions.jsx:164
 #: src/sidebar.tsx:57
 msgid "Group"
 msgstr "그룹"
 
-#: src/dialogs/permissions.jsx:193
+#: src/dialogs/permissions.jsx:194
 msgid "Group access"
 msgstr "그룹 접근"
 
@@ -319,7 +329,7 @@ msgstr "숨겨진 항목 감추기"
 msgid "Home"
 msgstr "홈"
 
-#: src/dialogs/editor.tsx:238
+#: src/dialogs/editor.tsx:239
 msgid "Ignore"
 msgstr "무시"
 
@@ -343,7 +353,7 @@ msgstr "마지막으로 수정됨"
 msgid "Least permissive"
 msgstr "최소 허용"
 
-#: org.cockpit-project.files.metainfo.xml:6
+#: org.cockpit_project.files.metainfo.xml:6
 msgid "Manage your files"
 msgstr "자신의 파일을 관리합니다"
 
@@ -415,20 +425,20 @@ msgstr "기타 권한"
 msgid "Others"
 msgstr "기타"
 
-#: src/dialogs/permissions.jsx:205
+#: src/dialogs/permissions.jsx:206
 msgid "Others access"
 msgstr "기타 접근"
 
-#: src/dialogs/editor.tsx:194 src/dialogs/rename.tsx:114
+#: src/dialogs/editor.tsx:195 src/dialogs/rename.tsx:114
 msgid "Overwrite"
 msgstr "덮어쓰기"
 
 #: src/files-card-body.tsx:533 src/files-card-body.tsx:601
-#: src/dialogs/permissions.jsx:148 src/sidebar.tsx:52 src/header.tsx:99
+#: src/dialogs/permissions.jsx:149 src/sidebar.tsx:52 src/header.tsx:99
 msgid "Owner"
 msgstr "소유자"
 
-#: src/dialogs/permissions.jsx:181
+#: src/dialogs/permissions.jsx:182
 msgid "Owner access"
 msgstr "소유자 접근"
 
@@ -444,7 +454,7 @@ msgstr "소유자 내림차순"
 msgid "Owner permissions"
 msgstr "소유자 권한"
 
-#: src/dialogs/permissions.jsx:147
+#: src/dialogs/permissions.jsx:148
 msgid "Ownership"
 msgstr "소유권"
 
@@ -476,7 +486,7 @@ msgstr "일기 및 쓰기"
 msgid "Read, write, and execute"
 msgstr "읽기, 쓰기 및 실행"
 
-#: src/dialogs/editor.tsx:171 src/common.ts:29
+#: src/common.ts:29 src/dialogs/editor.tsx:172
 msgid "Read-only"
 msgstr "읽기-전용"
 
@@ -484,7 +494,7 @@ msgstr "읽기-전용"
 msgid "Regular file"
 msgstr "일반 파일"
 
-#: src/dialogs/editor.tsx:235
+#: src/dialogs/editor.tsx:236
 msgid "Reload"
 msgstr "재적재"
 
@@ -512,7 +522,7 @@ msgstr "교체"
 msgid "Replace file $0?"
 msgstr "파일 $0를 교체합니까?"
 
-#: src/dialogs/editor.tsx:207
+#: src/dialogs/editor.tsx:208
 msgid "Save"
 msgstr "저장"
 
@@ -552,15 +562,15 @@ msgstr "성공적으로 파일이 올려짐"
 msgid "Symbolic link"
 msgstr "심볼릭 링크"
 
-#: src/dialogs/editor.tsx:57
+#: src/dialogs/editor.tsx:58
 msgid "The existing file changed unexpectedly"
 msgstr "기존 파일이 예상치 못하게 변경되었습니다"
 
-#: src/dialogs/editor.tsx:55 src/dialogs/editor.tsx:229
+#: src/dialogs/editor.tsx:56 src/dialogs/editor.tsx:230
 msgid "The file has been removed on disk"
 msgstr "파일이 디스크에서 제거되었습니다"
 
-#: src/dialogs/editor.tsx:230
+#: src/dialogs/editor.tsx:231
 msgid "The file has changed on disk"
 msgstr "파일이 디스크에서 변경되었습니다"
 
@@ -592,9 +602,9 @@ msgstr "올려주기 오류"
 msgid "Uploads"
 msgstr "올려주기"
 
-#: src/dialogs/editor.tsx:168
-msgid "View “$0”"
-msgstr "“$0” 보기"
+#: src/dialogs/editor.tsx:169
+msgid "View $0"
+msgstr "$0 보기"
 
 #: src/common.ts:28
 msgid "Write and execute"
@@ -620,10 +630,8 @@ msgstr "파일"
 msgid "filesystem"
 msgstr "파일시스템"
 
-#. Translators: $0 represents a filename
-#: src/dialogs/permissions.jsx:122
-msgid "“$0” permissions"
-msgstr "“$0” 권한"
+#~ msgid "A file system browser for Cockpit."
+#~ msgstr "Cockpit를 위한 파일 시스템 탐색기."
 
 #~ msgid "File or directory already exists"
 #~ msgstr "파일 또는 디렉토리가 이미 존재합니다"

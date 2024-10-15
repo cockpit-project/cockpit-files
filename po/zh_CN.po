@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-05 03:02+0000\n"
+"POT-Creation-Date: 2024-10-14 03:08+0000\n"
 "PO-Revision-Date: 2024-08-15 13:14+0000\n"
 "Last-Translator: Watson Xu <xuhuashan@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <https://translate.fedoraproject.org/"
@@ -40,14 +40,24 @@ msgid "$0 item is hidden"
 msgid_plural "$0 items are hidden"
 msgstr[0] "$0 个隐藏项目"
 
+#. Translators: $0 represents a filename
+#: src/dialogs/permissions.jsx:123
+#, fuzzy
+#| msgid "“$0” permissions"
+msgid "$0 permissions"
+msgstr "“$0” 的权限"
+
 #: src/sidebar.tsx:114
 msgid "($0 hidden)"
 msgid_plural "($0 hidden)"
 msgstr[0] "已隐藏 $0 个"
 
-#: org.cockpit-project.files.metainfo.xml:8
-msgid "A file system browser for Cockpit."
-msgstr "一个适用于 Cockpit 的文件系统浏览器。"
+#: org.cockpit_project.files.metainfo.xml:8
+msgid ""
+"A file system UI for Cockpit. You can browse directories, upload and "
+"download files, and change their properties. It also includes a simple file "
+"editor."
+msgstr ""
 
 #: src/upload-button.tsx:97
 msgid ""
@@ -59,7 +69,7 @@ msgstr "已存在和 $0 同名的文件，替换该文件将会覆盖其内容�
 msgid "A-Z"
 msgstr "由 A 到 Z"
 
-#: src/dialogs/permissions.jsx:179
+#: src/dialogs/permissions.jsx:180
 msgid "Access"
 msgstr "访问权限"
 
@@ -84,9 +94,9 @@ msgstr "块设备"
 msgid "Bookmarks"
 msgstr "书签"
 
-#: src/dialogs/mkdir.tsx:108 src/dialogs/editor.tsx:210
-#: src/dialogs/permissions.jsx:134 src/dialogs/rename.tsx:116
-#: src/dialogs/delete.tsx:88 src/upload-button.tsx:91
+#: src/dialogs/editor.tsx:211 src/dialogs/delete.tsx:91
+#: src/dialogs/permissions.jsx:135 src/dialogs/rename.tsx:116
+#: src/dialogs/mkdir.tsx:108 src/upload-button.tsx:91
 msgid "Cancel"
 msgstr "取消"
 
@@ -102,7 +112,7 @@ msgstr "已取消"
 msgid "Cancelled upload of $0"
 msgstr "已取消上传 $0"
 
-#: src/dialogs/permissions.jsx:132
+#: src/dialogs/permissions.jsx:133
 msgid "Change"
 msgstr "更改"
 
@@ -114,7 +124,7 @@ msgstr "字符设备"
 msgid "Clear filter"
 msgstr "清除筛选器"
 
-#: src/dialogs/editor.tsx:210 src/dialogs/keyboardShortcutsHelp.tsx:18
+#: src/dialogs/keyboardShortcutsHelp.tsx:18 src/dialogs/editor.tsx:211
 msgid "Close"
 msgstr ""
 
@@ -144,27 +154,27 @@ msgstr "创建目录"
 msgid "Create new directory"
 msgstr "创建目录"
 
-#: src/menu.tsx:137 src/menu.tsx:160 src/dialogs/delete.tsx:87
+#: src/menu.tsx:137 src/menu.tsx:160 src/dialogs/delete.tsx:90
 msgid "Delete"
 msgstr "删除"
 
-#: src/dialogs/delete.tsx:43
+#: src/dialogs/delete.tsx:45
 msgid "Delete $0 items?"
 msgstr "删除 $0 个项目？"
 
-#: src/dialogs/delete.tsx:59
+#: src/dialogs/delete.tsx:62
 msgid "Delete $0?"
 msgstr "删除 $0 ？"
 
-#: src/dialogs/delete.tsx:56
+#: src/dialogs/delete.tsx:59
 msgid "Delete directory $0?"
 msgstr "删除目录 $0 ？"
 
-#: src/dialogs/delete.tsx:48
+#: src/dialogs/delete.tsx:51
 msgid "Delete file $0?"
 msgstr "删除文件 $0 ？"
 
-#: src/dialogs/delete.tsx:52
+#: src/dialogs/delete.tsx:55
 msgid "Delete link $0?"
 msgstr "删除链接 $0 ？"
 
@@ -216,6 +226,13 @@ msgstr "以列表显示"
 msgid "Download"
 msgstr "下载"
 
+#. Translators: This is the title of a modal dialog.  $0 represents a filename.
+#: src/dialogs/editor.tsx:169
+#, fuzzy
+#| msgid "Edit path"
+msgid "Edit $0"
+msgstr "编辑路径"
+
 #: src/files-breadcrumbs.tsx:307 src/dialogs/keyboardShortcutsHelp.tsx:71
 msgid "Edit path"
 msgstr "编辑路径"
@@ -223,11 +240,6 @@ msgstr "编辑路径"
 #: src/menu.tsx:96 src/menu.tsx:126 src/sidebar.tsx:157
 msgid "Edit permissions"
 msgstr "编辑权限"
-
-#. Translators: This is the title of a modal dialog.  $0 represents a filename.
-#: src/dialogs/editor.tsx:168
-msgid "Edit “$0”"
-msgstr ""
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:131
 msgid "Editing"
@@ -249,7 +261,7 @@ msgstr "文件已存在"
 msgid "Filename is the same as original name"
 msgstr "文件名与原文件名同名"
 
-#: org.cockpit-project.files.metainfo.xml:5
+#: org.cockpit_project.files.metainfo.xml:5
 msgid "Files"
 msgstr "文件"
 
@@ -265,23 +277,23 @@ msgstr "筛选目录"
 msgid "First modified"
 msgstr "最先修改"
 
-#: src/dialogs/delete.tsx:59
+#: src/dialogs/delete.tsx:62
 msgid "Force delete $0"
 msgstr "强制删除 $0"
 
-#: src/dialogs/delete.tsx:43
+#: src/dialogs/delete.tsx:45
 msgid "Force delete $0 items"
 msgstr "强制删除 $0 个项目"
 
-#: src/dialogs/delete.tsx:56
+#: src/dialogs/delete.tsx:59
 msgid "Force delete directory $0?"
 msgstr "强制删除目录 $0 ？"
 
-#: src/dialogs/delete.tsx:48
+#: src/dialogs/delete.tsx:51
 msgid "Force delete file $0?"
 msgstr "强制删除文件 $0 ？"
 
-#: src/dialogs/delete.tsx:52
+#: src/dialogs/delete.tsx:55
 msgid "Force delete link $0?"
 msgstr "强制删除链接 $0 ?"
 
@@ -299,12 +311,12 @@ msgstr ""
 msgid "Go up a directory"
 msgstr "创建目录"
 
-#: src/files-card-body.tsx:601 src/dialogs/permissions.jsx:163
+#: src/files-card-body.tsx:601 src/dialogs/permissions.jsx:164
 #: src/sidebar.tsx:57
 msgid "Group"
 msgstr "用户组"
 
-#: src/dialogs/permissions.jsx:193
+#: src/dialogs/permissions.jsx:194
 msgid "Group access"
 msgstr "用户组访问权限"
 
@@ -320,7 +332,7 @@ msgstr "不显示隐藏项目"
 msgid "Home"
 msgstr "家目录"
 
-#: src/dialogs/editor.tsx:238
+#: src/dialogs/editor.tsx:239
 msgid "Ignore"
 msgstr ""
 
@@ -344,7 +356,7 @@ msgstr "最后修改"
 msgid "Least permissive"
 msgstr "最小权限"
 
-#: org.cockpit-project.files.metainfo.xml:6
+#: org.cockpit_project.files.metainfo.xml:6
 msgid "Manage your files"
 msgstr "管理您的文件"
 
@@ -416,20 +428,20 @@ msgstr "其它权限"
 msgid "Others"
 msgstr "其它"
 
-#: src/dialogs/permissions.jsx:205
+#: src/dialogs/permissions.jsx:206
 msgid "Others access"
 msgstr "其它人访问权限"
 
-#: src/dialogs/editor.tsx:194 src/dialogs/rename.tsx:114
+#: src/dialogs/editor.tsx:195 src/dialogs/rename.tsx:114
 msgid "Overwrite"
 msgstr "覆盖"
 
 #: src/files-card-body.tsx:533 src/files-card-body.tsx:601
-#: src/dialogs/permissions.jsx:148 src/sidebar.tsx:52 src/header.tsx:99
+#: src/dialogs/permissions.jsx:149 src/sidebar.tsx:52 src/header.tsx:99
 msgid "Owner"
 msgstr "所有者"
 
-#: src/dialogs/permissions.jsx:181
+#: src/dialogs/permissions.jsx:182
 msgid "Owner access"
 msgstr "所有者访问权限"
 
@@ -449,7 +461,7 @@ msgstr "所有者权限"
 msgid "Owner permissions"
 msgstr "所有者权限"
 
-#: src/dialogs/permissions.jsx:147
+#: src/dialogs/permissions.jsx:148
 msgid "Ownership"
 msgstr "所有权"
 
@@ -483,7 +495,7 @@ msgstr "读取与写入"
 msgid "Read, write, and execute"
 msgstr "读取，写入与执行"
 
-#: src/dialogs/editor.tsx:171 src/common.ts:29
+#: src/common.ts:29 src/dialogs/editor.tsx:172
 msgid "Read-only"
 msgstr "只能读取"
 
@@ -491,7 +503,7 @@ msgstr "只能读取"
 msgid "Regular file"
 msgstr "常规文件"
 
-#: src/dialogs/editor.tsx:235
+#: src/dialogs/editor.tsx:236
 #, fuzzy
 #| msgid "Upload"
 msgid "Reload"
@@ -521,7 +533,7 @@ msgstr "替换"
 msgid "Replace file $0?"
 msgstr "替换文件 $0 ？"
 
-#: src/dialogs/editor.tsx:207
+#: src/dialogs/editor.tsx:208
 msgid "Save"
 msgstr ""
 
@@ -561,15 +573,15 @@ msgstr "已成功上传文件"
 msgid "Symbolic link"
 msgstr "符号链接"
 
-#: src/dialogs/editor.tsx:57
+#: src/dialogs/editor.tsx:58
 msgid "The existing file changed unexpectedly"
 msgstr ""
 
-#: src/dialogs/editor.tsx:55 src/dialogs/editor.tsx:229
+#: src/dialogs/editor.tsx:56 src/dialogs/editor.tsx:230
 msgid "The file has been removed on disk"
 msgstr ""
 
-#: src/dialogs/editor.tsx:230
+#: src/dialogs/editor.tsx:231
 msgid "The file has changed on disk"
 msgstr ""
 
@@ -601,8 +613,8 @@ msgstr "上传失败"
 msgid "Uploads"
 msgstr "上传项目"
 
-#: src/dialogs/editor.tsx:168
-msgid "View “$0”"
+#: src/dialogs/editor.tsx:169
+msgid "View $0"
 msgstr ""
 
 #: src/common.ts:28
@@ -629,7 +641,5 @@ msgstr "文件"
 msgid "filesystem"
 msgstr "文件系统"
 
-#. Translators: $0 represents a filename
-#: src/dialogs/permissions.jsx:122
-msgid "“$0” permissions"
-msgstr "“$0” 的权限"
+#~ msgid "A file system browser for Cockpit."
+#~ msgstr "一个适用于 Cockpit 的文件系统浏览器。"
