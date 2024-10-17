@@ -267,8 +267,8 @@ class TestFiles(testlib.MachineCase):
                        f"Directory contains {dir_cnt} directories, {files_cnt} files, {hidden_cnt} hidden")
 
         # Enabling "show hidden files" changes the counters in cwd-info
-        dir_cnt = m.execute("ls -lA /home/admin | grep '^d' | wc -l").strip()
-        files_cnt = m.execute("ls -lA /home/admin | grep '^-' | wc -l").strip()
+        dir_cnt = int(m.execute("ls -lA /home/admin | grep '^d' | wc -l").strip())
+        files_cnt = int(m.execute("ls -lA /home/admin | grep '^-' | wc -l").strip())
         b.select_PF("#sort-menu-toggle", "Show hidden items")
         b.wait_in_text(".cwd-info",
                        f"Directory contains {dir_cnt} directories, {files_cnt} files")
@@ -1458,11 +1458,9 @@ class TestFiles(testlib.MachineCase):
         m.execute('touch /home/admin/testdir/testfile && chmod a+r /home/admin/testdir')
         b.mouse("[data-item='testdir']", "dblclick")
         self.assert_last_breadcrumb("testdir")
-        b.click("[data-item='testfile']")
-        b.wait_in_text("#sidebar-card-header", "testfile")
-        b.wait_text("#description-list-owner dd", "unknown")
-        b.wait_text("#description-list-group dd", "unknown")
-        b.wait_text("#description-list-last-modified dd", "unknown")
+        b.click("button[aria-label='Display as a list']")
+        b.wait_in_text("[data-item='testfile'] .item-owner", "")
+        b.wait_in_text("[data-item='testfile'] .item-date", "")
 
     def testMultiSelect(self) -> None:
         b = self.browser
