@@ -2263,7 +2263,7 @@ class TestFiles(testlib.MachineCase):
         def validate_content(file: str, content: str) -> None:
             open_editor(file)
             b.wait_val(".file-editor-modal textarea", content)
-            b.click(".pf-v5-c-button.pf-m-link")
+            b.click(".file-editor-modal button.pf-m-link")
             b.wait_not_present(".file-editor-modal")
 
             # validate on disk
@@ -2301,7 +2301,7 @@ class TestFiles(testlib.MachineCase):
         b.assert_pixels(".file-editor-modal", "editor-modal-changed")
         b.wait_visible(".pf-v5-c-modal-box__footer .pf-m-primary:not(:disabled)")
 
-        b.click(".pf-v5-c-button.pf-m-link")
+        b.click(".file-editor-modal button.pf-m-link")
         b.wait_not_present(".file-editor-modal")
         self.assertEqual(m.execute("cat /home/admin/test.txt"), "test\n")
 
@@ -2312,11 +2312,11 @@ class TestFiles(testlib.MachineCase):
         b.set_input_text(".file-editor-modal textarea", "foobar", append=True, value_check=False)
         b.wait_val(".file-editor-modal textarea", "test\nfoobar")
         b.wait_visible(".file-editor-modal.is-modified")
-        b.click(".pf-v5-c-button.pf-m-primary")
+        b.click(".file-editor-modal button.pf-m-primary")
         # Saving resets modified state so should not be shown
         b.wait_not_present(".file-editor-modal.is-modified")
 
-        b.click(".pf-v5-c-button.pf-m-link")
+        b.click(".file-editor-modal button.pf-m-link")
         b.wait_not_present(".file-editor-modal")
 
         validate_content("test.txt", "test\nfoobar\n")
@@ -2343,7 +2343,7 @@ class TestFiles(testlib.MachineCase):
 
         b.click(".pf-v5-c-modal-box__footer .pf-m-warning")
         b.wait_not_present(".pf-v5-c-alert__title")
-        b.click(".pf-v5-c-button.pf-m-link")
+        b.click(".file-editor-modal button.pf-m-link")
         b.wait_not_present(".file-editor-modal")
 
         validate_content("test.txt", "testing\nroll\n")
