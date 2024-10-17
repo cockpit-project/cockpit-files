@@ -62,7 +62,7 @@ class TestFiles(testlib.MachineCase):
     def create_directory(self, filename: str, owner: str | None = None, *, expect_success: bool = True) -> None:
         b = self.browser
         b.click("#dropdown-menu")
-        b.click("#create-item")
+        b.click("#create-folder")
         b.set_input_text("#create-directory-input", f"{filename}")
         if owner:
             b.select_from_dropdown("#create-directory-owner", owner)
@@ -861,7 +861,7 @@ class TestFiles(testlib.MachineCase):
 
         # validation
         b.click("#dropdown-menu")
-        b.click("#create-item")
+        b.click("#create-folder")
         b.assert_pixels(".pf-v5-c-modal-box", "create-modal")
         b.set_input_text("#create-directory-input", "test")
         b.set_input_text("#create-directory-input", "")
