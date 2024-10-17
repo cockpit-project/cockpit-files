@@ -28,7 +28,7 @@ import type { Dialogs } from 'dialogs';
 
 import type { FolderFileInfo } from "./app";
 import { confirm_delete } from './dialogs/delete.tsx';
-import { edit_file, MAX_EDITOR_FILE_SIZE } from './dialogs/editor.tsx';
+import { show_create_file_dialog, edit_file, MAX_EDITOR_FILE_SIZE } from './dialogs/editor.tsx';
 import { show_create_directory_dialog } from './dialogs/mkdir.tsx';
 import { edit_permissions } from './dialogs/permissions.jsx';
 import { show_rename_dialog } from './dialogs/rename.tsx';
@@ -89,6 +89,11 @@ export function get_menu_items(
                 id: "create-folder",
                 title: _("Create directory"),
                 onClick: () => show_create_directory_dialog(dialogs, path)
+            },
+            {
+                id: "create-file",
+                title: _("Create file"),
+                onClick: () => show_create_file_dialog(dialogs, path, addAlert)
             },
             { type: "divider" },
             {

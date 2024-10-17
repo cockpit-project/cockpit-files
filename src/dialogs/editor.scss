@@ -22,6 +22,11 @@
       margin-inline-start: 0.5cap;
     }
   }
+
+  // Create mode full size
+  .pf-v5-c-form.pf-m-horizontal {
+    block-size: 100%;
+  }
 }
 
 .file-editor {

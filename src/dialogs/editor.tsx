@@ -19,20 +19,30 @@
 
 import React from 'react';
 
-import { Alert, AlertActionLink } from '@patternfly/react-core/dist/esm/components/Alert';
+import { Alert, AlertActionLink, AlertVariant } from '@patternfly/react-core/dist/esm/components/Alert';
 import { Button } from '@patternfly/react-core/dist/esm/components/Button';
+import { Form, FormGroup } from "@patternfly/react-core/dist/esm/components/Form";
+import { FormSelect, FormSelectOption } from "@patternfly/react-core/dist/esm/components/FormSelect";
 import { Label } from '@patternfly/react-core/dist/esm/components/Label';
 import { Modal, ModalVariant } from '@patternfly/react-core/dist/esm/components/Modal';
 import { TextArea } from '@patternfly/react-core/dist/esm/components/TextArea';
+import { TextInput } from "@patternfly/react-core/dist/esm/components/TextInput";
 import { Stack } from '@patternfly/react-core/dist/esm/layouts/Stack';
 import { debounce } from "throttle-debounce";
 
 import cockpit from 'cockpit';
 import { EventEmitter } from 'cockpit/event.ts';
+import { FormHelper } from 'cockpit-components-form-helper';
 import type { Dialogs, DialogResult } from 'dialogs';
+import { superuser } from 'superuser';
 import { fmt_to_fragments } from 'utils';
 
 import "./editor.scss";
+import { useFilesContext } from '../app';
+import { checkFilename } from '../common';
+import { get_owner_candidates } from '../ownership';
+
+import { useInit } from 'hooks';
 
 const _ = cockpit.gettext;
 
@@ -124,22 +134,38 @@ class Editor extends EventEmitter<{ updated(state: EditorState): void }> {
     }
 }
 
-export const EditFileModal = ({ dialogResult, path } : {
+export const EditFileModal = ({ dialogResult, path, create = false } : {
     dialogResult: DialogResult<void>,
     path: string
+    create?: boolean
 }) => {
     const [last_tag, setLastTag] = React.useState<string | null>(null);
     const [state, setState] = React.useState(new EditorState());
     const [editor, setEditor] = React.useState<Editor | null>(null);
+    const [user, setUser] = React.useState<cockpit.UserInfo| undefined>();
+    const [filename, setFilename] = React.useState<string | undefined>();
+    const [owner, setOwner] = React.useState<string | undefined>();
+    const [created, setCreated] = React.useState<boolean>(!create);
+    const [file_path, setFilePath] = React.useState<string>(path);
+    const [initial_text, setInitialText] = React.useState<string | undefined>();
+    const [filenameError, setFileNameError] = React.useState<string | null>(null);
+
+    const { cwdInfo } = useFilesContext();
+
+    useInit(() => {
+        cockpit.user().then(user => setUser(user));
+    });
 
     React.useEffect(() => {
-        const editor = new Editor(path);
-        editor.on('updated', setState);
-        setEditor(editor);
-        return () => {
-            editor.close();
-        };
-    }, [path]);
+        if (created) {
+            const editor = new Editor(file_path);
+            editor.on('updated', setState);
+            setEditor(editor);
+            return () => {
+                editor.close();
+            };
+        }
+    }, [created, file_path]);
 
     const { modified } = state;
     React.useEffect(() => {
@@ -165,10 +191,68 @@ export const EditFileModal = ({ dialogResult, path } : {
         }
     };
 
-    /* Translators: This is the title of a modal dialog.  $0 represents a filename. */
-    let title = <>{fmt_to_fragments(state?.writable ? _("Edit $0") : _("View $0"), <b>{path}</b>)}</>;
-    if (!state.writable) {
-        title = (<>{title}<Label className="file-editor-title-label" variant="filled">{_("Read-only")}</Label></>);
+    const handleSave = async () => {
+        if (!created) {
+            const full_path = path + filename;
+
+            try {
+                await cockpit.file(full_path, { superuser: "try" }).replace("");
+            } catch (err) {
+                console.warn("Cannot create new file", err);
+                return;
+            }
+
+            if (owner !== undefined) {
+                try {
+                    await cockpit.spawn(["chown", owner, full_path], { superuser: "require" });
+                } catch (err) {
+                    console.warn("Cannot chown new file", err);
+                    return;
+                }
+            }
+
+            if (initial_text) {
+                // We need to obtain the tag to retain file ownership
+                // Can't do this async because we can't get the tag via await
+                cockpit.file(full_path, { superuser: "try" }).read()
+                        .then(async (_content: string, tag: string) => {
+                            try {
+                                await cockpit.file(full_path, { superuser: "try" }).replace(initial_text, tag);
+                            } catch (err) {
+                                console.warn("Cannot set initial file text", err);
+                            }
+
+                            setCreated(true);
+                            setFilePath(full_path);
+                            setInitialText("");
+                        });
+            } else {
+                setCreated(true);
+                setFilePath(full_path);
+                setInitialText("");
+            }
+        } else if (editor) {
+            editor.save();
+        }
+    };
+
+    const candidates = [];
+    if (!created && superuser.allowed && user && cwdInfo) {
+        candidates.push(...get_owner_candidates(user, cwdInfo));
+        if (owner === undefined) {
+            setOwner(candidates[0]);
+        }
+    }
+
+    let title = null;
+    if (!created) {
+        title = _("Create file");
+    } else {
+        /* Translators: This is the title of a modal dialog.  $0 represents a filename. */
+        title = <>{fmt_to_fragments(state?.writable ? _("Edit $0") : _("View $0"), <b>{file_path}</b>)}</>;
+        if (!state.writable) {
+            title = (<>{title}<Label className="file-editor-title-label" variant="filled">{_("Read-only")}</Label></>);
+        }
     }
 
     // File has changed on disk while editing.
@@ -186,23 +270,25 @@ export const EditFileModal = ({ dialogResult, path } : {
           onEscapePress={handleEscape}
           footer={
               <>
-                  {change_conflict && !file_removed &&
+                  {created && change_conflict && !file_removed &&
                   <Button
                     variant="warning"
                     onClick={() => editor && editor.save()}
                   >
                       {_("Overwrite")}
                   </Button>}
-                  {state?.writable && (!change_conflict || file_removed) &&
+                  {(!created || (state?.writable && (!change_conflict || file_removed))) &&
                   <Button
                     variant="primary"
                     isDisabled={
-                        !editor ||
+                        created
+                            ? (!editor ||
                             state.saving ||
                             !modified ||
-                            !state.writable
+                            !state.writable)
+                            : !filename || filenameError
                     }
-                    onClick={() => editor && editor.save()}
+                    onClick={handleSave}
                   >
                       {_("Save")}
                   </Button>}
@@ -240,13 +326,53 @@ export const EditFileModal = ({ dialogResult, path } : {
                       </>
                   }
                 />}
+                {!created &&
+                <Form isHorizontal>
+                    <FormGroup
+                      label={_("File name")}
+                      fieldId="file-name"
+                    >
+                        <TextInput
+                          autoFocus // eslint-disable-line jsx-a11y/no-autofocus
+                          id="file-name"
+                          value={filename}
+                          onChange={(_event, value) => {
+                              setFileNameError(checkFilename(value, cwdInfo?.entries || {}, undefined));
+                              setFilename(value);
+                          }}
+                        />
+                        <FormHelper fieldId="file-name" helperTextInvalid={filenameError} />
+                    </FormGroup>
+                    <TextArea
+                      id="editor-text-area"
+                      className="file-editor"
+                      value={initial_text}
+                      onChange={(_ev, content) => setInitialText(content)}
+                    />
+                    {candidates.length > 0 &&
+                        <FormGroup fieldId="create-directory-owner" label={_("Owner")}>
+                            <FormSelect
+                              id='create-directory-owner'
+                              value={owner}
+                              onChange={(_ev, val) => setOwner(val)}
+                            >
+                                {candidates.map(owner =>
+                                    <FormSelectOption
+                                      key={owner}
+                                      value={owner}
+                                      label={owner}
+                                    />)}
+                            </FormSelect>
+                        </FormGroup>}
+                </Form>}
+                {created &&
                 <TextArea
                   id="editor-text-area"
                   className="file-editor"
                   isDisabled={!state.writable}
                   value={state.content}
                   onChange={(_ev, content) => editor && editor.modify(content)}
-                />
+                />}
             </Stack>
         </Modal>
     );
@@ -254,4 +380,18 @@ export const EditFileModal = ({ dialogResult, path } : {
 
 export function edit_file(dialogs: Dialogs, path: string) {
     dialogs.run(EditFileModal, { path });
+}
+
+export async function show_create_file_dialog(dialogs: Dialogs, path: string,
+    addAlert: (title: string, variant: AlertVariant, key: string, detail?: string) => void) {
+    if (!superuser.allowed) {
+        try {
+            await cockpit.spawn(["test", "-w", path]);
+        } catch {
+            addAlert(_("Cannot create file in current directory"), AlertVariant.warning, "create-file",
+                     _("Permission denied"));
+            return;
+        }
+    }
+    dialogs.run(EditFileModal, { path, create: true });
 }
