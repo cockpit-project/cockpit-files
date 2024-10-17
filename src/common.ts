@@ -51,3 +51,32 @@ export function * map_permissions<T>(func: (value: number, label: string) => T) 
         yield func(value, label);
     }
 }
+
+export function permissionShortStr(mode: number) {
+    const specialBits = (mode >> 9) & 0b111;
+    const permsStr = [];
+    for (let i = 2; i >= 0; i--) {
+        const offset = i * 3;
+        let shortStr = "";
+        shortStr += (mode & (0b1 << (offset + 2))) ? "r" : "-";
+        shortStr += (mode & (0b1 << (offset + 1))) ? "w" : "-";
+
+        if (mode & (1 << offset)) {
+            if (specialBits & (0b1 << i)) {
+                shortStr += (i === 0) ? "t" : "s";
+            } else {
+                shortStr += "x";
+            }
+        } else {
+            if (specialBits & (0b1 << i)) {
+                shortStr += (i === 0) ? "T" : "S";
+            } else {
+                shortStr += "-";
+            }
+        }
+
+        permsStr.push(shortStr);
+    }
+
+    return permsStr.join(" ");
+}

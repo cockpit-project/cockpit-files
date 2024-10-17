@@ -19,13 +19,12 @@
 
 import React, { useState } from "react";
 
-import { CardHeader, CardTitle } from "@patternfly/react-core/dist/esm/components/Card";
+import { CardTitle } from "@patternfly/react-core/dist/esm/components/Card";
 import { Divider } from "@patternfly/react-core/dist/esm/components/Divider";
 import { DropdownItem } from "@patternfly/react-core/dist/esm/components/Dropdown";
 import { MenuToggle, MenuToggleAction } from "@patternfly/react-core/dist/esm/components/MenuToggle";
 import { SearchInput } from "@patternfly/react-core/dist/esm/components/SearchInput";
 import { Select, SelectGroup, SelectList, SelectOption } from "@patternfly/react-core/dist/esm/components/Select";
-import { Text, TextContent, TextVariants } from "@patternfly/react-core/dist/esm/components/Text";
 import { EyeIcon, EyeSlashIcon, GripVerticalIcon, ListIcon } from "@patternfly/react-icons";
 import { SortByDirection } from '@patternfly/react-table';
 
@@ -183,14 +182,7 @@ export const FilesCardHeader = ({
     });
 
     return (
-        <CardHeader className="card-actionbar">
-            <CardTitle component="h2" id="files-card-header">
-                <TextContent>
-                    <Text component={TextVariants.h2}>
-                        {_("Directories & files")}
-                    </Text>
-                </TextContent>
-            </CardTitle>
+        <CardTitle className="card-actionbar">
             <div className="header-toolbar">
                 <SearchInput
                   className="files-search"
@@ -214,7 +206,7 @@ export const FilesCardHeader = ({
                     />
                 </div>
             </div>
-        </CardHeader>
+        </CardTitle>
     );
 };
 
