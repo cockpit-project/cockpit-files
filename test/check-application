@@ -266,6 +266,14 @@ class TestFiles(testlib.MachineCase):
         b.wait_in_text(".cwd-info",
                        f"Directory contains {dir_cnt} directories, {files_cnt} files, {hidden_cnt} hidden")
 
+        # Enabling "show hidden files" changes the counters in cwd-info
+        dir_cnt = m.execute("ls -lA /home/admin | grep '^d' | wc -l").strip()
+        files_cnt = m.execute("ls -lA /home/admin | grep '^-' | wc -l").strip()
+        b.select_PF("#sort-menu-toggle", "Show hidden items")
+        b.wait_in_text(".cwd-info",
+                       f"Directory contains {dir_cnt} directories, {files_cnt} files")
+        b.select_PF("#sort-menu-toggle", "Hide hidden items")
+
         # double-clicking on a symlink to a directory also takes us into it
         m.execute("ln -s /tmp /home/admin/tmplink")
         b.mouse("[data-item='tmplink']", "dblclick")
@@ -309,6 +317,34 @@ class TestFiles(testlib.MachineCase):
         b.wait_not_present("[data-item='newdir']")
         self.assert_last_breadcrumb("home")
         b.wait_visible("[data-item='admin']")
+
+        # Change permissions of cwd and see that cwd-info is updated
+        b.go("/files#/?path=/home/admin/newdir")
+        self.assert_last_breadcrumb("newdir")
+        b.wait_in_text(".cwd-info .pf-m-link", "rwx r-x r-x")
+        m.execute("chmod 700 /home/admin/newdir")
+        b.wait_in_text(".cwd-info .pf-m-link", "rwx --- ---")
+
+        # Also check popover
+        b.click(".cwd-info .pf-m-link")
+        b.wait_in_text(".pf-v5-c-popover dl div:nth-child(1) > dd", "read, write, and execute")
+        b.wait_in_text(".pf-v5-c-popover dl div:nth-child(2) > dd", "none")
+        b.wait_in_text(".pf-v5-c-popover dl div:nth-child(3) > dd", "none")
+        b.click(".pf-v5-c-popover__close > button")
+        b.wait_not_present(".pf-v5-c-popover")
+
+        # Change last edit time on cwd
+        m.execute("touch -d '2 hours ago' /home/admin/newdir")
+        b.wait_in_text(".cwd-mtime", "2 hours ago")
+        m.execute("touch /home/admin/newdir")
+        b.wait_in_text(".cwd-mtime", "less than a minute ago")
+        # mock edit time for tooltip
+        m.execute("touch -d '1995/12/21' /home/admin/newdir")
+        b.mouse(".cwd-mtime", "mouseenter")
+        b.wait_in_text(".pf-v5-c-tooltip", "Dec 21, 1995")
+        b.mouse(".cwd-mtime", "mouseleave")
+        b.go("/files#/?path=/home")
+        self.assert_last_breadcrumb("home")
 
         # Navigation via editing the path
         path_input = "#new-path-input"
