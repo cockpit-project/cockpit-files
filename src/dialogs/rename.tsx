@@ -33,27 +33,9 @@ import type { Dialogs, DialogResult } from 'dialogs';
 import { fmt_to_fragments } from 'utils';
 
 import { FolderFileInfo, useFilesContext } from '../app.tsx';
+import { checkFilename } from '../common.ts';
 
 const _ = cockpit.gettext;
-
-function checkName(candidate: string, entries: Record<string, FileInfo>, selectedFile: FolderFileInfo) {
-    if (candidate === "") {
-        return _("Name cannot be empty");
-    } else if (candidate.length >= 256) {
-        return _("Name too long");
-    } else if (candidate.includes("/")) {
-        return _("Name cannot include a /");
-    } else if (selectedFile.name === candidate) {
-        return _("Filename is the same as original name");
-    } else if (candidate in entries) {
-        if (entries[candidate].type === "dir") {
-            return _("Directory with the same name exists");
-        }
-        return _("File exists");
-    } else {
-        return null;
-    }
-}
 
 function checkCanOverride(candidate: string, entries: Record<string, FileInfo>, selectedFile: FolderFileInfo) {
     if (candidate in entries) {
@@ -141,7 +123,7 @@ const RenameItemModal = ({ dialogResult, path, selected } : {
                       if (name !== selected.name)
                           renameItem();
                       else {
-                          setNameError(checkName(name, cwdInfo?.entries || {}, selected));
+                          setNameError(checkFilename(name, cwdInfo?.entries || {}, selected));
                       }
                       return false;
                   }}
@@ -151,7 +133,7 @@ const RenameItemModal = ({ dialogResult, path, selected } : {
                           autoFocus // eslint-disable-line jsx-a11y/no-autofocus
                           value={name}
                           onChange={(_, val) => {
-                              setNameError(checkName(val, cwdInfo?.entries || {}, selected));
+                              setNameError(checkFilename(val, cwdInfo?.entries || {}, selected));
                               setOverrideFileName(checkCanOverride(val, cwdInfo?.entries || {}, selected));
                               setErrorMessage(undefined);
                               setName(val);
