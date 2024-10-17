@@ -86,7 +86,7 @@ export function get_menu_items(
             },
             { type: "divider" },
             {
-                id: "create-item",
+                id: "create-folder",
                 title: _("Create directory"),
                 onClick: () => show_create_directory_dialog(dialogs, path)
             },
