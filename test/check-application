@@ -101,6 +101,12 @@ class TestFiles(testlib.MachineCase):
         b.click("#dropdown-menu")
         b.click(f"#dropdown-menu + .pf-v5-c-menu button:contains('{action}')")
 
+    def open_folder_context_menu(self) -> None:
+        # With BiDi on Firefox a click is by default in the "middle" of the
+        # element while we want to open the current folder context and a
+        # "middle" click can be a file or folder item.
+        self.browser.mouse("#files-card-parent", "contextmenu", 1, 1)
+
     def testBasic(self) -> None:
         b = self.browser
         m = self.machine
@@ -2586,6 +2592,111 @@ class TestFiles(testlib.MachineCase):
 
         b.click(".pf-v5-c-modal-box__footer button.pf-m-secondary")
         b.wait_not_present(".file-editor-modal")
+
+    def testCreateFile(self) -> None:
+        b = self.browser
+        m = self.machine
+
+        self.enter_files()
+
+        def open_create_file_modal() -> None:
+            b.mouse("#files-card-parent", "contextmenu")
+            b.click(".contextMenu button:contains('Create file')")
+            b.wait_visible(".file-create-modal")
+            b.wait_text(".pf-v5-c-modal-box__title-text", "Create file")
+            b.wait_visible("button.pf-m-primary:disabled")
+
+        # Error cases
+        # cancel does not create a file
+        open_create_file_modal()
+        b.set_input_text("#file-name", "test.txt")
+        b.set_input_text(".file-create-modal textarea", "content")
+        b.wait_visible("button.pf-m-primary:not(:disabled)")
+        b.click(".pf-v5-c-modal-box__footer button.pf-m-link")  # cancel
+        b.wait_not_present(".pf-v5-c-modal-box")
+        m.execute("! test -f test.txt")
+
+        # file already exists
+        m.execute("runuser -u admin touch /home/admin/test.txt")
+        b.wait_visible("[data-item='test.txt']")
+        open_create_file_modal()
+        b.set_input_text("#file-name", "test.txt")
+        b.wait_text(".file-create-modal .pf-v5-c-helper-text__item-text", "File exists")
+        b.wait_visible("button.pf-m-primary:disabled")
+        b.set_input_text("#file-name", "/test.txt")
+        b.wait_text(".file-create-modal .pf-v5-c-helper-text__item-text", "Name cannot include a /")
+        b.wait_visible("button.pf-m-primary:disabled")
+
+        # Create a file as admin, we are superuser and /home owned by admin
+        b.set_input_text("#file-name", "notes.txt")
+        b.set_input_text(".file-create-modal textarea", "content")
+        b.wait_val("#create-file-owner", "admin:admin")
+        b.assert_pixels(".pf-v5-c-modal-box", "create-file-modal-superuser")
+        b.click("button.pf-m-primary")
+        b.wait_not_present(".pf-v5-c-modal-box")
+        self.assert_owner("/home/admin/notes.txt", "admin:admin")
+        self.assertEqual(m.execute("cat /home/admin/notes.txt"), "content")
+
+        # create a file as root.
+        open_create_file_modal()
+        b.set_input_text("#file-name", "root.txt")
+        b.set_input_text(".file-create-modal textarea", "root")
+        b.select_from_dropdown("#create-file-owner", "root:root")
+        b.click("button.pf-m-primary")
+        b.wait_not_present(".pf-v5-c-modal-box")
+        self.assert_owner("/home/admin/root.txt", "root:root")
+        self.assertEqual(m.execute("cat /home/admin/root.txt"), "root")
+
+        # normal user has no change owner select
+        b.drop_superuser()
+
+        open_create_file_modal()
+        b.wait_not_present("#create-file-owner")
+        b.set_input_text("#file-name", "admin.txt")
+        b.set_input_text(".file-create-modal textarea", "admin")
+        b.assert_pixels(".pf-v5-c-modal-box", "create-file-modal-admin")
+        b.click("button.pf-m-primary")
+        b.wait_not_present(".pf-v5-c-modal-box")
+        self.assert_owner("/home/admin/admin.txt", "admin:admin")
+        self.assertEqual(m.execute("cat /home/admin/admin.txt"), "admin")
+
+        # Escape closes the dialog
+        self.open_folder_context_menu()
+        b.click(".contextMenu button:contains('Create file')")
+        b.blur("#file-name")  # remove focus from input
+        b.key("Escape")  # Escape for modal
+        b.wait_not_present(".pf-v5-c-modal-box")
+
+        # Escape does not close the the dialog when a filename is entered
+        self.open_folder_context_menu()
+        b.click(".contextMenu button:contains('Create file')")
+        b.set_input_text("#file-name", "admin.txt")
+        b.blur("#file-name")  # remove focus from input
+        b.key("Escape")  # Escape for modal
+        b.wait_val("#file-name", "admin.txt")
+        b.click(".pf-v5-c-modal-box__footer button.pf-m-link")  # cancel
+        b.wait_not_present(".pf-v5-c-modal-box")
+
+        # Unable to create a file
+        self.open_folder_context_menu()
+        b.click(".contextMenu button:contains('Create file')")
+        b.set_input_text("#file-name", "notallowed.txt")
+        b.set_input_text(".file-create-modal textarea", "nope")
+        m.execute("chattr +i /home/admin")
+        self.addCleanup(m.execute, "chattr -i /home/admin")
+        b.click("button.pf-m-primary")
+        self.wait_modal_inline_alert("Not permitted to perform this action")
+        b.click(".pf-v5-c-modal-box__footer button.pf-m-link")  # cancel
+        b.wait_not_present(".pf-v5-c-modal-box")
+
+        # create a file as admin
+
+        # cannot create file in /home as normal user
+        b.click("li[data-location='/home'] a")
+        self.assert_last_breadcrumb("home")
+        self.open_folder_context_menu()
+        b.click(".contextMenu button:contains('Create file')")
+        b.wait_in_text("h4.pf-v5-c-alert__title", "Cannot create file in current directory")
 
 
 if __name__ == '__main__':

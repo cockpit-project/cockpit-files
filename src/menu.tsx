@@ -27,6 +27,7 @@ import { basename } from "cockpit-path";
 import type { Dialogs } from 'dialogs';
 
 import type { FolderFileInfo } from "./app";
+import { show_create_file_dialog } from './dialogs/create-file.tsx';
 import { confirm_delete } from './dialogs/delete.tsx';
 import { edit_file, MAX_EDITOR_FILE_SIZE } from './dialogs/editor.tsx';
 import { show_create_directory_dialog } from './dialogs/mkdir.tsx';
@@ -89,6 +90,11 @@ export function get_menu_items(
                 id: "create-folder",
                 title: _("Create directory"),
                 onClick: () => show_create_directory_dialog(dialogs, path)
+            },
+            {
+                id: "create-file",
+                title: _("Create file"),
+                onClick: () => show_create_file_dialog(dialogs, path, addAlert)
             },
             { type: "divider" },
             {

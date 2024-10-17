@@ -18,9 +18,9 @@
  */
 
 import cockpit from "cockpit";
-import { FileInfo } from "cockpit/fsinfo";
+import { FileInfo } from "cockpit/fsinfo.ts";
 
-import { FolderFileInfo } from "./app";
+import { FolderFileInfo } from "./app.ts";
 
 const _ = cockpit.gettext;
 

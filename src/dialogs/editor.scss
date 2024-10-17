@@ -1,4 +1,4 @@
-.file-editor-modal {
+.file-editor-modal, .file-create-modal {
   block-size: 100%;
 
   &.is-modified {
@@ -21,6 +21,12 @@
       display: inline-block;
       margin-inline-start: 0.5cap;
     }
+  }
+
+  // Create mode shows textarea as full size
+  .pf-v5-c-form.pf-m-horizontal {
+    block-size: 100%;
+    grid-template-rows: auto 1fr auto;
   }
 }
 
