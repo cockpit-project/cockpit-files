@@ -18,6 +18,9 @@
  */
 
 import cockpit from "cockpit";
+import { FileInfo } from "cockpit/fsinfo";
+
+import { FolderFileInfo } from "./app";
 
 const _ = cockpit.gettext;
 
@@ -73,4 +76,23 @@ export function permissionShortStr(mode: number) {
     }
 
     return permsStr.join(" ");
+}
+
+export function checkFilename(candidate: string, entries: Record<string, FileInfo>, selectedFile?: FolderFileInfo) {
+    if (candidate === "") {
+        return _("Name cannot be empty");
+    } else if (candidate.length >= 256) {
+        return _("Name too long");
+    } else if (candidate.includes("/")) {
+        return _("Name cannot include a /");
+    } else if (selectedFile && selectedFile.name === candidate) {
+        return _("Filename is the same as original name");
+    } else if (candidate in entries) {
+        if (entries[candidate].type === "dir") {
+            return _("Directory with the same name exists");
+        }
+        return _("File exists");
+    } else {
+        return null;
+    }
 }
