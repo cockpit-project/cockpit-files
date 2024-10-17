@@ -193,7 +193,7 @@ export const Application = () => {
                     <FilesBreadcrumbs path={path} />
                     <PageSection>
                         {errorMessage &&
-                        <Card>
+                        <Card className="files-empty-state">
                             <EmptyStatePanel
                               paragraph={errorMessage}
                               icon={ExclamationCircleIcon}
