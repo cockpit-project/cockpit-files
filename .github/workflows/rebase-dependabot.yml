@@ -1,0 +1,24 @@
+name: rebase-dependabot-pr
+on:
+  # push:
+  #   branches: [ main ]
+  # can be run manually on https://github.com/cockpit-project/cockpit-files/actions
+  workflow_dispatch:
+jobs:
+  rebase-dependabot-pr:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: write
+    steps:
+      - name: Set up secrets
+        run: echo '${{ secrets.GITHUB_TOKEN }}' > ~/.config/github-token
+
+      - name: Checkout bots repo
+        uses: actions/checkout@v4
+        with:
+          repository: cockpit-project/bots
+
+      - name: Run dependabot-recreate-pr
+        run: |
+          GITHUB_BASE=${GITHUB_REPOSITORY} ./recreate-dependabot-pr
