@@ -6,6 +6,9 @@
   "repository": "git@github.com:cockpit-project/cockpit-files.git",
   "author": "",
   "license": "LGPL-2.1",
+  "engines": {
+    "node": ">= 18"
+  },
   "scripts": {
     "watch": "./build.js -w",
     "build": "./build.js",
