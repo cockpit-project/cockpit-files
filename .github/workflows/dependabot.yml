@@ -41,6 +41,19 @@ jobs:
               }
             }
 
+      - name: Rebase pull request and drop node_modules changes
+        run: |
+          git config --global user.name "GitHub Workflow"
+          git config --global user.email "cockpituous@cockpit-project.org"
+          git rebase main
+          ret=$?
+          if [ $ret -ne 0]; then
+            git reset node_modules
+            git checkout node_modules
+            git commit --amend --no-edit
+            git rebase --continue
+          fi
+
       - name: Update node_modules for package.json changes
         run: |
           make tools/node-modules
