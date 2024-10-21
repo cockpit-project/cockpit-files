@@ -24,7 +24,7 @@ import {
 } from "@patternfly/react-core/dist/esm/components/Alert";
 import { Card } from "@patternfly/react-core/dist/esm/components/Card";
 import { Page, PageSection } from "@patternfly/react-core/dist/esm/components/Page";
-import { Sidebar, SidebarPanel, SidebarContent } from "@patternfly/react-core/dist/esm/components/Sidebar";
+import { Stack } from "@patternfly/react-core/dist/esm/layouts/Stack";
 import { ExclamationCircleIcon } from "@patternfly/react-icons";
 
 import cockpit from "cockpit";
@@ -34,11 +34,11 @@ import { WithDialogs } from "dialogs";
 import { useInit, usePageLocation } from "hooks";
 import { superuser } from "superuser";
 
+import { CurrentDirDetail } from "./current-dir-detail.tsx";
 import { FilesBreadcrumbs } from "./files-breadcrumbs.tsx";
 import { FilesFolderView } from "./files-folder-view.tsx";
 import filetype_data from './filetype-data'; // eslint-disable-line import/extensions
 import { filetype_lookup } from './filetype-lookup.ts';
-import { SidebarPanelDetails } from "./sidebar.tsx";
 
 superuser.reload_page_on_change();
 
@@ -192,38 +192,31 @@ export const Application = () => {
                     </AlertGroup>
                     <FilesBreadcrumbs path={path} />
                     <PageSection>
-                        <Sidebar isPanelRight hasGutter>
-                            <SidebarContent>
-                                {errorMessage &&
-                                <Card>
-                                    <EmptyStatePanel
-                                      paragraph={errorMessage}
-                                      icon={ExclamationCircleIcon}
-                                    />
-                                </Card>}
-                                {!errorMessage &&
-                                <FilesFolderView
-                                  path={path}
-                                  files={files}
-                                  loadingFiles={loadingFiles}
-                                  showHidden={showHidden}
-                                  setShowHidden={setShowHidden}
-                                  selected={selected}
-                                  setSelected={setSelected}
-                                  clipboard={clipboard}
-                                  setClipboard={setClipboard}
-                                />}
-                            </SidebarContent>
-                            <SidebarPanel className="sidebar-panel">
-                                <SidebarPanelDetails
-                                  path={path}
-                                  selected={selected.map(s => files.find(f => f.name === s.name))
-                                          .filter(s => s !== undefined)}
-                                  showHidden={showHidden}
-                                  files={files}
-                                />
-                            </SidebarPanel>
-                        </Sidebar>
+                        {errorMessage &&
+                        <Card className="files-empty-state">
+                            <EmptyStatePanel
+                              paragraph={errorMessage}
+                              icon={ExclamationCircleIcon}
+                            />
+                        </Card>}
+                        {!errorMessage &&
+                        <Stack className="files-view-stack">
+                            <FilesFolderView
+                              path={path}
+                              files={files}
+                              loadingFiles={loadingFiles}
+                              showHidden={showHidden}
+                              setShowHidden={setShowHidden}
+                              selected={selected}
+                              setSelected={setSelected}
+                              clipboard={clipboard}
+                              setClipboard={setClipboard}
+                            />
+                            <CurrentDirDetail
+                              files={files}
+                              showHidden={showHidden}
+                            />
+                        </Stack>}
                     </PageSection>
                 </WithDialogs>
             </FilesContext.Provider>
