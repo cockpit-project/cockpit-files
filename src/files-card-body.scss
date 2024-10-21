@@ -309,3 +309,8 @@
     column-gap: var(--pf-v5-global--spacer--sm);
     text-align: start;
 }
+
+.files-drag-hover {
+    border: solid;
+    border-color: red;
+}

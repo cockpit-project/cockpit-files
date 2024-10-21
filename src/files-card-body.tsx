@@ -274,12 +274,14 @@ export const FilesCardBody = ({
         };
 
         const handleDragEnter = (event: DragEvent) => {
+            console.log("Drag Enter", event);
             event.preventDefault();
             event.stopPropagation();
             folderViewElem.classList.add("files-drag-hover");
         };
 
         const handleDragLeave = (event: DragEvent) => {
+            console.log("Drag Leave", event);
             event.preventDefault();
             event.stopPropagation();
             folderViewElem.classList.remove("files-drag-hover");
@@ -289,6 +291,7 @@ export const FilesCardBody = ({
             cockpit.assert(event.dataTransfer !== null, "dataTransfer cannot be null");
             dispatchEvent(new CustomEvent('files-drop', { detail: event.dataTransfer.files }));
             console.log("drop", event.dataTransfer.files);
+            folderViewElem.classList.remove("files-drag-hover");
             event.preventDefault();
             event.stopPropagation();
         };
@@ -419,8 +422,8 @@ export const FilesCardBody = ({
             folderViewElem.addEventListener("click", handleClick);
             folderViewElem.addEventListener("dblclick", handleDoubleClick);
             folderViewElem.addEventListener("contextmenu", handleContextMenu);
-            folderViewElem.addEventListener("dragenter", handleDragEnter, false);
-            folderViewElem.addEventListener("dragleave", handleDragLeave, false);
+            folderViewElem.addEventListener("dragenter", handleDragEnter);
+            folderViewElem.addEventListener("dragleave", handleDragLeave);
             folderViewElem.addEventListener("dragover", handleDragOver, false);
             folderViewElem.addEventListener("drop", handleDrop, false);
         }

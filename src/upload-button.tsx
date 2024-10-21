@@ -17,7 +17,7 @@
  * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 
 import { AlertVariant } from "@patternfly/react-core/dist/esm/components/Alert";
 import { Button } from "@patternfly/react-core/dist/esm/components/Button";
@@ -138,13 +138,13 @@ export const UploadButton = ({
     const [uploadedFiles, setUploadedFiles] = useState<{[name: string]:
                                                         {file: File, progress: number, cancel:() => void}}>({});
 
-    const handleFilesDrop = (event: CustomEvent) => {
+    const handleFilesDrop = ((event: CustomEvent) => {
         console.log(event);
         onUpload(event.detail);
-    };
+    }) as EventListener;
 
     useInit(() => {
-        console.log('doing the fun');
+        console.log('uploading');
         window.addEventListener("files-drop", handleFilesDrop);
         return () => {
             window.removeEventListener("files-drop", handleFilesDrop);
