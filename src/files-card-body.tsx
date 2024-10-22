@@ -17,7 +17,7 @@
  * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React, { useCallback, useEffect, useMemo, useState, useRef } from "react";
+import React, { useCallback, useEffect, useMemo, useState, useRef, useContext } from "react";
 
 import { Divider } from "@patternfly/react-core/dist/esm/components/Divider";
 import { MenuItem, MenuList } from "@patternfly/react-core/dist/esm/components/Menu";
@@ -40,6 +40,7 @@ import { get_permissions } from "./common.ts";
 import { confirm_delete } from "./dialogs/delete.tsx";
 import { show_create_directory_dialog } from "./dialogs/mkdir.tsx";
 import { show_rename_dialog } from "./dialogs/rename.tsx";
+import { UploadContext } from "./files-folder-view.tsx";
 import { Sort, filterColumnMapping, filterColumns } from "./header.tsx";
 import { get_menu_items, pasteFromClipboard } from "./menu.tsx";
 import "./files-card-body.scss";
@@ -159,6 +160,7 @@ export const FilesCardBody = ({
     const [boxPerRow, setBoxPerRow] = useState(0);
     const dialogs = useDialogs();
     const { addAlert, cwdInfo } = useFilesContext();
+    const { uploadedFiles } = useContext(UploadContext);
 
     const sortedFiles = useMemo(() => {
         return files
@@ -206,7 +208,8 @@ export const FilesCardBody = ({
     });
 
     useEffect(() => {
-        let folderViewElem = null;
+        let folderViewElem: HTMLDivElement | null = null;
+        const isUploading = Object.keys(uploadedFiles).length !== 0;
 
         const resetSelected = (e: MouseEvent) => {
             if ((e.target instanceof HTMLElement)) {
@@ -274,26 +277,40 @@ export const FilesCardBody = ({
         };
 
         const handleDragEnter = (event: DragEvent) => {
-            console.log("Drag Enter", event);
+            console.log("Drag Enter", event.target);
             event.preventDefault();
             event.stopPropagation();
-            folderViewElem.classList.add("files-drag-hover");
+
+            // disable drag & drop when upload is in progress
+            if (!isUploading && folderViewElem !== null) {
+                folderViewElem.classList.add("files-drag-hover");
+            }
         };
 
         const handleDragLeave = (event: DragEvent) => {
-            console.log("Drag Leave", event);
+            console.log("Drag Leave", event.target);
             event.preventDefault();
             event.stopPropagation();
-            folderViewElem.classList.remove("files-drag-hover");
+            if (folderViewElem !== null) {
+                folderViewElem.classList.remove("files-drag-hover");
+            }
         };
 
         const handleDrop = (event: DragEvent) => {
+            event.preventDefault();
+            event.stopPropagation();
+
+            // disable drag & drop when upload is in progress
+            if (isUploading) {
+                return;
+            }
+
             cockpit.assert(event.dataTransfer !== null, "dataTransfer cannot be null");
             dispatchEvent(new CustomEvent('files-drop', { detail: event.dataTransfer.files }));
             console.log("drop", event.dataTransfer.files);
-            folderViewElem.classList.remove("files-drag-hover");
-            event.preventDefault();
-            event.stopPropagation();
+            if (folderViewElem !== null) {
+                folderViewElem.classList.remove("files-drag-hover");
+            }
         };
 
         const handleDragOver = (event: DragEvent) => {
@@ -460,6 +477,7 @@ export const FilesCardBody = ({
         cwdInfo,
         clipboard,
         setClipboard,
+        uploadedFiles,
     ]);
 
     // Generic event handler to look up the corresponding `data-item` for a click event when

@@ -17,7 +17,7 @@
  * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React, { useState, useRef } from "react";
+import React, { useRef, useContext } from "react";
 
 import { AlertVariant } from "@patternfly/react-core/dist/esm/components/Alert";
 import { Button } from "@patternfly/react-core/dist/esm/components/Button";
@@ -33,13 +33,14 @@ import cockpit from "cockpit";
 import type { FileInfo } from "cockpit/fsinfo";
 import { upload } from "cockpit-upload-helper";
 import { DialogResult, useDialogs } from "dialogs";
+import { useInit } from "hooks";
 import * as timeformat from "timeformat";
 import { fmt_to_fragments } from "utils";
 
 import { useFilesContext } from "./app.tsx";
+import { UploadContext } from "./files-folder-view.tsx";
 
 import "./upload-button.scss";
-import { useInit } from "hooks";
 
 const _ = cockpit.gettext;
 
@@ -135,8 +136,9 @@ export const UploadButton = ({
     const { addAlert, cwdInfo } = useFilesContext();
     const dialogs = useDialogs();
     const [showPopover, setPopover] = React.useState(false);
-    const [uploadedFiles, setUploadedFiles] = useState<{[name: string]:
-                                                        {file: File, progress: number, cancel:() => void}}>({});
+    // const [uploadedFiles, setUploadedFiles] = useState<{[name: string]:
+    //                                                     {file: File, progress: number, cancel:() => void}}>({});
+    const { uploadedFiles, setUploadedFiles } = useContext(UploadContext);
 
     const handleFilesDrop = ((event: CustomEvent) => {
         console.log(event);
