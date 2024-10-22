@@ -51,3 +51,7 @@ export function * map_permissions<T>(func: (value: number, label: string) => T) 
         yield func(value, label);
     }
 }
+
+export function testIsAppleDevice() {
+    return /Mac|iPhone|iPad|iPod/.test(navigator.platform);
+}
