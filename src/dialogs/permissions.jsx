@@ -61,6 +61,55 @@ const OPTIONS_PERMISSIONS = {
     "read-write": 6,
 };
 
+// Convert the permissions mode to string based permissions to support
+// passing `+X` to chmod which cannot be combined with numeric mode.
+// Cockpit wants to pass `+X` for changing a folder and its contents, this only
+// makes folders executable and retains the executable bits on a file and
+// compared to `+x` does not make every file executable in a directory.
+function mode_to_args(mode) {
+    const offset_map = {
+        6: 'u',
+        3: 'g',
+        0: 'o',
+    };
+
+    const letter_map = {
+        4: 'r',
+        2: 'w',
+        1: 'X',
+    };
+
+    const chmod_args = [];
+    for (const offset of Object.keys(offset_map)) {
+        const single_mode = (mode >> offset) & 0o7;
+        let chmod_add = "";
+        let chmod_rem = "";
+
+        for (let digit of Object.keys(letter_map)) {
+            // An object's keys are automatically converted to a string
+            digit = parseInt(digit);
+            if ((single_mode & digit) === digit) {
+                chmod_add += letter_map[digit];
+            } else {
+                // Removal needs -x not -X
+                chmod_rem += letter_map[digit].toLowerCase();
+            }
+        }
+
+        if (chmod_add.length !== 0) {
+            chmod_add = "+" + chmod_add;
+        }
+
+        if (chmod_rem.length !== 0) {
+            chmod_rem = "-" + chmod_rem;
+        }
+
+        chmod_args.push(`${offset_map[offset]}${chmod_add}${chmod_rem}`);
+    }
+
+    return chmod_args.join(",");
+}
+
 const EditPermissionsModal = ({ dialogResult, selected, path }) => {
     const { cwdInfo } = useFilesContext();
 
@@ -112,6 +161,17 @@ const EditPermissionsModal = ({ dialogResult, selected, path }) => {
         const currentGroup = groups.find(g => g.name === group);
         if (currentGroup?.gid !== currentOwner?.gid && !currentGroup?.userlist.includes(currentOwner?.name)) {
             setGroup(groups.find(g => g.gid === currentOwner.gid).name);
+        }
+    };
+
+    const spawnEncloseFiles = async () => {
+        const full_path = selected?.isCwd ? path : path + selected.name;
+        try {
+            await cockpit.spawn(["chmod", "-R", mode_to_args(mode), full_path],
+                                { superuser: "try", err: "message" });
+            dialogResult.resolve();
+        } catch (err) {
+            setErrorMessage(err.message);
         }
     };
 
@@ -209,6 +269,13 @@ const EditPermissionsModal = ({ dialogResult, selected, path }) => {
                   >
                       {_("Change")}
                   </Button>
+                  {selected.type === "dir" &&
+                  <Button
+                    variant="secondary"
+                    onClick={() => spawnEncloseFiles()}
+                  >
+                      {_("Change permissions for enclosed files")}
+                  </Button>}
                   <Button variant="link" onClick={dialogResult.resolve}>{_("Cancel")}</Button>
               </>
           }

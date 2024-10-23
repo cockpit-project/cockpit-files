@@ -1447,13 +1447,74 @@ class TestFiles(testlib.MachineCase):
         b.wait_in_text(".pf-v5-c-modal-box__title-text", "bin")
         b.wait_in_text("#edit-permissions-owner", "root")
         b.wait_in_text("#edit-permissions-group", "root")
-
-        # As normal user you cannot change user/group permissions
-        b.drop_superuser()
+        b.click("button.pf-m-link")
+        b.wait_not_present(".pf-v5-c-modal-box")
 
         b.go("/files#/?path=/home/admin")
         self.assert_last_breadcrumb("admin")
         b.wait_not_present(".pf-v5-c-empty-state")
+
+        # Enclosed folder permissions
+        change_enclosed_dir = "/home/admin/Documents"
+        create_test_dirs_sh = f"""
+            mkdir {change_enclosed_dir}
+            mkdir {change_enclosed_dir}/Finance
+            mkdir {change_enclosed_dir}/Work
+            chmod 750 {change_enclosed_dir}/Work
+            touch {change_enclosed_dir}/Finance/program
+            chmod 777 {change_enclosed_dir}/Finance/program
+            touch {change_enclosed_dir}/Finance/accounts.txt
+            chmod 600 {change_enclosed_dir}/Finance/accounts.txt
+            touch {change_enclosed_dir}/Work/myvim
+            chmod 750 {change_enclosed_dir}/Work/myvim
+            touch {change_enclosed_dir}/Work/notes.txt
+            chmod 644 {change_enclosed_dir}/Work/notes.txt
+        """
+        self.write_file("/usr/local/bin/create-test-dirs.sh", create_test_dirs_sh, perm="755")
+        m.execute("runuser -u admin /usr/local/bin/create-test-dirs.sh")
+
+        open_permissions_dialog("Documents")
+        b.wait_val("#edit-permissions-owner-access", "read-write")
+        b.wait_val("#edit-permissions-group-access", "read-only")
+        b.wait_val("#edit-permissions-other-access", "read-only")
+        b.click(".pf-v5-c-modal-box button.pf-m-secondary")
+        b.wait_not_present(".pf-v5-c-empty-state")
+
+        # Files with any executable bit set, get a +x in all modes when +X is passed.
+        self.assertEqual(self.stat("%A", f"{change_enclosed_dir}/Finance"), "drwxr-xr-x")
+        self.assertEqual(self.stat("%A", f"{change_enclosed_dir}/Finance/program"), "-rwxr-xr-x")
+        self.assertEqual(self.stat("%A", f"{change_enclosed_dir}/Finance/accounts.txt"), "-rw-r--r--")
+        self.assertEqual(self.stat("%A", f"{change_enclosed_dir}/Work"), "drwxr-xr-x")
+        self.assertEqual(self.stat("%A", f"{change_enclosed_dir}/Work/myvim"), "-rwxr-xr-x")
+        self.assertEqual(self.stat("%A", f"{change_enclosed_dir}/Work/notes.txt"), "-rw-r--r--")
+
+        # Via kebab it selects cwd
+        b.mouse("[data-item='Documents']", "dblclick")
+        b.wait_not_present(".pf-v5-c-empty-state")
+        self.assert_last_breadcrumb("Documents")
+
+        b.click("#dropdown-menu")
+        b.click("button:contains('Edit permissions')")
+        b.wait_in_text(".pf-v5-c-modal-box__title-text", "Documents")
+
+        b.select_from_dropdown("#edit-permissions-owner-access", "read-only")
+        b.select_from_dropdown("#edit-permissions-group-access", "no-access")
+        b.select_from_dropdown("#edit-permissions-other-access", "no-access")
+        b.click(".pf-v5-c-modal-box button.pf-m-secondary")
+        b.wait_not_present(".pf-v5-c-empty-state")
+
+        self.assertEqual(m.execute(f"ls -ld {change_enclosed_dir}/Finance")[:10], "dr-x------")
+        self.assertEqual(m.execute(f"ls -l {change_enclosed_dir}/Finance/program")[:10], "-r-x------")
+        self.assertEqual(m.execute(f"ls -l {change_enclosed_dir}/Finance/accounts.txt")[:10], "-r--------")
+        self.assertEqual(m.execute(f"ls -ld {change_enclosed_dir}/Work")[:10], "dr-x------")
+        self.assertEqual(m.execute(f"ls -l {change_enclosed_dir}/Work/myvim")[:10], "-r-x------")
+        self.assertEqual(m.execute(f"ls -l {change_enclosed_dir}/Work/notes.txt")[:10], "-r--------")
+
+        b.click("li[data-location='/home/admin'] a")
+        self.assert_last_breadcrumb("admin")
+
+        # As normal user you cannot change user/group permissions
+        b.drop_superuser()
 
         m.execute("touch /home/admin/adminfile; chown admin: /home/admin/adminfile")
         open_permissions_dialog('adminfile')
@@ -1477,10 +1538,20 @@ class TestFiles(testlib.MachineCase):
         b.click(".pf-v5-c-modal-box button.pf-m-link")
         b.wait_not_present(".pf-v5-c-modal-box")
 
-        # Test permissions in details view
         b.go("/files#/?path=/home/admin")
         self.assert_last_breadcrumb("admin")
         b.wait_not_present(".pf-v5-c-empty-state")
+
+        # Test error conditions in "change enclosing file permissions"
+        m.execute("chattr +i /home/admin/Documents/Work/notes.txt")
+        self.addCleanup(m.execute, "chattr -i /home/admin/Documents/Work/notes.txt")
+        open_permissions_dialog("Documents")
+        b.click(".pf-v5-c-modal-box button.pf-m-secondary")
+        self.wait_modal_inline_alert("Operation not permitted")
+        b.click("button.pf-m-link")
+        b.wait_not_present(".pf-v5-c-modal-box")
+
+        # Test permissions in details view
         basedir = "/home/admin"
         for i in range(8):
             m.execute(f"runuser -u admin touch {basedir}/file{i}")
