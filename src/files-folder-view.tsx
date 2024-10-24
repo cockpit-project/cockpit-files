@@ -17,7 +17,7 @@
  * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React, { useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 import { Card } from '@patternfly/react-core/dist/esm/components/Card';
 import { debounce } from "throttle-debounce";
@@ -25,6 +25,20 @@ import { debounce } from "throttle-debounce";
 import type { FolderFileInfo } from "./app.tsx";
 import { FilesCardBody } from "./files-card-body.tsx";
 import { as_sort, FilesCardHeader } from "./header.tsx";
+
+export interface UploadedFilesType {[name: string]:{file: File, progress: number, cancel:() => void}}
+
+interface UploadContextType {
+    uploadedFiles: UploadedFilesType,
+    setUploadedFiles: React.Dispatch<React.SetStateAction<UploadedFilesType>>,
+}
+
+export const UploadContext = createContext({
+    uploadedFiles: {},
+    setUploadedFiles: () => console.warn("UploadContext not initialized!"),
+} as UploadContextType);
+
+export const useUploadContext = () => useContext(UploadContext);
 
 export const FilesFolderView = ({
     path,
@@ -48,6 +62,8 @@ export const FilesFolderView = ({
     const [currentFilter, setCurrentFilter] = useState("");
     const [isGrid, setIsGrid] = useState(localStorage.getItem("files:isGrid") !== "false");
     const [sortBy, setSortBy] = useState(as_sort(localStorage.getItem("files:sort")));
+    const [uploadedFiles, setUploadedFiles] = useState<{[name: string]:
+                                                        {file: File, progress: number, cancel:() => void}}>({});
     const onFilterChange = debounce(300,
                                     (_event: React.FormEvent<HTMLInputElement>, value: string) =>
                                         setCurrentFilter(value));
@@ -59,37 +75,39 @@ export const FilesFolderView = ({
 
     return (
         <Card>
-            <FilesCardHeader
-              currentFilter={currentFilter}
-              onFilterChange={onFilterChange}
-              isGrid={isGrid}
-              setIsGrid={setIsGrid}
-              sortBy={sortBy}
-              setSortBy={setSortBy}
-              path={path}
-              showHidden={showHidden}
-              setShowHidden={setShowHidden}
-              selected={selected}
-              setSelected={setSelected}
-              clipboard={clipboard}
-              setClipboard={setClipboard}
-            />
-            <FilesCardBody
-              files={files}
-              currentFilter={currentFilter}
-              path={path}
-              isGrid={isGrid}
-              sortBy={sortBy}
-              setSortBy={setSortBy}
-              selected={selected}
-              setSelected={setSelected}
-              loadingFiles={loadingFiles}
-              clipboard={clipboard}
-              setClipboard={setClipboard}
-              showHidden={showHidden}
-              setShowHidden={setShowHidden}
-              setCurrentFilter={setCurrentFilter}
-            />
+            <UploadContext.Provider value={{ uploadedFiles, setUploadedFiles }}>
+                <FilesCardHeader
+                  currentFilter={currentFilter}
+                  onFilterChange={onFilterChange}
+                  isGrid={isGrid}
+                  setIsGrid={setIsGrid}
+                  sortBy={sortBy}
+                  setSortBy={setSortBy}
+                  path={path}
+                  showHidden={showHidden}
+                  setShowHidden={setShowHidden}
+                  selected={selected}
+                  setSelected={setSelected}
+                  clipboard={clipboard}
+                  setClipboard={setClipboard}
+                />
+                <FilesCardBody
+                  files={files}
+                  currentFilter={currentFilter}
+                  path={path}
+                  isGrid={isGrid}
+                  sortBy={sortBy}
+                  setSortBy={setSortBy}
+                  selected={selected}
+                  setSelected={setSelected}
+                  loadingFiles={loadingFiles}
+                  clipboard={clipboard}
+                  setClipboard={setClipboard}
+                  showHidden={showHidden}
+                  setShowHidden={setShowHidden}
+                  setCurrentFilter={setCurrentFilter}
+                />
+            </UploadContext.Provider>
         </Card>
     );
 };
