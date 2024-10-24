@@ -11,60 +11,57 @@
 
 // Passthrough for layout and styling purposes, to enable main page parts to participate in the grid
 .pf-v5-c-page__main-section,
-.pf-v5-c-sidebar,
-.pf-v5-c-sidebar__main,
-.pf-v5-c-sidebar__content {
+.files-view-stack {
     display: contents;
 }
 
-// Move the scrollbar to the content area.
-// Do this by triggering the overflow on the fileview wrapper and sidebar panel
-// when content doesn't fit. (Parent card is also needed to overflow, else the
-// children won't here in this context.)
-.pf-v5-c-sidebar__content > .pf-v5-c-card,
-.fileview-wrapper,
-.sidebar-panel {
-    overflow: auto;
-}
-
 // Content area should stretch, so context menu works even when the content doesn't fill the area
+.files-view-stack .pf-v5-c-card,
 .fileview-wrapper {
     block-size: 100%;
+    overflow: auto;
 }
 
 .pf-v5-c-page__main {
     gap: var(--pf-v5-global--spacer--md);
     display: grid;
     grid-template:
-        "topbar topbar topbar topbar" auto
-        ". content sidebar ." 1fr
-        ". . . ." 0
-        / 0 1fr 18rem 0;
+        "topbar topbar topbar" auto
+        ". content ." 1fr
+        ". files-footer-info ." auto
+        ". . ." 0
+        / 0 1fr 0;
     inline-size: 100vw;
     block-size: 100vh;
 }
 
-.pf-v5-c-sidebar__content > .pf-v5-c-card {
+.files-empty-state,
+.files-view-stack > .pf-v5-c-card {
     grid-area: content;
 }
 
-.sidebar-panel {
-    grid-area: sidebar;
+.files-view-stack > .files-footer-info {
+    margin-block-start: 0;
+    grid-area: files-footer-info;
 }
 
 @container (width < 768px) {
     // Change the general layout in smaller screen sizes
     .pf-v5-c-page__main {
+        gap: var(--pf-v5-global--spacer--sm);
         grid-template:
             "topbar" auto
             "." var(--pf-v5-global--spacer--md)
             "content" 1fr
-            "sidebar" 8rem
+            "files-footer-info" auto
             / 1fr;
         row-gap: 0;
     }
-}
 
+    .files-view-stack > .files-footer-info {
+        margin-block: var(--pf-v5-global--spacer--sm);
+    }
+}
 /* Style the list cards as ct-cards */
 .pf-c-page__main-section > .pf-c-card {
     @extend .ct-card;
@@ -182,31 +179,6 @@
     grid-template-columns: repeat(auto-fill, minmax(var(--pf-v5-l-gallery--GridTemplateColumns--max), 1fr));
 }
 
-.sidebar-card {
-    background: inherit;
-    box-shadow: none;
-}
-
-.sidebar-panel {
-    background-color: unset;
-}
-
-.sidebar-details {
-    margin-block-end: var(--pf-v5-global--spacer--md);
-    // Wrap on demand
-    grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
-}
-
-// Improve header layout and wrap header text
-.sidebar-panel {
-    .pf-v5-c-card__header-main {
-        display: grid !important;
-        grid-template: 1fr / 1fr auto;
-        overflow-wrap: anywhere;
-        align-items: start;
-    }
-}
-
 // Wrap titles of modals (instead of truncating long filenames)
 .pf-v5-c-modal-box__title, .pf-v5-c-modal-box__title-text {
     white-space: break-spaces;
@@ -246,9 +218,11 @@
     display: flex;
     flex-flow: row wrap;
     gap: var(--pf-v5-global--spacer--md);
+    justify-content: space-between;
+    font-family: var(--pf-v5-global--FontFamily--text);
 
     .files-search {
-        flex: 15ch;
+        flex: min-content;
     }
 
     .header-actions {
@@ -318,5 +292,22 @@
         padding-inline: var(--pf-v5-global--spacer--sm);
         box-shadow: inset 1px 1px 0 var(--pf-v5-global--BackgroundColor--100);
         white-space: nowrap;
+    }
+}
+
+// Files footer styling
+.files-footer-info {
+    display: flex;
+    flex-flow: row wrap;
+    column-gap: var(--pf-v5-global--spacer--md);
+    margin-block-start: var(--pf-v5-global--spacer--sm);
+    margin-inline-start: var(--pf-v5-global--spacer--md);
+
+    .files-footer-mtime {
+        color: var(--pf-v5-global--Color--200);
+    }
+
+    .files-footer-permissions {
+        color: var(--pf-v5-global--link--Color);
     }
 }
