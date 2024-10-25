@@ -34,6 +34,10 @@ updates:
         patterns:
           - "xterm*"
     ignore:
+      # needs to be done in Cockpit first
+      - dependency-name: "@patternfly/*"
+        update-types: ["major"]
+
       # https://github.com/cockpit-project/cockpit/issues/21151
       - dependency-name: "sass"
         versions: ["1.80.x", "2.x"]
