@@ -76,6 +76,8 @@ export function get_menu_items(
     dialogs: Dialogs,
 ) {
     const menuItems: MenuItem[] = [];
+    // @ts-expect-error: complains about terminal not existing as a property despite being json
+    const supportsTerminal = cockpit.manifests.system?.tools?.terminal?.capabilities?.includes("path");
 
     if (selected.length === 0) {
         menuItems.push(
@@ -103,6 +105,16 @@ export function get_menu_items(
                 onClick: () => edit_permissions(dialogs, null, path)
             }
         );
+        if (supportsTerminal) {
+            menuItems.push(
+                { type: "divider" },
+                {
+                    id: "terminal",
+                    title: _("Open in terminal"),
+                    onClick: () => cockpit.jump("/system/terminal#/?path=" + encodeURIComponent(path))
+                }
+            );
+        }
     } else if (selected.length === 1) {
         const item = selected[0];
         // Only allow code, text and unknown file types as we detect things by
@@ -145,7 +157,7 @@ export function get_menu_items(
                 onClick: () => confirm_delete(dialogs, path, [item], setSelected)
             },
         );
-        if (item.type === "reg")
+        if (item.type === "reg") {
             menuItems.push(
                 { type: "divider" },
                 {
@@ -154,6 +166,16 @@ export function get_menu_items(
                     onClick: () => downloadFile(path, item)
                 }
             );
+        } else if (item.type === "dir" && supportsTerminal) {
+            menuItems.push(
+                { type: "divider" },
+                {
+                    id: "terminal",
+                    title: _("Open in terminal"),
+                    onClick: () => cockpit.jump("/system/terminal#/?path=" + encodeURIComponent(path + item.name))
+                }
+            );
+        }
     } else if (selected.length > 1) {
         menuItems.push(
             {
