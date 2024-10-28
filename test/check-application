@@ -869,13 +869,13 @@ class TestFiles(testlib.MachineCase):
 
         # Creating folder inside protected folder should return an error
         m.execute("chattr +i /home/admin/newdir")
+        self.addCleanup(m.execute, "chattr -i /home/admin/newdir")
         b.mouse("[data-item='newdir']", "dblclick")
         b.wait_not_present("[data-item='newdir']")
         self.create_directory("test")
         alert_text = "mkdir: cannot create directory ‘/home/admin/newdir/test’: Operation not permitted"
         self.wait_modal_inline_alert(alert_text)
         b.click("div.pf-v5-c-modal-box__close button.pf-v5-c-button")
-        m.execute("chattr -i /home/admin/newdir")
 
         # Creating folder as superuser a non-logged in owned directory has the expected folder permissions
         b.go("/files#/?path=/root")
@@ -1071,11 +1071,11 @@ class TestFiles(testlib.MachineCase):
 
         # Renaming protected item should give an error
         m.execute("chattr +i /home/admin/new\\ dir1")
+        self.addCleanup(m.execute, "chattr -i /home/admin/new\\ dir1")
         self.rename_item("new dir1", "testdir")
         alert_text = "mv: cannot move '/home/admin/new dir1' to '/home/admin/testdir': Operation not permitted"
         self.wait_modal_inline_alert(alert_text)
         b.click("div.pf-v5-c-modal-box__close > button")
-        m.execute("chattr -i /home/admin/new\\ dir1")
 
         basedir = '/home/admin'
         # Force overwrite rename on normal file
