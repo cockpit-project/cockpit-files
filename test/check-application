@@ -994,13 +994,47 @@ class TestFiles(testlib.MachineCase):
         b.click("button.pf-m-primary")
         b.wait_in_text("[data-item='newdir1'] .item-owner", "testuser")
 
+        if self.system_before(329):
+            # Open in terminal feature not supported before cockpit 329
+            b.mouse("[data-item='newdir1']", "contextmenu")
+            b.wait_visible(".contextMenu button:contains('Delete')")
+            b.wait_not_present(".contextMenu button:contains('Open in terminal')")
+            b.mouse("#files-card-parent", "contextmenu", body_size[0] / 2, body_size[0] / 2)
+            b.wait_visible(".contextMenu button:contains('Create directory')")
+            b.wait_not_present(".contextMenu button:contains('Open in terminal')")
+        else:
+            # Open folder in terminal from context menu
+            b.mouse("[data-item='newdir1']", "contextmenu")
+            b.click(".contextMenu button:contains('Open in terminal')")
+            b.enter_page("/system/terminal")
+            b.switch_to_top()
+            b.wait_js_cond('String(window.location.pathname) === "/system/terminal"')
+            b.wait_js_cond('window.location.hash === "#/?path=%2Fhome%2Fadmin%2Fnewdir1"')
+            b.go("/files")
+            b.enter_page("/files")
+
+            # Open current dir in terminal from context menu
+            b.mouse("#files-card-parent", "contextmenu", body_size[0] / 2, body_size[0] / 2)
+            b.click(".contextMenu button:contains('Open in terminal')")
+            b.enter_page("/system/terminal")
+            b.switch_to_top()
+            b.wait_js_cond('String(window.location.pathname) === "/system/terminal"')
+            b.wait_js_cond('window.location.hash === "#/?path=%2Fhome%2Fadmin%2F"')
+            b.go("/files")
+            b.enter_page("/files")
+
+        # Regular files should not have terminal feature
+        m.execute("echo 'some content' > /home/admin/newfile")
+        b.mouse("[data-item='newfile']", "contextmenu")
+        b.wait_visible(".contextMenu button:contains('Delete')")
+        b.wait_not_present(".contextMenu button:contains('Open in terminal')")
+
         # Delete folder from context menu
         b.mouse("[data-item='newdir1']", "contextmenu")
         b.click(".contextMenu button:contains('Delete')")
         b.click("button.pf-m-danger")
         b.wait_not_present("[data-item='newdir1']")
 
-        m.execute("echo 'some content' > /home/admin/newfile")
         b.mouse("[data-item='newfile']", "contextmenu")
         b.assert_pixels(".contextMenu", "file-context-menu")
         b.click(".contextMenu button:contains('Download')")
