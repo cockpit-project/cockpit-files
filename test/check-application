@@ -348,6 +348,27 @@ class TestFiles(testlib.MachineCase):
         b.go("/files#/?path=/home/admin")
         self.assert_last_breadcrumb("admin")
 
+        # Navigating resets the current search filter
+        b.go("/files#/?path=/")
+        self.assert_last_breadcrumb('/')
+        b.set_input_text("input[placeholder='Filter directory']", "sys")
+        self.browser.wait_js_cond("ph_count('#folder-view tbody tr') == 1")
+
+        b.mouse("[data-item='sys']", "dblclick")
+        self.assert_last_breadcrumb("sys")
+        b.wait_val("input[placeholder='Filter directory']", "")
+
+        b.set_input_text("input[placeholder='Filter directory']", "no-matches-at-all")
+        self.browser.wait_js_cond("ph_count('#folder-view tbody tr') == 0")
+        self.assert_last_breadcrumb("sys")
+
+        b.click("li[data-location='/'] a")
+        self.assert_last_breadcrumb("/")
+        b.wait_val("input[placeholder='Filter directory']", "")
+
+        b.go("/files#/?path=/home/admin")
+        self.assert_last_breadcrumb("admin")
+
         # Selecting one file shows its info in the footer
         b.click("[data-item='newdir']")
         b.wait_in_text(".files-footer-info", "newdir")
@@ -419,22 +440,6 @@ class TestFiles(testlib.MachineCase):
         b.click(edit_button)
         b.wait_val(path_input, "/")
         b.click(cancel_button)
-
-        # Navigating resets the current search filter
-        b.set_input_text("input[placeholder='Filter directory']", "sys")
-        self.browser.wait_js_cond("ph_count('#folder-view tbody tr') == 1")
-
-        b.mouse("[data-item='sys']", "dblclick")
-        self.assert_last_breadcrumb("sys")
-        b.wait_val("input[placeholder='Filter directory']", "")
-
-        b.set_input_text("input[placeholder='Filter directory']", "no-matches-at-all")
-        self.browser.wait_js_cond("ph_count('#folder-view tbody tr') == 0")
-        self.assert_last_breadcrumb("sys")
-
-        b.click("li[data-location='/'] a")
-        self.assert_last_breadcrumb("/")
-        b.wait_val("input[placeholder='Filter directory']", "")
 
     def testSorting(self) -> None:
         b = self.browser
