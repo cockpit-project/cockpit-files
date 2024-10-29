@@ -911,6 +911,7 @@ class TestFiles(testlib.MachineCase):
         b.drop_superuser()
         b.go('/files#/?path=/home/admin')
         b.wait_not_present('.pf-v5-c-empty-state')
+        self.assert_last_breadcrumb("admin")
         self.create_directory('admindir')
         b.wait_visible("[data-item='admindir']")
         self.assert_owner('/home/admin/admindir', 'admin:admin')
