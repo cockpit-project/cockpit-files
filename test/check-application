@@ -59,7 +59,7 @@ class TestFiles(testlib.MachineCase):
             b.wait_not_present(".pf-v5-c-modal-box")
             b.wait_not_present(f"[data-item='{filename}']")
 
-    def create_directory(self, filename: str, owner: str | None = None) -> None:
+    def create_directory(self, filename: str, owner: str | None = None, *, expect_success: bool = True) -> None:
         b = self.browser
         b.click("#dropdown-menu")
         b.click("#create-item")
@@ -67,6 +67,8 @@ class TestFiles(testlib.MachineCase):
         if owner:
             b.select_from_dropdown("#create-directory-owner", owner)
         b.click("button.pf-m-primary")
+        if expect_success:
+            b.wait_not_present(".pf-v5-c-modal-box")
 
     def wait_modal_inline_alert(self, msg: str) -> None:
         b = self.browser
@@ -858,12 +860,12 @@ class TestFiles(testlib.MachineCase):
         b.click(".pf-v5-c-modal-box__footer button.pf-m-link")  # cancel
 
         # Creating folder with duplicate name should return an error
-        self.create_directory("newdir")
+        self.create_directory("newdir", expect_success=False)
         self.wait_modal_inline_alert("mkdir: cannot create directory ‘/home/admin/newdir’: File exists")
         b.click("div.pf-v5-c-modal-box__close button.pf-v5-c-button")
 
         # Creating folder with empty name should return an error
-        self.create_directory("")
+        self.create_directory("", expect_success=False)
         self.wait_modal_inline_alert("mkdir: cannot create directory ‘/home/admin/’: File exists")
         b.click("div.pf-v5-c-modal-box__close button.pf-v5-c-button")
 
@@ -871,7 +873,7 @@ class TestFiles(testlib.MachineCase):
         m.execute("sudo chattr +i /home/admin/newdir")
         b.mouse("[data-item='newdir']", "dblclick")
         b.wait_not_present("[data-item='newdir']")
-        self.create_directory("test")
+        self.create_directory("test", expect_success=False)
         alert_text = "mkdir: cannot create directory ‘/home/admin/newdir/test’: Operation not permitted"
         self.wait_modal_inline_alert(alert_text)
         b.click("div.pf-v5-c-modal-box__close button.pf-v5-c-button")
