@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-16 03:07+0000\n"
+"POT-Creation-Date: 2024-10-29 03:06+0000\n"
 "PO-Revision-Date: 2024-09-17 08:38+0000\n"
 "Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
 "memory@weblate.org>\n"
@@ -44,7 +44,7 @@ msgstr[0] "$0 kohde on piilotettu"
 msgstr[1] "$0 kohdetta on piilotettu"
 
 #. Translators: $0 represents a filename
-#: src/dialogs/permissions.jsx:123
+#: src/dialogs/permissions.jsx:200
 #, fuzzy
 #| msgid "“$0” permissions"
 msgid "$0 permissions"
@@ -75,7 +75,7 @@ msgstr ""
 msgid "A-Z"
 msgstr "A-Z"
 
-#: src/dialogs/permissions.jsx:180
+#: src/dialogs/permissions.jsx:257
 msgid "Access"
 msgstr "Pääsy"
 
@@ -100,8 +100,8 @@ msgstr "Lohkolaite"
 msgid "Bookmarks"
 msgstr "Kirjanmerkit"
 
-#: src/dialogs/editor.tsx:211 src/dialogs/delete.tsx:91
-#: src/dialogs/permissions.jsx:135 src/dialogs/rename.tsx:116
+#: src/dialogs/editor.tsx:212 src/dialogs/delete.tsx:91
+#: src/dialogs/permissions.jsx:212 src/dialogs/rename.tsx:116
 #: src/dialogs/mkdir.tsx:108 src/upload-button.tsx:91
 msgid "Cancel"
 msgstr "Peru"
@@ -118,7 +118,7 @@ msgstr "Peruttu"
 msgid "Cancelled upload of $0"
 msgstr "$0:n uloslataus peruttu"
 
-#: src/dialogs/permissions.jsx:133
+#: src/dialogs/permissions.jsx:210
 msgid "Change"
 msgstr "Vaihda"
 
@@ -130,7 +130,7 @@ msgstr "Merkkilaite"
 msgid "Clear filter"
 msgstr "Tyhjennä suodatin"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:18 src/dialogs/editor.tsx:211
+#: src/dialogs/keyboardShortcutsHelp.tsx:18 src/dialogs/editor.tsx:212
 msgid "Close"
 msgstr "Sulje"
 
@@ -233,7 +233,7 @@ msgid "Download"
 msgstr "Lataus"
 
 #. Translators: This is the title of a modal dialog.  $0 represents a filename.
-#: src/dialogs/editor.tsx:169
+#: src/dialogs/editor.tsx:170
 #, fuzzy
 #| msgid "Edit “$0”"
 msgid "Edit $0"
@@ -317,12 +317,12 @@ msgstr ""
 msgid "Go up a directory"
 msgstr "Luo hakemisto"
 
-#: src/files-card-body.tsx:601 src/dialogs/permissions.jsx:164
+#: src/files-card-body.tsx:601 src/dialogs/permissions.jsx:241
 #: src/sidebar.tsx:57
 msgid "Group"
 msgstr "Ryhmä"
 
-#: src/dialogs/permissions.jsx:194
+#: src/dialogs/permissions.jsx:271
 msgid "Group access"
 msgstr "Ryhmään pääsy"
 
@@ -338,7 +338,7 @@ msgstr "Piilota piilotetut kohteet"
 msgid "Home"
 msgstr "Koti"
 
-#: src/dialogs/editor.tsx:239
+#: src/dialogs/editor.tsx:240
 msgid "Ignore"
 msgstr "Ohita"
 
@@ -410,6 +410,12 @@ msgstr "Uusi tiedostonimi"
 msgid "New name"
 msgstr "Uusi nimi"
 
+#: src/dialogs/permissions.jsx:153
+#, fuzzy
+#| msgid "Group access"
+msgid "No access"
+msgstr "Ryhmään pääsy"
+
 #: src/files-card-body.tsx:495
 msgid "No matching results"
 msgstr "Ei vastaavia tuloksia"
@@ -434,20 +440,20 @@ msgstr "Muut käyttöoikeudet"
 msgid "Others"
 msgstr "Muut"
 
-#: src/dialogs/permissions.jsx:206
+#: src/dialogs/permissions.jsx:283
 msgid "Others access"
 msgstr "Muiden pääsy"
 
-#: src/dialogs/editor.tsx:195 src/dialogs/rename.tsx:114
+#: src/dialogs/editor.tsx:196 src/dialogs/rename.tsx:114
 msgid "Overwrite"
 msgstr "Korvaa"
 
 #: src/files-card-body.tsx:533 src/files-card-body.tsx:601
-#: src/dialogs/permissions.jsx:149 src/sidebar.tsx:52 src/header.tsx:99
+#: src/dialogs/permissions.jsx:226 src/sidebar.tsx:52 src/header.tsx:99
 msgid "Owner"
 msgstr "Omistaja"
 
-#: src/dialogs/permissions.jsx:182
+#: src/dialogs/permissions.jsx:259
 msgid "Owner access"
 msgstr "Omistajan pääsy"
 
@@ -463,7 +469,7 @@ msgstr "Omistaja laskeva"
 msgid "Owner permissions"
 msgstr "Omistajan käyttöoikeudet"
 
-#: src/dialogs/permissions.jsx:148
+#: src/dialogs/permissions.jsx:225
 msgid "Ownership"
 msgstr "Omistajuus"
 
@@ -489,7 +495,7 @@ msgstr "Käyttöoikeudet"
 msgid "Read and execute"
 msgstr "Luku ja suoritus"
 
-#: src/common.ts:31
+#: src/common.ts:31 src/dialogs/permissions.jsx:143
 msgid "Read and write"
 msgstr "Luku ja kirjoitus"
 
@@ -497,7 +503,7 @@ msgstr "Luku ja kirjoitus"
 msgid "Read, write, and execute"
 msgstr "Luku, kirjoitus ja suoritus"
 
-#: src/common.ts:29 src/dialogs/editor.tsx:172
+#: src/common.ts:29 src/dialogs/editor.tsx:173 src/dialogs/permissions.jsx:148
 msgid "Read-only"
 msgstr "Vain luku"
 
@@ -505,7 +511,7 @@ msgstr "Vain luku"
 msgid "Regular file"
 msgstr "Säännöllinen tiedosto"
 
-#: src/dialogs/editor.tsx:236
+#: src/dialogs/editor.tsx:237
 msgid "Reload"
 msgstr "Lataa uudelleen"
 
@@ -533,12 +539,20 @@ msgstr "Vaihda"
 msgid "Replace file $0?"
 msgstr "Vaihdetaanko tiedosto $0?"
 
-#: src/dialogs/editor.tsx:208
+#: src/dialogs/editor.tsx:209
 msgid "Save"
 msgstr "Tallenna"
 
+#: src/dialogs/permissions.jsx:296
+msgid "Security context"
+msgstr ""
+
 #: src/dialogs/keyboardShortcutsHelp.tsx:104
 msgid "Select all"
+msgstr ""
+
+#: src/dialogs/permissions.jsx:308
+msgid "Set executable as program"
 msgstr ""
 
 #: src/files-card-body.tsx:511 src/header.tsx:294
@@ -573,15 +587,15 @@ msgstr "Tiedosto(t) ulosladattu onnistuneesti"
 msgid "Symbolic link"
 msgstr "Symbolinen linkki"
 
-#: src/dialogs/editor.tsx:58
+#: src/dialogs/editor.tsx:59
 msgid "The existing file changed unexpectedly"
 msgstr "Olemassa oleva tiedosto muuttui odottamatta"
 
-#: src/dialogs/editor.tsx:56 src/dialogs/editor.tsx:230
+#: src/dialogs/editor.tsx:57 src/dialogs/editor.tsx:231
 msgid "The file has been removed on disk"
 msgstr "Tiedosto on poistettu levyltä"
 
-#: src/dialogs/editor.tsx:231
+#: src/dialogs/editor.tsx:232
 msgid "The file has changed on disk"
 msgstr "Tiedosto on muuttunut levyllä"
 
@@ -614,7 +628,7 @@ msgstr "Uloslatausvirhe"
 msgid "Uploads"
 msgstr "Uloslataukset"
 
-#: src/dialogs/editor.tsx:169
+#: src/dialogs/editor.tsx:170
 #, fuzzy
 #| msgid "View “$0”"
 msgid "View $0"
@@ -624,7 +638,7 @@ msgstr "Näytä \"$0\""
 msgid "Write and execute"
 msgstr "Kirjoitus ja suoritus"
 
-#: src/common.ts:27
+#: src/common.ts:27 src/dialogs/permissions.jsx:163
 msgid "Write-only"
 msgstr "Vain kirjoitus"
 
