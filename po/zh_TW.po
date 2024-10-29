@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-16 03:07+0000\n"
+"POT-Creation-Date: 2024-10-29 03:06+0000\n"
 "PO-Revision-Date: 2024-10-11 18:38+0000\n"
 "Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
 "memory@weblate.org>\n"
@@ -42,7 +42,7 @@ msgid_plural "$0 items are hidden"
 msgstr[0] "$0 個已隱藏的項目"
 
 #. Translators: $0 represents a filename
-#: src/dialogs/permissions.jsx:123
+#: src/dialogs/permissions.jsx:200
 #, fuzzy
 #| msgid "“$0” permissions"
 msgid "$0 permissions"
@@ -70,7 +70,7 @@ msgstr "一個相同名稱的檔案已於 \"$0\" 存在。 若將其取代將覆
 msgid "A-Z"
 msgstr "由 A 到 Z"
 
-#: src/dialogs/permissions.jsx:180
+#: src/dialogs/permissions.jsx:257
 msgid "Access"
 msgstr "存取權限"
 
@@ -95,8 +95,8 @@ msgstr "區塊裝置"
 msgid "Bookmarks"
 msgstr "書籤"
 
-#: src/dialogs/editor.tsx:211 src/dialogs/delete.tsx:91
-#: src/dialogs/permissions.jsx:135 src/dialogs/rename.tsx:116
+#: src/dialogs/editor.tsx:212 src/dialogs/delete.tsx:91
+#: src/dialogs/permissions.jsx:212 src/dialogs/rename.tsx:116
 #: src/dialogs/mkdir.tsx:108 src/upload-button.tsx:91
 msgid "Cancel"
 msgstr "取消"
@@ -113,7 +113,7 @@ msgstr "已取消"
 msgid "Cancelled upload of $0"
 msgstr "已取消上傳 $0"
 
-#: src/dialogs/permissions.jsx:133
+#: src/dialogs/permissions.jsx:210
 msgid "Change"
 msgstr "變更"
 
@@ -125,7 +125,7 @@ msgstr "字元裝置"
 msgid "Clear filter"
 msgstr "清除篩選器"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:18 src/dialogs/editor.tsx:211
+#: src/dialogs/keyboardShortcutsHelp.tsx:18 src/dialogs/editor.tsx:212
 msgid "Close"
 msgstr "關閉"
 
@@ -226,7 +226,7 @@ msgid "Download"
 msgstr "下載"
 
 #. Translators: This is the title of a modal dialog.  $0 represents a filename.
-#: src/dialogs/editor.tsx:169
+#: src/dialogs/editor.tsx:170
 #, fuzzy
 #| msgid "Edit “$0”"
 msgid "Edit $0"
@@ -308,12 +308,12 @@ msgstr "前進"
 msgid "Go up a directory"
 msgstr "回上一層目錄"
 
-#: src/files-card-body.tsx:601 src/dialogs/permissions.jsx:164
+#: src/files-card-body.tsx:601 src/dialogs/permissions.jsx:241
 #: src/sidebar.tsx:57
 msgid "Group"
 msgstr "群組"
 
-#: src/dialogs/permissions.jsx:194
+#: src/dialogs/permissions.jsx:271
 msgid "Group access"
 msgstr "群組存取權限"
 
@@ -329,7 +329,7 @@ msgstr "不顯示隱藏的項目"
 msgid "Home"
 msgstr "家目錄"
 
-#: src/dialogs/editor.tsx:239
+#: src/dialogs/editor.tsx:240
 msgid "Ignore"
 msgstr "忽略"
 
@@ -401,6 +401,12 @@ msgstr "新檔案名稱"
 msgid "New name"
 msgstr "新名稱"
 
+#: src/dialogs/permissions.jsx:153
+#, fuzzy
+#| msgid "Group access"
+msgid "No access"
+msgstr "群組存取權限"
+
 #: src/files-card-body.tsx:495
 msgid "No matching results"
 msgstr "沒有找到相符的結果"
@@ -425,20 +431,20 @@ msgstr "其他權限"
 msgid "Others"
 msgstr "其他人"
 
-#: src/dialogs/permissions.jsx:206
+#: src/dialogs/permissions.jsx:283
 msgid "Others access"
 msgstr "其他人的存取權限"
 
-#: src/dialogs/editor.tsx:195 src/dialogs/rename.tsx:114
+#: src/dialogs/editor.tsx:196 src/dialogs/rename.tsx:114
 msgid "Overwrite"
 msgstr "覆寫"
 
 #: src/files-card-body.tsx:533 src/files-card-body.tsx:601
-#: src/dialogs/permissions.jsx:149 src/sidebar.tsx:52 src/header.tsx:99
+#: src/dialogs/permissions.jsx:226 src/sidebar.tsx:52 src/header.tsx:99
 msgid "Owner"
 msgstr "擁有者"
 
-#: src/dialogs/permissions.jsx:182
+#: src/dialogs/permissions.jsx:259
 msgid "Owner access"
 msgstr "擁有者存取權限"
 
@@ -454,7 +460,7 @@ msgstr "擁有者遞減排序"
 msgid "Owner permissions"
 msgstr "擁有者權限"
 
-#: src/dialogs/permissions.jsx:148
+#: src/dialogs/permissions.jsx:225
 msgid "Ownership"
 msgstr "所有權"
 
@@ -478,7 +484,7 @@ msgstr "權限"
 msgid "Read and execute"
 msgstr "讀取與執行"
 
-#: src/common.ts:31
+#: src/common.ts:31 src/dialogs/permissions.jsx:143
 msgid "Read and write"
 msgstr "讀取與寫入"
 
@@ -486,7 +492,7 @@ msgstr "讀取與寫入"
 msgid "Read, write, and execute"
 msgstr "讀取、寫入與執行"
 
-#: src/common.ts:29 src/dialogs/editor.tsx:172
+#: src/common.ts:29 src/dialogs/editor.tsx:173 src/dialogs/permissions.jsx:148
 msgid "Read-only"
 msgstr "只能讀取"
 
@@ -494,7 +500,7 @@ msgstr "只能讀取"
 msgid "Regular file"
 msgstr "一般檔案"
 
-#: src/dialogs/editor.tsx:236
+#: src/dialogs/editor.tsx:237
 msgid "Reload"
 msgstr "重新載入"
 
@@ -522,13 +528,21 @@ msgstr "取代"
 msgid "Replace file $0?"
 msgstr "取代檔案 $0 ？"
 
-#: src/dialogs/editor.tsx:208
+#: src/dialogs/editor.tsx:209
 msgid "Save"
 msgstr "儲存"
+
+#: src/dialogs/permissions.jsx:296
+msgid "Security context"
+msgstr ""
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:104
 msgid "Select all"
 msgstr "全選"
+
+#: src/dialogs/permissions.jsx:308
+msgid "Set executable as program"
+msgstr ""
 
 #: src/files-card-body.tsx:511 src/header.tsx:294
 msgid "Show hidden items"
@@ -562,15 +576,15 @@ msgstr "檔案上傳成功"
 msgid "Symbolic link"
 msgstr "符號連結"
 
-#: src/dialogs/editor.tsx:58
+#: src/dialogs/editor.tsx:59
 msgid "The existing file changed unexpectedly"
 msgstr "既存的檔案有意料外的變更"
 
-#: src/dialogs/editor.tsx:56 src/dialogs/editor.tsx:230
+#: src/dialogs/editor.tsx:57 src/dialogs/editor.tsx:231
 msgid "The file has been removed on disk"
 msgstr "該檔案已被從磁碟上移除"
 
-#: src/dialogs/editor.tsx:231
+#: src/dialogs/editor.tsx:232
 msgid "The file has changed on disk"
 msgstr "該檔案已在磁碟上被變更"
 
@@ -603,7 +617,7 @@ msgstr "上傳失敗"
 msgid "Uploads"
 msgstr "上傳項目"
 
-#: src/dialogs/editor.tsx:169
+#: src/dialogs/editor.tsx:170
 #, fuzzy
 #| msgid "View “$0”"
 msgid "View $0"
@@ -613,7 +627,7 @@ msgstr "檢視 \"$0\""
 msgid "Write and execute"
 msgstr "寫入與執行"
 
-#: src/common.ts:27
+#: src/common.ts:27 src/dialogs/permissions.jsx:163
 msgid "Write-only"
 msgstr "只能寫入"
 

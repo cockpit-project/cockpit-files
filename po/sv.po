@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-16 03:07+0000\n"
-"PO-Revision-Date: 2024-10-16 07:38+0000\n"
+"POT-Creation-Date: 2024-10-29 03:06+0000\n"
+"PO-Revision-Date: 2024-10-29 07:38+0000\n"
 "Last-Translator: Luna Jernberg <bittin@reimu.nl>\n"
 "Language-Team: Swedish <https://translate.fedoraproject.org/projects/cockpit-"
 "files/cockpit-files/sv/>\n"
@@ -43,7 +43,7 @@ msgstr[0] "($0 objekt är dolt)"
 msgstr[1] "($0 objekt är dolda)"
 
 #. Translators: $0 represents a filename
-#: src/dialogs/permissions.jsx:123
+#: src/dialogs/permissions.jsx:200
 msgid "$0 permissions"
 msgstr "$0 behörigheter"
 
@@ -75,7 +75,7 @@ msgstr ""
 msgid "A-Z"
 msgstr "A-Z"
 
-#: src/dialogs/permissions.jsx:180
+#: src/dialogs/permissions.jsx:257
 msgid "Access"
 msgstr "Åtkomst"
 
@@ -100,8 +100,8 @@ msgstr "Blockenhet"
 msgid "Bookmarks"
 msgstr "Bokmärken"
 
-#: src/dialogs/editor.tsx:211 src/dialogs/delete.tsx:91
-#: src/dialogs/permissions.jsx:135 src/dialogs/rename.tsx:116
+#: src/dialogs/editor.tsx:212 src/dialogs/delete.tsx:91
+#: src/dialogs/permissions.jsx:212 src/dialogs/rename.tsx:116
 #: src/dialogs/mkdir.tsx:108 src/upload-button.tsx:91
 msgid "Cancel"
 msgstr "Avbryt"
@@ -118,7 +118,7 @@ msgstr "Avbruten"
 msgid "Cancelled upload of $0"
 msgstr "Avbruten uppladdning av $0"
 
-#: src/dialogs/permissions.jsx:133
+#: src/dialogs/permissions.jsx:210
 msgid "Change"
 msgstr "Ändra"
 
@@ -130,7 +130,7 @@ msgstr "Teckenenhet"
 msgid "Clear filter"
 msgstr "Rensa filter"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:18 src/dialogs/editor.tsx:211
+#: src/dialogs/keyboardShortcutsHelp.tsx:18 src/dialogs/editor.tsx:212
 msgid "Close"
 msgstr "Stäng"
 
@@ -231,7 +231,7 @@ msgid "Download"
 msgstr "Hämta"
 
 #. Translators: This is the title of a modal dialog.  $0 represents a filename.
-#: src/dialogs/editor.tsx:169
+#: src/dialogs/editor.tsx:170
 msgid "Edit $0"
 msgstr "Redigera $0"
 
@@ -311,12 +311,12 @@ msgstr "Gå framåt"
 msgid "Go up a directory"
 msgstr "Gå upp en katalog"
 
-#: src/files-card-body.tsx:601 src/dialogs/permissions.jsx:164
+#: src/files-card-body.tsx:601 src/dialogs/permissions.jsx:241
 #: src/sidebar.tsx:57
 msgid "Group"
 msgstr "Grupp"
 
-#: src/dialogs/permissions.jsx:194
+#: src/dialogs/permissions.jsx:271
 msgid "Group access"
 msgstr "Gruppåtkomst"
 
@@ -332,7 +332,7 @@ msgstr "Dölj dolda objekt"
 msgid "Home"
 msgstr "Hem"
 
-#: src/dialogs/editor.tsx:239
+#: src/dialogs/editor.tsx:240
 msgid "Ignore"
 msgstr "Ignorera"
 
@@ -404,6 +404,10 @@ msgstr "Nytt filnamn"
 msgid "New name"
 msgstr "Nytt namn"
 
+#: src/dialogs/permissions.jsx:153
+msgid "No access"
+msgstr "Ingen åtkomst"
+
 #: src/files-card-body.tsx:495
 msgid "No matching results"
 msgstr "Inga matchande resultat"
@@ -428,20 +432,20 @@ msgstr "Andra behörigheter"
 msgid "Others"
 msgstr "Andra"
 
-#: src/dialogs/permissions.jsx:206
+#: src/dialogs/permissions.jsx:283
 msgid "Others access"
 msgstr "Andra tillgång"
 
-#: src/dialogs/editor.tsx:195 src/dialogs/rename.tsx:114
+#: src/dialogs/editor.tsx:196 src/dialogs/rename.tsx:114
 msgid "Overwrite"
 msgstr "Skriv över"
 
 #: src/files-card-body.tsx:533 src/files-card-body.tsx:601
-#: src/dialogs/permissions.jsx:149 src/sidebar.tsx:52 src/header.tsx:99
+#: src/dialogs/permissions.jsx:226 src/sidebar.tsx:52 src/header.tsx:99
 msgid "Owner"
 msgstr "Ägare"
 
-#: src/dialogs/permissions.jsx:182
+#: src/dialogs/permissions.jsx:259
 msgid "Owner access"
 msgstr "Ägare tillgång"
 
@@ -457,7 +461,7 @@ msgstr "Ägare minskande"
 msgid "Owner permissions"
 msgstr "Ägare behörigheter"
 
-#: src/dialogs/permissions.jsx:148
+#: src/dialogs/permissions.jsx:225
 msgid "Ownership"
 msgstr "Ägarskap"
 
@@ -481,7 +485,7 @@ msgstr "Behörigheter"
 msgid "Read and execute"
 msgstr "Läs och exekvera"
 
-#: src/common.ts:31
+#: src/common.ts:31 src/dialogs/permissions.jsx:143
 msgid "Read and write"
 msgstr "Läs och skriv"
 
@@ -489,7 +493,7 @@ msgstr "Läs och skriv"
 msgid "Read, write, and execute"
 msgstr "Läs, skriv, och exekvera"
 
-#: src/common.ts:29 src/dialogs/editor.tsx:172
+#: src/common.ts:29 src/dialogs/editor.tsx:173 src/dialogs/permissions.jsx:148
 msgid "Read-only"
 msgstr "Läs-endast"
 
@@ -497,7 +501,7 @@ msgstr "Läs-endast"
 msgid "Regular file"
 msgstr "Vanlig fil"
 
-#: src/dialogs/editor.tsx:236
+#: src/dialogs/editor.tsx:237
 msgid "Reload"
 msgstr "Ladda om"
 
@@ -525,13 +529,21 @@ msgstr "Ersätt"
 msgid "Replace file $0?"
 msgstr "Ersätt fil $0?"
 
-#: src/dialogs/editor.tsx:208
+#: src/dialogs/editor.tsx:209
 msgid "Save"
 msgstr "Spara"
+
+#: src/dialogs/permissions.jsx:296
+msgid "Security context"
+msgstr "Säkerhetskontext"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:104
 msgid "Select all"
 msgstr "Välj alla"
+
+#: src/dialogs/permissions.jsx:308
+msgid "Set executable as program"
+msgstr "Ställ in körbar fil som program"
 
 #: src/files-card-body.tsx:511 src/header.tsx:294
 msgid "Show hidden items"
@@ -565,15 +577,15 @@ msgstr "Fil(er) som har laddats upp framgångsrikt"
 msgid "Symbolic link"
 msgstr "Symbolisk länk"
 
-#: src/dialogs/editor.tsx:58
+#: src/dialogs/editor.tsx:59
 msgid "The existing file changed unexpectedly"
 msgstr "Den befintliga filen ändrades oväntat"
 
-#: src/dialogs/editor.tsx:56 src/dialogs/editor.tsx:230
+#: src/dialogs/editor.tsx:57 src/dialogs/editor.tsx:231
 msgid "The file has been removed on disk"
 msgstr "Filen har tagits bort på disken"
 
-#: src/dialogs/editor.tsx:231
+#: src/dialogs/editor.tsx:232
 msgid "The file has changed on disk"
 msgstr "Filen har ändrats på disken"
 
@@ -605,7 +617,7 @@ msgstr "Uppladdningsfel"
 msgid "Uploads"
 msgstr "Uppladdningar"
 
-#: src/dialogs/editor.tsx:169
+#: src/dialogs/editor.tsx:170
 msgid "View $0"
 msgstr "Visa $0"
 
@@ -613,7 +625,7 @@ msgstr "Visa $0"
 msgid "Write and execute"
 msgstr "Skriv och exekvera"
 
-#: src/common.ts:27
+#: src/common.ts:27 src/dialogs/permissions.jsx:163
 msgid "Write-only"
 msgstr "Skriv-endast"
 
