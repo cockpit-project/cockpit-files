@@ -1437,6 +1437,7 @@ class TestFiles(testlib.MachineCase):
         self.assertEqual(m.execute(f"ls -l /home/admin/{shell_script}")[:10], "-r-xrw----")
 
         b.go("/files#/?path=/")
+        self.assert_last_breadcrumb("/")
         b.wait_not_present(".pf-v5-c-empty-state")
 
         # Shows root user owns "bin"
@@ -1451,6 +1452,7 @@ class TestFiles(testlib.MachineCase):
         b.drop_superuser()
 
         b.go("/files#/?path=/home/admin")
+        self.assert_last_breadcrumb("admin")
         b.wait_not_present(".pf-v5-c-empty-state")
 
         m.execute("touch /home/admin/adminfile; chown admin: /home/admin/adminfile")
@@ -1477,6 +1479,7 @@ class TestFiles(testlib.MachineCase):
 
         # Test permissions in details view
         b.go("/files#/?path=/home/admin")
+        self.assert_last_breadcrumb("admin")
         b.wait_not_present(".pf-v5-c-empty-state")
         basedir = "/home/admin"
         for i in range(8):
