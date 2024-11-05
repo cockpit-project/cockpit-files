@@ -1468,6 +1468,11 @@ class TestFiles(testlib.MachineCase):
         b.click("button.pf-m-link")
         b.wait_not_present(".pf-v5-c-modal-box")
 
+        # As normal user you cannot change user/group permissions
+        b.drop_superuser()
+        self.assert_last_breadcrumb("/")
+        b.wait_not_present(".pf-v5-c-empty-state")
+
         b.go("/files#/?path=/home/admin")
         self.assert_last_breadcrumb("admin")
         b.wait_not_present(".pf-v5-c-empty-state")
