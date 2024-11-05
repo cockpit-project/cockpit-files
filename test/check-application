@@ -1244,6 +1244,24 @@ class TestFiles(testlib.MachineCase):
         b.wait_visible("[data-item='f1']")
         b.wait_not_present("[data-item='.f2']")
 
+    def testPermissions1(self) -> None:
+        self.testPermissions()
+
+    def testPermissions2(self) -> None:
+        self.testPermissions()
+
+    def testPermissions3(self) -> None:
+        self.testPermissions()
+
+    def testPermissions4(self) -> None:
+        self.testPermissions()
+
+    def testPermissions5(self) -> None:
+        self.testPermissions()
+
+    def testPermissions6(self) -> None:
+        self.testPermissions()
+
     def testPermissions(self) -> None:
         b = self.browser
         m = self.machine
