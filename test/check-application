@@ -1273,7 +1273,7 @@ class TestFiles(testlib.MachineCase):
         # Check sidebar info
         m.execute("touch /home/admin/newfile")
         b.click("[data-item='newfile']")
-        self.assertEqual(m.execute("ls -l /home/admin/newfile")[:10], "-rw-r--r--")
+        self.assertEqual(self.stat("%A", "/home/admin/newfile"), "-rw-r--r--")
         check_perms_match('newfile', '/home/admin')
 
         # Test changing owner/group
@@ -1305,13 +1305,13 @@ class TestFiles(testlib.MachineCase):
         open_permissions_dialog('newfile')
         select_access("no-access")
         b.click(".pf-v5-c-modal-box button.pf-m-primary")
-        self.assertEqual(m.execute("ls -l /home/admin/newfile")[:10], "----------")
+        self.assertEqual(self.stat("%A", "/home/admin/newfile"), "----------")
         check_perms_match('newfile', '/home/admin')
 
         open_permissions_dialog('newfile')
         select_access("read-write")
         b.click(".pf-v5-c-modal-box button.pf-m-primary")
-        self.assertEqual(m.execute("ls -l /home/admin/newfile")[:10], "-rw-rw-rw-")
+        self.assertEqual(self.stat("%A", "/home/admin/newfile"), "-rw-rw-rw-")
         check_perms_match('newfile', '/home/admin')
 
         # Test changing CWD permissions
@@ -1331,7 +1331,7 @@ class TestFiles(testlib.MachineCase):
         b.click(".pf-v5-c-modal-box button.pf-m-primary")
         b.wait_not_present(".pf-v5-c-modal-box")
 
-        self.assertEqual(m.execute(f"ls -ld {test_dir}")[:10], "drwxr-xr-x")
+        self.assertEqual(self.stat("%A", test_dir), "drwxr-xr-x")
 
         # Via kebab
         b.click("#dropdown-menu")
@@ -1343,7 +1343,7 @@ class TestFiles(testlib.MachineCase):
         b.click(".pf-v5-c-modal-box button.pf-m-primary")
         b.wait_not_present(".pf-v5-c-modal-box")
 
-        self.assertEqual(m.execute(f"ls -ld {test_dir}")[:10], "dr-x------")
+        self.assertEqual(self.stat("%A", test_dir), "dr-x------")
 
         # Can set a file as executable
         b.click("li[data-location='/home/admin'] a")
@@ -1367,7 +1367,7 @@ class TestFiles(testlib.MachineCase):
         b.click(".pf-v5-c-modal-box button.pf-m-primary")
         b.wait_not_present(".pf-v5-c-modal-box")
 
-        self.assertEqual(m.execute(f"ls -ld /home/admin/{shell_script}")[:10], "-rwxr-xr-x")
+        self.assertEqual(self.stat("%A", f"/home/admin/{shell_script}"), "-rwxr-xr-x")
         check_perms_match(shell_script, '/home/admin')
 
         open_permissions_dialog(shell_script)
@@ -1382,7 +1382,7 @@ class TestFiles(testlib.MachineCase):
         b.set_checked("#is-executable", False)
         b.click(".pf-v5-c-modal-box button.pf-m-primary")
         b.wait_not_present(".pf-v5-c-modal-box")
-        self.assertEqual(m.execute(f"ls -l /home/admin/{shell_script}")[:10], "-rw-r--r--")
+        self.assertEqual(self.stat("%A", f"/home/admin/{shell_script}"), "-rw-r--r--")
 
         # Not executable for .png
         img_file = "cockpit.png"
@@ -1434,7 +1434,7 @@ class TestFiles(testlib.MachineCase):
         b.select_from_dropdown("#edit-permissions-other-access", "no-access")
         b.click(".pf-v5-c-modal-box button.pf-m-primary")
         b.wait_not_present(".pf-v5-c-modal-box")
-        self.assertEqual(m.execute(f"ls -l /home/admin/{shell_script}")[:10], "-r-xrw----")
+        self.assertEqual(self.stat("%A", f"/home/admin/{shell_script}"), "-r-xrw----")
 
         b.go("/files#/?path=/")
         self.assert_last_breadcrumb("/")
@@ -1461,7 +1461,7 @@ class TestFiles(testlib.MachineCase):
         # A user cannot change ownership
         b.wait_not_in_text(".pf-v5-c-modal-box__body", "Ownership")
         b.click(".pf-v5-c-modal-box button.pf-m-primary")
-        self.assertEqual(m.execute("ls -l /home/admin/adminfile")[:10], "-rw-rw-rw-")
+        self.assertEqual(self.stat("%A", "/home/admin/adminfile"), "-rw-rw-rw-")
         check_perms_match('adminfile', '/home/admin')
         # Does not change ownership
         b.wait_in_text("[data-item='adminfile'] .item-owner", "admin")
