@@ -14,10 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-29 03:06+0000\n"
-"PO-Revision-Date: 2024-10-11 18:38+0000\n"
-"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
-"memory@weblate.org>\n"
+"POT-Creation-Date: 2024-11-05 03:01+0000\n"
+"PO-Revision-Date: 2024-11-01 11:38+0000\n"
+"Last-Translator: JW Wang <v72807647@gmail.com>\n"
 "Language-Team: Chinese (Traditional) <https://translate.fedoraproject.org/"
 "projects/cockpit-files/cockpit-files/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -43,10 +42,8 @@ msgstr[0] "$0 個已隱藏的項目"
 
 #. Translators: $0 represents a filename
 #: src/dialogs/permissions.jsx:200
-#, fuzzy
-#| msgid "“$0” permissions"
 msgid "$0 permissions"
-msgstr "“$0” 的權限"
+msgstr "$0 的權限"
 
 #: src/sidebar.tsx:114
 msgid "($0 hidden)"
@@ -59,6 +56,8 @@ msgid ""
 "download files, and change their properties. It also includes a simple file "
 "editor."
 msgstr ""
+"為 Cockpit 設計的檔案系統使用者界面。您可以瀏覽目錄、上傳與下載檔案，並變更其"
+"屬性。它也具備簡易的檔案編輯器。"
 
 #: src/upload-button.tsx:97
 msgid ""
@@ -227,10 +226,8 @@ msgstr "下載"
 
 #. Translators: This is the title of a modal dialog.  $0 represents a filename.
 #: src/dialogs/editor.tsx:170
-#, fuzzy
-#| msgid "Edit “$0”"
 msgid "Edit $0"
-msgstr "編輯 \"$0\""
+msgstr "編輯 $0"
 
 #: src/files-breadcrumbs.tsx:307 src/dialogs/keyboardShortcutsHelp.tsx:71
 msgid "Edit path"
@@ -402,10 +399,8 @@ msgid "New name"
 msgstr "新名稱"
 
 #: src/dialogs/permissions.jsx:153
-#, fuzzy
-#| msgid "Group access"
 msgid "No access"
-msgstr "群組存取權限"
+msgstr "無存取權限"
 
 #: src/files-card-body.tsx:495
 msgid "No matching results"
@@ -534,7 +529,7 @@ msgstr "儲存"
 
 #: src/dialogs/permissions.jsx:296
 msgid "Security context"
-msgstr ""
+msgstr "安全性 context"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:104
 msgid "Select all"
@@ -542,7 +537,7 @@ msgstr "全選"
 
 #: src/dialogs/permissions.jsx:308
 msgid "Set executable as program"
-msgstr ""
+msgstr "設定為可執行的程式"
 
 #: src/files-card-body.tsx:511 src/header.tsx:294
 msgid "Show hidden items"
@@ -618,10 +613,8 @@ msgid "Uploads"
 msgstr "上傳項目"
 
 #: src/dialogs/editor.tsx:170
-#, fuzzy
-#| msgid "View “$0”"
 msgid "View $0"
-msgstr "檢視 \"$0\""
+msgstr "檢視 $0"
 
 #: src/common.ts:28
 msgid "Write and execute"

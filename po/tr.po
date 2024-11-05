@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-29 03:06+0000\n"
-"PO-Revision-Date: 2024-10-12 08:25+0000\n"
+"POT-Creation-Date: 2024-11-05 03:01+0000\n"
+"PO-Revision-Date: 2024-11-01 11:38+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
 "Language-Team: Turkish <https://translate.fedoraproject.org/projects/cockpit-"
 "files/cockpit-files/tr/>\n"
@@ -405,10 +405,8 @@ msgid "New name"
 msgstr "Yeni ad"
 
 #: src/dialogs/permissions.jsx:153
-#, fuzzy
-#| msgid "Group access"
 msgid "No access"
-msgstr "Grup erişimi"
+msgstr "Erişim yok"
 
 #: src/files-card-body.tsx:495
 msgid "No matching results"
@@ -537,7 +535,7 @@ msgstr "Kaydet"
 
 #: src/dialogs/permissions.jsx:296
 msgid "Security context"
-msgstr ""
+msgstr "Güvenlik bağlamı"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:104
 msgid "Select all"
@@ -545,7 +543,7 @@ msgstr "Tümünü seç"
 
 #: src/dialogs/permissions.jsx:308
 msgid "Set executable as program"
-msgstr ""
+msgstr "Çalıştırılabilir program olarak ayarla"
 
 #: src/files-card-body.tsx:511 src/header.tsx:294
 msgid "Show hidden items"
