@@ -38,11 +38,11 @@ const _ = cockpit.gettext;
 
 function checkName(candidate: string, entries: Record<string, FileInfo>, selectedFile: FolderFileInfo) {
     if (candidate === "") {
-        return _("Name cannot be empty.");
+        return _("Name cannot be empty");
     } else if (candidate.length >= 256) {
-        return _("Name too long.");
+        return _("Name too long");
     } else if (candidate.includes("/")) {
-        return _("Name cannot include a /.");
+        return _("Name cannot include a /");
     } else if (selectedFile.name === candidate) {
         return _("Filename is the same as original name");
     } else if (candidate in entries) {

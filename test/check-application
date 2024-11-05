@@ -1050,16 +1050,16 @@ class TestFiles(testlib.MachineCase):
         b.set_input_text("#rename-item-input", "test")
         b.set_input_text("#rename-item-input", "")
         b.wait_visible("button.pf-m-primary:disabled")
-        b.wait_in_text("#rename-item-input-helper", "Name cannot be empty.")
+        b.wait_in_text("#rename-item-input-helper", "Name cannot be empty")
         b.assert_pixels(".pf-v5-c-modal-box", "rename-modal-error")
 
         b.set_input_text("#rename-item-input", "a" * 256)
         b.wait_visible("button.pf-m-primary:disabled")
-        b.wait_in_text("#rename-item-input-helper", "Name too long.")
+        b.wait_in_text("#rename-item-input-helper", "Name too long")
 
         b.set_input_text("#rename-item-input", "foo/bar")
         b.wait_visible("button.pf-m-primary:disabled")
-        b.wait_in_text("#rename-item-input-helper", "Name cannot include a /.")
+        b.wait_in_text("#rename-item-input-helper", "Name cannot include a /")
 
         b.set_input_text("#rename-item-input", "test")
         b.wait_visible("button.pf-m-primary:not(:disabled)")
