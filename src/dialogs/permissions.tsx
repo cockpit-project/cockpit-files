@@ -28,22 +28,28 @@ import { TextInput } from '@patternfly/react-core/dist/esm/components/TextInput'
 import { Stack } from '@patternfly/react-core/dist/esm/layouts/Stack';
 
 import cockpit from 'cockpit';
+import type { BasicError } from 'cockpit';
 import { InlineNotification } from 'cockpit-components-inline-notification';
 import { basename } from "cockpit-path";
+import type { Dialogs, DialogResult } from 'dialogs';
 import { useInit } from 'hooks';
 import { etc_group_syntax, etc_passwd_syntax } from 'pam_user_parser';
+import type { PamCommon, PasswdUserInfo, EtcGroupInfo } from 'pam_user_parser';
 import * as python from "python";
 import { superuser } from 'superuser';
 import { fmt_to_fragments } from 'utils.tsx';
 
 import { useFilesContext } from '../app.tsx';
+import type { FolderFileInfo } from '../app.tsx';
 import { inode_types } from '../common.ts';
 
+// Following python file is loaded as a string (esbuild loader: text)
+// @ts-expect-error Cannot find module or its corresponding type declaration
 import read_selinux_context from './read-selinux.py';
 
 const _ = cockpit.gettext;
 
-const PERMISSION_OPTIONS = {
+const PERMISSION_OPTIONS: Record<number, string> = {
     0: "no-access",
     1: "no-access",
     2: "write-only",
@@ -54,7 +60,7 @@ const PERMISSION_OPTIONS = {
     7: "read-write",
 };
 
-const OPTIONS_PERMISSIONS = {
+const OPTIONS_PERMISSIONS: Record<string, number> = {
     "no-access": 0,
     "write-only": 2,
     "read-only": 4,
@@ -66,28 +72,29 @@ const OPTIONS_PERMISSIONS = {
 // Cockpit wants to pass `+X` for changing a folder and its contents, this only
 // makes folders executable and retains the executable bits on a file and
 // compared to `+x` does not make every file executable in a directory.
-function mode_to_args(mode) {
-    const offset_map = {
+function mode_to_args(mode: number) {
+    const offset_map: Record<number, string> = {
         6: 'u',
         3: 'g',
         0: 'o',
     };
 
-    const letter_map = {
+    const letter_map: Record<number, string> = {
         4: 'r',
         2: 'w',
         1: 'X',
     };
 
     const chmod_args = [];
-    for (const offset of Object.keys(offset_map)) {
+    for (const offset_str of Object.keys(offset_map)) {
+        const offset = parseInt(offset_str, 10);
         const single_mode = (mode >> offset) & 0o7;
         let chmod_add = "";
         let chmod_rem = "";
 
-        for (let digit of Object.keys(letter_map)) {
+        for (const digit_str of Object.keys(letter_map)) {
             // An object's keys are automatically converted to a string
-            digit = parseInt(digit);
+            const digit = parseInt(digit_str, 10);
             if ((single_mode & digit) === digit) {
                 chmod_add += letter_map[digit];
             } else {
@@ -110,23 +117,29 @@ function mode_to_args(mode) {
     return chmod_args.join(",");
 }
 
-const EditPermissionsModal = ({ dialogResult, selected, path }) => {
+const EditPermissionsModal = ({ dialogResult, selected, path } : {
+    dialogResult: DialogResult<void>,
+    selected: FolderFileInfo | null,
+    path: string,
+}) => {
     const { cwdInfo } = useFilesContext();
+    let selectedIsCwd = false;
 
     // Nothing selected means we act on the current working directory
     if (!selected) {
         const directory_name = basename(path);
-        selected = { ...cwdInfo, isCwd: true, name: directory_name };
+        selected = { ...cwdInfo, name: directory_name, category: null, to: null };
+        selectedIsCwd = true;
     }
 
     const [owner, setOwner] = useState(selected.user);
-    const [mode, setMode] = useState(selected.mode);
+    const [mode, setMode] = useState(selected.mode ?? 0);
     const [group, setGroup] = useState(selected.group);
-    const [errorMessage, setErrorMessage] = useState(undefined);
-    const [accounts, setAccounts] = useState(null);
-    const [groups, setGroups] = useState(null);
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const [accounts, setAccounts] = useState<PasswdUserInfo[] | null>(null);
+    const [groups, setGroups] = useState<EtcGroupInfo[] | null>(null);
     const [isExecutable, setIsExecutable] = useState((mode & 0b001001001) === 0b001001001);
-    const [selinuxContext, setSELinuxContext] = useState(null);
+    const [selinuxContext, setSELinuxContext] = useState<string | null>(null);
 
     const executable_file_types = ["code-file", "file"];
 
@@ -146,32 +159,35 @@ const EditPermissionsModal = ({ dialogResult, selected, path }) => {
         }
 
         try {
-            const full_path = selected?.isCwd ? path : path + selected.name;
-            const selinux_context = await python.spawn(read_selinux_context, full_path);
+            const full_path = selectedIsCwd ? path : path + selected.name;
+            const selinux_context = await python.spawn(read_selinux_context, [full_path]);
             setSELinuxContext(selinux_context);
-        } catch (exc) {
-            if (exc.exit_status !== 2)
-                console.error("Cannot obtain SELinux context", exc);
+        } catch (err) {
+            const e = err as python.PythonExitStatus;
+            if (e.exit_status !== 2)
+                console.error("Cannot obtain SELinux context", err);
         }
     });
 
-    const changeOwner = (owner) => {
+    const changeOwner = (owner: string) => {
         setOwner(owner);
-        const currentOwner = accounts.find(a => a.name === owner);
-        const currentGroup = groups.find(g => g.name === group);
-        if (currentGroup?.gid !== currentOwner?.gid && !currentGroup?.userlist.includes(currentOwner?.name)) {
-            setGroup(groups.find(g => g.gid === currentOwner.gid).name);
+        const currentOwner = accounts?.find(a => a.name === owner);
+        const currentGroup = groups?.find(g => g.name === group);
+        if (currentOwner && currentGroup?.gid !== currentOwner?.gid &&
+            !currentGroup?.userlist.includes(currentOwner?.name)) {
+            setGroup(groups?.find(g => g.gid === currentOwner.gid)?.name);
         }
     };
 
     const spawnEncloseFiles = async () => {
-        const full_path = selected?.isCwd ? path : path + selected.name;
+        const full_path = selectedIsCwd ? path : path + selected.name;
         try {
             await cockpit.spawn(["chmod", "-R", mode_to_args(mode), full_path],
                                 { superuser: "try", err: "message" });
             dialogResult.resolve();
         } catch (err) {
-            setErrorMessage(err.message);
+            const e = err as BasicError;
+            setErrorMessage(e.message);
         }
     };
 
@@ -180,7 +196,7 @@ const EditPermissionsModal = ({ dialogResult, selected, path }) => {
         const ownerChanged = owner !== selected.user || group !== selected.group;
 
         try {
-            const directory = selected?.isCwd ? path : path + selected.name;
+            const directory = selectedIsCwd ? path : path + selected.name;
             if (permissionChanged)
                 await cockpit.spawn(["chmod", mode.toString(8), directory],
                                     { superuser: "try", err: "message" });
@@ -191,11 +207,12 @@ const EditPermissionsModal = ({ dialogResult, selected, path }) => {
 
             dialogResult.resolve();
         } catch (err) {
-            setErrorMessage(err.message);
+            const e = err as BasicError;
+            setErrorMessage(e.message);
         }
     };
 
-    function permissions_options(mode) {
+    function permissions_options(mode: number) {
         const options = [
             <FormSelectOption
               key="read-write"
@@ -228,16 +245,16 @@ const EditPermissionsModal = ({ dialogResult, selected, path }) => {
         return options;
     }
 
-    function setPermissions(mask, shift, option) {
+    function setPermissions(mask: number, shift: number, option: string) {
         let val = OPTIONS_PERMISSIONS[option];
-        if ((selected.type === 'reg' && isExecutable) || (selected.type === 'dir' && option !== "no-access")) {
+        if ((selected?.type === 'reg' && isExecutable) || (selected?.type === 'dir' && option !== "no-access")) {
             val += 1;
         }
 
         setMode((mode & mask) | (val << shift));
     }
 
-    function setExecutableBits(shouldBeExecutable) {
+    function setExecutableBits(shouldBeExecutable: boolean) {
         setIsExecutable(shouldBeExecutable);
 
         // Strip / add executable bits
@@ -248,7 +265,7 @@ const EditPermissionsModal = ({ dialogResult, selected, path }) => {
         }
     }
 
-    function sortByName(a, b) {
+    function sortByName(a: PamCommon, b: PamCommon) {
         return a.name.localeCompare(b.name);
     }
 
@@ -258,9 +275,9 @@ const EditPermissionsModal = ({ dialogResult, selected, path }) => {
           variant={ModalVariant.small}
           /* Translators: $0 represents a filename */
           title={fmt_to_fragments(_("$0 permissions"), <b>{selected.name}</b>)}
-          description={inode_types[selected.type] || "Unknown type"}
+          description={(selected.type) ? inode_types[selected.type] : _("Missing type")}
           isOpen
-          onClose={dialogResult.resolve}
+          onClose={() => dialogResult.resolve()}
           footer={
               <>
                   <Button
@@ -276,12 +293,12 @@ const EditPermissionsModal = ({ dialogResult, selected, path }) => {
                   >
                       {_("Change permissions for enclosed files")}
                   </Button>}
-                  <Button variant="link" onClick={dialogResult.resolve}>{_("Cancel")}</Button>
+                  <Button variant="link" onClick={() => dialogResult.resolve()}>{_("Cancel")}</Button>
               </>
           }
         >
             <Stack>
-                {errorMessage !== undefined &&
+                {errorMessage !== null &&
                 <InlineNotification
                   type="danger"
                   text={errorMessage}
@@ -382,6 +399,6 @@ const EditPermissionsModal = ({ dialogResult, selected, path }) => {
     );
 };
 
-export function edit_permissions(dialogs, selected, path) {
+export function edit_permissions(dialogs: Dialogs, selected: FolderFileInfo | null, path: string) {
     dialogs.run(EditPermissionsModal, { selected, path });
 }
