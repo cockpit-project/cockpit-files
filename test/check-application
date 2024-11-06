@@ -866,15 +866,15 @@ class TestFiles(testlib.MachineCase):
         b.set_input_text("#create-directory-input", "test")
         b.set_input_text("#create-directory-input", "")
         b.wait_visible("button.pf-m-primary:disabled")
-        b.wait_in_text("#create-directory-input-helper", "Directory name cannot be empty.")
+        b.wait_in_text("#create-directory-input-helper", "Directory name cannot be empty")
 
         b.set_input_text("#create-directory-input", "a" * 256)
         b.wait_visible("button.pf-m-primary:disabled")
-        b.wait_in_text("#create-directory-input-helper", "Directory name too long.")
+        b.wait_in_text("#create-directory-input-helper", "Directory name too long")
 
         b.set_input_text("#create-directory-input", "foo/bar")
         b.wait_visible("button.pf-m-primary:disabled")
-        b.wait_in_text("#create-directory-input-helper", "Directory name cannot include a /.")
+        b.wait_in_text("#create-directory-input-helper", "Directory name cannot include a /")
 
         b.set_input_text("#create-directory-input", "test")
         b.wait_visible("button.pf-m-primary:not(:disabled)")
