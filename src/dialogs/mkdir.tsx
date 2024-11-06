@@ -39,11 +39,11 @@ const _ = cockpit.gettext;
 
 function check_name(candidate: string) {
     if (candidate === "") {
-        return _("Directory name cannot be empty.");
+        return _("Directory name cannot be empty");
     } else if (candidate.length >= 256) {
-        return _("Directory name too long.");
+        return _("Directory name too long");
     } else if (candidate.includes("/")) {
-        return _("Directory name cannot include a /.");
+        return _("Directory name cannot include a /");
     } else {
         return undefined;
     }
