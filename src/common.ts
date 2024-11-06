@@ -32,7 +32,7 @@ export const permissions = [
     /* 7 */ _("Read, write, and execute"),
 ];
 
-export const inode_types = {
+export const inode_types: Record<string, string> = {
     blk: _("Block device"),
     chr: _("Character device"),
     dir: _("Directory"),
