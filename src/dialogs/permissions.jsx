@@ -32,7 +32,7 @@ import { InlineNotification } from 'cockpit-components-inline-notification';
 import { basename } from "cockpit-path";
 import { useInit } from 'hooks';
 import { etc_group_syntax, etc_passwd_syntax } from 'pam_user_parser';
-import * as python from "python.js";
+import * as python from "python";
 import { superuser } from 'superuser';
 import { fmt_to_fragments } from 'utils.tsx';
 
