@@ -1013,6 +1013,17 @@ class TestFiles(testlib.MachineCase):
         b.mouse("[data-item='testfile']", "contextmenu")
         b.wait_visible(".contextMenu button:contains('Delete')")
 
+        # Paste button should be disabled when clipboard is empty
+        b.wait_visible(".contextMenu button#paste-item:disabled")
+        b.click(".contextMenu button#copy-item")
+        b.mouse("[data-item='testfile']", "contextmenu")
+        b.wait_visible(".contextMenu button#paste-item")
+
+        # Copy button should be hidden when no files are selected
+        b.mouse("#files-card-parent tbody", "contextmenu", body_size[1] / 2, body_size[1] / 2)
+        b.wait_visible(".contextMenu button#paste-item")
+        b.wait_not_present(".contextMenu button#copy-item")
+
     def testDownload(self) -> None:
         b = self.browser
         m = self.machine
@@ -1686,7 +1697,7 @@ class TestFiles(testlib.MachineCase):
         b.mouse("[data-item='file2']", "click", ctrlKey=True)
         b.wait_visible("[data-item='file2'].row-selected")
         b.mouse("[data-item='file1']", "contextmenu")
-        b.wait_in_text(".contextMenu li:nth-child(2) button", "Delete")
+        b.wait_in_text(".contextMenu li:nth-child(3) button", "Delete")
         b.click(".contextMenu button:contains('Delete')")
         b.wait_in_text("h1.pf-v5-c-modal-box__title", "Delete 2 items?")
         b.click("button.pf-m-danger")

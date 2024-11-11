@@ -41,7 +41,7 @@ import { confirm_delete } from "./dialogs/delete.tsx";
 import { show_create_directory_dialog } from "./dialogs/mkdir.tsx";
 import { show_rename_dialog } from "./dialogs/rename.tsx";
 import { Sort, filterColumnMapping, filterColumns } from "./header.tsx";
-import { get_menu_items, pasteFromClipboard } from "./menu.tsx";
+import { get_menu_items, makeMenuHeader, pasteFromClipboard } from "./menu.tsx";
 import "./files-card-body.scss";
 
 const _ = cockpit.gettext;
@@ -105,12 +105,13 @@ const ContextMenuItems = ({ path, selected, setSelected, clipboard, setClipboard
 }) => {
     const dialogs = useDialogs();
     const { addAlert, cwdInfo } = useFilesContext();
-    const menuItems = get_menu_items(
+    const [iconItems, menuItems] = get_menu_items(
         path, selected, setSelected, clipboard, setClipboard, cwdInfo, addAlert, dialogs
     );
 
     return (
         <MenuList>
+            {makeMenuHeader(iconItems)}
             {menuItems.map((item, i) =>
                 item.type !== 'divider'
                     ? (

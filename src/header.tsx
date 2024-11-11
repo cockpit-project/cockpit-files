@@ -34,7 +34,7 @@ import { useDialogs } from "dialogs";
 
 import { FolderFileInfo, useFilesContext } from "./app.tsx";
 import { showKeyboardShortcuts } from "./dialogs/keyboardShortcutsHelp.tsx";
-import { get_menu_items } from "./menu.tsx";
+import { get_menu_items, makeMenuHeader } from "./menu.tsx";
 import { UploadButton } from "./upload-button.tsx";
 
 const _ = cockpit.gettext;
@@ -152,7 +152,7 @@ export const FilesCardHeader = ({
     const { addAlert, cwdInfo } = useFilesContext();
     const dialogs = useDialogs();
 
-    const menuItems = get_menu_items(
+    const [iconItems, menuItems] = get_menu_items(
         path, selected, setSelected, clipboard, setClipboard, cwdInfo, addAlert, dialogs
     );
 
@@ -166,7 +166,11 @@ export const FilesCardHeader = ({
         }
     );
 
-    const dropdownItems = menuItems.map((option, i) => {
+    const dropdownItems: React.JSX.Element[] = [];
+
+    dropdownItems.push(makeMenuHeader(iconItems));
+
+    dropdownItems.push(...menuItems.map((option, i) => {
         if (option.type === 'divider')
             return <Divider key={i} />;
         return (
@@ -179,7 +183,7 @@ export const FilesCardHeader = ({
                 {option.title}
             </DropdownItem>
         );
-    });
+    }));
 
     return (
         <CardTitle className="card-actionbar">

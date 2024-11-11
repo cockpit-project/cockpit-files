@@ -292,3 +292,25 @@
         color: var(--pf-v5-global--link--Color);
     }
 }
+
+// Colors for icons in menu
+.icon-menu-items {
+    margin-inline: var(--pf-v5-global--spacer--sm);
+
+    button {
+        padding-inline: var(--pf-v5-global--spacer--sm);
+        padding-block: var(--pf-v5-global--spacer--sm);
+    }
+
+    li .pf-v5-c-menu__item-text path {
+        fill: var(--pf-v5-global--Color--200);
+    }
+
+    li.pf-m-disabled .pf-v5-c-menu__item-text path {
+        fill: var(--pf-v5-global--disabled-color--200);
+    }
+
+    li:hover path {
+        fill: var(--pf-v5-global--Color--100);
+    }
+}
