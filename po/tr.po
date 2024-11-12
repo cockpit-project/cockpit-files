@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-05 03:01+0000\n"
-"PO-Revision-Date: 2024-11-01 11:38+0000\n"
+"POT-Creation-Date: 2024-11-11 03:03+0000\n"
+"PO-Revision-Date: 2024-11-08 20:52+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
 "Language-Team: Turkish <https://translate.fedoraproject.org/projects/cockpit-"
 "files/cockpit-files/tr/>\n"
@@ -24,17 +24,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1\n"
-"X-Generator: Weblate 5.7.2\n"
+"X-Generator: Weblate 5.8.2\n"
 
 #: src/menu.tsx:57
 msgid "\"$0\" exists, not overwriting with paste."
 msgstr "\"$0\" var, yapıştırma ile üzerine yazılmıyor."
 
-#: src/sidebar.tsx:112
-msgid "$0 item"
-msgid_plural "$0 items"
-msgstr[0] "$0 öge"
-msgstr[1] "$0 öge"
+#: src/files-footer-detail.tsx:35
+msgid "$0 files selected"
+msgstr "$0 dosya seçildi"
 
 #: src/files-card-body.tsx:508
 msgid "$0 item is hidden"
@@ -43,15 +41,9 @@ msgstr[0] "$0 gizli öge"
 msgstr[1] "$0 gizli öge"
 
 #. Translators: $0 represents a filename
-#: src/dialogs/permissions.jsx:200
+#: src/dialogs/permissions.jsx:260
 msgid "$0 permissions"
 msgstr "$0 izinleri"
-
-#: src/sidebar.tsx:114
-msgid "($0 hidden)"
-msgid_plural "($0 hidden)"
-msgstr[0] "($0 gizli)"
-msgstr[1] "($0 gizli)"
 
 #: org.cockpit_project.files.metainfo.xml:8
 msgid ""
@@ -71,11 +63,11 @@ msgstr ""
 "Aynı ada sahip bir dosya \"$0\" içinde zaten var. Değiştirmek içeriğinin "
 "üzerine yazacaktır."
 
-#: src/header.tsx:69
+#: src/header.tsx:68
 msgid "A-Z"
 msgstr "A-Z"
 
-#: src/dialogs/permissions.jsx:257
+#: src/dialogs/permissions.jsx:324
 msgid "Access"
 msgstr "Erişim"
 
@@ -101,7 +93,7 @@ msgid "Bookmarks"
 msgstr "Yer imleri"
 
 #: src/dialogs/editor.tsx:212 src/dialogs/delete.tsx:91
-#: src/dialogs/permissions.jsx:212 src/dialogs/rename.tsx:116
+#: src/dialogs/permissions.jsx:279 src/dialogs/rename.tsx:116
 #: src/dialogs/mkdir.tsx:108 src/upload-button.tsx:91
 msgid "Cancel"
 msgstr "İptal"
@@ -118,9 +110,13 @@ msgstr "İptal edildi"
 msgid "Cancelled upload of $0"
 msgstr "$0 karşıya yüklenmesi iptal edildi"
 
-#: src/dialogs/permissions.jsx:210
+#: src/dialogs/permissions.jsx:270
 msgid "Change"
 msgstr "Değiştir"
+
+#: src/dialogs/permissions.jsx:277
+msgid "Change permissions for enclosed files"
+msgstr "İçerilen dosyalar için izinleri değiştir"
 
 #: src/common.ts:37
 msgid "Character device"
@@ -182,13 +178,17 @@ msgstr "$0 dosyası silinsin mi?"
 msgid "Delete link $0?"
 msgstr "$0 bağlantısı silinsin mi?"
 
-#: src/header.tsx:190
-msgid "Directories & files"
-msgstr "Dizinler ve dosyalar"
-
 #: src/common.ts:38
 msgid "Directory"
 msgstr "Dizin"
+
+#: src/files-footer-detail.tsx:63
+msgid "Directory contains $0 directories, $1 files"
+msgstr "Dizin, $0 dizin ve $1 dosya içeriyor"
+
+#: src/files-footer-detail.tsx:64
+msgid "Directory contains $0 directories, $1 files, $2 hidden"
+msgstr "Dizin, $0 dizin ve $1 dosya içeriyor, $2 tanesi gizli"
 
 #: src/files-card-body.tsx:503
 msgid "Directory is empty"
@@ -199,16 +199,16 @@ msgid "Directory name"
 msgstr "Dizin adı"
 
 #: src/dialogs/mkdir.tsx:42
-msgid "Directory name cannot be empty."
-msgstr "Dizin adı boş olamaz."
+msgid "Directory name cannot be empty"
+msgstr "Dizin adı boş olamaz"
 
 #: src/dialogs/mkdir.tsx:46
-msgid "Directory name cannot include a /."
-msgstr "Dizin adı / karakteri içeremez."
+msgid "Directory name cannot include a /"
+msgstr "Dizin adı / karakteri içeremez"
 
 #: src/dialogs/mkdir.tsx:44
-msgid "Directory name too long."
-msgstr "Dizin adı çok uzun."
+msgid "Directory name too long"
+msgstr "Dizin adı çok uzun"
 
 #: src/dialogs/mkdir.tsx:140
 msgid "Directory owner"
@@ -218,11 +218,11 @@ msgstr "Dizin sahibi"
 msgid "Directory with the same name exists"
 msgstr "Aynı ada sahip dizin var"
 
-#: src/header.tsx:263
+#: src/header.tsx:255
 msgid "Display as a grid"
 msgstr "Izgara olarak görüntüle"
 
-#: src/header.tsx:262
+#: src/header.tsx:254
 msgid "Display as a list"
 msgstr "Liste olarak görüntüle"
 
@@ -239,7 +239,7 @@ msgstr "$0 dosyasını düzenle"
 msgid "Edit path"
 msgstr "Yolu düzenle"
 
-#: src/menu.tsx:96 src/menu.tsx:126 src/sidebar.tsx:157
+#: src/menu.tsx:96 src/menu.tsx:126
 msgid "Edit permissions"
 msgstr "İzinleri düzenle"
 
@@ -271,11 +271,11 @@ msgstr "Dosyalar"
 msgid "Filesystem"
 msgstr "Dosya sistemi"
 
-#: src/header.tsx:197
+#: src/header.tsx:189
 msgid "Filter directory"
 msgstr "Dizini filtrele"
 
-#: src/header.tsx:91
+#: src/header.tsx:90
 msgid "First modified"
 msgstr "İlk değiştirilme"
 
@@ -311,20 +311,16 @@ msgstr "İleri git"
 msgid "Go up a directory"
 msgstr "Bir dizin yukarı git"
 
-#: src/files-card-body.tsx:601 src/dialogs/permissions.jsx:241
-#: src/sidebar.tsx:57
+#: src/files-card-body.tsx:572 src/dialogs/permissions.jsx:308
+#: src/files-footer-detail.tsx:75
 msgid "Group"
 msgstr "Grup"
 
-#: src/dialogs/permissions.jsx:271
+#: src/dialogs/permissions.jsx:338
 msgid "Group access"
 msgstr "Grup erişimi"
 
-#: src/sidebar.tsx:78
-msgid "Group permissions"
-msgstr "Grup izinleri"
-
-#: src/header.tsx:294
+#: src/header.tsx:286
 msgid "Hide hidden items"
 msgstr "Gizli ögeleri gizle"
 
@@ -344,15 +340,15 @@ msgstr "Orijinali sakla"
 msgid "Keyboard shortcuts"
 msgstr "Klavye kısayolları"
 
-#: src/header.tsx:80
+#: src/header.tsx:79
 msgid "Largest size"
 msgstr "En büyük boyut"
 
-#: src/sidebar.tsx:47 src/header.tsx:95
+#: src/header.tsx:94
 msgid "Last modified"
 msgstr "Son değiştirilme"
 
-#: src/header.tsx:117
+#: src/header.tsx:116
 msgid "Least permissive"
 msgstr "En az izin veren"
 
@@ -360,29 +356,29 @@ msgstr "En az izin veren"
 msgid "Manage your files"
 msgstr "Dosyalarınızı yönetin"
 
-#: src/files-card-body.tsx:528 src/header.tsx:88
+#: src/files-card-body.tsx:528 src/header.tsx:87
 msgid "Modified"
 msgstr "Değiştirilme"
 
-#: src/header.tsx:113
+#: src/header.tsx:112
 msgid "Most permissive"
 msgstr "En çok izin veren"
 
-#: src/files-card-body.tsx:523 src/header.tsx:66
+#: src/files-card-body.tsx:523 src/header.tsx:65
 msgid "Name"
 msgstr "Ad"
 
 #: src/dialogs/rename.tsx:41
-msgid "Name cannot be empty."
-msgstr "Ad boş olamaz."
+msgid "Name cannot be empty"
+msgstr "Ad boş olamaz"
 
 #: src/dialogs/rename.tsx:45
-msgid "Name cannot include a /."
-msgstr "Ad / karakteri içeremez."
+msgid "Name cannot include a /"
+msgstr "Ad / karakteri içeremez"
 
 #: src/dialogs/rename.tsx:43
-msgid "Name too long."
-msgstr "Ad çok uzun."
+msgid "Name too long"
+msgstr "Ad çok uzun"
 
 #: src/common.ts:39
 msgid "Named pipe"
@@ -404,7 +400,7 @@ msgstr "Yeni dosya adı"
 msgid "New name"
 msgstr "Yeni ad"
 
-#: src/dialogs/permissions.jsx:153
+#: src/dialogs/permissions.jsx:213
 msgid "No access"
 msgstr "Erişim yok"
 
@@ -424,15 +420,11 @@ msgstr "Metin dosyası aç"
 msgid "Original file on server"
 msgstr "Sunucudaki orijinal dosya"
 
-#: src/sidebar.tsx:83
-msgid "Other permissions"
-msgstr "Diğer izinler"
-
-#: src/files-card-body.tsx:601
+#: src/files-card-body.tsx:572 src/files-footer-detail.tsx:75
 msgid "Others"
 msgstr "Diğerleri"
 
-#: src/dialogs/permissions.jsx:283
+#: src/dialogs/permissions.jsx:350
 msgid "Others access"
 msgstr "Diğerlerinin erişimi"
 
@@ -440,28 +432,25 @@ msgstr "Diğerlerinin erişimi"
 msgid "Overwrite"
 msgstr "Üzerine yaz"
 
-#: src/files-card-body.tsx:533 src/files-card-body.tsx:601
-#: src/dialogs/permissions.jsx:226 src/sidebar.tsx:52 src/header.tsx:99
+#: src/files-card-body.tsx:533 src/files-card-body.tsx:572
+#: src/dialogs/permissions.jsx:293 src/header.tsx:98
+#: src/files-footer-detail.tsx:75
 msgid "Owner"
 msgstr "Sahibi"
 
-#: src/dialogs/permissions.jsx:259
+#: src/dialogs/permissions.jsx:326
 msgid "Owner access"
 msgstr "Sahibinin erişimi"
 
-#: src/header.tsx:102
+#: src/header.tsx:101
 msgid "Owner ascending"
 msgstr "Sahibine göre artan"
 
-#: src/header.tsx:106
+#: src/header.tsx:105
 msgid "Owner descending"
 msgstr "Sahibine göre azalan"
 
-#: src/sidebar.tsx:73
-msgid "Owner permissions"
-msgstr "Sahibinin izinleri"
-
-#: src/dialogs/permissions.jsx:225
+#: src/dialogs/permissions.jsx:292
 msgid "Ownership"
 msgstr "Sahiplik"
 
@@ -477,7 +466,7 @@ msgstr "Dosya veya dizini yapıştır"
 msgid "Pasting failed"
 msgstr "Yapıştırma başarısız oldu"
 
-#: src/files-card-body.tsx:538 src/header.tsx:110
+#: src/files-card-body.tsx:538 src/header.tsx:109
 msgid "Permissions"
 msgstr "İzinler"
 
@@ -485,7 +474,7 @@ msgstr "İzinler"
 msgid "Read and execute"
 msgstr "Oku ve çalıştır"
 
-#: src/common.ts:31 src/dialogs/permissions.jsx:143
+#: src/common.ts:31 src/dialogs/permissions.jsx:203
 msgid "Read and write"
 msgstr "Oku ve yaz"
 
@@ -493,7 +482,7 @@ msgstr "Oku ve yaz"
 msgid "Read, write, and execute"
 msgstr "Oku, yaz ve çalıştır"
 
-#: src/common.ts:29 src/dialogs/editor.tsx:173 src/dialogs/permissions.jsx:148
+#: src/common.ts:29 src/dialogs/editor.tsx:173 src/dialogs/permissions.jsx:208
 msgid "Read-only"
 msgstr "Yalnızca oku"
 
@@ -533,7 +522,7 @@ msgstr "$0 dosyası değiştirilsin mi?"
 msgid "Save"
 msgstr "Kaydet"
 
-#: src/dialogs/permissions.jsx:296
+#: src/dialogs/permissions.jsx:363
 msgid "Security context"
 msgstr "Güvenlik bağlamı"
 
@@ -541,23 +530,23 @@ msgstr "Güvenlik bağlamı"
 msgid "Select all"
 msgstr "Tümünü seç"
 
-#: src/dialogs/permissions.jsx:308
+#: src/dialogs/permissions.jsx:375
 msgid "Set executable as program"
 msgstr "Çalıştırılabilir program olarak ayarla"
 
-#: src/files-card-body.tsx:511 src/header.tsx:294
+#: src/files-card-body.tsx:511 src/header.tsx:286
 msgid "Show hidden items"
 msgstr "Gizli ögeleri göster"
 
-#: src/header.tsx:165
+#: src/header.tsx:164
 msgid "Show keyboard shortcuts"
 msgstr "Klavye kısayollarını göster"
 
-#: src/files-card-body.tsx:524 src/sidebar.tsx:64 src/header.tsx:77
+#: src/files-card-body.tsx:524 src/header.tsx:76
 msgid "Size"
 msgstr "Boyut"
 
-#: src/header.tsx:84
+#: src/header.tsx:83
 msgid "Smallest size"
 msgstr "En küçük boyut"
 
@@ -565,7 +554,7 @@ msgstr "En küçük boyut"
 msgid "Socket"
 msgstr "Soket"
 
-#: src/header.tsx:281
+#: src/header.tsx:273
 msgid "Sort"
 msgstr "Sırala"
 
@@ -625,11 +614,11 @@ msgstr "$0 dosyasını görüntüle"
 msgid "Write and execute"
 msgstr "Yaz ve çalıştır"
 
-#: src/common.ts:27 src/dialogs/permissions.jsx:163
+#: src/common.ts:27 src/dialogs/permissions.jsx:223
 msgid "Write-only"
 msgstr "Yalnızca yaz"
 
-#: src/header.tsx:73
+#: src/header.tsx:72
 msgid "Z-A"
 msgstr "Z-A"
 
@@ -644,6 +633,28 @@ msgstr "dosyalar"
 #: src/manifest.json:0
 msgid "filesystem"
 msgstr "dosya sistemi"
+
+#~ msgid "$0 item"
+#~ msgid_plural "$0 items"
+#~ msgstr[0] "$0 öge"
+#~ msgstr[1] "$0 öge"
+
+#~ msgid "($0 hidden)"
+#~ msgid_plural "($0 hidden)"
+#~ msgstr[0] "($0 gizli)"
+#~ msgstr[1] "($0 gizli)"
+
+#~ msgid "Directories & files"
+#~ msgstr "Dizinler ve dosyalar"
+
+#~ msgid "Group permissions"
+#~ msgstr "Grup izinleri"
+
+#~ msgid "Other permissions"
+#~ msgstr "Diğer izinler"
+
+#~ msgid "Owner permissions"
+#~ msgstr "Sahibinin izinleri"
 
 #~ msgid "A file system browser for Cockpit."
 #~ msgstr "Cockpit için bir dosya sistemi gezgini."
