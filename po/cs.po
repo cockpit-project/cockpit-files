@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-05 03:01+0000\n"
-"PO-Revision-Date: 2024-10-30 11:38+0000\n"
+"POT-Creation-Date: 2024-11-11 03:03+0000\n"
+"PO-Revision-Date: 2024-11-11 23:20+0000\n"
 "Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech <https://translate.fedoraproject.org/projects/cockpit-"
 "files/cockpit-files/cs/>\n"
@@ -24,18 +24,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2\n"
-"X-Generator: Weblate 5.7.2\n"
+"X-Generator: Weblate 5.8.2\n"
 
 #: src/menu.tsx:57
 msgid "\"$0\" exists, not overwriting with paste."
-msgstr "„$0“ existuje, nebude přepsáno vložením."
+msgstr "„$0“ existuje – vložením nebude přepsáno."
 
-#: src/sidebar.tsx:112
-msgid "$0 item"
-msgid_plural "$0 items"
-msgstr[0] "$0 položka"
-msgstr[1] "$0 položky"
-msgstr[2] "$0 položek"
+#: src/files-footer-detail.tsx:35
+msgid "$0 files selected"
+msgstr "$0 souborů vybráno"
 
 #: src/files-card-body.tsx:508
 msgid "$0 item is hidden"
@@ -45,16 +42,9 @@ msgstr[1] "$0 položky jsou skryté"
 msgstr[2] "$0 položek je skrytých"
 
 #. Translators: $0 represents a filename
-#: src/dialogs/permissions.jsx:200
+#: src/dialogs/permissions.jsx:260
 msgid "$0 permissions"
 msgstr "oprávnění $0"
-
-#: src/sidebar.tsx:114
-msgid "($0 hidden)"
-msgid_plural "($0 hidden)"
-msgstr[0] "($0 skrytá)"
-msgstr[1] "($0 skryté)"
-msgstr[2] "($0 skrytých)"
 
 #: org.cockpit_project.files.metainfo.xml:8
 msgid ""
@@ -73,11 +63,11 @@ msgid ""
 msgstr ""
 "Stejně nazvaný soubor už v „$0“ existuje. Nahrazením bude jeho obsah přepsán."
 
-#: src/header.tsx:69
+#: src/header.tsx:68
 msgid "A-Z"
 msgstr "A-Z"
 
-#: src/dialogs/permissions.jsx:257
+#: src/dialogs/permissions.jsx:324
 msgid "Access"
 msgstr "Přístup"
 
@@ -103,7 +93,7 @@ msgid "Bookmarks"
 msgstr "Záložky"
 
 #: src/dialogs/editor.tsx:212 src/dialogs/delete.tsx:91
-#: src/dialogs/permissions.jsx:212 src/dialogs/rename.tsx:116
+#: src/dialogs/permissions.jsx:279 src/dialogs/rename.tsx:116
 #: src/dialogs/mkdir.tsx:108 src/upload-button.tsx:91
 msgid "Cancel"
 msgstr "Storno"
@@ -120,9 +110,13 @@ msgstr "Zrušeno"
 msgid "Cancelled upload of $0"
 msgstr "Zrušeno nahrávání $0"
 
-#: src/dialogs/permissions.jsx:210
+#: src/dialogs/permissions.jsx:270
 msgid "Change"
 msgstr "Změnit"
+
+#: src/dialogs/permissions.jsx:277
+msgid "Change permissions for enclosed files"
+msgstr "Změnit oprávnění pro obsažené soubory"
 
 #: src/common.ts:37
 msgid "Character device"
@@ -184,13 +178,17 @@ msgstr "Smazat soubor $0?"
 msgid "Delete link $0?"
 msgstr "Smazat odkaz $0?"
 
-#: src/header.tsx:190
-msgid "Directories & files"
-msgstr "Složky a soubory"
-
 #: src/common.ts:38
 msgid "Directory"
 msgstr "Složka"
+
+#: src/files-footer-detail.tsx:63
+msgid "Directory contains $0 directories, $1 files"
+msgstr "Složka obsahuje $0 podsložek, $1 souborů"
+
+#: src/files-footer-detail.tsx:64
+msgid "Directory contains $0 directories, $1 files, $2 hidden"
+msgstr "Složka obsahuje $0 podsložek, $1 souborů, $2 skrytých"
 
 #: src/files-card-body.tsx:503
 msgid "Directory is empty"
@@ -201,16 +199,16 @@ msgid "Directory name"
 msgstr "Název složky"
 
 #: src/dialogs/mkdir.tsx:42
-msgid "Directory name cannot be empty."
-msgstr "Složku je třeba nějak nazvat."
+msgid "Directory name cannot be empty"
+msgstr "Složku je třeba nějak nazvat"
 
 #: src/dialogs/mkdir.tsx:46
-msgid "Directory name cannot include a /."
-msgstr "Název složky nemůže obsahovat /."
+msgid "Directory name cannot include a /"
+msgstr "Název složky nemůže obsahovat /"
 
 #: src/dialogs/mkdir.tsx:44
-msgid "Directory name too long."
-msgstr "Název složky je příliš dlouhý."
+msgid "Directory name too long"
+msgstr "Název složky je příliš dlouhý"
 
 #: src/dialogs/mkdir.tsx:140
 msgid "Directory owner"
@@ -220,11 +218,11 @@ msgstr "Vlastník složky"
 msgid "Directory with the same name exists"
 msgstr "Složka s tímto názvem zde už existuje"
 
-#: src/header.tsx:263
+#: src/header.tsx:255
 msgid "Display as a grid"
 msgstr "Zobrazit jako mřížku"
 
-#: src/header.tsx:262
+#: src/header.tsx:254
 msgid "Display as a list"
 msgstr "Zobrazit jako seznam"
 
@@ -241,7 +239,7 @@ msgstr "Upravit $0"
 msgid "Edit path"
 msgstr "Upravit popis umístění"
 
-#: src/menu.tsx:96 src/menu.tsx:126 src/sidebar.tsx:157
+#: src/menu.tsx:96 src/menu.tsx:126
 msgid "Edit permissions"
 msgstr "Upravit oprávnění"
 
@@ -273,11 +271,11 @@ msgstr "Soubory"
 msgid "Filesystem"
 msgstr "Souborový systém"
 
-#: src/header.tsx:197
+#: src/header.tsx:189
 msgid "Filter directory"
 msgstr "Filtrovat složku"
 
-#: src/header.tsx:91
+#: src/header.tsx:90
 msgid "First modified"
 msgstr "Poprvé upraveno"
 
@@ -313,20 +311,16 @@ msgstr "Přejít vpřed"
 msgid "Go up a directory"
 msgstr "Do nadřazené složky"
 
-#: src/files-card-body.tsx:601 src/dialogs/permissions.jsx:241
-#: src/sidebar.tsx:57
+#: src/files-card-body.tsx:572 src/dialogs/permissions.jsx:308
+#: src/files-footer-detail.tsx:75
 msgid "Group"
 msgstr "Skupina"
 
-#: src/dialogs/permissions.jsx:271
+#: src/dialogs/permissions.jsx:338
 msgid "Group access"
-msgstr "Přístup skupiny"
+msgstr "Přístup pro skupinu"
 
-#: src/sidebar.tsx:78
-msgid "Group permissions"
-msgstr "Oprávnění skupiny"
-
-#: src/header.tsx:294
+#: src/header.tsx:286
 msgid "Hide hidden items"
 msgstr "Skrýt skryté položky"
 
@@ -346,15 +340,15 @@ msgstr "Ponechat původní"
 msgid "Keyboard shortcuts"
 msgstr "Klávesové zkratky"
 
-#: src/header.tsx:80
+#: src/header.tsx:79
 msgid "Largest size"
 msgstr "Největší velikost"
 
-#: src/sidebar.tsx:47 src/header.tsx:95
+#: src/header.tsx:94
 msgid "Last modified"
 msgstr "Naposledy změněno"
 
-#: src/header.tsx:117
+#: src/header.tsx:116
 msgid "Least permissive"
 msgstr "Nejméně přístupné"
 
@@ -362,29 +356,29 @@ msgstr "Nejméně přístupné"
 msgid "Manage your files"
 msgstr "Spravujte své soubory"
 
-#: src/files-card-body.tsx:528 src/header.tsx:88
+#: src/files-card-body.tsx:528 src/header.tsx:87
 msgid "Modified"
 msgstr "Změněno"
 
-#: src/header.tsx:113
+#: src/header.tsx:112
 msgid "Most permissive"
 msgstr "Nejpřístupnější"
 
-#: src/files-card-body.tsx:523 src/header.tsx:66
+#: src/files-card-body.tsx:523 src/header.tsx:65
 msgid "Name"
 msgstr "Název"
 
 #: src/dialogs/rename.tsx:41
-msgid "Name cannot be empty."
-msgstr "Název je třeba vyplnit."
+msgid "Name cannot be empty"
+msgstr "Název je třeba vyplnit"
 
 #: src/dialogs/rename.tsx:45
-msgid "Name cannot include a /."
-msgstr "Název nemůže obsahovat /."
+msgid "Name cannot include a /"
+msgstr "Název nemůže obsahovat /"
 
 #: src/dialogs/rename.tsx:43
-msgid "Name too long."
-msgstr "Název je příliš dlouhý."
+msgid "Name too long"
+msgstr "Název je příliš dlouhý"
 
 #: src/common.ts:39
 msgid "Named pipe"
@@ -406,7 +400,7 @@ msgstr "Nový název souboru"
 msgid "New name"
 msgstr "Nový název"
 
-#: src/dialogs/permissions.jsx:153
+#: src/dialogs/permissions.jsx:213
 msgid "No access"
 msgstr "Žádný přístup"
 
@@ -426,44 +420,37 @@ msgstr "Otevřít textový soubor"
 msgid "Original file on server"
 msgstr "Původní soubor na serveru"
 
-#: src/sidebar.tsx:83
-msgid "Other permissions"
-msgstr "Ostatní oprávnění"
-
-#: src/files-card-body.tsx:601
+#: src/files-card-body.tsx:572 src/files-footer-detail.tsx:75
 msgid "Others"
 msgstr "Ostatní"
 
-#: src/dialogs/permissions.jsx:283
+#: src/dialogs/permissions.jsx:350
 msgid "Others access"
-msgstr "Přístup ostatních"
+msgstr "Přístup pro ostatní"
 
 #: src/dialogs/editor.tsx:196 src/dialogs/rename.tsx:114
 msgid "Overwrite"
 msgstr "Přepsat"
 
-#: src/files-card-body.tsx:533 src/files-card-body.tsx:601
-#: src/dialogs/permissions.jsx:226 src/sidebar.tsx:52 src/header.tsx:99
+#: src/files-card-body.tsx:533 src/files-card-body.tsx:572
+#: src/dialogs/permissions.jsx:293 src/header.tsx:98
+#: src/files-footer-detail.tsx:75
 msgid "Owner"
 msgstr "Vlastník"
 
-#: src/dialogs/permissions.jsx:259
+#: src/dialogs/permissions.jsx:326
 msgid "Owner access"
-msgstr "Přístup vlastníka"
+msgstr "Přístup pro vlastníka"
 
-#: src/header.tsx:102
+#: src/header.tsx:101
 msgid "Owner ascending"
 msgstr "Podle vlastníka vzestupně"
 
-#: src/header.tsx:106
+#: src/header.tsx:105
 msgid "Owner descending"
 msgstr "Podle vlastníka sestupně"
 
-#: src/sidebar.tsx:73
-msgid "Owner permissions"
-msgstr "Oprávnění vlastníka"
-
-#: src/dialogs/permissions.jsx:225
+#: src/dialogs/permissions.jsx:292
 msgid "Ownership"
 msgstr "Vlastnictví"
 
@@ -479,7 +466,7 @@ msgstr "Vložit soubor nebo složku"
 msgid "Pasting failed"
 msgstr "Vkládání se nezdařilo"
 
-#: src/files-card-body.tsx:538 src/header.tsx:110
+#: src/files-card-body.tsx:538 src/header.tsx:109
 msgid "Permissions"
 msgstr "Oprávnění"
 
@@ -487,7 +474,7 @@ msgstr "Oprávnění"
 msgid "Read and execute"
 msgstr "Číst a spouštět"
 
-#: src/common.ts:31 src/dialogs/permissions.jsx:143
+#: src/common.ts:31 src/dialogs/permissions.jsx:203
 msgid "Read and write"
 msgstr "Číst a zapisovat"
 
@@ -495,7 +482,7 @@ msgstr "Číst a zapisovat"
 msgid "Read, write, and execute"
 msgstr "Číst, zapisovat a spouštět"
 
-#: src/common.ts:29 src/dialogs/editor.tsx:173 src/dialogs/permissions.jsx:148
+#: src/common.ts:29 src/dialogs/editor.tsx:173 src/dialogs/permissions.jsx:208
 msgid "Read-only"
 msgstr "Pouze pro čtení"
 
@@ -535,7 +522,7 @@ msgstr "Nahradit soubor $0?"
 msgid "Save"
 msgstr "Uložit"
 
-#: src/dialogs/permissions.jsx:296
+#: src/dialogs/permissions.jsx:363
 msgid "Security context"
 msgstr "Kontext zabezpečení"
 
@@ -543,23 +530,23 @@ msgstr "Kontext zabezpečení"
 msgid "Select all"
 msgstr "Vybrat vše"
 
-#: src/dialogs/permissions.jsx:308
+#: src/dialogs/permissions.jsx:375
 msgid "Set executable as program"
 msgstr "Nastavit spustitelné jako program"
 
-#: src/files-card-body.tsx:511 src/header.tsx:294
+#: src/files-card-body.tsx:511 src/header.tsx:286
 msgid "Show hidden items"
 msgstr "Zobrazit skryté položky"
 
-#: src/header.tsx:165
+#: src/header.tsx:164
 msgid "Show keyboard shortcuts"
 msgstr "Zobrazit klávesové zkratky"
 
-#: src/files-card-body.tsx:524 src/sidebar.tsx:64 src/header.tsx:77
+#: src/files-card-body.tsx:524 src/header.tsx:76
 msgid "Size"
 msgstr "Velikost"
 
-#: src/header.tsx:84
+#: src/header.tsx:83
 msgid "Smallest size"
 msgstr "Nejnižší velikost"
 
@@ -567,7 +554,7 @@ msgstr "Nejnižší velikost"
 msgid "Socket"
 msgstr "Soket"
 
-#: src/header.tsx:281
+#: src/header.tsx:273
 msgid "Sort"
 msgstr "Seřadit"
 
@@ -627,11 +614,11 @@ msgstr "Zobrazit $0"
 msgid "Write and execute"
 msgstr "Zápis a spouštění"
 
-#: src/common.ts:27 src/dialogs/permissions.jsx:163
+#: src/common.ts:27 src/dialogs/permissions.jsx:223
 msgid "Write-only"
 msgstr "Pouze zápis"
 
-#: src/header.tsx:73
+#: src/header.tsx:72
 msgid "Z-A"
 msgstr "Z-A"
 
@@ -646,6 +633,30 @@ msgstr "soubory"
 #: src/manifest.json:0
 msgid "filesystem"
 msgstr "souborový systém"
+
+#~ msgid "$0 item"
+#~ msgid_plural "$0 items"
+#~ msgstr[0] "$0 položka"
+#~ msgstr[1] "$0 položky"
+#~ msgstr[2] "$0 položek"
+
+#~ msgid "($0 hidden)"
+#~ msgid_plural "($0 hidden)"
+#~ msgstr[0] "($0 skrytá)"
+#~ msgstr[1] "($0 skryté)"
+#~ msgstr[2] "($0 skrytých)"
+
+#~ msgid "Directories & files"
+#~ msgstr "Složky a soubory"
+
+#~ msgid "Group permissions"
+#~ msgstr "Oprávnění skupiny"
+
+#~ msgid "Other permissions"
+#~ msgstr "Ostatní oprávnění"
+
+#~ msgid "Owner permissions"
+#~ msgstr "Oprávnění vlastníka"
 
 #~ msgid "A file system browser for Cockpit."
 #~ msgstr "Prohlížeč souborového systému pro Cockpit."

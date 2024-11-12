@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-05 03:01+0000\n"
-"PO-Revision-Date: 2024-11-01 11:38+0000\n"
+"POT-Creation-Date: 2024-11-11 03:03+0000\n"
+"PO-Revision-Date: 2024-11-07 11:38+0000\n"
 "Last-Translator: JW Wang <v72807647@gmail.com>\n"
 "Language-Team: Chinese (Traditional) <https://translate.fedoraproject.org/"
 "projects/cockpit-files/cockpit-files/zh_TW/>\n"
@@ -24,16 +24,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
-"X-Generator: Weblate 5.7.2\n"
+"X-Generator: Weblate 5.8.2\n"
 
 #: src/menu.tsx:57
 msgid "\"$0\" exists, not overwriting with paste."
 msgstr "\"$0\" 已存在，將不會貼上以免遭覆寫。"
 
-#: src/sidebar.tsx:112
-msgid "$0 item"
-msgid_plural "$0 items"
-msgstr[0] "$0 個項目"
+#: src/files-footer-detail.tsx:35
+msgid "$0 files selected"
+msgstr "已選擇 $0 個檔案"
 
 #: src/files-card-body.tsx:508
 msgid "$0 item is hidden"
@@ -41,14 +40,9 @@ msgid_plural "$0 items are hidden"
 msgstr[0] "$0 個已隱藏的項目"
 
 #. Translators: $0 represents a filename
-#: src/dialogs/permissions.jsx:200
+#: src/dialogs/permissions.jsx:260
 msgid "$0 permissions"
 msgstr "$0 的權限"
-
-#: src/sidebar.tsx:114
-msgid "($0 hidden)"
-msgid_plural "($0 hidden)"
-msgstr[0] "(已隱藏 $0 個)"
 
 #: org.cockpit_project.files.metainfo.xml:8
 msgid ""
@@ -65,11 +59,11 @@ msgid ""
 "overwrite its content."
 msgstr "一個相同名稱的檔案已於 \"$0\" 存在。 若將其取代將覆寫其內容。"
 
-#: src/header.tsx:69
+#: src/header.tsx:68
 msgid "A-Z"
 msgstr "由 A 到 Z"
 
-#: src/dialogs/permissions.jsx:257
+#: src/dialogs/permissions.jsx:324
 msgid "Access"
 msgstr "存取權限"
 
@@ -95,7 +89,7 @@ msgid "Bookmarks"
 msgstr "書籤"
 
 #: src/dialogs/editor.tsx:212 src/dialogs/delete.tsx:91
-#: src/dialogs/permissions.jsx:212 src/dialogs/rename.tsx:116
+#: src/dialogs/permissions.jsx:279 src/dialogs/rename.tsx:116
 #: src/dialogs/mkdir.tsx:108 src/upload-button.tsx:91
 msgid "Cancel"
 msgstr "取消"
@@ -112,9 +106,13 @@ msgstr "已取消"
 msgid "Cancelled upload of $0"
 msgstr "已取消上傳 $0"
 
-#: src/dialogs/permissions.jsx:210
+#: src/dialogs/permissions.jsx:270
 msgid "Change"
 msgstr "變更"
+
+#: src/dialogs/permissions.jsx:277
+msgid "Change permissions for enclosed files"
+msgstr "變更其中檔案的權限"
 
 #: src/common.ts:37
 msgid "Character device"
@@ -176,13 +174,17 @@ msgstr "刪除檔案 $0 ？"
 msgid "Delete link $0?"
 msgstr "刪除連結 $0 ？"
 
-#: src/header.tsx:190
-msgid "Directories & files"
-msgstr "目錄與檔案"
-
 #: src/common.ts:38
 msgid "Directory"
 msgstr "目錄"
+
+#: src/files-footer-detail.tsx:63
+msgid "Directory contains $0 directories, $1 files"
+msgstr "此目錄包含 $0 個目錄、$1 個檔案"
+
+#: src/files-footer-detail.tsx:64
+msgid "Directory contains $0 directories, $1 files, $2 hidden"
+msgstr "此目錄包含 $0 個目錄、$1 個檔案、$2 個隱藏項目"
 
 #: src/files-card-body.tsx:503
 msgid "Directory is empty"
@@ -193,15 +195,21 @@ msgid "Directory name"
 msgstr "目錄名稱"
 
 #: src/dialogs/mkdir.tsx:42
-msgid "Directory name cannot be empty."
+#, fuzzy
+#| msgid "Directory name cannot be empty."
+msgid "Directory name cannot be empty"
 msgstr "目錄名稱不能是空值。"
 
 #: src/dialogs/mkdir.tsx:46
-msgid "Directory name cannot include a /."
+#, fuzzy
+#| msgid "Directory name cannot include a /."
+msgid "Directory name cannot include a /"
 msgstr "目錄名稱不能包含 / 。"
 
 #: src/dialogs/mkdir.tsx:44
-msgid "Directory name too long."
+#, fuzzy
+#| msgid "Directory name too long."
+msgid "Directory name too long"
 msgstr "目錄名稱太長。"
 
 #: src/dialogs/mkdir.tsx:140
@@ -212,11 +220,11 @@ msgstr "目錄擁有者"
 msgid "Directory with the same name exists"
 msgstr "相同名稱的目錄已存在"
 
-#: src/header.tsx:263
+#: src/header.tsx:255
 msgid "Display as a grid"
 msgstr "以網格顯示"
 
-#: src/header.tsx:262
+#: src/header.tsx:254
 msgid "Display as a list"
 msgstr "以清單顯示"
 
@@ -233,7 +241,7 @@ msgstr "編輯 $0"
 msgid "Edit path"
 msgstr "編輯路徑"
 
-#: src/menu.tsx:96 src/menu.tsx:126 src/sidebar.tsx:157
+#: src/menu.tsx:96 src/menu.tsx:126
 msgid "Edit permissions"
 msgstr "編輯權限"
 
@@ -265,11 +273,11 @@ msgstr "檔案"
 msgid "Filesystem"
 msgstr "檔案系統"
 
-#: src/header.tsx:197
+#: src/header.tsx:189
 msgid "Filter directory"
 msgstr "篩選目錄"
 
-#: src/header.tsx:91
+#: src/header.tsx:90
 msgid "First modified"
 msgstr "初次修改於"
 
@@ -305,20 +313,16 @@ msgstr "前進"
 msgid "Go up a directory"
 msgstr "回上一層目錄"
 
-#: src/files-card-body.tsx:601 src/dialogs/permissions.jsx:241
-#: src/sidebar.tsx:57
+#: src/files-card-body.tsx:572 src/dialogs/permissions.jsx:308
+#: src/files-footer-detail.tsx:75
 msgid "Group"
 msgstr "群組"
 
-#: src/dialogs/permissions.jsx:271
+#: src/dialogs/permissions.jsx:338
 msgid "Group access"
 msgstr "群組存取權限"
 
-#: src/sidebar.tsx:78
-msgid "Group permissions"
-msgstr "群組權限"
-
-#: src/header.tsx:294
+#: src/header.tsx:286
 msgid "Hide hidden items"
 msgstr "不顯示隱藏的項目"
 
@@ -338,15 +342,15 @@ msgstr "保留原本的"
 msgid "Keyboard shortcuts"
 msgstr "鍵盤快速鍵"
 
-#: src/header.tsx:80
+#: src/header.tsx:79
 msgid "Largest size"
 msgstr "大小最大"
 
-#: src/sidebar.tsx:47 src/header.tsx:95
+#: src/header.tsx:94
 msgid "Last modified"
 msgstr "最後修改於"
 
-#: src/header.tsx:117
+#: src/header.tsx:116
 msgid "Least permissive"
 msgstr "最不寬鬆的權限"
 
@@ -354,29 +358,29 @@ msgstr "最不寬鬆的權限"
 msgid "Manage your files"
 msgstr "管理您的檔案"
 
-#: src/files-card-body.tsx:528 src/header.tsx:88
+#: src/files-card-body.tsx:528 src/header.tsx:87
 msgid "Modified"
 msgstr "被修改"
 
-#: src/header.tsx:113
+#: src/header.tsx:112
 msgid "Most permissive"
 msgstr "最寬鬆的權限"
 
-#: src/files-card-body.tsx:523 src/header.tsx:66
+#: src/files-card-body.tsx:523 src/header.tsx:65
 msgid "Name"
 msgstr "名稱"
 
 #: src/dialogs/rename.tsx:41
-msgid "Name cannot be empty."
-msgstr "名稱不能為空值。"
+msgid "Name cannot be empty"
+msgstr "名稱不能為空值"
 
 #: src/dialogs/rename.tsx:45
-msgid "Name cannot include a /."
-msgstr "名稱不能包含 / 。"
+msgid "Name cannot include a /"
+msgstr "名稱不能包含 /"
 
 #: src/dialogs/rename.tsx:43
-msgid "Name too long."
-msgstr "名稱太長。"
+msgid "Name too long"
+msgstr "名稱太長"
 
 #: src/common.ts:39
 msgid "Named pipe"
@@ -398,7 +402,7 @@ msgstr "新檔案名稱"
 msgid "New name"
 msgstr "新名稱"
 
-#: src/dialogs/permissions.jsx:153
+#: src/dialogs/permissions.jsx:213
 msgid "No access"
 msgstr "無存取權限"
 
@@ -418,15 +422,11 @@ msgstr "開啟文字檔案"
 msgid "Original file on server"
 msgstr "伺服器上原有的檔案"
 
-#: src/sidebar.tsx:83
-msgid "Other permissions"
-msgstr "其他權限"
-
-#: src/files-card-body.tsx:601
+#: src/files-card-body.tsx:572 src/files-footer-detail.tsx:75
 msgid "Others"
 msgstr "其他人"
 
-#: src/dialogs/permissions.jsx:283
+#: src/dialogs/permissions.jsx:350
 msgid "Others access"
 msgstr "其他人的存取權限"
 
@@ -434,28 +434,25 @@ msgstr "其他人的存取權限"
 msgid "Overwrite"
 msgstr "覆寫"
 
-#: src/files-card-body.tsx:533 src/files-card-body.tsx:601
-#: src/dialogs/permissions.jsx:226 src/sidebar.tsx:52 src/header.tsx:99
+#: src/files-card-body.tsx:533 src/files-card-body.tsx:572
+#: src/dialogs/permissions.jsx:293 src/header.tsx:98
+#: src/files-footer-detail.tsx:75
 msgid "Owner"
 msgstr "擁有者"
 
-#: src/dialogs/permissions.jsx:259
+#: src/dialogs/permissions.jsx:326
 msgid "Owner access"
 msgstr "擁有者存取權限"
 
-#: src/header.tsx:102
+#: src/header.tsx:101
 msgid "Owner ascending"
 msgstr "擁有者遞增排序"
 
-#: src/header.tsx:106
+#: src/header.tsx:105
 msgid "Owner descending"
 msgstr "擁有者遞減排序"
 
-#: src/sidebar.tsx:73
-msgid "Owner permissions"
-msgstr "擁有者權限"
-
-#: src/dialogs/permissions.jsx:225
+#: src/dialogs/permissions.jsx:292
 msgid "Ownership"
 msgstr "所有權"
 
@@ -471,7 +468,7 @@ msgstr "貼上檔案或目錄"
 msgid "Pasting failed"
 msgstr "貼上失敗"
 
-#: src/files-card-body.tsx:538 src/header.tsx:110
+#: src/files-card-body.tsx:538 src/header.tsx:109
 msgid "Permissions"
 msgstr "權限"
 
@@ -479,7 +476,7 @@ msgstr "權限"
 msgid "Read and execute"
 msgstr "讀取與執行"
 
-#: src/common.ts:31 src/dialogs/permissions.jsx:143
+#: src/common.ts:31 src/dialogs/permissions.jsx:203
 msgid "Read and write"
 msgstr "讀取與寫入"
 
@@ -487,7 +484,7 @@ msgstr "讀取與寫入"
 msgid "Read, write, and execute"
 msgstr "讀取、寫入與執行"
 
-#: src/common.ts:29 src/dialogs/editor.tsx:173 src/dialogs/permissions.jsx:148
+#: src/common.ts:29 src/dialogs/editor.tsx:173 src/dialogs/permissions.jsx:208
 msgid "Read-only"
 msgstr "只能讀取"
 
@@ -527,7 +524,7 @@ msgstr "取代檔案 $0 ？"
 msgid "Save"
 msgstr "儲存"
 
-#: src/dialogs/permissions.jsx:296
+#: src/dialogs/permissions.jsx:363
 msgid "Security context"
 msgstr "安全性 context"
 
@@ -535,23 +532,23 @@ msgstr "安全性 context"
 msgid "Select all"
 msgstr "全選"
 
-#: src/dialogs/permissions.jsx:308
+#: src/dialogs/permissions.jsx:375
 msgid "Set executable as program"
 msgstr "設定為可執行的程式"
 
-#: src/files-card-body.tsx:511 src/header.tsx:294
+#: src/files-card-body.tsx:511 src/header.tsx:286
 msgid "Show hidden items"
 msgstr "顯示隱藏的項目"
 
-#: src/header.tsx:165
+#: src/header.tsx:164
 msgid "Show keyboard shortcuts"
 msgstr "顯示鍵盤快速鍵"
 
-#: src/files-card-body.tsx:524 src/sidebar.tsx:64 src/header.tsx:77
+#: src/files-card-body.tsx:524 src/header.tsx:76
 msgid "Size"
 msgstr "大小"
 
-#: src/header.tsx:84
+#: src/header.tsx:83
 msgid "Smallest size"
 msgstr "大小最小"
 
@@ -559,7 +556,7 @@ msgstr "大小最小"
 msgid "Socket"
 msgstr "Socket"
 
-#: src/header.tsx:281
+#: src/header.tsx:273
 msgid "Sort"
 msgstr "排序"
 
@@ -620,11 +617,11 @@ msgstr "檢視 $0"
 msgid "Write and execute"
 msgstr "寫入與執行"
 
-#: src/common.ts:27 src/dialogs/permissions.jsx:163
+#: src/common.ts:27 src/dialogs/permissions.jsx:223
 msgid "Write-only"
 msgstr "只能寫入"
 
-#: src/header.tsx:73
+#: src/header.tsx:72
 msgid "Z-A"
 msgstr "由 Z 到 A"
 
@@ -639,6 +636,26 @@ msgstr "檔案"
 #: src/manifest.json:0
 msgid "filesystem"
 msgstr "檔案系統"
+
+#~ msgid "$0 item"
+#~ msgid_plural "$0 items"
+#~ msgstr[0] "$0 個項目"
+
+#~ msgid "($0 hidden)"
+#~ msgid_plural "($0 hidden)"
+#~ msgstr[0] "(已隱藏 $0 個)"
+
+#~ msgid "Directories & files"
+#~ msgstr "目錄與檔案"
+
+#~ msgid "Group permissions"
+#~ msgstr "群組權限"
+
+#~ msgid "Other permissions"
+#~ msgstr "其他權限"
+
+#~ msgid "Owner permissions"
+#~ msgstr "擁有者權限"
 
 #~ msgid "A file system browser for Cockpit."
 #~ msgstr "一個適用於 Cockpit 的檔案系統瀏覽器。"
