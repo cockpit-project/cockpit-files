@@ -2451,7 +2451,7 @@ class TestFiles(testlib.MachineCase):
 
         def open_editor(file: str) -> None:
             b.mouse(f"[data-item='{file}']", "contextmenu")
-            b.click(".contextMenu button:contains('Open text file')")
+            b.click(".contextMenu button:contains('Edit file')")
 
         def validate_content(file: str, content: str) -> None:
             open_editor(file)
