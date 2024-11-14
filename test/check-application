@@ -2574,11 +2574,14 @@ class TestFiles(testlib.MachineCase):
 
         # As unprivileged user
         b.drop_superuser()
+        b.wait_not_present('.pf-v5-c-empty-state')
+        self.assert_last_breadcrumb("admin")
 
         # View a file
         m.execute("echo 'this is a config file' > /etc/cockpit-files-test.cfg")
         self.addCleanup(m.execute, "rm /etc/cockpit-files-test.cfg")
         b.go("/files#/?path=/etc")
+        b.wait_not_present('.pf-v5-c-empty-state')
         self.assert_last_breadcrumb("etc")
         open_editor("cockpit-files-test.cfg")
         b.wait_text(".pf-v5-c-modal-box__title", "View cockpit-files-test.cfgRead-only")
