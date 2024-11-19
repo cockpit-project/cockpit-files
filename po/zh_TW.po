@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-11 03:03+0000\n"
-"PO-Revision-Date: 2024-11-07 11:38+0000\n"
+"POT-Creation-Date: 2024-11-19 03:17+0000\n"
+"PO-Revision-Date: 2024-11-19 15:38+0000\n"
 "Last-Translator: JW Wang <v72807647@gmail.com>\n"
 "Language-Team: Chinese (Traditional) <https://translate.fedoraproject.org/"
 "projects/cockpit-files/cockpit-files/zh_TW/>\n"
@@ -195,22 +195,16 @@ msgid "Directory name"
 msgstr "目錄名稱"
 
 #: src/dialogs/mkdir.tsx:42
-#, fuzzy
-#| msgid "Directory name cannot be empty."
 msgid "Directory name cannot be empty"
-msgstr "目錄名稱不能是空值。"
+msgstr "目錄名稱不能是空值"
 
 #: src/dialogs/mkdir.tsx:46
-#, fuzzy
-#| msgid "Directory name cannot include a /."
 msgid "Directory name cannot include a /"
-msgstr "目錄名稱不能包含 / 。"
+msgstr "目錄名稱不能包含 /"
 
 #: src/dialogs/mkdir.tsx:44
-#, fuzzy
-#| msgid "Directory name too long."
 msgid "Directory name too long"
-msgstr "目錄名稱太長。"
+msgstr "目錄名稱太長"
 
 #: src/dialogs/mkdir.tsx:140
 msgid "Directory owner"
