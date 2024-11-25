@@ -2578,6 +2578,12 @@ class TestFiles(testlib.MachineCase):
 
         validate_content("notes.txt", "reset\n")
 
+        # Escape closes the dialog
+        open_editor("notes.txt")
+        b.blur(".file-editor-modal textarea")  # remove focus from textarea
+        b.key("Escape")  # Escape for modal
+        b.wait_not_present(".file-editor-modal")
+
         # As unprivileged user
         b.drop_superuser()
         b.wait_not_present('.pf-v5-c-empty-state')
