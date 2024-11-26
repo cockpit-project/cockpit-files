@@ -1952,10 +1952,14 @@ class TestFiles(testlib.MachineCase):
         m = self.machine
 
         self.enter_files()
+        b.click("button[aria-label='Display as a list']")
 
         # Copy/paste file
         m.execute("runuser -u admin mkdir /home/admin/newdir")
         m.write('/home/admin/newfile', 'test_text\n', owner='admin:admin')
+        # "hack" test is too quick and UI doesnt reflect the chown done in m.write so it still
+        # thinks that file owner is root
+        b.wait_in_text("[data-item='newfile'] .item-owner", "admin")
         b.click("[data-item='newfile']")
         b.click("#dropdown-menu")
         b.click("#copy-item")
@@ -1970,6 +1974,8 @@ class TestFiles(testlib.MachineCase):
         self.assert_last_breadcrumb("admin")
         # original file still exists
         b.wait_visible("[data-item='newfile']")
+
+        b.click("button[aria-label='Display as a grid']")
 
         # Copy/paste directory
         m.execute("runuser -u admin mkdir /home/admin/copyDir")
@@ -2047,6 +2053,77 @@ class TestFiles(testlib.MachineCase):
         b.wait_in_text("h4.pf-v5-c-alert__title", "Pasting failed")
         b.wait_in_text(".pf-v5-c-alert__description", "\"newfile\" exists")
         self.assertEqual(m.execute("head -n 1 /home/admin/kbdCopy/newfile"), "keybindings good\n")
+        b.click(".pf-v5-c-alert__action button")
+
+        # Copy & paste as superuser
+        # Switch to list so owner is visible
+        b.click("button[aria-label='Display as a list']")
+        b.go("/files#/?path=/home/admin")
+        self.assert_last_breadcrumb("admin")
+        b.go("files#/?path=/home/admin")
+        self.assert_last_breadcrumb("admin")
+        m.execute("useradd -m foouser")
+
+        b.click("[data-item='newfile']")
+        b.click("#dropdown-menu")
+        b.click("#copy-item")
+
+        b.go("files#/?path=/home/foouser")
+        self.assert_last_breadcrumb("foouser")
+        # Paste file as destination directory owner
+        b.click("#dropdown-menu")
+        b.click("#paste-item")
+        b.wait_visible("#paste-owner-modal")
+        b.click("#paste-owner-modal button.pf-m-warning")
+        b.wait_in_text("[data-item='newfile'] .item-owner", "foouser")
+
+        # Copy foouser file into admin directory as admin
+        m.execute("runuser -u foouser touch /home/foouser/foouserfile")
+        b.wait_in_text("[data-item='foouserfile'] .item-owner", "foouser")
+        b.click("[data-item='foouserfile']")
+        b.click("#dropdown-menu")
+        b.click("#copy-item")
+        b.go("files#/?path=/home/admin")
+        self.assert_last_breadcrumb("admin")
+        b.click("#dropdown-menu")
+        b.click("#paste-item")
+        b.wait_visible("#paste-owner-modal")
+        b.click("#paste-owner-modal button.pf-m-warning")
+        b.wait_in_text("[data-item='foouserfile'] .item-owner", "admin")
+
+        # Paste as admin into foouser directory
+        m.execute("runuser -u admin touch /home/admin/adminfile")
+        b.wait_in_text("[data-item='adminfile'] .item-owner", "admin")
+        b.click("[data-item='adminfile']")
+        b.click("#dropdown-menu")
+        b.click("#copy-item")
+        b.go("files#/?path=/home/foouser")
+        self.assert_last_breadcrumb("foouser")
+        b.click("#dropdown-menu")
+        b.click("#paste-item")
+        b.wait_visible("#paste-owner-modal")
+        b.select_from_dropdown("#paste-owner-select", "admin:admin")
+        b.click("#paste-owner-modal button.pf-m-warning")
+        b.wait_in_text("[data-item='adminfile'] .item-owner", "admin")
+
+        # Copying a directory should change the owner recursively
+        b.go("files#/?path=/home/admin")
+        self.assert_last_breadcrumb("admin")
+        b.click("[data-item='kbdCopy']")
+        b.click("#dropdown-menu")
+        b.click("#copy-item")
+        b.go("files#/?path=/home/foouser")
+        self.assert_last_breadcrumb("foouser")
+        b.click("#dropdown-menu")
+        b.click("#paste-item")
+        b.wait_visible("#paste-owner-modal")
+        b.select_from_dropdown("#paste-owner-select", "root:root")
+        b.click("#paste-owner-modal button.pf-m-warning")
+        b.wait_in_text("[data-item='kbdCopy'] .item-owner", "root")
+        b.go("files#/?path=/home/foouser/kbdCopy")
+        self.assert_last_breadcrumb("kbdCopy")
+        b.wait_in_text("[data-item='loaded'] .item-owner", "root")
+        b.wait_in_text("[data-item='newfile'] .item-owner", "root")
 
     @testlib.skipBrowser(".upload_files() doesn't work on Firefox", "firefox")
     def testUpload(self) -> None:
