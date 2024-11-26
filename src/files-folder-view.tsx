@@ -22,7 +22,7 @@ import React, { useEffect, useState } from "react";
 import { Card } from '@patternfly/react-core/dist/esm/components/Card';
 import { debounce } from "throttle-debounce";
 
-import type { FolderFileInfo } from "./app.tsx";
+import type { FolderFileInfo, ClipboardInfo } from "./app.tsx";
 import { FilesCardBody } from "./files-card-body.tsx";
 import { as_sort, FilesCardHeader } from "./header.tsx";
 
@@ -43,7 +43,7 @@ export const FilesFolderView = ({
     showHidden: boolean,
     setShowHidden: React.Dispatch<React.SetStateAction<boolean>>,
     selected: FolderFileInfo[], setSelected: React.Dispatch<React.SetStateAction<FolderFileInfo[]>>,
-    clipboard: string[], setClipboard: React.Dispatch<React.SetStateAction<string[]>>,
+    clipboard: ClipboardInfo, setClipboard: React.Dispatch<React.SetStateAction<ClipboardInfo>>,
 }) => {
     const [currentFilter, setCurrentFilter] = useState("");
     const [isGrid, setIsGrid] = useState(localStorage.getItem("files:isGrid") !== "false");

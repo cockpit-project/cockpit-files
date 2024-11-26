@@ -35,7 +35,7 @@ import { dirname } from "cockpit-path.ts";
 import { useDialogs } from "dialogs";
 import * as timeformat from "timeformat";
 
-import { FolderFileInfo, useFilesContext } from "./app.tsx";
+import { ClipboardInfo, FolderFileInfo, useFilesContext } from "./app.tsx";
 import { get_permissions, permissionShortStr } from "./common.ts";
 import { confirm_delete } from "./dialogs/delete.tsx";
 import { show_create_directory_dialog } from "./dialogs/mkdir.tsx";
@@ -101,7 +101,7 @@ function compare(sortBy: Sort): (a: FolderFileInfo, b: FolderFileInfo) => number
 const ContextMenuItems = ({ path, selected, setSelected, clipboard, setClipboard } : {
     path: string,
     selected: FolderFileInfo[], setSelected: React.Dispatch<React.SetStateAction<FolderFileInfo[]>>,
-    clipboard: string[], setClipboard: React.Dispatch<React.SetStateAction<string[]>>,
+    clipboard: ClipboardInfo, setClipboard: React.Dispatch<React.SetStateAction<ClipboardInfo>>,
 }) => {
     const dialogs = useDialogs();
     const { addAlert, cwdInfo } = useFilesContext();
@@ -152,7 +152,7 @@ export const FilesCardBody = ({
     selected: FolderFileInfo[], setSelected: React.Dispatch<React.SetStateAction<FolderFileInfo[]>>,
     sortBy: Sort, setSortBy: React.Dispatch<React.SetStateAction<Sort>>,
     loadingFiles: boolean,
-    clipboard: string[], setClipboard: React.Dispatch<React.SetStateAction<string[]>>,
+    clipboard: ClipboardInfo, setClipboard: React.Dispatch<React.SetStateAction<ClipboardInfo>>,
     showHidden: boolean,
     setShowHidden: React.Dispatch<React.SetStateAction<boolean>>,
 }) => {
@@ -365,15 +365,16 @@ export const FilesCardBody = ({
                 // Keep standard text editing behavior by excluding input fields
                 if (e.ctrlKey && !e.shiftKey && !e.altKey && !(e.target instanceof HTMLInputElement)) {
                     e.preventDefault();
-                    setClipboard(selected.map(s => path + s.name));
+                    setClipboard({ path, files: selected });
                 }
                 break;
 
             case "v":
                 // Keep standard text editing behavior by excluding input fields
-                if (e.ctrlKey && !e.shiftKey && !e.altKey && !(e.target instanceof HTMLInputElement)) {
+                if (e.ctrlKey && !e.shiftKey && !e.altKey && clipboard.files.length > 0 &&
+                        !(e.target instanceof HTMLInputElement)) {
                     e.preventDefault();
-                    pasteFromClipboard(clipboard, cwdInfo, path, addAlert);
+                    pasteFromClipboard(clipboard, cwdInfo, path, dialogs, addAlert);
                 }
                 break;
 
