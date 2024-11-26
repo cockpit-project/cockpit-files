@@ -14,9 +14,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-19 03:17+0000\n"
-"PO-Revision-Date: 2024-11-08 20:52+0000\n"
-"Last-Translator: 김인수 <simmon@nplob.com>\n"
+"POT-Creation-Date: 2024-11-26 03:19+0000\n"
+"PO-Revision-Date: 2024-11-24 16:39+0000\n"
+"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
+"memory@weblate.org>\n"
 "Language-Team: Korean <https://translate.fedoraproject.org/projects/cockpit-"
 "files/cockpit-files/ko/>\n"
 "Language: ko\n"
@@ -26,7 +27,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0\n"
 "X-Generator: Weblate 5.8.2\n"
 
-#: src/menu.tsx:57
+#: src/menu.tsx:58
 msgid "\"$0\" exists, not overwriting with paste."
 msgstr "\"$0\" 존재하며, 붙여서 덮어쓰지 않습니다."
 
@@ -40,7 +41,7 @@ msgid_plural "$0 items are hidden"
 msgstr[0] "$0 항목이 숨겨졌습니다"
 
 #. Translators: $0 represents a filename
-#: src/dialogs/permissions.jsx:260
+#: src/dialogs/permissions.tsx:277
 msgid "$0 permissions"
 msgstr "$0 권한"
 
@@ -66,7 +67,7 @@ msgstr ""
 msgid "A-Z"
 msgstr "A-Z"
 
-#: src/dialogs/permissions.jsx:324
+#: src/dialogs/permissions.tsx:341
 msgid "Access"
 msgstr "접근"
 
@@ -83,7 +84,7 @@ msgstr "즐겨찾기 추가"
 msgid "Apply this action to all conflicting files"
 msgstr "모든 충돌하는 파일에 이와 같은 동작을 적용합니다"
 
-#: src/common.ts:36
+#: src/common.ts:39
 msgid "Block device"
 msgstr "블록 장치"
 
@@ -91,9 +92,9 @@ msgstr "블록 장치"
 msgid "Bookmarks"
 msgstr "즐겨찾기"
 
-#: src/dialogs/editor.tsx:212 src/dialogs/delete.tsx:91
-#: src/dialogs/permissions.jsx:279 src/dialogs/rename.tsx:116
-#: src/dialogs/mkdir.tsx:108 src/upload-button.tsx:91
+#: src/dialogs/permissions.tsx:296 src/dialogs/create-file.tsx:162
+#: src/dialogs/editor.tsx:211 src/dialogs/delete.tsx:91
+#: src/dialogs/rename.tsx:98 src/dialogs/mkdir.tsx:108 src/upload-button.tsx:91
 msgid "Cancel"
 msgstr "취소"
 
@@ -109,15 +110,19 @@ msgstr "취소됨"
 msgid "Cancelled upload of $0"
 msgstr "$0 올려주기 취소됨"
 
-#: src/dialogs/permissions.jsx:270
+#: src/dialogs/create-file.tsx:228
+msgid "Cannot create file in current directory"
+msgstr "현재 디렉토리에서 파일을 생성 할 수 없습니다"
+
+#: src/dialogs/permissions.tsx:287
 msgid "Change"
 msgstr "변경"
 
-#: src/dialogs/permissions.jsx:277
+#: src/dialogs/permissions.tsx:294
 msgid "Change permissions for enclosed files"
 msgstr "첨부된 파일을 위한 권한 변경"
 
-#: src/common.ts:37
+#: src/common.ts:40
 msgid "Character device"
 msgstr "문자 장치"
 
@@ -125,7 +130,7 @@ msgstr "문자 장치"
 msgid "Clear filter"
 msgstr "필터 지우기"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:18 src/dialogs/editor.tsx:212
+#: src/dialogs/keyboardShortcutsHelp.tsx:18 src/dialogs/editor.tsx:211
 msgid "Close"
 msgstr "종료"
 
@@ -133,7 +138,7 @@ msgstr "종료"
 msgid "Cockpit Files"
 msgstr "Cockpit 파일"
 
-#: src/menu.tsx:120 src/menu.tsx:155
+#: src/menu.tsx:138 src/menu.tsx:183
 msgid "Copy"
 msgstr "복사"
 
@@ -141,19 +146,23 @@ msgstr "복사"
 msgid "Copy selected file or directory"
 msgstr "선택된 파일 또는 디렉토리를 복사"
 
-#: src/dialogs/mkdir.tsx:106
+#: src/dialogs/create-file.tsx:159 src/dialogs/mkdir.tsx:106
 msgid "Create"
 msgstr "생성"
 
-#: src/menu.tsx:90 src/dialogs/mkdir.tsx:92
+#: src/menu.tsx:93 src/dialogs/mkdir.tsx:92
 msgid "Create directory"
 msgstr "디렉토리 생성"
+
+#: src/menu.tsx:98 src/dialogs/create-file.tsx:146
+msgid "Create file"
+msgstr "파일 생성"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:86
 msgid "Create new directory"
 msgstr "신규 디렉토리 생성"
 
-#: src/menu.tsx:137 src/menu.tsx:160 src/dialogs/delete.tsx:90
+#: src/menu.tsx:155 src/menu.tsx:188 src/dialogs/delete.tsx:90
 msgid "Delete"
 msgstr "삭제"
 
@@ -177,7 +186,7 @@ msgstr "파일 $0를 삭제할까요?"
 msgid "Delete link $0?"
 msgstr "링크 $0를 삭제할까요?"
 
-#: src/common.ts:38
+#: src/common.ts:41
 msgid "Directory"
 msgstr "디렉토리"
 
@@ -213,7 +222,7 @@ msgstr "디렉토리 이름이 너무 길어요"
 msgid "Directory owner"
 msgstr "디렉토리 소유자"
 
-#: src/dialogs/rename.tsx:50
+#: src/common.ts:92
 msgid "Directory with the same name exists"
 msgstr "동일한 이름을 갖는 디렉토리가 존재합니다"
 
@@ -225,7 +234,7 @@ msgstr "그리드로 표시"
 msgid "Display as a list"
 msgstr "목록으로 표시"
 
-#: src/menu.tsx:147
+#: src/menu.tsx:165
 msgid "Download"
 msgstr "내려받기"
 
@@ -238,7 +247,7 @@ msgstr "$0 편집"
 msgid "Edit path"
 msgstr "경로 편집"
 
-#: src/menu.tsx:96 src/menu.tsx:126
+#: src/menu.tsx:104 src/menu.tsx:144
 msgid "Edit permissions"
 msgstr "권한을 편집합니다"
 
@@ -246,7 +255,7 @@ msgstr "권한을 편집합니다"
 msgid "Editing"
 msgstr "편집하기"
 
-#: src/common.ts:26
+#: src/common.ts:29
 msgid "Execute-only"
 msgstr "실행-전용"
 
@@ -254,11 +263,15 @@ msgstr "실행-전용"
 msgid "File browser"
 msgstr "파일 탐색기"
 
-#: src/dialogs/rename.tsx:52
+#: src/common.ts:94
 msgid "File exists"
 msgstr "파일이 존재합니다"
 
-#: src/dialogs/rename.tsx:47
+#: src/dialogs/create-file.tsx:177
+msgid "File name"
+msgstr "파일 이름"
+
+#: src/common.ts:89
 msgid "Filename is the same as original name"
 msgstr "파일이름이 원래의 이름과 동일합니다"
 
@@ -310,12 +323,12 @@ msgstr "앞으로 가기"
 msgid "Go up a directory"
 msgstr "상위 디렉토리로 이동"
 
-#: src/files-card-body.tsx:572 src/dialogs/permissions.jsx:308
+#: src/files-card-body.tsx:572 src/dialogs/permissions.tsx:325
 #: src/files-footer-detail.tsx:75
 msgid "Group"
 msgstr "그룹"
 
-#: src/dialogs/permissions.jsx:338
+#: src/dialogs/permissions.tsx:355
 msgid "Group access"
 msgstr "그룹 접근"
 
@@ -327,7 +340,7 @@ msgstr "숨겨진 항목 감추기"
 msgid "Home"
 msgstr "홈"
 
-#: src/dialogs/editor.tsx:240
+#: src/dialogs/editor.tsx:239
 msgid "Ignore"
 msgstr "무시"
 
@@ -355,6 +368,10 @@ msgstr "최소 허용"
 msgid "Manage your files"
 msgstr "자신의 파일을 관리합니다"
 
+#: src/dialogs/permissions.tsx:278
+msgid "Missing type"
+msgstr "누락 유형"
+
 #: src/files-card-body.tsx:528 src/header.tsx:87
 msgid "Modified"
 msgstr "수정됨"
@@ -367,19 +384,19 @@ msgstr "관대한 허용"
 msgid "Name"
 msgstr "이름"
 
-#: src/dialogs/rename.tsx:41
+#: src/common.ts:83
 msgid "Name cannot be empty"
 msgstr "이름은 비워 둘 수 없습니다"
 
-#: src/dialogs/rename.tsx:45
+#: src/common.ts:87
 msgid "Name cannot include a /"
 msgstr "이름은 /를 포함 할 수 없습니다"
 
-#: src/dialogs/rename.tsx:43
+#: src/common.ts:85
 msgid "Name too long"
 msgstr "이름이 너무 길어요"
 
-#: src/common.ts:39
+#: src/common.ts:42
 msgid "Named pipe"
 msgstr "이름이 지정된 파이프"
 
@@ -391,15 +408,15 @@ msgstr "탐색"
 msgid "New file"
 msgstr "신규 파일"
 
-#: src/dialogs/rename.tsx:120
+#: src/dialogs/rename.tsx:102
 msgid "New filename"
 msgstr "신규 파일이름"
 
-#: src/dialogs/rename.tsx:120
+#: src/dialogs/rename.tsx:102
 msgid "New name"
 msgstr "신규 이름"
 
-#: src/dialogs/permissions.jsx:213
+#: src/dialogs/permissions.tsx:230
 msgid "No access"
 msgstr "접근 불가"
 
@@ -407,11 +424,15 @@ msgstr "접근 불가"
 msgid "No matching results"
 msgstr "일치하는 결과를 찾을 수 없습니다"
 
-#: src/common.ts:25
+#: src/common.ts:28
 msgid "None"
 msgstr "없음"
 
-#: src/menu.tsx:112
+#: src/menu.tsx:113 src/menu.tsx:174
+msgid "Open in terminal"
+msgstr "터미널에서 열기"
+
+#: src/menu.tsx:130
 msgid "Open text file"
 msgstr "텍스트 파일 열기"
 
@@ -423,21 +444,21 @@ msgstr "서버에서 원본 파일"
 msgid "Others"
 msgstr "기타"
 
-#: src/dialogs/permissions.jsx:350
+#: src/dialogs/permissions.tsx:367
 msgid "Others access"
 msgstr "기타 접근"
 
-#: src/dialogs/editor.tsx:196 src/dialogs/rename.tsx:114
+#: src/dialogs/editor.tsx:195 src/dialogs/rename.tsx:96
 msgid "Overwrite"
 msgstr "덮어쓰기"
 
 #: src/files-card-body.tsx:533 src/files-card-body.tsx:572
-#: src/dialogs/permissions.jsx:293 src/header.tsx:98
-#: src/files-footer-detail.tsx:75
+#: src/dialogs/permissions.tsx:310 src/dialogs/create-file.tsx:199
+#: src/header.tsx:98 src/files-footer-detail.tsx:75
 msgid "Owner"
 msgstr "소유자"
 
-#: src/dialogs/permissions.jsx:326
+#: src/dialogs/permissions.tsx:343
 msgid "Owner access"
 msgstr "소유자 접근"
 
@@ -449,11 +470,11 @@ msgstr "소유자 오름차순"
 msgid "Owner descending"
 msgstr "소유자 내림차순"
 
-#: src/dialogs/permissions.jsx:292
+#: src/dialogs/permissions.tsx:309
 msgid "Ownership"
 msgstr "소유권"
 
-#: src/menu.tsx:83
+#: src/menu.tsx:86
 msgid "Paste"
 msgstr "붙여넣기"
 
@@ -461,35 +482,39 @@ msgstr "붙여넣기"
 msgid "Paste file or directory"
 msgstr "파일 또는 디렉토리 붙여넣기"
 
-#: src/menu.tsx:56
+#: src/menu.tsx:57
 msgid "Pasting failed"
 msgstr "붙여넣기 실패함"
+
+#: src/dialogs/create-file.tsx:229
+msgid "Permission denied"
+msgstr "권한이 거부되었습니다"
 
 #: src/files-card-body.tsx:538 src/header.tsx:109
 msgid "Permissions"
 msgstr "권한"
 
-#: src/common.ts:30
+#: src/common.ts:33
 msgid "Read and execute"
 msgstr "읽기 및 실행"
 
-#: src/common.ts:31 src/dialogs/permissions.jsx:203
+#: src/common.ts:34 src/dialogs/permissions.tsx:220
 msgid "Read and write"
 msgstr "일기 및 쓰기"
 
-#: src/common.ts:32
+#: src/common.ts:35
 msgid "Read, write, and execute"
 msgstr "읽기, 쓰기 및 실행"
 
-#: src/common.ts:29 src/dialogs/editor.tsx:173 src/dialogs/permissions.jsx:208
+#: src/common.ts:32 src/dialogs/permissions.tsx:225 src/dialogs/editor.tsx:172
 msgid "Read-only"
 msgstr "읽기-전용"
 
-#: src/common.ts:41
+#: src/common.ts:44
 msgid "Regular file"
 msgstr "일반 파일"
 
-#: src/dialogs/editor.tsx:237
+#: src/dialogs/editor.tsx:236
 msgid "Reload"
 msgstr "재적재"
 
@@ -497,11 +522,11 @@ msgstr "재적재"
 msgid "Remove current directory"
 msgstr "현재 디렉토리를 제거합니다"
 
-#: src/menu.tsx:131 src/dialogs/rename.tsx:107
+#: src/menu.tsx:149 src/dialogs/rename.tsx:89
 msgid "Rename"
 msgstr "이름변경"
 
-#: src/dialogs/rename.tsx:125
+#: src/dialogs/rename.tsx:107
 msgid "Rename $0?"
 msgstr "$0 이름변경?"
 
@@ -517,11 +542,11 @@ msgstr "교체"
 msgid "Replace file $0?"
 msgstr "파일 $0를 교체합니까?"
 
-#: src/dialogs/editor.tsx:209
+#: src/dialogs/editor.tsx:208
 msgid "Save"
 msgstr "저장"
 
-#: src/dialogs/permissions.jsx:363
+#: src/dialogs/permissions.tsx:380
 msgid "Security context"
 msgstr "보안 문맥"
 
@@ -529,7 +554,7 @@ msgstr "보안 문맥"
 msgid "Select all"
 msgstr "모두 선택"
 
-#: src/dialogs/permissions.jsx:375
+#: src/dialogs/permissions.tsx:392
 msgid "Set executable as program"
 msgstr "실행 할 수 있는 프로그램 설정"
 
@@ -549,7 +574,7 @@ msgstr "크기"
 msgid "Smallest size"
 msgstr "최소 크기"
 
-#: src/common.ts:42
+#: src/common.ts:45
 msgid "Socket"
 msgstr "소켓"
 
@@ -561,7 +586,7 @@ msgstr "정렬"
 msgid "Successfully uploaded file(s)"
 msgstr "성공적으로 파일이 올려짐"
 
-#: src/common.ts:40
+#: src/common.ts:43
 msgid "Symbolic link"
 msgstr "심볼릭 링크"
 
@@ -569,11 +594,11 @@ msgstr "심볼릭 링크"
 msgid "The existing file changed unexpectedly"
 msgstr "기존 파일이 예상치 못하게 변경되었습니다"
 
-#: src/dialogs/editor.tsx:57 src/dialogs/editor.tsx:231
+#: src/dialogs/editor.tsx:57 src/dialogs/editor.tsx:230
 msgid "The file has been removed on disk"
 msgstr "파일이 디스크에서 제거되었습니다"
 
-#: src/dialogs/editor.tsx:232
+#: src/dialogs/editor.tsx:231
 msgid "The file has changed on disk"
 msgstr "파일이 디스크에서 변경되었습니다"
 
@@ -609,11 +634,11 @@ msgstr "올려주기"
 msgid "View $0"
 msgstr "$0 보기"
 
-#: src/common.ts:28
+#: src/common.ts:31
 msgid "Write and execute"
 msgstr "쓰기 및 실행"
 
-#: src/common.ts:27 src/dialogs/permissions.jsx:223
+#: src/common.ts:30 src/dialogs/permissions.tsx:240
 msgid "Write-only"
 msgstr "쓰기-전용"
 
