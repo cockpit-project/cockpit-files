@@ -25,8 +25,11 @@ import cockpit from "cockpit";
 import type { FileInfo } from "cockpit/fsinfo";
 import { basename, dirname } from "cockpit-path";
 import type { Dialogs } from 'dialogs';
+import { superuser } from 'superuser';
 
-import type { FolderFileInfo } from "./common.ts";
+import { debug } from "./common.ts";
+import type { ClipboardInfo, FolderFileInfo } from "./common.ts";
+import { show_copy_paste_as_owner } from "./dialogs/copyPasteOwnership.tsx";
 import { show_create_file_dialog } from './dialogs/create-file.tsx';
 import { confirm_delete } from './dialogs/delete.tsx';
 import { edit_file, MAX_EDITOR_FILE_SIZE } from './dialogs/editor.tsx';
@@ -46,31 +49,47 @@ type MenuItem = { type: "divider" } | {
     className?: string;
 };
 
-export function pasteFromClipboard(
-    clipboard: string[],
+export async function pasteFromClipboard(
+    clipboard: ClipboardInfo,
     cwdInfo: FileInfo | null,
     path: string,
+    dialogs: Dialogs,
     addAlert: (title: string, variant: AlertVariant, key: string, detail?: string) => void,
 ) {
-    const existingFiles = clipboard.filter(sourcePath => cwdInfo?.entries?.[basename(sourcePath)]);
+    const existingFiles = clipboard.files.filter(sourcePath => cwdInfo?.entries?.[sourcePath.name]);
+
     if (existingFiles.length > 0) {
         addAlert(_("Pasting failed"), AlertVariant.danger, "paste-error",
                  cockpit.format(_("\"$0\" exists, not overwriting with paste."),
-                                existingFiles.map(basename).join(", ")));
+                                existingFiles.map(file => file.name).join(", ")));
         return;
     }
-    cockpit.spawn([
-        "cp",
-        "-R",
-        ...clipboard,
-        path
-    ]).catch(err => addAlert(err.message, AlertVariant.danger, `${new Date().getTime()}`));
+
+    try {
+        // check for write access to destination directory
+        await cockpit.spawn(["test", "-w", path]);
+        const filePaths = clipboard.files.map(file => `${clipboard.path}/${file.name}`);
+        await cockpit.spawn([
+            "cp",
+            "-R",
+            ...filePaths,
+            path
+        ]);
+    } catch (e) {
+        const err = e as cockpit.BasicError;
+        debug("Failed to copy as admin: ", err);
+        if (superuser.allowed) {
+            show_copy_paste_as_owner(dialogs, clipboard, path);
+        } else {
+            addAlert(err.message, AlertVariant.danger, `${new Date().getTime()}`);
+        }
+    }
 }
 
 export function get_menu_items(
     path: string,
     selected: FolderFileInfo[], setSelected: React.Dispatch<React.SetStateAction<FolderFileInfo[]>>,
-    clipboard: string[], setClipboard: React.Dispatch<React.SetStateAction<string[]>>,
+    clipboard: ClipboardInfo, setClipboard: React.Dispatch<React.SetStateAction<ClipboardInfo>>,
     cwdInfo: FileInfo | null,
     addAlert: (title: string, variant: AlertVariant, key: string, detail?: string) => void,
     dialogs: Dialogs,
@@ -86,8 +105,8 @@ export function get_menu_items(
             {
                 id: "paste-item",
                 title: _("Paste"),
-                isDisabled: clipboard.length === 0,
-                onClick: () => pasteFromClipboard(clipboard, cwdInfo, path, addAlert),
+                isDisabled: clipboard.files.length === 0,
+                onClick: () => pasteFromClipboard(clipboard, cwdInfo, path, dialogs, addAlert),
             },
             { type: "divider" },
             {
@@ -138,7 +157,7 @@ export function get_menu_items(
             {
                 id: "copy-item",
                 title: _("Copy"),
-                onClick: () => setClipboard([path + item.name])
+                onClick: () => setClipboard({ path, files: [item] })
             },
             { type: "divider" },
             {
@@ -183,7 +202,7 @@ export function get_menu_items(
             {
                 id: "copy-item",
                 title: _("Copy"),
-                onClick: () => setClipboard(selected.map(s => path + s.name)),
+                onClick: () => setClipboard({ path, files: selected }),
             },
             {
                 id: "delete-item",

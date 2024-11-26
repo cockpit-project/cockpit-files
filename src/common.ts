@@ -16,7 +16,6 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
  */
-
 import React, { useContext } from "react";
 
 import type { AlertVariant } from "@patternfly/react-core/dist/esm/components/Alert";
@@ -31,6 +30,11 @@ export interface FolderFileInfo extends FileInfo {
     name: string,
     to: string | null,
     category: { class: string } | null,
+}
+
+export interface ClipboardInfo {
+    path: string,
+    files: FolderFileInfo[];
 }
 
 interface FilesContextType {
@@ -137,5 +141,11 @@ export function checkFilename(candidate: string, entries: Record<string, FileInf
         return _("File exists");
     } else {
         return null;
+    }
+}
+
+export function debug(...args: unknown[]) {
+    if (window.debugging === "all" || window.debugging?.includes("files")) {
+        console.debug("files:", ...args);
     }
 }

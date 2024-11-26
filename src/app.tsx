@@ -36,7 +36,7 @@ import { useInit, usePageLocation } from "hooks";
 import { superuser } from "superuser";
 
 import { FilesContext, usePath } from "./common.ts";
-import type { FolderFileInfo } from "./common.ts";
+import type { ClipboardInfo, FolderFileInfo } from "./common.ts";
 import { FilesBreadcrumbs } from "./files-breadcrumbs.tsx";
 import { FilesFolderView } from "./files-folder-view.tsx";
 import { FilesFooterDetail } from "./files-footer-detail.tsx";
@@ -61,7 +61,7 @@ export const Application = () => {
     const [files, setFiles] = useState<FolderFileInfo[]>([]);
     const [selected, setSelected] = useState<FolderFileInfo[]>([]);
     const [showHidden, setShowHidden] = useState(localStorage.getItem("files:showHiddenFiles") === "true");
-    const [clipboard, setClipboard] = useState<string[]>([]);
+    const [clipboard, setClipboard] = useState<ClipboardInfo>({ path: "/", files: [] });
     const [alerts, setAlerts] = useState<Alert[]>([]);
     const [cwdInfo, setCwdInfo] = useState<FileInfo | null>(null);
 
