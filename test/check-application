@@ -943,6 +943,15 @@ class TestFiles(testlib.MachineCase):
         b.wait_visible("[data-item='admindir']")
         self.assert_owner('/home/admin/admindir', 'admin:admin')
 
+        # Pressing enter creates a directory
+        b.click("#dropdown-menu")
+        b.click("#create-folder")
+        # Keep focus on the input so the enter key press registers as form submit.
+        b.set_input_text("#create-directory-input", "testdir", blur=False)
+        b.key("Enter")
+        b.wait_not_present(".pf-v5-c-modal-box")
+        b.wait_visible("[data-item='testdir']")
+
     def testContextMenu(self) -> None:
         b = self.browser
         m = self.machine
