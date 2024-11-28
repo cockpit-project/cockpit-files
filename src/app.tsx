@@ -46,7 +46,8 @@ interface Alert {
     key: string,
     title: string,
     variant: AlertVariant,
-    detail?: string,
+    detail?: string | React.ReactNode,
+    actionLinks?: React.ReactNode
 }
 
 export interface FolderFileInfo extends FileInfo {
@@ -56,12 +57,15 @@ export interface FolderFileInfo extends FileInfo {
 }
 
 interface FilesContextType {
-    addAlert: (title: string, variant: AlertVariant, key: string, detail?: string) => void,
+    addAlert: (title: string, variant: AlertVariant, key: string, detail?: string | React.ReactNode,
+               actionLinks?: React.ReactNode) => void,
+    removeAlert: (key: string) => void,
     cwdInfo: FileInfo | null,
 }
 
 export const FilesContext = React.createContext({
     addAlert: () => console.warn("FilesContext not initialized"),
+    removeAlert: () => console.warn("FilesContext not initialized"),
     cwdInfo: null,
 } as FilesContextType);
 
@@ -163,14 +167,23 @@ export const Application = () => {
     if (loading)
         return <EmptyStatePanel loading />;
 
-    const addAlert = (title: string, variant: AlertVariant, key: string, detail?: string) => {
-        setAlerts(prevAlerts => [...prevAlerts, { title, variant, key, ...detail && { detail }, }]);
+    const addAlert = (title: string, variant: AlertVariant, key: string, detail?: string | React.ReactNode,
+        actionLinks?: React.ReactNode) => {
+        setAlerts(prevAlerts => [
+            ...prevAlerts, {
+                title,
+                variant,
+                key,
+                ...detail && { detail },
+                ...actionLinks && { actionLinks },
+            }
+        ]);
     };
     const removeAlert = (key: string) => setAlerts(prevAlerts => prevAlerts.filter(alert => alert.key !== key));
 
     return (
         <Page>
-            <FilesContext.Provider value={{ addAlert, cwdInfo }}>
+            <FilesContext.Provider value={{ addAlert, removeAlert, cwdInfo }}>
                 <WithDialogs>
                     <AlertGroup isToast isLiveRegion>
                         {alerts.map(alert => (
@@ -184,6 +197,7 @@ export const Application = () => {
                                     onClose={() => removeAlert(alert.key)}
                                   />
                               }
+                              actionLinks={alert.actionLinks}
                               key={alert.key}
                             >
                                 {alert.detail}
