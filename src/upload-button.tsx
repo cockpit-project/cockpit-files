@@ -19,7 +19,7 @@
 
 import React, { useState, useRef } from "react";
 
-import { AlertVariant } from "@patternfly/react-core/dist/esm/components/Alert";
+import { AlertVariant, AlertActionLink } from "@patternfly/react-core/dist/esm/components/Alert";
 import { Button } from "@patternfly/react-core/dist/esm/components/Button";
 import { Checkbox } from "@patternfly/react-core/dist/esm/components/Checkbox";
 import { Divider } from "@patternfly/react-core/dist/esm/components/Divider";
@@ -29,14 +29,18 @@ import { Progress } from "@patternfly/react-core/dist/esm/components/Progress";
 import { Flex, FlexItem } from "@patternfly/react-core/dist/esm/layouts/Flex";
 import { TrashIcon } from "@patternfly/react-icons";
 
-import cockpit from "cockpit";
+import cockpit, { BasicError } from "cockpit";
 import type { FileInfo } from "cockpit/fsinfo";
 import { upload } from "cockpit-upload-helper";
 import { DialogResult, useDialogs } from "dialogs";
+import { superuser } from "superuser";
 import * as timeformat from "timeformat";
 import { fmt_to_fragments } from "utils";
 
-import { useFilesContext } from "./app.tsx";
+import { FolderFileInfo, useFilesContext } from "./app.tsx";
+import { permissionShortStr } from "./common.ts";
+import { edit_permissions } from "./dialogs/permissions.tsx";
+import { get_owner_candidates } from "./ownership.tsx";
 
 import "./upload-button.scss";
 
@@ -47,6 +51,26 @@ interface ConflictResult {
     skip?: true;
     applyToAll: boolean;
 }
+
+const UploadedFilesList = ({
+    files,
+    modes,
+    owner,
+}: {
+  files: File[],
+  modes: number[],
+  owner: string,
+}) => {
+    cockpit.assert(modes.length !== 0, "modes cannot be empty");
+    const permission = permissionShortStr(modes[0]);
+    const title = files.length === 1 ? files[0].name : cockpit.format(_("$0 files"), files.length);
+    return (
+        <>
+            <p>{title}</p>
+            {owner && <p className="ct-grey-text">{cockpit.format(_("Uploaded as $0, $1"), owner, permission)}</p>}
+        </>
+    );
+};
 
 const FileConflictDialog = ({
     path,
@@ -131,7 +155,7 @@ export const UploadButton = ({
     path: string,
 }) => {
     const ref = useRef<HTMLInputElement>(null);
-    const { addAlert, cwdInfo } = useFilesContext();
+    const { addAlert, removeAlert, cwdInfo } = useFilesContext();
     const dialogs = useDialogs();
     const [showPopover, setPopover] = React.useState(false);
     const [uploadedFiles, setUploadedFiles] = useState<{[name: string]:
@@ -155,7 +179,16 @@ export const UploadButton = ({
         cockpit.assert(event.target.files, "not an <input type='file'>?");
         cockpit.assert(cwdInfo?.entries, "cwdInfo.entries is undefined");
         let next_progress = 0;
-        const toUploadFiles = [];
+        let owner = null;
+        const toUploadFiles: File[] = [];
+
+        // When we are superuser upload as the owner of the directory and allow
+        // the user to later change ownership if required.
+        const user = await cockpit.user();
+        if (superuser.allowed && cwdInfo) {
+            const candidates = get_owner_candidates(user, cwdInfo);
+            owner = candidates[0];
+        }
 
         const resetInput = () => {
         // Reset input field in the case a download was cancelled and has to be re-uploaded
@@ -207,9 +240,11 @@ export const UploadButton = ({
         window.addEventListener("beforeunload", beforeUnloadHandler);
 
         const cancelledUploads = [];
+        const fileModes: number[] = [];
         await Promise.allSettled(toUploadFiles.map(async (file: File) => {
-            const destination = path + file.name;
+            let destination = path + file.name;
             const abort = new AbortController();
+            let options = { };
 
             setUploadedFiles(oldFiles => {
                 return {
@@ -217,6 +252,49 @@ export const UploadButton = ({
                     ...oldFiles,
                 };
             });
+
+            if (owner !== null) {
+                destination = `${path}.${file.name}.tmp`;
+                // The cockpit.file() API does not support setting an owner/group when uploading a new
+                // file with fsreplace1. This requires a re-design of the Files API:
+                // https://issues.redhat.com/browse/COCKPIT-1215
+                //
+                // For now we create an empty file using fsreplace1 and give it the proper ownership and using that tag
+                // upload the to be uploaded file. This prevents uploading with the wrong ownership.
+                //
+                // To support changing permissions after upload with our change permissions dialog we obtain the
+                // file mode using `stat` as fsreplace1 does not report this back except via the `tag` which is not
+                // a stable interface.
+                try {
+                    await cockpit.file(destination, { superuser: "try" }).replace("");
+                    await cockpit.spawn(["chown", owner, destination], { superuser: "try" });
+                    await cockpit.file(destination, { superuser: "try" }).read()
+                            .then((((_content: string, tag: string) => {
+                                options = { superuser: "try", tag };
+                            }) as any /* eslint-disable-line @typescript-eslint/no-explicit-any */));
+                    const stat = await cockpit.spawn(["stat", "--format", "%a", destination], { superuser: "try" });
+                    fileModes.push(Number.parseInt(stat.trimEnd(), 8));
+                } catch (exc) {
+                    const err = exc as BasicError;
+                    console.warn("Cannot set initial file permissions", err.toString());
+                    addAlert(_("Failed"), AlertVariant.warning, "upload", err.toString());
+
+                    try {
+                        await cockpit.file(destination, { superuser: "require" }).replace(null);
+                    } catch (exc) {
+                        console.warn(`Unable to cleanup file: ${destination}, err: ${exc}`);
+                    }
+
+                    cancelledUploads.push(file);
+                    setUploadedFiles(oldFiles => {
+                        const copy = { ...oldFiles };
+                        delete copy[file.name];
+                        return copy;
+                    });
+
+                    return;
+                }
+            }
 
             try {
                 await upload(destination, file, (progress) => {
@@ -231,10 +309,34 @@ export const UploadButton = ({
                             [file.name]: { ...oldFile, progress },
                         };
                     });
-                }, abort.signal);
-                // TODO: pass { superuser: try } depending on directory owner
+                }, abort.signal, options);
+
+                if (owner !== null) {
+                    try {
+                        await cockpit.spawn(["mv", destination, path + file.name],
+                                            { superuser: "require" });
+                    } catch (exc) {
+                        console.warn("Unable to move file to final destination", exc);
+                        addAlert(_("Upload error"), AlertVariant.danger, "upload-error",
+                                 _("Unable to move uploaded file to final destination"));
+                        try {
+                            await cockpit.file(destination, { superuser: "require" }).replace(null);
+                        } catch (exc) {
+                            console.warn(`Unable to cleanup file: ${destination}, err: ${exc}`);
+                        }
+                    }
+                }
             } catch (exc) {
                 cockpit.assert(exc instanceof Error, "Unknown exception type");
+
+                // Clean up touched file
+                if (owner) {
+                    try {
+                        await cockpit.file(destination, { superuser: "require" }).replace(null);
+                    } catch (exc) {
+                        console.warn(`Unable to cleanup file: ${destination}, err: ${exc}`);
+                    }
+                }
                 if (exc instanceof DOMException && exc.name === 'AbortError') {
                     addAlert(_("Cancelled"), AlertVariant.warning, "upload",
                              cockpit.format(_("Cancelled upload of $0"), file.name));
@@ -256,7 +358,43 @@ export const UploadButton = ({
 
         // If all uploads are cancelled, don't show an alert
         if (cancelledUploads.length !== toUploadFiles.length) {
-            addAlert(_("Upload complete"), AlertVariant.success, "upload-success", _("Successfully uploaded file(s)"));
+            const title = cockpit.ngettext(_("File uploaded"), _("Files uploaded"), toUploadFiles.length);
+            const key = window.btoa(toUploadFiles.join(""));
+            let description;
+            let action;
+
+            if (owner !== null) {
+                description = (
+                    <UploadedFilesList
+                      files={toUploadFiles}
+                      modes={fileModes}
+                      owner={owner}
+                    />
+                );
+                action = (
+                    <AlertActionLink
+                      onClick={() => {
+                          removeAlert(key);
+                          const [user, group] = owner.split(':');
+                          const uploadedFiles: FolderFileInfo[] = toUploadFiles.map((file, idx) => {
+                              return {
+                                  name: file.name,
+                                  to: null,
+                                  category: null,
+                                  user,
+                                  group,
+                                  mode: fileModes[idx]
+                              };
+                          });
+                          edit_permissions(dialogs, uploadedFiles, path);
+                      }}
+                    >
+                        {_("Change permissions")}
+                    </AlertActionLink>
+                );
+            }
+
+            addAlert(title, AlertVariant.success, key, description, action);
         }
     };
 
