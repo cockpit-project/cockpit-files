@@ -1509,12 +1509,12 @@ class TestFiles(testlib.MachineCase):
         b.click(".pf-v5-c-modal-box button.pf-m-secondary")
         b.wait_not_present(".pf-v5-c-modal-box")
 
-        self.assertEqual(m.execute(f"ls -ld {change_enclosed_dir}/Finance")[:10], "dr-x------")
-        self.assertEqual(m.execute(f"ls -l {change_enclosed_dir}/Finance/program")[:10], "-r-x------")
-        self.assertEqual(m.execute(f"ls -l {change_enclosed_dir}/Finance/accounts.txt")[:10], "-r--------")
-        self.assertEqual(m.execute(f"ls -ld {change_enclosed_dir}/Work")[:10], "dr-x------")
-        self.assertEqual(m.execute(f"ls -l {change_enclosed_dir}/Work/myvim")[:10], "-r-x------")
-        self.assertEqual(m.execute(f"ls -l {change_enclosed_dir}/Work/notes.txt")[:10], "-r--------")
+        self.assertEqual(self.stat("%A", f"{change_enclosed_dir}/Finance"), "dr-x------")
+        self.assertEqual(self.stat("%A", f"{change_enclosed_dir}/Finance/program"), "-r-x------")
+        self.assertEqual(self.stat("%A", f"{change_enclosed_dir}/Finance/accounts.txt"), "-r--------")
+        self.assertEqual(self.stat("%A", f"{change_enclosed_dir}/Work"), "dr-x------")
+        self.assertEqual(self.stat("%A", f"{change_enclosed_dir}/Work/myvim"), "-r-x------")
+        self.assertEqual(self.stat("%A", f"{change_enclosed_dir}/Work/notes.txt"), "-r--------")
 
         b.click("li[data-location='/home/admin'] a")
         self.assert_last_breadcrumb("admin")
