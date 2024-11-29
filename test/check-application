@@ -1489,6 +1489,13 @@ class TestFiles(testlib.MachineCase):
         self.assert_last_breadcrumb("/")
         b.wait_not_present(".pf-v5-c-empty-state")
 
+        # Shows / as /
+        b.click("#dropdown-menu")
+        b.click("#edit-permissions")
+        b.wait_in_text(".pf-v5-c-modal-box__title-text", "/")
+        b.click("button.pf-m-link")
+        b.wait_not_present(".pf-v5-c-modal-box")
+
         # Shows root user owns "bin"
         b.click("[data-item='bin']")
         b.click("#dropdown-menu")
