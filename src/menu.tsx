@@ -23,7 +23,7 @@ import { AlertVariant } from "@patternfly/react-core/dist/esm/components/Alert";
 
 import cockpit from "cockpit";
 import type { FileInfo } from "cockpit/fsinfo";
-import { basename } from "cockpit-path";
+import { basename, dirname } from "cockpit-path";
 import type { Dialogs } from 'dialogs';
 
 import type { FolderFileInfo } from "./app";
@@ -80,6 +80,9 @@ export function get_menu_items(
     const supportsTerminal = cockpit.manifests.system?.tools?.terminal?.capabilities?.includes("path");
 
     if (selected.length === 0) {
+        // HACK: basename('/') is currently ""
+        const current_directory = { ...cwdInfo, name: basename(path) || "/", category: null, to: null };
+        const base_path = get_base_path(path);
         menuItems.push(
             {
                 id: "paste-item",
@@ -102,7 +105,7 @@ export function get_menu_items(
             {
                 id: "edit-permissions",
                 title: _("Edit permissions"),
-                onClick: () => edit_permissions(dialogs, null, path)
+                onClick: () => edit_permissions(dialogs, current_directory, base_path)
             }
         );
         if (supportsTerminal) {
@@ -193,4 +196,17 @@ export function get_menu_items(
     }
 
     return menuItems;
+}
+
+// Get the dirname based on the given path with special logic for "/", so we don't show the root directory as "//"
+// As selected.name would already be "/".
+function get_base_path(path: string) {
+    let base_path = dirname(path);
+    if (base_path === "/")
+        base_path = "";
+    else {
+        base_path += "/";
+    }
+
+    return base_path;
 }
