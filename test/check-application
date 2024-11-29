@@ -1527,7 +1527,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_val("#edit-permissions-group-access", "read-only")
         b.wait_val("#edit-permissions-other-access", "read-only")
         b.click(".pf-v5-c-modal-box button.pf-m-secondary")
-        b.wait_not_present(".pf-v5-c-empty-state")
+        b.wait_not_present(".pf-v5-c-modal-box")
 
         # Files with any executable bit set, get a +x in all modes when +X is passed.
         self.assertEqual(self.stat("%A", f"{change_enclosed_dir}/Finance"), "drwxr-xr-x")
@@ -1550,7 +1550,7 @@ class TestFiles(testlib.MachineCase):
         b.select_from_dropdown("#edit-permissions-group-access", "no-access")
         b.select_from_dropdown("#edit-permissions-other-access", "no-access")
         b.click(".pf-v5-c-modal-box button.pf-m-secondary")
-        b.wait_not_present(".pf-v5-c-empty-state")
+        b.wait_not_present(".pf-v5-c-modal-box")
 
         self.assertEqual(m.execute(f"ls -ld {change_enclosed_dir}/Finance")[:10], "dr-x------")
         self.assertEqual(m.execute(f"ls -l {change_enclosed_dir}/Finance/program")[:10], "-r-x------")
