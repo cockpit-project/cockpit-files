@@ -1569,6 +1569,93 @@ class TestFiles(testlib.MachineCase):
         b.click("li[data-location='/home/admin'] a")
         self.assert_last_breadcrumb("admin")
 
+        # Edit multiple files
+        create_multiple_dirs_sh = "mkdir -p /home/admin/multiple/testdir\n"
+        for i in range(20):
+            create_multiple_dirs_sh += f"touch /home/admin/multiple/filename{i}\n"
+
+        self.write_file(f"{self.vm_tmpdir}/create-multiple-dirs.sh", create_multiple_dirs_sh, perm="755")
+        m.execute(f"runuser -u admin {self.vm_tmpdir}/create-multiple-dirs.sh")
+        b.mouse("[data-item='multiple']", "dblclick")
+        b.wait_not_present(".pf-v5-c-empty-state")
+        self.assert_last_breadcrumb("multiple")
+
+        # Editing two files
+        b.click("[data-item='filename1']")
+        b.mouse("[data-item='filename2']", "click", ctrlKey=True)
+        b.mouse("[data-item='filename1']", "contextmenu")
+        b.click("button:contains('Edit permissions')")
+
+        b.wait_text(".pf-v5-c-modal-box__title-text", "Permissions for 2 files")
+        b.wait_in_text("#edit-permissions-owner", "admin")
+        b.wait_in_text("#edit-permissions-group", "admin")
+        b.select_from_dropdown("#edit-permissions-owner-access", "read-only")
+        b.select_from_dropdown("#edit-permissions-group-access", "no-access")
+        b.select_from_dropdown("#edit-permissions-other-access", "no-access")
+        b.click(".pf-v5-c-modal-box button.pf-m-primary")
+        b.wait_not_present(".pf-v5-c-modal-box")
+        self.assertEqual(self.stat("%A", "/home/admin/multiple/filename1"), "-r--------")
+        self.assertEqual(self.stat("%A", "/home/admin/multiple/filename2"), "-r--------")
+
+        # No owner/group shown if ownership differs
+        def verify_no_owner_group_shown() -> None:
+            # HACK: the selected state contains a copy of files state so permissions information is not updated.
+            b.mouse("[data-item='filename1']", "click", ctrlKey=True)
+            b.mouse("[data-item='filename1']", "click", ctrlKey=True)
+            b.mouse("[data-item='filename1']", "contextmenu")
+            b.click("button:contains('Edit permissions')")
+
+            b.wait_visible("#edit-permissions-owner-access")
+            b.wait_not_present("#edit-permissions-owner")
+            b.wait_not_present("#edit-permissions-group")
+            b.select_from_dropdown("#edit-permissions-owner-access", "read-write")
+            b.select_from_dropdown("#edit-permissions-group-access", "read-only")
+            b.select_from_dropdown("#edit-permissions-other-access", "read-only")
+
+            b.click(".pf-v5-c-modal-box button.pf-m-primary")
+            b.wait_not_present(".pf-v5-c-modal-box")
+
+            self.assertEqual(self.stat("%A", "/home/admin/multiple/filename1"), "-rw-r--r--")
+            self.assertEqual(self.stat("%A", "/home/admin/multiple/filename2"), "-rw-r--r--")
+
+        m.execute("chmod 600 /home/admin/multiple/filename1")
+        m.execute("chown root: /home/admin/multiple/filename1")
+        b.wait_in_text("[data-item='filename1'] .item-owner", "root")
+        verify_no_owner_group_shown()
+
+        m.execute("chown admin:root /home/admin/multiple/filename1")
+        b.wait_in_text("[data-item='filename1'] .item-owner", "admin:root")
+        verify_no_owner_group_shown()
+
+        # No Edit permissions when selecting a folder and files
+        b.mouse("[data-item='testdir']", "click", ctrlKey=True)
+        b.mouse("[data-item='filename1']", "contextmenu")
+        b.wait_visible("button:contains('Delete')")
+        b.wait_not_present("button:contains('Edit permissions')")
+
+        # Editing > 10 files, select only files with the same owner/group
+        # Test that we see an expander and can toggle it.
+        b.mouse("[data-item='testdir']", "click", ctrlKey=True)
+        b.mouse("[data-item='filename1']", "click", ctrlKey=True)
+        for i in range(3, 15):
+            b.mouse(f"[data-item='filename{i}']", "click", ctrlKey=True)
+
+        b.mouse("[data-item='filename3']", "contextmenu")
+        b.click("button:contains('Edit permissions')")
+
+        b.wait_text(".pf-v5-c-modal-box__title-text", "Permissions for 13 files")
+        b.assert_pixels(".pf-v5-c-modal-box", "multiple-files-permissions-modal")
+        # Expand files
+        b.wait_text(".pf-v5-c-expandable-section button", "Show all files")
+        b.click(".pf-v5-c-expandable-section button")
+        b.wait_text(".pf-v5-c-expandable-section button", "Collapse")
+        b.click(".pf-v5-c-modal-box button.pf-m-link")
+        b.wait_not_present(".pf-v5-c-modal-box")
+
+        b.go("/files#/?path=/home/admin")
+        self.assert_last_breadcrumb("admin")
+        b.wait_not_present(".pf-v5-c-empty-state")
+
         # As normal user you cannot change user/group permissions
         b.drop_superuser()
 
