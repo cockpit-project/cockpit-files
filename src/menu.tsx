@@ -80,8 +80,7 @@ export function get_menu_items(
     const supportsTerminal = cockpit.manifests.system?.tools?.terminal?.capabilities?.includes("path");
 
     if (selected.length === 0) {
-        // HACK: basename('/') is currently ""
-        const current_directory = { ...cwdInfo, name: basename(path) || "/", category: null, to: null };
+        const current_directory = { ...cwdInfo, name: basename(path), category: null, to: null };
         const base_path = get_base_path(path);
         menuItems.push(
             {
@@ -105,7 +104,7 @@ export function get_menu_items(
             {
                 id: "edit-permissions",
                 title: _("Edit permissions"),
-                onClick: () => edit_permissions(dialogs, current_directory, base_path)
+                onClick: () => edit_permissions(dialogs, [current_directory], base_path)
             }
         );
         if (supportsTerminal) {
@@ -145,7 +144,7 @@ export function get_menu_items(
             {
                 id: "edit-permissions",
                 title: _("Edit permissions"),
-                onClick: () => edit_permissions(dialogs, item, path)
+                onClick: () => edit_permissions(dialogs, [item], path)
             },
             {
                 id: "rename-item",
@@ -193,6 +192,20 @@ export function get_menu_items(
                 onClick: () => confirm_delete(dialogs, path, selected, setSelected)
             }
         );
+
+        // Don't allow mixing regular files and folders when editing multiple
+        // permissions, it can be unclear if we are changing the folders
+        // permissions or the permissions of the files underneath.
+        if (selected.every(sel => sel.type === "reg")) {
+            menuItems.push(
+                { type: "divider" },
+                {
+                    id: "edit-permissions",
+                    title: _("Edit permissions"),
+                    onClick: () => edit_permissions(dialogs, selected, path)
+                }
+            );
+        }
     }
 
     return menuItems;
