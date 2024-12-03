@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-26 03:19+0000\n"
-"PO-Revision-Date: 2024-11-19 15:38+0000\n"
+"POT-Creation-Date: 2024-12-01 03:35+0000\n"
+"PO-Revision-Date: 2024-12-01 15:38+0000\n"
 "Last-Translator: JW Wang <v72807647@gmail.com>\n"
 "Language-Team: Chinese (Traditional) <https://translate.fedoraproject.org/"
 "projects/cockpit-files/cockpit-files/zh_TW/>\n"
@@ -107,10 +107,8 @@ msgid "Cancelled upload of $0"
 msgstr "已取消上傳 $0"
 
 #: src/dialogs/create-file.tsx:228
-#, fuzzy
-#| msgid "Copy selected file or directory"
 msgid "Cannot create file in current directory"
-msgstr "複製已選擇的檔案或目錄"
+msgstr "無法在目前的目錄建立檔案"
 
 #: src/dialogs/permissions.tsx:287
 msgid "Change"
@@ -153,10 +151,8 @@ msgid "Create directory"
 msgstr "建立目錄"
 
 #: src/menu.tsx:98 src/dialogs/create-file.tsx:146
-#, fuzzy
-#| msgid "Create"
 msgid "Create file"
-msgstr "建立"
+msgstr "建立檔案"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:86
 msgid "Create new directory"
@@ -268,10 +264,8 @@ msgid "File exists"
 msgstr "檔案已存在"
 
 #: src/dialogs/create-file.tsx:177
-#, fuzzy
-#| msgid "New name"
 msgid "File name"
-msgstr "新名稱"
+msgstr "檔案名稱"
 
 #: src/common.ts:89
 msgid "Filename is the same as original name"
@@ -372,7 +366,7 @@ msgstr "管理您的檔案"
 
 #: src/dialogs/permissions.tsx:278
 msgid "Missing type"
-msgstr ""
+msgstr "類型已遺失"
 
 #: src/files-card-body.tsx:528 src/header.tsx:87
 msgid "Modified"
@@ -431,10 +425,8 @@ msgid "None"
 msgstr "無"
 
 #: src/menu.tsx:113 src/menu.tsx:174
-#, fuzzy
-#| msgid "Open text file"
 msgid "Open in terminal"
-msgstr "開啟文字檔案"
+msgstr "於終端機開啟"
 
 #: src/menu.tsx:130
 msgid "Open text file"
@@ -491,10 +483,8 @@ msgid "Pasting failed"
 msgstr "貼上失敗"
 
 #: src/dialogs/create-file.tsx:229
-#, fuzzy
-#| msgid "Permissions"
 msgid "Permission denied"
-msgstr "權限"
+msgstr "權限遭拒"
 
 #: src/files-card-body.tsx:538 src/header.tsx:109
 msgid "Permissions"
