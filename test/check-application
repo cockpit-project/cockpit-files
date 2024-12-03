@@ -2277,6 +2277,27 @@ class TestFiles(testlib.MachineCase):
             drag_file_event(".fileview-wrapper", 'dragleave')
             b.wait_not_present(".drag-drop-upload")
 
+            # Drag & drop is disabled when upload is in progress
+            b.click("#upload-file-btn")
+            b.upload_files("#upload-file-btn + input[type='file']", [big_file])
+            b.wait_visible("#upload-file-btn:disabled")
+            b.wait_not_present(".drag-drop-upload")
+            drag_file_event(".fileview-wrapper", 'dragenter')
+            b.wait_not_present(".drag-drop-upload")
+            drag_file_event(".fileview-wrapper", 'dragleave')
+            b.wait_not_present(".drag-drop-upload")
+            # Dropping the file does nothing
+            drag_file_event(".fileview-wrapper", 'dragenter')
+            b.wait_not_present(".drag-drop-upload")
+            drag_file_event(".fileview-wrapper", 'drop', 'drag-drop-file-2.txt')
+            b.wait_not_present(".drag-drop-upload")
+            b.click("#upload-progress-btn")
+            b.wait_in_text(".upload-progress-0", "bigfile.img")
+            b.wait_not_present("[data-item='drag-drop-file-2.txt']")
+            b.click("#upload-progress-btn")
+            b.click(".cancel-button-0")
+            b.click(".pf-v5-c-alert__action button")
+
             # Change directory and upload
             b.mouse("[data-item='project']", "dblclick")
             drag_file_event(".fileview-wrapper", 'dragenter')
