@@ -23,6 +23,8 @@ import { AlertVariant } from "@patternfly/react-core/dist/esm/components/Alert";
 import { Button } from "@patternfly/react-core/dist/esm/components/Button";
 import { Checkbox } from "@patternfly/react-core/dist/esm/components/Checkbox";
 import { Divider } from "@patternfly/react-core/dist/esm/components/Divider";
+import { Form, FormGroup } from "@patternfly/react-core/dist/esm/components/Form";
+import { FormSelect, FormSelectOption } from "@patternfly/react-core/dist/esm/components/FormSelect";
 import { Modal, ModalVariant } from "@patternfly/react-core/dist/esm/components/Modal";
 import { Popover, PopoverPosition } from "@patternfly/react-core/dist/esm/components/Popover";
 import { Progress } from "@patternfly/react-core/dist/esm/components/Progress";
@@ -33,12 +35,16 @@ import cockpit from "cockpit";
 import type { FileInfo } from "cockpit/fsinfo";
 import { upload } from "cockpit-upload-helper";
 import { DialogResult, useDialogs } from "dialogs";
+import { superuser } from "superuser";
 import * as timeformat from "timeformat";
 import { fmt_to_fragments } from "utils";
 
 import { useFilesContext } from "./app.tsx";
 
 import "./upload-button.scss";
+import { useInit } from "hooks.ts";
+
+import { get_owner_candidates } from "./ownership.tsx";
 
 const _ = cockpit.gettext;
 
@@ -125,6 +131,72 @@ const FileConflictDialog = ({
     );
 };
 
+const OwnershipDialog = ({
+    path,
+    candidates,
+    cwdInfo,
+    dialogResult
+} : {
+  path: string,
+  candidates: string[],
+  cwdInfo: FileInfo,
+  dialogResult: DialogResult<string>,
+}) => {
+    // Shows the permissions for a path in a dialog and lets the user pick one
+    const [owner, setOwner] = useState<string>(candidates[0]);
+
+    const handleApply = () => {
+        dialogResult.resolve(owner);
+    };
+
+    const handleCancel = () => {
+        dialogResult.reject(new Error("cancelled"));
+    };
+
+    return (
+        <Modal
+          position="top"
+          title={_("Permission of newly uploaded files?")}
+          titleIconVariant="warning"
+          variant={ModalVariant.medium}
+          onClose={handleCancel}
+          isOpen
+          footer={
+              <>
+                  <Button variant="warning" onClick={handleApply}>{_("Apply")}</Button>
+                  <Button variant="link" onClick={handleCancel}>{_("Cancel")}</Button>
+              </>
+          }
+        >
+            <p>
+                {cockpit.format(
+                    _("The current directory \"$0\" is owned by \"$1\" but you are trying to upload as \"$2\"" +
+                      " which ownership do you want to give the new file(s)?"),
+                    path,
+                    `${cwdInfo.user}:${cwdInfo.group}`,
+                    candidates[0],
+                )}
+            </p>
+            <Form>
+                <FormGroup fieldId="upload-file-owner" label={_("Owner")}>
+                    <FormSelect
+                      id="upload-file-owner"
+                      value={owner}
+                      onChange={(_ev, val) => setOwner(val)}
+                    >
+                        {candidates.map(owner =>
+                            <FormSelectOption
+                              key={owner}
+                              value={owner}
+                              label={owner}
+                            />)}
+                    </FormSelect>
+                </FormGroup>
+            </Form>
+        </Modal>
+    );
+};
+
 export const UploadButton = ({
     path,
 } : {
@@ -134,8 +206,13 @@ export const UploadButton = ({
     const { addAlert, cwdInfo } = useFilesContext();
     const dialogs = useDialogs();
     const [showPopover, setPopover] = React.useState(false);
+    const [user, setUser] = useState<cockpit.UserInfo| undefined>();
     const [uploadedFiles, setUploadedFiles] = useState<{[name: string]:
                                                         {file: File, progress: number, cancel:() => void}}>({});
+
+    useInit(() => {
+        cockpit.user().then(user => setUser(user));
+    });
 
     const handleClick = () => {
         if (ref.current) {
@@ -155,7 +232,23 @@ export const UploadButton = ({
         cockpit.assert(event.target.files, "not an <input type='file'>?");
         cockpit.assert(cwdInfo?.entries, "cwdInfo.entries is undefined");
         let next_progress = 0;
+        let owner = null;
         const toUploadFiles = [];
+
+        //
+        const candidates = [];
+        if (superuser.allowed && user && cwdInfo) {
+            candidates.push(...get_owner_candidates(user, cwdInfo));
+        }
+
+        if (candidates.length > 0) {
+            owner = await dialogs.run(OwnershipDialog, {
+                path,
+                candidates,
+                cwdInfo,
+            });
+            console.log(owner);
+        }
 
         const resetInput = () => {
         // Reset input field in the case a download was cancelled and has to be re-uploaded
@@ -204,6 +297,11 @@ export const UploadButton = ({
             return;
         }
 
+        function resetUnload() {
+            resetInput();
+            window.removeEventListener("beforeunload", beforeUnloadHandler);
+        }
+
         window.addEventListener("beforeunload", beforeUnloadHandler);
 
         const cancelledUploads = [];
@@ -218,6 +316,25 @@ export const UploadButton = ({
                 };
             });
 
+            let dest_tag = null;
+            if (owner !== null) {
+                try {
+                    await cockpit.file(destination, { superuser: "try" }).replace(""); // TODO: cleanup might not work?
+                    await cockpit.spawn(["chown", owner, destination], { superuser: "try" });
+                    await cockpit.file(destination, { superuser: "try" }).read()
+                            .then(async (_content: string, tag: string) => {
+                                dest_tag = tag;
+                            });
+                } catch (exc) {
+                    await cockpit.spawn(["rm", "-f", destination], { superuser: "require" });
+                    console.warn("Cannot set initial file permissions", exc);
+                    addAlert(_("Cancelled"), AlertVariant.warning, "upload",
+                             cockpit.format(_("Cancelled upload of $0"), file.name));
+                    cancelledUploads.push(file);
+                    return;
+                }
+            }
+
             try {
                 await upload(destination, file, (progress) => {
                     const now = performance.now();
@@ -231,8 +348,7 @@ export const UploadButton = ({
                             [file.name]: { ...oldFile, progress },
                         };
                     });
-                }, abort.signal);
-                // TODO: pass { superuser: try } depending on directory owner
+                }, abort.signal, { superuser: "try", tag: dest_tag });
             } catch (exc) {
                 cockpit.assert(exc instanceof Error, "Unknown exception type");
                 if (exc instanceof DOMException && exc.name === 'AbortError') {
