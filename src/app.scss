@@ -20,7 +20,8 @@
     position: relative;
 }
 
-.drag-drop-upload {
+.drag-drop-upload,
+.drag-drop-upload-blocked {
     position: absolute;
     z-index: 10;
     border: 3px dashed var(--pf-v5-global--link--Color);

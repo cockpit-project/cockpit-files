@@ -20,7 +20,7 @@
 import React, { createContext, useContext, useEffect, useState, useRef } from "react";
 
 import { Card } from '@patternfly/react-core/dist/esm/components/Card';
-import { UploadIcon } from '@patternfly/react-icons';
+import { BanIcon, UploadIcon } from '@patternfly/react-icons';
 import { debounce } from "throttle-debounce";
 
 import cockpit from "cockpit";
@@ -81,34 +81,31 @@ export const FilesFolderView = ({
         setCurrentFilter("");
     }, [path]);
 
+    // counter to manage current status of drag&drop
+    // dragging items over file entries causes a bunch of drag-enter and drag-leave
+    // events, this counter helps checking when final drag-leave event is fired
+    const dragDropCnt = useRef(0);
+
     useEffect(() => {
         let dropzoneElem: HTMLDivElement | null = null;
         const isUploading = Object.keys(uploadedFiles).length !== 0;
-
-        // counter to manage current status of drag&drop
-        // dragging items over file entries causes a bunch of drag-enter and drag-leave
-        // events, this counter helps checking when final drag-leave event is fired
-        let dragDropCnt = 0;
 
         const handleDragEnter = (event: DragEvent) => {
             event.preventDefault();
             event.stopPropagation();
 
-            // disable drag & drop when upload is in progress
-            if (!isUploading) {
-                if (dragDropCnt === 0) {
-                    setDragDropActive(true);
-                }
-                dragDropCnt++;
+            if (dragDropCnt.current === 0) {
+                setDragDropActive(true);
             }
+            dragDropCnt.current++;
         };
 
         const handleDragLeave = (event: DragEvent) => {
             event.preventDefault();
             event.stopPropagation();
 
-            dragDropCnt--;
-            if (dragDropCnt === 0) {
+            dragDropCnt.current--;
+            if (dragDropCnt.current === 0) {
                 setDragDropActive(false);
             }
         };
@@ -117,6 +114,9 @@ export const FilesFolderView = ({
             event.preventDefault();
             event.stopPropagation();
 
+            setDragDropActive(false);
+            dragDropCnt.current = 0;
+
             // disable drag & drop when upload is in progress
             if (isUploading) {
                 return;
@@ -124,8 +124,6 @@ export const FilesFolderView = ({
 
             cockpit.assert(event.dataTransfer !== null, "dataTransfer cannot be null");
             dispatchEvent(new CustomEvent('files-drop', { detail: event.dataTransfer.files }));
-            setDragDropActive(false);
-            dragDropCnt = 0;
         };
 
         const handleDragOver = (event: DragEvent) => {
@@ -149,7 +147,25 @@ export const FilesFolderView = ({
                 dropzoneElem.removeEventListener("drop", handleDrop);
             }
         };
-    }, [uploadedFiles]);
+    }, [uploadedFiles, dragDropCnt]);
+
+    const dropzoneComponent = (Object.keys(uploadedFiles).length === 0)
+        ? (
+            <div className="drag-drop-upload">
+                <EmptyStatePanel
+                  icon={UploadIcon}
+                  title={_("Drop files to upload")}
+                />
+            </div>
+        )
+        : (
+            <div className="drag-drop-upload-blocked">
+                <EmptyStatePanel
+                  icon={BanIcon}
+                  title={_("Cannot drop files, another upload is already in progress")}
+                />
+            </div>
+        );
 
     return (
         <UploadContext.Provider value={{ uploadedFiles, setUploadedFiles }}>
@@ -187,13 +203,7 @@ export const FilesFolderView = ({
                       setCurrentFilter={setCurrentFilter}
                       setDragDropActive={setDragDropActive}
                     />
-                    {dragDropActive &&
-                        <div className="drag-drop-upload">
-                            <EmptyStatePanel
-                              icon={UploadIcon}
-                              title={_("Drop files to upload")}
-                            />
-                        </div>}
+                    {dragDropActive && dropzoneComponent}
                 </Card>
             </div>
         </UploadContext.Provider>

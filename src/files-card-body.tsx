@@ -17,7 +17,7 @@
  * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React, { useCallback, useEffect, useMemo, useState, useRef, useContext } from "react";
+import React, { useCallback, useEffect, useMemo, useState, useRef } from "react";
 
 import { Divider } from "@patternfly/react-core/dist/esm/components/Divider";
 import { MenuItem, MenuList } from "@patternfly/react-core/dist/esm/components/Menu";
