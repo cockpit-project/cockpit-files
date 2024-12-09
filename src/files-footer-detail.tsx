@@ -8,7 +8,8 @@ import { Popover } from "@patternfly/react-core/dist/esm/components/Popover";
 import { Text } from "@patternfly/react-core/dist/esm/components/Text";
 import { Tooltip } from "@patternfly/react-core/dist/esm/components/Tooltip";
 
-import cockpit from "cockpit";
+import cockpit, { file } from "cockpit";
+import type { FileInfo } from "cockpit/fsinfo.ts";
 import * as timeformat from "timeformat";
 
 import { useFilesContext } from './app.tsx';
@@ -70,7 +71,11 @@ export const FilesFooterDetail = ({
     const selectedFile = (selected.length === 1) ? selected[0] : cwdInfo;
 
     let permsPopover = null;
+    let userGroup = null;
+
     if (selectedFile.mode !== undefined) {
+        userGroup = <UserGroupPopover file={selectedFile} />;
+
         const mode = selectedFile.mode;
         const popoverBody = [_("Owner"), _("Group"), _("Others")].map((permGroup, i) => {
             return (
@@ -112,6 +117,7 @@ export const FilesFooterDetail = ({
     return (
         <div className="files-footer-info">
             {fileInfoText}
+            {userGroup}
             {selectedFile.mtime &&
             <Tooltip content={timeformat.dateTimeSeconds(selectedFile.mtime * 1000)}>
                 <Text className="files-footer-mtime">
@@ -122,3 +128,41 @@ export const FilesFooterDetail = ({
         </div>
     );
 };
+
+const UserGroupPopover = ({ file }: { file: FileInfo }) => (
+    <Popover
+        id="files-footer-usergroup-popover"
+        hasAutoWidth
+        bodyContent={
+            <DescriptionList
+                isHorizontal
+                isCompact
+            >
+                <DescriptionListGroup key="user">
+                    <DescriptionListTerm>
+                        User
+                    </DescriptionListTerm>
+                    <DescriptionListDescription>
+                        {file.user}
+                    </DescriptionListDescription>
+                </DescriptionListGroup>
+                <DescriptionListGroup key="group">
+                    <DescriptionListTerm>
+                        Group
+                    </DescriptionListTerm>
+                    <DescriptionListDescription>
+                        {file.group}
+                    </DescriptionListDescription>
+                </DescriptionListGroup>
+            </DescriptionList>
+        }
+    >
+        <Button
+            variant="link"
+            isInline
+            component="pre"
+        >
+            {file.user}:{file.group}
+        </Button>
+    </Popover>
+);
