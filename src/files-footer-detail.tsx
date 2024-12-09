@@ -9,6 +9,7 @@ import { Text } from "@patternfly/react-core/dist/esm/components/Text";
 import { Tooltip } from "@patternfly/react-core/dist/esm/components/Tooltip";
 
 import cockpit from "cockpit";
+import type { FileInfo } from "cockpit/fsinfo.ts";
 import * as timeformat from "timeformat";
 
 import { useFilesContext } from './app.tsx';
@@ -70,7 +71,11 @@ export const FilesFooterDetail = ({
     const selectedFile = (selected.length === 1) ? selected[0] : cwdInfo;
 
     let permsPopover = null;
+    let userGroup = null;
+
     if (selectedFile.mode !== undefined) {
+        userGroup = <UserGroupPopover file={selectedFile} />;
+
         const mode = selectedFile.mode;
         const popoverBody = [_("Owner"), _("Group"), _("Others")].map((permGroup, i) => {
             return (
@@ -119,7 +124,47 @@ export const FilesFooterDetail = ({
                     {timeformat.distanceToNow(selectedFile.mtime * 1000)}
                 </Text>
             </Tooltip>}
+            {userGroup}
             {permsPopover}
         </div>
     );
 };
+
+const UserGroupPopover = ({ file }: { file: FileInfo }) => (
+    <Popover
+      id="files-footer-usergroup-popover"
+      hasAutoWidth
+      bodyContent={
+          <DescriptionList
+            isHorizontal
+            isCompact
+          >
+              <DescriptionListGroup key="user">
+                  <DescriptionListTerm>
+                      {_("User")}
+                  </DescriptionListTerm>
+                  <DescriptionListDescription>
+                      {file.user}
+                  </DescriptionListDescription>
+              </DescriptionListGroup>
+              <DescriptionListGroup key="group">
+                  <DescriptionListTerm>
+                      {_("Group")}
+                  </DescriptionListTerm>
+                  <DescriptionListDescription>
+                      {file.group}
+                  </DescriptionListDescription>
+              </DescriptionListGroup>
+          </DescriptionList>
+      }
+    >
+        <Button
+          id="files-footer-owner"
+          variant="link"
+          isInline
+          component="pre"
+        >
+            {(file.user === file.group) ? file.user : `${file.user}:${file.group}`}
+        </Button>
+    </Popover>
+);

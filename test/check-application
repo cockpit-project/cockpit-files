@@ -333,12 +333,29 @@ class TestFiles(testlib.MachineCase):
         b.wait_in_text("#files-footer-permissions", "rwx r-x r-x")
         m.execute("chmod 700 /home/admin/newdir")
         b.wait_in_text("#files-footer-permissions", "rwx --- ---")
+        b.wait_text("#files-footer-owner", "root")
 
         # Also check popover
         b.click("#files-footer-permissions")
         b.wait_in_text(".pf-v5-c-popover dl div:nth-child(1) > dd", "read, write, and execute")
         b.wait_in_text(".pf-v5-c-popover dl div:nth-child(2) > dd", "none")
         b.wait_in_text(".pf-v5-c-popover dl div:nth-child(3) > dd", "none")
+        b.click(".pf-v5-c-popover__close > button")
+        b.wait_not_present(".pf-v5-c-popover")
+
+        b.click("#files-footer-owner")
+        b.wait_in_text(".pf-v5-c-popover dl div:nth-child(1) > dd", "root")
+        b.wait_in_text(".pf-v5-c-popover dl div:nth-child(2) > dd", "root")
+        b.click(".pf-v5-c-popover__close > button")
+        b.wait_not_present(".pf-v5-c-popover")
+
+        # Change group is shown in popover
+        m.execute("chown root:admin /home/admin/newdir")
+        b.wait_text("#files-footer-owner", "root:admin")
+
+        b.click("#files-footer-owner")
+        b.wait_in_text(".pf-v5-c-popover dl div:nth-child(1) > dd", "root")
+        b.wait_in_text(".pf-v5-c-popover dl div:nth-child(2) > dd", "admin")
         b.click(".pf-v5-c-popover__close > button")
         b.wait_not_present(".pf-v5-c-popover")
 
@@ -380,6 +397,7 @@ class TestFiles(testlib.MachineCase):
         b.click("[data-item='newdir']")
         b.wait_in_text(".files-footer-info", "newdir")
         b.wait_in_text("#files-footer-permissions", "rwx --- ---")
+        b.wait_in_text("#files-footer-owner", "root")
 
         # Select multiple files
         m.execute("touch /home/admin/newfile.txt")
