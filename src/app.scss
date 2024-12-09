@@ -11,8 +11,30 @@
 
 // Passthrough for layout and styling purposes, to enable main page parts to participate in the grid
 .pf-v5-c-page__main-section,
-.files-view-stack {
+.files-view-stack,
+.upload-drop-zone {
     display: contents;
+}
+
+.files-card {
+    position: relative;
+}
+
+.drag-drop-upload,
+.drag-drop-upload-blocked {
+    position: absolute;
+    z-index: 10;
+    border: 3px dashed var(--pf-v5-global--link--Color);
+    background: rgb(from var(--pf-v5-global--BackgroundColor--100) r g b / 80%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    block-size: 100%;
+    inline-size: 100%;
+
+    .pf-v5-c-empty-state__icon {
+        color: var(--pf-v5-global--Color--100);
+    }
 }
 
 .pf-v5-c-page__main {
@@ -30,12 +52,12 @@
 }
 
 .files-empty-state,
-.files-view-stack > .pf-v5-c-card,
+.files-view-stack > .upload-drop-zone > .pf-v5-c-card,
 .files-view-stack > .files-footer-info {
     grid-column: content;
 }
 
-.files-view-stack > .pf-v5-c-card {
+.files-view-stack > .upload-drop-zone > .pf-v5-c-card {
     overflow: auto;
 }
 

@@ -309,3 +309,9 @@
     column-gap: var(--pf-v5-global--spacer--sm);
     text-align: start;
 }
+
+// use all available space when there is not enough files to fill the whole view
+// so drag&drop works in empty space
+.fileview-wrapper {
+    block-size: 100%;
+}
