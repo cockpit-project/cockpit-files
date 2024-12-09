@@ -2237,7 +2237,7 @@ class TestFiles(testlib.MachineCase):
             b.wait_not_present(".drag-drop-upload")
             drag_file_event(".fileview-wrapper", 'dragenter')
             b.wait_visible(".drag-drop-upload")
-            # TODO add pixeltest here when we have a design what the UI should look like during drag events
+            b.assert_pixels(".files-card", "drag-drop-upload-dropzone")
             drag_file_event(".fileview-wrapper", 'drop', 'drag-drop-testfile.txt')
             b.wait_in_text(".pf-v5-c-alert__description", "Successfully uploaded file")
             b.click(".pf-v5-c-alert__action button")
@@ -2284,6 +2284,7 @@ class TestFiles(testlib.MachineCase):
             b.wait_not_present(".drag-drop-upload")
             drag_file_event(".fileview-wrapper", 'dragenter')
             b.wait_visible(".drag-drop-upload-blocked")
+            b.assert_pixels(".files-card", "drag-drop-upload-dropzone-blocked")
             drag_file_event(".fileview-wrapper", 'dragleave')
             b.wait_not_present(".drag-drop-upload-blocked")
             # Dropping the file does nothing
