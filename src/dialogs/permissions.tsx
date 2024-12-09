@@ -21,6 +21,8 @@ import React, { useState } from 'react';
 
 import { Button } from '@patternfly/react-core/dist/esm/components/Button';
 import { Checkbox } from '@patternfly/react-core/dist/esm/components/Checkbox';
+import { ExpandableSection, ExpandableSectionVariant } from
+    '@patternfly/react-core/dist/esm/components/ExpandableSection';
 import { Form, FormGroup, FormSection } from '@patternfly/react-core/dist/esm/components/Form';
 import { FormSelect, FormSelectOption } from '@patternfly/react-core/dist/esm/components/FormSelect';
 import { Modal, ModalVariant } from '@patternfly/react-core/dist/esm/components/Modal';
@@ -30,7 +32,6 @@ import { Stack } from '@patternfly/react-core/dist/esm/layouts/Stack';
 import cockpit from 'cockpit';
 import type { BasicError } from 'cockpit';
 import { InlineNotification } from 'cockpit-components-inline-notification';
-import { basename } from "cockpit-path";
 import type { Dialogs, DialogResult } from 'dialogs';
 import { useInit } from 'hooks';
 import { etc_group_syntax, etc_passwd_syntax } from 'pam_user_parser';
@@ -39,13 +40,14 @@ import * as python from "python";
 import { superuser } from 'superuser';
 import { fmt_to_fragments } from 'utils.tsx';
 
-import { useFilesContext } from '../app.tsx';
 import type { FolderFileInfo } from '../app.tsx';
 import { inode_types } from '../common.ts';
 
 // Following python file is loaded as a string (esbuild loader: text)
 // @ts-expect-error Cannot find module or its corresponding type declaration
 import read_selinux_context from './read-selinux.py';
+
+import "./permissions.css";
 
 const _ = cockpit.gettext;
 
@@ -117,20 +119,15 @@ function mode_to_args(mode: number) {
     return chmod_args.join(",");
 }
 
-const EditPermissionsModal = ({ dialogResult, selected, path } : {
+const EditPermissionsModal = ({ dialogResult, items, path } : {
     dialogResult: DialogResult<void>,
-    selected: FolderFileInfo | null,
+    items: FolderFileInfo[],
     path: string,
 }) => {
-    const { cwdInfo } = useFilesContext();
-    let selectedIsCwd = false;
-
-    // Nothing selected means we act on the current working directory
-    if (!selected) {
-        const directory_name = basename(path);
-        selected = { ...cwdInfo, name: directory_name, category: null, to: null };
-        selectedIsCwd = true;
-    }
+    cockpit.assert(items[0] !== undefined, "passed items cannot be empty");
+    const selected = items[0];
+    const is_user_equal = items.every((item) => item.user === items[0].user);
+    const is_group_equal = items.every((item) => item.group === items[0].group);
 
     const [owner, setOwner] = useState(selected.user);
     const [mode, setMode] = useState(selected.mode ?? 0);
@@ -141,6 +138,7 @@ const EditPermissionsModal = ({ dialogResult, selected, path } : {
     const [isExecutable, setIsExecutable] = useState((mode & 0b001001001) === 0b001001001);
     const [selinuxContext, setSELinuxContext] = useState<string | null>(null);
 
+    const full_path = path + selected.name;
     const executable_file_types = ["code-file", "file"];
 
     useInit(async () => {
@@ -158,14 +156,16 @@ const EditPermissionsModal = ({ dialogResult, selected, path } : {
             console.error("Cannot obtain users from getent group", exc);
         }
 
-        try {
-            const full_path = selectedIsCwd ? path : path + selected.name;
-            const selinux_context = await python.spawn(read_selinux_context, [full_path]);
-            setSELinuxContext(selinux_context);
-        } catch (err) {
-            const e = err as python.PythonExitStatus;
-            if (e.exit_status !== 2)
-                console.error("Cannot obtain SELinux context", err);
+        // When editing multiple files determining the common selinux context might not be possible so don't show it.
+        if (items.length === 1) {
+            try {
+                const selinux_context = await python.spawn(read_selinux_context, [full_path]);
+                setSELinuxContext(selinux_context);
+            } catch (err) {
+                const e = err as python.PythonExitStatus;
+                if (e.exit_status !== 2)
+                    console.error("Cannot obtain SELinux context", err);
+            }
         }
     });
 
@@ -180,7 +180,6 @@ const EditPermissionsModal = ({ dialogResult, selected, path } : {
     };
 
     const spawnEncloseFiles = async () => {
-        const full_path = selectedIsCwd ? path : path + selected.name;
         try {
             await cockpit.spawn(["chmod", "-R", mode_to_args(mode), full_path],
                                 { superuser: "try", err: "message" });
@@ -192,17 +191,18 @@ const EditPermissionsModal = ({ dialogResult, selected, path } : {
     };
 
     const spawnEditPermissions = async () => {
-        const permissionChanged = mode !== selected.mode;
+        const permissionChanged = items.some(item => item.mode !== mode);
+        // We only allow editing multiple files with the same owner:group.
         const ownerChanged = owner !== selected.user || group !== selected.group;
+        const file_paths = items.map(item => path + item.name);
 
         try {
-            const directory = selectedIsCwd ? path : path + selected.name;
             if (permissionChanged)
-                await cockpit.spawn(["chmod", mode.toString(8), directory],
+                await cockpit.spawn(["chmod", mode.toString(8), ...file_paths],
                                     { superuser: "try", err: "message" });
 
             if (ownerChanged)
-                await cockpit.spawn(["chown", owner + ":" + group, directory],
+                await cockpit.spawn(["chown", owner + ":" + group, ...file_paths],
                                     { superuser: "try", err: "message" });
 
             dialogResult.resolve();
@@ -269,13 +269,32 @@ const EditPermissionsModal = ({ dialogResult, selected, path } : {
         return a.name.localeCompare(b.name);
     }
 
+    let description;
+    if (items.length === 1) {
+        description = (selected.type) ? inode_types[selected.type] : _("Missing type");
+    } else {
+        description = (
+            <ExpandableSection
+              truncateMaxLines={1}
+              variant={ExpandableSectionVariant.truncate}
+              toggleTextExpanded={_("Collapse")}
+              toggleTextCollapsed={_("Show all files")}
+              className="multiple-files-expandable"
+            >
+                {items.map(itm => itm.name).join(", ")}
+            </ExpandableSection>
+        );
+    }
+
     return (
         <Modal
           position="top"
           variant={ModalVariant.small}
           /* Translators: $0 represents a filename */
-          title={fmt_to_fragments(_("$0 permissions"), <b>{selected.name}</b>)}
-          description={(selected.type) ? inode_types[selected.type] : _("Missing type")}
+          title={items.length === 1
+              ? fmt_to_fragments(_("$0 permissions"), <b>{selected.name}</b>)
+              : cockpit.format(_("Permissions for $0 files"), items.length)}
+          description={description}
           isOpen
           onClose={() => dialogResult.resolve()}
           footer={
@@ -305,7 +324,7 @@ const EditPermissionsModal = ({ dialogResult, selected, path } : {
                   isInline
                 />}
                 <Form isHorizontal>
-                    {superuser.allowed && accounts && groups &&
+                    {superuser.allowed && accounts && groups && is_user_equal && is_group_equal &&
                     <FormSection title={_("Ownership")}>
                         <FormGroup label={_("Owner")} fieldId="edit-permissions-owner">
                             <FormSelect
@@ -399,6 +418,6 @@ const EditPermissionsModal = ({ dialogResult, selected, path } : {
     );
 };
 
-export function edit_permissions(dialogs: Dialogs, selected: FolderFileInfo | null, path: string) {
-    dialogs.run(EditPermissionsModal, { selected, path });
+export function edit_permissions(dialogs: Dialogs, items: FolderFileInfo[], path: string) {
+    dialogs.run(EditPermissionsModal, { items, path });
 }

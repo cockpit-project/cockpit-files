@@ -23,7 +23,7 @@ import { AlertVariant } from "@patternfly/react-core/dist/esm/components/Alert";
 
 import cockpit from "cockpit";
 import type { FileInfo } from "cockpit/fsinfo";
-import { basename } from "cockpit-path";
+import { basename, dirname } from "cockpit-path";
 import type { Dialogs } from 'dialogs';
 
 import type { FolderFileInfo } from "./app";
@@ -80,6 +80,8 @@ export function get_menu_items(
     const supportsTerminal = cockpit.manifests.system?.tools?.terminal?.capabilities?.includes("path");
 
     if (selected.length === 0) {
+        const current_directory = { ...cwdInfo, name: basename(path), category: null, to: null };
+        const base_path = get_base_path(path);
         menuItems.push(
             {
                 id: "paste-item",
@@ -102,7 +104,7 @@ export function get_menu_items(
             {
                 id: "edit-permissions",
                 title: _("Edit permissions"),
-                onClick: () => edit_permissions(dialogs, null, path)
+                onClick: () => edit_permissions(dialogs, [current_directory], base_path)
             }
         );
         if (supportsTerminal) {
@@ -142,7 +144,7 @@ export function get_menu_items(
             {
                 id: "edit-permissions",
                 title: _("Edit permissions"),
-                onClick: () => edit_permissions(dialogs, item, path)
+                onClick: () => edit_permissions(dialogs, [item], path)
             },
             {
                 id: "rename-item",
@@ -190,7 +192,34 @@ export function get_menu_items(
                 onClick: () => confirm_delete(dialogs, path, selected, setSelected)
             }
         );
+
+        // Don't allow mixing regular files and folders when editing multiple
+        // permissions, it can be unclear if we are changing the folders
+        // permissions or the permissions of the files underneath.
+        if (selected.every(sel => sel.type === "reg")) {
+            menuItems.push(
+                { type: "divider" },
+                {
+                    id: "edit-permissions",
+                    title: _("Edit permissions"),
+                    onClick: () => edit_permissions(dialogs, selected, path)
+                }
+            );
+        }
     }
 
     return menuItems;
+}
+
+// Get the dirname based on the given path with special logic for "/", so we don't show the root directory as "//"
+// As selected.name would already be "/".
+function get_base_path(path: string) {
+    let base_path = dirname(path);
+    if (base_path === "/")
+        base_path = "";
+    else {
+        base_path += "/";
+    }
+
+    return base_path;
 }
