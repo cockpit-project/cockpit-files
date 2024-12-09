@@ -40,7 +40,6 @@ import { get_permissions, permissionShortStr } from "./common.ts";
 import { confirm_delete } from "./dialogs/delete.tsx";
 import { show_create_directory_dialog } from "./dialogs/mkdir.tsx";
 import { show_rename_dialog } from "./dialogs/rename.tsx";
-import { UploadContext } from "./files-folder-view.tsx";
 import { Sort, filterColumnMapping, filterColumns } from "./header.tsx";
 import { get_menu_items, pasteFromClipboard } from "./menu.tsx";
 import "./files-card-body.scss";
@@ -162,7 +161,6 @@ export const FilesCardBody = ({
     const [boxPerRow, setBoxPerRow] = useState(0);
     const dialogs = useDialogs();
     const { addAlert, cwdInfo } = useFilesContext();
-    const { uploadedFiles } = useContext(UploadContext);
 
     const sortedFiles = useMemo(() => {
         return files
@@ -428,7 +426,6 @@ export const FilesCardBody = ({
         cwdInfo,
         clipboard,
         setClipboard,
-        uploadedFiles,
         setDragDropActive,
     ]);
 
