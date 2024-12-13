@@ -66,6 +66,12 @@
         display: inline-block;
     }
 
+    // Fix the double-spacing issue for other dropdowns
+    // https://github.com/patternfly/patternfly/issues/6632
+    .pf-v5-c-menu-toggle__controls:last-child > .pf-v5-c-menu-toggle__toggle-icon {
+      margin-inline-end: 0;
+    }
+
     .pf-v5-c-breadcrumb {
         margin-block: 0;
         margin-inline: var(--pf-v5-global--spacer--sm);
