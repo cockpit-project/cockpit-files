@@ -71,6 +71,11 @@ export const FilesContext = React.createContext({
 
 export const useFilesContext = () => useContext(FilesContext);
 
+export interface ClipboardInfo {
+    path: string,
+    files: FolderFileInfo[];
+}
+
 export const usePath = () => {
     const { options } = usePageLocation();
     let currentPath = decodeURIComponent(options.path?.toString() || "/");
@@ -98,7 +103,7 @@ export const Application = () => {
     const [files, setFiles] = useState<FolderFileInfo[]>([]);
     const [selected, setSelected] = useState<FolderFileInfo[]>([]);
     const [showHidden, setShowHidden] = useState(localStorage.getItem("files:showHiddenFiles") === "true");
-    const [clipboard, setClipboard] = useState<string[]>([]);
+    const [clipboard, setClipboard] = useState<ClipboardInfo>({ path: "/", files: [] });
     const [alerts, setAlerts] = useState<Alert[]>([]);
     const [cwdInfo, setCwdInfo] = useState<FileInfo | null>(null);
 
