@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-04 03:23+0000\n"
+"POT-Creation-Date: 2024-12-17 03:22+0000\n"
 "PO-Revision-Date: 2024-12-01 15:38+0000\n"
 "Last-Translator: JW Wang <v72807647@gmail.com>\n"
 "Language-Team: Chinese (Traditional) <https://translate.fedoraproject.org/"
@@ -30,6 +30,12 @@ msgstr ""
 msgid "\"$0\" exists, not overwriting with paste."
 msgstr "\"$0\" 已存在，將不會貼上以免遭覆寫。"
 
+#: src/upload-button.tsx:66
+#, fuzzy
+#| msgid "files"
+msgid "$0 files"
+msgstr "檔案"
+
 #: src/files-footer-detail.tsx:35
 msgid "$0 files selected"
 msgstr "已選擇 $0 個檔案"
@@ -39,8 +45,7 @@ msgid "$0 item is hidden"
 msgid_plural "$0 items are hidden"
 msgstr[0] "$0 個已隱藏的項目"
 
-#. Translators: $0 represents a filename
-#: src/dialogs/permissions.tsx:277
+#: src/dialogs/permissions.tsx:295
 msgid "$0 permissions"
 msgstr "$0 的權限"
 
@@ -53,7 +58,7 @@ msgstr ""
 "為 Cockpit 設計的檔案系統使用者界面。您可以瀏覽目錄、上傳與下載檔案，並變更其"
 "屬性。它也具備簡易的檔案編輯器。"
 
-#: src/upload-button.tsx:97
+#: src/upload-button.tsx:121
 msgid ""
 "A file with the same name already exists in \"$0\". Replacing it will "
 "overwrite its content."
@@ -63,7 +68,7 @@ msgstr "一個相同名稱的檔案已於 \"$0\" 存在。 若將其取代將覆
 msgid "A-Z"
 msgstr "由 A 到 Z"
 
-#: src/dialogs/permissions.tsx:341
+#: src/dialogs/permissions.tsx:360
 msgid "Access"
 msgstr "存取權限"
 
@@ -76,7 +81,7 @@ msgstr "觸發所選擇的項目，進入目錄"
 msgid "Add bookmark"
 msgstr "新增書籤"
 
-#: src/upload-button.tsx:120
+#: src/upload-button.tsx:144
 msgid "Apply this action to all conflicting files"
 msgstr "套用此動作至所有發生衝突的檔案"
 
@@ -88,21 +93,22 @@ msgstr "區塊裝置"
 msgid "Bookmarks"
 msgstr "書籤"
 
-#: src/dialogs/permissions.tsx:296 src/dialogs/create-file.tsx:162
+#: src/dialogs/permissions.tsx:315 src/dialogs/create-file.tsx:162
 #: src/dialogs/editor.tsx:211 src/dialogs/delete.tsx:91
-#: src/dialogs/rename.tsx:98 src/dialogs/mkdir.tsx:108 src/upload-button.tsx:91
+#: src/dialogs/rename.tsx:98 src/dialogs/mkdir.tsx:108
+#: src/upload-button.tsx:115
 msgid "Cancel"
 msgstr "取消"
 
-#: src/upload-button.tsx:301
+#: src/upload-button.tsx:439
 msgid "Cancel upload of $0"
 msgstr "取消上傳 $0"
 
-#: src/upload-button.tsx:239
+#: src/upload-button.tsx:341
 msgid "Cancelled"
 msgstr "已取消"
 
-#: src/upload-button.tsx:240
+#: src/upload-button.tsx:342
 msgid "Cancelled upload of $0"
 msgstr "已取消上傳 $0"
 
@@ -110,11 +116,17 @@ msgstr "已取消上傳 $0"
 msgid "Cannot create file in current directory"
 msgstr "無法在目前的目錄建立檔案"
 
-#: src/dialogs/permissions.tsx:287
+#: src/dialogs/permissions.tsx:306
 msgid "Change"
 msgstr "變更"
 
-#: src/dialogs/permissions.tsx:294
+#: src/upload-button.tsx:392
+#, fuzzy
+#| msgid "Other permissions"
+msgid "Change permissions"
+msgstr "其他權限"
+
+#: src/dialogs/permissions.tsx:313
 msgid "Change permissions for enclosed files"
 msgstr "變更其中檔案的權限"
 
@@ -134,7 +146,11 @@ msgstr "關閉"
 msgid "Cockpit Files"
 msgstr "Cockpit Files"
 
-#: src/menu.tsx:138 src/menu.tsx:183
+#: src/dialogs/permissions.tsx:280
+msgid "Collapse"
+msgstr ""
+
+#: src/menu.tsx:140 src/menu.tsx:185
 msgid "Copy"
 msgstr "複製"
 
@@ -146,11 +162,11 @@ msgstr "複製已選擇的檔案或目錄"
 msgid "Create"
 msgstr "建立"
 
-#: src/menu.tsx:93 src/dialogs/mkdir.tsx:92
+#: src/menu.tsx:95 src/dialogs/mkdir.tsx:92
 msgid "Create directory"
 msgstr "建立目錄"
 
-#: src/menu.tsx:98 src/dialogs/create-file.tsx:146
+#: src/menu.tsx:100 src/dialogs/create-file.tsx:146
 msgid "Create file"
 msgstr "建立檔案"
 
@@ -158,7 +174,7 @@ msgstr "建立檔案"
 msgid "Create new directory"
 msgstr "建立新目錄"
 
-#: src/menu.tsx:155 src/menu.tsx:188 src/dialogs/delete.tsx:90
+#: src/menu.tsx:157 src/menu.tsx:190 src/dialogs/delete.tsx:90
 msgid "Delete"
 msgstr "刪除"
 
@@ -230,7 +246,7 @@ msgstr "以網格顯示"
 msgid "Display as a list"
 msgstr "以清單顯示"
 
-#: src/menu.tsx:165
+#: src/menu.tsx:167
 msgid "Download"
 msgstr "下載"
 
@@ -243,7 +259,7 @@ msgstr "編輯 $0"
 msgid "Edit path"
 msgstr "編輯路徑"
 
-#: src/menu.tsx:104 src/menu.tsx:144
+#: src/menu.tsx:106 src/menu.tsx:146 src/menu.tsx:204
 msgid "Edit permissions"
 msgstr "編輯權限"
 
@@ -254,6 +270,10 @@ msgstr "正在編輯"
 #: src/common.ts:29
 msgid "Execute-only"
 msgstr "只能執行"
+
+#: src/upload-button.tsx:280
+msgid "Failed"
+msgstr ""
 
 #: src/manifest.json:0
 msgid "File browser"
@@ -267,6 +287,12 @@ msgstr "檔案已存在"
 msgid "File name"
 msgstr "檔案名稱"
 
+#: src/upload-button.tsx:361
+#, fuzzy
+#| msgid "File name"
+msgid "File uploaded"
+msgstr "檔案名稱"
+
 #: src/common.ts:89
 msgid "Filename is the same as original name"
 msgstr "檔案名稱與原本相同"
@@ -274,6 +300,12 @@ msgstr "檔案名稱與原本相同"
 #: org.cockpit_project.files.metainfo.xml:5
 msgid "Files"
 msgstr "檔案"
+
+#: src/upload-button.tsx:361
+#, fuzzy
+#| msgid "File name"
+msgid "Files uploaded"
+msgstr "檔案名稱"
 
 #: src/files-breadcrumbs.tsx:239
 msgid "Filesystem"
@@ -319,12 +351,12 @@ msgstr "前進"
 msgid "Go up a directory"
 msgstr "回上一層目錄"
 
-#: src/files-card-body.tsx:572 src/dialogs/permissions.tsx:325
+#: src/files-card-body.tsx:572 src/dialogs/permissions.tsx:344
 #: src/files-footer-detail.tsx:75
 msgid "Group"
 msgstr "群組"
 
-#: src/dialogs/permissions.tsx:355
+#: src/dialogs/permissions.tsx:374
 msgid "Group access"
 msgstr "群組存取權限"
 
@@ -340,7 +372,7 @@ msgstr "家目錄"
 msgid "Ignore"
 msgstr "忽略"
 
-#: src/upload-button.tsx:90
+#: src/upload-button.tsx:114
 msgid "Keep original"
 msgstr "保留原本的"
 
@@ -364,7 +396,7 @@ msgstr "最不寬鬆的權限"
 msgid "Manage your files"
 msgstr "管理您的檔案"
 
-#: src/dialogs/permissions.tsx:278
+#: src/dialogs/permissions.tsx:274
 msgid "Missing type"
 msgstr "類型已遺失"
 
@@ -400,7 +432,7 @@ msgstr "Named pipe"
 msgid "Navigation"
 msgstr "瀏覽"
 
-#: src/upload-button.tsx:106
+#: src/upload-button.tsx:130
 msgid "New file"
 msgstr "新的檔案"
 
@@ -424,15 +456,15 @@ msgstr "沒有找到相符的結果"
 msgid "None"
 msgstr "無"
 
-#: src/menu.tsx:113 src/menu.tsx:174
+#: src/menu.tsx:115 src/menu.tsx:176
 msgid "Open in terminal"
 msgstr "於終端機開啟"
 
-#: src/menu.tsx:130
+#: src/menu.tsx:132
 msgid "Open text file"
 msgstr "開啟文字檔案"
 
-#: src/upload-button.tsx:111
+#: src/upload-button.tsx:135
 msgid "Original file on server"
 msgstr "伺服器上原有的檔案"
 
@@ -440,7 +472,7 @@ msgstr "伺服器上原有的檔案"
 msgid "Others"
 msgstr "其他人"
 
-#: src/dialogs/permissions.tsx:367
+#: src/dialogs/permissions.tsx:386
 msgid "Others access"
 msgstr "其他人的存取權限"
 
@@ -449,12 +481,12 @@ msgid "Overwrite"
 msgstr "覆寫"
 
 #: src/files-card-body.tsx:533 src/files-card-body.tsx:572
-#: src/dialogs/permissions.tsx:310 src/dialogs/create-file.tsx:199
+#: src/dialogs/permissions.tsx:329 src/dialogs/create-file.tsx:199
 #: src/header.tsx:98 src/files-footer-detail.tsx:75
 msgid "Owner"
 msgstr "擁有者"
 
-#: src/dialogs/permissions.tsx:343
+#: src/dialogs/permissions.tsx:362
 msgid "Owner access"
 msgstr "擁有者存取權限"
 
@@ -466,11 +498,11 @@ msgstr "擁有者遞增排序"
 msgid "Owner descending"
 msgstr "擁有者遞減排序"
 
-#: src/dialogs/permissions.tsx:309
+#: src/dialogs/permissions.tsx:328
 msgid "Ownership"
 msgstr "所有權"
 
-#: src/menu.tsx:86
+#: src/menu.tsx:88
 msgid "Paste"
 msgstr "貼上"
 
@@ -489,6 +521,12 @@ msgstr "權限遭拒"
 #: src/files-card-body.tsx:538 src/header.tsx:109
 msgid "Permissions"
 msgstr "權限"
+
+#: src/dialogs/permissions.tsx:296
+#, fuzzy
+#| msgid "Change permissions for enclosed files"
+msgid "Permissions for $0 files"
+msgstr "變更其中檔案的權限"
 
 #: src/common.ts:33
 msgid "Read and execute"
@@ -518,7 +556,7 @@ msgstr "重新載入"
 msgid "Remove current directory"
 msgstr "移除目前的目錄"
 
-#: src/menu.tsx:149 src/dialogs/rename.tsx:89
+#: src/menu.tsx:151 src/dialogs/rename.tsx:89
 msgid "Rename"
 msgstr "重新命名"
 
@@ -530,11 +568,11 @@ msgstr "將 $0 重新命名？"
 msgid "Rename selected file or directory"
 msgstr "重新命名已選擇的檔案或目錄"
 
-#: src/upload-button.tsx:88
+#: src/upload-button.tsx:112
 msgid "Replace"
 msgstr "取代"
 
-#: src/upload-button.tsx:81
+#: src/upload-button.tsx:105
 msgid "Replace file $0?"
 msgstr "取代檔案 $0 ？"
 
@@ -542,7 +580,7 @@ msgstr "取代檔案 $0 ？"
 msgid "Save"
 msgstr "儲存"
 
-#: src/dialogs/permissions.tsx:380
+#: src/dialogs/permissions.tsx:399
 msgid "Security context"
 msgstr "安全性 context"
 
@@ -550,9 +588,13 @@ msgstr "安全性 context"
 msgid "Select all"
 msgstr "全選"
 
-#: src/dialogs/permissions.tsx:392
+#: src/dialogs/permissions.tsx:411
 msgid "Set executable as program"
 msgstr "設定為可執行的程式"
+
+#: src/dialogs/permissions.tsx:281
+msgid "Show all files"
+msgstr ""
 
 #: src/files-card-body.tsx:511 src/header.tsx:286
 msgid "Show hidden items"
@@ -578,10 +620,6 @@ msgstr "Socket"
 msgid "Sort"
 msgstr "排序"
 
-#: src/upload-button.tsx:259
-msgid "Successfully uploaded file(s)"
-msgstr "檔案上傳成功"
-
 #: src/common.ts:43
 msgid "Symbolic link"
 msgstr "符號連結"
@@ -602,28 +640,32 @@ msgstr "該檔案已在磁碟上被變更"
 msgid "Unable to create bookmark directory"
 msgstr "無法建立書籤的存放目錄"
 
+#: src/upload-button.tsx:321
+msgid "Unable to move uploaded file to final destination"
+msgstr ""
+
 #: src/files-breadcrumbs.tsx:124
 msgid "Unable to save bookmark file"
 msgstr "無法儲存書籤的存放檔案"
 
-#: src/upload-button.tsx:337
+#: src/upload-button.tsx:475
 msgid "Upload"
 msgstr "上傳"
 
 #
-#: src/upload-button.tsx:318
+#: src/upload-button.tsx:456
 msgid "Upload $0% completed"
 msgstr "上傳 $0% 完成"
 
-#: src/upload-button.tsx:259
-msgid "Upload complete"
-msgstr "上傳已完成"
-
-#: src/upload-button.tsx:242
+#: src/upload-button.tsx:320 src/upload-button.tsx:344
 msgid "Upload error"
 msgstr "上傳失敗"
 
-#: src/upload-button.tsx:282
+#: src/upload-button.tsx:70
+msgid "Uploaded as $0, $1"
+msgstr ""
+
+#: src/upload-button.tsx:420
 msgid "Uploads"
 msgstr "上傳項目"
 
@@ -655,6 +697,12 @@ msgstr "檔案"
 msgid "filesystem"
 msgstr "檔案系統"
 
+#~ msgid "Successfully uploaded file(s)"
+#~ msgstr "檔案上傳成功"
+
+#~ msgid "Upload complete"
+#~ msgstr "上傳已完成"
+
 #~ msgid "$0 item"
 #~ msgid_plural "$0 items"
 #~ msgstr[0] "$0 個項目"
@@ -668,9 +716,6 @@ msgstr "檔案系統"
 
 #~ msgid "Group permissions"
 #~ msgstr "群組權限"
-
-#~ msgid "Other permissions"
-#~ msgstr "其他權限"
 
 #~ msgid "Owner permissions"
 #~ msgstr "擁有者權限"

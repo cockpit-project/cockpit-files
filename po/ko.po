@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-04 03:23+0000\n"
-"PO-Revision-Date: 2024-11-24 16:39+0000\n"
+"POT-Creation-Date: 2024-12-17 03:22+0000\n"
+"PO-Revision-Date: 2024-12-17 03:38+0000\n"
 "Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
 "memory@weblate.org>\n"
 "Language-Team: Korean <https://translate.fedoraproject.org/projects/cockpit-"
@@ -25,11 +25,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
-"X-Generator: Weblate 5.8.2\n"
+"X-Generator: Weblate 5.8.4\n"
 
 #: src/menu.tsx:58
 msgid "\"$0\" exists, not overwriting with paste."
 msgstr "\"$0\" 존재하며, 붙여서 덮어쓰지 않습니다."
+
+#: src/upload-button.tsx:66
+msgid "$0 files"
+msgstr "$0 파일"
 
 #: src/files-footer-detail.tsx:35
 msgid "$0 files selected"
@@ -40,8 +44,7 @@ msgid "$0 item is hidden"
 msgid_plural "$0 items are hidden"
 msgstr[0] "$0 항목이 숨겨졌습니다"
 
-#. Translators: $0 represents a filename
-#: src/dialogs/permissions.tsx:277
+#: src/dialogs/permissions.tsx:295
 msgid "$0 permissions"
 msgstr "$0 권한"
 
@@ -55,7 +58,7 @@ msgstr ""
 "받을 수 있으며, 이들 특성을 변경 할 수 있습니다. 이는 단순 파일 편집기도 포함"
 "합니다."
 
-#: src/upload-button.tsx:97
+#: src/upload-button.tsx:121
 msgid ""
 "A file with the same name already exists in \"$0\". Replacing it will "
 "overwrite its content."
@@ -67,7 +70,7 @@ msgstr ""
 msgid "A-Z"
 msgstr "A-Z"
 
-#: src/dialogs/permissions.tsx:341
+#: src/dialogs/permissions.tsx:360
 msgid "Access"
 msgstr "접근"
 
@@ -80,7 +83,7 @@ msgstr "선택된 항목을 활성화 하고, 디렉토리를 입력합니다"
 msgid "Add bookmark"
 msgstr "즐겨찾기 추가"
 
-#: src/upload-button.tsx:120
+#: src/upload-button.tsx:144
 msgid "Apply this action to all conflicting files"
 msgstr "모든 충돌하는 파일에 이와 같은 동작을 적용합니다"
 
@@ -92,21 +95,22 @@ msgstr "블록 장치"
 msgid "Bookmarks"
 msgstr "즐겨찾기"
 
-#: src/dialogs/permissions.tsx:296 src/dialogs/create-file.tsx:162
+#: src/dialogs/permissions.tsx:315 src/dialogs/create-file.tsx:162
 #: src/dialogs/editor.tsx:211 src/dialogs/delete.tsx:91
-#: src/dialogs/rename.tsx:98 src/dialogs/mkdir.tsx:108 src/upload-button.tsx:91
+#: src/dialogs/rename.tsx:98 src/dialogs/mkdir.tsx:108
+#: src/upload-button.tsx:115
 msgid "Cancel"
 msgstr "취소"
 
-#: src/upload-button.tsx:301
+#: src/upload-button.tsx:439
 msgid "Cancel upload of $0"
 msgstr "$0 올려주기 취소"
 
-#: src/upload-button.tsx:239
+#: src/upload-button.tsx:341
 msgid "Cancelled"
 msgstr "취소됨"
 
-#: src/upload-button.tsx:240
+#: src/upload-button.tsx:342
 msgid "Cancelled upload of $0"
 msgstr "$0 올려주기 취소됨"
 
@@ -114,11 +118,15 @@ msgstr "$0 올려주기 취소됨"
 msgid "Cannot create file in current directory"
 msgstr "현재 디렉토리에서 파일을 생성 할 수 없습니다"
 
-#: src/dialogs/permissions.tsx:287
+#: src/dialogs/permissions.tsx:306
 msgid "Change"
 msgstr "변경"
 
-#: src/dialogs/permissions.tsx:294
+#: src/upload-button.tsx:392
+msgid "Change permissions"
+msgstr "권한 변경"
+
+#: src/dialogs/permissions.tsx:313
 msgid "Change permissions for enclosed files"
 msgstr "첨부된 파일을 위한 권한 변경"
 
@@ -138,7 +146,11 @@ msgstr "종료"
 msgid "Cockpit Files"
 msgstr "Cockpit 파일"
 
-#: src/menu.tsx:138 src/menu.tsx:183
+#: src/dialogs/permissions.tsx:280
+msgid "Collapse"
+msgstr "붕괴"
+
+#: src/menu.tsx:140 src/menu.tsx:185
 msgid "Copy"
 msgstr "복사"
 
@@ -150,11 +162,11 @@ msgstr "선택된 파일 또는 디렉토리를 복사"
 msgid "Create"
 msgstr "생성"
 
-#: src/menu.tsx:93 src/dialogs/mkdir.tsx:92
+#: src/menu.tsx:95 src/dialogs/mkdir.tsx:92
 msgid "Create directory"
 msgstr "디렉토리 생성"
 
-#: src/menu.tsx:98 src/dialogs/create-file.tsx:146
+#: src/menu.tsx:100 src/dialogs/create-file.tsx:146
 msgid "Create file"
 msgstr "파일 생성"
 
@@ -162,7 +174,7 @@ msgstr "파일 생성"
 msgid "Create new directory"
 msgstr "신규 디렉토리 생성"
 
-#: src/menu.tsx:155 src/menu.tsx:188 src/dialogs/delete.tsx:90
+#: src/menu.tsx:157 src/menu.tsx:190 src/dialogs/delete.tsx:90
 msgid "Delete"
 msgstr "삭제"
 
@@ -234,7 +246,7 @@ msgstr "그리드로 표시"
 msgid "Display as a list"
 msgstr "목록으로 표시"
 
-#: src/menu.tsx:165
+#: src/menu.tsx:167
 msgid "Download"
 msgstr "내려받기"
 
@@ -247,7 +259,7 @@ msgstr "$0 편집"
 msgid "Edit path"
 msgstr "경로 편집"
 
-#: src/menu.tsx:104 src/menu.tsx:144
+#: src/menu.tsx:106 src/menu.tsx:146 src/menu.tsx:204
 msgid "Edit permissions"
 msgstr "권한을 편집합니다"
 
@@ -258,6 +270,10 @@ msgstr "편집하기"
 #: src/common.ts:29
 msgid "Execute-only"
 msgstr "실행-전용"
+
+#: src/upload-button.tsx:280
+msgid "Failed"
+msgstr "실패함"
 
 #: src/manifest.json:0
 msgid "File browser"
@@ -271,6 +287,10 @@ msgstr "파일이 존재합니다"
 msgid "File name"
 msgstr "파일 이름"
 
+#: src/upload-button.tsx:361
+msgid "File uploaded"
+msgstr "파일 올려짐"
+
 #: src/common.ts:89
 msgid "Filename is the same as original name"
 msgstr "파일이름이 원래의 이름과 동일합니다"
@@ -278,6 +298,10 @@ msgstr "파일이름이 원래의 이름과 동일합니다"
 #: org.cockpit_project.files.metainfo.xml:5
 msgid "Files"
 msgstr "파일"
+
+#: src/upload-button.tsx:361
+msgid "Files uploaded"
+msgstr "파일 올려짐"
 
 #: src/files-breadcrumbs.tsx:239
 msgid "Filesystem"
@@ -323,12 +347,12 @@ msgstr "앞으로 가기"
 msgid "Go up a directory"
 msgstr "상위 디렉토리로 이동"
 
-#: src/files-card-body.tsx:572 src/dialogs/permissions.tsx:325
+#: src/files-card-body.tsx:572 src/dialogs/permissions.tsx:344
 #: src/files-footer-detail.tsx:75
 msgid "Group"
 msgstr "그룹"
 
-#: src/dialogs/permissions.tsx:355
+#: src/dialogs/permissions.tsx:374
 msgid "Group access"
 msgstr "그룹 접근"
 
@@ -344,7 +368,7 @@ msgstr "홈"
 msgid "Ignore"
 msgstr "무시"
 
-#: src/upload-button.tsx:90
+#: src/upload-button.tsx:114
 msgid "Keep original"
 msgstr "원본 유지"
 
@@ -368,7 +392,7 @@ msgstr "최소 허용"
 msgid "Manage your files"
 msgstr "자신의 파일을 관리합니다"
 
-#: src/dialogs/permissions.tsx:278
+#: src/dialogs/permissions.tsx:274
 msgid "Missing type"
 msgstr "누락 유형"
 
@@ -404,7 +428,7 @@ msgstr "이름이 지정된 파이프"
 msgid "Navigation"
 msgstr "탐색"
 
-#: src/upload-button.tsx:106
+#: src/upload-button.tsx:130
 msgid "New file"
 msgstr "신규 파일"
 
@@ -428,15 +452,15 @@ msgstr "일치하는 결과를 찾을 수 없습니다"
 msgid "None"
 msgstr "없음"
 
-#: src/menu.tsx:113 src/menu.tsx:174
+#: src/menu.tsx:115 src/menu.tsx:176
 msgid "Open in terminal"
 msgstr "터미널에서 열기"
 
-#: src/menu.tsx:130
+#: src/menu.tsx:132
 msgid "Open text file"
 msgstr "텍스트 파일 열기"
 
-#: src/upload-button.tsx:111
+#: src/upload-button.tsx:135
 msgid "Original file on server"
 msgstr "서버에서 원본 파일"
 
@@ -444,7 +468,7 @@ msgstr "서버에서 원본 파일"
 msgid "Others"
 msgstr "기타"
 
-#: src/dialogs/permissions.tsx:367
+#: src/dialogs/permissions.tsx:386
 msgid "Others access"
 msgstr "기타 접근"
 
@@ -453,12 +477,12 @@ msgid "Overwrite"
 msgstr "덮어쓰기"
 
 #: src/files-card-body.tsx:533 src/files-card-body.tsx:572
-#: src/dialogs/permissions.tsx:310 src/dialogs/create-file.tsx:199
+#: src/dialogs/permissions.tsx:329 src/dialogs/create-file.tsx:199
 #: src/header.tsx:98 src/files-footer-detail.tsx:75
 msgid "Owner"
 msgstr "소유자"
 
-#: src/dialogs/permissions.tsx:343
+#: src/dialogs/permissions.tsx:362
 msgid "Owner access"
 msgstr "소유자 접근"
 
@@ -470,11 +494,11 @@ msgstr "소유자 오름차순"
 msgid "Owner descending"
 msgstr "소유자 내림차순"
 
-#: src/dialogs/permissions.tsx:309
+#: src/dialogs/permissions.tsx:328
 msgid "Ownership"
 msgstr "소유권"
 
-#: src/menu.tsx:86
+#: src/menu.tsx:88
 msgid "Paste"
 msgstr "붙여넣기"
 
@@ -493,6 +517,10 @@ msgstr "권한이 거부되었습니다"
 #: src/files-card-body.tsx:538 src/header.tsx:109
 msgid "Permissions"
 msgstr "권한"
+
+#: src/dialogs/permissions.tsx:296
+msgid "Permissions for $0 files"
+msgstr "$0 파일을 위한 권한"
 
 #: src/common.ts:33
 msgid "Read and execute"
@@ -522,7 +550,7 @@ msgstr "재적재"
 msgid "Remove current directory"
 msgstr "현재 디렉토리를 제거합니다"
 
-#: src/menu.tsx:149 src/dialogs/rename.tsx:89
+#: src/menu.tsx:151 src/dialogs/rename.tsx:89
 msgid "Rename"
 msgstr "이름변경"
 
@@ -534,11 +562,11 @@ msgstr "$0 이름변경?"
 msgid "Rename selected file or directory"
 msgstr "선택된 파일 또는 디렉토리 이름변경"
 
-#: src/upload-button.tsx:88
+#: src/upload-button.tsx:112
 msgid "Replace"
 msgstr "교체"
 
-#: src/upload-button.tsx:81
+#: src/upload-button.tsx:105
 msgid "Replace file $0?"
 msgstr "파일 $0를 교체합니까?"
 
@@ -546,7 +574,7 @@ msgstr "파일 $0를 교체합니까?"
 msgid "Save"
 msgstr "저장"
 
-#: src/dialogs/permissions.tsx:380
+#: src/dialogs/permissions.tsx:399
 msgid "Security context"
 msgstr "보안 문맥"
 
@@ -554,9 +582,13 @@ msgstr "보안 문맥"
 msgid "Select all"
 msgstr "모두 선택"
 
-#: src/dialogs/permissions.tsx:392
+#: src/dialogs/permissions.tsx:411
 msgid "Set executable as program"
 msgstr "실행 할 수 있는 프로그램 설정"
+
+#: src/dialogs/permissions.tsx:281
+msgid "Show all files"
+msgstr "모든 파일 표시"
 
 #: src/files-card-body.tsx:511 src/header.tsx:286
 msgid "Show hidden items"
@@ -582,10 +614,6 @@ msgstr "소켓"
 msgid "Sort"
 msgstr "정렬"
 
-#: src/upload-button.tsx:259
-msgid "Successfully uploaded file(s)"
-msgstr "성공적으로 파일이 올려짐"
-
 #: src/common.ts:43
 msgid "Symbolic link"
 msgstr "심볼릭 링크"
@@ -606,27 +634,31 @@ msgstr "파일이 디스크에서 변경되었습니다"
 msgid "Unable to create bookmark directory"
 msgstr "즐겨찾기 디렉토리를 생성 할 수 없음"
 
+#: src/upload-button.tsx:321
+msgid "Unable to move uploaded file to final destination"
+msgstr "올려진 파일을 최종 목적지에 이동 할 수 없음"
+
 #: src/files-breadcrumbs.tsx:124
 msgid "Unable to save bookmark file"
 msgstr "즐겨찾기 파일을 저장 할 수 없음"
 
-#: src/upload-button.tsx:337
+#: src/upload-button.tsx:475
 msgid "Upload"
 msgstr "올려주기"
 
-#: src/upload-button.tsx:318
+#: src/upload-button.tsx:456
 msgid "Upload $0% completed"
 msgstr "올려주기 $0% c완료"
 
-#: src/upload-button.tsx:259
-msgid "Upload complete"
-msgstr "올려주기 완료"
-
-#: src/upload-button.tsx:242
+#: src/upload-button.tsx:320 src/upload-button.tsx:344
 msgid "Upload error"
 msgstr "올려주기 오류"
 
-#: src/upload-button.tsx:282
+#: src/upload-button.tsx:70
+msgid "Uploaded as $0, $1"
+msgstr "$0, $1 로 올려짐"
+
+#: src/upload-button.tsx:420
 msgid "Uploads"
 msgstr "올려주기"
 
@@ -658,6 +690,12 @@ msgstr "파일"
 msgid "filesystem"
 msgstr "파일시스템"
 
+#~ msgid "Successfully uploaded file(s)"
+#~ msgstr "성공적으로 파일이 올려짐"
+
+#~ msgid "Upload complete"
+#~ msgstr "올려주기 완료"
+
 #~ msgid "$0 item"
 #~ msgid_plural "$0 items"
 #~ msgstr[0] "$0 항목"
@@ -671,9 +709,6 @@ msgstr "파일시스템"
 
 #~ msgid "Group permissions"
 #~ msgstr "그룹 권한"
-
-#~ msgid "Other permissions"
-#~ msgstr "기타 권한"
 
 #~ msgid "Owner permissions"
 #~ msgstr "소유자 권한"
