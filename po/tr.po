@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-04 03:23+0000\n"
-"PO-Revision-Date: 2024-11-24 16:39+0000\n"
+"POT-Creation-Date: 2024-12-17 03:22+0000\n"
+"PO-Revision-Date: 2024-12-17 03:38+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
 "Language-Team: Turkish <https://translate.fedoraproject.org/projects/cockpit-"
 "files/cockpit-files/tr/>\n"
@@ -24,11 +24,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1\n"
-"X-Generator: Weblate 5.8.2\n"
+"X-Generator: Weblate 5.8.4\n"
 
 #: src/menu.tsx:58
 msgid "\"$0\" exists, not overwriting with paste."
 msgstr "\"$0\" var, yapıştırma ile üzerine yazılmıyor."
+
+#: src/upload-button.tsx:66
+msgid "$0 files"
+msgstr "$0 dosya"
 
 #: src/files-footer-detail.tsx:35
 msgid "$0 files selected"
@@ -40,8 +44,7 @@ msgid_plural "$0 items are hidden"
 msgstr[0] "$0 gizli öge"
 msgstr[1] "$0 gizli öge"
 
-#. Translators: $0 represents a filename
-#: src/dialogs/permissions.tsx:277
+#: src/dialogs/permissions.tsx:295
 msgid "$0 permissions"
 msgstr "$0 izinleri"
 
@@ -55,7 +58,7 @@ msgstr ""
 "dosya yükleyebilir ve indirebilir, özelliklerini değiştirebilirsiniz. Ayrıca "
 "basit bir dosya düzenleyici içerir."
 
-#: src/upload-button.tsx:97
+#: src/upload-button.tsx:121
 msgid ""
 "A file with the same name already exists in \"$0\". Replacing it will "
 "overwrite its content."
@@ -67,7 +70,7 @@ msgstr ""
 msgid "A-Z"
 msgstr "A-Z"
 
-#: src/dialogs/permissions.tsx:341
+#: src/dialogs/permissions.tsx:360
 msgid "Access"
 msgstr "Erişim"
 
@@ -80,7 +83,7 @@ msgstr "Seçili ögeyi etkinleştir, dizine gir"
 msgid "Add bookmark"
 msgstr "Yer imi ekle"
 
-#: src/upload-button.tsx:120
+#: src/upload-button.tsx:144
 msgid "Apply this action to all conflicting files"
 msgstr "Bu eylemi çakışan tüm dosyalara uygula"
 
@@ -92,21 +95,22 @@ msgstr "Blok aygıtı"
 msgid "Bookmarks"
 msgstr "Yer imleri"
 
-#: src/dialogs/permissions.tsx:296 src/dialogs/create-file.tsx:162
+#: src/dialogs/permissions.tsx:315 src/dialogs/create-file.tsx:162
 #: src/dialogs/editor.tsx:211 src/dialogs/delete.tsx:91
-#: src/dialogs/rename.tsx:98 src/dialogs/mkdir.tsx:108 src/upload-button.tsx:91
+#: src/dialogs/rename.tsx:98 src/dialogs/mkdir.tsx:108
+#: src/upload-button.tsx:115
 msgid "Cancel"
 msgstr "İptal"
 
-#: src/upload-button.tsx:301
+#: src/upload-button.tsx:439
 msgid "Cancel upload of $0"
 msgstr "$0 karşıya yüklenmesini iptal et"
 
-#: src/upload-button.tsx:239
+#: src/upload-button.tsx:341
 msgid "Cancelled"
 msgstr "İptal edildi"
 
-#: src/upload-button.tsx:240
+#: src/upload-button.tsx:342
 msgid "Cancelled upload of $0"
 msgstr "$0 karşıya yüklenmesi iptal edildi"
 
@@ -114,11 +118,15 @@ msgstr "$0 karşıya yüklenmesi iptal edildi"
 msgid "Cannot create file in current directory"
 msgstr "Geçerli dizinde dosya oluşturulamıyor"
 
-#: src/dialogs/permissions.tsx:287
+#: src/dialogs/permissions.tsx:306
 msgid "Change"
 msgstr "Değiştir"
 
-#: src/dialogs/permissions.tsx:294
+#: src/upload-button.tsx:392
+msgid "Change permissions"
+msgstr "İzinleri değiştir"
+
+#: src/dialogs/permissions.tsx:313
 msgid "Change permissions for enclosed files"
 msgstr "İçerilen dosyalar için izinleri değiştir"
 
@@ -138,7 +146,11 @@ msgstr "Kapat"
 msgid "Cockpit Files"
 msgstr "Cockpit Dosyalar"
 
-#: src/menu.tsx:138 src/menu.tsx:183
+#: src/dialogs/permissions.tsx:280
+msgid "Collapse"
+msgstr "Daralt"
+
+#: src/menu.tsx:140 src/menu.tsx:185
 msgid "Copy"
 msgstr "Kopyala"
 
@@ -150,11 +162,11 @@ msgstr "Seçili dosya veya dizini kopyala"
 msgid "Create"
 msgstr "Oluştur"
 
-#: src/menu.tsx:93 src/dialogs/mkdir.tsx:92
+#: src/menu.tsx:95 src/dialogs/mkdir.tsx:92
 msgid "Create directory"
 msgstr "Dizin oluştur"
 
-#: src/menu.tsx:98 src/dialogs/create-file.tsx:146
+#: src/menu.tsx:100 src/dialogs/create-file.tsx:146
 msgid "Create file"
 msgstr "Dosya oluştur"
 
@@ -162,7 +174,7 @@ msgstr "Dosya oluştur"
 msgid "Create new directory"
 msgstr "Yeni dizin oluştur"
 
-#: src/menu.tsx:155 src/menu.tsx:188 src/dialogs/delete.tsx:90
+#: src/menu.tsx:157 src/menu.tsx:190 src/dialogs/delete.tsx:90
 msgid "Delete"
 msgstr "Sil"
 
@@ -234,7 +246,7 @@ msgstr "Izgara olarak görüntüle"
 msgid "Display as a list"
 msgstr "Liste olarak görüntüle"
 
-#: src/menu.tsx:165
+#: src/menu.tsx:167
 msgid "Download"
 msgstr "İndir"
 
@@ -247,7 +259,7 @@ msgstr "$0 dosyasını düzenle"
 msgid "Edit path"
 msgstr "Yolu düzenle"
 
-#: src/menu.tsx:104 src/menu.tsx:144
+#: src/menu.tsx:106 src/menu.tsx:146 src/menu.tsx:204
 msgid "Edit permissions"
 msgstr "İzinleri düzenle"
 
@@ -258,6 +270,10 @@ msgstr "Düzenleme"
 #: src/common.ts:29
 msgid "Execute-only"
 msgstr "Yalnızca çalıştır"
+
+#: src/upload-button.tsx:280
+msgid "Failed"
+msgstr "Başarısız oldu"
 
 #: src/manifest.json:0
 msgid "File browser"
@@ -271,6 +287,10 @@ msgstr "Dosya var"
 msgid "File name"
 msgstr "Dosya adı"
 
+#: src/upload-button.tsx:361
+msgid "File uploaded"
+msgstr "Dosya karşıya yüklendi"
+
 #: src/common.ts:89
 msgid "Filename is the same as original name"
 msgstr "Dosya adı ilk adıyla aynı"
@@ -278,6 +298,10 @@ msgstr "Dosya adı ilk adıyla aynı"
 #: org.cockpit_project.files.metainfo.xml:5
 msgid "Files"
 msgstr "Dosyalar"
+
+#: src/upload-button.tsx:361
+msgid "Files uploaded"
+msgstr "Dosyalar karşıya yüklendi"
 
 #: src/files-breadcrumbs.tsx:239
 msgid "Filesystem"
@@ -323,12 +347,12 @@ msgstr "İleri git"
 msgid "Go up a directory"
 msgstr "Bir dizin yukarı git"
 
-#: src/files-card-body.tsx:572 src/dialogs/permissions.tsx:325
+#: src/files-card-body.tsx:572 src/dialogs/permissions.tsx:344
 #: src/files-footer-detail.tsx:75
 msgid "Group"
 msgstr "Grup"
 
-#: src/dialogs/permissions.tsx:355
+#: src/dialogs/permissions.tsx:374
 msgid "Group access"
 msgstr "Grup erişimi"
 
@@ -344,7 +368,7 @@ msgstr "Ev dizini"
 msgid "Ignore"
 msgstr "Yok say"
 
-#: src/upload-button.tsx:90
+#: src/upload-button.tsx:114
 msgid "Keep original"
 msgstr "Orijinali sakla"
 
@@ -368,7 +392,7 @@ msgstr "En az izin veren"
 msgid "Manage your files"
 msgstr "Dosyalarınızı yönetin"
 
-#: src/dialogs/permissions.tsx:278
+#: src/dialogs/permissions.tsx:274
 msgid "Missing type"
 msgstr "Tür eksik"
 
@@ -404,7 +428,7 @@ msgstr "Adlı boru (pipe)"
 msgid "Navigation"
 msgstr "Gezinme"
 
-#: src/upload-button.tsx:106
+#: src/upload-button.tsx:130
 msgid "New file"
 msgstr "Yeni dosya"
 
@@ -428,15 +452,15 @@ msgstr "Eşleşen sonuç yok"
 msgid "None"
 msgstr "Yok"
 
-#: src/menu.tsx:113 src/menu.tsx:174
+#: src/menu.tsx:115 src/menu.tsx:176
 msgid "Open in terminal"
 msgstr "Terminalde aç"
 
-#: src/menu.tsx:130
+#: src/menu.tsx:132
 msgid "Open text file"
 msgstr "Metin dosyası aç"
 
-#: src/upload-button.tsx:111
+#: src/upload-button.tsx:135
 msgid "Original file on server"
 msgstr "Sunucudaki orijinal dosya"
 
@@ -444,7 +468,7 @@ msgstr "Sunucudaki orijinal dosya"
 msgid "Others"
 msgstr "Diğerleri"
 
-#: src/dialogs/permissions.tsx:367
+#: src/dialogs/permissions.tsx:386
 msgid "Others access"
 msgstr "Diğerlerinin erişimi"
 
@@ -453,12 +477,12 @@ msgid "Overwrite"
 msgstr "Üzerine yaz"
 
 #: src/files-card-body.tsx:533 src/files-card-body.tsx:572
-#: src/dialogs/permissions.tsx:310 src/dialogs/create-file.tsx:199
+#: src/dialogs/permissions.tsx:329 src/dialogs/create-file.tsx:199
 #: src/header.tsx:98 src/files-footer-detail.tsx:75
 msgid "Owner"
 msgstr "Sahibi"
 
-#: src/dialogs/permissions.tsx:343
+#: src/dialogs/permissions.tsx:362
 msgid "Owner access"
 msgstr "Sahibinin erişimi"
 
@@ -470,11 +494,11 @@ msgstr "Sahibine göre artan"
 msgid "Owner descending"
 msgstr "Sahibine göre azalan"
 
-#: src/dialogs/permissions.tsx:309
+#: src/dialogs/permissions.tsx:328
 msgid "Ownership"
 msgstr "Sahiplik"
 
-#: src/menu.tsx:86
+#: src/menu.tsx:88
 msgid "Paste"
 msgstr "Yapıştır"
 
@@ -493,6 +517,10 @@ msgstr "İzin reddedildi"
 #: src/files-card-body.tsx:538 src/header.tsx:109
 msgid "Permissions"
 msgstr "İzinler"
+
+#: src/dialogs/permissions.tsx:296
+msgid "Permissions for $0 files"
+msgstr "$0 dosya için izinler"
 
 #: src/common.ts:33
 msgid "Read and execute"
@@ -522,7 +550,7 @@ msgstr "Yeniden yükle"
 msgid "Remove current directory"
 msgstr "Geçerli dizini kaldır"
 
-#: src/menu.tsx:149 src/dialogs/rename.tsx:89
+#: src/menu.tsx:151 src/dialogs/rename.tsx:89
 msgid "Rename"
 msgstr "Yeniden adlandır"
 
@@ -534,11 +562,11 @@ msgstr "$0 yeniden adlandırılsın mı?"
 msgid "Rename selected file or directory"
 msgstr "Seçili dosya veya dizini yeniden adlandır"
 
-#: src/upload-button.tsx:88
+#: src/upload-button.tsx:112
 msgid "Replace"
 msgstr "Değiştir"
 
-#: src/upload-button.tsx:81
+#: src/upload-button.tsx:105
 msgid "Replace file $0?"
 msgstr "$0 dosyası değiştirilsin mi?"
 
@@ -546,7 +574,7 @@ msgstr "$0 dosyası değiştirilsin mi?"
 msgid "Save"
 msgstr "Kaydet"
 
-#: src/dialogs/permissions.tsx:380
+#: src/dialogs/permissions.tsx:399
 msgid "Security context"
 msgstr "Güvenlik bağlamı"
 
@@ -554,9 +582,13 @@ msgstr "Güvenlik bağlamı"
 msgid "Select all"
 msgstr "Tümünü seç"
 
-#: src/dialogs/permissions.tsx:392
+#: src/dialogs/permissions.tsx:411
 msgid "Set executable as program"
 msgstr "Çalıştırılabilir program olarak ayarla"
+
+#: src/dialogs/permissions.tsx:281
+msgid "Show all files"
+msgstr "Tüm dosyaları göster"
 
 #: src/files-card-body.tsx:511 src/header.tsx:286
 msgid "Show hidden items"
@@ -582,10 +614,6 @@ msgstr "Soket"
 msgid "Sort"
 msgstr "Sırala"
 
-#: src/upload-button.tsx:259
-msgid "Successfully uploaded file(s)"
-msgstr "Dosya(lar) başarıyla karşıya yüklendi"
-
 #: src/common.ts:43
 msgid "Symbolic link"
 msgstr "Sembolik bağlantı"
@@ -606,27 +634,31 @@ msgstr "Dosya disk üzerinde değişti"
 msgid "Unable to create bookmark directory"
 msgstr "Yer imi dizini oluşturulamıyor"
 
+#: src/upload-button.tsx:321
+msgid "Unable to move uploaded file to final destination"
+msgstr "Karşıya yüklenen dosya son hedefe taşınamıyor"
+
 #: src/files-breadcrumbs.tsx:124
 msgid "Unable to save bookmark file"
 msgstr "Yer imi dosyası kaydedilemiyor"
 
-#: src/upload-button.tsx:337
+#: src/upload-button.tsx:475
 msgid "Upload"
 msgstr "Karşıya yükle"
 
-#: src/upload-button.tsx:318
+#: src/upload-button.tsx:456
 msgid "Upload $0% completed"
 msgstr "Karşıya yükleme %$0 tamamlandı"
 
-#: src/upload-button.tsx:259
-msgid "Upload complete"
-msgstr "Karşıya yükleme tamamlandı"
-
-#: src/upload-button.tsx:242
+#: src/upload-button.tsx:320 src/upload-button.tsx:344
 msgid "Upload error"
 msgstr "Karşıya yükleme hatası"
 
-#: src/upload-button.tsx:282
+#: src/upload-button.tsx:70
+msgid "Uploaded as $0, $1"
+msgstr "$0, $1 olarak karşıya yüklendi"
+
+#: src/upload-button.tsx:420
 msgid "Uploads"
 msgstr "Yüklenenler"
 
@@ -658,6 +690,12 @@ msgstr "dosyalar"
 msgid "filesystem"
 msgstr "dosya sistemi"
 
+#~ msgid "Successfully uploaded file(s)"
+#~ msgstr "Dosya(lar) başarıyla karşıya yüklendi"
+
+#~ msgid "Upload complete"
+#~ msgstr "Karşıya yükleme tamamlandı"
+
 #~ msgid "$0 item"
 #~ msgid_plural "$0 items"
 #~ msgstr[0] "$0 öge"
@@ -673,9 +711,6 @@ msgstr "dosya sistemi"
 
 #~ msgid "Group permissions"
 #~ msgstr "Grup izinleri"
-
-#~ msgid "Other permissions"
-#~ msgstr "Diğer izinler"
 
 #~ msgid "Owner permissions"
 #~ msgstr "Sahibinin izinleri"

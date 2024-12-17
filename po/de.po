@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: starter-kit 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-04 03:23+0000\n"
+"POT-Creation-Date: 2024-12-17 03:22+0000\n"
 "PO-Revision-Date: 2024-11-24 12:38+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German <https://translate.fedoraproject.org/projects/cockpit-"
@@ -19,6 +19,12 @@ msgstr ""
 msgid "\"$0\" exists, not overwriting with paste."
 msgstr "\"$0\" existiert, es wird nicht mit Einfügen überschrieben."
 
+#: src/upload-button.tsx:66
+#, fuzzy
+#| msgid "files"
+msgid "$0 files"
+msgstr "Dateien"
+
 #: src/files-footer-detail.tsx:35
 msgid "$0 files selected"
 msgstr "$0 Dateien ausgewählt"
@@ -29,8 +35,7 @@ msgid_plural "$0 items are hidden"
 msgstr[0] "$0 Element ist verborgen"
 msgstr[1] "$0 Elemente sind verborgen"
 
-#. Translators: $0 represents a filename
-#: src/dialogs/permissions.tsx:277
+#: src/dialogs/permissions.tsx:295
 msgid "$0 permissions"
 msgstr "$0-Berechtigungen"
 
@@ -44,7 +49,7 @@ msgstr ""
 "durchsuchen, Dateien hoch- und herunterladen und deren Eigenschaften ändern. "
 "Es enthält auch einen einfachen Dateieditor."
 
-#: src/upload-button.tsx:97
+#: src/upload-button.tsx:121
 msgid ""
 "A file with the same name already exists in \"$0\". Replacing it will "
 "overwrite its content."
@@ -56,7 +61,7 @@ msgstr ""
 msgid "A-Z"
 msgstr "A-Z"
 
-#: src/dialogs/permissions.tsx:341
+#: src/dialogs/permissions.tsx:360
 msgid "Access"
 msgstr "Zugriff"
 
@@ -69,7 +74,7 @@ msgstr "Ausgewählten Eintrag aktivieren, Verzeichnis eingeben"
 msgid "Add bookmark"
 msgstr "Lesezeichen hinzufügen"
 
-#: src/upload-button.tsx:120
+#: src/upload-button.tsx:144
 msgid "Apply this action to all conflicting files"
 msgstr "Diese Aktion auf alle widersprüchlichen Dateien anwenden"
 
@@ -81,21 +86,22 @@ msgstr "Blockiere Gerät"
 msgid "Bookmarks"
 msgstr "Lesezeichen"
 
-#: src/dialogs/permissions.tsx:296 src/dialogs/create-file.tsx:162
+#: src/dialogs/permissions.tsx:315 src/dialogs/create-file.tsx:162
 #: src/dialogs/editor.tsx:211 src/dialogs/delete.tsx:91
-#: src/dialogs/rename.tsx:98 src/dialogs/mkdir.tsx:108 src/upload-button.tsx:91
+#: src/dialogs/rename.tsx:98 src/dialogs/mkdir.tsx:108
+#: src/upload-button.tsx:115
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: src/upload-button.tsx:301
+#: src/upload-button.tsx:439
 msgid "Cancel upload of $0"
 msgstr "Upload von $0 abbrechen"
 
-#: src/upload-button.tsx:239
+#: src/upload-button.tsx:341
 msgid "Cancelled"
 msgstr "Abgebrochen"
 
-#: src/upload-button.tsx:240
+#: src/upload-button.tsx:342
 msgid "Cancelled upload of $0"
 msgstr "Upload von $0 abgebrochen"
 
@@ -105,11 +111,17 @@ msgstr "Upload von $0 abgebrochen"
 msgid "Cannot create file in current directory"
 msgstr "Ausgewählte Datei oder ausgewähltes Verzeichnis kopieren"
 
-#: src/dialogs/permissions.tsx:287
+#: src/dialogs/permissions.tsx:306
 msgid "Change"
 msgstr "Ändern"
 
-#: src/dialogs/permissions.tsx:294
+#: src/upload-button.tsx:392
+#, fuzzy
+#| msgid "Other permissions"
+msgid "Change permissions"
+msgstr "Andere Berechtigungen"
+
+#: src/dialogs/permissions.tsx:313
 msgid "Change permissions for enclosed files"
 msgstr "Berechtigungen für enthaltene Dateien ändern"
 
@@ -129,7 +141,11 @@ msgstr "Schließen"
 msgid "Cockpit Files"
 msgstr "Cockpit-Dateien"
 
-#: src/menu.tsx:138 src/menu.tsx:183
+#: src/dialogs/permissions.tsx:280
+msgid "Collapse"
+msgstr ""
+
+#: src/menu.tsx:140 src/menu.tsx:185
 msgid "Copy"
 msgstr "Kopieren"
 
@@ -141,11 +157,11 @@ msgstr "Ausgewählte Datei oder ausgewähltes Verzeichnis kopieren"
 msgid "Create"
 msgstr "Erstellen"
 
-#: src/menu.tsx:93 src/dialogs/mkdir.tsx:92
+#: src/menu.tsx:95 src/dialogs/mkdir.tsx:92
 msgid "Create directory"
 msgstr "Verzeichnis erstellen"
 
-#: src/menu.tsx:98 src/dialogs/create-file.tsx:146
+#: src/menu.tsx:100 src/dialogs/create-file.tsx:146
 #, fuzzy
 #| msgid "Create"
 msgid "Create file"
@@ -155,7 +171,7 @@ msgstr "Erstellen"
 msgid "Create new directory"
 msgstr "Neues Verzeichnis erstellen"
 
-#: src/menu.tsx:155 src/menu.tsx:188 src/dialogs/delete.tsx:90
+#: src/menu.tsx:157 src/menu.tsx:190 src/dialogs/delete.tsx:90
 msgid "Delete"
 msgstr "Löschen"
 
@@ -227,7 +243,7 @@ msgstr "Als Raster anzeigen"
 msgid "Display as a list"
 msgstr "Als Liste anzeigen"
 
-#: src/menu.tsx:165
+#: src/menu.tsx:167
 msgid "Download"
 msgstr "Herunterladen"
 
@@ -240,7 +256,7 @@ msgstr "$0 bearbeiten"
 msgid "Edit path"
 msgstr "Pfad bearbeiten"
 
-#: src/menu.tsx:104 src/menu.tsx:144
+#: src/menu.tsx:106 src/menu.tsx:146 src/menu.tsx:204
 msgid "Edit permissions"
 msgstr "Berechtigungen bearbeiten"
 
@@ -251,6 +267,10 @@ msgstr "Bearbeiten"
 #: src/common.ts:29
 msgid "Execute-only"
 msgstr "Nur Ausführen"
+
+#: src/upload-button.tsx:280
+msgid "Failed"
+msgstr ""
 
 #: src/manifest.json:0
 msgid "File browser"
@@ -266,6 +286,12 @@ msgstr "Datei existiert"
 msgid "File name"
 msgstr "Neuer Name"
 
+#: src/upload-button.tsx:361
+#, fuzzy
+#| msgid "New name"
+msgid "File uploaded"
+msgstr "Neuer Name"
+
 #: src/common.ts:89
 msgid "Filename is the same as original name"
 msgstr "Der Dateiname ist derselbe wie der ursprüngliche Name"
@@ -273,6 +299,12 @@ msgstr "Der Dateiname ist derselbe wie der ursprüngliche Name"
 #: org.cockpit_project.files.metainfo.xml:5
 msgid "Files"
 msgstr "Dateien"
+
+#: src/upload-button.tsx:361
+#, fuzzy
+#| msgid "New name"
+msgid "Files uploaded"
+msgstr "Neuer Name"
 
 #: src/files-breadcrumbs.tsx:239
 msgid "Filesystem"
@@ -318,12 +350,12 @@ msgstr "Weitergehen"
 msgid "Go up a directory"
 msgstr "Ein Verzeichnis nach oben gehen"
 
-#: src/files-card-body.tsx:572 src/dialogs/permissions.tsx:325
+#: src/files-card-body.tsx:572 src/dialogs/permissions.tsx:344
 #: src/files-footer-detail.tsx:75
 msgid "Group"
 msgstr "Gruppe"
 
-#: src/dialogs/permissions.tsx:355
+#: src/dialogs/permissions.tsx:374
 msgid "Group access"
 msgstr "Gruppenzugriff"
 
@@ -339,7 +371,7 @@ msgstr ""
 msgid "Ignore"
 msgstr "Ignorieren"
 
-#: src/upload-button.tsx:90
+#: src/upload-button.tsx:114
 msgid "Keep original"
 msgstr "Original behalten"
 
@@ -363,7 +395,7 @@ msgstr "Am wenigsten zulässig"
 msgid "Manage your files"
 msgstr "Verwalten Sie Ihre Dateien"
 
-#: src/dialogs/permissions.tsx:278
+#: src/dialogs/permissions.tsx:274
 msgid "Missing type"
 msgstr ""
 
@@ -399,7 +431,7 @@ msgstr ""
 msgid "Navigation"
 msgstr "Navigation"
 
-#: src/upload-button.tsx:106
+#: src/upload-button.tsx:130
 msgid "New file"
 msgstr "Neue Datei"
 
@@ -423,17 +455,17 @@ msgstr "Keine passenden Ergebnisse"
 msgid "None"
 msgstr "Keine"
 
-#: src/menu.tsx:113 src/menu.tsx:174
+#: src/menu.tsx:115 src/menu.tsx:176
 #, fuzzy
 #| msgid "Open text file"
 msgid "Open in terminal"
 msgstr "Textdatei öffnen"
 
-#: src/menu.tsx:130
+#: src/menu.tsx:132
 msgid "Open text file"
 msgstr "Textdatei öffnen"
 
-#: src/upload-button.tsx:111
+#: src/upload-button.tsx:135
 msgid "Original file on server"
 msgstr "Originaldatei auf dem Server"
 
@@ -441,7 +473,7 @@ msgstr "Originaldatei auf dem Server"
 msgid "Others"
 msgstr "Andere"
 
-#: src/dialogs/permissions.tsx:367
+#: src/dialogs/permissions.tsx:386
 msgid "Others access"
 msgstr "Anderer Zugriff"
 
@@ -450,12 +482,12 @@ msgid "Overwrite"
 msgstr "Überschreiben"
 
 #: src/files-card-body.tsx:533 src/files-card-body.tsx:572
-#: src/dialogs/permissions.tsx:310 src/dialogs/create-file.tsx:199
+#: src/dialogs/permissions.tsx:329 src/dialogs/create-file.tsx:199
 #: src/header.tsx:98 src/files-footer-detail.tsx:75
 msgid "Owner"
 msgstr "Eigentümer"
 
-#: src/dialogs/permissions.tsx:343
+#: src/dialogs/permissions.tsx:362
 msgid "Owner access"
 msgstr "Eigentümerzugriff"
 
@@ -467,11 +499,11 @@ msgstr "Eigentümer aufsteigend"
 msgid "Owner descending"
 msgstr "Eigentümer absteigend"
 
-#: src/dialogs/permissions.tsx:309
+#: src/dialogs/permissions.tsx:328
 msgid "Ownership"
 msgstr "Eigentümerschaft"
 
-#: src/menu.tsx:86
+#: src/menu.tsx:88
 msgid "Paste"
 msgstr "Einfügen"
 
@@ -492,6 +524,12 @@ msgstr "Berechtigungen"
 #: src/files-card-body.tsx:538 src/header.tsx:109
 msgid "Permissions"
 msgstr "Berechtigungen"
+
+#: src/dialogs/permissions.tsx:296
+#, fuzzy
+#| msgid "Change permissions for enclosed files"
+msgid "Permissions for $0 files"
+msgstr "Berechtigungen für enthaltene Dateien ändern"
 
 #: src/common.ts:33
 msgid "Read and execute"
@@ -521,7 +559,7 @@ msgstr "Neu laden"
 msgid "Remove current directory"
 msgstr "Aktuelles Verzeichnis entfernen"
 
-#: src/menu.tsx:149 src/dialogs/rename.tsx:89
+#: src/menu.tsx:151 src/dialogs/rename.tsx:89
 msgid "Rename"
 msgstr "Umbenennen"
 
@@ -533,11 +571,11 @@ msgstr "$0 umbenennen?"
 msgid "Rename selected file or directory"
 msgstr "Ausgewählte Datei oder ausgewähltes Verzeichnis umbenennen"
 
-#: src/upload-button.tsx:88
+#: src/upload-button.tsx:112
 msgid "Replace"
 msgstr "Ersetzen"
 
-#: src/upload-button.tsx:81
+#: src/upload-button.tsx:105
 msgid "Replace file $0?"
 msgstr "Datei $0 ersetzen?"
 
@@ -545,7 +583,7 @@ msgstr "Datei $0 ersetzen?"
 msgid "Save"
 msgstr "Speichern"
 
-#: src/dialogs/permissions.tsx:380
+#: src/dialogs/permissions.tsx:399
 msgid "Security context"
 msgstr "Sicherheitskontext"
 
@@ -553,9 +591,13 @@ msgstr "Sicherheitskontext"
 msgid "Select all"
 msgstr "Alles auswählen"
 
-#: src/dialogs/permissions.tsx:392
+#: src/dialogs/permissions.tsx:411
 msgid "Set executable as program"
 msgstr "Ausführbare Datei als Programm festlegen"
+
+#: src/dialogs/permissions.tsx:281
+msgid "Show all files"
+msgstr ""
 
 #: src/files-card-body.tsx:511 src/header.tsx:286
 msgid "Show hidden items"
@@ -581,10 +623,6 @@ msgstr "Socket"
 msgid "Sort"
 msgstr "Sortieren"
 
-#: src/upload-button.tsx:259
-msgid "Successfully uploaded file(s)"
-msgstr "Erfolgreich hochgeladene Datei(en)"
-
 #: src/common.ts:43
 msgid "Symbolic link"
 msgstr "Symbolische Verknüpfung"
@@ -605,27 +643,31 @@ msgstr "Die Datei hat sich auf der Festplatte geändert"
 msgid "Unable to create bookmark directory"
 msgstr "Lesezeichenverzeichnis kann nicht erstellt werden"
 
+#: src/upload-button.tsx:321
+msgid "Unable to move uploaded file to final destination"
+msgstr ""
+
 #: src/files-breadcrumbs.tsx:124
 msgid "Unable to save bookmark file"
 msgstr "Lesezeichendatei kann nicht gespeichert werden"
 
-#: src/upload-button.tsx:337
+#: src/upload-button.tsx:475
 msgid "Upload"
 msgstr "Hochladen"
 
-#: src/upload-button.tsx:318
+#: src/upload-button.tsx:456
 msgid "Upload $0% completed"
 msgstr "Hochladen $0% abgeschlossen"
 
-#: src/upload-button.tsx:259
-msgid "Upload complete"
-msgstr "Hochladen abgeschlossen"
-
-#: src/upload-button.tsx:242
+#: src/upload-button.tsx:320 src/upload-button.tsx:344
 msgid "Upload error"
 msgstr "Hochladefehler"
 
-#: src/upload-button.tsx:282
+#: src/upload-button.tsx:70
+msgid "Uploaded as $0, $1"
+msgstr ""
+
+#: src/upload-button.tsx:420
 msgid "Uploads"
 msgstr ""
 
@@ -657,6 +699,12 @@ msgstr "Dateien"
 msgid "filesystem"
 msgstr "Dateisystem"
 
+#~ msgid "Successfully uploaded file(s)"
+#~ msgstr "Erfolgreich hochgeladene Datei(en)"
+
+#~ msgid "Upload complete"
+#~ msgstr "Hochladen abgeschlossen"
+
 #~ msgid "$0 item"
 #~ msgid_plural "$0 items"
 #~ msgstr[0] "$0 Element"
@@ -672,9 +720,6 @@ msgstr "Dateisystem"
 
 #~ msgid "Group permissions"
 #~ msgstr "Gruppenberechtigungen"
-
-#~ msgid "Other permissions"
-#~ msgstr "Andere Berechtigungen"
 
 #~ msgid "Owner permissions"
 #~ msgstr "Eigentümerberechtigungen"

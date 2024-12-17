@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-04 03:23+0000\n"
-"PO-Revision-Date: 2024-11-26 04:38+0000\n"
+"POT-Creation-Date: 2024-12-17 03:22+0000\n"
+"PO-Revision-Date: 2024-12-17 03:38+0000\n"
 "Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
 "memory@weblate.org>\n"
 "Language-Team: Swedish <https://translate.fedoraproject.org/projects/cockpit-"
@@ -25,11 +25,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1\n"
-"X-Generator: Weblate 5.8.2\n"
+"X-Generator: Weblate 5.8.4\n"
 
 #: src/menu.tsx:58
 msgid "\"$0\" exists, not overwriting with paste."
 msgstr "\"$0\" existerar, skriver inte över med klistra in."
+
+#: src/upload-button.tsx:66
+msgid "$0 files"
+msgstr "$0 filer"
 
 #: src/files-footer-detail.tsx:35
 msgid "$0 files selected"
@@ -41,8 +45,7 @@ msgid_plural "$0 items are hidden"
 msgstr[0] "($0 objekt är dolt)"
 msgstr[1] "($0 objekt är dolda)"
 
-#. Translators: $0 represents a filename
-#: src/dialogs/permissions.tsx:277
+#: src/dialogs/permissions.tsx:295
 msgid "$0 permissions"
 msgstr "$0 behörigheter"
 
@@ -56,7 +59,7 @@ msgstr ""
 "ladda upp och ladda ner filer och ändra deras egenskaper. Den innehåller "
 "också en enkel filredigerare."
 
-#: src/upload-button.tsx:97
+#: src/upload-button.tsx:121
 msgid ""
 "A file with the same name already exists in \"$0\". Replacing it will "
 "overwrite its content."
@@ -68,7 +71,7 @@ msgstr ""
 msgid "A-Z"
 msgstr "A-Z"
 
-#: src/dialogs/permissions.tsx:341
+#: src/dialogs/permissions.tsx:360
 msgid "Access"
 msgstr "Åtkomst"
 
@@ -81,7 +84,7 @@ msgstr "Aktivera valt objekt, gå in i katalog"
 msgid "Add bookmark"
 msgstr "Lägg till bokmärke"
 
-#: src/upload-button.tsx:120
+#: src/upload-button.tsx:144
 msgid "Apply this action to all conflicting files"
 msgstr "Tillämpa den här åtgärden på alla konfliktfiler"
 
@@ -93,21 +96,22 @@ msgstr "Blockenhet"
 msgid "Bookmarks"
 msgstr "Bokmärken"
 
-#: src/dialogs/permissions.tsx:296 src/dialogs/create-file.tsx:162
+#: src/dialogs/permissions.tsx:315 src/dialogs/create-file.tsx:162
 #: src/dialogs/editor.tsx:211 src/dialogs/delete.tsx:91
-#: src/dialogs/rename.tsx:98 src/dialogs/mkdir.tsx:108 src/upload-button.tsx:91
+#: src/dialogs/rename.tsx:98 src/dialogs/mkdir.tsx:108
+#: src/upload-button.tsx:115
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: src/upload-button.tsx:301
+#: src/upload-button.tsx:439
 msgid "Cancel upload of $0"
 msgstr "Avbryt uppladdning av $0"
 
-#: src/upload-button.tsx:239
+#: src/upload-button.tsx:341
 msgid "Cancelled"
 msgstr "Avbruten"
 
-#: src/upload-button.tsx:240
+#: src/upload-button.tsx:342
 msgid "Cancelled upload of $0"
 msgstr "Avbruten uppladdning av $0"
 
@@ -115,11 +119,15 @@ msgstr "Avbruten uppladdning av $0"
 msgid "Cannot create file in current directory"
 msgstr "Kan inte skapa fil i nuvarande katalog"
 
-#: src/dialogs/permissions.tsx:287
+#: src/dialogs/permissions.tsx:306
 msgid "Change"
 msgstr "Ändra"
 
-#: src/dialogs/permissions.tsx:294
+#: src/upload-button.tsx:392
+msgid "Change permissions"
+msgstr "Ändra behörigheter"
+
+#: src/dialogs/permissions.tsx:313
 msgid "Change permissions for enclosed files"
 msgstr "Ändra behörigheter för bifogade filer"
 
@@ -139,7 +147,11 @@ msgstr "Stäng"
 msgid "Cockpit Files"
 msgstr "Cockpit filer"
 
-#: src/menu.tsx:138 src/menu.tsx:183
+#: src/dialogs/permissions.tsx:280
+msgid "Collapse"
+msgstr "Fäll ihop"
+
+#: src/menu.tsx:140 src/menu.tsx:185
 msgid "Copy"
 msgstr "Kopiera"
 
@@ -151,11 +163,11 @@ msgstr "Kopiera vald fil eller katalog"
 msgid "Create"
 msgstr "Skapa"
 
-#: src/menu.tsx:93 src/dialogs/mkdir.tsx:92
+#: src/menu.tsx:95 src/dialogs/mkdir.tsx:92
 msgid "Create directory"
 msgstr "Skapa katalog"
 
-#: src/menu.tsx:98 src/dialogs/create-file.tsx:146
+#: src/menu.tsx:100 src/dialogs/create-file.tsx:146
 msgid "Create file"
 msgstr "Skapa fil"
 
@@ -163,7 +175,7 @@ msgstr "Skapa fil"
 msgid "Create new directory"
 msgstr "Skapa ny katalog"
 
-#: src/menu.tsx:155 src/menu.tsx:188 src/dialogs/delete.tsx:90
+#: src/menu.tsx:157 src/menu.tsx:190 src/dialogs/delete.tsx:90
 msgid "Delete"
 msgstr "Ta bort"
 
@@ -235,7 +247,7 @@ msgstr "Visa som ett rutnät"
 msgid "Display as a list"
 msgstr "Visa som en lista"
 
-#: src/menu.tsx:165
+#: src/menu.tsx:167
 msgid "Download"
 msgstr "Hämta"
 
@@ -248,7 +260,7 @@ msgstr "Redigera $0"
 msgid "Edit path"
 msgstr "Redigera sökväg"
 
-#: src/menu.tsx:104 src/menu.tsx:144
+#: src/menu.tsx:106 src/menu.tsx:146 src/menu.tsx:204
 msgid "Edit permissions"
 msgstr "Redigera behörigheter"
 
@@ -259,6 +271,10 @@ msgstr "Redigerar"
 #: src/common.ts:29
 msgid "Execute-only"
 msgstr "Exekvering-endast"
+
+#: src/upload-button.tsx:280
+msgid "Failed"
+msgstr "Misslyckades"
 
 #: src/manifest.json:0
 msgid "File browser"
@@ -272,6 +288,10 @@ msgstr "Fil existerar"
 msgid "File name"
 msgstr "Filnamn"
 
+#: src/upload-button.tsx:361
+msgid "File uploaded"
+msgstr "Fil uppladdad"
+
 #: src/common.ts:89
 msgid "Filename is the same as original name"
 msgstr "Filnamn är samma som originalnamn"
@@ -279,6 +299,10 @@ msgstr "Filnamn är samma som originalnamn"
 #: org.cockpit_project.files.metainfo.xml:5
 msgid "Files"
 msgstr "Filer"
+
+#: src/upload-button.tsx:361
+msgid "Files uploaded"
+msgstr "Filer uppladdade"
 
 #: src/files-breadcrumbs.tsx:239
 msgid "Filesystem"
@@ -324,12 +348,12 @@ msgstr "Gå framåt"
 msgid "Go up a directory"
 msgstr "Gå upp en katalog"
 
-#: src/files-card-body.tsx:572 src/dialogs/permissions.tsx:325
+#: src/files-card-body.tsx:572 src/dialogs/permissions.tsx:344
 #: src/files-footer-detail.tsx:75
 msgid "Group"
 msgstr "Grupp"
 
-#: src/dialogs/permissions.tsx:355
+#: src/dialogs/permissions.tsx:374
 msgid "Group access"
 msgstr "Gruppåtkomst"
 
@@ -345,7 +369,7 @@ msgstr "Hem"
 msgid "Ignore"
 msgstr "Ignorera"
 
-#: src/upload-button.tsx:90
+#: src/upload-button.tsx:114
 msgid "Keep original"
 msgstr "Behåll original"
 
@@ -369,7 +393,7 @@ msgstr "Minst tillåtande"
 msgid "Manage your files"
 msgstr "Hantera dina filer"
 
-#: src/dialogs/permissions.tsx:278
+#: src/dialogs/permissions.tsx:274
 msgid "Missing type"
 msgstr "Saknar typ"
 
@@ -405,7 +429,7 @@ msgstr "Namngivet rör"
 msgid "Navigation"
 msgstr "Navigering"
 
-#: src/upload-button.tsx:106
+#: src/upload-button.tsx:130
 msgid "New file"
 msgstr "Ny fil"
 
@@ -429,15 +453,15 @@ msgstr "Inga matchande resultat"
 msgid "None"
 msgstr "Inga"
 
-#: src/menu.tsx:113 src/menu.tsx:174
+#: src/menu.tsx:115 src/menu.tsx:176
 msgid "Open in terminal"
 msgstr "Öppna i terminal"
 
-#: src/menu.tsx:130
+#: src/menu.tsx:132
 msgid "Open text file"
 msgstr "Öppna en textfil"
 
-#: src/upload-button.tsx:111
+#: src/upload-button.tsx:135
 msgid "Original file on server"
 msgstr "Original fil på server"
 
@@ -445,7 +469,7 @@ msgstr "Original fil på server"
 msgid "Others"
 msgstr "Andra"
 
-#: src/dialogs/permissions.tsx:367
+#: src/dialogs/permissions.tsx:386
 msgid "Others access"
 msgstr "Andra tillgång"
 
@@ -454,12 +478,12 @@ msgid "Overwrite"
 msgstr "Skriv över"
 
 #: src/files-card-body.tsx:533 src/files-card-body.tsx:572
-#: src/dialogs/permissions.tsx:310 src/dialogs/create-file.tsx:199
+#: src/dialogs/permissions.tsx:329 src/dialogs/create-file.tsx:199
 #: src/header.tsx:98 src/files-footer-detail.tsx:75
 msgid "Owner"
 msgstr "Ägare"
 
-#: src/dialogs/permissions.tsx:343
+#: src/dialogs/permissions.tsx:362
 msgid "Owner access"
 msgstr "Ägare tillgång"
 
@@ -471,11 +495,11 @@ msgstr "Ägare ökande"
 msgid "Owner descending"
 msgstr "Ägare minskande"
 
-#: src/dialogs/permissions.tsx:309
+#: src/dialogs/permissions.tsx:328
 msgid "Ownership"
 msgstr "Ägarskap"
 
-#: src/menu.tsx:86
+#: src/menu.tsx:88
 msgid "Paste"
 msgstr "Klistra in"
 
@@ -494,6 +518,10 @@ msgstr "Åtkomst nekas"
 #: src/files-card-body.tsx:538 src/header.tsx:109
 msgid "Permissions"
 msgstr "Behörigheter"
+
+#: src/dialogs/permissions.tsx:296
+msgid "Permissions for $0 files"
+msgstr "Behörigheter för $0 filer"
 
 #: src/common.ts:33
 msgid "Read and execute"
@@ -523,7 +551,7 @@ msgstr "Ladda om"
 msgid "Remove current directory"
 msgstr "Ta bort aktuell katalog"
 
-#: src/menu.tsx:149 src/dialogs/rename.tsx:89
+#: src/menu.tsx:151 src/dialogs/rename.tsx:89
 msgid "Rename"
 msgstr "Byt namn"
 
@@ -535,11 +563,11 @@ msgstr "Byt namn på $0?"
 msgid "Rename selected file or directory"
 msgstr "Byt namn på vald fil eller katalog"
 
-#: src/upload-button.tsx:88
+#: src/upload-button.tsx:112
 msgid "Replace"
 msgstr "Ersätt"
 
-#: src/upload-button.tsx:81
+#: src/upload-button.tsx:105
 msgid "Replace file $0?"
 msgstr "Ersätt fil $0?"
 
@@ -547,7 +575,7 @@ msgstr "Ersätt fil $0?"
 msgid "Save"
 msgstr "Spara"
 
-#: src/dialogs/permissions.tsx:380
+#: src/dialogs/permissions.tsx:399
 msgid "Security context"
 msgstr "Säkerhetskontext"
 
@@ -555,9 +583,13 @@ msgstr "Säkerhetskontext"
 msgid "Select all"
 msgstr "Välj alla"
 
-#: src/dialogs/permissions.tsx:392
+#: src/dialogs/permissions.tsx:411
 msgid "Set executable as program"
 msgstr "Ställ in körbar fil som program"
+
+#: src/dialogs/permissions.tsx:281
+msgid "Show all files"
+msgstr "Visa alla filer"
 
 #: src/files-card-body.tsx:511 src/header.tsx:286
 msgid "Show hidden items"
@@ -583,10 +615,6 @@ msgstr "Uttag"
 msgid "Sort"
 msgstr "Sortera"
 
-#: src/upload-button.tsx:259
-msgid "Successfully uploaded file(s)"
-msgstr "Fil(er) som har laddats upp framgångsrikt"
-
 #: src/common.ts:43
 msgid "Symbolic link"
 msgstr "Symbolisk länk"
@@ -607,27 +635,31 @@ msgstr "Filen har ändrats på disken"
 msgid "Unable to create bookmark directory"
 msgstr "Kan inte skapa en bokmärkeskatalog"
 
+#: src/upload-button.tsx:321
+msgid "Unable to move uploaded file to final destination"
+msgstr "Det gick inte att flytta uppladdad fil till slutdestinationen"
+
 #: src/files-breadcrumbs.tsx:124
 msgid "Unable to save bookmark file"
 msgstr "Kan inte spara bokmärkesfilen"
 
-#: src/upload-button.tsx:337
+#: src/upload-button.tsx:475
 msgid "Upload"
 msgstr "Ladda upp"
 
-#: src/upload-button.tsx:318
+#: src/upload-button.tsx:456
 msgid "Upload $0% completed"
 msgstr "Uppladdning $0% slutförd"
 
-#: src/upload-button.tsx:259
-msgid "Upload complete"
-msgstr "Uppladdningen har slutförts"
-
-#: src/upload-button.tsx:242
+#: src/upload-button.tsx:320 src/upload-button.tsx:344
 msgid "Upload error"
 msgstr "Uppladdningsfel"
 
-#: src/upload-button.tsx:282
+#: src/upload-button.tsx:70
+msgid "Uploaded as $0, $1"
+msgstr "Uppladdad som $0,$1"
+
+#: src/upload-button.tsx:420
 msgid "Uploads"
 msgstr "Uppladdningar"
 
@@ -659,6 +691,12 @@ msgstr "filer"
 msgid "filesystem"
 msgstr "filsystem"
 
+#~ msgid "Successfully uploaded file(s)"
+#~ msgstr "Fil(er) som har laddats upp framgångsrikt"
+
+#~ msgid "Upload complete"
+#~ msgstr "Uppladdningen har slutförts"
+
 #~ msgid "$0 item"
 #~ msgid_plural "$0 items"
 #~ msgstr[0] "$0 objekt"
@@ -674,9 +712,6 @@ msgstr "filsystem"
 
 #~ msgid "Group permissions"
 #~ msgstr "Gruppbehörigheter"
-
-#~ msgid "Other permissions"
-#~ msgstr "Andra behörigheter"
 
 #~ msgid "Owner permissions"
 #~ msgstr "Ägare behörigheter"
