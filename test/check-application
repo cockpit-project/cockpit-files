@@ -1538,12 +1538,18 @@ class TestFiles(testlib.MachineCase):
         b.wait_not_present(".pf-v5-c-modal-box")
 
         # Files with any executable bit set, get a +x in all modes when +X is passed.
-        self.assertEqual(self.stat("%A", f"{change_enclosed_dir}/Finance"), "drwxr-xr-x")
-        self.assertEqual(self.stat("%A", f"{change_enclosed_dir}/Finance/program"), "-rwxr-xr-x")
-        self.assertEqual(self.stat("%A", f"{change_enclosed_dir}/Finance/accounts.txt"), "-rw-r--r--")
-        self.assertEqual(self.stat("%A", f"{change_enclosed_dir}/Work"), "drwxr-xr-x")
-        self.assertEqual(self.stat("%A", f"{change_enclosed_dir}/Work/myvim"), "-rwxr-xr-x")
-        self.assertEqual(self.stat("%A", f"{change_enclosed_dir}/Work/notes.txt"), "-rw-r--r--")
+        self.assertEqual(self.stat("%A,%U,%G",
+                                   f"{change_enclosed_dir}/Finance"), "drwxr-xr-x,admin,admin")
+        self.assertEqual(self.stat("%A,%U,%G",
+                                   f"{change_enclosed_dir}/Finance/program"), "-rwxr-xr-x,admin,admin")
+        self.assertEqual(self.stat("%A,%U,%G",
+                                   f"{change_enclosed_dir}/Finance/accounts.txt"), "-rw-r--r--,admin,admin")
+        self.assertEqual(self.stat("%A,%U,%G",
+                                   f"{change_enclosed_dir}/Work"), "drwxr-xr-x,admin,admin")
+        self.assertEqual(self.stat("%A,%U,%G",
+                                   f"{change_enclosed_dir}/Work/myvim"), "-rwxr-xr-x,admin,admin")
+        self.assertEqual(self.stat("%A,%U,%G",
+                                   f"{change_enclosed_dir}/Work/notes.txt"), "-rw-r--r--,admin,admin")
 
         # Via kebab it selects cwd
         b.mouse("[data-item='Documents']", "dblclick")
@@ -1554,18 +1560,25 @@ class TestFiles(testlib.MachineCase):
         b.click("button:contains('Edit permissions')")
         b.wait_in_text(".pf-v5-c-modal-box__title-text", "Documents")
 
+        b.select_from_dropdown("#edit-permissions-group", "root")
         b.select_from_dropdown("#edit-permissions-owner-access", "read-only")
         b.select_from_dropdown("#edit-permissions-group-access", "no-access")
         b.select_from_dropdown("#edit-permissions-other-access", "no-access")
         b.click(".pf-v5-c-modal-box button.pf-m-secondary")
         b.wait_not_present(".pf-v5-c-modal-box")
 
-        self.assertEqual(self.stat("%A", f"{change_enclosed_dir}/Finance"), "dr-x------")
-        self.assertEqual(self.stat("%A", f"{change_enclosed_dir}/Finance/program"), "-r-x------")
-        self.assertEqual(self.stat("%A", f"{change_enclosed_dir}/Finance/accounts.txt"), "-r--------")
-        self.assertEqual(self.stat("%A", f"{change_enclosed_dir}/Work"), "dr-x------")
-        self.assertEqual(self.stat("%A", f"{change_enclosed_dir}/Work/myvim"), "-r-x------")
-        self.assertEqual(self.stat("%A", f"{change_enclosed_dir}/Work/notes.txt"), "-r--------")
+        self.assertEqual(self.stat("%A,%U,%G",
+                                   f"{change_enclosed_dir}/Finance"), "dr-x------,admin,root")
+        self.assertEqual(self.stat("%A,%U,%G",
+                                   f"{change_enclosed_dir}/Finance/program"), "-r-x------,admin,root")
+        self.assertEqual(self.stat("%A,%U,%G",
+                                   f"{change_enclosed_dir}/Finance/accounts.txt"), "-r--------,admin,root")
+        self.assertEqual(self.stat("%A,%U,%G",
+                                   f"{change_enclosed_dir}/Work"), "dr-x------,admin,root")
+        self.assertEqual(self.stat("%A,%U,%G",
+                                   f"{change_enclosed_dir}/Work/myvim"), "-r-x------,admin,root")
+        self.assertEqual(self.stat("%A,%U,%G",
+                                   f"{change_enclosed_dir}/Work/notes.txt"), "-r--------,admin,root")
 
         b.click("li[data-location='/home/admin'] a")
         self.assert_last_breadcrumb("admin")
