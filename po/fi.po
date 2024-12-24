@@ -14,9 +14,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-17 03:22+0000\n"
-"PO-Revision-Date: 2024-12-15 17:38+0000\n"
-"Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
+"POT-Creation-Date: 2024-12-20 03:04+0000\n"
+"PO-Revision-Date: 2024-12-20 07:38+0000\n"
+"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
+"memory@weblate.org>\n"
 "Language-Team: Finnish <https://translate.fedoraproject.org/projects/cockpit-"
 "files/cockpit-files/fi/>\n"
 "Language: fi\n"
@@ -24,17 +25,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1\n"
-"X-Generator: Weblate 5.8.4\n"
+"X-Generator: Weblate 5.9.1\n"
 
 #: src/menu.tsx:58
 msgid "\"$0\" exists, not overwriting with paste."
 msgstr "\"$0\" on olemassa, eikä sitä korvata liittämällä."
 
-#: src/upload-button.tsx:66
-#, fuzzy
-#| msgid "files"
+#: src/upload-button.tsx:67
 msgid "$0 files"
-msgstr "tiedostot"
+msgstr "$0 tiedostoa"
 
 #: src/files-footer-detail.tsx:35
 msgid "$0 files selected"
@@ -46,11 +45,9 @@ msgid_plural "$0 items are hidden"
 msgstr[0] "$0 kohde on piilotettu"
 msgstr[1] "$0 kohdetta on piilotettu"
 
-#: src/dialogs/permissions.tsx:295
-#, fuzzy
-#| msgid "“$0” permissions"
+#: src/dialogs/permissions.tsx:299
 msgid "$0 permissions"
-msgstr "\"$0\" käyttöoikeudet"
+msgstr "$0 käyttöoikeutta"
 
 #: org.cockpit_project.files.metainfo.xml:8
 msgid ""
@@ -58,8 +55,11 @@ msgid ""
 "download files, and change their properties. It also includes a simple file "
 "editor."
 msgstr ""
+"Cockpitin tiedostojärjestelmän käyttöliittymä. Voit selata hakemistoja, "
+"ulosladata ja ladata tiedostoja ja muuttaa niiden ominaisuuksia. Se sisältää "
+"myös yksinkertaisen tiedostomuokkaimen."
 
-#: src/upload-button.tsx:121
+#: src/upload-button.tsx:122
 msgid ""
 "A file with the same name already exists in \"$0\". Replacing it will "
 "overwrite its content."
@@ -71,20 +71,20 @@ msgstr ""
 msgid "A-Z"
 msgstr "A-Z"
 
-#: src/dialogs/permissions.tsx:360
+#: src/dialogs/permissions.tsx:364
 msgid "Access"
 msgstr "Pääsy"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:57
 #: src/dialogs/keyboardShortcutsHelp.tsx:63
 msgid "Activate selected item, enter directory"
-msgstr ""
+msgstr "Aktivoi valittu kohde, siirry hakemistoon"
 
 #: src/files-breadcrumbs.tsx:147
 msgid "Add bookmark"
 msgstr "Lisää kirjanmerkki"
 
-#: src/upload-button.tsx:144
+#: src/upload-button.tsx:145
 msgid "Apply this action to all conflicting files"
 msgstr "Käytä tätä toimintoa kaikkiin ristiriitaisiin tiedostoihin"
 
@@ -96,14 +96,14 @@ msgstr "Lohkolaite"
 msgid "Bookmarks"
 msgstr "Kirjanmerkit"
 
-#: src/dialogs/permissions.tsx:315 src/dialogs/create-file.tsx:162
+#: src/dialogs/permissions.tsx:319 src/dialogs/create-file.tsx:162
 #: src/dialogs/editor.tsx:211 src/dialogs/delete.tsx:91
 #: src/dialogs/rename.tsx:98 src/dialogs/mkdir.tsx:108
-#: src/upload-button.tsx:115
+#: src/upload-button.tsx:116
 msgid "Cancel"
 msgstr "Peru"
 
-#: src/upload-button.tsx:439
+#: src/upload-button.tsx:458
 msgid "Cancel upload of $0"
 msgstr "Peru $0:n uloslataus"
 
@@ -119,19 +119,21 @@ msgstr "$0:n uloslataus peruttu"
 msgid "Cannot create file in current directory"
 msgstr "Nykyiseen hakemistoon ei voi luoda tiedostoa"
 
-#: src/dialogs/permissions.tsx:306
+#: src/files-folder-view.tsx:165
+msgid "Cannot drop files, another upload is already in progress"
+msgstr "Tiedostoja ei voi pudottaa, toinen uloslataus on jo käynnissä"
+
+#: src/dialogs/permissions.tsx:310
 msgid "Change"
 msgstr "Vaihda"
 
 #: src/upload-button.tsx:392
-#, fuzzy
-#| msgid "Other permissions"
 msgid "Change permissions"
-msgstr "Muut käyttöoikeudet"
+msgstr "Muuta käyttöoikeuksia"
 
-#: src/dialogs/permissions.tsx:313
+#: src/dialogs/permissions.tsx:317
 msgid "Change permissions for enclosed files"
-msgstr ""
+msgstr "Muuta suljettujen tiedostojen käyttöoikeuksia"
 
 #: src/common.ts:40
 msgid "Character device"
@@ -149,9 +151,9 @@ msgstr "Sulje"
 msgid "Cockpit Files"
 msgstr "Cockpit-tiedostot"
 
-#: src/dialogs/permissions.tsx:280
+#: src/dialogs/permissions.tsx:284
 msgid "Collapse"
-msgstr ""
+msgstr "Romahda"
 
 #: src/menu.tsx:140 src/menu.tsx:185
 msgid "Copy"
@@ -253,6 +255,10 @@ msgstr "Näytä luettelona"
 msgid "Download"
 msgstr "Lataus"
 
+#: src/files-folder-view.tsx:157
+msgid "Drop files to upload"
+msgstr "Pudota ulosladattavat tiedostot"
+
 #. Translators: This is the title of a modal dialog.  $0 represents a filename.
 #: src/dialogs/editor.tsx:170
 msgid "Edit $0"
@@ -276,7 +282,7 @@ msgstr "Vain suoritettavaksi"
 
 #: src/upload-button.tsx:280
 msgid "Failed"
-msgstr ""
+msgstr "Epäonnistui"
 
 #: src/manifest.json:0
 msgid "File browser"
@@ -291,10 +297,8 @@ msgid "File name"
 msgstr "Tiedostonimi"
 
 #: src/upload-button.tsx:361
-#, fuzzy
-#| msgid "File name"
 msgid "File uploaded"
-msgstr "Tiedostonimi"
+msgstr "Tiedosto ulosladattu"
 
 #: src/common.ts:89
 msgid "Filename is the same as original name"
@@ -305,10 +309,8 @@ msgid "Files"
 msgstr "Tiedostot"
 
 #: src/upload-button.tsx:361
-#, fuzzy
-#| msgid "File name"
 msgid "Files uploaded"
-msgstr "Tiedostonimi"
+msgstr "Tiedostot ulosladattu"
 
 #: src/files-breadcrumbs.tsx:239
 msgid "Filesystem"
@@ -354,12 +356,12 @@ msgstr "Siirry eteenpäin"
 msgid "Go up a directory"
 msgstr "Siirry yksi hakemisto ylös"
 
-#: src/files-card-body.tsx:572 src/dialogs/permissions.tsx:344
+#: src/files-card-body.tsx:572 src/dialogs/permissions.tsx:348
 #: src/files-footer-detail.tsx:75
 msgid "Group"
 msgstr "Ryhmä"
 
-#: src/dialogs/permissions.tsx:374
+#: src/dialogs/permissions.tsx:378
 msgid "Group access"
 msgstr "Ryhmään pääsy"
 
@@ -375,7 +377,7 @@ msgstr "Koti"
 msgid "Ignore"
 msgstr "Ohita"
 
-#: src/upload-button.tsx:114
+#: src/upload-button.tsx:115
 msgid "Keep original"
 msgstr "Säilytä alkuperäinen"
 
@@ -399,9 +401,9 @@ msgstr "Vähiten salliva"
 msgid "Manage your files"
 msgstr "Hallitse tiedostojasi"
 
-#: src/dialogs/permissions.tsx:274
+#: src/dialogs/permissions.tsx:278
 msgid "Missing type"
-msgstr ""
+msgstr "Puuttuva tyyppi"
 
 #: src/files-card-body.tsx:528 src/header.tsx:87
 msgid "Modified"
@@ -435,7 +437,7 @@ msgstr "Nimetty putki"
 msgid "Navigation"
 msgstr "Liikkuminen"
 
-#: src/upload-button.tsx:130
+#: src/upload-button.tsx:131
 msgid "New file"
 msgstr "Uusi tiedosto"
 
@@ -447,7 +449,7 @@ msgstr "Uusi tiedostonimi"
 msgid "New name"
 msgstr "Uusi nimi"
 
-#: src/dialogs/permissions.tsx:230
+#: src/dialogs/permissions.tsx:234
 msgid "No access"
 msgstr "Ei pääsyä"
 
@@ -467,7 +469,7 @@ msgstr "Avaa päätteessä"
 msgid "Open text file"
 msgstr "Avaa tekstitiedosto"
 
-#: src/upload-button.tsx:135
+#: src/upload-button.tsx:136
 msgid "Original file on server"
 msgstr "Alkuperäinen tiedosto palvelimella"
 
@@ -475,7 +477,7 @@ msgstr "Alkuperäinen tiedosto palvelimella"
 msgid "Others"
 msgstr "Muut"
 
-#: src/dialogs/permissions.tsx:386
+#: src/dialogs/permissions.tsx:390
 msgid "Others access"
 msgstr "Muiden pääsy"
 
@@ -484,12 +486,12 @@ msgid "Overwrite"
 msgstr "Korvaa"
 
 #: src/files-card-body.tsx:533 src/files-card-body.tsx:572
-#: src/dialogs/permissions.tsx:329 src/dialogs/create-file.tsx:199
+#: src/dialogs/permissions.tsx:333 src/dialogs/create-file.tsx:199
 #: src/header.tsx:98 src/files-footer-detail.tsx:75
 msgid "Owner"
 msgstr "Omistaja"
 
-#: src/dialogs/permissions.tsx:362
+#: src/dialogs/permissions.tsx:366
 msgid "Owner access"
 msgstr "Omistajan pääsy"
 
@@ -501,7 +503,7 @@ msgstr "Omistaja nouseva"
 msgid "Owner descending"
 msgstr "Omistaja laskeva"
 
-#: src/dialogs/permissions.tsx:328
+#: src/dialogs/permissions.tsx:332
 msgid "Ownership"
 msgstr "Omistajuus"
 
@@ -525,17 +527,15 @@ msgstr "Käyttö estetty"
 msgid "Permissions"
 msgstr "Käyttöoikeudet"
 
-#: src/dialogs/permissions.tsx:296
-#, fuzzy
-#| msgid "Permission denied"
+#: src/dialogs/permissions.tsx:300
 msgid "Permissions for $0 files"
-msgstr "Käyttö estetty"
+msgstr "Käyttöoikeudet $0 tiedostoille"
 
 #: src/common.ts:33
 msgid "Read and execute"
 msgstr "Luku ja suoritus"
 
-#: src/common.ts:34 src/dialogs/permissions.tsx:220
+#: src/common.ts:34 src/dialogs/permissions.tsx:224
 msgid "Read and write"
 msgstr "Luku ja kirjoitus"
 
@@ -543,7 +543,7 @@ msgstr "Luku ja kirjoitus"
 msgid "Read, write, and execute"
 msgstr "Luku, kirjoitus ja suoritus"
 
-#: src/common.ts:32 src/dialogs/permissions.tsx:225 src/dialogs/editor.tsx:172
+#: src/common.ts:32 src/dialogs/permissions.tsx:229 src/dialogs/editor.tsx:172
 msgid "Read-only"
 msgstr "Vain luku"
 
@@ -571,11 +571,11 @@ msgstr "Nimetäänkö $0 uudelleen?"
 msgid "Rename selected file or directory"
 msgstr "Nimeä valittu tiedosto tai hakemisto uudelleen"
 
-#: src/upload-button.tsx:112
+#: src/upload-button.tsx:113
 msgid "Replace"
 msgstr "Vaihda"
 
-#: src/upload-button.tsx:105
+#: src/upload-button.tsx:106
 msgid "Replace file $0?"
 msgstr "Vaihdetaanko tiedosto $0?"
 
@@ -583,7 +583,7 @@ msgstr "Vaihdetaanko tiedosto $0?"
 msgid "Save"
 msgstr "Tallenna"
 
-#: src/dialogs/permissions.tsx:399
+#: src/dialogs/permissions.tsx:403
 msgid "Security context"
 msgstr "Turvakonteksti"
 
@@ -591,13 +591,13 @@ msgstr "Turvakonteksti"
 msgid "Select all"
 msgstr "Valitse kaikki"
 
-#: src/dialogs/permissions.tsx:411
+#: src/dialogs/permissions.tsx:415
 msgid "Set executable as program"
-msgstr ""
+msgstr "Määritä suoritettava ohjelmaksi"
 
-#: src/dialogs/permissions.tsx:281
+#: src/dialogs/permissions.tsx:285
 msgid "Show all files"
-msgstr ""
+msgstr "Näytä kaikki tiedostot"
 
 #: src/files-card-body.tsx:511 src/header.tsx:286
 msgid "Show hidden items"
@@ -645,18 +645,18 @@ msgstr "Kirjanmerkkihakemistoa ei voi luoda"
 
 #: src/upload-button.tsx:321
 msgid "Unable to move uploaded file to final destination"
-msgstr ""
+msgstr "Ulosladattua tiedostoa ei voida siirtää lopulliseen määränpäähän"
 
 #: src/files-breadcrumbs.tsx:124
 msgid "Unable to save bookmark file"
 msgstr "Kirjanmerkkitiedostoa ei voi tallentaa"
 
-#: src/upload-button.tsx:475
+#: src/upload-button.tsx:494
 msgid "Upload"
 msgstr "Uloslataa"
 
 #
-#: src/upload-button.tsx:456
+#: src/upload-button.tsx:475
 msgid "Upload $0% completed"
 msgstr "Uloslataus $0 % valmis"
 
@@ -664,11 +664,11 @@ msgstr "Uloslataus $0 % valmis"
 msgid "Upload error"
 msgstr "Uloslatausvirhe"
 
-#: src/upload-button.tsx:70
+#: src/upload-button.tsx:71
 msgid "Uploaded as $0, $1"
-msgstr ""
+msgstr "Ulosladattu $0:lla, $1"
 
-#: src/upload-button.tsx:420
+#: src/upload-button.tsx:439
 msgid "Uploads"
 msgstr "Uloslataukset"
 
@@ -680,7 +680,7 @@ msgstr "Näytä $0"
 msgid "Write and execute"
 msgstr "Kirjoitus ja suoritus"
 
-#: src/common.ts:30 src/dialogs/permissions.tsx:240
+#: src/common.ts:30 src/dialogs/permissions.tsx:244
 msgid "Write-only"
 msgstr "Vain kirjoitus"
 

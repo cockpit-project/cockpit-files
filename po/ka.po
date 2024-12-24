@@ -14,10 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-17 03:22+0000\n"
-"PO-Revision-Date: 2024-12-17 03:38+0000\n"
-"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
-"memory@weblate.org>\n"
+"POT-Creation-Date: 2024-12-20 03:04+0000\n"
+"PO-Revision-Date: 2024-12-20 07:38+0000\n"
+"Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <https://translate.fedoraproject.org/projects/"
 "cockpit-files/cockpit-files/ka/>\n"
 "Language: ka\n"
@@ -25,13 +24,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1\n"
-"X-Generator: Weblate 5.8.4\n"
+"X-Generator: Weblate 5.9.1\n"
 
 #: src/menu.tsx:58
 msgid "\"$0\" exists, not overwriting with paste."
 msgstr "\"$0\" არსებობს. ჩასმით მას თავზე არ გადაეწერება."
 
-#: src/upload-button.tsx:66
+#: src/upload-button.tsx:67
 msgid "$0 files"
 msgstr "$0 ფაილი"
 
@@ -45,7 +44,7 @@ msgid_plural "$0 items are hidden"
 msgstr[0] "$0 ელემენტი დამალულია"
 msgstr[1] "$0 ელემენტი დამალულია"
 
-#: src/dialogs/permissions.tsx:295
+#: src/dialogs/permissions.tsx:299
 msgid "$0 permissions"
 msgstr "$0 წვდომა"
 
@@ -59,7 +58,7 @@ msgstr ""
 "საქაღალდეები, ატვირთოთ და გადმოწეროთ ფაილები და შეცვალოთ მათი თვისებები. "
 "ასევე შეიცავს მარტივ რედაქტორსაც."
 
-#: src/upload-button.tsx:121
+#: src/upload-button.tsx:122
 msgid ""
 "A file with the same name already exists in \"$0\". Replacing it will "
 "overwrite its content."
@@ -71,7 +70,7 @@ msgstr ""
 msgid "A-Z"
 msgstr "A-Z"
 
-#: src/dialogs/permissions.tsx:360
+#: src/dialogs/permissions.tsx:364
 msgid "Access"
 msgstr "წვდომა"
 
@@ -84,7 +83,7 @@ msgstr "მონიშნული ელემენტის გააქტ�
 msgid "Add bookmark"
 msgstr "სანიშნეს დამატება"
 
-#: src/upload-button.tsx:144
+#: src/upload-button.tsx:145
 msgid "Apply this action to all conflicting files"
 msgstr "ამ ქმედების გადატარება ყველა კონფლიქტურ ფაილზე"
 
@@ -96,14 +95,14 @@ msgstr "ბლოკური მოწყობილობა"
 msgid "Bookmarks"
 msgstr "სანიშნეები"
 
-#: src/dialogs/permissions.tsx:315 src/dialogs/create-file.tsx:162
+#: src/dialogs/permissions.tsx:319 src/dialogs/create-file.tsx:162
 #: src/dialogs/editor.tsx:211 src/dialogs/delete.tsx:91
 #: src/dialogs/rename.tsx:98 src/dialogs/mkdir.tsx:108
-#: src/upload-button.tsx:115
+#: src/upload-button.tsx:116
 msgid "Cancel"
 msgstr "გაუქმება"
 
-#: src/upload-button.tsx:439
+#: src/upload-button.tsx:458
 msgid "Cancel upload of $0"
 msgstr "$0-ის ატვირთვის შეწყვეტა"
 
@@ -119,7 +118,11 @@ msgstr "$0-ის ატვირთვა შეწყდა"
 msgid "Cannot create file in current directory"
 msgstr "მიმდინარე საქაღალდეში ფაილის შექმნა შეუძლებელია"
 
-#: src/dialogs/permissions.tsx:306
+#: src/files-folder-view.tsx:165
+msgid "Cannot drop files, another upload is already in progress"
+msgstr "ფაილებს ვერ დაყრით, რადგან ფაილების ატვირთვა უკვე მიმდინარეობს"
+
+#: src/dialogs/permissions.tsx:310
 msgid "Change"
 msgstr "შეცვლა"
 
@@ -127,7 +130,7 @@ msgstr "შეცვლა"
 msgid "Change permissions"
 msgstr "წვდომების შეცვლა"
 
-#: src/dialogs/permissions.tsx:313
+#: src/dialogs/permissions.tsx:317
 msgid "Change permissions for enclosed files"
 msgstr "ჩასმული ფაილების წვდომების შეცვლა"
 
@@ -147,7 +150,7 @@ msgstr "დახურვა"
 msgid "Cockpit Files"
 msgstr "Cockpit Files"
 
-#: src/dialogs/permissions.tsx:280
+#: src/dialogs/permissions.tsx:284
 msgid "Collapse"
 msgstr "ჩამოშლა"
 
@@ -251,6 +254,10 @@ msgstr "სიის სახით ჩვენება"
 msgid "Download"
 msgstr "გადმოწერა"
 
+#: src/files-folder-view.tsx:157
+msgid "Drop files to upload"
+msgstr "ასატვირთად დაყარეთ ფაილები"
+
 #. Translators: This is the title of a modal dialog.  $0 represents a filename.
 #: src/dialogs/editor.tsx:170
 msgid "Edit $0"
@@ -348,12 +355,12 @@ msgstr "წინ გადასვლა"
 msgid "Go up a directory"
 msgstr "ზემო საქაღალდეზე გადასვლა"
 
-#: src/files-card-body.tsx:572 src/dialogs/permissions.tsx:344
+#: src/files-card-body.tsx:572 src/dialogs/permissions.tsx:348
 #: src/files-footer-detail.tsx:75
 msgid "Group"
 msgstr "ჯგუფი"
 
-#: src/dialogs/permissions.tsx:374
+#: src/dialogs/permissions.tsx:378
 msgid "Group access"
 msgstr "ჯგუფის წვდომა"
 
@@ -369,7 +376,7 @@ msgstr "საწყისი"
 msgid "Ignore"
 msgstr "დაიგნორება"
 
-#: src/upload-button.tsx:114
+#: src/upload-button.tsx:115
 msgid "Keep original"
 msgstr "ორიგინალის შენარჩუნება"
 
@@ -393,7 +400,7 @@ msgstr "ყველაზე ნაკლები დაშვებით"
 msgid "Manage your files"
 msgstr "მართეთ თქვენი ფაილები"
 
-#: src/dialogs/permissions.tsx:274
+#: src/dialogs/permissions.tsx:278
 msgid "Missing type"
 msgstr "ნაკლული ტიპი"
 
@@ -429,7 +436,7 @@ msgstr "სახელიანი ფაიფი"
 msgid "Navigation"
 msgstr "ნავიგაცია"
 
-#: src/upload-button.tsx:130
+#: src/upload-button.tsx:131
 msgid "New file"
 msgstr "ახალი ფაილი"
 
@@ -441,7 +448,7 @@ msgstr "ახალი ფაილის სახელი"
 msgid "New name"
 msgstr "ახალი სახელი"
 
-#: src/dialogs/permissions.tsx:230
+#: src/dialogs/permissions.tsx:234
 msgid "No access"
 msgstr "წვდომის გარეშე"
 
@@ -461,7 +468,7 @@ msgstr "ტერმინალში გახსნა"
 msgid "Open text file"
 msgstr "ტექსტური ფაილის გახსნა"
 
-#: src/upload-button.tsx:135
+#: src/upload-button.tsx:136
 msgid "Original file on server"
 msgstr "ორიგინალი ფაილი სერვერზე"
 
@@ -469,7 +476,7 @@ msgstr "ორიგინალი ფაილი სერვერზე"
 msgid "Others"
 msgstr "სხვები"
 
-#: src/dialogs/permissions.tsx:386
+#: src/dialogs/permissions.tsx:390
 msgid "Others access"
 msgstr "სხვების წვდომა"
 
@@ -478,12 +485,12 @@ msgid "Overwrite"
 msgstr "გადაწერა"
 
 #: src/files-card-body.tsx:533 src/files-card-body.tsx:572
-#: src/dialogs/permissions.tsx:329 src/dialogs/create-file.tsx:199
+#: src/dialogs/permissions.tsx:333 src/dialogs/create-file.tsx:199
 #: src/header.tsx:98 src/files-footer-detail.tsx:75
 msgid "Owner"
 msgstr "მფლობელი"
 
-#: src/dialogs/permissions.tsx:362
+#: src/dialogs/permissions.tsx:366
 msgid "Owner access"
 msgstr "მფლობელის წვდომა"
 
@@ -495,7 +502,7 @@ msgstr "მფლობელი აღმავალი"
 msgid "Owner descending"
 msgstr "მფლობელი დაღმავალი"
 
-#: src/dialogs/permissions.tsx:328
+#: src/dialogs/permissions.tsx:332
 msgid "Ownership"
 msgstr "მფლობელობა"
 
@@ -519,7 +526,7 @@ msgstr "წვდომა აკრძალულია"
 msgid "Permissions"
 msgstr "წვდომები"
 
-#: src/dialogs/permissions.tsx:296
+#: src/dialogs/permissions.tsx:300
 msgid "Permissions for $0 files"
 msgstr "წვდომები $0 ფაილისთვის"
 
@@ -527,7 +534,7 @@ msgstr "წვდომები $0 ფაილისთვის"
 msgid "Read and execute"
 msgstr "წაკითხვა და გაშვება"
 
-#: src/common.ts:34 src/dialogs/permissions.tsx:220
+#: src/common.ts:34 src/dialogs/permissions.tsx:224
 msgid "Read and write"
 msgstr "წაკითხვა და ჩაწერა"
 
@@ -535,7 +542,7 @@ msgstr "წაკითხვა და ჩაწერა"
 msgid "Read, write, and execute"
 msgstr "წაკითხვა, ჩაწერა და გაშვება"
 
-#: src/common.ts:32 src/dialogs/permissions.tsx:225 src/dialogs/editor.tsx:172
+#: src/common.ts:32 src/dialogs/permissions.tsx:229 src/dialogs/editor.tsx:172
 msgid "Read-only"
 msgstr "მხოლოდ-წასაკითხად"
 
@@ -563,11 +570,11 @@ msgstr "გადავარქვა სახელი ფაილს $0?"
 msgid "Rename selected file or directory"
 msgstr "მონიშნული ფაილის ან საქაღალდის სახელის გადარქმევა"
 
-#: src/upload-button.tsx:112
+#: src/upload-button.tsx:113
 msgid "Replace"
 msgstr "ჩანაცვლება"
 
-#: src/upload-button.tsx:105
+#: src/upload-button.tsx:106
 msgid "Replace file $0?"
 msgstr "ჩავანაცვლო ფაილი $0?"
 
@@ -575,7 +582,7 @@ msgstr "ჩავანაცვლო ფაილი $0?"
 msgid "Save"
 msgstr "შენახვა"
 
-#: src/dialogs/permissions.tsx:399
+#: src/dialogs/permissions.tsx:403
 msgid "Security context"
 msgstr "უსაფრთხოების კონტექსტი"
 
@@ -583,11 +590,11 @@ msgstr "უსაფრთხოების კონტექსტი"
 msgid "Select all"
 msgstr "ყველას მონიშვნა"
 
-#: src/dialogs/permissions.tsx:411
+#: src/dialogs/permissions.tsx:415
 msgid "Set executable as program"
 msgstr "პროგრამის გაშვებადად დაყენება"
 
-#: src/dialogs/permissions.tsx:281
+#: src/dialogs/permissions.tsx:285
 msgid "Show all files"
 msgstr "ყველა ფაილის ჩვენება"
 
@@ -643,12 +650,12 @@ msgstr "ატვირთული ფაილების საბოლო�
 msgid "Unable to save bookmark file"
 msgstr "სანიშნეს ფაილის შენახვა შეუძლებელია"
 
-#: src/upload-button.tsx:475
+#: src/upload-button.tsx:494
 msgid "Upload"
 msgstr "ატვირთვა"
 
 #
-#: src/upload-button.tsx:456
+#: src/upload-button.tsx:475
 msgid "Upload $0% completed"
 msgstr "ატვირთვის $0% დასრულდა"
 
@@ -656,11 +663,11 @@ msgstr "ატვირთვის $0% დასრულდა"
 msgid "Upload error"
 msgstr "ატვირთვის შეცდომა"
 
-#: src/upload-button.tsx:70
+#: src/upload-button.tsx:71
 msgid "Uploaded as $0, $1"
 msgstr "ატვირთულია, როგორც $0.$1"
 
-#: src/upload-button.tsx:420
+#: src/upload-button.tsx:439
 msgid "Uploads"
 msgstr "ატვირთვები"
 
@@ -672,7 +679,7 @@ msgstr "$0-ის ნახვა"
 msgid "Write and execute"
 msgstr "ჩაწერა და შესრულება"
 
-#: src/common.ts:30 src/dialogs/permissions.tsx:240
+#: src/common.ts:30 src/dialogs/permissions.tsx:244
 msgid "Write-only"
 msgstr "მხოლოდ-ჩაწერადი"
 

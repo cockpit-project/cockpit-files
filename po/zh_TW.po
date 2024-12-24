@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-17 03:22+0000\n"
+"POT-Creation-Date: 2024-12-20 03:04+0000\n"
 "PO-Revision-Date: 2024-12-01 15:38+0000\n"
 "Last-Translator: JW Wang <v72807647@gmail.com>\n"
 "Language-Team: Chinese (Traditional) <https://translate.fedoraproject.org/"
@@ -30,7 +30,7 @@ msgstr ""
 msgid "\"$0\" exists, not overwriting with paste."
 msgstr "\"$0\" 已存在，將不會貼上以免遭覆寫。"
 
-#: src/upload-button.tsx:66
+#: src/upload-button.tsx:67
 #, fuzzy
 #| msgid "files"
 msgid "$0 files"
@@ -45,7 +45,7 @@ msgid "$0 item is hidden"
 msgid_plural "$0 items are hidden"
 msgstr[0] "$0 個已隱藏的項目"
 
-#: src/dialogs/permissions.tsx:295
+#: src/dialogs/permissions.tsx:299
 msgid "$0 permissions"
 msgstr "$0 的權限"
 
@@ -58,7 +58,7 @@ msgstr ""
 "為 Cockpit 設計的檔案系統使用者界面。您可以瀏覽目錄、上傳與下載檔案，並變更其"
 "屬性。它也具備簡易的檔案編輯器。"
 
-#: src/upload-button.tsx:121
+#: src/upload-button.tsx:122
 msgid ""
 "A file with the same name already exists in \"$0\". Replacing it will "
 "overwrite its content."
@@ -68,7 +68,7 @@ msgstr "一個相同名稱的檔案已於 \"$0\" 存在。 若將其取代將覆
 msgid "A-Z"
 msgstr "由 A 到 Z"
 
-#: src/dialogs/permissions.tsx:360
+#: src/dialogs/permissions.tsx:364
 msgid "Access"
 msgstr "存取權限"
 
@@ -81,7 +81,7 @@ msgstr "觸發所選擇的項目，進入目錄"
 msgid "Add bookmark"
 msgstr "新增書籤"
 
-#: src/upload-button.tsx:144
+#: src/upload-button.tsx:145
 msgid "Apply this action to all conflicting files"
 msgstr "套用此動作至所有發生衝突的檔案"
 
@@ -93,14 +93,14 @@ msgstr "區塊裝置"
 msgid "Bookmarks"
 msgstr "書籤"
 
-#: src/dialogs/permissions.tsx:315 src/dialogs/create-file.tsx:162
+#: src/dialogs/permissions.tsx:319 src/dialogs/create-file.tsx:162
 #: src/dialogs/editor.tsx:211 src/dialogs/delete.tsx:91
 #: src/dialogs/rename.tsx:98 src/dialogs/mkdir.tsx:108
-#: src/upload-button.tsx:115
+#: src/upload-button.tsx:116
 msgid "Cancel"
 msgstr "取消"
 
-#: src/upload-button.tsx:439
+#: src/upload-button.tsx:458
 msgid "Cancel upload of $0"
 msgstr "取消上傳 $0"
 
@@ -116,7 +116,11 @@ msgstr "已取消上傳 $0"
 msgid "Cannot create file in current directory"
 msgstr "無法在目前的目錄建立檔案"
 
-#: src/dialogs/permissions.tsx:306
+#: src/files-folder-view.tsx:165
+msgid "Cannot drop files, another upload is already in progress"
+msgstr ""
+
+#: src/dialogs/permissions.tsx:310
 msgid "Change"
 msgstr "變更"
 
@@ -126,7 +130,7 @@ msgstr "變更"
 msgid "Change permissions"
 msgstr "其他權限"
 
-#: src/dialogs/permissions.tsx:313
+#: src/dialogs/permissions.tsx:317
 msgid "Change permissions for enclosed files"
 msgstr "變更其中檔案的權限"
 
@@ -146,7 +150,7 @@ msgstr "關閉"
 msgid "Cockpit Files"
 msgstr "Cockpit Files"
 
-#: src/dialogs/permissions.tsx:280
+#: src/dialogs/permissions.tsx:284
 msgid "Collapse"
 msgstr ""
 
@@ -250,6 +254,12 @@ msgstr "以清單顯示"
 msgid "Download"
 msgstr "下載"
 
+#: src/files-folder-view.tsx:157
+#, fuzzy
+#| msgid "File name"
+msgid "Drop files to upload"
+msgstr "檔案名稱"
+
 #. Translators: This is the title of a modal dialog.  $0 represents a filename.
 #: src/dialogs/editor.tsx:170
 msgid "Edit $0"
@@ -351,12 +361,12 @@ msgstr "前進"
 msgid "Go up a directory"
 msgstr "回上一層目錄"
 
-#: src/files-card-body.tsx:572 src/dialogs/permissions.tsx:344
+#: src/files-card-body.tsx:572 src/dialogs/permissions.tsx:348
 #: src/files-footer-detail.tsx:75
 msgid "Group"
 msgstr "群組"
 
-#: src/dialogs/permissions.tsx:374
+#: src/dialogs/permissions.tsx:378
 msgid "Group access"
 msgstr "群組存取權限"
 
@@ -372,7 +382,7 @@ msgstr "家目錄"
 msgid "Ignore"
 msgstr "忽略"
 
-#: src/upload-button.tsx:114
+#: src/upload-button.tsx:115
 msgid "Keep original"
 msgstr "保留原本的"
 
@@ -396,7 +406,7 @@ msgstr "最不寬鬆的權限"
 msgid "Manage your files"
 msgstr "管理您的檔案"
 
-#: src/dialogs/permissions.tsx:274
+#: src/dialogs/permissions.tsx:278
 msgid "Missing type"
 msgstr "類型已遺失"
 
@@ -432,7 +442,7 @@ msgstr "Named pipe"
 msgid "Navigation"
 msgstr "瀏覽"
 
-#: src/upload-button.tsx:130
+#: src/upload-button.tsx:131
 msgid "New file"
 msgstr "新的檔案"
 
@@ -444,7 +454,7 @@ msgstr "新檔案名稱"
 msgid "New name"
 msgstr "新名稱"
 
-#: src/dialogs/permissions.tsx:230
+#: src/dialogs/permissions.tsx:234
 msgid "No access"
 msgstr "無存取權限"
 
@@ -464,7 +474,7 @@ msgstr "於終端機開啟"
 msgid "Open text file"
 msgstr "開啟文字檔案"
 
-#: src/upload-button.tsx:135
+#: src/upload-button.tsx:136
 msgid "Original file on server"
 msgstr "伺服器上原有的檔案"
 
@@ -472,7 +482,7 @@ msgstr "伺服器上原有的檔案"
 msgid "Others"
 msgstr "其他人"
 
-#: src/dialogs/permissions.tsx:386
+#: src/dialogs/permissions.tsx:390
 msgid "Others access"
 msgstr "其他人的存取權限"
 
@@ -481,12 +491,12 @@ msgid "Overwrite"
 msgstr "覆寫"
 
 #: src/files-card-body.tsx:533 src/files-card-body.tsx:572
-#: src/dialogs/permissions.tsx:329 src/dialogs/create-file.tsx:199
+#: src/dialogs/permissions.tsx:333 src/dialogs/create-file.tsx:199
 #: src/header.tsx:98 src/files-footer-detail.tsx:75
 msgid "Owner"
 msgstr "擁有者"
 
-#: src/dialogs/permissions.tsx:362
+#: src/dialogs/permissions.tsx:366
 msgid "Owner access"
 msgstr "擁有者存取權限"
 
@@ -498,7 +508,7 @@ msgstr "擁有者遞增排序"
 msgid "Owner descending"
 msgstr "擁有者遞減排序"
 
-#: src/dialogs/permissions.tsx:328
+#: src/dialogs/permissions.tsx:332
 msgid "Ownership"
 msgstr "所有權"
 
@@ -522,7 +532,7 @@ msgstr "權限遭拒"
 msgid "Permissions"
 msgstr "權限"
 
-#: src/dialogs/permissions.tsx:296
+#: src/dialogs/permissions.tsx:300
 #, fuzzy
 #| msgid "Change permissions for enclosed files"
 msgid "Permissions for $0 files"
@@ -532,7 +542,7 @@ msgstr "變更其中檔案的權限"
 msgid "Read and execute"
 msgstr "讀取與執行"
 
-#: src/common.ts:34 src/dialogs/permissions.tsx:220
+#: src/common.ts:34 src/dialogs/permissions.tsx:224
 msgid "Read and write"
 msgstr "讀取與寫入"
 
@@ -540,7 +550,7 @@ msgstr "讀取與寫入"
 msgid "Read, write, and execute"
 msgstr "讀取、寫入與執行"
 
-#: src/common.ts:32 src/dialogs/permissions.tsx:225 src/dialogs/editor.tsx:172
+#: src/common.ts:32 src/dialogs/permissions.tsx:229 src/dialogs/editor.tsx:172
 msgid "Read-only"
 msgstr "只能讀取"
 
@@ -568,11 +578,11 @@ msgstr "將 $0 重新命名？"
 msgid "Rename selected file or directory"
 msgstr "重新命名已選擇的檔案或目錄"
 
-#: src/upload-button.tsx:112
+#: src/upload-button.tsx:113
 msgid "Replace"
 msgstr "取代"
 
-#: src/upload-button.tsx:105
+#: src/upload-button.tsx:106
 msgid "Replace file $0?"
 msgstr "取代檔案 $0 ？"
 
@@ -580,7 +590,7 @@ msgstr "取代檔案 $0 ？"
 msgid "Save"
 msgstr "儲存"
 
-#: src/dialogs/permissions.tsx:399
+#: src/dialogs/permissions.tsx:403
 msgid "Security context"
 msgstr "安全性 context"
 
@@ -588,11 +598,11 @@ msgstr "安全性 context"
 msgid "Select all"
 msgstr "全選"
 
-#: src/dialogs/permissions.tsx:411
+#: src/dialogs/permissions.tsx:415
 msgid "Set executable as program"
 msgstr "設定為可執行的程式"
 
-#: src/dialogs/permissions.tsx:281
+#: src/dialogs/permissions.tsx:285
 msgid "Show all files"
 msgstr ""
 
@@ -648,12 +658,12 @@ msgstr ""
 msgid "Unable to save bookmark file"
 msgstr "無法儲存書籤的存放檔案"
 
-#: src/upload-button.tsx:475
+#: src/upload-button.tsx:494
 msgid "Upload"
 msgstr "上傳"
 
 #
-#: src/upload-button.tsx:456
+#: src/upload-button.tsx:475
 msgid "Upload $0% completed"
 msgstr "上傳 $0% 完成"
 
@@ -661,11 +671,11 @@ msgstr "上傳 $0% 完成"
 msgid "Upload error"
 msgstr "上傳失敗"
 
-#: src/upload-button.tsx:70
+#: src/upload-button.tsx:71
 msgid "Uploaded as $0, $1"
 msgstr ""
 
-#: src/upload-button.tsx:420
+#: src/upload-button.tsx:439
 msgid "Uploads"
 msgstr "上傳項目"
 
@@ -677,7 +687,7 @@ msgstr "檢視 $0"
 msgid "Write and execute"
 msgstr "寫入與執行"
 
-#: src/common.ts:30 src/dialogs/permissions.tsx:240
+#: src/common.ts:30 src/dialogs/permissions.tsx:244
 msgid "Write-only"
 msgstr "只能寫入"
 
