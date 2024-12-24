@@ -14,28 +14,25 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-17 03:22+0000\n"
-"PO-Revision-Date: 2024-11-26 04:38+0000\n"
-"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
-"memory@weblate.org>\n"
-"Language-Team: Czech <https://translate.fedoraproject.org/projects/cockpit-"
-"files/cockpit-files/cs/>\n"
+"POT-Creation-Date: 2024-12-20 03:04+0000\n"
+"PO-Revision-Date: 2024-12-20 21:47+0000\n"
+"Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
+"Language-Team: Czech <https://translate.fedoraproject.org/projects/"
+"cockpit-files/cockpit-files/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2\n"
-"X-Generator: Weblate 5.8.2\n"
+"X-Generator: Weblate 5.9.1\n"
 
 #: src/menu.tsx:58
 msgid "\"$0\" exists, not overwriting with paste."
 msgstr "„$0“ existuje – vložením nebude přepsáno."
 
-#: src/upload-button.tsx:66
-#, fuzzy
-#| msgid "files"
+#: src/upload-button.tsx:67
 msgid "$0 files"
-msgstr "soubory"
+msgstr "$0 souborů"
 
 #: src/files-footer-detail.tsx:35
 msgid "$0 files selected"
@@ -48,7 +45,7 @@ msgstr[0] "$0 položka je skrytá"
 msgstr[1] "$0 položky jsou skryté"
 msgstr[2] "$0 položek je skrytých"
 
-#: src/dialogs/permissions.tsx:295
+#: src/dialogs/permissions.tsx:299
 msgid "$0 permissions"
 msgstr "oprávnění $0"
 
@@ -62,7 +59,7 @@ msgstr ""
 "procházet složky, nahrávat a stahovat si soubory a měnit jejich vlastnosti. "
 "Také obsahuje jednoduchý textový editor."
 
-#: src/upload-button.tsx:121
+#: src/upload-button.tsx:122
 msgid ""
 "A file with the same name already exists in \"$0\". Replacing it will "
 "overwrite its content."
@@ -73,7 +70,7 @@ msgstr ""
 msgid "A-Z"
 msgstr "A-Z"
 
-#: src/dialogs/permissions.tsx:360
+#: src/dialogs/permissions.tsx:364
 msgid "Access"
 msgstr "Přístup"
 
@@ -86,7 +83,7 @@ msgstr "Aktivovat označenou položku, vstoupit do složky"
 msgid "Add bookmark"
 msgstr "Přidat záložku"
 
-#: src/upload-button.tsx:144
+#: src/upload-button.tsx:145
 msgid "Apply this action to all conflicting files"
 msgstr "Použít tuto akci na veškeré kolidující soubory"
 
@@ -98,14 +95,14 @@ msgstr "Blokové zařízení"
 msgid "Bookmarks"
 msgstr "Záložky"
 
-#: src/dialogs/permissions.tsx:315 src/dialogs/create-file.tsx:162
+#: src/dialogs/permissions.tsx:319 src/dialogs/create-file.tsx:162
 #: src/dialogs/editor.tsx:211 src/dialogs/delete.tsx:91
 #: src/dialogs/rename.tsx:98 src/dialogs/mkdir.tsx:108
-#: src/upload-button.tsx:115
+#: src/upload-button.tsx:116
 msgid "Cancel"
 msgstr "Storno"
 
-#: src/upload-button.tsx:439
+#: src/upload-button.tsx:458
 msgid "Cancel upload of $0"
 msgstr "Zrušit nahrávání $0"
 
@@ -121,17 +118,20 @@ msgstr "Zrušeno nahrávání $0"
 msgid "Cannot create file in current directory"
 msgstr "Ve stávající složce není možné soubor vytvořit"
 
-#: src/dialogs/permissions.tsx:306
+#: src/files-folder-view.tsx:165
+msgid "Cannot drop files, another upload is already in progress"
+msgstr ""
+"Není možné přetáhnout soubory – v tuto chvíli probíhá ještě jiné nahrání"
+
+#: src/dialogs/permissions.tsx:310
 msgid "Change"
 msgstr "Změnit"
 
 #: src/upload-button.tsx:392
-#, fuzzy
-#| msgid "Other permissions"
 msgid "Change permissions"
-msgstr "Ostatní oprávnění"
+msgstr "Změnit oprávnění"
 
-#: src/dialogs/permissions.tsx:313
+#: src/dialogs/permissions.tsx:317
 msgid "Change permissions for enclosed files"
 msgstr "Změnit oprávnění pro obsažené soubory"
 
@@ -151,9 +151,9 @@ msgstr "Zavřít"
 msgid "Cockpit Files"
 msgstr "Cockpit Soubory"
 
-#: src/dialogs/permissions.tsx:280
+#: src/dialogs/permissions.tsx:284
 msgid "Collapse"
-msgstr ""
+msgstr "Sbalit"
 
 #: src/menu.tsx:140 src/menu.tsx:185
 msgid "Copy"
@@ -255,6 +255,10 @@ msgstr "Zobrazit jako seznam"
 msgid "Download"
 msgstr "Stáhnout"
 
+#: src/files-folder-view.tsx:157
+msgid "Drop files to upload"
+msgstr "Soubory nahrajete jejich přetažením sem"
+
 #. Translators: This is the title of a modal dialog.  $0 represents a filename.
 #: src/dialogs/editor.tsx:170
 msgid "Edit $0"
@@ -278,7 +282,7 @@ msgstr "Pouze spouštět"
 
 #: src/upload-button.tsx:280
 msgid "Failed"
-msgstr ""
+msgstr "Nezdařilo se"
 
 #: src/manifest.json:0
 msgid "File browser"
@@ -293,10 +297,8 @@ msgid "File name"
 msgstr "Název souboru"
 
 #: src/upload-button.tsx:361
-#, fuzzy
-#| msgid "File name"
 msgid "File uploaded"
-msgstr "Název souboru"
+msgstr "Soubor nahrán"
 
 #: src/common.ts:89
 msgid "Filename is the same as original name"
@@ -307,10 +309,8 @@ msgid "Files"
 msgstr "Soubory"
 
 #: src/upload-button.tsx:361
-#, fuzzy
-#| msgid "File name"
 msgid "Files uploaded"
-msgstr "Název souboru"
+msgstr "Soubory nahrány"
 
 #: src/files-breadcrumbs.tsx:239
 msgid "Filesystem"
@@ -356,12 +356,12 @@ msgstr "Přejít vpřed"
 msgid "Go up a directory"
 msgstr "Do nadřazené složky"
 
-#: src/files-card-body.tsx:572 src/dialogs/permissions.tsx:344
+#: src/files-card-body.tsx:572 src/dialogs/permissions.tsx:348
 #: src/files-footer-detail.tsx:75
 msgid "Group"
 msgstr "Skupina"
 
-#: src/dialogs/permissions.tsx:374
+#: src/dialogs/permissions.tsx:378
 msgid "Group access"
 msgstr "Přístup pro skupinu"
 
@@ -377,7 +377,7 @@ msgstr "Domů"
 msgid "Ignore"
 msgstr "Ignorovat"
 
-#: src/upload-button.tsx:114
+#: src/upload-button.tsx:115
 msgid "Keep original"
 msgstr "Ponechat původní"
 
@@ -401,7 +401,7 @@ msgstr "Nejméně přístupné"
 msgid "Manage your files"
 msgstr "Spravujte své soubory"
 
-#: src/dialogs/permissions.tsx:274
+#: src/dialogs/permissions.tsx:278
 msgid "Missing type"
 msgstr "Chybí typ"
 
@@ -437,7 +437,7 @@ msgstr "Pojmenovaná roura"
 msgid "Navigation"
 msgstr "Navigace"
 
-#: src/upload-button.tsx:130
+#: src/upload-button.tsx:131
 msgid "New file"
 msgstr "Nový soubor"
 
@@ -449,7 +449,7 @@ msgstr "Nový název souboru"
 msgid "New name"
 msgstr "Nový název"
 
-#: src/dialogs/permissions.tsx:230
+#: src/dialogs/permissions.tsx:234
 msgid "No access"
 msgstr "Žádný přístup"
 
@@ -469,7 +469,7 @@ msgstr "Otevřít v terminálu"
 msgid "Open text file"
 msgstr "Otevřít textový soubor"
 
-#: src/upload-button.tsx:135
+#: src/upload-button.tsx:136
 msgid "Original file on server"
 msgstr "Původní soubor na serveru"
 
@@ -477,7 +477,7 @@ msgstr "Původní soubor na serveru"
 msgid "Others"
 msgstr "Ostatní"
 
-#: src/dialogs/permissions.tsx:386
+#: src/dialogs/permissions.tsx:390
 msgid "Others access"
 msgstr "Přístup pro ostatní"
 
@@ -486,12 +486,12 @@ msgid "Overwrite"
 msgstr "Přepsat"
 
 #: src/files-card-body.tsx:533 src/files-card-body.tsx:572
-#: src/dialogs/permissions.tsx:329 src/dialogs/create-file.tsx:199
+#: src/dialogs/permissions.tsx:333 src/dialogs/create-file.tsx:199
 #: src/header.tsx:98 src/files-footer-detail.tsx:75
 msgid "Owner"
 msgstr "Vlastník"
 
-#: src/dialogs/permissions.tsx:362
+#: src/dialogs/permissions.tsx:366
 msgid "Owner access"
 msgstr "Přístup pro vlastníka"
 
@@ -503,7 +503,7 @@ msgstr "Podle vlastníka vzestupně"
 msgid "Owner descending"
 msgstr "Podle vlastníka sestupně"
 
-#: src/dialogs/permissions.tsx:328
+#: src/dialogs/permissions.tsx:332
 msgid "Ownership"
 msgstr "Vlastnictví"
 
@@ -527,17 +527,15 @@ msgstr "Přístup zamítnut"
 msgid "Permissions"
 msgstr "Oprávnění"
 
-#: src/dialogs/permissions.tsx:296
-#, fuzzy
-#| msgid "Change permissions for enclosed files"
+#: src/dialogs/permissions.tsx:300
 msgid "Permissions for $0 files"
-msgstr "Změnit oprávnění pro obsažené soubory"
+msgstr "Oprávnění pro $0 souborů"
 
 #: src/common.ts:33
 msgid "Read and execute"
 msgstr "Číst a spouštět"
 
-#: src/common.ts:34 src/dialogs/permissions.tsx:220
+#: src/common.ts:34 src/dialogs/permissions.tsx:224
 msgid "Read and write"
 msgstr "Číst a zapisovat"
 
@@ -545,7 +543,7 @@ msgstr "Číst a zapisovat"
 msgid "Read, write, and execute"
 msgstr "Číst, zapisovat a spouštět"
 
-#: src/common.ts:32 src/dialogs/permissions.tsx:225 src/dialogs/editor.tsx:172
+#: src/common.ts:32 src/dialogs/permissions.tsx:229 src/dialogs/editor.tsx:172
 msgid "Read-only"
 msgstr "Pouze pro čtení"
 
@@ -573,11 +571,11 @@ msgstr "Přejmenovat $0?"
 msgid "Rename selected file or directory"
 msgstr "Přejmenovat označený soubor či složku"
 
-#: src/upload-button.tsx:112
+#: src/upload-button.tsx:113
 msgid "Replace"
 msgstr "Nahradit"
 
-#: src/upload-button.tsx:105
+#: src/upload-button.tsx:106
 msgid "Replace file $0?"
 msgstr "Nahradit soubor $0?"
 
@@ -585,7 +583,7 @@ msgstr "Nahradit soubor $0?"
 msgid "Save"
 msgstr "Uložit"
 
-#: src/dialogs/permissions.tsx:399
+#: src/dialogs/permissions.tsx:403
 msgid "Security context"
 msgstr "Kontext zabezpečení"
 
@@ -593,13 +591,13 @@ msgstr "Kontext zabezpečení"
 msgid "Select all"
 msgstr "Vybrat vše"
 
-#: src/dialogs/permissions.tsx:411
+#: src/dialogs/permissions.tsx:415
 msgid "Set executable as program"
 msgstr "Nastavit spustitelné jako program"
 
-#: src/dialogs/permissions.tsx:281
+#: src/dialogs/permissions.tsx:285
 msgid "Show all files"
-msgstr ""
+msgstr "Zobrazit veškeré soubory"
 
 #: src/files-card-body.tsx:511 src/header.tsx:286
 msgid "Show hidden items"
@@ -647,17 +645,17 @@ msgstr "Nepodařilo se vytvořit složku záložek"
 
 #: src/upload-button.tsx:321
 msgid "Unable to move uploaded file to final destination"
-msgstr ""
+msgstr "Nebylo možné přesunout nahrané soubory do konečného umístění"
 
 #: src/files-breadcrumbs.tsx:124
 msgid "Unable to save bookmark file"
 msgstr "Nepodařilo se uložit soubor se záložkami"
 
-#: src/upload-button.tsx:475
+#: src/upload-button.tsx:494
 msgid "Upload"
 msgstr "Nahrát"
 
-#: src/upload-button.tsx:456
+#: src/upload-button.tsx:475
 msgid "Upload $0% completed"
 msgstr "Nahrávání z $0% dokončeno"
 
@@ -665,11 +663,11 @@ msgstr "Nahrávání z $0% dokončeno"
 msgid "Upload error"
 msgstr "Chyba nahrávání"
 
-#: src/upload-button.tsx:70
+#: src/upload-button.tsx:71
 msgid "Uploaded as $0, $1"
-msgstr ""
+msgstr "Nahráno jako $0,$1"
 
-#: src/upload-button.tsx:420
+#: src/upload-button.tsx:439
 msgid "Uploads"
 msgstr "Nahrání"
 
@@ -681,7 +679,7 @@ msgstr "Zobrazit $0"
 msgid "Write and execute"
 msgstr "Zápis a spouštění"
 
-#: src/common.ts:30 src/dialogs/permissions.tsx:240
+#: src/common.ts:30 src/dialogs/permissions.tsx:244
 msgid "Write-only"
 msgstr "Pouze zápis"
 
