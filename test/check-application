@@ -1975,8 +1975,6 @@ class TestFiles(testlib.MachineCase):
         # Copy/paste file
         m.execute("runuser -u admin mkdir /home/admin/newdir")
         m.write('/home/admin/newfile', 'test_text\n', owner='admin:admin')
-        # "hack" test is too quick and UI doesnt reflect the chown done in m.write so it still
-        # thinks that file owner is root
         b.wait_in_text("[data-item='newfile'] .item-owner", "admin")
         b.click("[data-item='newfile']")
         b.click("#dropdown-menu")
