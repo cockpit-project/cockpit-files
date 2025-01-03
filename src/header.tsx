@@ -32,7 +32,8 @@ import cockpit from "cockpit";
 import { KebabDropdown } from "cockpit-components-dropdown";
 import { useDialogs } from "dialogs";
 
-import { FolderFileInfo, useFilesContext } from "./app.tsx";
+import { useFilesContext } from "./app.tsx";
+import type { FolderFileInfo, ClipboardInfo } from "./app.tsx";
 import { showKeyboardShortcuts } from "./dialogs/keyboardShortcutsHelp.tsx";
 import { get_menu_items } from "./menu.tsx";
 import { UploadButton } from "./upload-button.tsx";
@@ -146,7 +147,7 @@ export const FilesCardHeader = ({
     sortBy: Sort, setSortBy: React.Dispatch<React.SetStateAction<Sort>>
     showHidden: boolean, setShowHidden: React.Dispatch<React.SetStateAction<boolean>>,
     selected: FolderFileInfo[], setSelected: React.Dispatch<React.SetStateAction<FolderFileInfo[]>>,
-    clipboard: string[], setClipboard: React.Dispatch<React.SetStateAction<string[]>>
+    clipboard: ClipboardInfo, setClipboard: React.Dispatch<React.SetStateAction<ClipboardInfo>>
     path: string,
 }) => {
     const { addAlert, cwdInfo } = useFilesContext();
