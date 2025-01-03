@@ -41,7 +41,7 @@ async function pasteAsOwner(clipboard: ClipboardInfo, dstPath: string, owner: st
         await cockpit.spawn([
             "cp",
             "--recursive",
-            ...clipboard.files.map(file => clipboard.path + file.name),
+            ...clipboard.files.map(file => clipboard.path + "/" + file.name),
             dstPath
         ], { superuser: "try" });
 
@@ -49,11 +49,22 @@ async function pasteAsOwner(clipboard: ClipboardInfo, dstPath: string, owner: st
             "chown",
             "--recursive",
             owner,
-            ...clipboard.files.map(file => dstPath + file.name),
+            ...clipboard.files.map(file => dstPath + "/" + file.name),
         ], { superuser: "try" });
     } catch (err) {
         const e = err as cockpit.BasicError;
         addAlert(e.message, AlertVariant.danger, `${new Date().getTime()}`);
+
+        // cleanup potentially copied files in case of "chown" fail
+        try {
+            await cockpit.spawn([
+                "rm",
+                "-rf",
+                ...clipboard.files.map(file => dstPath + "/" + file.name)
+            ], { superuser: "try" });
+        } catch (ex) {
+            console.warn(`Failed to clean up copied files in ${dstPath}`, ex);
+        }
     }
 }
 
