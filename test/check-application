@@ -330,12 +330,12 @@ class TestFiles(testlib.MachineCase):
         # Change permissions of cwd and see that files-footer-info is updated
         b.go("/files#/?path=/home/admin/newdir")
         self.assert_last_breadcrumb("newdir")
-        b.wait_in_text(".files-footer-info .pf-m-link", "rwx r-x r-x")
+        b.wait_in_text("#files-footer-permissions", "rwx r-x r-x")
         m.execute("chmod 700 /home/admin/newdir")
-        b.wait_in_text(".files-footer-info .pf-m-link", "rwx --- ---")
+        b.wait_in_text("#files-footer-permissions", "rwx --- ---")
 
         # Also check popover
-        b.click(".files-footer-info .pf-m-link")
+        b.click("#files-footer-permissions")
         b.wait_in_text(".pf-v5-c-popover dl div:nth-child(1) > dd", "read, write, and execute")
         b.wait_in_text(".pf-v5-c-popover dl div:nth-child(2) > dd", "none")
         b.wait_in_text(".pf-v5-c-popover dl div:nth-child(3) > dd", "none")
@@ -379,7 +379,7 @@ class TestFiles(testlib.MachineCase):
         # Selecting one file shows its info in the footer
         b.click("[data-item='newdir']")
         b.wait_in_text(".files-footer-info", "newdir")
-        b.wait_in_text(".files-footer-info .pf-m-link", "rwx --- ---")
+        b.wait_in_text("#files-footer-permissions", "rwx --- ---")
 
         # Select multiple files
         m.execute("touch /home/admin/newfile.txt")
