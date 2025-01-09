@@ -102,6 +102,7 @@ export const FilesFooterDetail = ({
                   variant="link"
                   isInline
                   component="pre"
+                  id="files-footer-permissions"
                 >
                     {permissionShortStr(selectedFile.mode)}
                 </Button>
