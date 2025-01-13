@@ -27,6 +27,7 @@ import { Modal, ModalVariant } from "@patternfly/react-core/dist/esm/components/
 import { Text, TextContent } from "@patternfly/react-core/dist/esm/components/Text";
 
 import cockpit from 'cockpit';
+import { FileInfo } from 'cockpit/fsinfo.ts';
 import type { Dialogs, DialogResult } from 'dialogs';
 import { superuser } from 'superuser';
 
@@ -69,6 +70,33 @@ async function pasteAsOwner(clipboard: ClipboardInfo, dstPath: string, owner: st
     }
 }
 
+function makeCandidatesMap(currentUser: cockpit.UserInfo, cwdInfo: FileInfo, clipboard: ClipboardInfo) {
+    const map: Record<string, string> = {};
+    const candidates = get_owner_candidates(currentUser, cwdInfo);
+
+    // also add current ownership if it is same for all files (shallow check)
+    const firstFile = clipboard.files[0];
+    const firstOwnerStr = `${firstFile.user}:${firstFile.group}`;
+    if (clipboard.files.every(file => file.user === firstFile.user && file.group === firstFile.group)) {
+        candidates.add(firstOwnerStr);
+    }
+
+    candidates.forEach(owner => {
+        const split = owner.split(':');
+        let key = owner;
+        if (split.length === 2 && split[0] === split[1]) {
+            key = split[0];
+        }
+        if (owner === firstOwnerStr) {
+            key = `${key} ${_("(original owner)")}`;
+        }
+
+        map[key] = owner;
+    });
+
+    return map;
+}
+
 const CopyPasteAsOwnerModal = ({
     clipboard,
     dialogResult,
@@ -86,11 +114,11 @@ const CopyPasteAsOwnerModal = ({
         cockpit.user().then(user => setCurrentUser(user));
     }, []);
 
-    const candidates = [];
+    let candidatesMap: Record<string, string> = {};
     if (superuser.allowed && currentUser && cwdInfo) {
-        candidates.push(...get_owner_candidates(currentUser, cwdInfo));
+        candidatesMap = makeCandidatesMap(currentUser, cwdInfo, clipboard);
         if (selectedOwner === undefined) {
-            setSelectedOwner(candidates[0]);
+            setSelectedOwner(Object.keys(candidatesMap)[0]);
         }
     }
 
@@ -103,7 +131,7 @@ const CopyPasteAsOwnerModal = ({
             <Button
               variant="primary"
               onClick={() => {
-                  pasteAsOwner(clipboard, path, selectedOwner, addAlert);
+                  pasteAsOwner(clipboard, path, candidatesMap[selectedOwner], addAlert);
                   dialogResult.resolve();
               }}
             >
@@ -123,12 +151,11 @@ const CopyPasteAsOwnerModal = ({
           variant={ModalVariant.small}
           footer={modalFooter}
         >
-            <Form
-                isHorizontal
-            >
+            <Form isHorizontal>
                 <TextContent>
                     <Text>
-                        {_("Files being pasted have a different owner. By default, ownership will be changed to match the destination directory.")}
+                        {_(`Files being pasted have a different owner. By default,
+                            ownership will be changed to match the destination directory.`)}
                     </Text>
                 </TextContent>
                 <FormGroup fieldId="paste-as-owner" label={_("New owner")}>
@@ -137,7 +164,7 @@ const CopyPasteAsOwnerModal = ({
                       value={selectedOwner}
                       onChange={(_ev, val) => setSelectedOwner(val)}
                     >
-                        {candidates.map(user =>
+                        {Object.keys(candidatesMap).map(user =>
                             <FormSelectOption
                               key={user}
                               value={user}

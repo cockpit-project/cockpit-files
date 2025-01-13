@@ -2118,7 +2118,7 @@ class TestFiles(testlib.MachineCase):
         b.click("#dropdown-menu")
         b.click("#paste-item")
         b.wait_visible("#paste-owner-modal")
-        b.select_from_dropdown("#paste-owner-select", "admin:admin")
+        b.select_from_dropdown("#paste-owner-select", "admin (original owner)")
         b.click("#paste-owner-modal button.pf-m-primary")
         b.wait_in_text("[data-item='adminfile'] .item-owner", "admin")
 
@@ -2133,13 +2133,32 @@ class TestFiles(testlib.MachineCase):
         b.click("#dropdown-menu")
         b.click("#paste-item")
         b.wait_visible("#paste-owner-modal")
-        b.select_from_dropdown("#paste-owner-select", "root:root")
+        b.select_from_dropdown("#paste-owner-select", "root")
         b.click("#paste-owner-modal button.pf-m-primary")
         b.wait_in_text("[data-item='kbdCopy'] .item-owner", "root")
         b.go("files#/?path=/home/foouser/kbdCopy")
         self.assert_last_breadcrumb("kbdCopy")
         b.wait_in_text("[data-item='loaded'] .item-owner", "root")
         b.wait_in_text("[data-item='newfile'] .item-owner", "root")
+
+        # Copy file with different user, group
+        b.go("files#/?path=/home/admin")
+        self.assert_last_breadcrumb("admin")
+        m.execute("""
+            touch /home/admin/adminfoofile
+            chown admin:foouser /home/admin/adminfoofile
+        """)
+        b.click("[data-item='adminfoofile']")
+        b.click("#dropdown-menu")
+        b.click("#copy-item")
+        b.go("files#/?path=/home/foouser")
+        self.assert_last_breadcrumb("foouser")
+        b.click("#dropdown-menu")
+        b.click("#paste-item")
+        b.wait_visible("#paste-owner-modal")
+        b.select_from_dropdown("#paste-owner-select", "admin:foouser (original owner)")
+        b.click("#paste-owner-modal button.pf-m-primary")
+        b.wait_in_text("[data-item='adminfoofile'] .item-owner", "admin:foouser")
 
         b.go("files#/?path=/home/admin")
         self.assert_last_breadcrumb("admin")
