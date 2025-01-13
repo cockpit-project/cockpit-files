@@ -24,6 +24,7 @@ import { Button } from "@patternfly/react-core/dist/esm/components/Button";
 import { Form, FormGroup } from "@patternfly/react-core/dist/esm/components/Form";
 import { FormSelect, FormSelectOption } from "@patternfly/react-core/dist/esm/components/FormSelect";
 import { Modal, ModalVariant } from "@patternfly/react-core/dist/esm/components/Modal";
+import { Text, TextContent } from "@patternfly/react-core/dist/esm/components/Text";
 
 import cockpit from 'cockpit';
 import type { Dialogs, DialogResult } from 'dialogs';
@@ -100,7 +101,7 @@ const CopyPasteAsOwnerModal = ({
     const modalFooter = (
         <>
             <Button
-              variant="warning"
+              variant="primary"
               onClick={() => {
                   pasteAsOwner(clipboard, path, selectedOwner, addAlert);
                   dialogResult.resolve();
@@ -116,15 +117,21 @@ const CopyPasteAsOwnerModal = ({
         <Modal
           id="paste-owner-modal"
           position="top"
-          title={_("Select owner of pasted files")}
-          titleIconVariant="warning"
+          title={_("Paste as owner")}
           isOpen
           onClose={() => dialogResult.resolve()}
           variant={ModalVariant.small}
           footer={modalFooter}
         >
-            <Form isHorizontal>
-                <FormGroup fieldId="paste-as-owner" label={_("Paste files as")}>
+            <Form
+                isHorizontal
+            >
+                <TextContent>
+                    <Text>
+                        {_("Files being pasted have a different owner. By default, ownership will be changed to match the destination directory.")}
+                    </Text>
+                </TextContent>
+                <FormGroup fieldId="paste-as-owner" label={_("New owner")}>
                     <FormSelect
                       id='paste-owner-select'
                       value={selectedOwner}
