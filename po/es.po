@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-30 03:05+0000\n"
+"POT-Creation-Date: 2025-01-13 03:17+0000\n"
 "PO-Revision-Date: 2024-12-19 06:52+0000\n"
 "Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
 "memory@weblate.org>\n"
@@ -35,7 +35,7 @@ msgstr "\"$0\" existe, no se permite pegar para sobreescribirlo."
 msgid "$0 files"
 msgstr "$0 archivos"
 
-#: src/files-footer-detail.tsx:35
+#: src/files-footer-detail.tsx:36
 msgid "$0 files selected"
 msgstr "$0 archivos seleccionados"
 
@@ -96,10 +96,10 @@ msgstr "Bloquear dispositivo"
 msgid "Bookmarks"
 msgstr "Marcadores"
 
-#: src/dialogs/permissions.tsx:319 src/dialogs/create-file.tsx:162
+#: src/upload-button.tsx:116 src/dialogs/create-file.tsx:162
+#: src/dialogs/rename.tsx:98 src/dialogs/permissions.tsx:319
 #: src/dialogs/editor.tsx:211 src/dialogs/delete.tsx:91
-#: src/dialogs/rename.tsx:98 src/dialogs/mkdir.tsx:108
-#: src/upload-button.tsx:116
+#: src/dialogs/mkdir.tsx:108
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -143,12 +143,18 @@ msgstr "Dispositivo de caracteres"
 msgid "Clear filter"
 msgstr "Borrar filtro"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:18 src/dialogs/editor.tsx:211
+#: src/dialogs/editor.tsx:211 src/dialogs/keyboardShortcutsHelp.tsx:18
 msgid "Close"
 msgstr "Cerrar"
 
 #: src/index.html:20
 msgid "Cockpit Files"
+msgstr "Cockpit Files"
+
+#: org.cockpit_project.files.metainfo.xml:21
+#, fuzzy
+#| msgid "Cockpit Files"
+msgid "Cockpit Project"
 msgstr "Cockpit Files"
 
 #: src/dialogs/permissions.tsx:284
@@ -167,11 +173,11 @@ msgstr "Copiar archivo o directorio seleccionado"
 msgid "Create"
 msgstr "Crear"
 
-#: src/menu.tsx:95 src/dialogs/mkdir.tsx:92
+#: src/dialogs/mkdir.tsx:92 src/menu.tsx:95
 msgid "Create directory"
 msgstr "Crear directorio"
 
-#: src/menu.tsx:100 src/dialogs/create-file.tsx:146
+#: src/dialogs/create-file.tsx:146 src/menu.tsx:100
 msgid "Create file"
 msgstr "Crear archivo"
 
@@ -179,7 +185,7 @@ msgstr "Crear archivo"
 msgid "Create new directory"
 msgstr "Crear nuevo directorio"
 
-#: src/menu.tsx:157 src/menu.tsx:190 src/dialogs/delete.tsx:90
+#: src/dialogs/delete.tsx:90 src/menu.tsx:157 src/menu.tsx:190
 msgid "Delete"
 msgstr "Eliminar"
 
@@ -207,11 +213,11 @@ msgstr "¿Eliminar enlace $0?"
 msgid "Directory"
 msgstr "Directorio"
 
-#: src/files-footer-detail.tsx:63
+#: src/files-footer-detail.tsx:64
 msgid "Directory contains $0 directories, $1 files"
 msgstr "El directorio contiene $0 directorios, $1 archivos"
 
-#: src/files-footer-detail.tsx:64
+#: src/files-footer-detail.tsx:65
 msgid "Directory contains $0 directories, $1 files, $2 hidden"
 msgstr "El directorio contiene $0 directorios, $1 archivos, $2 ocultos"
 
@@ -356,8 +362,8 @@ msgstr "Avanzar"
 msgid "Go up a directory"
 msgstr "Subir un directorio"
 
-#: src/files-card-body.tsx:572 src/dialogs/permissions.tsx:348
-#: src/files-footer-detail.tsx:75
+#: src/files-card-body.tsx:572 src/files-footer-detail.tsx:80
+#: src/files-footer-detail.tsx:152 src/dialogs/permissions.tsx:348
 msgid "Group"
 msgstr "Grupo"
 
@@ -473,7 +479,7 @@ msgstr "Abrir archivo de texto"
 msgid "Original file on server"
 msgstr "Archivo original en el servidor"
 
-#: src/files-card-body.tsx:572 src/files-footer-detail.tsx:75
+#: src/files-card-body.tsx:572 src/files-footer-detail.tsx:80
 msgid "Others"
 msgstr "Otros"
 
@@ -481,13 +487,13 @@ msgstr "Otros"
 msgid "Others access"
 msgstr "Otros accesos"
 
-#: src/dialogs/editor.tsx:195 src/dialogs/rename.tsx:96
+#: src/dialogs/rename.tsx:96 src/dialogs/editor.tsx:195
 msgid "Overwrite"
 msgstr "Sobrescribir"
 
 #: src/files-card-body.tsx:533 src/files-card-body.tsx:572
-#: src/dialogs/permissions.tsx:333 src/dialogs/create-file.tsx:199
-#: src/header.tsx:98 src/files-footer-detail.tsx:75
+#: src/files-footer-detail.tsx:80 src/dialogs/create-file.tsx:199
+#: src/dialogs/permissions.tsx:333 src/header.tsx:98
 msgid "Owner"
 msgstr "Propietario"
 
@@ -559,7 +565,7 @@ msgstr "Recargar"
 msgid "Remove current directory"
 msgstr "Remover directorio actual"
 
-#: src/menu.tsx:151 src/dialogs/rename.tsx:89
+#: src/dialogs/rename.tsx:89 src/menu.tsx:151
 msgid "Rename"
 msgstr "Renombrar"
 
@@ -671,6 +677,10 @@ msgstr "Subido como $0, $1"
 #: src/upload-button.tsx:439
 msgid "Uploads"
 msgstr "Subidas"
+
+#: src/files-footer-detail.tsx:144
+msgid "User"
+msgstr ""
 
 #: src/dialogs/editor.tsx:170
 msgid "View $0"

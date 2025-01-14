@@ -14,9 +14,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-30 03:05+0000\n"
-"PO-Revision-Date: 2024-12-19 06:52+0000\n"
-"Last-Translator: 김인수 <simmon@nplob.com>\n"
+"POT-Creation-Date: 2025-01-13 03:17+0000\n"
+"PO-Revision-Date: 2025-01-13 14:38+0000\n"
+"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
+"memory@weblate.org>\n"
 "Language-Team: Korean <https://translate.fedoraproject.org/projects/cockpit-"
 "files/cockpit-files/ko/>\n"
 "Language: ko\n"
@@ -24,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
-"X-Generator: Weblate 5.9.1\n"
+"X-Generator: Weblate 5.9.2\n"
 
 #: src/menu.tsx:58
 msgid "\"$0\" exists, not overwriting with paste."
@@ -34,7 +35,7 @@ msgstr "\"$0\" 존재하며, 붙여서 덮어쓰지 않습니다."
 msgid "$0 files"
 msgstr "$0 파일"
 
-#: src/files-footer-detail.tsx:35
+#: src/files-footer-detail.tsx:36
 msgid "$0 files selected"
 msgstr "$0 파일을 선택함"
 
@@ -94,10 +95,10 @@ msgstr "블록 장치"
 msgid "Bookmarks"
 msgstr "즐겨찾기"
 
-#: src/dialogs/permissions.tsx:319 src/dialogs/create-file.tsx:162
+#: src/upload-button.tsx:116 src/dialogs/create-file.tsx:162
+#: src/dialogs/rename.tsx:98 src/dialogs/permissions.tsx:319
 #: src/dialogs/editor.tsx:211 src/dialogs/delete.tsx:91
-#: src/dialogs/rename.tsx:98 src/dialogs/mkdir.tsx:108
-#: src/upload-button.tsx:116
+#: src/dialogs/mkdir.tsx:108
 msgid "Cancel"
 msgstr "취소"
 
@@ -141,13 +142,17 @@ msgstr "문자 장치"
 msgid "Clear filter"
 msgstr "필터 지우기"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:18 src/dialogs/editor.tsx:211
+#: src/dialogs/editor.tsx:211 src/dialogs/keyboardShortcutsHelp.tsx:18
 msgid "Close"
 msgstr "종료"
 
 #: src/index.html:20
 msgid "Cockpit Files"
 msgstr "Cockpit 파일"
+
+#: org.cockpit_project.files.metainfo.xml:21
+msgid "Cockpit Project"
+msgstr "Cockpit 프로젝트"
 
 #: src/dialogs/permissions.tsx:284
 msgid "Collapse"
@@ -165,11 +170,11 @@ msgstr "선택된 파일 또는 디렉토리를 복사"
 msgid "Create"
 msgstr "생성"
 
-#: src/menu.tsx:95 src/dialogs/mkdir.tsx:92
+#: src/dialogs/mkdir.tsx:92 src/menu.tsx:95
 msgid "Create directory"
 msgstr "디렉토리 생성"
 
-#: src/menu.tsx:100 src/dialogs/create-file.tsx:146
+#: src/dialogs/create-file.tsx:146 src/menu.tsx:100
 msgid "Create file"
 msgstr "파일 생성"
 
@@ -177,7 +182,7 @@ msgstr "파일 생성"
 msgid "Create new directory"
 msgstr "신규 디렉토리 생성"
 
-#: src/menu.tsx:157 src/menu.tsx:190 src/dialogs/delete.tsx:90
+#: src/dialogs/delete.tsx:90 src/menu.tsx:157 src/menu.tsx:190
 msgid "Delete"
 msgstr "삭제"
 
@@ -205,11 +210,11 @@ msgstr "링크 $0를 삭제할까요?"
 msgid "Directory"
 msgstr "디렉토리"
 
-#: src/files-footer-detail.tsx:63
+#: src/files-footer-detail.tsx:64
 msgid "Directory contains $0 directories, $1 files"
 msgstr "디렉토리는 $0 디렉토리, $1 파일을 포함합니다"
 
-#: src/files-footer-detail.tsx:64
+#: src/files-footer-detail.tsx:65
 msgid "Directory contains $0 directories, $1 files, $2 hidden"
 msgstr "디렉토리는 $0 디렉토리, $1 파일, $2 숨김 파일을 포함합니다"
 
@@ -354,8 +359,8 @@ msgstr "앞으로 가기"
 msgid "Go up a directory"
 msgstr "상위 디렉토리로 이동"
 
-#: src/files-card-body.tsx:572 src/dialogs/permissions.tsx:348
-#: src/files-footer-detail.tsx:75
+#: src/files-card-body.tsx:572 src/files-footer-detail.tsx:80
+#: src/files-footer-detail.tsx:152 src/dialogs/permissions.tsx:348
 msgid "Group"
 msgstr "그룹"
 
@@ -471,7 +476,7 @@ msgstr "텍스트 파일 열기"
 msgid "Original file on server"
 msgstr "서버에서 원본 파일"
 
-#: src/files-card-body.tsx:572 src/files-footer-detail.tsx:75
+#: src/files-card-body.tsx:572 src/files-footer-detail.tsx:80
 msgid "Others"
 msgstr "기타"
 
@@ -479,13 +484,13 @@ msgstr "기타"
 msgid "Others access"
 msgstr "기타 접근"
 
-#: src/dialogs/editor.tsx:195 src/dialogs/rename.tsx:96
+#: src/dialogs/rename.tsx:96 src/dialogs/editor.tsx:195
 msgid "Overwrite"
 msgstr "덮어쓰기"
 
 #: src/files-card-body.tsx:533 src/files-card-body.tsx:572
-#: src/dialogs/permissions.tsx:333 src/dialogs/create-file.tsx:199
-#: src/header.tsx:98 src/files-footer-detail.tsx:75
+#: src/files-footer-detail.tsx:80 src/dialogs/create-file.tsx:199
+#: src/dialogs/permissions.tsx:333 src/header.tsx:98
 msgid "Owner"
 msgstr "소유자"
 
@@ -557,7 +562,7 @@ msgstr "재적재"
 msgid "Remove current directory"
 msgstr "현재 디렉토리를 제거합니다"
 
-#: src/menu.tsx:151 src/dialogs/rename.tsx:89
+#: src/dialogs/rename.tsx:89 src/menu.tsx:151
 msgid "Rename"
 msgstr "이름변경"
 
@@ -668,6 +673,10 @@ msgstr "$0, $1 로 올려짐"
 #: src/upload-button.tsx:439
 msgid "Uploads"
 msgstr "올려주기"
+
+#: src/files-footer-detail.tsx:144
+msgid "User"
+msgstr "사용자"
 
 #: src/dialogs/editor.tsx:170
 msgid "View $0"

@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-30 03:05+0000\n"
-"PO-Revision-Date: 2024-12-20 21:47+0000\n"
+"POT-Creation-Date: 2025-01-13 03:17+0000\n"
+"PO-Revision-Date: 2025-01-12 13:38+0000\n"
 "Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech <https://translate.fedoraproject.org/projects/cockpit-"
 "files/cockpit-files/cs/>\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2\n"
-"X-Generator: Weblate 5.9.1\n"
+"X-Generator: Weblate 5.9.2\n"
 
 #: src/menu.tsx:58
 msgid "\"$0\" exists, not overwriting with paste."
@@ -34,7 +34,7 @@ msgstr "„$0“ existuje – vložením nebude přepsáno."
 msgid "$0 files"
 msgstr "$0 souborů"
 
-#: src/files-footer-detail.tsx:35
+#: src/files-footer-detail.tsx:36
 msgid "$0 files selected"
 msgstr "$0 souborů vybráno"
 
@@ -95,10 +95,10 @@ msgstr "Blokové zařízení"
 msgid "Bookmarks"
 msgstr "Záložky"
 
-#: src/dialogs/permissions.tsx:319 src/dialogs/create-file.tsx:162
+#: src/upload-button.tsx:116 src/dialogs/create-file.tsx:162
+#: src/dialogs/rename.tsx:98 src/dialogs/permissions.tsx:319
 #: src/dialogs/editor.tsx:211 src/dialogs/delete.tsx:91
-#: src/dialogs/rename.tsx:98 src/dialogs/mkdir.tsx:108
-#: src/upload-button.tsx:116
+#: src/dialogs/mkdir.tsx:108
 msgid "Cancel"
 msgstr "Storno"
 
@@ -143,13 +143,17 @@ msgstr "Znakové zařízení"
 msgid "Clear filter"
 msgstr "Vyčistit filtr"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:18 src/dialogs/editor.tsx:211
+#: src/dialogs/editor.tsx:211 src/dialogs/keyboardShortcutsHelp.tsx:18
 msgid "Close"
 msgstr "Zavřít"
 
 #: src/index.html:20
 msgid "Cockpit Files"
 msgstr "Cockpit Soubory"
+
+#: org.cockpit_project.files.metainfo.xml:21
+msgid "Cockpit Project"
+msgstr "projekt Cockpit"
 
 #: src/dialogs/permissions.tsx:284
 msgid "Collapse"
@@ -167,11 +171,11 @@ msgstr "Zkopírovat označený soubor či složku"
 msgid "Create"
 msgstr "Vytvořit"
 
-#: src/menu.tsx:95 src/dialogs/mkdir.tsx:92
+#: src/dialogs/mkdir.tsx:92 src/menu.tsx:95
 msgid "Create directory"
 msgstr "Vytvořit složku"
 
-#: src/menu.tsx:100 src/dialogs/create-file.tsx:146
+#: src/dialogs/create-file.tsx:146 src/menu.tsx:100
 msgid "Create file"
 msgstr "Vytvořit soubor"
 
@@ -179,7 +183,7 @@ msgstr "Vytvořit soubor"
 msgid "Create new directory"
 msgstr "Vytvořit novou složku"
 
-#: src/menu.tsx:157 src/menu.tsx:190 src/dialogs/delete.tsx:90
+#: src/dialogs/delete.tsx:90 src/menu.tsx:157 src/menu.tsx:190
 msgid "Delete"
 msgstr "Smazat"
 
@@ -207,11 +211,11 @@ msgstr "Smazat odkaz $0?"
 msgid "Directory"
 msgstr "Složka"
 
-#: src/files-footer-detail.tsx:63
+#: src/files-footer-detail.tsx:64
 msgid "Directory contains $0 directories, $1 files"
 msgstr "Složka obsahuje $0 podsložek, $1 souborů"
 
-#: src/files-footer-detail.tsx:64
+#: src/files-footer-detail.tsx:65
 msgid "Directory contains $0 directories, $1 files, $2 hidden"
 msgstr "Složka obsahuje $0 podsložek, $1 souborů, $2 skrytých"
 
@@ -356,8 +360,8 @@ msgstr "Přejít vpřed"
 msgid "Go up a directory"
 msgstr "Do nadřazené složky"
 
-#: src/files-card-body.tsx:572 src/dialogs/permissions.tsx:348
-#: src/files-footer-detail.tsx:75
+#: src/files-card-body.tsx:572 src/files-footer-detail.tsx:80
+#: src/files-footer-detail.tsx:152 src/dialogs/permissions.tsx:348
 msgid "Group"
 msgstr "Skupina"
 
@@ -473,7 +477,7 @@ msgstr "Otevřít textový soubor"
 msgid "Original file on server"
 msgstr "Původní soubor na serveru"
 
-#: src/files-card-body.tsx:572 src/files-footer-detail.tsx:75
+#: src/files-card-body.tsx:572 src/files-footer-detail.tsx:80
 msgid "Others"
 msgstr "Ostatní"
 
@@ -481,13 +485,13 @@ msgstr "Ostatní"
 msgid "Others access"
 msgstr "Přístup pro ostatní"
 
-#: src/dialogs/editor.tsx:195 src/dialogs/rename.tsx:96
+#: src/dialogs/rename.tsx:96 src/dialogs/editor.tsx:195
 msgid "Overwrite"
 msgstr "Přepsat"
 
 #: src/files-card-body.tsx:533 src/files-card-body.tsx:572
-#: src/dialogs/permissions.tsx:333 src/dialogs/create-file.tsx:199
-#: src/header.tsx:98 src/files-footer-detail.tsx:75
+#: src/files-footer-detail.tsx:80 src/dialogs/create-file.tsx:199
+#: src/dialogs/permissions.tsx:333 src/header.tsx:98
 msgid "Owner"
 msgstr "Vlastník"
 
@@ -559,7 +563,7 @@ msgstr "Načíst znovu"
 msgid "Remove current directory"
 msgstr "Odebrat stávající složku"
 
-#: src/menu.tsx:151 src/dialogs/rename.tsx:89
+#: src/dialogs/rename.tsx:89 src/menu.tsx:151
 msgid "Rename"
 msgstr "Přejmenovat"
 
@@ -670,6 +674,10 @@ msgstr "Nahráno jako $0,$1"
 #: src/upload-button.tsx:439
 msgid "Uploads"
 msgstr "Nahrání"
+
+#: src/files-footer-detail.tsx:144
+msgid "User"
+msgstr ""
 
 #: src/dialogs/editor.tsx:170
 msgid "View $0"

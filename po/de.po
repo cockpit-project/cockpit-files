@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: starter-kit 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-30 03:05+0000\n"
+"POT-Creation-Date: 2025-01-13 03:17+0000\n"
 "PO-Revision-Date: 2024-12-30 06:32+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German <https://translate.fedoraproject.org/projects/cockpit-"
@@ -23,7 +23,7 @@ msgstr "\"$0\" existiert, es wird nicht mit Einfügen überschrieben."
 msgid "$0 files"
 msgstr "$0 Dateien"
 
-#: src/files-footer-detail.tsx:35
+#: src/files-footer-detail.tsx:36
 msgid "$0 files selected"
 msgstr "$0 Dateien ausgewählt"
 
@@ -84,10 +84,10 @@ msgstr "Blockiere Gerät"
 msgid "Bookmarks"
 msgstr "Lesezeichen"
 
-#: src/dialogs/permissions.tsx:319 src/dialogs/create-file.tsx:162
+#: src/upload-button.tsx:116 src/dialogs/create-file.tsx:162
+#: src/dialogs/rename.tsx:98 src/dialogs/permissions.tsx:319
 #: src/dialogs/editor.tsx:211 src/dialogs/delete.tsx:91
-#: src/dialogs/rename.tsx:98 src/dialogs/mkdir.tsx:108
-#: src/upload-button.tsx:116
+#: src/dialogs/mkdir.tsx:108
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -131,13 +131,19 @@ msgstr "Zeichengerät"
 msgid "Clear filter"
 msgstr "Filter entfernen"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:18 src/dialogs/editor.tsx:211
+#: src/dialogs/editor.tsx:211 src/dialogs/keyboardShortcutsHelp.tsx:18
 msgid "Close"
 msgstr "Schließen"
 
 #: src/index.html:20
 msgid "Cockpit Files"
 msgstr "Cockpit-Dateien"
+
+#: org.cockpit_project.files.metainfo.xml:21
+#, fuzzy
+#| msgid "Cockpit Starter Kit"
+msgid "Cockpit Project"
+msgstr "Cockpit Bausatz"
 
 #: src/dialogs/permissions.tsx:284
 msgid "Collapse"
@@ -155,11 +161,11 @@ msgstr "Ausgewählte Datei oder ausgewähltes Verzeichnis kopieren"
 msgid "Create"
 msgstr "Erstellen"
 
-#: src/menu.tsx:95 src/dialogs/mkdir.tsx:92
+#: src/dialogs/mkdir.tsx:92 src/menu.tsx:95
 msgid "Create directory"
 msgstr "Verzeichnis erstellen"
 
-#: src/menu.tsx:100 src/dialogs/create-file.tsx:146
+#: src/dialogs/create-file.tsx:146 src/menu.tsx:100
 msgid "Create file"
 msgstr "Datei erstellen"
 
@@ -167,7 +173,7 @@ msgstr "Datei erstellen"
 msgid "Create new directory"
 msgstr "Neues Verzeichnis erstellen"
 
-#: src/menu.tsx:157 src/menu.tsx:190 src/dialogs/delete.tsx:90
+#: src/dialogs/delete.tsx:90 src/menu.tsx:157 src/menu.tsx:190
 msgid "Delete"
 msgstr "Löschen"
 
@@ -195,11 +201,11 @@ msgstr "Link $0 löschen?"
 msgid "Directory"
 msgstr "Verzeichnis"
 
-#: src/files-footer-detail.tsx:63
+#: src/files-footer-detail.tsx:64
 msgid "Directory contains $0 directories, $1 files"
 msgstr "Verzeichnis enthält $0 Verzeichnisse, $1 Dateien"
 
-#: src/files-footer-detail.tsx:64
+#: src/files-footer-detail.tsx:65
 msgid "Directory contains $0 directories, $1 files, $2 hidden"
 msgstr "Verzeichnis enthält $0 Verzeichnisse, $1 Dateien, $2 versteckte"
 
@@ -344,8 +350,8 @@ msgstr "Weitergehen"
 msgid "Go up a directory"
 msgstr "Ein Verzeichnis nach oben gehen"
 
-#: src/files-card-body.tsx:572 src/dialogs/permissions.tsx:348
-#: src/files-footer-detail.tsx:75
+#: src/files-card-body.tsx:572 src/files-footer-detail.tsx:80
+#: src/files-footer-detail.tsx:152 src/dialogs/permissions.tsx:348
 msgid "Group"
 msgstr "Gruppe"
 
@@ -462,7 +468,7 @@ msgstr "Textdatei öffnen"
 msgid "Original file on server"
 msgstr "Originaldatei auf dem Server"
 
-#: src/files-card-body.tsx:572 src/files-footer-detail.tsx:75
+#: src/files-card-body.tsx:572 src/files-footer-detail.tsx:80
 msgid "Others"
 msgstr "Andere"
 
@@ -470,13 +476,13 @@ msgstr "Andere"
 msgid "Others access"
 msgstr "Anderer Zugriff"
 
-#: src/dialogs/editor.tsx:195 src/dialogs/rename.tsx:96
+#: src/dialogs/rename.tsx:96 src/dialogs/editor.tsx:195
 msgid "Overwrite"
 msgstr "Überschreiben"
 
 #: src/files-card-body.tsx:533 src/files-card-body.tsx:572
-#: src/dialogs/permissions.tsx:333 src/dialogs/create-file.tsx:199
-#: src/header.tsx:98 src/files-footer-detail.tsx:75
+#: src/files-footer-detail.tsx:80 src/dialogs/create-file.tsx:199
+#: src/dialogs/permissions.tsx:333 src/header.tsx:98
 msgid "Owner"
 msgstr "Eigentümer"
 
@@ -548,7 +554,7 @@ msgstr "Neu laden"
 msgid "Remove current directory"
 msgstr "Aktuelles Verzeichnis entfernen"
 
-#: src/menu.tsx:151 src/dialogs/rename.tsx:89
+#: src/dialogs/rename.tsx:89 src/menu.tsx:151
 msgid "Rename"
 msgstr "Umbenennen"
 
@@ -661,6 +667,10 @@ msgstr "Als $0, $1 hochgeladen"
 msgid "Uploads"
 msgstr ""
 
+#: src/files-footer-detail.tsx:144
+msgid "User"
+msgstr ""
+
 #: src/dialogs/editor.tsx:170
 msgid "View $0"
 msgstr "$0 ansehen"
@@ -716,9 +726,6 @@ msgstr "Dateisystem"
 
 #~ msgid "A file system browser for Cockpit."
 #~ msgstr "Ein Dateisystembrowser für Cockpit."
-
-#~ msgid "Cockpit Starter Kit"
-#~ msgstr "Cockpit Bausatz"
 
 #~ msgid "Running on $0"
 #~ msgstr "Läuft auf $0"

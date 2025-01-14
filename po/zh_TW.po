@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-30 03:05+0000\n"
+"POT-Creation-Date: 2025-01-13 03:17+0000\n"
 "PO-Revision-Date: 2024-12-01 15:38+0000\n"
 "Last-Translator: JW Wang <v72807647@gmail.com>\n"
 "Language-Team: Chinese (Traditional) <https://translate.fedoraproject.org/"
@@ -36,7 +36,7 @@ msgstr "\"$0\" 已存在，將不會貼上以免遭覆寫。"
 msgid "$0 files"
 msgstr "檔案"
 
-#: src/files-footer-detail.tsx:35
+#: src/files-footer-detail.tsx:36
 msgid "$0 files selected"
 msgstr "已選擇 $0 個檔案"
 
@@ -93,10 +93,10 @@ msgstr "區塊裝置"
 msgid "Bookmarks"
 msgstr "書籤"
 
-#: src/dialogs/permissions.tsx:319 src/dialogs/create-file.tsx:162
+#: src/upload-button.tsx:116 src/dialogs/create-file.tsx:162
+#: src/dialogs/rename.tsx:98 src/dialogs/permissions.tsx:319
 #: src/dialogs/editor.tsx:211 src/dialogs/delete.tsx:91
-#: src/dialogs/rename.tsx:98 src/dialogs/mkdir.tsx:108
-#: src/upload-button.tsx:116
+#: src/dialogs/mkdir.tsx:108
 msgid "Cancel"
 msgstr "取消"
 
@@ -142,12 +142,18 @@ msgstr "字元裝置"
 msgid "Clear filter"
 msgstr "清除篩選器"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:18 src/dialogs/editor.tsx:211
+#: src/dialogs/editor.tsx:211 src/dialogs/keyboardShortcutsHelp.tsx:18
 msgid "Close"
 msgstr "關閉"
 
 #: src/index.html:20
 msgid "Cockpit Files"
+msgstr "Cockpit Files"
+
+#: org.cockpit_project.files.metainfo.xml:21
+#, fuzzy
+#| msgid "Cockpit Files"
+msgid "Cockpit Project"
 msgstr "Cockpit Files"
 
 #: src/dialogs/permissions.tsx:284
@@ -166,11 +172,11 @@ msgstr "複製已選擇的檔案或目錄"
 msgid "Create"
 msgstr "建立"
 
-#: src/menu.tsx:95 src/dialogs/mkdir.tsx:92
+#: src/dialogs/mkdir.tsx:92 src/menu.tsx:95
 msgid "Create directory"
 msgstr "建立目錄"
 
-#: src/menu.tsx:100 src/dialogs/create-file.tsx:146
+#: src/dialogs/create-file.tsx:146 src/menu.tsx:100
 msgid "Create file"
 msgstr "建立檔案"
 
@@ -178,7 +184,7 @@ msgstr "建立檔案"
 msgid "Create new directory"
 msgstr "建立新目錄"
 
-#: src/menu.tsx:157 src/menu.tsx:190 src/dialogs/delete.tsx:90
+#: src/dialogs/delete.tsx:90 src/menu.tsx:157 src/menu.tsx:190
 msgid "Delete"
 msgstr "刪除"
 
@@ -206,11 +212,11 @@ msgstr "刪除連結 $0 ？"
 msgid "Directory"
 msgstr "目錄"
 
-#: src/files-footer-detail.tsx:63
+#: src/files-footer-detail.tsx:64
 msgid "Directory contains $0 directories, $1 files"
 msgstr "此目錄包含 $0 個目錄、$1 個檔案"
 
-#: src/files-footer-detail.tsx:64
+#: src/files-footer-detail.tsx:65
 msgid "Directory contains $0 directories, $1 files, $2 hidden"
 msgstr "此目錄包含 $0 個目錄、$1 個檔案、$2 個隱藏項目"
 
@@ -361,8 +367,8 @@ msgstr "前進"
 msgid "Go up a directory"
 msgstr "回上一層目錄"
 
-#: src/files-card-body.tsx:572 src/dialogs/permissions.tsx:348
-#: src/files-footer-detail.tsx:75
+#: src/files-card-body.tsx:572 src/files-footer-detail.tsx:80
+#: src/files-footer-detail.tsx:152 src/dialogs/permissions.tsx:348
 msgid "Group"
 msgstr "群組"
 
@@ -478,7 +484,7 @@ msgstr "開啟文字檔案"
 msgid "Original file on server"
 msgstr "伺服器上原有的檔案"
 
-#: src/files-card-body.tsx:572 src/files-footer-detail.tsx:75
+#: src/files-card-body.tsx:572 src/files-footer-detail.tsx:80
 msgid "Others"
 msgstr "其他人"
 
@@ -486,13 +492,13 @@ msgstr "其他人"
 msgid "Others access"
 msgstr "其他人的存取權限"
 
-#: src/dialogs/editor.tsx:195 src/dialogs/rename.tsx:96
+#: src/dialogs/rename.tsx:96 src/dialogs/editor.tsx:195
 msgid "Overwrite"
 msgstr "覆寫"
 
 #: src/files-card-body.tsx:533 src/files-card-body.tsx:572
-#: src/dialogs/permissions.tsx:333 src/dialogs/create-file.tsx:199
-#: src/header.tsx:98 src/files-footer-detail.tsx:75
+#: src/files-footer-detail.tsx:80 src/dialogs/create-file.tsx:199
+#: src/dialogs/permissions.tsx:333 src/header.tsx:98
 msgid "Owner"
 msgstr "擁有者"
 
@@ -566,7 +572,7 @@ msgstr "重新載入"
 msgid "Remove current directory"
 msgstr "移除目前的目錄"
 
-#: src/menu.tsx:151 src/dialogs/rename.tsx:89
+#: src/dialogs/rename.tsx:89 src/menu.tsx:151
 msgid "Rename"
 msgstr "重新命名"
 
@@ -678,6 +684,10 @@ msgstr ""
 #: src/upload-button.tsx:439
 msgid "Uploads"
 msgstr "上傳項目"
+
+#: src/files-footer-detail.tsx:144
+msgid "User"
+msgstr ""
 
 #: src/dialogs/editor.tsx:170
 msgid "View $0"

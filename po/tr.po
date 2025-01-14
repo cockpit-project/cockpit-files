@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-30 03:05+0000\n"
-"PO-Revision-Date: 2024-12-20 07:38+0000\n"
+"POT-Creation-Date: 2025-01-13 03:17+0000\n"
+"PO-Revision-Date: 2025-01-13 14:38+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
 "Language-Team: Turkish <https://translate.fedoraproject.org/projects/cockpit-"
 "files/cockpit-files/tr/>\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1\n"
-"X-Generator: Weblate 5.9.1\n"
+"X-Generator: Weblate 5.9.2\n"
 
 #: src/menu.tsx:58
 msgid "\"$0\" exists, not overwriting with paste."
@@ -34,7 +34,7 @@ msgstr "\"$0\" var, yapıştırma ile üzerine yazılmıyor."
 msgid "$0 files"
 msgstr "$0 dosya"
 
-#: src/files-footer-detail.tsx:35
+#: src/files-footer-detail.tsx:36
 msgid "$0 files selected"
 msgstr "$0 dosya seçildi"
 
@@ -95,10 +95,10 @@ msgstr "Blok aygıtı"
 msgid "Bookmarks"
 msgstr "Yer imleri"
 
-#: src/dialogs/permissions.tsx:319 src/dialogs/create-file.tsx:162
+#: src/upload-button.tsx:116 src/dialogs/create-file.tsx:162
+#: src/dialogs/rename.tsx:98 src/dialogs/permissions.tsx:319
 #: src/dialogs/editor.tsx:211 src/dialogs/delete.tsx:91
-#: src/dialogs/rename.tsx:98 src/dialogs/mkdir.tsx:108
-#: src/upload-button.tsx:116
+#: src/dialogs/mkdir.tsx:108
 msgid "Cancel"
 msgstr "İptal"
 
@@ -142,13 +142,17 @@ msgstr "Karakter aygıtı"
 msgid "Clear filter"
 msgstr "Filtreyi temizle"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:18 src/dialogs/editor.tsx:211
+#: src/dialogs/editor.tsx:211 src/dialogs/keyboardShortcutsHelp.tsx:18
 msgid "Close"
 msgstr "Kapat"
 
 #: src/index.html:20
 msgid "Cockpit Files"
 msgstr "Cockpit Dosyalar"
+
+#: org.cockpit_project.files.metainfo.xml:21
+msgid "Cockpit Project"
+msgstr "Cockpit Projesi"
 
 #: src/dialogs/permissions.tsx:284
 msgid "Collapse"
@@ -166,11 +170,11 @@ msgstr "Seçili dosya veya dizini kopyala"
 msgid "Create"
 msgstr "Oluştur"
 
-#: src/menu.tsx:95 src/dialogs/mkdir.tsx:92
+#: src/dialogs/mkdir.tsx:92 src/menu.tsx:95
 msgid "Create directory"
 msgstr "Dizin oluştur"
 
-#: src/menu.tsx:100 src/dialogs/create-file.tsx:146
+#: src/dialogs/create-file.tsx:146 src/menu.tsx:100
 msgid "Create file"
 msgstr "Dosya oluştur"
 
@@ -178,7 +182,7 @@ msgstr "Dosya oluştur"
 msgid "Create new directory"
 msgstr "Yeni dizin oluştur"
 
-#: src/menu.tsx:157 src/menu.tsx:190 src/dialogs/delete.tsx:90
+#: src/dialogs/delete.tsx:90 src/menu.tsx:157 src/menu.tsx:190
 msgid "Delete"
 msgstr "Sil"
 
@@ -206,11 +210,11 @@ msgstr "$0 bağlantısı silinsin mi?"
 msgid "Directory"
 msgstr "Dizin"
 
-#: src/files-footer-detail.tsx:63
+#: src/files-footer-detail.tsx:64
 msgid "Directory contains $0 directories, $1 files"
 msgstr "Dizin, $0 dizin ve $1 dosya içeriyor"
 
-#: src/files-footer-detail.tsx:64
+#: src/files-footer-detail.tsx:65
 msgid "Directory contains $0 directories, $1 files, $2 hidden"
 msgstr "Dizin, $0 dizin ve $1 dosya içeriyor, $2 tanesi gizli"
 
@@ -355,8 +359,8 @@ msgstr "İleri git"
 msgid "Go up a directory"
 msgstr "Bir dizin yukarı git"
 
-#: src/files-card-body.tsx:572 src/dialogs/permissions.tsx:348
-#: src/files-footer-detail.tsx:75
+#: src/files-card-body.tsx:572 src/files-footer-detail.tsx:80
+#: src/files-footer-detail.tsx:152 src/dialogs/permissions.tsx:348
 msgid "Group"
 msgstr "Grup"
 
@@ -472,7 +476,7 @@ msgstr "Metin dosyası aç"
 msgid "Original file on server"
 msgstr "Sunucudaki orijinal dosya"
 
-#: src/files-card-body.tsx:572 src/files-footer-detail.tsx:75
+#: src/files-card-body.tsx:572 src/files-footer-detail.tsx:80
 msgid "Others"
 msgstr "Diğerleri"
 
@@ -480,13 +484,13 @@ msgstr "Diğerleri"
 msgid "Others access"
 msgstr "Diğerlerinin erişimi"
 
-#: src/dialogs/editor.tsx:195 src/dialogs/rename.tsx:96
+#: src/dialogs/rename.tsx:96 src/dialogs/editor.tsx:195
 msgid "Overwrite"
 msgstr "Üzerine yaz"
 
 #: src/files-card-body.tsx:533 src/files-card-body.tsx:572
-#: src/dialogs/permissions.tsx:333 src/dialogs/create-file.tsx:199
-#: src/header.tsx:98 src/files-footer-detail.tsx:75
+#: src/files-footer-detail.tsx:80 src/dialogs/create-file.tsx:199
+#: src/dialogs/permissions.tsx:333 src/header.tsx:98
 msgid "Owner"
 msgstr "Sahibi"
 
@@ -558,7 +562,7 @@ msgstr "Yeniden yükle"
 msgid "Remove current directory"
 msgstr "Geçerli dizini kaldır"
 
-#: src/menu.tsx:151 src/dialogs/rename.tsx:89
+#: src/dialogs/rename.tsx:89 src/menu.tsx:151
 msgid "Rename"
 msgstr "Yeniden adlandır"
 
@@ -669,6 +673,10 @@ msgstr "$0, $1 olarak karşıya yüklendi"
 #: src/upload-button.tsx:439
 msgid "Uploads"
 msgstr "Yüklenenler"
+
+#: src/files-footer-detail.tsx:144
+msgid "User"
+msgstr "Kullanıcı"
 
 #: src/dialogs/editor.tsx:170
 msgid "View $0"
