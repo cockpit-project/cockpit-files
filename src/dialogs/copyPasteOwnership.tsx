@@ -71,7 +71,7 @@ async function pasteAsOwner(clipboard: ClipboardInfo, dstPath: string, owner: st
 }
 
 function makeCandidatesMap(currentUser: cockpit.UserInfo, cwdInfo: FileInfo, clipboard: ClipboardInfo) {
-    const map: Record<string, string> = {};
+    const map: Map<string, string> = new Map();
     const candidates = get_owner_candidates(currentUser, cwdInfo);
 
     // also add current ownership if it is same for all files (shallow check)
@@ -91,7 +91,7 @@ function makeCandidatesMap(currentUser: cockpit.UserInfo, cwdInfo: FileInfo, cli
             key = `${key} ${_("(original owner)")}`;
         }
 
-        map[key] = owner;
+        map.set(key, owner);
     });
 
     return map;
@@ -114,11 +114,11 @@ const CopyPasteAsOwnerModal = ({
         cockpit.user().then(user => setCurrentUser(user));
     }, []);
 
-    let candidatesMap: Record<string, string> = {};
+    let candidatesMap: Map<string, string> = new Map();
     if (superuser.allowed && currentUser && cwdInfo) {
         candidatesMap = makeCandidatesMap(currentUser, cwdInfo, clipboard);
         if (selectedOwner === undefined) {
-            setSelectedOwner(Object.keys(candidatesMap)[0]);
+            setSelectedOwner(candidatesMap.keys().next().value);
         }
     }
 
@@ -126,12 +126,15 @@ const CopyPasteAsOwnerModal = ({
         return;
     }
 
+    const selectedVal = candidatesMap.get(selectedOwner);
+    cockpit.assert(selectedVal !== undefined, "New file ownership undefined");
+
     const modalFooter = (
         <>
             <Button
               variant="primary"
               onClick={() => {
-                  pasteAsOwner(clipboard, path, candidatesMap[selectedOwner], addAlert);
+                  pasteAsOwner(clipboard, path, selectedVal, addAlert);
                   dialogResult.resolve();
               }}
             >
@@ -164,7 +167,7 @@ const CopyPasteAsOwnerModal = ({
                       value={selectedOwner}
                       onChange={(_ev, val) => setSelectedOwner(val)}
                     >
-                        {Object.keys(candidatesMap).map(user =>
+                        {[...candidatesMap.keys()].map(user =>
                             <FormSelectOption
                               key={user}
                               value={user}
@@ -172,9 +175,7 @@ const CopyPasteAsOwnerModal = ({
                             />)}
                     </FormSelect>
                 </FormGroup>
-
             </Form>
-
         </Modal>
     );
 };
