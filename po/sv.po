@@ -14,9 +14,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-30 03:05+0000\n"
-"PO-Revision-Date: 2024-12-26 11:38+0000\n"
-"Last-Translator: Luna Jernberg <bittin@reimu.nl>\n"
+"POT-Creation-Date: 2025-01-13 03:17+0000\n"
+"PO-Revision-Date: 2025-01-13 14:38+0000\n"
+"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
+"memory@weblate.org>\n"
 "Language-Team: Swedish <https://translate.fedoraproject.org/projects/cockpit-"
 "files/cockpit-files/sv/>\n"
 "Language: sv\n"
@@ -34,7 +35,7 @@ msgstr "\"$0\" existerar, skriver inte över med klistra in."
 msgid "$0 files"
 msgstr "$0 filer"
 
-#: src/files-footer-detail.tsx:35
+#: src/files-footer-detail.tsx:36
 msgid "$0 files selected"
 msgstr "$0 filer valda"
 
@@ -95,10 +96,10 @@ msgstr "Blockenhet"
 msgid "Bookmarks"
 msgstr "Bokmärken"
 
-#: src/dialogs/permissions.tsx:319 src/dialogs/create-file.tsx:162
+#: src/upload-button.tsx:116 src/dialogs/create-file.tsx:162
+#: src/dialogs/rename.tsx:98 src/dialogs/permissions.tsx:319
 #: src/dialogs/editor.tsx:211 src/dialogs/delete.tsx:91
-#: src/dialogs/rename.tsx:98 src/dialogs/mkdir.tsx:108
-#: src/upload-button.tsx:116
+#: src/dialogs/mkdir.tsx:108
 msgid "Cancel"
 msgstr "Avbryt"
 
@@ -142,13 +143,17 @@ msgstr "Teckenenhet"
 msgid "Clear filter"
 msgstr "Rensa filter"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:18 src/dialogs/editor.tsx:211
+#: src/dialogs/editor.tsx:211 src/dialogs/keyboardShortcutsHelp.tsx:18
 msgid "Close"
 msgstr "Stäng"
 
 #: src/index.html:20
 msgid "Cockpit Files"
 msgstr "Cockpit filer"
+
+#: org.cockpit_project.files.metainfo.xml:21
+msgid "Cockpit Project"
+msgstr "Cockpitprojektet"
 
 #: src/dialogs/permissions.tsx:284
 msgid "Collapse"
@@ -166,11 +171,11 @@ msgstr "Kopiera vald fil eller katalog"
 msgid "Create"
 msgstr "Skapa"
 
-#: src/menu.tsx:95 src/dialogs/mkdir.tsx:92
+#: src/dialogs/mkdir.tsx:92 src/menu.tsx:95
 msgid "Create directory"
 msgstr "Skapa katalog"
 
-#: src/menu.tsx:100 src/dialogs/create-file.tsx:146
+#: src/dialogs/create-file.tsx:146 src/menu.tsx:100
 msgid "Create file"
 msgstr "Skapa fil"
 
@@ -178,7 +183,7 @@ msgstr "Skapa fil"
 msgid "Create new directory"
 msgstr "Skapa ny katalog"
 
-#: src/menu.tsx:157 src/menu.tsx:190 src/dialogs/delete.tsx:90
+#: src/dialogs/delete.tsx:90 src/menu.tsx:157 src/menu.tsx:190
 msgid "Delete"
 msgstr "Ta bort"
 
@@ -206,11 +211,11 @@ msgstr "Radera länk $0?"
 msgid "Directory"
 msgstr "Katalog"
 
-#: src/files-footer-detail.tsx:63
+#: src/files-footer-detail.tsx:64
 msgid "Directory contains $0 directories, $1 files"
 msgstr "Katalog innehåller $0 kataloger, $1 filer"
 
-#: src/files-footer-detail.tsx:64
+#: src/files-footer-detail.tsx:65
 msgid "Directory contains $0 directories, $1 files, $2 hidden"
 msgstr "Katalog innehåller $0 kataloger, $1 filer, $2 dolda"
 
@@ -355,8 +360,8 @@ msgstr "Gå framåt"
 msgid "Go up a directory"
 msgstr "Gå upp en katalog"
 
-#: src/files-card-body.tsx:572 src/dialogs/permissions.tsx:348
-#: src/files-footer-detail.tsx:75
+#: src/files-card-body.tsx:572 src/files-footer-detail.tsx:80
+#: src/files-footer-detail.tsx:152 src/dialogs/permissions.tsx:348
 msgid "Group"
 msgstr "Grupp"
 
@@ -472,7 +477,7 @@ msgstr "Öppna en textfil"
 msgid "Original file on server"
 msgstr "Original fil på server"
 
-#: src/files-card-body.tsx:572 src/files-footer-detail.tsx:75
+#: src/files-card-body.tsx:572 src/files-footer-detail.tsx:80
 msgid "Others"
 msgstr "Andra"
 
@@ -480,13 +485,13 @@ msgstr "Andra"
 msgid "Others access"
 msgstr "Andra tillgång"
 
-#: src/dialogs/editor.tsx:195 src/dialogs/rename.tsx:96
+#: src/dialogs/rename.tsx:96 src/dialogs/editor.tsx:195
 msgid "Overwrite"
 msgstr "Skriv över"
 
 #: src/files-card-body.tsx:533 src/files-card-body.tsx:572
-#: src/dialogs/permissions.tsx:333 src/dialogs/create-file.tsx:199
-#: src/header.tsx:98 src/files-footer-detail.tsx:75
+#: src/files-footer-detail.tsx:80 src/dialogs/create-file.tsx:199
+#: src/dialogs/permissions.tsx:333 src/header.tsx:98
 msgid "Owner"
 msgstr "Ägare"
 
@@ -558,7 +563,7 @@ msgstr "Ladda om"
 msgid "Remove current directory"
 msgstr "Ta bort aktuell katalog"
 
-#: src/menu.tsx:151 src/dialogs/rename.tsx:89
+#: src/dialogs/rename.tsx:89 src/menu.tsx:151
 msgid "Rename"
 msgstr "Byt namn"
 
@@ -669,6 +674,10 @@ msgstr "Uppladdad som $0,$1"
 #: src/upload-button.tsx:439
 msgid "Uploads"
 msgstr "Uppladdningar"
+
+#: src/files-footer-detail.tsx:144
+msgid "User"
+msgstr "Användare"
 
 #: src/dialogs/editor.tsx:170
 msgid "View $0"

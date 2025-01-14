@@ -14,10 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-30 03:05+0000\n"
-"PO-Revision-Date: 2024-12-20 07:38+0000\n"
-"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
-"memory@weblate.org>\n"
+"POT-Creation-Date: 2025-01-13 03:17+0000\n"
+"PO-Revision-Date: 2025-01-09 06:42+0000\n"
+"Last-Translator: Ricky Tigg <ricky.tigg@gmail.com>\n"
 "Language-Team: Finnish <https://translate.fedoraproject.org/projects/cockpit-"
 "files/cockpit-files/fi/>\n"
 "Language: fi\n"
@@ -25,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1\n"
-"X-Generator: Weblate 5.9.1\n"
+"X-Generator: Weblate 5.9.2\n"
 
 #: src/menu.tsx:58
 msgid "\"$0\" exists, not overwriting with paste."
@@ -35,7 +34,7 @@ msgstr "\"$0\" on olemassa, eikä sitä korvata liittämällä."
 msgid "$0 files"
 msgstr "$0 tiedostoa"
 
-#: src/files-footer-detail.tsx:35
+#: src/files-footer-detail.tsx:36
 msgid "$0 files selected"
 msgstr "$0 tiedostoa valittu"
 
@@ -47,7 +46,7 @@ msgstr[1] "$0 kohdetta on piilotettu"
 
 #: src/dialogs/permissions.tsx:299
 msgid "$0 permissions"
-msgstr "$0 käyttöoikeutta"
+msgstr "$0 käyttöoikeudet"
 
 #: org.cockpit_project.files.metainfo.xml:8
 msgid ""
@@ -96,10 +95,10 @@ msgstr "Lohkolaite"
 msgid "Bookmarks"
 msgstr "Kirjanmerkit"
 
-#: src/dialogs/permissions.tsx:319 src/dialogs/create-file.tsx:162
+#: src/upload-button.tsx:116 src/dialogs/create-file.tsx:162
+#: src/dialogs/rename.tsx:98 src/dialogs/permissions.tsx:319
 #: src/dialogs/editor.tsx:211 src/dialogs/delete.tsx:91
-#: src/dialogs/rename.tsx:98 src/dialogs/mkdir.tsx:108
-#: src/upload-button.tsx:116
+#: src/dialogs/mkdir.tsx:108
 msgid "Cancel"
 msgstr "Peru"
 
@@ -143,12 +142,18 @@ msgstr "Merkkilaite"
 msgid "Clear filter"
 msgstr "Tyhjennä suodatin"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:18 src/dialogs/editor.tsx:211
+#: src/dialogs/editor.tsx:211 src/dialogs/keyboardShortcutsHelp.tsx:18
 msgid "Close"
 msgstr "Sulje"
 
 #: src/index.html:20
 msgid "Cockpit Files"
+msgstr "Cockpit-tiedostot"
+
+#: org.cockpit_project.files.metainfo.xml:21
+#, fuzzy
+#| msgid "Cockpit Files"
+msgid "Cockpit Project"
 msgstr "Cockpit-tiedostot"
 
 #: src/dialogs/permissions.tsx:284
@@ -167,11 +172,11 @@ msgstr "Kopioi valittu tiedosto tai kansio"
 msgid "Create"
 msgstr "Luo"
 
-#: src/menu.tsx:95 src/dialogs/mkdir.tsx:92
+#: src/dialogs/mkdir.tsx:92 src/menu.tsx:95
 msgid "Create directory"
 msgstr "Luo hakemisto"
 
-#: src/menu.tsx:100 src/dialogs/create-file.tsx:146
+#: src/dialogs/create-file.tsx:146 src/menu.tsx:100
 msgid "Create file"
 msgstr "Luo tiedosto"
 
@@ -179,7 +184,7 @@ msgstr "Luo tiedosto"
 msgid "Create new directory"
 msgstr "Luo uusi hakemisto"
 
-#: src/menu.tsx:157 src/menu.tsx:190 src/dialogs/delete.tsx:90
+#: src/dialogs/delete.tsx:90 src/menu.tsx:157 src/menu.tsx:190
 msgid "Delete"
 msgstr "Poista"
 
@@ -207,11 +212,11 @@ msgstr "Poistetaanko linkki $0?"
 msgid "Directory"
 msgstr "Hakemisto"
 
-#: src/files-footer-detail.tsx:63
+#: src/files-footer-detail.tsx:64
 msgid "Directory contains $0 directories, $1 files"
 msgstr "Hakemisto sisältää $0 hakemistoa, $1 tiedostoa"
 
-#: src/files-footer-detail.tsx:64
+#: src/files-footer-detail.tsx:65
 msgid "Directory contains $0 directories, $1 files, $2 hidden"
 msgstr "Hakemisto sisältää $0 hakemistoa, $1 tiedostoa, $2 piilotettua"
 
@@ -356,8 +361,8 @@ msgstr "Siirry eteenpäin"
 msgid "Go up a directory"
 msgstr "Siirry yksi hakemisto ylös"
 
-#: src/files-card-body.tsx:572 src/dialogs/permissions.tsx:348
-#: src/files-footer-detail.tsx:75
+#: src/files-card-body.tsx:572 src/files-footer-detail.tsx:80
+#: src/files-footer-detail.tsx:152 src/dialogs/permissions.tsx:348
 msgid "Group"
 msgstr "Ryhmä"
 
@@ -435,7 +440,7 @@ msgstr "Nimetty putki"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:121
 msgid "Navigation"
-msgstr "Liikkuminen"
+msgstr "Navigointi"
 
 #: src/upload-button.tsx:131
 msgid "New file"
@@ -473,7 +478,7 @@ msgstr "Avaa tekstitiedosto"
 msgid "Original file on server"
 msgstr "Alkuperäinen tiedosto palvelimella"
 
-#: src/files-card-body.tsx:572 src/files-footer-detail.tsx:75
+#: src/files-card-body.tsx:572 src/files-footer-detail.tsx:80
 msgid "Others"
 msgstr "Muut"
 
@@ -481,13 +486,13 @@ msgstr "Muut"
 msgid "Others access"
 msgstr "Muiden pääsy"
 
-#: src/dialogs/editor.tsx:195 src/dialogs/rename.tsx:96
+#: src/dialogs/rename.tsx:96 src/dialogs/editor.tsx:195
 msgid "Overwrite"
 msgstr "Korvaa"
 
 #: src/files-card-body.tsx:533 src/files-card-body.tsx:572
-#: src/dialogs/permissions.tsx:333 src/dialogs/create-file.tsx:199
-#: src/header.tsx:98 src/files-footer-detail.tsx:75
+#: src/files-footer-detail.tsx:80 src/dialogs/create-file.tsx:199
+#: src/dialogs/permissions.tsx:333 src/header.tsx:98
 msgid "Owner"
 msgstr "Omistaja"
 
@@ -559,7 +564,7 @@ msgstr "Lataa uudelleen"
 msgid "Remove current directory"
 msgstr "Poista nykyinen hakemisto"
 
-#: src/menu.tsx:151 src/dialogs/rename.tsx:89
+#: src/dialogs/rename.tsx:89 src/menu.tsx:151
 msgid "Rename"
 msgstr "Nimeä uudelleen"
 
@@ -671,6 +676,10 @@ msgstr "Ulosladattu $0:lla, $1"
 #: src/upload-button.tsx:439
 msgid "Uploads"
 msgstr "Uloslataukset"
+
+#: src/files-footer-detail.tsx:144
+msgid "User"
+msgstr ""
 
 #: src/dialogs/editor.tsx:170
 msgid "View $0"
