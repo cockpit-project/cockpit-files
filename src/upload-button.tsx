@@ -186,7 +186,7 @@ export const UploadButton = ({
         const user = await cockpit.user();
         if (superuser.allowed && cwdInfo) {
             const candidates = get_owner_candidates(user, cwdInfo);
-            owner = candidates[0];
+            owner = [...candidates][0];
         }
 
         const resetInput = () => {
