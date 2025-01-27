@@ -169,21 +169,10 @@ rpm: $(TARFILE) $(NODE_CACHE) $(SPEC)
 	rm -r "`pwd`/rpmbuild"
 	rm -r "`pwd`/output" "`pwd`/build"
 
-ifeq ("$(TEST_SCENARIO)","pybridge")
-COCKPIT_PYBRIDGE_REF = main
-COCKPIT_WHEEL = cockpit-0-py3-none-any.whl
-
-$(COCKPIT_WHEEL):
-	pip wheel git+https://github.com/cockpit-project/cockpit.git@${COCKPIT_PYBRIDGE_REF}
-
-VM_DEPENDS = $(COCKPIT_WHEEL)
-VM_CUSTOMIZE_FLAGS = --install $(COCKPIT_WHEEL)
-endif
-
 # build a VM with locally built distro pkgs installed
 # disable networking, VM images have mock/pbuilder with the common build dependencies pre-installed
 $(VM_IMAGE): export XZ_OPT=-0
-$(VM_IMAGE): $(TARFILE) $(NODE_CACHE) packaging/arch/PKGBUILD bots test/vm.install $(VM_DEPENDS)
+$(VM_IMAGE): $(TARFILE) $(NODE_CACHE) packaging/arch/PKGBUILD bots test/vm.install
 	bots/image-customize --no-network --fresh \
 		$(VM_CUSTOMIZE_FLAGS) \
 		--upload $(NODE_CACHE):/var/tmp/ --build $(TARFILE) \
