@@ -1022,7 +1022,7 @@ class TestFiles(testlib.MachineCase):
         b.click("button.pf-m-primary")
         b.wait_in_text("[data-item='newdir1'] .item-owner", "testuser")
 
-        if self.system_before(329):
+        if not m.ws_container and self.system_before(329):
             # Open in terminal feature not supported before cockpit 329
             b.mouse("[data-item='newdir1']", "contextmenu")
             b.wait_visible(".contextMenu button:contains('Delete')")
