@@ -1951,7 +1951,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_visible("[data-item='file0'].row-selected")
 
         # Test with very long hostnames
-        original_hostname = m.execute('hostnamectl hostname').strip()
+        original_hostname = m.execute('hostname').strip()
         self.addCleanup(m.execute, ['hostnamectl', 'set-hostname', original_hostname])
         # length of testing farm hostname
         m.execute('hostnamectl set-hostname aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeee.testing-farm')
