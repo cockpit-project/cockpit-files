@@ -169,14 +169,17 @@ rpm: $(TARFILE) $(NODE_CACHE) $(SPEC)
 	rm -r "`pwd`/rpmbuild"
 	rm -r "`pwd`/output" "`pwd`/build"
 
+ifeq ("$(TEST_SCENARIO)","ws-container")
+VM_INSTALL = --upload $(TARFILE):/var/tmp/ --script $(CURDIR)/test/vm-ws.install
+else
+VM_INSTALL = --upload $(NODE_CACHE):/var/tmp/ --build $(TARFILE) --script $(CURDIR)/test/vm.install
+endif
+
 # build a VM with locally built distro pkgs installed
 # disable networking, VM images have mock/pbuilder with the common build dependencies pre-installed
 $(VM_IMAGE): export XZ_OPT=-0
-$(VM_IMAGE): $(TARFILE) $(NODE_CACHE) packaging/arch/PKGBUILD bots test/vm.install
-	bots/image-customize --no-network --fresh \
-		$(VM_CUSTOMIZE_FLAGS) \
-		--upload $(NODE_CACHE):/var/tmp/ --build $(TARFILE) \
-		--script $(CURDIR)/test/vm.install $(TEST_OS)
+$(VM_IMAGE): $(TARFILE) $(NODE_CACHE) packaging/arch/PKGBUILD bots test/vm.install test/vm-ws.install
+	bots/image-customize --no-network --fresh $(VM_CUSTOMIZE_FLAGS) $(VM_INSTALL) $(TEST_OS)
 
 # convenience target for the above
 vm: $(VM_IMAGE)
