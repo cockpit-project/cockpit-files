@@ -14,9 +14,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-13 03:17+0000\n"
-"PO-Revision-Date: 2025-01-12 13:38+0000\n"
-"Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
+"POT-Creation-Date: 2025-01-28 02:59+0000\n"
+"PO-Revision-Date: 2025-01-28 10:38+0000\n"
+"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
+"memory@weblate.org>\n"
 "Language-Team: Czech <https://translate.fedoraproject.org/projects/cockpit-"
 "files/cockpit-files/cs/>\n"
 "Language: cs\n"
@@ -95,10 +96,10 @@ msgstr "Blokové zařízení"
 msgid "Bookmarks"
 msgstr "Záložky"
 
-#: src/upload-button.tsx:116 src/dialogs/create-file.tsx:162
-#: src/dialogs/rename.tsx:98 src/dialogs/permissions.tsx:319
+#: src/dialogs/rename.tsx:98 src/dialogs/mkdir.tsx:108
+#: src/dialogs/create-file.tsx:162 src/dialogs/permissions.tsx:319
 #: src/dialogs/editor.tsx:211 src/dialogs/delete.tsx:91
-#: src/dialogs/mkdir.tsx:108
+#: src/upload-button.tsx:116
 msgid "Cancel"
 msgstr "Storno"
 
@@ -167,7 +168,7 @@ msgstr "Zkopírovat"
 msgid "Copy selected file or directory"
 msgstr "Zkopírovat označený soubor či složku"
 
-#: src/dialogs/create-file.tsx:159 src/dialogs/mkdir.tsx:106
+#: src/dialogs/mkdir.tsx:106 src/dialogs/create-file.tsx:159
 msgid "Create"
 msgstr "Vytvořit"
 
@@ -360,8 +361,8 @@ msgstr "Přejít vpřed"
 msgid "Go up a directory"
 msgstr "Do nadřazené složky"
 
-#: src/files-card-body.tsx:572 src/files-footer-detail.tsx:80
-#: src/files-footer-detail.tsx:152 src/dialogs/permissions.tsx:348
+#: src/dialogs/permissions.tsx:348 src/files-card-body.tsx:572
+#: src/files-footer-detail.tsx:80 src/files-footer-detail.tsx:152
 msgid "Group"
 msgstr "Skupina"
 
@@ -409,7 +410,7 @@ msgstr "Spravujte své soubory"
 msgid "Missing type"
 msgstr "Chybí typ"
 
-#: src/files-card-body.tsx:528 src/header.tsx:87
+#: src/header.tsx:87 src/files-card-body.tsx:528
 msgid "Modified"
 msgstr "Změněno"
 
@@ -417,7 +418,7 @@ msgstr "Změněno"
 msgid "Most permissive"
 msgstr "Nejpřístupnější"
 
-#: src/files-card-body.tsx:523 src/header.tsx:65
+#: src/header.tsx:65 src/files-card-body.tsx:523
 msgid "Name"
 msgstr "Název"
 
@@ -489,9 +490,9 @@ msgstr "Přístup pro ostatní"
 msgid "Overwrite"
 msgstr "Přepsat"
 
-#: src/files-card-body.tsx:533 src/files-card-body.tsx:572
-#: src/files-footer-detail.tsx:80 src/dialogs/create-file.tsx:199
-#: src/dialogs/permissions.tsx:333 src/header.tsx:98
+#: src/dialogs/create-file.tsx:199 src/dialogs/permissions.tsx:333
+#: src/header.tsx:98 src/files-card-body.tsx:533 src/files-card-body.tsx:572
+#: src/files-footer-detail.tsx:80
 msgid "Owner"
 msgstr "Vlastník"
 
@@ -527,7 +528,7 @@ msgstr "Vkládání se nezdařilo"
 msgid "Permission denied"
 msgstr "Přístup zamítnut"
 
-#: src/files-card-body.tsx:538 src/header.tsx:109
+#: src/header.tsx:109 src/files-card-body.tsx:538
 msgid "Permissions"
 msgstr "Oprávnění"
 
@@ -603,7 +604,7 @@ msgstr "Nastavit spustitelné jako program"
 msgid "Show all files"
 msgstr "Zobrazit veškeré soubory"
 
-#: src/files-card-body.tsx:511 src/header.tsx:286
+#: src/header.tsx:286 src/files-card-body.tsx:511
 msgid "Show hidden items"
 msgstr "Zobrazit skryté položky"
 
@@ -611,7 +612,7 @@ msgstr "Zobrazit skryté položky"
 msgid "Show keyboard shortcuts"
 msgstr "Zobrazit klávesové zkratky"
 
-#: src/files-card-body.tsx:524 src/header.tsx:76
+#: src/header.tsx:76 src/files-card-body.tsx:524
 msgid "Size"
 msgstr "Velikost"
 
@@ -677,7 +678,7 @@ msgstr "Nahrání"
 
 #: src/files-footer-detail.tsx:144
 msgid "User"
-msgstr ""
+msgstr "Uživatel"
 
 #: src/dialogs/editor.tsx:170
 msgid "View $0"

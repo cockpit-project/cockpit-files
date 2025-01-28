@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-13 03:17+0000\n"
+"POT-Creation-Date: 2025-01-28 02:59+0000\n"
 "PO-Revision-Date: 2024-12-19 06:52+0000\n"
 "Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
 "memory@weblate.org>\n"
@@ -96,10 +96,10 @@ msgstr "Bloquear dispositivo"
 msgid "Bookmarks"
 msgstr "Marcadores"
 
-#: src/upload-button.tsx:116 src/dialogs/create-file.tsx:162
-#: src/dialogs/rename.tsx:98 src/dialogs/permissions.tsx:319
+#: src/dialogs/rename.tsx:98 src/dialogs/mkdir.tsx:108
+#: src/dialogs/create-file.tsx:162 src/dialogs/permissions.tsx:319
 #: src/dialogs/editor.tsx:211 src/dialogs/delete.tsx:91
-#: src/dialogs/mkdir.tsx:108
+#: src/upload-button.tsx:116
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -169,7 +169,7 @@ msgstr "Copiar"
 msgid "Copy selected file or directory"
 msgstr "Copiar archivo o directorio seleccionado"
 
-#: src/dialogs/create-file.tsx:159 src/dialogs/mkdir.tsx:106
+#: src/dialogs/mkdir.tsx:106 src/dialogs/create-file.tsx:159
 msgid "Create"
 msgstr "Crear"
 
@@ -362,8 +362,8 @@ msgstr "Avanzar"
 msgid "Go up a directory"
 msgstr "Subir un directorio"
 
-#: src/files-card-body.tsx:572 src/files-footer-detail.tsx:80
-#: src/files-footer-detail.tsx:152 src/dialogs/permissions.tsx:348
+#: src/dialogs/permissions.tsx:348 src/files-card-body.tsx:572
+#: src/files-footer-detail.tsx:80 src/files-footer-detail.tsx:152
 msgid "Group"
 msgstr "Grupo"
 
@@ -411,7 +411,7 @@ msgstr "Administra tus archivos"
 msgid "Missing type"
 msgstr "Tipo faltante"
 
-#: src/files-card-body.tsx:528 src/header.tsx:87
+#: src/header.tsx:87 src/files-card-body.tsx:528
 msgid "Modified"
 msgstr "Modificado"
 
@@ -419,7 +419,7 @@ msgstr "Modificado"
 msgid "Most permissive"
 msgstr "Más permisivo"
 
-#: src/files-card-body.tsx:523 src/header.tsx:65
+#: src/header.tsx:65 src/files-card-body.tsx:523
 msgid "Name"
 msgstr "Nombre"
 
@@ -491,9 +491,9 @@ msgstr "Otros accesos"
 msgid "Overwrite"
 msgstr "Sobrescribir"
 
-#: src/files-card-body.tsx:533 src/files-card-body.tsx:572
-#: src/files-footer-detail.tsx:80 src/dialogs/create-file.tsx:199
-#: src/dialogs/permissions.tsx:333 src/header.tsx:98
+#: src/dialogs/create-file.tsx:199 src/dialogs/permissions.tsx:333
+#: src/header.tsx:98 src/files-card-body.tsx:533 src/files-card-body.tsx:572
+#: src/files-footer-detail.tsx:80
 msgid "Owner"
 msgstr "Propietario"
 
@@ -529,7 +529,7 @@ msgstr "Falló el pegado"
 msgid "Permission denied"
 msgstr "Permiso denegado"
 
-#: src/files-card-body.tsx:538 src/header.tsx:109
+#: src/header.tsx:109 src/files-card-body.tsx:538
 msgid "Permissions"
 msgstr "Permisos"
 
@@ -605,7 +605,7 @@ msgstr "Establecer como programa ejecutable"
 msgid "Show all files"
 msgstr "Mostrar todos los archivos"
 
-#: src/files-card-body.tsx:511 src/header.tsx:286
+#: src/header.tsx:286 src/files-card-body.tsx:511
 msgid "Show hidden items"
 msgstr "Mostrar elementos ocultos"
 
@@ -613,7 +613,7 @@ msgstr "Mostrar elementos ocultos"
 msgid "Show keyboard shortcuts"
 msgstr "Mostrar atajos de teclado"
 
-#: src/files-card-body.tsx:524 src/header.tsx:76
+#: src/header.tsx:76 src/files-card-body.tsx:524
 msgid "Size"
 msgstr "Tamaño"
 

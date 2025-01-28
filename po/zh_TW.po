@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-13 03:17+0000\n"
+"POT-Creation-Date: 2025-01-28 02:59+0000\n"
 "PO-Revision-Date: 2024-12-01 15:38+0000\n"
 "Last-Translator: JW Wang <v72807647@gmail.com>\n"
 "Language-Team: Chinese (Traditional) <https://translate.fedoraproject.org/"
@@ -93,10 +93,10 @@ msgstr "區塊裝置"
 msgid "Bookmarks"
 msgstr "書籤"
 
-#: src/upload-button.tsx:116 src/dialogs/create-file.tsx:162
-#: src/dialogs/rename.tsx:98 src/dialogs/permissions.tsx:319
+#: src/dialogs/rename.tsx:98 src/dialogs/mkdir.tsx:108
+#: src/dialogs/create-file.tsx:162 src/dialogs/permissions.tsx:319
 #: src/dialogs/editor.tsx:211 src/dialogs/delete.tsx:91
-#: src/dialogs/mkdir.tsx:108
+#: src/upload-button.tsx:116
 msgid "Cancel"
 msgstr "取消"
 
@@ -168,7 +168,7 @@ msgstr "複製"
 msgid "Copy selected file or directory"
 msgstr "複製已選擇的檔案或目錄"
 
-#: src/dialogs/create-file.tsx:159 src/dialogs/mkdir.tsx:106
+#: src/dialogs/mkdir.tsx:106 src/dialogs/create-file.tsx:159
 msgid "Create"
 msgstr "建立"
 
@@ -367,8 +367,8 @@ msgstr "前進"
 msgid "Go up a directory"
 msgstr "回上一層目錄"
 
-#: src/files-card-body.tsx:572 src/files-footer-detail.tsx:80
-#: src/files-footer-detail.tsx:152 src/dialogs/permissions.tsx:348
+#: src/dialogs/permissions.tsx:348 src/files-card-body.tsx:572
+#: src/files-footer-detail.tsx:80 src/files-footer-detail.tsx:152
 msgid "Group"
 msgstr "群組"
 
@@ -416,7 +416,7 @@ msgstr "管理您的檔案"
 msgid "Missing type"
 msgstr "類型已遺失"
 
-#: src/files-card-body.tsx:528 src/header.tsx:87
+#: src/header.tsx:87 src/files-card-body.tsx:528
 msgid "Modified"
 msgstr "被修改"
 
@@ -424,7 +424,7 @@ msgstr "被修改"
 msgid "Most permissive"
 msgstr "最寬鬆的權限"
 
-#: src/files-card-body.tsx:523 src/header.tsx:65
+#: src/header.tsx:65 src/files-card-body.tsx:523
 msgid "Name"
 msgstr "名稱"
 
@@ -496,9 +496,9 @@ msgstr "其他人的存取權限"
 msgid "Overwrite"
 msgstr "覆寫"
 
-#: src/files-card-body.tsx:533 src/files-card-body.tsx:572
-#: src/files-footer-detail.tsx:80 src/dialogs/create-file.tsx:199
-#: src/dialogs/permissions.tsx:333 src/header.tsx:98
+#: src/dialogs/create-file.tsx:199 src/dialogs/permissions.tsx:333
+#: src/header.tsx:98 src/files-card-body.tsx:533 src/files-card-body.tsx:572
+#: src/files-footer-detail.tsx:80
 msgid "Owner"
 msgstr "擁有者"
 
@@ -534,7 +534,7 @@ msgstr "貼上失敗"
 msgid "Permission denied"
 msgstr "權限遭拒"
 
-#: src/files-card-body.tsx:538 src/header.tsx:109
+#: src/header.tsx:109 src/files-card-body.tsx:538
 msgid "Permissions"
 msgstr "權限"
 
@@ -612,7 +612,7 @@ msgstr "設定為可執行的程式"
 msgid "Show all files"
 msgstr ""
 
-#: src/files-card-body.tsx:511 src/header.tsx:286
+#: src/header.tsx:286 src/files-card-body.tsx:511
 msgid "Show hidden items"
 msgstr "顯示隱藏的項目"
 
@@ -620,7 +620,7 @@ msgstr "顯示隱藏的項目"
 msgid "Show keyboard shortcuts"
 msgstr "顯示鍵盤快速鍵"
 
-#: src/files-card-body.tsx:524 src/header.tsx:76
+#: src/header.tsx:76 src/files-card-body.tsx:524
 msgid "Size"
 msgstr "大小"
 

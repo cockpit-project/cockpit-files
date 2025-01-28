@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-13 03:17+0000\n"
+"POT-Creation-Date: 2025-01-28 02:59+0000\n"
 "PO-Revision-Date: 2025-01-13 14:38+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
 "Language-Team: Turkish <https://translate.fedoraproject.org/projects/cockpit-"
@@ -95,10 +95,10 @@ msgstr "Blok aygıtı"
 msgid "Bookmarks"
 msgstr "Yer imleri"
 
-#: src/upload-button.tsx:116 src/dialogs/create-file.tsx:162
-#: src/dialogs/rename.tsx:98 src/dialogs/permissions.tsx:319
+#: src/dialogs/rename.tsx:98 src/dialogs/mkdir.tsx:108
+#: src/dialogs/create-file.tsx:162 src/dialogs/permissions.tsx:319
 #: src/dialogs/editor.tsx:211 src/dialogs/delete.tsx:91
-#: src/dialogs/mkdir.tsx:108
+#: src/upload-button.tsx:116
 msgid "Cancel"
 msgstr "İptal"
 
@@ -166,7 +166,7 @@ msgstr "Kopyala"
 msgid "Copy selected file or directory"
 msgstr "Seçili dosya veya dizini kopyala"
 
-#: src/dialogs/create-file.tsx:159 src/dialogs/mkdir.tsx:106
+#: src/dialogs/mkdir.tsx:106 src/dialogs/create-file.tsx:159
 msgid "Create"
 msgstr "Oluştur"
 
@@ -359,8 +359,8 @@ msgstr "İleri git"
 msgid "Go up a directory"
 msgstr "Bir dizin yukarı git"
 
-#: src/files-card-body.tsx:572 src/files-footer-detail.tsx:80
-#: src/files-footer-detail.tsx:152 src/dialogs/permissions.tsx:348
+#: src/dialogs/permissions.tsx:348 src/files-card-body.tsx:572
+#: src/files-footer-detail.tsx:80 src/files-footer-detail.tsx:152
 msgid "Group"
 msgstr "Grup"
 
@@ -408,7 +408,7 @@ msgstr "Dosyalarınızı yönetin"
 msgid "Missing type"
 msgstr "Tür eksik"
 
-#: src/files-card-body.tsx:528 src/header.tsx:87
+#: src/header.tsx:87 src/files-card-body.tsx:528
 msgid "Modified"
 msgstr "Değiştirilme"
 
@@ -416,7 +416,7 @@ msgstr "Değiştirilme"
 msgid "Most permissive"
 msgstr "En çok izin veren"
 
-#: src/files-card-body.tsx:523 src/header.tsx:65
+#: src/header.tsx:65 src/files-card-body.tsx:523
 msgid "Name"
 msgstr "Ad"
 
@@ -488,9 +488,9 @@ msgstr "Diğerlerinin erişimi"
 msgid "Overwrite"
 msgstr "Üzerine yaz"
 
-#: src/files-card-body.tsx:533 src/files-card-body.tsx:572
-#: src/files-footer-detail.tsx:80 src/dialogs/create-file.tsx:199
-#: src/dialogs/permissions.tsx:333 src/header.tsx:98
+#: src/dialogs/create-file.tsx:199 src/dialogs/permissions.tsx:333
+#: src/header.tsx:98 src/files-card-body.tsx:533 src/files-card-body.tsx:572
+#: src/files-footer-detail.tsx:80
 msgid "Owner"
 msgstr "Sahibi"
 
@@ -526,7 +526,7 @@ msgstr "Yapıştırma başarısız oldu"
 msgid "Permission denied"
 msgstr "İzin reddedildi"
 
-#: src/files-card-body.tsx:538 src/header.tsx:109
+#: src/header.tsx:109 src/files-card-body.tsx:538
 msgid "Permissions"
 msgstr "İzinler"
 
@@ -602,7 +602,7 @@ msgstr "Çalıştırılabilir program olarak ayarla"
 msgid "Show all files"
 msgstr "Tüm dosyaları göster"
 
-#: src/files-card-body.tsx:511 src/header.tsx:286
+#: src/header.tsx:286 src/files-card-body.tsx:511
 msgid "Show hidden items"
 msgstr "Gizli ögeleri göster"
 
@@ -610,7 +610,7 @@ msgstr "Gizli ögeleri göster"
 msgid "Show keyboard shortcuts"
 msgstr "Klavye kısayollarını göster"
 
-#: src/files-card-body.tsx:524 src/header.tsx:76
+#: src/header.tsx:76 src/files-card-body.tsx:524
 msgid "Size"
 msgstr "Boyut"
 
