@@ -1385,9 +1385,9 @@ class TestFiles(testlib.MachineCase):
         # Test changing CWD permissions
         test_dir = "/home/admin/testdir"
         m.execute(['runuser', '-u', 'admin', 'mkdir', test_dir])
-        b.wait_visible("[data-item='testdir']")
         b.mouse("[data-item='testdir']", "dblclick")
-        b.wait_not_present(".pf-v5-c-empty-state")
+        b.wait_visible(".pf-v5-c-empty-state")
+        self.assert_last_breadcrumb("testdir")
 
         # Via contextmenu
         b.mouse("#files-card-parent", "contextmenu")
