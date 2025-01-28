@@ -2318,7 +2318,7 @@ class TestFiles(testlib.MachineCase):
 
             m.execute("useradd --create-home testuser")
             b.go('/files#/?path=/home/testuser')
-            b.wait_not_present('.pf-v5-c-empty-state')
+            b.wait_visible('.pf-v5-c-empty-state')
 
             testuser_file = str(Path(tmpdir) / "testuser.txt")
             test_content = "testdata"
