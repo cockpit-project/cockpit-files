@@ -33,7 +33,7 @@ import cockpit from "cockpit";
 import { basename } from "cockpit-path";
 import { useInit } from "hooks";
 
-import { useFilesContext } from "./app.tsx";
+import { useFilesContext } from "./common.ts";
 
 const _ = cockpit.gettext;
 

@@ -26,7 +26,7 @@ import { debounce } from "throttle-debounce";
 import cockpit from "cockpit";
 import { EmptyStatePanel } from "cockpit-components-empty-state";
 
-import type { FolderFileInfo } from "./app.tsx";
+import type { FolderFileInfo } from "./common.ts";
 import { FilesCardBody } from "./files-card-body.tsx";
 import { as_sort, FilesCardHeader } from "./header.tsx";
 

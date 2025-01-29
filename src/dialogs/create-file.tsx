@@ -35,8 +35,7 @@ import { useInit } from 'hooks';
 import { superuser } from 'superuser';
 
 import "./editor.scss";
-import { useFilesContext } from '../app.tsx';
-import { checkFilename } from '../common.ts';
+import { checkFilename, useFilesContext } from '../common.ts';
 import { get_owner_candidates } from '../ownership.tsx';
 
 const _ = cockpit.gettext;

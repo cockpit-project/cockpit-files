@@ -40,8 +40,8 @@ import * as python from "python";
 import { superuser } from 'superuser';
 import { fmt_to_fragments } from 'utils.tsx';
 
-import type { FolderFileInfo } from '../app.tsx';
 import { inode_types } from '../common.ts';
+import type { FolderFileInfo } from '../common.ts';
 
 // Following python file is loaded as a string (esbuild loader: text)
 // @ts-expect-error Cannot find module or its corresponding type declaration

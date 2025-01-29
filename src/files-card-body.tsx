@@ -35,8 +35,8 @@ import { dirname } from "cockpit-path.ts";
 import { useDialogs } from "dialogs";
 import * as timeformat from "timeformat";
 
-import { FolderFileInfo, useFilesContext } from "./app.tsx";
-import { get_permissions, permissionShortStr } from "./common.ts";
+import { get_permissions, permissionShortStr, useFilesContext } from "./common.ts";
+import type { FolderFileInfo } from "./common.ts";
 import { confirm_delete } from "./dialogs/delete.tsx";
 import { show_create_directory_dialog } from "./dialogs/mkdir.tsx";
 import { show_rename_dialog } from "./dialogs/rename.tsx";

@@ -32,7 +32,8 @@ import cockpit from "cockpit";
 import { KebabDropdown } from "cockpit-components-dropdown";
 import { useDialogs } from "dialogs";
 
-import { FolderFileInfo, useFilesContext } from "./app.tsx";
+import { useFilesContext } from "./common.ts";
+import type { FolderFileInfo } from "./common.ts";
 import { showKeyboardShortcuts } from "./dialogs/keyboardShortcutsHelp.tsx";
 import { get_menu_items } from "./menu.tsx";
 import { UploadButton } from "./upload-button.tsx";

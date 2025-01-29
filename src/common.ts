@@ -17,12 +17,55 @@
  * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
  */
 
-import cockpit from "cockpit";
-import { FileInfo } from "cockpit/fsinfo.ts";
+import React, { useContext } from "react";
 
-import { FolderFileInfo } from "./app.ts";
+import type { AlertVariant } from "@patternfly/react-core/dist/esm/components/Alert";
+
+import cockpit from "cockpit";
+import type { FileInfo } from "cockpit/fsinfo.ts";
+import { usePageLocation } from "hooks";
 
 const _ = cockpit.gettext;
+
+export interface FolderFileInfo extends FileInfo {
+    name: string,
+    to: string | null,
+    category: { class: string } | null,
+}
+
+interface FilesContextType {
+    addAlert: (title: string, variant: AlertVariant, key: string, detail?: string | React.ReactNode,
+               actionLinks?: React.ReactNode) => void,
+    removeAlert: (key: string) => void,
+    cwdInfo: FileInfo | null,
+}
+
+export const FilesContext = React.createContext({
+    addAlert: () => console.warn("FilesContext not initialized"),
+    removeAlert: () => console.warn("FilesContext not initialized"),
+    cwdInfo: null,
+} as FilesContextType);
+
+export const useFilesContext = () => useContext(FilesContext);
+
+export const usePath = () => {
+    const { options } = usePageLocation();
+    let currentPath = decodeURIComponent(options.path?.toString() || "/");
+
+    // Trim all trailing slashes
+    currentPath = currentPath.replace(/\/+$/, '');
+
+    // Our path will always be `/foo/` formatted
+    if (!currentPath.endsWith("/")) {
+        currentPath += "/";
+    }
+
+    if (!currentPath.startsWith("/")) {
+        currentPath = `/${currentPath}`;
+    }
+
+    return currentPath;
+};
 
 export const permissions = [
     /* 0 */ _("None"),

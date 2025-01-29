@@ -32,7 +32,7 @@ import { InlineNotification } from 'cockpit-components-inline-notification';
 import type { Dialogs, DialogResult } from 'dialogs';
 import { superuser } from 'superuser';
 
-import { useFilesContext } from '../app.tsx';
+import { useFilesContext } from '../common.ts';
 import { get_owner_candidates } from '../ownership.tsx';
 
 const _ = cockpit.gettext;
