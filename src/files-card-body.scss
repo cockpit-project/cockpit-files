@@ -194,6 +194,11 @@
         th, td {
             padding: var(--pf-v5-global--spacer--sm);
             border-block-start: none;
+
+            /* Do not visually highlight files when double clicking */
+            a::selection {
+              background-color: none;
+            }
         }
 
         .col-size, .item-size,
