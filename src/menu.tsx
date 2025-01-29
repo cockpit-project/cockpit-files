@@ -26,7 +26,7 @@ import type { FileInfo } from "cockpit/fsinfo";
 import { basename, dirname } from "cockpit-path";
 import type { Dialogs } from 'dialogs';
 
-import type { FolderFileInfo } from "./app";
+import type { FolderFileInfo } from "./common.ts";
 import { show_create_file_dialog } from './dialogs/create-file.tsx';
 import { confirm_delete } from './dialogs/delete.tsx';
 import { edit_file, MAX_EDITOR_FILE_SIZE } from './dialogs/editor.tsx';

@@ -27,7 +27,7 @@ import { InlineNotification } from 'cockpit-components-inline-notification';
 import type { Dialogs, DialogResult } from 'dialogs';
 import { fmt_to_fragments } from 'utils';
 
-import type { FolderFileInfo } from '../app';
+import type { FolderFileInfo } from '../common.ts';
 
 const _ = cockpit.gettext;
 

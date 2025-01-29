@@ -12,9 +12,8 @@ import cockpit from "cockpit";
 import type { FileInfo } from "cockpit/fsinfo.ts";
 import * as timeformat from "timeformat";
 
-import { useFilesContext } from './app.tsx';
-import type { FolderFileInfo } from "./app.tsx";
-import { get_permissions, permissionShortStr } from "./common.ts";
+import { get_permissions, permissionShortStr, useFilesContext } from "./common.ts";
+import type { FolderFileInfo } from "./common.ts";
 
 const _ = cockpit.gettext;
 

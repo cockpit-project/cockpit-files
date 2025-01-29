@@ -17,11 +17,12 @@
  * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
-    AlertGroup, Alert, AlertVariant, AlertActionCloseButton
+    AlertGroup, Alert, AlertActionCloseButton
 } from "@patternfly/react-core/dist/esm/components/Alert";
+import type { AlertVariant } from "@patternfly/react-core/dist/esm/components/Alert";
 import { Card } from "@patternfly/react-core/dist/esm/components/Card";
 import { Page, PageSection } from "@patternfly/react-core/dist/esm/components/Page";
 import { Stack } from "@patternfly/react-core/dist/esm/layouts/Stack";
@@ -34,6 +35,8 @@ import { WithDialogs } from "dialogs";
 import { useInit, usePageLocation } from "hooks";
 import { superuser } from "superuser";
 
+import { FilesContext, usePath } from "./common.ts";
+import type { FolderFileInfo } from "./common.ts";
 import { FilesBreadcrumbs } from "./files-breadcrumbs.tsx";
 import { FilesFolderView } from "./files-folder-view.tsx";
 import { FilesFooterDetail } from "./files-footer-detail.tsx";
@@ -49,46 +52,6 @@ interface Alert {
     detail?: string | React.ReactNode,
     actionLinks?: React.ReactNode
 }
-
-export interface FolderFileInfo extends FileInfo {
-    name: string,
-    to: string | null,
-    category: { class: string } | null,
-}
-
-interface FilesContextType {
-    addAlert: (title: string, variant: AlertVariant, key: string, detail?: string | React.ReactNode,
-               actionLinks?: React.ReactNode) => void,
-    removeAlert: (key: string) => void,
-    cwdInfo: FileInfo | null,
-}
-
-export const FilesContext = React.createContext({
-    addAlert: () => console.warn("FilesContext not initialized"),
-    removeAlert: () => console.warn("FilesContext not initialized"),
-    cwdInfo: null,
-} as FilesContextType);
-
-export const useFilesContext = () => useContext(FilesContext);
-
-export const usePath = () => {
-    const { options } = usePageLocation();
-    let currentPath = decodeURIComponent(options.path?.toString() || "/");
-
-    // Trim all trailing slashes
-    currentPath = currentPath.replace(/\/+$/, '');
-
-    // Our path will always be `/foo/` formatted
-    if (!currentPath.endsWith("/")) {
-        currentPath += "/";
-    }
-
-    if (!currentPath.startsWith("/")) {
-        currentPath = `/${currentPath}`;
-    }
-
-    return currentPath;
-};
 
 export const Application = () => {
     const { options } = usePageLocation();
