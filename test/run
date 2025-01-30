@@ -14,3 +14,4 @@ fi
 
 make codecheck
 make check
+make po/files.pot
