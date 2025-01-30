@@ -183,16 +183,16 @@
 
     &.view-details {
         --icon-size: 16px;
+        --pf-v5-c-table--m-compact--cell--first-last-child--PaddingLeft: var(--pf-v5-global--spacer--md);
+        --pf-v5-c-table--m-compact--cell--first-last-child--PaddingRight: var(--pf-v5-global--spacer--md);
         inline-size: 100%;
         margin: 0;
-
 
         tbody tr {
             border-block: 1px solid var(--pf-v5-global--BorderColor--100);
         }
 
         th, td {
-            padding: var(--pf-v5-global--spacer--sm);
             border-block-start: none;
         }
 
@@ -216,14 +216,6 @@
                 justify-content: end;
             }
         }
-
-        :first-child:is(td, th) {
-            padding-inline-start: var(--pf-v5-global--spacer--lg);
-        }
-
-        :last-child:is(td, th):not(.pf-v5-c-table__sort) {
-            padding-inline-end: var(--pf-v5-global--spacer--lg);
-        }
     }
 
     &.view-grid {
@@ -241,7 +233,7 @@
             gap: var(--pf-v5-global--spacer--sm);
             grid-template-columns: repeat(auto-fill, minmax(8rem,1fr));
             justify-content: space-between;
-            margin: var(--pf-v5-global--spacer--sm);
+            padding-block-end: var(--pf-v5-global--spacer--sm);
 
             tr {
                 border-radius: var(--pf-v5-global--BorderWidth--xl);
@@ -314,4 +306,5 @@
 // so drag&drop works in empty space
 .fileview-wrapper {
     block-size: 100%;
+    padding-inline: var(--pf-v5-global--spacer--md);
 }
