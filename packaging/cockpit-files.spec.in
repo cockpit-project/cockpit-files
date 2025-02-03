@@ -19,6 +19,9 @@ BuildRequires: gettext
 
 Requires: cockpit-bridge >= 318
 
+# Replace the older cockpit-navigator provided by 45Drives
+Obsoletes: cockpit-navigator < 0.5.11
+
 %{NPM_PROVIDES}
 
 %description
