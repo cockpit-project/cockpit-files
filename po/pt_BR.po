@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-28 02:59+0000\n"
+"POT-Creation-Date: 2025-02-04 03:00+0000\n"
 "PO-Revision-Date: 2024-12-20 07:38+0000\n"
 "Last-Translator: Ricardo Gonzalez <rickygzz@hotmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://translate.fedoraproject.org/"
@@ -34,7 +34,7 @@ msgstr "\"$0\" existe, não será sobrescrito com colar."
 msgid "$0 files"
 msgstr "$0 arquivos"
 
-#: src/files-footer-detail.tsx:36
+#: src/files-footer-detail.tsx:35
 msgid "$0 files selected"
 msgstr "$0 arquivos selecionados"
 
@@ -66,7 +66,7 @@ msgstr ""
 "Um arquivo com o mesmo nome já existe em \"$0\". Substituí-lo irá "
 "sobrescrever seu conteúdo."
 
-#: src/header.tsx:68
+#: src/header.tsx:69
 msgid "A-Z"
 msgstr "A-Z"
 
@@ -74,8 +74,8 @@ msgstr "A-Z"
 msgid "Access"
 msgstr "Acesso"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:57
-#: src/dialogs/keyboardShortcutsHelp.tsx:63
+#: src/dialogs/keyboardShortcutsHelp.tsx:76
+#: src/dialogs/keyboardShortcutsHelp.tsx:82
 msgid "Activate selected item, enter directory"
 msgstr "Ativar item selecionado, entrar no diretório"
 
@@ -87,7 +87,7 @@ msgstr "Adicionar marcador"
 msgid "Apply this action to all conflicting files"
 msgstr "Aplicar esta ação a todos os arquivos em conflito"
 
-#: src/common.ts:39
+#: src/common.ts:82
 msgid "Block device"
 msgstr "dispositivo de bloco"
 
@@ -96,7 +96,7 @@ msgid "Bookmarks"
 msgstr "Favoritos"
 
 #: src/dialogs/rename.tsx:98 src/dialogs/mkdir.tsx:108
-#: src/dialogs/create-file.tsx:162 src/dialogs/permissions.tsx:319
+#: src/dialogs/create-file.tsx:161 src/dialogs/permissions.tsx:319
 #: src/dialogs/editor.tsx:211 src/dialogs/delete.tsx:91
 #: src/upload-button.tsx:116
 msgid "Cancel"
@@ -114,7 +114,7 @@ msgstr "Cancelado"
 msgid "Cancelled upload of $0"
 msgstr "Upload de $0 cancelado"
 
-#: src/dialogs/create-file.tsx:228
+#: src/dialogs/create-file.tsx:227
 msgid "Cannot create file in current directory"
 msgstr "Não é possível criar arquivo no diretório atual"
 
@@ -134,7 +134,7 @@ msgstr "Alterar permissões"
 msgid "Change permissions for enclosed files"
 msgstr "Alterar permissões para os arquivos incluídos"
 
-#: src/common.ts:40
+#: src/common.ts:83
 msgid "Character device"
 msgstr "Dispositivo de caracteres"
 
@@ -142,7 +142,7 @@ msgstr "Dispositivo de caracteres"
 msgid "Clear filter"
 msgstr "Limpar filtro"
 
-#: src/dialogs/editor.tsx:211 src/dialogs/keyboardShortcutsHelp.tsx:18
+#: src/dialogs/editor.tsx:211 src/dialogs/keyboardShortcutsHelp.tsx:37
 msgid "Close"
 msgstr "Fechar"
 
@@ -164,11 +164,11 @@ msgstr "Recolher"
 msgid "Copy"
 msgstr "Copiar"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:92
+#: src/dialogs/keyboardShortcutsHelp.tsx:111
 msgid "Copy selected file or directory"
 msgstr "Copiar arquivo ou diretório selecionado"
 
-#: src/dialogs/mkdir.tsx:106 src/dialogs/create-file.tsx:159
+#: src/dialogs/mkdir.tsx:106 src/dialogs/create-file.tsx:158
 msgid "Create"
 msgstr "Criar"
 
@@ -176,11 +176,11 @@ msgstr "Criar"
 msgid "Create directory"
 msgstr "Criar diretório"
 
-#: src/dialogs/create-file.tsx:146 src/menu.tsx:100
+#: src/dialogs/create-file.tsx:145 src/menu.tsx:100
 msgid "Create file"
 msgstr "Criar arquivo"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:86
+#: src/dialogs/keyboardShortcutsHelp.tsx:105
 msgid "Create new directory"
 msgstr "Criar novo diretório"
 
@@ -208,15 +208,15 @@ msgstr "Excluir o arquivo $0?"
 msgid "Delete link $0?"
 msgstr "Excluir o link $0?"
 
-#: src/common.ts:41
+#: src/common.ts:84
 msgid "Directory"
 msgstr "Diretório"
 
-#: src/files-footer-detail.tsx:64
+#: src/files-footer-detail.tsx:63
 msgid "Directory contains $0 directories, $1 files"
 msgstr "O diretório contém $0 diretórios, $1 arquivos"
 
-#: src/files-footer-detail.tsx:65
+#: src/files-footer-detail.tsx:64
 msgid "Directory contains $0 directories, $1 files, $2 hidden"
 msgstr "O diretório contém $0 diretórios, $1 arquivos, $2 ocultos"
 
@@ -244,15 +244,15 @@ msgstr "Nome do diretório muito longo"
 msgid "Directory owner"
 msgstr "Proprietário do diretório"
 
-#: src/common.ts:92
+#: src/common.ts:135
 msgid "Directory with the same name exists"
 msgstr "Um diretório com o mesmo nome já existe"
 
-#: src/header.tsx:255
+#: src/header.tsx:256
 msgid "Display as a grid"
 msgstr "Mostrar como uma grade"
 
-#: src/header.tsx:254
+#: src/header.tsx:255
 msgid "Display as a list"
 msgstr "Mostrar como uma lista"
 
@@ -269,7 +269,7 @@ msgstr "Solte arquivos para enviar"
 msgid "Edit $0"
 msgstr "Editar $0"
 
-#: src/files-breadcrumbs.tsx:307 src/dialogs/keyboardShortcutsHelp.tsx:71
+#: src/files-breadcrumbs.tsx:307 src/dialogs/keyboardShortcutsHelp.tsx:90
 msgid "Edit path"
 msgstr "Editar caminho"
 
@@ -277,11 +277,11 @@ msgstr "Editar caminho"
 msgid "Edit permissions"
 msgstr "Editar permissões"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:131
+#: src/dialogs/keyboardShortcutsHelp.tsx:150
 msgid "Editing"
 msgstr "Editando"
 
-#: src/common.ts:29
+#: src/common.ts:72
 msgid "Execute-only"
 msgstr "Executar somente"
 
@@ -293,11 +293,11 @@ msgstr "Falhou"
 msgid "File browser"
 msgstr "Navegador de arquivos"
 
-#: src/common.ts:94
+#: src/common.ts:137
 msgid "File exists"
 msgstr "Arquivo existe"
 
-#: src/dialogs/create-file.tsx:177
+#: src/dialogs/create-file.tsx:176
 msgid "File name"
 msgstr "Nome do arquivo"
 
@@ -305,7 +305,7 @@ msgstr "Nome do arquivo"
 msgid "File uploaded"
 msgstr "Arquivo enviado"
 
-#: src/common.ts:89
+#: src/common.ts:132
 msgid "Filename is the same as original name"
 msgstr "O nome do arquivo é o mesmo que o nome original"
 
@@ -321,11 +321,11 @@ msgstr "Arquivos enviados"
 msgid "Filesystem"
 msgstr "Sistema de arquivos"
 
-#: src/header.tsx:189
+#: src/header.tsx:190
 msgid "Filter directory"
 msgstr "Filtrar diretório"
 
-#: src/header.tsx:90
+#: src/header.tsx:91
 msgid "First modified"
 msgstr "Primeira modificação"
 
@@ -349,20 +349,20 @@ msgstr "Forçar a exclusão do arquivo $0?"
 msgid "Force delete link $0?"
 msgstr "Forçar a exclusão do link de $0?"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:45
+#: src/dialogs/keyboardShortcutsHelp.tsx:64
 msgid "Go back"
 msgstr "Retornar"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:51
+#: src/dialogs/keyboardShortcutsHelp.tsx:70
 msgid "Go forward"
 msgstr "Avançar"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:39
+#: src/dialogs/keyboardShortcutsHelp.tsx:58
 msgid "Go up a directory"
 msgstr "Subir um diretório"
 
 #: src/dialogs/permissions.tsx:348 src/files-card-body.tsx:572
-#: src/files-footer-detail.tsx:80 src/files-footer-detail.tsx:152
+#: src/files-footer-detail.tsx:79 src/files-footer-detail.tsx:151
 msgid "Group"
 msgstr "Grupo"
 
@@ -370,7 +370,7 @@ msgstr "Grupo"
 msgid "Group access"
 msgstr "Acesso do grupo"
 
-#: src/header.tsx:286
+#: src/header.tsx:287
 msgid "Hide hidden items"
 msgstr "Ocultar itens ocultos"
 
@@ -386,19 +386,19 @@ msgstr "Ignorar"
 msgid "Keep original"
 msgstr "Manter original"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:112
+#: src/dialogs/keyboardShortcutsHelp.tsx:131
 msgid "Keyboard shortcuts"
 msgstr "Atalhos do teclado"
 
-#: src/header.tsx:79
+#: src/header.tsx:80
 msgid "Largest size"
 msgstr "Maior tamanho"
 
-#: src/header.tsx:94
+#: src/header.tsx:95
 msgid "Last modified"
 msgstr "Última modificação"
 
-#: src/header.tsx:116
+#: src/header.tsx:117
 msgid "Least permissive"
 msgstr "Menos permissivo"
 
@@ -410,35 +410,35 @@ msgstr "Gerencie seus arquivos"
 msgid "Missing type"
 msgstr "Tipo ausente"
 
-#: src/header.tsx:87 src/files-card-body.tsx:528
+#: src/header.tsx:88 src/files-card-body.tsx:528
 msgid "Modified"
 msgstr "Modificado"
 
-#: src/header.tsx:112
+#: src/header.tsx:113
 msgid "Most permissive"
 msgstr "Mais permissivo"
 
-#: src/header.tsx:65 src/files-card-body.tsx:523
+#: src/header.tsx:66 src/files-card-body.tsx:523
 msgid "Name"
 msgstr "Nome"
 
-#: src/common.ts:83
+#: src/common.ts:126
 msgid "Name cannot be empty"
 msgstr "O nome não pode estar vazio"
 
-#: src/common.ts:87
+#: src/common.ts:130
 msgid "Name cannot include a /"
 msgstr "O nome não pode incluir um /"
 
-#: src/common.ts:85
+#: src/common.ts:128
 msgid "Name too long"
 msgstr "Nome muito longo"
 
-#: src/common.ts:42
+#: src/common.ts:85
 msgid "Named pipe"
 msgstr "pipe nomeado"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:121
+#: src/dialogs/keyboardShortcutsHelp.tsx:140
 msgid "Navigation"
 msgstr "Navegação"
 
@@ -462,7 +462,7 @@ msgstr "Sem acesso"
 msgid "No matching results"
 msgstr "Nenhum resultado correspondente"
 
-#: src/common.ts:28
+#: src/common.ts:71
 msgid "None"
 msgstr "Nenhum"
 
@@ -478,7 +478,7 @@ msgstr "Abrir arquivo de texto"
 msgid "Original file on server"
 msgstr "Arquivo original no servidor"
 
-#: src/files-card-body.tsx:572 src/files-footer-detail.tsx:80
+#: src/files-card-body.tsx:572 src/files-footer-detail.tsx:79
 msgid "Others"
 msgstr "Outros"
 
@@ -490,9 +490,9 @@ msgstr "Acesso de outros"
 msgid "Overwrite"
 msgstr "Sobrescrever"
 
-#: src/dialogs/create-file.tsx:199 src/dialogs/permissions.tsx:333
-#: src/header.tsx:98 src/files-card-body.tsx:533 src/files-card-body.tsx:572
-#: src/files-footer-detail.tsx:80
+#: src/dialogs/create-file.tsx:198 src/dialogs/permissions.tsx:333
+#: src/header.tsx:99 src/files-card-body.tsx:533 src/files-card-body.tsx:572
+#: src/files-footer-detail.tsx:79
 msgid "Owner"
 msgstr "Proprietário"
 
@@ -500,11 +500,11 @@ msgstr "Proprietário"
 msgid "Owner access"
 msgstr "Acesso do proprietário"
 
-#: src/header.tsx:101
+#: src/header.tsx:102
 msgid "Owner ascending"
 msgstr "Proprietário ascendente"
 
-#: src/header.tsx:105
+#: src/header.tsx:106
 msgid "Owner descending"
 msgstr "Proprietário descendente"
 
@@ -516,7 +516,7 @@ msgstr "Propriedade"
 msgid "Paste"
 msgstr "Colar"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:98
+#: src/dialogs/keyboardShortcutsHelp.tsx:117
 msgid "Paste file or directory"
 msgstr "Colar arquivo ou diretório"
 
@@ -524,11 +524,11 @@ msgstr "Colar arquivo ou diretório"
 msgid "Pasting failed"
 msgstr "Falha ao colar"
 
-#: src/dialogs/create-file.tsx:229
+#: src/dialogs/create-file.tsx:228
 msgid "Permission denied"
 msgstr "Permissão negada"
 
-#: src/header.tsx:109 src/files-card-body.tsx:538
+#: src/header.tsx:110 src/files-card-body.tsx:538
 msgid "Permissions"
 msgstr "Permissões"
 
@@ -536,23 +536,23 @@ msgstr "Permissões"
 msgid "Permissions for $0 files"
 msgstr "Permissões para $0 arquivos"
 
-#: src/common.ts:33
+#: src/common.ts:76
 msgid "Read and execute"
 msgstr "Ler e executar"
 
-#: src/common.ts:34 src/dialogs/permissions.tsx:224
+#: src/common.ts:77 src/dialogs/permissions.tsx:224
 msgid "Read and write"
 msgstr "Ler e escrever"
 
-#: src/common.ts:35
+#: src/common.ts:78
 msgid "Read, write, and execute"
 msgstr "Ler, escrever e executar"
 
-#: src/common.ts:32 src/dialogs/permissions.tsx:229 src/dialogs/editor.tsx:172
+#: src/common.ts:75 src/dialogs/permissions.tsx:229 src/dialogs/editor.tsx:172
 msgid "Read-only"
 msgstr "Somente leitura"
 
-#: src/common.ts:44
+#: src/common.ts:87
 msgid "Regular file"
 msgstr "Arquivo regular"
 
@@ -572,7 +572,7 @@ msgstr "Renomear"
 msgid "Rename $0?"
 msgstr "Renomear $0?"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:79
+#: src/dialogs/keyboardShortcutsHelp.tsx:98
 msgid "Rename selected file or directory"
 msgstr "Renomear arquivo ou diretório selecionado"
 
@@ -592,7 +592,7 @@ msgstr "Salvar"
 msgid "Security context"
 msgstr "Contexto de segurança"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:104
+#: src/dialogs/keyboardShortcutsHelp.tsx:123
 msgid "Select all"
 msgstr "Selecionar todos"
 
@@ -604,31 +604,31 @@ msgstr "Definir executável como programa"
 msgid "Show all files"
 msgstr "Mostrar todos os arquivos"
 
-#: src/header.tsx:286 src/files-card-body.tsx:511
+#: src/header.tsx:287 src/files-card-body.tsx:511
 msgid "Show hidden items"
 msgstr "Mostrar itens ocultos"
 
-#: src/header.tsx:164
+#: src/header.tsx:165
 msgid "Show keyboard shortcuts"
 msgstr "Mostrar atalhos de teclado"
 
-#: src/header.tsx:76 src/files-card-body.tsx:524
+#: src/header.tsx:77 src/files-card-body.tsx:524
 msgid "Size"
 msgstr "Tamanho"
 
-#: src/header.tsx:83
+#: src/header.tsx:84
 msgid "Smallest size"
 msgstr "Menor tamanho"
 
-#: src/common.ts:45
+#: src/common.ts:88
 msgid "Socket"
 msgstr "socket"
 
-#: src/header.tsx:273
+#: src/header.tsx:274
 msgid "Sort"
 msgstr "Ordenar"
 
-#: src/common.ts:43
+#: src/common.ts:86
 msgid "Symbolic link"
 msgstr "Link simbólico"
 
@@ -676,7 +676,7 @@ msgstr "Enviado como $0, $1"
 msgid "Uploads"
 msgstr "Transferências"
 
-#: src/files-footer-detail.tsx:144
+#: src/files-footer-detail.tsx:143
 msgid "User"
 msgstr ""
 
@@ -684,15 +684,15 @@ msgstr ""
 msgid "View $0"
 msgstr "Visualizar $0"
 
-#: src/common.ts:31
+#: src/common.ts:74
 msgid "Write and execute"
 msgstr "Escrever e executar"
 
-#: src/common.ts:30 src/dialogs/permissions.tsx:244
+#: src/common.ts:73 src/dialogs/permissions.tsx:244
 msgid "Write-only"
 msgstr "Somente escrever"
 
-#: src/header.tsx:72
+#: src/header.tsx:73
 msgid "Z-A"
 msgstr "Z-A"
 
