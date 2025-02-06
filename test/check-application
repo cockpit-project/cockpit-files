@@ -2614,8 +2614,8 @@ class TestFiles(testlib.MachineCase):
         # There is only one menu item
         b.wait_in_text(".pf-v5-c-menu .pf-v5-c-menu__list-item", "Home")
         # Home directory cannot be added or removed as bookmark
-        b.wait_not_present(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add bookmark)")
-        b.wait_not_present(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Remove current directory)")
+        b.wait_not_present(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add to bookmarks)")
+        b.wait_not_present(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Remove from bookmarks)")
         b.click("#bookmark-btn")
         b.wait_not_present(".pf-v5-c-menu .pf-v5-c-menu__list-item")
 
@@ -2625,7 +2625,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_visible("[data-item='passwd']")
 
         b.click("#bookmark-btn")
-        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add bookmark) button")
+        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add to bookmarks) button")
         b.wait_not_present(".pf-v5-c-menu")
 
         assert_bookmark("/etc", exists=True)
@@ -2633,7 +2633,7 @@ class TestFiles(testlib.MachineCase):
         # Remove bookmark
         b.click("#bookmark-btn")
         b.wait_visible(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('/etc') button")
-        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('Remove current directory') button")
+        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('Remove from bookmarks') button")
         b.wait_not_present(".pf-v5-c-menu")
 
         assert_bookmark("/etc", exists=False)
@@ -2641,7 +2641,7 @@ class TestFiles(testlib.MachineCase):
         # Go to bookmark
         b.click("#bookmark-btn")
         b.wait_not_present(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('/etc') button")
-        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add bookmark) button")
+        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add to bookmarks) button")
         b.wait_not_present(".pf-v5-c-menu")
 
         b.go("/files#/?path=/proc")
@@ -2664,14 +2664,14 @@ class TestFiles(testlib.MachineCase):
 
         # Removing directory with spaces or aliases
         b.click("#bookmark-btn")
-        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('Remove current directory') button")
+        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('Remove from bookmarks') button")
         b.wait_not_present(".pf-v5-c-menu")
 
         assert_bookmark("This is a-test", exists=False)
 
         # Bookmarking a directory with spaces encodes it correctly
         b.click("#bookmark-btn")
-        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add bookmark) button")
+        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add to bookmarks) button")
 
         assert_bookmark("This is a-test", exists=True)
         self.assertIn("file:///home/admin/This%20is%20a-test/\n", read_config())
@@ -2682,7 +2682,7 @@ class TestFiles(testlib.MachineCase):
         self.assert_last_breadcrumb("tmp")
 
         b.click("#bookmark-btn")
-        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('Remove current directory') button")
+        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('Remove from bookmarks') button")
         b.wait_not_present(".pf-v5-c-menu")
 
         assert_bookmark("/tmp", exists=False)
@@ -2697,7 +2697,7 @@ class TestFiles(testlib.MachineCase):
         self.assert_last_breadcrumb(special_dir)
 
         b.click("#bookmark-btn")
-        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add bookmark) button")
+        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add to bookmarks) button")
 
         assert_bookmark(special_dir, exists=True)
         self.assertEqual("file:///etc/\nfile:///home/admin/This%20is%20a-test/\nfile:///home/admin/super%23special*1%202%3E%3C.%2C%C3%9F/\n",
@@ -2711,7 +2711,7 @@ class TestFiles(testlib.MachineCase):
         self.assert_last_breadcrumb(special_dir)
 
         b.click("#bookmark-btn")
-        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('Remove current directory') button")
+        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('Remove from bookmarks') button")
         b.wait_not_present(".pf-v5-c-menu")
 
         assert_bookmark(special_dir, exists=False)
@@ -2745,13 +2745,13 @@ class TestFiles(testlib.MachineCase):
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('non-existent') button")
         self.assert_last_breadcrumb("non-existent")
         b.click("#bookmark-btn")
-        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('Remove current directory') button")
+        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('Remove from bookmarks') button")
         b.wait_not_present(".pf-v5-c-menu")
         # Removing the last bookmark, empties the file
         m.execute(f"until [ $(stat -c '%s' {config_file}) -eq 0 ]; do sleep 1; done")
 
         b.click("#bookmark-btn")
-        b.wait_not_present(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('Add bookmark') button")
+        b.wait_not_present(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('Add to bookmarks') button")
         b.click("#bookmark-btn")
         b.wait_not_present(".pf-v5-c-menu")
 
@@ -2767,7 +2767,7 @@ class TestFiles(testlib.MachineCase):
         self.assert_last_breadcrumb("var")
 
         b.click("#bookmark-btn")
-        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add bookmark) button")
+        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add to bookmarks) button")
         self.wait_modal_inline_alert("Unable to create bookmark directory")
         b.click(".pf-v5-c-alert__action button")
         b.wait_not_present(".pf-v5-c-alert__action")
@@ -2776,7 +2776,7 @@ class TestFiles(testlib.MachineCase):
         # When directory is not writable for us
         m.execute("mkdir /home/admin/.config/gtk-3.0")
         b.click("#bookmark-btn")
-        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add bookmark) button")
+        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add to bookmarks) button")
         self.wait_modal_inline_alert("Unable to save bookmark file")
         b.click(".pf-v5-c-alert__action button")
         b.wait_not_present(".pf-v5-c-alert__action")

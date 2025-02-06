@@ -142,9 +142,9 @@ function BookmarkButton({ path }: { path: string }) {
     let actionText = null;
     if (!defaultBookmarks.some(bkmark => bkmark.loc === path)) {
         if (bookmarks.includes(path)) {
-            actionText = _("Remove current directory");
+            actionText = _("Remove from bookmarks");
         } else if (cwdInfo !== null) {
-            actionText = _("Add bookmark");
+            actionText = _("Add to bookmarks");
         }
     }
 
