@@ -24,8 +24,8 @@
 .drag-drop-upload-blocked {
     position: absolute;
     z-index: 10;
-    border: 3px dashed var(--pf-v5-global--link--Color);
-    background: rgb(from var(--pf-v5-global--BackgroundColor--100) r g b / 80%);
+    border: 3px dashed var(--pf-t--global--text--color--link--default);
+    background: rgb(from var(--pf-t--global--background--color--primary--default) r g b / 80%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -33,12 +33,12 @@
     inline-size: 100%;
 
     .pf-v6-c-empty-state__icon {
-        color: var(--pf-v5-global--Color--100);
+        color: var(--pf-v6-global--Color--100);
     }
 }
 
 .pf-v6-c-page__main {
-    gap: var(--pf-v5-global--spacer--md);
+    gap: var(--pf-t--global--spacer--md);
     display: grid;
     grid-template-rows: auto 1fr auto 0;
     grid-template-columns: [header-start] 0 [content-start] 1fr [content-end] 0 [header-end];
@@ -72,8 +72,10 @@
 
 .files-overview-header {
     grid-column: header;
-    gap: var(--pf-v5-global--spacer--sm);
+    gap: var(--pf-t--global--spacer--sm);
     display: flex;
+    // By default pf6 PageSections use column
+    flex-direction: row;
     /* Align page breadcrumb centered */
     align-items: center;
 
@@ -96,13 +98,13 @@
 
     .pf-v6-c-breadcrumb {
         margin-block: 0;
-        margin-inline: var(--pf-v5-global--spacer--sm);
+        margin-inline: var(--pf-t--global--spacer--sm);
     }
 }
 
 .pf-v6-c-breadcrumb {
     margin-block: 0;
-    margin-inline: var(--pf-v5-global--spacer--md);
+    margin-inline: var(--pf-t--global--spacer--md);
 }
 
 .pf-v6-c-breadcrumb__list {
@@ -122,13 +124,13 @@
 
     .pf-v6-c-breadcrumb__item {
         // Use the default font size, not the smaller size
-        font-size: var(--pf-v5-global--FontSize--md);
+        font-size: var(--pf-t--global--font--size--md);
     }
 
     // Size, align, and space icon correctly
     .breadcrumb-hdd-icon {
         // Set the size to a large icon
-        block-size: var(--pf-v5-global--icon--FontSize--lg);
+        block-size: var(--pf-v6-global--icon--FontSize--lg);
         // Width should resolve itself based on height and aspect ratio
         inline-size: auto;
         // Align to the middle (as one would expect)
@@ -143,7 +145,7 @@
 
         &-edit-apply,
         &-edit-cancel {
-            padding-inline: var(--pf-v5-global--spacer--sm);
+            padding-inline: var(--pf-t--global--spacer--sm);
         }
 
         &-edit-apply {
@@ -182,11 +184,11 @@
     color: var(--pf-global--primary-color--100);
 }
 
-.pf-v5-l-gallery {
-    --pf-v5-l-gallery--GridTemplateColumns--max: 10rem;
+.pf-v6-l-gallery {
+    --pf-v6-l-gallery--GridTemplateColumns--max: 10rem;
     align-items: start;
-    gap: var(--pf-v5-global--spacer--sm);
-    grid-template-columns: repeat(auto-fill, minmax(var(--pf-v5-l-gallery--GridTemplateColumns--max), 1fr));
+    gap: var(--pf-t--global--spacer--sm);
+    grid-template-columns: repeat(auto-fill, minmax(var(--pf-v6-l-gallery--GridTemplateColumns--max), 1fr));
 }
 
 // Wrap titles of modals (instead of truncating long filenames)
@@ -214,23 +216,13 @@
 
 // // FIXME: Promote the CSS below to overrides, open PF issues // //
 
-// PatternFly always adds a margin after images inside of widgets with pf-m-end, which is incorrect when it's the last element
-.pf-v6-c-button__icon.pf-m-start:last-child {
-    margin-inline-end: 0;
-}
-
-// PF menu toggles are no longer spaced consistently
-.pf-v6-c-menu-toggle {
-    padding-inline: var(--pf-v5-global--spacer--md) calc(var(--pf-v5-global--spacer--md) * 0.75);
-}
-
 // Toolbar actions styling
 .header-toolbar {
     display: flex;
     flex-flow: row wrap;
-    gap: var(--pf-v5-global--spacer--md);
+    gap: var(--pf-t--global--spacer--md);
     justify-content: space-between;
-    font-family: var(--pf-v5-global--FontFamily--text);
+    font-family: var(--pf-t--global--font--line-height--body);
 
     .files-search {
         flex: min-content;
@@ -238,23 +230,23 @@
 
     .header-actions {
         display: flex;
-        gap: var(--pf-v5-global--spacer--md);
+        gap: var(--pf-t--global--spacer--md);
     }
 
     #dropdown-menu.pf-v6-c-menu-toggle {
-        padding-inline-start: var(--pf-v5-global--spacer--sm);
+        padding-inline-start: var(--pf-t--global--spacer--sm);
     }
 }
 
 .shortcuts-dialog {
     h2+.pf-v6-c-description-list {
-        margin-block-start: var(--pf-v5-global--spacer--md);
+        margin-block-start: var(--pf-t--global--spacer--md);
     }
 
-    .pf-v5-l-flex {
+    .pf-v6-l-flex {
         // Add standard spacing between the description lists that are in a flex
         // (PF Flex does odd stuff by default)
-        gap: var(--pf-v5-global--spacer--lg) var(--pf-v5-global--spacer--md);
+        gap: var(--pf-t--global--spacer--lg) var(--pf-t--global--spacer--md);
 
         >.pf-v6-c-content {
             // Have the content prefer 20em and wrap if too narrow
@@ -264,7 +256,7 @@
 
     .pf-v6-c-description-list {
         // PF's gap is weirdly too big; let's use the PF standard size that's used everywhere else
-        --pf-v6-c-content--dl--ColumnGap: var(--pf-v5-global--spacer--md);
+        --pf-v6-c-content--dl--ColumnGap: var(--pf-t--global--spacer--md);
         // We're setting this up as a table on the list, so they're consistent
         display: grid;
         // Fixing the width to the keyboard shortcuts
@@ -287,21 +279,21 @@
     .keystroke {
         display: flex;
         align-items: center;
-        color: var(--pf-v5-global--Color--200);
-        font-size: var(--pf-v5-global--FontSize--xs);
-        gap: var(--pf-v5-global--spacer--xs);
+        color: var(--pf-v6-global--Color--200);
+        font-size: var(--pf-t--global--font--size--xs);
+        gap: var(--pf-t--global--spacer--xs);
     }
 
     // Style individual keys
     .key {
         display: inline-block;
-        background-color: var(--pf-v5-global--BackgroundColor--200);
-        border-radius: var(--pf-v5-global--BorderRadius--sm);
-        border: 1px solid var(--pf-v5-global--BorderColor--100);
-        color: var(--pf-v5-global--Color--100);
-        padding-block: var(--pf-v5-global--spacer--xs);
-        padding-inline: var(--pf-v5-global--spacer--sm);
-        box-shadow: inset 1px 1px 0 var(--pf-v5-global--BackgroundColor--100);
+        background-color: var(--pf-t--global--background--color--primary--default);
+        border-radius: var(--pf-v6-global--BorderRadius--sm);
+        border: 1px solid var(--pf-v6-global--BorderColor--100);
+        color: var(--pf-v6-global--Color--100);
+        padding-block: var(--pf-t--global--spacer--xs);
+        padding-inline: var(--pf-t--global--spacer--sm);
+        box-shadow: inset 1px 1px 0 var(--pf-t--global--background--color--primary--default);
         white-space: nowrap;
     }
 }
@@ -310,15 +302,15 @@
 .files-footer-info {
     display: flex;
     flex-flow: row wrap;
-    column-gap: var(--pf-v5-global--spacer--md);
-    margin-block-start: var(--pf-v5-global--spacer--sm);
-    margin-inline-start: var(--pf-v5-global--spacer--md);
+    column-gap: var(--pf-t--global--spacer--md);
+    margin-block-start: var(--pf-t--global--spacer--sm);
+    margin-inline-start: var(--pf-t--global--spacer--md);
 
     .files-footer-mtime {
-        color: var(--pf-v5-global--Color--200);
+        color: var(--pf-v6-global--Color--200);
     }
 
     .files-footer-permissions {
-        color: var(--pf-v5-global--link--Color);
+        color: var(--pf-t--global--text--color--link--default);
     }
 }

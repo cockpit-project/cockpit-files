@@ -1,26 +1,25 @@
 .fileview {
     --icon-size: 32px;
+    --pf-t--global--text-decoration--link--line--default: none;
+    // text-decoration:none
     border-collapse: collapse;
     inline-size: 100%;
-    margin: var(--pf-v6-global--spacer--sm);
-    line-height: var(--pf-v6-global--LineHeight--md);
-    font-family: var(--pf-v6-global--FontFamily--text);
-    font-size: var(--pf-v6-global--FontSize--md);
+    margin: var(--pf-t--global--spacer--sm);
+    line-height: var(--pf-t--global--font--line-height--heading);
+    font-family: var(--pf-t--global--font--line-height--body);
+    font-size: var(--pf-t--global--font--size--md);
     overflow: auto;
-
-    .row-selected {
-        background-color: var(--pf-v6-c-card--m-selectable--m-selected--BackgroundColor);
-    }
 
     th {
         text-align: start;
     }
 
     tbody tr {
-        --color-folder: var(--pf-v6-global--primary-color--100);
-        --color-icon: var(--pf-v6-global--Color--400);
+        --color-folder: var(--pf-t--global--color--brand--default);
+        --color-icon: var(--pf-t--global--icon--color--subtle);
         --focus-width: 1px;
         --focus-solidity: solid;
+
 
         // We're handling focus state with focus-within below the focus ring at the tr
         a:focus {
@@ -31,35 +30,35 @@
         &.row-selected,
         &.row-selected:hover,
         &:focus-within {
-            outline: var(--focus-width) var(--focus-solidity) var(--pf-v6-global--active-color--300);
+            outline: var(--focus-width) var(--focus-solidity) var(--pf-t--global--color--brand--clicked);
         }
 
         // Hovered items, for both views
         &:hover {
             // Propogate the hovering via variables to the link and cursor
-            --pf-v6-global--link--Color: var(--pf-v6-global--link--Color--hover);
-            --pf-v6-global--link--TextDecoration: var(--pf-v6-global--link--TextDecoration--hover);
+            --pf-t--global--color--brand--default: var(--pf-t--global--color--brand--hover);
+            --pf-t--global--text--color--link--default: var(--pf-t--global--text--color--link--hover);
             // Show an interactive cursor
             cursor: pointer;
             // Standard PF hover color
-            background-color: var(--pf-v6-global--BackgroundColor--200);
+            background-color: var(--pf-t--global--background--color--secondary--default);
         }
 
         // When focused, show thicker ring and darker colors for icons
         &:focus-within {
             --focus-width: 2px;
-            --color-folder: var(--pf-v6-global--primary-color--200);
-            --color-icon: var(--pf-v6-global--Color--300);
+            --color-folder: var(--pf-t--global--color--brand--clicked);
+            --color-icon: var(--pf-t--global--icon--color--brand--clicked);
         }
 
         // Selected icons should have light blue selected color
         // (to distinguish from hovered items)
         &.row-selected,
         &.row-selected:hover {
-            --pf-v6-global--link--Color: var(--pf-v6-global--link--Color--hover);
+            --pf-t--global--text--color--link--default: var(--pf-t--global--text--color--link--hover);
             background-color: color-mix(in srgb,
-                    var(--pf-v6-global--link--Color--light) 15%,
-                    var(--pf-v6-global--BackgroundColor--100));
+                    var(--pf-t--global--text--color--link--default) 15%,
+                    var(--pf-t--global--background--color--primary--default));
         }
     }
 
@@ -67,7 +66,7 @@
 
         // Bump up the font size to standard for the filenames
         a {
-            font-size: var(--pf-v6-global--FontSize--md);
+            font-size: var(--pf-t--global--font--size--md);
         }
 
         a::before {
@@ -103,15 +102,15 @@
 
     &.view-grid .symlink a::after {
         --symlink-size: 22px;
-        inset-block-start: var(--pf-v6-global--spacer--sm);
-        inset-inline-end: var(--pf-v6-global--spacer--md);
+        inset-block-start: var(--pf-t--global--spacer--sm);
+        inset-inline-end: var(--pf-t--global--spacer--md);
         position: absolute;
     }
 
     &.view-details .symlink a::after {
         display: inline-block;
         inset-block-start: -1px;
-        margin-inline-start: var(--pf-v6-global--spacer--sm);
+        margin-inline-start: var(--pf-t--global--spacer--sm);
         position: relative;
         vertical-align: middle;
     }
@@ -165,7 +164,7 @@
 
     &.view-details .item-name a::before {
         display: inline-block;
-        margin-inline-end: var(--pf-v6-global--spacer--sm);
+        margin-inline-end: var(--pf-t--global--spacer--sm);
         // FIXME: Figure out why there's an offset
         transform: translateY(3px);
     }
@@ -176,7 +175,7 @@
         &::before {
             display: block;
             margin-inline: auto;
-            margin-block-end: var(--pf-v6-global--spacer--sm);
+            margin-block-end: var(--pf-t--global--spacer--sm);
         }
     }
 
@@ -187,12 +186,12 @@
 
 
         tbody tr {
-            border-block: 1px solid var(--pf-v6-global--BorderColor--100);
+            border-block: 1px solid var(--pf-t--global--border--color--default);
         }
 
         th,
         td {
-            padding: var(--pf-v6-global--spacer--sm);
+            padding: var(--pf-t--global--spacer--sm);
             border-block-start: none;
         }
 
@@ -226,11 +225,11 @@
         }
 
         :first-child:is(td, th) {
-            padding-inline-start: var(--pf-v6-global--spacer--lg);
+            padding-inline-start: var(--pf-t--global--spacer--lg);
         }
 
         :last-child:is(td, th):not(.pf-v5-c-table__sort) {
-            padding-inline-end: var(--pf-v6-global--spacer--lg);
+            padding-inline-end: var(--pf-t--global--spacer--lg);
         }
     }
 
@@ -246,13 +245,13 @@
             align-items: start;
             display: grid;
             // As we're using justify-content: space-between, this is the minimum gap horizontally;
-            gap: var(--pf-v6-global--spacer--sm);
+            gap: var(--pf-t--global--spacer--sm);
             grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
             justify-content: space-between;
-            margin: var(--pf-v6-global--spacer--sm);
+            margin: var(--pf-t--global--spacer--sm);
 
             tr {
-                border-radius: var(--pf-v6-global--BorderWidth--xl);
+                border-radius: var(--pf-t--global--border--width--extra-strong);
             }
         }
 
@@ -269,7 +268,7 @@
                 padding: 0;
 
                 a {
-                    padding: var(--pf-v6-global--spacer--sm);
+                    padding: var(--pf-t--global--spacer--sm);
                 }
 
                 &:not(:last-child) a {
@@ -277,7 +276,7 @@
                 }
 
                 +td {
-                    padding-block-end: var(--pf-v6-global--spacer--sm);
+                    padding-block-end: var(--pf-t--global--spacer--sm);
                 }
             }
 
@@ -286,8 +285,8 @@
             }
 
             .item-size {
-                font-size: var(--pf-v6-global--FontSize--xs);
-                color: var(--pf-v6-global--Color--200);
+                font-size: var(--pf-t--global--font--size--xs);
+                color: var(--pf-t--global--icon--color--brand--default);
             }
 
             .item-date,
@@ -297,7 +296,7 @@
             }
 
             &:hover {
-                outline: 1px solid var(--pf-v6-global--BackgroundColor--300);
+                outline: 1px solid var(--pf-t--global--background--color--secondary--hover);
             }
         }
     }
@@ -308,7 +307,7 @@
         z-index: 1;
 
         th {
-            background-color: var(--pf-v6-global--BackgroundColor--100);
+            background-color: var(--pf-t--global--background--color--primary--default);
         }
     }
 }
@@ -316,7 +315,7 @@
 .pf-v5-c-tooltip .permissions-tooltip-text {
     display: grid;
     grid-template-columns: auto 1fr;
-    column-gap: var(--pf-v6-global--spacer--sm);
+    column-gap: var(--pf-t--global--spacer--sm);
     text-align: start;
 }
 

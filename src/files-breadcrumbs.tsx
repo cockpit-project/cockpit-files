@@ -297,7 +297,7 @@ export function FilesBreadcrumbs({ path }: { path: string }) {
 
     return (
         <PageSection hasBodyWrapper={false}
-          
+          type="breadcrumb"
           className="files-overview-header"
           padding={{ default: "padding" }}
         >
