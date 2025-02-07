@@ -22,7 +22,10 @@ import React, { useEffect, useState } from 'react';
 import { Button } from "@patternfly/react-core/dist/esm/components/Button";
 import { Form, FormGroup } from "@patternfly/react-core/dist/esm/components/Form";
 import { FormSelect, FormSelectOption } from "@patternfly/react-core/dist/esm/components/FormSelect";
-import { Modal, ModalVariant } from "@patternfly/react-core/dist/esm/components/Modal";
+import {
+	Modal,
+	ModalVariant
+} from '@patternfly/react-core/dist/esm/deprecated/components/Modal';
 import { TextInput } from "@patternfly/react-core/dist/esm/components/TextInput";
 import { Stack } from "@patternfly/react-core/dist/esm/layouts/Stack";
 

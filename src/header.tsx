@@ -247,9 +247,7 @@ const ViewSelector = ({ isGrid, setIsGrid, sortBy, setSortBy, showHidden, setSho
                 isExpanded={isOpen}
                 onClick={() => onToggleClick(isOpen)}
                 ref={toggleRef}
-                splitButtonOptions={{
-                    variant: "action",
-                    items: [
+                splitButtonItems={[
                         <MenuToggleAction
                           aria-label={isGrid
                               ? _("Display as a list")
@@ -264,8 +262,7 @@ const ViewSelector = ({ isGrid, setIsGrid, sortBy, setSortBy, showHidden, setSho
                                 ? <ListIcon className="view-toggle-icon" />
                                 : <GripVerticalIcon className="view-toggle-icon" />}
                         </MenuToggleAction>
-                    ]
-                }}
+                    ]}
                 variant="secondary"
               />
           )}

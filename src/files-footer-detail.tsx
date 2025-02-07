@@ -5,7 +5,7 @@ import {
     DescriptionList, DescriptionListDescription, DescriptionListGroup, DescriptionListTerm
 } from "@patternfly/react-core/dist/esm/components/DescriptionList";
 import { Popover } from "@patternfly/react-core/dist/esm/components/Popover";
-import { Text } from "@patternfly/react-core/dist/esm/components/Text";
+import { Content } from "@patternfly/react-core/dist/esm/components/Content";
 import { Tooltip } from "@patternfly/react-core/dist/esm/components/Tooltip";
 
 import cockpit from "cockpit";
@@ -31,9 +31,9 @@ export const FilesFooterDetail = ({
     if (selected.length > 1) {
         return (
             <div className="files-footer-info">
-                <Text>
+                <Content component="p">
                     {cockpit.format(_("$0 files selected"), selected.length)}
-                </Text>
+                </Content>
             </div>
         );
     }
@@ -119,9 +119,9 @@ export const FilesFooterDetail = ({
             {fileInfoText}
             {selectedFile.mtime &&
             <Tooltip content={timeformat.dateTimeSeconds(selectedFile.mtime * 1000)}>
-                <Text className="files-footer-mtime">
+                <Content component="p" className="files-footer-mtime">
                     {timeformat.distanceToNow(selectedFile.mtime * 1000)}
-                </Text>
+                </Content>
             </Tooltip>}
             {userGroup}
             {permsPopover}

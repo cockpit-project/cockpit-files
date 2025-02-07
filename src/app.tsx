@@ -145,7 +145,7 @@ export const Application = () => {
     const removeAlert = (key: string) => setAlerts(prevAlerts => prevAlerts.filter(alert => alert.key !== key));
 
     return (
-        <Page>
+        <>
             <FilesContext.Provider value={{ addAlert, removeAlert, cwdInfo }}>
                 <WithDialogs>
                     <AlertGroup isToast isLiveRegion>
@@ -168,7 +168,7 @@ export const Application = () => {
                         ))}
                     </AlertGroup>
                     <FilesBreadcrumbs path={path} />
-                    <PageSection>
+                    <PageSection hasBodyWrapper={false}>
                         {errorMessage &&
                         <Card className="files-empty-state">
                             <EmptyStatePanel
@@ -198,6 +198,6 @@ export const Application = () => {
                     </PageSection>
                 </WithDialogs>
             </FilesContext.Provider>
-        </Page>
+        </>
     );
 };

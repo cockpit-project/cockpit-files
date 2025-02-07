@@ -22,7 +22,7 @@ import React, { useCallback, useEffect, useMemo, useState, useRef } from "react"
 import { Divider } from "@patternfly/react-core/dist/esm/components/Divider";
 import { MenuItem, MenuList } from "@patternfly/react-core/dist/esm/components/Menu";
 import { Spinner } from "@patternfly/react-core/dist/esm/components/Spinner";
-import { Text, TextContent, TextVariants } from "@patternfly/react-core/dist/esm/components/Text";
+import { Content, ContentVariants } from "@patternfly/react-core/dist/esm/components/Content";
 import { Tooltip } from "@patternfly/react-core/dist/esm/components/Tooltip";
 import { Flex } from "@patternfly/react-core/dist/esm/layouts/Flex";
 import { FolderIcon, SearchIcon } from '@patternfly/react-icons';
@@ -586,7 +586,7 @@ const FilePermissions = ({ file } : {
 
     return (
         <Tooltip content={tooltip}>
-            <Text component={TextVariants.pre}>{permissionShortStr(mode)}</Text>
+            <Content component={ContentVariants.pre}>{permissionShortStr(mode)}</Content>
         </Tooltip>
     );
 };
@@ -597,11 +597,11 @@ const FileOwnership = ({ file } : { file: FolderFileInfo, }) => {
         : `${file.user}:${file.group}`;
 
     return (
-        <TextContent>
-            <Text>
+        <Content>
+            <Content component="p">
                 {ownerText}
-            </Text>
-        </TextContent>
+            </Content>
+        </Content>
     );
 };
 
