@@ -26,7 +26,7 @@ import { debounce } from "throttle-debounce";
 import cockpit from "cockpit";
 import { EmptyStatePanel } from "cockpit-components-empty-state";
 
-import type { FolderFileInfo } from "./common.ts";
+import type { FolderFileInfo, ClipboardInfo } from "./common.ts";
 import { FilesCardBody } from "./files-card-body.tsx";
 import { as_sort, FilesCardHeader } from "./header.tsx";
 
@@ -63,7 +63,7 @@ export const FilesFolderView = ({
     showHidden: boolean,
     setShowHidden: React.Dispatch<React.SetStateAction<boolean>>,
     selected: FolderFileInfo[], setSelected: React.Dispatch<React.SetStateAction<FolderFileInfo[]>>,
-    clipboard: string[], setClipboard: React.Dispatch<React.SetStateAction<string[]>>,
+    clipboard: ClipboardInfo, setClipboard: React.Dispatch<React.SetStateAction<ClipboardInfo>>,
 }) => {
     const dropzoneRef = useRef<HTMLDivElement>(null);
     const [currentFilter, setCurrentFilter] = useState("");

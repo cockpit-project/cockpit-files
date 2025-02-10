@@ -39,5 +39,5 @@ export function get_owner_candidates(user: cockpit.UserInfo, info: FileInfo) {
         candidates.add(`${user.name || user.id}:${setgid || user.gid}`);
     }
 
-    return [...candidates];
+    return candidates;
 }
