@@ -2649,16 +2649,16 @@ class TestFiles(testlib.MachineCase):
 
             # Test drag & drop upload
             b.eval_js('''
-                      function dragFileEvent(sel, eventType, filename) {
+                      function dragFileEvent(sel, dragType, filename) {
                           const el = window.ph_find(sel);
+                          const dataTransfer = new DataTransfer();
+                          dataTransfer.dropEffect = "move";
 
-                          let dataTransfer = null;
-                          if (filename) {
+                          // File is added only for drop event
+                          if (dragType === 'drop' && filename) {
                               // Synthetize a file DataTransfer action
                               const content = "Random file content: 4";
                               const file = new File([content], filename, { type: "text/plain" });
-                              dataTransfer = new DataTransfer();
-                              dataTransfer.dropEffect = "move";
 
                               Object.defineProperty(dataTransfer, 'files', {
                                   value: [file],
@@ -2666,7 +2666,18 @@ class TestFiles(testlib.MachineCase):
                               });
                           }
 
-                          const ev = new DragEvent(eventType, { bubbles: true, dataTransfer: dataTransfer });
+                          // types are known in all drags event
+                          // default to dragging an html element
+                          let types = ['text/plain', 'text/html'];
+                          if (filename) {
+                              types = ['Files'];
+                          }
+                          Object.defineProperty(dataTransfer, 'types', {
+                              value: types,
+                              writable: false,
+                          });
+
+                          const ev = new DragEvent(dragType, { bubbles: true, dataTransfer: dataTransfer });
                           el.dispatchEvent(ev);
                       }''')
 
@@ -2675,7 +2686,7 @@ class TestFiles(testlib.MachineCase):
                 b.call_js_func('dragFileEvent', selector, dragType, filename)
 
             b.wait_not_present(".drag-drop-upload")
-            drag_file_event(".fileview-wrapper", 'dragenter')
+            drag_file_event(".fileview-wrapper", 'dragenter', 'drag-drop-testfile.txt')
             b.wait_visible(".drag-drop-upload")
             b.assert_pixels(".files-card", "drag-drop-upload-dropzone",
                             mock={".item-date": "Jun 19, 2024, 11:30 AM"})
@@ -2687,35 +2698,53 @@ class TestFiles(testlib.MachineCase):
             b.wait_not_present(".drag-drop-upload")
 
             # Upload same file again - warning should show up
-            drag_file_event(".fileview-wrapper", 'dragenter')
+            drag_file_event(".fileview-wrapper", 'dragenter', 'drag-drop-testfile.txt')
             b.wait_visible(".drag-drop-upload")
-            drag_file_event(".fileview-wrapper", 'dragover')
+            drag_file_event(".fileview-wrapper", 'dragover', 'drag-drop-testfile.txt')
             drag_file_event(".fileview-wrapper", 'drop', 'drag-drop-testfile.txt')
             b.wait_in_text("h1.pf-v5-c-modal-box__title", "Replace file drag-drop-testfile.txt?")
             b.click(".pf-v5-c-modal-box button.pf-m-link")
             b.wait_not_present(".pf-v5-c-modal-box")
 
-            # Drag file around to test if upload icon shows up and hides accordingly
+            # Drag & drop upload overlay is not dislayed when event has no files
             drag_file_event(".fileview-wrapper", 'dragenter')
-            b.wait_visible(".drag-drop-upload")
+            b.wait_not_present(".drag-drop-upload")
+            drag_file_event(".fileview-wrapper", 'dragover')
+            b.wait_not_present(".drag-drop-upload")
             drag_file_event(".fileview-wrapper", 'dragleave')
+            b.wait_not_present(".drag-drop-upload")
+            drag_file_event(".fileview-wrapper", 'dragenter')
+            b.wait_not_present(".drag-drop-upload")
+            drag_file_event(".fileview-wrapper", 'dragover')
+            b.wait_not_present(".drag-drop-upload")
+            drag_file_event(".fileview-wrapper", 'drop')
             b.wait_not_present(".drag-drop-upload")
 
-            drag_file_event(".fileview-wrapper", 'dragenter')
+            # Drag file around to test if upload icon shows up and hides accordingly
+            drag_file_event(".fileview-wrapper", 'dragenter', 'drag-drop-testfile.txt')
+            b.wait_visible(".drag-drop-upload")
+            drag_file_event(".fileview-wrapper", 'dragleave', 'drag-drop-testfile.txt')
+            b.wait_not_present(".drag-drop-upload")
+
+            drag_file_event(".fileview-wrapper", 'dragenter', 'drag-drop-testfile.txt')
             b.wait_visible(".drag-drop-upload")
             # Hover over element which is a child of .fileview-wrapper
-            drag_file_event(".fileview-wrapper [data-item='Downloads'] .item-name", 'dragenter')
-            drag_file_event(".fileview-wrapper", 'dragleave')
+            drag_file_event(".fileview-wrapper [data-item='Downloads'] .item-name",
+                            'dragenter', 'drag-drop-testfile.txt')
+            drag_file_event(".fileview-wrapper", 'dragleave', 'drag-drop-testfile.txt')
             b.wait_visible(".drag-drop-upload")
-            drag_file_event(".fileview-wrapper [data-item='project'] .item-name", 'dragenter')
-            drag_file_event(".fileview-wrapper [data-item='Downloads'] .item-name", 'dragleave')
+            drag_file_event(".fileview-wrapper [data-item='project'] .item-name",
+                            'dragenter', 'drag-drop-testfile.txt')
+            drag_file_event(".fileview-wrapper [data-item='Downloads'] .item-name",
+                            'dragleave', 'drag-drop-testfile.txt')
             b.wait_visible(".drag-drop-upload")
             # Drag away from the .fileview-wrapper
-            drag_file_event(".fileview-wrapper [data-item='project'] .item-name", 'dragleave')
+            drag_file_event(".fileview-wrapper [data-item='project'] .item-name",
+                            'dragleave', 'drag-drop-testfile.txt')
             b.wait_not_present(".drag-drop-upload")
-            drag_file_event(".fileview-wrapper", 'dragenter')
+            drag_file_event(".fileview-wrapper", 'dragenter', 'drag-drop-testfile.txt')
             b.wait_visible(".drag-drop-upload")
-            drag_file_event(".fileview-wrapper", 'dragleave')
+            drag_file_event(".fileview-wrapper", 'dragleave', 'drag-drop-testfile.txt')
             b.wait_not_present(".drag-drop-upload")
 
             # Drag & drop is disabled when upload is in progress
@@ -2723,14 +2752,14 @@ class TestFiles(testlib.MachineCase):
             b.upload_files("#upload-file-btn + input[type='file']", [big_file])
             b.wait_visible("#upload-file-btn:disabled")
             b.wait_not_present(".drag-drop-upload")
-            drag_file_event(".fileview-wrapper", 'dragenter')
+            drag_file_event(".fileview-wrapper", 'dragenter', 'drag-drop-testfile.txt')
             b.wait_visible(".drag-drop-upload-blocked")
             b.assert_pixels(".files-card", "drag-drop-upload-dropzone-blocked",
                             mock={".item-date": "Jun 19, 2024, 11:30 AM"})
-            drag_file_event(".fileview-wrapper", 'dragleave')
+            drag_file_event(".fileview-wrapper", 'dragleave', 'drag-drop-testfile.txt')
             b.wait_not_present(".drag-drop-upload-blocked")
             # Dropping the file does nothing
-            drag_file_event(".fileview-wrapper", 'dragenter')
+            drag_file_event(".fileview-wrapper", 'dragenter', 'drag-drop-testfile.txt')
             b.wait_visible(".drag-drop-upload-blocked")
             drag_file_event(".fileview-wrapper", 'drop', 'drag-drop-file-2.txt')
             b.wait_not_present(".drag-drop-upload")
@@ -2743,7 +2772,7 @@ class TestFiles(testlib.MachineCase):
 
             # Change directory and upload
             b.mouse("[data-item='project']", "dblclick")
-            drag_file_event(".fileview-wrapper", 'dragenter')
+            drag_file_event(".fileview-wrapper", 'dragenter', 'drag-drop-testfile.txt')
             b.wait_visible(".drag-drop-upload")
             drag_file_event(".fileview-wrapper", 'drop', 'drag-drop-testfile.txt')
             b.wait_in_text(".pf-v5-c-alert__title", "File uploaded")

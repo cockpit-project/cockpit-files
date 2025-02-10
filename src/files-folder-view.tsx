@@ -94,6 +94,10 @@ export const FilesFolderView = ({
             event.preventDefault();
             event.stopPropagation();
 
+            if (!event.dataTransfer?.types.includes("Files")) {
+                return;
+            }
+
             if (dragDropCnt.current === 0) {
                 setDragDropActive(true);
             }
@@ -104,6 +108,10 @@ export const FilesFolderView = ({
             event.preventDefault();
             event.stopPropagation();
 
+            if (!event.dataTransfer?.types.includes("Files")) {
+                return;
+            }
+
             dragDropCnt.current--;
             if (dragDropCnt.current === 0) {
                 setDragDropActive(false);
@@ -113,6 +121,10 @@ export const FilesFolderView = ({
         const handleDrop = (event: DragEvent) => {
             event.preventDefault();
             event.stopPropagation();
+
+            if (!event.dataTransfer?.types.includes("Files")) {
+                return;
+            }
 
             setDragDropActive(false);
             dragDropCnt.current = 0;
