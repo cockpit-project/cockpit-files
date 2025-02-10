@@ -2271,6 +2271,22 @@ class TestFiles(testlib.MachineCase):
         self.assert_owner("/home/foouser/dir2/hi.txt", "foouser:foouser")
         self.assert_owner("/home/foouser/dir2/bye.txt", "foouser:foouser")
 
+        # Non-admin copy to no write access directory shows permission denied error
+        b.drop_superuser()
+        b.go("/files#/?path=/home/admin")
+        self.assert_last_breadcrumb("admin")
+        b.click("[data-item='newfile']")
+        b.click("#dropdown-menu")
+        b.click("#copy-item")
+        b.go("files#/?path=/")
+        self.assert_last_breadcrumb("/")
+        b.click("#dropdown-menu")
+        b.click("#paste-item")
+        b.wait_visible(".pf-v5-c-alert.pf-m-danger")
+        self.assertIn("Permission denied", b.text(".pf-v5-c-alert.pf-m-danger .pf-v5-c-alert__title"))
+        b.click(".pf-v5-c-alert__action button")
+        b.wait_not_present("[data-item='newfile']")
+
     @testlib.skipBrowser(".upload_files() doesn't work on Firefox", "firefox")
     def testUpload(self) -> None:
         b = self.browser

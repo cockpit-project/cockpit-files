@@ -66,8 +66,6 @@ export async function pasteFromClipboard(
     }
 
     try {
-        // check for write access to destination directory
-        await cockpit.spawn(["test", "-w", path]);
         const filePaths = clipboard.files.map(file => `${clipboard.path}/${file.name}`);
         await cockpit.spawn([
             "cp",
