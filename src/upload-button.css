@@ -3,7 +3,7 @@ button.progress-wrapper {
   aspect-ratio: 1;
   padding: 0;
 
-  // Make the button look clickable on hover
+  /* Make the button look clickable on hover */
   &:hover {
     outline: 2px solid var(--pf-v5-c-button--m-secondary--hover--after--BorderColor);
   }
@@ -18,7 +18,7 @@ button.progress-wrapper {
   aspect-ratio: 1;
   border-radius: 100%;
   block-size: auto;
-  // Set "padding" to xs size (1/2 of sm)
+  /* Set "padding" to xs size (1/2 of sm) */
   inline-size: calc(100% - var(--pf-v5-global--spacer--sm));
   line-height: var(--pf-v5-c-button--LineHeight);
   display: inline-block;
@@ -53,7 +53,7 @@ button.progress-wrapper {
 
 .upload-progress-flex {
   .pf-v5-c-progress {
-    // Align % with label and trashcan
+    /* Align % with label and trashcan */
     align-items: start;
   }
 }
@@ -70,11 +70,11 @@ button.cancel-button {
 }
 
 .upload-popover {
-  // Set the max width to 32rem, but have it work on smaller screen sizes too
+  /* Set the max width to 32rem, but have it work on smaller screen sizes too */
   max-inline-size: min(32rem, 100vw - 8rem);
 
   .pf-v5-c-popover__body {
-    // Set the minimum width to 14rem, but also allow it to work on smaller screen sizes
+    /* Set the minimum width to 14rem, but also allow it to work on smaller screen sizes */
     min-inline-size: min(14rem, 33vw);
   }
 }

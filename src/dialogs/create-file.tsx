@@ -34,7 +34,7 @@ import type { Dialogs, DialogResult } from 'dialogs';
 import { useInit } from 'hooks';
 import { superuser } from 'superuser';
 
-import "./editor.scss";
+import "./editor.css";
 import { checkFilename, useFilesContext } from '../common.ts';
 import { get_owner_candidates } from '../ownership.tsx';
 
