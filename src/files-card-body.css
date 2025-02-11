@@ -22,38 +22,39 @@
         --focus-width: 1px;
         --focus-solidity: solid;
 
-        // We're handling focus state with focus-within below the focus ring at the tr
+        /* We're handling focus state with focus-within below the focus ring at the tr */
         a:focus {
             outline: none;
         }
 
-        // Turn focus ring back on at the tr level for selected and focused items
+        /* Turn focus ring back on at the tr level for selected and focused items */
         &.row-selected,
         &.row-selected:hover,
         &:focus-within {
             outline: var(--focus-width) var(--focus-solidity) var(--pf-v5-global--active-color--300);
         }
 
-        // Hovered items, for both views
+        /* Hovered items, for both views */
         &:hover {
-            // Propogate the hovering via variables to the link and cursor
+            /* Propogate the hovering via variables to the link and cursor */
             --pf-v5-global--link--Color: var(--pf-v5-global--link--Color--hover);
             --pf-v5-global--link--TextDecoration: var(--pf-v5-global--link--TextDecoration--hover);
-            // Show an interactive cursor
+            /* Show an interactive cursor */
             cursor: pointer;
-            // Standard PF hover color
+            /* Standard PF hover color */
             background-color: var(--pf-v5-global--BackgroundColor--200);
         }
 
-        // When focused, show thicker ring and darker colors for icons
+        /* When focused, show thicker ring and darker colors for icons */
         &:focus-within {
             --focus-width: 2px;
             --color-folder: var(--pf-v5-global--primary-color--200);
             --color-icon: var(--pf-v5-global--Color--300);
         }
 
-        // Selected icons should have light blue selected color
-        // (to distinguish from hovered items)
+        /* Selected icons should have light blue selected color
+         * (to distinguish from hovered items)
+         */
         &.row-selected,
         &.row-selected:hover {
             --pf-v5-global--link--Color: var(--pf-v5-global--link--Color--hover);
@@ -66,7 +67,7 @@
     }
 
     .item-name {
-        // Bump up the font size to standard for the filenames
+        /* Bump up the font size to standard for the filenames */
         a {
             font-size: var(--pf-v5-global--FontSize--md);
         }
@@ -91,7 +92,7 @@
 
             &::after {
                 aspect-ratio: 1;
-                // Reuse default icon color
+                /* Reuse default icon color */
                 background-color: var(--color-icon);
                 block-size: var(--symlink-size);
                 content: '';
@@ -167,7 +168,7 @@
     &.view-details .item-name a::before {
         display: inline-block;
         margin-inline-end: var(--pf-v5-global--spacer--sm);
-        // FIXME: Figure out why there's an offset
+        /* FIXME: Figure out why there's an offset */
         transform: translateY(3px);
     }
 
@@ -204,7 +205,7 @@
             text-align: end;
         }
 
-        // Remove the extra padding on the end of the column and button, as the icon has padding already
+        /* Remove the extra padding on the end of the column and button, as the icon has padding already */
         .col-size, .col-date,
         .col-perms, .col-owner {
             &, .pf-v5-c-table__button {
@@ -237,7 +238,7 @@
         tbody {
             align-items: start;
             display: grid;
-            // As we're using justify-content: space-between, this is the minimum gap horizontally;
+            /* As we're using justify-content: space-between, this is the minimum gap horizontally; */
             gap: var(--pf-v5-global--spacer--sm);
             grid-template-columns: repeat(auto-fill, minmax(8rem,1fr));
             justify-content: space-between;
@@ -250,14 +251,14 @@
 
         tr {
             display: block;
-            // Override default PF padding
+            /* Override default PF padding */
             padding: 0;
 
             td {
                 display: block;
                 text-align: center;
                 word-break: break-all;
-                // Override default PF padding
+                /* Override default PF padding */
                 padding: 0;
 
                 a {
@@ -310,8 +311,9 @@
     text-align: start;
 }
 
-// use all available space when there is not enough files to fill the whole view
-// so drag&drop works in empty space
+/* use all available space when there is not enough files to fill the whole view
+ * so drag&drop works in empty space
+ */
 .fileview-wrapper {
     block-size: 100%;
 }

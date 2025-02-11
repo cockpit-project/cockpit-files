@@ -2,7 +2,7 @@
   block-size: 100%;
 
   &.is-modified {
-    // Add a background highlight on the modal itself
+    /* Add a background highlight on the modal itself */
     &::after {
       background: linear-gradient(to bottom, var(--pf-v5-global--warning-color--100), transparent 0.33em);
       content: '';
@@ -11,7 +11,7 @@
       position: absolute;
     }
 
-    // Add a circle to indicate that there are changes
+    /* Add a circle to indicate that there are changes */
     .pf-v5-c-modal-box__title-text::after {
       aspect-ratio: 1;
       background: var(--pf-v5-global--warning-color--100);
@@ -23,7 +23,7 @@
     }
   }
 
-  // Create mode shows textarea as full size
+  /* Create mode shows textarea as full size */
   .pf-v5-c-form.pf-m-horizontal {
     block-size: 100%;
     grid-template-rows: auto 1fr auto;

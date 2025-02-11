@@ -42,7 +42,7 @@ import { show_create_directory_dialog } from "./dialogs/mkdir.tsx";
 import { show_rename_dialog } from "./dialogs/rename.tsx";
 import { Sort, filterColumnMapping, filterColumns } from "./header.tsx";
 import { get_menu_items, pasteFromClipboard } from "./menu.tsx";
-import "./files-card-body.scss";
+import "./files-card-body.css";
 
 const _ = cockpit.gettext;
 

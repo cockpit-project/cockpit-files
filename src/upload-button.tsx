@@ -43,7 +43,7 @@ import { edit_permissions } from "./dialogs/permissions.tsx";
 import { UploadContext } from "./files-folder-view.tsx";
 import { get_owner_candidates } from "./ownership.tsx";
 
-import "./upload-button.scss";
+import "./upload-button.css";
 
 const _ = cockpit.gettext;
 

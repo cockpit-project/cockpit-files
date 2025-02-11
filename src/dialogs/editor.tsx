@@ -33,7 +33,7 @@ import { basename } from "cockpit-path";
 import type { Dialogs, DialogResult } from 'dialogs';
 import { fmt_to_fragments } from 'utils';
 
-import "./editor.scss";
+import "./editor.css";
 
 const _ = cockpit.gettext;
 
