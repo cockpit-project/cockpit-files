@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-04 03:00+0000\n"
+"POT-Creation-Date: 2025-02-11 03:02+0000\n"
 "PO-Revision-Date: 2025-01-13 14:38+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
 "Language-Team: Turkish <https://translate.fedoraproject.org/projects/cockpit-"
@@ -26,7 +26,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1\n"
 "X-Generator: Weblate 5.9.2\n"
 
-#: src/menu.tsx:58
+#: src/menu.tsx:63
 msgid "\"$0\" exists, not overwriting with paste."
 msgstr "\"$0\" var, yapıştırma ile üzerine yazılmıyor."
 
@@ -38,7 +38,7 @@ msgstr "$0 dosya"
 msgid "$0 files selected"
 msgstr "$0 dosya seçildi"
 
-#: src/files-card-body.tsx:508
+#: src/files-card-body.tsx:509
 msgid "$0 item is hidden"
 msgid_plural "$0 items are hidden"
 msgstr[0] "$0 gizli öge"
@@ -47,6 +47,12 @@ msgstr[1] "$0 gizli öge"
 #: src/dialogs/permissions.tsx:299
 msgid "$0 permissions"
 msgstr "$0 izinleri"
+
+#: src/dialogs/copyPasteOwnership.tsx:118
+#, fuzzy
+#| msgid "Original file on server"
+msgid "(original owner)"
+msgstr "Sunucudaki orijinal dosya"
 
 #: org.cockpit_project.files.metainfo.xml:8
 msgid ""
@@ -80,14 +86,16 @@ msgid "Activate selected item, enter directory"
 msgstr "Seçili ögeyi etkinleştir, dizine gir"
 
 #: src/files-breadcrumbs.tsx:147
-msgid "Add bookmark"
+#, fuzzy
+#| msgid "Add bookmark"
+msgid "Add to bookmarks"
 msgstr "Yer imi ekle"
 
 #: src/upload-button.tsx:145
 msgid "Apply this action to all conflicting files"
 msgstr "Bu eylemi çakışan tüm dosyalara uygula"
 
-#: src/common.ts:82
+#: src/common.ts:86
 msgid "Block device"
 msgstr "Blok aygıtı"
 
@@ -97,8 +105,8 @@ msgstr "Yer imleri"
 
 #: src/dialogs/rename.tsx:98 src/dialogs/mkdir.tsx:108
 #: src/dialogs/create-file.tsx:161 src/dialogs/permissions.tsx:319
-#: src/dialogs/editor.tsx:211 src/dialogs/delete.tsx:91
-#: src/upload-button.tsx:116
+#: src/dialogs/copyPasteOwnership.tsx:180 src/dialogs/editor.tsx:211
+#: src/dialogs/delete.tsx:91 src/upload-button.tsx:116
 msgid "Cancel"
 msgstr "İptal"
 
@@ -134,11 +142,11 @@ msgstr "İzinleri değiştir"
 msgid "Change permissions for enclosed files"
 msgstr "İçerilen dosyalar için izinleri değiştir"
 
-#: src/common.ts:83
+#: src/common.ts:87
 msgid "Character device"
 msgstr "Karakter aygıtı"
 
-#: src/files-card-body.tsx:496
+#: src/files-card-body.tsx:497
 msgid "Clear filter"
 msgstr "Filtreyi temizle"
 
@@ -158,7 +166,7 @@ msgstr "Cockpit Projesi"
 msgid "Collapse"
 msgstr "Daralt"
 
-#: src/menu.tsx:140 src/menu.tsx:185
+#: src/menu.tsx:157 src/menu.tsx:202
 msgid "Copy"
 msgstr "Kopyala"
 
@@ -170,11 +178,11 @@ msgstr "Seçili dosya veya dizini kopyala"
 msgid "Create"
 msgstr "Oluştur"
 
-#: src/dialogs/mkdir.tsx:92 src/menu.tsx:95
+#: src/dialogs/mkdir.tsx:92 src/menu.tsx:112
 msgid "Create directory"
 msgstr "Dizin oluştur"
 
-#: src/dialogs/create-file.tsx:145 src/menu.tsx:100
+#: src/dialogs/create-file.tsx:145 src/menu.tsx:117
 msgid "Create file"
 msgstr "Dosya oluştur"
 
@@ -182,7 +190,7 @@ msgstr "Dosya oluştur"
 msgid "Create new directory"
 msgstr "Yeni dizin oluştur"
 
-#: src/dialogs/delete.tsx:90 src/menu.tsx:157 src/menu.tsx:190
+#: src/dialogs/delete.tsx:90 src/menu.tsx:174 src/menu.tsx:207
 msgid "Delete"
 msgstr "Sil"
 
@@ -206,7 +214,7 @@ msgstr "$0 dosyası silinsin mi?"
 msgid "Delete link $0?"
 msgstr "$0 bağlantısı silinsin mi?"
 
-#: src/common.ts:84
+#: src/common.ts:88
 msgid "Directory"
 msgstr "Dizin"
 
@@ -218,7 +226,7 @@ msgstr "Dizin, $0 dizin ve $1 dosya içeriyor"
 msgid "Directory contains $0 directories, $1 files, $2 hidden"
 msgstr "Dizin, $0 dizin ve $1 dosya içeriyor, $2 tanesi gizli"
 
-#: src/files-card-body.tsx:503
+#: src/files-card-body.tsx:504
 msgid "Directory is empty"
 msgstr "Dizin boş"
 
@@ -242,7 +250,7 @@ msgstr "Dizin adı çok uzun"
 msgid "Directory owner"
 msgstr "Dizin sahibi"
 
-#: src/common.ts:135
+#: src/common.ts:139
 msgid "Directory with the same name exists"
 msgstr "Aynı ada sahip dizin var"
 
@@ -254,7 +262,7 @@ msgstr "Izgara olarak görüntüle"
 msgid "Display as a list"
 msgstr "Liste olarak görüntüle"
 
-#: src/menu.tsx:167
+#: src/menu.tsx:184
 msgid "Download"
 msgstr "İndir"
 
@@ -271,7 +279,7 @@ msgstr "$0 dosyasını düzenle"
 msgid "Edit path"
 msgstr "Yolu düzenle"
 
-#: src/menu.tsx:106 src/menu.tsx:146 src/menu.tsx:204
+#: src/menu.tsx:123 src/menu.tsx:163 src/menu.tsx:221
 msgid "Edit permissions"
 msgstr "İzinleri düzenle"
 
@@ -279,7 +287,7 @@ msgstr "İzinleri düzenle"
 msgid "Editing"
 msgstr "Düzenleme"
 
-#: src/common.ts:72
+#: src/common.ts:76
 msgid "Execute-only"
 msgstr "Yalnızca çalıştır"
 
@@ -291,7 +299,7 @@ msgstr "Başarısız oldu"
 msgid "File browser"
 msgstr "Dosya gezgini"
 
-#: src/common.ts:137
+#: src/common.ts:141
 msgid "File exists"
 msgstr "Dosya var"
 
@@ -303,13 +311,19 @@ msgstr "Dosya adı"
 msgid "File uploaded"
 msgstr "Dosya karşıya yüklendi"
 
-#: src/common.ts:132
+#: src/common.ts:136
 msgid "Filename is the same as original name"
 msgstr "Dosya adı ilk adıyla aynı"
 
 #: org.cockpit_project.files.metainfo.xml:5
 msgid "Files"
 msgstr "Dosyalar"
+
+#: src/dialogs/copyPasteOwnership.tsx:197
+msgid ""
+"Files being pasted have a different owner. By default, ownership will be "
+"changed to match the destination directory."
+msgstr ""
 
 #: src/upload-button.tsx:361
 msgid "Files uploaded"
@@ -359,7 +373,7 @@ msgstr "İleri git"
 msgid "Go up a directory"
 msgstr "Bir dizin yukarı git"
 
-#: src/dialogs/permissions.tsx:348 src/files-card-body.tsx:572
+#: src/dialogs/permissions.tsx:348 src/files-card-body.tsx:573
 #: src/files-footer-detail.tsx:79 src/files-footer-detail.tsx:151
 msgid "Group"
 msgstr "Grup"
@@ -408,7 +422,7 @@ msgstr "Dosyalarınızı yönetin"
 msgid "Missing type"
 msgstr "Tür eksik"
 
-#: src/header.tsx:88 src/files-card-body.tsx:528
+#: src/header.tsx:88 src/files-card-body.tsx:529
 msgid "Modified"
 msgstr "Değiştirilme"
 
@@ -416,23 +430,23 @@ msgstr "Değiştirilme"
 msgid "Most permissive"
 msgstr "En çok izin veren"
 
-#: src/header.tsx:66 src/files-card-body.tsx:523
+#: src/header.tsx:66 src/files-card-body.tsx:524
 msgid "Name"
 msgstr "Ad"
 
-#: src/common.ts:126
+#: src/common.ts:130
 msgid "Name cannot be empty"
 msgstr "Ad boş olamaz"
 
-#: src/common.ts:130
+#: src/common.ts:134
 msgid "Name cannot include a /"
 msgstr "Ad / karakteri içeremez"
 
-#: src/common.ts:128
+#: src/common.ts:132
 msgid "Name too long"
 msgstr "Ad çok uzun"
 
-#: src/common.ts:85
+#: src/common.ts:89
 msgid "Named pipe"
 msgstr "Adlı boru (pipe)"
 
@@ -452,23 +466,29 @@ msgstr "Yeni dosya adı"
 msgid "New name"
 msgstr "Yeni ad"
 
+#: src/dialogs/copyPasteOwnership.tsx:200
+#, fuzzy
+#| msgid "New name"
+msgid "New owner"
+msgstr "Yeni ad"
+
 #: src/dialogs/permissions.tsx:234
 msgid "No access"
 msgstr "Erişim yok"
 
-#: src/files-card-body.tsx:495
+#: src/files-card-body.tsx:496
 msgid "No matching results"
 msgstr "Eşleşen sonuç yok"
 
-#: src/common.ts:71
+#: src/common.ts:75
 msgid "None"
 msgstr "Yok"
 
-#: src/menu.tsx:115 src/menu.tsx:176
+#: src/menu.tsx:132 src/menu.tsx:193
 msgid "Open in terminal"
 msgstr "Terminalde aç"
 
-#: src/menu.tsx:132
+#: src/menu.tsx:149
 msgid "Open text file"
 msgstr "Metin dosyası aç"
 
@@ -476,7 +496,7 @@ msgstr "Metin dosyası aç"
 msgid "Original file on server"
 msgstr "Sunucudaki orijinal dosya"
 
-#: src/files-card-body.tsx:572 src/files-footer-detail.tsx:79
+#: src/files-card-body.tsx:573 src/files-footer-detail.tsx:79
 msgid "Others"
 msgstr "Diğerleri"
 
@@ -489,7 +509,7 @@ msgid "Overwrite"
 msgstr "Üzerine yaz"
 
 #: src/dialogs/create-file.tsx:198 src/dialogs/permissions.tsx:333
-#: src/header.tsx:99 src/files-card-body.tsx:533 src/files-card-body.tsx:572
+#: src/header.tsx:99 src/files-card-body.tsx:534 src/files-card-body.tsx:573
 #: src/files-footer-detail.tsx:79
 msgid "Owner"
 msgstr "Sahibi"
@@ -510,15 +530,19 @@ msgstr "Sahibine göre azalan"
 msgid "Ownership"
 msgstr "Sahiplik"
 
-#: src/menu.tsx:88
+#: src/dialogs/copyPasteOwnership.tsx:178 src/menu.tsx:105
 msgid "Paste"
 msgstr "Yapıştır"
+
+#: src/dialogs/copyPasteOwnership.tsx:188
+msgid "Paste as owner"
+msgstr ""
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:117
 msgid "Paste file or directory"
 msgstr "Dosya veya dizini yapıştır"
 
-#: src/menu.tsx:57
+#: src/dialogs/copyPasteOwnership.tsx:65 src/menu.tsx:62
 msgid "Pasting failed"
 msgstr "Yapıştırma başarısız oldu"
 
@@ -526,7 +550,7 @@ msgstr "Yapıştırma başarısız oldu"
 msgid "Permission denied"
 msgstr "İzin reddedildi"
 
-#: src/header.tsx:110 src/files-card-body.tsx:538
+#: src/header.tsx:110 src/files-card-body.tsx:539
 msgid "Permissions"
 msgstr "İzinler"
 
@@ -534,23 +558,23 @@ msgstr "İzinler"
 msgid "Permissions for $0 files"
 msgstr "$0 dosya için izinler"
 
-#: src/common.ts:76
+#: src/common.ts:80
 msgid "Read and execute"
 msgstr "Oku ve çalıştır"
 
-#: src/common.ts:77 src/dialogs/permissions.tsx:224
+#: src/common.ts:81 src/dialogs/permissions.tsx:224
 msgid "Read and write"
 msgstr "Oku ve yaz"
 
-#: src/common.ts:78
+#: src/common.ts:82
 msgid "Read, write, and execute"
 msgstr "Oku, yaz ve çalıştır"
 
-#: src/common.ts:75 src/dialogs/permissions.tsx:229 src/dialogs/editor.tsx:172
+#: src/common.ts:79 src/dialogs/permissions.tsx:229 src/dialogs/editor.tsx:172
 msgid "Read-only"
 msgstr "Yalnızca oku"
 
-#: src/common.ts:87
+#: src/common.ts:91
 msgid "Regular file"
 msgstr "Normal dosya"
 
@@ -559,10 +583,10 @@ msgid "Reload"
 msgstr "Yeniden yükle"
 
 #: src/files-breadcrumbs.tsx:145
-msgid "Remove current directory"
-msgstr "Geçerli dizini kaldır"
+msgid "Remove from bookmarks"
+msgstr ""
 
-#: src/dialogs/rename.tsx:89 src/menu.tsx:151
+#: src/dialogs/rename.tsx:89 src/menu.tsx:168
 msgid "Rename"
 msgstr "Yeniden adlandır"
 
@@ -602,7 +626,7 @@ msgstr "Çalıştırılabilir program olarak ayarla"
 msgid "Show all files"
 msgstr "Tüm dosyaları göster"
 
-#: src/header.tsx:287 src/files-card-body.tsx:511
+#: src/header.tsx:287 src/files-card-body.tsx:512
 msgid "Show hidden items"
 msgstr "Gizli ögeleri göster"
 
@@ -610,7 +634,7 @@ msgstr "Gizli ögeleri göster"
 msgid "Show keyboard shortcuts"
 msgstr "Klavye kısayollarını göster"
 
-#: src/header.tsx:77 src/files-card-body.tsx:524
+#: src/header.tsx:77 src/files-card-body.tsx:525
 msgid "Size"
 msgstr "Boyut"
 
@@ -618,7 +642,7 @@ msgstr "Boyut"
 msgid "Smallest size"
 msgstr "En küçük boyut"
 
-#: src/common.ts:88
+#: src/common.ts:92
 msgid "Socket"
 msgstr "Soket"
 
@@ -626,7 +650,7 @@ msgstr "Soket"
 msgid "Sort"
 msgstr "Sırala"
 
-#: src/common.ts:86
+#: src/common.ts:90
 msgid "Symbolic link"
 msgstr "Sembolik bağlantı"
 
@@ -682,11 +706,11 @@ msgstr "Kullanıcı"
 msgid "View $0"
 msgstr "$0 dosyasını görüntüle"
 
-#: src/common.ts:74
+#: src/common.ts:78
 msgid "Write and execute"
 msgstr "Yaz ve çalıştır"
 
-#: src/common.ts:73 src/dialogs/permissions.tsx:244
+#: src/common.ts:77 src/dialogs/permissions.tsx:244
 msgid "Write-only"
 msgstr "Yalnızca yaz"
 
@@ -705,6 +729,15 @@ msgstr "dosyalar"
 #: src/manifest.json:0
 msgid "filesystem"
 msgstr "dosya sistemi"
+
+#: src/dialogs/copyPasteOwnership.tsx:127
+#, fuzzy
+#| msgid "Keep original"
+msgid "keep original owners"
+msgstr "Orijinali sakla"
+
+#~ msgid "Remove current directory"
+#~ msgstr "Geçerli dizini kaldır"
 
 #~ msgid "Successfully uploaded file(s)"
 #~ msgstr "Dosya(lar) başarıyla karşıya yüklendi"
