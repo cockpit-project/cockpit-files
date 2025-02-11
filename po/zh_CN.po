@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-04 03:00+0000\n"
+"POT-Creation-Date: 2025-02-11 03:02+0000\n"
 "PO-Revision-Date: 2024-08-15 13:14+0000\n"
 "Last-Translator: Watson Xu <xuhuashan@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <https://translate.fedoraproject.org/"
@@ -26,7 +26,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0\n"
 "X-Generator: Weblate 5.6.2\n"
 
-#: src/menu.tsx:58
+#: src/menu.tsx:63
 msgid "\"$0\" exists, not overwriting with paste."
 msgstr "\"$0\" 已存在，将不会粘贴覆盖该文件。"
 
@@ -40,7 +40,7 @@ msgstr "文件"
 msgid "$0 files selected"
 msgstr ""
 
-#: src/files-card-body.tsx:508
+#: src/files-card-body.tsx:509
 msgid "$0 item is hidden"
 msgid_plural "$0 items are hidden"
 msgstr[0] "$0 个隐藏项目"
@@ -50,6 +50,12 @@ msgstr[0] "$0 个隐藏项目"
 #| msgid "“$0” permissions"
 msgid "$0 permissions"
 msgstr "“$0” 的权限"
+
+#: src/dialogs/copyPasteOwnership.tsx:118
+#, fuzzy
+#| msgid "Original file on server"
+msgid "(original owner)"
+msgstr "服务器上原有的文件"
 
 #: org.cockpit_project.files.metainfo.xml:8
 msgid ""
@@ -78,14 +84,16 @@ msgid "Activate selected item, enter directory"
 msgstr ""
 
 #: src/files-breadcrumbs.tsx:147
-msgid "Add bookmark"
+#, fuzzy
+#| msgid "Add bookmark"
+msgid "Add to bookmarks"
 msgstr "添加书签"
 
 #: src/upload-button.tsx:145
 msgid "Apply this action to all conflicting files"
 msgstr "将此操作应用于所有冲突文件"
 
-#: src/common.ts:82
+#: src/common.ts:86
 msgid "Block device"
 msgstr "块设备"
 
@@ -95,8 +103,8 @@ msgstr "书签"
 
 #: src/dialogs/rename.tsx:98 src/dialogs/mkdir.tsx:108
 #: src/dialogs/create-file.tsx:161 src/dialogs/permissions.tsx:319
-#: src/dialogs/editor.tsx:211 src/dialogs/delete.tsx:91
-#: src/upload-button.tsx:116
+#: src/dialogs/copyPasteOwnership.tsx:180 src/dialogs/editor.tsx:211
+#: src/dialogs/delete.tsx:91 src/upload-button.tsx:116
 msgid "Cancel"
 msgstr "取消"
 
@@ -136,11 +144,11 @@ msgstr "其它权限"
 msgid "Change permissions for enclosed files"
 msgstr ""
 
-#: src/common.ts:83
+#: src/common.ts:87
 msgid "Character device"
 msgstr "字符设备"
 
-#: src/files-card-body.tsx:496
+#: src/files-card-body.tsx:497
 msgid "Clear filter"
 msgstr "清除筛选器"
 
@@ -162,7 +170,7 @@ msgstr "Cockpit Files"
 msgid "Collapse"
 msgstr ""
 
-#: src/menu.tsx:140 src/menu.tsx:185
+#: src/menu.tsx:157 src/menu.tsx:202
 msgid "Copy"
 msgstr "复制"
 
@@ -174,11 +182,11 @@ msgstr ""
 msgid "Create"
 msgstr "创建"
 
-#: src/dialogs/mkdir.tsx:92 src/menu.tsx:95
+#: src/dialogs/mkdir.tsx:92 src/menu.tsx:112
 msgid "Create directory"
 msgstr "创建目录"
 
-#: src/dialogs/create-file.tsx:145 src/menu.tsx:100
+#: src/dialogs/create-file.tsx:145 src/menu.tsx:117
 #, fuzzy
 #| msgid "Create"
 msgid "Create file"
@@ -190,7 +198,7 @@ msgstr "创建"
 msgid "Create new directory"
 msgstr "创建目录"
 
-#: src/dialogs/delete.tsx:90 src/menu.tsx:157 src/menu.tsx:190
+#: src/dialogs/delete.tsx:90 src/menu.tsx:174 src/menu.tsx:207
 msgid "Delete"
 msgstr "删除"
 
@@ -214,7 +222,7 @@ msgstr "删除文件 $0 ？"
 msgid "Delete link $0?"
 msgstr "删除链接 $0 ？"
 
-#: src/common.ts:84
+#: src/common.ts:88
 msgid "Directory"
 msgstr "目录"
 
@@ -226,7 +234,7 @@ msgstr ""
 msgid "Directory contains $0 directories, $1 files, $2 hidden"
 msgstr ""
 
-#: src/files-card-body.tsx:503
+#: src/files-card-body.tsx:504
 msgid "Directory is empty"
 msgstr "目录为空"
 
@@ -256,7 +264,7 @@ msgstr "目录名称太长。"
 msgid "Directory owner"
 msgstr "目录所有者"
 
-#: src/common.ts:135
+#: src/common.ts:139
 msgid "Directory with the same name exists"
 msgstr "同名的目录已经存在"
 
@@ -268,7 +276,7 @@ msgstr "以网格显示"
 msgid "Display as a list"
 msgstr "以列表显示"
 
-#: src/menu.tsx:167
+#: src/menu.tsx:184
 msgid "Download"
 msgstr "下载"
 
@@ -289,7 +297,7 @@ msgstr "编辑路径"
 msgid "Edit path"
 msgstr "编辑路径"
 
-#: src/menu.tsx:106 src/menu.tsx:146 src/menu.tsx:204
+#: src/menu.tsx:123 src/menu.tsx:163 src/menu.tsx:221
 msgid "Edit permissions"
 msgstr "编辑权限"
 
@@ -297,7 +305,7 @@ msgstr "编辑权限"
 msgid "Editing"
 msgstr ""
 
-#: src/common.ts:72
+#: src/common.ts:76
 msgid "Execute-only"
 msgstr "只能执行"
 
@@ -309,7 +317,7 @@ msgstr ""
 msgid "File browser"
 msgstr "文件浏览器"
 
-#: src/common.ts:137
+#: src/common.ts:141
 msgid "File exists"
 msgstr "文件已存在"
 
@@ -325,13 +333,19 @@ msgstr "新名称"
 msgid "File uploaded"
 msgstr "新名称"
 
-#: src/common.ts:132
+#: src/common.ts:136
 msgid "Filename is the same as original name"
 msgstr "文件名与原文件名同名"
 
 #: org.cockpit_project.files.metainfo.xml:5
 msgid "Files"
 msgstr "文件"
+
+#: src/dialogs/copyPasteOwnership.tsx:197
+msgid ""
+"Files being pasted have a different owner. By default, ownership will be "
+"changed to match the destination directory."
+msgstr ""
 
 #: src/upload-button.tsx:361
 #, fuzzy
@@ -385,7 +399,7 @@ msgstr ""
 msgid "Go up a directory"
 msgstr "创建目录"
 
-#: src/dialogs/permissions.tsx:348 src/files-card-body.tsx:572
+#: src/dialogs/permissions.tsx:348 src/files-card-body.tsx:573
 #: src/files-footer-detail.tsx:79 src/files-footer-detail.tsx:151
 msgid "Group"
 msgstr "用户组"
@@ -434,7 +448,7 @@ msgstr "管理您的文件"
 msgid "Missing type"
 msgstr ""
 
-#: src/header.tsx:88 src/files-card-body.tsx:528
+#: src/header.tsx:88 src/files-card-body.tsx:529
 msgid "Modified"
 msgstr "修改时间"
 
@@ -442,29 +456,29 @@ msgstr "修改时间"
 msgid "Most permissive"
 msgstr "最大权限"
 
-#: src/header.tsx:66 src/files-card-body.tsx:523
+#: src/header.tsx:66 src/files-card-body.tsx:524
 msgid "Name"
 msgstr "名称"
 
-#: src/common.ts:126
+#: src/common.ts:130
 #, fuzzy
 #| msgid "Name cannot be empty."
 msgid "Name cannot be empty"
 msgstr "名称不能为空。"
 
-#: src/common.ts:130
+#: src/common.ts:134
 #, fuzzy
 #| msgid "Name cannot include a /."
 msgid "Name cannot include a /"
 msgstr "名称不能包含 / 。"
 
-#: src/common.ts:128
+#: src/common.ts:132
 #, fuzzy
 #| msgid "Name too long."
 msgid "Name too long"
 msgstr "名称太长。"
 
-#: src/common.ts:85
+#: src/common.ts:89
 msgid "Named pipe"
 msgstr "命名管道"
 
@@ -484,25 +498,31 @@ msgstr "新文件名"
 msgid "New name"
 msgstr "新名称"
 
+#: src/dialogs/copyPasteOwnership.tsx:200
+#, fuzzy
+#| msgid "New name"
+msgid "New owner"
+msgstr "新名称"
+
 #: src/dialogs/permissions.tsx:234
 #, fuzzy
 #| msgid "Group access"
 msgid "No access"
 msgstr "用户组访问权限"
 
-#: src/files-card-body.tsx:495
+#: src/files-card-body.tsx:496
 msgid "No matching results"
 msgstr "没有匹配的结果"
 
-#: src/common.ts:71
+#: src/common.ts:75
 msgid "None"
 msgstr "无"
 
-#: src/menu.tsx:115 src/menu.tsx:176
+#: src/menu.tsx:132 src/menu.tsx:193
 msgid "Open in terminal"
 msgstr ""
 
-#: src/menu.tsx:132
+#: src/menu.tsx:149
 msgid "Open text file"
 msgstr ""
 
@@ -510,7 +530,7 @@ msgstr ""
 msgid "Original file on server"
 msgstr "服务器上原有的文件"
 
-#: src/files-card-body.tsx:572 src/files-footer-detail.tsx:79
+#: src/files-card-body.tsx:573 src/files-footer-detail.tsx:79
 msgid "Others"
 msgstr "其它"
 
@@ -523,7 +543,7 @@ msgid "Overwrite"
 msgstr "覆盖"
 
 #: src/dialogs/create-file.tsx:198 src/dialogs/permissions.tsx:333
-#: src/header.tsx:99 src/files-card-body.tsx:533 src/files-card-body.tsx:572
+#: src/header.tsx:99 src/files-card-body.tsx:534 src/files-card-body.tsx:573
 #: src/files-footer-detail.tsx:79
 msgid "Owner"
 msgstr "所有者"
@@ -548,9 +568,13 @@ msgstr "所有者权限"
 msgid "Ownership"
 msgstr "所有权"
 
-#: src/menu.tsx:88
+#: src/dialogs/copyPasteOwnership.tsx:178 src/menu.tsx:105
 msgid "Paste"
 msgstr "粘贴"
+
+#: src/dialogs/copyPasteOwnership.tsx:188
+msgid "Paste as owner"
+msgstr ""
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:117
 #, fuzzy
@@ -558,7 +582,7 @@ msgstr "粘贴"
 msgid "Paste file or directory"
 msgstr "筛选目录"
 
-#: src/menu.tsx:57
+#: src/dialogs/copyPasteOwnership.tsx:65 src/menu.tsx:62
 msgid "Pasting failed"
 msgstr "粘贴失败"
 
@@ -568,7 +592,7 @@ msgstr "粘贴失败"
 msgid "Permission denied"
 msgstr "权限"
 
-#: src/header.tsx:110 src/files-card-body.tsx:538
+#: src/header.tsx:110 src/files-card-body.tsx:539
 msgid "Permissions"
 msgstr "权限"
 
@@ -578,23 +602,23 @@ msgstr "权限"
 msgid "Permissions for $0 files"
 msgstr "权限"
 
-#: src/common.ts:76
+#: src/common.ts:80
 msgid "Read and execute"
 msgstr "读取与执行"
 
-#: src/common.ts:77 src/dialogs/permissions.tsx:224
+#: src/common.ts:81 src/dialogs/permissions.tsx:224
 msgid "Read and write"
 msgstr "读取与写入"
 
-#: src/common.ts:78
+#: src/common.ts:82
 msgid "Read, write, and execute"
 msgstr "读取，写入与执行"
 
-#: src/common.ts:75 src/dialogs/permissions.tsx:229 src/dialogs/editor.tsx:172
+#: src/common.ts:79 src/dialogs/permissions.tsx:229 src/dialogs/editor.tsx:172
 msgid "Read-only"
 msgstr "只能读取"
 
-#: src/common.ts:87
+#: src/common.ts:91
 msgid "Regular file"
 msgstr "常规文件"
 
@@ -605,10 +629,10 @@ msgid "Reload"
 msgstr "上传"
 
 #: src/files-breadcrumbs.tsx:145
-msgid "Remove current directory"
-msgstr "删除当前目录"
+msgid "Remove from bookmarks"
+msgstr ""
 
-#: src/dialogs/rename.tsx:89 src/menu.tsx:151
+#: src/dialogs/rename.tsx:89 src/menu.tsx:168
 msgid "Rename"
 msgstr "重新命名"
 
@@ -648,7 +672,7 @@ msgstr ""
 msgid "Show all files"
 msgstr ""
 
-#: src/header.tsx:287 src/files-card-body.tsx:511
+#: src/header.tsx:287 src/files-card-body.tsx:512
 msgid "Show hidden items"
 msgstr "显示隐藏项目"
 
@@ -656,7 +680,7 @@ msgstr "显示隐藏项目"
 msgid "Show keyboard shortcuts"
 msgstr ""
 
-#: src/header.tsx:77 src/files-card-body.tsx:524
+#: src/header.tsx:77 src/files-card-body.tsx:525
 msgid "Size"
 msgstr "尺寸"
 
@@ -664,7 +688,7 @@ msgstr "尺寸"
 msgid "Smallest size"
 msgstr "尺寸最小"
 
-#: src/common.ts:88
+#: src/common.ts:92
 msgid "Socket"
 msgstr "Socket"
 
@@ -672,7 +696,7 @@ msgstr "Socket"
 msgid "Sort"
 msgstr "排序"
 
-#: src/common.ts:86
+#: src/common.ts:90
 msgid "Symbolic link"
 msgstr "符号链接"
 
@@ -728,11 +752,11 @@ msgstr ""
 msgid "View $0"
 msgstr ""
 
-#: src/common.ts:74
+#: src/common.ts:78
 msgid "Write and execute"
 msgstr "写入与执行"
 
-#: src/common.ts:73 src/dialogs/permissions.tsx:244
+#: src/common.ts:77 src/dialogs/permissions.tsx:244
 msgid "Write-only"
 msgstr "只能写入"
 
@@ -751,6 +775,15 @@ msgstr "文件"
 #: src/manifest.json:0
 msgid "filesystem"
 msgstr "文件系统"
+
+#: src/dialogs/copyPasteOwnership.tsx:127
+#, fuzzy
+#| msgid "Keep original"
+msgid "keep original owners"
+msgstr "保留原本的"
+
+#~ msgid "Remove current directory"
+#~ msgstr "删除当前目录"
 
 #~ msgid "Successfully uploaded file(s)"
 #~ msgstr "已成功上传文件"
