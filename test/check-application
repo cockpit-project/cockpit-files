@@ -2144,9 +2144,9 @@ class TestFiles(testlib.MachineCase):
         b.wait_in_text("[data-item='newfile'] .item-owner", "root")
 
         # Copy file with different user, group
+        m.write("/home/admin/adminfoofile", "adminfoo", owner="admin:foouser")
         b.go("files#/?path=/home/admin")
         self.assert_last_breadcrumb("admin")
-        m.write("/home/admin/adminfoofile", "adminfoo", owner="admin:foouser")
         b.click("[data-item='adminfoofile']")
         b.wait_visible("[data-item='adminfoofile'].row-selected")
         b.click("#dropdown-menu")
