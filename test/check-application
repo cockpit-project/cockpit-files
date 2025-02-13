@@ -1390,7 +1390,7 @@ class TestFiles(testlib.MachineCase):
         self.assert_last_breadcrumb("testdir")
 
         # Via contextmenu
-        b.mouse("#files-card-parent", "contextmenu")
+        self.open_folder_context_menu()
         b.click(".contextMenu button:contains('Edit permissions')")
         b.wait_in_text(".pf-v5-c-modal-box__title-text", "testdir")
         b.select_from_dropdown("#edit-permissions-owner-access", "read-write")
@@ -3245,7 +3245,7 @@ class TestFiles(testlib.MachineCase):
         self.enter_files()
 
         def open_create_file_modal() -> None:
-            b.mouse("#files-card-parent", "contextmenu")
+            self.open_folder_context_menu()
             b.click(".contextMenu button:contains('Create file')")
             b.wait_visible(".file-create-modal")
             b.wait_text(".pf-v5-c-modal-box__title-text", "Create file")
