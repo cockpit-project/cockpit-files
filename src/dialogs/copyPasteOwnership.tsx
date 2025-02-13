@@ -45,8 +45,7 @@ async function pasteAsOwner(clipboard: ClipboardInfo,
     try {
         await cockpit.spawn([
             "cp",
-            "-a",
-            "--recursive",
+            "--archive",
             ...clipboard.files.map(file => clipboard.path + "/" + file.name),
             dstPath
         ], { superuser: "require" });
