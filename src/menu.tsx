@@ -69,7 +69,7 @@ export async function pasteFromClipboard(
         const filePaths = clipboard.files.map(file => `${clipboard.path}/${file.name}`);
         await cockpit.spawn([
             "cp",
-            "-R",
+            "--archive",
             ...filePaths,
             path
         ]);
