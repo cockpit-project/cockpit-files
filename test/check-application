@@ -2312,6 +2312,39 @@ class TestFiles(testlib.MachineCase):
         self.assert_owner("/home/foouser/dir2/hi.txt", "foouser:foouser")
         self.assert_owner("/home/foouser/dir2/bye.txt", "foouser:foouser")
 
+        # Symlinks, stay symlinks when copying
+        def copy_symlink() -> None:
+            b.go("/files#/?path=/home/admin")
+            self.assert_last_breadcrumb("admin")
+            b.click("[data-item='link-to-uname']")
+            b.click("#dropdown-menu")
+            b.click("#copy-item")
+            b.wait_not_present(".contextMenu")
+
+        # Absolute
+        m.execute("runuser -u admin -- ln -s /usr/bin/uname /home/admin/link-to-uname")
+
+        # Non user owned directory
+        copy_symlink()
+        b.go("files#/?path=/home/foouser")
+        self.assert_last_breadcrumb("foouser")
+        b.click("#dropdown-menu")
+        b.click("#paste-item")
+        b.wait_visible("#paste-owner-modal")
+        b.click("#paste-owner-modal button.pf-m-primary")
+        b.wait_visible("[data-item='link-to-uname'].symlink")
+
+        # Users own directory
+        copy_symlink()
+        # HACK: can't use dblclick due to the usage of ctrlClick above
+        b.go("files#/?path=/home/admin/newdir")
+        self.assert_last_breadcrumb("newdir")
+        b.wait_not_present(".pf-v5-c-empty-state")
+
+        self.open_folder_context_menu()
+        b.click(".contextMenu button:contains('Paste')")
+        b.wait_visible("[data-item='link-to-uname'].symlink")
+
         # Non-admin copy to no write access directory shows permission denied error
         b.go("/files#/?path=/home/admin")
         self.assert_last_breadcrumb("admin")
