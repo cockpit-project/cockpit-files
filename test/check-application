@@ -2304,9 +2304,10 @@ class TestFiles(testlib.MachineCase):
         self.assert_owner("/home/foouser/dir2/bye.txt", "foouser:foouser")
 
         # Non-admin copy to no write access directory shows permission denied error
-        b.drop_superuser()
         b.go("/files#/?path=/home/admin")
         self.assert_last_breadcrumb("admin")
+        b.wait_not_present('.pf-v5-c-empty-state')
+        b.drop_superuser()
         b.click("[data-item='newfile']")
         b.wait_visible("[data-item='newfile'].row-selected")
         b.click("#dropdown-menu")
