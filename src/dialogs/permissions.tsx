@@ -128,6 +128,7 @@ const EditPermissionsModal = ({ dialogResult, items, path } : {
     const selected = items[0];
     const is_user_equal = items.every((item) => item.user === items[0].user);
     const is_group_equal = items.every((item) => item.group === items[0].group);
+    const has_symlinks = items.some((item) => item?.type === 'lnk');
 
     const [owner, setOwner] = useState(selected.user);
     const [mode, setMode] = useState(selected.mode ?? 0);
@@ -206,7 +207,7 @@ const EditPermissionsModal = ({ dialogResult, items, path } : {
                                     { superuser: "try", err: "message" });
 
             if (ownerChanged)
-                await cockpit.spawn(["chown", owner + ":" + group, ...file_paths],
+                await cockpit.spawn(["chown", "--no-dereference", owner + ":" + group, ...file_paths],
                                     { superuser: "try", err: "message" });
 
             dialogResult.resolve();
@@ -361,6 +362,7 @@ const EditPermissionsModal = ({ dialogResult, items, path } : {
                             </FormSelect>
                         </FormGroup>
                     </FormSection>}
+                    {!has_symlinks &&
                     <FormSection title={_("Access")}>
                         <FormGroup
                           label={_("Owner access")}
@@ -408,7 +410,7 @@ const EditPermissionsModal = ({ dialogResult, items, path } : {
                               readOnlyVariant="plain"
                             />
                         </FormGroup>}
-                    </FormSection>
+                    </FormSection>}
                     {selected.type === "reg" && executable_file_types.includes(selected?.category?.class || "file") &&
                         <Checkbox
                           id="is-executable"
