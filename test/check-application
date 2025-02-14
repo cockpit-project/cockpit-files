@@ -1482,6 +1482,22 @@ class TestFiles(testlib.MachineCase):
 
         check_perms_match(executable_file, '/home/admin')
 
+        # Symlinks
+        symlink = "link-to-uname"
+        m.execute(f"runuser -u admin -- ln -s /usr/bin/uname /home/admin/{symlink}")
+
+        # show no file mode permissions
+        open_permissions_dialog(symlink)
+        b.wait_not_present("#edit-permissions-owner-access")
+
+        # Changing ownership does not affect the symlink target
+        b.select_from_dropdown("#edit-permissions-group", "root")
+        b.click(".pf-v5-c-modal-box button.pf-m-primary")
+        b.wait_not_present(".pf-v5-c-modal-box")
+
+        b.wait_in_text(f"[data-item='{symlink}'] .item-owner", "admin:root")
+        self.assertEqual(self.stat("%U:%G", "/usr/bin/uname"), "root:root")
+
         # Special file access permission cases
 
         # We normally don't provide "write-only" as an option unless someone
