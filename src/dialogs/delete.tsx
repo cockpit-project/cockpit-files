@@ -85,9 +85,16 @@ const ConfirmDeletionDialog = ({ dialogResult, path, selected, setSelected } : {
           variant={ModalVariant.medium}
           isOpen
           onClose={() => dialogResult.resolve()}
+          elementToFocus="#delete-button"
           footer={
               <>
-                  <Button variant="danger" onClick={deleteItem}>{_("Delete")}</Button>
+                  <Button
+                    id="delete-button"
+                    variant="danger"
+                    onClick={deleteItem}
+                  >
+                      {_("Delete")}
+                  </Button>
                   <Button variant="link" onClick={() => dialogResult.resolve()}>{_("Cancel")}</Button>
               </>
           }
