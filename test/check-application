@@ -3331,6 +3331,199 @@ class TestFiles(testlib.MachineCase):
         b.click(".contextMenu button:contains('Create file')")
         b.wait_in_text("h4.pf-v5-c-alert__title", "Cannot create file in current directory")
 
+    def testCreateLink(self) -> None:
+        b = self.browser
+        m = self.machine
+
+        self.enter_files()
+
+        test_filename = "filename.txt"
+        m.execute(['runuser', '-u', 'admin', 'touch', "/home/admin/existing.txt", f"/home/admin/{test_filename}"])
+        test_directory = 'testdir'
+        m.execute(['runuser', '-u', 'admin', 'mkdir', f'/home/admin/{test_directory}'])
+        b.wait_visible("[data-item='existing.txt']")
+        b.wait_visible(f"[data-item='{test_filename}']")
+        b.wait_visible(f"[data-item='{test_directory}']")
+
+        def create_symlink(filename: str) -> None:
+            b.mouse(f"[data-item='{filename}']", "contextmenu")
+            b.click(".contextMenu button:contains('Create link')")
+            b.wait_in_text(".pf-v5-c-modal-box__title-text", f"Create link to {filename}")
+
+        def assert_link(link: str, expected: str, owner: str | None = None) -> None:
+            self.assertEqual(m.execute(f"readlink '{link}'").strip(),
+                             expected)
+            if owner is not None:
+                self.assertEqual(self.stat("%U:%G", link), owner)
+
+        # Absolute
+
+        # normal filename
+        create_symlink(test_filename)
+        b.wait_val("#target-name", test_filename)
+        b.wait_val("#symlink-input", f"link to {test_filename}")
+        b.set_checked("#absolute", val=True)
+        b.assert_pixels(".file-symlink-modal", "create-link-dialog")
+        b.click(".pf-m-primary")
+        b.wait_not_present(".pf-v5-c-modal-box")
+        assert_link(f"/home/admin/link to {test_filename}",
+                    f"/home/admin/{test_filename}",
+                    "admin:admin")
+
+        # absolute path given
+        create_symlink(test_filename)
+        b.set_input_text("#symlink-input", f"{self.vm_tmpdir}/absolute-absolute")
+        b.set_checked("#absolute", val=True)
+        b.click(".pf-m-primary")
+        b.wait_not_present(".pf-v5-c-modal-box")
+        assert_link(f"{self.vm_tmpdir}/absolute-absolute",
+                    f"/home/admin/{test_filename}",
+                    "root:root")
+
+        # not canonical path
+        create_symlink(test_filename)
+        b.set_input_text("#symlink-input", f"/..{self.vm_tmpdir}/absolute-relative")
+        b.set_checked("#absolute", val=True)
+        b.click(".pf-m-primary")
+        b.wait_not_present(".pf-v5-c-modal-box")
+        assert_link(f"{self.vm_tmpdir}/absolute-relative",
+                    f"/home/admin/{test_filename}",
+                    "root:root")
+
+        # relative path given
+        create_symlink(test_filename)
+        b.set_input_text("#symlink-input", "../absolute-relative")
+        b.set_checked("#absolute", val=True)
+        self.addCleanup(m.execute, "rm /home/absolute-relative")
+        b.click(".pf-m-primary")
+        b.wait_not_present(".pf-v5-c-modal-box")
+        assert_link("/home/absolute-relative",
+                    f"/home/admin/{test_filename}",
+                    "root:root")
+
+        # Relative
+        create_symlink(test_filename)
+        b.wait_val("#target-name", test_filename)
+        b.set_input_text("#symlink-input", "relative")
+        self.assertTrue(b.get_checked("#relative"))
+        b.click(".pf-m-primary")
+        b.wait_not_present(".pf-v5-c-modal-box")
+        assert_link("/home/admin/relative",
+                    test_filename,
+                    "admin:admin")
+
+        # absolute path given
+        create_symlink(test_filename)
+        b.set_input_text("#symlink-input", f"{self.vm_tmpdir}/relative-absolute")
+        self.assertTrue(b.get_checked("#relative"))
+        b.click(".pf-m-primary")
+        b.wait_not_present(".pf-v5-c-modal-box")
+        assert_link(f"{self.vm_tmpdir}/relative-absolute",
+                    f"../../../home/admin/{test_filename}",
+                    "root:root")
+
+        # not canonical path
+        create_symlink(test_filename)
+        b.set_input_text("#symlink-input", f"/../{self.vm_tmpdir}/relative-relative")
+        self.assertTrue(b.get_checked("#relative"))
+        b.click(".pf-m-primary")
+        b.wait_not_present(".pf-v5-c-modal-box")
+        assert_link(f"{self.vm_tmpdir}/relative-relative",
+                    f"../../../home/admin/{test_filename}",
+                    "root:root")
+
+        # relative path
+        create_symlink(test_filename)
+        b.set_input_text("#symlink-input", "../relative-relative")
+        self.assertTrue(b.get_checked("#relative"))
+        self.addCleanup(m.execute, "rm /home/relative-relative")
+        b.click(".pf-m-primary")
+        b.wait_not_present(".pf-v5-c-modal-box")
+        assert_link("/home/relative-relative",
+                    f"admin/{test_filename}",
+                    "root:root")
+
+        # directory
+        create_symlink(test_directory)
+        b.wait_val("#target-name", test_directory)
+        b.wait_val("#symlink-input", f"link to {test_directory}")
+        b.set_checked("#absolute", val=True)
+        b.click(".pf-m-primary")
+        b.wait_not_present(".pf-v5-c-modal-box")
+        assert_link(f"/home/admin/link to {test_directory}",
+                    f"/home/admin/{test_directory}",
+                    "admin:admin")
+
+        # symlinking to /opt/ errors out and does not create /opt/bar
+        create_symlink(test_directory)
+        b.wait_val("#target-name", test_directory)
+        b.set_input_text("#symlink-input", "/opt/")
+        b.click(".pf-m-primary")
+        self.wait_modal_inline_alert("ln: failed to create symbolic link '/opt/': File exists")
+        b.click(".pf-v5-c-modal-box__footer button.pf-m-link")  # cancel
+        b.wait_not_present(".pf-v5-c-modal-box")
+
+        # normal user
+        b.drop_superuser()
+
+        # absolute
+        create_symlink(test_filename)
+        b.set_input_text("#symlink-input", "user-absolute")
+        b.set_checked("#absolute", val=True)
+        b.click(".pf-m-primary")
+        b.wait_not_present(".pf-v5-c-modal-box")
+        assert_link("/home/admin/user-absolute",
+                    f"/home/admin/{test_filename}",
+                    "admin:admin")
+
+        # relative
+        create_symlink(test_filename)
+        self.assertTrue(b.get_checked("#relative"))
+        b.set_input_text("#symlink-input", "user-relative")
+        b.click(".pf-m-primary")
+        b.wait_not_present(".pf-v5-c-modal-box")
+        assert_link("/home/admin/user-relative",
+                    test_filename,
+                    "admin:admin")
+
+        # validation
+        create_symlink(test_filename)
+        b.set_input_text("#symlink-input", "")
+        b.wait_text(".file-symlink-modal .pf-v5-c-helper-text__item-text", "Name cannot be empty")
+        b.wait_visible("button.pf-m-primary:disabled")
+
+        b.set_input_text("#symlink-input", "existing.txt")
+        b.wait_text(".file-symlink-modal .pf-v5-c-helper-text__item-text", "File exists")
+
+        b.set_input_text("#symlink-input", test_directory)
+        b.wait_text(".file-symlink-modal .pf-v5-c-helper-text__item-text",
+                    "Directory with the same name exists")
+        b.wait_visible("button.pf-m-primary:disabled")
+
+        # no permissions
+        b.set_input_text("#symlink-input", "/bar")
+        b.click(".pf-m-primary")
+        b.wait_in_text(".pf-v5-c-alert__title", "Permission denied")
+        b.wait_visible("button.pf-m-primary:disabled")
+
+        # dialogs cwdInfo not updated, still validated on create
+        b.set_input_text("#symlink-input", "new")
+        m.execute("mkdir /home/admin/new")
+        b.wait_visible("[data-item='new']")
+        b.click(".file-symlink-modal .pf-m-primary")
+        b.wait_text(".file-symlink-modal .pf-v5-c-helper-text__item-text",
+                    "Directory with the same name exists")
+        b.wait_visible("button.pf-m-primary:disabled")
+
+        # Non-existant target
+        b.set_input_text("#symlink-input", "../non-existant/not/really/here")
+        b.click(".file-symlink-modal .pf-m-primary")
+        b.wait_in_text(".pf-v5-c-alert__title", "No such file or directory")
+        b.wait_visible("button.pf-m-primary:disabled")
+
+        b.click(".file-symlink-modal .pf-m-link")
+        b.wait_not_present(".pf-v5-c-modal-box")
+
 
 if __name__ == '__main__':
     testlib.test_main()
