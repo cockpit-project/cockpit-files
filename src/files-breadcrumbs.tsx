@@ -249,7 +249,6 @@ const PathBreadcrumbs = ({ path }: { path: string }) => {
     );
 };
 
-// eslint-disable-next-line max-len
 export function FilesBreadcrumbs({ path }: { path: string }) {
     const [editMode, setEditMode] = React.useState(false);
     const [newPath, setNewPath] = React.useState<string | null>(null);
