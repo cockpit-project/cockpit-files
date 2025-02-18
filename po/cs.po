@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-11 03:02+0000\n"
-"PO-Revision-Date: 2025-02-11 03:38+0000\n"
-"Last-Translator: Jan Kalabza <jan.kalabza@gmail.com>\n"
+"POT-Creation-Date: 2025-02-12 03:02+0000\n"
+"PO-Revision-Date: 2025-02-12 19:38+0000\n"
+"Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech <https://translate.fedoraproject.org/projects/cockpit-"
 "files/cockpit-files/cs/>\n"
 "Language: cs\n"
@@ -50,10 +50,8 @@ msgid "$0 permissions"
 msgstr "oprávnění $0"
 
 #: src/dialogs/copyPasteOwnership.tsx:118
-#, fuzzy
-#| msgid "Original file on server"
 msgid "(original owner)"
-msgstr "Původní soubor na serveru"
+msgstr "(původní vlastník)"
 
 #: org.cockpit_project.files.metainfo.xml:8
 msgid ""
@@ -323,6 +321,8 @@ msgid ""
 "Files being pasted have a different owner. By default, ownership will be "
 "changed to match the destination directory."
 msgstr ""
+"Vkládané soubory mají jiného vlastníka. Ve výchozím stavu bude vlastnictví "
+"změněno tak, aby odpovídalo cílové složce."
 
 #: src/upload-button.tsx:361
 msgid "Files uploaded"
@@ -466,10 +466,8 @@ msgid "New name"
 msgstr "Nový název"
 
 #: src/dialogs/copyPasteOwnership.tsx:200
-#, fuzzy
-#| msgid "New name"
 msgid "New owner"
-msgstr "Nový název"
+msgstr "Nový vlastník"
 
 #: src/dialogs/permissions.tsx:234
 msgid "No access"
@@ -535,7 +533,7 @@ msgstr "Vložit"
 
 #: src/dialogs/copyPasteOwnership.tsx:188
 msgid "Paste as owner"
-msgstr ""
+msgstr "Vložit jako vlastník"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:117
 msgid "Paste file or directory"
@@ -730,10 +728,8 @@ msgid "filesystem"
 msgstr "souborový systém"
 
 #: src/dialogs/copyPasteOwnership.tsx:127
-#, fuzzy
-#| msgid "Keep original"
 msgid "keep original owners"
-msgstr "Ponechat původní"
+msgstr "Ponechat původní vlastníky"
 
 #~ msgid "Remove current directory"
 #~ msgstr "Odebrat stávající složku"
