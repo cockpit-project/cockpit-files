@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-11 03:02+0000\n"
-"PO-Revision-Date: 2025-02-11 03:38+0000\n"
+"POT-Creation-Date: 2025-02-12 03:02+0000\n"
+"PO-Revision-Date: 2025-02-12 19:38+0000\n"
 "Last-Translator: 김인수 <simmon@nplob.com>\n"
 "Language-Team: Korean <https://translate.fedoraproject.org/projects/cockpit-"
 "files/cockpit-files/ko/>\n"
@@ -48,10 +48,8 @@ msgid "$0 permissions"
 msgstr "$0 권한"
 
 #: src/dialogs/copyPasteOwnership.tsx:118
-#, fuzzy
-#| msgid "Original file on server"
 msgid "(original owner)"
-msgstr "서버에서 원본 파일"
+msgstr "(원소유자)"
 
 #: org.cockpit_project.files.metainfo.xml:8
 msgid ""
@@ -321,6 +319,8 @@ msgid ""
 "Files being pasted have a different owner. By default, ownership will be "
 "changed to match the destination directory."
 msgstr ""
+"붙여 넣기 중인 파일에 다른 소유자가 있습니다. 기본 값으로, 소유권은 대상 디렉"
+"토리와 일치하도록 변경됩니다."
 
 #: src/upload-button.tsx:361
 msgid "Files uploaded"
@@ -464,10 +464,8 @@ msgid "New name"
 msgstr "신규 이름"
 
 #: src/dialogs/copyPasteOwnership.tsx:200
-#, fuzzy
-#| msgid "New name"
 msgid "New owner"
-msgstr "신규 이름"
+msgstr "새로운 소유자"
 
 #: src/dialogs/permissions.tsx:234
 msgid "No access"
@@ -533,7 +531,7 @@ msgstr "붙여넣기"
 
 #: src/dialogs/copyPasteOwnership.tsx:188
 msgid "Paste as owner"
-msgstr ""
+msgstr "소유자로 붙여넣기"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:117
 msgid "Paste file or directory"
@@ -728,10 +726,8 @@ msgid "filesystem"
 msgstr "파일시스템"
 
 #: src/dialogs/copyPasteOwnership.tsx:127
-#, fuzzy
-#| msgid "Keep original"
 msgid "keep original owners"
-msgstr "원본 유지"
+msgstr "원소유자 유지"
 
 #~ msgid "Remove current directory"
 #~ msgstr "현재 디렉토리를 제거합니다"

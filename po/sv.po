@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-11 03:02+0000\n"
-"PO-Revision-Date: 2025-02-11 03:38+0000\n"
+"POT-Creation-Date: 2025-02-12 03:02+0000\n"
+"PO-Revision-Date: 2025-02-12 19:38+0000\n"
 "Last-Translator: Luna Jernberg <bittin@reimu.nl>\n"
 "Language-Team: Swedish <https://translate.fedoraproject.org/projects/cockpit-"
 "files/cockpit-files/sv/>\n"
@@ -49,10 +49,8 @@ msgid "$0 permissions"
 msgstr "$0 behörigheter"
 
 #: src/dialogs/copyPasteOwnership.tsx:118
-#, fuzzy
-#| msgid "Original file on server"
 msgid "(original owner)"
-msgstr "Original fil på server"
+msgstr "(original ägare)"
 
 #: org.cockpit_project.files.metainfo.xml:8
 msgid ""
@@ -322,6 +320,8 @@ msgid ""
 "Files being pasted have a different owner. By default, ownership will be "
 "changed to match the destination directory."
 msgstr ""
+"Filer som klistras in har en annan ägare. Som standard kommer äganderätten "
+"att ändras för att matcha målkatalogen."
 
 #: src/upload-button.tsx:361
 msgid "Files uploaded"
@@ -465,10 +465,8 @@ msgid "New name"
 msgstr "Nytt namn"
 
 #: src/dialogs/copyPasteOwnership.tsx:200
-#, fuzzy
-#| msgid "New name"
 msgid "New owner"
-msgstr "Nytt namn"
+msgstr "Ny ägare"
 
 #: src/dialogs/permissions.tsx:234
 msgid "No access"
@@ -534,7 +532,7 @@ msgstr "Klistra in"
 
 #: src/dialogs/copyPasteOwnership.tsx:188
 msgid "Paste as owner"
-msgstr ""
+msgstr "Klistra in som ägare"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:117
 msgid "Paste file or directory"
@@ -729,10 +727,8 @@ msgid "filesystem"
 msgstr "filsystem"
 
 #: src/dialogs/copyPasteOwnership.tsx:127
-#, fuzzy
-#| msgid "Keep original"
 msgid "keep original owners"
-msgstr "Behåll original"
+msgstr "behåll ursprungliga ägare"
 
 #~ msgid "Remove current directory"
 #~ msgstr "Ta bort aktuell katalog"

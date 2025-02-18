@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-11 03:02+0000\n"
-"PO-Revision-Date: 2025-02-11 03:38+0000\n"
+"POT-Creation-Date: 2025-02-12 03:02+0000\n"
+"PO-Revision-Date: 2025-02-12 19:38+0000\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <https://translate.fedoraproject.org/projects/"
 "cockpit-files/cockpit-files/ka/>\n"
@@ -49,10 +49,8 @@ msgid "$0 permissions"
 msgstr "$0 წვდომა"
 
 #: src/dialogs/copyPasteOwnership.tsx:118
-#, fuzzy
-#| msgid "Original file on server"
 msgid "(original owner)"
-msgstr "ორიგინალი ფაილი სერვერზე"
+msgstr "(ორიგინალი მფლობელი)"
 
 #: org.cockpit_project.files.metainfo.xml:8
 msgid ""
@@ -322,6 +320,8 @@ msgid ""
 "Files being pasted have a different owner. By default, ownership will be "
 "changed to match the destination directory."
 msgstr ""
+"ჩასმული ფაილების მფლობელი განსხვავებულია. ნაგულისხმევად მფლობელობა "
+"შეიცვლება, რომ ის სამიზნე საქაღალდისას დაემთხვეს."
 
 #: src/upload-button.tsx:361
 msgid "Files uploaded"
@@ -465,10 +465,8 @@ msgid "New name"
 msgstr "ახალი სახელი"
 
 #: src/dialogs/copyPasteOwnership.tsx:200
-#, fuzzy
-#| msgid "New name"
 msgid "New owner"
-msgstr "ახალი სახელი"
+msgstr "ახალი მფლობელი"
 
 #: src/dialogs/permissions.tsx:234
 msgid "No access"
@@ -534,7 +532,7 @@ msgstr "ჩასმა"
 
 #: src/dialogs/copyPasteOwnership.tsx:188
 msgid "Paste as owner"
-msgstr ""
+msgstr "ჩასმა მფლობელის სახელით"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:117
 msgid "Paste file or directory"
@@ -730,10 +728,8 @@ msgid "filesystem"
 msgstr "ფაილური სისტემა"
 
 #: src/dialogs/copyPasteOwnership.tsx:127
-#, fuzzy
-#| msgid "Keep original"
 msgid "keep original owners"
-msgstr "ორიგინალის შენარჩუნება"
+msgstr "ორიგინალი მფლობელების შენარჩუნება"
 
 #~ msgid "Remove current directory"
 #~ msgstr "მიმდინარე საქაღალდის წაშლა"
