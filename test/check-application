@@ -928,6 +928,7 @@ class TestFiles(testlib.MachineCase):
         # Creating folder as superuser a non-logged in owned directory has the expected folder permissions
         b.go("/files#/?path=/root")
         self.assert_last_breadcrumb("root")
+        b.wait_text("#files-footer-owner", "root")
         self.addCleanup(m.execute, ['rm', '-rf', '/root/newdir'])
         self.create_directory("newdir")
         b.wait_visible("[data-item='newdir']")
