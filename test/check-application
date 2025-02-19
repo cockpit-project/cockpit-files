@@ -2179,7 +2179,7 @@ class TestFiles(testlib.MachineCase):
         b.click("#copy-item")
         b.go("files#/?path=/home/foouser")
         self.assert_last_breadcrumb("foouser")
-        b.wait_visible("[data-item='kbdCopy']")
+        b.wait_text("#files-footer-owner", "foouser")
         b.click("#dropdown-menu")
         b.click("#paste-item")
         b.wait_visible("#paste-owner-modal")
