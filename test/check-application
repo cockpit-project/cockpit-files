@@ -1693,13 +1693,7 @@ class TestFiles(testlib.MachineCase):
         b.click("button:contains('Edit permissions')")
 
         b.wait_text(".pf-v5-c-modal-box__title-text", "Permissions for 13 files")
-        # HACK: there is some really evil Chromium bug that often hides the "Change" button
-        # in screenshots; ensure it's there, and ignore it in the pixel comparison
-        # https://github.com/cockpit-project/cockpit/issues/21577
-        b.wait_text(".pf-v5-c-modal-box button.pf-m-primary", "Change")
-        b.assert_pixels(".pf-v5-c-modal-box", "multiple-files-permissions-modal",
-                        ignore=["button.pf-m-primary"])
-
+        b.assert_pixels(".pf-v5-c-modal-box", "multiple-files-permissions-modal")
         # Expand files
         b.wait_text(".pf-v5-c-expandable-section button", "Show all files")
         b.click(".pf-v5-c-expandable-section button")
