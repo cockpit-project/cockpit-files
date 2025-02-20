@@ -39,7 +39,7 @@ COCKPIT_REPO_FILES = \
 	$(NULL)
 
 COCKPIT_REPO_URL = https://github.com/cockpit-project/cockpit.git
-COCKPIT_REPO_COMMIT = 9ef2e8ba1d6b4b3db9b8baa45621ca072abadaef # 333 + 11 commits
+COCKPIT_REPO_COMMIT = 498d8da9343107d4277f18d5cea9ee4878de628c # mvollmer:test-take-two-screenshots
 
 $(COCKPIT_REPO_FILES): $(COCKPIT_REPO_STAMP)
 COCKPIT_REPO_TREE = '$(strip $(COCKPIT_REPO_COMMIT))^{tree}'
@@ -199,7 +199,7 @@ prepare-check: $(NODE_MODULES_TEST) $(VM_IMAGE) test/common test/reference
 # run the browser integration tests
 # this will run all tests/check-* and format them as TAP
 check: prepare-check
-	test/common/run-tests ${RUN_TESTS_OPTIONS}
+	test/common/run-tests ${RUN_TESTS_OPTIONS} TestFiles.testPermissions
 
 # checkout Cockpit's bots for standard test VM images and API to launch them
 bots: test/common
