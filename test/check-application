@@ -2401,9 +2401,20 @@ class TestFiles(testlib.MachineCase):
                 b.wait_not_present(".pf-v5-c-alert__action")
 
         with tempfile.TemporaryDirectory() as tmpdir:
+
             # Test cancelling of upload
+            if b.browser == 'chromium':
+                # Chromium BiDi driver craps out with uploading large files, so throttle network speed there
+                b.cdp_command("Network.emulateNetworkConditions",
+                              offline=False, latency=0, downloadThroughput=-1, uploadThroughput=50000)
+                big_size = "15MB"
+            else:
+                # BiDi does not have a network speed API, so we can't throttle on Firefox
+                # but that's happy with large files
+                big_size = "1500MB"
+
             big_file = str(Path(tmpdir) / "bigfile.img")
-            subprocess.check_call(["truncate", "-s", "1500MB", big_file])
+            subprocess.check_call(["truncate", "-s", big_size, big_file])
 
             m.execute("runuser -u admin mkdir /home/admin/Downloads")
             b.wait_visible("[data-item='Downloads']")
