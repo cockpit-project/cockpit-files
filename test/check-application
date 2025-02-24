@@ -1693,7 +1693,7 @@ class TestFiles(testlib.MachineCase):
 
         b.wait_text(".pf-v5-c-modal-box__title-text", "Permissions for 13 files")
         b.wait_in_text(".pf-v5-c-modal-box", "Ownership")
-        b.assert_pixels(".pf-v5-c-modal-box", "multiple-files-permissions-modal")
+        b.assert_pixels(".pf-v5-c-modal-box", "multiple-files-permissions-modal", chrome_hack_double_shots=True)
         # Expand files
         b.wait_text(".pf-v5-c-expandable-section button", "Show all files")
         b.click(".pf-v5-c-expandable-section button")
