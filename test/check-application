@@ -2809,6 +2809,8 @@ class TestFiles(testlib.MachineCase):
 
             # Change directory and upload
             b.mouse("[data-item='project']", "dblclick")
+            self.assert_last_breadcrumb("project")
+            b.wait_visible("[data-item='4.txt']")
             drag_file_event(".fileview-wrapper", 'dragenter', 'drag-drop-testfile.txt')
             b.wait_visible(".drag-drop-upload")
             drag_file_event(".fileview-wrapper", 'drop', 'drag-drop-testfile.txt')
