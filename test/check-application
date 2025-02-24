@@ -935,7 +935,7 @@ class TestFiles(testlib.MachineCase):
 
         m.execute('useradd -m testuser')
         b.go('/files#/?path=/home/testuser')
-        b.wait_not_present('.pf-v5-c-empty-state')
+        b.wait_text("#files-footer-owner", "testuser")
         self.create_directory('newdir')
         b.wait_visible("[data-item='newdir']")
         self.assert_owner('/home/testuser', 'testuser:testuser')
