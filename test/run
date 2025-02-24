@@ -6,7 +6,7 @@ set -eu
 
 TEST_SCENARIO="${TEST_SCENARIO:-}"
 [ "${TEST_SCENARIO}" = "${TEST_SCENARIO##firefox}" ] || export TEST_BROWSER=firefox
-export RUN_TESTS_OPTIONS=--track-naughties
+export RUN_TESTS_OPTIONS="--track-naughties -t"
 
 if [ "$TEST_SCENARIO" = "devel" ]; then
     export TEST_COVERAGE=yes
