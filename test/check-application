@@ -2363,7 +2363,6 @@ class TestFiles(testlib.MachineCase):
         b.click(".pf-v5-c-alert__action button")
         b.wait_not_present("[data-item='newfile']")
 
-    @testlib.skipBrowser(".upload_files() doesn't work on Firefox", "firefox")
     def testUpload(self) -> None:
         b = self.browser
         m = self.machine
