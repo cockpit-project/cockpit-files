@@ -193,7 +193,10 @@ export const Application = () => {
                         ))}
                     </AlertGroup>
                     <FilesBreadcrumbs path={path} />
-                    <PageSection>
+                    <PageSection
+                      id="files-folder-section"
+                      data-dir-loaded={!loadingFiles ? path : null}
+                    >
                         {errorMessage &&
                         <Card className="files-empty-state">
                             <EmptyStatePanel
