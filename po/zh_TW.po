@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-12 03:02+0000\n"
+"POT-Creation-Date: 2025-02-22 03:01+0000\n"
 "PO-Revision-Date: 2025-01-31 14:23+0000\n"
 "Last-Translator: JW Wang <v72807647@gmail.com>\n"
 "Language-Team: Chinese (Traditional) <https://translate.fedoraproject.org/"
@@ -43,11 +43,11 @@ msgid "$0 item is hidden"
 msgid_plural "$0 items are hidden"
 msgstr[0] "$0 個已隱藏的項目"
 
-#: src/dialogs/permissions.tsx:299
+#: src/dialogs/permissions.tsx:300
 msgid "$0 permissions"
 msgstr "$0 的權限"
 
-#: src/dialogs/copyPasteOwnership.tsx:118
+#: src/dialogs/copyPasteOwnership.tsx:117
 #, fuzzy
 #| msgid "Original file on server"
 msgid "(original owner)"
@@ -72,7 +72,7 @@ msgstr "一個相同名稱的檔案已於 \"$0\" 存在。 若將其取代將覆
 msgid "A-Z"
 msgstr "由 A 到 Z"
 
-#: src/dialogs/permissions.tsx:364
+#: src/dialogs/permissions.tsx:366
 msgid "Access"
 msgstr "存取權限"
 
@@ -99,10 +99,10 @@ msgstr "區塊裝置"
 msgid "Bookmarks"
 msgstr "書籤"
 
-#: src/dialogs/rename.tsx:98 src/dialogs/mkdir.tsx:108
-#: src/dialogs/create-file.tsx:161 src/dialogs/permissions.tsx:319
-#: src/dialogs/copyPasteOwnership.tsx:180 src/dialogs/editor.tsx:211
-#: src/dialogs/delete.tsx:91 src/upload-button.tsx:116
+#: src/upload-button.tsx:116 src/dialogs/mkdir.tsx:108
+#: src/dialogs/permissions.tsx:320 src/dialogs/copyPasteOwnership.tsx:179
+#: src/dialogs/create-file.tsx:161 src/dialogs/rename.tsx:98
+#: src/dialogs/delete.tsx:98 src/dialogs/editor.tsx:211
 msgid "Cancel"
 msgstr "取消"
 
@@ -122,11 +122,11 @@ msgstr "已取消上傳 $0"
 msgid "Cannot create file in current directory"
 msgstr "無法在目前的目錄建立檔案"
 
-#: src/files-folder-view.tsx:165
+#: src/files-folder-view.tsx:177
 msgid "Cannot drop files, another upload is already in progress"
 msgstr "正在處理其他上傳作業，無法拖曳檔案至此"
 
-#: src/dialogs/permissions.tsx:310
+#: src/dialogs/permissions.tsx:311
 msgid "Change"
 msgstr "變更"
 
@@ -134,7 +134,7 @@ msgstr "變更"
 msgid "Change permissions"
 msgstr "變更權限"
 
-#: src/dialogs/permissions.tsx:317
+#: src/dialogs/permissions.tsx:318
 msgid "Change permissions for enclosed files"
 msgstr "變更其中檔案的權限"
 
@@ -146,7 +146,7 @@ msgstr "字元裝置"
 msgid "Clear filter"
 msgstr "清除篩選器"
 
-#: src/dialogs/editor.tsx:211 src/dialogs/keyboardShortcutsHelp.tsx:37
+#: src/dialogs/keyboardShortcutsHelp.tsx:37 src/dialogs/editor.tsx:211
 msgid "Close"
 msgstr "關閉"
 
@@ -158,7 +158,7 @@ msgstr "Cockpit Files"
 msgid "Cockpit Project"
 msgstr "Cockpit 專案"
 
-#: src/dialogs/permissions.tsx:284
+#: src/dialogs/permissions.tsx:285
 msgid "Collapse"
 msgstr "收折"
 
@@ -174,11 +174,11 @@ msgstr "複製已選擇的檔案或目錄"
 msgid "Create"
 msgstr "建立"
 
-#: src/dialogs/mkdir.tsx:92 src/menu.tsx:112
+#: src/menu.tsx:112 src/dialogs/mkdir.tsx:92
 msgid "Create directory"
 msgstr "建立目錄"
 
-#: src/dialogs/create-file.tsx:145 src/menu.tsx:117
+#: src/menu.tsx:117 src/dialogs/create-file.tsx:145
 msgid "Create file"
 msgstr "建立檔案"
 
@@ -186,7 +186,7 @@ msgstr "建立檔案"
 msgid "Create new directory"
 msgstr "建立新目錄"
 
-#: src/dialogs/delete.tsx:90 src/menu.tsx:174 src/menu.tsx:207
+#: src/menu.tsx:174 src/menu.tsx:207 src/dialogs/delete.tsx:96
 msgid "Delete"
 msgstr "刪除"
 
@@ -262,7 +262,7 @@ msgstr "以清單顯示"
 msgid "Download"
 msgstr "下載"
 
-#: src/files-folder-view.tsx:157
+#: src/files-folder-view.tsx:169
 msgid "Drop files to upload"
 msgstr "拖曳檔案以上傳"
 
@@ -271,7 +271,7 @@ msgstr "拖曳檔案以上傳"
 msgid "Edit $0"
 msgstr "編輯 $0"
 
-#: src/files-breadcrumbs.tsx:307 src/dialogs/keyboardShortcutsHelp.tsx:90
+#: src/dialogs/keyboardShortcutsHelp.tsx:90 src/files-breadcrumbs.tsx:306
 msgid "Edit path"
 msgstr "編輯路徑"
 
@@ -315,7 +315,7 @@ msgstr "檔案名稱與原本相同"
 msgid "Files"
 msgstr "檔案"
 
-#: src/dialogs/copyPasteOwnership.tsx:197
+#: src/dialogs/copyPasteOwnership.tsx:196
 msgid ""
 "Files being pasted have a different owner. By default, ownership will be "
 "changed to match the destination directory."
@@ -369,12 +369,12 @@ msgstr "前進"
 msgid "Go up a directory"
 msgstr "回上一層目錄"
 
-#: src/dialogs/permissions.tsx:348 src/files-card-body.tsx:573
 #: src/files-footer-detail.tsx:79 src/files-footer-detail.tsx:151
+#: src/files-card-body.tsx:573 src/dialogs/permissions.tsx:349
 msgid "Group"
 msgstr "群組"
 
-#: src/dialogs/permissions.tsx:378
+#: src/dialogs/permissions.tsx:380
 msgid "Group access"
 msgstr "群組存取權限"
 
@@ -414,7 +414,7 @@ msgstr "最不寬鬆的權限"
 msgid "Manage your files"
 msgstr "管理您的檔案"
 
-#: src/dialogs/permissions.tsx:278
+#: src/dialogs/permissions.tsx:279
 msgid "Missing type"
 msgstr "類型已遺失"
 
@@ -462,13 +462,13 @@ msgstr "新檔案名稱"
 msgid "New name"
 msgstr "新名稱"
 
-#: src/dialogs/copyPasteOwnership.tsx:200
+#: src/dialogs/copyPasteOwnership.tsx:199
 #, fuzzy
 #| msgid "New name"
 msgid "New owner"
 msgstr "新名稱"
 
-#: src/dialogs/permissions.tsx:234
+#: src/dialogs/permissions.tsx:235
 msgid "No access"
 msgstr "無存取權限"
 
@@ -492,11 +492,11 @@ msgstr "開啟文字檔案"
 msgid "Original file on server"
 msgstr "伺服器上原有的檔案"
 
-#: src/files-card-body.tsx:573 src/files-footer-detail.tsx:79
+#: src/files-footer-detail.tsx:79 src/files-card-body.tsx:573
 msgid "Others"
 msgstr "其他人"
 
-#: src/dialogs/permissions.tsx:390
+#: src/dialogs/permissions.tsx:392
 msgid "Others access"
 msgstr "其他人的存取權限"
 
@@ -504,13 +504,13 @@ msgstr "其他人的存取權限"
 msgid "Overwrite"
 msgstr "覆寫"
 
-#: src/dialogs/create-file.tsx:198 src/dialogs/permissions.tsx:333
-#: src/header.tsx:99 src/files-card-body.tsx:534 src/files-card-body.tsx:573
-#: src/files-footer-detail.tsx:79
+#: src/header.tsx:99 src/files-footer-detail.tsx:79 src/files-card-body.tsx:534
+#: src/files-card-body.tsx:573 src/dialogs/permissions.tsx:334
+#: src/dialogs/create-file.tsx:198
 msgid "Owner"
 msgstr "擁有者"
 
-#: src/dialogs/permissions.tsx:366
+#: src/dialogs/permissions.tsx:368
 msgid "Owner access"
 msgstr "擁有者存取權限"
 
@@ -522,15 +522,15 @@ msgstr "擁有者遞增排序"
 msgid "Owner descending"
 msgstr "擁有者遞減排序"
 
-#: src/dialogs/permissions.tsx:332
+#: src/dialogs/permissions.tsx:333
 msgid "Ownership"
 msgstr "所有權"
 
-#: src/dialogs/copyPasteOwnership.tsx:178 src/menu.tsx:105
+#: src/menu.tsx:105 src/dialogs/copyPasteOwnership.tsx:177
 msgid "Paste"
 msgstr "貼上"
 
-#: src/dialogs/copyPasteOwnership.tsx:188
+#: src/dialogs/copyPasteOwnership.tsx:187
 msgid "Paste as owner"
 msgstr ""
 
@@ -538,7 +538,7 @@ msgstr ""
 msgid "Paste file or directory"
 msgstr "貼上檔案或目錄"
 
-#: src/dialogs/copyPasteOwnership.tsx:65 src/menu.tsx:62
+#: src/menu.tsx:62 src/dialogs/copyPasteOwnership.tsx:64
 msgid "Pasting failed"
 msgstr "貼上失敗"
 
@@ -550,7 +550,7 @@ msgstr "權限遭拒"
 msgid "Permissions"
 msgstr "權限"
 
-#: src/dialogs/permissions.tsx:300
+#: src/dialogs/permissions.tsx:301
 msgid "Permissions for $0 files"
 msgstr "變更 $0 個檔案的權限"
 
@@ -558,7 +558,7 @@ msgstr "變更 $0 個檔案的權限"
 msgid "Read and execute"
 msgstr "讀取與執行"
 
-#: src/common.ts:81 src/dialogs/permissions.tsx:224
+#: src/dialogs/permissions.tsx:225 src/common.ts:81
 msgid "Read and write"
 msgstr "讀取與寫入"
 
@@ -566,7 +566,7 @@ msgstr "讀取與寫入"
 msgid "Read, write, and execute"
 msgstr "讀取、寫入與執行"
 
-#: src/common.ts:79 src/dialogs/permissions.tsx:229 src/dialogs/editor.tsx:172
+#: src/dialogs/permissions.tsx:230 src/dialogs/editor.tsx:172 src/common.ts:79
 msgid "Read-only"
 msgstr "只能讀取"
 
@@ -582,7 +582,7 @@ msgstr "重新載入"
 msgid "Remove from bookmarks"
 msgstr ""
 
-#: src/dialogs/rename.tsx:89 src/menu.tsx:168
+#: src/menu.tsx:168 src/dialogs/rename.tsx:89
 msgid "Rename"
 msgstr "重新命名"
 
@@ -606,7 +606,7 @@ msgstr "取代檔案 $0 ？"
 msgid "Save"
 msgstr "儲存"
 
-#: src/dialogs/permissions.tsx:403
+#: src/dialogs/permissions.tsx:405
 msgid "Security context"
 msgstr "安全性 context"
 
@@ -614,11 +614,11 @@ msgstr "安全性 context"
 msgid "Select all"
 msgstr "全選"
 
-#: src/dialogs/permissions.tsx:415
+#: src/dialogs/permissions.tsx:417
 msgid "Set executable as program"
 msgstr "設定為可執行的程式"
 
-#: src/dialogs/permissions.tsx:285
+#: src/dialogs/permissions.tsx:286
 msgid "Show all files"
 msgstr "顯示所有檔案"
 
@@ -707,7 +707,7 @@ msgstr "檢視 $0"
 msgid "Write and execute"
 msgstr "寫入與執行"
 
-#: src/common.ts:77 src/dialogs/permissions.tsx:244
+#: src/dialogs/permissions.tsx:245 src/common.ts:77
 msgid "Write-only"
 msgstr "只能寫入"
 
@@ -727,7 +727,7 @@ msgstr "檔案"
 msgid "filesystem"
 msgstr "檔案系統"
 
-#: src/dialogs/copyPasteOwnership.tsx:127
+#: src/dialogs/copyPasteOwnership.tsx:126
 #, fuzzy
 #| msgid "Keep original"
 msgid "keep original owners"
