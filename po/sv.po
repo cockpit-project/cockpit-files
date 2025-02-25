@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-12 03:02+0000\n"
+"POT-Creation-Date: 2025-02-22 03:01+0000\n"
 "PO-Revision-Date: 2025-02-12 19:38+0000\n"
 "Last-Translator: Luna Jernberg <bittin@reimu.nl>\n"
 "Language-Team: Swedish <https://translate.fedoraproject.org/projects/cockpit-"
@@ -44,11 +44,11 @@ msgid_plural "$0 items are hidden"
 msgstr[0] "($0 objekt är dolt)"
 msgstr[1] "($0 objekt är dolda)"
 
-#: src/dialogs/permissions.tsx:299
+#: src/dialogs/permissions.tsx:300
 msgid "$0 permissions"
 msgstr "$0 behörigheter"
 
-#: src/dialogs/copyPasteOwnership.tsx:118
+#: src/dialogs/copyPasteOwnership.tsx:117
 msgid "(original owner)"
 msgstr "(original ägare)"
 
@@ -74,7 +74,7 @@ msgstr ""
 msgid "A-Z"
 msgstr "A-Z"
 
-#: src/dialogs/permissions.tsx:364
+#: src/dialogs/permissions.tsx:366
 msgid "Access"
 msgstr "Åtkomst"
 
@@ -99,10 +99,10 @@ msgstr "Blockenhet"
 msgid "Bookmarks"
 msgstr "Bokmärken"
 
-#: src/dialogs/rename.tsx:98 src/dialogs/mkdir.tsx:108
-#: src/dialogs/create-file.tsx:161 src/dialogs/permissions.tsx:319
-#: src/dialogs/copyPasteOwnership.tsx:180 src/dialogs/editor.tsx:211
-#: src/dialogs/delete.tsx:91 src/upload-button.tsx:116
+#: src/upload-button.tsx:116 src/dialogs/mkdir.tsx:108
+#: src/dialogs/permissions.tsx:320 src/dialogs/copyPasteOwnership.tsx:179
+#: src/dialogs/create-file.tsx:161 src/dialogs/rename.tsx:98
+#: src/dialogs/delete.tsx:98 src/dialogs/editor.tsx:211
 msgid "Cancel"
 msgstr "Avbryt"
 
@@ -122,11 +122,11 @@ msgstr "Avbruten uppladdning av $0"
 msgid "Cannot create file in current directory"
 msgstr "Kan inte skapa fil i nuvarande katalog"
 
-#: src/files-folder-view.tsx:165
+#: src/files-folder-view.tsx:177
 msgid "Cannot drop files, another upload is already in progress"
 msgstr "Det går inte att släppa filer, en annan uppladdning pågår redan"
 
-#: src/dialogs/permissions.tsx:310
+#: src/dialogs/permissions.tsx:311
 msgid "Change"
 msgstr "Ändra"
 
@@ -134,7 +134,7 @@ msgstr "Ändra"
 msgid "Change permissions"
 msgstr "Ändra behörigheter"
 
-#: src/dialogs/permissions.tsx:317
+#: src/dialogs/permissions.tsx:318
 msgid "Change permissions for enclosed files"
 msgstr "Ändra behörigheter för bifogade filer"
 
@@ -146,7 +146,7 @@ msgstr "Teckenenhet"
 msgid "Clear filter"
 msgstr "Rensa filter"
 
-#: src/dialogs/editor.tsx:211 src/dialogs/keyboardShortcutsHelp.tsx:37
+#: src/dialogs/keyboardShortcutsHelp.tsx:37 src/dialogs/editor.tsx:211
 msgid "Close"
 msgstr "Stäng"
 
@@ -158,7 +158,7 @@ msgstr "Cockpit filer"
 msgid "Cockpit Project"
 msgstr "Cockpitprojektet"
 
-#: src/dialogs/permissions.tsx:284
+#: src/dialogs/permissions.tsx:285
 msgid "Collapse"
 msgstr "Fäll ihop"
 
@@ -174,11 +174,11 @@ msgstr "Kopiera vald fil eller katalog"
 msgid "Create"
 msgstr "Skapa"
 
-#: src/dialogs/mkdir.tsx:92 src/menu.tsx:112
+#: src/menu.tsx:112 src/dialogs/mkdir.tsx:92
 msgid "Create directory"
 msgstr "Skapa katalog"
 
-#: src/dialogs/create-file.tsx:145 src/menu.tsx:117
+#: src/menu.tsx:117 src/dialogs/create-file.tsx:145
 msgid "Create file"
 msgstr "Skapa fil"
 
@@ -186,7 +186,7 @@ msgstr "Skapa fil"
 msgid "Create new directory"
 msgstr "Skapa ny katalog"
 
-#: src/dialogs/delete.tsx:90 src/menu.tsx:174 src/menu.tsx:207
+#: src/menu.tsx:174 src/menu.tsx:207 src/dialogs/delete.tsx:96
 msgid "Delete"
 msgstr "Ta bort"
 
@@ -262,7 +262,7 @@ msgstr "Visa som en lista"
 msgid "Download"
 msgstr "Hämta"
 
-#: src/files-folder-view.tsx:157
+#: src/files-folder-view.tsx:169
 msgid "Drop files to upload"
 msgstr "Släpp filer för att ladda upp"
 
@@ -271,7 +271,7 @@ msgstr "Släpp filer för att ladda upp"
 msgid "Edit $0"
 msgstr "Redigera $0"
 
-#: src/files-breadcrumbs.tsx:307 src/dialogs/keyboardShortcutsHelp.tsx:90
+#: src/dialogs/keyboardShortcutsHelp.tsx:90 src/files-breadcrumbs.tsx:306
 msgid "Edit path"
 msgstr "Redigera sökväg"
 
@@ -315,7 +315,7 @@ msgstr "Filnamn är samma som originalnamn"
 msgid "Files"
 msgstr "Filer"
 
-#: src/dialogs/copyPasteOwnership.tsx:197
+#: src/dialogs/copyPasteOwnership.tsx:196
 msgid ""
 "Files being pasted have a different owner. By default, ownership will be "
 "changed to match the destination directory."
@@ -371,12 +371,12 @@ msgstr "Gå framåt"
 msgid "Go up a directory"
 msgstr "Gå upp en katalog"
 
-#: src/dialogs/permissions.tsx:348 src/files-card-body.tsx:573
 #: src/files-footer-detail.tsx:79 src/files-footer-detail.tsx:151
+#: src/files-card-body.tsx:573 src/dialogs/permissions.tsx:349
 msgid "Group"
 msgstr "Grupp"
 
-#: src/dialogs/permissions.tsx:378
+#: src/dialogs/permissions.tsx:380
 msgid "Group access"
 msgstr "Gruppåtkomst"
 
@@ -416,7 +416,7 @@ msgstr "Minst tillåtande"
 msgid "Manage your files"
 msgstr "Hantera dina filer"
 
-#: src/dialogs/permissions.tsx:278
+#: src/dialogs/permissions.tsx:279
 msgid "Missing type"
 msgstr "Saknar typ"
 
@@ -464,11 +464,11 @@ msgstr "Nytt filnamn"
 msgid "New name"
 msgstr "Nytt namn"
 
-#: src/dialogs/copyPasteOwnership.tsx:200
+#: src/dialogs/copyPasteOwnership.tsx:199
 msgid "New owner"
 msgstr "Ny ägare"
 
-#: src/dialogs/permissions.tsx:234
+#: src/dialogs/permissions.tsx:235
 msgid "No access"
 msgstr "Ingen åtkomst"
 
@@ -492,11 +492,11 @@ msgstr "Öppna en textfil"
 msgid "Original file on server"
 msgstr "Original fil på server"
 
-#: src/files-card-body.tsx:573 src/files-footer-detail.tsx:79
+#: src/files-footer-detail.tsx:79 src/files-card-body.tsx:573
 msgid "Others"
 msgstr "Andra"
 
-#: src/dialogs/permissions.tsx:390
+#: src/dialogs/permissions.tsx:392
 msgid "Others access"
 msgstr "Andra tillgång"
 
@@ -504,13 +504,13 @@ msgstr "Andra tillgång"
 msgid "Overwrite"
 msgstr "Skriv över"
 
-#: src/dialogs/create-file.tsx:198 src/dialogs/permissions.tsx:333
-#: src/header.tsx:99 src/files-card-body.tsx:534 src/files-card-body.tsx:573
-#: src/files-footer-detail.tsx:79
+#: src/header.tsx:99 src/files-footer-detail.tsx:79 src/files-card-body.tsx:534
+#: src/files-card-body.tsx:573 src/dialogs/permissions.tsx:334
+#: src/dialogs/create-file.tsx:198
 msgid "Owner"
 msgstr "Ägare"
 
-#: src/dialogs/permissions.tsx:366
+#: src/dialogs/permissions.tsx:368
 msgid "Owner access"
 msgstr "Ägare tillgång"
 
@@ -522,15 +522,15 @@ msgstr "Ägare ökande"
 msgid "Owner descending"
 msgstr "Ägare minskande"
 
-#: src/dialogs/permissions.tsx:332
+#: src/dialogs/permissions.tsx:333
 msgid "Ownership"
 msgstr "Ägarskap"
 
-#: src/dialogs/copyPasteOwnership.tsx:178 src/menu.tsx:105
+#: src/menu.tsx:105 src/dialogs/copyPasteOwnership.tsx:177
 msgid "Paste"
 msgstr "Klistra in"
 
-#: src/dialogs/copyPasteOwnership.tsx:188
+#: src/dialogs/copyPasteOwnership.tsx:187
 msgid "Paste as owner"
 msgstr "Klistra in som ägare"
 
@@ -538,7 +538,7 @@ msgstr "Klistra in som ägare"
 msgid "Paste file or directory"
 msgstr "Klistra in fil eller katalog"
 
-#: src/dialogs/copyPasteOwnership.tsx:65 src/menu.tsx:62
+#: src/menu.tsx:62 src/dialogs/copyPasteOwnership.tsx:64
 msgid "Pasting failed"
 msgstr "Inklistring misslyckades"
 
@@ -550,7 +550,7 @@ msgstr "Åtkomst nekas"
 msgid "Permissions"
 msgstr "Behörigheter"
 
-#: src/dialogs/permissions.tsx:300
+#: src/dialogs/permissions.tsx:301
 msgid "Permissions for $0 files"
 msgstr "Behörigheter för $0 filer"
 
@@ -558,7 +558,7 @@ msgstr "Behörigheter för $0 filer"
 msgid "Read and execute"
 msgstr "Läs och exekvera"
 
-#: src/common.ts:81 src/dialogs/permissions.tsx:224
+#: src/dialogs/permissions.tsx:225 src/common.ts:81
 msgid "Read and write"
 msgstr "Läs och skriv"
 
@@ -566,7 +566,7 @@ msgstr "Läs och skriv"
 msgid "Read, write, and execute"
 msgstr "Läs, skriv, och exekvera"
 
-#: src/common.ts:79 src/dialogs/permissions.tsx:229 src/dialogs/editor.tsx:172
+#: src/dialogs/permissions.tsx:230 src/dialogs/editor.tsx:172 src/common.ts:79
 msgid "Read-only"
 msgstr "Läs-endast"
 
@@ -582,7 +582,7 @@ msgstr "Ladda om"
 msgid "Remove from bookmarks"
 msgstr "Ta bort från bokmärken"
 
-#: src/dialogs/rename.tsx:89 src/menu.tsx:168
+#: src/menu.tsx:168 src/dialogs/rename.tsx:89
 msgid "Rename"
 msgstr "Byt namn"
 
@@ -606,7 +606,7 @@ msgstr "Ersätt fil $0?"
 msgid "Save"
 msgstr "Spara"
 
-#: src/dialogs/permissions.tsx:403
+#: src/dialogs/permissions.tsx:405
 msgid "Security context"
 msgstr "Säkerhetskontext"
 
@@ -614,11 +614,11 @@ msgstr "Säkerhetskontext"
 msgid "Select all"
 msgstr "Välj alla"
 
-#: src/dialogs/permissions.tsx:415
+#: src/dialogs/permissions.tsx:417
 msgid "Set executable as program"
 msgstr "Ställ in körbar fil som program"
 
-#: src/dialogs/permissions.tsx:285
+#: src/dialogs/permissions.tsx:286
 msgid "Show all files"
 msgstr "Visa alla filer"
 
@@ -706,7 +706,7 @@ msgstr "Visa $0"
 msgid "Write and execute"
 msgstr "Skriv och exekvera"
 
-#: src/common.ts:77 src/dialogs/permissions.tsx:244
+#: src/dialogs/permissions.tsx:245 src/common.ts:77
 msgid "Write-only"
 msgstr "Skriv-endast"
 
@@ -726,7 +726,7 @@ msgstr "filer"
 msgid "filesystem"
 msgstr "filsystem"
 
-#: src/dialogs/copyPasteOwnership.tsx:127
+#: src/dialogs/copyPasteOwnership.tsx:126
 msgid "keep original owners"
 msgstr "behåll ursprungliga ägare"
 

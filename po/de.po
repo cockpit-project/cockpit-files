@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: starter-kit 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-12 03:02+0000\n"
+"POT-Creation-Date: 2025-02-22 03:01+0000\n"
 "PO-Revision-Date: 2025-02-10 02:17+0000\n"
 "Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
 "memory@weblate.org>\n"
@@ -34,11 +34,11 @@ msgid_plural "$0 items are hidden"
 msgstr[0] "$0 Element ist verborgen"
 msgstr[1] "$0 Elemente sind verborgen"
 
-#: src/dialogs/permissions.tsx:299
+#: src/dialogs/permissions.tsx:300
 msgid "$0 permissions"
 msgstr "$0-Berechtigungen"
 
-#: src/dialogs/copyPasteOwnership.tsx:118
+#: src/dialogs/copyPasteOwnership.tsx:117
 #, fuzzy
 #| msgid "Original file on server"
 msgid "(original owner)"
@@ -66,7 +66,7 @@ msgstr ""
 msgid "A-Z"
 msgstr "A-Z"
 
-#: src/dialogs/permissions.tsx:364
+#: src/dialogs/permissions.tsx:366
 msgid "Access"
 msgstr "Zugriff"
 
@@ -93,10 +93,10 @@ msgstr "Blockiere Gerät"
 msgid "Bookmarks"
 msgstr "Lesezeichen"
 
-#: src/dialogs/rename.tsx:98 src/dialogs/mkdir.tsx:108
-#: src/dialogs/create-file.tsx:161 src/dialogs/permissions.tsx:319
-#: src/dialogs/copyPasteOwnership.tsx:180 src/dialogs/editor.tsx:211
-#: src/dialogs/delete.tsx:91 src/upload-button.tsx:116
+#: src/upload-button.tsx:116 src/dialogs/mkdir.tsx:108
+#: src/dialogs/permissions.tsx:320 src/dialogs/copyPasteOwnership.tsx:179
+#: src/dialogs/create-file.tsx:161 src/dialogs/rename.tsx:98
+#: src/dialogs/delete.tsx:98 src/dialogs/editor.tsx:211
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -116,13 +116,13 @@ msgstr "Upload von $0 abgebrochen"
 msgid "Cannot create file in current directory"
 msgstr "Datei im aktuellen Verzeichnis kann nicht erstellt werden"
 
-#: src/files-folder-view.tsx:165
+#: src/files-folder-view.tsx:177
 msgid "Cannot drop files, another upload is already in progress"
 msgstr ""
 "Dateien können nicht abgelegt werden, ein anderer Hochladevorgang ist "
 "bereits im Gange"
 
-#: src/dialogs/permissions.tsx:310
+#: src/dialogs/permissions.tsx:311
 msgid "Change"
 msgstr "Ändern"
 
@@ -130,7 +130,7 @@ msgstr "Ändern"
 msgid "Change permissions"
 msgstr "Berechtigungen ändern"
 
-#: src/dialogs/permissions.tsx:317
+#: src/dialogs/permissions.tsx:318
 msgid "Change permissions for enclosed files"
 msgstr "Berechtigungen für enthaltene Dateien ändern"
 
@@ -142,7 +142,7 @@ msgstr "Zeichengerät"
 msgid "Clear filter"
 msgstr "Filter entfernen"
 
-#: src/dialogs/editor.tsx:211 src/dialogs/keyboardShortcutsHelp.tsx:37
+#: src/dialogs/keyboardShortcutsHelp.tsx:37 src/dialogs/editor.tsx:211
 msgid "Close"
 msgstr "Schließen"
 
@@ -154,7 +154,7 @@ msgstr "Cockpit-Dateien"
 msgid "Cockpit Project"
 msgstr "Cockpit-Projekt"
 
-#: src/dialogs/permissions.tsx:284
+#: src/dialogs/permissions.tsx:285
 msgid "Collapse"
 msgstr "Einklappen"
 
@@ -170,11 +170,11 @@ msgstr "Ausgewählte Datei oder ausgewähltes Verzeichnis kopieren"
 msgid "Create"
 msgstr "Erstellen"
 
-#: src/dialogs/mkdir.tsx:92 src/menu.tsx:112
+#: src/menu.tsx:112 src/dialogs/mkdir.tsx:92
 msgid "Create directory"
 msgstr "Verzeichnis erstellen"
 
-#: src/dialogs/create-file.tsx:145 src/menu.tsx:117
+#: src/menu.tsx:117 src/dialogs/create-file.tsx:145
 msgid "Create file"
 msgstr "Datei erstellen"
 
@@ -182,7 +182,7 @@ msgstr "Datei erstellen"
 msgid "Create new directory"
 msgstr "Neues Verzeichnis erstellen"
 
-#: src/dialogs/delete.tsx:90 src/menu.tsx:174 src/menu.tsx:207
+#: src/menu.tsx:174 src/menu.tsx:207 src/dialogs/delete.tsx:96
 msgid "Delete"
 msgstr "Löschen"
 
@@ -258,7 +258,7 @@ msgstr "Als Liste anzeigen"
 msgid "Download"
 msgstr "Herunterladen"
 
-#: src/files-folder-view.tsx:157
+#: src/files-folder-view.tsx:169
 msgid "Drop files to upload"
 msgstr "Dateien zum Hochladen ablegen"
 
@@ -267,7 +267,7 @@ msgstr "Dateien zum Hochladen ablegen"
 msgid "Edit $0"
 msgstr "$0 bearbeiten"
 
-#: src/files-breadcrumbs.tsx:307 src/dialogs/keyboardShortcutsHelp.tsx:90
+#: src/dialogs/keyboardShortcutsHelp.tsx:90 src/files-breadcrumbs.tsx:306
 msgid "Edit path"
 msgstr "Pfad bearbeiten"
 
@@ -311,7 +311,7 @@ msgstr "Der Dateiname ist derselbe wie der ursprüngliche Name"
 msgid "Files"
 msgstr "Dateien"
 
-#: src/dialogs/copyPasteOwnership.tsx:197
+#: src/dialogs/copyPasteOwnership.tsx:196
 msgid ""
 "Files being pasted have a different owner. By default, ownership will be "
 "changed to match the destination directory."
@@ -365,12 +365,12 @@ msgstr "Weitergehen"
 msgid "Go up a directory"
 msgstr "Ein Verzeichnis nach oben gehen"
 
-#: src/dialogs/permissions.tsx:348 src/files-card-body.tsx:573
 #: src/files-footer-detail.tsx:79 src/files-footer-detail.tsx:151
+#: src/files-card-body.tsx:573 src/dialogs/permissions.tsx:349
 msgid "Group"
 msgstr "Gruppe"
 
-#: src/dialogs/permissions.tsx:378
+#: src/dialogs/permissions.tsx:380
 msgid "Group access"
 msgstr "Gruppenzugriff"
 
@@ -410,7 +410,7 @@ msgstr "Am wenigsten zulässig"
 msgid "Manage your files"
 msgstr "Verwalten Sie Ihre Dateien"
 
-#: src/dialogs/permissions.tsx:278
+#: src/dialogs/permissions.tsx:279
 msgid "Missing type"
 msgstr "Fehlender Typ"
 
@@ -459,13 +459,13 @@ msgstr "Neuer Dateiname"
 msgid "New name"
 msgstr "Neuer Name"
 
-#: src/dialogs/copyPasteOwnership.tsx:200
+#: src/dialogs/copyPasteOwnership.tsx:199
 #, fuzzy
 #| msgid "New name"
 msgid "New owner"
 msgstr "Neuer Name"
 
-#: src/dialogs/permissions.tsx:234
+#: src/dialogs/permissions.tsx:235
 msgid "No access"
 msgstr "Kein Zugriff"
 
@@ -489,11 +489,11 @@ msgstr "Textdatei öffnen"
 msgid "Original file on server"
 msgstr "Originaldatei auf dem Server"
 
-#: src/files-card-body.tsx:573 src/files-footer-detail.tsx:79
+#: src/files-footer-detail.tsx:79 src/files-card-body.tsx:573
 msgid "Others"
 msgstr "Andere"
 
-#: src/dialogs/permissions.tsx:390
+#: src/dialogs/permissions.tsx:392
 msgid "Others access"
 msgstr "Anderer Zugriff"
 
@@ -501,13 +501,13 @@ msgstr "Anderer Zugriff"
 msgid "Overwrite"
 msgstr "Überschreiben"
 
-#: src/dialogs/create-file.tsx:198 src/dialogs/permissions.tsx:333
-#: src/header.tsx:99 src/files-card-body.tsx:534 src/files-card-body.tsx:573
-#: src/files-footer-detail.tsx:79
+#: src/header.tsx:99 src/files-footer-detail.tsx:79 src/files-card-body.tsx:534
+#: src/files-card-body.tsx:573 src/dialogs/permissions.tsx:334
+#: src/dialogs/create-file.tsx:198
 msgid "Owner"
 msgstr "Eigentümer"
 
-#: src/dialogs/permissions.tsx:366
+#: src/dialogs/permissions.tsx:368
 msgid "Owner access"
 msgstr "Eigentümerzugriff"
 
@@ -519,15 +519,15 @@ msgstr "Eigentümer aufsteigend"
 msgid "Owner descending"
 msgstr "Eigentümer absteigend"
 
-#: src/dialogs/permissions.tsx:332
+#: src/dialogs/permissions.tsx:333
 msgid "Ownership"
 msgstr "Eigentümerschaft"
 
-#: src/dialogs/copyPasteOwnership.tsx:178 src/menu.tsx:105
+#: src/menu.tsx:105 src/dialogs/copyPasteOwnership.tsx:177
 msgid "Paste"
 msgstr "Einfügen"
 
-#: src/dialogs/copyPasteOwnership.tsx:188
+#: src/dialogs/copyPasteOwnership.tsx:187
 msgid "Paste as owner"
 msgstr ""
 
@@ -535,7 +535,7 @@ msgstr ""
 msgid "Paste file or directory"
 msgstr "Datei oder Verzeichnis einfügen"
 
-#: src/dialogs/copyPasteOwnership.tsx:65 src/menu.tsx:62
+#: src/menu.tsx:62 src/dialogs/copyPasteOwnership.tsx:64
 msgid "Pasting failed"
 msgstr "Einfügen fehlgeschlagen"
 
@@ -547,7 +547,7 @@ msgstr "Berechtigung verweigert"
 msgid "Permissions"
 msgstr "Berechtigungen"
 
-#: src/dialogs/permissions.tsx:300
+#: src/dialogs/permissions.tsx:301
 msgid "Permissions for $0 files"
 msgstr "Berechtigungen für $0 Dateien"
 
@@ -555,7 +555,7 @@ msgstr "Berechtigungen für $0 Dateien"
 msgid "Read and execute"
 msgstr "Lesen und ausführen"
 
-#: src/common.ts:81 src/dialogs/permissions.tsx:224
+#: src/dialogs/permissions.tsx:225 src/common.ts:81
 msgid "Read and write"
 msgstr "Lesen und schreiben"
 
@@ -563,7 +563,7 @@ msgstr "Lesen und schreiben"
 msgid "Read, write, and execute"
 msgstr "Lesen, schreiben und ausführen"
 
-#: src/common.ts:79 src/dialogs/permissions.tsx:229 src/dialogs/editor.tsx:172
+#: src/dialogs/permissions.tsx:230 src/dialogs/editor.tsx:172 src/common.ts:79
 msgid "Read-only"
 msgstr "Nur lesen"
 
@@ -579,7 +579,7 @@ msgstr "Neu laden"
 msgid "Remove from bookmarks"
 msgstr ""
 
-#: src/dialogs/rename.tsx:89 src/menu.tsx:168
+#: src/menu.tsx:168 src/dialogs/rename.tsx:89
 msgid "Rename"
 msgstr "Umbenennen"
 
@@ -603,7 +603,7 @@ msgstr "Datei $0 ersetzen?"
 msgid "Save"
 msgstr "Speichern"
 
-#: src/dialogs/permissions.tsx:403
+#: src/dialogs/permissions.tsx:405
 msgid "Security context"
 msgstr "Sicherheitskontext"
 
@@ -611,11 +611,11 @@ msgstr "Sicherheitskontext"
 msgid "Select all"
 msgstr "Alles auswählen"
 
-#: src/dialogs/permissions.tsx:415
+#: src/dialogs/permissions.tsx:417
 msgid "Set executable as program"
 msgstr "Ausführbare Datei als Programm festlegen"
 
-#: src/dialogs/permissions.tsx:285
+#: src/dialogs/permissions.tsx:286
 msgid "Show all files"
 msgstr "Alle Dateien anzeigen"
 
@@ -704,7 +704,7 @@ msgstr "$0 ansehen"
 msgid "Write and execute"
 msgstr "Schreiben und ausführen"
 
-#: src/common.ts:77 src/dialogs/permissions.tsx:244
+#: src/dialogs/permissions.tsx:245 src/common.ts:77
 msgid "Write-only"
 msgstr "Nur schreiben"
 
@@ -724,7 +724,7 @@ msgstr "Dateien"
 msgid "filesystem"
 msgstr "Dateisystem"
 
-#: src/dialogs/copyPasteOwnership.tsx:127
+#: src/dialogs/copyPasteOwnership.tsx:126
 #, fuzzy
 #| msgid "Keep original"
 msgid "keep original owners"
