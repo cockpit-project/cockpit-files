@@ -32,7 +32,7 @@ import cockpit from "cockpit";
 import { FsInfoClient, FileInfo } from "cockpit/fsinfo.ts";
 import { EmptyStatePanel } from "cockpit-components-empty-state";
 import { WithDialogs } from "dialogs";
-import { useInit, usePageLocation } from "hooks";
+import { useInit } from "hooks";
 import { superuser } from "superuser";
 
 import { FilesContext, testIsAppleDevice, usePath } from "./common.ts";
@@ -54,7 +54,7 @@ interface Alert {
 }
 
 export const Application = () => {
-    const { options } = usePageLocation();
+    const [location, setLocation] = useState(cockpit.location);
     const [loading, setLoading] = useState(true);
     const [loadingFiles, setLoadingFiles] = useState(true);
     const [errorMessage, setErrorMessage] = useState("");
@@ -66,6 +66,18 @@ export const Application = () => {
     const [cwdInfo, setCwdInfo] = useState<FileInfo | null>(null);
 
     const path = usePath();
+    const { options } = location;
+
+    useEffect(() => {
+        function update() {
+            setLocation(cockpit.location);
+            setLoadingFiles(true);
+            setCwdInfo(null);
+        }
+
+        cockpit.addEventListener("locationchanged", update);
+        return () => cockpit.removeEventListener("locationchanged", update);
+    }, []);
 
     useEffect(() => {
         cockpit.user().then(user => {
@@ -106,6 +118,7 @@ export const Application = () => {
 
             return () => {
                 disconnect();
+                setLoadingFiles(true);
                 client.close();
             };
         },
