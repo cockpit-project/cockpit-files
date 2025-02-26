@@ -68,7 +68,7 @@ export const Application = () => {
     const path = usePath();
     const { options } = location;
 
-    useEffect(() => {
+    useInit(() => {
         function update() {
             setLocation(cockpit.location);
             setLoadingFiles(true);
@@ -85,7 +85,7 @@ export const Application = () => {
         });
 
         return () => cockpit.removeEventListener("locationchanged", update);
-    }, []);
+    });
 
     useEffect(
         () => {
