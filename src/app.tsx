@@ -76,16 +76,16 @@ export const Application = () => {
         }
 
         cockpit.addEventListener("locationchanged", update);
-        return () => cockpit.removeEventListener("locationchanged", update);
-    }, []);
 
-    useEffect(() => {
+        // On initial load redirect to the users home directory
         cockpit.user().then(user => {
-            if (options.path === undefined) {
+            if (cockpit.location.options.path === undefined) {
                 cockpit.location.replace("/", { path: encodeURIComponent(user.home) });
             }
         });
-    }, [options]);
+
+        return () => cockpit.removeEventListener("locationchanged", update);
+    }, []);
 
     useEffect(
         () => {
