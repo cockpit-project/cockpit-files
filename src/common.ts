@@ -22,7 +22,6 @@ import type { AlertVariant } from "@patternfly/react-core/dist/esm/components/Al
 
 import cockpit from "cockpit";
 import type { FileInfo } from "cockpit/fsinfo.ts";
-import { usePageLocation } from "hooks";
 
 const _ = cockpit.gettext;
 
@@ -51,25 +50,6 @@ export const FilesContext = React.createContext({
 } as FilesContextType);
 
 export const useFilesContext = () => useContext(FilesContext);
-
-export const usePath = () => {
-    const { options } = usePageLocation();
-    let currentPath = decodeURIComponent(options.path?.toString() || "/");
-
-    // Trim all trailing slashes
-    currentPath = currentPath.replace(/\/+$/, '');
-
-    // Our path will always be `/foo/` formatted
-    if (!currentPath.endsWith("/")) {
-        currentPath += "/";
-    }
-
-    if (!currentPath.startsWith("/")) {
-        currentPath = `/${currentPath}`;
-    }
-
-    return currentPath;
-};
 
 export const permissions = [
     /* 0 */ _("None"),
