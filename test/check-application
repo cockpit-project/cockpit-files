@@ -107,6 +107,21 @@ class TestFiles(testlib.MachineCase):
         # "middle" click can be a file or folder item.
         self.browser.mouse("#files-card-parent", "contextmenu", 1, 1)
 
+    def wait_directory_changed(self, expected_path: str) -> None:
+        path = Path(expected_path)
+        self.browser.wait_attr("#files-folder-section", "data-dir-loaded", expected_path)
+        self.assert_last_breadcrumb('/' if path.name == "" else path.name)
+
+    def chdir(self, path: str, *, expected_path: str | None = None) -> None:
+        self.browser.go(f"/files#/?path={path}")
+        # The files state always ensures we have a well formulated path ending on a /
+        if expected_path is None:
+            expected_path = str(Path(path).absolute())
+            if not expected_path.endswith('/'):
+                expected_path += '/'
+
+        self.wait_directory_changed(expected_path)
+
     def testBasic(self) -> None:
         b = self.browser
         m = self.machine
@@ -121,7 +136,7 @@ class TestFiles(testlib.MachineCase):
         m.execute("runuser -u admin mkdir /home/admin/empty")
         m.execute("runuser -u admin touch /home/admin/empty/.hiddenfile")
         b.mouse("[data-item='empty']", "dblclick")
-        b.wait_text(".pf-v5-c-empty-state__title-text", "Directory is empty")
+        self.wait_directory_changed("/home/admin/empty/")
         b.wait_in_text(".pf-v5-c-empty-state__body", "1 item is hidden")
         b.assert_pixels(".pf-v5-c-page__main", "empty-folder-view")
 
@@ -224,13 +239,12 @@ class TestFiles(testlib.MachineCase):
 
         # Non-existing directory
         b.wait_visible("#dropdown-menu")
-        b.go("/files#/?path=/doesnotexists")
+        self.chdir('/doesnotexists')
         b.wait_in_text(".pf-v5-c-empty-state__body", "No such file or directory")
         b.wait_not_present("#dropdown-menu")
 
         # Path with multiple slashes is normalized
-        b.go("/files#/?path=/////")
-        b.wait_text("li[data-location='/']", "")
+        self.chdir('////', expected_path='/')
 
         # Path without a forward slash does get one
         b.go("/files#/?path=etc")
@@ -262,8 +276,7 @@ class TestFiles(testlib.MachineCase):
 
         # double-clicking on a directory should take us into it
         b.mouse("[data-item='admin']", "dblclick")
-        b.wait_not_present("[data-item='admin']")
-        self.assert_last_breadcrumb("admin")
+        self.wait_directory_changed("/home/admin/")
 
         # cwd info is updated when navigating to a new directory
         dir_cnt = int(m.execute(r'''
@@ -287,12 +300,11 @@ class TestFiles(testlib.MachineCase):
         b.mouse("[data-item='tmplink']", "dblclick")
         b.wait_not_present("[data-item='tmplink']")
         self.assert_last_breadcrumb("tmplink")
-        b.go("/files#/?path=/home/admin")
-        b.wait_not_present(".pf-v5-c-empty-state")
 
         # create folders and test navigation history buttons
         m.execute("mkdir /home/admin/newdir")
         m.execute("mkdir /home/admin/newdir/newdir2")
+        self.chdir("/home/admin")
         b.mouse("[data-item='newdir']", "dblclick")
         b.wait_not_present("[data-item='admin']")
         b.wait_visible("[data-item='newdir2']")
@@ -327,8 +339,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_visible("[data-item='admin']")
 
         # Change permissions of cwd and see that files-footer-info is updated
-        b.go("/files#/?path=/home/admin/newdir")
-        self.assert_last_breadcrumb("newdir")
+        self.chdir("/home/admin/newdir")
         b.wait_in_text("#files-footer-permissions", "rwx r-x r-x")
         m.execute("chmod 700 /home/admin/newdir")
         b.wait_in_text("#files-footer-permissions", "rwx --- ---")
@@ -368,12 +379,9 @@ class TestFiles(testlib.MachineCase):
         b.mouse(".files-footer-mtime", "mouseenter")
         b.wait_in_text(".pf-v5-c-tooltip", "Dec 21, 1995")
         b.mouse(".files-footer-mtime", "mouseleave")
-        b.go("/files#/?path=/home/admin")
-        self.assert_last_breadcrumb("admin")
 
         # Navigating resets the current search filter
-        b.go("/files#/?path=/")
-        self.assert_last_breadcrumb('/')
+        self.chdir('/')
         b.set_input_text("input[placeholder='Filter directory']", "sys")
         self.browser.wait_js_cond("ph_count('#folder-view tbody tr') == 1")
 
@@ -389,8 +397,7 @@ class TestFiles(testlib.MachineCase):
         self.assert_last_breadcrumb("/")
         b.wait_val("input[placeholder='Filter directory']", "")
 
-        b.go("/files#/?path=/home/admin")
-        self.assert_last_breadcrumb("admin")
+        self.chdir('/home/admin')
 
         # Selecting one file shows its info in the footer
         b.click("[data-item='newdir']")
@@ -404,8 +411,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_in_text(".files-footer-info", "2 files selected")
         b.mouse("[data-item='tmplink']", "click", ctrlKey=True)
         b.wait_in_text(".files-footer-info", "3 files selected")
-        b.go("/files#/?path=/home")
-        self.assert_last_breadcrumb("home")
+        self.chdir('/home')
 
         # Navigation via editing the path
         path_input = "#new-path-input"
@@ -925,8 +931,7 @@ class TestFiles(testlib.MachineCase):
         b.click("div.pf-v5-c-modal-box__close button.pf-v5-c-button")
 
         # Creating folder as superuser a non-logged in owned directory has the expected folder permissions
-        b.go("/files#/?path=/root")
-        self.assert_last_breadcrumb("root")
+        self.chdir('/root')
         b.wait_text("#files-footer-owner", "root")
         self.addCleanup(m.execute, ['rm', '-rf', '/root/newdir'])
         self.create_directory("newdir")
@@ -934,14 +939,13 @@ class TestFiles(testlib.MachineCase):
         self.assert_owner('/root/newdir', 'root:root')
 
         m.execute('useradd -m testuser')
-        b.go('/files#/?path=/home/testuser')
+        self.chdir('/home/testuser')
         b.wait_text("#files-footer-owner", "testuser")
         self.create_directory('newdir')
         b.wait_visible("[data-item='newdir']")
         self.assert_owner('/home/testuser', 'testuser:testuser')
 
-        b.go('/files#/?path=/tmp')
-        b.wait_not_present('.pf-v5-c-empty-state')
+        self.chdir('/tmp')
         self.addCleanup(m.execute, ['rm', '-rf', '/tmp/newdir'])
         self.create_directory('newdir')
         b.wait_visible("[data-item='newdir']")
@@ -954,9 +958,7 @@ class TestFiles(testlib.MachineCase):
         self.assert_owner('/tmp/admindir', 'admin:admin')
 
         # Creating folder as user without administrator privileges
-        b.go('/files#/?path=/home/admin')
-        b.wait_not_present('.pf-v5-c-empty-state')
-        self.assert_last_breadcrumb("admin")
+        self.chdir('/home/admin')
         b.drop_superuser()
         self.create_directory('admindir')
         b.wait_visible("[data-item='admindir']")
@@ -1386,8 +1388,7 @@ class TestFiles(testlib.MachineCase):
         test_dir = "/home/admin/testdir"
         m.execute(['runuser', '-u', 'admin', 'mkdir', test_dir])
         b.mouse("[data-item='testdir']", "dblclick")
-        b.wait_visible(".pf-v5-c-empty-state")
-        self.assert_last_breadcrumb("testdir")
+        self.wait_directory_changed(expected_path='/home/admin/testdir/')
 
         # Via contextmenu
         self.open_folder_context_menu()
@@ -1415,7 +1416,7 @@ class TestFiles(testlib.MachineCase):
 
         # Can set a file as executable
         b.click("li[data-location='/home/admin'] a")
-        self.assert_last_breadcrumb("admin")
+        self.wait_directory_changed("/home/admin/")
 
         shell_script = "install.sh"
         m.execute(['runuser', '-u', 'admin', 'touch', f'/home/admin/{shell_script}'])
@@ -1520,9 +1521,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_not_present(".pf-v5-c-modal-box")
         self.assertEqual(self.stat("%A", f"/home/admin/{shell_script}"), "-r-xrw----")
 
-        b.go("/files#/?path=/")
-        self.assert_last_breadcrumb("/")
-        b.wait_not_present(".pf-v5-c-empty-state")
+        self.chdir('/')
 
         # Shows / as /
         b.click("#dropdown-menu")
@@ -1541,9 +1540,7 @@ class TestFiles(testlib.MachineCase):
         b.click("button.pf-m-link")
         b.wait_not_present(".pf-v5-c-modal-box")
 
-        b.go("/files#/?path=/home/admin")
-        self.assert_last_breadcrumb("admin")
-        b.wait_not_present(".pf-v5-c-empty-state")
+        self.chdir('/home/admin')
 
         # Enclosed folder permissions
         change_enclosed_dir = "/home/admin/Documents"
@@ -1587,8 +1584,7 @@ class TestFiles(testlib.MachineCase):
 
         # Via kebab it selects cwd
         b.mouse("[data-item='Documents']", "dblclick")
-        b.wait_not_present(".pf-v5-c-empty-state")
-        self.assert_last_breadcrumb("Documents")
+        self.wait_directory_changed("/home/admin/Documents/")
 
         b.click("#dropdown-menu")
         b.click("button:contains('Edit permissions')")
@@ -1615,7 +1611,7 @@ class TestFiles(testlib.MachineCase):
                                    f"{change_enclosed_dir}/Work/notes.txt"), "-r--------,admin,root")
 
         b.click("li[data-location='/home/admin'] a")
-        self.assert_last_breadcrumb("admin")
+        self.wait_directory_changed("/home/admin/")
 
         # Edit multiple files
         create_multiple_dirs_sh = "mkdir -p /home/admin/multiple/testdir\n"
@@ -1625,8 +1621,7 @@ class TestFiles(testlib.MachineCase):
         self.write_file(f"{self.vm_tmpdir}/create-multiple-dirs.sh", create_multiple_dirs_sh, perm="755")
         m.execute(f"runuser -u admin {self.vm_tmpdir}/create-multiple-dirs.sh")
         b.mouse("[data-item='multiple']", "dblclick")
-        b.wait_not_present(".pf-v5-c-empty-state")
-        self.assert_last_breadcrumb("multiple")
+        self.wait_directory_changed("/home/admin/multiple/")
 
         # Editing two files
         b.click("[data-item='filename1']")
@@ -1701,9 +1696,7 @@ class TestFiles(testlib.MachineCase):
         b.click(".pf-v5-c-modal-box button.pf-m-link")
         b.wait_not_present(".pf-v5-c-modal-box")
 
-        b.go("/files#/?path=/home/admin")
-        self.assert_last_breadcrumb("admin")
-        b.wait_not_present(".pf-v5-c-empty-state")
+        self.chdir('/home/admin')
 
         # As normal user you cannot change user/group permissions
         b.drop_superuser()
@@ -1730,9 +1723,7 @@ class TestFiles(testlib.MachineCase):
         b.click(".pf-v5-c-modal-box button.pf-m-link")
         b.wait_not_present(".pf-v5-c-modal-box")
 
-        b.go("/files#/?path=/home/admin")
-        self.assert_last_breadcrumb("admin")
-        b.wait_not_present(".pf-v5-c-empty-state")
+        self.chdir('/home/admin')
 
         # Test error conditions in "change enclosing file permissions"
         m.execute("chattr +i /home/admin/Documents/Work/notes.txt")
@@ -1821,20 +1812,20 @@ class TestFiles(testlib.MachineCase):
         # Make a directory that's not readable to the admin user
         m.execute("mkdir /home/admin/testdir && chmod 400 /home/admin/testdir")
         b.mouse("[data-item='testdir']", "dblclick")
-        self.assert_last_breadcrumb("testdir")
-        b.wait_in_text(".pf-v5-c-empty-state", "Directory is empty")
+        self.wait_directory_changed("/home/admin/testdir/")
         b.drop_superuser()
         b.wait_in_text(".pf-v5-c-empty-state", "Permission denied")
         b.assert_pixels(".pf-v5-c-page__main", "error-folder-view")
 
         # clicking on the home button should take us to the home directory
         b.click("li[data-location='/home/admin'] a")
+        self.wait_directory_changed("/home/admin/")
 
         # Now set a+r.  We will be able to enter the directory now, and see the
         # files present, but not read any information about them (not +x).
         m.execute('touch /home/admin/testdir/testfile && chmod a+r /home/admin/testdir')
         b.mouse("[data-item='testdir']", "dblclick")
-        self.assert_last_breadcrumb("testdir")
+        self.wait_directory_changed("/home/admin/testdir/")
         b.click("button[aria-label='Display as a list']")
         b.wait_in_text("[data-item='testfile'] .item-owner", "")
         b.wait_in_text("[data-item='testfile'] .item-date", "")
@@ -1948,8 +1939,7 @@ class TestFiles(testlib.MachineCase):
         b.input_text("/home/admin/anotherdir")
         b.key("Enter")
         self.assert_last_breadcrumb("anotherdir")
-        b.go("/files#/?path=/home/admin")
-        self.assert_last_breadcrumb("admin")
+        self.chdir('/home/admin')
 
         b.key("N", modifiers=["Shift"])
         b.set_input_text("#create-directory-input", "foodir")
@@ -1996,14 +1986,13 @@ class TestFiles(testlib.MachineCase):
         b.click("#dropdown-menu")
         b.click("#copy-item")
         b.mouse("[data-item='newdir']", "dblclick")
-        self.assert_last_breadcrumb("newdir")
-        b.wait_in_text(".pf-v5-c-empty-state", "Directory is empty")
+        self.wait_directory_changed("/home/admin/newdir/")
         b.click("#dropdown-menu")
         b.click("#paste-item")
         b.wait_visible("[data-item='newfile']")
         self.assertEqual(m.execute("head -n 1 /home/admin/newdir/newfile"), "test_text\n")
         b.click("li[data-location='/home/admin'] a")
-        self.assert_last_breadcrumb("admin")
+        self.wait_directory_changed("/home/admin/")
         # original file still exists
         b.wait_visible("[data-item='newfile']")
 
@@ -2014,13 +2003,13 @@ class TestFiles(testlib.MachineCase):
         b.click("#dropdown-menu")
         b.click("#copy-item")
         b.mouse("[data-item='newdir']", "dblclick")
-        self.assert_last_breadcrumb("newdir")
+        self.wait_directory_changed("/home/admin/newdir/")
         b.wait_visible("[data-item='loaded']")
         b.click("#dropdown-menu")
         b.click("#paste-item")
         b.wait_visible("[data-item='copyDir']")
         b.click("li[data-location='/home/admin'] a")
-        self.assert_last_breadcrumb("admin")
+        self.wait_directory_changed("/home/admin/")
         b.wait_visible("[data-item='copyDir']")
 
         # File already exists error
@@ -2029,6 +2018,7 @@ class TestFiles(testlib.MachineCase):
         b.click("#dropdown-menu")
         b.click("#copy-item")
         b.mouse("[data-item='newdir']", "dblclick")
+        self.wait_directory_changed("/home/admin/newdir/")
         b.click("#dropdown-menu")
         b.click("#paste-item")
         b.wait_visible("[data-item='newfile']")
@@ -2036,7 +2026,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_in_text("h4.pf-v5-c-alert__title", "Pasting failed")
         b.wait_in_text(".pf-v5-c-alert__description", "\"newfile\" exists")
         b.click("li[data-location='/home/admin'] a")
-        self.assert_last_breadcrumb("admin")
+        self.wait_directory_changed("/home/admin/")
         b.click(".pf-v5-c-alert__action button")
 
         # Copy/paste with keybinds
@@ -2045,24 +2035,21 @@ class TestFiles(testlib.MachineCase):
         b.click("[data-item='copyDir']")
         b.key("c", modifiers=["Control"])
         m.execute("runuser -u admin mkdir -p /home/admin/kbdCopy")
-        b.go("/files#/?path=/home/admin")
-        self.assert_last_breadcrumb("admin")
+        self.chdir('/home/admin')
         b.mouse("[data-item='kbdCopy']", "dblclick")
-        self.assert_last_breadcrumb("kbdCopy")
-        b.wait_text(".pf-v5-c-empty-state__title-text", "Directory is empty")
+        self.wait_directory_changed("/home/admin/kbdCopy/")
         b.key("v", modifiers=["Control"])
         b.wait_visible("[data-item='copyDir']")
-        b.go("/files#/?path=/home/admin")
-        self.assert_last_breadcrumb("admin")
+        self.chdir('/home/admin')
         m.execute("runuser -u admin echo 'keybindings good' > /home/admin/newdir/newfile")
         b.mouse("[data-item='newdir']", "dblclick")
+        self.wait_directory_changed("/home/admin/newdir/")
         b.click("[data-item='loaded']")
         b.mouse("[data-item='newfile']", "click", ctrlKey=True)
         b.wait_visible("[data-item='loaded'].row-selected")
         b.wait_visible("[data-item='newfile'].row-selected")
         b.key("c", modifiers=["Control"])
-        b.go("/files#/?path=/home/admin/kbdCopy")
-        self.assert_last_breadcrumb("kbdCopy")
+        self.chdir('/home/admin/kbdCopy')
         b.wait_visible("[data-item='copyDir']")
         m.execute("runuser -u admin rmdir /home/admin/kbdCopy/copyDir")
         b.wait_not_present("[data-item='copyDir']")
@@ -2072,13 +2059,11 @@ class TestFiles(testlib.MachineCase):
         self.assertEqual(m.execute("head -n 1 /home/admin/kbdCopy/newfile"), "keybindings good\n")
 
         # File already exists error with keybinds
-        b.go("/files#/?path=/home/admin")
-        self.assert_last_breadcrumb("admin")
+        self.chdir('/home/admin')
         m.execute("runuser -u admin echo 'changed' > /home/admin/newdir/newfile")
         b.click("[data-item='newfile']")
         b.key("c", modifiers=["Control"])
-        b.go("/files#/?path=/home/admin/kbdCopy")
-        self.assert_last_breadcrumb("kbdCopy")
+        self.chdir('/home/admin/kbdCopy')
         b.key("v", modifiers=["Control"])
         b.wait_in_text("h4.pf-v5-c-alert__title", "Pasting failed")
         b.wait_in_text(".pf-v5-c-alert__description", "\"newfile\" exists")
@@ -2088,8 +2073,7 @@ class TestFiles(testlib.MachineCase):
         # Copy & paste as superuser
         # Switch to list so owner is visible
         b.click("button[aria-label='Display as a list']")
-        b.go("/files#/?path=/home/admin")
-        self.assert_last_breadcrumb("admin")
+        self.chdir('/home/admin')
         m.execute("useradd -m foouser")
         m.write("/home/admin/newfile", "test copy", owner="admin:admin")
 
@@ -2097,10 +2081,8 @@ class TestFiles(testlib.MachineCase):
         b.click("#dropdown-menu")
         b.click("#copy-item")
 
-        b.go("files#/?path=/home/foouser")
-        self.assert_last_breadcrumb("foouser")
-        b.wait_text(".pf-v5-c-empty-state__title-text", "Directory is empty")
         # Paste file as destination directory owner
+        self.chdir('/home/foouser')
         b.click("#dropdown-menu")
         b.click("#paste-item")
         b.wait_visible("#paste-owner-modal")
@@ -2115,8 +2097,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_visible("[data-item='foouserfile'].row-selected")
         b.click("#dropdown-menu")
         b.click("#copy-item")
-        b.go("files#/?path=/home/admin")
-        self.assert_last_breadcrumb("admin")
+        self.chdir('/home/admin')
         b.wait_visible("[data-item='copyDir']")
         b.click("#dropdown-menu")
         b.click("#paste-item")
@@ -2132,9 +2113,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_visible("[data-item='adminfile'].row-selected")
         b.click("#dropdown-menu")
         b.click("#copy-item")
-        b.go("files#/?path=/home/foouser")
-        self.assert_last_breadcrumb("foouser")
-        b.wait_text("#files-footer-owner", "foouser")
+        self.chdir('/home/foouser')
         b.click("#dropdown-menu")
         b.click("#paste-item")
         b.wait_visible("#paste-owner-modal")
@@ -2144,37 +2123,30 @@ class TestFiles(testlib.MachineCase):
         self.assertEqual(m.execute("cat /home/foouser/adminfile"), "admintext")
 
         # Copying a directory should change the owner recursively
-        b.go("files#/?path=/home/admin")
-        self.assert_last_breadcrumb("admin")
+        self.chdir('/home/admin')
         b.click("[data-item='kbdCopy']")
         b.wait_visible("[data-item='kbdCopy'].row-selected")
         b.click("#dropdown-menu")
         b.click("#copy-item")
-        b.go("files#/?path=/home/foouser")
-        self.assert_last_breadcrumb("foouser")
-        b.wait_in_text(".files-footer-info", "Directory contains 0 directories, 3 files")
+        self.chdir('/home/foouser')
         b.click("#dropdown-menu")
         b.click("#paste-item")
         b.wait_visible("#paste-owner-modal")
         b.select_from_dropdown("#paste-owner-select", "root")
         b.click("#paste-owner-modal button.pf-m-primary")
         b.wait_in_text("[data-item='kbdCopy'] .item-owner", "root")
-        b.go("files#/?path=/home/foouser/kbdCopy")
-        self.assert_last_breadcrumb("kbdCopy")
+        self.chdir('/home/foouser/kbdCopy')
         b.wait_in_text("[data-item='loaded'] .item-owner", "root")
         b.wait_in_text("[data-item='newfile'] .item-owner", "root")
 
         # Copy file with different user, group
         m.write("/home/admin/adminfoofile", "adminfoo", owner="admin:foouser")
-        b.go("files#/?path=/home/admin")
-        self.assert_last_breadcrumb("admin")
+        self.chdir('/home/admin')
         b.click("[data-item='adminfoofile']")
         b.wait_visible("[data-item='adminfoofile'].row-selected")
         b.click("#dropdown-menu")
         b.click("#copy-item")
-        b.go("files#/?path=/home/foouser")
-        self.assert_last_breadcrumb("foouser")
-        b.wait_text("#files-footer-owner", "foouser")
+        self.chdir('/home/foouser')
         b.click("#dropdown-menu")
         b.click("#paste-item")
         b.wait_visible("#paste-owner-modal")
@@ -2183,14 +2155,12 @@ class TestFiles(testlib.MachineCase):
         b.wait_in_text("[data-item='adminfoofile'] .item-owner", "admin:foouser")
         self.assertEqual(m.execute("cat /home/foouser/adminfoofile"), "adminfoo")
 
-        b.go("files#/?path=/home/admin")
-        self.assert_last_breadcrumb("admin")
+        self.chdir('/home/admin')
         b.click("[data-item='newdir']")
         b.wait_visible("[data-item='newdir'].row-selected")
         b.click("#dropdown-menu")
         b.click("#copy-item")
-        b.go("files#/?path=/home/foouser")
-        self.assert_last_breadcrumb("foouser")
+        self.chdir('/home/foouser')
         b.wait_visible("[data-item='kbdCopy']")
         b.click("#dropdown-menu")
         b.click("#paste-item")
@@ -2206,16 +2176,12 @@ class TestFiles(testlib.MachineCase):
             chattr +i /home/foouser/copyfail
         """)
         self.addCleanup(m.execute, "chattr -i /home/foouser/copyfail")
-        b.go("files#/?path=/home/admin")
-        self.assert_last_breadcrumb("admin")
-        b.wait_in_text(".files-footer-info", "Directory contains 3 directories, 4 files")
+        self.chdir('/home/admin')
         b.click("[data-item='newfile']")
         b.wait_visible("[data-item='newfile'].row-selected")
         b.click("#dropdown-menu")
         b.click("#copy-item")
-        b.go("files#/?path=/home/foouser/copyfail")
-        self.assert_last_breadcrumb("copyfail")
-        b.wait_text(".pf-v5-c-empty-state__title-text", "Directory is empty")
+        self.chdir('/home/foouser/copyfail')
         b.click("#dropdown-menu")
         b.click("#paste-item")
         b.click("#paste-owner-modal button.pf-m-primary")
@@ -2228,16 +2194,13 @@ class TestFiles(testlib.MachineCase):
 
         # Multiple ownerships are kept when selecting "keep original owners"
         m.execute("runuser -u foouser mkdir /home/foouser/copydiff")
-        b.go("files#/?path=/home/admin")
-        self.assert_last_breadcrumb("admin")
+        self.chdir('/home/admin')
         b.mouse("[data-item='adminfile']", "click")
         b.mouse("[data-item='adminfoofile']", "click", ctrlKey=True)
         b.wait_visible("[data-item='adminfoofile'].row-selected")
         b.click("#dropdown-menu")
         b.click("#copy-item")
-        b.go("files#/?path=/home/foouser/copydiff")
-        self.assert_last_breadcrumb("copydiff")
-        b.wait_text(".pf-v5-c-empty-state__title-text", "Directory is empty")
+        self.chdir('/home/foouser/copydiff')
         b.click("#dropdown-menu")
         b.click("#paste-item")
         b.wait_visible("#paste-owner-modal")
@@ -2259,8 +2222,7 @@ class TestFiles(testlib.MachineCase):
             chown -R admin:admin /home/admin/dir1
             chown -R foouser:foouser /home/admin/dir2
         """)
-        b.go("files#/?path=/home/admin")
-        self.assert_last_breadcrumb("admin")
+        self.chdir('/home/admin')
         b.wait_in_text("[data-item='dir1'] .item-owner", "admin")
         b.wait_in_text("[data-item='dir2'] .item-owner", "foouser")
         b.mouse("[data-item='dir1']", "click")
@@ -2268,9 +2230,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_visible("[data-item='dir2'].row-selected")
         b.click("#dropdown-menu")
         b.click("#copy-item")
-        b.go("files#/?path=/home/foouser")
-        self.assert_last_breadcrumb("foouser")
-        b.wait_visible("[data-item='copydiff']")
+        self.chdir('/home/foouser')
         b.click("#dropdown-menu")
         b.click("#paste-item")
         b.wait_visible("#paste-owner-modal")
@@ -2309,8 +2269,7 @@ class TestFiles(testlib.MachineCase):
 
         # Symlinks, stay symlinks when copying
         def copy_symlink() -> None:
-            b.go("/files#/?path=/home/admin")
-            self.assert_last_breadcrumb("admin")
+            self.chdir('/home/admin')
             b.click("[data-item='link-to-uname']")
             b.click("#dropdown-menu")
             b.click("#copy-item")
@@ -2321,8 +2280,7 @@ class TestFiles(testlib.MachineCase):
 
         # Non user owned directory
         copy_symlink()
-        b.go("files#/?path=/home/foouser")
-        self.assert_last_breadcrumb("foouser")
+        self.chdir('/home/foouser')
         b.click("#dropdown-menu")
         b.click("#paste-item")
         b.wait_visible("#paste-owner-modal")
@@ -2332,26 +2290,20 @@ class TestFiles(testlib.MachineCase):
         # Users own directory
         copy_symlink()
         # HACK: can't use dblclick due to the usage of ctrlClick above
-        b.go("files#/?path=/home/admin/newdir")
-        self.assert_last_breadcrumb("newdir")
-        b.wait_not_present(".pf-v5-c-empty-state")
+        self.chdir('/home/admin/newdir')
 
         self.open_folder_context_menu()
         b.click(".contextMenu button:contains('Paste')")
         b.wait_visible("[data-item='link-to-uname'].symlink")
 
         # Non-admin copy to no write access directory shows permission denied error
-        b.go("/files#/?path=/home/admin")
-        self.assert_last_breadcrumb("admin")
-        b.wait_not_present('.pf-v5-c-empty-state')
+        self.chdir('/home/admin')
         b.drop_superuser()
         b.click("[data-item='newfile']")
         b.wait_visible("[data-item='newfile'].row-selected")
         b.click("#dropdown-menu")
         b.click("#copy-item")
-        b.go("files#/?path=/")
-        b.wait_visible("[data-item='root']")
-        self.assert_last_breadcrumb("/")
+        self.chdir('/')
         b.click("#dropdown-menu")
         b.click("#paste-item")
         b.wait_visible(".pf-v5-c-alert.pf-m-danger")
@@ -2419,7 +2371,7 @@ class TestFiles(testlib.MachineCase):
             m.execute("runuser -u admin mkdir /home/admin/Downloads")
             b.wait_visible("[data-item='Downloads']")
             b.mouse("[data-item='Downloads']", "dblclick")
-            b.wait_not_present(".pf-v5-c-empty-state")
+            self.wait_directory_changed("/home/admin/Downloads/")
 
             b.click("#upload-file-btn")
             b.upload_files("#upload-file-btn + input[type='file']", [big_file])
@@ -2463,7 +2415,7 @@ class TestFiles(testlib.MachineCase):
 
             b.go("/files#/?path=/mnt/upload")
             self.assert_last_breadcrumb("upload")
-            b.wait_text("#files-footer-owner", "root")
+            self.chdir('/mnt/upload')
             b.click("#upload-file-btn")
             b.upload_files("#upload-file-btn + input[type='file']", [big_file])
 
@@ -2475,9 +2427,7 @@ class TestFiles(testlib.MachineCase):
             # Multi upload
             dest_dir = "/home/admin/project"
             m.execute(['runuser', '-u', 'admin', 'mkdir', dest_dir])
-            b.go(f"/files#/?path={dest_dir}")
-            self.assert_last_breadcrumb("project")
-            b.wait_text("#files-footer-owner", "admin")
+            self.chdir(dest_dir)
 
             files = [str(Path(tmpdir) / f"{i}.txt") for i in range(0, 5)]
             test_data = "this is a test"
@@ -2629,8 +2579,7 @@ class TestFiles(testlib.MachineCase):
             # As administrator upload in testuser and change ownership to root:root
 
             m.execute("useradd --create-home testuser")
-            b.go('/files#/?path=/home/testuser')
-            b.wait_visible('.pf-v5-c-empty-state')
+            self.chdir('/home/testuser')
 
             testuser_file = str(Path(tmpdir) / "testuser.txt")
             test_content = "testdata"
@@ -2673,10 +2622,9 @@ class TestFiles(testlib.MachineCase):
             b.wait_not_present(".pf-v5-c-alert__action")
 
             # Non-admin session
-            b.go(f'/files#/?path={dest_dir}')
-            b.wait_visible(f"[data-item='{filename}']")
-
+            self.chdir(dest_dir)
             b.drop_superuser()
+            b.wait_visible(f"[data-item='{filename}']")
             m.execute(f"rm {dest_dir}/{filename}; touch {dest_dir}/update.txt")
             b.wait_not_present(f"[data-item='{filename}']")
             # Wait for the update to appear so uploading doesn't flake
@@ -2692,9 +2640,7 @@ class TestFiles(testlib.MachineCase):
             b.wait_visible(f"[data-item='{filename}']")
 
             # Permission error
-            b.go("/files#/?path=/")
-            b.wait_visible("[data-item='bin']")
-
+            self.chdir('/')
             b.click("#upload-file-btn")
             b.upload_files("#upload-file-btn + input[type='file']", [files[0]])
             b.wait_in_text(".pf-v5-c-alert__description", "UploadError: Not permitted to perform this action")
@@ -2702,7 +2648,7 @@ class TestFiles(testlib.MachineCase):
             b.wait_not_present(".pf-v5-c-alert__action")
 
             b.click("button[aria-label='Display as a list']")
-            b.go("/files#/?path=/home/admin")
+            self.chdir('/home/admin')
 
             # Test drag & drop upload
             b.eval_js('''
@@ -2832,7 +2778,8 @@ class TestFiles(testlib.MachineCase):
 
             # Change directory and upload
             b.mouse("[data-item='project']", "dblclick")
-            self.assert_last_breadcrumb("project")
+            with b.wait_timeout(30):
+                self.wait_directory_changed("/home/admin/project/")
             b.wait_visible("[data-item='4.txt']")
             drag_file_event(".fileview-wrapper", 'dragenter', 'drag-drop-testfile.txt')
             b.wait_visible(".drag-drop-upload")
@@ -2966,10 +2913,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_not_present(".pf-v5-c-menu .pf-v5-c-menu__list-item")
 
         # Add a bookmark
-        b.go("/files#/?path=/etc")
-        self.assert_last_breadcrumb("etc")
-        b.wait_visible("[data-item='passwd']")
-
+        self.chdir('/etc')
         b.click("#bookmark-btn")
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add to bookmarks) button")
         b.wait_not_present(".pf-v5-c-menu")
@@ -2990,13 +2934,10 @@ class TestFiles(testlib.MachineCase):
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add to bookmarks) button")
         b.wait_not_present(".pf-v5-c-menu")
 
-        b.go("/files#/?path=/proc")
-        b.wait_not_present(".pf-v5-c-empty-state")
-
+        self.chdir('/proc')
         b.click("#bookmark-btn")
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('/etc') button")
-        b.wait_not_present(".pf-v5-c-empty-state")
-        self.assert_last_breadcrumb("etc")
+        self.wait_directory_changed("/etc/")
 
         # Bookmarks from nautilus are supported
         m.execute("runuser -u admin mkdir '/home/admin/This is a-test'")
@@ -3006,7 +2947,7 @@ class TestFiles(testlib.MachineCase):
                 append=True, owner='admin:admin')
         b.click("#bookmark-btn")
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('This is a-test') button")
-        self.assert_last_breadcrumb("This is a-test")
+        self.wait_directory_changed("/home/admin/This is a-test/")
 
         # Removing directory with spaces or aliases
         b.click("#bookmark-btn")
@@ -3025,7 +2966,7 @@ class TestFiles(testlib.MachineCase):
         # Removing /tmp bookmark keeps bookmark with spaces
         b.click("#bookmark-btn")
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('tmp') button")
-        self.assert_last_breadcrumb("tmp")
+        self.wait_directory_changed("/tmp/")
 
         b.click("#bookmark-btn")
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('Remove from bookmarks') button")
@@ -3037,10 +2978,9 @@ class TestFiles(testlib.MachineCase):
         # Add a directory with special characters
         special_dir = "super#special*1 2><.,ß"
         m.execute(f"runuser -u admin mkdir '/home/admin/{special_dir}'")
-        b.go("/files#/?path=/home/admin")
-        b.wait_visible(f"[data-item='{special_dir}'")
+        self.chdir('/home/admin')
         b.mouse(f"[data-item='{special_dir}']", "dblclick")
-        self.assert_last_breadcrumb(special_dir)
+        self.wait_directory_changed(f"/home/admin/{special_dir}/")
 
         b.click("#bookmark-btn")
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add to bookmarks) button")
@@ -3050,7 +2990,7 @@ class TestFiles(testlib.MachineCase):
                          read_config())
 
         b.click("li[data-location='/home/admin'] a")
-        self.assert_last_breadcrumb("admin")
+        self.wait_directory_changed("/home/admin/")
 
         b.click("#bookmark-btn")
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('super#special') button")
@@ -3073,7 +3013,7 @@ class TestFiles(testlib.MachineCase):
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('/var') button")
         b.wait_not_present(".pf-v5-c-empty-state")
         b.wait_not_present(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('lalala') button")
-        self.assert_last_breadcrumb("var")
+        self.wait_directory_changed("/var/")
 
         # Removing bookmarks file removes all bookmarks
         m.execute(['rm', '-rf', config_file])
@@ -3089,7 +3029,7 @@ class TestFiles(testlib.MachineCase):
 
         b.click("#bookmark-btn")
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('non-existent') button")
-        self.assert_last_breadcrumb("non-existent")
+        self.wait_directory_changed("/tmp/non-existent/")
         b.click("#bookmark-btn")
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('Remove from bookmarks') button")
         b.wait_not_present(".pf-v5-c-menu")
@@ -3109,9 +3049,7 @@ class TestFiles(testlib.MachineCase):
             chattr +i /home/admin/.config
         """)
 
-        b.go("/files#/?path=/var")
-        self.assert_last_breadcrumb("var")
-
+        self.chdir('/var')
         b.click("#bookmark-btn")
         b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add to bookmarks) button")
         self.wait_modal_inline_alert("Unable to create bookmark directory")
@@ -3275,15 +3213,12 @@ class TestFiles(testlib.MachineCase):
 
         # As unprivileged user
         b.drop_superuser()
-        b.wait_not_present('.pf-v5-c-empty-state')
-        self.assert_last_breadcrumb("admin")
+        self.wait_directory_changed("/home/admin/")
 
         # View a file
         m.execute("echo 'this is a config file' > /etc/cockpit-files-test.cfg")
         self.addCleanup(m.execute, "rm /etc/cockpit-files-test.cfg")
-        b.go("/files#/?path=/etc")
-        b.wait_not_present('.pf-v5-c-empty-state')
-        self.assert_last_breadcrumb("etc")
+        self.chdir('/etc')
         open_editor("cockpit-files-test.cfg")
         b.wait_text(".pf-v5-c-modal-box__title", "View cockpit-files-test.cfgRead-only")
         b.assert_pixels(".file-editor-modal", "editor-modal-read-only")
@@ -3391,7 +3326,7 @@ class TestFiles(testlib.MachineCase):
 
         # cannot create file in /home as normal user
         b.click("li[data-location='/home'] a")
-        self.assert_last_breadcrumb("home")
+        self.wait_directory_changed("/home/")
         self.open_folder_context_menu()
         b.click(".contextMenu button:contains('Create file')")
         b.wait_in_text("h4.pf-v5-c-alert__title", "Cannot create file in current directory")
