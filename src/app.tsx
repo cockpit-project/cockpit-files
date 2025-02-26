@@ -29,13 +29,14 @@ import { Stack } from "@patternfly/react-core/dist/esm/layouts/Stack";
 import { ExclamationCircleIcon } from "@patternfly/react-icons";
 
 import cockpit from "cockpit";
+import { type Location } from "cockpit";
 import { FsInfoClient, FileInfo } from "cockpit/fsinfo.ts";
 import { EmptyStatePanel } from "cockpit-components-empty-state";
 import { WithDialogs } from "dialogs";
 import { useInit } from "hooks";
 import { superuser } from "superuser";
 
-import { FilesContext, testIsAppleDevice, usePath } from "./common.ts";
+import { FilesContext, testIsAppleDevice } from "./common.ts";
 import type { ClipboardInfo, FolderFileInfo } from "./common.ts";
 import { FilesBreadcrumbs } from "./files-breadcrumbs.tsx";
 import { FilesFolderView } from "./files-folder-view.tsx";
@@ -53,6 +54,24 @@ interface Alert {
     actionLinks?: React.ReactNode
 }
 
+const get_path = (options: Location['options']) => {
+    let currentPath = decodeURIComponent(options.path?.toString() || "/");
+
+    // Trim all trailing slashes
+    currentPath = currentPath.replace(/\/+$/, '');
+
+    // Our path will always be `/foo/` formatted
+    if (!currentPath.endsWith("/")) {
+        currentPath += "/";
+    }
+
+    if (!currentPath.startsWith("/")) {
+        currentPath = `/${currentPath}`;
+    }
+
+    return currentPath;
+};
+
 export const Application = () => {
     const [location, setLocation] = useState(cockpit.location);
     const [loading, setLoading] = useState(true);
@@ -65,8 +84,8 @@ export const Application = () => {
     const [alerts, setAlerts] = useState<Alert[]>([]);
     const [cwdInfo, setCwdInfo] = useState<FileInfo | null>(null);
 
-    const path = usePath();
     const { options } = location;
+    const path = get_path(options);
 
     useInit(() => {
         function update() {
