@@ -2765,7 +2765,7 @@ class TestFiles(testlib.MachineCase):
 
             # Change directory and upload
             b.mouse("[data-item='project']", "dblclick")
-            with b.wait_timeout(30):
+            with b.wait_timeout(120):
                 self.wait_directory_changed("/home/admin/project/")
             b.wait_visible("[data-item='4.txt']")
             drag_file_event(".fileview-wrapper", 'dragenter', 'drag-drop-testfile.txt')

@@ -122,6 +122,7 @@ export const Application = () => {
             );
 
             const disconnect = client.on('change', (state) => {
+                console.log(JSON.stringify(state));
                 setLoading(false);
                 setLoadingFiles(!(state.info || state.error));
                 setCwdInfo(state.info || null);
