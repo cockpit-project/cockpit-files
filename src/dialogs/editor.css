@@ -37,7 +37,29 @@
     font-family: monospace;
     hyphens: none;
     white-space: wrap break-spaces;
+    outline: none;
   }
+}
+
+.numbers{
+  border-right: 1px solid rgb(203 213 225);
+  padding: 0.5rem;
+  text-align: right;
+  overflow: hidden;
+  min-width: 2ch; 
+  width: fit-content; 
+  white-space: nowrap;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.file-editor-wrapper{
+    display: flex;
+    border: 1px solid rgb(203 213 225);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    height: 100%;
 }
 
 .file-editor-alert {

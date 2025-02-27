@@ -176,6 +176,129 @@ export const EditFileModal = ({ dialogResult, path } : {
     const change_conflict = state.tag_now !== state.tag_at_load;
     const file_removed = state.tag_now === "-";
 
+    const textAreaRef = React.useRef<HTMLTextAreaElement | null>(null);
+    const lineNumberRef = React.useRef<HTMLDivElement | null>(null);
+    
+    React.useEffect(() => {
+        if (!textAreaRef.current || !lineNumberRef.current) return;
+    
+        const textarea = textAreaRef.current;
+        const lineNumbersEle = lineNumberRef.current;
+    
+        const syncStyles = () => {
+          const textareaStyles = window.getComputedStyle(textarea);
+    
+          const writableProperties: (keyof CSSStyleDeclaration)[] = [
+            "fontFamily",
+            "fontSize",
+            "fontWeight",
+            "letterSpacing",
+            "lineHeight",
+            "paddingTop",
+            "paddingBottom",
+            "paddingLeft",
+            "paddingRight",
+          ];
+    
+          writableProperties.forEach((property) => {
+            if (typeof textareaStyles[property] === "string") {
+              (lineNumbersEle.style as any)[property] = textareaStyles[property];
+            }
+          });
+        };
+    
+        const parseValue = (v: string): number =>
+          v.endsWith("px") ? parseInt(v.slice(0, -2), 10) : 0;
+    
+        const calculateNumLines = (str: string, context: CanvasRenderingContext2D, textareaWidth: number) => {
+          const words = str.split(" ");
+          let lineCount = 0;
+          let currentLine = "";
+    
+          words.forEach((word) => {
+            const wordWidth = context.measureText(word + " ").width;
+            const lineWidth = context.measureText(currentLine).width;
+    
+            if (lineWidth + wordWidth > textareaWidth) {
+              lineCount++;
+              currentLine = word + " ";
+            } else {
+              currentLine += word + " ";
+            }
+          });
+    
+          if (currentLine.trim() !== "") {
+            lineCount++;
+          }
+    
+          return lineCount;
+        };
+    
+        const calculateLineNumbers = (): number[] => {
+          const canvas = document.createElement("canvas");
+          const context = canvas.getContext("2d");
+          if (!context) return [];
+    
+          const textareaStyles = window.getComputedStyle(textarea);
+          const font = `${textareaStyles.fontSize} ${textareaStyles.fontFamily}`;
+          context.font = font;
+    
+          const paddingLeft = parseValue(textareaStyles.paddingLeft);
+          const paddingRight = parseValue(textareaStyles.paddingRight);
+          const textareaWidth = textarea.getBoundingClientRect().width - paddingLeft - paddingRight;
+    
+          const lines = textarea.value.split("\n");
+          const numLines = lines.map((line) => calculateNumLines(line, context, textareaWidth));
+    
+          let lineNumbers: number[] = [];
+          let i = 1;
+    
+          while (numLines.length > 0) {
+            const numLinesOfSentence = numLines.shift()!;
+            lineNumbers.push(i);
+    
+            if (numLinesOfSentence > 1) {
+              Array(numLinesOfSentence - 1)
+                .fill("")
+                .forEach(() => lineNumbers.push(0));
+            }
+    
+            i++;
+          }
+    
+          return lineNumbers;
+        };
+    
+        const displayLineNumbers = () => {
+          const lineNumbers = calculateLineNumbers();
+          lineNumbersEle.innerHTML = lineNumbers
+            .map((num) => `<div>${num === 0 ? "&nbsp;" : num}</div>`)
+            .join("");
+        };
+    
+        textarea.addEventListener("input", displayLineNumbers);
+        textarea.addEventListener("scroll", () => {
+          lineNumbersEle.scrollTop = textarea.scrollTop;
+        });
+    
+        const resizeObserver = new ResizeObserver(() => {
+          lineNumbersEle.style.height = `${textarea.getBoundingClientRect().height}px`;
+          displayLineNumbers();
+        });
+    
+        resizeObserver.observe(textarea);
+        syncStyles();
+        displayLineNumbers();
+    
+        return () => {
+          resizeObserver.disconnect();
+          textarea.removeEventListener("input", displayLineNumbers);
+          textarea.removeEventListener("scroll", () => {
+            lineNumbersEle.scrollTop = textarea.scrollTop;
+          });
+        };
+      }, [state.content]);
+
     return (
         <Modal
           position="top"
@@ -241,13 +364,17 @@ export const EditFileModal = ({ dialogResult, path } : {
                       </>
                   }
                 />}
-                <TextArea
-                  id="editor-text-area"
-                  className="file-editor"
-                  isDisabled={!state.writable}
-                  value={state.content}
-                  onChange={(_ev, content) => editor && editor.modify(content)}
-                />
+                <div className='file-editor-wrapper'>
+                    <div className='numbers' ref={lineNumberRef}></div>
+                    <TextArea
+                    id="editor-text-area"
+                    className="file-editor"
+                    ref = {textAreaRef}
+                    isDisabled={!state.writable}
+                    value={state.content}
+                    onChange={(_ev, content) => editor && editor.modify(content)}
+                    /> 
+                </div>
             </Stack>
         </Modal>
     );
