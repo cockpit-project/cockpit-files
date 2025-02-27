@@ -122,6 +122,7 @@ export const Application = () => {
             );
 
             const disconnect = client.on('change', (state) => {
+                console.log('change');
                 console.log(JSON.stringify(state));
                 setLoading(false);
                 setLoadingFiles(!(state.info || state.error));
@@ -138,6 +139,7 @@ export const Application = () => {
 
             return () => {
                 disconnect();
+                console.log('we disconnected');
                 setLoadingFiles(true);
                 client.close();
             };
