@@ -29,13 +29,14 @@ import { Stack } from "@patternfly/react-core/dist/esm/layouts/Stack";
 import { ExclamationCircleIcon } from "@patternfly/react-icons";
 
 import cockpit from "cockpit";
+import { type Location } from "cockpit";
 import { FsInfoClient, FileInfo } from "cockpit/fsinfo.ts";
 import { EmptyStatePanel } from "cockpit-components-empty-state";
 import { WithDialogs } from "dialogs";
-import { useInit, usePageLocation } from "hooks";
+import { useInit } from "hooks";
 import { superuser } from "superuser";
 
-import { FilesContext, testIsAppleDevice, usePath } from "./common.ts";
+import { FilesContext, testIsAppleDevice } from "./common.ts";
 import type { ClipboardInfo, FolderFileInfo } from "./common.ts";
 import { FilesBreadcrumbs } from "./files-breadcrumbs.tsx";
 import { FilesFolderView } from "./files-folder-view.tsx";
@@ -53,8 +54,26 @@ interface Alert {
     actionLinks?: React.ReactNode
 }
 
+const get_path = (options: Location['options']) => {
+    let currentPath = decodeURIComponent(options.path?.toString() || "/");
+
+    // Trim all trailing slashes
+    currentPath = currentPath.replace(/\/+$/, '');
+
+    // Our path will always be `/foo/` formatted
+    if (!currentPath.endsWith("/")) {
+        currentPath += "/";
+    }
+
+    if (!currentPath.startsWith("/")) {
+        currentPath = `/${currentPath}`;
+    }
+
+    return currentPath;
+};
+
 export const Application = () => {
-    const { options } = usePageLocation();
+    const [location, setLocation] = useState(cockpit.location);
     const [loading, setLoading] = useState(true);
     const [loadingFiles, setLoadingFiles] = useState(true);
     const [errorMessage, setErrorMessage] = useState("");
@@ -65,15 +84,27 @@ export const Application = () => {
     const [alerts, setAlerts] = useState<Alert[]>([]);
     const [cwdInfo, setCwdInfo] = useState<FileInfo | null>(null);
 
-    const path = usePath();
+    const { options } = location;
+    const path = get_path(options);
 
-    useEffect(() => {
+    useInit(() => {
+        function update() {
+            setLocation(cockpit.location);
+            setLoadingFiles(true);
+            setCwdInfo(null);
+        }
+
+        cockpit.addEventListener("locationchanged", update);
+
+        // On initial load redirect to the users home directory
         cockpit.user().then(user => {
-            if (options.path === undefined) {
+            if (cockpit.location.options.path === undefined) {
                 cockpit.location.replace("/", { path: encodeURIComponent(user.home) });
             }
         });
-    }, [options]);
+
+        return () => cockpit.removeEventListener("locationchanged", update);
+    });
 
     useEffect(
         () => {
@@ -91,6 +122,8 @@ export const Application = () => {
             );
 
             const disconnect = client.on('change', (state) => {
+                console.log('change');
+                console.log(JSON.stringify(state));
                 setLoading(false);
                 setLoadingFiles(!(state.info || state.error));
                 setCwdInfo(state.info || null);
@@ -106,6 +139,8 @@ export const Application = () => {
 
             return () => {
                 disconnect();
+                console.log('we disconnected');
+                setLoadingFiles(true);
                 client.close();
             };
         },
@@ -180,7 +215,10 @@ export const Application = () => {
                         ))}
                     </AlertGroup>
                     <FilesBreadcrumbs path={path} />
-                    <PageSection>
+                    <PageSection
+                      id="files-folder-section"
+                      data-dir-loaded={!loadingFiles ? path : null}
+                    >
                         {errorMessage &&
                         <Card className="files-empty-state">
                             <EmptyStatePanel
