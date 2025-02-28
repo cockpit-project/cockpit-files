@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: starter-kit 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-22 03:01+0000\n"
+"POT-Creation-Date: 2025-02-28 03:07+0000\n"
 "PO-Revision-Date: 2025-02-10 02:17+0000\n"
 "Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
 "memory@weblate.org>\n"
@@ -28,7 +28,7 @@ msgstr "$0 Dateien"
 msgid "$0 files selected"
 msgstr "$0 Dateien ausgewählt"
 
-#: src/files-card-body.tsx:509
+#: src/files-card-body.tsx:532
 msgid "$0 item is hidden"
 msgid_plural "$0 items are hidden"
 msgstr[0] "$0 Element ist verborgen"
@@ -70,8 +70,8 @@ msgstr "A-Z"
 msgid "Access"
 msgstr "Zugriff"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:76
 #: src/dialogs/keyboardShortcutsHelp.tsx:82
+#: src/dialogs/keyboardShortcutsHelp.tsx:88
 msgid "Activate selected item, enter directory"
 msgstr "Ausgewählten Eintrag aktivieren, Verzeichnis eingeben"
 
@@ -93,10 +93,10 @@ msgstr "Blockiere Gerät"
 msgid "Bookmarks"
 msgstr "Lesezeichen"
 
-#: src/upload-button.tsx:116 src/dialogs/mkdir.tsx:108
-#: src/dialogs/permissions.tsx:320 src/dialogs/copyPasteOwnership.tsx:179
-#: src/dialogs/create-file.tsx:161 src/dialogs/rename.tsx:98
-#: src/dialogs/delete.tsx:98 src/dialogs/editor.tsx:211
+#: src/upload-button.tsx:116 src/dialogs/editor.tsx:211
+#: src/dialogs/mkdir.tsx:108 src/dialogs/permissions.tsx:320
+#: src/dialogs/create-file.tsx:161 src/dialogs/delete.tsx:98
+#: src/dialogs/rename.tsx:98 src/dialogs/copyPasteOwnership.tsx:179
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -138,11 +138,11 @@ msgstr "Berechtigungen für enthaltene Dateien ändern"
 msgid "Character device"
 msgstr "Zeichengerät"
 
-#: src/files-card-body.tsx:497
+#: src/files-card-body.tsx:520
 msgid "Clear filter"
 msgstr "Filter entfernen"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:37 src/dialogs/editor.tsx:211
+#: src/dialogs/editor.tsx:211 src/dialogs/keyboardShortcutsHelp.tsx:43
 msgid "Close"
 msgstr "Schließen"
 
@@ -162,7 +162,7 @@ msgstr "Einklappen"
 msgid "Copy"
 msgstr "Kopieren"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:111
+#: src/dialogs/keyboardShortcutsHelp.tsx:117
 msgid "Copy selected file or directory"
 msgstr "Ausgewählte Datei oder ausgewähltes Verzeichnis kopieren"
 
@@ -178,7 +178,7 @@ msgstr "Verzeichnis erstellen"
 msgid "Create file"
 msgstr "Datei erstellen"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:105
+#: src/dialogs/keyboardShortcutsHelp.tsx:111
 msgid "Create new directory"
 msgstr "Neues Verzeichnis erstellen"
 
@@ -218,7 +218,7 @@ msgstr "Verzeichnis enthält $0 Verzeichnisse, $1 Dateien"
 msgid "Directory contains $0 directories, $1 files, $2 hidden"
 msgstr "Verzeichnis enthält $0 Verzeichnisse, $1 Dateien, $2 versteckte"
 
-#: src/files-card-body.tsx:504
+#: src/files-card-body.tsx:527
 msgid "Directory is empty"
 msgstr "Verzeichnis ist leer"
 
@@ -267,7 +267,7 @@ msgstr "Dateien zum Hochladen ablegen"
 msgid "Edit $0"
 msgstr "$0 bearbeiten"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:90 src/files-breadcrumbs.tsx:306
+#: src/dialogs/keyboardShortcutsHelp.tsx:96 src/files-breadcrumbs.tsx:306
 msgid "Edit path"
 msgstr "Pfad bearbeiten"
 
@@ -275,7 +275,7 @@ msgstr "Pfad bearbeiten"
 msgid "Edit permissions"
 msgstr "Berechtigungen bearbeiten"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:150
+#: src/dialogs/keyboardShortcutsHelp.tsx:156
 msgid "Editing"
 msgstr "Bearbeiten"
 
@@ -353,20 +353,20 @@ msgstr "Löschen der Datei $0 erzwingen?"
 msgid "Force delete link $0?"
 msgstr "Löschen der Verknüpfung $0 erzwingen?"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:64
+#: src/dialogs/keyboardShortcutsHelp.tsx:70
 msgid "Go back"
 msgstr "Zurück"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:70
+#: src/dialogs/keyboardShortcutsHelp.tsx:76
 msgid "Go forward"
 msgstr "Weitergehen"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:58
+#: src/dialogs/keyboardShortcutsHelp.tsx:64
 msgid "Go up a directory"
 msgstr "Ein Verzeichnis nach oben gehen"
 
+#: src/files-card-body.tsx:596 src/dialogs/permissions.tsx:349
 #: src/files-footer-detail.tsx:79 src/files-footer-detail.tsx:151
-#: src/files-card-body.tsx:573 src/dialogs/permissions.tsx:349
 msgid "Group"
 msgstr "Gruppe"
 
@@ -390,7 +390,7 @@ msgstr "Ignorieren"
 msgid "Keep original"
 msgstr "Original behalten"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:131
+#: src/dialogs/keyboardShortcutsHelp.tsx:137
 msgid "Keyboard shortcuts"
 msgstr "Tastenkombinationen"
 
@@ -414,7 +414,7 @@ msgstr "Verwalten Sie Ihre Dateien"
 msgid "Missing type"
 msgstr "Fehlender Typ"
 
-#: src/header.tsx:88 src/files-card-body.tsx:529
+#: src/files-card-body.tsx:552 src/header.tsx:88
 msgid "Modified"
 msgstr "Geändert"
 
@@ -422,7 +422,7 @@ msgstr "Geändert"
 msgid "Most permissive"
 msgstr "Am meisten zulässig"
 
-#: src/header.tsx:66 src/files-card-body.tsx:524
+#: src/files-card-body.tsx:547 src/header.tsx:66
 msgid "Name"
 msgstr "Name"
 
@@ -443,7 +443,7 @@ msgstr "Name zu lang"
 msgid "Named pipe"
 msgstr "Benannte Weiterleitung"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:140
+#: src/dialogs/keyboardShortcutsHelp.tsx:146
 msgid "Navigation"
 msgstr "Navigation"
 
@@ -469,7 +469,7 @@ msgstr "Neuer Name"
 msgid "No access"
 msgstr "Kein Zugriff"
 
-#: src/files-card-body.tsx:496
+#: src/files-card-body.tsx:519
 msgid "No matching results"
 msgstr "Keine passenden Ergebnisse"
 
@@ -489,7 +489,7 @@ msgstr "Textdatei öffnen"
 msgid "Original file on server"
 msgstr "Originaldatei auf dem Server"
 
-#: src/files-footer-detail.tsx:79 src/files-card-body.tsx:573
+#: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
 msgid "Others"
 msgstr "Andere"
 
@@ -497,13 +497,13 @@ msgstr "Andere"
 msgid "Others access"
 msgstr "Anderer Zugriff"
 
-#: src/dialogs/rename.tsx:96 src/dialogs/editor.tsx:195
+#: src/dialogs/editor.tsx:195 src/dialogs/rename.tsx:96
 msgid "Overwrite"
 msgstr "Überschreiben"
 
-#: src/header.tsx:99 src/files-footer-detail.tsx:79 src/files-card-body.tsx:534
-#: src/files-card-body.tsx:573 src/dialogs/permissions.tsx:334
-#: src/dialogs/create-file.tsx:198
+#: src/files-card-body.tsx:557 src/files-card-body.tsx:596
+#: src/dialogs/permissions.tsx:334 src/dialogs/create-file.tsx:198
+#: src/files-footer-detail.tsx:79 src/header.tsx:99
 msgid "Owner"
 msgstr "Eigentümer"
 
@@ -531,7 +531,7 @@ msgstr "Einfügen"
 msgid "Paste as owner"
 msgstr ""
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:117
+#: src/dialogs/keyboardShortcutsHelp.tsx:123
 msgid "Paste file or directory"
 msgstr "Datei oder Verzeichnis einfügen"
 
@@ -543,7 +543,7 @@ msgstr "Einfügen fehlgeschlagen"
 msgid "Permission denied"
 msgstr "Berechtigung verweigert"
 
-#: src/header.tsx:110 src/files-card-body.tsx:539
+#: src/files-card-body.tsx:562 src/header.tsx:110
 msgid "Permissions"
 msgstr "Berechtigungen"
 
@@ -563,7 +563,7 @@ msgstr "Lesen und schreiben"
 msgid "Read, write, and execute"
 msgstr "Lesen, schreiben und ausführen"
 
-#: src/dialogs/permissions.tsx:230 src/dialogs/editor.tsx:172 src/common.ts:79
+#: src/dialogs/editor.tsx:172 src/dialogs/permissions.tsx:230 src/common.ts:79
 msgid "Read-only"
 msgstr "Nur lesen"
 
@@ -587,7 +587,7 @@ msgstr "Umbenennen"
 msgid "Rename $0?"
 msgstr "$0 umbenennen?"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:98
+#: src/dialogs/keyboardShortcutsHelp.tsx:104
 msgid "Rename selected file or directory"
 msgstr "Ausgewählte Datei oder ausgewähltes Verzeichnis umbenennen"
 
@@ -607,7 +607,7 @@ msgstr "Speichern"
 msgid "Security context"
 msgstr "Sicherheitskontext"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:123
+#: src/dialogs/keyboardShortcutsHelp.tsx:129
 msgid "Select all"
 msgstr "Alles auswählen"
 
@@ -619,7 +619,7 @@ msgstr "Ausführbare Datei als Programm festlegen"
 msgid "Show all files"
 msgstr "Alle Dateien anzeigen"
 
-#: src/header.tsx:287 src/files-card-body.tsx:512
+#: src/files-card-body.tsx:535 src/header.tsx:287
 msgid "Show hidden items"
 msgstr "Versteckte Elemente anzeigen"
 
@@ -627,7 +627,7 @@ msgstr "Versteckte Elemente anzeigen"
 msgid "Show keyboard shortcuts"
 msgstr "Tastenkombinationen anzeigen"
 
-#: src/header.tsx:77 src/files-card-body.tsx:525
+#: src/files-card-body.tsx:548 src/header.tsx:77
 msgid "Size"
 msgstr "Größe"
 

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-22 03:01+0000\n"
+"POT-Creation-Date: 2025-02-28 03:07+0000\n"
 "PO-Revision-Date: 2025-02-22 19:22+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://translate.fedoraproject.org/projects/cockpit-"
@@ -38,7 +38,7 @@ msgstr "$0 tiedostoa"
 msgid "$0 files selected"
 msgstr "$0 tiedostoa valittu"
 
-#: src/files-card-body.tsx:509
+#: src/files-card-body.tsx:532
 msgid "$0 item is hidden"
 msgid_plural "$0 items are hidden"
 msgstr[0] "$0 kohde on piilotettu"
@@ -78,8 +78,8 @@ msgstr "A-Z"
 msgid "Access"
 msgstr "Pääsy"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:76
 #: src/dialogs/keyboardShortcutsHelp.tsx:82
+#: src/dialogs/keyboardShortcutsHelp.tsx:88
 msgid "Activate selected item, enter directory"
 msgstr "Aktivoi valittu kohde, siirry hakemistoon"
 
@@ -99,10 +99,10 @@ msgstr "Lohkolaite"
 msgid "Bookmarks"
 msgstr "Kirjanmerkit"
 
-#: src/upload-button.tsx:116 src/dialogs/mkdir.tsx:108
-#: src/dialogs/permissions.tsx:320 src/dialogs/copyPasteOwnership.tsx:179
-#: src/dialogs/create-file.tsx:161 src/dialogs/rename.tsx:98
-#: src/dialogs/delete.tsx:98 src/dialogs/editor.tsx:211
+#: src/upload-button.tsx:116 src/dialogs/editor.tsx:211
+#: src/dialogs/mkdir.tsx:108 src/dialogs/permissions.tsx:320
+#: src/dialogs/create-file.tsx:161 src/dialogs/delete.tsx:98
+#: src/dialogs/rename.tsx:98 src/dialogs/copyPasteOwnership.tsx:179
 msgid "Cancel"
 msgstr "Peru"
 
@@ -142,11 +142,11 @@ msgstr "Muuta suljettujen tiedostojen käyttöoikeuksia"
 msgid "Character device"
 msgstr "Merkkilaite"
 
-#: src/files-card-body.tsx:497
+#: src/files-card-body.tsx:520
 msgid "Clear filter"
 msgstr "Tyhjennä suodatin"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:37 src/dialogs/editor.tsx:211
+#: src/dialogs/editor.tsx:211 src/dialogs/keyboardShortcutsHelp.tsx:43
 msgid "Close"
 msgstr "Sulje"
 
@@ -166,7 +166,7 @@ msgstr "Romahda"
 msgid "Copy"
 msgstr "Kopio"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:111
+#: src/dialogs/keyboardShortcutsHelp.tsx:117
 msgid "Copy selected file or directory"
 msgstr "Kopioi valittu tiedosto tai kansio"
 
@@ -182,7 +182,7 @@ msgstr "Luo hakemisto"
 msgid "Create file"
 msgstr "Luo tiedosto"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:105
+#: src/dialogs/keyboardShortcutsHelp.tsx:111
 msgid "Create new directory"
 msgstr "Luo uusi hakemisto"
 
@@ -222,7 +222,7 @@ msgstr "Hakemisto sisältää $0 hakemistoa, $1 tiedostoa"
 msgid "Directory contains $0 directories, $1 files, $2 hidden"
 msgstr "Hakemisto sisältää $0 hakemistoa, $1 tiedostoa, $2 piilotettua"
 
-#: src/files-card-body.tsx:504
+#: src/files-card-body.tsx:527
 msgid "Directory is empty"
 msgstr "Hakemisto on tyhjä"
 
@@ -271,7 +271,7 @@ msgstr "Pudota ulosladattavat tiedostot"
 msgid "Edit $0"
 msgstr "Muokkaa $0"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:90 src/files-breadcrumbs.tsx:306
+#: src/dialogs/keyboardShortcutsHelp.tsx:96 src/files-breadcrumbs.tsx:306
 msgid "Edit path"
 msgstr "Muokkaa polkua"
 
@@ -279,7 +279,7 @@ msgstr "Muokkaa polkua"
 msgid "Edit permissions"
 msgstr "Muokkaa käyttöoikeuksia"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:150
+#: src/dialogs/keyboardShortcutsHelp.tsx:156
 msgid "Editing"
 msgstr "Muokataan"
 
@@ -357,20 +357,20 @@ msgstr "Pakottaako tiedoston $0 poisto?"
 msgid "Force delete link $0?"
 msgstr "Pakottaako linkin $0 poisto?"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:64
+#: src/dialogs/keyboardShortcutsHelp.tsx:70
 msgid "Go back"
 msgstr "Siirry taaksepäin"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:70
+#: src/dialogs/keyboardShortcutsHelp.tsx:76
 msgid "Go forward"
 msgstr "Siirry eteenpäin"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:58
+#: src/dialogs/keyboardShortcutsHelp.tsx:64
 msgid "Go up a directory"
 msgstr "Siirry yksi hakemisto ylös"
 
+#: src/files-card-body.tsx:596 src/dialogs/permissions.tsx:349
 #: src/files-footer-detail.tsx:79 src/files-footer-detail.tsx:151
-#: src/files-card-body.tsx:573 src/dialogs/permissions.tsx:349
 msgid "Group"
 msgstr "Ryhmä"
 
@@ -394,7 +394,7 @@ msgstr "Ohita"
 msgid "Keep original"
 msgstr "Säilytä alkuperäinen"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:131
+#: src/dialogs/keyboardShortcutsHelp.tsx:137
 msgid "Keyboard shortcuts"
 msgstr "Pikanäppäimet"
 
@@ -418,7 +418,7 @@ msgstr "Hallitse tiedostojasi"
 msgid "Missing type"
 msgstr "Puuttuva tyyppi"
 
-#: src/header.tsx:88 src/files-card-body.tsx:529
+#: src/files-card-body.tsx:552 src/header.tsx:88
 msgid "Modified"
 msgstr "Muokattu"
 
@@ -426,7 +426,7 @@ msgstr "Muokattu"
 msgid "Most permissive"
 msgstr "Eniten salliva"
 
-#: src/header.tsx:66 src/files-card-body.tsx:524
+#: src/files-card-body.tsx:547 src/header.tsx:66
 msgid "Name"
 msgstr "Nimi"
 
@@ -446,7 +446,7 @@ msgstr "Nimi liian pitkä"
 msgid "Named pipe"
 msgstr "Nimetty putki"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:140
+#: src/dialogs/keyboardShortcutsHelp.tsx:146
 msgid "Navigation"
 msgstr "Navigointi"
 
@@ -470,7 +470,7 @@ msgstr "Uusi omistaja"
 msgid "No access"
 msgstr "Ei pääsyä"
 
-#: src/files-card-body.tsx:496
+#: src/files-card-body.tsx:519
 msgid "No matching results"
 msgstr "Ei vastaavia tuloksia"
 
@@ -490,7 +490,7 @@ msgstr "Avaa tekstitiedosto"
 msgid "Original file on server"
 msgstr "Alkuperäinen tiedosto palvelimella"
 
-#: src/files-footer-detail.tsx:79 src/files-card-body.tsx:573
+#: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
 msgid "Others"
 msgstr "Muut"
 
@@ -498,13 +498,13 @@ msgstr "Muut"
 msgid "Others access"
 msgstr "Muiden pääsy"
 
-#: src/dialogs/rename.tsx:96 src/dialogs/editor.tsx:195
+#: src/dialogs/editor.tsx:195 src/dialogs/rename.tsx:96
 msgid "Overwrite"
 msgstr "Korvaa"
 
-#: src/header.tsx:99 src/files-footer-detail.tsx:79 src/files-card-body.tsx:534
-#: src/files-card-body.tsx:573 src/dialogs/permissions.tsx:334
-#: src/dialogs/create-file.tsx:198
+#: src/files-card-body.tsx:557 src/files-card-body.tsx:596
+#: src/dialogs/permissions.tsx:334 src/dialogs/create-file.tsx:198
+#: src/files-footer-detail.tsx:79 src/header.tsx:99
 msgid "Owner"
 msgstr "Omistaja"
 
@@ -532,7 +532,7 @@ msgstr "Liitä"
 msgid "Paste as owner"
 msgstr ""
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:117
+#: src/dialogs/keyboardShortcutsHelp.tsx:123
 msgid "Paste file or directory"
 msgstr "Liitä tiedosto tai hakemisto"
 
@@ -544,7 +544,7 @@ msgstr "Liittäminen epäonnistui"
 msgid "Permission denied"
 msgstr "Käyttö estetty"
 
-#: src/header.tsx:110 src/files-card-body.tsx:539
+#: src/files-card-body.tsx:562 src/header.tsx:110
 msgid "Permissions"
 msgstr "Käyttöoikeudet"
 
@@ -564,7 +564,7 @@ msgstr "Luku ja kirjoitus"
 msgid "Read, write, and execute"
 msgstr "Luku, kirjoitus ja suoritus"
 
-#: src/dialogs/permissions.tsx:230 src/dialogs/editor.tsx:172 src/common.ts:79
+#: src/dialogs/editor.tsx:172 src/dialogs/permissions.tsx:230 src/common.ts:79
 msgid "Read-only"
 msgstr "Vain luku"
 
@@ -588,7 +588,7 @@ msgstr "Nimeä uudelleen"
 msgid "Rename $0?"
 msgstr "Nimetäänkö $0 uudelleen?"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:98
+#: src/dialogs/keyboardShortcutsHelp.tsx:104
 msgid "Rename selected file or directory"
 msgstr "Nimeä valittu tiedosto tai hakemisto uudelleen"
 
@@ -608,7 +608,7 @@ msgstr "Tallenna"
 msgid "Security context"
 msgstr "Turvakonteksti"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:123
+#: src/dialogs/keyboardShortcutsHelp.tsx:129
 msgid "Select all"
 msgstr "Valitse kaikki"
 
@@ -620,7 +620,7 @@ msgstr "Määritä suoritettava ohjelmaksi"
 msgid "Show all files"
 msgstr "Näytä kaikki tiedostot"
 
-#: src/header.tsx:287 src/files-card-body.tsx:512
+#: src/files-card-body.tsx:535 src/header.tsx:287
 msgid "Show hidden items"
 msgstr "Näytä piilotetut kohteet"
 
@@ -628,7 +628,7 @@ msgstr "Näytä piilotetut kohteet"
 msgid "Show keyboard shortcuts"
 msgstr "Näytä pikanäppäimet"
 
-#: src/header.tsx:77 src/files-card-body.tsx:525
+#: src/files-card-body.tsx:548 src/header.tsx:77
 msgid "Size"
 msgstr "Koko"
 
