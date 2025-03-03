@@ -2658,15 +2658,15 @@ class TestFiles(testlib.MachineCase):
             self.addCleanup(m.execute, "chattr -i /home/testuser")
             b.click("#upload-file-btn")
             b.upload_files("#upload-file-btn + input[type='file']", [files[-1]])
-
-            b.go(f'/files#/?path={dest_dir}')
-            b.wait_not_present('.pf-v5-c-empty-state')
             b.wait_in_text(".pf-v5-c-alert__title", "Failed")
             b.wait_in_text(".pf-v5-c-alert__description", "Not permitted to perform this action")
             b.click(".pf-v5-c-alert__action button")
             b.wait_not_present(".pf-v5-c-alert__action")
 
             # Non-admin session
+            b.go(f'/files#/?path={dest_dir}')
+            b.wait_visible(f"[data-item='{filename}']")
+
             b.drop_superuser()
             m.execute(f"rm {dest_dir}/{filename}; touch {dest_dir}/update.txt")
             b.wait_not_present(f"[data-item='{filename}']")
