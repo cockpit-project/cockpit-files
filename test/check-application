@@ -2454,7 +2454,7 @@ class TestFiles(testlib.MachineCase):
 
             b.go("/files#/?path=/mnt/upload")
             self.assert_last_breadcrumb("upload")
-            b.wait_text(".pf-v5-c-empty-state__title-text", "Directory is empty")
+            b.wait_text("#files-footer-owner", "root")
             b.click("#upload-file-btn")
             b.upload_files("#upload-file-btn + input[type='file']", [big_file])
 
@@ -2468,7 +2468,7 @@ class TestFiles(testlib.MachineCase):
             m.execute(['runuser', '-u', 'admin', 'mkdir', dest_dir])
             b.go(f"/files#/?path={dest_dir}")
             self.assert_last_breadcrumb("project")
-            b.wait_text(".pf-v5-c-empty-state__title-text", "Directory is empty")
+            b.wait_text("#files-footer-owner", "admin")
 
             files = [str(Path(tmpdir) / f"{i}.txt") for i in range(0, 5)]
             test_data = "this is a test"
