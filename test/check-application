@@ -2796,6 +2796,7 @@ class TestFiles(testlib.MachineCase):
             b.wait_not_present(".drag-drop-upload")
 
             # Drag & drop is disabled when upload is in progress
+            files_cnt = int(m.execute("ls -a /home/admin | wc -l").strip())
             b.click("#upload-file-btn")
             b.upload_files("#upload-file-btn + input[type='file']", [big_file])
             b.wait_visible("#upload-file-btn:disabled")
@@ -2817,6 +2818,8 @@ class TestFiles(testlib.MachineCase):
             b.click("#upload-progress-btn")
             b.click(".cancel-button-0")
             b.click(".pf-v5-c-alert__action button")
+            b.wait_not_present(".pf-v5-c-alert__action")
+            b.wait(lambda: int(m.execute("ls -a /home/admin | wc -l").strip()) == files_cnt)
 
             # Change directory and upload
             b.mouse("[data-item='project']", "dblclick")
