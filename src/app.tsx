@@ -108,10 +108,6 @@ export const Application = () => {
 
     useEffect(
         () => {
-            if (options.path === undefined) {
-                return;
-            }
-
             // Reset selected when path changes
             setSelected([]);
 
@@ -141,7 +137,7 @@ export const Application = () => {
                 client.close();
             };
         },
-        [options, path]
+        [path]
     );
 
     useInit(() => {
