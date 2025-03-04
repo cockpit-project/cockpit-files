@@ -2431,7 +2431,16 @@ class TestFiles(testlib.MachineCase):
             b.wait_in_text(".upload-progress-0", "bigfile.img")
             b.assert_pixels(".upload-popover", "upload-popover",
                             ignore=[".upload-progress-0"],
-                            skip_layouts=["mobile", "rtl"])
+                            # This pixel test flakes a lot in the
+                            # "medium" layout, producing an empty
+                            # screenshot. One guess is that this is
+                            # caused by changing the browser size when
+                            # switching layouts and PF's delayed
+                            # reaction to it when placing an already
+                            # open popover. So let's only test the
+                            # "desktop" and "dark" layouts, which are
+                            # the same size. Fingers crossed.
+                            skip_layouts=["medium", "mobile", "rtl"])
             b.wait(lambda: b.get_pf_progress_value(".upload-progress-0") >= 2)
 
             b.click(".cancel-button-0")
