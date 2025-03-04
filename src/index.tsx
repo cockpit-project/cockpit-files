@@ -24,6 +24,8 @@ import React from "react";
 
 import { createRoot } from "react-dom/client";
 
+import cockpit from "cockpit";
+
 import { Application } from "./app.tsx";
 
 /*
@@ -37,5 +39,7 @@ import "./app.scss";
 
 document.addEventListener("DOMContentLoaded", () => {
     const root = createRoot(document.getElementById("app")!);
-    root.render(<Application />);
+    cockpit.user().then(user => {
+        root.render(<Application user={user} />);
+    });
 });

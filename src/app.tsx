@@ -72,7 +72,7 @@ const get_path = (options: Location['options']) => {
     return currentPath;
 };
 
-export const Application = () => {
+export const Application = ({ user }: { user: cockpit.UserInfo }) => {
     const [location, setLocation] = useState(cockpit.location);
     const [loading, setLoading] = useState(true);
     const [loadingFiles, setLoadingFiles] = useState(true);
@@ -97,11 +97,9 @@ export const Application = () => {
         cockpit.addEventListener("locationchanged", update);
 
         // On initial load redirect to the users home directory
-        cockpit.user().then(user => {
-            if (cockpit.location.options.path === undefined) {
-                cockpit.location.replace("/", { path: encodeURIComponent(user.home) });
-            }
-        });
+        if (cockpit.location.options.path === undefined) {
+            cockpit.location.replace("/", { path: encodeURIComponent(user.home) });
+        }
 
         return () => cockpit.removeEventListener("locationchanged", update);
     });
