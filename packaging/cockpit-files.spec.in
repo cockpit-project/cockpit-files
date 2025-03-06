@@ -6,8 +6,6 @@ License: LGPL-2.1-or-later
 
 Source0: https://github.com/cockpit-project/cockpit-files/releases/download/%{version}/%{name}-%{version}.tar.xz
 BuildArch: noarch
-ExclusiveArch: %{nodejs_arches} noarch
-BuildRequires: nodejs
 BuildRequires: make
 %if 0%{?suse_version}
 # Suse's package has a different name
