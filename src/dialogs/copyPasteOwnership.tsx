@@ -27,7 +27,7 @@ import { Modal, ModalVariant } from "@patternfly/react-core/dist/esm/components/
 import { Text, TextContent } from "@patternfly/react-core/dist/esm/components/Text";
 
 import cockpit from 'cockpit';
-import { FileInfo } from 'cockpit/fsinfo.ts';
+import { type FileInfo } from 'cockpit/fsinfo.ts';
 import type { Dialogs, DialogResult } from 'dialogs';
 import { useEvent, useInit } from 'hooks.ts';
 import { superuser } from 'superuser';

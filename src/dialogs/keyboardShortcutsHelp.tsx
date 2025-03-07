@@ -28,7 +28,7 @@ import { Text, TextContent, TextVariants } from "@patternfly/react-core/dist/esm
 import { Flex, } from "@patternfly/react-core/dist/esm/layouts/Flex";
 
 import cockpit from 'cockpit';
-import { DialogResult, Dialogs } from 'dialogs';
+import type { DialogResult, Dialogs } from 'dialogs';
 
 import { testIsAppleDevice } from '../common.ts';
 
