@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: starter-kit 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-28 03:07+0000\n"
+"POT-Creation-Date: 2025-03-07 03:16+0000\n"
 "PO-Revision-Date: 2025-02-10 02:17+0000\n"
 "Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
 "memory@weblate.org>\n"
@@ -85,7 +85,7 @@ msgstr "Lesezeichen hinzufügen"
 msgid "Apply this action to all conflicting files"
 msgstr "Diese Aktion auf alle widersprüchlichen Dateien anwenden"
 
-#: src/common.ts:86
+#: src/common.ts:66
 msgid "Block device"
 msgstr "Blockiere Gerät"
 
@@ -134,7 +134,7 @@ msgstr "Berechtigungen ändern"
 msgid "Change permissions for enclosed files"
 msgstr "Berechtigungen für enthaltene Dateien ändern"
 
-#: src/common.ts:87
+#: src/common.ts:67
 msgid "Character device"
 msgstr "Zeichengerät"
 
@@ -206,7 +206,7 @@ msgstr "Datei $0 löschen?"
 msgid "Delete link $0?"
 msgstr "Link $0 löschen?"
 
-#: src/common.ts:88
+#: src/common.ts:68
 msgid "Directory"
 msgstr "Verzeichnis"
 
@@ -242,7 +242,7 @@ msgstr "Verzeichnisname zu lang"
 msgid "Directory owner"
 msgstr "Verzeichniseigentümer"
 
-#: src/common.ts:139
+#: src/common.ts:119
 msgid "Directory with the same name exists"
 msgstr "Verzeichniseigentümer mit gleichem Namen existiert bereits"
 
@@ -279,7 +279,7 @@ msgstr "Berechtigungen bearbeiten"
 msgid "Editing"
 msgstr "Bearbeiten"
 
-#: src/common.ts:76
+#: src/common.ts:56
 msgid "Execute-only"
 msgstr "Nur Ausführen"
 
@@ -291,7 +291,7 @@ msgstr "Fehlgeschlagen"
 msgid "File browser"
 msgstr "Datei-Browser"
 
-#: src/common.ts:141
+#: src/common.ts:121
 msgid "File exists"
 msgstr "Datei existiert"
 
@@ -303,7 +303,7 @@ msgstr "Dateiname"
 msgid "File uploaded"
 msgstr "Datei hochgeladen"
 
-#: src/common.ts:136
+#: src/common.ts:116
 msgid "Filename is the same as original name"
 msgstr "Der Dateiname ist derselbe wie der ursprüngliche Name"
 
@@ -426,19 +426,19 @@ msgstr "Am meisten zulässig"
 msgid "Name"
 msgstr "Name"
 
-#: src/common.ts:130
+#: src/common.ts:110
 msgid "Name cannot be empty"
 msgstr "Name darf nicht leer sein"
 
-#: src/common.ts:134
+#: src/common.ts:114
 msgid "Name cannot include a /"
 msgstr "Name darf kein / enthalten"
 
-#: src/common.ts:132
+#: src/common.ts:112
 msgid "Name too long"
 msgstr "Name zu lang"
 
-#: src/common.ts:89
+#: src/common.ts:69
 #, fuzzy
 msgid "Named pipe"
 msgstr "Benannte Weiterleitung"
@@ -473,7 +473,7 @@ msgstr "Kein Zugriff"
 msgid "No matching results"
 msgstr "Keine passenden Ergebnisse"
 
-#: src/common.ts:75
+#: src/common.ts:55
 msgid "None"
 msgstr "Keine"
 
@@ -551,23 +551,23 @@ msgstr "Berechtigungen"
 msgid "Permissions for $0 files"
 msgstr "Berechtigungen für $0 Dateien"
 
-#: src/common.ts:80
+#: src/common.ts:60
 msgid "Read and execute"
 msgstr "Lesen und ausführen"
 
-#: src/dialogs/permissions.tsx:225 src/common.ts:81
+#: src/dialogs/permissions.tsx:225 src/common.ts:61
 msgid "Read and write"
 msgstr "Lesen und schreiben"
 
-#: src/common.ts:82
+#: src/common.ts:62
 msgid "Read, write, and execute"
 msgstr "Lesen, schreiben und ausführen"
 
-#: src/dialogs/editor.tsx:172 src/dialogs/permissions.tsx:230 src/common.ts:79
+#: src/dialogs/editor.tsx:172 src/dialogs/permissions.tsx:230 src/common.ts:59
 msgid "Read-only"
 msgstr "Nur lesen"
 
-#: src/common.ts:91
+#: src/common.ts:71
 msgid "Regular file"
 msgstr "Reguläre Datei"
 
@@ -635,7 +635,7 @@ msgstr "Größe"
 msgid "Smallest size"
 msgstr "Kleinste Größe"
 
-#: src/common.ts:92
+#: src/common.ts:72
 msgid "Socket"
 msgstr "Socket"
 
@@ -643,7 +643,7 @@ msgstr "Socket"
 msgid "Sort"
 msgstr "Sortieren"
 
-#: src/common.ts:90
+#: src/common.ts:70
 msgid "Symbolic link"
 msgstr "Symbolische Verknüpfung"
 
@@ -700,11 +700,11 @@ msgstr "Benutzer"
 msgid "View $0"
 msgstr "$0 ansehen"
 
-#: src/common.ts:78
+#: src/common.ts:58
 msgid "Write and execute"
 msgstr "Schreiben und ausführen"
 
-#: src/dialogs/permissions.tsx:245 src/common.ts:77
+#: src/dialogs/permissions.tsx:245 src/common.ts:57
 msgid "Write-only"
 msgstr "Nur schreiben"
 

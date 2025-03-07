@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-28 03:07+0000\n"
+"POT-Creation-Date: 2025-03-07 03:16+0000\n"
 "PO-Revision-Date: 2025-01-13 14:38+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
 "Language-Team: Turkish <https://translate.fedoraproject.org/projects/cockpit-"
@@ -95,7 +95,7 @@ msgstr "Yer imi ekle"
 msgid "Apply this action to all conflicting files"
 msgstr "Bu eylemi çakışan tüm dosyalara uygula"
 
-#: src/common.ts:86
+#: src/common.ts:66
 msgid "Block device"
 msgstr "Blok aygıtı"
 
@@ -142,7 +142,7 @@ msgstr "İzinleri değiştir"
 msgid "Change permissions for enclosed files"
 msgstr "İçerilen dosyalar için izinleri değiştir"
 
-#: src/common.ts:87
+#: src/common.ts:67
 msgid "Character device"
 msgstr "Karakter aygıtı"
 
@@ -214,7 +214,7 @@ msgstr "$0 dosyası silinsin mi?"
 msgid "Delete link $0?"
 msgstr "$0 bağlantısı silinsin mi?"
 
-#: src/common.ts:88
+#: src/common.ts:68
 msgid "Directory"
 msgstr "Dizin"
 
@@ -250,7 +250,7 @@ msgstr "Dizin adı çok uzun"
 msgid "Directory owner"
 msgstr "Dizin sahibi"
 
-#: src/common.ts:139
+#: src/common.ts:119
 msgid "Directory with the same name exists"
 msgstr "Aynı ada sahip dizin var"
 
@@ -287,7 +287,7 @@ msgstr "İzinleri düzenle"
 msgid "Editing"
 msgstr "Düzenleme"
 
-#: src/common.ts:76
+#: src/common.ts:56
 msgid "Execute-only"
 msgstr "Yalnızca çalıştır"
 
@@ -299,7 +299,7 @@ msgstr "Başarısız oldu"
 msgid "File browser"
 msgstr "Dosya gezgini"
 
-#: src/common.ts:141
+#: src/common.ts:121
 msgid "File exists"
 msgstr "Dosya var"
 
@@ -311,7 +311,7 @@ msgstr "Dosya adı"
 msgid "File uploaded"
 msgstr "Dosya karşıya yüklendi"
 
-#: src/common.ts:136
+#: src/common.ts:116
 msgid "Filename is the same as original name"
 msgstr "Dosya adı ilk adıyla aynı"
 
@@ -434,19 +434,19 @@ msgstr "En çok izin veren"
 msgid "Name"
 msgstr "Ad"
 
-#: src/common.ts:130
+#: src/common.ts:110
 msgid "Name cannot be empty"
 msgstr "Ad boş olamaz"
 
-#: src/common.ts:134
+#: src/common.ts:114
 msgid "Name cannot include a /"
 msgstr "Ad / karakteri içeremez"
 
-#: src/common.ts:132
+#: src/common.ts:112
 msgid "Name too long"
 msgstr "Ad çok uzun"
 
-#: src/common.ts:89
+#: src/common.ts:69
 msgid "Named pipe"
 msgstr "Adlı boru (pipe)"
 
@@ -480,7 +480,7 @@ msgstr "Erişim yok"
 msgid "No matching results"
 msgstr "Eşleşen sonuç yok"
 
-#: src/common.ts:75
+#: src/common.ts:55
 msgid "None"
 msgstr "Yok"
 
@@ -558,23 +558,23 @@ msgstr "İzinler"
 msgid "Permissions for $0 files"
 msgstr "$0 dosya için izinler"
 
-#: src/common.ts:80
+#: src/common.ts:60
 msgid "Read and execute"
 msgstr "Oku ve çalıştır"
 
-#: src/dialogs/permissions.tsx:225 src/common.ts:81
+#: src/dialogs/permissions.tsx:225 src/common.ts:61
 msgid "Read and write"
 msgstr "Oku ve yaz"
 
-#: src/common.ts:82
+#: src/common.ts:62
 msgid "Read, write, and execute"
 msgstr "Oku, yaz ve çalıştır"
 
-#: src/dialogs/editor.tsx:172 src/dialogs/permissions.tsx:230 src/common.ts:79
+#: src/dialogs/editor.tsx:172 src/dialogs/permissions.tsx:230 src/common.ts:59
 msgid "Read-only"
 msgstr "Yalnızca oku"
 
-#: src/common.ts:91
+#: src/common.ts:71
 msgid "Regular file"
 msgstr "Normal dosya"
 
@@ -642,7 +642,7 @@ msgstr "Boyut"
 msgid "Smallest size"
 msgstr "En küçük boyut"
 
-#: src/common.ts:92
+#: src/common.ts:72
 msgid "Socket"
 msgstr "Soket"
 
@@ -650,7 +650,7 @@ msgstr "Soket"
 msgid "Sort"
 msgstr "Sırala"
 
-#: src/common.ts:90
+#: src/common.ts:70
 msgid "Symbolic link"
 msgstr "Sembolik bağlantı"
 
@@ -706,11 +706,11 @@ msgstr "Kullanıcı"
 msgid "View $0"
 msgstr "$0 dosyasını görüntüle"
 
-#: src/common.ts:78
+#: src/common.ts:58
 msgid "Write and execute"
 msgstr "Yaz ve çalıştır"
 
-#: src/dialogs/permissions.tsx:245 src/common.ts:77
+#: src/dialogs/permissions.tsx:245 src/common.ts:57
 msgid "Write-only"
 msgstr "Yalnızca yaz"
 

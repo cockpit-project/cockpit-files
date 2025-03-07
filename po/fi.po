@@ -14,11 +14,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-28 03:07+0000\n"
+"POT-Creation-Date: 2025-03-07 03:16+0000\n"
 "PO-Revision-Date: 2025-02-28 20:04+0000\n"
 "Last-Translator: Jan Kuparinen <copper_fin@hotmail.com>\n"
-"Language-Team: Finnish <https://translate.fedoraproject.org/projects/"
-"cockpit-files/cockpit-files/fi/>\n"
+"Language-Team: Finnish <https://translate.fedoraproject.org/projects/cockpit-"
+"files/cockpit-files/fi/>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -91,7 +91,7 @@ msgstr "Lisää kirjanmerkkeihin"
 msgid "Apply this action to all conflicting files"
 msgstr "Käytä tätä toimintoa kaikkiin ristiriitaisiin tiedostoihin"
 
-#: src/common.ts:86
+#: src/common.ts:66
 msgid "Block device"
 msgstr "Lohkolaite"
 
@@ -138,7 +138,7 @@ msgstr "Muuta käyttöoikeuksia"
 msgid "Change permissions for enclosed files"
 msgstr "Muuta suljettujen tiedostojen käyttöoikeuksia"
 
-#: src/common.ts:87
+#: src/common.ts:67
 msgid "Character device"
 msgstr "Merkkilaite"
 
@@ -210,7 +210,7 @@ msgstr "Poistetaanko tiedosto $0?"
 msgid "Delete link $0?"
 msgstr "Poistetaanko linkki $0?"
 
-#: src/common.ts:88
+#: src/common.ts:68
 msgid "Directory"
 msgstr "Hakemisto"
 
@@ -246,7 +246,7 @@ msgstr "Hakemiston nimi liian pitkä"
 msgid "Directory owner"
 msgstr "Hakemiston omistaja"
 
-#: src/common.ts:139
+#: src/common.ts:119
 msgid "Directory with the same name exists"
 msgstr "Samanniminen hakemisto on olemassa"
 
@@ -283,7 +283,7 @@ msgstr "Muokkaa käyttöoikeuksia"
 msgid "Editing"
 msgstr "Muokataan"
 
-#: src/common.ts:76
+#: src/common.ts:56
 msgid "Execute-only"
 msgstr "Vain suoritettavaksi"
 
@@ -295,7 +295,7 @@ msgstr "Epäonnistui"
 msgid "File browser"
 msgstr "Tiedostoselain"
 
-#: src/common.ts:141
+#: src/common.ts:121
 msgid "File exists"
 msgstr "Tiedosto on olemassa"
 
@@ -307,7 +307,7 @@ msgstr "Tiedostonimi"
 msgid "File uploaded"
 msgstr "Tiedosto ulosladattu"
 
-#: src/common.ts:136
+#: src/common.ts:116
 msgid "Filename is the same as original name"
 msgstr "Tiedostonimi on sama kuin alkuperäinen nimi"
 
@@ -432,19 +432,19 @@ msgstr "Eniten salliva"
 msgid "Name"
 msgstr "Nimi"
 
-#: src/common.ts:130
+#: src/common.ts:110
 msgid "Name cannot be empty"
 msgstr "Nimi ei voi olla tyhjä"
 
-#: src/common.ts:134
+#: src/common.ts:114
 msgid "Name cannot include a /"
 msgstr "Nimessä ei saa olla \"/\""
 
-#: src/common.ts:132
+#: src/common.ts:112
 msgid "Name too long"
 msgstr "Nimi liian pitkä"
 
-#: src/common.ts:89
+#: src/common.ts:69
 msgid "Named pipe"
 msgstr "Nimetty putki"
 
@@ -476,7 +476,7 @@ msgstr "Ei pääsyä"
 msgid "No matching results"
 msgstr "Ei vastaavia tuloksia"
 
-#: src/common.ts:75
+#: src/common.ts:55
 msgid "None"
 msgstr "Ei mitään"
 
@@ -554,23 +554,23 @@ msgstr "Käyttöoikeudet"
 msgid "Permissions for $0 files"
 msgstr "Käyttöoikeudet $0 tiedostoille"
 
-#: src/common.ts:80
+#: src/common.ts:60
 msgid "Read and execute"
 msgstr "Luku ja suoritus"
 
-#: src/dialogs/permissions.tsx:225 src/common.ts:81
+#: src/dialogs/permissions.tsx:225 src/common.ts:61
 msgid "Read and write"
 msgstr "Luku ja kirjoitus"
 
-#: src/common.ts:82
+#: src/common.ts:62
 msgid "Read, write, and execute"
 msgstr "Luku, kirjoitus ja suoritus"
 
-#: src/dialogs/editor.tsx:172 src/dialogs/permissions.tsx:230 src/common.ts:79
+#: src/dialogs/editor.tsx:172 src/dialogs/permissions.tsx:230 src/common.ts:59
 msgid "Read-only"
 msgstr "Vain luku"
 
-#: src/common.ts:91
+#: src/common.ts:71
 msgid "Regular file"
 msgstr "Säännöllinen tiedosto"
 
@@ -638,7 +638,7 @@ msgstr "Koko"
 msgid "Smallest size"
 msgstr "Pienin koko"
 
-#: src/common.ts:92
+#: src/common.ts:72
 msgid "Socket"
 msgstr "Pistoke"
 
@@ -646,7 +646,7 @@ msgstr "Pistoke"
 msgid "Sort"
 msgstr "Järjestele"
 
-#: src/common.ts:90
+#: src/common.ts:70
 msgid "Symbolic link"
 msgstr "Symbolinen linkki"
 
@@ -703,11 +703,11 @@ msgstr "Käyttäjä"
 msgid "View $0"
 msgstr "Näytä $0"
 
-#: src/common.ts:78
+#: src/common.ts:58
 msgid "Write and execute"
 msgstr "Kirjoitus ja suoritus"
 
-#: src/dialogs/permissions.tsx:245 src/common.ts:77
+#: src/dialogs/permissions.tsx:245 src/common.ts:57
 msgid "Write-only"
 msgstr "Vain kirjoitus"
 

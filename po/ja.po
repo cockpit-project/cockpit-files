@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-28 03:07+0000\n"
+"POT-Creation-Date: 2025-03-07 03:16+0000\n"
 "PO-Revision-Date: 2025-02-28 05:41+0000\n"
 "Last-Translator: Martin Pitt <mpitt@redhat.com>\n"
 "Language-Team: Japanese <https://translate.fedoraproject.org/projects/"
@@ -57,18 +57,17 @@ msgid ""
 "download files, and change their properties. It also includes a simple file "
 "editor."
 msgstr ""
-"Cockpit 用のファイルシステム "
-"UI。ディレクトリーを参照したり、ファイルをアップロードおよびダウンロードした"
-"り、ファイルのプロパティーを変更したりできます。また、シンプルなファイルエデ"
-"ィターが組み込まれています。"
+"Cockpit 用のファイルシステム UI。ディレクトリーを参照したり、ファイルをアップ"
+"ロードおよびダウンロードしたり、ファイルのプロパティーを変更したりできます。"
+"また、シンプルなファイルエディターが組み込まれています。"
 
 #: src/upload-button.tsx:122
 msgid ""
 "A file with the same name already exists in \"$0\". Replacing it will "
 "overwrite its content."
-msgstr "\"$0\" "
-"に同じ名前のファイルがすでに存在します。このファイルを置き換えると内容が上書"
-"きされます。"
+msgstr ""
+"\"$0\" に同じ名前のファイルがすでに存在します。このファイルを置き換えると内容"
+"が上書きされます。"
 
 #: src/header.tsx:69
 msgid "A-Z"
@@ -91,7 +90,7 @@ msgstr "ブックマークに追加"
 msgid "Apply this action to all conflicting files"
 msgstr "このアクションをすべての競合ファイルに適用する"
 
-#: src/common.ts:86
+#: src/common.ts:66
 msgid "Block device"
 msgstr "ブロックデバイス"
 
@@ -138,7 +137,7 @@ msgstr "パーミッションの変更"
 msgid "Change permissions for enclosed files"
 msgstr "含まれるファイルのパーミッションの変更"
 
-#: src/common.ts:87
+#: src/common.ts:67
 msgid "Character device"
 msgstr "キャラクターデバイス"
 
@@ -210,18 +209,20 @@ msgstr "ファイル $0 を削除しますか?"
 msgid "Delete link $0?"
 msgstr "リンク $0 を削除しますか?"
 
-#: src/common.ts:88
+#: src/common.ts:68
 msgid "Directory"
 msgstr "フォルダー"
 
 #: src/files-footer-detail.tsx:63
 msgid "Directory contains $0 directories, $1 files"
-msgstr "ディレクトリーに $0 個のディレクトリー、$1 個のファイルが含まれています"
+msgstr ""
+"ディレクトリーに $0 個のディレクトリー、$1 個のファイルが含まれています"
 
 #: src/files-footer-detail.tsx:64
 msgid "Directory contains $0 directories, $1 files, $2 hidden"
-msgstr "ディレクトリーに $0 個のディレクトリー、$1 個のファイルが含まれ、$2 "
-"個が非表示です"
+msgstr ""
+"ディレクトリーに $0 個のディレクトリー、$1 個のファイルが含まれ、$2 個が非表"
+"示です"
 
 #: src/files-card-body.tsx:527
 msgid "Directory is empty"
@@ -247,7 +248,7 @@ msgstr "ディレクトリー名が長すぎます"
 msgid "Directory owner"
 msgstr "ディレクトリー所有者"
 
-#: src/common.ts:139
+#: src/common.ts:119
 msgid "Directory with the same name exists"
 msgstr "同じ名前のディレクトリーが存在します"
 
@@ -284,7 +285,7 @@ msgstr "編集パーミッション"
 msgid "Editing"
 msgstr "編集中"
 
-#: src/common.ts:76
+#: src/common.ts:56
 msgid "Execute-only"
 msgstr "実行のみ"
 
@@ -296,7 +297,7 @@ msgstr "失敗"
 msgid "File browser"
 msgstr "ファイルブラウザー"
 
-#: src/common.ts:141
+#: src/common.ts:121
 msgid "File exists"
 msgstr "ファイルが存在します"
 
@@ -308,7 +309,7 @@ msgstr "ファイル名"
 msgid "File uploaded"
 msgstr "ファイルをアップロードしました"
 
-#: src/common.ts:136
+#: src/common.ts:116
 msgid "Filename is the same as original name"
 msgstr "ファイル名が元の名前と同じです"
 
@@ -320,7 +321,8 @@ msgstr "ファイル"
 msgid ""
 "Files being pasted have a different owner. By default, ownership will be "
 "changed to match the destination directory."
-msgstr "貼り付けるファイルの所有者が異なります。デフォルトでは、貼り付け先のディレク"
+msgstr ""
+"貼り付けるファイルの所有者が異なります。デフォルトでは、貼り付け先のディレク"
 "トリーに合わせて所有権が変更されます。"
 
 #: src/upload-button.tsx:361
@@ -432,19 +434,19 @@ msgstr "最も許容度が高い"
 msgid "Name"
 msgstr "名前"
 
-#: src/common.ts:130
+#: src/common.ts:110
 msgid "Name cannot be empty"
 msgstr "名前は空欄にできません"
 
-#: src/common.ts:134
+#: src/common.ts:114
 msgid "Name cannot include a /"
 msgstr "名前に / を含めることはできません"
 
-#: src/common.ts:132
+#: src/common.ts:112
 msgid "Name too long"
 msgstr "名前が長すぎます"
 
-#: src/common.ts:89
+#: src/common.ts:69
 msgid "Named pipe"
 msgstr "名前付きパイプ"
 
@@ -476,7 +478,7 @@ msgstr "アクセスなし"
 msgid "No matching results"
 msgstr "一致する結果はありません"
 
-#: src/common.ts:75
+#: src/common.ts:55
 msgid "None"
 msgstr "なし"
 
@@ -554,23 +556,23 @@ msgstr "パーミッション"
 msgid "Permissions for $0 files"
 msgstr "$0 ファイルのパーミッション"
 
-#: src/common.ts:80
+#: src/common.ts:60
 msgid "Read and execute"
 msgstr "読み取りおよび実行"
 
-#: src/dialogs/permissions.tsx:225 src/common.ts:81
+#: src/dialogs/permissions.tsx:225 src/common.ts:61
 msgid "Read and write"
 msgstr "読み取りおよび書き込み"
 
-#: src/common.ts:82
+#: src/common.ts:62
 msgid "Read, write, and execute"
 msgstr "読み取り、書き込み、および実行"
 
-#: src/dialogs/editor.tsx:172 src/dialogs/permissions.tsx:230 src/common.ts:79
+#: src/dialogs/editor.tsx:172 src/dialogs/permissions.tsx:230 src/common.ts:59
 msgid "Read-only"
 msgstr "読み取り専用"
 
-#: src/common.ts:91
+#: src/common.ts:71
 msgid "Regular file"
 msgstr "通常ファイル"
 
@@ -638,7 +640,7 @@ msgstr "サイズ"
 msgid "Smallest size"
 msgstr "最小サイズ"
 
-#: src/common.ts:92
+#: src/common.ts:72
 msgid "Socket"
 msgstr "ソケット"
 
@@ -646,7 +648,7 @@ msgstr "ソケット"
 msgid "Sort"
 msgstr "ソート"
 
-#: src/common.ts:90
+#: src/common.ts:70
 msgid "Symbolic link"
 msgstr "シンボリックリンク"
 
@@ -703,11 +705,11 @@ msgstr "ユーザー"
 msgid "View $0"
 msgstr "$0 の表示"
 
-#: src/common.ts:78
+#: src/common.ts:58
 msgid "Write and execute"
 msgstr "書き込みおよび実行"
 
-#: src/dialogs/permissions.tsx:245 src/common.ts:77
+#: src/dialogs/permissions.tsx:245 src/common.ts:57
 msgid "Write-only"
 msgstr "書き込み専用"
 

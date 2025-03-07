@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-28 03:07+0000\n"
+"POT-Creation-Date: 2025-03-07 03:16+0000\n"
 "PO-Revision-Date: 2025-02-12 19:38+0000\n"
 "Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech <https://translate.fedoraproject.org/projects/cockpit-"
@@ -91,7 +91,7 @@ msgstr "Přidat do záložek"
 msgid "Apply this action to all conflicting files"
 msgstr "Použít tuto akci na veškeré kolidující soubory"
 
-#: src/common.ts:86
+#: src/common.ts:66
 msgid "Block device"
 msgstr "Blokové zařízení"
 
@@ -139,7 +139,7 @@ msgstr "Změnit oprávnění"
 msgid "Change permissions for enclosed files"
 msgstr "Změnit oprávnění pro obsažené soubory"
 
-#: src/common.ts:87
+#: src/common.ts:67
 msgid "Character device"
 msgstr "Znakové zařízení"
 
@@ -211,7 +211,7 @@ msgstr "Smazat soubor $0?"
 msgid "Delete link $0?"
 msgstr "Smazat odkaz $0?"
 
-#: src/common.ts:88
+#: src/common.ts:68
 msgid "Directory"
 msgstr "Složka"
 
@@ -247,7 +247,7 @@ msgstr "Název složky je příliš dlouhý"
 msgid "Directory owner"
 msgstr "Vlastník složky"
 
-#: src/common.ts:139
+#: src/common.ts:119
 msgid "Directory with the same name exists"
 msgstr "Složka s tímto názvem zde už existuje"
 
@@ -284,7 +284,7 @@ msgstr "Upravit oprávnění"
 msgid "Editing"
 msgstr "Upravování"
 
-#: src/common.ts:76
+#: src/common.ts:56
 msgid "Execute-only"
 msgstr "Pouze spouštět"
 
@@ -296,7 +296,7 @@ msgstr "Nezdařilo se"
 msgid "File browser"
 msgstr "Procházení souborů"
 
-#: src/common.ts:141
+#: src/common.ts:121
 msgid "File exists"
 msgstr "Soubor existuje"
 
@@ -308,7 +308,7 @@ msgstr "Název souboru"
 msgid "File uploaded"
 msgstr "Soubor nahrán"
 
-#: src/common.ts:136
+#: src/common.ts:116
 msgid "Filename is the same as original name"
 msgstr "Tento název souboru je stejný jako ten předchozí"
 
@@ -433,19 +433,19 @@ msgstr "Nejpřístupnější"
 msgid "Name"
 msgstr "Název"
 
-#: src/common.ts:130
+#: src/common.ts:110
 msgid "Name cannot be empty"
 msgstr "Název je třeba vyplnit"
 
-#: src/common.ts:134
+#: src/common.ts:114
 msgid "Name cannot include a /"
 msgstr "Název nemůže obsahovat /"
 
-#: src/common.ts:132
+#: src/common.ts:112
 msgid "Name too long"
 msgstr "Název je příliš dlouhý"
 
-#: src/common.ts:89
+#: src/common.ts:69
 msgid "Named pipe"
 msgstr "Pojmenovaná roura"
 
@@ -477,7 +477,7 @@ msgstr "Žádný přístup"
 msgid "No matching results"
 msgstr "Nic nenalezeno"
 
-#: src/common.ts:75
+#: src/common.ts:55
 msgid "None"
 msgstr "Žádné"
 
@@ -555,23 +555,23 @@ msgstr "Oprávnění"
 msgid "Permissions for $0 files"
 msgstr "Oprávnění pro $0 souborů"
 
-#: src/common.ts:80
+#: src/common.ts:60
 msgid "Read and execute"
 msgstr "Číst a spouštět"
 
-#: src/dialogs/permissions.tsx:225 src/common.ts:81
+#: src/dialogs/permissions.tsx:225 src/common.ts:61
 msgid "Read and write"
 msgstr "Číst a zapisovat"
 
-#: src/common.ts:82
+#: src/common.ts:62
 msgid "Read, write, and execute"
 msgstr "Číst, zapisovat a spouštět"
 
-#: src/dialogs/editor.tsx:172 src/dialogs/permissions.tsx:230 src/common.ts:79
+#: src/dialogs/editor.tsx:172 src/dialogs/permissions.tsx:230 src/common.ts:59
 msgid "Read-only"
 msgstr "Pouze pro čtení"
 
-#: src/common.ts:91
+#: src/common.ts:71
 msgid "Regular file"
 msgstr "Obyčejný soubor"
 
@@ -639,7 +639,7 @@ msgstr "Velikost"
 msgid "Smallest size"
 msgstr "Nejnižší velikost"
 
-#: src/common.ts:92
+#: src/common.ts:72
 msgid "Socket"
 msgstr "Soket"
 
@@ -647,7 +647,7 @@ msgstr "Soket"
 msgid "Sort"
 msgstr "Seřadit"
 
-#: src/common.ts:90
+#: src/common.ts:70
 msgid "Symbolic link"
 msgstr "Symbolický odkaz"
 
@@ -703,11 +703,11 @@ msgstr "Uživatel"
 msgid "View $0"
 msgstr "Zobrazit $0"
 
-#: src/common.ts:78
+#: src/common.ts:58
 msgid "Write and execute"
 msgstr "Zápis a spouštění"
 
-#: src/dialogs/permissions.tsx:245 src/common.ts:77
+#: src/dialogs/permissions.tsx:245 src/common.ts:57
 msgid "Write-only"
 msgstr "Pouze zápis"
 
