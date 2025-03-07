@@ -83,6 +83,7 @@ export const Application = () => {
     const [clipboard, setClipboard] = useState<ClipboardInfo>({ path: "/", files: [] });
     const [alerts, setAlerts] = useState<Alert[]>([]);
     const [cwdInfo, setCwdInfo] = useState<FileInfo | null>(null);
+    const [user, setUser] = useState<cockpit.UserInfo | null>(null);
 
     const { options } = location;
     const path = get_path(options);
@@ -98,6 +99,7 @@ export const Application = () => {
 
         // On initial load redirect to the users home directory
         cockpit.user().then(user => {
+            setUser(user);
             if (cockpit.location.options.path === undefined) {
                 cockpit.location.replace("/", { path: encodeURIComponent(user.home) });
             }
@@ -108,6 +110,12 @@ export const Application = () => {
 
     useEffect(
         () => {
+            // Don't render when there is no user, this avoids showing `/`
+            // briefly and then loading the users home direcotry.
+            if (user === null) {
+                return;
+            }
+
             // Reset selected when path changes
             setSelected([]);
 
@@ -137,7 +145,7 @@ export const Application = () => {
                 client.close();
             };
         },
-        [path]
+        [path, user]
     );
 
     useInit(() => {
