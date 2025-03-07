@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-28 03:07+0000\n"
+"POT-Creation-Date: 2025-03-07 03:16+0000\n"
 "PO-Revision-Date: 2025-02-12 19:38+0000\n"
 "Last-Translator: Luna Jernberg <bittin@reimu.nl>\n"
 "Language-Team: Swedish <https://translate.fedoraproject.org/projects/cockpit-"
@@ -91,7 +91,7 @@ msgstr "Lägg till i bokmärken"
 msgid "Apply this action to all conflicting files"
 msgstr "Tillämpa den här åtgärden på alla konfliktfiler"
 
-#: src/common.ts:86
+#: src/common.ts:66
 msgid "Block device"
 msgstr "Blockenhet"
 
@@ -138,7 +138,7 @@ msgstr "Ändra behörigheter"
 msgid "Change permissions for enclosed files"
 msgstr "Ändra behörigheter för bifogade filer"
 
-#: src/common.ts:87
+#: src/common.ts:67
 msgid "Character device"
 msgstr "Teckenenhet"
 
@@ -210,7 +210,7 @@ msgstr "Radera fil $0?"
 msgid "Delete link $0?"
 msgstr "Radera länk $0?"
 
-#: src/common.ts:88
+#: src/common.ts:68
 msgid "Directory"
 msgstr "Katalog"
 
@@ -246,7 +246,7 @@ msgstr "Katalognamn för långt"
 msgid "Directory owner"
 msgstr "Katalogägare"
 
-#: src/common.ts:139
+#: src/common.ts:119
 msgid "Directory with the same name exists"
 msgstr "Katalog med samma namn existerar"
 
@@ -283,7 +283,7 @@ msgstr "Redigera behörigheter"
 msgid "Editing"
 msgstr "Redigerar"
 
-#: src/common.ts:76
+#: src/common.ts:56
 msgid "Execute-only"
 msgstr "Exekvering-endast"
 
@@ -295,7 +295,7 @@ msgstr "Misslyckades"
 msgid "File browser"
 msgstr "Filbläddrare"
 
-#: src/common.ts:141
+#: src/common.ts:121
 msgid "File exists"
 msgstr "Fil existerar"
 
@@ -307,7 +307,7 @@ msgstr "Filnamn"
 msgid "File uploaded"
 msgstr "Fil uppladdad"
 
-#: src/common.ts:136
+#: src/common.ts:116
 msgid "Filename is the same as original name"
 msgstr "Filnamn är samma som originalnamn"
 
@@ -432,19 +432,19 @@ msgstr "Mest tillåtande"
 msgid "Name"
 msgstr "Namn"
 
-#: src/common.ts:130
+#: src/common.ts:110
 msgid "Name cannot be empty"
 msgstr "Namn kan inte vara tomt"
 
-#: src/common.ts:134
+#: src/common.ts:114
 msgid "Name cannot include a /"
 msgstr "Namn kan inte inkludera ett /"
 
-#: src/common.ts:132
+#: src/common.ts:112
 msgid "Name too long"
 msgstr "Namn för långt"
 
-#: src/common.ts:89
+#: src/common.ts:69
 msgid "Named pipe"
 msgstr "Namngivet rör"
 
@@ -476,7 +476,7 @@ msgstr "Ingen åtkomst"
 msgid "No matching results"
 msgstr "Inga matchande resultat"
 
-#: src/common.ts:75
+#: src/common.ts:55
 msgid "None"
 msgstr "Inga"
 
@@ -554,23 +554,23 @@ msgstr "Behörigheter"
 msgid "Permissions for $0 files"
 msgstr "Behörigheter för $0 filer"
 
-#: src/common.ts:80
+#: src/common.ts:60
 msgid "Read and execute"
 msgstr "Läs och exekvera"
 
-#: src/dialogs/permissions.tsx:225 src/common.ts:81
+#: src/dialogs/permissions.tsx:225 src/common.ts:61
 msgid "Read and write"
 msgstr "Läs och skriv"
 
-#: src/common.ts:82
+#: src/common.ts:62
 msgid "Read, write, and execute"
 msgstr "Läs, skriv, och exekvera"
 
-#: src/dialogs/editor.tsx:172 src/dialogs/permissions.tsx:230 src/common.ts:79
+#: src/dialogs/editor.tsx:172 src/dialogs/permissions.tsx:230 src/common.ts:59
 msgid "Read-only"
 msgstr "Läs-endast"
 
-#: src/common.ts:91
+#: src/common.ts:71
 msgid "Regular file"
 msgstr "Vanlig fil"
 
@@ -638,7 +638,7 @@ msgstr "Storlek"
 msgid "Smallest size"
 msgstr "Minsta storlek"
 
-#: src/common.ts:92
+#: src/common.ts:72
 msgid "Socket"
 msgstr "Uttag"
 
@@ -646,7 +646,7 @@ msgstr "Uttag"
 msgid "Sort"
 msgstr "Sortera"
 
-#: src/common.ts:90
+#: src/common.ts:70
 msgid "Symbolic link"
 msgstr "Symbolisk länk"
 
@@ -702,11 +702,11 @@ msgstr "Användare"
 msgid "View $0"
 msgstr "Visa $0"
 
-#: src/common.ts:78
+#: src/common.ts:58
 msgid "Write and execute"
 msgstr "Skriv och exekvera"
 
-#: src/dialogs/permissions.tsx:245 src/common.ts:77
+#: src/dialogs/permissions.tsx:245 src/common.ts:57
 msgid "Write-only"
 msgstr "Skriv-endast"
 

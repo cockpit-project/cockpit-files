@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-28 03:07+0000\n"
+"POT-Creation-Date: 2025-03-07 03:16+0000\n"
 "PO-Revision-Date: 2025-01-31 14:23+0000\n"
 "Last-Translator: JW Wang <v72807647@gmail.com>\n"
 "Language-Team: Chinese (Traditional) <https://translate.fedoraproject.org/"
@@ -91,7 +91,7 @@ msgstr "新增書籤"
 msgid "Apply this action to all conflicting files"
 msgstr "套用此動作至所有發生衝突的檔案"
 
-#: src/common.ts:86
+#: src/common.ts:66
 msgid "Block device"
 msgstr "區塊裝置"
 
@@ -138,7 +138,7 @@ msgstr "變更權限"
 msgid "Change permissions for enclosed files"
 msgstr "變更其中檔案的權限"
 
-#: src/common.ts:87
+#: src/common.ts:67
 msgid "Character device"
 msgstr "字元裝置"
 
@@ -210,7 +210,7 @@ msgstr "刪除檔案 $0 ？"
 msgid "Delete link $0?"
 msgstr "刪除連結 $0 ？"
 
-#: src/common.ts:88
+#: src/common.ts:68
 msgid "Directory"
 msgstr "目錄"
 
@@ -246,7 +246,7 @@ msgstr "目錄名稱太長"
 msgid "Directory owner"
 msgstr "目錄擁有者"
 
-#: src/common.ts:139
+#: src/common.ts:119
 msgid "Directory with the same name exists"
 msgstr "相同名稱的目錄已存在"
 
@@ -283,7 +283,7 @@ msgstr "編輯權限"
 msgid "Editing"
 msgstr "正在編輯"
 
-#: src/common.ts:76
+#: src/common.ts:56
 msgid "Execute-only"
 msgstr "只能執行"
 
@@ -295,7 +295,7 @@ msgstr "失敗"
 msgid "File browser"
 msgstr "檔案瀏覽器"
 
-#: src/common.ts:141
+#: src/common.ts:121
 msgid "File exists"
 msgstr "檔案已存在"
 
@@ -307,7 +307,7 @@ msgstr "檔案名稱"
 msgid "File uploaded"
 msgstr "檔案已上傳"
 
-#: src/common.ts:136
+#: src/common.ts:116
 msgid "Filename is the same as original name"
 msgstr "檔案名稱與原本相同"
 
@@ -430,19 +430,19 @@ msgstr "最寬鬆的權限"
 msgid "Name"
 msgstr "名稱"
 
-#: src/common.ts:130
+#: src/common.ts:110
 msgid "Name cannot be empty"
 msgstr "名稱不能為空值"
 
-#: src/common.ts:134
+#: src/common.ts:114
 msgid "Name cannot include a /"
 msgstr "名稱不能包含 /"
 
-#: src/common.ts:132
+#: src/common.ts:112
 msgid "Name too long"
 msgstr "名稱太長"
 
-#: src/common.ts:89
+#: src/common.ts:69
 msgid "Named pipe"
 msgstr "Named pipe"
 
@@ -476,7 +476,7 @@ msgstr "無存取權限"
 msgid "No matching results"
 msgstr "沒有找到相符的結果"
 
-#: src/common.ts:75
+#: src/common.ts:55
 msgid "None"
 msgstr "無"
 
@@ -554,23 +554,23 @@ msgstr "權限"
 msgid "Permissions for $0 files"
 msgstr "變更 $0 個檔案的權限"
 
-#: src/common.ts:80
+#: src/common.ts:60
 msgid "Read and execute"
 msgstr "讀取與執行"
 
-#: src/dialogs/permissions.tsx:225 src/common.ts:81
+#: src/dialogs/permissions.tsx:225 src/common.ts:61
 msgid "Read and write"
 msgstr "讀取與寫入"
 
-#: src/common.ts:82
+#: src/common.ts:62
 msgid "Read, write, and execute"
 msgstr "讀取、寫入與執行"
 
-#: src/dialogs/editor.tsx:172 src/dialogs/permissions.tsx:230 src/common.ts:79
+#: src/dialogs/editor.tsx:172 src/dialogs/permissions.tsx:230 src/common.ts:59
 msgid "Read-only"
 msgstr "只能讀取"
 
-#: src/common.ts:91
+#: src/common.ts:71
 msgid "Regular file"
 msgstr "一般檔案"
 
@@ -638,7 +638,7 @@ msgstr "大小"
 msgid "Smallest size"
 msgstr "大小最小"
 
-#: src/common.ts:92
+#: src/common.ts:72
 msgid "Socket"
 msgstr "Socket"
 
@@ -646,7 +646,7 @@ msgstr "Socket"
 msgid "Sort"
 msgstr "排序"
 
-#: src/common.ts:90
+#: src/common.ts:70
 msgid "Symbolic link"
 msgstr "符號連結"
 
@@ -703,11 +703,11 @@ msgstr "使用者"
 msgid "View $0"
 msgstr "檢視 $0"
 
-#: src/common.ts:78
+#: src/common.ts:58
 msgid "Write and execute"
 msgstr "寫入與執行"
 
-#: src/dialogs/permissions.tsx:245 src/common.ts:77
+#: src/dialogs/permissions.tsx:245 src/common.ts:57
 msgid "Write-only"
 msgstr "只能寫入"
 

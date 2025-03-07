@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-28 03:07+0000\n"
+"POT-Creation-Date: 2025-03-07 03:16+0000\n"
 "PO-Revision-Date: 2025-02-12 19:38+0000\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <https://translate.fedoraproject.org/projects/"
@@ -91,7 +91,7 @@ msgstr "სანიშნეებში დამატება"
 msgid "Apply this action to all conflicting files"
 msgstr "ამ ქმედების გადატარება ყველა კონფლიქტურ ფაილზე"
 
-#: src/common.ts:86
+#: src/common.ts:66
 msgid "Block device"
 msgstr "ბლოკური მოწყობილობა"
 
@@ -138,7 +138,7 @@ msgstr "წვდომების შეცვლა"
 msgid "Change permissions for enclosed files"
 msgstr "ჩასმული ფაილების წვდომების შეცვლა"
 
-#: src/common.ts:87
+#: src/common.ts:67
 msgid "Character device"
 msgstr "სიმბოლური მოწყობილობა"
 
@@ -210,7 +210,7 @@ msgstr "წავშალო ფაილი $0?"
 msgid "Delete link $0?"
 msgstr "წავშალო ბმული $0?"
 
-#: src/common.ts:88
+#: src/common.ts:68
 msgid "Directory"
 msgstr "საქაღალდე"
 
@@ -246,7 +246,7 @@ msgstr "საქაღალდის სახელი ძალიან გ
 msgid "Directory owner"
 msgstr "საქაღალდის მფლობელი"
 
-#: src/common.ts:139
+#: src/common.ts:119
 msgid "Directory with the same name exists"
 msgstr "საქაღალდე იგივე სახელით უკვე არსებობს"
 
@@ -283,7 +283,7 @@ msgstr "წვდომების ჩასწორება"
 msgid "Editing"
 msgstr "ჩასწორება"
 
-#: src/common.ts:76
+#: src/common.ts:56
 msgid "Execute-only"
 msgstr "მხოლოდ-გამშვები"
 
@@ -295,7 +295,7 @@ msgstr "შეცდომა"
 msgid "File browser"
 msgstr "ფაილების ბრაუზერი"
 
-#: src/common.ts:141
+#: src/common.ts:121
 msgid "File exists"
 msgstr "ფაილი არსებობს"
 
@@ -307,7 +307,7 @@ msgstr "ფაილის სახელი"
 msgid "File uploaded"
 msgstr "ფაილი ატვირთულია"
 
-#: src/common.ts:136
+#: src/common.ts:116
 msgid "Filename is the same as original name"
 msgstr "ფაილის სახელი იგივეა, რაც საწყისი სახელი"
 
@@ -432,19 +432,19 @@ msgstr "ყველაზე მეტი დაშვებით"
 msgid "Name"
 msgstr "სახელი"
 
-#: src/common.ts:130
+#: src/common.ts:110
 msgid "Name cannot be empty"
 msgstr "სახელი არ შეიძლება იყოს ცარიელი"
 
-#: src/common.ts:134
+#: src/common.ts:114
 msgid "Name cannot include a /"
 msgstr "სახელი, არ შეიძლება, სიმბოლოს '/' შეიცავდეს"
 
-#: src/common.ts:132
+#: src/common.ts:112
 msgid "Name too long"
 msgstr "სახელი ძალიან გრძელია"
 
-#: src/common.ts:89
+#: src/common.ts:69
 msgid "Named pipe"
 msgstr "სახელიანი ფაიფი"
 
@@ -476,7 +476,7 @@ msgstr "წვდომის გარეშე"
 msgid "No matching results"
 msgstr "პასუხები არაა"
 
-#: src/common.ts:75
+#: src/common.ts:55
 msgid "None"
 msgstr "არაფერი"
 
@@ -554,23 +554,23 @@ msgstr "წვდომები"
 msgid "Permissions for $0 files"
 msgstr "წვდომები $0 ფაილისთვის"
 
-#: src/common.ts:80
+#: src/common.ts:60
 msgid "Read and execute"
 msgstr "წაკითხვა და გაშვება"
 
-#: src/dialogs/permissions.tsx:225 src/common.ts:81
+#: src/dialogs/permissions.tsx:225 src/common.ts:61
 msgid "Read and write"
 msgstr "წაკითხვა და ჩაწერა"
 
-#: src/common.ts:82
+#: src/common.ts:62
 msgid "Read, write, and execute"
 msgstr "წაკითხვა, ჩაწერა და გაშვება"
 
-#: src/dialogs/editor.tsx:172 src/dialogs/permissions.tsx:230 src/common.ts:79
+#: src/dialogs/editor.tsx:172 src/dialogs/permissions.tsx:230 src/common.ts:59
 msgid "Read-only"
 msgstr "მხოლოდ-წასაკითხად"
 
-#: src/common.ts:91
+#: src/common.ts:71
 msgid "Regular file"
 msgstr "ჩვეულებრივი ფაილი"
 
@@ -638,7 +638,7 @@ msgstr "ზომა"
 msgid "Smallest size"
 msgstr "უმცირესი ზომა"
 
-#: src/common.ts:92
+#: src/common.ts:72
 msgid "Socket"
 msgstr "სოკეტი"
 
@@ -646,7 +646,7 @@ msgstr "სოკეტი"
 msgid "Sort"
 msgstr "დალაგება"
 
-#: src/common.ts:90
+#: src/common.ts:70
 msgid "Symbolic link"
 msgstr "სიმბმული"
 
@@ -703,11 +703,11 @@ msgstr "მომხმარებელი"
 msgid "View $0"
 msgstr "$0-ის ნახვა"
 
-#: src/common.ts:78
+#: src/common.ts:58
 msgid "Write and execute"
 msgstr "ჩაწერა და შესრულება"
 
-#: src/dialogs/permissions.tsx:245 src/common.ts:77
+#: src/dialogs/permissions.tsx:245 src/common.ts:57
 msgid "Write-only"
 msgstr "მხოლოდ-ჩაწერადი"
 

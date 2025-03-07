@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-28 03:07+0000\n"
+"POT-Creation-Date: 2025-03-07 03:16+0000\n"
 "PO-Revision-Date: 2025-02-04 07:14+0000\n"
 "Last-Translator: N M <nm@users.noreply.translate.fedoraproject.org>\n"
 "Language-Team: Spanish <https://translate.fedoraproject.org/projects/cockpit-"
@@ -95,7 +95,7 @@ msgstr "Agregar marcador"
 msgid "Apply this action to all conflicting files"
 msgstr "Aplicar esta acción para todos los conflictos"
 
-#: src/common.ts:86
+#: src/common.ts:66
 msgid "Block device"
 msgstr "Bloquear dispositivo"
 
@@ -142,7 +142,7 @@ msgstr "Modificar permisos"
 msgid "Change permissions for enclosed files"
 msgstr "Modificar permisos para los archivos incluidos"
 
-#: src/common.ts:87
+#: src/common.ts:67
 msgid "Character device"
 msgstr "Dispositivo de caracteres"
 
@@ -214,7 +214,7 @@ msgstr "¿Eliminar archivo $0?"
 msgid "Delete link $0?"
 msgstr "¿Eliminar enlace $0?"
 
-#: src/common.ts:88
+#: src/common.ts:68
 msgid "Directory"
 msgstr "Directorio"
 
@@ -250,7 +250,7 @@ msgstr "El nombre del directorio es demasiado largo"
 msgid "Directory owner"
 msgstr "Propietario del directorio"
 
-#: src/common.ts:139
+#: src/common.ts:119
 msgid "Directory with the same name exists"
 msgstr "Ya existe un directorio con el mismo nombre"
 
@@ -287,7 +287,7 @@ msgstr "Editar permisos"
 msgid "Editing"
 msgstr "Editando"
 
-#: src/common.ts:76
+#: src/common.ts:56
 msgid "Execute-only"
 msgstr "Ejecutar solamente"
 
@@ -299,7 +299,7 @@ msgstr "Falló"
 msgid "File browser"
 msgstr "Explorador de archivos"
 
-#: src/common.ts:141
+#: src/common.ts:121
 msgid "File exists"
 msgstr "El archivo existe"
 
@@ -311,7 +311,7 @@ msgstr "Nombre de archivo"
 msgid "File uploaded"
 msgstr "Archivo subido"
 
-#: src/common.ts:136
+#: src/common.ts:116
 msgid "Filename is the same as original name"
 msgstr "El nombre de archivo es el mismo que el nombre original"
 
@@ -434,19 +434,19 @@ msgstr "Más permisivo"
 msgid "Name"
 msgstr "Nombre"
 
-#: src/common.ts:130
+#: src/common.ts:110
 msgid "Name cannot be empty"
 msgstr "Nombre no puede estar vacío."
 
-#: src/common.ts:134
+#: src/common.ts:114
 msgid "Name cannot include a /"
 msgstr "El nombre no puede contener /"
 
-#: src/common.ts:132
+#: src/common.ts:112
 msgid "Name too long"
 msgstr "El nombre es demasiado largo"
 
-#: src/common.ts:89
+#: src/common.ts:69
 msgid "Named pipe"
 msgstr "Tubería con nombre"
 
@@ -480,7 +480,7 @@ msgstr "No hay acceso"
 msgid "No matching results"
 msgstr "No se encontraron resultados"
 
-#: src/common.ts:75
+#: src/common.ts:55
 msgid "None"
 msgstr "Ninguno"
 
@@ -558,23 +558,23 @@ msgstr "Permisos"
 msgid "Permissions for $0 files"
 msgstr "Permisos para $0 archivos"
 
-#: src/common.ts:80
+#: src/common.ts:60
 msgid "Read and execute"
 msgstr "Lectura y ejecución"
 
-#: src/dialogs/permissions.tsx:225 src/common.ts:81
+#: src/dialogs/permissions.tsx:225 src/common.ts:61
 msgid "Read and write"
 msgstr "Lectura y escritura"
 
-#: src/common.ts:82
+#: src/common.ts:62
 msgid "Read, write, and execute"
 msgstr "Lectura, escritura y ejecución"
 
-#: src/dialogs/editor.tsx:172 src/dialogs/permissions.tsx:230 src/common.ts:79
+#: src/dialogs/editor.tsx:172 src/dialogs/permissions.tsx:230 src/common.ts:59
 msgid "Read-only"
 msgstr "Solo lectura"
 
-#: src/common.ts:91
+#: src/common.ts:71
 msgid "Regular file"
 msgstr "Archivo regular"
 
@@ -642,7 +642,7 @@ msgstr "Tamaño"
 msgid "Smallest size"
 msgstr "Tamaño más pequeño"
 
-#: src/common.ts:92
+#: src/common.ts:72
 msgid "Socket"
 msgstr "Socket"
 
@@ -650,7 +650,7 @@ msgstr "Socket"
 msgid "Sort"
 msgstr "Ordenar"
 
-#: src/common.ts:90
+#: src/common.ts:70
 msgid "Symbolic link"
 msgstr "Enlace simbólico"
 
@@ -707,11 +707,11 @@ msgstr "Usuario"
 msgid "View $0"
 msgstr "Ver $0"
 
-#: src/common.ts:78
+#: src/common.ts:58
 msgid "Write and execute"
 msgstr "Escritura y ejecución"
 
-#: src/dialogs/permissions.tsx:245 src/common.ts:77
+#: src/dialogs/permissions.tsx:245 src/common.ts:57
 msgid "Write-only"
 msgstr "Solo escritura"
 

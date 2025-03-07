@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-28 03:07+0000\n"
+"POT-Creation-Date: 2025-03-07 03:16+0000\n"
 "PO-Revision-Date: 2025-02-12 19:38+0000\n"
 "Last-Translator: 김인수 <simmon@nplob.com>\n"
 "Language-Team: Korean <https://translate.fedoraproject.org/projects/cockpit-"
@@ -90,7 +90,7 @@ msgstr "즐겨찾기에 추가"
 msgid "Apply this action to all conflicting files"
 msgstr "모든 충돌하는 파일에 이와 같은 동작을 적용합니다"
 
-#: src/common.ts:86
+#: src/common.ts:66
 msgid "Block device"
 msgstr "블록 장치"
 
@@ -137,7 +137,7 @@ msgstr "권한 변경"
 msgid "Change permissions for enclosed files"
 msgstr "첨부된 파일을 위한 권한 변경"
 
-#: src/common.ts:87
+#: src/common.ts:67
 msgid "Character device"
 msgstr "문자 장치"
 
@@ -209,7 +209,7 @@ msgstr "파일 $0를 삭제할까요?"
 msgid "Delete link $0?"
 msgstr "링크 $0를 삭제할까요?"
 
-#: src/common.ts:88
+#: src/common.ts:68
 msgid "Directory"
 msgstr "디렉토리"
 
@@ -245,7 +245,7 @@ msgstr "디렉토리 이름이 너무 길어요"
 msgid "Directory owner"
 msgstr "디렉토리 소유자"
 
-#: src/common.ts:139
+#: src/common.ts:119
 msgid "Directory with the same name exists"
 msgstr "동일한 이름을 갖는 디렉토리가 존재합니다"
 
@@ -282,7 +282,7 @@ msgstr "권한을 편집합니다"
 msgid "Editing"
 msgstr "편집하기"
 
-#: src/common.ts:76
+#: src/common.ts:56
 msgid "Execute-only"
 msgstr "실행-전용"
 
@@ -294,7 +294,7 @@ msgstr "실패함"
 msgid "File browser"
 msgstr "파일 탐색기"
 
-#: src/common.ts:141
+#: src/common.ts:121
 msgid "File exists"
 msgstr "파일이 존재합니다"
 
@@ -306,7 +306,7 @@ msgstr "파일 이름"
 msgid "File uploaded"
 msgstr "파일 올려짐"
 
-#: src/common.ts:136
+#: src/common.ts:116
 msgid "Filename is the same as original name"
 msgstr "파일이름이 원래의 이름과 동일합니다"
 
@@ -431,19 +431,19 @@ msgstr "관대한 허용"
 msgid "Name"
 msgstr "이름"
 
-#: src/common.ts:130
+#: src/common.ts:110
 msgid "Name cannot be empty"
 msgstr "이름은 비워 둘 수 없습니다"
 
-#: src/common.ts:134
+#: src/common.ts:114
 msgid "Name cannot include a /"
 msgstr "이름은 /를 포함 할 수 없습니다"
 
-#: src/common.ts:132
+#: src/common.ts:112
 msgid "Name too long"
 msgstr "이름이 너무 길어요"
 
-#: src/common.ts:89
+#: src/common.ts:69
 msgid "Named pipe"
 msgstr "이름이 지정된 파이프"
 
@@ -475,7 +475,7 @@ msgstr "접근 불가"
 msgid "No matching results"
 msgstr "일치하는 결과를 찾을 수 없습니다"
 
-#: src/common.ts:75
+#: src/common.ts:55
 msgid "None"
 msgstr "없음"
 
@@ -553,23 +553,23 @@ msgstr "권한"
 msgid "Permissions for $0 files"
 msgstr "$0 파일을 위한 권한"
 
-#: src/common.ts:80
+#: src/common.ts:60
 msgid "Read and execute"
 msgstr "읽기 및 실행"
 
-#: src/dialogs/permissions.tsx:225 src/common.ts:81
+#: src/dialogs/permissions.tsx:225 src/common.ts:61
 msgid "Read and write"
 msgstr "일기 및 쓰기"
 
-#: src/common.ts:82
+#: src/common.ts:62
 msgid "Read, write, and execute"
 msgstr "읽기, 쓰기 및 실행"
 
-#: src/dialogs/editor.tsx:172 src/dialogs/permissions.tsx:230 src/common.ts:79
+#: src/dialogs/editor.tsx:172 src/dialogs/permissions.tsx:230 src/common.ts:59
 msgid "Read-only"
 msgstr "읽기-전용"
 
-#: src/common.ts:91
+#: src/common.ts:71
 msgid "Regular file"
 msgstr "일반 파일"
 
@@ -637,7 +637,7 @@ msgstr "크기"
 msgid "Smallest size"
 msgstr "최소 크기"
 
-#: src/common.ts:92
+#: src/common.ts:72
 msgid "Socket"
 msgstr "소켓"
 
@@ -645,7 +645,7 @@ msgstr "소켓"
 msgid "Sort"
 msgstr "정렬"
 
-#: src/common.ts:90
+#: src/common.ts:70
 msgid "Symbolic link"
 msgstr "심볼릭 링크"
 
@@ -701,11 +701,11 @@ msgstr "사용자"
 msgid "View $0"
 msgstr "$0 보기"
 
-#: src/common.ts:78
+#: src/common.ts:58
 msgid "Write and execute"
 msgstr "쓰기 및 실행"
 
-#: src/dialogs/permissions.tsx:245 src/common.ts:77
+#: src/dialogs/permissions.tsx:245 src/common.ts:57
 msgid "Write-only"
 msgstr "쓰기-전용"
 
