@@ -46,7 +46,7 @@ import { filetype_lookup } from './filetype-lookup.ts';
 
 superuser.reload_page_on_change();
 
-interface Alert {
+interface AlertInfo {
     key: string,
     title: string,
     variant: AlertVariant,
@@ -81,7 +81,7 @@ export const Application = () => {
     const [selected, setSelected] = useState<FolderFileInfo[]>([]);
     const [showHidden, setShowHidden] = useState(localStorage.getItem("files:showHiddenFiles") === "true");
     const [clipboard, setClipboard] = useState<ClipboardInfo>({ path: "/", files: [] });
-    const [alerts, setAlerts] = useState<Alert[]>([]);
+    const [alerts, setAlerts] = useState<AlertInfo[]>([]);
     const [cwdInfo, setCwdInfo] = useState<FileInfo | null>(null);
 
     const { options } = location;
