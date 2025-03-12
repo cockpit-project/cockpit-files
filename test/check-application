@@ -25,7 +25,7 @@ class TestFiles(testlib.MachineCase):
         # Run browser in UTC as the displayed time is in the browser's timezone
         os.environ['TZ'] = 'UTC'
 
-    def setUp(self) -> None:  # type: ignore[override]
+    def setUp(self) -> None:
         super().setUp()
         self.restore_dir("/home/admin")
 
@@ -2484,7 +2484,7 @@ class TestFiles(testlib.MachineCase):
             assert_upload_alert([os.path.basename(files[0])], "admin:admin")
 
             self.assertEqual(m.execute(f"cat {dest_dir}/{filename}"),
-                            subprocess.check_output(["cat", files[0]]).decode())
+                             subprocess.check_output(["cat", files[0]]).decode())
             # reset test file
             m.execute(f"echo -n this is a test > {dest_dir}/{filename}")
 
