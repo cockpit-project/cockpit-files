@@ -1432,7 +1432,7 @@ class TestFiles(testlib.MachineCase):
             b.wait_not_present("#selinux-content")
         self.assertFalse(b.get_checked("#is-executable"))
 
-        b.set_checked("#is-executable", True)
+        b.set_checked("#is-executable", val=True)
         b.click(".pf-v5-c-modal-box button.pf-m-primary")
         b.wait_not_present(".pf-v5-c-modal-box")
 
@@ -1448,7 +1448,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_val("#edit-permissions-other-access", "read-only")
         self.assertTrue(b.get_checked("#is-executable"))
 
-        b.set_checked("#is-executable", False)
+        b.set_checked("#is-executable", val=False)
         b.click(".pf-v5-c-modal-box button.pf-m-primary")
         b.wait_not_present(".pf-v5-c-modal-box")
         self.assertEqual(self.stat("%A", f"/home/admin/{shell_script}"), "-rw-r--r--")
@@ -1477,7 +1477,7 @@ class TestFiles(testlib.MachineCase):
         m.execute(['chmod', '644', f'/home/admin/{executable_file}'])
 
         open_permissions_dialog(executable_file)
-        b.set_checked("#is-executable", True)
+        b.set_checked("#is-executable", val=True)
         b.click(".pf-v5-c-modal-box button.pf-m-primary")
         b.wait_not_present(".pf-v5-c-modal-box")
 
@@ -2509,7 +2509,7 @@ class TestFiles(testlib.MachineCase):
 
             b.wait_in_text("h1.pf-v5-c-modal-box__title", f"Replace file {filename}?")
             b.wait_in_text(".pf-v5-c-check__label", "Apply this action to all conflicting files")
-            b.set_checked("#replace-all", True)
+            b.set_checked("#replace-all", val=True)
             b.click("button.pf-m-secondary:contains('Keep original')")
             b.wait_not_present(".pf-v5-c-modal-box")
 
@@ -2521,7 +2521,7 @@ class TestFiles(testlib.MachineCase):
 
             b.wait_in_text("h1.pf-v5-c-modal-box__title", f"Replace file {filename}?")
             b.wait_in_text(".pf-v5-c-check__label", "Apply this action to all conflicting files")
-            b.set_checked("#replace-all", True)
+            b.set_checked("#replace-all", val=True)
             b.click("button.pf-m-warning:contains('Replace')")
             b.wait_not_present(".pf-v5-c-modal-box")
 

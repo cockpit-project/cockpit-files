@@ -49,8 +49,6 @@ select = [
     "YTT",     # flake8-2020
 ]
 ignore = [
-    "FBT002", # Boolean default value in function definition
-    "FBT003", # Boolean positional value in function call
     "RUF001", # String contains ambiguous `’`
 ]
 
