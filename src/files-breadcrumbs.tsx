@@ -39,11 +39,10 @@ const _ = cockpit.gettext;
 
 function BookmarkButton({ path }: { path: string }) {
     const [isOpen, setIsOpen] = React.useState(false);
-    const [user, setUser] = React.useState<cockpit.UserInfo | null>(null);
     const [bookmarks, setBookmarks] = React.useState<string[]>([]);
     const [bookmarkHandle, setBookmarkHandle] = React.useState<cockpit.FileHandle<string> | null>(null);
 
-    const { addAlert, cwdInfo } = useFilesContext();
+    const { addAlert, cwdInfo, user } = useFilesContext();
 
     const defaultBookmarks = [];
     if (user?.home) {
@@ -72,10 +71,8 @@ function BookmarkButton({ path }: { path: string }) {
     };
 
     useInit(async () => {
-        const user_info = await cockpit.user();
-        setUser(user_info);
-
-        const handle = cockpit.file(`${user_info.home}/.config/gtk-3.0/bookmarks`);
+        cockpit.assert(user !== null, "user is null in useInit");
+        const handle = cockpit.file(`${user.home}/.config/gtk-3.0/bookmarks`);
         setBookmarkHandle(handle);
 
         handle.watch((content) => {

@@ -184,7 +184,7 @@ export const Application = ({ user }: { user: cockpit.UserInfo }) => {
 
     return (
         <Page>
-            <FilesContext.Provider value={{ addAlert, removeAlert, cwdInfo }}>
+            <FilesContext.Provider value={{ addAlert, removeAlert, cwdInfo, user }}>
                 <WithDialogs>
                     <AlertGroup isToast isLiveRegion>
                         {alerts.map(alert => (

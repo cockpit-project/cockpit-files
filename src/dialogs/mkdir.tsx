@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { Button } from "@patternfly/react-core/dist/esm/components/Button";
 import { Form, FormGroup } from "@patternfly/react-core/dist/esm/components/Form";
@@ -67,16 +67,11 @@ const CreateDirectoryModal = ({ currentPath, dialogResult } : {
     const [nameError, setNameError] = useState<string | undefined>();
     const [errorMessage, setErrorMessage] = useState<string | undefined>();
     const [owner, setOwner] = useState<string | undefined>();
-    const [user, setUser] = useState<cockpit.UserInfo| undefined>();
     const createDirectory = () => {
         const path = currentPath + name;
         create_directory(path, owner).then(dialogResult.resolve, err => setErrorMessage(err.message));
     };
-    const { cwdInfo } = useFilesContext();
-
-    useEffect(() => {
-        cockpit.user().then(user => setUser(user));
-    }, []);
+    const { cwdInfo, user } = useFilesContext();
 
     const candidates = [];
     if (superuser.allowed && user && cwdInfo) {

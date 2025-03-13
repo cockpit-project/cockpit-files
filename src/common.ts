@@ -41,12 +41,14 @@ interface FilesContextType {
                actionLinks?: React.ReactNode) => void,
     removeAlert: (key: string) => void,
     cwdInfo: FileInfo | null,
+    user: cockpit.UserInfo | null,
 }
 
 export const FilesContext = React.createContext({
     addAlert: () => console.warn("FilesContext not initialized"),
     removeAlert: () => console.warn("FilesContext not initialized"),
     cwdInfo: null,
+    user: null,
 } as FilesContextType);
 
 export const useFilesContext = () => useContext(FilesContext);
