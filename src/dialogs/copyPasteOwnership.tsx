@@ -141,15 +141,14 @@ const CopyPasteAsOwnerModal = ({
     // @ts-expect-error superuser.js is not typed
     useEvent(superuser, "changed");
     const [selectedOwner, setSelectedOwner] = useState<string | undefined>();
-    const { cwdInfo, addAlert } = useFilesContext();
+    const { cwdInfo, addAlert, user } = useFilesContext();
     const [candidatesMap, setCandidatesMap] = useState<Map<string, string> | undefined>();
 
     useInit(async () => {
-        const userInfo = await cockpit.user();
         let map: Map<string, string> = new Map();
 
-        if (superuser.allowed && userInfo && cwdInfo) {
-            map = makeCandidatesMap(userInfo, cwdInfo, clipboard);
+        if (superuser.allowed && user && cwdInfo) {
+            map = makeCandidatesMap(user, cwdInfo, clipboard);
             if (selectedOwner === undefined) {
                 setSelectedOwner(map.keys().next().value);
             }
