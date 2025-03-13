@@ -36,7 +36,6 @@ import { edit_file, MAX_EDITOR_FILE_SIZE } from './dialogs/editor.tsx';
 import { show_create_directory_dialog } from './dialogs/mkdir.tsx';
 import { edit_permissions } from './dialogs/permissions.jsx';
 import { show_rename_dialog } from './dialogs/rename.tsx';
-import { create_link } from "./dialogs/symlink.tsx";
 import { downloadFile } from './download.tsx';
 
 const _ = cockpit.gettext;
@@ -149,15 +148,6 @@ export function get_menu_items(
                     id: "open-file",
                     title: _("Open text file"),
                     onClick: () => edit_file(dialogs, path + item.name)
-                },
-                { type: "divider" },
-            );
-        if (item.type === 'reg' || item.type === "dir")
-            menuItems.push(
-                {
-                    id: "create-symlink",
-                    title: _("Create link"),
-                    onClick: () => create_link(dialogs, path, item)
                 },
                 { type: "divider" },
             );
