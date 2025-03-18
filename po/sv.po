@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-07 03:16+0000\n"
+"POT-Creation-Date: 2025-03-14 03:16+0000\n"
 "PO-Revision-Date: 2025-02-12 19:38+0000\n"
 "Last-Translator: Luna Jernberg <bittin@reimu.nl>\n"
 "Language-Team: Swedish <https://translate.fedoraproject.org/projects/cockpit-"
@@ -83,7 +83,7 @@ msgstr "Åtkomst"
 msgid "Activate selected item, enter directory"
 msgstr "Aktivera valt objekt, gå in i katalog"
 
-#: src/files-breadcrumbs.tsx:147
+#: src/files-breadcrumbs.tsx:144
 msgid "Add to bookmarks"
 msgstr "Lägg till i bokmärken"
 
@@ -91,18 +91,18 @@ msgstr "Lägg till i bokmärken"
 msgid "Apply this action to all conflicting files"
 msgstr "Tillämpa den här åtgärden på alla konfliktfiler"
 
-#: src/common.ts:66
+#: src/common.ts:68
 msgid "Block device"
 msgstr "Blockenhet"
 
-#: src/files-breadcrumbs.tsx:158
+#: src/files-breadcrumbs.tsx:155
 msgid "Bookmarks"
 msgstr "Bokmärken"
 
 #: src/upload-button.tsx:116 src/dialogs/editor.tsx:211
-#: src/dialogs/mkdir.tsx:108 src/dialogs/permissions.tsx:320
-#: src/dialogs/create-file.tsx:161 src/dialogs/delete.tsx:98
-#: src/dialogs/rename.tsx:98 src/dialogs/copyPasteOwnership.tsx:179
+#: src/dialogs/mkdir.tsx:103 src/dialogs/permissions.tsx:320
+#: src/dialogs/create-file.tsx:160 src/dialogs/delete.tsx:98
+#: src/dialogs/rename.tsx:98 src/dialogs/copyPasteOwnership.tsx:178
 msgid "Cancel"
 msgstr "Avbryt"
 
@@ -110,15 +110,15 @@ msgstr "Avbryt"
 msgid "Cancel upload of $0"
 msgstr "Avbryt uppladdning av $0"
 
-#: src/upload-button.tsx:341
+#: src/upload-button.tsx:340
 msgid "Cancelled"
 msgstr "Avbruten"
 
-#: src/upload-button.tsx:342
+#: src/upload-button.tsx:341
 msgid "Cancelled upload of $0"
 msgstr "Avbruten uppladdning av $0"
 
-#: src/dialogs/create-file.tsx:227
+#: src/dialogs/create-file.tsx:226
 msgid "Cannot create file in current directory"
 msgstr "Kan inte skapa fil i nuvarande katalog"
 
@@ -130,7 +130,7 @@ msgstr "Det går inte att släppa filer, en annan uppladdning pågår redan"
 msgid "Change"
 msgstr "Ändra"
 
-#: src/upload-button.tsx:392
+#: src/upload-button.tsx:391
 msgid "Change permissions"
 msgstr "Ändra behörigheter"
 
@@ -138,7 +138,7 @@ msgstr "Ändra behörigheter"
 msgid "Change permissions for enclosed files"
 msgstr "Ändra behörigheter för bifogade filer"
 
-#: src/common.ts:67
+#: src/common.ts:69
 msgid "Character device"
 msgstr "Teckenenhet"
 
@@ -170,15 +170,15 @@ msgstr "Kopiera"
 msgid "Copy selected file or directory"
 msgstr "Kopiera vald fil eller katalog"
 
-#: src/dialogs/mkdir.tsx:106 src/dialogs/create-file.tsx:158
+#: src/dialogs/mkdir.tsx:101 src/dialogs/create-file.tsx:157
 msgid "Create"
 msgstr "Skapa"
 
-#: src/menu.tsx:112 src/dialogs/mkdir.tsx:92
+#: src/menu.tsx:112 src/dialogs/mkdir.tsx:87
 msgid "Create directory"
 msgstr "Skapa katalog"
 
-#: src/menu.tsx:117 src/dialogs/create-file.tsx:145
+#: src/menu.tsx:117 src/dialogs/create-file.tsx:144
 msgid "Create file"
 msgstr "Skapa fil"
 
@@ -210,7 +210,7 @@ msgstr "Radera fil $0?"
 msgid "Delete link $0?"
 msgstr "Radera länk $0?"
 
-#: src/common.ts:68
+#: src/common.ts:70
 msgid "Directory"
 msgstr "Katalog"
 
@@ -226,7 +226,7 @@ msgstr "Katalog innehåller $0 kataloger, $1 filer, $2 dolda"
 msgid "Directory is empty"
 msgstr "Katalog är tom"
 
-#: src/dialogs/mkdir.tsx:126
+#: src/dialogs/mkdir.tsx:121
 msgid "Directory name"
 msgstr "Katalognamn"
 
@@ -242,11 +242,11 @@ msgstr "Katalognamn kan inte inkludera ett /"
 msgid "Directory name too long"
 msgstr "Katalognamn för långt"
 
-#: src/dialogs/mkdir.tsx:140
+#: src/dialogs/mkdir.tsx:135
 msgid "Directory owner"
 msgstr "Katalogägare"
 
-#: src/common.ts:119
+#: src/common.ts:121
 msgid "Directory with the same name exists"
 msgstr "Katalog med samma namn existerar"
 
@@ -271,7 +271,7 @@ msgstr "Släpp filer för att ladda upp"
 msgid "Edit $0"
 msgstr "Redigera $0"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:96 src/files-breadcrumbs.tsx:306
+#: src/dialogs/keyboardShortcutsHelp.tsx:96 src/files-breadcrumbs.tsx:303
 msgid "Edit path"
 msgstr "Redigera sökväg"
 
@@ -283,11 +283,11 @@ msgstr "Redigera behörigheter"
 msgid "Editing"
 msgstr "Redigerar"
 
-#: src/common.ts:56
+#: src/common.ts:58
 msgid "Execute-only"
 msgstr "Exekvering-endast"
 
-#: src/upload-button.tsx:280
+#: src/upload-button.tsx:279
 msgid "Failed"
 msgstr "Misslyckades"
 
@@ -295,19 +295,19 @@ msgstr "Misslyckades"
 msgid "File browser"
 msgstr "Filbläddrare"
 
-#: src/common.ts:121
+#: src/common.ts:123
 msgid "File exists"
 msgstr "Fil existerar"
 
-#: src/dialogs/create-file.tsx:176
+#: src/dialogs/create-file.tsx:175
 msgid "File name"
 msgstr "Filnamn"
 
-#: src/upload-button.tsx:361
+#: src/upload-button.tsx:360
 msgid "File uploaded"
 msgstr "Fil uppladdad"
 
-#: src/common.ts:116
+#: src/common.ts:118
 msgid "Filename is the same as original name"
 msgstr "Filnamn är samma som originalnamn"
 
@@ -315,7 +315,7 @@ msgstr "Filnamn är samma som originalnamn"
 msgid "Files"
 msgstr "Filer"
 
-#: src/dialogs/copyPasteOwnership.tsx:196
+#: src/dialogs/copyPasteOwnership.tsx:195
 msgid ""
 "Files being pasted have a different owner. By default, ownership will be "
 "changed to match the destination directory."
@@ -323,11 +323,11 @@ msgstr ""
 "Filer som klistras in har en annan ägare. Som standard kommer äganderätten "
 "att ändras för att matcha målkatalogen."
 
-#: src/upload-button.tsx:361
+#: src/upload-button.tsx:360
 msgid "Files uploaded"
 msgstr "Filer uppladdade"
 
-#: src/files-breadcrumbs.tsx:239
+#: src/files-breadcrumbs.tsx:236
 msgid "Filesystem"
 msgstr "Filsystem"
 
@@ -384,7 +384,7 @@ msgstr "Gruppåtkomst"
 msgid "Hide hidden items"
 msgstr "Dölj dolda objekt"
 
-#: src/files-breadcrumbs.tsx:52
+#: src/files-breadcrumbs.tsx:51
 msgid "Home"
 msgstr "Hem"
 
@@ -432,19 +432,19 @@ msgstr "Mest tillåtande"
 msgid "Name"
 msgstr "Namn"
 
-#: src/common.ts:110
+#: src/common.ts:112
 msgid "Name cannot be empty"
 msgstr "Namn kan inte vara tomt"
 
-#: src/common.ts:114
+#: src/common.ts:116
 msgid "Name cannot include a /"
 msgstr "Namn kan inte inkludera ett /"
 
-#: src/common.ts:112
+#: src/common.ts:114
 msgid "Name too long"
 msgstr "Namn för långt"
 
-#: src/common.ts:69
+#: src/common.ts:71
 msgid "Named pipe"
 msgstr "Namngivet rör"
 
@@ -464,7 +464,7 @@ msgstr "Nytt filnamn"
 msgid "New name"
 msgstr "Nytt namn"
 
-#: src/dialogs/copyPasteOwnership.tsx:199
+#: src/dialogs/copyPasteOwnership.tsx:198
 msgid "New owner"
 msgstr "Ny ägare"
 
@@ -476,7 +476,7 @@ msgstr "Ingen åtkomst"
 msgid "No matching results"
 msgstr "Inga matchande resultat"
 
-#: src/common.ts:55
+#: src/common.ts:57
 msgid "None"
 msgstr "Inga"
 
@@ -505,7 +505,7 @@ msgid "Overwrite"
 msgstr "Skriv över"
 
 #: src/files-card-body.tsx:557 src/files-card-body.tsx:596
-#: src/dialogs/permissions.tsx:334 src/dialogs/create-file.tsx:198
+#: src/dialogs/permissions.tsx:334 src/dialogs/create-file.tsx:197
 #: src/files-footer-detail.tsx:79 src/header.tsx:99
 msgid "Owner"
 msgstr "Ägare"
@@ -526,11 +526,11 @@ msgstr "Ägare minskande"
 msgid "Ownership"
 msgstr "Ägarskap"
 
-#: src/menu.tsx:105 src/dialogs/copyPasteOwnership.tsx:177
+#: src/menu.tsx:105 src/dialogs/copyPasteOwnership.tsx:176
 msgid "Paste"
 msgstr "Klistra in"
 
-#: src/dialogs/copyPasteOwnership.tsx:187
+#: src/dialogs/copyPasteOwnership.tsx:186
 msgid "Paste as owner"
 msgstr "Klistra in som ägare"
 
@@ -542,7 +542,7 @@ msgstr "Klistra in fil eller katalog"
 msgid "Pasting failed"
 msgstr "Inklistring misslyckades"
 
-#: src/dialogs/create-file.tsx:228
+#: src/dialogs/create-file.tsx:227
 msgid "Permission denied"
 msgstr "Åtkomst nekas"
 
@@ -554,23 +554,23 @@ msgstr "Behörigheter"
 msgid "Permissions for $0 files"
 msgstr "Behörigheter för $0 filer"
 
-#: src/common.ts:60
+#: src/common.ts:62
 msgid "Read and execute"
 msgstr "Läs och exekvera"
 
-#: src/dialogs/permissions.tsx:225 src/common.ts:61
+#: src/dialogs/permissions.tsx:225 src/common.ts:63
 msgid "Read and write"
 msgstr "Läs och skriv"
 
-#: src/common.ts:62
+#: src/common.ts:64
 msgid "Read, write, and execute"
 msgstr "Läs, skriv, och exekvera"
 
-#: src/dialogs/editor.tsx:172 src/dialogs/permissions.tsx:230 src/common.ts:59
+#: src/dialogs/editor.tsx:172 src/dialogs/permissions.tsx:230 src/common.ts:61
 msgid "Read-only"
 msgstr "Läs-endast"
 
-#: src/common.ts:71
+#: src/common.ts:73
 msgid "Regular file"
 msgstr "Vanlig fil"
 
@@ -578,7 +578,7 @@ msgstr "Vanlig fil"
 msgid "Reload"
 msgstr "Ladda om"
 
-#: src/files-breadcrumbs.tsx:145
+#: src/files-breadcrumbs.tsx:142
 msgid "Remove from bookmarks"
 msgstr "Ta bort från bokmärken"
 
@@ -638,7 +638,7 @@ msgstr "Storlek"
 msgid "Smallest size"
 msgstr "Minsta storlek"
 
-#: src/common.ts:72
+#: src/common.ts:74
 msgid "Socket"
 msgstr "Uttag"
 
@@ -646,7 +646,7 @@ msgstr "Uttag"
 msgid "Sort"
 msgstr "Sortera"
 
-#: src/common.ts:70
+#: src/common.ts:72
 msgid "Symbolic link"
 msgstr "Symbolisk länk"
 
@@ -662,15 +662,15 @@ msgstr "Filen har tagits bort på disken"
 msgid "The file has changed on disk"
 msgstr "Filen har ändrats på disken"
 
-#: src/files-breadcrumbs.tsx:104
+#: src/files-breadcrumbs.tsx:101
 msgid "Unable to create bookmark directory"
 msgstr "Kan inte skapa en bokmärkeskatalog"
 
-#: src/upload-button.tsx:321
+#: src/upload-button.tsx:320
 msgid "Unable to move uploaded file to final destination"
 msgstr "Det gick inte att flytta uppladdad fil till slutdestinationen"
 
-#: src/files-breadcrumbs.tsx:124
+#: src/files-breadcrumbs.tsx:121
 msgid "Unable to save bookmark file"
 msgstr "Kan inte spara bokmärkesfilen"
 
@@ -682,7 +682,7 @@ msgstr "Ladda upp"
 msgid "Upload $0% completed"
 msgstr "Uppladdning $0% slutförd"
 
-#: src/upload-button.tsx:320 src/upload-button.tsx:344
+#: src/upload-button.tsx:319 src/upload-button.tsx:343
 msgid "Upload error"
 msgstr "Uppladdningsfel"
 
@@ -702,11 +702,11 @@ msgstr "Användare"
 msgid "View $0"
 msgstr "Visa $0"
 
-#: src/common.ts:58
+#: src/common.ts:60
 msgid "Write and execute"
 msgstr "Skriv och exekvera"
 
-#: src/dialogs/permissions.tsx:245 src/common.ts:57
+#: src/dialogs/permissions.tsx:245 src/common.ts:59
 msgid "Write-only"
 msgstr "Skriv-endast"
 
