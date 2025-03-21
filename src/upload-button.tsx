@@ -156,7 +156,7 @@ export const UploadButton = ({
     path: string,
 }) => {
     const ref = useRef<HTMLInputElement>(null);
-    const { addAlert, removeAlert, cwdInfo, user } = useFilesContext();
+    const { addAlert, removeAlert, cwdInfo } = useFilesContext();
     const dialogs = useDialogs();
     const [showPopover, setPopover] = React.useState(false);
     const { uploadedFiles, setUploadedFiles } = useContext(UploadContext);
@@ -183,8 +183,8 @@ export const UploadButton = ({
 
         // When we are superuser upload as the owner of the directory and allow
         // the user to later change ownership if required.
-        if (superuser.allowed && cwdInfo && user) {
-            const candidates = get_owner_candidates(user, cwdInfo);
+        if (superuser.allowed && cwdInfo) {
+            const candidates = get_owner_candidates(cwdInfo);
             owner = [...candidates][0];
         }
 
@@ -399,7 +399,6 @@ export const UploadButton = ({
         addAlert,
         removeAlert,
         cwdInfo,
-        user,
         dialogs,
         path,
         setUploadedFiles,

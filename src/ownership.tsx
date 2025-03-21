@@ -6,7 +6,7 @@ import type { FileInfo } from 'cockpit/fsinfo.ts';
 // disabled, it's all a moot point, since we don't have any choice (in which
 // case this function should not be used).  This is very much a heuristic, and
 // might change in the future.
-export function get_owner_candidates(user: cockpit.UserInfo, info: FileInfo) {
+export function get_owner_candidates(info: FileInfo) {
     // In case the parent directory is setgid, we always override the group we
     // create as, mirroring the usual POSIX behaviour.  There are other cases
     // where the "BSD group semantics" come into play (like mount options) but
@@ -32,12 +32,7 @@ export function get_owner_candidates(user: cockpit.UserInfo, info: FileInfo) {
     // The last option is always available: create as the normal user.  In case
     // of something inside of the user's home directory, this was probably the
     // first option as well...
-    // The first group from `cockpit.user()` is guaranteed to be the users default group
-    if (user.groups.length >= 1) {
-        candidates.add(`${user.name || user.id}:${setgid || user.groups[0] || user.gid}`);
-    } else {
-        candidates.add(`${user.name || user.id}:${setgid || user.gid}`);
-    }
+    candidates.add(`${cockpit.info.user.name}:${setgid || cockpit.info.user.group}`);
 
     return candidates;
 }

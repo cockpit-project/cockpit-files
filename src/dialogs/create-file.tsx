@@ -95,13 +95,12 @@ const CreateFileModal = ({ dialogResult, path } : {
     const [createError, setCreateError] = React.useState<string | null>(null);
     const [candidates, setCandidates] = React.useState<string[]>([]);
 
-    const { cwdInfo, user } = useFilesContext();
+    const { cwdInfo } = useFilesContext();
 
     useInit(() => {
-        cockpit.assert(user !== null, "user cannot be null");
         const owner_candidates = [];
         if (superuser.allowed && cwdInfo) {
-            owner_candidates.push(...get_owner_candidates(user, cwdInfo));
+            owner_candidates.push(...get_owner_candidates(cwdInfo));
             setOwner(owner_candidates[0]);
             setCandidates(owner_candidates);
         }
