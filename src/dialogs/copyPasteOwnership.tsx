@@ -93,11 +93,11 @@ function ownershipTypes(files: FolderFileInfo[]) {
     return [...owners];
 }
 
-function makeCandidatesMap(currentUser: cockpit.UserInfo, cwdInfo: FileInfo, clipboard: ClipboardInfo) {
+function makeCandidatesMap(cwdInfo: FileInfo, clipboard: ClipboardInfo) {
     // keys in Map() are ordered in the same order as they were inserted
     // and has no duplicates. Only the first insertion.
     const map: Map<string, string> = new Map();
-    const candidates = get_owner_candidates(currentUser, cwdInfo);
+    const candidates = get_owner_candidates(cwdInfo);
 
     // also add current ownership if it is same for all files (shallow check)
     const firstFile = clipboard.files[0];
@@ -141,14 +141,14 @@ const CopyPasteAsOwnerModal = ({
     // @ts-expect-error superuser.js is not typed
     useEvent(superuser, "changed");
     const [selectedOwner, setSelectedOwner] = useState<string | undefined>();
-    const { cwdInfo, addAlert, user } = useFilesContext();
+    const { cwdInfo, addAlert } = useFilesContext();
     const [candidatesMap, setCandidatesMap] = useState<Map<string, string> | undefined>();
 
     useInit(async () => {
         let map: Map<string, string> = new Map();
 
-        if (superuser.allowed && user && cwdInfo) {
-            map = makeCandidatesMap(user, cwdInfo, clipboard);
+        if (superuser.allowed && cwdInfo) {
+            map = makeCandidatesMap(cwdInfo, clipboard);
             if (selectedOwner === undefined) {
                 setSelectedOwner(map.keys().next().value);
             }

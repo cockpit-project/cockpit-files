@@ -42,14 +42,14 @@ function BookmarkButton({ path }: { path: string }) {
     const [bookmarks, setBookmarks] = React.useState<string[]>([]);
     const [bookmarkHandle, setBookmarkHandle] = React.useState<cockpit.FileHandle<string> | null>(null);
 
-    const { addAlert, cwdInfo, user } = useFilesContext();
+    const { addAlert, cwdInfo } = useFilesContext();
 
     const defaultBookmarks = [];
-    if (user?.home) {
-        // Ensure the home dir has a trailing / like the path
-        const home_dir = user.home.endsWith('/') ? user.home : `${user.home}/`;
-        defaultBookmarks.push({ name: _("Home"), loc: home_dir }); // TODO: add trash
-    }
+
+    // Ensure the home dir has a trailing / like the path
+    const home = cockpit.info.user.home;
+    const home_dir = home.endsWith('/') ? home : `${home}/`;
+    defaultBookmarks.push({ name: _("Home"), loc: home_dir }); // TODO: add trash
 
     const parse_uri = (line: string) => {
         // Drop everything after the space, we don't show renames
@@ -71,8 +71,7 @@ function BookmarkButton({ path }: { path: string }) {
     };
 
     useInit(async () => {
-        cockpit.assert(user !== null, "user is null in useInit");
-        const handle = cockpit.file(`${user.home}/.config/gtk-3.0/bookmarks`);
+        const handle = cockpit.file(`${home}/.config/gtk-3.0/bookmarks`);
         setBookmarkHandle(handle);
 
         handle.watch((content) => {
@@ -89,7 +88,6 @@ function BookmarkButton({ path }: { path: string }) {
     });
 
     const saveBookmark = async () => {
-        cockpit.assert(user !== null, "user is null while saving bookmarks");
         cockpit.assert(bookmarkHandle !== null, "bookmarkHandle is null while saving bookmarks");
         const bookmark_file = basename(bookmarkHandle.path);
         const config_dir = bookmarkHandle.path.replace(bookmark_file, "");
@@ -132,9 +130,6 @@ function BookmarkButton({ path }: { path: string }) {
         }
         setIsOpen(false);
     };
-
-    if (user === null)
-        return null;
 
     let actionText = null;
     if (!defaultBookmarks.some(bkmark => bkmark.loc === path)) {
