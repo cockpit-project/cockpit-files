@@ -72,7 +72,7 @@ const get_path = (options: Location['options']) => {
     return currentPath;
 };
 
-export const Application = ({ user }: { user: cockpit.UserInfo }) => {
+export const Application = () => {
     const [location, setLocation] = useState(cockpit.location);
     const [loading, setLoading] = useState(true);
     const [loadingFiles, setLoadingFiles] = useState(true);
@@ -98,7 +98,7 @@ export const Application = ({ user }: { user: cockpit.UserInfo }) => {
 
         // On initial load redirect to the users home directory
         if (cockpit.location.options.path === undefined) {
-            cockpit.location.replace("/", { path: encodeURIComponent(user.home) });
+            cockpit.location.replace("/", { path: encodeURIComponent(cockpit.info.user.home) });
         }
 
         return () => cockpit.removeEventListener("locationchanged", update);
@@ -184,7 +184,7 @@ export const Application = ({ user }: { user: cockpit.UserInfo }) => {
 
     return (
         <Page>
-            <FilesContext.Provider value={{ addAlert, removeAlert, cwdInfo, user }}>
+            <FilesContext.Provider value={{ addAlert, removeAlert, cwdInfo }}>
                 <WithDialogs>
                     <AlertGroup isToast isLiveRegion>
                         {alerts.map(alert => (
