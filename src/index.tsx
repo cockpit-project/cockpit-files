@@ -39,7 +39,7 @@ import "./app.scss";
 
 document.addEventListener("DOMContentLoaded", () => {
     const root = createRoot(document.getElementById("app")!);
-    cockpit.user().then(user => {
-        root.render(<Application user={user} />);
+    cockpit.init().then(() => {
+        root.render(<Application />);
     });
 });

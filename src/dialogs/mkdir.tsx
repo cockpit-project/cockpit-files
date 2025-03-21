@@ -71,11 +71,11 @@ const CreateDirectoryModal = ({ currentPath, dialogResult } : {
         const path = currentPath + name;
         create_directory(path, owner).then(dialogResult.resolve, err => setErrorMessage(err.message));
     };
-    const { cwdInfo, user } = useFilesContext();
+    const { cwdInfo } = useFilesContext();
 
     const candidates = [];
-    if (superuser.allowed && user && cwdInfo) {
-        candidates.push(...get_owner_candidates(user, cwdInfo));
+    if (superuser.allowed && cwdInfo) {
+        candidates.push(...get_owner_candidates(cwdInfo));
         if (owner === undefined) {
             setOwner(candidates[0]);
         }
@@ -95,7 +95,6 @@ const CreateDirectoryModal = ({ currentPath, dialogResult } : {
                     onClick={createDirectory}
                     isDisabled={errorMessage !== undefined ||
                         nameError !== undefined ||
-                        user === null ||
                         cwdInfo === null}
                   >
                       {_("Create")}
