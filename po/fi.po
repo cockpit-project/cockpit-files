@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-14 03:16+0000\n"
-"PO-Revision-Date: 2025-02-28 20:04+0000\n"
-"Last-Translator: Jan Kuparinen <copper_fin@hotmail.com>\n"
+"POT-Creation-Date: 2025-03-21 03:19+0000\n"
+"PO-Revision-Date: 2025-03-21 19:47+0000\n"
+"Last-Translator: Ricky Tigg <ricky.tigg@gmail.com>\n"
 "Language-Team: Finnish <https://translate.fedoraproject.org/projects/cockpit-"
 "files/cockpit-files/fi/>\n"
 "Language: fi\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1\n"
-"X-Generator: Weblate 5.10.2\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #: src/menu.tsx:63
 msgid "\"$0\" exists, not overwriting with paste."
@@ -58,9 +58,9 @@ msgid ""
 "download files, and change their properties. It also includes a simple file "
 "editor."
 msgstr ""
-"Cockpitin tiedostojärjestelmän käyttöliittymä. Voit selata hakemistoja, "
-"ulosladata ja ladata tiedostoja ja muuttaa niiden ominaisuuksia. Se sisältää "
-"myös yksinkertaisen tiedostomuokkaimen."
+"Tiedostojärjestelmän käyttöliittymä Cockpitille. Voit selata hakemistoja, "
+"ladata ulospäin ja ladata tiedostoja ja muuttaa niiden ominaisuuksia. Se "
+"sisältää myös yksinkertaisen tiedostomuokkaimen."
 
 #: src/upload-button.tsx:122
 msgid ""
@@ -108,7 +108,7 @@ msgstr "Peru"
 
 #: src/upload-button.tsx:458
 msgid "Cancel upload of $0"
-msgstr "Peru $0:n uloslataus"
+msgstr "Peru $0:n lataus ulospäin"
 
 #: src/upload-button.tsx:340
 msgid "Cancelled"
@@ -116,7 +116,7 @@ msgstr "Peruttu"
 
 #: src/upload-button.tsx:341
 msgid "Cancelled upload of $0"
-msgstr "$0:n uloslataus peruttu"
+msgstr "$0:n lataus ulospäin peruttu"
 
 #: src/dialogs/create-file.tsx:226
 msgid "Cannot create file in current directory"
@@ -124,7 +124,7 @@ msgstr "Nykyiseen hakemistoon ei voi luoda tiedostoa"
 
 #: src/files-folder-view.tsx:177
 msgid "Cannot drop files, another upload is already in progress"
-msgstr "Tiedostoja ei voi pudottaa, toinen uloslataus on jo käynnissä"
+msgstr "Tiedostoja ei voi pudottaa, toinen lataus ulospäin on jo meneillään"
 
 #: src/dialogs/permissions.tsx:311
 msgid "Change"
@@ -264,7 +264,7 @@ msgstr "Lataus"
 
 #: src/files-folder-view.tsx:169
 msgid "Drop files to upload"
-msgstr "Pudota ulosladattavat tiedostot"
+msgstr "Pudota ulospäinladattavat tiedostot"
 
 #. Translators: This is the title of a modal dialog.  $0 represents a filename.
 #: src/dialogs/editor.tsx:170
@@ -305,7 +305,7 @@ msgstr "Tiedostonimi"
 
 #: src/upload-button.tsx:360
 msgid "File uploaded"
-msgstr "Tiedosto ulosladattu"
+msgstr "Tiedosto ladattu ulospäin"
 
 #: src/common.ts:118
 msgid "Filename is the same as original name"
@@ -325,7 +325,7 @@ msgstr ""
 
 #: src/upload-button.tsx:360
 msgid "Files uploaded"
-msgstr "Tiedostot ulosladattu"
+msgstr "Tiedostot ladattu ulospäin"
 
 #: src/files-breadcrumbs.tsx:236
 msgid "Filesystem"
@@ -668,7 +668,7 @@ msgstr "Kirjanmerkkihakemistoa ei voi luoda"
 
 #: src/upload-button.tsx:320
 msgid "Unable to move uploaded file to final destination"
-msgstr "Ulosladattua tiedostoa ei voida siirtää lopulliseen määränpäähän"
+msgstr "Ulospäinladattua tiedostoa ei voida siirtää lopulliseen määränpäähän"
 
 #: src/files-breadcrumbs.tsx:121
 msgid "Unable to save bookmark file"
@@ -676,24 +676,24 @@ msgstr "Kirjanmerkkitiedostoa ei voi tallentaa"
 
 #: src/upload-button.tsx:494
 msgid "Upload"
-msgstr "Uloslataa"
+msgstr "Lataa ulospäin"
 
 #
 #: src/upload-button.tsx:475
 msgid "Upload $0% completed"
-msgstr "Uloslataus $0 % valmis"
+msgstr "Lataus ulospäin $0 % valmis"
 
 #: src/upload-button.tsx:319 src/upload-button.tsx:343
 msgid "Upload error"
-msgstr "Uloslatausvirhe"
+msgstr "Lataus ulospäin -virhe"
 
 #: src/upload-button.tsx:71
 msgid "Uploaded as $0, $1"
-msgstr "Ulosladattu $0:lla, $1"
+msgstr "Ladattu ulospäin $0:na, $1"
 
 #: src/upload-button.tsx:439
 msgid "Uploads"
-msgstr "Uloslataukset"
+msgstr "Lataukset ulospäin"
 
 #: src/files-footer-detail.tsx:143
 msgid "User"
