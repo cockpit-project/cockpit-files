@@ -20,10 +20,13 @@ import React from 'react';
 
 import { Button } from '@patternfly/react-core/dist/esm/components/Button';
 import { Form, FormGroup } from "@patternfly/react-core/dist/esm/components/Form";
-import { Modal, ModalVariant } from '@patternfly/react-core/dist/esm/components/Modal';
 import { Popover } from "@patternfly/react-core/dist/esm/components/Popover";
 import { Radio } from "@patternfly/react-core/dist/esm/components/Radio";
 import { TextInput } from "@patternfly/react-core/dist/esm/components/TextInput";
+import {
+    Modal,
+    ModalVariant
+} from '@patternfly/react-core/dist/esm/deprecated/components/Modal';
 import { HelpIcon } from "@patternfly/react-icons";
 
 import cockpit, { BasicError } from 'cockpit';
@@ -202,7 +205,7 @@ const CreateLinkModal = ({ dialogResult, path, selected } : {
                   fieldId="symlink-type"
                   label={_("Type")}
                   isInline
-                  labelIcon={
+                  labelHelp={
                       <Popover
                         headerContent={_("Absolute vs. Relative")}
                         bodyContent={

@@ -22,8 +22,11 @@ import React from 'react';
 import { Alert, AlertActionLink } from '@patternfly/react-core/dist/esm/components/Alert';
 import { Button } from '@patternfly/react-core/dist/esm/components/Button';
 import { Label } from '@patternfly/react-core/dist/esm/components/Label';
-import { Modal, ModalVariant } from '@patternfly/react-core/dist/esm/components/Modal';
 import { TextArea } from '@patternfly/react-core/dist/esm/components/TextArea';
+import {
+    Modal,
+    ModalVariant
+} from '@patternfly/react-core/dist/esm/deprecated/components/Modal';
 import { Stack } from '@patternfly/react-core/dist/esm/layouts/Stack';
 import { debounce } from "throttle-debounce";
 

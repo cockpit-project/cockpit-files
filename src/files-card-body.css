@@ -208,11 +208,11 @@
         /* Remove the extra padding on the end of the column and button, as the icon has padding already */
         .col-size, .col-date,
         .col-perms, .col-owner {
-            &, .pf-v5-c-table__button {
+            &, .pf-v6-c-table__button {
                 padding-inline-end: 0;
             }
 
-            .pf-v5-c-table__button {
+            .pf-v6-c-table__button {
                 inline-size: 100%;
                 justify-content: end;
             }
@@ -222,7 +222,7 @@
             padding-inline-start: var(--pf-v5-global--spacer--lg);
         }
 
-        :last-child:is(td, th):not(.pf-v5-c-table__sort) {
+        :last-child:is(td, th):not(.pf-v6-c-table__sort) {
             padding-inline-end: var(--pf-v5-global--spacer--lg);
         }
     }
@@ -293,7 +293,7 @@
         }
     }
 
-    .pf-v5-c-table__thead {
+    .pf-v6-c-table__thead {
         position: sticky;
         inset-block-start: 0;
         z-index: 1;
@@ -304,7 +304,7 @@
     }
 }
 
-.pf-v5-c-tooltip .permissions-tooltip-text {
+.pf-v6-c-tooltip .permissions-tooltip-text {
     display: grid;
     grid-template-columns: auto 1fr;
     column-gap: var(--pf-v5-global--spacer--sm);
