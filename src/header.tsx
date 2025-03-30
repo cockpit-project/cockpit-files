@@ -247,25 +247,22 @@ const ViewSelector = ({ isGrid, setIsGrid, sortBy, setSortBy, showHidden, setSho
                 isExpanded={isOpen}
                 onClick={() => onToggleClick(isOpen)}
                 ref={toggleRef}
-                splitButtonOptions={{
-                    variant: "action",
-                    items: [
-                        <MenuToggleAction
-                          aria-label={isGrid
-                              ? _("Display as a list")
-                              : _("Display as a grid")}
-                          key="view-toggle-action"
-                          onClick={() => setIsGrid(isGrid => {
-                              localStorage.setItem("files:isGrid", !isGrid ? "true" : "false");
-                              return !isGrid;
-                          })}
-                        >
-                            {isGrid
-                                ? <ListIcon className="view-toggle-icon" />
-                                : <GripVerticalIcon className="view-toggle-icon" />}
-                        </MenuToggleAction>
-                    ]
-                }}
+                splitButtonItems={[
+                    <MenuToggleAction
+                      aria-label={isGrid
+                          ? _("Display as a list")
+                          : _("Display as a grid")}
+                      key="view-toggle-action"
+                      onClick={() => setIsGrid(isGrid => {
+                          localStorage.setItem("files:isGrid", !isGrid ? "true" : "false");
+                          return !isGrid;
+                      })}
+                    >
+                        {isGrid
+                            ? <ListIcon className="view-toggle-icon" />
+                            : <GripVerticalIcon className="view-toggle-icon" />}
+                    </MenuToggleAction>
+                ]}
                 variant="secondary"
               />
           )}
