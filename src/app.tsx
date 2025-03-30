@@ -183,7 +183,7 @@ export const Application = () => {
     const removeAlert = (key: string) => setAlerts(prevAlerts => prevAlerts.filter(alert => alert.key !== key));
 
     return (
-        <Page>
+        <Page className="no-masthead-sidebar">
             <FilesContext.Provider value={{ addAlert, removeAlert, cwdInfo }}>
                 <WithDialogs>
                     <AlertGroup isToast isLiveRegion>
@@ -207,6 +207,7 @@ export const Application = () => {
                     </AlertGroup>
                     <FilesBreadcrumbs path={path} />
                     <PageSection
+                      hasBodyWrapper={false}
                       id="files-folder-section"
                       data-dir-loaded={!loadingFiles ? path : null}
                     >

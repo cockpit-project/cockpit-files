@@ -23,9 +23,12 @@ import { AlertVariant, AlertActionLink } from "@patternfly/react-core/dist/esm/c
 import { Button } from "@patternfly/react-core/dist/esm/components/Button";
 import { Checkbox } from "@patternfly/react-core/dist/esm/components/Checkbox";
 import { Divider } from "@patternfly/react-core/dist/esm/components/Divider";
-import { Modal, ModalVariant } from "@patternfly/react-core/dist/esm/components/Modal";
 import { Popover, PopoverPosition } from "@patternfly/react-core/dist/esm/components/Popover";
 import { Progress } from "@patternfly/react-core/dist/esm/components/Progress";
+import {
+    Modal,
+    ModalVariant
+} from '@patternfly/react-core/dist/esm/deprecated/components/Modal';
 import { Flex, FlexItem } from "@patternfly/react-core/dist/esm/layouts/Flex";
 import { TrashIcon } from "@patternfly/react-icons";
 

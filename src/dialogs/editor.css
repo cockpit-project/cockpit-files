@@ -12,7 +12,7 @@
     }
 
     /* Add a circle to indicate that there are changes */
-    .pf-v5-c-modal-box__title-text::after {
+    .pf-v6-c-modal-box__title-text::after {
       aspect-ratio: 1;
       background: var(--pf-v5-global--warning-color--100);
       block-size: 1cap;
@@ -24,7 +24,7 @@
   }
 
   /* Create mode shows textarea as full size */
-  .pf-v5-c-form.pf-m-horizontal {
+  .pf-v6-c-form.pf-m-horizontal {
     block-size: 100%;
     grid-template-rows: auto 1fr auto;
   }

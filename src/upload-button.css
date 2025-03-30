@@ -46,13 +46,13 @@ button.progress-wrapper {
    * doesn't jump when the percentage jumps from 9 => 10
    * TODO: fill PF issue
    */
-  .pf-v5-c-progress__measure {
+  .pf-v6-c-progress__measure {
      inline-size: 4ch;
   }
 }
 
 .upload-progress-flex {
-  .pf-v5-c-progress {
+  .pf-v6-c-progress {
     /* Align % with label and trashcan */
     align-items: start;
   }
@@ -73,7 +73,7 @@ button.cancel-button {
   /* Set the max width to 32rem, but have it work on smaller screen sizes too */
   max-inline-size: min(32rem, 100vw - 8rem);
 
-  .pf-v5-c-popover__body {
+  .pf-v6-c-popover__body {
     /* Set the minimum width to 14rem, but also allow it to work on smaller screen sizes */
     min-inline-size: min(14rem, 33vw);
   }

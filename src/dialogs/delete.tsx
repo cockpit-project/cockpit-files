@@ -20,7 +20,10 @@
 import React, { useState } from 'react';
 
 import { Button } from '@patternfly/react-core/dist/esm/components/Button';
-import { Modal, ModalVariant } from '@patternfly/react-core/dist/esm/components/Modal';
+import {
+    Modal,
+    ModalVariant
+} from '@patternfly/react-core/dist/esm/deprecated/components/Modal';
 
 import cockpit from 'cockpit';
 import { InlineNotification } from 'cockpit-components-inline-notification';
