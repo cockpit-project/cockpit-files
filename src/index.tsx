@@ -18,7 +18,7 @@
  */
 
 import "cockpit-dark-theme";
-import "patternfly/patternfly-5-cockpit.scss";
+import "patternfly/patternfly-6-cockpit.scss";
 
 import React from "react";
 
