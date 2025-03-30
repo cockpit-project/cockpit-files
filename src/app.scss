@@ -5,12 +5,12 @@
 @import "@patternfly/patternfly/components/Button/button.css";
 
 // Use the page as the toplevel container
-.pf-v5-c-page {
+.pf-v6-c-page {
     container-type: size;
 }
 
 // Passthrough for layout and styling purposes, to enable main page parts to participate in the grid
-.pf-v5-c-page__main-section,
+.pf-v6-c-page__main-section,
 .files-view-stack,
 .upload-drop-zone {
     display: contents;
@@ -32,12 +32,12 @@
     block-size: 100%;
     inline-size: 100%;
 
-    .pf-v5-c-empty-state__icon {
+    .pf-v6-c-empty-state__icon {
         color: var(--pf-v5-global--Color--100);
     }
 }
 
-.pf-v5-c-page__main {
+.pf-v6-c-page__main {
     gap: var(--pf-v5-global--spacer--md);
     display: grid;
     grid-template-rows: auto 1fr auto 0;
@@ -46,18 +46,18 @@
 
 // Remove gaps on the left/right side of file view on small screens
 @container (width < 768px) {
-    .pf-v5-c-page__main {
+    .pf-v6-c-page__main {
         column-gap: 0;
     }
 }
 
 .files-empty-state,
-.files-view-stack > .upload-drop-zone > .pf-v5-c-card,
+.files-view-stack > .upload-drop-zone > .pf-v6-c-card,
 .files-view-stack > .files-footer-info {
     grid-column: content;
 }
 
-.files-view-stack > .upload-drop-zone > .pf-v5-c-card {
+.files-view-stack > .upload-drop-zone > .pf-v6-c-card {
     overflow: auto;
 }
 
@@ -78,39 +78,39 @@
     align-items: center;
 
     /* Override different background color from the <PageBreadCrumb> */
-    .pf-v5-c-page__main-breadcrumb {
+    .pf-v6-c-page__main-breadcrumb {
         background-color: unset
     }
 
   /* Drop PF padding */
-    .pf-v5-c-page__main-breadcrumb {
+    .pf-v6-c-page__main-breadcrumb {
         padding: 0;
         display: inline-block;
     }
 
     // Fix the double-spacing issue for other dropdowns
     // https://github.com/patternfly/patternfly/issues/6632
-    .pf-v5-c-menu-toggle__controls:last-child > .pf-v5-c-menu-toggle__toggle-icon {
+    .pf-v6-c-menu-toggle__controls:last-child > .pf-v6-c-menu-toggle__toggle-icon {
       margin-inline-end: 0;
     }
 
-    .pf-v5-c-breadcrumb {
+    .pf-v6-c-breadcrumb {
         margin-block: 0;
         margin-inline: var(--pf-v5-global--spacer--sm);
     }
 }
 
-.pf-v5-c-breadcrumb {
+.pf-v6-c-breadcrumb {
     margin-block: 0;
     margin-inline: var(--pf-v5-global--spacer--md);
 }
 
-.pf-v5-c-breadcrumb__list {
+.pf-v6-c-breadcrumb__list {
     // Make sure all breadcrumb text is aligned properly, even if different heights (including icon)
     align-items: baseline;
 
     // Style the breadcrumb component as a path
-    .pf-v5-c-breadcrumb__item-divider {
+    .pf-v6-c-breadcrumb__item-divider {
         > svg {
             display: none;
         }
@@ -120,7 +120,7 @@
         }
     }
 
-    .pf-v5-c-breadcrumb__item {
+    .pf-v6-c-breadcrumb__item {
         // Use the default font size, not the smaller size
         font-size: var(--pf-v5-global--FontSize--md);
     }
@@ -176,7 +176,7 @@
     color: var(--pf-global--primary-color--100);
 }
 
-.pf-v5-l-gallery {
+.pf-v6-l-gallery {
     --pf-v5-l-gallery--GridTemplateColumns--max: 10rem;
     align-items: start;
     gap: var(--pf-v5-global--spacer--sm);
@@ -184,12 +184,12 @@
 }
 
 // Wrap titles of modals (instead of truncating long filenames)
-.pf-v5-c-modal-box__title, .pf-v5-c-modal-box__title-text {
+.pf-v6-c-modal-box__title, .pf-v6-c-modal-box__title-text {
     white-space: break-spaces;
 }
 
 // Menu toggles should also not have extra space between the content and dropmarker
-.pf-v5-c-menu-toggle > .pf-v5-c-menu-toggle__controls {
+.pf-v6-c-menu-toggle > .pf-v6-c-menu-toggle__controls {
     padding-inline-start: 0;
 }
 
@@ -199,8 +199,8 @@
 }
 
 // First Menu SelectGroup item in the sort menu should have no top padding
-.pf-v5-c-menu__list section:first-of-type {
-    .pf-v5-c-menu__group-title {
+.pf-v6-c-menu__list section:first-of-type {
+    .pf-v6-c-menu__group-title {
         padding-block-start: 0;
     }
 }
@@ -208,12 +208,12 @@
 // // FIXME: Promote the CSS below to overrides, open PF issues // //
 
 // PatternFly always adds a margin after images inside of widgets with pf-m-end, which is incorrect when it's the last element
-.pf-v5-c-button__icon.pf-m-start:last-child {
+.pf-v6-c-button__icon.pf-m-start:last-child {
     margin-inline-end: 0;
 }
 
 // PF menu toggles are no longer spaced consistently
-.pf-v5-c-menu-toggle {
+.pf-v6-c-menu-toggle {
     padding-inline: var(--pf-v5-global--spacer--md) calc(var(--pf-v5-global--spacer--md) * 0.75);
 }
 
@@ -234,28 +234,28 @@
         gap: var(--pf-v5-global--spacer--md);
     }
 
-    #dropdown-menu.pf-v5-c-menu-toggle {
+    #dropdown-menu.pf-v6-c-menu-toggle {
         padding-inline-start: var(--pf-v5-global--spacer--sm);
     }
 }
 
 .shortcuts-dialog {
-    h2 + .pf-v5-c-description-list {
+    h2 + .pf-v6-c-description-list {
         margin-block-start: var(--pf-v5-global--spacer--md);
     }
 
-    .pf-v5-l-flex {
+    .pf-v6-l-flex {
         // Add standard spacing between the description lists that are in a flex
         // (PF Flex does odd stuff by default)
         gap: var(--pf-v5-global--spacer--lg) var(--pf-v5-global--spacer--md);
 
-        > .pf-v5-c-content {
+        > .pf-v6-c-content {
             // Have the content prefer 20em and wrap if too narrow
             flex: 1 1 20em;
         }
     }
 
-    .pf-v5-c-description-list {
+    .pf-v6-c-description-list {
         // PF's gap is weirdly too big; let's use the PF standard size that's used everywhere else
         --pf-v5-c-content--dl--ColumnGap: var(--pf-v5-global--spacer--md);
         // We're setting this up as a table on the list, so they're consistent
@@ -265,7 +265,7 @@
         // Fix PF's negative margin at the end bug (as it's handled by grid layout anyway)
         margin-block-end: 0;
 
-        .pf-v5-c-description-list__group {
+        .pf-v6-c-description-list__group {
             // Ignore the grid of the group and use the grid from the description list, so everything lines up properly
             display: contents;
         }

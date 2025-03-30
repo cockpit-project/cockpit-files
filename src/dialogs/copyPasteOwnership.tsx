@@ -21,10 +21,13 @@ import React, { useState } from 'react';
 
 import { AlertVariant } from "@patternfly/react-core/dist/esm/components/Alert";
 import { Button } from "@patternfly/react-core/dist/esm/components/Button";
+import { Content, } from "@patternfly/react-core/dist/esm/components/Content";
 import { Form, FormGroup } from "@patternfly/react-core/dist/esm/components/Form";
 import { FormSelect, FormSelectOption } from "@patternfly/react-core/dist/esm/components/FormSelect";
-import { Modal, ModalVariant } from "@patternfly/react-core/dist/esm/components/Modal";
-import { Text, TextContent } from "@patternfly/react-core/dist/esm/components/Text";
+import {
+    Modal,
+    ModalVariant
+} from '@patternfly/react-core/dist/esm/deprecated/components/Modal';
 
 import cockpit from 'cockpit';
 import { type FileInfo } from 'cockpit/fsinfo.ts';
@@ -190,11 +193,11 @@ const CopyPasteAsOwnerModal = ({
           footer={modalFooter}
         >
             <Form isHorizontal>
-                <TextContent>
-                    <Text>
+                <Content>
+                    <Content component="p">
                         {/*eslint-disable-line*/ _("Files being pasted have a different owner. By default, ownership will be changed to match the destination directory.")}
-                    </Text>
-                </TextContent>
+                    </Content>
+                </Content>
                 <FormGroup fieldId="paste-as-owner" label={_("New owner")}>
                     <FormSelect
                       id='paste-owner-select'

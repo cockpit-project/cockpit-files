@@ -21,8 +21,11 @@ import React, { useState } from 'react';
 
 import { Button } from '@patternfly/react-core/dist/esm/components/Button';
 import { Form, FormGroup } from '@patternfly/react-core/dist/esm/components/Form';
-import { Modal, ModalVariant } from '@patternfly/react-core/dist/esm/components/Modal';
 import { TextInput } from '@patternfly/react-core/dist/esm/components/TextInput';
+import {
+    Modal,
+    ModalVariant
+} from '@patternfly/react-core/dist/esm/deprecated/components/Modal';
 import { Stack } from '@patternfly/react-core/dist/esm/layouts/Stack';
 
 import cockpit from 'cockpit';

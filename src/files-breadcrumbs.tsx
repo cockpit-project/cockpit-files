@@ -24,7 +24,7 @@ import { Button } from "@patternfly/react-core/dist/esm/components/Button";
 import { Divider } from "@patternfly/react-core/dist/esm/components/Divider";
 import { Dropdown, DropdownItem, DropdownList } from "@patternfly/react-core/dist/esm/components/Dropdown";
 import { MenuToggle, MenuToggleElement } from "@patternfly/react-core/dist/esm/components/MenuToggle";
-import { PageBreadcrumb, PageSection, PageSectionVariants } from "@patternfly/react-core/dist/esm/components/Page";
+import { PageBreadcrumb, PageSection, } from "@patternfly/react-core/dist/esm/components/Page";
 import { TextInput } from "@patternfly/react-core/dist/esm/components/TextInput";
 import { Tooltip, TooltipPosition } from "@patternfly/react-core/dist/esm/components/Tooltip";
 import { CheckIcon, OutlinedHddIcon, PencilAltIcon, StarIcon, TimesIcon } from "@patternfly/react-icons";
@@ -288,7 +288,7 @@ export function FilesBreadcrumbs({ path }: { path: string }) {
 
     return (
         <PageSection
-          variant={PageSectionVariants.light}
+          hasBodyWrapper={false}
           className="files-overview-header"
           padding={{ default: "padding" }}
         >
@@ -303,7 +303,7 @@ export function FilesBreadcrumbs({ path }: { path: string }) {
                           className="breadcrumb-button-edit"
                         />
                     </Tooltip>
-                    <PageBreadcrumb>
+                    <PageBreadcrumb hasBodyWrapper={false}>
                         <PathBreadcrumbs path={path} />
                     </PageBreadcrumb>
                 </>}
