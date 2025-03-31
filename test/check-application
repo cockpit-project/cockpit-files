@@ -31,7 +31,7 @@ class TestFiles(testlib.MachineCase):
 
     def enter_files(self) -> None:
         self.login_and_go("/files")
-        self.browser.wait_text(".pf-v5-c-empty-state__title-text", "Directory is empty")
+        self.browser.wait_text(".pf-v6-c-empty-state__title-text", "Directory is empty")
 
     def stat(self, fmt: str, path: str) -> str:
         return self.machine.execute(['stat', f'--format={fmt}', path]).strip()
@@ -44,19 +44,19 @@ class TestFiles(testlib.MachineCase):
 
     def assert_last_breadcrumb(self, directory: str) -> None:
         if directory == '/':
-            self.browser.wait_visible("a.pf-v5-c-breadcrumb__link.pf-m-current svg.breadcrumb-hdd-icon")
+            self.browser.wait_visible("a.pf-v6-c-breadcrumb__link.pf-m-current svg.breadcrumb-hdd-icon")
         else:
-            self.browser.wait_text(".pf-v5-c-page__main-breadcrumb a.pf-m-current", directory)
+            self.browser.wait_text(".pf-v6-c-page__main-breadcrumb a.pf-m-current", directory)
 
     def delete_item(self, filetype: str, filename: str, *, expect_success: bool = True) -> None:
         b = self.browser
         b.click(f"[data-item='{filename}']")
         b.click("#dropdown-menu")
         b.click("#delete-item")
-        b.wait_in_text("h1.pf-v5-c-modal-box__title", f"Delete {filetype} {filename}?")
+        b.wait_in_text("h1.pf-v6-c-modal-box__title", f"Delete {filetype} {filename}?")
         b.click("button.pf-m-danger")
         if expect_success:
-            b.wait_not_present(".pf-v5-c-modal-box")
+            b.wait_not_present(".pf-v6-c-modal-box")
             b.wait_not_present(f"[data-item='{filename}']")
 
     def create_directory(self, filename: str, owner: str | None = None, *, expect_success: bool = True) -> None:
@@ -68,18 +68,18 @@ class TestFiles(testlib.MachineCase):
             b.select_from_dropdown("#create-directory-owner", owner)
         b.click("button.pf-m-primary")
         if expect_success:
-            b.wait_not_present(".pf-v5-c-modal-box")
+            b.wait_not_present(".pf-v6-c-modal-box")
 
     def wait_modal_inline_alert(self, msg: str) -> None:
         b = self.browser
-        b.wait_in_text("h4.pf-v5-c-alert__title", msg)
+        b.wait_in_text("h4.pf-v6-c-alert__title", msg)
 
     def rename_item(self, itemname: str, newname: str) -> None:
         b = self.browser
         b.click(f"[data-item='{itemname}']")
         b.click("#dropdown-menu")
         b.click("#rename-item")
-        b.wait_in_text("h1.pf-v5-c-modal-box__title", "Rename")
+        b.wait_in_text("h1.pf-v6-c-modal-box__title", "Rename")
         b.set_input_text("#rename-item-input", f"{newname}")
         b.click("button.pf-m-primary")
 
@@ -99,7 +99,7 @@ class TestFiles(testlib.MachineCase):
         b = self.browser
         b.click(f"[data-item='{filename}']")
         b.click("#dropdown-menu")
-        b.click(f"#dropdown-menu + .pf-v5-c-menu button:contains('{action}')")
+        b.click(f"#dropdown-menu + .pf-v6-c-menu button:contains('{action}')")
 
     def open_folder_context_menu(self) -> None:
         # With BiDi on Firefox a click is by default in the "middle" of the
@@ -137,22 +137,22 @@ class TestFiles(testlib.MachineCase):
         m.execute("runuser -u admin touch /home/admin/empty/.hiddenfile")
         b.mouse("[data-item='empty']", "dblclick")
         self.wait_directory_changed("/home/admin/empty/")
-        b.wait_in_text(".pf-v5-c-empty-state__body", "1 item is hidden")
-        b.assert_pixels(".pf-v5-c-page__main", "empty-folder-view")
+        b.wait_in_text(".pf-v6-c-empty-state__body", "1 item is hidden")
+        b.assert_pixels(".pf-v6-c-page__main", "empty-folder-view")
 
         # Clicking `show hidden items` shows it
-        b.click(".pf-v5-c-empty-state button:contains('Show hidden items')")
+        b.click(".pf-v6-c-empty-state button:contains('Show hidden items')")
         b.wait_visible("[data-item='.hiddenfile']")
 
         # Reset global setting
         b.select_PF("#sort-menu-toggle", "Hide hidden items")
         b.wait_not_present("[data-item='.hiddenfile']")
-        b.wait_text(".pf-v5-c-empty-state__title-text", "Directory is empty")
+        b.wait_text(".pf-v6-c-empty-state__title-text", "Directory is empty")
 
         # removing the empty file shows empty directory again
         m.execute("rm /home/admin/empty/.hiddenfile")
-        b.wait_text(".pf-v5-c-empty-state__title-text", "Directory is empty")
-        b.wait_not_in_text(".pf-v5-c-empty-state", "1 item is hidden")
+        b.wait_text(".pf-v6-c-empty-state__title-text", "Directory is empty")
+        b.wait_not_in_text(".pf-v6-c-empty-state", "1 item is hidden")
 
         b.click("li[data-location='/home/admin'] a")  # go back to home dir
         m.execute("rm -r /home/admin/empty")
@@ -187,17 +187,17 @@ class TestFiles(testlib.MachineCase):
         # no results when filtering
         b.set_input_text("input[placeholder='Filter directory']", "absolutelynothing")
         self.browser.wait_js_cond("ph_count('#folder-view tbody tr') == 0")
-        b.wait_text(".pf-v5-c-empty-state__title-text", "No matching results")
+        b.wait_text(".pf-v6-c-empty-state__title-text", "No matching results")
 
         # clear using empty-state
-        b.click(".pf-v5-c-empty-state button:contains('Clear filter')")
+        b.click(".pf-v6-c-empty-state button:contains('Clear filter')")
         b.wait_text("input[placeholder='Filter directory']", "")
         self.browser.wait_js_cond("ph_count('#folder-view tbody tr') != 0")
 
         # clear using input button
         b.set_input_text("input[placeholder='Filter directory']", "absolutelynothing")
         self.browser.wait_js_cond("ph_count('#folder-view tbody tr') == 0")
-        b.wait_text(".pf-v5-c-empty-state__title-text", "No matching results")
+        b.wait_text(".pf-v6-c-empty-state__title-text", "No matching results")
 
         b.click("input[aria-label='Search input']")
         b.wait_text("input[placeholder='Filter directory']", "")
@@ -240,7 +240,7 @@ class TestFiles(testlib.MachineCase):
         # Non-existing directory
         b.wait_visible("#dropdown-menu")
         self.chdir('/doesnotexists')
-        b.wait_in_text(".pf-v5-c-empty-state__body", "No such file or directory")
+        b.wait_in_text(".pf-v6-c-empty-state__body", "No such file or directory")
         b.wait_not_present("#dropdown-menu")
 
         # Path with multiple slashes is normalized
@@ -347,27 +347,27 @@ class TestFiles(testlib.MachineCase):
 
         # Also check popover
         b.click("#files-footer-permissions")
-        b.wait_in_text(".pf-v5-c-popover dl div:nth-child(1) > dd", "read, write, and execute")
-        b.wait_in_text(".pf-v5-c-popover dl div:nth-child(2) > dd", "none")
-        b.wait_in_text(".pf-v5-c-popover dl div:nth-child(3) > dd", "none")
-        b.click(".pf-v5-c-popover__close > button")
-        b.wait_not_present(".pf-v5-c-popover")
+        b.wait_in_text(".pf-v6-c-popover dl div:nth-child(1) > dd", "read, write, and execute")
+        b.wait_in_text(".pf-v6-c-popover dl div:nth-child(2) > dd", "none")
+        b.wait_in_text(".pf-v6-c-popover dl div:nth-child(3) > dd", "none")
+        b.click(".pf-v6-c-popover__close > button")
+        b.wait_not_present(".pf-v6-c-popover")
 
         b.click("#files-footer-owner")
-        b.wait_in_text(".pf-v5-c-popover dl div:nth-child(1) > dd", "root")
-        b.wait_in_text(".pf-v5-c-popover dl div:nth-child(2) > dd", "root")
-        b.click(".pf-v5-c-popover__close > button")
-        b.wait_not_present(".pf-v5-c-popover")
+        b.wait_in_text(".pf-v6-c-popover dl div:nth-child(1) > dd", "root")
+        b.wait_in_text(".pf-v6-c-popover dl div:nth-child(2) > dd", "root")
+        b.click(".pf-v6-c-popover__close > button")
+        b.wait_not_present(".pf-v6-c-popover")
 
         # Change group is shown in popover
         m.execute("chown root:admin /home/admin/newdir")
         b.wait_text("#files-footer-owner", "root:admin")
 
         b.click("#files-footer-owner")
-        b.wait_in_text(".pf-v5-c-popover dl div:nth-child(1) > dd", "root")
-        b.wait_in_text(".pf-v5-c-popover dl div:nth-child(2) > dd", "admin")
-        b.click(".pf-v5-c-popover__close > button")
-        b.wait_not_present(".pf-v5-c-popover")
+        b.wait_in_text(".pf-v6-c-popover dl div:nth-child(1) > dd", "root")
+        b.wait_in_text(".pf-v6-c-popover dl div:nth-child(2) > dd", "admin")
+        b.click(".pf-v6-c-popover__close > button")
+        b.wait_not_present(".pf-v6-c-popover")
 
         # Change last edit time on cwd
         m.execute("touch -d '2 hours ago' /home/admin/newdir")
@@ -377,7 +377,7 @@ class TestFiles(testlib.MachineCase):
         # mock edit time for tooltip
         m.execute("touch -d '1995/12/21' /home/admin/newdir")
         b.mouse(".files-footer-mtime", "mouseenter")
-        b.wait_in_text(".pf-v5-c-tooltip", "Dec 21, 1995")
+        b.wait_in_text(".pf-v6-c-tooltip", "Dec 21, 1995")
         b.mouse(".files-footer-mtime", "mouseleave")
 
         # Navigating resets the current search filter
@@ -848,14 +848,14 @@ class TestFiles(testlib.MachineCase):
         m.execute("chattr +i /home/admin/newfile")
         b.wait_visible("[data-item='newfile']")
         self.delete_item("file", "newfile", expect_success=False)
-        b.wait_in_text("h1.pf-v5-c-modal-box__title", "Force delete file newfile?")
-        b.assert_pixels(".pf-v5-c-modal-box", "delete-modal-error")
+        b.wait_in_text("h1.pf-v6-c-modal-box__title", "Force delete file newfile?")
+        b.assert_pixels(".pf-v6-c-modal-box", "delete-modal-error")
         self.wait_modal_inline_alert("rm: cannot remove '/home/admin/newfile': Operation not permitted")
         b.click("button.pf-m-danger")
-        b.wait_in_text("h1.pf-v5-c-modal-box__title", "Force delete file newfile?")
+        b.wait_in_text("h1.pf-v6-c-modal-box__title", "Force delete file newfile?")
         self.wait_modal_inline_alert("rm: cannot remove '/home/admin/newfile': Operation not permitted")
-        b.click("div.pf-v5-c-modal-box__close button")
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.click("div.pf-v6-c-modal-box__close button")
+        b.wait_not_present(".pf-v6-c-modal-box")
         b.wait_visible("[data-item='newfile']")
         m.execute("chattr -i /home/admin/newfile")
         self.delete_item("file", "newfile")
@@ -870,11 +870,11 @@ class TestFiles(testlib.MachineCase):
         # For strange reasons ctrlKey remains pressed after the b.mouse() above (spotted in firefox)
         b.key("Control")
         b.key("Delete")
-        b.wait_in_text("h1.pf-v5-c-modal-box__title", "Delete 2 items?")
-        b.assert_pixels(".pf-v5-c-modal-box", "delete-modal")
+        b.wait_in_text("h1.pf-v6-c-modal-box__title", "Delete 2 items?")
+        b.assert_pixels(".pf-v6-c-modal-box", "delete-modal")
         b.click("button.pf-m-danger")
 
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.wait_not_present(".pf-v6-c-modal-box")
         b.wait_not_present("[data-item='delete1']")
         b.wait_not_present("[data-item='delete2']")
 
@@ -892,7 +892,7 @@ class TestFiles(testlib.MachineCase):
         # validation
         b.click("#dropdown-menu")
         b.click("#create-folder")
-        b.assert_pixels(".pf-v5-c-modal-box", "create-modal")
+        b.assert_pixels(".pf-v6-c-modal-box", "create-modal")
         b.set_input_text("#create-directory-input", "test")
         b.set_input_text("#create-directory-input", "")
         b.wait_visible("button.pf-m-primary:disabled")
@@ -908,17 +908,17 @@ class TestFiles(testlib.MachineCase):
 
         b.set_input_text("#create-directory-input", "test")
         b.wait_visible("button.pf-m-primary:not(:disabled)")
-        b.click(".pf-v5-c-modal-box__footer button.pf-m-link")  # cancel
+        b.click(".pf-v6-c-modal-box__footer button.pf-m-link")  # cancel
 
         # Creating folder with duplicate name should return an error
         self.create_directory("newdir", expect_success=False)
         self.wait_modal_inline_alert("mkdir: cannot create directory ‘/home/admin/newdir’: File exists")
-        b.click("div.pf-v5-c-modal-box__close button.pf-v5-c-button")
+        b.click("div.pf-v6-c-modal-box__close button.pf-v6-c-button")
 
         # Creating folder with empty name should return an error
         self.create_directory("", expect_success=False)
         self.wait_modal_inline_alert("mkdir: cannot create directory ‘/home/admin/’: File exists")
-        b.click("div.pf-v5-c-modal-box__close button.pf-v5-c-button")
+        b.click("div.pf-v6-c-modal-box__close button.pf-v6-c-button")
 
         # Creating folder inside protected folder should return an error
         m.execute("chattr +i /home/admin/newdir")
@@ -928,7 +928,7 @@ class TestFiles(testlib.MachineCase):
         self.create_directory("test", expect_success=False)
         alert_text = "mkdir: cannot create directory ‘/home/admin/newdir/test’: Operation not permitted"
         self.wait_modal_inline_alert(alert_text)
-        b.click("div.pf-v5-c-modal-box__close button.pf-v5-c-button")
+        b.click("div.pf-v6-c-modal-box__close button.pf-v6-c-button")
 
         # Creating folder as superuser a non-logged in owned directory has the expected folder permissions
         self.chdir('/root')
@@ -970,7 +970,7 @@ class TestFiles(testlib.MachineCase):
         # Keep focus on the input so the enter key press registers as form submit.
         b.set_input_text("#create-directory-input", "testdir", blur=False)
         b.key("Enter")
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.wait_not_present(".pf-v6-c-modal-box")
         b.wait_visible("[data-item='testdir']")
 
     def testContextMenu(self) -> None:
@@ -1121,7 +1121,7 @@ class TestFiles(testlib.MachineCase):
         b.set_input_text("#rename-item-input", "")
         b.wait_visible("button.pf-m-primary:disabled")
         b.wait_in_text("#rename-item-input-helper", "Name cannot be empty")
-        b.assert_pixels(".pf-v5-c-modal-box", "rename-modal-error")
+        b.assert_pixels(".pf-v6-c-modal-box", "rename-modal-error")
 
         b.set_input_text("#rename-item-input", "a" * 256)
         b.wait_visible("button.pf-m-primary:disabled")
@@ -1133,8 +1133,8 @@ class TestFiles(testlib.MachineCase):
 
         b.set_input_text("#rename-item-input", "test")
         b.wait_visible("button.pf-m-primary:not(:disabled)")
-        b.assert_pixels(".pf-v5-c-modal-box", "rename-modal")
-        b.click(".pf-v5-c-modal-box__footer button.pf-m-link")  # cancel
+        b.assert_pixels(".pf-v6-c-modal-box", "rename-modal")
+        b.click(".pf-v6-c-modal-box__footer button.pf-m-link")  # cancel
 
         # Rename file
         self.rename_item("newfile", "newfile1")
@@ -1163,7 +1163,7 @@ class TestFiles(testlib.MachineCase):
         b.set_input_text("#rename-item-input", "dest")
         b.wait_in_text("#rename-item-input-helper", "Directory with the same name exists")
         b.click("button.pf-m-link:contains('Cancel')")
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.wait_not_present(".pf-v6-c-modal-box")
 
         # Renaming protected item should give an error
         m.execute("chattr +i /home/admin/new\\ dir1")
@@ -1171,7 +1171,7 @@ class TestFiles(testlib.MachineCase):
         self.rename_item("new dir1", "testdir")
         alert_text = "mv: cannot move '/home/admin/new dir1' to '/home/admin/testdir': Operation not permitted"
         self.wait_modal_inline_alert(alert_text)
-        b.click("div.pf-v5-c-modal-box__close > button")
+        b.click("div.pf-v6-c-modal-box__close > button")
 
         basedir = '/home/admin'
         # Force overwrite rename on normal file
@@ -1203,7 +1203,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_in_text("#rename-item-input-helper", "Directory with the same name exists")
         b.wait_visible("button.pf-m-primary:disabled")
         b.wait_not_present("button.pf-m-danger")
-        b.click("div.pf-v5-c-modal-box__close > button")
+        b.click("div.pf-v6-c-modal-box__close > button")
 
         # Trying to overwrite normal file to directory name shows error
         self.file_action_modal('bar.txt', 'Rename')
@@ -1211,7 +1211,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_in_text("#rename-item-input-helper", "Directory with the same name exists")
         b.wait_visible("button.pf-m-primary:disabled")
         b.wait_not_present("button.pf-m-danger")
-        b.click("div.pf-v5-c-modal-box__close > button")
+        b.click("div.pf-v6-c-modal-box__close > button")
 
         # Overwriting symlinks is not supported
         m.execute(f"""
@@ -1225,7 +1225,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_in_text("#rename-item-input-helper", "File exists")
         b.wait_visible("button.pf-m-primary:disabled")
         b.wait_not_present("button.pf-m-danger")
-        b.click("div.pf-v5-c-modal-box__close > button")
+        b.click("div.pf-v6-c-modal-box__close > button")
 
         # Trying to overwrite symlink to directory name shows error
         m.execute(f"""
@@ -1236,7 +1236,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_in_text("#rename-item-input-helper", "Directory with the same name exists")
         b.wait_visible("button.pf-m-primary:disabled")
         b.wait_not_present("button.pf-m-danger")
-        b.click("div.pf-v5-c-modal-box__close > button")
+        b.click("div.pf-v6-c-modal-box__close > button")
 
         # Do not overwrite symlinks to directory with another file
         self.file_action_modal('bardir', 'Rename')
@@ -1244,13 +1244,13 @@ class TestFiles(testlib.MachineCase):
         b.wait_in_text("#rename-item-input-helper", "File exists")
         b.wait_visible("button.pf-m-primary:disabled")
         b.wait_not_present("button.pf-m-danger")
-        b.click("div.pf-v5-c-modal-box__close > button")
+        b.click("div.pf-v6-c-modal-box__close > button")
         self.file_action_modal('foo.txt', 'Rename')
         b.set_input_text("#rename-item-input", "foodirlink")
         b.wait_in_text("#rename-item-input-helper", "File exists")
         b.wait_visible("button.pf-m-primary:disabled")
         b.wait_not_present("button.pf-m-danger")
-        b.click("div.pf-v5-c-modal-box__close > button")
+        b.click("div.pf-v6-c-modal-box__close > button")
 
         # Rename back to the original name
         self.file_action_modal('foo.txt', 'Rename')
@@ -1259,8 +1259,8 @@ class TestFiles(testlib.MachineCase):
         b.wait_visible("button.pf-m-primary:disabled")
         b.set_input_text("#rename-item-input", "foo.txt")
         b.wait_in_text("#rename-item-input-helper", "Filename is the same as original name")
-        b.click("div.pf-v5-c-modal-box__close > button")
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.click("div.pf-v6-c-modal-box__close > button")
+        b.wait_not_present(".pf-v6-c-modal-box")
 
         # Enter allows renaming.
         self.file_action_modal('foo.txt', 'Rename')
@@ -1269,22 +1269,22 @@ class TestFiles(testlib.MachineCase):
         b.wait_in_text("#rename-item-input-helper", "Filename is the same as original name")
         b.set_input_text("#rename-item-input", "renamed-foo.txt", blur=False)
         b.key('Enter')
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.wait_not_present(".pf-v6-c-modal-box")
         b.wait_visible("[data-item='renamed-foo.txt']")
 
         # Rename file using keyboard shortcut
         b.click("[data-item='newfile']")
         b.key("F2")
-        b.wait_in_text(".pf-v5-c-modal-box__title-text", "Rename newfile")
+        b.wait_in_text(".pf-v6-c-modal-box__title-text", "Rename newfile")
         b.set_input_text("#rename-item-input", "teddybear.txt")
-        b.click(".pf-v5-c-button.pf-m-primary")
+        b.click(".pf-v6-c-button.pf-m-primary")
         b.wait_visible("[data-item='teddybear.txt']")
 
         # Rename modal does not open when multiple files are selected
         b.mouse("[data-item='dest']", "click", ctrlKey=True)
         b.mouse("[data-item='new dir1']", "click", ctrlKey=True)
         b.key("F2")
-        b.wait_not_present(".pf-v5-c-modal-box__title-text")
+        b.wait_not_present(".pf-v6-c-modal-box__title-text")
 
     def testHiddenItems(self) -> None:
         b = self.browser
@@ -1328,7 +1328,7 @@ class TestFiles(testlib.MachineCase):
             b.wait_visible(f"[data-item='{filename}']")
             b.mouse(f"[data-item='{filename}']", "contextmenu")
             b.click(".contextMenu button:contains('Edit permissions')")
-            b.wait_in_text(".pf-v5-c-modal-box__title-text", filename)
+            b.wait_in_text(".pf-v6-c-modal-box__title-text", filename)
 
         def check_perms_match(filename: str, basedir: str) -> None:
             ls = m.execute(f"ls -l {basedir}/{filename}")[:10]
@@ -1349,11 +1349,11 @@ class TestFiles(testlib.MachineCase):
         # Test changing owner/group
         m.execute("useradd testuser")
         open_permissions_dialog('newfile')
-        b.assert_pixels(".pf-v5-c-modal-box", "permissions-modal")
+        b.assert_pixels(".pf-v6-c-modal-box", "permissions-modal")
         # Changing owner should change group if user is not in the group
         b.select_from_dropdown("#edit-permissions-owner", "testuser")
         b.wait_in_text("#edit-permissions-group", "testuser")
-        b.click(".pf-v5-c-modal-box button.pf-m-primary")
+        b.click(".pf-v6-c-modal-box button.pf-m-primary")
         b.wait_in_text("[data-item='newfile'] .item-owner", "testuser")
 
         m.execute("usermod -a -G testuser admin")
@@ -1361,26 +1361,26 @@ class TestFiles(testlib.MachineCase):
         # Changing owner shouldn't change group if user is in the group
         b.select_from_dropdown("#edit-permissions-owner", "admin")
         b.wait_in_text("#edit-permissions-group", "testuser")
-        b.click(".pf-v5-c-modal-box button.pf-m-primary")
+        b.click(".pf-v6-c-modal-box button.pf-m-primary")
         b.wait_in_text("[data-item='newfile'] .item-owner", "admin:testuser")
 
         # Change the group to admin
         open_permissions_dialog('newfile')
         b.select_from_dropdown("#edit-permissions-group", "admin")
         b.wait_in_text("#edit-permissions-group", "admin")
-        b.click(".pf-v5-c-modal-box button.pf-m-primary")
+        b.click(".pf-v6-c-modal-box button.pf-m-primary")
         b.wait_in_text("[data-item='newfile'] .item-owner", "admin")
 
         # Test changing permissions
         open_permissions_dialog('newfile')
         select_access("no-access")
-        b.click(".pf-v5-c-modal-box button.pf-m-primary")
+        b.click(".pf-v6-c-modal-box button.pf-m-primary")
         self.assertEqual(self.stat("%A", "/home/admin/newfile"), "----------")
         check_perms_match('newfile', '/home/admin')
 
         open_permissions_dialog('newfile')
         select_access("read-write")
-        b.click(".pf-v5-c-modal-box button.pf-m-primary")
+        b.click(".pf-v6-c-modal-box button.pf-m-primary")
         self.assertEqual(self.stat("%A", "/home/admin/newfile"), "-rw-rw-rw-")
         check_perms_match('newfile', '/home/admin')
 
@@ -1393,24 +1393,24 @@ class TestFiles(testlib.MachineCase):
         # Via contextmenu
         self.open_folder_context_menu()
         b.click(".contextMenu button:contains('Edit permissions')")
-        b.wait_in_text(".pf-v5-c-modal-box__title-text", "testdir")
+        b.wait_in_text(".pf-v6-c-modal-box__title-text", "testdir")
         b.select_from_dropdown("#edit-permissions-owner-access", "read-write")
         b.select_from_dropdown("#edit-permissions-group-access", "read-only")
         b.select_from_dropdown("#edit-permissions-other-access", "read-only")
-        b.click(".pf-v5-c-modal-box button.pf-m-primary")
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.click(".pf-v6-c-modal-box button.pf-m-primary")
+        b.wait_not_present(".pf-v6-c-modal-box")
 
         self.assertEqual(self.stat("%A", test_dir), "drwxr-xr-x")
 
         # Via kebab
         b.click("#dropdown-menu")
         b.click("button:contains('Edit permissions')")
-        b.wait_in_text(".pf-v5-c-modal-box__title-text", "testdir")
+        b.wait_in_text(".pf-v6-c-modal-box__title-text", "testdir")
         b.select_from_dropdown("#edit-permissions-owner-access", "read-only")
         b.select_from_dropdown("#edit-permissions-group-access", "no-access")
         b.select_from_dropdown("#edit-permissions-other-access", "no-access")
-        b.click(".pf-v5-c-modal-box button.pf-m-primary")
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.click(".pf-v6-c-modal-box button.pf-m-primary")
+        b.wait_not_present(".pf-v6-c-modal-box")
 
         self.assertEqual(self.stat("%A", test_dir), "dr-x------")
 
@@ -1433,14 +1433,14 @@ class TestFiles(testlib.MachineCase):
         self.assertFalse(b.get_checked("#is-executable"))
 
         b.set_checked("#is-executable", val=True)
-        b.click(".pf-v5-c-modal-box button.pf-m-primary")
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.click(".pf-v6-c-modal-box button.pf-m-primary")
+        b.wait_not_present(".pf-v6-c-modal-box")
 
         self.assertEqual(self.stat("%A", f"/home/admin/{shell_script}"), "-rwxr-xr-x")
         check_perms_match(shell_script, '/home/admin')
 
         open_permissions_dialog(shell_script)
-        b.wait_in_text(".pf-v5-c-modal-box__title-text", shell_script)
+        b.wait_in_text(".pf-v6-c-modal-box__title-text", shell_script)
 
         # Permissions did not change visually only executable is checked now
         b.wait_val("#edit-permissions-owner-access", "read-write")
@@ -1449,8 +1449,8 @@ class TestFiles(testlib.MachineCase):
         self.assertTrue(b.get_checked("#is-executable"))
 
         b.set_checked("#is-executable", val=False)
-        b.click(".pf-v5-c-modal-box button.pf-m-primary")
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.click(".pf-v6-c-modal-box button.pf-m-primary")
+        b.wait_not_present(".pf-v6-c-modal-box")
         self.assertEqual(self.stat("%A", f"/home/admin/{shell_script}"), "-rw-r--r--")
 
         # Not executable for .png
@@ -1459,8 +1459,8 @@ class TestFiles(testlib.MachineCase):
 
         open_permissions_dialog(img_file)
         b.wait_not_present("#is-executable")
-        b.click("div.pf-v5-c-modal-box__close button")
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.click("div.pf-v6-c-modal-box__close button")
+        b.wait_not_present(".pf-v6-c-modal-box")
 
         # fifo not executable
         fifo_file = "test.fifo"
@@ -1468,8 +1468,8 @@ class TestFiles(testlib.MachineCase):
 
         open_permissions_dialog(fifo_file)
         b.wait_not_present("#is-executable")
-        b.click("div.pf-v5-c-modal-box__close button")
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.click("div.pf-v6-c-modal-box__close button")
+        b.wait_not_present(".pf-v6-c-modal-box")
 
         # `uname` can be marked as executable
         executable_file = "uname"
@@ -1478,8 +1478,8 @@ class TestFiles(testlib.MachineCase):
 
         open_permissions_dialog(executable_file)
         b.set_checked("#is-executable", val=True)
-        b.click(".pf-v5-c-modal-box button.pf-m-primary")
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.click(".pf-v6-c-modal-box button.pf-m-primary")
+        b.wait_not_present(".pf-v6-c-modal-box")
 
         check_perms_match(executable_file, '/home/admin')
 
@@ -1493,8 +1493,8 @@ class TestFiles(testlib.MachineCase):
 
         # Changing ownership does not affect the symlink target
         b.select_from_dropdown("#edit-permissions-group", "root")
-        b.click(".pf-v5-c-modal-box button.pf-m-primary")
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.click(".pf-v6-c-modal-box button.pf-m-primary")
+        b.wait_not_present(".pf-v6-c-modal-box")
 
         b.wait_in_text(f"[data-item='{symlink}'] .item-owner", "admin:root")
         self.assertEqual(self.stat("%U:%G", "/usr/bin/uname"), "root:root")
@@ -1509,7 +1509,7 @@ class TestFiles(testlib.MachineCase):
         check_perms_match(shell_script, '/home/admin')
         open_permissions_dialog(shell_script)
 
-        b.wait_in_text(".pf-v5-c-modal-box__title-text", shell_script)
+        b.wait_in_text(".pf-v6-c-modal-box__title-text", shell_script)
         b.wait_val("#edit-permissions-owner-access", "read-only")
         b.wait_val("#edit-permissions-group-access", "write-only")
         b.wait_val("#edit-permissions-other-access", "write-only")
@@ -1517,8 +1517,8 @@ class TestFiles(testlib.MachineCase):
 
         b.select_from_dropdown("#edit-permissions-group-access", "read-write")
         b.select_from_dropdown("#edit-permissions-other-access", "no-access")
-        b.click(".pf-v5-c-modal-box button.pf-m-primary")
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.click(".pf-v6-c-modal-box button.pf-m-primary")
+        b.wait_not_present(".pf-v6-c-modal-box")
         self.assertEqual(self.stat("%A", f"/home/admin/{shell_script}"), "-r-xrw----")
 
         self.chdir('/')
@@ -1526,19 +1526,19 @@ class TestFiles(testlib.MachineCase):
         # Shows / as /
         b.click("#dropdown-menu")
         b.click("#edit-permissions")
-        b.wait_in_text(".pf-v5-c-modal-box__title-text", "/")
+        b.wait_in_text(".pf-v6-c-modal-box__title-text", "/")
         b.click("button.pf-m-link")
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.wait_not_present(".pf-v6-c-modal-box")
 
         # Shows root user owns "bin"
         b.click("[data-item='bin']")
         b.click("#dropdown-menu")
         b.click("#edit-permissions")
-        b.wait_in_text(".pf-v5-c-modal-box__title-text", "bin")
+        b.wait_in_text(".pf-v6-c-modal-box__title-text", "bin")
         b.wait_in_text("#edit-permissions-owner", "root")
         b.wait_in_text("#edit-permissions-group", "root")
         b.click("button.pf-m-link")
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.wait_not_present(".pf-v6-c-modal-box")
 
         self.chdir('/home/admin')
 
@@ -1565,8 +1565,8 @@ class TestFiles(testlib.MachineCase):
         b.wait_val("#edit-permissions-owner-access", "read-write")
         b.wait_val("#edit-permissions-group-access", "read-only")
         b.wait_val("#edit-permissions-other-access", "read-only")
-        b.click(".pf-v5-c-modal-box button.pf-m-secondary")
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.click(".pf-v6-c-modal-box button.pf-m-secondary")
+        b.wait_not_present(".pf-v6-c-modal-box")
 
         # Files with any executable bit set, get a +x in all modes when +X is passed.
         self.assertEqual(self.stat("%A,%U,%G",
@@ -1588,14 +1588,14 @@ class TestFiles(testlib.MachineCase):
 
         b.click("#dropdown-menu")
         b.click("button:contains('Edit permissions')")
-        b.wait_in_text(".pf-v5-c-modal-box__title-text", "Documents")
+        b.wait_in_text(".pf-v6-c-modal-box__title-text", "Documents")
 
         b.select_from_dropdown("#edit-permissions-group", "root")
         b.select_from_dropdown("#edit-permissions-owner-access", "read-only")
         b.select_from_dropdown("#edit-permissions-group-access", "no-access")
         b.select_from_dropdown("#edit-permissions-other-access", "no-access")
-        b.click(".pf-v5-c-modal-box button.pf-m-secondary")
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.click(".pf-v6-c-modal-box button.pf-m-secondary")
+        b.wait_not_present(".pf-v6-c-modal-box")
 
         self.assertEqual(self.stat("%A,%U,%G",
                                    f"{change_enclosed_dir}/Finance"), "dr-x------,admin,root")
@@ -1629,14 +1629,14 @@ class TestFiles(testlib.MachineCase):
         b.mouse("[data-item='filename1']", "contextmenu")
         b.click("button:contains('Edit permissions')")
 
-        b.wait_text(".pf-v5-c-modal-box__title-text", "Permissions for 2 files")
+        b.wait_text(".pf-v6-c-modal-box__title-text", "Permissions for 2 files")
         b.wait_in_text("#edit-permissions-owner", "admin")
         b.wait_in_text("#edit-permissions-group", "admin")
         b.select_from_dropdown("#edit-permissions-owner-access", "read-only")
         b.select_from_dropdown("#edit-permissions-group-access", "no-access")
         b.select_from_dropdown("#edit-permissions-other-access", "no-access")
-        b.click(".pf-v5-c-modal-box button.pf-m-primary")
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.click(".pf-v6-c-modal-box button.pf-m-primary")
+        b.wait_not_present(".pf-v6-c-modal-box")
         self.assertEqual(self.stat("%A", "/home/admin/multiple/filename1"), "-r--------")
         self.assertEqual(self.stat("%A", "/home/admin/multiple/filename2"), "-r--------")
 
@@ -1655,8 +1655,8 @@ class TestFiles(testlib.MachineCase):
             b.select_from_dropdown("#edit-permissions-group-access", "read-only")
             b.select_from_dropdown("#edit-permissions-other-access", "read-only")
 
-            b.click(".pf-v5-c-modal-box button.pf-m-primary")
-            b.wait_not_present(".pf-v5-c-modal-box")
+            b.click(".pf-v6-c-modal-box button.pf-m-primary")
+            b.wait_not_present(".pf-v6-c-modal-box")
 
             self.assertEqual(self.stat("%A", "/home/admin/multiple/filename1"), "-rw-r--r--")
             self.assertEqual(self.stat("%A", "/home/admin/multiple/filename2"), "-rw-r--r--")
@@ -1686,15 +1686,15 @@ class TestFiles(testlib.MachineCase):
         b.mouse("[data-item='filename3']", "contextmenu")
         b.click("button:contains('Edit permissions')")
 
-        b.wait_text(".pf-v5-c-modal-box__title-text", "Permissions for 13 files")
-        b.wait_in_text(".pf-v5-c-modal-box", "Ownership")
-        b.assert_pixels(".pf-v5-c-modal-box", "multiple-files-permissions-modal", chrome_hack_double_shots=True)
+        b.wait_text(".pf-v6-c-modal-box__title-text", "Permissions for 13 files")
+        b.wait_in_text(".pf-v6-c-modal-box", "Ownership")
+        b.assert_pixels(".pf-v6-c-modal-box", "multiple-files-permissions-modal", chrome_hack_double_shots=True)
         # Expand files
-        b.wait_text(".pf-v5-c-expandable-section button", "Show all files")
-        b.click(".pf-v5-c-expandable-section button")
-        b.wait_text(".pf-v5-c-expandable-section button", "Collapse")
-        b.click(".pf-v5-c-modal-box button.pf-m-link")
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.wait_text(".pf-v6-c-expandable-section button", "Show all files")
+        b.click(".pf-v6-c-expandable-section button")
+        b.wait_text(".pf-v6-c-expandable-section button", "Collapse")
+        b.click(".pf-v6-c-modal-box button.pf-m-link")
+        b.wait_not_present(".pf-v6-c-modal-box")
 
         self.chdir('/home/admin')
 
@@ -1705,8 +1705,8 @@ class TestFiles(testlib.MachineCase):
         open_permissions_dialog('adminfile')
         select_access("read-write")
         # A user cannot change ownership
-        b.wait_not_in_text(".pf-v5-c-modal-box__body", "Ownership")
-        b.click(".pf-v5-c-modal-box button.pf-m-primary")
+        b.wait_not_in_text(".pf-v6-c-modal-box__body", "Ownership")
+        b.click(".pf-v6-c-modal-box button.pf-m-primary")
         self.assertEqual(self.stat("%A", "/home/admin/adminfile"), "-rw-rw-rw-")
         check_perms_match('adminfile', '/home/admin')
         # Does not change ownership
@@ -1718,10 +1718,10 @@ class TestFiles(testlib.MachineCase):
         select_access("read-only")
         if has_selinux:
             b.wait_val("#selinux-context", "system_u:object_r:home_root_t:s0")
-        b.click(".pf-v5-c-modal-box button.pf-m-primary")
+        b.click(".pf-v6-c-modal-box button.pf-m-primary")
         self.wait_modal_inline_alert("chmod: changing permissions of '/home': Operation not permitted")
-        b.click(".pf-v5-c-modal-box button.pf-m-link")
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.click(".pf-v6-c-modal-box button.pf-m-link")
+        b.wait_not_present(".pf-v6-c-modal-box")
 
         self.chdir('/home/admin')
 
@@ -1729,10 +1729,10 @@ class TestFiles(testlib.MachineCase):
         m.execute("chattr +i /home/admin/Documents/Work/notes.txt")
         self.addCleanup(m.execute, "chattr -i /home/admin/Documents/Work/notes.txt")
         open_permissions_dialog("Documents")
-        b.click(".pf-v5-c-modal-box button.pf-m-secondary")
+        b.click(".pf-v6-c-modal-box button.pf-m-secondary")
         self.wait_modal_inline_alert("Operation not permitted")
         b.click("button.pf-m-link")
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.wait_not_present(".pf-v6-c-modal-box")
 
         # Test permissions in details view
         basedir = "/home/admin"
@@ -1752,9 +1752,9 @@ class TestFiles(testlib.MachineCase):
         """)
 
         b.mouse("[data-item='file6'] .item-perms pre", "mouseenter")
-        b.wait_in_text(".pf-v5-c-tooltip dd:nth-of-type(1)", "read and write")
-        b.wait_in_text(".pf-v5-c-tooltip dd:nth-of-type(2)", "read and write")
-        b.wait_in_text(".pf-v5-c-tooltip dd:nth-of-type(3)", "read and write")
+        b.wait_in_text(".pf-v6-c-tooltip dd:nth-of-type(1)", "read and write")
+        b.wait_in_text(".pf-v6-c-tooltip dd:nth-of-type(2)", "read and write")
+        b.wait_in_text(".pf-v6-c-tooltip dd:nth-of-type(3)", "read and write")
         b.mouse("[data-item='file6'] .item-perms pre", "mouseleave")
 
         for i in range(8):
@@ -1773,10 +1773,10 @@ class TestFiles(testlib.MachineCase):
         """)
 
         b.mouse("[data-item='file4'] .item-perms pre", "mouseenter")
-        b.wait_in_text(".pf-v5-c-tooltip dd:nth-of-type(1)", "read and write")
-        b.wait_in_text(".pf-v5-c-tooltip dd:nth-of-type(2)", "execute-only")
-        b.wait_in_text(".pf-v5-c-tooltip dd:nth-of-type(3)", "write and execute")
-        b.assert_pixels(".pf-v5-c-page__main", "permissions-tooltip", mock={".item-date": "Jun 19, 2024, 11:30 AM"})
+        b.wait_in_text(".pf-v6-c-tooltip dd:nth-of-type(1)", "read and write")
+        b.wait_in_text(".pf-v6-c-tooltip dd:nth-of-type(2)", "execute-only")
+        b.wait_in_text(".pf-v6-c-tooltip dd:nth-of-type(3)", "write and execute")
+        b.assert_pixels(".pf-v6-c-page__main", "permissions-tooltip", mock={".item-date": "Jun 19, 2024, 11:30 AM"})
         b.mouse("[data-item='file4'] .item-perms pre", "mouseleave")
 
         for i in range(8):
@@ -1795,9 +1795,9 @@ class TestFiles(testlib.MachineCase):
         """)
 
         b.mouse("[data-item='file7'] .item-perms pre", "mouseenter")
-        b.wait_in_text(".pf-v5-c-tooltip dd:nth-of-type(1)", "read, write, and execute")
-        b.wait_in_text(".pf-v5-c-tooltip dd:nth-of-type(2)", "read, write, and execute")
-        b.wait_in_text(".pf-v5-c-tooltip dd:nth-of-type(3)", "read, write, and execute")
+        b.wait_in_text(".pf-v6-c-tooltip dd:nth-of-type(1)", "read, write, and execute")
+        b.wait_in_text(".pf-v6-c-tooltip dd:nth-of-type(2)", "read, write, and execute")
+        b.wait_in_text(".pf-v6-c-tooltip dd:nth-of-type(3)", "read, write, and execute")
         b.mouse("[data-item='file7'] .item-perms pre", "mouseleave")
 
         for i in range(8):
@@ -1814,8 +1814,8 @@ class TestFiles(testlib.MachineCase):
         b.mouse("[data-item='testdir']", "dblclick")
         self.wait_directory_changed("/home/admin/testdir/")
         b.drop_superuser()
-        b.wait_in_text(".pf-v5-c-empty-state", "Permission denied")
-        b.assert_pixels(".pf-v5-c-page__main", "error-folder-view")
+        b.wait_in_text(".pf-v6-c-empty-state", "Permission denied")
+        b.assert_pixels(".pf-v6-c-page__main", "error-folder-view")
 
         # clicking on the home button should take us to the home directory
         b.click("li[data-location='/home/admin'] a")
@@ -1872,7 +1872,7 @@ class TestFiles(testlib.MachineCase):
         b.mouse("[data-item='file1']", "contextmenu")
         b.wait_in_text(".contextMenu li:nth-child(2) button", "Delete")
         b.click(".contextMenu button:contains('Delete')")
-        b.wait_in_text("h1.pf-v5-c-modal-box__title", "Delete 2 items?")
+        b.wait_in_text("h1.pf-v6-c-modal-box__title", "Delete 2 items?")
         b.click("button.pf-m-danger")
         b.wait_not_present("[data-item='file1']")
         b.wait_not_present("[data-item='file2']")
@@ -1883,7 +1883,7 @@ class TestFiles(testlib.MachineCase):
         b.mouse("[data-item='file2']", "click", ctrlKey=True)
         b.click("#dropdown-menu")
         b.click("#delete-item")
-        b.wait_in_text("h1.pf-v5-c-modal-box__title", "Delete 2 items?")
+        b.wait_in_text("h1.pf-v6-c-modal-box__title", "Delete 2 items?")
         b.click("button.pf-m-danger")
         b.wait_not_present("[data-item='file1']")
         b.wait_not_present("[data-item='file2']")
@@ -1906,7 +1906,7 @@ class TestFiles(testlib.MachineCase):
         # view shortcuts help dialog
         b.click("#dropdown-menu")
         b.click("#shortcuts-help")
-        b.wait_in_text(".shortcuts-dialog .pf-v5-c-modal-box__title-text", "Keyboard shortcuts")
+        b.wait_in_text(".shortcuts-dialog .pf-v6-c-modal-box__title-text", "Keyboard shortcuts")
         b.assert_pixels(".shortcuts-dialog", "shortcuts-help-menu")
         b.click(".shortcuts-dialog button.pf-m-secondary")
         b.wait_not_present(".shortcuts-dialog")
@@ -1915,9 +1915,9 @@ class TestFiles(testlib.MachineCase):
         b.eval_js("window.focus()")
 
         # Pressing ArrowRight will select first item when nothing is selected
-        b.wait_visible(".pf-v5-c-table__tbody tr:nth-child(1)")
+        b.wait_visible(".pf-v6-c-table__tbody tr:nth-child(1)")
         b.key("ArrowRight")
-        b.wait_visible(".pf-v5-c-table__tbody tr:nth-child(1).row-selected")
+        b.wait_visible(".pf-v6-c-table__tbody tr:nth-child(1).row-selected")
 
         b.click("[data-item='file0']")
         b.wait_visible("[data-item='file0'].row-selected")
@@ -2023,11 +2023,11 @@ class TestFiles(testlib.MachineCase):
         b.click("#paste-item")
         b.wait_visible("[data-item='newfile']")
         self.assertEqual(m.execute("head -n 1 /home/admin/newdir/newfile"), "test_text\n")
-        b.wait_in_text("h4.pf-v5-c-alert__title", "Pasting failed")
-        b.wait_in_text(".pf-v5-c-alert__description", "\"newfile\" exists")
+        b.wait_in_text("h4.pf-v6-c-alert__title", "Pasting failed")
+        b.wait_in_text(".pf-v6-c-alert__description", "\"newfile\" exists")
         b.click("li[data-location='/home/admin'] a")
         self.wait_directory_changed("/home/admin/")
-        b.click(".pf-v5-c-alert__action button")
+        b.click(".pf-v6-c-alert__action button")
 
         # Copy/paste with keybinds
         b.eval_js("window.focus()")
@@ -2065,10 +2065,10 @@ class TestFiles(testlib.MachineCase):
         b.key("c", modifiers=["Control"])
         self.chdir('/home/admin/kbdCopy')
         b.key("v", modifiers=["Control"])
-        b.wait_in_text("h4.pf-v5-c-alert__title", "Pasting failed")
-        b.wait_in_text(".pf-v5-c-alert__description", "\"newfile\" exists")
+        b.wait_in_text("h4.pf-v6-c-alert__title", "Pasting failed")
+        b.wait_in_text(".pf-v6-c-alert__description", "\"newfile\" exists")
         self.assertEqual(m.execute("head -n 1 /home/admin/kbdCopy/newfile"), "keybindings good\n")
-        b.click(".pf-v5-c-alert__action button")
+        b.click(".pf-v6-c-alert__action button")
 
         # Copy & paste as superuser
         # Switch to list so owner is visible
@@ -2185,12 +2185,12 @@ class TestFiles(testlib.MachineCase):
         b.click("#dropdown-menu")
         b.click("#paste-item")
         b.click("#paste-owner-modal button.pf-m-primary")
-        b.wait_in_text("h4.pf-v5-c-alert__title", "Pasting failed")
+        b.wait_in_text("h4.pf-v6-c-alert__title", "Pasting failed")
         # check that alert has a sensible error message
-        self.assertIn("/home/foouser/copyfail/newfile", b.text(".pf-v5-c-alert__description"))
-        self.assertIn("Operation not permitted", b.text(".pf-v5-c-alert__description"))
+        self.assertIn("/home/foouser/copyfail/newfile", b.text(".pf-v6-c-alert__description"))
+        self.assertIn("Operation not permitted", b.text(".pf-v6-c-alert__description"))
         b.wait_not_present("[data-item='copyfail']")
-        b.click(".pf-v5-c-alert__action button")
+        b.click(".pf-v6-c-alert__action button")
 
         # Multiple ownerships are kept when selecting "keep original owners"
         m.execute("runuser -u foouser mkdir /home/foouser/copydiff")
@@ -2306,9 +2306,9 @@ class TestFiles(testlib.MachineCase):
         self.chdir('/')
         b.click("#dropdown-menu")
         b.click("#paste-item")
-        b.wait_visible(".pf-v5-c-alert.pf-m-danger")
-        self.assertIn("Permission denied", b.text(".pf-v5-c-alert.pf-m-danger .pf-v5-c-alert__title"))
-        b.click(".pf-v5-c-alert__action button")
+        b.wait_visible(".pf-v6-c-alert.pf-m-danger")
+        self.assertIn("Permission denied", b.text(".pf-v6-c-alert.pf-m-danger .pf-v6-c-alert__title"))
+        b.click(".pf-v6-c-alert__action button")
         b.wait_not_present("[data-item='newfile']")
 
     def testUpload(self) -> None:
@@ -2342,15 +2342,15 @@ class TestFiles(testlib.MachineCase):
                 # Default umask should be 022
                 description += f"Uploaded as {owner_group}, rw- r-- r--"
 
-            b.wait_in_text(".pf-v5-c-alert__title", title)
-            b.wait_text(".pf-v5-c-alert__description", description)
+            b.wait_in_text(".pf-v6-c-alert__title", title)
+            b.wait_text(".pf-v6-c-alert__description", description)
 
             if pixel_test:
-                b.assert_pixels(".pf-v5-c-alert.pf-m-success", "multiple-upload-alert-success")
+                b.assert_pixels(".pf-v6-c-alert.pf-m-success", "multiple-upload-alert-success")
 
             if close:
-                b.click(".pf-v5-c-alert__action button")
-                b.wait_not_present(".pf-v5-c-alert__action")
+                b.click(".pf-v6-c-alert__action button")
+                b.wait_not_present(".pf-v6-c-alert__action")
 
         with tempfile.TemporaryDirectory() as tmpdir:
 
@@ -2399,9 +2399,9 @@ class TestFiles(testlib.MachineCase):
 
             b.wait_not_present("#upload-progress-btn")
             b.wait_visible("#upload-file-btn")
-            b.wait_in_text(".pf-v5-c-alert__description", "Cancelled upload of bigfile.img")
-            b.click(".pf-v5-c-alert__action button")
-            b.wait_not_present(".pf-v5-c-alert__action")
+            b.wait_in_text(".pf-v6-c-alert__description", "Cancelled upload of bigfile.img")
+            b.click(".pf-v6-c-alert__action button")
+            b.wait_not_present(".pf-v6-c-alert__action")
             self.assertEqual(dir_file_count("/home/admin/Downloads"), 0)
 
             # Early ENOSPC error (before we would block on 'ack')
@@ -2419,9 +2419,9 @@ class TestFiles(testlib.MachineCase):
             b.click("#upload-file-btn")
             b.upload_files("#upload-file-btn + input[type='file']", [big_file])
 
-            b.wait_in_text(".pf-v5-c-alert__description", "No space left on device")
-            b.click(".pf-v5-c-alert__action button")
-            b.wait_not_present(".pf-v5-c-alert__action")
+            b.wait_in_text(".pf-v6-c-alert__description", "No space left on device")
+            b.click(".pf-v6-c-alert__action button")
+            b.wait_not_present(".pf-v6-c-alert__action")
             self.assertEqual(dir_file_count("/home/admin/Downloads"), 0)
 
             # Multi upload
@@ -2467,8 +2467,8 @@ class TestFiles(testlib.MachineCase):
             # Cancel does not overwrite
             b.click("#upload-file-btn")
             b.upload_files("#upload-file-btn + input[type='file']", [files[0]])
-            b.wait_in_text("h1.pf-v5-c-modal-box__title", f"Replace file {filename}?")
-            b.assert_pixels(".pf-v5-c-modal-box.pf-m-warning", "upload-replace-dialog",
+            b.wait_in_text("h1.pf-v6-c-modal-box__title", f"Replace file {filename}?")
+            b.assert_pixels(".pf-v6-c-modal-box.pf-m-warning", "upload-replace-dialog",
                             mock={".new-file-date": "Jun 19, 2024, 11:30 AM",
                                   ".original-file-date": "Jun 19, 2024, 11:30 AM"})
             b.click("button.pf-m-link:contains('Cancel')")
@@ -2478,9 +2478,9 @@ class TestFiles(testlib.MachineCase):
             # Overwrite
             b.click("#upload-file-btn")
             b.upload_files("#upload-file-btn + input[type='file']", [files[0]])
-            b.wait_in_text("h1.pf-v5-c-modal-box__title", f"Replace file {filename}?")
+            b.wait_in_text("h1.pf-v6-c-modal-box__title", f"Replace file {filename}?")
             b.click("button.pf-m-warning:contains('Replace')")
-            b.wait_not_present(".pf-v5-c-modal-box")
+            b.wait_not_present(".pf-v6-c-modal-box")
             assert_upload_alert([os.path.basename(files[0])], "admin:admin")
 
             self.assertEqual(m.execute(f"cat {dest_dir}/{filename}"),
@@ -2494,11 +2494,11 @@ class TestFiles(testlib.MachineCase):
             b.click("#upload-file-btn")
             b.upload_files("#upload-file-btn + input[type='file']", files)
 
-            b.wait_in_text("h1.pf-v5-c-modal-box__title", f"Replace file {filename}?")
-            b.wait_in_text(".pf-v5-c-check__label", "Apply this action to all conflicting files")
+            b.wait_in_text("h1.pf-v6-c-modal-box__title", f"Replace file {filename}?")
+            b.wait_in_text(".pf-v6-c-check__label", "Apply this action to all conflicting files")
             # Cancelling calls all
             b.click("button.pf-m-link:contains('Cancel')")
-            b.wait_not_present(".pf-v5-c-modal-box")
+            b.wait_not_present(".pf-v6-c-modal-box")
 
             verify_uploaded_files()
 
@@ -2507,11 +2507,11 @@ class TestFiles(testlib.MachineCase):
             b.click("#upload-file-btn")
             b.upload_files("#upload-file-btn + input[type='file']", files)
 
-            b.wait_in_text("h1.pf-v5-c-modal-box__title", f"Replace file {filename}?")
-            b.wait_in_text(".pf-v5-c-check__label", "Apply this action to all conflicting files")
+            b.wait_in_text("h1.pf-v6-c-modal-box__title", f"Replace file {filename}?")
+            b.wait_in_text(".pf-v6-c-check__label", "Apply this action to all conflicting files")
             b.set_checked("#replace-all", val=True)
             b.click("button.pf-m-secondary:contains('Keep original')")
-            b.wait_not_present(".pf-v5-c-modal-box")
+            b.wait_not_present(".pf-v6-c-modal-box")
 
             verify_uploaded_files()
 
@@ -2519,11 +2519,11 @@ class TestFiles(testlib.MachineCase):
             b.click("#upload-file-btn")
             b.upload_files("#upload-file-btn + input[type='file']", files)
 
-            b.wait_in_text("h1.pf-v5-c-modal-box__title", f"Replace file {filename}?")
-            b.wait_in_text(".pf-v5-c-check__label", "Apply this action to all conflicting files")
+            b.wait_in_text("h1.pf-v6-c-modal-box__title", f"Replace file {filename}?")
+            b.wait_in_text(".pf-v6-c-check__label", "Apply this action to all conflicting files")
             b.set_checked("#replace-all", val=True)
             b.click("button.pf-m-warning:contains('Replace')")
-            b.wait_not_present(".pf-v5-c-modal-box")
+            b.wait_not_present(".pf-v6-c-modal-box")
 
             assert_upload_alert(files, "admin:admin")
             verify_uploaded_files(changed=True)
@@ -2542,15 +2542,15 @@ class TestFiles(testlib.MachineCase):
             for file in files:
                 filename = os.path.basename(file)
                 if file != files[-1]:
-                    b.wait_in_text("h1.pf-v5-c-modal-box__title", f"Replace file {filename}?")
+                    b.wait_in_text("h1.pf-v6-c-modal-box__title", f"Replace file {filename}?")
                     b.click("button.pf-m-secondary:contains('Keep original')")
 
-            b.wait_not_present(".pf-v5-c-modal-box")
-            b.wait_in_text(".pf-v5-c-alert__title", "File uploaded")
-            b.wait_in_text(".pf-v5-c-alert__description", "newfile.txt")
-            b.wait_in_text(".pf-v5-c-alert__description", "Uploaded as admin:admin")
-            b.click(".pf-v5-c-alert__action button")
-            b.wait_not_present(".pf-v5-c-alert__action")
+            b.wait_not_present(".pf-v6-c-modal-box")
+            b.wait_in_text(".pf-v6-c-alert__title", "File uploaded")
+            b.wait_in_text(".pf-v6-c-alert__description", "newfile.txt")
+            b.wait_in_text(".pf-v6-c-alert__description", "Uploaded as admin:admin")
+            b.click(".pf-v6-c-alert__action button")
+            b.wait_not_present(".pf-v6-c-alert__action")
 
             b.wait_visible(f"[data-item='{os.path.basename(newfile)}']")
 
@@ -2565,13 +2565,13 @@ class TestFiles(testlib.MachineCase):
             # We only get asked about existing files
             for file in files:
                 filename = os.path.basename(file)
-                b.wait_in_text("h1.pf-v5-c-modal-box__title", f"Replace file {filename}?")
+                b.wait_in_text("h1.pf-v6-c-modal-box__title", f"Replace file {filename}?")
                 if file == files[-1]:
                     b.click("button.pf-m-warning:contains('Replace')")
                 else:
                     b.click("button.pf-m-secondary:contains('Keep original')")
 
-            b.wait_not_present(".pf-v5-c-modal-box")
+            b.wait_not_present(".pf-v6-c-modal-box")
             assert_upload_alert([os.path.basename(files[-1])], "admin:admin")
 
             self.assertEqual(m.execute(f"cat {dest_dir}/{filename}"), "new content")
@@ -2594,9 +2594,9 @@ class TestFiles(testlib.MachineCase):
             contents = m.execute(f"cat /home/testuser/{testuser_filename}")
             self.assertEqual(contents, test_content)
 
-            b.click(".pf-v5-c-alert__action-group button")
-            b.wait_not_present(".pf-v5-c-alert__action")
-            b.wait_in_text(".pf-v5-c-modal-box__title-text", testuser_filename)
+            b.click(".pf-v6-c-alert__action-group button")
+            b.wait_not_present(".pf-v6-c-alert__action")
+            b.wait_in_text(".pf-v6-c-modal-box__title-text", testuser_filename)
             b.wait_val("#edit-permissions-owner", "testuser")
             b.wait_val("#edit-permissions-group", "testuser")
             b.wait_val("#edit-permissions-owner-access", "read-write")
@@ -2606,7 +2606,7 @@ class TestFiles(testlib.MachineCase):
             b.select_from_dropdown("#edit-permissions-owner", "root")
             b.select_from_dropdown("#edit-permissions-group", "root")
             b.click("button.pf-m-primary")
-            b.wait_not_present(".pf-v5-c-modal-box")
+            b.wait_not_present(".pf-v6-c-modal-box")
 
             self.assert_owner(f'/home/testuser/{testuser_filename}', 'root:root')
 
@@ -2616,10 +2616,10 @@ class TestFiles(testlib.MachineCase):
             self.addCleanup(m.execute, "chattr -i /home/testuser")
             b.click("#upload-file-btn")
             b.upload_files("#upload-file-btn + input[type='file']", [files[-1]])
-            b.wait_in_text(".pf-v5-c-alert__title", "Failed")
-            b.wait_in_text(".pf-v5-c-alert__description", "Not permitted to perform this action")
-            b.click(".pf-v5-c-alert__action button")
-            b.wait_not_present(".pf-v5-c-alert__action")
+            b.wait_in_text(".pf-v6-c-alert__title", "Failed")
+            b.wait_in_text(".pf-v6-c-alert__description", "Not permitted to perform this action")
+            b.click(".pf-v6-c-alert__action button")
+            b.wait_not_present(".pf-v6-c-alert__action")
 
             # Non-admin session
             self.chdir(dest_dir)
@@ -2633,9 +2633,9 @@ class TestFiles(testlib.MachineCase):
             b.click("#upload-file-btn")
             b.upload_files("#upload-file-btn + input[type='file']", [files[-1]])
 
-            b.wait_in_text(".pf-v5-c-alert__title", "File uploaded")
-            b.click(".pf-v5-c-alert__action button")
-            b.wait_not_present(".pf-v5-c-alert__action")
+            b.wait_in_text(".pf-v6-c-alert__title", "File uploaded")
+            b.click(".pf-v6-c-alert__action button")
+            b.wait_not_present(".pf-v6-c-alert__action")
 
             b.wait_visible(f"[data-item='{filename}']")
 
@@ -2643,9 +2643,9 @@ class TestFiles(testlib.MachineCase):
             self.chdir('/')
             b.click("#upload-file-btn")
             b.upload_files("#upload-file-btn + input[type='file']", [files[0]])
-            b.wait_in_text(".pf-v5-c-alert__description", "UploadError: Not permitted to perform this action")
-            b.click(".pf-v5-c-alert__action button")
-            b.wait_not_present(".pf-v5-c-alert__action")
+            b.wait_in_text(".pf-v6-c-alert__description", "UploadError: Not permitted to perform this action")
+            b.click(".pf-v6-c-alert__action button")
+            b.wait_not_present(".pf-v6-c-alert__action")
 
             b.click("button[aria-label='Display as a list']")
             self.chdir('/home/admin')
@@ -2694,10 +2694,10 @@ class TestFiles(testlib.MachineCase):
             b.assert_pixels(".files-card", "drag-drop-upload-dropzone",
                             mock={".item-date": "Jun 19, 2024, 11:30 AM"})
             drag_file_event(".fileview-wrapper", 'drop', 'drag-drop-testfile.txt')
-            b.wait_in_text(".pf-v5-c-alert__title", "File uploaded")
-            b.click(".pf-v5-c-alert__action button")
+            b.wait_in_text(".pf-v6-c-alert__title", "File uploaded")
+            b.click(".pf-v6-c-alert__action button")
             b.wait_visible("[data-item='drag-drop-testfile.txt']")
-            b.wait_not_present(".pf-v5-c-alert__action")
+            b.wait_not_present(".pf-v6-c-alert__action")
             b.wait_not_present(".drag-drop-upload")
 
             # Upload same file again - warning should show up
@@ -2705,9 +2705,9 @@ class TestFiles(testlib.MachineCase):
             b.wait_visible(".drag-drop-upload")
             drag_file_event(".fileview-wrapper", 'dragover', 'drag-drop-testfile.txt')
             drag_file_event(".fileview-wrapper", 'drop', 'drag-drop-testfile.txt')
-            b.wait_in_text("h1.pf-v5-c-modal-box__title", "Replace file drag-drop-testfile.txt?")
-            b.click(".pf-v5-c-modal-box button.pf-m-link")
-            b.wait_not_present(".pf-v5-c-modal-box")
+            b.wait_in_text("h1.pf-v6-c-modal-box__title", "Replace file drag-drop-testfile.txt?")
+            b.click(".pf-v6-c-modal-box button.pf-m-link")
+            b.wait_not_present(".pf-v6-c-modal-box")
 
             # Drag & drop upload overlay is not dislayed when event has no files
             drag_file_event(".fileview-wrapper", 'dragenter')
@@ -2772,8 +2772,8 @@ class TestFiles(testlib.MachineCase):
             b.wait_not_present("[data-item='drag-drop-file-2.txt']")
             b.click("#upload-progress-btn")
             b.click(".cancel-button-0")
-            b.click(".pf-v5-c-alert__action button")
-            b.wait_not_present(".pf-v5-c-alert__action")
+            b.click(".pf-v6-c-alert__action button")
+            b.wait_not_present(".pf-v6-c-alert__action")
             b.wait(lambda: int(m.execute("ls -a /home/admin | wc -l").strip()) == files_cnt)
 
             # Change directory and upload
@@ -2784,10 +2784,10 @@ class TestFiles(testlib.MachineCase):
             drag_file_event(".fileview-wrapper", 'dragenter', 'drag-drop-testfile.txt')
             b.wait_visible(".drag-drop-upload")
             drag_file_event(".fileview-wrapper", 'drop', 'drag-drop-testfile.txt')
-            b.wait_in_text(".pf-v5-c-alert__title", "File uploaded")
-            b.click(".pf-v5-c-alert__action button")
+            b.wait_in_text(".pf-v6-c-alert__title", "File uploaded")
+            b.click(".pf-v6-c-alert__action button")
             b.wait_visible("[data-item='drag-drop-testfile.txt']")
-            b.wait_not_present(".pf-v5-c-alert__action")
+            b.wait_not_present(".pf-v6-c-alert__action")
             b.wait_not_present(".drag-drop-upload")
 
     def testFileTypes(self) -> None:
@@ -2893,50 +2893,50 @@ class TestFiles(testlib.MachineCase):
 
         def assert_bookmark(bookmark: str, *, exists: bool = True) -> None:
             b.click("#bookmark-btn")
-            b.wait_visible(".pf-v5-c-menu")
+            b.wait_visible(".pf-v6-c-menu")
             if exists:
-                b.wait_visible(f".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('{bookmark}') button")
+                b.wait_visible(f".pf-v6-c-menu .pf-v6-c-menu__list-item:contains('{bookmark}') button")
             else:
                 # Has to wait on file.watch() (inotify) to re-read the bookmarks
-                b.wait_not_in_text(".pf-v5-c-menu", bookmark)
+                b.wait_not_in_text(".pf-v6-c-menu", bookmark)
 
             b.click("#bookmark-btn")
-            b.wait_not_present(".pf-v5-c-menu .pf-v5-c-menu__list-item")
+            b.wait_not_present(".pf-v6-c-menu .pf-v6-c-menu__list-item")
 
         b.click("#bookmark-btn")
         # There is only one menu item
-        b.wait_in_text(".pf-v5-c-menu .pf-v5-c-menu__list-item", "Home")
+        b.wait_in_text(".pf-v6-c-menu .pf-v6-c-menu__list-item", "Home")
         # Home directory cannot be added or removed as bookmark
-        b.wait_not_present(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add to bookmarks)")
-        b.wait_not_present(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Remove from bookmarks)")
+        b.wait_not_present(".pf-v6-c-menu .pf-v6-c-menu__list-item:contains(Add to bookmarks)")
+        b.wait_not_present(".pf-v6-c-menu .pf-v6-c-menu__list-item:contains(Remove from bookmarks)")
         b.click("#bookmark-btn")
-        b.wait_not_present(".pf-v5-c-menu .pf-v5-c-menu__list-item")
+        b.wait_not_present(".pf-v6-c-menu .pf-v6-c-menu__list-item")
 
         # Add a bookmark
         self.chdir('/etc')
         b.click("#bookmark-btn")
-        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add to bookmarks) button")
-        b.wait_not_present(".pf-v5-c-menu")
+        b.click(".pf-v6-c-menu .pf-v6-c-menu__list-item:contains(Add to bookmarks) button")
+        b.wait_not_present(".pf-v6-c-menu")
 
         assert_bookmark("/etc", exists=True)
 
         # Remove bookmark
         b.click("#bookmark-btn")
-        b.wait_visible(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('/etc') button")
-        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('Remove from bookmarks') button")
-        b.wait_not_present(".pf-v5-c-menu")
+        b.wait_visible(".pf-v6-c-menu .pf-v6-c-menu__list-item:contains('/etc') button")
+        b.click(".pf-v6-c-menu .pf-v6-c-menu__list-item:contains('Remove from bookmarks') button")
+        b.wait_not_present(".pf-v6-c-menu")
 
         assert_bookmark("/etc", exists=False)
 
         # Go to bookmark
         b.click("#bookmark-btn")
-        b.wait_not_present(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('/etc') button")
-        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add to bookmarks) button")
-        b.wait_not_present(".pf-v5-c-menu")
+        b.wait_not_present(".pf-v6-c-menu .pf-v6-c-menu__list-item:contains('/etc') button")
+        b.click(".pf-v6-c-menu .pf-v6-c-menu__list-item:contains(Add to bookmarks) button")
+        b.wait_not_present(".pf-v6-c-menu")
 
         self.chdir('/proc')
         b.click("#bookmark-btn")
-        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('/etc') button")
+        b.click(".pf-v6-c-menu .pf-v6-c-menu__list-item:contains('/etc') button")
         self.wait_directory_changed("/etc/")
 
         # Bookmarks from nautilus are supported
@@ -2946,31 +2946,31 @@ class TestFiles(testlib.MachineCase):
                 "file:///tmp Temporary Directory\n",
                 append=True, owner='admin:admin')
         b.click("#bookmark-btn")
-        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('This is a-test') button")
+        b.click(".pf-v6-c-menu .pf-v6-c-menu__list-item:contains('This is a-test') button")
         self.wait_directory_changed("/home/admin/This is a-test/")
 
         # Removing directory with spaces or aliases
         b.click("#bookmark-btn")
-        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('Remove from bookmarks') button")
-        b.wait_not_present(".pf-v5-c-menu")
+        b.click(".pf-v6-c-menu .pf-v6-c-menu__list-item:contains('Remove from bookmarks') button")
+        b.wait_not_present(".pf-v6-c-menu")
 
         assert_bookmark("This is a-test", exists=False)
 
         # Bookmarking a directory with spaces encodes it correctly
         b.click("#bookmark-btn")
-        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add to bookmarks) button")
+        b.click(".pf-v6-c-menu .pf-v6-c-menu__list-item:contains(Add to bookmarks) button")
 
         assert_bookmark("This is a-test", exists=True)
         self.assertIn("file:///home/admin/This%20is%20a-test/\n", read_config())
 
         # Removing /tmp bookmark keeps bookmark with spaces
         b.click("#bookmark-btn")
-        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('tmp') button")
+        b.click(".pf-v6-c-menu .pf-v6-c-menu__list-item:contains('tmp') button")
         self.wait_directory_changed("/tmp/")
 
         b.click("#bookmark-btn")
-        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('Remove from bookmarks') button")
-        b.wait_not_present(".pf-v5-c-menu")
+        b.click(".pf-v6-c-menu .pf-v6-c-menu__list-item:contains('Remove from bookmarks') button")
+        b.wait_not_present(".pf-v6-c-menu")
 
         assert_bookmark("/tmp", exists=False)
         self.assertEqual(read_config(), "file:///etc/\nfile:///home/admin/This%20is%20a-test/\n")
@@ -2983,7 +2983,7 @@ class TestFiles(testlib.MachineCase):
         self.wait_directory_changed(f"/home/admin/{special_dir}/")
 
         b.click("#bookmark-btn")
-        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add to bookmarks) button")
+        b.click(".pf-v6-c-menu .pf-v6-c-menu__list-item:contains(Add to bookmarks) button")
 
         assert_bookmark(special_dir, exists=True)
         self.assertEqual("file:///etc/\nfile:///home/admin/This%20is%20a-test/\nfile:///home/admin/super%23special*1%202%3E%3C.%2C%C3%9F/\n",
@@ -2993,12 +2993,12 @@ class TestFiles(testlib.MachineCase):
         self.wait_directory_changed("/home/admin/")
 
         b.click("#bookmark-btn")
-        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('super#special') button")
+        b.click(".pf-v6-c-menu .pf-v6-c-menu__list-item:contains('super#special') button")
         self.assert_last_breadcrumb(special_dir)
 
         b.click("#bookmark-btn")
-        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('Remove from bookmarks') button")
-        b.wait_not_present(".pf-v5-c-menu")
+        b.click(".pf-v6-c-menu .pf-v6-c-menu__list-item:contains('Remove from bookmarks') button")
+        b.wait_not_present(".pf-v6-c-menu")
 
         assert_bookmark(special_dir, exists=False)
         self.assertEqual(read_config(), "file:///etc/\nfile:///home/admin/This%20is%20a-test/\n")
@@ -3010,17 +3010,17 @@ class TestFiles(testlib.MachineCase):
                 append=True, owner='admin:admin')
 
         b.click("#bookmark-btn")
-        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('/var') button")
-        b.wait_not_present(".pf-v5-c-empty-state")
-        b.wait_not_present(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('lalala') button")
+        b.click(".pf-v6-c-menu .pf-v6-c-menu__list-item:contains('/var') button")
+        b.wait_not_present(".pf-v6-c-empty-state")
+        b.wait_not_present(".pf-v6-c-menu .pf-v6-c-menu__list-item:contains('lalala') button")
         self.wait_directory_changed("/var/")
 
         # Removing bookmarks file removes all bookmarks
         m.execute(['rm', '-rf', config_file])
         b.click("#bookmark-btn")
-        b.wait_not_present(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('/etc') button")
+        b.wait_not_present(".pf-v6-c-menu .pf-v6-c-menu__list-item:contains('/etc') button")
         b.click("#bookmark-btn")
-        b.wait_not_present(".pf-v5-c-menu")
+        b.wait_not_present(".pf-v6-c-menu")
 
         # Remove a bookmark when the directory is removed
         m.write(config_file,
@@ -3028,18 +3028,18 @@ class TestFiles(testlib.MachineCase):
                 owner='admin:admin')
 
         b.click("#bookmark-btn")
-        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('non-existent') button")
+        b.click(".pf-v6-c-menu .pf-v6-c-menu__list-item:contains('non-existent') button")
         self.wait_directory_changed("/tmp/non-existent/")
         b.click("#bookmark-btn")
-        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('Remove from bookmarks') button")
-        b.wait_not_present(".pf-v5-c-menu")
+        b.click(".pf-v6-c-menu .pf-v6-c-menu__list-item:contains('Remove from bookmarks') button")
+        b.wait_not_present(".pf-v6-c-menu")
         # Removing the last bookmark, empties the file
         m.execute(f"until [ $(stat -c '%s' {config_file}) -eq 0 ]; do sleep 1; done")
 
         b.click("#bookmark-btn")
-        b.wait_not_present(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains('Add to bookmarks') button")
+        b.wait_not_present(".pf-v6-c-menu .pf-v6-c-menu__list-item:contains('Add to bookmarks') button")
         b.click("#bookmark-btn")
-        b.wait_not_present(".pf-v5-c-menu")
+        b.wait_not_present(".pf-v6-c-menu")
 
         # Error conditions
 
@@ -3051,19 +3051,19 @@ class TestFiles(testlib.MachineCase):
 
         self.chdir('/var')
         b.click("#bookmark-btn")
-        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add to bookmarks) button")
+        b.click(".pf-v6-c-menu .pf-v6-c-menu__list-item:contains(Add to bookmarks) button")
         self.wait_modal_inline_alert("Unable to create bookmark directory")
-        b.click(".pf-v5-c-alert__action button")
-        b.wait_not_present(".pf-v5-c-alert__action")
+        b.click(".pf-v6-c-alert__action button")
+        b.wait_not_present(".pf-v6-c-alert__action")
         m.execute("chattr -i /home/admin/.config")
 
         # When directory is not writable for us
         m.execute("mkdir /home/admin/.config/gtk-3.0")
         b.click("#bookmark-btn")
-        b.click(".pf-v5-c-menu .pf-v5-c-menu__list-item:contains(Add to bookmarks) button")
+        b.click(".pf-v6-c-menu .pf-v6-c-menu__list-item:contains(Add to bookmarks) button")
         self.wait_modal_inline_alert("Unable to save bookmark file")
-        b.click(".pf-v5-c-alert__action button")
-        b.wait_not_present(".pf-v5-c-alert__action")
+        b.click(".pf-v6-c-alert__action button")
+        b.wait_not_present(".pf-v6-c-alert__action")
 
     def testEditor(self) -> None:
         b = self.browser
@@ -3105,16 +3105,16 @@ class TestFiles(testlib.MachineCase):
 
         # Opening an test file, editing and closing (discard)
         open_editor("test.txt")
-        b.wait_text(".pf-v5-c-modal-box__title", "Edit test.txt")
+        b.wait_text(".pf-v6-c-modal-box__title", "Edit test.txt")
         b.wait_text(".file-editor-modal textarea", "test\n")
 
         # Save button is disabled when not editing yet
-        b.wait_visible(".pf-v5-c-modal-box__footer .pf-m-primary.pf-m-disabled")
+        b.wait_visible(".pf-v6-c-modal-box__footer .pf-m-primary.pf-m-disabled")
         b.set_input_text(".file-editor-modal textarea", "foobar", append=True, value_check=False)
         b.wait_val(".file-editor-modal textarea", "test\nfoobar")
 
         b.assert_pixels(".file-editor-modal", "editor-modal-changed")
-        b.wait_visible(".pf-v5-c-modal-box__footer .pf-m-primary:not(:disabled)")
+        b.wait_visible(".pf-v6-c-modal-box__footer .pf-m-primary:not(:disabled)")
 
         b.click(".file-editor-modal button.pf-m-link")
         b.wait_not_present(".file-editor-modal")
@@ -3141,10 +3141,10 @@ class TestFiles(testlib.MachineCase):
         open_editor("test.txt")
         b.set_input_text(".file-editor-modal textarea", "roll\n", append=True, value_check=False)
         b.wait_val(".file-editor-modal textarea", "test\nfoobar\nroll\n")
-        b.wait_visible(".pf-v5-c-modal-box__footer .pf-m-primary:not(:disabled)")
+        b.wait_visible(".pf-v6-c-modal-box__footer .pf-m-primary:not(:disabled)")
 
         m.execute("runuser -u admin echo 'testing' > /home/admin/test.txt")
-        b.wait_in_text(".pf-v5-c-alert__title", "The file has changed on disk")
+        b.wait_in_text(".pf-v6-c-alert__title", "The file has changed on disk")
 
         # Abort, reload
         b.click(".file-editor-modal button:contains('Reload')")
@@ -3154,10 +3154,10 @@ class TestFiles(testlib.MachineCase):
         b.set_input_text(".file-editor-modal textarea", "roll\n", append=True, value_check=False)
         b.wait_val(".file-editor-modal textarea", "testing\nroll\n")
         m.execute("echo 'testing' > /home/admin/test.txt")
-        b.wait_in_text(".pf-v5-c-alert__title", "The file has changed on disk")
+        b.wait_in_text(".pf-v6-c-alert__title", "The file has changed on disk")
 
-        b.click(".pf-v5-c-modal-box__footer .pf-m-warning")
-        b.wait_not_present(".pf-v5-c-alert__title")
+        b.click(".pf-v6-c-modal-box__footer .pf-m-warning")
+        b.wait_not_present(".pf-v6-c-alert__title")
         b.click(".file-editor-modal button.pf-m-link")
         b.wait_not_present(".file-editor-modal")
 
@@ -3169,20 +3169,20 @@ class TestFiles(testlib.MachineCase):
         b.wait_val(".file-editor-modal textarea", "testing\nroll\n")
         m.execute("chown root: /home/admin/test.txt")
         b.set_input_text(".file-editor-modal textarea", "reset")
-        b.click(".pf-v5-c-modal-box__footer .pf-m-primary")
-        b.wait_in_text(".pf-v5-c-alert.pf-m-warning", "The file has changed on disk")
+        b.click(".pf-v6-c-modal-box__footer .pf-m-primary")
+        b.wait_in_text(".pf-v6-c-alert.pf-m-warning", "The file has changed on disk")
 
-        b.click(".pf-v5-c-modal-box__footer .pf-v5-c-button.pf-m-link")
+        b.click(".pf-v6-c-modal-box__footer .pf-v6-c-button.pf-m-link")
         b.wait_not_present(".file-editor-modal")
 
         # Emptying a file does not remove the file
         open_editor("notes.txt")
         b.wait_val(".file-editor-modal textarea", "planes\n")
         b.set_input_text(".file-editor-modal textarea", "")
-        b.click(".pf-v5-c-modal-box__footer .pf-m-primary")
-        b.wait_visible(".pf-v5-c-modal-box__footer .pf-m-primary:disabled")
+        b.click(".pf-v6-c-modal-box__footer .pf-m-primary")
+        b.wait_visible(".pf-v6-c-modal-box__footer .pf-m-primary:disabled")
 
-        b.click(".pf-v5-c-modal-box__footer .pf-v5-c-button.pf-m-link")
+        b.click(".pf-v6-c-modal-box__footer .pf-v6-c-button.pf-m-link")
         b.wait_not_present(".file-editor-modal")
 
         validate_content("notes.txt", "")
@@ -3192,15 +3192,15 @@ class TestFiles(testlib.MachineCase):
         b.wait_val(".file-editor-modal textarea", "")
         b.set_input_text(".file-editor-modal textarea", "reset")
         m.execute("rm /home/admin/notes.txt")
-        b.click(".pf-v5-c-modal-box__footer .pf-m-primary")
-        b.wait_in_text(".pf-v5-c-alert.pf-m-warning", "The file has been removed on disk")
+        b.click(".pf-v6-c-modal-box__footer .pf-m-primary")
+        b.wait_in_text(".pf-v6-c-alert.pf-m-warning", "The file has been removed on disk")
 
         # Save, file was gone but we write it again
-        b.click(".pf-v5-c-modal-box__footer .pf-v5-c-button.pf-m-primary")
+        b.click(".pf-v6-c-modal-box__footer .pf-v6-c-button.pf-m-primary")
         # Saving resets modified state so should not be shown
         b.wait_not_present(".file-editor-modal.is-modified")
 
-        b.click(".pf-v5-c-modal-box__footer .pf-v5-c-button.pf-m-link")
+        b.click(".pf-v6-c-modal-box__footer .pf-v6-c-button.pf-m-link")
         b.wait_not_present(".file-editor-modal")
 
         validate_content("notes.txt", "reset\n")
@@ -3220,10 +3220,10 @@ class TestFiles(testlib.MachineCase):
         self.addCleanup(m.execute, "rm /etc/cockpit-files-test.cfg")
         self.chdir('/etc')
         open_editor("cockpit-files-test.cfg")
-        b.wait_text(".pf-v5-c-modal-box__title", "View cockpit-files-test.cfgRead-only")
+        b.wait_text(".pf-v6-c-modal-box__title", "View cockpit-files-test.cfgRead-only")
         b.assert_pixels(".file-editor-modal", "editor-modal-read-only")
 
-        b.click(".pf-v5-c-modal-box__footer button.pf-m-secondary")
+        b.click(".pf-v6-c-modal-box__footer button.pf-m-secondary")
         b.wait_not_present(".file-editor-modal")
 
     def testCreateFile(self) -> None:
@@ -3236,7 +3236,7 @@ class TestFiles(testlib.MachineCase):
             self.open_folder_context_menu()
             b.click(".contextMenu button:contains('Create file')")
             b.wait_visible(".file-create-modal")
-            b.wait_text(".pf-v5-c-modal-box__title-text", "Create file")
+            b.wait_text(".pf-v6-c-modal-box__title-text", "Create file")
             b.wait_visible("button.pf-m-primary:disabled")
 
         # Error cases
@@ -3245,8 +3245,8 @@ class TestFiles(testlib.MachineCase):
         b.set_input_text("#file-name", "test.txt")
         b.set_input_text(".file-create-modal textarea", "content")
         b.wait_visible("button.pf-m-primary:not(:disabled)")
-        b.click(".pf-v5-c-modal-box__footer button.pf-m-link")  # cancel
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.click(".pf-v6-c-modal-box__footer button.pf-m-link")  # cancel
+        b.wait_not_present(".pf-v6-c-modal-box")
         m.execute("! test -f test.txt")
 
         # file already exists
@@ -3254,19 +3254,19 @@ class TestFiles(testlib.MachineCase):
         b.wait_visible("[data-item='test.txt']")
         open_create_file_modal()
         b.set_input_text("#file-name", "test.txt")
-        b.wait_text(".file-create-modal .pf-v5-c-helper-text__item-text", "File exists")
+        b.wait_text(".file-create-modal .pf-v6-c-helper-text__item-text", "File exists")
         b.wait_visible("button.pf-m-primary:disabled")
         b.set_input_text("#file-name", "/test.txt")
-        b.wait_text(".file-create-modal .pf-v5-c-helper-text__item-text", "Name cannot include a /")
+        b.wait_text(".file-create-modal .pf-v6-c-helper-text__item-text", "Name cannot include a /")
         b.wait_visible("button.pf-m-primary:disabled")
 
         # Create a file as admin, we are superuser and /home owned by admin
         b.set_input_text("#file-name", "notes.txt")
         b.set_input_text(".file-create-modal textarea", "content")
         b.wait_val("#create-file-owner", "admin:admin")
-        b.assert_pixels(".pf-v5-c-modal-box", "create-file-modal-superuser")
+        b.assert_pixels(".pf-v6-c-modal-box", "create-file-modal-superuser")
         b.click("button.pf-m-primary")
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.wait_not_present(".pf-v6-c-modal-box")
         self.assert_owner("/home/admin/notes.txt", "admin:admin")
         self.assertEqual(m.execute("cat /home/admin/notes.txt"), "content")
 
@@ -3276,7 +3276,7 @@ class TestFiles(testlib.MachineCase):
         b.set_input_text(".file-create-modal textarea", "root")
         b.select_from_dropdown("#create-file-owner", "root:root")
         b.click("button.pf-m-primary")
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.wait_not_present(".pf-v6-c-modal-box")
         self.assert_owner("/home/admin/root.txt", "root:root")
         self.assertEqual(m.execute("cat /home/admin/root.txt"), "root")
 
@@ -3287,9 +3287,9 @@ class TestFiles(testlib.MachineCase):
         b.wait_not_present("#create-file-owner")
         b.set_input_text("#file-name", "admin.txt")
         b.set_input_text(".file-create-modal textarea", "admin")
-        b.assert_pixels(".pf-v5-c-modal-box", "create-file-modal-admin")
+        b.assert_pixels(".pf-v6-c-modal-box", "create-file-modal-admin")
         b.click("button.pf-m-primary")
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.wait_not_present(".pf-v6-c-modal-box")
         self.assert_owner("/home/admin/admin.txt", "admin:admin")
         self.assertEqual(m.execute("cat /home/admin/admin.txt"), "admin")
 
@@ -3298,7 +3298,7 @@ class TestFiles(testlib.MachineCase):
         b.click(".contextMenu button:contains('Create file')")
         b.blur("#file-name")  # remove focus from input
         b.key("Escape")  # Escape for modal
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.wait_not_present(".pf-v6-c-modal-box")
 
         # Escape does not close the the dialog when a filename is entered
         self.open_folder_context_menu()
@@ -3307,8 +3307,8 @@ class TestFiles(testlib.MachineCase):
         b.blur("#file-name")  # remove focus from input
         b.key("Escape")  # Escape for modal
         b.wait_val("#file-name", "admin.txt")
-        b.click(".pf-v5-c-modal-box__footer button.pf-m-link")  # cancel
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.click(".pf-v6-c-modal-box__footer button.pf-m-link")  # cancel
+        b.wait_not_present(".pf-v6-c-modal-box")
 
         # Unable to create a file
         self.open_folder_context_menu()
@@ -3319,8 +3319,8 @@ class TestFiles(testlib.MachineCase):
         self.addCleanup(m.execute, "chattr -i /home/admin")
         b.click("button.pf-m-primary")
         self.wait_modal_inline_alert("Not permitted to perform this action")
-        b.click(".pf-v5-c-modal-box__footer button.pf-m-link")  # cancel
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.click(".pf-v6-c-modal-box__footer button.pf-m-link")  # cancel
+        b.wait_not_present(".pf-v6-c-modal-box")
 
         # create a file as admin
 
@@ -3329,7 +3329,7 @@ class TestFiles(testlib.MachineCase):
         self.wait_directory_changed("/home/")
         self.open_folder_context_menu()
         b.click(".contextMenu button:contains('Create file')")
-        b.wait_in_text("h4.pf-v5-c-alert__title", "Cannot create file in current directory")
+        b.wait_in_text("h4.pf-v6-c-alert__title", "Cannot create file in current directory")
 
     def testCreateLink(self) -> None:
         b = self.browser
@@ -3348,7 +3348,7 @@ class TestFiles(testlib.MachineCase):
         def create_symlink(filename: str) -> None:
             b.mouse(f"[data-item='{filename}']", "contextmenu")
             b.click(".contextMenu button:contains('Create link')")
-            b.wait_in_text(".pf-v5-c-modal-box__title-text", f"Create link to {filename}")
+            b.wait_in_text(".pf-v6-c-modal-box__title-text", f"Create link to {filename}")
 
         def assert_link(link: str, expected: str, owner: str | None = None) -> None:
             self.assertEqual(m.execute(f"readlink '{link}'").strip(),
@@ -3365,7 +3365,7 @@ class TestFiles(testlib.MachineCase):
         b.set_checked("#absolute", val=True)
         b.assert_pixels(".file-symlink-modal", "create-link-dialog")
         b.click(".pf-m-primary")
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.wait_not_present(".pf-v6-c-modal-box")
         assert_link(f"/home/admin/link to {test_filename}",
                     f"/home/admin/{test_filename}",
                     "admin:admin")
@@ -3375,7 +3375,7 @@ class TestFiles(testlib.MachineCase):
         b.set_input_text("#symlink-input", f"{self.vm_tmpdir}/absolute-absolute")
         b.set_checked("#absolute", val=True)
         b.click(".pf-m-primary")
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.wait_not_present(".pf-v6-c-modal-box")
         assert_link(f"{self.vm_tmpdir}/absolute-absolute",
                     f"/home/admin/{test_filename}",
                     "root:root")
@@ -3385,7 +3385,7 @@ class TestFiles(testlib.MachineCase):
         b.set_input_text("#symlink-input", f"/..{self.vm_tmpdir}/absolute-relative")
         b.set_checked("#absolute", val=True)
         b.click(".pf-m-primary")
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.wait_not_present(".pf-v6-c-modal-box")
         assert_link(f"{self.vm_tmpdir}/absolute-relative",
                     f"/home/admin/{test_filename}",
                     "root:root")
@@ -3396,7 +3396,7 @@ class TestFiles(testlib.MachineCase):
         b.set_checked("#absolute", val=True)
         self.addCleanup(m.execute, "rm /home/absolute-relative")
         b.click(".pf-m-primary")
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.wait_not_present(".pf-v6-c-modal-box")
         assert_link("/home/absolute-relative",
                     f"/home/admin/{test_filename}",
                     "root:root")
@@ -3407,7 +3407,7 @@ class TestFiles(testlib.MachineCase):
         b.set_input_text("#symlink-input", "relative")
         self.assertTrue(b.get_checked("#relative"))
         b.click(".pf-m-primary")
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.wait_not_present(".pf-v6-c-modal-box")
         assert_link("/home/admin/relative",
                     test_filename,
                     "admin:admin")
@@ -3417,7 +3417,7 @@ class TestFiles(testlib.MachineCase):
         b.set_input_text("#symlink-input", f"{self.vm_tmpdir}/relative-absolute")
         self.assertTrue(b.get_checked("#relative"))
         b.click(".pf-m-primary")
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.wait_not_present(".pf-v6-c-modal-box")
         assert_link(f"{self.vm_tmpdir}/relative-absolute",
                     f"../../../home/admin/{test_filename}",
                     "root:root")
@@ -3427,7 +3427,7 @@ class TestFiles(testlib.MachineCase):
         b.set_input_text("#symlink-input", f"/../{self.vm_tmpdir}/relative-relative")
         self.assertTrue(b.get_checked("#relative"))
         b.click(".pf-m-primary")
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.wait_not_present(".pf-v6-c-modal-box")
         assert_link(f"{self.vm_tmpdir}/relative-relative",
                     f"../../../home/admin/{test_filename}",
                     "root:root")
@@ -3438,7 +3438,7 @@ class TestFiles(testlib.MachineCase):
         self.assertTrue(b.get_checked("#relative"))
         self.addCleanup(m.execute, "rm /home/relative-relative")
         b.click(".pf-m-primary")
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.wait_not_present(".pf-v6-c-modal-box")
         assert_link("/home/relative-relative",
                     f"admin/{test_filename}",
                     "root:root")
@@ -3449,7 +3449,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_val("#symlink-input", f"link to {test_directory}")
         b.set_checked("#absolute", val=True)
         b.click(".pf-m-primary")
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.wait_not_present(".pf-v6-c-modal-box")
         assert_link(f"/home/admin/link to {test_directory}",
                     f"/home/admin/{test_directory}",
                     "admin:admin")
@@ -3460,8 +3460,8 @@ class TestFiles(testlib.MachineCase):
         b.set_input_text("#symlink-input", "/opt/")
         b.click(".pf-m-primary")
         self.wait_modal_inline_alert("ln: failed to create symbolic link '/opt/': File exists")
-        b.click(".pf-v5-c-modal-box__footer button.pf-m-link")  # cancel
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.click(".pf-v6-c-modal-box__footer button.pf-m-link")  # cancel
+        b.wait_not_present(".pf-v6-c-modal-box")
 
         # normal user
         b.drop_superuser()
@@ -3471,7 +3471,7 @@ class TestFiles(testlib.MachineCase):
         b.set_input_text("#symlink-input", "user-absolute")
         b.set_checked("#absolute", val=True)
         b.click(".pf-m-primary")
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.wait_not_present(".pf-v6-c-modal-box")
         assert_link("/home/admin/user-absolute",
                     f"/home/admin/{test_filename}",
                     "admin:admin")
@@ -3481,7 +3481,7 @@ class TestFiles(testlib.MachineCase):
         self.assertTrue(b.get_checked("#relative"))
         b.set_input_text("#symlink-input", "user-relative")
         b.click(".pf-m-primary")
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.wait_not_present(".pf-v6-c-modal-box")
         assert_link("/home/admin/user-relative",
                     test_filename,
                     "admin:admin")
@@ -3489,21 +3489,21 @@ class TestFiles(testlib.MachineCase):
         # validation
         create_symlink(test_filename)
         b.set_input_text("#symlink-input", "")
-        b.wait_text(".file-symlink-modal .pf-v5-c-helper-text__item-text", "Name cannot be empty")
+        b.wait_text(".file-symlink-modal .pf-v6-c-helper-text__item-text", "Name cannot be empty")
         b.wait_visible("button.pf-m-primary:disabled")
 
         b.set_input_text("#symlink-input", "existing.txt")
-        b.wait_text(".file-symlink-modal .pf-v5-c-helper-text__item-text", "File exists")
+        b.wait_text(".file-symlink-modal .pf-v6-c-helper-text__item-text", "File exists")
 
         b.set_input_text("#symlink-input", test_directory)
-        b.wait_text(".file-symlink-modal .pf-v5-c-helper-text__item-text",
+        b.wait_text(".file-symlink-modal .pf-v6-c-helper-text__item-text",
                     "Directory with the same name exists")
         b.wait_visible("button.pf-m-primary:disabled")
 
         # no permissions
         b.set_input_text("#symlink-input", "/bar")
         b.click(".pf-m-primary")
-        b.wait_in_text(".pf-v5-c-alert__title", "Permission denied")
+        b.wait_in_text(".pf-v6-c-alert__title", "Permission denied")
         b.wait_visible("button.pf-m-primary:disabled")
 
         # dialogs cwdInfo not updated, still validated on create
@@ -3511,18 +3511,18 @@ class TestFiles(testlib.MachineCase):
         m.execute("mkdir /home/admin/new")
         b.wait_visible("[data-item='new']")
         b.click(".file-symlink-modal .pf-m-primary")
-        b.wait_text(".file-symlink-modal .pf-v5-c-helper-text__item-text",
+        b.wait_text(".file-symlink-modal .pf-v6-c-helper-text__item-text",
                     "Directory with the same name exists")
         b.wait_visible("button.pf-m-primary:disabled")
 
         # Non-existant target
         b.set_input_text("#symlink-input", "../non-existant/not/really/here")
         b.click(".file-symlink-modal .pf-m-primary")
-        b.wait_in_text(".pf-v5-c-alert__title", "No such file or directory")
+        b.wait_in_text(".pf-v6-c-alert__title", "No such file or directory")
         b.wait_visible("button.pf-m-primary:disabled")
 
         b.click(".file-symlink-modal .pf-m-link")
-        b.wait_not_present(".pf-v5-c-modal-box")
+        b.wait_not_present(".pf-v6-c-modal-box")
 
 
 if __name__ == '__main__':

@@ -1,17 +1,23 @@
 button.progress-wrapper {
-  block-size: 100%;
-  aspect-ratio: 1;
   padding: 0;
 
-  /* Make the button look clickable on hover */
-  &:hover {
-    outline: 2px solid var(--pf-v5-c-button--m-secondary--hover--after--BorderColor);
+  /* We need this to ensure the icon will show.
+   * This is due to how icons now work in PF6 - should revisit
+   * NOTE @Venefilyn: Change CSS behaviour of progress-pie icon to be more like PF6
+   */
+  .pf-v6-c-button__icon {
+    block-size: 100%;
+    inline-size: 100%;
   }
 }
 
+/* Patternfly doesn't offer a progress pie like feature so we need to create it ourselves
+ * NOTE @Venefilyn: This is tracked in PF and should be replaced if they release this as a new feature
+ * https://github.com/patternfly/patternfly-design/issues/1390
+ */
 .progress-pie {
-  --progress-fill: var(--pf-v5-global--primary-color--100);
-  --progress-empty: var(--pf-v5-global--BorderColor--100);
+  --progress-fill: var(--pf-t--global--color--brand--default);
+  --progress-empty: var(--pf-t--global--color--nonstatus--gray--default);
   /* Width can be set to 100% for a filled circle or to any units, including px */
   --progress-width: 40%;
 
@@ -19,10 +25,13 @@ button.progress-wrapper {
   border-radius: 100%;
   block-size: auto;
   /* Set "padding" to xs size (1/2 of sm) */
-  inline-size: calc(100% - var(--pf-v5-global--spacer--sm));
-  line-height: var(--pf-v5-c-button--LineHeight);
+  inline-size: calc(100% - var(--pf-t--global--spacer--sm));
+  line-height: var(--pf-v6-c-button--LineHeight);
   display: inline-block;
-  vertical-align: middle;
+  /* FIXME @Venefilyn: Likely can be done better, was middle before but the icon HTML structure
+   * changed from PF5 to PF6.
+   */
+  vertical-align: -1.2em;
   /* Multiply by a float for a bit of anti-aliasing, while preserving 0% and 100% */
   background: conic-gradient(
     var(--progress-fill) var(--progress, 0),
@@ -38,8 +47,8 @@ button.progress-wrapper {
 
 /* Divider has no margin by default */
 .upload-progress {
-  margin-block-start: var(--pf-v5-global--spacer--md);
-  margin-block-end: var(--pf-v5-global--spacer--md);
+  margin-block-start: var(--pf-t--global--spacer--md);
+  margin-block-end: var(--pf-t--global--spacer--md);
   flex: auto;
 
   /* Force the progress percentage text to be 4 characters wide so the width
@@ -64,9 +73,9 @@ button.cancel-button {
 }
 
 .conflict-modal-files {
-  padding-inline-start: var(--pf-v5-global--spacer--md);
-  padding-block-start: var(--pf-v5-global--spacer--md);
-  padding-block-end: var(--pf-v5-global--spacer--md);
+  padding-inline-start: var(--pf-t--global--spacer--md);
+  padding-block-start: var(--pf-t--global--spacer--md);
+  padding-block-end: var(--pf-t--global--spacer--md);
 }
 
 .upload-popover {
@@ -80,5 +89,5 @@ button.cancel-button {
 }
 
 .ct-grey-text {
-   color: var(--pf-v5-global--Color--200);
+   color: var(--pf-t--temp--dev--tbd);
 }
