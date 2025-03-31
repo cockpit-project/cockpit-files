@@ -447,7 +447,7 @@ export const UploadButton = ({
                           <Flex className="upload-progress-flex" flexWrap={{ default: 'nowrap' }}>
                               <Progress
                                 key={file.file.name}
-                                className={`upload-progress-${index} upload-progress pf-v5-m-tabular-nums`}
+                                className={`upload-progress-${index} upload-progress pf-v6-m-tabular-nums`}
                                 value={file.progress}
                                 title={file.file.name}
                                 max={file.file.size}
