@@ -50,8 +50,6 @@ import type { FolderFileInfo } from '../common.ts';
 // @ts-expect-error Cannot find module or its corresponding type declaration
 import read_selinux_context from './read-selinux.py';
 
-import "./permissions.css";
-
 const _ = cockpit.gettext;
 
 const PERMISSION_OPTIONS: Record<number, string> = {

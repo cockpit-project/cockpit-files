@@ -182,7 +182,10 @@ export const FilesFolderView = ({
     return (
         <UploadContext.Provider value={{ uploadedFiles, setUploadedFiles }}>
             <div className="upload-drop-zone" ref={dropzoneRef}>
-                <Card className="files-card">
+                <Card
+                  className="files-card" isPlain
+                  isCompact
+                >
                     <FilesCardHeader
                       currentFilter={currentFilter}
                       onFilterChange={onFilterChange}

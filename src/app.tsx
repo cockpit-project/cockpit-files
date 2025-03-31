@@ -183,7 +183,7 @@ export const Application = () => {
     const removeAlert = (key: string) => setAlerts(prevAlerts => prevAlerts.filter(alert => alert.key !== key));
 
     return (
-        <Page className="no-masthead-sidebar">
+        <Page className="no-masthead-sidebar" isContentFilled>
             <FilesContext.Provider value={{ addAlert, removeAlert, cwdInfo }}>
                 <WithDialogs>
                     <AlertGroup isToast isLiveRegion>
