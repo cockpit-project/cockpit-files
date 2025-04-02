@@ -99,7 +99,7 @@ class TestFiles(testlib.MachineCase):
         b = self.browser
         b.click(f"[data-item='{filename}']")
         b.click("#dropdown-menu")
-        b.click(f"#dropdown-menu + .pf-v6-c-menu button:contains('{action}')")
+        b.click(f".pf-v6-c-menu button:contains('{action}')")
 
     def open_folder_context_menu(self) -> None:
         # With BiDi on Firefox a click is by default in the "middle" of the
@@ -1693,7 +1693,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_text(".pf-v6-c-expandable-section button", "Show all files")
         b.click(".pf-v6-c-expandable-section button")
         b.wait_text(".pf-v6-c-expandable-section button", "Collapse")
-        b.click(".pf-v6-c-modal-box button.pf-m-link")
+        b.click(".pf-v6-c-modal-box__footer button.pf-m-link")
         b.wait_not_present(".pf-v6-c-modal-box")
 
         self.chdir('/home/admin')
@@ -3109,7 +3109,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_text(".file-editor-modal textarea", "test\n")
 
         # Save button is disabled when not editing yet
-        b.wait_visible(".pf-v6-c-modal-box__footer .pf-m-primary.pf-m-disabled")
+        b.wait_visible(".pf-v6-c-modal-box__footer button.pf-m-primary:disabled")
         b.set_input_text(".file-editor-modal textarea", "foobar", append=True, value_check=False)
         b.wait_val(".file-editor-modal textarea", "test\nfoobar")
 
