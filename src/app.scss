@@ -18,6 +18,10 @@
 
 .files-card {
     position: relative;
+    // Links have underline by default, but within a tree structure or grid we don't want that as we want to
+    // be more similar to how files actually are.
+    // FIXME @Venefilyn: Maybe we can change from links as we don't use them as links. Possibly dirs are but not sure
+    --pf-t--global--text-decoration--link--line--default: none;
 }
 
 .drag-drop-upload,
