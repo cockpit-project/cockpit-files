@@ -188,13 +188,28 @@
             border-block-start: none;
         }
 
+        @media screen and (max-width: calc(-1px + 48rem)) {
+            tr:nth-child(even) {
+                background-color: var(--pf-t--global--background--color--secondary--default);
+            }
+
+            .col-folder, .item-name {
+                text-align: end;
+            }
+        }
+
         .col-size, .item-size,
         .col-date, .item-date,
         .col-owner, .item-owner,
         .col-perms, .item-perms {
-            inline-size: 12ch;
             text-align: end;
+
+            /* To fix mobile view table */
+            @media screen and (min-width: 48rem) {
+                inline-size: 12ch;
+            }
         }
+
 
         /* Remove the extra padding on the end of the column and button, as the icon has padding already */
         .col-size, .col-date,
@@ -209,12 +224,14 @@
             }
         }
 
-        :first-child:is(td, th) {
-            padding-inline-start: var(--pf-t--global--spacer--lg);
-        }
+        @media screen and (min-width: 48rem) {
+            :first-child:is(td, th) {
+                padding-inline-start: var(--pf-t--global--spacer--lg);
+            }
 
-        :last-child:is(td, th):not(.pf-v6-c-table__sort) {
-            padding-inline-end: var(--pf-t--global--spacer--lg);
+            :last-child:is(td, th):not(.pf-v6-c-table__sort) {
+                padding-inline-end: var(--pf-t--global--spacer--lg);
+            }
         }
     }
 
@@ -280,6 +297,11 @@
 
             &:hover {
                 outline: 1px solid var(--pf-t--global--color--brand--clicked);
+            }
+        }
+        @media screen and (max-width: calc(-1px + 48rem)) {
+            .pf-v6-c-table__th::before, .pf-v6-c-table__td::before {
+                content: none;
             }
         }
     }
