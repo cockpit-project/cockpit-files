@@ -89,5 +89,5 @@ button.cancel-button {
 }
 
 .ct-grey-text {
-   color: var(--pf-t--temp--dev--tbd);
+   color: var(--pf-t--global--text--color--subtle);
 }
