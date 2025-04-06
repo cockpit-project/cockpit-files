@@ -147,7 +147,7 @@ export function get_menu_items(
             menuItems.push(
                 {
                     id: "open-file",
-                    title: _("Open text file"),
+                    title: _("Open file in editor"),
                     onClick: () => edit_file(dialogs, path + item.name)
                 },
                 { type: "divider" },
