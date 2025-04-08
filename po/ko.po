@@ -14,9 +14,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-31 03:27+0000\n"
-"PO-Revision-Date: 2025-02-12 19:38+0000\n"
-"Last-Translator: 김인수 <simmon@nplob.com>\n"
+"POT-Creation-Date: 2025-04-03 03:22+0000\n"
+"PO-Revision-Date: 2025-04-01 19:54+0000\n"
+"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
+"memory@weblate.org>\n"
 "Language-Team: Korean <https://translate.fedoraproject.org/projects/cockpit-"
 "files/cockpit-files/ko/>\n"
 "Language: ko\n"
@@ -24,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
-"X-Generator: Weblate 5.9.2\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #: src/menu.tsx:64
 msgid "\"$0\" exists, not overwriting with paste."
@@ -75,17 +76,19 @@ msgstr "A-Z"
 
 #: src/dialogs/symlink.tsx:225
 msgid "Absolute"
-msgstr ""
+msgstr "절대적인"
 
 #: src/dialogs/symlink.tsx:211
 msgid ""
 "Absolute symlinks are ideal when referring to files or directories that "
 "won't move, such as system files."
 msgstr ""
+"절대적인 심볼릭 링크는 시스템 파일처럼 움직이지 않는 파일이나 디렉토리를 참"
+"조 할 때 이상적입니다."
 
 #: src/dialogs/symlink.tsx:207
 msgid "Absolute vs. Relative"
-msgstr ""
+msgstr "절대적인 대 상대적인"
 
 #: src/dialogs/permissions.tsx:366
 msgid "Access"
@@ -197,16 +200,12 @@ msgid "Create file"
 msgstr "파일 생성"
 
 #: src/menu.tsx:204 src/dialogs/symlink.tsx:160
-#, fuzzy
-#| msgid "Create file"
 msgid "Create link"
-msgstr "파일 생성"
+msgstr "연결 생성"
 
 #: src/dialogs/symlink.tsx:139
-#, fuzzy
-#| msgid "Rename link $0"
 msgid "Create link to $0"
-msgstr "링크 $0 이름변경"
+msgstr "$0로 연결 생성"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:111
 msgid "Create new directory"
@@ -602,13 +601,15 @@ msgstr "일반 파일"
 
 #: src/dialogs/symlink.tsx:232
 msgid "Relative"
-msgstr ""
+msgstr "상대적인"
 
 #: src/dialogs/symlink.tsx:214
 msgid ""
 "Relative symlinks are useful when both a symlink and target might move at "
 "the same time, such as when renaming or moving a parent directory."
 msgstr ""
+"상대적인 심볼릭 링크는 심볼릭 링크 및 대상 모두가 부모(상위) 디렉토리의 이름 "
+"변경하기나 이동처럼 동시에 움직일 때에 유용합니다."
 
 #: src/dialogs/editor.tsx:236
 msgid "Reload"
@@ -688,11 +689,11 @@ msgstr "심볼릭 링크"
 
 #: src/dialogs/symlink.tsx:187
 msgid "Symlink name"
-msgstr ""
+msgstr "심볼릭 링크 이름"
 
 #: src/dialogs/symlink.tsx:180
 msgid "Target"
-msgstr ""
+msgstr "대상"
 
 #: src/dialogs/editor.tsx:59
 msgid "The existing file changed unexpectedly"
@@ -708,7 +709,7 @@ msgstr "파일이 디스크에서 변경되었습니다"
 
 #: src/dialogs/symlink.tsx:203
 msgid "Type"
-msgstr ""
+msgstr "유형"
 
 #: src/files-breadcrumbs.tsx:99
 msgid "Unable to create bookmark directory"
@@ -780,7 +781,7 @@ msgstr "원소유자 유지"
 
 #: src/dialogs/symlink.tsx:64
 msgid "link to $0"
-msgstr ""
+msgstr "$0 로 연결"
 
 #~ msgid "Remove current directory"
 #~ msgstr "현재 디렉토리를 제거합니다"

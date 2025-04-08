@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-31 03:27+0000\n"
-"PO-Revision-Date: 2025-03-21 19:47+0000\n"
+"POT-Creation-Date: 2025-04-03 03:22+0000\n"
+"PO-Revision-Date: 2025-04-03 14:53+0000\n"
 "Last-Translator: Ricky Tigg <ricky.tigg@gmail.com>\n"
 "Language-Team: Finnish <https://translate.fedoraproject.org/projects/cockpit-"
 "files/cockpit-files/fi/>\n"
@@ -76,17 +76,19 @@ msgstr "A-Z"
 
 #: src/dialogs/symlink.tsx:225
 msgid "Absolute"
-msgstr ""
+msgstr "Absoluuttinen"
 
 #: src/dialogs/symlink.tsx:211
 msgid ""
 "Absolute symlinks are ideal when referring to files or directories that "
 "won't move, such as system files."
 msgstr ""
+"Absoluuttiset symbolilinkit ovat ihanteellisia, kun viitataan tiedostoihin "
+"tai hakemistoihin, jotka eivät liiku, kuten järjestelmätiedostot."
 
 #: src/dialogs/symlink.tsx:207
 msgid "Absolute vs. Relative"
-msgstr ""
+msgstr "Absoluuttinen vs. suhteellinen"
 
 #: src/dialogs/permissions.tsx:366
 msgid "Access"
@@ -198,16 +200,12 @@ msgid "Create file"
 msgstr "Luo tiedosto"
 
 #: src/menu.tsx:204 src/dialogs/symlink.tsx:160
-#, fuzzy
-#| msgid "Create file"
 msgid "Create link"
-msgstr "Luo tiedosto"
+msgstr "Luo linkki"
 
 #: src/dialogs/symlink.tsx:139
-#, fuzzy
-#| msgid "Delete link $0?"
 msgid "Create link to $0"
-msgstr "Poistetaanko linkki $0?"
+msgstr "Luo linkki $0:iin"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:111
 msgid "Create new directory"
@@ -603,13 +601,16 @@ msgstr "Säännöllinen tiedosto"
 
 #: src/dialogs/symlink.tsx:232
 msgid "Relative"
-msgstr ""
+msgstr "Suhteellinen"
 
 #: src/dialogs/symlink.tsx:214
 msgid ""
 "Relative symlinks are useful when both a symlink and target might move at "
 "the same time, such as when renaming or moving a parent directory."
 msgstr ""
+"Suhteelliset symbolilinkit ovat hyödyllisiä silloin, kun sekä symbolilinkki "
+"että kohde voivat liikkua samanaikaisesti, esimerkiksi kun nimetään "
+"uudelleen tai siirretään ylähakemistoa."
 
 #: src/dialogs/editor.tsx:236
 msgid "Reload"
@@ -689,11 +690,11 @@ msgstr "Symbolinen linkki"
 
 #: src/dialogs/symlink.tsx:187
 msgid "Symlink name"
-msgstr ""
+msgstr "Symbolisen linkin nimi"
 
 #: src/dialogs/symlink.tsx:180
 msgid "Target"
-msgstr ""
+msgstr "Kohde"
 
 #: src/dialogs/editor.tsx:59
 msgid "The existing file changed unexpectedly"
@@ -709,7 +710,7 @@ msgstr "Tiedosto on muuttunut levyllä"
 
 #: src/dialogs/symlink.tsx:203
 msgid "Type"
-msgstr ""
+msgstr "Tyyppi"
 
 #: src/files-breadcrumbs.tsx:99
 msgid "Unable to create bookmark directory"
@@ -782,7 +783,7 @@ msgstr "säilytä alkuperäiset omistajat"
 
 #: src/dialogs/symlink.tsx:64
 msgid "link to $0"
-msgstr ""
+msgstr "linkki $0:iin"
 
 #~ msgid "Remove current directory"
 #~ msgstr "Poista nykyinen hakemisto"
