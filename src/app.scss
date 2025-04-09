@@ -145,6 +145,24 @@
         &-edit-cancel {
             padding-inline: var(--pf-t--global--spacer--sm);
         }
+
+        &-edit-apply {
+            svg {
+                color: var(--pf-v6-c-button--m-link--Color);
+            }
+
+            &:focus svg {
+                color: var(--pf-v6-c-button--m-link--focus--Color);
+            }
+
+            &:hover svg {
+                color: var(--pf-v6-c-button--m-link--hover--Color);
+            }
+
+            &:active svg {
+                color: var(--pf-v6-c-button--m-link--active--Color);
+            }
+        }
     }
 }
 
