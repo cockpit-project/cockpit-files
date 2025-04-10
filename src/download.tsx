@@ -31,7 +31,10 @@ export function downloadFile(currentPath: string, selected: FolderFileInfo) {
         external: {
             "content-disposition": `attachment; filename="${selected.name}"`,
             "content-type": "application/octet-stream",
-        }
+        },
+        // HACK: The Cockpit bridge has no way of saying "unlimited" until it supports passing -1
+        // https://github.com/cockpit-project/cockpit/pull/21556
+        max_read_size: Number.MAX_SAFE_INTEGER,
     });
 
     const encodedPayload = new TextEncoder().encode(payload);
