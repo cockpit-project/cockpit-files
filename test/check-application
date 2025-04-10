@@ -2304,6 +2304,11 @@ class TestFiles(testlib.MachineCase):
         b.click("#dropdown-menu")
         b.click("#copy-item")
         self.chdir('/')
+
+        # Permissions tooltip might be active over the dropdown
+        b.mouse("body", "mouseleave")
+        b.wait_not_present(".pf-v6-c-tooltip")
+
         b.click("#dropdown-menu")
         b.click("#paste-item")
         b.wait_visible(".pf-v6-c-alert.pf-m-danger")
