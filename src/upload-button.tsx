@@ -33,7 +33,7 @@ import { Flex, FlexItem } from "@patternfly/react-core/dist/esm/layouts/Flex";
 import { TrashIcon } from "@patternfly/react-icons";
 
 import cockpit, { BasicError } from "cockpit";
-import type { FileInfo } from "cockpit/fsinfo";
+import { fsinfo, type FileInfo } from "cockpit/fsinfo.ts";
 import { upload } from "cockpit-upload-helper";
 import { DialogResult, useDialogs } from "dialogs";
 import { superuser } from "superuser";
@@ -270,10 +270,8 @@ export const UploadButton = ({
                 try {
                     await cockpit.file(destination, { superuser: "try" }).replace("");
                     await cockpit.spawn(["chown", owner, destination], { superuser: "try" });
-                    await cockpit.file(destination, { superuser: "try" }).read()
-                            .then((((_content: string, tag: string) => {
-                                options = { superuser: "try", tag };
-                            }) as any /* eslint-disable-line @typescript-eslint/no-explicit-any */));
+                    const { tag } = await fsinfo(destination, ['tag'], { superuser: "try" });
+                    options = { superuser: "try", tag };
                     const stat = await cockpit.spawn(["stat", "--format", "%a", destination], { superuser: "try" });
                     fileModes.push(Number.parseInt(stat.trimEnd(), 8));
                 } catch (exc) {
