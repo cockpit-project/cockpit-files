@@ -29,6 +29,7 @@ import { TextInput } from "@patternfly/react-core/dist/esm/components/TextInput"
 import { Stack } from '@patternfly/react-core/dist/esm/layouts/Stack';
 
 import cockpit from 'cockpit';
+import { fsinfo } from 'cockpit/fsinfo.ts';
 import { FormHelper } from 'cockpit-components-form-helper';
 import type { Dialogs, DialogResult } from 'dialogs';
 import { useInit } from 'hooks';
@@ -65,22 +66,23 @@ async function create_file(filename: string, content?: string, owner?: string | 
     }
 
     if (content) {
-        // We need to obtain the tag to retain file ownership
-        // Can't do this async because we can't get the tag via await
-        await cockpit.file(filename, { superuser: "try" }).read()
-                .then(((async (_content: string, tag: string) => {
-                    try {
-                        await cockpit.file(filename, { superuser: "try" }).replace(content, tag);
-                    } catch (err) {
-                        console.warn("Cannot set initial file text", err);
-                        try {
-                            await cockpit.spawn(["rm", filename], { superuser: "require" });
-                        } catch (err) {
-                            console.warn(`Failed to cleanup ${filename}`, err);
-                        }
-                        throw err;
-                    }
-                }) as any /* eslint-disable-line @typescript-eslint/no-explicit-any */));
+        try {
+            // We need to obtain the tag to retain file ownership
+            const { tag } = await fsinfo(filename, ['tag'], { superuser: "try" });
+            try {
+                await cockpit.file(filename, { superuser: "try" }).replace(content, tag);
+            } catch (err) {
+                console.warn("Cannot set initial file text", err);
+                try {
+                    await cockpit.spawn(["rm", filename], { superuser: "require" });
+                } catch (err) {
+                    console.warn(`Failed to cleanup ${filename}`, err);
+                }
+                throw err;
+            }
+        } catch (err) {
+            console.warn(`Failed to read the tag of ${filename}`, err);
+        }
     }
 }
 
