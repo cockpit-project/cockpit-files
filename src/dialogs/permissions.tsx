@@ -25,8 +25,11 @@ import { ExpandableSection, ExpandableSectionVariant } from
     '@patternfly/react-core/dist/esm/components/ExpandableSection';
 import { Form, FormGroup, FormSection } from '@patternfly/react-core/dist/esm/components/Form';
 import { FormSelect, FormSelectOption } from '@patternfly/react-core/dist/esm/components/FormSelect';
-import { Modal, ModalVariant } from '@patternfly/react-core/dist/esm/components/Modal';
 import { TextInput } from '@patternfly/react-core/dist/esm/components/TextInput';
+import {
+    Modal,
+    ModalVariant
+} from '@patternfly/react-core/dist/esm/deprecated/components/Modal';
 import { Stack } from '@patternfly/react-core/dist/esm/layouts/Stack';
 
 import cockpit from 'cockpit';
@@ -46,8 +49,6 @@ import type { FolderFileInfo } from '../common.ts';
 // Following python file is loaded as a string (esbuild loader: text)
 // @ts-expect-error Cannot find module or its corresponding type declaration
 import read_selinux_context from './read-selinux.py';
-
-import "./permissions.css";
 
 const _ = cockpit.gettext;
 

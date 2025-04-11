@@ -4,7 +4,7 @@
   &.is-modified {
     /* Add a background highlight on the modal itself */
     &::after {
-      background: linear-gradient(to bottom, var(--pf-v5-global--warning-color--100), transparent 0.33em);
+      background: linear-gradient(to bottom, var(--pf-t--global--icon--color--status--warning--default) 0.33em, transparent 0.33em);
       content: '';
       inset: 0;
       pointer-events: none;
@@ -12,9 +12,9 @@
     }
 
     /* Add a circle to indicate that there are changes */
-    .pf-v5-c-modal-box__title-text::after {
+    .pf-v6-c-modal-box__title-text::after {
       aspect-ratio: 1;
-      background: var(--pf-v5-global--warning-color--100);
+      background: var(--pf-t--global--icon--color--status--warning--default);
       block-size: 1cap;
       border-radius: 0.5cap;
       content: '';
@@ -22,9 +22,8 @@
       margin-inline-start: 0.5cap;
     }
   }
-
   /* Create mode shows textarea as full size */
-  .pf-v5-c-form.pf-m-horizontal {
+  .pf-v6-c-form.pf-m-horizontal {
     block-size: 100%;
     grid-template-rows: auto 1fr auto;
   }
@@ -34,20 +33,12 @@
   block-size: 100%;
 
   textarea {
-    font-family: monospace;
+    font-family: var(--pf-t--global--font--family--mono);
     hyphens: none;
     white-space: wrap break-spaces;
   }
 }
 
-.file-editor-alert {
-  margin-block-end: var(--pf-v5-global--spacer--md);
-}
-
 .file-editor-title-label {
-  margin-inline-start: var(--pf-v5-global--spacer--sm);
-
-  .pf-v5-theme-dark & {
-    background-color: var(--pf-v5-global--BackgroundColor--100);
-  }
+  margin-inline-start: var(--pf-t--global--spacer--sm);
 }

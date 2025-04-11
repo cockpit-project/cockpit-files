@@ -20,11 +20,14 @@
 import React from 'react';
 
 import { Button } from "@patternfly/react-core/dist/esm/components/Button";
+import { Content, ContentVariants } from "@patternfly/react-core/dist/esm/components/Content";
 import {
     DescriptionList, DescriptionListDescription, DescriptionListGroup, DescriptionListTerm
 } from "@patternfly/react-core/dist/esm/components/DescriptionList/index";
-import { Modal, ModalVariant } from "@patternfly/react-core/dist/esm/components/Modal";
-import { Text, TextContent, TextVariants } from "@patternfly/react-core/dist/esm/components/Text";
+import {
+    Modal,
+    ModalVariant
+} from '@patternfly/react-core/dist/esm/deprecated/components/Modal';
 import { Flex, } from "@patternfly/react-core/dist/esm/layouts/Flex";
 
 import cockpit from 'cockpit';
@@ -142,8 +145,8 @@ const KeyboardShortcutsHelp = ({ dialogResult } : { dialogResult: DialogResult<v
           isOpen
         >
             <Flex>
-                <TextContent>
-                    <Text component={TextVariants.h2}>{_("Navigation")}</Text>
+                <Content>
+                    <Content component={ContentVariants.h2}>{_("Navigation")}</Content>
                     <DescriptionList
                       isHorizontal
                       isFluid
@@ -151,9 +154,9 @@ const KeyboardShortcutsHelp = ({ dialogResult } : { dialogResult: DialogResult<v
                     >
                         {navShortcuts.map(toDescriptionListGroups)}
                     </DescriptionList>
-                </TextContent>
-                <TextContent>
-                    <Text component={TextVariants.h2}>{_("Editing")}</Text>
+                </Content>
+                <Content>
+                    <Content component={ContentVariants.h2}>{_("Editing")}</Content>
                     <DescriptionList
                       isHorizontal
                       isFluid
@@ -161,7 +164,7 @@ const KeyboardShortcutsHelp = ({ dialogResult } : { dialogResult: DialogResult<v
                     >
                         {editShortcuts.map(toDescriptionListGroups)}
                     </DescriptionList>
-                </TextContent>
+                </Content>
             </Flex>
         </Modal>
     );
