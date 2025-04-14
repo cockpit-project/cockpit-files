@@ -2884,7 +2884,10 @@ class TestFiles(testlib.MachineCase):
 
         # Make sure nothing else was present
         b.wait_js_cond(f"ph_count('#folder-view tbody tr') == {len(files)}")
-        b.assert_pixels("#files-card-parent", "icon-list-view", mock={".item-date": "Jun 19, 2024, 11:30 AM"})
+        b.assert_pixels("#files-card-parent",
+                        "icon-list-view",
+                        mock={".item-date": "Jun 19, 2024, 11:30 AM"},
+                        chrome_hack_double_shots=True)
 
     def testBookmark(self) -> None:
         b = self.browser
