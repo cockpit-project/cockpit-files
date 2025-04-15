@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-03 03:22+0000\n"
-"PO-Revision-Date: 2025-02-04 07:14+0000\n"
-"Last-Translator: N M <nm@users.noreply.translate.fedoraproject.org>\n"
+"POT-Creation-Date: 2025-04-09 03:23+0000\n"
+"PO-Revision-Date: 2025-04-09 19:53+0000\n"
+"Last-Translator: Javier Francisco <fserrador@gmail.com>\n"
 "Language-Team: Spanish <https://translate.fedoraproject.org/projects/cockpit-"
 "files/cockpit-files/es/>\n"
 "Language: es\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1\n"
-"X-Generator: Weblate 5.9.2\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #: src/menu.tsx:64
 msgid "\"$0\" exists, not overwriting with paste."
@@ -41,18 +41,16 @@ msgstr "$0 archivos seleccionados"
 #: src/files-card-body.tsx:532
 msgid "$0 item is hidden"
 msgid_plural "$0 items are hidden"
-msgstr[0] "El elemento $0 está oculto."
-msgstr[1] "Los elementos $0 están ocultos."
+msgstr[0] "$0 elemento está oculto"
+msgstr[1] "$0 elementos están ocultos"
 
 #: src/dialogs/permissions.tsx:300
 msgid "$0 permissions"
 msgstr "$0 permisos"
 
 #: src/dialogs/copyPasteOwnership.tsx:117
-#, fuzzy
-#| msgid "Original file on server"
 msgid "(original owner)"
-msgstr "Archivo original en el servidor"
+msgstr "(propietario original)"
 
 #: org.cockpit_project.files.metainfo.xml:8
 msgid ""
@@ -78,17 +76,19 @@ msgstr "A-Z"
 
 #: src/dialogs/symlink.tsx:225
 msgid "Absolute"
-msgstr ""
+msgstr "Absoluto"
 
 #: src/dialogs/symlink.tsx:211
 msgid ""
 "Absolute symlinks are ideal when referring to files or directories that "
 "won't move, such as system files."
 msgstr ""
+"Enlaces simbólicos absolutos son ideales cuando se refieren a archivos o "
+"directorios que no se muevan, tales como archivos del sistema."
 
 #: src/dialogs/symlink.tsx:207
 msgid "Absolute vs. Relative"
-msgstr ""
+msgstr "Absoluto vs. Relativo"
 
 #: src/dialogs/permissions.tsx:366
 msgid "Access"
@@ -100,10 +100,8 @@ msgid "Activate selected item, enter directory"
 msgstr "Activa el elemento seleccionado, entrar al directorio"
 
 #: src/files-breadcrumbs.tsx:139
-#, fuzzy
-#| msgid "Add bookmark"
 msgid "Add to bookmarks"
-msgstr "Agregar marcador"
+msgstr "Agregar a marcadores"
 
 #: src/upload-button.tsx:145
 msgid "Apply this action to all conflicting files"
@@ -111,7 +109,7 @@ msgstr "Aplicar esta acción para todos los conflictos"
 
 #: src/common.ts:66
 msgid "Block device"
-msgstr "Bloquear dispositivo"
+msgstr "Dispositivo de bloque"
 
 #: src/files-breadcrumbs.tsx:150
 msgid "Bookmarks"
@@ -159,7 +157,7 @@ msgstr "Modificar permisos para los archivos incluidos"
 
 #: src/common.ts:67
 msgid "Character device"
-msgstr "Dispositivo de caracteres"
+msgstr "Dispositivo de carácter"
 
 #: src/files-card-body.tsx:520
 msgid "Clear filter"
@@ -202,16 +200,12 @@ msgid "Create file"
 msgstr "Crear archivo"
 
 #: src/menu.tsx:204 src/dialogs/symlink.tsx:160
-#, fuzzy
-#| msgid "Create file"
 msgid "Create link"
-msgstr "Crear archivo"
+msgstr "Crear enlace"
 
 #: src/dialogs/symlink.tsx:139
-#, fuzzy
-#| msgid "Delete link $0?"
 msgid "Create link to $0"
-msgstr "¿Eliminar enlace $0?"
+msgstr "Crear enlace a $0"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:111
 msgid "Create new directory"
@@ -291,7 +285,7 @@ msgstr "Mostrar como una lista"
 
 #: src/menu.tsx:185
 msgid "Download"
-msgstr "Descargar"
+msgstr "Descarga"
 
 #: src/files-folder-view.tsx:169
 msgid "Drop files to upload"
@@ -312,7 +306,7 @@ msgstr "Editar permisos"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:156
 msgid "Editing"
-msgstr "Editando"
+msgstr "Modificando"
 
 #: src/common.ts:56
 msgid "Execute-only"
@@ -351,6 +345,8 @@ msgid ""
 "Files being pasted have a different owner. By default, ownership will be "
 "changed to match the destination directory."
 msgstr ""
+"Archivos siendo pegados tienen un propietario diferente. Por defecto, la "
+"propiedad será modificada para coincidir con el directorio del destino."
 
 #: src/upload-button.tsx:360
 msgid "Files uploaded"
@@ -463,7 +459,7 @@ msgstr "Nombre"
 
 #: src/dialogs/symlink.tsx:47 src/common.ts:110
 msgid "Name cannot be empty"
-msgstr "Nombre no puede estar vacío."
+msgstr "El nombre no puede estar vacío"
 
 #: src/common.ts:114
 msgid "Name cannot include a /"
@@ -475,7 +471,7 @@ msgstr "El nombre es demasiado largo"
 
 #: src/common.ts:69
 msgid "Named pipe"
-msgstr "Tubería con nombre"
+msgstr "Conducto nombrado"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:146
 msgid "Navigation"
@@ -494,10 +490,8 @@ msgid "New name"
 msgstr "Nuevo nombre"
 
 #: src/dialogs/copyPasteOwnership.tsx:198
-#, fuzzy
-#| msgid "New name"
 msgid "New owner"
-msgstr "Nuevo nombre"
+msgstr "Nuevo propietario"
 
 #: src/dialogs/permissions.tsx:235
 msgid "No access"
@@ -563,7 +557,7 @@ msgstr "Pegar"
 
 #: src/dialogs/copyPasteOwnership.tsx:186
 msgid "Paste as owner"
-msgstr ""
+msgstr "Pegar como propietario"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:123
 msgid "Paste file or directory"
@@ -607,13 +601,15 @@ msgstr "Archivo regular"
 
 #: src/dialogs/symlink.tsx:232
 msgid "Relative"
-msgstr ""
+msgstr "Relativo"
 
 #: src/dialogs/symlink.tsx:214
 msgid ""
 "Relative symlinks are useful when both a symlink and target might move at "
 "the same time, such as when renaming or moving a parent directory."
 msgstr ""
+"Enlaces simbólicos relativos son útiles cuando ambos enlace y destino muevan "
+"a la vez, tales como cuando renombren o muevan un directorio antecesor."
 
 #: src/dialogs/editor.tsx:236
 msgid "Reload"
@@ -621,7 +617,7 @@ msgstr "Recargar"
 
 #: src/files-breadcrumbs.tsx:137
 msgid "Remove from bookmarks"
-msgstr ""
+msgstr "Quitar de marcadores"
 
 #: src/menu.tsx:169 src/dialogs/rename.tsx:89
 msgid "Rename"
@@ -681,7 +677,7 @@ msgstr "Tamaño más pequeño"
 
 #: src/common.ts:72
 msgid "Socket"
-msgstr "Socket"
+msgstr "Zócalo"
 
 #: src/header.tsx:274
 msgid "Sort"
@@ -693,11 +689,11 @@ msgstr "Enlace simbólico"
 
 #: src/dialogs/symlink.tsx:187
 msgid "Symlink name"
-msgstr ""
+msgstr "Nombre de enlace simbólico"
 
 #: src/dialogs/symlink.tsx:180
 msgid "Target"
-msgstr ""
+msgstr "Destino"
 
 #: src/dialogs/editor.tsx:59
 msgid "The existing file changed unexpectedly"
@@ -713,7 +709,7 @@ msgstr "El archivo ha cambiado en el disco"
 
 #: src/dialogs/symlink.tsx:203
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 #: src/files-breadcrumbs.tsx:99
 msgid "Unable to create bookmark directory"
@@ -781,14 +777,12 @@ msgid "filesystem"
 msgstr "sistema de archivos"
 
 #: src/dialogs/copyPasteOwnership.tsx:126
-#, fuzzy
-#| msgid "Keep original"
 msgid "keep original owners"
-msgstr "Mantener original"
+msgstr "mantener propietarios originales"
 
 #: src/dialogs/symlink.tsx:64
 msgid "link to $0"
-msgstr ""
+msgstr "enlazar a $0"
 
 #~ msgid "Remove current directory"
 #~ msgstr "Remover directorio actual"
