@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-09 03:23+0000\n"
+"POT-Creation-Date: 2025-05-05 03:35+0000\n"
 "PO-Revision-Date: 2025-02-28 05:41+0000\n"
 "Last-Translator: Martin Pitt <mpitt@redhat.com>\n"
 "Language-Team: Japanese <https://translate.fedoraproject.org/projects/"
@@ -30,7 +30,7 @@ msgstr ""
 msgid "\"$0\" exists, not overwriting with paste."
 msgstr "\"$0\" は存在するため、貼り付けで上書きされません。"
 
-#: src/upload-button.tsx:67
+#: src/upload-button.tsx:70
 msgid "$0 files"
 msgstr "$0 個のファイル"
 
@@ -43,11 +43,11 @@ msgid "$0 item is hidden"
 msgid_plural "$0 items are hidden"
 msgstr[0] "$0 個の項目が非表示"
 
-#: src/dialogs/permissions.tsx:300
+#: src/dialogs/permissions.tsx:301
 msgid "$0 permissions"
 msgstr "$0 個のパーミッション"
 
-#: src/dialogs/copyPasteOwnership.tsx:117
+#: src/dialogs/copyPasteOwnership.tsx:120
 msgid "(original owner)"
 msgstr "(元の所有者)"
 
@@ -61,7 +61,7 @@ msgstr ""
 "ロードおよびダウンロードしたり、ファイルのプロパティーを変更したりできます。"
 "また、シンプルなファイルエディターが組み込まれています。"
 
-#: src/upload-button.tsx:122
+#: src/upload-button.tsx:125
 msgid ""
 "A file with the same name already exists in \"$0\". Replacing it will "
 "overwrite its content."
@@ -73,26 +73,26 @@ msgstr ""
 msgid "A-Z"
 msgstr "A-Z"
 
-#: src/dialogs/symlink.tsx:225
+#: src/dialogs/symlink.tsx:228
 msgid "Absolute"
 msgstr ""
 
-#: src/dialogs/symlink.tsx:211
+#: src/dialogs/symlink.tsx:214
 msgid ""
 "Absolute symlinks are ideal when referring to files or directories that "
 "won't move, such as system files."
 msgstr ""
 
-#: src/dialogs/symlink.tsx:207
+#: src/dialogs/symlink.tsx:210
 msgid "Absolute vs. Relative"
 msgstr ""
 
-#: src/dialogs/permissions.tsx:366
+#: src/dialogs/permissions.tsx:367
 msgid "Access"
 msgstr "アクセス"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:82
-#: src/dialogs/keyboardShortcutsHelp.tsx:88
+#: src/dialogs/keyboardShortcutsHelp.tsx:85
+#: src/dialogs/keyboardShortcutsHelp.tsx:91
 msgid "Activate selected item, enter directory"
 msgstr "選択した項目をアクティブにしてディレクトリーに入る"
 
@@ -100,7 +100,7 @@ msgstr "選択した項目をアクティブにしてディレクトリーに入
 msgid "Add to bookmarks"
 msgstr "ブックマークに追加"
 
-#: src/upload-button.tsx:145
+#: src/upload-button.tsx:148
 msgid "Apply this action to all conflicting files"
 msgstr "このアクションをすべての競合ファイルに適用する"
 
@@ -112,27 +112,27 @@ msgstr "ブロックデバイス"
 msgid "Bookmarks"
 msgstr "ブックマーク"
 
-#: src/upload-button.tsx:116 src/dialogs/editor.tsx:211
-#: src/dialogs/mkdir.tsx:102 src/dialogs/symlink.tsx:162
-#: src/dialogs/permissions.tsx:320 src/dialogs/create-file.tsx:159
-#: src/dialogs/delete.tsx:98 src/dialogs/rename.tsx:98
-#: src/dialogs/copyPasteOwnership.tsx:178
+#: src/upload-button.tsx:119 src/dialogs/editor.tsx:214
+#: src/dialogs/create-file.tsx:162 src/dialogs/copyPasteOwnership.tsx:181
+#: src/dialogs/rename.tsx:101 src/dialogs/mkdir.tsx:105
+#: src/dialogs/symlink.tsx:165 src/dialogs/permissions.tsx:321
+#: src/dialogs/delete.tsx:101
 msgid "Cancel"
 msgstr "取り消し"
 
-#: src/upload-button.tsx:457
+#: src/upload-button.tsx:460
 msgid "Cancel upload of $0"
 msgstr "$0 のアップロードをキャンセルする"
 
-#: src/upload-button.tsx:340
+#: src/upload-button.tsx:343
 msgid "Cancelled"
 msgstr "キャンセル済み"
 
-#: src/upload-button.tsx:341
+#: src/upload-button.tsx:344
 msgid "Cancelled upload of $0"
 msgstr "$0 のアップロードをキャンセルしました"
 
-#: src/dialogs/create-file.tsx:225
+#: src/dialogs/create-file.tsx:228
 msgid "Cannot create file in current directory"
 msgstr "カレントディレクトリーにファイルを作成できません"
 
@@ -140,15 +140,15 @@ msgstr "カレントディレクトリーにファイルを作成できません
 msgid "Cannot drop files, another upload is already in progress"
 msgstr "ファイルをドロップできません。別のアップロードがすでに進行中です"
 
-#: src/dialogs/permissions.tsx:311
+#: src/dialogs/permissions.tsx:312
 msgid "Change"
 msgstr "変更"
 
-#: src/upload-button.tsx:391
+#: src/upload-button.tsx:394
 msgid "Change permissions"
 msgstr "パーミッションの変更"
 
-#: src/dialogs/permissions.tsx:318
+#: src/dialogs/permissions.tsx:319
 msgid "Change permissions for enclosed files"
 msgstr "含まれるファイルのパーミッションの変更"
 
@@ -160,7 +160,7 @@ msgstr "キャラクターデバイス"
 msgid "Clear filter"
 msgstr "フィルターを外す"
 
-#: src/dialogs/editor.tsx:211 src/dialogs/keyboardShortcutsHelp.tsx:43
+#: src/dialogs/editor.tsx:214 src/dialogs/keyboardShortcutsHelp.tsx:46
 msgid "Close"
 msgstr "閉じる"
 
@@ -172,7 +172,7 @@ msgstr "Cockpit ファイル"
 msgid "Cockpit Project"
 msgstr "Cockpit プロジェクト"
 
-#: src/dialogs/permissions.tsx:285
+#: src/dialogs/permissions.tsx:286
 msgid "Collapse"
 msgstr "折りたたむ"
 
@@ -180,59 +180,59 @@ msgstr "折りたたむ"
 msgid "Copy"
 msgstr "コピー"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:117
+#: src/dialogs/keyboardShortcutsHelp.tsx:120
 msgid "Copy selected file or directory"
 msgstr "選択したファイルまたはディレクトリーをコピーする"
 
-#: src/dialogs/mkdir.tsx:100 src/dialogs/create-file.tsx:156
+#: src/dialogs/create-file.tsx:159 src/dialogs/mkdir.tsx:103
 msgid "Create"
 msgstr "作成"
 
-#: src/menu.tsx:113 src/dialogs/mkdir.tsx:87
+#: src/menu.tsx:113 src/dialogs/mkdir.tsx:90
 msgid "Create directory"
 msgstr "ディレクトリーの作成"
 
-#: src/menu.tsx:118 src/dialogs/create-file.tsx:143
+#: src/menu.tsx:118 src/dialogs/create-file.tsx:146
 msgid "Create file"
 msgstr "ファイルの作成"
 
-#: src/menu.tsx:204 src/dialogs/symlink.tsx:160
+#: src/menu.tsx:204 src/dialogs/symlink.tsx:163
 #, fuzzy
 #| msgid "Create file"
 msgid "Create link"
 msgstr "ファイルの作成"
 
-#: src/dialogs/symlink.tsx:139
+#: src/dialogs/symlink.tsx:142
 #, fuzzy
 #| msgid "Delete link $0?"
 msgid "Create link to $0"
 msgstr "リンク $0 を削除しますか?"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:111
+#: src/dialogs/keyboardShortcutsHelp.tsx:114
 msgid "Create new directory"
 msgstr "新しいディレクトリーの作成"
 
-#: src/menu.tsx:175 src/menu.tsx:217 src/dialogs/delete.tsx:96
+#: src/menu.tsx:175 src/menu.tsx:217 src/dialogs/delete.tsx:99
 msgid "Delete"
 msgstr "削除"
 
-#: src/dialogs/delete.tsx:45
+#: src/dialogs/delete.tsx:48
 msgid "Delete $0 items?"
 msgstr "$0 個の項目を削除しますか?"
 
-#: src/dialogs/delete.tsx:62
+#: src/dialogs/delete.tsx:65
 msgid "Delete $0?"
 msgstr "$0 を削除しますか?"
 
-#: src/dialogs/delete.tsx:59
+#: src/dialogs/delete.tsx:62
 msgid "Delete directory $0?"
 msgstr "ディレクトリー $0 を削除しますか?"
 
-#: src/dialogs/delete.tsx:51
+#: src/dialogs/delete.tsx:54
 msgid "Delete file $0?"
 msgstr "ファイル $0 を削除しますか?"
 
-#: src/dialogs/delete.tsx:55
+#: src/dialogs/delete.tsx:58
 msgid "Delete link $0?"
 msgstr "リンク $0 を削除しますか?"
 
@@ -255,35 +255,35 @@ msgstr ""
 msgid "Directory is empty"
 msgstr "ディレクトリーは空です"
 
-#: src/dialogs/mkdir.tsx:120
+#: src/dialogs/mkdir.tsx:123
 msgid "Directory name"
 msgstr "ディレクトリー名"
 
-#: src/dialogs/mkdir.tsx:42
+#: src/dialogs/mkdir.tsx:45
 msgid "Directory name cannot be empty"
 msgstr "ディレクトリー名は空にできません"
 
-#: src/dialogs/mkdir.tsx:46
+#: src/dialogs/mkdir.tsx:49
 msgid "Directory name cannot include a /"
 msgstr "ディレクトリー名に / を含めることはできません"
 
-#: src/dialogs/mkdir.tsx:44
+#: src/dialogs/mkdir.tsx:47
 msgid "Directory name too long"
 msgstr "ディレクトリー名が長すぎます"
 
-#: src/dialogs/mkdir.tsx:134
+#: src/dialogs/mkdir.tsx:137
 msgid "Directory owner"
 msgstr "ディレクトリー所有者"
 
-#: src/dialogs/symlink.tsx:50 src/common.ts:119
+#: src/common.ts:119 src/dialogs/symlink.tsx:53
 msgid "Directory with the same name exists"
 msgstr "同じ名前のディレクトリーが存在します"
 
-#: src/header.tsx:256
+#: src/header.tsx:254
 msgid "Display as a grid"
 msgstr "グリッド形式で表示"
 
-#: src/header.tsx:255
+#: src/header.tsx:253
 msgid "Display as a list"
 msgstr "リスト形式で表示"
 
@@ -296,11 +296,11 @@ msgid "Drop files to upload"
 msgstr "アップロードするファイルをドロップする"
 
 #. Translators: This is the title of a modal dialog.  $0 represents a filename.
-#: src/dialogs/editor.tsx:170
+#: src/dialogs/editor.tsx:173
 msgid "Edit $0"
 msgstr "$0 の編集"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:96 src/files-breadcrumbs.tsx:298
+#: src/files-breadcrumbs.tsx:298 src/dialogs/keyboardShortcutsHelp.tsx:99
 msgid "Edit path"
 msgstr "パスの編集"
 
@@ -308,7 +308,7 @@ msgstr "パスの編集"
 msgid "Edit permissions"
 msgstr "編集パーミッション"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:156
+#: src/dialogs/keyboardShortcutsHelp.tsx:159
 msgid "Editing"
 msgstr "編集中"
 
@@ -316,7 +316,7 @@ msgstr "編集中"
 msgid "Execute-only"
 msgstr "実行のみ"
 
-#: src/upload-button.tsx:279
+#: src/upload-button.tsx:282
 msgid "Failed"
 msgstr "失敗"
 
@@ -324,15 +324,15 @@ msgstr "失敗"
 msgid "File browser"
 msgstr "ファイルブラウザー"
 
-#: src/dialogs/symlink.tsx:52 src/common.ts:121
+#: src/common.ts:121 src/dialogs/symlink.tsx:55
 msgid "File exists"
 msgstr "ファイルが存在します"
 
-#: src/dialogs/create-file.tsx:174
+#: src/dialogs/create-file.tsx:177
 msgid "File name"
 msgstr "ファイル名"
 
-#: src/upload-button.tsx:360
+#: src/upload-button.tsx:363
 msgid "File uploaded"
 msgstr "ファイルをアップロードしました"
 
@@ -344,7 +344,7 @@ msgstr "ファイル名が元の名前と同じです"
 msgid "Files"
 msgstr "ファイル"
 
-#: src/dialogs/copyPasteOwnership.tsx:195
+#: src/dialogs/copyPasteOwnership.tsx:198
 msgid ""
 "Files being pasted have a different owner. By default, ownership will be "
 "changed to match the destination directory."
@@ -352,7 +352,7 @@ msgstr ""
 "貼り付けるファイルの所有者が異なります。デフォルトでは、貼り付け先のディレク"
 "トリーに合わせて所有権が変更されます。"
 
-#: src/upload-button.tsx:360
+#: src/upload-button.tsx:363
 msgid "Files uploaded"
 msgstr "アップロードされたファイル"
 
@@ -368,48 +368,48 @@ msgstr "ディレクトリーの絞り込み"
 msgid "First modified"
 msgstr "最初に変更"
 
-#: src/dialogs/delete.tsx:62
+#: src/dialogs/delete.tsx:65
 msgid "Force delete $0"
 msgstr "$0 を強制的に削除"
 
-#: src/dialogs/delete.tsx:45
+#: src/dialogs/delete.tsx:48
 msgid "Force delete $0 items"
 msgstr "$0 個の項目を強制的に削除"
 
-#: src/dialogs/delete.tsx:59
+#: src/dialogs/delete.tsx:62
 msgid "Force delete directory $0?"
 msgstr "ディレクトリー $0 を強制的に削除しますか?"
 
-#: src/dialogs/delete.tsx:51
+#: src/dialogs/delete.tsx:54
 msgid "Force delete file $0?"
 msgstr "ファイル $0 を強制的に削除しますか?"
 
-#: src/dialogs/delete.tsx:55
+#: src/dialogs/delete.tsx:58
 msgid "Force delete link $0?"
 msgstr "リンク $0 を強制的に削除しますか?"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:70
+#: src/dialogs/keyboardShortcutsHelp.tsx:73
 msgid "Go back"
 msgstr "戻る"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:76
+#: src/dialogs/keyboardShortcutsHelp.tsx:79
 msgid "Go forward"
 msgstr "進む"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:64
+#: src/dialogs/keyboardShortcutsHelp.tsx:67
 msgid "Go up a directory"
 msgstr "1 つ上のディレクトリーに移動する"
 
-#: src/files-card-body.tsx:596 src/dialogs/permissions.tsx:349
 #: src/files-footer-detail.tsx:79 src/files-footer-detail.tsx:151
+#: src/files-card-body.tsx:596 src/dialogs/permissions.tsx:350
 msgid "Group"
 msgstr "グループ"
 
-#: src/dialogs/permissions.tsx:380
+#: src/dialogs/permissions.tsx:381
 msgid "Group access"
 msgstr "グループアクセス"
 
-#: src/header.tsx:287
+#: src/header.tsx:284
 msgid "Hide hidden items"
 msgstr "非表示の項目を非表示にする"
 
@@ -417,15 +417,15 @@ msgstr "非表示の項目を非表示にする"
 msgid "Home"
 msgstr "ホーム"
 
-#: src/dialogs/editor.tsx:239
+#: src/dialogs/editor.tsx:242
 msgid "Ignore"
 msgstr "無視"
 
-#: src/upload-button.tsx:115
+#: src/upload-button.tsx:118
 msgid "Keep original"
 msgstr "元のものを維持"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:137
+#: src/dialogs/keyboardShortcutsHelp.tsx:140
 msgid "Keyboard shortcuts"
 msgstr "キーボードショートカット"
 
@@ -445,11 +445,11 @@ msgstr "最も許容度が低い"
 msgid "Manage your files"
 msgstr "ファイルの管理"
 
-#: src/dialogs/permissions.tsx:279
+#: src/dialogs/permissions.tsx:280
 msgid "Missing type"
 msgstr "存在しないタイプ"
 
-#: src/files-card-body.tsx:552 src/header.tsx:88
+#: src/header.tsx:88 src/files-card-body.tsx:552
 msgid "Modified"
 msgstr "変更"
 
@@ -457,11 +457,11 @@ msgstr "変更"
 msgid "Most permissive"
 msgstr "最も許容度が高い"
 
-#: src/files-card-body.tsx:547 src/header.tsx:66
+#: src/header.tsx:66 src/files-card-body.tsx:547
 msgid "Name"
 msgstr "名前"
 
-#: src/dialogs/symlink.tsx:47 src/common.ts:110
+#: src/common.ts:110 src/dialogs/symlink.tsx:50
 msgid "Name cannot be empty"
 msgstr "名前は空欄にできません"
 
@@ -477,27 +477,27 @@ msgstr "名前が長すぎます"
 msgid "Named pipe"
 msgstr "名前付きパイプ"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:146
+#: src/dialogs/keyboardShortcutsHelp.tsx:149
 msgid "Navigation"
 msgstr "ナビゲーション"
 
-#: src/upload-button.tsx:131
+#: src/upload-button.tsx:134
 msgid "New file"
 msgstr "新しいファイル"
 
-#: src/dialogs/rename.tsx:102
+#: src/dialogs/rename.tsx:105
 msgid "New filename"
 msgstr "新しいファイル名"
 
-#: src/dialogs/rename.tsx:102
+#: src/dialogs/rename.tsx:105
 msgid "New name"
 msgstr "新しい名前"
 
-#: src/dialogs/copyPasteOwnership.tsx:198
+#: src/dialogs/copyPasteOwnership.tsx:201
 msgid "New owner"
 msgstr "新しい所有者"
 
-#: src/dialogs/permissions.tsx:235
+#: src/dialogs/permissions.tsx:236
 msgid "No access"
 msgstr "アクセスなし"
 
@@ -517,29 +517,29 @@ msgstr "ターミナルで開く"
 msgid "Open text file"
 msgstr "テキストファイルを開く"
 
-#: src/upload-button.tsx:136
+#: src/upload-button.tsx:139
 msgid "Original file on server"
 msgstr "サーバー上の元のファイル"
 
-#: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
+#: src/files-footer-detail.tsx:79 src/files-card-body.tsx:596
 msgid "Others"
 msgstr "その他のユーザー"
 
-#: src/dialogs/permissions.tsx:392
+#: src/dialogs/permissions.tsx:393
 msgid "Others access"
 msgstr "その他のユーザーのアクセス"
 
-#: src/dialogs/editor.tsx:195 src/dialogs/rename.tsx:96
+#: src/dialogs/editor.tsx:198 src/dialogs/rename.tsx:99
 msgid "Overwrite"
 msgstr "上書き"
 
-#: src/files-card-body.tsx:557 src/files-card-body.tsx:596
-#: src/dialogs/permissions.tsx:334 src/dialogs/create-file.tsx:196
-#: src/files-footer-detail.tsx:79 src/header.tsx:99
+#: src/header.tsx:99 src/files-footer-detail.tsx:79 src/files-card-body.tsx:557
+#: src/files-card-body.tsx:596 src/dialogs/create-file.tsx:199
+#: src/dialogs/permissions.tsx:335
 msgid "Owner"
 msgstr "所有者"
 
-#: src/dialogs/permissions.tsx:368
+#: src/dialogs/permissions.tsx:369
 msgid "Owner access"
 msgstr "所有者アクセス"
 
@@ -551,35 +551,35 @@ msgstr "所有者昇順"
 msgid "Owner descending"
 msgstr "所有者降順"
 
-#: src/dialogs/permissions.tsx:333
+#: src/dialogs/permissions.tsx:334
 msgid "Ownership"
 msgstr "所有権"
 
-#: src/menu.tsx:106 src/dialogs/copyPasteOwnership.tsx:176
+#: src/menu.tsx:106 src/dialogs/copyPasteOwnership.tsx:179
 msgid "Paste"
 msgstr "貼り付け"
 
-#: src/dialogs/copyPasteOwnership.tsx:186
+#: src/dialogs/copyPasteOwnership.tsx:189
 msgid "Paste as owner"
 msgstr "所有者として貼り付け"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:123
+#: src/dialogs/keyboardShortcutsHelp.tsx:126
 msgid "Paste file or directory"
 msgstr "ファイルまたはディレクトリーを貼り付ける"
 
-#: src/menu.tsx:63 src/dialogs/copyPasteOwnership.tsx:64
+#: src/menu.tsx:63 src/dialogs/copyPasteOwnership.tsx:67
 msgid "Pasting failed"
 msgstr "貼り付けに失敗しました"
 
-#: src/dialogs/create-file.tsx:226
+#: src/dialogs/create-file.tsx:229
 msgid "Permission denied"
 msgstr "パーミッションが拒否されました"
 
-#: src/files-card-body.tsx:562 src/header.tsx:110
+#: src/header.tsx:110 src/files-card-body.tsx:562
 msgid "Permissions"
 msgstr "パーミッション"
 
-#: src/dialogs/permissions.tsx:301
+#: src/dialogs/permissions.tsx:302
 msgid "Permissions for $0 files"
 msgstr "$0 ファイルのパーミッション"
 
@@ -587,7 +587,7 @@ msgstr "$0 ファイルのパーミッション"
 msgid "Read and execute"
 msgstr "読み取りおよび実行"
 
-#: src/dialogs/permissions.tsx:225 src/common.ts:61
+#: src/common.ts:61 src/dialogs/permissions.tsx:226
 msgid "Read and write"
 msgstr "読み取りおよび書き込み"
 
@@ -595,7 +595,7 @@ msgstr "読み取りおよび書き込み"
 msgid "Read, write, and execute"
 msgstr "読み取り、書き込み、および実行"
 
-#: src/dialogs/editor.tsx:172 src/dialogs/permissions.tsx:230 src/common.ts:59
+#: src/common.ts:59 src/dialogs/editor.tsx:175 src/dialogs/permissions.tsx:231
 msgid "Read-only"
 msgstr "読み取り専用"
 
@@ -603,17 +603,17 @@ msgstr "読み取り専用"
 msgid "Regular file"
 msgstr "通常ファイル"
 
-#: src/dialogs/symlink.tsx:232
+#: src/dialogs/symlink.tsx:235
 msgid "Relative"
 msgstr ""
 
-#: src/dialogs/symlink.tsx:214
+#: src/dialogs/symlink.tsx:217
 msgid ""
 "Relative symlinks are useful when both a symlink and target might move at "
 "the same time, such as when renaming or moving a parent directory."
 msgstr ""
 
-#: src/dialogs/editor.tsx:236
+#: src/dialogs/editor.tsx:239
 msgid "Reload"
 msgstr "再ロード"
 
@@ -621,47 +621,47 @@ msgstr "再ロード"
 msgid "Remove from bookmarks"
 msgstr "ブックマークから削除"
 
-#: src/menu.tsx:169 src/dialogs/rename.tsx:89
+#: src/menu.tsx:169 src/dialogs/rename.tsx:92
 msgid "Rename"
 msgstr "名前変更"
 
-#: src/dialogs/rename.tsx:107
+#: src/dialogs/rename.tsx:110
 msgid "Rename $0?"
 msgstr "$0 の名前を変更しますか?"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:104
+#: src/dialogs/keyboardShortcutsHelp.tsx:107
 msgid "Rename selected file or directory"
 msgstr "選択したファイルまたはディレクトリーの名前を変更する"
 
-#: src/upload-button.tsx:113
+#: src/upload-button.tsx:116
 msgid "Replace"
 msgstr "置き換え"
 
-#: src/upload-button.tsx:106
+#: src/upload-button.tsx:109
 msgid "Replace file $0?"
 msgstr "ファイル $0 を置き換えますか?"
 
-#: src/dialogs/editor.tsx:208
+#: src/dialogs/editor.tsx:211
 msgid "Save"
 msgstr "保存"
 
-#: src/dialogs/permissions.tsx:405
+#: src/dialogs/permissions.tsx:406
 msgid "Security context"
 msgstr "セキュリティーコンテキスト"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:129
+#: src/dialogs/keyboardShortcutsHelp.tsx:132
 msgid "Select all"
 msgstr "すべて選択"
 
-#: src/dialogs/permissions.tsx:417
+#: src/dialogs/permissions.tsx:418
 msgid "Set executable as program"
 msgstr "実行可能ファイルをプログラムとして設定"
 
-#: src/dialogs/permissions.tsx:286
+#: src/dialogs/permissions.tsx:287
 msgid "Show all files"
 msgstr "すべてのファイルの表示"
 
-#: src/files-card-body.tsx:535 src/header.tsx:287
+#: src/header.tsx:284 src/files-card-body.tsx:535
 msgid "Show hidden items"
 msgstr "非表示の項目を表示する"
 
@@ -669,7 +669,7 @@ msgstr "非表示の項目を表示する"
 msgid "Show keyboard shortcuts"
 msgstr "キーボードショートカットの表示"
 
-#: src/files-card-body.tsx:548 src/header.tsx:77
+#: src/header.tsx:77 src/files-card-body.tsx:548
 msgid "Size"
 msgstr "サイズ"
 
@@ -681,7 +681,7 @@ msgstr "最小サイズ"
 msgid "Socket"
 msgstr "ソケット"
 
-#: src/header.tsx:274
+#: src/header.tsx:271
 msgid "Sort"
 msgstr "ソート"
 
@@ -689,27 +689,27 @@ msgstr "ソート"
 msgid "Symbolic link"
 msgstr "シンボリックリンク"
 
-#: src/dialogs/symlink.tsx:187
+#: src/dialogs/symlink.tsx:190
 msgid "Symlink name"
 msgstr ""
 
-#: src/dialogs/symlink.tsx:180
+#: src/dialogs/symlink.tsx:183
 msgid "Target"
 msgstr ""
 
-#: src/dialogs/editor.tsx:59
+#: src/dialogs/editor.tsx:62
 msgid "The existing file changed unexpectedly"
 msgstr "既存のファイルが予期せず変更されました"
 
-#: src/dialogs/editor.tsx:57 src/dialogs/editor.tsx:230
+#: src/dialogs/editor.tsx:60 src/dialogs/editor.tsx:233
 msgid "The file has been removed on disk"
 msgstr "ファイルがディスクから削除されました"
 
-#: src/dialogs/editor.tsx:231
+#: src/dialogs/editor.tsx:234
 msgid "The file has changed on disk"
 msgstr "ファイルがディスク上で変更されました"
 
-#: src/dialogs/symlink.tsx:203
+#: src/dialogs/symlink.tsx:206
 msgid "Type"
 msgstr ""
 
@@ -717,7 +717,7 @@ msgstr ""
 msgid "Unable to create bookmark directory"
 msgstr "ブックマークディレクトリーを作成できません"
 
-#: src/upload-button.tsx:320
+#: src/upload-button.tsx:323
 msgid "Unable to move uploaded file to final destination"
 msgstr "アップロードしたファイルを最終移動先に移動できません"
 
@@ -725,24 +725,24 @@ msgstr "アップロードしたファイルを最終移動先に移動できま
 msgid "Unable to save bookmark file"
 msgstr "ブックマークファイルを保存できません"
 
-#: src/upload-button.tsx:493
+#: src/upload-button.tsx:496
 msgid "Upload"
 msgstr "アップロード"
 
 #
-#: src/upload-button.tsx:474
+#: src/upload-button.tsx:477
 msgid "Upload $0% completed"
 msgstr "アップロード $0% 完了"
 
-#: src/upload-button.tsx:319 src/upload-button.tsx:343
+#: src/upload-button.tsx:322 src/upload-button.tsx:346
 msgid "Upload error"
 msgstr "アップロードエラー"
 
-#: src/upload-button.tsx:71
+#: src/upload-button.tsx:74
 msgid "Uploaded as $0, $1"
 msgstr "$0、$1 としてアップロードしました"
 
-#: src/upload-button.tsx:438
+#: src/upload-button.tsx:441
 msgid "Uploads"
 msgstr "アップロード"
 
@@ -750,7 +750,7 @@ msgstr "アップロード"
 msgid "User"
 msgstr "ユーザー"
 
-#: src/dialogs/editor.tsx:170
+#: src/dialogs/editor.tsx:173
 msgid "View $0"
 msgstr "$0 の表示"
 
@@ -758,7 +758,7 @@ msgstr "$0 の表示"
 msgid "Write and execute"
 msgstr "書き込みおよび実行"
 
-#: src/dialogs/permissions.tsx:245 src/common.ts:57
+#: src/common.ts:57 src/dialogs/permissions.tsx:246
 msgid "Write-only"
 msgstr "書き込み専用"
 
@@ -778,10 +778,10 @@ msgstr "ファイル"
 msgid "filesystem"
 msgstr "ファイルシステム"
 
-#: src/dialogs/copyPasteOwnership.tsx:126
+#: src/dialogs/copyPasteOwnership.tsx:129
 msgid "keep original owners"
 msgstr "元の所有者を維持"
 
-#: src/dialogs/symlink.tsx:64
+#: src/dialogs/symlink.tsx:67
 msgid "link to $0"
 msgstr ""
