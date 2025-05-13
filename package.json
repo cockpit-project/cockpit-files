@@ -49,7 +49,7 @@
     "stylelint-config-standard-scss": "15.0.0",
     "stylelint-formatter-pretty": "4.0.1",
     "stylelint-use-logical-spec": "5.0.1",
-    "tsx": "4.19.3",
+    "tsx": "4.19.4",
     "typescript": "5.8.3"
   },
   "dependencies": {
