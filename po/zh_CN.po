@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-05 03:35+0000\n"
+"POT-Creation-Date: 2025-05-13 03:34+0000\n"
 "PO-Revision-Date: 2025-03-07 04:16+0000\n"
 "Last-Translator: Watson Xu <xuhuashan@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <https://translate.fedoraproject.org/"
@@ -109,11 +109,11 @@ msgstr "块设备"
 msgid "Bookmarks"
 msgstr "书签"
 
-#: src/upload-button.tsx:119 src/dialogs/editor.tsx:214
-#: src/dialogs/create-file.tsx:162 src/dialogs/copyPasteOwnership.tsx:181
-#: src/dialogs/rename.tsx:101 src/dialogs/mkdir.tsx:105
-#: src/dialogs/symlink.tsx:165 src/dialogs/permissions.tsx:321
-#: src/dialogs/delete.tsx:101
+#: src/dialogs/mkdir.tsx:105 src/dialogs/rename.tsx:101
+#: src/dialogs/editor.tsx:214 src/dialogs/permissions.tsx:321
+#: src/dialogs/delete.tsx:101 src/dialogs/create-file.tsx:162
+#: src/dialogs/copyPasteOwnership.tsx:181 src/dialogs/symlink.tsx:165
+#: src/upload-button.tsx:119
 msgid "Cancel"
 msgstr "取消"
 
@@ -181,19 +181,19 @@ msgstr "复制"
 msgid "Copy selected file or directory"
 msgstr "复制所选的文件或目录"
 
-#: src/dialogs/create-file.tsx:159 src/dialogs/mkdir.tsx:103
+#: src/dialogs/mkdir.tsx:103 src/dialogs/create-file.tsx:159
 msgid "Create"
 msgstr "创建"
 
-#: src/menu.tsx:113 src/dialogs/mkdir.tsx:90
+#: src/dialogs/mkdir.tsx:90 src/menu.tsx:113
 msgid "Create directory"
 msgstr "创建目录"
 
-#: src/menu.tsx:118 src/dialogs/create-file.tsx:146
+#: src/dialogs/create-file.tsx:146 src/menu.tsx:118
 msgid "Create file"
 msgstr "创建文件"
 
-#: src/menu.tsx:204 src/dialogs/symlink.tsx:163
+#: src/dialogs/symlink.tsx:163 src/menu.tsx:204
 #, fuzzy
 #| msgid "Create file"
 msgid "Create link"
@@ -209,7 +209,7 @@ msgstr "删除链接 $0 ？"
 msgid "Create new directory"
 msgstr "创建新目录"
 
-#: src/menu.tsx:175 src/menu.tsx:217 src/dialogs/delete.tsx:99
+#: src/dialogs/delete.tsx:99 src/menu.tsx:175 src/menu.tsx:217
 msgid "Delete"
 msgstr "删除"
 
@@ -269,7 +269,7 @@ msgstr "目录名称太长"
 msgid "Directory owner"
 msgstr "目录所有者"
 
-#: src/common.ts:119 src/dialogs/symlink.tsx:53
+#: src/dialogs/symlink.tsx:53 src/common.ts:119
 msgid "Directory with the same name exists"
 msgstr "同名的目录已经存在"
 
@@ -294,7 +294,7 @@ msgstr "删除要上传的文件"
 msgid "Edit $0"
 msgstr "编辑 $0"
 
-#: src/files-breadcrumbs.tsx:298 src/dialogs/keyboardShortcutsHelp.tsx:99
+#: src/dialogs/keyboardShortcutsHelp.tsx:99 src/files-breadcrumbs.tsx:298
 msgid "Edit path"
 msgstr "编辑路径"
 
@@ -318,7 +318,7 @@ msgstr "已失败"
 msgid "File browser"
 msgstr "文件浏览器"
 
-#: src/common.ts:121 src/dialogs/symlink.tsx:55
+#: src/dialogs/symlink.tsx:55 src/common.ts:121
 msgid "File exists"
 msgstr "文件已存在"
 
@@ -392,8 +392,8 @@ msgstr "继续"
 msgid "Go up a directory"
 msgstr "转到目录"
 
-#: src/files-footer-detail.tsx:79 src/files-footer-detail.tsx:151
 #: src/files-card-body.tsx:596 src/dialogs/permissions.tsx:350
+#: src/files-footer-detail.tsx:79 src/files-footer-detail.tsx:151
 msgid "Group"
 msgstr "组"
 
@@ -441,7 +441,7 @@ msgstr "管理您的文件"
 msgid "Missing type"
 msgstr "缺少类型"
 
-#: src/header.tsx:88 src/files-card-body.tsx:552
+#: src/files-card-body.tsx:552 src/header.tsx:88
 msgid "Modified"
 msgstr "修改时间"
 
@@ -449,11 +449,11 @@ msgstr "修改时间"
 msgid "Most permissive"
 msgstr "最大权限"
 
-#: src/header.tsx:66 src/files-card-body.tsx:547
+#: src/files-card-body.tsx:547 src/header.tsx:66
 msgid "Name"
 msgstr "名称"
 
-#: src/common.ts:110 src/dialogs/symlink.tsx:50
+#: src/dialogs/symlink.tsx:50 src/common.ts:110
 msgid "Name cannot be empty"
 msgstr "名称不能为空。"
 
@@ -513,7 +513,7 @@ msgstr "打开文本文件"
 msgid "Original file on server"
 msgstr "服务器上原有的文件"
 
-#: src/files-footer-detail.tsx:79 src/files-card-body.tsx:596
+#: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
 msgid "Others"
 msgstr "其它"
 
@@ -521,13 +521,13 @@ msgstr "其它"
 msgid "Others access"
 msgstr "其它人访问权限"
 
-#: src/dialogs/editor.tsx:198 src/dialogs/rename.tsx:99
+#: src/dialogs/rename.tsx:99 src/dialogs/editor.tsx:198
 msgid "Overwrite"
 msgstr "覆盖"
 
-#: src/header.tsx:99 src/files-footer-detail.tsx:79 src/files-card-body.tsx:557
-#: src/files-card-body.tsx:596 src/dialogs/create-file.tsx:199
-#: src/dialogs/permissions.tsx:335
+#: src/files-card-body.tsx:557 src/files-card-body.tsx:596 src/header.tsx:99
+#: src/dialogs/permissions.tsx:335 src/dialogs/create-file.tsx:199
+#: src/files-footer-detail.tsx:79
 msgid "Owner"
 msgstr "所有者"
 
@@ -547,7 +547,7 @@ msgstr "所有者降序"
 msgid "Ownership"
 msgstr "所有权"
 
-#: src/menu.tsx:106 src/dialogs/copyPasteOwnership.tsx:179
+#: src/dialogs/copyPasteOwnership.tsx:179 src/menu.tsx:106
 msgid "Paste"
 msgstr "粘贴"
 
@@ -559,7 +559,7 @@ msgstr "粘贴为所有者"
 msgid "Paste file or directory"
 msgstr "粘贴文件或目录"
 
-#: src/menu.tsx:63 src/dialogs/copyPasteOwnership.tsx:67
+#: src/dialogs/copyPasteOwnership.tsx:67 src/menu.tsx:63
 msgid "Pasting failed"
 msgstr "粘贴失败"
 
@@ -567,7 +567,7 @@ msgstr "粘贴失败"
 msgid "Permission denied"
 msgstr "权限被拒绝"
 
-#: src/header.tsx:110 src/files-card-body.tsx:562
+#: src/files-card-body.tsx:562 src/header.tsx:110
 msgid "Permissions"
 msgstr "权限"
 
@@ -579,7 +579,7 @@ msgstr "$0 文件的权限"
 msgid "Read and execute"
 msgstr "读取与执行"
 
-#: src/common.ts:61 src/dialogs/permissions.tsx:226
+#: src/dialogs/permissions.tsx:226 src/common.ts:61
 msgid "Read and write"
 msgstr "读取与写入"
 
@@ -587,7 +587,7 @@ msgstr "读取与写入"
 msgid "Read, write, and execute"
 msgstr "读取，写入与执行"
 
-#: src/common.ts:59 src/dialogs/editor.tsx:175 src/dialogs/permissions.tsx:231
+#: src/dialogs/editor.tsx:175 src/dialogs/permissions.tsx:231 src/common.ts:59
 msgid "Read-only"
 msgstr "只读"
 
@@ -613,7 +613,7 @@ msgstr "重载"
 msgid "Remove from bookmarks"
 msgstr "从书签中删除"
 
-#: src/menu.tsx:169 src/dialogs/rename.tsx:92
+#: src/dialogs/rename.tsx:92 src/menu.tsx:169
 msgid "Rename"
 msgstr "重命名"
 
@@ -653,7 +653,7 @@ msgstr "将可执行文件设置为程序"
 msgid "Show all files"
 msgstr "显示所有文件"
 
-#: src/header.tsx:284 src/files-card-body.tsx:535
+#: src/files-card-body.tsx:535 src/header.tsx:284
 msgid "Show hidden items"
 msgstr "显示隐藏项目"
 
@@ -661,7 +661,7 @@ msgstr "显示隐藏项目"
 msgid "Show keyboard shortcuts"
 msgstr "显示键盘快捷方式"
 
-#: src/header.tsx:77 src/files-card-body.tsx:548
+#: src/files-card-body.tsx:548 src/header.tsx:77
 msgid "Size"
 msgstr "大小"
 
@@ -749,7 +749,7 @@ msgstr "查看 $0"
 msgid "Write and execute"
 msgstr "写入与执行"
 
-#: src/common.ts:57 src/dialogs/permissions.tsx:246
+#: src/dialogs/permissions.tsx:246 src/common.ts:57
 msgid "Write-only"
 msgstr "只能写入"
 

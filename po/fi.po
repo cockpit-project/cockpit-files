@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-05 03:35+0000\n"
+"POT-Creation-Date: 2025-05-13 03:34+0000\n"
 "PO-Revision-Date: 2025-04-03 14:53+0000\n"
 "Last-Translator: Ricky Tigg <ricky.tigg@gmail.com>\n"
 "Language-Team: Finnish <https://translate.fedoraproject.org/projects/cockpit-"
@@ -115,11 +115,11 @@ msgstr "Lohkolaite"
 msgid "Bookmarks"
 msgstr "Kirjanmerkit"
 
-#: src/upload-button.tsx:119 src/dialogs/editor.tsx:214
-#: src/dialogs/create-file.tsx:162 src/dialogs/copyPasteOwnership.tsx:181
-#: src/dialogs/rename.tsx:101 src/dialogs/mkdir.tsx:105
-#: src/dialogs/symlink.tsx:165 src/dialogs/permissions.tsx:321
-#: src/dialogs/delete.tsx:101
+#: src/dialogs/mkdir.tsx:105 src/dialogs/rename.tsx:101
+#: src/dialogs/editor.tsx:214 src/dialogs/permissions.tsx:321
+#: src/dialogs/delete.tsx:101 src/dialogs/create-file.tsx:162
+#: src/dialogs/copyPasteOwnership.tsx:181 src/dialogs/symlink.tsx:165
+#: src/upload-button.tsx:119
 msgid "Cancel"
 msgstr "Peru"
 
@@ -187,19 +187,19 @@ msgstr "Kopio"
 msgid "Copy selected file or directory"
 msgstr "Kopioi valittu tiedosto tai kansio"
 
-#: src/dialogs/create-file.tsx:159 src/dialogs/mkdir.tsx:103
+#: src/dialogs/mkdir.tsx:103 src/dialogs/create-file.tsx:159
 msgid "Create"
 msgstr "Luo"
 
-#: src/menu.tsx:113 src/dialogs/mkdir.tsx:90
+#: src/dialogs/mkdir.tsx:90 src/menu.tsx:113
 msgid "Create directory"
 msgstr "Luo hakemisto"
 
-#: src/menu.tsx:118 src/dialogs/create-file.tsx:146
+#: src/dialogs/create-file.tsx:146 src/menu.tsx:118
 msgid "Create file"
 msgstr "Luo tiedosto"
 
-#: src/menu.tsx:204 src/dialogs/symlink.tsx:163
+#: src/dialogs/symlink.tsx:163 src/menu.tsx:204
 msgid "Create link"
 msgstr "Luo linkki"
 
@@ -211,7 +211,7 @@ msgstr "Luo linkki $0:iin"
 msgid "Create new directory"
 msgstr "Luo uusi hakemisto"
 
-#: src/menu.tsx:175 src/menu.tsx:217 src/dialogs/delete.tsx:99
+#: src/dialogs/delete.tsx:99 src/menu.tsx:175 src/menu.tsx:217
 msgid "Delete"
 msgstr "Poista"
 
@@ -271,7 +271,7 @@ msgstr "Hakemiston nimi liian pitkä"
 msgid "Directory owner"
 msgstr "Hakemiston omistaja"
 
-#: src/common.ts:119 src/dialogs/symlink.tsx:53
+#: src/dialogs/symlink.tsx:53 src/common.ts:119
 msgid "Directory with the same name exists"
 msgstr "Samanniminen hakemisto on olemassa"
 
@@ -296,7 +296,7 @@ msgstr "Pudota ulospäinladattavat tiedostot"
 msgid "Edit $0"
 msgstr "Muokkaa $0"
 
-#: src/files-breadcrumbs.tsx:298 src/dialogs/keyboardShortcutsHelp.tsx:99
+#: src/dialogs/keyboardShortcutsHelp.tsx:99 src/files-breadcrumbs.tsx:298
 msgid "Edit path"
 msgstr "Muokkaa polkua"
 
@@ -320,7 +320,7 @@ msgstr "Epäonnistui"
 msgid "File browser"
 msgstr "Tiedostoselain"
 
-#: src/common.ts:121 src/dialogs/symlink.tsx:55
+#: src/dialogs/symlink.tsx:55 src/common.ts:121
 msgid "File exists"
 msgstr "Tiedosto on olemassa"
 
@@ -396,8 +396,8 @@ msgstr "Siirry eteenpäin"
 msgid "Go up a directory"
 msgstr "Siirry yksi hakemisto ylös"
 
-#: src/files-footer-detail.tsx:79 src/files-footer-detail.tsx:151
 #: src/files-card-body.tsx:596 src/dialogs/permissions.tsx:350
+#: src/files-footer-detail.tsx:79 src/files-footer-detail.tsx:151
 msgid "Group"
 msgstr "Ryhmä"
 
@@ -445,7 +445,7 @@ msgstr "Hallitse tiedostojasi"
 msgid "Missing type"
 msgstr "Puuttuva tyyppi"
 
-#: src/header.tsx:88 src/files-card-body.tsx:552
+#: src/files-card-body.tsx:552 src/header.tsx:88
 msgid "Modified"
 msgstr "Muokattu"
 
@@ -453,11 +453,11 @@ msgstr "Muokattu"
 msgid "Most permissive"
 msgstr "Eniten salliva"
 
-#: src/header.tsx:66 src/files-card-body.tsx:547
+#: src/files-card-body.tsx:547 src/header.tsx:66
 msgid "Name"
 msgstr "Nimi"
 
-#: src/common.ts:110 src/dialogs/symlink.tsx:50
+#: src/dialogs/symlink.tsx:50 src/common.ts:110
 msgid "Name cannot be empty"
 msgstr "Nimi ei voi olla tyhjä"
 
@@ -517,7 +517,7 @@ msgstr "Avaa tekstitiedosto"
 msgid "Original file on server"
 msgstr "Alkuperäinen tiedosto palvelimella"
 
-#: src/files-footer-detail.tsx:79 src/files-card-body.tsx:596
+#: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
 msgid "Others"
 msgstr "Muut"
 
@@ -525,13 +525,13 @@ msgstr "Muut"
 msgid "Others access"
 msgstr "Muiden pääsy"
 
-#: src/dialogs/editor.tsx:198 src/dialogs/rename.tsx:99
+#: src/dialogs/rename.tsx:99 src/dialogs/editor.tsx:198
 msgid "Overwrite"
 msgstr "Korvaa"
 
-#: src/header.tsx:99 src/files-footer-detail.tsx:79 src/files-card-body.tsx:557
-#: src/files-card-body.tsx:596 src/dialogs/create-file.tsx:199
-#: src/dialogs/permissions.tsx:335
+#: src/files-card-body.tsx:557 src/files-card-body.tsx:596 src/header.tsx:99
+#: src/dialogs/permissions.tsx:335 src/dialogs/create-file.tsx:199
+#: src/files-footer-detail.tsx:79
 msgid "Owner"
 msgstr "Omistaja"
 
@@ -551,7 +551,7 @@ msgstr "Omistaja laskeva"
 msgid "Ownership"
 msgstr "Omistajuus"
 
-#: src/menu.tsx:106 src/dialogs/copyPasteOwnership.tsx:179
+#: src/dialogs/copyPasteOwnership.tsx:179 src/menu.tsx:106
 msgid "Paste"
 msgstr "Liitä"
 
@@ -563,7 +563,7 @@ msgstr "Liitä omistajana"
 msgid "Paste file or directory"
 msgstr "Liitä tiedosto tai hakemisto"
 
-#: src/menu.tsx:63 src/dialogs/copyPasteOwnership.tsx:67
+#: src/dialogs/copyPasteOwnership.tsx:67 src/menu.tsx:63
 msgid "Pasting failed"
 msgstr "Liittäminen epäonnistui"
 
@@ -571,7 +571,7 @@ msgstr "Liittäminen epäonnistui"
 msgid "Permission denied"
 msgstr "Käyttö estetty"
 
-#: src/header.tsx:110 src/files-card-body.tsx:562
+#: src/files-card-body.tsx:562 src/header.tsx:110
 msgid "Permissions"
 msgstr "Käyttöoikeudet"
 
@@ -583,7 +583,7 @@ msgstr "Käyttöoikeudet $0 tiedostoille"
 msgid "Read and execute"
 msgstr "Luku ja suoritus"
 
-#: src/common.ts:61 src/dialogs/permissions.tsx:226
+#: src/dialogs/permissions.tsx:226 src/common.ts:61
 msgid "Read and write"
 msgstr "Luku ja kirjoitus"
 
@@ -591,7 +591,7 @@ msgstr "Luku ja kirjoitus"
 msgid "Read, write, and execute"
 msgstr "Luku, kirjoitus ja suoritus"
 
-#: src/common.ts:59 src/dialogs/editor.tsx:175 src/dialogs/permissions.tsx:231
+#: src/dialogs/editor.tsx:175 src/dialogs/permissions.tsx:231 src/common.ts:59
 msgid "Read-only"
 msgstr "Vain luku"
 
@@ -620,7 +620,7 @@ msgstr "Lataa uudelleen"
 msgid "Remove from bookmarks"
 msgstr "Poista kirjanmerkeistä"
 
-#: src/menu.tsx:169 src/dialogs/rename.tsx:92
+#: src/dialogs/rename.tsx:92 src/menu.tsx:169
 msgid "Rename"
 msgstr "Nimeä uudelleen"
 
@@ -660,7 +660,7 @@ msgstr "Määritä suoritettava ohjelmaksi"
 msgid "Show all files"
 msgstr "Näytä kaikki tiedostot"
 
-#: src/header.tsx:284 src/files-card-body.tsx:535
+#: src/files-card-body.tsx:535 src/header.tsx:284
 msgid "Show hidden items"
 msgstr "Näytä piilotetut kohteet"
 
@@ -668,7 +668,7 @@ msgstr "Näytä piilotetut kohteet"
 msgid "Show keyboard shortcuts"
 msgstr "Näytä pikanäppäimet"
 
-#: src/header.tsx:77 src/files-card-body.tsx:548
+#: src/files-card-body.tsx:548 src/header.tsx:77
 msgid "Size"
 msgstr "Koko"
 
@@ -757,7 +757,7 @@ msgstr "Näytä $0"
 msgid "Write and execute"
 msgstr "Kirjoitus ja suoritus"
 
-#: src/common.ts:57 src/dialogs/permissions.tsx:246
+#: src/dialogs/permissions.tsx:246 src/common.ts:57
 msgid "Write-only"
 msgstr "Vain kirjoitus"
 
