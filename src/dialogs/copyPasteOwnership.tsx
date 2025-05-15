@@ -141,7 +141,6 @@ const CopyPasteAsOwnerModal = ({
     dialogResult: DialogResult<void>,
     path: string,
 }) => {
-    // @ts-expect-error superuser.js is not typed
     useEvent(superuser, "changed");
     const [selectedOwner, setSelectedOwner] = useState<string | undefined>();
     const { cwdInfo, addAlert } = useFilesContext();
