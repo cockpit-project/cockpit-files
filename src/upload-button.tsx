@@ -106,7 +106,7 @@ const FileConflictDialog = ({
     return (
         <Modal
           position="top"
-          title={fmt_to_fragments(_("Replace file $0?"), <b>{uploadFile.name}</b>)}
+          title={fmt_to_fragments(_("Replace file $0?"), <b className="ct-heading-font-weight">{uploadFile.name}</b>)}
           titleIconVariant="warning"
           variant={ModalVariant.medium}
           onClose={handleCancel}

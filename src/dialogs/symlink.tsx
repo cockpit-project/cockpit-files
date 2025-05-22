@@ -139,7 +139,7 @@ const CreateLinkModal = ({ dialogResult, path, selected } : {
     return (
         <Modal
           position="top"
-          title={fmt_to_fragments(_("Create link to $0"), <b>{selected.name}</b>)}
+          title={fmt_to_fragments(_("Create link to $0"), <b className="ct-heading-font-weight">{selected.name}</b>)}
           variant={ModalVariant.medium}
           isOpen
           className="file-symlink-modal"

@@ -107,7 +107,7 @@ const RenameItemModal = ({ dialogResult, path, selected } : {
     return (
         <Modal
           position="top"
-          title={fmt_to_fragments(_("Rename $0?"), <b>{selected.name}</b>)}
+          title={fmt_to_fragments(_("Rename $0?"), <b className="ct-heading-font-weight">{selected.name}</b>)}
           variant={ModalVariant.small}
           isOpen
           onClose={() => dialogResult.resolve()}

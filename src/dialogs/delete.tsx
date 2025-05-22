@@ -44,11 +44,11 @@ const ConfirmDeletionDialog = ({ dialogResult, path, selected, setSelected } : {
 
     let modalTitle;
     if (selected.length > 1) {
-        const selectedJSX = <b>{selected.length}</b>;
+        const selectedJSX = <b className="ct-heading-font-weight">{selected.length}</b>;
         modalTitle = fmt_to_fragments(forceDelete ? _("Force delete $0 items") : _("Delete $0 items?"), selectedJSX);
     } else {
         const selectedItem = selected[0];
-        const selectedJSX = <b>{selectedItem.name}</b>;
+        const selectedJSX = <b className="ct-heading-font-weight">{selectedItem.name}</b>;
         if (selectedItem.type === "reg") {
             modalTitle = fmt_to_fragments(
                 forceDelete ? _("Force delete file $0?") : _("Delete file $0?"), selectedJSX
