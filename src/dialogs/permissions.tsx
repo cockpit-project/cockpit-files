@@ -296,7 +296,7 @@ const EditPermissionsModal = ({ dialogResult, items, path } : {
           variant={ModalVariant.small}
           /* Translators: $0 represents a filename */
           title={items.length === 1
-              ? fmt_to_fragments(_("$0 permissions"), <b>{selected.name}</b>)
+              ? fmt_to_fragments(_("$0 permissions"), <b className="ct-heading-font-weight">{selected.name}</b>)
               : cockpit.format(_("Permissions for $0 files"), items.length)}
           description={description}
           isOpen

@@ -169,8 +169,9 @@ export const EditFileModal = ({ dialogResult, path } : {
         }
     };
 
+    const boldBasename = (<b className="ct-heading-font-weight">{basename(path)}</b>);
     /* Translators: This is the title of a modal dialog.  $0 represents a filename. */
-    let title = <>{fmt_to_fragments(state?.writable ? _("Edit $0") : _("View $0"), <b>{basename(path)}</b>)}</>;
+    let title = <>{fmt_to_fragments(state?.writable ? _("Edit $0") : _("View $0"), boldBasename)}</>;
     if (!state.writable) {
         title = (<>{title}<Label className="file-editor-title-label" variant="filled">{_("Read-only")}</Label></>);
     }
