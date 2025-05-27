@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-19 03:38+0000\n"
+"POT-Creation-Date: 2025-05-25 03:39+0000\n"
 "PO-Revision-Date: 2025-04-03 14:53+0000\n"
 "Last-Translator: Ricky Tigg <ricky.tigg@gmail.com>\n"
 "Language-Team: Finnish <https://translate.fedoraproject.org/projects/cockpit-"
@@ -118,7 +118,7 @@ msgstr "Kirjanmerkit"
 #: src/upload-button.tsx:119 src/dialogs/rename.tsx:101
 #: src/dialogs/delete.tsx:101 src/dialogs/permissions.tsx:319
 #: src/dialogs/create-file.tsx:162 src/dialogs/mkdir.tsx:105
-#: src/dialogs/symlink.tsx:165 src/dialogs/editor.tsx:214
+#: src/dialogs/symlink.tsx:165 src/dialogs/editor.tsx:215
 #: src/dialogs/copyPasteOwnership.tsx:180
 msgid "Cancel"
 msgstr "Peru"
@@ -163,7 +163,7 @@ msgstr "Merkkilaite"
 msgid "Clear filter"
 msgstr "Tyhjennä suodatin"
 
-#: src/dialogs/editor.tsx:214 src/dialogs/keyboardShortcutsHelp.tsx:46
+#: src/dialogs/editor.tsx:215 src/dialogs/keyboardShortcutsHelp.tsx:46
 msgid "Close"
 msgstr "Sulje"
 
@@ -292,7 +292,7 @@ msgid "Drop files to upload"
 msgstr "Pudota ulospäinladattavat tiedostot"
 
 #. Translators: This is the title of a modal dialog.  $0 represents a filename.
-#: src/dialogs/editor.tsx:173
+#: src/dialogs/editor.tsx:174
 msgid "Edit $0"
 msgstr "Muokkaa $0"
 
@@ -413,7 +413,7 @@ msgstr "Piilota piilotetut kohteet"
 msgid "Home"
 msgstr "Koti"
 
-#: src/dialogs/editor.tsx:242
+#: src/dialogs/editor.tsx:243
 msgid "Ignore"
 msgstr "Ohita"
 
@@ -525,7 +525,7 @@ msgstr "Muut"
 msgid "Others access"
 msgstr "Muiden pääsy"
 
-#: src/dialogs/rename.tsx:99 src/dialogs/editor.tsx:198
+#: src/dialogs/rename.tsx:99 src/dialogs/editor.tsx:199
 msgid "Overwrite"
 msgstr "Korvaa"
 
@@ -591,7 +591,7 @@ msgstr "Luku ja kirjoitus"
 msgid "Read, write, and execute"
 msgstr "Luku, kirjoitus ja suoritus"
 
-#: src/dialogs/permissions.tsx:229 src/dialogs/editor.tsx:175 src/common.ts:59
+#: src/dialogs/permissions.tsx:229 src/dialogs/editor.tsx:176 src/common.ts:59
 msgid "Read-only"
 msgstr "Vain luku"
 
@@ -612,7 +612,7 @@ msgstr ""
 "että kohde voivat liikkua samanaikaisesti, esimerkiksi kun nimetään "
 "uudelleen tai siirretään ylähakemistoa."
 
-#: src/dialogs/editor.tsx:239
+#: src/dialogs/editor.tsx:240
 msgid "Reload"
 msgstr "Lataa uudelleen"
 
@@ -640,7 +640,7 @@ msgstr "Vaihda"
 msgid "Replace file $0?"
 msgstr "Vaihdetaanko tiedosto $0?"
 
-#: src/dialogs/editor.tsx:211
+#: src/dialogs/editor.tsx:212
 msgid "Save"
 msgstr "Tallenna"
 
@@ -700,11 +700,11 @@ msgstr "Kohde"
 msgid "The existing file changed unexpectedly"
 msgstr "Olemassa oleva tiedosto muuttui odottamatta"
 
-#: src/dialogs/editor.tsx:60 src/dialogs/editor.tsx:233
+#: src/dialogs/editor.tsx:60 src/dialogs/editor.tsx:234
 msgid "The file has been removed on disk"
 msgstr "Tiedosto on poistettu levyltä"
 
-#: src/dialogs/editor.tsx:234
+#: src/dialogs/editor.tsx:235
 msgid "The file has changed on disk"
 msgstr "Tiedosto on muuttunut levyllä"
 
@@ -749,7 +749,7 @@ msgstr "Lataukset ulospäin"
 msgid "User"
 msgstr "Käyttäjä"
 
-#: src/dialogs/editor.tsx:173
+#: src/dialogs/editor.tsx:174
 msgid "View $0"
 msgstr "Näytä $0"
 

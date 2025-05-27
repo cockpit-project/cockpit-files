@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: starter-kit 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-19 03:38+0000\n"
+"POT-Creation-Date: 2025-05-25 03:39+0000\n"
 "PO-Revision-Date: 2025-05-06 03:06+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German <https://translate.fedoraproject.org/projects/cockpit-"
@@ -107,7 +107,7 @@ msgstr "Lesezeichen"
 #: src/upload-button.tsx:119 src/dialogs/rename.tsx:101
 #: src/dialogs/delete.tsx:101 src/dialogs/permissions.tsx:319
 #: src/dialogs/create-file.tsx:162 src/dialogs/mkdir.tsx:105
-#: src/dialogs/symlink.tsx:165 src/dialogs/editor.tsx:214
+#: src/dialogs/symlink.tsx:165 src/dialogs/editor.tsx:215
 #: src/dialogs/copyPasteOwnership.tsx:180
 msgid "Cancel"
 msgstr "Abbrechen"
@@ -154,7 +154,7 @@ msgstr "Zeichengerät"
 msgid "Clear filter"
 msgstr "Filter entfernen"
 
-#: src/dialogs/editor.tsx:214 src/dialogs/keyboardShortcutsHelp.tsx:46
+#: src/dialogs/editor.tsx:215 src/dialogs/keyboardShortcutsHelp.tsx:46
 msgid "Close"
 msgstr "Schließen"
 
@@ -283,7 +283,7 @@ msgid "Drop files to upload"
 msgstr "Dateien zum Hochladen ablegen"
 
 #. Translators: This is the title of a modal dialog.  $0 represents a filename.
-#: src/dialogs/editor.tsx:173
+#: src/dialogs/editor.tsx:174
 msgid "Edit $0"
 msgstr "$0 bearbeiten"
 
@@ -404,7 +404,7 @@ msgstr "Versteckte Elemente ausblenden"
 msgid "Home"
 msgstr "Startseite"
 
-#: src/dialogs/editor.tsx:242
+#: src/dialogs/editor.tsx:243
 msgid "Ignore"
 msgstr "Ignorieren"
 
@@ -517,7 +517,7 @@ msgstr "Andere"
 msgid "Others access"
 msgstr "Anderer Zugriff"
 
-#: src/dialogs/rename.tsx:99 src/dialogs/editor.tsx:198
+#: src/dialogs/rename.tsx:99 src/dialogs/editor.tsx:199
 msgid "Overwrite"
 msgstr "Überschreiben"
 
@@ -583,7 +583,7 @@ msgstr "Lesen und schreiben"
 msgid "Read, write, and execute"
 msgstr "Lesen, schreiben und ausführen"
 
-#: src/dialogs/permissions.tsx:229 src/dialogs/editor.tsx:175 src/common.ts:59
+#: src/dialogs/permissions.tsx:229 src/dialogs/editor.tsx:176 src/common.ts:59
 msgid "Read-only"
 msgstr "Nur lesen"
 
@@ -604,7 +604,7 @@ msgstr ""
 "als auch das Ziel gleichzeitig verschoben werden können, z. B. beim "
 "Umbenennen oder Verschieben eines übergeordneten Verzeichnisses."
 
-#: src/dialogs/editor.tsx:239
+#: src/dialogs/editor.tsx:240
 msgid "Reload"
 msgstr "Neu laden"
 
@@ -632,7 +632,7 @@ msgstr "Ersetzen"
 msgid "Replace file $0?"
 msgstr "Datei $0 ersetzen?"
 
-#: src/dialogs/editor.tsx:211
+#: src/dialogs/editor.tsx:212
 msgid "Save"
 msgstr "Speichern"
 
@@ -692,11 +692,11 @@ msgstr "Ziel"
 msgid "The existing file changed unexpectedly"
 msgstr "Die existierende Datei wurde unerwartet geändert"
 
-#: src/dialogs/editor.tsx:60 src/dialogs/editor.tsx:233
+#: src/dialogs/editor.tsx:60 src/dialogs/editor.tsx:234
 msgid "The file has been removed on disk"
 msgstr "Die Datei wurde von der Festplatte entfernt"
 
-#: src/dialogs/editor.tsx:234
+#: src/dialogs/editor.tsx:235
 msgid "The file has changed on disk"
 msgstr "Die Datei hat sich auf der Festplatte geändert"
 
@@ -741,7 +741,7 @@ msgstr "Hochladevorgänge"
 msgid "User"
 msgstr "Benutzer"
 
-#: src/dialogs/editor.tsx:173
+#: src/dialogs/editor.tsx:174
 msgid "View $0"
 msgstr "$0 ansehen"
 

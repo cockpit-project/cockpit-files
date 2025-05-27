@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-19 03:38+0000\n"
+"POT-Creation-Date: 2025-05-25 03:39+0000\n"
 "PO-Revision-Date: 2025-02-28 05:41+0000\n"
 "Last-Translator: Martin Pitt <mpitt@redhat.com>\n"
 "Language-Team: Japanese <https://translate.fedoraproject.org/projects/"
@@ -115,7 +115,7 @@ msgstr "ブックマーク"
 #: src/upload-button.tsx:119 src/dialogs/rename.tsx:101
 #: src/dialogs/delete.tsx:101 src/dialogs/permissions.tsx:319
 #: src/dialogs/create-file.tsx:162 src/dialogs/mkdir.tsx:105
-#: src/dialogs/symlink.tsx:165 src/dialogs/editor.tsx:214
+#: src/dialogs/symlink.tsx:165 src/dialogs/editor.tsx:215
 #: src/dialogs/copyPasteOwnership.tsx:180
 msgid "Cancel"
 msgstr "取り消し"
@@ -160,7 +160,7 @@ msgstr "キャラクターデバイス"
 msgid "Clear filter"
 msgstr "フィルターを外す"
 
-#: src/dialogs/editor.tsx:214 src/dialogs/keyboardShortcutsHelp.tsx:46
+#: src/dialogs/editor.tsx:215 src/dialogs/keyboardShortcutsHelp.tsx:46
 msgid "Close"
 msgstr "閉じる"
 
@@ -296,7 +296,7 @@ msgid "Drop files to upload"
 msgstr "アップロードするファイルをドロップする"
 
 #. Translators: This is the title of a modal dialog.  $0 represents a filename.
-#: src/dialogs/editor.tsx:173
+#: src/dialogs/editor.tsx:174
 msgid "Edit $0"
 msgstr "$0 の編集"
 
@@ -417,7 +417,7 @@ msgstr "非表示の項目を非表示にする"
 msgid "Home"
 msgstr "ホーム"
 
-#: src/dialogs/editor.tsx:242
+#: src/dialogs/editor.tsx:243
 msgid "Ignore"
 msgstr "無視"
 
@@ -529,7 +529,7 @@ msgstr "その他のユーザー"
 msgid "Others access"
 msgstr "その他のユーザーのアクセス"
 
-#: src/dialogs/rename.tsx:99 src/dialogs/editor.tsx:198
+#: src/dialogs/rename.tsx:99 src/dialogs/editor.tsx:199
 msgid "Overwrite"
 msgstr "上書き"
 
@@ -595,7 +595,7 @@ msgstr "読み取りおよび書き込み"
 msgid "Read, write, and execute"
 msgstr "読み取り、書き込み、および実行"
 
-#: src/dialogs/permissions.tsx:229 src/dialogs/editor.tsx:175 src/common.ts:59
+#: src/dialogs/permissions.tsx:229 src/dialogs/editor.tsx:176 src/common.ts:59
 msgid "Read-only"
 msgstr "読み取り専用"
 
@@ -613,7 +613,7 @@ msgid ""
 "the same time, such as when renaming or moving a parent directory."
 msgstr ""
 
-#: src/dialogs/editor.tsx:239
+#: src/dialogs/editor.tsx:240
 msgid "Reload"
 msgstr "再ロード"
 
@@ -641,7 +641,7 @@ msgstr "置き換え"
 msgid "Replace file $0?"
 msgstr "ファイル $0 を置き換えますか?"
 
-#: src/dialogs/editor.tsx:211
+#: src/dialogs/editor.tsx:212
 msgid "Save"
 msgstr "保存"
 
@@ -701,11 +701,11 @@ msgstr ""
 msgid "The existing file changed unexpectedly"
 msgstr "既存のファイルが予期せず変更されました"
 
-#: src/dialogs/editor.tsx:60 src/dialogs/editor.tsx:233
+#: src/dialogs/editor.tsx:60 src/dialogs/editor.tsx:234
 msgid "The file has been removed on disk"
 msgstr "ファイルがディスクから削除されました"
 
-#: src/dialogs/editor.tsx:234
+#: src/dialogs/editor.tsx:235
 msgid "The file has changed on disk"
 msgstr "ファイルがディスク上で変更されました"
 
@@ -750,7 +750,7 @@ msgstr "アップロード"
 msgid "User"
 msgstr "ユーザー"
 
-#: src/dialogs/editor.tsx:173
+#: src/dialogs/editor.tsx:174
 msgid "View $0"
 msgstr "$0 の表示"
 

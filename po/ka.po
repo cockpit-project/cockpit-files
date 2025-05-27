@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-19 03:38+0000\n"
+"POT-Creation-Date: 2025-05-25 03:39+0000\n"
 "PO-Revision-Date: 2025-05-14 14:12+0000\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <https://translate.fedoraproject.org/projects/"
@@ -118,7 +118,7 @@ msgstr "სანიშნეები"
 #: src/upload-button.tsx:119 src/dialogs/rename.tsx:101
 #: src/dialogs/delete.tsx:101 src/dialogs/permissions.tsx:319
 #: src/dialogs/create-file.tsx:162 src/dialogs/mkdir.tsx:105
-#: src/dialogs/symlink.tsx:165 src/dialogs/editor.tsx:214
+#: src/dialogs/symlink.tsx:165 src/dialogs/editor.tsx:215
 #: src/dialogs/copyPasteOwnership.tsx:180
 msgid "Cancel"
 msgstr "გაუქმება"
@@ -163,7 +163,7 @@ msgstr "სიმბოლური მოწყობილობა"
 msgid "Clear filter"
 msgstr "ფილტრის გასუფთავება"
 
-#: src/dialogs/editor.tsx:214 src/dialogs/keyboardShortcutsHelp.tsx:46
+#: src/dialogs/editor.tsx:215 src/dialogs/keyboardShortcutsHelp.tsx:46
 msgid "Close"
 msgstr "დახურვა"
 
@@ -292,7 +292,7 @@ msgid "Drop files to upload"
 msgstr "ასატვირთად დაყარეთ ფაილები"
 
 #. Translators: This is the title of a modal dialog.  $0 represents a filename.
-#: src/dialogs/editor.tsx:173
+#: src/dialogs/editor.tsx:174
 msgid "Edit $0"
 msgstr "$0-ის ჩასწორება"
 
@@ -413,7 +413,7 @@ msgstr "დამალული ელემენტების დამა�
 msgid "Home"
 msgstr "საწყისი"
 
-#: src/dialogs/editor.tsx:242
+#: src/dialogs/editor.tsx:243
 msgid "Ignore"
 msgstr "დაიგნორება"
 
@@ -525,7 +525,7 @@ msgstr "სხვები"
 msgid "Others access"
 msgstr "სხვების წვდომა"
 
-#: src/dialogs/rename.tsx:99 src/dialogs/editor.tsx:198
+#: src/dialogs/rename.tsx:99 src/dialogs/editor.tsx:199
 msgid "Overwrite"
 msgstr "გადაწერა"
 
@@ -591,7 +591,7 @@ msgstr "წაკითხვა და ჩაწერა"
 msgid "Read, write, and execute"
 msgstr "წაკითხვა, ჩაწერა და გაშვება"
 
-#: src/dialogs/permissions.tsx:229 src/dialogs/editor.tsx:175 src/common.ts:59
+#: src/dialogs/permissions.tsx:229 src/dialogs/editor.tsx:176 src/common.ts:59
 msgid "Read-only"
 msgstr "მხოლოდ-წასაკითხად"
 
@@ -612,7 +612,7 @@ msgstr ""
 "შეიძლება, ერთდროულად იქნეს გადაადგილებული. მაგალითად, როცა სახელს არქმევთ, "
 "ან გადაგაგაქვთ მშობელი საქაღალდე."
 
-#: src/dialogs/editor.tsx:239
+#: src/dialogs/editor.tsx:240
 msgid "Reload"
 msgstr "თავიდან ჩატვირთვა"
 
@@ -640,7 +640,7 @@ msgstr "ჩანაცვლება"
 msgid "Replace file $0?"
 msgstr "ჩავანაცვლო ფაილი $0?"
 
-#: src/dialogs/editor.tsx:211
+#: src/dialogs/editor.tsx:212
 msgid "Save"
 msgstr "შენახვა"
 
@@ -700,11 +700,11 @@ msgstr "სამიზნე"
 msgid "The existing file changed unexpectedly"
 msgstr "არსებული ფაილი წარმატებით შეიცვალა"
 
-#: src/dialogs/editor.tsx:60 src/dialogs/editor.tsx:233
+#: src/dialogs/editor.tsx:60 src/dialogs/editor.tsx:234
 msgid "The file has been removed on disk"
 msgstr "ფაილი წაიშალა დისკიდან"
 
-#: src/dialogs/editor.tsx:234
+#: src/dialogs/editor.tsx:235
 msgid "The file has changed on disk"
 msgstr "ფაილი შეიცვალა დისკზე"
 
@@ -749,7 +749,7 @@ msgstr "ატვირთვები"
 msgid "User"
 msgstr "მომხმარებელი"
 
-#: src/dialogs/editor.tsx:173
+#: src/dialogs/editor.tsx:174
 msgid "View $0"
 msgstr "$0-ის ნახვა"
 

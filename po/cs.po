@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-19 03:38+0000\n"
+"POT-Creation-Date: 2025-05-25 03:39+0000\n"
 "PO-Revision-Date: 2025-04-01 02:53+0000\n"
 "Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
 "memory@weblate.org>\n"
@@ -119,7 +119,7 @@ msgstr "Záložky"
 #: src/upload-button.tsx:119 src/dialogs/rename.tsx:101
 #: src/dialogs/delete.tsx:101 src/dialogs/permissions.tsx:319
 #: src/dialogs/create-file.tsx:162 src/dialogs/mkdir.tsx:105
-#: src/dialogs/symlink.tsx:165 src/dialogs/editor.tsx:214
+#: src/dialogs/symlink.tsx:165 src/dialogs/editor.tsx:215
 #: src/dialogs/copyPasteOwnership.tsx:180
 msgid "Cancel"
 msgstr "Storno"
@@ -165,7 +165,7 @@ msgstr "Znakové zařízení"
 msgid "Clear filter"
 msgstr "Vyčistit filtr"
 
-#: src/dialogs/editor.tsx:214 src/dialogs/keyboardShortcutsHelp.tsx:46
+#: src/dialogs/editor.tsx:215 src/dialogs/keyboardShortcutsHelp.tsx:46
 msgid "Close"
 msgstr "Zavřít"
 
@@ -294,7 +294,7 @@ msgid "Drop files to upload"
 msgstr "Soubory nahrajete jejich přetažením sem"
 
 #. Translators: This is the title of a modal dialog.  $0 represents a filename.
-#: src/dialogs/editor.tsx:173
+#: src/dialogs/editor.tsx:174
 msgid "Edit $0"
 msgstr "Upravit $0"
 
@@ -415,7 +415,7 @@ msgstr "Skrýt skryté položky"
 msgid "Home"
 msgstr "Domů"
 
-#: src/dialogs/editor.tsx:242
+#: src/dialogs/editor.tsx:243
 msgid "Ignore"
 msgstr "Ignorovat"
 
@@ -527,7 +527,7 @@ msgstr "Ostatní"
 msgid "Others access"
 msgstr "Přístup pro ostatní"
 
-#: src/dialogs/rename.tsx:99 src/dialogs/editor.tsx:198
+#: src/dialogs/rename.tsx:99 src/dialogs/editor.tsx:199
 msgid "Overwrite"
 msgstr "Přepsat"
 
@@ -593,7 +593,7 @@ msgstr "Číst a zapisovat"
 msgid "Read, write, and execute"
 msgstr "Číst, zapisovat a spouštět"
 
-#: src/dialogs/permissions.tsx:229 src/dialogs/editor.tsx:175 src/common.ts:59
+#: src/dialogs/permissions.tsx:229 src/dialogs/editor.tsx:176 src/common.ts:59
 msgid "Read-only"
 msgstr "Pouze pro čtení"
 
@@ -614,7 +614,7 @@ msgstr ""
 "tak jeho cíl budou společně přesunuty, jako například při přejmenování nebo "
 "přesunu jim nadřazené složky."
 
-#: src/dialogs/editor.tsx:239
+#: src/dialogs/editor.tsx:240
 msgid "Reload"
 msgstr "Načíst znovu"
 
@@ -642,7 +642,7 @@ msgstr "Nahradit"
 msgid "Replace file $0?"
 msgstr "Nahradit soubor $0?"
 
-#: src/dialogs/editor.tsx:211
+#: src/dialogs/editor.tsx:212
 msgid "Save"
 msgstr "Uložit"
 
@@ -702,11 +702,11 @@ msgstr "Cíl"
 msgid "The existing file changed unexpectedly"
 msgstr "Existující soubor byl mezitím neočekávaně změněn"
 
-#: src/dialogs/editor.tsx:60 src/dialogs/editor.tsx:233
+#: src/dialogs/editor.tsx:60 src/dialogs/editor.tsx:234
 msgid "The file has been removed on disk"
 msgstr "Soubor byl odebrán z úložiště"
 
-#: src/dialogs/editor.tsx:234
+#: src/dialogs/editor.tsx:235
 msgid "The file has changed on disk"
 msgstr "Soubor byl na úložišti změněn"
 
@@ -750,7 +750,7 @@ msgstr "Nahrání"
 msgid "User"
 msgstr "Uživatel"
 
-#: src/dialogs/editor.tsx:173
+#: src/dialogs/editor.tsx:174
 msgid "View $0"
 msgstr "Zobrazit $0"
 
