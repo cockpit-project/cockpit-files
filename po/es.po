@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-19 03:38+0000\n"
+"POT-Creation-Date: 2025-05-25 03:39+0000\n"
 "PO-Revision-Date: 2025-04-09 19:53+0000\n"
 "Last-Translator: Javier Francisco <fserrador@gmail.com>\n"
 "Language-Team: Spanish <https://translate.fedoraproject.org/projects/cockpit-"
@@ -118,7 +118,7 @@ msgstr "Marcadores"
 #: src/upload-button.tsx:119 src/dialogs/rename.tsx:101
 #: src/dialogs/delete.tsx:101 src/dialogs/permissions.tsx:319
 #: src/dialogs/create-file.tsx:162 src/dialogs/mkdir.tsx:105
-#: src/dialogs/symlink.tsx:165 src/dialogs/editor.tsx:214
+#: src/dialogs/symlink.tsx:165 src/dialogs/editor.tsx:215
 #: src/dialogs/copyPasteOwnership.tsx:180
 msgid "Cancel"
 msgstr "Cancelar"
@@ -163,7 +163,7 @@ msgstr "Dispositivo de carácter"
 msgid "Clear filter"
 msgstr "Borrar filtro"
 
-#: src/dialogs/editor.tsx:214 src/dialogs/keyboardShortcutsHelp.tsx:46
+#: src/dialogs/editor.tsx:215 src/dialogs/keyboardShortcutsHelp.tsx:46
 msgid "Close"
 msgstr "Cerrar"
 
@@ -292,7 +292,7 @@ msgid "Drop files to upload"
 msgstr "Suelta archivos para subir"
 
 #. Translators: This is the title of a modal dialog.  $0 represents a filename.
-#: src/dialogs/editor.tsx:173
+#: src/dialogs/editor.tsx:174
 msgid "Edit $0"
 msgstr "Editar $0"
 
@@ -413,7 +413,7 @@ msgstr "Ocultar elementos ocultos"
 msgid "Home"
 msgstr "Inicio"
 
-#: src/dialogs/editor.tsx:242
+#: src/dialogs/editor.tsx:243
 msgid "Ignore"
 msgstr "Ignorar"
 
@@ -525,7 +525,7 @@ msgstr "Otros"
 msgid "Others access"
 msgstr "Otros accesos"
 
-#: src/dialogs/rename.tsx:99 src/dialogs/editor.tsx:198
+#: src/dialogs/rename.tsx:99 src/dialogs/editor.tsx:199
 msgid "Overwrite"
 msgstr "Sobrescribir"
 
@@ -591,7 +591,7 @@ msgstr "Lectura y escritura"
 msgid "Read, write, and execute"
 msgstr "Lectura, escritura y ejecución"
 
-#: src/dialogs/permissions.tsx:229 src/dialogs/editor.tsx:175 src/common.ts:59
+#: src/dialogs/permissions.tsx:229 src/dialogs/editor.tsx:176 src/common.ts:59
 msgid "Read-only"
 msgstr "Solo lectura"
 
@@ -611,7 +611,7 @@ msgstr ""
 "Enlaces simbólicos relativos son útiles cuando ambos enlace y destino muevan "
 "a la vez, tales como cuando renombren o muevan un directorio antecesor."
 
-#: src/dialogs/editor.tsx:239
+#: src/dialogs/editor.tsx:240
 msgid "Reload"
 msgstr "Recargar"
 
@@ -639,7 +639,7 @@ msgstr "Reemplazar"
 msgid "Replace file $0?"
 msgstr "¿Reemplazar archivo $0?"
 
-#: src/dialogs/editor.tsx:211
+#: src/dialogs/editor.tsx:212
 msgid "Save"
 msgstr "Guardar"
 
@@ -699,11 +699,11 @@ msgstr "Destino"
 msgid "The existing file changed unexpectedly"
 msgstr "El archivo existente cambió de manera inesperada"
 
-#: src/dialogs/editor.tsx:60 src/dialogs/editor.tsx:233
+#: src/dialogs/editor.tsx:60 src/dialogs/editor.tsx:234
 msgid "The file has been removed on disk"
 msgstr "El archivo ha sido eliminado del disco"
 
-#: src/dialogs/editor.tsx:234
+#: src/dialogs/editor.tsx:235
 msgid "The file has changed on disk"
 msgstr "El archivo ha cambiado en el disco"
 
@@ -748,7 +748,7 @@ msgstr "Subidas"
 msgid "User"
 msgstr "Usuario"
 
-#: src/dialogs/editor.tsx:173
+#: src/dialogs/editor.tsx:174
 msgid "View $0"
 msgstr "Ver $0"
 
