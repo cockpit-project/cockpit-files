@@ -2664,7 +2664,7 @@ class TestFiles(testlib.MachineCase):
 
                           // File is added only for drop event
                           if (dragType === 'drop' && filename) {
-                              // Synthetize a file DataTransfer action
+                              // Synthesize a file DataTransfer action
                               const content = "Random file content: 4";
                               const file = new File([content], filename, { type: "text/plain" });
 
@@ -2714,7 +2714,7 @@ class TestFiles(testlib.MachineCase):
             b.click(".pf-v6-c-modal-box button.pf-m-link")
             b.wait_not_present(".pf-v6-c-modal-box")
 
-            # Drag & drop upload overlay is not dislayed when event has no files
+            # Drag & drop upload overlay is not displayed when event has no files
             drag_file_event(".fileview-wrapper", 'dragenter')
             b.wait_not_present(".drag-drop-upload")
             drag_file_event(".fileview-wrapper", 'dragover')
@@ -3523,8 +3523,8 @@ class TestFiles(testlib.MachineCase):
                     "Directory with the same name exists")
         b.wait_visible("button.pf-m-primary:disabled")
 
-        # Non-existant target
-        b.set_input_text("#symlink-input", "../non-existant/not/really/here")
+        # Non-existent target
+        b.set_input_text("#symlink-input", "../non-existent/not/really/here")
         b.click(".file-symlink-modal .pf-m-primary")
         b.wait_in_text(".pf-v6-c-alert__title", "No such file or directory")
         b.wait_visible("button.pf-m-primary:disabled")

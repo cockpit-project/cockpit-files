@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
         await cockpit.init();
     } catch (exp: any) { /* eslint-disable-line @typescript-eslint/no-explicit-any */
-        /* Remove this when we take a dependency on Cockpit 336 ('info' channnel in the bridge) */
+        /* Remove this when we take a dependency on Cockpit 336 ('info' channel in the bridge) */
         if (exp.problem === 'not-supported') {
             const user = await cockpit.user();
             cockpit.info.user = {
