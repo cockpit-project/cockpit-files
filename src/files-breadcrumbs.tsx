@@ -259,7 +259,7 @@ export function FilesBreadcrumbs({ path }: { path: string }) {
     }, [enableEditMode]);
 
     const handleInputKey = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        // Don't propogate navigation specific events
+        // Don't propagate navigation specific events
         if (event.key === "ArrowDown" || event.key === "ArrowUp" ||
             event.key === "ArrowLeft" || event.key === "ArrowRight" ||
             event.key === "Delete") {
