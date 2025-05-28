@@ -32,7 +32,7 @@
 
         /* Hovered items, for both views */
         &:hover {
-            /* Propogate the hovering via variables to the link and cursor */
+            /* Propagate the hovering via variables to the link and cursor */
             --pf-t--global--color--brand--default: var(--pf-t--global--color--brand--hover);
             --pf-t--global--text--color--link--default: var(--pf-t--global--text--color--link--hover);
             /* Show an interactive cursor */
