@@ -61,3 +61,7 @@ ignore_names = [
    "setUpClass",
    "test[A-Z0-9]*",
 ]
+
+[tool.codespell]
+skip = './node_modules,./dist'
+ignore-words-list = 'doubleclick'
