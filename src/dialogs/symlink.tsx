@@ -20,13 +20,12 @@ import React from 'react';
 
 import { Button } from '@patternfly/react-core/dist/esm/components/Button';
 import { Form, FormGroup } from "@patternfly/react-core/dist/esm/components/Form";
+import {
+    Modal, ModalBody, ModalFooter, ModalHeader, ModalVariant
+} from '@patternfly/react-core/dist/esm/components/Modal';
 import { Popover } from "@patternfly/react-core/dist/esm/components/Popover";
 import { Radio } from "@patternfly/react-core/dist/esm/components/Radio";
 import { TextInput } from "@patternfly/react-core/dist/esm/components/TextInput";
-import {
-    Modal,
-    ModalVariant
-} from '@patternfly/react-core/dist/esm/deprecated/components/Modal';
 import { HelpIcon } from "@patternfly/react-icons";
 
 import cockpit, { BasicError } from 'cockpit';
@@ -136,108 +135,116 @@ const CreateLinkModal = ({ dialogResult, path, selected } : {
         dialogResult.resolve();
     };
 
+    const modalHeader = (
+        <ModalHeader
+          title={
+              fmt_to_fragments(_("Create link to $0"), <b className="ct-heading-font-weight">{selected.name}</b>)
+          }
+        />
+    );
+
     return (
         <Modal
           position="top"
-          title={fmt_to_fragments(_("Create link to $0"), <b className="ct-heading-font-weight">{selected.name}</b>)}
           variant={ModalVariant.medium}
           isOpen
           className="file-symlink-modal"
           onClose={() => dialogResult.resolve()}
-          footer={
-              <>
-                  <Button
-                    variant="primary"
-                    onClick={() => {
-                        const filename_invalid = checkLinkName(symlinkName, cwdInfo?.entries || {});
-                        if (filename_invalid) {
-                            setSymlinkError(filename_invalid);
-                        } else {
-                            createLink();
-                        }
-                    }}
-                    isDisabled={errorMessage !== undefined ||
-                        symlinkError !== null ||
-                        cwdInfo === null}
-                  >
-                      {_("Create link")}
-                  </Button>
-                  <Button variant="link" onClick={() => dialogResult.resolve()}>{_("Cancel")}</Button>
-              </>
-          }
         >
-            {errorMessage &&
-            <InlineNotification
-              type="danger"
-              text={errorMessage}
-              isInline
-            />}
-            <Form
-              isHorizontal
-              onSubmit={e => {
-                  e.preventDefault();
-                  createLink();
-                  return false;
-              }}
-            >
-                <FormGroup fieldId="target-name" label={_("Target")}>
-                    <TextInput
-                      value={selected.name}
-                      readOnlyVariant="plain"
-                      id="target-name"
-                    />
-                </FormGroup>
-                <FormGroup fieldId="symlink-input" label={_("Symlink name")}>
-                    <TextInput
-                      validated={symlinkError ? "error" : "default"}
-                      value={symlinkName}
-                      onChange={(_, val) => {
-                          const filename_invalid = checkLinkName(val, cwdInfo?.entries || {});
-                          setSymlinkError(filename_invalid);
-                          setErrorMessage(undefined);
-                          setSymlinkName(val);
-                      }}
-                      id="symlink-input" autoFocus // eslint-disable-line jsx-a11y/no-autofocus
-                    />
-                    <FormHelper fieldId="symlink-input" helperTextInvalid={symlinkError} />
-                </FormGroup>
-                <FormGroup
-                  fieldId="symlink-type"
-                  label={_("Type")}
+            {modalHeader}
+            <ModalBody>
+                {errorMessage &&
+                <InlineNotification
+                  type="danger"
+                  text={errorMessage}
                   isInline
-                  labelHelp={
-                      <Popover
-                        headerContent={_("Absolute vs. Relative")}
-                        bodyContent={
-                            <>
-                                {/* eslint-disable-next-line max-len */}
-                                <p>{_("Absolute symlinks are ideal when referring to files or directories that won't move, such as system files.")}</p>
-                                <br />
-                                {/* eslint-disable-next-line max-len */}
-                                <p>{_("Relative symlinks are useful when both a symlink and target might move at the same time, such as when renaming or moving a parent directory.")}</p>
-                            </>
-                        }
-                      >
-                          <HelpIcon />
-                      </Popover>
-                  }
+                />}
+                <Form
+                  isHorizontal
+                  onSubmit={e => {
+                      e.preventDefault();
+                      createLink();
+                      return false;
+                  }}
                 >
-                    <Radio
-                      id="absolute"
-                      name="absolute"
-                      label={_("Absolute")}
-                      isChecked={mode === "absolute"}
-                      onChange={() => setMode("absolute")}
-                    />
-                    <Radio
-                      id="relative"
-                      name="relative"
-                      label={_("Relative")}
-                      isChecked={mode === "relative"}
-                      onChange={() => setMode("relative")}
-                    />
-                </FormGroup>
-            </Form>
+                    <FormGroup fieldId="target-name" label={_("Target")}>
+                        <TextInput
+                          value={selected.name}
+                          readOnlyVariant="plain"
+                          id="target-name"
+                        />
+                    </FormGroup>
+                    <FormGroup fieldId="symlink-input" label={_("Symlink name")}>
+                        <TextInput
+                          validated={symlinkError ? "error" : "default"}
+                          value={symlinkName}
+                          onChange={(_, val) => {
+                              const filename_invalid = checkLinkName(val, cwdInfo?.entries || {});
+                              setSymlinkError(filename_invalid);
+                              setErrorMessage(undefined);
+                              setSymlinkName(val);
+                          }}
+                          id="symlink-input" autoFocus // eslint-disable-line jsx-a11y/no-autofocus
+                        />
+                        <FormHelper fieldId="symlink-input" helperTextInvalid={symlinkError} />
+                    </FormGroup>
+                    <FormGroup
+                      fieldId="symlink-type"
+                      label={_("Type")}
+                      isInline
+                      labelHelp={
+                          <Popover
+                            headerContent={_("Absolute vs. Relative")}
+                            bodyContent={
+                                <>
+                                    {/* eslint-disable-next-line max-len */}
+                                    <p>{_("Absolute symlinks are ideal when referring to files or directories that won't move, such as system files.")}</p>
+                                    <br />
+                                    {/* eslint-disable-next-line max-len */}
+                                    <p>{_("Relative symlinks are useful when both a symlink and target might move at the same time, such as when renaming or moving a parent directory.")}</p>
+                                </>
+                            }
+                          >
+                              <HelpIcon />
+                          </Popover>
+                      }
+                    >
+                        <Radio
+                          id="absolute"
+                          name="absolute"
+                          label={_("Absolute")}
+                          isChecked={mode === "absolute"}
+                          onChange={() => setMode("absolute")}
+                        />
+                        <Radio
+                          id="relative"
+                          name="relative"
+                          label={_("Relative")}
+                          isChecked={mode === "relative"}
+                          onChange={() => setMode("relative")}
+                        />
+                    </FormGroup>
+                </Form>
+            </ModalBody>
+            <ModalFooter>
+                <Button
+                  variant="primary"
+                  onClick={() => {
+                      const filename_invalid = checkLinkName(symlinkName, cwdInfo?.entries || {});
+                      if (filename_invalid) {
+                          setSymlinkError(filename_invalid);
+                      } else {
+                          createLink();
+                      }
+                  }}
+                  isDisabled={errorMessage !== undefined ||
+                      symlinkError !== null ||
+                      cwdInfo === null}
+                >
+                    {_("Create link")}
+                </Button>
+                <Button variant="link" onClick={() => dialogResult.resolve()}>{_("Cancel")}</Button>
+            </ModalFooter>
         </Modal>
     );
 };

@@ -21,9 +21,8 @@ import React, { useState } from 'react';
 
 import { Button } from '@patternfly/react-core/dist/esm/components/Button';
 import {
-    Modal,
-    ModalVariant
-} from '@patternfly/react-core/dist/esm/deprecated/components/Modal';
+    Modal, ModalBody, ModalFooter, ModalHeader, ModalVariant
+} from '@patternfly/react-core/dist/esm/components/Modal';
 
 import cockpit from 'cockpit';
 import { InlineNotification } from 'cockpit-components-inline-notification';
@@ -83,31 +82,33 @@ const ConfirmDeletionDialog = ({ dialogResult, path, selected, setSelected } : {
     return (
         <Modal
           position="top"
-          title={modalTitle}
-          titleIconVariant="warning"
           variant={ModalVariant.medium}
           isOpen
           onClose={() => dialogResult.resolve()}
           elementToFocus="#delete-button"
-          footer={
-              <>
-                  <Button
-                    id="delete-button"
-                    variant="danger"
-                    onClick={deleteItem}
-                  >
-                      {_("Delete")}
-                  </Button>
-                  <Button variant="link" onClick={() => dialogResult.resolve()}>{_("Cancel")}</Button>
-              </>
-          }
         >
-            {errorMessage &&
-            <InlineNotification
-              type="danger"
-              text={errorMessage}
-              isInline
-            />}
+            <ModalHeader
+              title={modalTitle}
+              titleIconVariant="warning"
+            />
+            <ModalBody>
+                {errorMessage &&
+                <InlineNotification
+                  type="danger"
+                  text={errorMessage}
+                  isInline
+                />}
+            </ModalBody>
+            <ModalFooter>
+                <Button
+                  id="delete-button"
+                  variant="danger"
+                  onClick={deleteItem}
+                >
+                    {_("Delete")}
+                </Button>
+                <Button variant="link" onClick={() => dialogResult.resolve()}>{_("Cancel")}</Button>
+            </ModalFooter>
         </Modal>
     );
 };

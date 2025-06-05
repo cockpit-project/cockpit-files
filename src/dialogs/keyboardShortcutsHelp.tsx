@@ -25,9 +25,8 @@ import {
     DescriptionList, DescriptionListDescription, DescriptionListGroup, DescriptionListTerm
 } from "@patternfly/react-core/dist/esm/components/DescriptionList/index";
 import {
-    Modal,
-    ModalVariant
-} from '@patternfly/react-core/dist/esm/deprecated/components/Modal';
+    Modal, ModalBody, ModalFooter, ModalHeader, ModalVariant
+} from '@patternfly/react-core/dist/esm/components/Modal';
 import { Flex, } from "@patternfly/react-core/dist/esm/layouts/Flex";
 
 import cockpit from 'cockpit';
@@ -43,7 +42,9 @@ const KeyboardShortcutsHelp = ({ dialogResult } : { dialogResult: DialogResult<v
     const altString = isApple ? "Command" : "Alt";
 
     const footer = (
-        <Button variant="secondary" onClick={() => dialogResult.resolve()}>{_("Close")}</Button>
+        <ModalFooter>
+            <Button variant="secondary" onClick={() => dialogResult.resolve()}>{_("Close")}</Button>
+        </ModalFooter>
     );
 
     const toDescriptionListGroups = (item: [React.JSX.Element, string, string]) => {
@@ -137,35 +138,37 @@ const KeyboardShortcutsHelp = ({ dialogResult } : { dialogResult: DialogResult<v
     return (
         <Modal
           position="top"
-          title={_("Keyboard shortcuts")}
           variant={ModalVariant.large}
           className="shortcuts-dialog"
           onClose={() => dialogResult.resolve()}
-          footer={footer}
           isOpen
         >
-            <Flex>
-                <Content>
-                    <Content component={ContentVariants.h2}>{_("Navigation")}</Content>
-                    <DescriptionList
-                      isHorizontal
-                      isFluid
-                      isFillColumns
-                    >
-                        {navShortcuts.map(toDescriptionListGroups)}
-                    </DescriptionList>
-                </Content>
-                <Content>
-                    <Content component={ContentVariants.h2}>{_("Editing")}</Content>
-                    <DescriptionList
-                      isHorizontal
-                      isFluid
-                      isFillColumns
-                    >
-                        {editShortcuts.map(toDescriptionListGroups)}
-                    </DescriptionList>
-                </Content>
-            </Flex>
+            <ModalHeader title={_("Keyboard shortcuts")} />
+            <ModalBody>
+                <Flex>
+                    <Content>
+                        <Content component={ContentVariants.h2}>{_("Navigation")}</Content>
+                        <DescriptionList
+                          isHorizontal
+                          isFluid
+                          isFillColumns
+                        >
+                            {navShortcuts.map(toDescriptionListGroups)}
+                        </DescriptionList>
+                    </Content>
+                    <Content>
+                        <Content component={ContentVariants.h2}>{_("Editing")}</Content>
+                        <DescriptionList
+                          isHorizontal
+                          isFluid
+                          isFillColumns
+                        >
+                            {editShortcuts.map(toDescriptionListGroups)}
+                        </DescriptionList>
+                    </Content>
+                </Flex>
+            </ModalBody>
+            {footer}
         </Modal>
     );
 };

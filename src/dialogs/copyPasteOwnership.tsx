@@ -25,9 +25,8 @@ import { Content, } from "@patternfly/react-core/dist/esm/components/Content";
 import { Form, FormGroup } from "@patternfly/react-core/dist/esm/components/Form";
 import { FormSelect, FormSelectOption } from "@patternfly/react-core/dist/esm/components/FormSelect";
 import {
-    Modal,
-    ModalVariant
-} from '@patternfly/react-core/dist/esm/deprecated/components/Modal';
+    Modal, ModalBody, ModalFooter, ModalHeader, ModalVariant
+} from '@patternfly/react-core/dist/esm/components/Modal';
 
 import cockpit from 'cockpit';
 import { type FileInfo } from 'cockpit/fsinfo.ts';
@@ -167,7 +166,7 @@ const CopyPasteAsOwnerModal = ({
     cockpit.assert(selectedVal !== undefined, "New file ownership undefined");
 
     const modalFooter = (
-        <>
+        <ModalFooter>
             <Button
               variant="primary"
               onClick={() => {
@@ -178,40 +177,42 @@ const CopyPasteAsOwnerModal = ({
                 {_("Paste")}
             </Button>
             <Button variant="link" onClick={() => dialogResult.resolve()}>{_("Cancel")}</Button>
-        </>
+        </ModalFooter>
     );
 
     return (
         <Modal
           id="paste-owner-modal"
           position="top"
-          title={_("Paste as owner")}
           isOpen
           onClose={() => dialogResult.resolve()}
           variant={ModalVariant.small}
-          footer={modalFooter}
         >
-            <Form isHorizontal>
-                <Content>
-                    <Content component="p">
-                        {/*eslint-disable-line*/ _("Files being pasted have a different owner. By default, ownership will be changed to match the destination directory.")}
+            <ModalHeader title={_("Paste as owner")} />
+            <ModalBody>
+                <Form isHorizontal>
+                    <Content>
+                        <Content component="p">
+                            {/*eslint-disable-line*/ _("Files being pasted have a different owner. By default, ownership will be changed to match the destination directory.")}
+                        </Content>
                     </Content>
-                </Content>
-                <FormGroup fieldId="paste-as-owner" label={_("New owner")}>
-                    <FormSelect
-                      id='paste-owner-select'
-                      value={selectedOwner}
-                      onChange={(_ev, val) => setSelectedOwner(val)}
-                    >
-                        {[...candidatesMap.keys()].map(user =>
-                            <FormSelectOption
-                              key={user}
-                              value={user}
-                              label={user}
-                            />)}
-                    </FormSelect>
-                </FormGroup>
-            </Form>
+                    <FormGroup fieldId="paste-as-owner" label={_("New owner")}>
+                        <FormSelect
+                          id='paste-owner-select'
+                          value={selectedOwner}
+                          onChange={(_ev, val) => setSelectedOwner(val)}
+                        >
+                            {[...candidatesMap.keys()].map(user =>
+                                <FormSelectOption
+                                  key={user}
+                                  value={user}
+                                  label={user}
+                                />)}
+                        </FormSelect>
+                    </FormGroup>
+                </Form>
+            </ModalBody>
+            {modalFooter}
         </Modal>
     );
 };

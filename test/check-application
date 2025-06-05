@@ -2473,7 +2473,7 @@ class TestFiles(testlib.MachineCase):
             b.click("#upload-file-btn")
             b.upload_files("#upload-file-btn + input[type='file']", [files[0]])
             b.wait_in_text("h1.pf-v6-c-modal-box__title", f"Replace file {filename}?")
-            b.assert_pixels(".pf-v6-c-modal-box.pf-m-warning", "upload-replace-dialog",
+            b.assert_pixels(".pf-v6-c-modal-box", "upload-replace-dialog",
                             mock={".new-file-date": "Jun 19, 2024, 11:30 AM",
                                   ".original-file-date": "Jun 19, 2024, 11:30 AM"})
             b.click("button.pf-m-link:contains('Cancel')")
