@@ -23,12 +23,11 @@ import { AlertVariant, AlertActionLink } from "@patternfly/react-core/dist/esm/c
 import { Button } from "@patternfly/react-core/dist/esm/components/Button";
 import { Checkbox } from "@patternfly/react-core/dist/esm/components/Checkbox";
 import { Divider } from "@patternfly/react-core/dist/esm/components/Divider";
+import {
+    Modal, ModalBody, ModalFooter, ModalHeader, ModalVariant
+} from '@patternfly/react-core/dist/esm/components/Modal';
 import { Popover, PopoverPosition } from "@patternfly/react-core/dist/esm/components/Popover";
 import { Progress } from "@patternfly/react-core/dist/esm/components/Progress";
-import {
-    Modal,
-    ModalVariant
-} from '@patternfly/react-core/dist/esm/deprecated/components/Modal';
 import { Flex, FlexItem } from "@patternfly/react-core/dist/esm/layouts/Flex";
 import { TrashIcon } from "@patternfly/react-icons";
 
@@ -103,52 +102,62 @@ const FileConflictDialog = ({
         dialogResult.reject(new Error("cancelled"));
     };
 
+    const modalHeader = (
+        <ModalHeader
+          titleIconVariant="warning"
+          title={fmt_to_fragments(_("Replace file $0?"), <b className="ct-heading-font-weight">{uploadFile.name}</b>)}
+        />
+    );
+
+    const alreadyExistsWarning = (
+        <p>
+            {cockpit.format(
+                _("A file with the same name already exists in \"$0\". Replacing it will overwrite its content."),
+                path
+            )}
+        </p>
+    );
+
     return (
         <Modal
           position="top"
-          title={fmt_to_fragments(_("Replace file $0?"), <b className="ct-heading-font-weight">{uploadFile.name}</b>)}
-          titleIconVariant="warning"
           variant={ModalVariant.medium}
           onClose={handleCancel}
           isOpen
-          footer={
-              <>
-                  <Button variant="warning" onClick={handleReplace}>{_("Replace")}</Button>
-                  {isMultiUpload &&
-                  <Button variant="secondary" onClick={handleSkip}>{_("Keep original")}</Button>}
-                  <Button variant="link" onClick={handleCancel}>{_("Cancel")}</Button>
-              </>
-          }
         >
-            <p>
-                {cockpit.format(
-                    _("A file with the same name already exists in \"$0\". Replacing it will overwrite its content."),
-                    path
-                )}
-            </p>
-            <Flex
-              spaceItems={{ default: "spaceItems3xl" }}
-              className="conflict-modal-files"
-            >
-                <FlexItem>
-                    <b>{_("New file")}</b>
-                    <p>{cockpit.format_bytes(uploadFile.size)}</p>
-                    <p className="new-file-date">{timeformat.dateTime(uploadFile.lastModified)}</p>
-                </FlexItem>
-                <FlexItem>
-                    <b>{_("Original file on server")}</b>
-                    <p>{cockpit.format_bytes(file.size)}</p>
-                    {file.mtime &&
-                    <p className="original-file-date">{timeformat.dateTime(file.mtime * 1000)}</p>}
-                </FlexItem>
-            </Flex>
-            {isMultiUpload &&
-            <Checkbox
-              id="replace-all"
-              label={_("Apply this action to all conflicting files")}
-              isChecked={applyToAll}
-              onChange={() => setApplyToAll(!applyToAll)}
-            />}
+            {modalHeader}
+            <ModalBody>
+                {alreadyExistsWarning}
+                <Flex
+                  spaceItems={{ default: "spaceItems3xl" }}
+                  className="conflict-modal-files"
+                >
+                    <FlexItem>
+                        <b>{_("New file")}</b>
+                        <p>{cockpit.format_bytes(uploadFile.size)}</p>
+                        <p className="new-file-date">{timeformat.dateTime(uploadFile.lastModified)}</p>
+                    </FlexItem>
+                    <FlexItem>
+                        <b>{_("Original file on server")}</b>
+                        <p>{cockpit.format_bytes(file.size)}</p>
+                        {file.mtime &&
+                        <p className="original-file-date">{timeformat.dateTime(file.mtime * 1000)}</p>}
+                    </FlexItem>
+                </Flex>
+                {isMultiUpload &&
+                <Checkbox
+                  id="replace-all"
+                  label={_("Apply this action to all conflicting files")}
+                  isChecked={applyToAll}
+                  onChange={() => setApplyToAll(!applyToAll)}
+                />}
+            </ModalBody>
+            <ModalFooter>
+                <Button variant="warning" onClick={handleReplace}>{_("Replace")}</Button>
+                {isMultiUpload &&
+                <Button variant="secondary" onClick={handleSkip}>{_("Keep original")}</Button>}
+                <Button variant="link" onClick={handleCancel}>{_("Cancel")}</Button>
+            </ModalFooter>
         </Modal>
     );
 };

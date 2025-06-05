@@ -25,11 +25,10 @@ import { ExpandableSection, ExpandableSectionVariant } from
     '@patternfly/react-core/dist/esm/components/ExpandableSection';
 import { Form, FormGroup, FormSection } from '@patternfly/react-core/dist/esm/components/Form';
 import { FormSelect, FormSelectOption } from '@patternfly/react-core/dist/esm/components/FormSelect';
-import { TextInput } from '@patternfly/react-core/dist/esm/components/TextInput';
 import {
-    Modal,
-    ModalVariant
-} from '@patternfly/react-core/dist/esm/deprecated/components/Modal';
+    Modal, ModalBody, ModalFooter, ModalHeader, ModalVariant
+} from '@patternfly/react-core/dist/esm/components/Modal';
+import { TextInput } from '@patternfly/react-core/dist/esm/components/TextInput';
 import { Stack } from '@patternfly/react-core/dist/esm/layouts/Stack';
 
 import cockpit from 'cockpit';
@@ -294,131 +293,134 @@ const EditPermissionsModal = ({ dialogResult, items, path } : {
         <Modal
           position="top"
           variant={ModalVariant.small}
-          /* Translators: $0 represents a filename */
-          title={items.length === 1
-              ? fmt_to_fragments(_("$0 permissions"), <b className="ct-heading-font-weight">{selected.name}</b>)
-              : cockpit.format(_("Permissions for $0 files"), items.length)}
-          description={description}
           isOpen
           onClose={() => dialogResult.resolve()}
-          footer={
-              <>
-                  <Button
-                    variant="primary"
-                    onClick={() => spawnEditPermissions()}
-                  >
-                      {_("Change")}
-                  </Button>
-                  {selected.type === "dir" &&
-                  <Button
-                    variant="secondary"
-                    onClick={() => spawnEncloseFiles()}
-                  >
-                      {_("Change permissions for enclosed files")}
-                  </Button>}
-                  <Button variant="link" onClick={() => dialogResult.resolve()}>{_("Cancel")}</Button>
-              </>
-          }
         >
-            <Stack>
-                {errorMessage !== null &&
-                <InlineNotification
-                  type="danger"
-                  text={errorMessage}
-                  isInline
-                />}
-                <Form isHorizontal>
-                    {superuser.allowed && accounts && groups && is_user_equal && is_group_equal &&
-                    <FormSection title={_("Ownership")}>
-                        <FormGroup label={_("Owner")} fieldId="edit-permissions-owner">
-                            <FormSelect
-                              onChange={(_, val) => changeOwner(val)} id="edit-permissions-owner"
-                              value={owner}
+            <ModalHeader
+              /* Translators: $0 represents a filename */
+              title={items.length === 1
+                  ? fmt_to_fragments(_("$0 permissions"), <b className="ct-heading-font-weight">{selected.name}</b>)
+                  : cockpit.format(_("Permissions for $0 files"), items.length)}
+              description={description}
+            />
+            <ModalBody>
+                <Stack>
+                    {errorMessage !== null &&
+                    <InlineNotification
+                      type="danger"
+                      text={errorMessage}
+                      isInline
+                    />}
+                    <Form isHorizontal>
+                        {superuser.allowed && accounts && groups && is_user_equal && is_group_equal &&
+                        <FormSection title={_("Ownership")}>
+                            <FormGroup label={_("Owner")} fieldId="edit-permissions-owner">
+                                <FormSelect
+                                  onChange={(_, val) => changeOwner(val)} id="edit-permissions-owner"
+                                  value={owner}
+                                >
+                                    {accounts?.sort(sortByName).map(a => {
+                                        return (
+                                            <FormSelectOption
+                                              key={a.name} label={a.name}
+                                              value={a.name}
+                                            />
+                                        );
+                                    })}
+                                </FormSelect>
+                            </FormGroup>
+                            <FormGroup label={_("Group")} fieldId="edit-permissions-group">
+                                <FormSelect
+                                  onChange={(_, val) => setGroup(val)} id="edit-permissions-group"
+                                  value={group}
+                                >
+                                    {groups?.sort(sortByName).map(g => {
+                                        return (
+                                            <FormSelectOption
+                                              key={g.name} label={g.name}
+                                              value={g.name}
+                                            />
+                                        );
+                                    })}
+                                </FormSelect>
+                            </FormGroup>
+                        </FormSection>}
+                        {!has_symlinks &&
+                        <FormSection title={_("Access")}>
+                            <FormGroup
+                              label={_("Owner access")}
+                              fieldId="edit-permissions-owner-access"
                             >
-                                {accounts?.sort(sortByName).map(a => {
-                                    return (
-                                        <FormSelectOption
-                                          key={a.name} label={a.name}
-                                          value={a.name}
-                                        />
-                                    );
-                                })}
-                            </FormSelect>
-                        </FormGroup>
-                        <FormGroup label={_("Group")} fieldId="edit-permissions-group">
-                            <FormSelect
-                              onChange={(_, val) => setGroup(val)} id="edit-permissions-group"
-                              value={group}
+                                <FormSelect
+                                  value={PERMISSION_OPTIONS[(mode >> 6) & 7]}
+                                  onChange={(_, val) => { setPermissions(0o077, 6, val) }}
+                                  id="edit-permissions-owner-access"
+                                >
+                                    {permissions_options((mode >> 6) & 7)}
+                                </FormSelect>
+                            </FormGroup>
+                            <FormGroup
+                              label={_("Group access")}
+                              fieldId="edit-permissions-group-access"
                             >
-                                {groups?.sort(sortByName).map(g => {
-                                    return (
-                                        <FormSelectOption
-                                          key={g.name} label={g.name}
-                                          value={g.name}
-                                        />
-                                    );
-                                })}
-                            </FormSelect>
-                        </FormGroup>
-                    </FormSection>}
-                    {!has_symlinks &&
-                    <FormSection title={_("Access")}>
-                        <FormGroup
-                          label={_("Owner access")}
-                          fieldId="edit-permissions-owner-access"
-                        >
-                            <FormSelect
-                              value={PERMISSION_OPTIONS[(mode >> 6) & 7]}
-                              onChange={(_, val) => { setPermissions(0o077, 6, val) }}
-                              id="edit-permissions-owner-access"
+                                <FormSelect
+                                  value={PERMISSION_OPTIONS[(mode >> 3) & 7]}
+                                  onChange={(_, val) => { setPermissions(0o707, 3, val) }}
+                                  id="edit-permissions-group-access"
+                                >
+                                    {permissions_options((mode >> 3) & 7)}
+                                </FormSelect>
+                            </FormGroup>
+                            <FormGroup
+                              label={_("Others access")}
+                              fieldId="edit-permissions-other-access"
                             >
-                                {permissions_options((mode >> 6) & 7)}
-                            </FormSelect>
-                        </FormGroup>
-                        <FormGroup
-                          label={_("Group access")}
-                          fieldId="edit-permissions-group-access"
-                        >
-                            <FormSelect
-                              value={PERMISSION_OPTIONS[(mode >> 3) & 7]}
-                              onChange={(_, val) => { setPermissions(0o707, 3, val) }}
-                              id="edit-permissions-group-access"
+                                <FormSelect
+                                  value={PERMISSION_OPTIONS[(mode) & 7]}
+                                  onChange={(_, val) => { setPermissions(0o770, 0, val) }}
+                                  id="edit-permissions-other-access"
+                                >
+                                    {permissions_options(mode & 7)}
+                                </FormSelect>
+                            </FormGroup>
+                            {selinuxContext !== null &&
+                            <FormGroup
+                              label={_("Security context")}
                             >
-                                {permissions_options((mode >> 3) & 7)}
-                            </FormSelect>
-                        </FormGroup>
-                        <FormGroup
-                          label={_("Others access")}
-                          fieldId="edit-permissions-other-access"
-                        >
-                            <FormSelect
-                              value={PERMISSION_OPTIONS[(mode) & 7]}
-                              onChange={(_, val) => { setPermissions(0o770, 0, val) }}
-                              id="edit-permissions-other-access"
-                            >
-                                {permissions_options(mode & 7)}
-                            </FormSelect>
-                        </FormGroup>
-                        {selinuxContext !== null &&
-                        <FormGroup
-                          label={_("Security context")}
-                        >
-                            <TextInput
-                              id="selinux-context"
-                              value={selinuxContext}
-                              readOnlyVariant="plain"
-                            />
-                        </FormGroup>}
-                    </FormSection>}
-                    {selected.type === "reg" && executable_file_types.includes(selected?.category?.class || "file") &&
-                        <Checkbox
-                          id="is-executable"
-                          label={_("Set executable as program")}
-                          isChecked={isExecutable}
-                          onChange={() => setExecutableBits(!isExecutable)}
-                        />}
-                </Form>
-            </Stack>
+                                <TextInput
+                                  id="selinux-context"
+                                  value={selinuxContext}
+                                  readOnlyVariant="plain"
+                                />
+                            </FormGroup>}
+                        </FormSection>}
+                        {selected.type === "reg" &&
+                            executable_file_types.includes(selected?.category?.class || "file") &&
+                            <Checkbox
+                              id="is-executable"
+                              label={_("Set executable as program")}
+                              isChecked={isExecutable}
+                              onChange={() => setExecutableBits(!isExecutable)}
+                            />}
+                    </Form>
+                </Stack>
+            </ModalBody>
+            <ModalFooter>
+                <Button
+                  variant="primary"
+                  onClick={() => spawnEditPermissions()}
+                >
+                    {_("Change")}
+                </Button>
+                {selected.type === "dir" &&
+                <Button
+                  variant="secondary"
+                  onClick={() => spawnEncloseFiles()}
+                >
+                    {_("Change permissions for enclosed files")}
+                </Button>}
+                <Button variant="link" onClick={() => dialogResult.resolve()}>{_("Cancel")}</Button>
+            </ModalFooter>
         </Modal>
     );
 };

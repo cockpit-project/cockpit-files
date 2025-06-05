@@ -23,12 +23,11 @@ import { Alert, AlertVariant } from '@patternfly/react-core/dist/esm/components/
 import { Button } from '@patternfly/react-core/dist/esm/components/Button';
 import { Form, FormGroup } from "@patternfly/react-core/dist/esm/components/Form";
 import { FormSelect, FormSelectOption } from "@patternfly/react-core/dist/esm/components/FormSelect";
+import {
+    Modal, ModalBody, ModalFooter, ModalHeader, ModalVariant
+} from '@patternfly/react-core/dist/esm/components/Modal';
 import { TextArea } from '@patternfly/react-core/dist/esm/components/TextArea';
 import { TextInput } from "@patternfly/react-core/dist/esm/components/TextInput";
-import {
-    Modal,
-    ModalVariant
-} from '@patternfly/react-core/dist/esm/deprecated/components/Modal';
 import { Stack } from '@patternfly/react-core/dist/esm/layouts/Stack';
 
 import cockpit from 'cockpit';
@@ -143,75 +142,75 @@ const CreateFileModal = ({ dialogResult, path } : {
     return (
         <Modal
           position="top"
-          title={_("Create file")}
           isOpen
           onClose={() => dialogResult.resolve(null)}
           variant={ModalVariant.large}
           className="file-create-modal"
           onEscapePress={handleEscape}
-          footer={
-              <>
-                  <Button
-                    variant="primary"
-                    isDisabled={!filename || initialText === "" || filenameError !== null}
-                    onClick={handleSave}
-                  >
-                      {_("Create")}
-                  </Button>
-                  <Button variant="link" onClick={() => dialogResult.resolve(null)}>
-                      {_("Cancel")}
-                  </Button>
-              </>
-          }
         >
-            <Stack>
-                {createError &&
-                <Alert
-                  className="file-editor-alert"
-                  variant="danger"
-                  title={createError}
-                  isInline
-                />}
-                <Form isHorizontal>
-                    <FormGroup
-                      label={_("File name")}
-                      fieldId="file-name"
-                    >
-                        <TextInput
-                          autoFocus // eslint-disable-line jsx-a11y/no-autofocus
-                          id="file-name"
-                          isRequired
-                          value={filename}
-                          onChange={(_event, value) => {
-                              setFileNameError(checkFilename(value, cwdInfo?.entries || {}, undefined));
-                              setFilename(value);
-                          }}
+            <ModalHeader title={_("Create file")} />
+            <ModalBody>
+                <Stack>
+                    {createError &&
+                    <Alert
+                      className="file-editor-alert"
+                      variant="danger"
+                      title={createError}
+                      isInline
+                    />}
+                    <Form isHorizontal>
+                        <FormGroup
+                          label={_("File name")}
+                          fieldId="file-name"
+                        >
+                            <TextInput
+                              autoFocus // eslint-disable-line jsx-a11y/no-autofocus
+                              id="file-name"
+                              isRequired
+                              value={filename}
+                              onChange={(_event, value) => {
+                                  setFileNameError(checkFilename(value, cwdInfo?.entries || {}, undefined));
+                                  setFilename(value);
+                              }}
+                            />
+                            <FormHelper fieldId="file-name" helperTextInvalid={filenameError} />
+                        </FormGroup>
+                        <TextArea
+                          id="editor-text-area"
+                          className="file-editor"
+                          value={initialText}
+                          onChange={(_ev, content) => setInitialText(content)}
                         />
-                        <FormHelper fieldId="file-name" helperTextInvalid={filenameError} />
-                    </FormGroup>
-                    <TextArea
-                      id="editor-text-area"
-                      className="file-editor"
-                      value={initialText}
-                      onChange={(_ev, content) => setInitialText(content)}
-                    />
-                    {candidates.length > 0 &&
-                        <FormGroup fieldId="create-file-owner" label={_("Owner")}>
-                            <FormSelect
-                              id="create-file-owner"
-                              value={owner}
-                              onChange={(_ev, val) => setOwner(val)}
-                            >
-                                {candidates.map(owner =>
-                                    <FormSelectOption
-                                      key={owner}
-                                      value={owner}
-                                      label={owner}
-                                    />)}
-                            </FormSelect>
-                        </FormGroup>}
-                </Form>
-            </Stack>
+                        {candidates.length > 0 &&
+                            <FormGroup fieldId="create-file-owner" label={_("Owner")}>
+                                <FormSelect
+                                  id="create-file-owner"
+                                  value={owner}
+                                  onChange={(_ev, val) => setOwner(val)}
+                                >
+                                    {candidates.map(owner =>
+                                        <FormSelectOption
+                                          key={owner}
+                                          value={owner}
+                                          label={owner}
+                                        />)}
+                                </FormSelect>
+                            </FormGroup>}
+                    </Form>
+                </Stack>
+            </ModalBody>
+            <ModalFooter>
+                <Button
+                  variant="primary"
+                  isDisabled={!filename || initialText === "" || filenameError !== null}
+                  onClick={handleSave}
+                >
+                    {_("Create")}
+                </Button>
+                <Button variant="link" onClick={() => dialogResult.resolve(null)}>
+                    {_("Cancel")}
+                </Button>
+            </ModalFooter>
         </Modal>
     );
 };
