@@ -213,7 +213,7 @@ class TestFiles(testlib.MachineCase):
         # in the same test causes issues with Chromium. This takes ~ 40 seconds.
         m.execute("truncate -s 1500M /home/admin/test.iso")
         b.wait_visible("[data-item='test.iso']")
-        b.mouse("[data-item='test.iso']", "contextmenu")
+        b.mouse("[data-item='test.iso']", "click", btn=2)
         b.click(".contextMenu button:contains('Download')")
         self.waitDownloadFile("test.iso", 1500 * 1024 * 1024)
 
@@ -1008,7 +1008,8 @@ class TestFiles(testlib.MachineCase):
         m.execute("rmdir /home/admin/newdir2")
 
         # Rename folder from context menu
-        b.mouse("[data-item='newdir']", "contextmenu")
+        # HACK: context menu disappears in mobile mode
+        b.mouse("[data-item='newdir']", "contextmenu", x=0, y=0)
         b.assert_pixels(".contextMenu", "folder-context-menu")
         b.click(".contextMenu button:contains('Rename')")
         b.set_input_text("#rename-item-input", "newdir1")
@@ -1018,7 +1019,7 @@ class TestFiles(testlib.MachineCase):
         # Edit permissions from context menu
         m.execute("useradd testuser")
         b.click("[data-item='newdir1']")
-        b.mouse("[data-item='newdir1']", "contextmenu")
+        b.mouse("[data-item='newdir1']", "click", btn=2)
         b.click(".contextMenu button:contains('Edit permissions')")
         b.select_from_dropdown("#edit-permissions-owner", "testuser")
         b.click("button.pf-m-primary")
@@ -1026,7 +1027,7 @@ class TestFiles(testlib.MachineCase):
 
         if not m.ws_container and self.system_before(329):
             # Open in terminal feature not supported before cockpit 329
-            b.mouse("[data-item='newdir1']", "contextmenu")
+            b.mouse("[data-item='newdir1']", "click", btn=2)
             b.wait_visible(".contextMenu button:contains('Delete')")
             b.wait_not_present(".contextMenu button:contains('Open in terminal')")
             b.mouse("#files-card-parent", "contextmenu", body_size[0] / 2, body_size[0] / 2)
@@ -1034,7 +1035,7 @@ class TestFiles(testlib.MachineCase):
             b.wait_not_present(".contextMenu button:contains('Open in terminal')")
         else:
             # Open folder in terminal from context menu
-            b.mouse("[data-item='newdir1']", "contextmenu")
+            b.mouse("[data-item='newdir1']", "click", btn=2)
             b.click(".contextMenu button:contains('Open in terminal')")
             b.enter_page("/system/terminal")
             b.switch_to_top()
@@ -1055,24 +1056,25 @@ class TestFiles(testlib.MachineCase):
 
         # Regular files should not have terminal feature
         m.execute("echo 'some content' > /home/admin/newfile")
-        b.mouse("[data-item='newfile']", "contextmenu")
+        b.mouse("[data-item='newfile']", "click", btn=2)
         b.wait_visible(".contextMenu button:contains('Delete')")
         b.wait_not_present(".contextMenu button:contains('Open in terminal')")
 
         # Delete folder from context menu
-        b.mouse("[data-item='newdir1']", "contextmenu")
+        b.mouse("[data-item='newdir1']", "click", btn=2)
         b.click(".contextMenu button:contains('Delete')")
         b.click("button.pf-m-danger")
         b.wait_not_present("[data-item='newdir1']")
 
-        b.mouse("[data-item='newfile']", "contextmenu")
+        # HACK: context menu disappears in mobile mode
+        b.mouse("[data-item='newfile']", "contextmenu", x=0, y=0)
         b.assert_pixels(".contextMenu", "file-context-menu")
         b.click(".contextMenu button:contains('Download')")
         size = int(self.stat('%s', '/home/admin/newfile'))
         self.waitDownloadFile("newfile", size, "some content\n")
 
         # Delete button text should match item type: directory/file
-        b.mouse("[data-item='newfile']", "contextmenu")
+        b.mouse("[data-item='newfile']", "click", btn=2)
         b.click(".contextMenu button:contains('Delete')")
         b.click("button.pf-m-danger")
         b.wait_not_present("[data-item='newfile']")
@@ -1080,7 +1082,7 @@ class TestFiles(testlib.MachineCase):
         # The grid view also supports a contextmenu
         m.execute("touch /home/admin/testfile")
         b.click("button[aria-label='Display as a grid']")
-        b.mouse("[data-item='testfile']", "contextmenu")
+        b.mouse("[data-item='testfile']", "click", btn=2)
         b.wait_visible(".contextMenu button:contains('Delete')")
 
     def testDownload(self) -> None:
@@ -1093,14 +1095,14 @@ class TestFiles(testlib.MachineCase):
         # Big file downloads fine
         m.execute("truncate -s 1500M /home/admin/test.iso")
         b.wait_visible("[data-item='test.iso']")
-        b.mouse("[data-item='test.iso']", "contextmenu")
+        b.mouse("[data-item='test.iso']", "click", btn=2)
         b.click(".contextMenu button:contains('Download')")
         self.waitDownloadFile("test.iso", 1500 * 1024 * 1024)
 
         # non-latin1 file is fine
         m.execute("echo 'non-latin filename' > /home/admin/漢字")
         b.wait_visible("[data-item='漢字']")
-        b.mouse("[data-item='漢字']", "contextmenu")
+        b.mouse("[data-item='漢字']", "click", btn=2)
         b.click(".contextMenu button:contains('Download')")
         size = int(self.stat('%s', '/home/admin/漢字'))
         self.waitDownloadFile("漢字", size, "non-latin filename\n")
@@ -1326,7 +1328,7 @@ class TestFiles(testlib.MachineCase):
 
         def open_permissions_dialog(filename: str) -> None:
             b.wait_visible(f"[data-item='{filename}']")
-            b.mouse(f"[data-item='{filename}']", "contextmenu")
+            b.mouse(f"[data-item='{filename}']", "click", btn=2)
             b.click(".contextMenu button:contains('Edit permissions')")
             b.wait_in_text(".pf-v6-c-modal-box__title-text", filename)
 
@@ -1628,7 +1630,7 @@ class TestFiles(testlib.MachineCase):
         # Editing two files
         b.click("[data-item='filename1']")
         b.mouse("[data-item='filename2']", "click", ctrlKey=True)
-        b.mouse("[data-item='filename1']", "contextmenu")
+        b.mouse("[data-item='filename1']", "click", btn=2)
         b.click("button:contains('Edit permissions')")
 
         b.wait_text(".pf-v6-c-modal-box__title-text", "Permissions for 2 files")
@@ -1647,7 +1649,7 @@ class TestFiles(testlib.MachineCase):
             # HACK: the selected state contains a copy of files state so permissions information is not updated.
             b.mouse("[data-item='filename1']", "click", ctrlKey=True)
             b.mouse("[data-item='filename1']", "click", ctrlKey=True)
-            b.mouse("[data-item='filename1']", "contextmenu")
+            b.mouse("[data-item='filename1']", "click", btn=2)
             b.click("button:contains('Edit permissions')")
 
             b.wait_visible("#edit-permissions-owner-access")
@@ -1674,7 +1676,7 @@ class TestFiles(testlib.MachineCase):
 
         # No Edit permissions when selecting a folder and files
         b.mouse("[data-item='testdir']", "click", ctrlKey=True)
-        b.mouse("[data-item='filename1']", "contextmenu")
+        b.mouse("[data-item='filename1']", "click", btn=2)
         b.wait_visible("button:contains('Delete')")
         b.wait_not_present("button:contains('Edit permissions')")
 
@@ -1685,7 +1687,7 @@ class TestFiles(testlib.MachineCase):
         for i in range(3, 15):
             b.mouse(f"[data-item='filename{i}']", "click", ctrlKey=True)
 
-        b.mouse("[data-item='filename3']", "contextmenu")
+        b.mouse("[data-item='filename3']", "click", btn=2)
         b.click("button:contains('Edit permissions')")
 
         b.wait_text(".pf-v6-c-modal-box__title-text", "Permissions for 13 files")
@@ -1754,6 +1756,13 @@ class TestFiles(testlib.MachineCase):
         chmod 777 {basedir}/file7
         """)
 
+        # HACK: Pixel tests change the resolution and the layout, so with real mouse
+        # events we have to move the mouse to the tooltip element after each
+        # layout change. Use https://github.com/cockpit-project/cockpit/pull/22113 API once available
+        # also, mouseenter events seem to get lost in CI (not locally)
+        b.chromium_fake_mouse = True
+        assert b.chromium_fake_mouse  # vulture
+
         b.mouse("[data-item='file6'] .item-perms pre", "mouseenter")
         b.wait_in_text(".pf-v6-c-tooltip dd:nth-of-type(1)", "read and write")
         b.wait_in_text(".pf-v6-c-tooltip dd:nth-of-type(2)", "read and write")
@@ -1781,6 +1790,8 @@ class TestFiles(testlib.MachineCase):
         b.wait_in_text(".pf-v6-c-tooltip dd:nth-of-type(3)", "write and execute")
         b.assert_pixels(".pf-v6-c-page__main", "permissions-tooltip", mock={".item-date": "Jun 19, 2024, 11:30 AM"})
         b.mouse("[data-item='file4'] .item-perms pre", "mouseleave")
+
+        b.chromium_fake_mouse = False
 
         for i in range(8):
             check_perms_match(f"file{i}", basedir)
@@ -1872,7 +1883,7 @@ class TestFiles(testlib.MachineCase):
         # Check context menu
         b.mouse("[data-item='file2']", "click", ctrlKey=True)
         b.wait_visible("[data-item='file2'].row-selected")
-        b.mouse("[data-item='file1']", "contextmenu")
+        b.mouse("[data-item='file1']", "click", btn=2)
         b.wait_in_text(".contextMenu li:nth-child(2) button", "Delete")
         b.click(".contextMenu button:contains('Delete')")
         b.wait_in_text("h1.pf-v6-c-modal-box__title", "Delete 2 items?")
@@ -3087,7 +3098,7 @@ class TestFiles(testlib.MachineCase):
         self.enter_files()
 
         def open_editor(file: str) -> None:
-            b.mouse(f"[data-item='{file}']", "contextmenu")
+            b.mouse(f"[data-item='{file}']", "click", btn=2)
             b.click(".contextMenu button:contains('Open text file')")
 
         def validate_content(file: str, content: str) -> None:
@@ -3107,13 +3118,13 @@ class TestFiles(testlib.MachineCase):
         """)
 
         # Don't allow opening big text files
-        b.mouse("[data-item='big.txt']", "contextmenu")
+        b.mouse("[data-item='big.txt']", "click", btn=2)
         b.wait_not_in_text(".contextMenu", "Open text file")
         b.click("#files-card-parent tbody")
         b.wait_not_present(".contextMenu")
 
         # A tarball cannot be edited
-        b.mouse("[data-item='archive.tar.gz']", "contextmenu")
+        b.mouse("[data-item='archive.tar.gz']", "click", btn=2)
         b.wait_not_in_text(".contextMenu", "Open text file")
         b.click("#files-card-parent tbody")
         b.wait_not_present(".contextMenu")
@@ -3361,7 +3372,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_visible(f"[data-item='{test_directory}']")
 
         def create_symlink(filename: str) -> None:
-            b.mouse(f"[data-item='{filename}']", "contextmenu")
+            b.mouse(f"[data-item='{filename}']", "click", btn=2)
             b.click(".contextMenu button:contains('Create link')")
             b.wait_in_text(".pf-v6-c-modal-box__title-text", f"Create link to {filename}")
 
