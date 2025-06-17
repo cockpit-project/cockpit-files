@@ -1,0 +1,789 @@
+# #-#-#-#-#  files.js.pot (PACKAGE VERSION)  #-#-#-#-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# #-#-#-#-#  files.metainfo.pot (PACKAGE VERSION)  #-#-#-#-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-06-15 03:43+0000\n"
+"PO-Revision-Date: 2025-06-15 23:40+0000\n"
+"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
+"memory@weblate.org>\n"
+"Language-Team: Arabic <https://translate.fedoraproject.org/projects/cockpit/"
+"cockpit-files/ar/>\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Weblate 5.11.4\n"
+
+#: src/menu.tsx:64
+msgid "\"$0\" exists, not overwriting with paste."
+msgstr "الملف \"$0\" موجود ، ولن يؤدي اللصق لاستبداله."
+
+#: src/upload-button.tsx:69
+msgid "$0 files"
+msgstr "$0 ملفات"
+
+#: src/files-footer-detail.tsx:35
+msgid "$0 files selected"
+msgstr "$0 ملفاً محدداً"
+
+#: src/files-card-body.tsx:532
+msgid "$0 item is hidden"
+msgid_plural "$0 items are hidden"
+msgstr[0] "لا عنصر مخفي"
+msgstr[1] "عنصر واحد مخفي"
+msgstr[2] "عنصران مخفيان"
+msgstr[3] "$0 عناصر مخفية"
+msgstr[4] "$0 عنصراً مخفياً"
+msgstr[5] "$0 عنصراً مخفياً"
+
+#: src/dialogs/permissions.tsx:302
+msgid "$0 permissions"
+msgstr "$0 صلاحيات"
+
+#: src/dialogs/copyPasteOwnership.tsx:119
+msgid "(original owner)"
+msgstr "(المالك الأصلي)"
+
+#: org.cockpit_project.files.metainfo.xml:8
+msgid ""
+"A file system UI for Cockpit. You can browse directories, upload and "
+"download files, and change their properties. It also includes a simple file "
+"editor."
+msgstr ""
+"واجهة مستخدم نظام الملفات لـ Cockpit. بإمكانك تصفح الدلائل، تحميل الملفات "
+"وتنزيلها، وتغيير خصائصها. كما تتضمن أيضًا محرر ملفات بسيط."
+
+#: src/upload-button.tsx:115
+msgid ""
+"A file with the same name already exists in \"$0\". Replacing it will "
+"overwrite its content."
+msgstr ""
+"يوجد ملف بنفس الاسم بالفعل في \"$0\". سيؤدي استبداله إلى الكتابة فوق محتواه."
+
+#: src/header.tsx:69
+msgid "A-Z"
+msgstr "A-Z"
+
+#: src/dialogs/symlink.tsx:215
+msgid "Absolute"
+msgstr "مطلق"
+
+#: src/dialogs/symlink.tsx:201
+msgid ""
+"Absolute symlinks are ideal when referring to files or directories that "
+"won't move, such as system files."
+msgstr ""
+"تعتبر الروابط الرمزية المطلقة نموذجية عند الإشارة إلى الملفات أو الدلائل "
+"التي لن تتحرك، مثل ملفات النظام."
+
+#: src/dialogs/symlink.tsx:197
+msgid "Absolute vs. Relative"
+msgstr "المطلق مقابل النسبي"
+
+#: src/dialogs/permissions.tsx:349
+msgid "Access"
+msgstr "وصول"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:86
+#: src/dialogs/keyboardShortcutsHelp.tsx:92
+msgid "Activate selected item, enter directory"
+msgstr "تنشيط العنصر المحدد، ادخل الدليل"
+
+#: src/files-breadcrumbs.tsx:139
+msgid "Add to bookmarks"
+msgstr "إضافة إلى العلامات المرجعية"
+
+#: src/upload-button.tsx:150
+msgid "Apply this action to all conflicting files"
+msgstr "قم بتطبيق هذا الإجراء على جميع الملفات المتعارضة"
+
+#: src/common.ts:66
+msgid "Block device"
+msgstr "حجب الجحاز"
+
+#: src/files-breadcrumbs.tsx:150
+msgid "Bookmarks"
+msgstr "العلامات المرجعية"
+
+#: src/upload-button.tsx:159 src/dialogs/editor.tsx:252
+#: src/dialogs/delete.tsx:110 src/dialogs/permissions.tsx:422
+#: src/dialogs/mkdir.tsx:150 src/dialogs/rename.tsx:100
+#: src/dialogs/symlink.tsx:246 src/dialogs/copyPasteOwnership.tsx:179
+#: src/dialogs/create-file.tsx:211
+msgid "Cancel"
+msgstr "إلغاء"
+
+#: src/upload-button.tsx:469
+msgid "Cancel upload of $0"
+msgstr "إلغاء تحميل $0"
+
+#: src/upload-button.tsx:352
+msgid "Cancelled"
+msgstr "تم إلغاؤه"
+
+#: src/upload-button.tsx:353
+msgid "Cancelled upload of $0"
+msgstr "تم إلغاء تحميل $0"
+
+#: src/dialogs/create-file.tsx:227
+msgid "Cannot create file in current directory"
+msgstr "يتعذر إنشاء ملف في الدليل الحالي"
+
+#: src/files-folder-view.tsx:177
+msgid "Cannot drop files, another upload is already in progress"
+msgstr "لا يمكن إسقاط الملفات، هناك تحميل آخر قيد المعالجة بالفعل"
+
+#: src/dialogs/permissions.tsx:413
+msgid "Change"
+msgstr "تغيير"
+
+#: src/upload-button.tsx:403
+msgid "Change permissions"
+msgstr "تغيير الصلاحيات"
+
+#: src/dialogs/permissions.tsx:420
+msgid "Change permissions for enclosed files"
+msgstr "تغيير صلاحيات الملفات المرفقة"
+
+#: src/common.ts:67
+msgid "Character device"
+msgstr "جهاز محوري"
+
+#: src/files-card-body.tsx:520
+msgid "Clear filter"
+msgstr "إزالة عامل التصفية"
+
+#: src/dialogs/editor.tsx:252 src/dialogs/keyboardShortcutsHelp.tsx:46
+msgid "Close"
+msgstr "أغلق"
+
+#: src/index.html:20
+msgid "Cockpit Files"
+msgstr "ملفات Cockpit"
+
+#: org.cockpit_project.files.metainfo.xml:21
+msgid "Cockpit Project"
+msgstr "مشروع Cockpit"
+
+#: src/dialogs/permissions.tsx:283
+msgid "Collapse"
+msgstr "انهيار"
+
+#: src/menu.tsx:158 src/menu.tsx:212
+msgid "Copy"
+msgstr "نسخ"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:121
+msgid "Copy selected file or directory"
+msgstr "لنسخ المجلد أو الدليل المحدد"
+
+#: src/dialogs/mkdir.tsx:148 src/dialogs/create-file.tsx:208
+msgid "Create"
+msgstr "إنشاء"
+
+#: src/menu.tsx:113 src/dialogs/mkdir.tsx:93
+msgid "Create directory"
+msgstr "إنشاء دليل"
+
+#: src/menu.tsx:118 src/dialogs/create-file.tsx:151
+msgid "Create file"
+msgstr "إنشاء ملف"
+
+#: src/menu.tsx:204 src/dialogs/symlink.tsx:244
+msgid "Create link"
+msgstr "إنشاء رابط"
+
+#: src/dialogs/symlink.tsx:141
+msgid "Create link to $0"
+msgstr "إنشاء رابط إلى $0"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:115
+msgid "Create new directory"
+msgstr "إنشاء دليل جديد"
+
+#: src/menu.tsx:175 src/menu.tsx:217 src/dialogs/delete.tsx:108
+msgid "Delete"
+msgstr "حذف"
+
+#: src/dialogs/delete.tsx:47
+msgid "Delete $0 items?"
+msgstr "حذف $0 عنصراً؟"
+
+#: src/dialogs/delete.tsx:64
+msgid "Delete $0?"
+msgstr "حذف $0؟"
+
+#: src/dialogs/delete.tsx:61
+msgid "Delete directory $0?"
+msgstr "حذف الدليل $0؟"
+
+#: src/dialogs/delete.tsx:53
+msgid "Delete file $0?"
+msgstr "حذف الملف $0؟"
+
+#: src/dialogs/delete.tsx:57
+msgid "Delete link $0?"
+msgstr "حذف الرابط $0؟"
+
+#: src/common.ts:68
+msgid "Directory"
+msgstr "دليل"
+
+#: src/files-footer-detail.tsx:63
+msgid "Directory contains $0 directories, $1 files"
+msgstr "الدليل يحوي على $0 دلائل، $1 ملفات"
+
+#: src/files-footer-detail.tsx:64
+msgid "Directory contains $0 directories, $1 files, $2 hidden"
+msgstr "المجلد يحتوي على $0 مجلدات، $1 ملفات $2 مخفية"
+
+#: src/files-card-body.tsx:527
+msgid "Directory is empty"
+msgstr "الدليل فارغ"
+
+#: src/dialogs/mkdir.tsx:109
+msgid "Directory name"
+msgstr "اسم الدليل"
+
+#: src/dialogs/mkdir.tsx:44
+msgid "Directory name cannot be empty"
+msgstr "اسم الدليل لا يمكن أن يكون فارغاً"
+
+#: src/dialogs/mkdir.tsx:48
+msgid "Directory name cannot include a /"
+msgstr "اسم الدليل لا يمكن أن يتضمن /"
+
+#: src/dialogs/mkdir.tsx:46
+msgid "Directory name too long"
+msgstr "اسم الدليل كبير جداَ"
+
+#: src/dialogs/mkdir.tsx:123
+msgid "Directory owner"
+msgstr "مدير الدليل"
+
+#: src/dialogs/symlink.tsx:52 src/common.ts:119
+msgid "Directory with the same name exists"
+msgstr "الدليل موجود بنفس الاسم"
+
+#: src/header.tsx:254
+msgid "Display as a grid"
+msgstr "إظهار كشبكة"
+
+#: src/header.tsx:253
+msgid "Display as a list"
+msgstr "إظهار كقائمة"
+
+#: src/menu.tsx:185
+msgid "Download"
+msgstr "نزِّل"
+
+#: src/files-folder-view.tsx:169
+msgid "Drop files to upload"
+msgstr "أسقط الملفات للتحميل"
+
+#. Translators: This is the title of a modal dialog.  $0 represents a filename.
+#: src/dialogs/editor.tsx:173
+msgid "Edit $0"
+msgstr "عدِّل $0"
+
+#: src/files-breadcrumbs.tsx:298 src/dialogs/keyboardShortcutsHelp.tsx:100
+msgid "Edit path"
+msgstr "عدل المسار"
+
+#: src/menu.tsx:124 src/menu.tsx:164 src/menu.tsx:231
+msgid "Edit permissions"
+msgstr "عدِّل الصلاحيات"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:160
+msgid "Editing"
+msgstr "تعديل"
+
+#: src/common.ts:56
+msgid "Execute-only"
+msgstr "التنفيذ فقط"
+
+#: src/upload-button.tsx:291
+msgid "Failed"
+msgstr "فشل"
+
+#: src/manifest.json:0
+msgid "File browser"
+msgstr "متصفح الملفات"
+
+#: src/dialogs/symlink.tsx:54 src/common.ts:121
+msgid "File exists"
+msgstr "الملف موجود"
+
+#: src/dialogs/create-file.tsx:163
+msgid "File name"
+msgstr "اسم الملف"
+
+#: src/upload-button.tsx:372
+msgid "File uploaded"
+msgstr "تم تحميل الملف"
+
+#: src/common.ts:116
+msgid "Filename is the same as original name"
+msgstr "اسم الملف هو نفس الاسم الأصلي"
+
+#: org.cockpit_project.files.metainfo.xml:5
+msgid "Files"
+msgstr "الملفات"
+
+#: src/dialogs/copyPasteOwnership.tsx:196
+msgid ""
+"Files being pasted have a different owner. By default, ownership will be "
+"changed to match the destination directory."
+msgstr ""
+"الملفات التي يتم لصقها لها مالك مختلف. بشكل افتراضي، سيتم تغيير الملكية "
+"لتتناسب مع الدليل الوجهة."
+
+#: src/upload-button.tsx:372
+msgid "Files uploaded"
+msgstr "الملفات التي تم تحميلها"
+
+#: src/files-breadcrumbs.tsx:231
+msgid "Filesystem"
+msgstr "نظام الملفات"
+
+#: src/header.tsx:190
+msgid "Filter directory"
+msgstr "دليل التصفية"
+
+#: src/header.tsx:91
+msgid "First modified"
+msgstr "التعديل الأول"
+
+#: src/dialogs/delete.tsx:64
+msgid "Force delete $0"
+msgstr "حذف $0 بشكل إجباري"
+
+#: src/dialogs/delete.tsx:47
+msgid "Force delete $0 items"
+msgstr "حذف $0 عنصراً بشكل إجباري"
+
+#: src/dialogs/delete.tsx:61
+msgid "Force delete directory $0?"
+msgstr "حذف الدليل $0 بشكل إجباري؟"
+
+#: src/dialogs/delete.tsx:53
+msgid "Force delete file $0?"
+msgstr "حذف الملف $0 بشكل إجباري؟"
+
+#: src/dialogs/delete.tsx:57
+msgid "Force delete link $0?"
+msgstr "حذف الرابط $0 بشكل إجباري؟"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:74
+msgid "Go back"
+msgstr "الرجوع للوراء"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:80
+msgid "Go forward"
+msgstr "التقدّم للأمام"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:68
+msgid "Go up a directory"
+msgstr "الانتقال للأعلى"
+
+#: src/dialogs/permissions.tsx:332 src/files-footer-detail.tsx:79
+#: src/files-footer-detail.tsx:151 src/files-card-body.tsx:596
+msgid "Group"
+msgstr "مجموعة"
+
+#: src/dialogs/permissions.tsx:363
+msgid "Group access"
+msgstr "دخول المجموعة"
+
+#: src/header.tsx:284
+msgid "Hide hidden items"
+msgstr "اخفِ العناصر المخفية"
+
+#: src/files-breadcrumbs.tsx:52
+msgid "Home"
+msgstr "المنزل"
+
+#: src/dialogs/editor.tsx:216
+msgid "Ignore"
+msgstr "تجاهل"
+
+#: src/upload-button.tsx:158
+msgid "Keep original"
+msgstr "حافظ على الأصل"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:146
+msgid "Keyboard shortcuts"
+msgstr "اختصارات لوحة المفاتيح"
+
+#: src/header.tsx:80
+msgid "Largest size"
+msgstr "أكبر حجم"
+
+#: src/header.tsx:95
+msgid "Last modified"
+msgstr "آخر تعديل"
+
+#: src/header.tsx:117
+msgid "Least permissive"
+msgstr "أقل تساهلاً"
+
+#: org.cockpit_project.files.metainfo.xml:6
+msgid "Manage your files"
+msgstr "ادمج ملفاتك"
+
+#: src/dialogs/permissions.tsx:277
+msgid "Missing type"
+msgstr "نوع مفقود"
+
+#: src/header.tsx:88 src/files-card-body.tsx:552
+msgid "Modified"
+msgstr "مُعدَّل"
+
+#: src/header.tsx:113
+msgid "Most permissive"
+msgstr "الأكثر تَساهُلًا"
+
+#: src/header.tsx:66 src/files-card-body.tsx:547
+msgid "Name"
+msgstr "الاسم"
+
+#: src/dialogs/symlink.tsx:49 src/common.ts:110
+msgid "Name cannot be empty"
+msgstr "لا يمكن ترك الاسم فارغاً"
+
+#: src/common.ts:114
+msgid "Name cannot include a /"
+msgstr "لا يمكن أن يتضمن الاسم /"
+
+#: src/common.ts:112
+msgid "Name too long"
+msgstr "الاسم كبير جداً"
+
+#: src/common.ts:69
+msgid "Named pipe"
+msgstr "الأنبوب المسمى"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:150
+msgid "Navigation"
+msgstr "التنقل"
+
+#: src/upload-button.tsx:136
+msgid "New file"
+msgstr "ملف جديد"
+
+#: src/dialogs/rename.tsx:104
+msgid "New filename"
+msgstr "اسم ملف جديد"
+
+#: src/dialogs/rename.tsx:104
+msgid "New name"
+msgstr "اسم جديد"
+
+#: src/dialogs/copyPasteOwnership.tsx:199
+msgid "New owner"
+msgstr "مالك جديد"
+
+#: src/dialogs/permissions.tsx:233
+msgid "No access"
+msgstr "لا وصول"
+
+#: src/files-card-body.tsx:519
+msgid "No matching results"
+msgstr "لا نتائج مطابقة"
+
+#: src/common.ts:55
+msgid "None"
+msgstr "لا شيء"
+
+#: src/menu.tsx:133 src/menu.tsx:194
+msgid "Open in terminal"
+msgstr "فتح في الطرفية"
+
+#: src/menu.tsx:150
+msgid "Open text file"
+msgstr "افتح الملف النصي"
+
+#: src/upload-button.tsx:141
+msgid "Original file on server"
+msgstr "الملف الأصلي على الخادم"
+
+#: src/files-footer-detail.tsx:79 src/files-card-body.tsx:596
+msgid "Others"
+msgstr "الآخرون"
+
+#: src/dialogs/permissions.tsx:375
+msgid "Others access"
+msgstr "وصول آخرين"
+
+#: src/dialogs/editor.tsx:236 src/dialogs/rename.tsx:98
+msgid "Overwrite"
+msgstr "الكتابة فوق"
+
+#: src/dialogs/permissions.tsx:317 src/dialogs/create-file.tsx:185
+#: src/files-footer-detail.tsx:79 src/header.tsx:99 src/files-card-body.tsx:557
+#: src/files-card-body.tsx:596
+msgid "Owner"
+msgstr "المالك"
+
+#: src/dialogs/permissions.tsx:351
+msgid "Owner access"
+msgstr "وصول المالك"
+
+#: src/header.tsx:102
+msgid "Owner ascending"
+msgstr "مالك (تصاعدي)"
+
+#: src/header.tsx:106
+msgid "Owner descending"
+msgstr "مالك (تنازلي)"
+
+#: src/dialogs/permissions.tsx:316
+msgid "Ownership"
+msgstr "الملكية"
+
+#: src/menu.tsx:106 src/dialogs/copyPasteOwnership.tsx:177
+msgid "Paste"
+msgstr "لصق"
+
+#: src/dialogs/copyPasteOwnership.tsx:191
+msgid "Paste as owner"
+msgstr "لصق كمالك"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:127
+msgid "Paste file or directory"
+msgstr "لصق الملف أو الدليل"
+
+#: src/menu.tsx:63 src/dialogs/copyPasteOwnership.tsx:66
+msgid "Pasting failed"
+msgstr "فشل اللصق"
+
+#: src/dialogs/create-file.tsx:228
+msgid "Permission denied"
+msgstr "الإذن مرفوض"
+
+#: src/header.tsx:110 src/files-card-body.tsx:562
+msgid "Permissions"
+msgstr "الصلاحيات"
+
+#: src/dialogs/permissions.tsx:303
+msgid "Permissions for $0 files"
+msgstr "الصلاحيات لـ $0 ملفاً"
+
+#: src/common.ts:60
+msgid "Read and execute"
+msgstr "قراءة ثمَّ تنفيذ"
+
+#: src/dialogs/permissions.tsx:223 src/common.ts:61
+msgid "Read and write"
+msgstr "قراءة وكتابة"
+
+#: src/common.ts:62
+msgid "Read, write, and execute"
+msgstr "قراءة، كتابة، وتنفيذ"
+
+#: src/dialogs/editor.tsx:175 src/dialogs/permissions.tsx:228 src/common.ts:59
+msgid "Read-only"
+msgstr "وضع القراءة فقط"
+
+#: src/common.ts:71
+msgid "Regular file"
+msgstr "ملف عادي"
+
+#: src/dialogs/symlink.tsx:222
+msgid "Relative"
+msgstr "نسبي"
+
+#: src/dialogs/symlink.tsx:204
+msgid ""
+"Relative symlinks are useful when both a symlink and target might move at "
+"the same time, such as when renaming or moving a parent directory."
+msgstr ""
+"الروابط الرمزية النسبية مفيدة عندما يكون كلٌ من الرابط والهدف معرضين للحركة "
+"في نفس الوقت، كما هو الحال عند إعادة تسمية أو نقل الدليل الأب."
+
+#: src/dialogs/editor.tsx:213
+msgid "Reload"
+msgstr "إعادة تحميل"
+
+#: src/files-breadcrumbs.tsx:137
+msgid "Remove from bookmarks"
+msgstr "الإزالة من العلامات المرجعية"
+
+#: src/menu.tsx:169 src/dialogs/rename.tsx:91
+msgid "Rename"
+msgstr "إعادة التسمية"
+
+#: src/dialogs/rename.tsx:114
+msgid "Rename $0?"
+msgstr "إعادة تسمية $0؟"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:108
+msgid "Rename selected file or directory"
+msgstr "أعد تسممية الملف أو الدليل المحدد"
+
+#: src/upload-button.tsx:156
+msgid "Replace"
+msgstr "استبدل"
+
+#: src/upload-button.tsx:108
+msgid "Replace file $0?"
+msgstr "استبدال الملف $0؟"
+
+#: src/dialogs/editor.tsx:249
+msgid "Save"
+msgstr "حفظ"
+
+#: src/dialogs/permissions.tsx:388
+msgid "Security context"
+msgstr "السياق الأمني"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:133
+msgid "Select all"
+msgstr "تحديد الكل"
+
+#: src/dialogs/permissions.tsx:401
+msgid "Set executable as program"
+msgstr "اجعله قابلاً للتنفيذ كبرنامج"
+
+#: src/dialogs/permissions.tsx:284
+msgid "Show all files"
+msgstr "أظهر جميع الملفات"
+
+#: src/header.tsx:284 src/files-card-body.tsx:535
+msgid "Show hidden items"
+msgstr "أظهر العناصر المخفية"
+
+#: src/header.tsx:165
+msgid "Show keyboard shortcuts"
+msgstr "أظهر اختصارات لوحة المفاتيح"
+
+#: src/header.tsx:77 src/files-card-body.tsx:548
+msgid "Size"
+msgstr "الحجم"
+
+#: src/header.tsx:84
+msgid "Smallest size"
+msgstr "أصغر حجم"
+
+#: src/common.ts:72
+msgid "Socket"
+msgstr "مقبس الشبكة"
+
+#: src/header.tsx:271
+msgid "Sort"
+msgstr "ترتيب"
+
+#: src/common.ts:70
+msgid "Symbolic link"
+msgstr "رابط رمزي"
+
+#: src/dialogs/symlink.tsx:177
+msgid "Symlink name"
+msgstr "اسم الرابط الرمزي"
+
+#: src/dialogs/symlink.tsx:170
+msgid "Target"
+msgstr "الهدف"
+
+#: src/dialogs/editor.tsx:61
+msgid "The existing file changed unexpectedly"
+msgstr "الملف الموجود تغيَّر بشكل غير متوقع"
+
+#: src/dialogs/editor.tsx:59 src/dialogs/editor.tsx:207
+msgid "The file has been removed on disk"
+msgstr "الملف تمت إزالته من القرص"
+
+#: src/dialogs/editor.tsx:208
+msgid "The file has changed on disk"
+msgstr "تم تغيير الملف على القرص"
+
+#: src/dialogs/symlink.tsx:193
+msgid "Type"
+msgstr "النوع"
+
+#: src/files-breadcrumbs.tsx:99
+msgid "Unable to create bookmark directory"
+msgstr "غير قادر على إنشاء علامة مرجعية لدليل"
+
+#: src/upload-button.tsx:332
+msgid "Unable to move uploaded file to final destination"
+msgstr "غير قادر على نقل الملف المرفوع إلى وجهته النهائية"
+
+#: src/files-breadcrumbs.tsx:119
+msgid "Unable to save bookmark file"
+msgstr "غير قادر على حفظ ملف العلامة المرجعية"
+
+#: src/upload-button.tsx:505
+msgid "Upload"
+msgstr "ارفع"
+
+#
+#: src/upload-button.tsx:486
+msgid "Upload $0% completed"
+msgstr "اكتمل الرفع بنسبة $0%"
+
+#: src/upload-button.tsx:331 src/upload-button.tsx:355
+msgid "Upload error"
+msgstr "خطأ في الرفع"
+
+#: src/upload-button.tsx:73
+msgid "Uploaded as $0, $1"
+msgstr "محمّل كـ $0، $1"
+
+#: src/upload-button.tsx:450
+msgid "Uploads"
+msgstr "عمليات التحميل"
+
+#: src/files-footer-detail.tsx:143
+msgid "User"
+msgstr "المستخدم"
+
+#: src/dialogs/editor.tsx:173
+msgid "View $0"
+msgstr "عرض $0"
+
+#: src/common.ts:58
+msgid "Write and execute"
+msgstr "الكتابة والتنفيذ"
+
+#: src/dialogs/permissions.tsx:243 src/common.ts:57
+msgid "Write-only"
+msgstr "الكتابة-فقط"
+
+#: src/header.tsx:73
+msgid "Z-A"
+msgstr "Z-A"
+
+#: src/manifest.json:0
+msgid "explorer"
+msgstr "مستعرض"
+
+#: src/manifest.json:0
+msgid "files"
+msgstr "الملفات"
+
+#: src/manifest.json:0
+msgid "filesystem"
+msgstr "نظام الملفات"
+
+#: src/dialogs/copyPasteOwnership.tsx:128
+msgid "keep original owners"
+msgstr "الحفاظ على المُلَّاك الأصليين"
+
+#: src/dialogs/symlink.tsx:66
+msgid "link to $0"
+msgstr "ربط بـ $0"
