@@ -3,17 +3,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: starter-kit 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-08 03:44+0000\n"
-"PO-Revision-Date: 2025-05-06 03:06+0000\n"
-"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
-"Language-Team: German <https://translate.fedoraproject.org/projects/cockpit-"
-"files/cockpit-files/de/>\n"
+"POT-Creation-Date: 2025-06-15 03:43+0000\n"
+"PO-Revision-Date: 2025-06-12 14:28+0000\n"
+"Last-Translator: Robert Simai <robert.simai@suse.com>\n"
+"Language-Team: German <https://translate.fedoraproject.org/projects/cockpit/"
+"cockpit-files/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1\n"
-"X-Generator: Weblate 5.11.3\n"
+"X-Generator: Weblate 5.11.4\n"
 
 #: src/menu.tsx:64
 msgid "\"$0\" exists, not overwriting with paste."
@@ -104,11 +104,11 @@ msgstr "Blockiere Gerät"
 msgid "Bookmarks"
 msgstr "Lesezeichen"
 
-#: src/upload-button.tsx:159 src/dialogs/rename.tsx:100
+#: src/upload-button.tsx:159 src/dialogs/editor.tsx:252
 #: src/dialogs/delete.tsx:110 src/dialogs/permissions.tsx:422
-#: src/dialogs/create-file.tsx:211 src/dialogs/mkdir.tsx:150
-#: src/dialogs/symlink.tsx:246 src/dialogs/editor.tsx:252
-#: src/dialogs/copyPasteOwnership.tsx:179
+#: src/dialogs/mkdir.tsx:150 src/dialogs/rename.tsx:100
+#: src/dialogs/symlink.tsx:246 src/dialogs/copyPasteOwnership.tsx:179
+#: src/dialogs/create-file.tsx:211
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -178,7 +178,7 @@ msgstr "Kopieren"
 msgid "Copy selected file or directory"
 msgstr "Ausgewählte Datei oder ausgewähltes Verzeichnis kopieren"
 
-#: src/dialogs/create-file.tsx:208 src/dialogs/mkdir.tsx:148
+#: src/dialogs/mkdir.tsx:148 src/dialogs/create-file.tsx:208
 msgid "Create"
 msgstr "Erstellen"
 
@@ -287,7 +287,7 @@ msgstr "Dateien zum Hochladen ablegen"
 msgid "Edit $0"
 msgstr "$0 bearbeiten"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:100 src/files-breadcrumbs.tsx:298
+#: src/files-breadcrumbs.tsx:298 src/dialogs/keyboardShortcutsHelp.tsx:100
 msgid "Edit path"
 msgstr "Pfad bearbeiten"
 
@@ -387,8 +387,8 @@ msgstr "Weitergehen"
 msgid "Go up a directory"
 msgstr "Ein Verzeichnis nach oben gehen"
 
-#: src/files-footer-detail.tsx:79 src/files-footer-detail.tsx:151
-#: src/dialogs/permissions.tsx:332 src/files-card-body.tsx:596
+#: src/dialogs/permissions.tsx:332 src/files-footer-detail.tsx:79
+#: src/files-footer-detail.tsx:151 src/files-card-body.tsx:596
 msgid "Group"
 msgstr "Gruppe"
 
@@ -461,9 +461,8 @@ msgid "Name too long"
 msgstr "Name zu lang"
 
 #: src/common.ts:69
-#, fuzzy
 msgid "Named pipe"
-msgstr "Benannte Weiterleitung"
+msgstr "Named Pipe"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:150
 msgid "Navigation"
@@ -517,13 +516,13 @@ msgstr "Andere"
 msgid "Others access"
 msgstr "Anderer Zugriff"
 
-#: src/dialogs/rename.tsx:98 src/dialogs/editor.tsx:236
+#: src/dialogs/editor.tsx:236 src/dialogs/rename.tsx:98
 msgid "Overwrite"
 msgstr "Überschreiben"
 
-#: src/files-footer-detail.tsx:79 src/dialogs/permissions.tsx:317
-#: src/dialogs/create-file.tsx:185 src/header.tsx:99
-#: src/files-card-body.tsx:557 src/files-card-body.tsx:596
+#: src/dialogs/permissions.tsx:317 src/dialogs/create-file.tsx:185
+#: src/files-footer-detail.tsx:79 src/header.tsx:99 src/files-card-body.tsx:557
+#: src/files-card-body.tsx:596
 msgid "Owner"
 msgstr "Eigentümer"
 
@@ -583,7 +582,7 @@ msgstr "Lesen und schreiben"
 msgid "Read, write, and execute"
 msgstr "Lesen, schreiben und ausführen"
 
-#: src/dialogs/permissions.tsx:228 src/dialogs/editor.tsx:175 src/common.ts:59
+#: src/dialogs/editor.tsx:175 src/dialogs/permissions.tsx:228 src/common.ts:59
 msgid "Read-only"
 msgstr "Nur lesen"
 
@@ -759,7 +758,7 @@ msgstr "Z-A"
 
 #: src/manifest.json:0
 msgid "explorer"
-msgstr ""
+msgstr "Explorer"
 
 #: src/manifest.json:0
 msgid "files"
