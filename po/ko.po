@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-08 03:44+0000\n"
+"POT-Creation-Date: 2025-06-15 03:43+0000\n"
 "PO-Revision-Date: 2025-05-16 04:47+0000\n"
 "Last-Translator: 김인수 <simmon@nplob.com>\n"
 "Language-Team: Korean <https://translate.fedoraproject.org/projects/cockpit/"
@@ -114,11 +114,11 @@ msgstr "블록 장치"
 msgid "Bookmarks"
 msgstr "즐겨찾기"
 
-#: src/upload-button.tsx:159 src/dialogs/rename.tsx:100
+#: src/upload-button.tsx:159 src/dialogs/editor.tsx:252
 #: src/dialogs/delete.tsx:110 src/dialogs/permissions.tsx:422
-#: src/dialogs/create-file.tsx:211 src/dialogs/mkdir.tsx:150
-#: src/dialogs/symlink.tsx:246 src/dialogs/editor.tsx:252
-#: src/dialogs/copyPasteOwnership.tsx:179
+#: src/dialogs/mkdir.tsx:150 src/dialogs/rename.tsx:100
+#: src/dialogs/symlink.tsx:246 src/dialogs/copyPasteOwnership.tsx:179
+#: src/dialogs/create-file.tsx:211
 msgid "Cancel"
 msgstr "취소"
 
@@ -186,7 +186,7 @@ msgstr "복사"
 msgid "Copy selected file or directory"
 msgstr "선택된 파일 또는 디렉토리를 복사"
 
-#: src/dialogs/create-file.tsx:208 src/dialogs/mkdir.tsx:148
+#: src/dialogs/mkdir.tsx:148 src/dialogs/create-file.tsx:208
 msgid "Create"
 msgstr "생성"
 
@@ -295,7 +295,7 @@ msgstr "올려지는 파일을 삭제합니다"
 msgid "Edit $0"
 msgstr "$0 편집"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:100 src/files-breadcrumbs.tsx:298
+#: src/files-breadcrumbs.tsx:298 src/dialogs/keyboardShortcutsHelp.tsx:100
 msgid "Edit path"
 msgstr "경로 편집"
 
@@ -395,8 +395,8 @@ msgstr "앞으로 가기"
 msgid "Go up a directory"
 msgstr "상위 디렉토리로 이동"
 
-#: src/files-footer-detail.tsx:79 src/files-footer-detail.tsx:151
-#: src/dialogs/permissions.tsx:332 src/files-card-body.tsx:596
+#: src/dialogs/permissions.tsx:332 src/files-footer-detail.tsx:79
+#: src/files-footer-detail.tsx:151 src/files-card-body.tsx:596
 msgid "Group"
 msgstr "그룹"
 
@@ -524,13 +524,13 @@ msgstr "기타"
 msgid "Others access"
 msgstr "기타 접근"
 
-#: src/dialogs/rename.tsx:98 src/dialogs/editor.tsx:236
+#: src/dialogs/editor.tsx:236 src/dialogs/rename.tsx:98
 msgid "Overwrite"
 msgstr "덮어쓰기"
 
-#: src/files-footer-detail.tsx:79 src/dialogs/permissions.tsx:317
-#: src/dialogs/create-file.tsx:185 src/header.tsx:99
-#: src/files-card-body.tsx:557 src/files-card-body.tsx:596
+#: src/dialogs/permissions.tsx:317 src/dialogs/create-file.tsx:185
+#: src/files-footer-detail.tsx:79 src/header.tsx:99 src/files-card-body.tsx:557
+#: src/files-card-body.tsx:596
 msgid "Owner"
 msgstr "소유자"
 
@@ -590,7 +590,7 @@ msgstr "일기 및 쓰기"
 msgid "Read, write, and execute"
 msgstr "읽기, 쓰기 및 실행"
 
-#: src/dialogs/permissions.tsx:228 src/dialogs/editor.tsx:175 src/common.ts:59
+#: src/dialogs/editor.tsx:175 src/dialogs/permissions.tsx:228 src/common.ts:59
 msgid "Read-only"
 msgstr "읽기-전용"
 

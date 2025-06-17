@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-08 03:44+0000\n"
+"POT-Creation-Date: 2025-06-15 03:43+0000\n"
 "PO-Revision-Date: 2025-02-28 05:41+0000\n"
 "Last-Translator: Martin Pitt <mpitt@redhat.com>\n"
 "Language-Team: Japanese <https://translate.fedoraproject.org/projects/"
@@ -112,11 +112,11 @@ msgstr "ブロックデバイス"
 msgid "Bookmarks"
 msgstr "ブックマーク"
 
-#: src/upload-button.tsx:159 src/dialogs/rename.tsx:100
+#: src/upload-button.tsx:159 src/dialogs/editor.tsx:252
 #: src/dialogs/delete.tsx:110 src/dialogs/permissions.tsx:422
-#: src/dialogs/create-file.tsx:211 src/dialogs/mkdir.tsx:150
-#: src/dialogs/symlink.tsx:246 src/dialogs/editor.tsx:252
-#: src/dialogs/copyPasteOwnership.tsx:179
+#: src/dialogs/mkdir.tsx:150 src/dialogs/rename.tsx:100
+#: src/dialogs/symlink.tsx:246 src/dialogs/copyPasteOwnership.tsx:179
+#: src/dialogs/create-file.tsx:211
 msgid "Cancel"
 msgstr "取り消し"
 
@@ -184,7 +184,7 @@ msgstr "コピー"
 msgid "Copy selected file or directory"
 msgstr "選択したファイルまたはディレクトリーをコピーする"
 
-#: src/dialogs/create-file.tsx:208 src/dialogs/mkdir.tsx:148
+#: src/dialogs/mkdir.tsx:148 src/dialogs/create-file.tsx:208
 msgid "Create"
 msgstr "作成"
 
@@ -300,7 +300,7 @@ msgstr "アップロードするファイルをドロップする"
 msgid "Edit $0"
 msgstr "$0 の編集"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:100 src/files-breadcrumbs.tsx:298
+#: src/files-breadcrumbs.tsx:298 src/dialogs/keyboardShortcutsHelp.tsx:100
 msgid "Edit path"
 msgstr "パスの編集"
 
@@ -400,8 +400,8 @@ msgstr "進む"
 msgid "Go up a directory"
 msgstr "1 つ上のディレクトリーに移動する"
 
-#: src/files-footer-detail.tsx:79 src/files-footer-detail.tsx:151
-#: src/dialogs/permissions.tsx:332 src/files-card-body.tsx:596
+#: src/dialogs/permissions.tsx:332 src/files-footer-detail.tsx:79
+#: src/files-footer-detail.tsx:151 src/files-card-body.tsx:596
 msgid "Group"
 msgstr "グループ"
 
@@ -529,13 +529,13 @@ msgstr "その他のユーザー"
 msgid "Others access"
 msgstr "その他のユーザーのアクセス"
 
-#: src/dialogs/rename.tsx:98 src/dialogs/editor.tsx:236
+#: src/dialogs/editor.tsx:236 src/dialogs/rename.tsx:98
 msgid "Overwrite"
 msgstr "上書き"
 
-#: src/files-footer-detail.tsx:79 src/dialogs/permissions.tsx:317
-#: src/dialogs/create-file.tsx:185 src/header.tsx:99
-#: src/files-card-body.tsx:557 src/files-card-body.tsx:596
+#: src/dialogs/permissions.tsx:317 src/dialogs/create-file.tsx:185
+#: src/files-footer-detail.tsx:79 src/header.tsx:99 src/files-card-body.tsx:557
+#: src/files-card-body.tsx:596
 msgid "Owner"
 msgstr "所有者"
 
@@ -595,7 +595,7 @@ msgstr "読み取りおよび書き込み"
 msgid "Read, write, and execute"
 msgstr "読み取り、書き込み、および実行"
 
-#: src/dialogs/permissions.tsx:228 src/dialogs/editor.tsx:175 src/common.ts:59
+#: src/dialogs/editor.tsx:175 src/dialogs/permissions.tsx:228 src/common.ts:59
 msgid "Read-only"
 msgstr "読み取り専用"
 
