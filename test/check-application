@@ -1375,12 +1375,14 @@ class TestFiles(testlib.MachineCase):
         open_permissions_dialog('newfile')
         select_access("no-access")
         b.click(".pf-v6-c-modal-box button.pf-m-primary")
+        b.wait_not_present(".pf-v6-c-modal-box")
         self.assertEqual(self.stat("%A", "/home/admin/newfile"), "----------")
         check_perms_match('newfile', '/home/admin')
 
         open_permissions_dialog('newfile')
         select_access("read-write")
         b.click(".pf-v6-c-modal-box button.pf-m-primary")
+        b.wait_not_present(".pf-v6-c-modal-box")
         self.assertEqual(self.stat("%A", "/home/admin/newfile"), "-rw-rw-rw-")
         check_perms_match('newfile', '/home/admin')
 
