@@ -1774,12 +1774,17 @@ class TestFiles(testlib.MachineCase):
         chmod 740 {basedir}/file7
         """)
 
-        b.mouse("[data-item='file4'] .item-perms pre", "mouseenter")
-        b.wait_in_text(".pf-v6-c-tooltip dd:nth-of-type(1)", "read and write")
-        b.wait_in_text(".pf-v6-c-tooltip dd:nth-of-type(2)", "execute-only")
-        b.wait_in_text(".pf-v6-c-tooltip dd:nth-of-type(3)", "write and execute")
-        b.assert_pixels(".pf-v6-c-page__main", "permissions-tooltip", mock={".item-date": "Jun 19, 2024, 11:30 AM"})
-        b.mouse("[data-item='file4'] .item-perms pre", "mouseleave")
+        def move_tooltip() -> None:
+            b.mouse("[data-item='file4'] .item-perms pre", "mouseleave")
+            b.wait_not_present(".pf-v6-c-tooltip")
+            b.mouse("[data-item='file4'] .item-perms pre", "mouseenter")
+            b.wait_in_text(".pf-v6-c-tooltip dd:nth-of-type(1)", "read and write")
+            b.wait_in_text(".pf-v6-c-tooltip dd:nth-of-type(2)", "execute-only")
+            b.wait_in_text(".pf-v6-c-tooltip dd:nth-of-type(3)", "write and execute")
+
+        b.assert_pixels(".pf-v6-c-page__main", "permissions-tooltip",
+                        mock={".item-date": "Jun 19, 2024, 11:30 AM"},
+                        layout_change_hook=move_tooltip)
 
         for i in range(8):
             check_perms_match(f"file{i}", basedir)
