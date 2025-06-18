@@ -1938,6 +1938,7 @@ class TestFiles(testlib.MachineCase):
 
         # Manually edit path
         b.key("L", modifiers=["Control", "Shift"])
+        b.wait_visible("#new-path-input")
         b.input_text("/home/admin/anotherdir")
         b.key("Enter")
         self.assert_last_breadcrumb("anotherdir")
