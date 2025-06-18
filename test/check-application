@@ -1756,13 +1756,6 @@ class TestFiles(testlib.MachineCase):
         chmod 777 {basedir}/file7
         """)
 
-        # HACK: Pixel tests change the resolution and the layout, so with real mouse
-        # events we have to move the mouse to the tooltip element after each
-        # layout change. Use https://github.com/cockpit-project/cockpit/pull/22113 API once available
-        # also, mouseenter events seem to get lost in CI (not locally)
-        b.chromium_fake_mouse = True
-        assert b.chromium_fake_mouse  # vulture
-
         b.mouse("[data-item='file6'] .item-perms pre", "mouseenter")
         b.wait_in_text(".pf-v6-c-tooltip dd:nth-of-type(1)", "read and write")
         b.wait_in_text(".pf-v6-c-tooltip dd:nth-of-type(2)", "read and write")
@@ -1784,14 +1777,17 @@ class TestFiles(testlib.MachineCase):
         chmod 740 {basedir}/file7
         """)
 
-        b.mouse("[data-item='file4'] .item-perms pre", "mouseenter")
-        b.wait_in_text(".pf-v6-c-tooltip dd:nth-of-type(1)", "read and write")
-        b.wait_in_text(".pf-v6-c-tooltip dd:nth-of-type(2)", "execute-only")
-        b.wait_in_text(".pf-v6-c-tooltip dd:nth-of-type(3)", "write and execute")
-        b.assert_pixels(".pf-v6-c-page__main", "permissions-tooltip", mock={".item-date": "Jun 19, 2024, 11:30 AM"})
-        b.mouse("[data-item='file4'] .item-perms pre", "mouseleave")
+        def move_tooltip() -> None:
+            b.mouse("[data-item='file4'] .item-perms pre", "mouseleave")
+            b.wait_not_present(".pf-v6-c-tooltip")
+            b.mouse("[data-item='file4'] .item-perms pre", "mouseenter")
+            b.wait_in_text(".pf-v6-c-tooltip dd:nth-of-type(1)", "read and write")
+            b.wait_in_text(".pf-v6-c-tooltip dd:nth-of-type(2)", "execute-only")
+            b.wait_in_text(".pf-v6-c-tooltip dd:nth-of-type(3)", "write and execute")
 
-        b.chromium_fake_mouse = False
+        b.assert_pixels(".pf-v6-c-page__main", "permissions-tooltip",
+                        mock={".item-date": "Jun 19, 2024, 11:30 AM"},
+                        layout_change_hook=move_tooltip)
 
         for i in range(8):
             check_perms_match(f"file{i}", basedir)
