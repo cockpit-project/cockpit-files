@@ -1331,10 +1331,10 @@ class TestFiles(testlib.MachineCase):
             b.wait_in_text(".pf-v6-c-modal-box__title-text", filename)
 
         def check_perms_match(filename: str, basedir: str) -> None:
-            ls = m.execute(f"ls -l {basedir}/{filename}")[:10]
+            perm = self.stat("%A", os.path.join(basedir, filename))
             # format ls output with spaces to match string in UI
-            spaced_ls = f"{ls[1:4]} {ls[4:7]} {ls[7:10]}"
-            b.wait_in_text(f"[data-item='{filename}'] .item-perms pre", spaced_ls)
+            spaced_perm = f"{perm[1:4]} {perm[4:7]} {perm[7:10]}"
+            b.wait_in_text(f"[data-item='{filename}'] .item-perms pre", spaced_perm)
 
         self.enter_files()
 
