@@ -3087,7 +3087,7 @@ class TestFiles(testlib.MachineCase):
 
         def open_editor(file: str) -> None:
             b.mouse(f"[data-item='{file}']", "contextmenu")
-            b.click(".contextMenu button:contains('Open text file')")
+            b.click(".contextMenu button:contains('Open file in editor')")
 
         def validate_content(file: str, content: str) -> None:
             open_editor(file)
@@ -3107,13 +3107,13 @@ class TestFiles(testlib.MachineCase):
 
         # Don't allow opening big text files
         b.mouse("[data-item='big.txt']", "contextmenu")
-        b.wait_not_in_text(".contextMenu", "Open text file")
+        b.wait_not_in_text(".contextMenu", "Open file in editor")
         b.click("#files-card-parent tbody")
         b.wait_not_present(".contextMenu")
 
         # A tarball cannot be edited
         b.mouse("[data-item='archive.tar.gz']", "contextmenu")
-        b.wait_not_in_text(".contextMenu", "Open text file")
+        b.wait_not_in_text(".contextMenu", "Open file in editor")
         b.click("#files-card-parent tbody")
         b.wait_not_present(".contextMenu")
 
