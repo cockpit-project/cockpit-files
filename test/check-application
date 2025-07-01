@@ -1715,7 +1715,8 @@ class TestFiles(testlib.MachineCase):
         b.wait_in_text("[data-item='adminfile'] .item-owner", "admin")
 
         # Cannot change permission of /home
-        b.click("li[data-location='/'] a")
+        # HACK: fix with default click(), middle of the element does not work
+        b.mouse("li[data-location='/'] a", "click", y=1)
         open_permissions_dialog('home')
         select_access("read-only")
         if has_selinux:
