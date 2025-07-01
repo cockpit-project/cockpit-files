@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-15 03:43+0000\n"
+"POT-Creation-Date: 2025-06-30 03:45+0000\n"
 "PO-Revision-Date: 2025-02-28 05:41+0000\n"
 "Last-Translator: Martin Pitt <mpitt@redhat.com>\n"
 "Language-Team: Japanese <https://translate.fedoraproject.org/projects/"
@@ -112,11 +112,11 @@ msgstr "ブロックデバイス"
 msgid "Bookmarks"
 msgstr "ブックマーク"
 
-#: src/upload-button.tsx:159 src/dialogs/editor.tsx:252
-#: src/dialogs/delete.tsx:110 src/dialogs/permissions.tsx:422
-#: src/dialogs/mkdir.tsx:150 src/dialogs/rename.tsx:100
-#: src/dialogs/symlink.tsx:246 src/dialogs/copyPasteOwnership.tsx:179
-#: src/dialogs/create-file.tsx:211
+#: src/dialogs/permissions.tsx:422 src/dialogs/copyPasteOwnership.tsx:179
+#: src/dialogs/delete.tsx:110 src/dialogs/mkdir.tsx:150
+#: src/dialogs/editor.tsx:252 src/dialogs/rename.tsx:100
+#: src/dialogs/create-file.tsx:211 src/dialogs/symlink.tsx:246
+#: src/upload-button.tsx:159
 msgid "Cancel"
 msgstr "取り消し"
 
@@ -160,7 +160,7 @@ msgstr "キャラクターデバイス"
 msgid "Clear filter"
 msgstr "フィルターを外す"
 
-#: src/dialogs/editor.tsx:252 src/dialogs/keyboardShortcutsHelp.tsx:46
+#: src/dialogs/keyboardShortcutsHelp.tsx:46 src/dialogs/editor.tsx:252
 msgid "Close"
 msgstr "閉じる"
 
@@ -400,8 +400,8 @@ msgstr "進む"
 msgid "Go up a directory"
 msgstr "1 つ上のディレクトリーに移動する"
 
-#: src/dialogs/permissions.tsx:332 src/files-footer-detail.tsx:79
-#: src/files-footer-detail.tsx:151 src/files-card-body.tsx:596
+#: src/dialogs/permissions.tsx:332 src/files-card-body.tsx:596
+#: src/files-footer-detail.tsx:79 src/files-footer-detail.tsx:151
 msgid "Group"
 msgstr "グループ"
 
@@ -521,7 +521,7 @@ msgstr "テキストファイルを開く"
 msgid "Original file on server"
 msgstr "サーバー上の元のファイル"
 
-#: src/files-footer-detail.tsx:79 src/files-card-body.tsx:596
+#: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
 msgid "Others"
 msgstr "その他のユーザー"
 
@@ -534,8 +534,8 @@ msgid "Overwrite"
 msgstr "上書き"
 
 #: src/dialogs/permissions.tsx:317 src/dialogs/create-file.tsx:185
-#: src/files-footer-detail.tsx:79 src/header.tsx:99 src/files-card-body.tsx:557
-#: src/files-card-body.tsx:596
+#: src/header.tsx:99 src/files-card-body.tsx:557 src/files-card-body.tsx:596
+#: src/files-footer-detail.tsx:79
 msgid "Owner"
 msgstr "所有者"
 
@@ -595,7 +595,7 @@ msgstr "読み取りおよび書き込み"
 msgid "Read, write, and execute"
 msgstr "読み取り、書き込み、および実行"
 
-#: src/dialogs/editor.tsx:175 src/dialogs/permissions.tsx:228 src/common.ts:59
+#: src/dialogs/permissions.tsx:228 src/dialogs/editor.tsx:175 src/common.ts:59
 msgid "Read-only"
 msgstr "読み取り専用"
 
