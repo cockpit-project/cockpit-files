@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: starter-kit 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-15 03:43+0000\n"
+"POT-Creation-Date: 2025-06-30 03:45+0000\n"
 "PO-Revision-Date: 2025-06-12 14:28+0000\n"
 "Last-Translator: Robert Simai <robert.simai@suse.com>\n"
 "Language-Team: German <https://translate.fedoraproject.org/projects/cockpit/"
@@ -104,11 +104,11 @@ msgstr "Blockiere Gerät"
 msgid "Bookmarks"
 msgstr "Lesezeichen"
 
-#: src/upload-button.tsx:159 src/dialogs/editor.tsx:252
-#: src/dialogs/delete.tsx:110 src/dialogs/permissions.tsx:422
-#: src/dialogs/mkdir.tsx:150 src/dialogs/rename.tsx:100
-#: src/dialogs/symlink.tsx:246 src/dialogs/copyPasteOwnership.tsx:179
-#: src/dialogs/create-file.tsx:211
+#: src/dialogs/permissions.tsx:422 src/dialogs/copyPasteOwnership.tsx:179
+#: src/dialogs/delete.tsx:110 src/dialogs/mkdir.tsx:150
+#: src/dialogs/editor.tsx:252 src/dialogs/rename.tsx:100
+#: src/dialogs/create-file.tsx:211 src/dialogs/symlink.tsx:246
+#: src/upload-button.tsx:159
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -154,7 +154,7 @@ msgstr "Zeichengerät"
 msgid "Clear filter"
 msgstr "Filter entfernen"
 
-#: src/dialogs/editor.tsx:252 src/dialogs/keyboardShortcutsHelp.tsx:46
+#: src/dialogs/keyboardShortcutsHelp.tsx:46 src/dialogs/editor.tsx:252
 msgid "Close"
 msgstr "Schließen"
 
@@ -387,8 +387,8 @@ msgstr "Weitergehen"
 msgid "Go up a directory"
 msgstr "Ein Verzeichnis nach oben gehen"
 
-#: src/dialogs/permissions.tsx:332 src/files-footer-detail.tsx:79
-#: src/files-footer-detail.tsx:151 src/files-card-body.tsx:596
+#: src/dialogs/permissions.tsx:332 src/files-card-body.tsx:596
+#: src/files-footer-detail.tsx:79 src/files-footer-detail.tsx:151
 msgid "Group"
 msgstr "Gruppe"
 
@@ -508,7 +508,7 @@ msgstr "Textdatei öffnen"
 msgid "Original file on server"
 msgstr "Originaldatei auf dem Server"
 
-#: src/files-footer-detail.tsx:79 src/files-card-body.tsx:596
+#: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
 msgid "Others"
 msgstr "Andere"
 
@@ -521,8 +521,8 @@ msgid "Overwrite"
 msgstr "Überschreiben"
 
 #: src/dialogs/permissions.tsx:317 src/dialogs/create-file.tsx:185
-#: src/files-footer-detail.tsx:79 src/header.tsx:99 src/files-card-body.tsx:557
-#: src/files-card-body.tsx:596
+#: src/header.tsx:99 src/files-card-body.tsx:557 src/files-card-body.tsx:596
+#: src/files-footer-detail.tsx:79
 msgid "Owner"
 msgstr "Eigentümer"
 
@@ -582,7 +582,7 @@ msgstr "Lesen und schreiben"
 msgid "Read, write, and execute"
 msgstr "Lesen, schreiben und ausführen"
 
-#: src/dialogs/editor.tsx:175 src/dialogs/permissions.tsx:228 src/common.ts:59
+#: src/dialogs/permissions.tsx:228 src/dialogs/editor.tsx:175 src/common.ts:59
 msgid "Read-only"
 msgstr "Nur lesen"
 

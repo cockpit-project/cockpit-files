@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-15 03:43+0000\n"
+"POT-Creation-Date: 2025-06-30 03:45+0000\n"
 "PO-Revision-Date: 2025-05-14 19:17+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <https://translate.fedoraproject.org/projects/"
@@ -117,11 +117,11 @@ msgstr "Блоковий пристрій"
 msgid "Bookmarks"
 msgstr "Закладки"
 
-#: src/upload-button.tsx:159 src/dialogs/editor.tsx:252
-#: src/dialogs/delete.tsx:110 src/dialogs/permissions.tsx:422
-#: src/dialogs/mkdir.tsx:150 src/dialogs/rename.tsx:100
-#: src/dialogs/symlink.tsx:246 src/dialogs/copyPasteOwnership.tsx:179
-#: src/dialogs/create-file.tsx:211
+#: src/dialogs/permissions.tsx:422 src/dialogs/copyPasteOwnership.tsx:179
+#: src/dialogs/delete.tsx:110 src/dialogs/mkdir.tsx:150
+#: src/dialogs/editor.tsx:252 src/dialogs/rename.tsx:100
+#: src/dialogs/create-file.tsx:211 src/dialogs/symlink.tsx:246
+#: src/upload-button.tsx:159
 msgid "Cancel"
 msgstr "Скасувати"
 
@@ -165,7 +165,7 @@ msgstr "Символьний пристрій"
 msgid "Clear filter"
 msgstr "Зняти фільтрування"
 
-#: src/dialogs/editor.tsx:252 src/dialogs/keyboardShortcutsHelp.tsx:46
+#: src/dialogs/keyboardShortcutsHelp.tsx:46 src/dialogs/editor.tsx:252
 msgid "Close"
 msgstr "Закрити"
 
@@ -398,8 +398,8 @@ msgstr "Вперед"
 msgid "Go up a directory"
 msgstr "Вище за ієрархією каталогів"
 
-#: src/dialogs/permissions.tsx:332 src/files-footer-detail.tsx:79
-#: src/files-footer-detail.tsx:151 src/files-card-body.tsx:596
+#: src/dialogs/permissions.tsx:332 src/files-card-body.tsx:596
+#: src/files-footer-detail.tsx:79 src/files-footer-detail.tsx:151
 msgid "Group"
 msgstr "Група"
 
@@ -519,7 +519,7 @@ msgstr "Відкрити текстовий файл"
 msgid "Original file on server"
 msgstr "Початковий файл на сервері"
 
-#: src/files-footer-detail.tsx:79 src/files-card-body.tsx:596
+#: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
 msgid "Others"
 msgstr "Інші"
 
@@ -532,8 +532,8 @@ msgid "Overwrite"
 msgstr "Перезаписати"
 
 #: src/dialogs/permissions.tsx:317 src/dialogs/create-file.tsx:185
-#: src/files-footer-detail.tsx:79 src/header.tsx:99 src/files-card-body.tsx:557
-#: src/files-card-body.tsx:596
+#: src/header.tsx:99 src/files-card-body.tsx:557 src/files-card-body.tsx:596
+#: src/files-footer-detail.tsx:79
 msgid "Owner"
 msgstr "Власник"
 
@@ -593,7 +593,7 @@ msgstr "Читання та запис"
 msgid "Read, write, and execute"
 msgstr "Читання, запис і виконання"
 
-#: src/dialogs/editor.tsx:175 src/dialogs/permissions.tsx:228 src/common.ts:59
+#: src/dialogs/permissions.tsx:228 src/dialogs/editor.tsx:175 src/common.ts:59
 msgid "Read-only"
 msgstr "Лише читання"
 
