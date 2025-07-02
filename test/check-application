@@ -83,14 +83,12 @@ class TestFiles(testlib.MachineCase):
         b.set_input_text("#rename-item-input", f"{newname}")
         b.click("button.pf-m-primary")
 
-    def waitDownloadFile(self, filename: str, expected_size: int | None = None, content: str | None = None) -> None:
+    def waitDownloadFile(self, filename: str, expected_size: int, content: str | None = None) -> None:
         b = self.browser
         filepath = b.driver.download_dir / filename
 
         # Big downloads can take a while
-        testlib.wait(filepath.exists, tries=120)
-        if expected_size is not None:
-            testlib.wait(lambda: filepath.stat().st_size == expected_size)
+        testlib.wait(lambda: filepath.stat().st_size == expected_size, tries=120)
 
         if content is not None:
             self.assertEqual(filepath.read_text(), content)
