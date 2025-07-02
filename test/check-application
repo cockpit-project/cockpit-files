@@ -1007,10 +1007,12 @@ class TestFiles(testlib.MachineCase):
         b.wait_visible("[data-item='newdir2']")
         m.execute("rmdir /home/admin/newdir2")
 
+        # pixel test for directory context menu; resolution changes, so we need to re-open it for every layout
+        b.assert_pixels(".contextMenu", "folder-context-menu",
+                        layout_change_hook=lambda: self.open_context_menu("[data-item='newdir']"))
+
         # Rename folder from context menu
-        # HACK: context menu disappears in mobile mode
-        b.mouse("[data-item='newdir']", "contextmenu", x=0, y=0)
-        b.assert_pixels(".contextMenu", "folder-context-menu")
+        self.open_context_menu("[data-item='newdir']")
         b.click(".contextMenu button:contains('Rename')")
         b.set_input_text("#rename-item-input", "newdir1")
         b.click("button.pf-m-primary")
@@ -1066,9 +1068,12 @@ class TestFiles(testlib.MachineCase):
         b.click("button.pf-m-danger")
         b.wait_not_present("[data-item='newdir1']")
 
-        # HACK: context menu disappears in mobile mode
-        b.mouse("[data-item='newfile']", "contextmenu", x=0, y=0)
-        b.assert_pixels(".contextMenu", "file-context-menu")
+        # pixel test for file context menu; resolution changes, so we need to re-open it for every layout
+        b.assert_pixels(".contextMenu", "file-context-menu",
+                        layout_change_hook=lambda: self.open_context_menu("[data-item='newfile']"))
+
+        # Download file from context menu
+        self.open_context_menu("[data-item='newfile']")
         b.click(".contextMenu button:contains('Download')")
         size = int(self.stat('%s', '/home/admin/newfile'))
         self.waitDownloadFile("newfile", size, "some content\n")
