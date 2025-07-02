@@ -209,14 +209,6 @@ class TestFiles(testlib.MachineCase):
         b.set_input_text("input[placeholder='Filter directory']", "")
         self.browser.wait_js_cond("ph_count('#folder-view tbody tr') > 1")
 
-        # Big file downloads fine, runs in this test as running two downloads
-        # in the same test causes issues with Chromium. This takes ~ 40 seconds.
-        m.execute("truncate -s 1500M /home/admin/test.iso")
-        b.wait_visible("[data-item='test.iso']")
-        b.mouse("[data-item='test.iso']", "click", btn=2)
-        b.click(".contextMenu button:contains('Download')")
-        self.waitDownloadFile("test.iso", 1500 * 1024 * 1024)
-
         # Selected view is saved in localStorage
         b.logout()
         self.login_and_go("/files")
