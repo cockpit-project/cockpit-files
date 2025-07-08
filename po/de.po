@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: starter-kit 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-30 03:45+0000\n"
-"PO-Revision-Date: 2025-06-12 14:28+0000\n"
+"POT-Creation-Date: 2025-07-08 03:42+0000\n"
+"PO-Revision-Date: 2025-07-08 08:43+0000\n"
 "Last-Translator: Robert Simai <robert.simai@suse.com>\n"
 "Language-Team: German <https://translate.fedoraproject.org/projects/cockpit/"
 "cockpit-files/de/>\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1\n"
-"X-Generator: Weblate 5.11.4\n"
+"X-Generator: Weblate 5.12.2\n"
 
 #: src/menu.tsx:64
 msgid "\"$0\" exists, not overwriting with paste."
@@ -560,7 +560,7 @@ msgstr "Einfügen fehlgeschlagen"
 
 #: src/dialogs/create-file.tsx:228
 msgid "Permission denied"
-msgstr "Berechtigung verweigert"
+msgstr "Erlaubnis verweigert"
 
 #: src/header.tsx:110 src/files-card-body.tsx:562
 msgid "Permissions"
