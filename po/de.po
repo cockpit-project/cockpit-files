@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: starter-kit 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-08 03:42+0000\n"
-"PO-Revision-Date: 2025-07-08 08:43+0000\n"
+"POT-Creation-Date: 2025-07-09 03:45+0000\n"
+"PO-Revision-Date: 2025-07-09 15:08+0000\n"
 "Last-Translator: Robert Simai <robert.simai@suse.com>\n"
 "Language-Team: German <https://translate.fedoraproject.org/projects/cockpit/"
 "cockpit-files/de/>\n"
@@ -98,7 +98,7 @@ msgstr "Diese Aktion auf alle widersprüchlichen Dateien anwenden"
 
 #: src/common.ts:66
 msgid "Block device"
-msgstr "Blockiere Gerät"
+msgstr "Blockorientiertes Gerät"
 
 #: src/files-breadcrumbs.tsx:150
 msgid "Bookmarks"
