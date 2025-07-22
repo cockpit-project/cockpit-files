@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-09 03:45+0000\n"
+"POT-Creation-Date: 2025-07-18 03:51+0000\n"
 "PO-Revision-Date: 2025-05-14 14:12+0000\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <https://translate.fedoraproject.org/projects/"
@@ -115,10 +115,10 @@ msgstr "ბლოკური მოწყობილობა"
 msgid "Bookmarks"
 msgstr "სანიშნეები"
 
-#: src/dialogs/permissions.tsx:422 src/dialogs/copyPasteOwnership.tsx:179
+#: src/dialogs/editor.tsx:252 src/dialogs/copyPasteOwnership.tsx:179
 #: src/dialogs/delete.tsx:110 src/dialogs/mkdir.tsx:150
-#: src/dialogs/editor.tsx:252 src/dialogs/rename.tsx:100
-#: src/dialogs/create-file.tsx:211 src/dialogs/symlink.tsx:246
+#: src/dialogs/permissions.tsx:422 src/dialogs/create-file.tsx:211
+#: src/dialogs/rename.tsx:100 src/dialogs/symlink.tsx:246
 #: src/upload-button.tsx:159
 msgid "Cancel"
 msgstr "გაუქმება"
@@ -163,7 +163,7 @@ msgstr "სიმბოლური მოწყობილობა"
 msgid "Clear filter"
 msgstr "ფილტრის გასუფთავება"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:46 src/dialogs/editor.tsx:252
+#: src/dialogs/editor.tsx:252 src/dialogs/keyboardShortcutsHelp.tsx:46
 msgid "Close"
 msgstr "დახურვა"
 
@@ -191,15 +191,15 @@ msgstr "მონიშნული ფაილის ან საქაღა
 msgid "Create"
 msgstr "შექმნა"
 
-#: src/menu.tsx:113 src/dialogs/mkdir.tsx:93
+#: src/dialogs/mkdir.tsx:93 src/menu.tsx:113
 msgid "Create directory"
 msgstr "საქაღალდის შექმნა"
 
-#: src/menu.tsx:118 src/dialogs/create-file.tsx:151
+#: src/dialogs/create-file.tsx:151 src/menu.tsx:118
 msgid "Create file"
 msgstr "ფაილის შექმნა"
 
-#: src/menu.tsx:204 src/dialogs/symlink.tsx:244
+#: src/dialogs/symlink.tsx:244 src/menu.tsx:204
 msgid "Create link"
 msgstr "ბმულის შექმნა"
 
@@ -211,7 +211,7 @@ msgstr "ბმულის შექმნა $0-მდე"
 msgid "Create new directory"
 msgstr "ახალი საქაღალდის შექმნა"
 
-#: src/menu.tsx:175 src/menu.tsx:217 src/dialogs/delete.tsx:108
+#: src/dialogs/delete.tsx:108 src/menu.tsx:175 src/menu.tsx:217
 msgid "Delete"
 msgstr "წაშლა"
 
@@ -296,7 +296,7 @@ msgstr "ასატვირთად დაყარეთ ფაილებ�
 msgid "Edit $0"
 msgstr "$0-ის ჩასწორება"
 
-#: src/files-breadcrumbs.tsx:298 src/dialogs/keyboardShortcutsHelp.tsx:100
+#: src/dialogs/keyboardShortcutsHelp.tsx:100 src/files-breadcrumbs.tsx:298
 msgid "Edit path"
 msgstr "ბილიკის ჩასწორება"
 
@@ -396,8 +396,8 @@ msgstr "წინ გადასვლა"
 msgid "Go up a directory"
 msgstr "ზემო საქაღალდეზე გადასვლა"
 
-#: src/dialogs/permissions.tsx:332 src/files-card-body.tsx:596
-#: src/files-footer-detail.tsx:79 src/files-footer-detail.tsx:151
+#: src/dialogs/permissions.tsx:332 src/files-footer-detail.tsx:79
+#: src/files-footer-detail.tsx:151 src/files-card-body.tsx:596
 msgid "Group"
 msgstr "ჯგუფი"
 
@@ -517,7 +517,7 @@ msgstr "ტექსტური ფაილის გახსნა"
 msgid "Original file on server"
 msgstr "ორიგინალი ფაილი სერვერზე"
 
-#: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
+#: src/files-footer-detail.tsx:79 src/files-card-body.tsx:596
 msgid "Others"
 msgstr "სხვები"
 
@@ -530,8 +530,8 @@ msgid "Overwrite"
 msgstr "გადაწერა"
 
 #: src/dialogs/permissions.tsx:317 src/dialogs/create-file.tsx:185
-#: src/header.tsx:99 src/files-card-body.tsx:557 src/files-card-body.tsx:596
-#: src/files-footer-detail.tsx:79
+#: src/header.tsx:99 src/files-footer-detail.tsx:79 src/files-card-body.tsx:557
+#: src/files-card-body.tsx:596
 msgid "Owner"
 msgstr "მფლობელი"
 
@@ -551,7 +551,7 @@ msgstr "მფლობელი დაღმავალი"
 msgid "Ownership"
 msgstr "მფლობელობა"
 
-#: src/menu.tsx:106 src/dialogs/copyPasteOwnership.tsx:177
+#: src/dialogs/copyPasteOwnership.tsx:177 src/menu.tsx:106
 msgid "Paste"
 msgstr "ჩასმა"
 
@@ -563,7 +563,7 @@ msgstr "ჩასმა მფლობელის სახელით"
 msgid "Paste file or directory"
 msgstr "ფაილის ან საქაღალდის ჩასმა"
 
-#: src/menu.tsx:63 src/dialogs/copyPasteOwnership.tsx:66
+#: src/dialogs/copyPasteOwnership.tsx:66 src/menu.tsx:63
 msgid "Pasting failed"
 msgstr "ჩასმა ჩავარდა"
 
@@ -591,7 +591,7 @@ msgstr "წაკითხვა და ჩაწერა"
 msgid "Read, write, and execute"
 msgstr "წაკითხვა, ჩაწერა და გაშვება"
 
-#: src/dialogs/permissions.tsx:228 src/dialogs/editor.tsx:175 src/common.ts:59
+#: src/dialogs/editor.tsx:175 src/dialogs/permissions.tsx:228 src/common.ts:59
 msgid "Read-only"
 msgstr "მხოლოდ-წასაკითხად"
 
@@ -620,7 +620,7 @@ msgstr "თავიდან ჩატვირთვა"
 msgid "Remove from bookmarks"
 msgstr "სანიშნეებიდან წაშლა"
 
-#: src/menu.tsx:169 src/dialogs/rename.tsx:91
+#: src/dialogs/rename.tsx:91 src/menu.tsx:169
 msgid "Rename"
 msgstr "გადარქმევა"
 

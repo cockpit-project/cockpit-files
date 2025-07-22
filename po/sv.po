@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-09 03:45+0000\n"
+"POT-Creation-Date: 2025-07-18 03:51+0000\n"
 "PO-Revision-Date: 2025-04-01 02:53+0000\n"
 "Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
 "memory@weblate.org>\n"
@@ -116,10 +116,10 @@ msgstr "Blockenhet"
 msgid "Bookmarks"
 msgstr "Bokmärken"
 
-#: src/dialogs/permissions.tsx:422 src/dialogs/copyPasteOwnership.tsx:179
+#: src/dialogs/editor.tsx:252 src/dialogs/copyPasteOwnership.tsx:179
 #: src/dialogs/delete.tsx:110 src/dialogs/mkdir.tsx:150
-#: src/dialogs/editor.tsx:252 src/dialogs/rename.tsx:100
-#: src/dialogs/create-file.tsx:211 src/dialogs/symlink.tsx:246
+#: src/dialogs/permissions.tsx:422 src/dialogs/create-file.tsx:211
+#: src/dialogs/rename.tsx:100 src/dialogs/symlink.tsx:246
 #: src/upload-button.tsx:159
 msgid "Cancel"
 msgstr "Avbryt"
@@ -164,7 +164,7 @@ msgstr "Teckenenhet"
 msgid "Clear filter"
 msgstr "Rensa filter"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:46 src/dialogs/editor.tsx:252
+#: src/dialogs/editor.tsx:252 src/dialogs/keyboardShortcutsHelp.tsx:46
 msgid "Close"
 msgstr "Stäng"
 
@@ -192,15 +192,15 @@ msgstr "Kopiera vald fil eller katalog"
 msgid "Create"
 msgstr "Skapa"
 
-#: src/menu.tsx:113 src/dialogs/mkdir.tsx:93
+#: src/dialogs/mkdir.tsx:93 src/menu.tsx:113
 msgid "Create directory"
 msgstr "Skapa katalog"
 
-#: src/menu.tsx:118 src/dialogs/create-file.tsx:151
+#: src/dialogs/create-file.tsx:151 src/menu.tsx:118
 msgid "Create file"
 msgstr "Skapa fil"
 
-#: src/menu.tsx:204 src/dialogs/symlink.tsx:244
+#: src/dialogs/symlink.tsx:244 src/menu.tsx:204
 msgid "Create link"
 msgstr "Skapa länk"
 
@@ -212,7 +212,7 @@ msgstr "Skapa länk till $0"
 msgid "Create new directory"
 msgstr "Skapa ny katalog"
 
-#: src/menu.tsx:175 src/menu.tsx:217 src/dialogs/delete.tsx:108
+#: src/dialogs/delete.tsx:108 src/menu.tsx:175 src/menu.tsx:217
 msgid "Delete"
 msgstr "Ta bort"
 
@@ -297,7 +297,7 @@ msgstr "Släpp filer för att ladda upp"
 msgid "Edit $0"
 msgstr "Redigera $0"
 
-#: src/files-breadcrumbs.tsx:298 src/dialogs/keyboardShortcutsHelp.tsx:100
+#: src/dialogs/keyboardShortcutsHelp.tsx:100 src/files-breadcrumbs.tsx:298
 msgid "Edit path"
 msgstr "Redigera sökväg"
 
@@ -397,8 +397,8 @@ msgstr "Gå framåt"
 msgid "Go up a directory"
 msgstr "Gå upp en katalog"
 
-#: src/dialogs/permissions.tsx:332 src/files-card-body.tsx:596
-#: src/files-footer-detail.tsx:79 src/files-footer-detail.tsx:151
+#: src/dialogs/permissions.tsx:332 src/files-footer-detail.tsx:79
+#: src/files-footer-detail.tsx:151 src/files-card-body.tsx:596
 msgid "Group"
 msgstr "Grupp"
 
@@ -518,7 +518,7 @@ msgstr "Öppna en textfil"
 msgid "Original file on server"
 msgstr "Original fil på server"
 
-#: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
+#: src/files-footer-detail.tsx:79 src/files-card-body.tsx:596
 msgid "Others"
 msgstr "Andra"
 
@@ -531,8 +531,8 @@ msgid "Overwrite"
 msgstr "Skriv över"
 
 #: src/dialogs/permissions.tsx:317 src/dialogs/create-file.tsx:185
-#: src/header.tsx:99 src/files-card-body.tsx:557 src/files-card-body.tsx:596
-#: src/files-footer-detail.tsx:79
+#: src/header.tsx:99 src/files-footer-detail.tsx:79 src/files-card-body.tsx:557
+#: src/files-card-body.tsx:596
 msgid "Owner"
 msgstr "Ägare"
 
@@ -552,7 +552,7 @@ msgstr "Ägare minskande"
 msgid "Ownership"
 msgstr "Ägarskap"
 
-#: src/menu.tsx:106 src/dialogs/copyPasteOwnership.tsx:177
+#: src/dialogs/copyPasteOwnership.tsx:177 src/menu.tsx:106
 msgid "Paste"
 msgstr "Klistra in"
 
@@ -564,7 +564,7 @@ msgstr "Klistra in som ägare"
 msgid "Paste file or directory"
 msgstr "Klistra in fil eller katalog"
 
-#: src/menu.tsx:63 src/dialogs/copyPasteOwnership.tsx:66
+#: src/dialogs/copyPasteOwnership.tsx:66 src/menu.tsx:63
 msgid "Pasting failed"
 msgstr "Inklistring misslyckades"
 
@@ -592,7 +592,7 @@ msgstr "Läs och skriv"
 msgid "Read, write, and execute"
 msgstr "Läs, skriv, och exekvera"
 
-#: src/dialogs/permissions.tsx:228 src/dialogs/editor.tsx:175 src/common.ts:59
+#: src/dialogs/editor.tsx:175 src/dialogs/permissions.tsx:228 src/common.ts:59
 msgid "Read-only"
 msgstr "Läs-endast"
 
@@ -621,7 +621,7 @@ msgstr "Ladda om"
 msgid "Remove from bookmarks"
 msgstr "Ta bort från bokmärken"
 
-#: src/menu.tsx:169 src/dialogs/rename.tsx:91
+#: src/dialogs/rename.tsx:91 src/menu.tsx:169
 msgid "Rename"
 msgstr "Byt namn"
 

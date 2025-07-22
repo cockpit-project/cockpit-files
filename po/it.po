@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-09 03:45+0000\n"
+"POT-Creation-Date: 2025-07-18 03:51+0000\n"
 "PO-Revision-Date: 2025-06-01 14:21+0000\n"
 "Last-Translator: Nathan <nathan95@live.it>\n"
 "Language-Team: Italian <https://translate.fedoraproject.org/projects/cockpit/"
@@ -115,10 +115,10 @@ msgstr "blocca il dispositivo"
 msgid "Bookmarks"
 msgstr "Segnalibri"
 
-#: src/dialogs/permissions.tsx:422 src/dialogs/copyPasteOwnership.tsx:179
+#: src/dialogs/editor.tsx:252 src/dialogs/copyPasteOwnership.tsx:179
 #: src/dialogs/delete.tsx:110 src/dialogs/mkdir.tsx:150
-#: src/dialogs/editor.tsx:252 src/dialogs/rename.tsx:100
-#: src/dialogs/create-file.tsx:211 src/dialogs/symlink.tsx:246
+#: src/dialogs/permissions.tsx:422 src/dialogs/create-file.tsx:211
+#: src/dialogs/rename.tsx:100 src/dialogs/symlink.tsx:246
 #: src/upload-button.tsx:159
 msgid "Cancel"
 msgstr "Annulla"
@@ -163,7 +163,7 @@ msgstr "dispositivo a caratteri"
 msgid "Clear filter"
 msgstr "Cancella filtro"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:46 src/dialogs/editor.tsx:252
+#: src/dialogs/editor.tsx:252 src/dialogs/keyboardShortcutsHelp.tsx:46
 msgid "Close"
 msgstr "Chiudi"
 
@@ -191,15 +191,15 @@ msgstr "Copia i file o directory selezionati"
 msgid "Create"
 msgstr "Crea"
 
-#: src/menu.tsx:113 src/dialogs/mkdir.tsx:93
+#: src/dialogs/mkdir.tsx:93 src/menu.tsx:113
 msgid "Create directory"
 msgstr "Crea directory"
 
-#: src/menu.tsx:118 src/dialogs/create-file.tsx:151
+#: src/dialogs/create-file.tsx:151 src/menu.tsx:118
 msgid "Create file"
 msgstr "Crea file"
 
-#: src/menu.tsx:204 src/dialogs/symlink.tsx:244
+#: src/dialogs/symlink.tsx:244 src/menu.tsx:204
 msgid "Create link"
 msgstr "Crea link"
 
@@ -211,7 +211,7 @@ msgstr "Crea link a $0"
 msgid "Create new directory"
 msgstr "Crea una nuova cartella"
 
-#: src/menu.tsx:175 src/menu.tsx:217 src/dialogs/delete.tsx:108
+#: src/dialogs/delete.tsx:108 src/menu.tsx:175 src/menu.tsx:217
 msgid "Delete"
 msgstr "Elimina"
 
@@ -296,7 +296,7 @@ msgstr "Trascina i file qui per caricarli"
 msgid "Edit $0"
 msgstr "Modifica $0"
 
-#: src/files-breadcrumbs.tsx:298 src/dialogs/keyboardShortcutsHelp.tsx:100
+#: src/dialogs/keyboardShortcutsHelp.tsx:100 src/files-breadcrumbs.tsx:298
 msgid "Edit path"
 msgstr "Modifica percorso"
 
@@ -397,8 +397,8 @@ msgstr "Avanti"
 msgid "Go up a directory"
 msgstr "Tornare alla cartella superiore"
 
-#: src/dialogs/permissions.tsx:332 src/files-card-body.tsx:596
-#: src/files-footer-detail.tsx:79 src/files-footer-detail.tsx:151
+#: src/dialogs/permissions.tsx:332 src/files-footer-detail.tsx:79
+#: src/files-footer-detail.tsx:151 src/files-card-body.tsx:596
 msgid "Group"
 msgstr "Gruppo"
 
@@ -518,7 +518,7 @@ msgstr "Apri file di testo"
 msgid "Original file on server"
 msgstr "File originale sul server"
 
-#: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
+#: src/files-footer-detail.tsx:79 src/files-card-body.tsx:596
 msgid "Others"
 msgstr "Altri"
 
@@ -531,8 +531,8 @@ msgid "Overwrite"
 msgstr "Sovrascrivere"
 
 #: src/dialogs/permissions.tsx:317 src/dialogs/create-file.tsx:185
-#: src/header.tsx:99 src/files-card-body.tsx:557 src/files-card-body.tsx:596
-#: src/files-footer-detail.tsx:79
+#: src/header.tsx:99 src/files-footer-detail.tsx:79 src/files-card-body.tsx:557
+#: src/files-card-body.tsx:596
 msgid "Owner"
 msgstr "Proprietario"
 
@@ -552,7 +552,7 @@ msgstr "Proprietario decrescente"
 msgid "Ownership"
 msgstr "Proprietà"
 
-#: src/menu.tsx:106 src/dialogs/copyPasteOwnership.tsx:177
+#: src/dialogs/copyPasteOwnership.tsx:177 src/menu.tsx:106
 msgid "Paste"
 msgstr "Incolla"
 
@@ -564,7 +564,7 @@ msgstr "Incolla come proprietario"
 msgid "Paste file or directory"
 msgstr "Incolla file o cartella"
 
-#: src/menu.tsx:63 src/dialogs/copyPasteOwnership.tsx:66
+#: src/dialogs/copyPasteOwnership.tsx:66 src/menu.tsx:63
 msgid "Pasting failed"
 msgstr "Operazione incolla fallita"
 
@@ -592,7 +592,7 @@ msgstr "Lettura e scrittura"
 msgid "Read, write, and execute"
 msgstr "Lettura, scrittura ed esecuzione"
 
-#: src/dialogs/permissions.tsx:228 src/dialogs/editor.tsx:175 src/common.ts:59
+#: src/dialogs/editor.tsx:175 src/dialogs/permissions.tsx:228 src/common.ts:59
 msgid "Read-only"
 msgstr "Sola lettura"
 
@@ -621,7 +621,7 @@ msgstr "Ricarica"
 msgid "Remove from bookmarks"
 msgstr "Rimuovi dai segnalibri"
 
-#: src/menu.tsx:169 src/dialogs/rename.tsx:91
+#: src/dialogs/rename.tsx:91 src/menu.tsx:169
 msgid "Rename"
 msgstr "Rinomina"
 

@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-09 03:45+0000\n"
-"PO-Revision-Date: 2025-07-07 19:48+0000\n"
-"Last-Translator: عمّار عبدالله <ammar-dmour19@proton.me>\n"
+"POT-Creation-Date: 2025-07-18 03:51+0000\n"
+"PO-Revision-Date: 2025-07-18 05:53+0000\n"
+"Last-Translator: Abdullah Albaroty <albaroty@gmail.com>\n"
 "Language-Team: Arabic <https://translate.fedoraproject.org/projects/cockpit/"
 "cockpit-files/ar/>\n"
 "Language: ar\n"
@@ -118,10 +118,10 @@ msgstr "حجب الجحاز"
 msgid "Bookmarks"
 msgstr "العلامات المرجعية"
 
-#: src/dialogs/permissions.tsx:422 src/dialogs/copyPasteOwnership.tsx:179
+#: src/dialogs/editor.tsx:252 src/dialogs/copyPasteOwnership.tsx:179
 #: src/dialogs/delete.tsx:110 src/dialogs/mkdir.tsx:150
-#: src/dialogs/editor.tsx:252 src/dialogs/rename.tsx:100
-#: src/dialogs/create-file.tsx:211 src/dialogs/symlink.tsx:246
+#: src/dialogs/permissions.tsx:422 src/dialogs/create-file.tsx:211
+#: src/dialogs/rename.tsx:100 src/dialogs/symlink.tsx:246
 #: src/upload-button.tsx:159
 msgid "Cancel"
 msgstr "إلغاء"
@@ -166,7 +166,7 @@ msgstr "جهاز محوري"
 msgid "Clear filter"
 msgstr "إزالة عامل التصفية"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:46 src/dialogs/editor.tsx:252
+#: src/dialogs/editor.tsx:252 src/dialogs/keyboardShortcutsHelp.tsx:46
 msgid "Close"
 msgstr "أغلق"
 
@@ -194,15 +194,15 @@ msgstr "لنسخ المجلد أو الدليل المحدد"
 msgid "Create"
 msgstr "إنشاء"
 
-#: src/menu.tsx:113 src/dialogs/mkdir.tsx:93
+#: src/dialogs/mkdir.tsx:93 src/menu.tsx:113
 msgid "Create directory"
 msgstr "إنشاء دليل"
 
-#: src/menu.tsx:118 src/dialogs/create-file.tsx:151
+#: src/dialogs/create-file.tsx:151 src/menu.tsx:118
 msgid "Create file"
 msgstr "إنشاء ملف"
 
-#: src/menu.tsx:204 src/dialogs/symlink.tsx:244
+#: src/dialogs/symlink.tsx:244 src/menu.tsx:204
 msgid "Create link"
 msgstr "إنشاء رابط"
 
@@ -214,7 +214,7 @@ msgstr "إنشاء رابط إلى $0"
 msgid "Create new directory"
 msgstr "إنشاء دليل جديد"
 
-#: src/menu.tsx:175 src/menu.tsx:217 src/dialogs/delete.tsx:108
+#: src/dialogs/delete.tsx:108 src/menu.tsx:175 src/menu.tsx:217
 msgid "Delete"
 msgstr "حذف"
 
@@ -299,7 +299,7 @@ msgstr "أسقط الملفات للتحميل"
 msgid "Edit $0"
 msgstr "عدِّل $0"
 
-#: src/files-breadcrumbs.tsx:298 src/dialogs/keyboardShortcutsHelp.tsx:100
+#: src/dialogs/keyboardShortcutsHelp.tsx:100 src/files-breadcrumbs.tsx:298
 msgid "Edit path"
 msgstr "عدل المسار"
 
@@ -399,8 +399,8 @@ msgstr "التقدّم للأمام"
 msgid "Go up a directory"
 msgstr "الانتقال للأعلى"
 
-#: src/dialogs/permissions.tsx:332 src/files-card-body.tsx:596
-#: src/files-footer-detail.tsx:79 src/files-footer-detail.tsx:151
+#: src/dialogs/permissions.tsx:332 src/files-footer-detail.tsx:79
+#: src/files-footer-detail.tsx:151 src/files-card-body.tsx:596
 msgid "Group"
 msgstr "مجموعة"
 
@@ -520,7 +520,7 @@ msgstr "افتح الملف النصي"
 msgid "Original file on server"
 msgstr "الملف الأصلي على الخادم"
 
-#: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
+#: src/files-footer-detail.tsx:79 src/files-card-body.tsx:596
 msgid "Others"
 msgstr "الآخرون"
 
@@ -533,8 +533,8 @@ msgid "Overwrite"
 msgstr "الكتابة فوق"
 
 #: src/dialogs/permissions.tsx:317 src/dialogs/create-file.tsx:185
-#: src/header.tsx:99 src/files-card-body.tsx:557 src/files-card-body.tsx:596
-#: src/files-footer-detail.tsx:79
+#: src/header.tsx:99 src/files-footer-detail.tsx:79 src/files-card-body.tsx:557
+#: src/files-card-body.tsx:596
 msgid "Owner"
 msgstr "المالك"
 
@@ -554,7 +554,7 @@ msgstr "مالك (تنازلي)"
 msgid "Ownership"
 msgstr "الملكية"
 
-#: src/menu.tsx:106 src/dialogs/copyPasteOwnership.tsx:177
+#: src/dialogs/copyPasteOwnership.tsx:177 src/menu.tsx:106
 msgid "Paste"
 msgstr "لصق"
 
@@ -566,7 +566,7 @@ msgstr "لصق كمالك"
 msgid "Paste file or directory"
 msgstr "لصق الملف أو الدليل"
 
-#: src/menu.tsx:63 src/dialogs/copyPasteOwnership.tsx:66
+#: src/dialogs/copyPasteOwnership.tsx:66 src/menu.tsx:63
 msgid "Pasting failed"
 msgstr "فشل اللصق"
 
@@ -594,7 +594,7 @@ msgstr "قراءة وكتابة"
 msgid "Read, write, and execute"
 msgstr "قراءة، كتابة، وتنفيذ"
 
-#: src/dialogs/permissions.tsx:228 src/dialogs/editor.tsx:175 src/common.ts:59
+#: src/dialogs/editor.tsx:175 src/dialogs/permissions.tsx:228 src/common.ts:59
 msgid "Read-only"
 msgstr "القراءة-فقط"
 
@@ -622,9 +622,9 @@ msgstr "إعادة تحميل"
 msgid "Remove from bookmarks"
 msgstr "الإزالة من العلامات المرجعية"
 
-#: src/menu.tsx:169 src/dialogs/rename.tsx:91
+#: src/dialogs/rename.tsx:91 src/menu.tsx:169
 msgid "Rename"
-msgstr "إعادة التسمية"
+msgstr "أعد التسمية"
 
 #: src/dialogs/rename.tsx:114
 msgid "Rename $0?"
@@ -652,7 +652,7 @@ msgstr "السياق الأمني"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:133
 msgid "Select all"
-msgstr "تحديد الكل"
+msgstr "حدد الكل"
 
 #: src/dialogs/permissions.tsx:401
 msgid "Set executable as program"
