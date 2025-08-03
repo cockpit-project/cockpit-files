@@ -50,7 +50,7 @@
     "stylelint-formatter-pretty": "4.0.1",
     "stylelint-use-logical-spec": "5.0.1",
     "tsx": "4.20.3",
-    "typescript": "5.8.3"
+    "typescript": "5.9.2"
   },
   "dependencies": {
     "@patternfly/patternfly": "6.3.0",
