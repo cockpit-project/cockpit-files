@@ -5,7 +5,6 @@ import os from 'node:os';
 import path from 'node:path';
 import process from 'node:process';
 
-import copy from 'esbuild-plugin-copy';
 
 import { cockpitPoEsbuildPlugin } from './pkg/lib/cockpit-po-plugin.js';
 import { cockpitRsyncEsbuildPlugin } from './pkg/lib/cockpit-rsync-plugin.js';
@@ -95,14 +94,18 @@ const context = await esbuild.context({
     target: ['es2020'],
     plugins: [
         cleanPlugin(),
-        // Esbuild will only copy assets that are explicitly imported and used
-        // in the code. This is a problem for index.html and manifest.json which are not imported
-        copy({
-            assets: [
-                { from: ['./src/manifest.json'], to: ['./manifest.json'] },
-                { from: ['./src/index.html'], to: ['./index.html'] },
-            ]
-        }),
+        // Esbuild will only copy assets that are explicitly imported and used in the code.
+        // Copy the other files here.
+        {
+            name: 'copy-assets',
+            setup(build) {
+                build.onEnd(() => {
+                    fs.copyFileSync('./src/manifest.json', './dist/manifest.json');
+                    fs.copyFileSync('./src/index.html', './dist/index.html');
+                });
+            }
+        },
+
         filetype_plugin,
         ...esbuildStylesPlugins,
         cockpitPoEsbuildPlugin(),
