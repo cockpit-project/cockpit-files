@@ -194,18 +194,6 @@
     }
 }
 
-// // FIXME: Promote the CSS below to overrides, open PF issues // //
-
-// PatternFly always adds a margin after images inside of widgets with pf-m-end, which is incorrect when it's the last element
-.pf-v6-c-button__icon.pf-m-start:last-child {
-    margin-inline-end: 0;
-}
-
-// PF menu toggles are no longer spaced consistently
-.pf-v6-c-menu-toggle {
-    padding-inline: var(--pf-t--global--spacer--md) calc(var(--pf-t--global--spacer--md) * 0.75);
-}
-
 // Toolbar actions styling
 .header-toolbar {
     display: flex;
