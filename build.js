@@ -5,11 +5,11 @@ import os from 'node:os';
 import path from 'node:path';
 import process from 'node:process';
 
+import { sassPlugin } from 'esbuild-sass-plugin';
 
 import { cockpitPoEsbuildPlugin } from './pkg/lib/cockpit-po-plugin.js';
 import { cockpitRsyncEsbuildPlugin } from './pkg/lib/cockpit-rsync-plugin.js';
 import { cleanPlugin } from './pkg/lib/esbuild-cleanup-plugin.js';
-import { esbuildStylesPlugins } from './pkg/lib/esbuild-common.js';
 import { cockpitCompressPlugin } from './pkg/lib/esbuild-compress-plugin.js';
 import { filetype_plugin } from './src/filetype-plugin.ts';
 
@@ -107,7 +107,13 @@ const context = await esbuild.context({
         },
 
         filetype_plugin,
-        ...esbuildStylesPlugins,
+
+        sassPlugin({
+            loadPaths: [...nodePaths, 'node_modules'],
+            filter: /\.scss/,
+            quietDeps: true,
+        }),
+
         cockpitPoEsbuildPlugin(),
         ...production ? [cockpitCompressPlugin()] : [],
         cockpitRsyncEsbuildPlugin({ dest: packageJson.name }),
