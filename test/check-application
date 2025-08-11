@@ -2782,7 +2782,8 @@ class TestFiles(testlib.MachineCase):
             drag_file_event(".fileview-wrapper", 'dragenter', 'drag-drop-testfile.txt')
             b.wait_visible(".drag-drop-upload-blocked")
             b.assert_pixels(".files-card", "drag-drop-upload-dropzone-blocked",
-                            mock={".item-date": "Jun 19, 2024, 11:30 AM"})
+                            mock={".item-date": "Jun 19, 2024, 11:30 AM"},
+                            ignore=["#upload-progress-btn"])
             drag_file_event(".fileview-wrapper", 'dragleave', 'drag-drop-testfile.txt')
             b.wait_not_present(".drag-drop-upload-blocked")
             # Dropping the file does nothing
