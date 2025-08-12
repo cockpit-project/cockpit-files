@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-30 03:57+0000\n"
+"POT-Creation-Date: 2025-08-09 03:42+0000\n"
 "PO-Revision-Date: 2025-05-14 14:12+0000\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <https://translate.fedoraproject.org/projects/"
@@ -115,10 +115,10 @@ msgstr "ბლოკური მოწყობილობა"
 msgid "Bookmarks"
 msgstr "სანიშნეები"
 
-#: src/dialogs/editor.tsx:252 src/dialogs/copyPasteOwnership.tsx:179
-#: src/dialogs/delete.tsx:110 src/dialogs/mkdir.tsx:150
-#: src/dialogs/permissions.tsx:422 src/dialogs/create-file.tsx:211
-#: src/dialogs/rename.tsx:100 src/dialogs/symlink.tsx:246
+#: src/dialogs/copyPasteOwnership.tsx:179 src/dialogs/create-file.tsx:211
+#: src/dialogs/symlink.tsx:246 src/dialogs/rename.tsx:100
+#: src/dialogs/editor.tsx:252 src/dialogs/mkdir.tsx:150
+#: src/dialogs/permissions.tsx:422 src/dialogs/delete.tsx:110
 #: src/upload-button.tsx:159
 msgid "Cancel"
 msgstr "გაუქმება"
@@ -163,7 +163,7 @@ msgstr "სიმბოლური მოწყობილობა"
 msgid "Clear filter"
 msgstr "ფილტრის გასუფთავება"
 
-#: src/dialogs/editor.tsx:252 src/dialogs/keyboardShortcutsHelp.tsx:46
+#: src/dialogs/keyboardShortcutsHelp.tsx:46 src/dialogs/editor.tsx:252
 msgid "Close"
 msgstr "დახურვა"
 
@@ -187,7 +187,7 @@ msgstr "კოპირება"
 msgid "Copy selected file or directory"
 msgstr "მონიშნული ფაილის ან საქაღალდის კოპირება"
 
-#: src/dialogs/mkdir.tsx:148 src/dialogs/create-file.tsx:208
+#: src/dialogs/create-file.tsx:208 src/dialogs/mkdir.tsx:148
 msgid "Create"
 msgstr "შექმნა"
 
@@ -396,8 +396,8 @@ msgstr "წინ გადასვლა"
 msgid "Go up a directory"
 msgstr "ზემო საქაღალდეზე გადასვლა"
 
-#: src/dialogs/permissions.tsx:332 src/files-footer-detail.tsx:79
-#: src/files-footer-detail.tsx:151 src/files-card-body.tsx:596
+#: src/dialogs/permissions.tsx:332 src/files-card-body.tsx:596
+#: src/files-footer-detail.tsx:79 src/files-footer-detail.tsx:151
 msgid "Group"
 msgstr "ჯგუფი"
 
@@ -517,7 +517,7 @@ msgstr "ტექსტური ფაილის გახსნა"
 msgid "Original file on server"
 msgstr "ორიგინალი ფაილი სერვერზე"
 
-#: src/files-footer-detail.tsx:79 src/files-card-body.tsx:596
+#: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
 msgid "Others"
 msgstr "სხვები"
 
@@ -525,13 +525,13 @@ msgstr "სხვები"
 msgid "Others access"
 msgstr "სხვების წვდომა"
 
-#: src/dialogs/editor.tsx:236 src/dialogs/rename.tsx:98
+#: src/dialogs/rename.tsx:98 src/dialogs/editor.tsx:236
 msgid "Overwrite"
 msgstr "გადაწერა"
 
-#: src/dialogs/permissions.tsx:317 src/dialogs/create-file.tsx:185
-#: src/header.tsx:99 src/files-footer-detail.tsx:79 src/files-card-body.tsx:557
-#: src/files-card-body.tsx:596
+#: src/header.tsx:99 src/dialogs/create-file.tsx:185
+#: src/dialogs/permissions.tsx:317 src/files-card-body.tsx:557
+#: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
 msgid "Owner"
 msgstr "მფლობელი"
 
