@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-30 03:57+0000\n"
+"POT-Creation-Date: 2025-08-09 03:42+0000\n"
 "PO-Revision-Date: 2025-03-07 04:16+0000\n"
 "Last-Translator: Watson Xu <xuhuashan@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <https://translate.fedoraproject.org/"
@@ -109,10 +109,10 @@ msgstr "块设备"
 msgid "Bookmarks"
 msgstr "书签"
 
-#: src/dialogs/editor.tsx:252 src/dialogs/copyPasteOwnership.tsx:179
-#: src/dialogs/delete.tsx:110 src/dialogs/mkdir.tsx:150
-#: src/dialogs/permissions.tsx:422 src/dialogs/create-file.tsx:211
-#: src/dialogs/rename.tsx:100 src/dialogs/symlink.tsx:246
+#: src/dialogs/copyPasteOwnership.tsx:179 src/dialogs/create-file.tsx:211
+#: src/dialogs/symlink.tsx:246 src/dialogs/rename.tsx:100
+#: src/dialogs/editor.tsx:252 src/dialogs/mkdir.tsx:150
+#: src/dialogs/permissions.tsx:422 src/dialogs/delete.tsx:110
 #: src/upload-button.tsx:159
 msgid "Cancel"
 msgstr "取消"
@@ -157,7 +157,7 @@ msgstr "字符设备"
 msgid "Clear filter"
 msgstr "清除过滤器"
 
-#: src/dialogs/editor.tsx:252 src/dialogs/keyboardShortcutsHelp.tsx:46
+#: src/dialogs/keyboardShortcutsHelp.tsx:46 src/dialogs/editor.tsx:252
 msgid "Close"
 msgstr "关闭"
 
@@ -181,7 +181,7 @@ msgstr "复制"
 msgid "Copy selected file or directory"
 msgstr "复制所选的文件或目录"
 
-#: src/dialogs/mkdir.tsx:148 src/dialogs/create-file.tsx:208
+#: src/dialogs/create-file.tsx:208 src/dialogs/mkdir.tsx:148
 msgid "Create"
 msgstr "创建"
 
@@ -392,8 +392,8 @@ msgstr "继续"
 msgid "Go up a directory"
 msgstr "转到目录"
 
-#: src/dialogs/permissions.tsx:332 src/files-footer-detail.tsx:79
-#: src/files-footer-detail.tsx:151 src/files-card-body.tsx:596
+#: src/dialogs/permissions.tsx:332 src/files-card-body.tsx:596
+#: src/files-footer-detail.tsx:79 src/files-footer-detail.tsx:151
 msgid "Group"
 msgstr "组"
 
@@ -513,7 +513,7 @@ msgstr "打开文本文件"
 msgid "Original file on server"
 msgstr "服务器上原有的文件"
 
-#: src/files-footer-detail.tsx:79 src/files-card-body.tsx:596
+#: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
 msgid "Others"
 msgstr "其它"
 
@@ -521,13 +521,13 @@ msgstr "其它"
 msgid "Others access"
 msgstr "其它人访问权限"
 
-#: src/dialogs/editor.tsx:236 src/dialogs/rename.tsx:98
+#: src/dialogs/rename.tsx:98 src/dialogs/editor.tsx:236
 msgid "Overwrite"
 msgstr "覆盖"
 
-#: src/dialogs/permissions.tsx:317 src/dialogs/create-file.tsx:185
-#: src/header.tsx:99 src/files-footer-detail.tsx:79 src/files-card-body.tsx:557
-#: src/files-card-body.tsx:596
+#: src/header.tsx:99 src/dialogs/create-file.tsx:185
+#: src/dialogs/permissions.tsx:317 src/files-card-body.tsx:557
+#: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
 msgid "Owner"
 msgstr "所有者"
 
