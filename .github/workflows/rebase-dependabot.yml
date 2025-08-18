@@ -15,7 +15,7 @@ jobs:
         run: echo '${{ secrets.GITHUB_TOKEN }}' > ~/.config/github-token
 
       - name: Checkout bots repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: cockpit-project/bots
 
