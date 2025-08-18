@@ -22,7 +22,7 @@ jobs:
           echo '${{ secrets.GITHUB_TOKEN }}' > ~/.config/github-token
 
       - name: Clone repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       # https://github.blog/2022-04-12-git-security-vulnerability-announced/
       - name: Pacify git's permission check
