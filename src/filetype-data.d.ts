@@ -1,4 +1,4 @@
-import type { FileTypeData } from './filetype-lookup.ts';
+import type { FileTypeData } from './filetype-lookup.js';
 
 /* This data comes dynamically as JSON from filetype-plugin.ts */
 declare const filetype_data: FileTypeData;
