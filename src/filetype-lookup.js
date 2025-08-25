@@ -1,26 +1,36 @@
-export enum Category {
-    FILE = 0,
+export const Category = Object.freeze({
+    FILE: 0,
+    ARCHIVE: 1,
+    AUDIO: 2,
+    CODE: 3,
+    IMAGE: 4,
+    TEXT: 5,
+    VIDEO: 6,
+});
 
-    ARCHIVE,
-    AUDIO,
-    CODE,
-    IMAGE,
-    TEXT,
-    VIDEO,
-}
+/**
+ * @export @typedef {{
+ *   name: string,
+ *   class: string
+ * }} CategoryMetadata;
+ */
 
-export interface CategoryMetadata extends Record<string, string> {
-    name: string;
-    class: string;
-}
+/**
+ * @typedef {{
+ *   categories: Record<number, CategoryMetadata>;
+ *   extensions: Record<string, number>;
+ *   max_extension_length: number;
+ * }} FileTypeData;
+ */
 
-export interface FileTypeData {
-    categories: Record<Category, CategoryMetadata>;
-    extensions: Record<string, Category>;
-    max_extension_length: number;
-}
-
-export function filetype_lookup(filetype_data: FileTypeData, name: string) {
+/**
+ * Look up the category metadata for a given filename.
+ *
+ * @param {FileTypeData} filetype_data
+ * @param {string} name
+ * @returns {CategoryMetadata}
+ */
+export function filetype_lookup(filetype_data, name) {
     // Never find a dot at offset '0' (the one for a hidden file), or one that
     // would produce an extension that we know not to be in the database.
     let offset = Math.max(1, name.length - filetype_data.max_extension_length - 1);

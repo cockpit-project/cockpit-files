@@ -42,7 +42,7 @@ import { FilesBreadcrumbs } from "./files-breadcrumbs.tsx";
 import { FilesFolderView } from "./files-folder-view.tsx";
 import { FilesFooterDetail } from "./files-footer-detail.tsx";
 import filetype_data from './filetype-data'; // eslint-disable-line import/extensions
-import { filetype_lookup } from './filetype-lookup.ts';
+import { filetype_lookup } from './filetype-lookup.js';
 
 superuser.reload_page_on_change();
 

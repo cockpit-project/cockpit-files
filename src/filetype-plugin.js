@@ -19,19 +19,36 @@
  * That means that the data will end up in the bundle, but is never in the src/
  * directory.
  *
- * The lookup side of this all lives in 'filetype-lookup.ts'.  It can be used
+ * The lookup side of this all lives in 'filetype-lookup.js'.  It can be used
  * with the data imported from './filetype-data' or it can be used directly
  * with the return value of the `create_filetype_data()` function`.
  */
 
-import type { Plugin, PluginBuild } from 'esbuild';
-import language_map from 'language-map' with { type: 'json' };
-import mime_db from 'mime-db/db.json' with { type: 'json' };
+import { readFileSync } from "node:fs";
+import { createRequire } from "node:module";
 
-import { Category, type FileTypeData } from './filetype-lookup.ts';
+import { Category } from './filetype-lookup.js';
 
-export function create_filetype_data() : FileTypeData {
-    const categories = {
+/**
+ * Roughly equivalent to `import(specifier, { with: { type: "json" } })` but
+ * avoids upsetting eslint too much.
+ *
+ * @template T
+ * @param {string} specifier - Module specifier
+ * @returns {T} Parsed JSON object.
+ */
+export function import_json(specifier) {
+    const require = createRequire(import.meta.url);
+    const filePath = require.resolve(specifier);
+    const text = readFileSync(filePath, "utf8");
+    return /** @type {T} */ (JSON.parse(text));
+}
+
+/**
+ * @returns { import("./filetype-lookup.js").FileTypeData }
+ */
+export function create_filetype_data() {
+    const categories = Object.freeze({
         [Category.FILE]: { name: "Unknown type", class: "file" },
         [Category.ARCHIVE]: { name: "Archive file", class: "archive-file" },
         [Category.AUDIO]: { name: "Audio file", class: "audio-file" },
@@ -39,12 +56,16 @@ export function create_filetype_data() : FileTypeData {
         [Category.IMAGE]: { name: "Image file", class: "image-file" },
         [Category.TEXT]: { name: "Text file", class: "text-file" },
         [Category.VIDEO]: { name: "Video file", class: "video-file" },
-    } as const;
+    });
 
-    const extensions: { [ext: string]: Category } = {};
+    /** @type {{ [ext: string]: number }} */ const extensions = {};
     let max_extension_length = 0;
 
-    function add_category_extensions(category: Category, exts: string[]) {
+    /**
+     * @param { import("./filetype-lookup.js").Category } category
+     * @param { string[] } exts
+     */
+    function add_category_extensions(category, exts) {
         for (let ext of exts) {
             if (ext[0] === '.') {
                 ext = ext.substring(1);
@@ -56,6 +77,7 @@ export function create_filetype_data() : FileTypeData {
     }
 
     // Broad-stroke categorization based on 'mime-db' package
+    const mime_db = import_json('mime-db/db.json');
     for (const [mimetype, details] of Object.entries(mime_db)) {
         if ('extensions' in details) {
             if (mimetype.startsWith('image/')) {
@@ -86,6 +108,7 @@ export function create_filetype_data() : FileTypeData {
     );
 
     // Special treatment for programming languages based on GitHub's database
+    const language_map = import_json('language-map');
     for (const lang of Object.values(language_map)) {
         if (lang.type === 'programming' && 'extensions' in lang) {
             add_category_extensions(Category.CODE, lang.extensions);
@@ -95,10 +118,17 @@ export function create_filetype_data() : FileTypeData {
     return { categories, extensions, max_extension_length };
 }
 
-export class FileTypePlugin implements Plugin {
+/** @typedef {import("esbuild").Plugin} Plugin */
+/**
+ * @implements {Plugin}
+ */
+export class FileTypePlugin {
     name = 'cockpit-files-filetype-plugin';
 
-    setup(build: PluginBuild) {
+    /**
+     * @param {import("esbuild").PluginBuild} build
+     */
+    setup(build) {
         build.onResolve({ filter: /^\.\/filetype-data$/ }, args => ({
             path: args.path,
             namespace: 'cockpit-files-filetype-plugin',
