@@ -202,7 +202,7 @@ const CreateFileModal = ({ dialogResult, path } : {
             <ModalFooter>
                 <Button
                   variant="primary"
-                  isDisabled={!filename || initialText === "" || filenameError !== null}
+                  isDisabled={!filename || initialText === null || filenameError !== null}
                   onClick={handleSave}
                 >
                     {_("Create")}
