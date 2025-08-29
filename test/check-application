@@ -3114,6 +3114,7 @@ class TestFiles(testlib.MachineCase):
         m.execute("""
             runuser -u admin -- bash -c "echo test > /home/admin/test.txt"
             runuser -u admin -- bash -c "echo planes > /home/admin/notes.txt"
+            runuser -u admin -- bash -c "echo emptyme > /home/admin/emptyme.txt"
             runuser -u admin -- truncate -s 2M /home/admin/big.txt
             runuser -u admin -- touch /home/admin/archive.tar.gz
         """)
@@ -3148,6 +3149,21 @@ class TestFiles(testlib.MachineCase):
         self.assertEqual(m.execute("cat /home/admin/test.txt"), "test\n")
 
         self.assert_owner('/home/admin/test.txt', 'admin:admin')
+
+        # Opening a test file, remove all text, and save
+        open_editor("emptyme.txt")
+        b.set_input_text(".file-editor-modal textarea", "", append=False, value_check=False)
+        b.wait_val(".file-editor-modal textarea", "")
+        b.wait_visible(".file-editor-modal.is-modified")
+        b.click(".file-editor-modal button.pf-m-primary")
+        # Saving resets modified state so should not be shown
+        b.wait_not_present(".file-editor-modal.is-modified")
+
+        b.click(".file-editor-modal button.pf-m-link")
+        b.wait_not_present(".file-editor-modal")
+
+        validate_content("emptyme.txt", "")
+        self.assert_owner("/home/admin/emptyme.txt", "admin:admin")
 
         # Opening a test file, add text and save
         open_editor("test.txt")
@@ -3336,6 +3352,16 @@ class TestFiles(testlib.MachineCase):
         b.wait_val("#file-name", "admin.txt")
         b.click(".pf-v6-c-modal-box__footer button.pf-m-link")  # cancel
         b.wait_not_present(".pf-v6-c-modal-box")
+
+        # Can create empty files
+        open_create_file_modal()
+        b.wait_not_present("#create-file-owner")
+        b.set_input_text("#file-name", "empty-file")
+        b.set_input_text(".file-create-modal textarea", "")
+        b.click("button.pf-m-primary")
+        b.wait_not_present(".pf-v6-c-modal-box")
+        self.assert_owner("/home/admin/empty-file", "admin:admin")
+        self.assertEqual(m.execute("cat /home/admin/empty-file"), "")
 
         # Unable to create a file
         self.open_folder_context_menu()
