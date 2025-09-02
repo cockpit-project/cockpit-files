@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-09 03:42+0000\n"
+"POT-Creation-Date: 2025-08-28 03:25+0000\n"
 "PO-Revision-Date: 2025-07-18 05:53+0000\n"
 "Last-Translator: Jo Hyeonsu <cloud9350@naver.com>\n"
 "Language-Team: Korean <https://translate.fedoraproject.org/projects/cockpit/"
@@ -114,11 +114,11 @@ msgstr "블록 장치"
 msgid "Bookmarks"
 msgstr "즐겨찾기"
 
-#: src/dialogs/copyPasteOwnership.tsx:179 src/dialogs/create-file.tsx:211
-#: src/dialogs/symlink.tsx:246 src/dialogs/rename.tsx:100
-#: src/dialogs/editor.tsx:252 src/dialogs/mkdir.tsx:150
-#: src/dialogs/permissions.tsx:422 src/dialogs/delete.tsx:110
-#: src/upload-button.tsx:159
+#: src/upload-button.tsx:159 src/dialogs/symlink.tsx:246
+#: src/dialogs/create-file.tsx:211 src/dialogs/delete.tsx:110
+#: src/dialogs/editor.tsx:252 src/dialogs/copyPasteOwnership.tsx:179
+#: src/dialogs/permissions.tsx:422 src/dialogs/mkdir.tsx:150
+#: src/dialogs/rename.tsx:100
 msgid "Cancel"
 msgstr "취소"
 
@@ -162,7 +162,7 @@ msgstr "문자 장치"
 msgid "Clear filter"
 msgstr "필터 지우기"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:46 src/dialogs/editor.tsx:252
+#: src/dialogs/editor.tsx:252 src/dialogs/keyboardShortcutsHelp.tsx:46
 msgid "Close"
 msgstr "종료"
 
@@ -190,15 +190,15 @@ msgstr "선택된 파일 또는 디렉토리를 복사"
 msgid "Create"
 msgstr "생성"
 
-#: src/dialogs/mkdir.tsx:93 src/menu.tsx:113
+#: src/menu.tsx:113 src/dialogs/mkdir.tsx:93
 msgid "Create directory"
 msgstr "디렉토리 생성"
 
-#: src/dialogs/create-file.tsx:151 src/menu.tsx:118
+#: src/menu.tsx:118 src/dialogs/create-file.tsx:151
 msgid "Create file"
 msgstr "파일 생성"
 
-#: src/dialogs/symlink.tsx:244 src/menu.tsx:204
+#: src/menu.tsx:204 src/dialogs/symlink.tsx:244
 msgid "Create link"
 msgstr "연결 생성"
 
@@ -210,7 +210,7 @@ msgstr "$0로 연결 생성"
 msgid "Create new directory"
 msgstr "신규 디렉토리 생성"
 
-#: src/dialogs/delete.tsx:108 src/menu.tsx:175 src/menu.tsx:217
+#: src/menu.tsx:175 src/menu.tsx:217 src/dialogs/delete.tsx:108
 msgid "Delete"
 msgstr "삭제"
 
@@ -524,7 +524,7 @@ msgstr "기타"
 msgid "Others access"
 msgstr "기타 접근"
 
-#: src/dialogs/rename.tsx:98 src/dialogs/editor.tsx:236
+#: src/dialogs/editor.tsx:236 src/dialogs/rename.tsx:98
 msgid "Overwrite"
 msgstr "덮어쓰기"
 
@@ -550,7 +550,7 @@ msgstr "소유자 내림차순"
 msgid "Ownership"
 msgstr "소유권"
 
-#: src/dialogs/copyPasteOwnership.tsx:177 src/menu.tsx:106
+#: src/menu.tsx:106 src/dialogs/copyPasteOwnership.tsx:177
 msgid "Paste"
 msgstr "붙여넣기"
 
@@ -562,7 +562,7 @@ msgstr "소유자로 붙여넣기"
 msgid "Paste file or directory"
 msgstr "파일 또는 디렉토리 붙여넣기"
 
-#: src/dialogs/copyPasteOwnership.tsx:66 src/menu.tsx:63
+#: src/menu.tsx:63 src/dialogs/copyPasteOwnership.tsx:66
 msgid "Pasting failed"
 msgstr "붙여넣기 실패함"
 
@@ -618,7 +618,7 @@ msgstr "재적재"
 msgid "Remove from bookmarks"
 msgstr "즐겨찾기에서 제거"
 
-#: src/dialogs/rename.tsx:91 src/menu.tsx:169
+#: src/menu.tsx:169 src/dialogs/rename.tsx:91
 msgid "Rename"
 msgstr "이름변경"
 
