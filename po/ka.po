@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-09 03:42+0000\n"
+"POT-Creation-Date: 2025-08-28 03:25+0000\n"
 "PO-Revision-Date: 2025-05-14 14:12+0000\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <https://translate.fedoraproject.org/projects/"
@@ -115,11 +115,11 @@ msgstr "ბლოკური მოწყობილობა"
 msgid "Bookmarks"
 msgstr "სანიშნეები"
 
-#: src/dialogs/copyPasteOwnership.tsx:179 src/dialogs/create-file.tsx:211
-#: src/dialogs/symlink.tsx:246 src/dialogs/rename.tsx:100
-#: src/dialogs/editor.tsx:252 src/dialogs/mkdir.tsx:150
-#: src/dialogs/permissions.tsx:422 src/dialogs/delete.tsx:110
-#: src/upload-button.tsx:159
+#: src/upload-button.tsx:159 src/dialogs/symlink.tsx:246
+#: src/dialogs/create-file.tsx:211 src/dialogs/delete.tsx:110
+#: src/dialogs/editor.tsx:252 src/dialogs/copyPasteOwnership.tsx:179
+#: src/dialogs/permissions.tsx:422 src/dialogs/mkdir.tsx:150
+#: src/dialogs/rename.tsx:100
 msgid "Cancel"
 msgstr "გაუქმება"
 
@@ -163,7 +163,7 @@ msgstr "სიმბოლური მოწყობილობა"
 msgid "Clear filter"
 msgstr "ფილტრის გასუფთავება"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:46 src/dialogs/editor.tsx:252
+#: src/dialogs/editor.tsx:252 src/dialogs/keyboardShortcutsHelp.tsx:46
 msgid "Close"
 msgstr "დახურვა"
 
@@ -191,15 +191,15 @@ msgstr "მონიშნული ფაილის ან საქაღა
 msgid "Create"
 msgstr "შექმნა"
 
-#: src/dialogs/mkdir.tsx:93 src/menu.tsx:113
+#: src/menu.tsx:113 src/dialogs/mkdir.tsx:93
 msgid "Create directory"
 msgstr "საქაღალდის შექმნა"
 
-#: src/dialogs/create-file.tsx:151 src/menu.tsx:118
+#: src/menu.tsx:118 src/dialogs/create-file.tsx:151
 msgid "Create file"
 msgstr "ფაილის შექმნა"
 
-#: src/dialogs/symlink.tsx:244 src/menu.tsx:204
+#: src/menu.tsx:204 src/dialogs/symlink.tsx:244
 msgid "Create link"
 msgstr "ბმულის შექმნა"
 
@@ -211,7 +211,7 @@ msgstr "ბმულის შექმნა $0-მდე"
 msgid "Create new directory"
 msgstr "ახალი საქაღალდის შექმნა"
 
-#: src/dialogs/delete.tsx:108 src/menu.tsx:175 src/menu.tsx:217
+#: src/menu.tsx:175 src/menu.tsx:217 src/dialogs/delete.tsx:108
 msgid "Delete"
 msgstr "წაშლა"
 
@@ -525,7 +525,7 @@ msgstr "სხვები"
 msgid "Others access"
 msgstr "სხვების წვდომა"
 
-#: src/dialogs/rename.tsx:98 src/dialogs/editor.tsx:236
+#: src/dialogs/editor.tsx:236 src/dialogs/rename.tsx:98
 msgid "Overwrite"
 msgstr "გადაწერა"
 
@@ -551,7 +551,7 @@ msgstr "მფლობელი დაღმავალი"
 msgid "Ownership"
 msgstr "მფლობელობა"
 
-#: src/dialogs/copyPasteOwnership.tsx:177 src/menu.tsx:106
+#: src/menu.tsx:106 src/dialogs/copyPasteOwnership.tsx:177
 msgid "Paste"
 msgstr "ჩასმა"
 
@@ -563,7 +563,7 @@ msgstr "ჩასმა მფლობელის სახელით"
 msgid "Paste file or directory"
 msgstr "ფაილის ან საქაღალდის ჩასმა"
 
-#: src/dialogs/copyPasteOwnership.tsx:66 src/menu.tsx:63
+#: src/menu.tsx:63 src/dialogs/copyPasteOwnership.tsx:66
 msgid "Pasting failed"
 msgstr "ჩასმა ჩავარდა"
 
@@ -620,7 +620,7 @@ msgstr "თავიდან ჩატვირთვა"
 msgid "Remove from bookmarks"
 msgstr "სანიშნეებიდან წაშლა"
 
-#: src/dialogs/rename.tsx:91 src/menu.tsx:169
+#: src/menu.tsx:169 src/dialogs/rename.tsx:91
 msgid "Rename"
 msgstr "გადარქმევა"
 
