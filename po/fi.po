@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-28 03:25+0000\n"
+"POT-Creation-Date: 2025-09-10 03:19+0000\n"
 "PO-Revision-Date: 2025-04-03 14:53+0000\n"
 "Last-Translator: Ricky Tigg <ricky.tigg@gmail.com>\n"
 "Language-Team: Finnish <https://translate.fedoraproject.org/projects/cockpit-"
@@ -116,26 +116,26 @@ msgid "Bookmarks"
 msgstr "Kirjanmerkit"
 
 #: src/upload-button.tsx:159 src/dialogs/symlink.tsx:246
-#: src/dialogs/create-file.tsx:211 src/dialogs/delete.tsx:110
+#: src/dialogs/create-file.tsx:209 src/dialogs/delete.tsx:110
 #: src/dialogs/editor.tsx:252 src/dialogs/copyPasteOwnership.tsx:179
 #: src/dialogs/permissions.tsx:422 src/dialogs/mkdir.tsx:150
 #: src/dialogs/rename.tsx:100
 msgid "Cancel"
 msgstr "Peru"
 
-#: src/upload-button.tsx:469
+#: src/upload-button.tsx:467
 msgid "Cancel upload of $0"
 msgstr "Peru $0:n lataus ulospäin"
 
-#: src/upload-button.tsx:352
+#: src/upload-button.tsx:350
 msgid "Cancelled"
 msgstr "Peruttu"
 
-#: src/upload-button.tsx:353
+#: src/upload-button.tsx:351
 msgid "Cancelled upload of $0"
 msgstr "$0:n lataus ulospäin peruttu"
 
-#: src/dialogs/create-file.tsx:227
+#: src/dialogs/create-file.tsx:225
 msgid "Cannot create file in current directory"
 msgstr "Nykyiseen hakemistoon ei voi luoda tiedostoa"
 
@@ -147,7 +147,7 @@ msgstr "Tiedostoja ei voi pudottaa, toinen lataus ulospäin on jo meneillään"
 msgid "Change"
 msgstr "Vaihda"
 
-#: src/upload-button.tsx:403
+#: src/upload-button.tsx:401
 msgid "Change permissions"
 msgstr "Muuta käyttöoikeuksia"
 
@@ -187,7 +187,7 @@ msgstr "Kopio"
 msgid "Copy selected file or directory"
 msgstr "Kopioi valittu tiedosto tai kansio"
 
-#: src/dialogs/create-file.tsx:208 src/dialogs/mkdir.tsx:148
+#: src/dialogs/create-file.tsx:206 src/dialogs/mkdir.tsx:148
 msgid "Create"
 msgstr "Luo"
 
@@ -195,7 +195,7 @@ msgstr "Luo"
 msgid "Create directory"
 msgstr "Luo hakemisto"
 
-#: src/menu.tsx:118 src/dialogs/create-file.tsx:151
+#: src/menu.tsx:118 src/dialogs/create-file.tsx:149
 msgid "Create file"
 msgstr "Luo tiedosto"
 
@@ -312,7 +312,7 @@ msgstr "Muokataan"
 msgid "Execute-only"
 msgstr "Vain suoritettavaksi"
 
-#: src/upload-button.tsx:291
+#: src/upload-button.tsx:289
 msgid "Failed"
 msgstr "Epäonnistui"
 
@@ -324,11 +324,11 @@ msgstr "Tiedostoselain"
 msgid "File exists"
 msgstr "Tiedosto on olemassa"
 
-#: src/dialogs/create-file.tsx:163
+#: src/dialogs/create-file.tsx:161
 msgid "File name"
 msgstr "Tiedostonimi"
 
-#: src/upload-button.tsx:372
+#: src/upload-button.tsx:370
 msgid "File uploaded"
 msgstr "Tiedosto ladattu ulospäin"
 
@@ -348,7 +348,7 @@ msgstr ""
 "Liitettävällä tiedostolla on eri omistaja. Oletusarvoisesti omistajuus "
 "muutetaan vastaamaan kohdehakemistoa."
 
-#: src/upload-button.tsx:372
+#: src/upload-button.tsx:370
 msgid "Files uploaded"
 msgstr "Tiedostot ladattu ulospäin"
 
@@ -529,7 +529,7 @@ msgstr "Muiden pääsy"
 msgid "Overwrite"
 msgstr "Korvaa"
 
-#: src/header.tsx:99 src/dialogs/create-file.tsx:185
+#: src/header.tsx:99 src/dialogs/create-file.tsx:183
 #: src/dialogs/permissions.tsx:317 src/files-card-body.tsx:557
 #: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
 msgid "Owner"
@@ -567,7 +567,7 @@ msgstr "Liitä tiedosto tai hakemisto"
 msgid "Pasting failed"
 msgstr "Liittäminen epäonnistui"
 
-#: src/dialogs/create-file.tsx:228
+#: src/dialogs/create-file.tsx:226
 msgid "Permission denied"
 msgstr "Käyttö estetty"
 
@@ -716,7 +716,7 @@ msgstr "Tyyppi"
 msgid "Unable to create bookmark directory"
 msgstr "Kirjanmerkkihakemistoa ei voi luoda"
 
-#: src/upload-button.tsx:332
+#: src/upload-button.tsx:330
 msgid "Unable to move uploaded file to final destination"
 msgstr "Ulospäinladattua tiedostoa ei voida siirtää lopulliseen määränpäähän"
 
@@ -724,16 +724,16 @@ msgstr "Ulospäinladattua tiedostoa ei voida siirtää lopulliseen määränpä�
 msgid "Unable to save bookmark file"
 msgstr "Kirjanmerkkitiedostoa ei voi tallentaa"
 
-#: src/upload-button.tsx:505
+#: src/upload-button.tsx:503
 msgid "Upload"
 msgstr "Lataa ulospäin"
 
 #
-#: src/upload-button.tsx:486
+#: src/upload-button.tsx:484
 msgid "Upload $0% completed"
 msgstr "Lataus ulospäin $0 % valmis"
 
-#: src/upload-button.tsx:331 src/upload-button.tsx:355
+#: src/upload-button.tsx:329 src/upload-button.tsx:353
 msgid "Upload error"
 msgstr "Lataus ulospäin -virhe"
 
@@ -741,7 +741,7 @@ msgstr "Lataus ulospäin -virhe"
 msgid "Uploaded as $0, $1"
 msgstr "Ladattu ulospäin $0:na, $1"
 
-#: src/upload-button.tsx:450
+#: src/upload-button.tsx:448
 msgid "Uploads"
 msgstr "Lataukset ulospäin"
 

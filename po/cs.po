@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-28 03:25+0000\n"
+"POT-Creation-Date: 2025-09-10 03:19+0000\n"
 "PO-Revision-Date: 2025-04-01 02:53+0000\n"
 "Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
 "memory@weblate.org>\n"
@@ -117,26 +117,26 @@ msgid "Bookmarks"
 msgstr "Záložky"
 
 #: src/upload-button.tsx:159 src/dialogs/symlink.tsx:246
-#: src/dialogs/create-file.tsx:211 src/dialogs/delete.tsx:110
+#: src/dialogs/create-file.tsx:209 src/dialogs/delete.tsx:110
 #: src/dialogs/editor.tsx:252 src/dialogs/copyPasteOwnership.tsx:179
 #: src/dialogs/permissions.tsx:422 src/dialogs/mkdir.tsx:150
 #: src/dialogs/rename.tsx:100
 msgid "Cancel"
 msgstr "Storno"
 
-#: src/upload-button.tsx:469
+#: src/upload-button.tsx:467
 msgid "Cancel upload of $0"
 msgstr "Zrušit nahrávání $0"
 
-#: src/upload-button.tsx:352
+#: src/upload-button.tsx:350
 msgid "Cancelled"
 msgstr "Zrušeno"
 
-#: src/upload-button.tsx:353
+#: src/upload-button.tsx:351
 msgid "Cancelled upload of $0"
 msgstr "Zrušeno nahrávání $0"
 
-#: src/dialogs/create-file.tsx:227
+#: src/dialogs/create-file.tsx:225
 msgid "Cannot create file in current directory"
 msgstr "Ve stávající složce není možné soubor vytvořit"
 
@@ -149,7 +149,7 @@ msgstr ""
 msgid "Change"
 msgstr "Změnit"
 
-#: src/upload-button.tsx:403
+#: src/upload-button.tsx:401
 msgid "Change permissions"
 msgstr "Změnit oprávnění"
 
@@ -189,7 +189,7 @@ msgstr "Zkopírovat"
 msgid "Copy selected file or directory"
 msgstr "Zkopírovat označený soubor či složku"
 
-#: src/dialogs/create-file.tsx:208 src/dialogs/mkdir.tsx:148
+#: src/dialogs/create-file.tsx:206 src/dialogs/mkdir.tsx:148
 msgid "Create"
 msgstr "Vytvořit"
 
@@ -197,7 +197,7 @@ msgstr "Vytvořit"
 msgid "Create directory"
 msgstr "Vytvořit složku"
 
-#: src/menu.tsx:118 src/dialogs/create-file.tsx:151
+#: src/menu.tsx:118 src/dialogs/create-file.tsx:149
 msgid "Create file"
 msgstr "Vytvořit soubor"
 
@@ -314,7 +314,7 @@ msgstr "Upravování"
 msgid "Execute-only"
 msgstr "Pouze spouštět"
 
-#: src/upload-button.tsx:291
+#: src/upload-button.tsx:289
 msgid "Failed"
 msgstr "Nezdařilo se"
 
@@ -326,11 +326,11 @@ msgstr "Procházení souborů"
 msgid "File exists"
 msgstr "Soubor existuje"
 
-#: src/dialogs/create-file.tsx:163
+#: src/dialogs/create-file.tsx:161
 msgid "File name"
 msgstr "Název souboru"
 
-#: src/upload-button.tsx:372
+#: src/upload-button.tsx:370
 msgid "File uploaded"
 msgstr "Soubor nahrán"
 
@@ -350,7 +350,7 @@ msgstr ""
 "Vkládané soubory mají jiného vlastníka. Ve výchozím stavu bude vlastnictví "
 "změněno tak, aby odpovídalo cílové složce."
 
-#: src/upload-button.tsx:372
+#: src/upload-button.tsx:370
 msgid "Files uploaded"
 msgstr "Soubory nahrány"
 
@@ -531,7 +531,7 @@ msgstr "Přístup pro ostatní"
 msgid "Overwrite"
 msgstr "Přepsat"
 
-#: src/header.tsx:99 src/dialogs/create-file.tsx:185
+#: src/header.tsx:99 src/dialogs/create-file.tsx:183
 #: src/dialogs/permissions.tsx:317 src/files-card-body.tsx:557
 #: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
 msgid "Owner"
@@ -569,7 +569,7 @@ msgstr "Vložit soubor nebo složku"
 msgid "Pasting failed"
 msgstr "Vkládání se nezdařilo"
 
-#: src/dialogs/create-file.tsx:228
+#: src/dialogs/create-file.tsx:226
 msgid "Permission denied"
 msgstr "Přístup zamítnut"
 
@@ -718,7 +718,7 @@ msgstr "Typ"
 msgid "Unable to create bookmark directory"
 msgstr "Nepodařilo se vytvořit složku záložek"
 
-#: src/upload-button.tsx:332
+#: src/upload-button.tsx:330
 msgid "Unable to move uploaded file to final destination"
 msgstr "Nebylo možné přesunout nahrané soubory do konečného umístění"
 
@@ -726,15 +726,15 @@ msgstr "Nebylo možné přesunout nahrané soubory do konečného umístění"
 msgid "Unable to save bookmark file"
 msgstr "Nepodařilo se uložit soubor se záložkami"
 
-#: src/upload-button.tsx:505
+#: src/upload-button.tsx:503
 msgid "Upload"
 msgstr "Nahrát"
 
-#: src/upload-button.tsx:486
+#: src/upload-button.tsx:484
 msgid "Upload $0% completed"
 msgstr "Nahrávání z $0% dokončeno"
 
-#: src/upload-button.tsx:331 src/upload-button.tsx:355
+#: src/upload-button.tsx:329 src/upload-button.tsx:353
 msgid "Upload error"
 msgstr "Chyba nahrávání"
 
@@ -742,7 +742,7 @@ msgstr "Chyba nahrávání"
 msgid "Uploaded as $0, $1"
 msgstr "Nahráno jako $0,$1"
 
-#: src/upload-button.tsx:450
+#: src/upload-button.tsx:448
 msgid "Uploads"
 msgstr "Nahrání"
 

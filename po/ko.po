@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-28 03:25+0000\n"
+"POT-Creation-Date: 2025-09-10 03:19+0000\n"
 "PO-Revision-Date: 2025-07-18 05:53+0000\n"
 "Last-Translator: Jo Hyeonsu <cloud9350@naver.com>\n"
 "Language-Team: Korean <https://translate.fedoraproject.org/projects/cockpit/"
@@ -115,26 +115,26 @@ msgid "Bookmarks"
 msgstr "즐겨찾기"
 
 #: src/upload-button.tsx:159 src/dialogs/symlink.tsx:246
-#: src/dialogs/create-file.tsx:211 src/dialogs/delete.tsx:110
+#: src/dialogs/create-file.tsx:209 src/dialogs/delete.tsx:110
 #: src/dialogs/editor.tsx:252 src/dialogs/copyPasteOwnership.tsx:179
 #: src/dialogs/permissions.tsx:422 src/dialogs/mkdir.tsx:150
 #: src/dialogs/rename.tsx:100
 msgid "Cancel"
 msgstr "취소"
 
-#: src/upload-button.tsx:469
+#: src/upload-button.tsx:467
 msgid "Cancel upload of $0"
 msgstr "$0 올려주기 취소"
 
-#: src/upload-button.tsx:352
+#: src/upload-button.tsx:350
 msgid "Cancelled"
 msgstr "취소됨"
 
-#: src/upload-button.tsx:353
+#: src/upload-button.tsx:351
 msgid "Cancelled upload of $0"
 msgstr "$0 올려주기 취소됨"
 
-#: src/dialogs/create-file.tsx:227
+#: src/dialogs/create-file.tsx:225
 msgid "Cannot create file in current directory"
 msgstr "현재 디렉토리에서 파일을 생성 할 수 없습니다"
 
@@ -146,7 +146,7 @@ msgstr "다른 파일이 이미 진행 중이기 때문에 파일을 삭제 할 
 msgid "Change"
 msgstr "변경"
 
-#: src/upload-button.tsx:403
+#: src/upload-button.tsx:401
 msgid "Change permissions"
 msgstr "권한 변경"
 
@@ -186,7 +186,7 @@ msgstr "복사"
 msgid "Copy selected file or directory"
 msgstr "선택된 파일 또는 디렉토리를 복사"
 
-#: src/dialogs/create-file.tsx:208 src/dialogs/mkdir.tsx:148
+#: src/dialogs/create-file.tsx:206 src/dialogs/mkdir.tsx:148
 msgid "Create"
 msgstr "생성"
 
@@ -194,7 +194,7 @@ msgstr "생성"
 msgid "Create directory"
 msgstr "디렉토리 생성"
 
-#: src/menu.tsx:118 src/dialogs/create-file.tsx:151
+#: src/menu.tsx:118 src/dialogs/create-file.tsx:149
 msgid "Create file"
 msgstr "파일 생성"
 
@@ -311,7 +311,7 @@ msgstr "편집하기"
 msgid "Execute-only"
 msgstr "실행-전용"
 
-#: src/upload-button.tsx:291
+#: src/upload-button.tsx:289
 msgid "Failed"
 msgstr "실패함"
 
@@ -323,11 +323,11 @@ msgstr "파일 탐색기"
 msgid "File exists"
 msgstr "파일이 존재합니다"
 
-#: src/dialogs/create-file.tsx:163
+#: src/dialogs/create-file.tsx:161
 msgid "File name"
 msgstr "파일 이름"
 
-#: src/upload-button.tsx:372
+#: src/upload-button.tsx:370
 msgid "File uploaded"
 msgstr "파일 올려짐"
 
@@ -347,7 +347,7 @@ msgstr ""
 "붙여 넣기 중인 파일에 다른 소유자가 있습니다. 기본 값으로, 소유권은 대상 디렉"
 "토리와 일치하도록 변경됩니다."
 
-#: src/upload-button.tsx:372
+#: src/upload-button.tsx:370
 msgid "Files uploaded"
 msgstr "파일 올려짐"
 
@@ -528,7 +528,7 @@ msgstr "기타 접근"
 msgid "Overwrite"
 msgstr "덮어쓰기"
 
-#: src/header.tsx:99 src/dialogs/create-file.tsx:185
+#: src/header.tsx:99 src/dialogs/create-file.tsx:183
 #: src/dialogs/permissions.tsx:317 src/files-card-body.tsx:557
 #: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
 msgid "Owner"
@@ -566,7 +566,7 @@ msgstr "파일 또는 디렉토리 붙여넣기"
 msgid "Pasting failed"
 msgstr "붙여넣기 실패함"
 
-#: src/dialogs/create-file.tsx:228
+#: src/dialogs/create-file.tsx:226
 msgid "Permission denied"
 msgstr "권한이 거부되었습니다"
 
@@ -714,7 +714,7 @@ msgstr "유형"
 msgid "Unable to create bookmark directory"
 msgstr "즐겨찾기 디렉토리를 생성 할 수 없음"
 
-#: src/upload-button.tsx:332
+#: src/upload-button.tsx:330
 msgid "Unable to move uploaded file to final destination"
 msgstr "올려진 파일을 최종 목적지에 이동 할 수 없음"
 
@@ -722,15 +722,15 @@ msgstr "올려진 파일을 최종 목적지에 이동 할 수 없음"
 msgid "Unable to save bookmark file"
 msgstr "즐겨찾기 파일을 저장 할 수 없음"
 
-#: src/upload-button.tsx:505
+#: src/upload-button.tsx:503
 msgid "Upload"
 msgstr "올려주기"
 
-#: src/upload-button.tsx:486
+#: src/upload-button.tsx:484
 msgid "Upload $0% completed"
 msgstr "올려주기 $0% c완료"
 
-#: src/upload-button.tsx:331 src/upload-button.tsx:355
+#: src/upload-button.tsx:329 src/upload-button.tsx:353
 msgid "Upload error"
 msgstr "올려주기 오류"
 
@@ -738,7 +738,7 @@ msgstr "올려주기 오류"
 msgid "Uploaded as $0, $1"
 msgstr "$0, $1 로 올려짐"
 
-#: src/upload-button.tsx:450
+#: src/upload-button.tsx:448
 msgid "Uploads"
 msgstr "올려주기"
 

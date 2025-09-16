@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-28 03:25+0000\n"
-"PO-Revision-Date: 2025-08-28 16:53+0000\n"
-"Last-Translator: fangzheng <fz0000@sina.com>\n"
+"POT-Creation-Date: 2025-09-10 03:19+0000\n"
+"PO-Revision-Date: 2025-09-11 01:28+0000\n"
+"Last-Translator: Jesse Guo <jesseguotech@outlook.com>\n"
 "Language-Team: Chinese (Simplified) <https://translate.fedoraproject.org/"
 "projects/cockpit/cockpit-files/zh_CN/>\n"
 "Language: zh_CN\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
-"X-Generator: Weblate 5.13\n"
+"X-Generator: Weblate 5.13.2\n"
 
 #: src/menu.tsx:64
 msgid "\"$0\" exists, not overwriting with paste."
@@ -72,17 +72,17 @@ msgstr "由 A 到 Z"
 
 #: src/dialogs/symlink.tsx:215
 msgid "Absolute"
-msgstr ""
+msgstr "绝对"
 
 #: src/dialogs/symlink.tsx:201
 msgid ""
 "Absolute symlinks are ideal when referring to files or directories that "
 "won't move, such as system files."
-msgstr ""
+msgstr "绝对符号链接适合指向不会被移动的文件或目录（例如系统文件）。"
 
 #: src/dialogs/symlink.tsx:197
 msgid "Absolute vs. Relative"
-msgstr ""
+msgstr "绝对 vs. 相对"
 
 #: src/dialogs/permissions.tsx:349
 msgid "Access"
@@ -110,26 +110,26 @@ msgid "Bookmarks"
 msgstr "书签"
 
 #: src/upload-button.tsx:159 src/dialogs/symlink.tsx:246
-#: src/dialogs/create-file.tsx:211 src/dialogs/delete.tsx:110
+#: src/dialogs/create-file.tsx:209 src/dialogs/delete.tsx:110
 #: src/dialogs/editor.tsx:252 src/dialogs/copyPasteOwnership.tsx:179
 #: src/dialogs/permissions.tsx:422 src/dialogs/mkdir.tsx:150
 #: src/dialogs/rename.tsx:100
 msgid "Cancel"
 msgstr "取消"
 
-#: src/upload-button.tsx:469
+#: src/upload-button.tsx:467
 msgid "Cancel upload of $0"
 msgstr "取消上传 $0"
 
-#: src/upload-button.tsx:352
+#: src/upload-button.tsx:350
 msgid "Cancelled"
 msgstr "已取消"
 
-#: src/upload-button.tsx:353
+#: src/upload-button.tsx:351
 msgid "Cancelled upload of $0"
 msgstr "已取消上传 $0"
 
-#: src/dialogs/create-file.tsx:227
+#: src/dialogs/create-file.tsx:225
 msgid "Cannot create file in current directory"
 msgstr "不能在当前目录中创建文件"
 
@@ -141,7 +141,7 @@ msgstr "无法丢弃文件，另一个上传已在进行中"
 msgid "Change"
 msgstr "变更"
 
-#: src/upload-button.tsx:403
+#: src/upload-button.tsx:401
 msgid "Change permissions"
 msgstr "更改权限"
 
@@ -181,7 +181,7 @@ msgstr "复制"
 msgid "Copy selected file or directory"
 msgstr "复制所选的文件或目录"
 
-#: src/dialogs/create-file.tsx:208 src/dialogs/mkdir.tsx:148
+#: src/dialogs/create-file.tsx:206 src/dialogs/mkdir.tsx:148
 msgid "Create"
 msgstr "创建"
 
@@ -189,7 +189,7 @@ msgstr "创建"
 msgid "Create directory"
 msgstr "创建目录"
 
-#: src/menu.tsx:118 src/dialogs/create-file.tsx:151
+#: src/menu.tsx:118 src/dialogs/create-file.tsx:149
 msgid "Create file"
 msgstr "创建文件"
 
@@ -306,7 +306,7 @@ msgstr "编辑中"
 msgid "Execute-only"
 msgstr "只能执行"
 
-#: src/upload-button.tsx:291
+#: src/upload-button.tsx:289
 msgid "Failed"
 msgstr "已失败"
 
@@ -318,11 +318,11 @@ msgstr "文件浏览器"
 msgid "File exists"
 msgstr "文件已存在"
 
-#: src/dialogs/create-file.tsx:163
+#: src/dialogs/create-file.tsx:161
 msgid "File name"
 msgstr "文件名"
 
-#: src/upload-button.tsx:372
+#: src/upload-button.tsx:370
 msgid "File uploaded"
 msgstr "文件已上传"
 
@@ -340,7 +340,7 @@ msgid ""
 "changed to match the destination directory."
 msgstr "要粘贴的文件有不同的所有者。默认情况下，所有权将更改为与目标目录匹配。"
 
-#: src/upload-button.tsx:372
+#: src/upload-button.tsx:370
 msgid "Files uploaded"
 msgstr "文件已上传"
 
@@ -521,7 +521,7 @@ msgstr "其它人访问权限"
 msgid "Overwrite"
 msgstr "覆盖"
 
-#: src/header.tsx:99 src/dialogs/create-file.tsx:185
+#: src/header.tsx:99 src/dialogs/create-file.tsx:183
 #: src/dialogs/permissions.tsx:317 src/files-card-body.tsx:557
 #: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
 msgid "Owner"
@@ -559,7 +559,7 @@ msgstr "粘贴文件或目录"
 msgid "Pasting failed"
 msgstr "粘贴失败"
 
-#: src/dialogs/create-file.tsx:228
+#: src/dialogs/create-file.tsx:226
 msgid "Permission denied"
 msgstr "权限被拒绝"
 
@@ -593,7 +593,7 @@ msgstr "常规文件"
 
 #: src/dialogs/symlink.tsx:222
 msgid "Relative"
-msgstr ""
+msgstr "相对"
 
 #: src/dialogs/symlink.tsx:204
 msgid ""
@@ -705,7 +705,7 @@ msgstr ""
 msgid "Unable to create bookmark directory"
 msgstr "无法创建书签目录"
 
-#: src/upload-button.tsx:332
+#: src/upload-button.tsx:330
 msgid "Unable to move uploaded file to final destination"
 msgstr "无法将上传的文件移至最终目的地"
 
@@ -713,15 +713,15 @@ msgstr "无法将上传的文件移至最终目的地"
 msgid "Unable to save bookmark file"
 msgstr "无法保存书签文件"
 
-#: src/upload-button.tsx:505
+#: src/upload-button.tsx:503
 msgid "Upload"
 msgstr "上传"
 
-#: src/upload-button.tsx:486
+#: src/upload-button.tsx:484
 msgid "Upload $0% completed"
 msgstr "上传 $0 已完成"
 
-#: src/upload-button.tsx:331 src/upload-button.tsx:355
+#: src/upload-button.tsx:329 src/upload-button.tsx:353
 msgid "Upload error"
 msgstr "上传失败"
 
@@ -729,7 +729,7 @@ msgstr "上传失败"
 msgid "Uploaded as $0, $1"
 msgstr "上传为 $0，$1"
 
-#: src/upload-button.tsx:450
+#: src/upload-button.tsx:448
 msgid "Uploads"
 msgstr "上传项目"
 

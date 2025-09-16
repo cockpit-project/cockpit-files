@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-28 03:25+0000\n"
+"POT-Creation-Date: 2025-09-10 03:19+0000\n"
 "PO-Revision-Date: 2025-05-08 00:48+0000\n"
 "Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
 "memory@weblate.org>\n"
@@ -117,26 +117,26 @@ msgid "Bookmarks"
 msgstr "Favoritos"
 
 #: src/upload-button.tsx:159 src/dialogs/symlink.tsx:246
-#: src/dialogs/create-file.tsx:211 src/dialogs/delete.tsx:110
+#: src/dialogs/create-file.tsx:209 src/dialogs/delete.tsx:110
 #: src/dialogs/editor.tsx:252 src/dialogs/copyPasteOwnership.tsx:179
 #: src/dialogs/permissions.tsx:422 src/dialogs/mkdir.tsx:150
 #: src/dialogs/rename.tsx:100
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: src/upload-button.tsx:469
+#: src/upload-button.tsx:467
 msgid "Cancel upload of $0"
 msgstr "Cancelar o upload de $0"
 
-#: src/upload-button.tsx:352
+#: src/upload-button.tsx:350
 msgid "Cancelled"
 msgstr "Cancelado"
 
-#: src/upload-button.tsx:353
+#: src/upload-button.tsx:351
 msgid "Cancelled upload of $0"
 msgstr "Upload de $0 cancelado"
 
-#: src/dialogs/create-file.tsx:227
+#: src/dialogs/create-file.tsx:225
 msgid "Cannot create file in current directory"
 msgstr "Não é possível criar arquivo no diretório atual"
 
@@ -148,7 +148,7 @@ msgstr "Não é possível soltar arquivos, outro upload já está em andamento"
 msgid "Change"
 msgstr "Alterar"
 
-#: src/upload-button.tsx:403
+#: src/upload-button.tsx:401
 msgid "Change permissions"
 msgstr "Alterar permissões"
 
@@ -188,7 +188,7 @@ msgstr "Copiar"
 msgid "Copy selected file or directory"
 msgstr "Copiar arquivo ou diretório selecionado"
 
-#: src/dialogs/create-file.tsx:208 src/dialogs/mkdir.tsx:148
+#: src/dialogs/create-file.tsx:206 src/dialogs/mkdir.tsx:148
 msgid "Create"
 msgstr "Criar"
 
@@ -196,7 +196,7 @@ msgstr "Criar"
 msgid "Create directory"
 msgstr "Criar diretório"
 
-#: src/menu.tsx:118 src/dialogs/create-file.tsx:151
+#: src/menu.tsx:118 src/dialogs/create-file.tsx:149
 msgid "Create file"
 msgstr "Criar arquivo"
 
@@ -313,7 +313,7 @@ msgstr "Editando"
 msgid "Execute-only"
 msgstr "Executar somente"
 
-#: src/upload-button.tsx:291
+#: src/upload-button.tsx:289
 msgid "Failed"
 msgstr "Falhou"
 
@@ -325,11 +325,11 @@ msgstr "Navegador de arquivos"
 msgid "File exists"
 msgstr "Arquivo existe"
 
-#: src/dialogs/create-file.tsx:163
+#: src/dialogs/create-file.tsx:161
 msgid "File name"
 msgstr "Nome do arquivo"
 
-#: src/upload-button.tsx:372
+#: src/upload-button.tsx:370
 msgid "File uploaded"
 msgstr "Arquivo enviado"
 
@@ -350,7 +350,7 @@ msgstr ""
 "padrão, a propriedade será alterada para corresponder ao diretório de "
 "destino."
 
-#: src/upload-button.tsx:372
+#: src/upload-button.tsx:370
 msgid "Files uploaded"
 msgstr "Arquivos enviados"
 
@@ -531,7 +531,7 @@ msgstr "Acesso de outros"
 msgid "Overwrite"
 msgstr "Sobrescrever"
 
-#: src/header.tsx:99 src/dialogs/create-file.tsx:185
+#: src/header.tsx:99 src/dialogs/create-file.tsx:183
 #: src/dialogs/permissions.tsx:317 src/files-card-body.tsx:557
 #: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
 msgid "Owner"
@@ -569,7 +569,7 @@ msgstr "Colar arquivo ou diretório"
 msgid "Pasting failed"
 msgstr "Falha ao colar"
 
-#: src/dialogs/create-file.tsx:228
+#: src/dialogs/create-file.tsx:226
 msgid "Permission denied"
 msgstr "Permissão negada"
 
@@ -717,7 +717,7 @@ msgstr "Tipo"
 msgid "Unable to create bookmark directory"
 msgstr "Não é possível criar o diretório de marcadores"
 
-#: src/upload-button.tsx:332
+#: src/upload-button.tsx:330
 msgid "Unable to move uploaded file to final destination"
 msgstr "Não é possível mover o arquivo enviado para o destino final"
 
@@ -725,15 +725,15 @@ msgstr "Não é possível mover o arquivo enviado para o destino final"
 msgid "Unable to save bookmark file"
 msgstr "Não é possível salvar o arquivo de marcadores"
 
-#: src/upload-button.tsx:505
+#: src/upload-button.tsx:503
 msgid "Upload"
 msgstr "Enviar"
 
-#: src/upload-button.tsx:486
+#: src/upload-button.tsx:484
 msgid "Upload $0% completed"
 msgstr "Upload $0% concluído"
 
-#: src/upload-button.tsx:331 src/upload-button.tsx:355
+#: src/upload-button.tsx:329 src/upload-button.tsx:353
 msgid "Upload error"
 msgstr "Erro de upload"
 
@@ -741,7 +741,7 @@ msgstr "Erro de upload"
 msgid "Uploaded as $0, $1"
 msgstr "Enviado como $0, $1"
 
-#: src/upload-button.tsx:450
+#: src/upload-button.tsx:448
 msgid "Uploads"
 msgstr "Transferências"
 

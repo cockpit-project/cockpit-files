@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-28 03:25+0000\n"
+"POT-Creation-Date: 2025-09-10 03:19+0000\n"
 "PO-Revision-Date: 2025-07-18 05:53+0000\n"
 "Last-Translator: Abdullah Albaroty <albaroty@gmail.com>\n"
 "Language-Team: Arabic <https://translate.fedoraproject.org/projects/cockpit/"
@@ -119,26 +119,26 @@ msgid "Bookmarks"
 msgstr "العلامات المرجعية"
 
 #: src/upload-button.tsx:159 src/dialogs/symlink.tsx:246
-#: src/dialogs/create-file.tsx:211 src/dialogs/delete.tsx:110
+#: src/dialogs/create-file.tsx:209 src/dialogs/delete.tsx:110
 #: src/dialogs/editor.tsx:252 src/dialogs/copyPasteOwnership.tsx:179
 #: src/dialogs/permissions.tsx:422 src/dialogs/mkdir.tsx:150
 #: src/dialogs/rename.tsx:100
 msgid "Cancel"
 msgstr "إلغاء"
 
-#: src/upload-button.tsx:469
+#: src/upload-button.tsx:467
 msgid "Cancel upload of $0"
 msgstr "إلغاء تحميل $0"
 
-#: src/upload-button.tsx:352
+#: src/upload-button.tsx:350
 msgid "Cancelled"
 msgstr "تم إلغاؤه"
 
-#: src/upload-button.tsx:353
+#: src/upload-button.tsx:351
 msgid "Cancelled upload of $0"
 msgstr "تم إلغاء تحميل $0"
 
-#: src/dialogs/create-file.tsx:227
+#: src/dialogs/create-file.tsx:225
 msgid "Cannot create file in current directory"
 msgstr "يتعذر إنشاء ملف في الدليل الحالي"
 
@@ -150,7 +150,7 @@ msgstr "لا يمكن إسقاط الملفات، هناك تحميل آخر ق�
 msgid "Change"
 msgstr "تغيير"
 
-#: src/upload-button.tsx:403
+#: src/upload-button.tsx:401
 msgid "Change permissions"
 msgstr "تغيير الصلاحيات"
 
@@ -190,7 +190,7 @@ msgstr "نسخ"
 msgid "Copy selected file or directory"
 msgstr "لنسخ المجلد أو الدليل المحدد"
 
-#: src/dialogs/create-file.tsx:208 src/dialogs/mkdir.tsx:148
+#: src/dialogs/create-file.tsx:206 src/dialogs/mkdir.tsx:148
 msgid "Create"
 msgstr "إنشاء"
 
@@ -198,7 +198,7 @@ msgstr "إنشاء"
 msgid "Create directory"
 msgstr "إنشاء دليل"
 
-#: src/menu.tsx:118 src/dialogs/create-file.tsx:151
+#: src/menu.tsx:118 src/dialogs/create-file.tsx:149
 msgid "Create file"
 msgstr "إنشاء ملف"
 
@@ -315,7 +315,7 @@ msgstr "تعديل"
 msgid "Execute-only"
 msgstr "التنفيذ فقط"
 
-#: src/upload-button.tsx:291
+#: src/upload-button.tsx:289
 msgid "Failed"
 msgstr "فشل"
 
@@ -327,11 +327,11 @@ msgstr "متصفح الملفات"
 msgid "File exists"
 msgstr "الملف موجود"
 
-#: src/dialogs/create-file.tsx:163
+#: src/dialogs/create-file.tsx:161
 msgid "File name"
 msgstr "اسم الملف"
 
-#: src/upload-button.tsx:372
+#: src/upload-button.tsx:370
 msgid "File uploaded"
 msgstr "تم تحميل الملف"
 
@@ -351,7 +351,7 @@ msgstr ""
 "الملفات التي يتم لصقها لها مالك مختلف. بشكل افتراضي، سيتم تغيير الملكية "
 "لتتناسب مع الدليل الوجهة."
 
-#: src/upload-button.tsx:372
+#: src/upload-button.tsx:370
 msgid "Files uploaded"
 msgstr "الملفات التي تم تحميلها"
 
@@ -532,7 +532,7 @@ msgstr "وصول آخرين"
 msgid "Overwrite"
 msgstr "الكتابة فوق"
 
-#: src/header.tsx:99 src/dialogs/create-file.tsx:185
+#: src/header.tsx:99 src/dialogs/create-file.tsx:183
 #: src/dialogs/permissions.tsx:317 src/files-card-body.tsx:557
 #: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
 msgid "Owner"
@@ -570,7 +570,7 @@ msgstr "لصق الملف أو الدليل"
 msgid "Pasting failed"
 msgstr "فشل اللصق"
 
-#: src/dialogs/create-file.tsx:228
+#: src/dialogs/create-file.tsx:226
 msgid "Permission denied"
 msgstr "الإذن مرفوض"
 
@@ -718,7 +718,7 @@ msgstr "النوع"
 msgid "Unable to create bookmark directory"
 msgstr "غير قادر على إنشاء علامة مرجعية لدليل"
 
-#: src/upload-button.tsx:332
+#: src/upload-button.tsx:330
 msgid "Unable to move uploaded file to final destination"
 msgstr "غير قادر على نقل الملف المرفوع إلى وجهته النهائية"
 
@@ -726,16 +726,16 @@ msgstr "غير قادر على نقل الملف المرفوع إلى وجهت�
 msgid "Unable to save bookmark file"
 msgstr "غير قادر على حفظ ملف العلامة المرجعية"
 
-#: src/upload-button.tsx:505
+#: src/upload-button.tsx:503
 msgid "Upload"
 msgstr "ارفع"
 
 #
-#: src/upload-button.tsx:486
+#: src/upload-button.tsx:484
 msgid "Upload $0% completed"
 msgstr "اكتمل الرفع بنسبة $0%"
 
-#: src/upload-button.tsx:331 src/upload-button.tsx:355
+#: src/upload-button.tsx:329 src/upload-button.tsx:353
 msgid "Upload error"
 msgstr "خطأ في الرفع"
 
@@ -743,7 +743,7 @@ msgstr "خطأ في الرفع"
 msgid "Uploaded as $0, $1"
 msgstr "محمّل كـ $0، $1"
 
-#: src/upload-button.tsx:450
+#: src/upload-button.tsx:448
 msgid "Uploads"
 msgstr "عمليات التحميل"
 

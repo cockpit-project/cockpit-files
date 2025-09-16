@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-28 03:25+0000\n"
+"POT-Creation-Date: 2025-09-10 03:19+0000\n"
 "PO-Revision-Date: 2025-02-28 05:41+0000\n"
 "Last-Translator: Martin Pitt <mpitt@redhat.com>\n"
 "Language-Team: Japanese <https://translate.fedoraproject.org/projects/"
@@ -113,26 +113,26 @@ msgid "Bookmarks"
 msgstr "ブックマーク"
 
 #: src/upload-button.tsx:159 src/dialogs/symlink.tsx:246
-#: src/dialogs/create-file.tsx:211 src/dialogs/delete.tsx:110
+#: src/dialogs/create-file.tsx:209 src/dialogs/delete.tsx:110
 #: src/dialogs/editor.tsx:252 src/dialogs/copyPasteOwnership.tsx:179
 #: src/dialogs/permissions.tsx:422 src/dialogs/mkdir.tsx:150
 #: src/dialogs/rename.tsx:100
 msgid "Cancel"
 msgstr "取り消し"
 
-#: src/upload-button.tsx:469
+#: src/upload-button.tsx:467
 msgid "Cancel upload of $0"
 msgstr "$0 のアップロードをキャンセルする"
 
-#: src/upload-button.tsx:352
+#: src/upload-button.tsx:350
 msgid "Cancelled"
 msgstr "キャンセル済み"
 
-#: src/upload-button.tsx:353
+#: src/upload-button.tsx:351
 msgid "Cancelled upload of $0"
 msgstr "$0 のアップロードをキャンセルしました"
 
-#: src/dialogs/create-file.tsx:227
+#: src/dialogs/create-file.tsx:225
 msgid "Cannot create file in current directory"
 msgstr "カレントディレクトリーにファイルを作成できません"
 
@@ -144,7 +144,7 @@ msgstr "ファイルをドロップできません。別のアップロードが
 msgid "Change"
 msgstr "変更"
 
-#: src/upload-button.tsx:403
+#: src/upload-button.tsx:401
 msgid "Change permissions"
 msgstr "パーミッションの変更"
 
@@ -184,7 +184,7 @@ msgstr "コピー"
 msgid "Copy selected file or directory"
 msgstr "選択したファイルまたはディレクトリーをコピーする"
 
-#: src/dialogs/create-file.tsx:208 src/dialogs/mkdir.tsx:148
+#: src/dialogs/create-file.tsx:206 src/dialogs/mkdir.tsx:148
 msgid "Create"
 msgstr "作成"
 
@@ -192,7 +192,7 @@ msgstr "作成"
 msgid "Create directory"
 msgstr "ディレクトリーの作成"
 
-#: src/menu.tsx:118 src/dialogs/create-file.tsx:151
+#: src/menu.tsx:118 src/dialogs/create-file.tsx:149
 msgid "Create file"
 msgstr "ファイルの作成"
 
@@ -316,7 +316,7 @@ msgstr "編集中"
 msgid "Execute-only"
 msgstr "実行のみ"
 
-#: src/upload-button.tsx:291
+#: src/upload-button.tsx:289
 msgid "Failed"
 msgstr "失敗"
 
@@ -328,11 +328,11 @@ msgstr "ファイルブラウザー"
 msgid "File exists"
 msgstr "ファイルが存在します"
 
-#: src/dialogs/create-file.tsx:163
+#: src/dialogs/create-file.tsx:161
 msgid "File name"
 msgstr "ファイル名"
 
-#: src/upload-button.tsx:372
+#: src/upload-button.tsx:370
 msgid "File uploaded"
 msgstr "ファイルをアップロードしました"
 
@@ -352,7 +352,7 @@ msgstr ""
 "貼り付けるファイルの所有者が異なります。デフォルトでは、貼り付け先のディレク"
 "トリーに合わせて所有権が変更されます。"
 
-#: src/upload-button.tsx:372
+#: src/upload-button.tsx:370
 msgid "Files uploaded"
 msgstr "アップロードされたファイル"
 
@@ -533,7 +533,7 @@ msgstr "その他のユーザーのアクセス"
 msgid "Overwrite"
 msgstr "上書き"
 
-#: src/header.tsx:99 src/dialogs/create-file.tsx:185
+#: src/header.tsx:99 src/dialogs/create-file.tsx:183
 #: src/dialogs/permissions.tsx:317 src/files-card-body.tsx:557
 #: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
 msgid "Owner"
@@ -571,7 +571,7 @@ msgstr "ファイルまたはディレクトリーを貼り付ける"
 msgid "Pasting failed"
 msgstr "貼り付けに失敗しました"
 
-#: src/dialogs/create-file.tsx:228
+#: src/dialogs/create-file.tsx:226
 msgid "Permission denied"
 msgstr "パーミッションが拒否されました"
 
@@ -717,7 +717,7 @@ msgstr ""
 msgid "Unable to create bookmark directory"
 msgstr "ブックマークディレクトリーを作成できません"
 
-#: src/upload-button.tsx:332
+#: src/upload-button.tsx:330
 msgid "Unable to move uploaded file to final destination"
 msgstr "アップロードしたファイルを最終移動先に移動できません"
 
@@ -725,16 +725,16 @@ msgstr "アップロードしたファイルを最終移動先に移動できま
 msgid "Unable to save bookmark file"
 msgstr "ブックマークファイルを保存できません"
 
-#: src/upload-button.tsx:505
+#: src/upload-button.tsx:503
 msgid "Upload"
 msgstr "アップロード"
 
 #
-#: src/upload-button.tsx:486
+#: src/upload-button.tsx:484
 msgid "Upload $0% completed"
 msgstr "アップロード $0% 完了"
 
-#: src/upload-button.tsx:331 src/upload-button.tsx:355
+#: src/upload-button.tsx:329 src/upload-button.tsx:353
 msgid "Upload error"
 msgstr "アップロードエラー"
 
@@ -742,7 +742,7 @@ msgstr "アップロードエラー"
 msgid "Uploaded as $0, $1"
 msgstr "$0、$1 としてアップロードしました"
 
-#: src/upload-button.tsx:450
+#: src/upload-button.tsx:448
 msgid "Uploads"
 msgstr "アップロード"
 
