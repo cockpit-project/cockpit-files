@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-28 03:25+0000\n"
+"POT-Creation-Date: 2025-09-10 03:19+0000\n"
 "PO-Revision-Date: 2025-05-14 14:12+0000\n"
 "Last-Translator: Burak Yavuz <hitowerdigit@hotmail.com>\n"
 "Language-Team: Turkish <https://translate.fedoraproject.org/projects/cockpit/"
@@ -116,26 +116,26 @@ msgid "Bookmarks"
 msgstr "Yer işaretleri"
 
 #: src/upload-button.tsx:159 src/dialogs/symlink.tsx:246
-#: src/dialogs/create-file.tsx:211 src/dialogs/delete.tsx:110
+#: src/dialogs/create-file.tsx:209 src/dialogs/delete.tsx:110
 #: src/dialogs/editor.tsx:252 src/dialogs/copyPasteOwnership.tsx:179
 #: src/dialogs/permissions.tsx:422 src/dialogs/mkdir.tsx:150
 #: src/dialogs/rename.tsx:100
 msgid "Cancel"
 msgstr "İptal"
 
-#: src/upload-button.tsx:469
+#: src/upload-button.tsx:467
 msgid "Cancel upload of $0"
 msgstr "$0 karşıya yüklenmesini iptal et"
 
-#: src/upload-button.tsx:352
+#: src/upload-button.tsx:350
 msgid "Cancelled"
 msgstr "İptal edildi"
 
-#: src/upload-button.tsx:353
+#: src/upload-button.tsx:351
 msgid "Cancelled upload of $0"
 msgstr "$0 karşıya yüklenmesi iptal edildi"
 
-#: src/dialogs/create-file.tsx:227
+#: src/dialogs/create-file.tsx:225
 msgid "Cannot create file in current directory"
 msgstr "Geçerli dizinde dosya oluşturulamıyor"
 
@@ -147,7 +147,7 @@ msgstr "Dosyalar bırakılamıyor, başka bir karşıya yükleme zaten devam edi
 msgid "Change"
 msgstr "Değiştir"
 
-#: src/upload-button.tsx:403
+#: src/upload-button.tsx:401
 msgid "Change permissions"
 msgstr "İzinleri değiştir"
 
@@ -187,7 +187,7 @@ msgstr "Kopyala"
 msgid "Copy selected file or directory"
 msgstr "Seçili dosya veya dizini kopyala"
 
-#: src/dialogs/create-file.tsx:208 src/dialogs/mkdir.tsx:148
+#: src/dialogs/create-file.tsx:206 src/dialogs/mkdir.tsx:148
 msgid "Create"
 msgstr "Oluştur"
 
@@ -195,7 +195,7 @@ msgstr "Oluştur"
 msgid "Create directory"
 msgstr "Dizin oluştur"
 
-#: src/menu.tsx:118 src/dialogs/create-file.tsx:151
+#: src/menu.tsx:118 src/dialogs/create-file.tsx:149
 msgid "Create file"
 msgstr "Dosya oluştur"
 
@@ -312,7 +312,7 @@ msgstr "Düzenleme"
 msgid "Execute-only"
 msgstr "Yalnızca çalıştır"
 
-#: src/upload-button.tsx:291
+#: src/upload-button.tsx:289
 msgid "Failed"
 msgstr "Başarısız oldu"
 
@@ -324,11 +324,11 @@ msgstr "Dosya gezgini"
 msgid "File exists"
 msgstr "Dosya var"
 
-#: src/dialogs/create-file.tsx:163
+#: src/dialogs/create-file.tsx:161
 msgid "File name"
 msgstr "Dosya adı"
 
-#: src/upload-button.tsx:372
+#: src/upload-button.tsx:370
 msgid "File uploaded"
 msgstr "Dosya karşıya yüklendi"
 
@@ -348,7 +348,7 @@ msgstr ""
 "Yapıştırılan dosyaların farklı bir sahibi var. Varsayılan olarak sahiplik, "
 "hedef dizin ile eşleşmesi için değiştirilecektir."
 
-#: src/upload-button.tsx:372
+#: src/upload-button.tsx:370
 msgid "Files uploaded"
 msgstr "Dosyalar karşıya yüklendi"
 
@@ -529,7 +529,7 @@ msgstr "Diğerlerinin erişimi"
 msgid "Overwrite"
 msgstr "Üzerine yaz"
 
-#: src/header.tsx:99 src/dialogs/create-file.tsx:185
+#: src/header.tsx:99 src/dialogs/create-file.tsx:183
 #: src/dialogs/permissions.tsx:317 src/files-card-body.tsx:557
 #: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
 msgid "Owner"
@@ -567,7 +567,7 @@ msgstr "Dosya veya dizini yapıştır"
 msgid "Pasting failed"
 msgstr "Yapıştırma başarısız oldu"
 
-#: src/dialogs/create-file.tsx:228
+#: src/dialogs/create-file.tsx:226
 msgid "Permission denied"
 msgstr "İzin reddedildi"
 
@@ -716,7 +716,7 @@ msgstr "Tür"
 msgid "Unable to create bookmark directory"
 msgstr "Yer işareti dizini oluşturulamıyor"
 
-#: src/upload-button.tsx:332
+#: src/upload-button.tsx:330
 msgid "Unable to move uploaded file to final destination"
 msgstr "Karşıya yüklenen dosya son hedefe taşınamıyor"
 
@@ -724,15 +724,15 @@ msgstr "Karşıya yüklenen dosya son hedefe taşınamıyor"
 msgid "Unable to save bookmark file"
 msgstr "Yer işareti dosyası kaydedilemiyor"
 
-#: src/upload-button.tsx:505
+#: src/upload-button.tsx:503
 msgid "Upload"
 msgstr "Karşıya yükle"
 
-#: src/upload-button.tsx:486
+#: src/upload-button.tsx:484
 msgid "Upload $0% completed"
 msgstr "Karşıya yükleme %$0 tamamlandı"
 
-#: src/upload-button.tsx:331 src/upload-button.tsx:355
+#: src/upload-button.tsx:329 src/upload-button.tsx:353
 msgid "Upload error"
 msgstr "Karşıya yükleme hatası"
 
@@ -740,7 +740,7 @@ msgstr "Karşıya yükleme hatası"
 msgid "Uploaded as $0, $1"
 msgstr "$0, $1 olarak karşıya yüklendi"
 
-#: src/upload-button.tsx:450
+#: src/upload-button.tsx:448
 msgid "Uploads"
 msgstr "Yüklenenler"
 

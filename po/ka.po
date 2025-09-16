@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-28 03:25+0000\n"
+"POT-Creation-Date: 2025-09-10 03:19+0000\n"
 "PO-Revision-Date: 2025-05-14 14:12+0000\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <https://translate.fedoraproject.org/projects/"
@@ -116,26 +116,26 @@ msgid "Bookmarks"
 msgstr "სანიშნეები"
 
 #: src/upload-button.tsx:159 src/dialogs/symlink.tsx:246
-#: src/dialogs/create-file.tsx:211 src/dialogs/delete.tsx:110
+#: src/dialogs/create-file.tsx:209 src/dialogs/delete.tsx:110
 #: src/dialogs/editor.tsx:252 src/dialogs/copyPasteOwnership.tsx:179
 #: src/dialogs/permissions.tsx:422 src/dialogs/mkdir.tsx:150
 #: src/dialogs/rename.tsx:100
 msgid "Cancel"
 msgstr "გაუქმება"
 
-#: src/upload-button.tsx:469
+#: src/upload-button.tsx:467
 msgid "Cancel upload of $0"
 msgstr "$0-ის ატვირთვის შეწყვეტა"
 
-#: src/upload-button.tsx:352
+#: src/upload-button.tsx:350
 msgid "Cancelled"
 msgstr "გაუქმებულია"
 
-#: src/upload-button.tsx:353
+#: src/upload-button.tsx:351
 msgid "Cancelled upload of $0"
 msgstr "$0-ის ატვირთვა შეწყდა"
 
-#: src/dialogs/create-file.tsx:227
+#: src/dialogs/create-file.tsx:225
 msgid "Cannot create file in current directory"
 msgstr "მიმდინარე საქაღალდეში ფაილის შექმნა შეუძლებელია"
 
@@ -147,7 +147,7 @@ msgstr "ფაილებს ვერ დაყრით, რადგან �
 msgid "Change"
 msgstr "შეცვლა"
 
-#: src/upload-button.tsx:403
+#: src/upload-button.tsx:401
 msgid "Change permissions"
 msgstr "წვდომების შეცვლა"
 
@@ -187,7 +187,7 @@ msgstr "კოპირება"
 msgid "Copy selected file or directory"
 msgstr "მონიშნული ფაილის ან საქაღალდის კოპირება"
 
-#: src/dialogs/create-file.tsx:208 src/dialogs/mkdir.tsx:148
+#: src/dialogs/create-file.tsx:206 src/dialogs/mkdir.tsx:148
 msgid "Create"
 msgstr "შექმნა"
 
@@ -195,7 +195,7 @@ msgstr "შექმნა"
 msgid "Create directory"
 msgstr "საქაღალდის შექმნა"
 
-#: src/menu.tsx:118 src/dialogs/create-file.tsx:151
+#: src/menu.tsx:118 src/dialogs/create-file.tsx:149
 msgid "Create file"
 msgstr "ფაილის შექმნა"
 
@@ -312,7 +312,7 @@ msgstr "ჩასწორება"
 msgid "Execute-only"
 msgstr "მხოლოდ-გამშვები"
 
-#: src/upload-button.tsx:291
+#: src/upload-button.tsx:289
 msgid "Failed"
 msgstr "შეცდომა"
 
@@ -324,11 +324,11 @@ msgstr "ფაილების ბრაუზერი"
 msgid "File exists"
 msgstr "ფაილი არსებობს"
 
-#: src/dialogs/create-file.tsx:163
+#: src/dialogs/create-file.tsx:161
 msgid "File name"
 msgstr "ფაილის სახელი"
 
-#: src/upload-button.tsx:372
+#: src/upload-button.tsx:370
 msgid "File uploaded"
 msgstr "ფაილი ატვირთულია"
 
@@ -348,7 +348,7 @@ msgstr ""
 "ჩასმული ფაილების მფლობელი განსხვავებულია. ნაგულისხმევად მფლობელობა "
 "შეიცვლება, რომ ის სამიზნე საქაღალდისას დაემთხვეს."
 
-#: src/upload-button.tsx:372
+#: src/upload-button.tsx:370
 msgid "Files uploaded"
 msgstr "ფაილები ატვირთულია"
 
@@ -529,7 +529,7 @@ msgstr "სხვების წვდომა"
 msgid "Overwrite"
 msgstr "გადაწერა"
 
-#: src/header.tsx:99 src/dialogs/create-file.tsx:185
+#: src/header.tsx:99 src/dialogs/create-file.tsx:183
 #: src/dialogs/permissions.tsx:317 src/files-card-body.tsx:557
 #: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
 msgid "Owner"
@@ -567,7 +567,7 @@ msgstr "ფაილის ან საქაღალდის ჩასმა
 msgid "Pasting failed"
 msgstr "ჩასმა ჩავარდა"
 
-#: src/dialogs/create-file.tsx:228
+#: src/dialogs/create-file.tsx:226
 msgid "Permission denied"
 msgstr "წვდომა აკრძალულია"
 
@@ -716,7 +716,7 @@ msgstr "ტიპი"
 msgid "Unable to create bookmark directory"
 msgstr "სანიშნეების საქაღალდის შექმნა შეუძლებელია"
 
-#: src/upload-button.tsx:332
+#: src/upload-button.tsx:330
 msgid "Unable to move uploaded file to final destination"
 msgstr "ატვირთული ფაილების საბოლოო სამიზნეზე გადატანა შეუძლებელია"
 
@@ -724,16 +724,16 @@ msgstr "ატვირთული ფაილების საბოლო�
 msgid "Unable to save bookmark file"
 msgstr "სანიშნეს ფაილის შენახვა შეუძლებელია"
 
-#: src/upload-button.tsx:505
+#: src/upload-button.tsx:503
 msgid "Upload"
 msgstr "ატვირთვა"
 
 #
-#: src/upload-button.tsx:486
+#: src/upload-button.tsx:484
 msgid "Upload $0% completed"
 msgstr "ატვირთვის $0% დასრულდა"
 
-#: src/upload-button.tsx:331 src/upload-button.tsx:355
+#: src/upload-button.tsx:329 src/upload-button.tsx:353
 msgid "Upload error"
 msgstr "ატვირთვის შეცდომა"
 
@@ -741,7 +741,7 @@ msgstr "ატვირთვის შეცდომა"
 msgid "Uploaded as $0, $1"
 msgstr "ატვირთულია, როგორც $0.$1"
 
-#: src/upload-button.tsx:450
+#: src/upload-button.tsx:448
 msgid "Uploads"
 msgstr "ატვირთვები"
 
