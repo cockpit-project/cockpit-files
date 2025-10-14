@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-10 03:19+0000\n"
+"POT-Creation-Date: 2025-10-08 03:21+0000\n"
 "PO-Revision-Date: 2025-05-14 14:12+0000\n"
 "Last-Translator: Burak Yavuz <hitowerdigit@hotmail.com>\n"
 "Language-Team: Turkish <https://translate.fedoraproject.org/projects/cockpit/"
@@ -116,10 +116,10 @@ msgid "Bookmarks"
 msgstr "Yer işaretleri"
 
 #: src/upload-button.tsx:159 src/dialogs/symlink.tsx:246
-#: src/dialogs/create-file.tsx:209 src/dialogs/delete.tsx:110
-#: src/dialogs/editor.tsx:252 src/dialogs/copyPasteOwnership.tsx:179
-#: src/dialogs/permissions.tsx:422 src/dialogs/mkdir.tsx:150
-#: src/dialogs/rename.tsx:100
+#: src/dialogs/copyPasteOwnership.tsx:179 src/dialogs/editor.tsx:252
+#: src/dialogs/mkdir.tsx:150 src/dialogs/create-file.tsx:209
+#: src/dialogs/delete.tsx:110 src/dialogs/rename.tsx:100
+#: src/dialogs/permissions.tsx:422
 msgid "Cancel"
 msgstr "İptal"
 
@@ -187,7 +187,7 @@ msgstr "Kopyala"
 msgid "Copy selected file or directory"
 msgstr "Seçili dosya veya dizini kopyala"
 
-#: src/dialogs/create-file.tsx:206 src/dialogs/mkdir.tsx:148
+#: src/dialogs/mkdir.tsx:148 src/dialogs/create-file.tsx:206
 msgid "Create"
 msgstr "Oluştur"
 
@@ -271,7 +271,7 @@ msgstr "Dizin adı çok uzun"
 msgid "Directory owner"
 msgstr "Dizin sahibi"
 
-#: src/dialogs/symlink.tsx:52 src/common.ts:119
+#: src/common.ts:119 src/dialogs/symlink.tsx:52
 msgid "Directory with the same name exists"
 msgstr "Aynı ada sahip dizin var"
 
@@ -296,7 +296,7 @@ msgstr "Karşıya yüklenecek dosyaları bırakın"
 msgid "Edit $0"
 msgstr "$0 dosyasını düzenle"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:100 src/files-breadcrumbs.tsx:298
+#: src/files-breadcrumbs.tsx:298 src/dialogs/keyboardShortcutsHelp.tsx:100
 msgid "Edit path"
 msgstr "Yolu düzenle"
 
@@ -320,7 +320,7 @@ msgstr "Başarısız oldu"
 msgid "File browser"
 msgstr "Dosya gezgini"
 
-#: src/dialogs/symlink.tsx:54 src/common.ts:121
+#: src/common.ts:121 src/dialogs/symlink.tsx:54
 msgid "File exists"
 msgstr "Dosya var"
 
@@ -396,8 +396,8 @@ msgstr "İleri git"
 msgid "Go up a directory"
 msgstr "Bir dizin yukarı git"
 
-#: src/dialogs/permissions.tsx:332 src/files-card-body.tsx:596
-#: src/files-footer-detail.tsx:79 src/files-footer-detail.tsx:151
+#: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
+#: src/files-footer-detail.tsx:151 src/dialogs/permissions.tsx:332
 msgid "Group"
 msgstr "Grup"
 
@@ -445,7 +445,7 @@ msgstr "Dosyalarınızı yönetin"
 msgid "Missing type"
 msgstr "Tür eksik"
 
-#: src/header.tsx:88 src/files-card-body.tsx:552
+#: src/files-card-body.tsx:552 src/header.tsx:88
 msgid "Modified"
 msgstr "Değiştirilme"
 
@@ -453,11 +453,11 @@ msgstr "Değiştirilme"
 msgid "Most permissive"
 msgstr "En çok izin veren"
 
-#: src/header.tsx:66 src/files-card-body.tsx:547
+#: src/files-card-body.tsx:547 src/header.tsx:66
 msgid "Name"
 msgstr "Ad"
 
-#: src/dialogs/symlink.tsx:49 src/common.ts:110
+#: src/common.ts:110 src/dialogs/symlink.tsx:49
 msgid "Name cannot be empty"
 msgstr "Ad boş olamaz"
 
@@ -529,9 +529,9 @@ msgstr "Diğerlerinin erişimi"
 msgid "Overwrite"
 msgstr "Üzerine yaz"
 
-#: src/header.tsx:99 src/dialogs/create-file.tsx:183
-#: src/dialogs/permissions.tsx:317 src/files-card-body.tsx:557
-#: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
+#: src/files-card-body.tsx:557 src/files-card-body.tsx:596
+#: src/files-footer-detail.tsx:79 src/header.tsx:99
+#: src/dialogs/create-file.tsx:183 src/dialogs/permissions.tsx:317
 msgid "Owner"
 msgstr "Sahibi"
 
@@ -571,7 +571,7 @@ msgstr "Yapıştırma başarısız oldu"
 msgid "Permission denied"
 msgstr "İzin reddedildi"
 
-#: src/header.tsx:110 src/files-card-body.tsx:562
+#: src/files-card-body.tsx:562 src/header.tsx:110
 msgid "Permissions"
 msgstr "İzinler"
 
@@ -583,7 +583,7 @@ msgstr "$0 dosya için izinler"
 msgid "Read and execute"
 msgstr "Oku ve çalıştır"
 
-#: src/dialogs/permissions.tsx:223 src/common.ts:61
+#: src/common.ts:61 src/dialogs/permissions.tsx:223
 msgid "Read and write"
 msgstr "Oku ve yaz"
 
@@ -591,7 +591,7 @@ msgstr "Oku ve yaz"
 msgid "Read, write, and execute"
 msgstr "Oku, yaz ve çalıştır"
 
-#: src/dialogs/editor.tsx:175 src/dialogs/permissions.tsx:228 src/common.ts:59
+#: src/common.ts:59 src/dialogs/editor.tsx:175 src/dialogs/permissions.tsx:228
 msgid "Read-only"
 msgstr "Yalnızca oku"
 
@@ -660,7 +660,7 @@ msgstr "Çalıştırılabilir program olarak ayarla"
 msgid "Show all files"
 msgstr "Tüm dosyaları göster"
 
-#: src/header.tsx:284 src/files-card-body.tsx:535
+#: src/files-card-body.tsx:535 src/header.tsx:284
 msgid "Show hidden items"
 msgstr "Gizli ögeleri göster"
 
@@ -668,7 +668,7 @@ msgstr "Gizli ögeleri göster"
 msgid "Show keyboard shortcuts"
 msgstr "Klavye kısayollarını göster"
 
-#: src/header.tsx:77 src/files-card-body.tsx:548
+#: src/files-card-body.tsx:548 src/header.tsx:77
 msgid "Size"
 msgstr "Boyut"
 
@@ -756,7 +756,7 @@ msgstr "$0 dosyasını görüntüle"
 msgid "Write and execute"
 msgstr "Yaz ve çalıştır"
 
-#: src/dialogs/permissions.tsx:243 src/common.ts:57
+#: src/common.ts:57 src/dialogs/permissions.tsx:243
 msgid "Write-only"
 msgstr "Yalnızca yaz"
 

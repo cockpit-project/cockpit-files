@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-10 03:19+0000\n"
+"POT-Creation-Date: 2025-10-08 03:21+0000\n"
 "PO-Revision-Date: 2025-06-01 14:21+0000\n"
 "Last-Translator: Nathan <nathan95@live.it>\n"
 "Language-Team: Italian <https://translate.fedoraproject.org/projects/cockpit/"
@@ -116,10 +116,10 @@ msgid "Bookmarks"
 msgstr "Segnalibri"
 
 #: src/upload-button.tsx:159 src/dialogs/symlink.tsx:246
-#: src/dialogs/create-file.tsx:209 src/dialogs/delete.tsx:110
-#: src/dialogs/editor.tsx:252 src/dialogs/copyPasteOwnership.tsx:179
-#: src/dialogs/permissions.tsx:422 src/dialogs/mkdir.tsx:150
-#: src/dialogs/rename.tsx:100
+#: src/dialogs/copyPasteOwnership.tsx:179 src/dialogs/editor.tsx:252
+#: src/dialogs/mkdir.tsx:150 src/dialogs/create-file.tsx:209
+#: src/dialogs/delete.tsx:110 src/dialogs/rename.tsx:100
+#: src/dialogs/permissions.tsx:422
 msgid "Cancel"
 msgstr "Annulla"
 
@@ -187,7 +187,7 @@ msgstr "copia"
 msgid "Copy selected file or directory"
 msgstr "Copia i file o directory selezionati"
 
-#: src/dialogs/create-file.tsx:206 src/dialogs/mkdir.tsx:148
+#: src/dialogs/mkdir.tsx:148 src/dialogs/create-file.tsx:206
 msgid "Create"
 msgstr "Crea"
 
@@ -271,7 +271,7 @@ msgstr "Nome della cartella troppo lungo"
 msgid "Directory owner"
 msgstr "Proprietario cartella"
 
-#: src/dialogs/symlink.tsx:52 src/common.ts:119
+#: src/common.ts:119 src/dialogs/symlink.tsx:52
 msgid "Directory with the same name exists"
 msgstr "Esiste una cartella con lo stesso nome"
 
@@ -296,7 +296,7 @@ msgstr "Trascina i file qui per caricarli"
 msgid "Edit $0"
 msgstr "Modifica $0"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:100 src/files-breadcrumbs.tsx:298
+#: src/files-breadcrumbs.tsx:298 src/dialogs/keyboardShortcutsHelp.tsx:100
 msgid "Edit path"
 msgstr "Modifica percorso"
 
@@ -320,7 +320,7 @@ msgstr "Fallito"
 msgid "File browser"
 msgstr "Browser file"
 
-#: src/dialogs/symlink.tsx:54 src/common.ts:121
+#: src/common.ts:121 src/dialogs/symlink.tsx:54
 msgid "File exists"
 msgstr "Il file esiste già"
 
@@ -397,8 +397,8 @@ msgstr "Avanti"
 msgid "Go up a directory"
 msgstr "Tornare alla cartella superiore"
 
-#: src/dialogs/permissions.tsx:332 src/files-card-body.tsx:596
-#: src/files-footer-detail.tsx:79 src/files-footer-detail.tsx:151
+#: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
+#: src/files-footer-detail.tsx:151 src/dialogs/permissions.tsx:332
 msgid "Group"
 msgstr "Gruppo"
 
@@ -446,7 +446,7 @@ msgstr "Gestisci i tuoi file"
 msgid "Missing type"
 msgstr "Tipo mancante"
 
-#: src/header.tsx:88 src/files-card-body.tsx:552
+#: src/files-card-body.tsx:552 src/header.tsx:88
 msgid "Modified"
 msgstr "Modificati"
 
@@ -454,11 +454,11 @@ msgstr "Modificati"
 msgid "Most permissive"
 msgstr "Più permissivi"
 
-#: src/header.tsx:66 src/files-card-body.tsx:547
+#: src/files-card-body.tsx:547 src/header.tsx:66
 msgid "Name"
 msgstr "Nome"
 
-#: src/dialogs/symlink.tsx:49 src/common.ts:110
+#: src/common.ts:110 src/dialogs/symlink.tsx:49
 msgid "Name cannot be empty"
 msgstr "Il nome non può essere vuoto."
 
@@ -530,9 +530,9 @@ msgstr "Accesso altri"
 msgid "Overwrite"
 msgstr "Sovrascrivere"
 
-#: src/header.tsx:99 src/dialogs/create-file.tsx:183
-#: src/dialogs/permissions.tsx:317 src/files-card-body.tsx:557
-#: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
+#: src/files-card-body.tsx:557 src/files-card-body.tsx:596
+#: src/files-footer-detail.tsx:79 src/header.tsx:99
+#: src/dialogs/create-file.tsx:183 src/dialogs/permissions.tsx:317
 msgid "Owner"
 msgstr "Proprietario"
 
@@ -572,7 +572,7 @@ msgstr "Operazione incolla fallita"
 msgid "Permission denied"
 msgstr "Permesso negato"
 
-#: src/header.tsx:110 src/files-card-body.tsx:562
+#: src/files-card-body.tsx:562 src/header.tsx:110
 msgid "Permissions"
 msgstr "permessi"
 
@@ -584,7 +584,7 @@ msgstr "Permessi per $0 file"
 msgid "Read and execute"
 msgstr "Lettura ed esecuzione"
 
-#: src/dialogs/permissions.tsx:223 src/common.ts:61
+#: src/common.ts:61 src/dialogs/permissions.tsx:223
 msgid "Read and write"
 msgstr "Lettura e scrittura"
 
@@ -592,7 +592,7 @@ msgstr "Lettura e scrittura"
 msgid "Read, write, and execute"
 msgstr "Lettura, scrittura ed esecuzione"
 
-#: src/dialogs/editor.tsx:175 src/dialogs/permissions.tsx:228 src/common.ts:59
+#: src/common.ts:59 src/dialogs/editor.tsx:175 src/dialogs/permissions.tsx:228
 msgid "Read-only"
 msgstr "Sola lettura"
 
@@ -661,7 +661,7 @@ msgstr "Imposta come eseguibile (programma)"
 msgid "Show all files"
 msgstr "Mostra tutti i file"
 
-#: src/header.tsx:284 src/files-card-body.tsx:535
+#: src/files-card-body.tsx:535 src/header.tsx:284
 msgid "Show hidden items"
 msgstr "Mostra elementi nascosti"
 
@@ -669,7 +669,7 @@ msgstr "Mostra elementi nascosti"
 msgid "Show keyboard shortcuts"
 msgstr "Mostra scorciatoie da tastiera"
 
-#: src/header.tsx:77 src/files-card-body.tsx:548
+#: src/files-card-body.tsx:548 src/header.tsx:77
 msgid "Size"
 msgstr "Dimensione"
 
@@ -758,7 +758,7 @@ msgstr "Visualizza $0"
 msgid "Write and execute"
 msgstr "Scrittura ed esecuzione"
 
-#: src/dialogs/permissions.tsx:243 src/common.ts:57
+#: src/common.ts:57 src/dialogs/permissions.tsx:243
 msgid "Write-only"
 msgstr "Sola scrittura"
 

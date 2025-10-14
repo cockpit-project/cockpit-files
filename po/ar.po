@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-10 03:19+0000\n"
+"POT-Creation-Date: 2025-10-08 03:21+0000\n"
 "PO-Revision-Date: 2025-07-18 05:53+0000\n"
 "Last-Translator: Abdullah Albaroty <albaroty@gmail.com>\n"
 "Language-Team: Arabic <https://translate.fedoraproject.org/projects/cockpit/"
@@ -119,10 +119,10 @@ msgid "Bookmarks"
 msgstr "العلامات المرجعية"
 
 #: src/upload-button.tsx:159 src/dialogs/symlink.tsx:246
-#: src/dialogs/create-file.tsx:209 src/dialogs/delete.tsx:110
-#: src/dialogs/editor.tsx:252 src/dialogs/copyPasteOwnership.tsx:179
-#: src/dialogs/permissions.tsx:422 src/dialogs/mkdir.tsx:150
-#: src/dialogs/rename.tsx:100
+#: src/dialogs/copyPasteOwnership.tsx:179 src/dialogs/editor.tsx:252
+#: src/dialogs/mkdir.tsx:150 src/dialogs/create-file.tsx:209
+#: src/dialogs/delete.tsx:110 src/dialogs/rename.tsx:100
+#: src/dialogs/permissions.tsx:422
 msgid "Cancel"
 msgstr "إلغاء"
 
@@ -190,7 +190,7 @@ msgstr "نسخ"
 msgid "Copy selected file or directory"
 msgstr "لنسخ المجلد أو الدليل المحدد"
 
-#: src/dialogs/create-file.tsx:206 src/dialogs/mkdir.tsx:148
+#: src/dialogs/mkdir.tsx:148 src/dialogs/create-file.tsx:206
 msgid "Create"
 msgstr "إنشاء"
 
@@ -274,7 +274,7 @@ msgstr "اسم الدليل كبير جداَ"
 msgid "Directory owner"
 msgstr "مدير الدليل"
 
-#: src/dialogs/symlink.tsx:52 src/common.ts:119
+#: src/common.ts:119 src/dialogs/symlink.tsx:52
 msgid "Directory with the same name exists"
 msgstr "الدليل موجود بنفس الاسم"
 
@@ -299,7 +299,7 @@ msgstr "أسقط الملفات للتحميل"
 msgid "Edit $0"
 msgstr "عدِّل $0"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:100 src/files-breadcrumbs.tsx:298
+#: src/files-breadcrumbs.tsx:298 src/dialogs/keyboardShortcutsHelp.tsx:100
 msgid "Edit path"
 msgstr "عدل المسار"
 
@@ -323,7 +323,7 @@ msgstr "فشل"
 msgid "File browser"
 msgstr "متصفح الملفات"
 
-#: src/dialogs/symlink.tsx:54 src/common.ts:121
+#: src/common.ts:121 src/dialogs/symlink.tsx:54
 msgid "File exists"
 msgstr "الملف موجود"
 
@@ -399,8 +399,8 @@ msgstr "التقدّم للأمام"
 msgid "Go up a directory"
 msgstr "الانتقال للأعلى"
 
-#: src/dialogs/permissions.tsx:332 src/files-card-body.tsx:596
-#: src/files-footer-detail.tsx:79 src/files-footer-detail.tsx:151
+#: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
+#: src/files-footer-detail.tsx:151 src/dialogs/permissions.tsx:332
 msgid "Group"
 msgstr "مجموعة"
 
@@ -448,7 +448,7 @@ msgstr "ادمج ملفاتك"
 msgid "Missing type"
 msgstr "نوع مفقود"
 
-#: src/header.tsx:88 src/files-card-body.tsx:552
+#: src/files-card-body.tsx:552 src/header.tsx:88
 msgid "Modified"
 msgstr "مُعدَّل"
 
@@ -456,11 +456,11 @@ msgstr "مُعدَّل"
 msgid "Most permissive"
 msgstr "الأكثر تَساهُلًا"
 
-#: src/header.tsx:66 src/files-card-body.tsx:547
+#: src/files-card-body.tsx:547 src/header.tsx:66
 msgid "Name"
 msgstr "الاسم"
 
-#: src/dialogs/symlink.tsx:49 src/common.ts:110
+#: src/common.ts:110 src/dialogs/symlink.tsx:49
 msgid "Name cannot be empty"
 msgstr "لا يمكن أن يكون الاسم فارغاً"
 
@@ -532,9 +532,9 @@ msgstr "وصول آخرين"
 msgid "Overwrite"
 msgstr "الكتابة فوق"
 
-#: src/header.tsx:99 src/dialogs/create-file.tsx:183
-#: src/dialogs/permissions.tsx:317 src/files-card-body.tsx:557
-#: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
+#: src/files-card-body.tsx:557 src/files-card-body.tsx:596
+#: src/files-footer-detail.tsx:79 src/header.tsx:99
+#: src/dialogs/create-file.tsx:183 src/dialogs/permissions.tsx:317
 msgid "Owner"
 msgstr "المالك"
 
@@ -574,7 +574,7 @@ msgstr "فشل اللصق"
 msgid "Permission denied"
 msgstr "الإذن مرفوض"
 
-#: src/header.tsx:110 src/files-card-body.tsx:562
+#: src/files-card-body.tsx:562 src/header.tsx:110
 msgid "Permissions"
 msgstr "الصلاحيات"
 
@@ -586,7 +586,7 @@ msgstr "الصلاحيات لـ $0 ملفاً"
 msgid "Read and execute"
 msgstr "قراءة ثمَّ تنفيذ"
 
-#: src/dialogs/permissions.tsx:223 src/common.ts:61
+#: src/common.ts:61 src/dialogs/permissions.tsx:223
 msgid "Read and write"
 msgstr "قراءة وكتابة"
 
@@ -594,7 +594,7 @@ msgstr "قراءة وكتابة"
 msgid "Read, write, and execute"
 msgstr "قراءة، كتابة، وتنفيذ"
 
-#: src/dialogs/editor.tsx:175 src/dialogs/permissions.tsx:228 src/common.ts:59
+#: src/common.ts:59 src/dialogs/editor.tsx:175 src/dialogs/permissions.tsx:228
 msgid "Read-only"
 msgstr "القراءة-فقط"
 
@@ -662,7 +662,7 @@ msgstr "اجعله قابلاً للتنفيذ كبرنامج"
 msgid "Show all files"
 msgstr "أظهر جميع الملفات"
 
-#: src/header.tsx:284 src/files-card-body.tsx:535
+#: src/files-card-body.tsx:535 src/header.tsx:284
 msgid "Show hidden items"
 msgstr "أظهر العناصر المخفية"
 
@@ -670,7 +670,7 @@ msgstr "أظهر العناصر المخفية"
 msgid "Show keyboard shortcuts"
 msgstr "أظهر اختصارات لوحة المفاتيح"
 
-#: src/header.tsx:77 src/files-card-body.tsx:548
+#: src/files-card-body.tsx:548 src/header.tsx:77
 msgid "Size"
 msgstr "الحجم"
 
@@ -759,7 +759,7 @@ msgstr "عرض $0"
 msgid "Write and execute"
 msgstr "الكتابة والتنفيذ"
 
-#: src/dialogs/permissions.tsx:243 src/common.ts:57
+#: src/common.ts:57 src/dialogs/permissions.tsx:243
 msgid "Write-only"
 msgstr "الكتابة-فقط"
 

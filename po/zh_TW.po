@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-10 03:19+0000\n"
+"POT-Creation-Date: 2025-10-08 03:21+0000\n"
 "PO-Revision-Date: 2025-08-09 22:55+0000\n"
 "Last-Translator: hsu zangmen <chzang55@gmail.com>\n"
 "Language-Team: Chinese (Traditional) <https://translate.fedoraproject.org/"
@@ -110,10 +110,10 @@ msgid "Bookmarks"
 msgstr "書籤"
 
 #: src/upload-button.tsx:159 src/dialogs/symlink.tsx:246
-#: src/dialogs/create-file.tsx:209 src/dialogs/delete.tsx:110
-#: src/dialogs/editor.tsx:252 src/dialogs/copyPasteOwnership.tsx:179
-#: src/dialogs/permissions.tsx:422 src/dialogs/mkdir.tsx:150
-#: src/dialogs/rename.tsx:100
+#: src/dialogs/copyPasteOwnership.tsx:179 src/dialogs/editor.tsx:252
+#: src/dialogs/mkdir.tsx:150 src/dialogs/create-file.tsx:209
+#: src/dialogs/delete.tsx:110 src/dialogs/rename.tsx:100
+#: src/dialogs/permissions.tsx:422
 msgid "Cancel"
 msgstr "取消"
 
@@ -181,7 +181,7 @@ msgstr "複製"
 msgid "Copy selected file or directory"
 msgstr "複製已選擇的檔案或目錄"
 
-#: src/dialogs/create-file.tsx:206 src/dialogs/mkdir.tsx:148
+#: src/dialogs/mkdir.tsx:148 src/dialogs/create-file.tsx:206
 msgid "Create"
 msgstr "建立"
 
@@ -265,7 +265,7 @@ msgstr "目錄名稱太長"
 msgid "Directory owner"
 msgstr "目錄擁有者"
 
-#: src/dialogs/symlink.tsx:52 src/common.ts:119
+#: src/common.ts:119 src/dialogs/symlink.tsx:52
 msgid "Directory with the same name exists"
 msgstr "相同名稱的目錄已存在"
 
@@ -290,7 +290,7 @@ msgstr "拖曳檔案以上傳"
 msgid "Edit $0"
 msgstr "編輯 $0"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:100 src/files-breadcrumbs.tsx:298
+#: src/files-breadcrumbs.tsx:298 src/dialogs/keyboardShortcutsHelp.tsx:100
 msgid "Edit path"
 msgstr "編輯路徑"
 
@@ -314,7 +314,7 @@ msgstr "失敗"
 msgid "File browser"
 msgstr "檔案瀏覽器"
 
-#: src/dialogs/symlink.tsx:54 src/common.ts:121
+#: src/common.ts:121 src/dialogs/symlink.tsx:54
 msgid "File exists"
 msgstr "檔案已存在"
 
@@ -390,8 +390,8 @@ msgstr "前進"
 msgid "Go up a directory"
 msgstr "回上一層目錄"
 
-#: src/dialogs/permissions.tsx:332 src/files-card-body.tsx:596
-#: src/files-footer-detail.tsx:79 src/files-footer-detail.tsx:151
+#: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
+#: src/files-footer-detail.tsx:151 src/dialogs/permissions.tsx:332
 msgid "Group"
 msgstr "群組"
 
@@ -439,7 +439,7 @@ msgstr "管理您的檔案"
 msgid "Missing type"
 msgstr "類型已遺失"
 
-#: src/header.tsx:88 src/files-card-body.tsx:552
+#: src/files-card-body.tsx:552 src/header.tsx:88
 msgid "Modified"
 msgstr "被修改"
 
@@ -447,11 +447,11 @@ msgstr "被修改"
 msgid "Most permissive"
 msgstr "最寬鬆的權限"
 
-#: src/header.tsx:66 src/files-card-body.tsx:547
+#: src/files-card-body.tsx:547 src/header.tsx:66
 msgid "Name"
 msgstr "名稱"
 
-#: src/dialogs/symlink.tsx:49 src/common.ts:110
+#: src/common.ts:110 src/dialogs/symlink.tsx:49
 msgid "Name cannot be empty"
 msgstr "名稱不能為空值"
 
@@ -523,9 +523,9 @@ msgstr "其他人的存取權限"
 msgid "Overwrite"
 msgstr "覆寫"
 
-#: src/header.tsx:99 src/dialogs/create-file.tsx:183
-#: src/dialogs/permissions.tsx:317 src/files-card-body.tsx:557
-#: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
+#: src/files-card-body.tsx:557 src/files-card-body.tsx:596
+#: src/files-footer-detail.tsx:79 src/header.tsx:99
+#: src/dialogs/create-file.tsx:183 src/dialogs/permissions.tsx:317
 msgid "Owner"
 msgstr "擁有者"
 
@@ -565,7 +565,7 @@ msgstr "貼上失敗"
 msgid "Permission denied"
 msgstr "使用權限被拒"
 
-#: src/header.tsx:110 src/files-card-body.tsx:562
+#: src/files-card-body.tsx:562 src/header.tsx:110
 msgid "Permissions"
 msgstr "權限"
 
@@ -577,7 +577,7 @@ msgstr "變更 $0 個檔案的權限"
 msgid "Read and execute"
 msgstr "讀取與執行"
 
-#: src/dialogs/permissions.tsx:223 src/common.ts:61
+#: src/common.ts:61 src/dialogs/permissions.tsx:223
 msgid "Read and write"
 msgstr "讀取與寫入"
 
@@ -585,7 +585,7 @@ msgstr "讀取與寫入"
 msgid "Read, write, and execute"
 msgstr "讀取、寫入與執行"
 
-#: src/dialogs/editor.tsx:175 src/dialogs/permissions.tsx:228 src/common.ts:59
+#: src/common.ts:59 src/dialogs/editor.tsx:175 src/dialogs/permissions.tsx:228
 msgid "Read-only"
 msgstr "唯讀"
 
@@ -653,7 +653,7 @@ msgstr "設定為可執行的程式"
 msgid "Show all files"
 msgstr "顯示所有檔案"
 
-#: src/header.tsx:284 src/files-card-body.tsx:535
+#: src/files-card-body.tsx:535 src/header.tsx:284
 msgid "Show hidden items"
 msgstr "顯示隱藏的項目"
 
@@ -661,7 +661,7 @@ msgstr "顯示隱藏的項目"
 msgid "Show keyboard shortcuts"
 msgstr "顯示鍵盤快速鍵"
 
-#: src/header.tsx:77 src/files-card-body.tsx:548
+#: src/files-card-body.tsx:548 src/header.tsx:77
 msgid "Size"
 msgstr "大小"
 
@@ -750,7 +750,7 @@ msgstr "檢視 $0"
 msgid "Write and execute"
 msgstr "寫入與執行"
 
-#: src/dialogs/permissions.tsx:243 src/common.ts:57
+#: src/common.ts:57 src/dialogs/permissions.tsx:243
 msgid "Write-only"
 msgstr "只能寫入"
 
