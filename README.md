@@ -1,3 +1,37 @@
+# WIP build bundle in distro packages
+
+Initial proof of concept for Debian, which has more packaged dependencies:
+
+Install at least esbuild:
+```
+sudo apt install esbuild
+```
+
+Fedora's package does not currently work ([bugzilla](https://bugzilla.redhat.com/show_bug.cgi?id=2387212))
+but a [fix was proposed](https://src.fedoraproject.org/rpms/golang-github-evanw-esbuild/pull-request/13).
+
+Strip all devDependencies and binary esbuild blob, build node tarball
+and replace it:
+```
+tools/node-modules runtime-tar /tmp/n.tar.xz
+mv node_modules{,.full}
+tar xf /tmp/n.tar.xz
+```
+
+Now `./build` should create a working `dist/`.
+
+On Debian you can reduce it further by using distro packages for some JS
+libraries, in particular React:
+
+```
+sudo apt install node-argparse node-gettext-parser node-mime-db node-react node-react-dom
+
+for m in argparse gettext-parser mime-db react react-dom; do
+    rm -rf node_modules/$m
+    ln -sn /usr/share/nodejs/$m node_modules/$m
+done
+```
+
 # Cockpit Files
 
 This is the [Cockpit](https://cockpit-project.org/) user interface for managing
