@@ -4,7 +4,9 @@ Priority: optional
 Maintainer: Utopia Maintenance Team <pkg-utopia-maintainers@lists.alioth.debian.org>
 Uploaders: Martin Pitt <mpitt@debian.org>,
 Build-Depends: debhelper-compat (= 13),
+               esbuild,
                gettext (>= 0.21),
+               nodejs,
 Standards-Version: 4.7.0
 Rules-Requires-Root: no
 Homepage: https://github.com/cockpit-project/cockpit-files
