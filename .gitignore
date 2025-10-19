@@ -19,8 +19,10 @@
 /cockpit-*.tar.xz
 /cockpit-files.spec
 /dist/
+/metafile.json
 /package-lock.json
 /pkg/
+/runtime-npm-modules.txt
 /tmp/
 /tools/
 
