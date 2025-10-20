@@ -7,18 +7,14 @@ git init
 rm -f bots  # common local case: existing bots symlink
 make bots test/common
 
-# support running from clean git tree
-if [ ! -d node_modules/chrome-remote-interface ]; then
-    # copy package.json temporarily otherwise npm might try to install the dependencies from it
-    rm -f package-lock.json  # otherwise the command below installs *everything*, argh
-    mv package.json .package.json
-    # only install a subset to save time/space
-    npm install chrome-remote-interface sizzle
-    mv .package.json package.json
+if [ -e .git ]; then
+    tools/node-modules checkout
+    # disable detection of affected tests; testing takes too long as there is no parallelization
+    mv .git dot-git
+else
+    # upstream tarballs ship test dependencies; print version for debugging
+    grep '"version"' node_modules/sizzle/package.json
 fi
-
-# disable detection of affected tests; testing takes too long as there is no parallelization
-mv .git dot-git
 
 . /run/host/usr/lib/os-release
 export TEST_OS="${ID}-${VERSION_ID/./-}"

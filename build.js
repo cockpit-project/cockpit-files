@@ -1,6 +1,7 @@
 #!/usr/bin/env -S node
 
 import fs from 'node:fs';
+import { createRequire } from 'node:module';
 import os from 'node:os';
 import path from 'node:path';
 import process from 'node:process';
@@ -14,7 +15,22 @@ import { cockpitCompressPlugin } from './pkg/lib/esbuild-compress-plugin.js';
 import { filetype_plugin } from './src/filetype-plugin.js';
 
 const useWasm = os.arch() !== 'x64';
-const esbuild = (await import(useWasm ? 'esbuild-wasm' : 'esbuild')).default;
+
+const esbuild = await (async () => {
+    try {
+        // Try node_modules first for installs with devDependencies
+        return (await import(useWasm ? 'esbuild-wasm' : 'esbuild')).default;
+    } catch (e) {
+        if (e.code !== 'ERR_MODULE_NOT_FOUND')
+            throw e;
+
+        // Fall back to distro package (e.g. Debian's /usr/lib/*/nodejs/esbuild)
+        // Use createRequire to leverage Node's module resolution which searches system paths
+        // Use require.resolve to find esbuild in system paths, then import it
+        const require = createRequire(import.meta.url);
+        return (await import(require.resolve('esbuild'))).default;
+    }
+})();
 
 const production = process.env.NODE_ENV === 'production';
 // List of directories to use when using import statements
@@ -28,7 +44,6 @@ const parser = (await import('argparse')).default.ArgumentParser();
 /* eslint-disable max-len */
 parser.add_argument('-r', '--rsync', { help: "rsync bundles to ssh target after build", metavar: "HOST" });
 parser.add_argument('-w', '--watch', { action: 'store_true', help: "Enable watch mode", default: process.env.ESBUILD_WATCH === "true" });
-parser.add_argument('-m', '--metafile', { help: "Enable bundle size information file", metavar: "FILE" });
 /* eslint-enable max-len */
 const args = parser.parse_args();
 
@@ -90,7 +105,7 @@ const context = await esbuild.context({
     minify: production,
     nodePaths,
     outdir,
-    metafile: !!args.metafile,
+    metafile: true,
     target: ['es2020'],
     plugins: [
         cleanPlugin(),
@@ -125,8 +140,32 @@ const context = await esbuild.context({
 
 try {
     const result = await context.rebuild();
-    if (args.metafile) {
-        fs.writeFileSync(args.metafile, JSON.stringify(result.metafile));
+
+    // skip metafile and runtime module calculation in watch mode
+    if (!args.watch) {
+        fs.writeFileSync('metafile.json', JSON.stringify(result.metafile));
+
+        // Extract bundled npm packages for dependency tracking
+        const bundledPackages = new Set();
+        for (const inputPath of Object.keys(result.metafile.inputs)) {
+            // Match paths like node_modules/package-name/ or node_modules/@scope/package-name/
+            const match = inputPath.match(/^node_modules\/(@[^/]+\/[^/]+|[^/]+)\//);
+            if (match)
+                bundledPackages.add(match[1]);
+        }
+
+        // Look up versions from package-lock.json and output simple format
+        const packageLock = JSON.parse(fs.readFileSync('package-lock.json', 'utf8'));
+        const deps = [];
+        for (const pkgName of Array.from(bundledPackages).sort()) {
+            const lockKey = `node_modules/${pkgName}`;
+            const pkgInfo = packageLock.packages?.[lockKey];
+            if (pkgInfo?.version)
+                deps.push(`${pkgName} ${pkgInfo.version}`);
+            else
+                console.error(`Warning: Could not find version for ${pkgName}`);
+        }
+        fs.writeFileSync('runtime-npm-modules.txt', deps.join('\n') + '\n');
     }
 } catch (e) {
     if (!args.watch)
