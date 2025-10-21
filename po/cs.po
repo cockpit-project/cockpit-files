@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 03:21+0000\n"
+"POT-Creation-Date: 2025-10-17 03:26+0000\n"
 "PO-Revision-Date: 2025-04-01 02:53+0000\n"
 "Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
 "memory@weblate.org>\n"
@@ -116,11 +116,11 @@ msgstr "Blokové zařízení"
 msgid "Bookmarks"
 msgstr "Záložky"
 
-#: src/upload-button.tsx:159 src/dialogs/symlink.tsx:246
-#: src/dialogs/copyPasteOwnership.tsx:179 src/dialogs/editor.tsx:252
-#: src/dialogs/mkdir.tsx:150 src/dialogs/create-file.tsx:209
-#: src/dialogs/delete.tsx:110 src/dialogs/rename.tsx:100
-#: src/dialogs/permissions.tsx:422
+#: src/upload-button.tsx:159 src/dialogs/editor.tsx:252
+#: src/dialogs/mkdir.tsx:150 src/dialogs/permissions.tsx:422
+#: src/dialogs/copyPasteOwnership.tsx:179 src/dialogs/create-file.tsx:209
+#: src/dialogs/rename.tsx:100 src/dialogs/delete.tsx:110
+#: src/dialogs/symlink.tsx:246
 msgid "Cancel"
 msgstr "Storno"
 
@@ -398,8 +398,8 @@ msgstr "Přejít vpřed"
 msgid "Go up a directory"
 msgstr "Do nadřazené složky"
 
-#: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
-#: src/files-footer-detail.tsx:151 src/dialogs/permissions.tsx:332
+#: src/files-card-body.tsx:596 src/dialogs/permissions.tsx:332
+#: src/files-footer-detail.tsx:79 src/files-footer-detail.tsx:151
 msgid "Group"
 msgstr "Skupina"
 
@@ -447,7 +447,7 @@ msgstr "Spravujte své soubory"
 msgid "Missing type"
 msgstr "Chybí typ"
 
-#: src/files-card-body.tsx:552 src/header.tsx:88
+#: src/header.tsx:88 src/files-card-body.tsx:552
 msgid "Modified"
 msgstr "Změněno"
 
@@ -455,7 +455,7 @@ msgstr "Změněno"
 msgid "Most permissive"
 msgstr "Nejpřístupnější"
 
-#: src/files-card-body.tsx:547 src/header.tsx:66
+#: src/header.tsx:66 src/files-card-body.tsx:547
 msgid "Name"
 msgstr "Název"
 
@@ -531,9 +531,9 @@ msgstr "Přístup pro ostatní"
 msgid "Overwrite"
 msgstr "Přepsat"
 
-#: src/files-card-body.tsx:557 src/files-card-body.tsx:596
-#: src/files-footer-detail.tsx:79 src/header.tsx:99
-#: src/dialogs/create-file.tsx:183 src/dialogs/permissions.tsx:317
+#: src/header.tsx:99 src/files-card-body.tsx:557 src/files-card-body.tsx:596
+#: src/dialogs/permissions.tsx:317 src/dialogs/create-file.tsx:183
+#: src/files-footer-detail.tsx:79
 msgid "Owner"
 msgstr "Vlastník"
 
@@ -573,7 +573,7 @@ msgstr "Vkládání se nezdařilo"
 msgid "Permission denied"
 msgstr "Přístup zamítnut"
 
-#: src/files-card-body.tsx:562 src/header.tsx:110
+#: src/header.tsx:110 src/files-card-body.tsx:562
 msgid "Permissions"
 msgstr "Oprávnění"
 
@@ -662,7 +662,7 @@ msgstr "Nastavit spustitelné jako program"
 msgid "Show all files"
 msgstr "Zobrazit veškeré soubory"
 
-#: src/files-card-body.tsx:535 src/header.tsx:284
+#: src/header.tsx:284 src/files-card-body.tsx:535
 msgid "Show hidden items"
 msgstr "Zobrazit skryté položky"
 
@@ -670,7 +670,7 @@ msgstr "Zobrazit skryté položky"
 msgid "Show keyboard shortcuts"
 msgstr "Zobrazit klávesové zkratky"
 
-#: src/files-card-body.tsx:548 src/header.tsx:77
+#: src/header.tsx:77 src/files-card-body.tsx:548
 msgid "Size"
 msgstr "Velikost"
 

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 03:21+0000\n"
+"POT-Creation-Date: 2025-10-17 03:26+0000\n"
 "PO-Revision-Date: 2025-07-18 05:53+0000\n"
 "Last-Translator: Jo Hyeonsu <cloud9350@naver.com>\n"
 "Language-Team: Korean <https://translate.fedoraproject.org/projects/cockpit/"
@@ -114,11 +114,11 @@ msgstr "블록 장치"
 msgid "Bookmarks"
 msgstr "즐겨찾기"
 
-#: src/upload-button.tsx:159 src/dialogs/symlink.tsx:246
-#: src/dialogs/copyPasteOwnership.tsx:179 src/dialogs/editor.tsx:252
-#: src/dialogs/mkdir.tsx:150 src/dialogs/create-file.tsx:209
-#: src/dialogs/delete.tsx:110 src/dialogs/rename.tsx:100
-#: src/dialogs/permissions.tsx:422
+#: src/upload-button.tsx:159 src/dialogs/editor.tsx:252
+#: src/dialogs/mkdir.tsx:150 src/dialogs/permissions.tsx:422
+#: src/dialogs/copyPasteOwnership.tsx:179 src/dialogs/create-file.tsx:209
+#: src/dialogs/rename.tsx:100 src/dialogs/delete.tsx:110
+#: src/dialogs/symlink.tsx:246
 msgid "Cancel"
 msgstr "취소"
 
@@ -395,8 +395,8 @@ msgstr "앞으로 가기"
 msgid "Go up a directory"
 msgstr "상위 디렉토리로 이동"
 
-#: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
-#: src/files-footer-detail.tsx:151 src/dialogs/permissions.tsx:332
+#: src/files-card-body.tsx:596 src/dialogs/permissions.tsx:332
+#: src/files-footer-detail.tsx:79 src/files-footer-detail.tsx:151
 msgid "Group"
 msgstr "그룹"
 
@@ -444,7 +444,7 @@ msgstr "자신의 파일을 관리합니다"
 msgid "Missing type"
 msgstr "누락 유형"
 
-#: src/files-card-body.tsx:552 src/header.tsx:88
+#: src/header.tsx:88 src/files-card-body.tsx:552
 msgid "Modified"
 msgstr "수정됨"
 
@@ -452,7 +452,7 @@ msgstr "수정됨"
 msgid "Most permissive"
 msgstr "관대한 허용"
 
-#: src/files-card-body.tsx:547 src/header.tsx:66
+#: src/header.tsx:66 src/files-card-body.tsx:547
 msgid "Name"
 msgstr "이름"
 
@@ -528,9 +528,9 @@ msgstr "기타 접근"
 msgid "Overwrite"
 msgstr "덮어쓰기"
 
-#: src/files-card-body.tsx:557 src/files-card-body.tsx:596
-#: src/files-footer-detail.tsx:79 src/header.tsx:99
-#: src/dialogs/create-file.tsx:183 src/dialogs/permissions.tsx:317
+#: src/header.tsx:99 src/files-card-body.tsx:557 src/files-card-body.tsx:596
+#: src/dialogs/permissions.tsx:317 src/dialogs/create-file.tsx:183
+#: src/files-footer-detail.tsx:79
 msgid "Owner"
 msgstr "소유자"
 
@@ -570,7 +570,7 @@ msgstr "붙여넣기 실패함"
 msgid "Permission denied"
 msgstr "권한이 거부되었습니다"
 
-#: src/files-card-body.tsx:562 src/header.tsx:110
+#: src/header.tsx:110 src/files-card-body.tsx:562
 msgid "Permissions"
 msgstr "권한"
 
@@ -658,7 +658,7 @@ msgstr "실행 할 수 있는 프로그램 설정"
 msgid "Show all files"
 msgstr "모든 파일 표시"
 
-#: src/files-card-body.tsx:535 src/header.tsx:284
+#: src/header.tsx:284 src/files-card-body.tsx:535
 msgid "Show hidden items"
 msgstr "숨겨진 항목 표시"
 
@@ -666,7 +666,7 @@ msgstr "숨겨진 항목 표시"
 msgid "Show keyboard shortcuts"
 msgstr "키보드 단축키 표시"
 
-#: src/files-card-body.tsx:548 src/header.tsx:77
+#: src/header.tsx:77 src/files-card-body.tsx:548
 msgid "Size"
 msgstr "크기"
 

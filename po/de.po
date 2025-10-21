@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: starter-kit 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 03:21+0000\n"
+"POT-Creation-Date: 2025-10-17 03:26+0000\n"
 "PO-Revision-Date: 2025-07-09 15:08+0000\n"
 "Last-Translator: Robert Simai <robert.simai@suse.com>\n"
 "Language-Team: German <https://translate.fedoraproject.org/projects/cockpit/"
@@ -104,11 +104,11 @@ msgstr "Blockorientiertes Gerät"
 msgid "Bookmarks"
 msgstr "Lesezeichen"
 
-#: src/upload-button.tsx:159 src/dialogs/symlink.tsx:246
-#: src/dialogs/copyPasteOwnership.tsx:179 src/dialogs/editor.tsx:252
-#: src/dialogs/mkdir.tsx:150 src/dialogs/create-file.tsx:209
-#: src/dialogs/delete.tsx:110 src/dialogs/rename.tsx:100
-#: src/dialogs/permissions.tsx:422
+#: src/upload-button.tsx:159 src/dialogs/editor.tsx:252
+#: src/dialogs/mkdir.tsx:150 src/dialogs/permissions.tsx:422
+#: src/dialogs/copyPasteOwnership.tsx:179 src/dialogs/create-file.tsx:209
+#: src/dialogs/rename.tsx:100 src/dialogs/delete.tsx:110
+#: src/dialogs/symlink.tsx:246
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -387,8 +387,8 @@ msgstr "Weitergehen"
 msgid "Go up a directory"
 msgstr "Ein Verzeichnis nach oben gehen"
 
-#: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
-#: src/files-footer-detail.tsx:151 src/dialogs/permissions.tsx:332
+#: src/files-card-body.tsx:596 src/dialogs/permissions.tsx:332
+#: src/files-footer-detail.tsx:79 src/files-footer-detail.tsx:151
 msgid "Group"
 msgstr "Gruppe"
 
@@ -436,7 +436,7 @@ msgstr "Verwalten Sie Ihre Dateien"
 msgid "Missing type"
 msgstr "Fehlender Typ"
 
-#: src/files-card-body.tsx:552 src/header.tsx:88
+#: src/header.tsx:88 src/files-card-body.tsx:552
 msgid "Modified"
 msgstr "Geändert"
 
@@ -444,7 +444,7 @@ msgstr "Geändert"
 msgid "Most permissive"
 msgstr "Am meisten zulässig"
 
-#: src/files-card-body.tsx:547 src/header.tsx:66
+#: src/header.tsx:66 src/files-card-body.tsx:547
 msgid "Name"
 msgstr "Name"
 
@@ -520,9 +520,9 @@ msgstr "Anderer Zugriff"
 msgid "Overwrite"
 msgstr "Überschreiben"
 
-#: src/files-card-body.tsx:557 src/files-card-body.tsx:596
-#: src/files-footer-detail.tsx:79 src/header.tsx:99
-#: src/dialogs/create-file.tsx:183 src/dialogs/permissions.tsx:317
+#: src/header.tsx:99 src/files-card-body.tsx:557 src/files-card-body.tsx:596
+#: src/dialogs/permissions.tsx:317 src/dialogs/create-file.tsx:183
+#: src/files-footer-detail.tsx:79
 msgid "Owner"
 msgstr "Eigentümer"
 
@@ -562,7 +562,7 @@ msgstr "Einfügen fehlgeschlagen"
 msgid "Permission denied"
 msgstr "Erlaubnis verweigert"
 
-#: src/files-card-body.tsx:562 src/header.tsx:110
+#: src/header.tsx:110 src/files-card-body.tsx:562
 msgid "Permissions"
 msgstr "Berechtigungen"
 
@@ -651,7 +651,7 @@ msgstr "Ausführbare Datei als Programm festlegen"
 msgid "Show all files"
 msgstr "Alle Dateien anzeigen"
 
-#: src/files-card-body.tsx:535 src/header.tsx:284
+#: src/header.tsx:284 src/files-card-body.tsx:535
 msgid "Show hidden items"
 msgstr "Versteckte Elemente anzeigen"
 
@@ -659,7 +659,7 @@ msgstr "Versteckte Elemente anzeigen"
 msgid "Show keyboard shortcuts"
 msgstr "Tastenkombinationen anzeigen"
 
-#: src/files-card-body.tsx:548 src/header.tsx:77
+#: src/header.tsx:77 src/files-card-body.tsx:548
 msgid "Size"
 msgstr "Größe"
 
