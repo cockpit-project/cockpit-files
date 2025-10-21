@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 03:21+0000\n"
+"POT-Creation-Date: 2025-10-17 03:26+0000\n"
 "PO-Revision-Date: 2025-06-01 14:21+0000\n"
 "Last-Translator: Nathan <nathan95@live.it>\n"
 "Language-Team: Italian <https://translate.fedoraproject.org/projects/cockpit/"
@@ -115,11 +115,11 @@ msgstr "blocca il dispositivo"
 msgid "Bookmarks"
 msgstr "Segnalibri"
 
-#: src/upload-button.tsx:159 src/dialogs/symlink.tsx:246
-#: src/dialogs/copyPasteOwnership.tsx:179 src/dialogs/editor.tsx:252
-#: src/dialogs/mkdir.tsx:150 src/dialogs/create-file.tsx:209
-#: src/dialogs/delete.tsx:110 src/dialogs/rename.tsx:100
-#: src/dialogs/permissions.tsx:422
+#: src/upload-button.tsx:159 src/dialogs/editor.tsx:252
+#: src/dialogs/mkdir.tsx:150 src/dialogs/permissions.tsx:422
+#: src/dialogs/copyPasteOwnership.tsx:179 src/dialogs/create-file.tsx:209
+#: src/dialogs/rename.tsx:100 src/dialogs/delete.tsx:110
+#: src/dialogs/symlink.tsx:246
 msgid "Cancel"
 msgstr "Annulla"
 
@@ -397,8 +397,8 @@ msgstr "Avanti"
 msgid "Go up a directory"
 msgstr "Tornare alla cartella superiore"
 
-#: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
-#: src/files-footer-detail.tsx:151 src/dialogs/permissions.tsx:332
+#: src/files-card-body.tsx:596 src/dialogs/permissions.tsx:332
+#: src/files-footer-detail.tsx:79 src/files-footer-detail.tsx:151
 msgid "Group"
 msgstr "Gruppo"
 
@@ -446,7 +446,7 @@ msgstr "Gestisci i tuoi file"
 msgid "Missing type"
 msgstr "Tipo mancante"
 
-#: src/files-card-body.tsx:552 src/header.tsx:88
+#: src/header.tsx:88 src/files-card-body.tsx:552
 msgid "Modified"
 msgstr "Modificati"
 
@@ -454,7 +454,7 @@ msgstr "Modificati"
 msgid "Most permissive"
 msgstr "Più permissivi"
 
-#: src/files-card-body.tsx:547 src/header.tsx:66
+#: src/header.tsx:66 src/files-card-body.tsx:547
 msgid "Name"
 msgstr "Nome"
 
@@ -530,9 +530,9 @@ msgstr "Accesso altri"
 msgid "Overwrite"
 msgstr "Sovrascrivere"
 
-#: src/files-card-body.tsx:557 src/files-card-body.tsx:596
-#: src/files-footer-detail.tsx:79 src/header.tsx:99
-#: src/dialogs/create-file.tsx:183 src/dialogs/permissions.tsx:317
+#: src/header.tsx:99 src/files-card-body.tsx:557 src/files-card-body.tsx:596
+#: src/dialogs/permissions.tsx:317 src/dialogs/create-file.tsx:183
+#: src/files-footer-detail.tsx:79
 msgid "Owner"
 msgstr "Proprietario"
 
@@ -572,7 +572,7 @@ msgstr "Operazione incolla fallita"
 msgid "Permission denied"
 msgstr "Permesso negato"
 
-#: src/files-card-body.tsx:562 src/header.tsx:110
+#: src/header.tsx:110 src/files-card-body.tsx:562
 msgid "Permissions"
 msgstr "permessi"
 
@@ -661,7 +661,7 @@ msgstr "Imposta come eseguibile (programma)"
 msgid "Show all files"
 msgstr "Mostra tutti i file"
 
-#: src/files-card-body.tsx:535 src/header.tsx:284
+#: src/header.tsx:284 src/files-card-body.tsx:535
 msgid "Show hidden items"
 msgstr "Mostra elementi nascosti"
 
@@ -669,7 +669,7 @@ msgstr "Mostra elementi nascosti"
 msgid "Show keyboard shortcuts"
 msgstr "Mostra scorciatoie da tastiera"
 
-#: src/files-card-body.tsx:548 src/header.tsx:77
+#: src/header.tsx:77 src/files-card-body.tsx:548
 msgid "Size"
 msgstr "Dimensione"
 
