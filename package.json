@@ -33,7 +33,6 @@
     "eslint-plugin-promise": "6.6.0",
     "eslint-plugin-react": "7.37.5",
     "eslint-plugin-react-hooks": "4.6.2",
-    "sizzle": "2.3.10",
     "stylelint": "16.25.0",
     "stylelint-config-recommended-scss": "16.0.2",
     "stylelint-config-standard": "39.0.1",

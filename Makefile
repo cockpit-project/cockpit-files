@@ -39,7 +39,7 @@ COCKPIT_REPO_FILES = \
 	$(NULL)
 
 COCKPIT_REPO_URL = https://github.com/cockpit-project/cockpit.git
-COCKPIT_REPO_COMMIT = a358c8816e316340c8d204b457d71660e74ea165 # 349 + 9 commits
+COCKPIT_REPO_COMMIT = 5de1fdba558d76fa8d174d4f7bc20b469de8e241 # sizzle PR
 
 $(COCKPIT_REPO_FILES): $(COCKPIT_REPO_STAMP)
 COCKPIT_REPO_TREE = '$(strip $(COCKPIT_REPO_COMMIT))^{tree}'
@@ -127,10 +127,6 @@ devel-uninstall:
 print-version:
 	@echo "$(VERSION)"
 
-TEST_NPMS = \
-	node_modules/sizzle \
-	$(NULL)
-
 dist: $(TARFILE)
 	@ls -1 $(TARFILE)
 
@@ -143,7 +139,7 @@ $(TARFILE): $(DIST_TEST) $(SPEC) packaging/arch/PKGBUILD packaging/debian/change
 	tar --xz $(TAR_ARGS) -cf $(TARFILE) --transform 's,^,$(RPM_NAME)/,' \
 		--exclude packaging/$(SPEC).in --exclude test/reference \
 		$$(git ls-files | grep -v node_modules) \
-		$(COCKPIT_REPO_FILES) $(NODE_MODULES_TEST) $(TEST_NPMS) $(SPEC) \
+		$(COCKPIT_REPO_FILES) $(NODE_MODULES_TEST) $(SPEC) \
 		packaging/arch/PKGBUILD packaging/debian/changelog dist/
 
 $(NODE_CACHE): $(NODE_MODULES_TEST)
