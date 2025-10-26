@@ -9,7 +9,7 @@ copy_upstream_release_description: true
 srpm_build_deps:
   - jq
   - make
-  - nodejs-npm
+  - nodejs
 
 actions:
   post-upstream-clone:
