@@ -97,12 +97,15 @@ packaging/arch/PKGBUILD: packaging/arch/PKGBUILD.in
 packaging/debian/changelog: packaging/debian/changelog.in
 	sed 's/VERSION/$(VERSION)/' $< > $@
 
+packaging/debian/copyright: packaging/debian/copyright.template $(NODE_CACHE)
+	packaging/build-debian-copyright $(NODE_CACHE) > $@
+
 watch: $(NODE_MODULES_TEST) $(COCKPIT_REPO_STAMP)
 	NODE_ENV=$(NODE_ENV) ./build.js -w
 
 clean:
 	rm -rf dist/
-	rm -f $(SPEC) packaging/arch/PKGBUILD packaging/debian/changelog
+	rm -f $(SPEC) packaging/arch/PKGBUILD packaging/debian/changelog packaging/debian/copyright
 	rm -f po/LINGUAS
 	rm -f metafile.json runtime-npm-modules.txt
 
@@ -134,13 +137,13 @@ dist: $(TARFILE)
 # we don't ship most node_modules for license and compactness reasons, only the ones necessary for running tests
 # we ship a pre-built dist/ (so it's not necessary) and ship package-lock.json (so that node_modules/ can be reconstructed if necessary)
 $(TARFILE): export NODE_ENV ?= production
-$(TARFILE): $(DIST_TEST) $(SPEC) packaging/arch/PKGBUILD packaging/debian/changelog
+$(TARFILE): $(DIST_TEST) $(SPEC) packaging/arch/PKGBUILD packaging/debian/changelog packaging/debian/copyright
 	if type appstream-util >/dev/null 2>&1; then appstream-util validate-relax --nonet *.metainfo.xml; fi
 	tar --xz $(TAR_ARGS) -cf $(TARFILE) --transform 's,^,$(RPM_NAME)/,' \
 		--exclude packaging/$(SPEC).in --exclude test/reference \
 		$$(git ls-files | grep -v node_modules) \
 		$(COCKPIT_REPO_FILES) $(NODE_MODULES_TEST) $(SPEC) \
-		packaging/arch/PKGBUILD packaging/debian/changelog dist/
+		packaging/arch/PKGBUILD packaging/debian/changelog packaging/debian/copyright dist/
 
 $(NODE_CACHE): $(NODE_MODULES_TEST)
 	tools/node-modules runtime-tar $(NODE_CACHE)
