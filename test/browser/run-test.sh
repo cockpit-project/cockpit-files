@@ -3,7 +3,6 @@ set -eux
 cd "${SOURCE}"
 
 # tests need cockpit's bots/ libraries and test infrastructure
-git init
 rm -f bots  # common local case: existing bots symlink
 make bots test/common
 
