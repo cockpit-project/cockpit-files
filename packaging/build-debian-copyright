@@ -1,0 +1,233 @@
+#!/usr/bin/python3
+# generate debian/copyright from packaging/debian/copyright.template and node_modules
+# Author: Martin Pitt <mpitt@redhat.com>
+
+import json
+import os
+import re
+import sys
+
+BASE_DIR = os.path.realpath(f'{__file__}/../..')
+TEMPLATE_FILE = f'{BASE_DIR}/packaging/debian/copyright.template'
+PACKAGE_LOCK_FILE = f'{BASE_DIR}/package-lock.json'
+NODE_MODULES_DIR = f'{BASE_DIR}/node_modules'
+
+
+def template_licenses(template: str) -> set[str]:
+    """Return set of existing License: short names"""
+
+    ids: set[str] = set()
+    for line in template.splitlines():
+        if line.startswith('License:'):
+            ids.add(line.split(None, 1)[1].lower())
+    return ids
+
+
+def find_copyright_in_license_file(license_path: str) -> set[str]:
+    """Heuristically extract copyrights from LICENSE file"""
+
+    with open(license_path, errors='ignore') as f:
+        content = f.read()
+
+    copyrights: set[str] = set()
+    # Look for copyright lines
+    for match in re.finditer(r'Copyright\s+(?:\([cC]\)\s*)?(.+)$', content, re.MULTILINE | re.IGNORECASE):
+        copyright_text = match.group(1).strip()
+
+        # Skip template placeholders in content
+        if '[yyyy]' in copyright_text or '{yyyy}' in copyright_text:
+            continue
+
+        # Skip generic license template text
+        skip_patterns = [
+            r'^owner',
+            r'^holder',
+            r'^license',
+            r'^notice',
+            r'^statement',
+            r'^law',
+            r'^and',
+            r'^or\b',
+            r'^the\b',
+            r'^\d{4}\s*$',  # Just a year
+        ]
+
+        if any(re.match(pattern, copyright_text, re.IGNORECASE) for pattern in skip_patterns):
+            continue
+
+        # Skip if it's just numbers, punctuation and common words (incomplete copyright statements)
+        if re.match(r'^[\d\s,;.\-]+$', copyright_text):
+            continue
+        if re.match(r'^[\d\s,;.\-]+(All Rights|Reserved)\.?$', copyright_text, re.IGNORECASE):
+            continue
+
+        # Only accept if it looks like an actual copyright (has year or name)
+        if (re.search(r'\d{4}', copyright_text) or len(copyright_text.split()) >= 2) and len(copyright_text) < 200:
+            copyrights.add(copyright_text)
+
+    return copyrights
+
+
+def normalize_spdx_license(license_text: str) -> str:
+    """Normalize license to SPDX identifier using pattern-based substitutions"""
+
+    # Handle license expressions - normalize to lowercase "and"/"or" per Debian spec
+    # https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/#license-short-name
+    license_text = license_text.replace(' AND ', ' and ').replace(' OR ', ' or ')
+
+    def normalize_part(part: str) -> str:
+        part = part.strip().strip('()')
+
+        # Strip " License" suffix (e.g., "ISC License" -> "ISC")
+        part = re.sub(r'\s+License$', '', part)
+
+        # Convert e.g. "GPL-2.0+" → "GPL-2.0-or-later"
+        part = re.sub(r'\+$', '-or-later', part)
+
+        # Normalize specific licenses
+        part = part.replace('MIT/X11', 'MIT')
+        part = re.sub(r'^Apache[- ]2(?:\.0)?$', 'Apache-2.0', part)
+        part = re.sub(r'^BSD$', 'BSD-3-Clause', part)
+        part = re.sub(r'^Python-2\.0\.1$', 'Python-2.0', part)
+
+        # Handle -only suffix (e.g., "LGPL-2.1" -> "LGPL-2.1-only" if not already suffixed)
+        if re.match(r'^(L?GPL)-\d+\.\d+$', part):
+            part = part + '-only'
+
+        return part
+
+    # Parse and normalize each part of compound license expressions
+    parts = re.split(r'(\s+and\s+|\s+or\s+)', license_text)
+    normalized_parts = []
+    for part in parts:
+        if part.strip() in ('and', 'or'):
+            normalized_parts.append(f' {part.strip()} ')
+        else:
+            normalized_parts.append(normalize_part(part))
+    return ''.join(normalized_parts)
+
+
+def get_package_info(package_name: str, package_data: dict[str, object]) -> tuple[str, set[str]]:
+    """Extract license and copyright info for a package"""
+
+    # Get license from package-lock.json
+    license_text = str(package_data.get('license', 'UNKNOWN'))
+
+    # Normalize to SPDX identifier
+    license_text = normalize_spdx_license(license_text)
+
+    # Try to find copyright information
+    copyrights: set[str] = set()
+
+    # Check for LICENSE files
+    package_path = os.path.join(NODE_MODULES_DIR, package_name.replace('node_modules/', ''))
+    if os.path.isdir(package_path):
+        # Look for LICENSE files (various names)
+        for license_file in ['LICENSE', 'LICENSE.md', 'LICENSE.txt', 'COPYING', 'COPYING.txt']:
+            license_path = os.path.join(package_path, license_file)
+            if os.path.exists(license_path):
+                copyrights.update(find_copyright_in_license_file(license_path))
+
+        # Also check package.json for author
+        package_json_path = os.path.join(package_path, 'package.json')
+        if os.path.exists(package_json_path):
+            with open(package_json_path) as f:
+                pkg_data = json.load(f)
+
+            # Check for author
+            if 'author' in pkg_data:
+                author = pkg_data['author']
+                if isinstance(author, dict):
+                    author_name = author.get('name', '')
+                else:
+                    # Parse "Name <email>" format
+                    author_name = re.sub(r'\s*<[^>]+>\s*', '', str(author)).strip()
+
+                if author_name:
+                    copyrights.add(author_name)
+
+    return license_text, copyrights
+
+
+#
+# main
+#
+
+with open(TEMPLATE_FILE) as f:
+    template = f.read()
+with open(PACKAGE_LOCK_FILE) as f:
+    package_lock = json.load(f)
+
+# Collect runtime dependencies
+packages_info: dict[str, tuple[str, set[str]]] = {}  # package_name → (license, copyrights)
+
+for package_name, package_data in package_lock.get('packages', {}).items():
+    # Skip root package (empty name), dev dependencies, and peer dependencies
+    if not package_name or package_data.get('dev') or package_data.get('peer'):
+        continue
+
+    # Skip packages filtered out by `tools/node-modules runtime-tar`:
+    # - esbuild: arch dependent, must use distribution packages
+    if re.search(r'.*/@?esbuild(/|$)', package_name):
+        continue
+    # unnecessary binary packages
+    if 'watcher-linux' in package_name or 'sass-embedded' in package_name:
+        continue
+
+    # Get license and copyright info
+    license_text, copyrights = get_package_info(package_name, package_data)
+
+    packages_info[package_name] = (license_text, copyrights)
+
+# Extract all individual licenses for validation
+all_licenses_used: set[str] = set()
+for license_text, _copyrights in packages_info.values():
+    # Extract individual licenses from compound expressions (split on 'and'/'or')
+    parts = re.split(r'\s+(?:and|or)\s+', license_text)
+    all_licenses_used.update(part.strip().strip('()') for part in parts)
+
+# Validate all licenses are defined
+license_ids = template_licenses(template)
+missing_licenses = [lic for lic in all_licenses_used
+                    if lic.lower() not in license_ids and lic != 'UNKNOWN']
+
+if missing_licenses:
+    sys.exit(f"ERROR: The following licenses are used but not defined in {TEMPLATE_FILE}:\n"
+             + '\n'.join(f"  - {lic}" for lic in sorted(missing_licenses))
+             + "\n\nPlease add License: paragraphs for these licenses to the template.")
+
+# Group packages by top-level directory (e.g., @patternfly/react-core → @patternfly, react → react)
+toplevel_groups: dict[str, tuple[str, set[str]]] = {}
+
+for package_name in sorted(packages_info.keys()):
+    license_text, copyrights = packages_info[package_name]
+
+    # Extract top-level directory from package name
+    toplevel = package_name.replace('node_modules/', '', 1).split('/')[0]
+
+    # Group by top-level directory, merging copyrights for packages in the same directory
+    if toplevel in toplevel_groups:
+        existing_license, existing_copyrights = toplevel_groups[toplevel]
+        toplevel_groups[toplevel] = (existing_license, existing_copyrights | copyrights)
+    else:
+        toplevel_groups[toplevel] = (license_text, copyrights.copy())
+
+# Generate paragraphs
+paragraphs: list[str] = []
+for toplevel in sorted(toplevel_groups.keys()):
+    license_text, copyrights = toplevel_groups[toplevel]
+
+    # Use fallback if no copyright found
+    if not copyrights:
+        copyrights = {f"Authors of {toplevel}"}
+
+    copyright_text = '\n '.join(sorted(copyrights))
+
+    # For scoped packages, use wildcard; otherwise use package name directly
+    files_pattern = f"node_modules/{toplevel}/*" if toplevel.startswith('@') else f"node_modules/{toplevel}"
+
+    paragraphs.append(f"Files: {files_pattern}\nCopyright: {copyright_text}\nLicense: {license_text}")
+
+# Assemble copyright file
+npm_content = '\n\n'.join(paragraphs)
+print('\n'.join(npm_content if '#NPM' in line else line for line in template.splitlines()))
