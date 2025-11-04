@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-17 03:26+0000\n"
+"POT-Creation-Date: 2025-10-28 03:34+0000\n"
 "PO-Revision-Date: 2025-04-03 14:53+0000\n"
 "Last-Translator: Ricky Tigg <ricky.tigg@gmail.com>\n"
 "Language-Team: Finnish <https://translate.fedoraproject.org/projects/cockpit-"
@@ -115,11 +115,11 @@ msgstr "Lohkolaite"
 msgid "Bookmarks"
 msgstr "Kirjanmerkit"
 
-#: src/upload-button.tsx:159 src/dialogs/editor.tsx:252
-#: src/dialogs/mkdir.tsx:150 src/dialogs/permissions.tsx:422
-#: src/dialogs/copyPasteOwnership.tsx:179 src/dialogs/create-file.tsx:209
-#: src/dialogs/rename.tsx:100 src/dialogs/delete.tsx:110
-#: src/dialogs/symlink.tsx:246
+#: src/upload-button.tsx:159 src/dialogs/symlink.tsx:246
+#: src/dialogs/copyPasteOwnership.tsx:179 src/dialogs/editor.tsx:252
+#: src/dialogs/mkdir.tsx:150 src/dialogs/create-file.tsx:209
+#: src/dialogs/delete.tsx:110 src/dialogs/rename.tsx:100
+#: src/dialogs/permissions.tsx:422
 msgid "Cancel"
 msgstr "Peru"
 
@@ -396,8 +396,8 @@ msgstr "Siirry eteenpäin"
 msgid "Go up a directory"
 msgstr "Siirry yksi hakemisto ylös"
 
-#: src/files-card-body.tsx:596 src/dialogs/permissions.tsx:332
-#: src/files-footer-detail.tsx:79 src/files-footer-detail.tsx:151
+#: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
+#: src/files-footer-detail.tsx:151 src/dialogs/permissions.tsx:332
 msgid "Group"
 msgstr "Ryhmä"
 
@@ -445,7 +445,7 @@ msgstr "Hallitse tiedostojasi"
 msgid "Missing type"
 msgstr "Puuttuva tyyppi"
 
-#: src/header.tsx:88 src/files-card-body.tsx:552
+#: src/files-card-body.tsx:552 src/header.tsx:88
 msgid "Modified"
 msgstr "Muokattu"
 
@@ -453,7 +453,7 @@ msgstr "Muokattu"
 msgid "Most permissive"
 msgstr "Eniten salliva"
 
-#: src/header.tsx:66 src/files-card-body.tsx:547
+#: src/files-card-body.tsx:547 src/header.tsx:66
 msgid "Name"
 msgstr "Nimi"
 
@@ -529,9 +529,9 @@ msgstr "Muiden pääsy"
 msgid "Overwrite"
 msgstr "Korvaa"
 
-#: src/header.tsx:99 src/files-card-body.tsx:557 src/files-card-body.tsx:596
-#: src/dialogs/permissions.tsx:317 src/dialogs/create-file.tsx:183
-#: src/files-footer-detail.tsx:79
+#: src/files-card-body.tsx:557 src/files-card-body.tsx:596
+#: src/files-footer-detail.tsx:79 src/header.tsx:99
+#: src/dialogs/create-file.tsx:183 src/dialogs/permissions.tsx:317
 msgid "Owner"
 msgstr "Omistaja"
 
@@ -571,7 +571,7 @@ msgstr "Liittäminen epäonnistui"
 msgid "Permission denied"
 msgstr "Käyttö estetty"
 
-#: src/header.tsx:110 src/files-card-body.tsx:562
+#: src/files-card-body.tsx:562 src/header.tsx:110
 msgid "Permissions"
 msgstr "Käyttöoikeudet"
 
@@ -660,7 +660,7 @@ msgstr "Määritä suoritettava ohjelmaksi"
 msgid "Show all files"
 msgstr "Näytä kaikki tiedostot"
 
-#: src/header.tsx:284 src/files-card-body.tsx:535
+#: src/files-card-body.tsx:535 src/header.tsx:284
 msgid "Show hidden items"
 msgstr "Näytä piilotetut kohteet"
 
@@ -668,7 +668,7 @@ msgstr "Näytä piilotetut kohteet"
 msgid "Show keyboard shortcuts"
 msgstr "Näytä pikanäppäimet"
 
-#: src/header.tsx:77 src/files-card-body.tsx:548
+#: src/files-card-body.tsx:548 src/header.tsx:77
 msgid "Size"
 msgstr "Koko"
 

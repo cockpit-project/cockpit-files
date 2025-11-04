@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-17 03:26+0000\n"
+"POT-Creation-Date: 2025-10-28 03:34+0000\n"
 "PO-Revision-Date: 2025-09-11 01:28+0000\n"
 "Last-Translator: Jesse Guo <jesseguotech@outlook.com>\n"
 "Language-Team: Chinese (Simplified) <https://translate.fedoraproject.org/"
@@ -109,11 +109,11 @@ msgstr "块设备"
 msgid "Bookmarks"
 msgstr "书签"
 
-#: src/upload-button.tsx:159 src/dialogs/editor.tsx:252
-#: src/dialogs/mkdir.tsx:150 src/dialogs/permissions.tsx:422
-#: src/dialogs/copyPasteOwnership.tsx:179 src/dialogs/create-file.tsx:209
-#: src/dialogs/rename.tsx:100 src/dialogs/delete.tsx:110
-#: src/dialogs/symlink.tsx:246
+#: src/upload-button.tsx:159 src/dialogs/symlink.tsx:246
+#: src/dialogs/copyPasteOwnership.tsx:179 src/dialogs/editor.tsx:252
+#: src/dialogs/mkdir.tsx:150 src/dialogs/create-file.tsx:209
+#: src/dialogs/delete.tsx:110 src/dialogs/rename.tsx:100
+#: src/dialogs/permissions.tsx:422
 msgid "Cancel"
 msgstr "取消"
 
@@ -388,8 +388,8 @@ msgstr "继续"
 msgid "Go up a directory"
 msgstr "转到目录"
 
-#: src/files-card-body.tsx:596 src/dialogs/permissions.tsx:332
-#: src/files-footer-detail.tsx:79 src/files-footer-detail.tsx:151
+#: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
+#: src/files-footer-detail.tsx:151 src/dialogs/permissions.tsx:332
 msgid "Group"
 msgstr "组"
 
@@ -437,7 +437,7 @@ msgstr "管理您的文件"
 msgid "Missing type"
 msgstr "缺少类型"
 
-#: src/header.tsx:88 src/files-card-body.tsx:552
+#: src/files-card-body.tsx:552 src/header.tsx:88
 msgid "Modified"
 msgstr "修改时间"
 
@@ -445,7 +445,7 @@ msgstr "修改时间"
 msgid "Most permissive"
 msgstr "最大权限"
 
-#: src/header.tsx:66 src/files-card-body.tsx:547
+#: src/files-card-body.tsx:547 src/header.tsx:66
 msgid "Name"
 msgstr "名称"
 
@@ -521,9 +521,9 @@ msgstr "其它人访问权限"
 msgid "Overwrite"
 msgstr "覆盖"
 
-#: src/header.tsx:99 src/files-card-body.tsx:557 src/files-card-body.tsx:596
-#: src/dialogs/permissions.tsx:317 src/dialogs/create-file.tsx:183
-#: src/files-footer-detail.tsx:79
+#: src/files-card-body.tsx:557 src/files-card-body.tsx:596
+#: src/files-footer-detail.tsx:79 src/header.tsx:99
+#: src/dialogs/create-file.tsx:183 src/dialogs/permissions.tsx:317
 msgid "Owner"
 msgstr "所有者"
 
@@ -563,7 +563,7 @@ msgstr "粘贴失败"
 msgid "Permission denied"
 msgstr "权限被拒绝"
 
-#: src/header.tsx:110 src/files-card-body.tsx:562
+#: src/files-card-body.tsx:562 src/header.tsx:110
 msgid "Permissions"
 msgstr "权限"
 
@@ -649,7 +649,7 @@ msgstr "将可执行文件设置为程序"
 msgid "Show all files"
 msgstr "显示所有文件"
 
-#: src/header.tsx:284 src/files-card-body.tsx:535
+#: src/files-card-body.tsx:535 src/header.tsx:284
 msgid "Show hidden items"
 msgstr "显示隐藏项目"
 
@@ -657,7 +657,7 @@ msgstr "显示隐藏项目"
 msgid "Show keyboard shortcuts"
 msgstr "显示键盘快捷方式"
 
-#: src/header.tsx:77 src/files-card-body.tsx:548
+#: src/files-card-body.tsx:548 src/header.tsx:77
 msgid "Size"
 msgstr "大小"
 
