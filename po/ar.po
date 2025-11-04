@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-17 03:26+0000\n"
+"POT-Creation-Date: 2025-10-28 03:34+0000\n"
 "PO-Revision-Date: 2025-07-18 05:53+0000\n"
 "Last-Translator: Abdullah Albaroty <albaroty@gmail.com>\n"
 "Language-Team: Arabic <https://translate.fedoraproject.org/projects/cockpit/"
@@ -118,11 +118,11 @@ msgstr "حجب الجحاز"
 msgid "Bookmarks"
 msgstr "العلامات المرجعية"
 
-#: src/upload-button.tsx:159 src/dialogs/editor.tsx:252
-#: src/dialogs/mkdir.tsx:150 src/dialogs/permissions.tsx:422
-#: src/dialogs/copyPasteOwnership.tsx:179 src/dialogs/create-file.tsx:209
-#: src/dialogs/rename.tsx:100 src/dialogs/delete.tsx:110
-#: src/dialogs/symlink.tsx:246
+#: src/upload-button.tsx:159 src/dialogs/symlink.tsx:246
+#: src/dialogs/copyPasteOwnership.tsx:179 src/dialogs/editor.tsx:252
+#: src/dialogs/mkdir.tsx:150 src/dialogs/create-file.tsx:209
+#: src/dialogs/delete.tsx:110 src/dialogs/rename.tsx:100
+#: src/dialogs/permissions.tsx:422
 msgid "Cancel"
 msgstr "إلغاء"
 
@@ -399,8 +399,8 @@ msgstr "التقدّم للأمام"
 msgid "Go up a directory"
 msgstr "الانتقال للأعلى"
 
-#: src/files-card-body.tsx:596 src/dialogs/permissions.tsx:332
-#: src/files-footer-detail.tsx:79 src/files-footer-detail.tsx:151
+#: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
+#: src/files-footer-detail.tsx:151 src/dialogs/permissions.tsx:332
 msgid "Group"
 msgstr "مجموعة"
 
@@ -448,7 +448,7 @@ msgstr "ادمج ملفاتك"
 msgid "Missing type"
 msgstr "نوع مفقود"
 
-#: src/header.tsx:88 src/files-card-body.tsx:552
+#: src/files-card-body.tsx:552 src/header.tsx:88
 msgid "Modified"
 msgstr "مُعدَّل"
 
@@ -456,7 +456,7 @@ msgstr "مُعدَّل"
 msgid "Most permissive"
 msgstr "الأكثر تَساهُلًا"
 
-#: src/header.tsx:66 src/files-card-body.tsx:547
+#: src/files-card-body.tsx:547 src/header.tsx:66
 msgid "Name"
 msgstr "الاسم"
 
@@ -532,9 +532,9 @@ msgstr "وصول آخرين"
 msgid "Overwrite"
 msgstr "الكتابة فوق"
 
-#: src/header.tsx:99 src/files-card-body.tsx:557 src/files-card-body.tsx:596
-#: src/dialogs/permissions.tsx:317 src/dialogs/create-file.tsx:183
-#: src/files-footer-detail.tsx:79
+#: src/files-card-body.tsx:557 src/files-card-body.tsx:596
+#: src/files-footer-detail.tsx:79 src/header.tsx:99
+#: src/dialogs/create-file.tsx:183 src/dialogs/permissions.tsx:317
 msgid "Owner"
 msgstr "المالك"
 
@@ -574,7 +574,7 @@ msgstr "فشل اللصق"
 msgid "Permission denied"
 msgstr "الإذن مرفوض"
 
-#: src/header.tsx:110 src/files-card-body.tsx:562
+#: src/files-card-body.tsx:562 src/header.tsx:110
 msgid "Permissions"
 msgstr "الصلاحيات"
 
@@ -662,7 +662,7 @@ msgstr "اجعله قابلاً للتنفيذ كبرنامج"
 msgid "Show all files"
 msgstr "أظهر جميع الملفات"
 
-#: src/header.tsx:284 src/files-card-body.tsx:535
+#: src/files-card-body.tsx:535 src/header.tsx:284
 msgid "Show hidden items"
 msgstr "أظهر العناصر المخفية"
 
@@ -670,7 +670,7 @@ msgstr "أظهر العناصر المخفية"
 msgid "Show keyboard shortcuts"
 msgstr "أظهر اختصارات لوحة المفاتيح"
 
-#: src/header.tsx:77 src/files-card-body.tsx:548
+#: src/files-card-body.tsx:548 src/header.tsx:77
 msgid "Size"
 msgstr "الحجم"
 
