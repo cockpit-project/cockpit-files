@@ -15,10 +15,6 @@ fi
 . /run/host/usr/lib/os-release
 export TEST_OS="${ID}-${VERSION_ID/./-}"
 
-if [ "${TEST_OS#centos-}" != "$TEST_OS" ]; then
-    TEST_OS="${TEST_OS}-stream"
-fi
-
 # Chromium sometimes gets OOM killed on testing farm
 export TEST_BROWSER=firefox
 
