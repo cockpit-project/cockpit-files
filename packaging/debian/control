@@ -22,5 +22,5 @@ Description: Cockpit component for file management
  The Cockpit Web Console enables users to administer GNU/Linux servers using a
  web browser.
  .
-  This package adds an user interface for managing, uploading, and downloading
+ This package adds an user interface for managing, uploading, and downloading
  files, with a similar experience as a desktop file manager.
