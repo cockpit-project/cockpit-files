@@ -19,13 +19,14 @@
 
 import React, { useEffect, useState } from "react";
 
-import { PageSection } from "@patternfly/react-core/dist/esm/components/Page";
+import { PageSection, PageGroup } from "@patternfly/react-core/dist/esm/components/Page";
 import { debounce } from "throttle-debounce";
 
 import type { FolderFileInfo, ClipboardInfo } from "./common.ts";
 import { FilesCardBody } from "./files-card-body.tsx";
 import { FilesFooterDetail } from "./files-footer-detail.tsx";
 import { as_sort, FilesCardHeader } from "./header.tsx";
+import { DropZone } from "./drag-drop.tsx";
 
 export const FilesFolderView = ({
     path,
@@ -60,6 +61,8 @@ export const FilesFolderView = ({
 
     return (
         <>
+            <PageGroup isFilled hasOverflowScroll>
+                <DropZone>
             <PageSection>
                 <FilesCardHeader
                     currentFilter={currentFilter}
@@ -99,6 +102,8 @@ export const FilesFolderView = ({
                     setCurrentFilter={setCurrentFilter}
                 />
             </PageSection>
+                </DropZone>
+          </PageGroup>
             <PageSection>
                 <FilesFooterDetail
                     files={files}

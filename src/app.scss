@@ -10,10 +10,14 @@
     --pf-t--global--text-decoration--link--line--default: none;
 }
 
+.upload-drop-zone {
+    display: contents;
+}
+
 .drag-drop-upload,
 .drag-drop-upload-blocked {
     position: absolute;
-    z-index: 1000;
+    z-index: 100;
     border: 3px dashed var(--pf-t--global--text--color--link--default);
     border-radius: var(--pf-t--global--border--radius--medium);
     background: rgb(from var(--pf-t--global--background--color--primary--default) r g b / 80%);

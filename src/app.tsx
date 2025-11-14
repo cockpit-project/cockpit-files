@@ -201,7 +201,6 @@ export const Application = () => {
         <FilesContext.Provider value={{ addAlert, removeAlert, cwdInfo }}>
             <UploadContext.Provider value={{ uploadedFiles, setUploadedFiles }}>
                 <WithDialogs>
-                    <DropZone>
                         <Page className="pf-m-no-sidebar" isContentFilled>
                             <AlertGroup isToast isLiveRegion>
                                 {alerts.map(alert => (
@@ -247,7 +246,6 @@ export const Application = () => {
                                     setClipboard={setClipboard}
                                 />}
                         </Page>
-                    </DropZone>
                 </WithDialogs>
             </UploadContext.Provider>
         </FilesContext.Provider>
