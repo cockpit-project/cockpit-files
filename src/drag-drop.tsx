@@ -138,8 +138,8 @@ export const DropZone = ({
 
     return (
         <div className="upload-drop-zone" ref={dropzoneRef}>
-            {dragDropActive && dropzoneComponent}
             {children}
+            {dragDropActive && dropzoneComponent}
         </div>
     );
 };
