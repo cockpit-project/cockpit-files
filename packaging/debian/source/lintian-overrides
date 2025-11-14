@@ -1,2 +1,2 @@
-# source contains NPM modules required for running browser integration tests
-cockpit-files source: source-is-missing *node_modules/*
+# source contains NPM modules required for building
+cockpit-files source: source-is-missing *node/*

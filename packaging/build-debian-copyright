@@ -166,7 +166,7 @@ paragraphs: list[str] = []
 for toplevel in sorted(packages_legal.keys()):
     license_text, copyrights = packages_legal[toplevel]
     copyright_text = '\n '.join(sorted(copyrights))
-    paragraphs.append(f"Files: node_modules/{toplevel}/*\nCopyright: {copyright_text}\nLicense: {license_text}")
+    paragraphs.append(f"Files: node/{toplevel}/*\nCopyright: {copyright_text}\nLicense: {license_text}")
 
 # Assemble copyright file
 npm_content = '\n\n'.join(paragraphs)
