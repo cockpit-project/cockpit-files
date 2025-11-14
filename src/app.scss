@@ -213,6 +213,7 @@
     gap: var(--pf-t--global--spacer--md);
     justify-content: space-between;
     font-family: var(--pf-t--global--font--family--body);
+    padding-inline: var(--pf-t--global--spacer--md);
 
     .files-search {
         flex: min-content;
