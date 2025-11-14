@@ -1,23 +1,9 @@
 @use "page.scss";
-@use "ct-card.scss";
 @use "@patternfly/patternfly/utilities/Text/text.css";
 
 @import "@patternfly/patternfly/components/Button/button.css";
 
-// Use the page as the toplevel container
-.pf-v6-c-page {
-    container-type: size;
-}
-
-// Passthrough for layout and styling purposes, to enable main page parts to participate in the grid
-.pf-v6-c-page__main-section,
-.files-view-stack,
-.upload-drop-zone {
-    display: contents;
-}
-
 .files-card {
-    position: relative;
     // Links have underline by default, but within a tree structure or grid we don't want that as we want to
     // be more similar to how files actually are.
     // FIXME @Venefilyn: Maybe we can change from links as we don't use them as links. Possibly dirs are but not sure
@@ -27,7 +13,7 @@
 .drag-drop-upload,
 .drag-drop-upload-blocked {
     position: absolute;
-    z-index: 100;
+    z-index: 1000;
     border: 3px dashed var(--pf-t--global--text--color--link--default);
     border-radius: var(--pf-t--global--border--radius--medium);
     background: rgb(from var(--pf-t--global--background--color--primary--default) r g b / 80%);
@@ -38,41 +24,7 @@
     inline-size: 100%;
 }
 
-.pf-v6-c-page__main {
-    gap: var(--pf-t--global--spacer--md);
-    display: grid;
-    grid-template-rows: auto 1fr auto 0;
-    grid-template-columns: [header-start] 0 [content-start] 1fr [content-end] 0 [header-end];
-}
-
-// Remove gaps on the left/right side of file view on small screens
-@container (width < 768px) {
-    .pf-v6-c-page__main {
-        column-gap: 0;
-    }
-}
-
-.files-empty-state,
-.files-view-stack > .upload-drop-zone > .pf-v6-c-card,
-.files-view-stack > .files-footer-info {
-    grid-column: content;
-}
-
-.files-view-stack > .upload-drop-zone > .pf-v6-c-card {
-    overflow: auto;
-}
-
-.files-view-stack > .files-footer-info {
-    margin-block-start: 0;
-}
-
-/* Style the list cards as ct-cards */
-.pf-c-page__main-section > .pf-c-card {
-    @extend .ct-card;
-}
-
 .files-overview-header {
-    grid-column: header;
     gap: var(--pf-t--global--spacer--sm);
     display: flex;
     // By default pf6 PageSections use column
