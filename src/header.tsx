@@ -19,7 +19,6 @@
 
 import React, { useState } from "react";
 
-import { CardTitle } from "@patternfly/react-core/dist/esm/components/Card";
 import { Divider } from "@patternfly/react-core/dist/esm/components/Divider";
 import { DropdownItem } from "@patternfly/react-core/dist/esm/components/Dropdown";
 import { MenuToggle, MenuToggleAction } from "@patternfly/react-core/dist/esm/components/MenuToggle";
@@ -183,29 +182,29 @@ export const FilesCardHeader = ({
     });
 
     return (
-            <div className="header-toolbar">
-                <SearchInput
-                  className="files-search"
-                  placeholder={_("Filter directory")} value={currentFilter}
-                  onChange={onFilterChange}
-                  onClear={event => onFilterChange(event as React.FormEvent<HTMLInputElement>, "")}
+        <div className="header-toolbar">
+            <SearchInput
+              className="files-search"
+              placeholder={_("Filter directory")} value={currentFilter}
+              onChange={onFilterChange}
+              onClear={event => onFilterChange(event as React.FormEvent<HTMLInputElement>, "")}
+            />
+            <div className="header-actions">
+                <ViewSelector
+                  isGrid={isGrid} setIsGrid={setIsGrid}
+                  setSortBy={setSortBy} sortBy={sortBy}
+                  showHidden={showHidden} setShowHidden={setShowHidden}
                 />
-                <div className="header-actions">
-                    <ViewSelector
-                      isGrid={isGrid} setIsGrid={setIsGrid}
-                      setSortBy={setSortBy} sortBy={sortBy}
-                      showHidden={showHidden} setShowHidden={setShowHidden}
-                    />
-                    <Divider orientation={{ default: "vertical" }} />
-                    <UploadButton
-                      path={path}
-                    />
-                    <KebabDropdown
-                      toggleButtonId="dropdown-menu" dropdownItems={dropdownItems}
-                      isDisabled={cwdInfo === null} position="right"
-                    />
-                </div>
+                <Divider orientation={{ default: "vertical" }} />
+                <UploadButton
+                  path={path}
+                />
+                <KebabDropdown
+                  toggleButtonId="dropdown-menu" dropdownItems={dropdownItems}
+                  isDisabled={cwdInfo === null} position="right"
+                />
             </div>
+        </div>
     );
 };
 

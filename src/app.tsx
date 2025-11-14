@@ -37,7 +37,6 @@ import { superuser } from "superuser";
 
 import { FilesContext, testIsAppleDevice } from "./common.ts";
 import type { ClipboardInfo, FolderFileInfo } from "./common.ts";
-import { DropZone } from "./drag-drop.tsx";
 import { FilesBreadcrumbs } from "./files-breadcrumbs.tsx";
 import { FilesFolderView } from "./files-folder-view.tsx";
 import filetype_data from './filetype-data'; // eslint-disable-line import/extensions
@@ -201,51 +200,51 @@ export const Application = () => {
         <FilesContext.Provider value={{ addAlert, removeAlert, cwdInfo }}>
             <UploadContext.Provider value={{ uploadedFiles, setUploadedFiles }}>
                 <WithDialogs>
-                        <Page className="pf-m-no-sidebar" isContentFilled>
-                            <AlertGroup isToast isLiveRegion>
-                                {alerts.map(alert => (
-                                    <Alert
-                                        variant={alert.variant}
+                    <Page className="pf-m-no-sidebar" isContentFilled>
+                        <AlertGroup isToast isLiveRegion>
+                            {alerts.map(alert => (
+                                <Alert
+                                  variant={alert.variant}
+                                  title={alert.title}
+                                  actionClose={
+                                      <AlertActionCloseButton
                                         title={alert.title}
-                                        actionClose={
-                                            <AlertActionCloseButton
-                                                title={alert.title}
-                                                variantLabel={`${alert.variant} alert`}
-                                                onClose={() => removeAlert(alert.key)}
-                                            />
-                                        }
-                                        actionLinks={alert.actionLinks}
-                                        key={alert.key}
-                                    >
-                                        {alert.detail}
-                                    </Alert>
-                                ))}
-                            </AlertGroup>
-                            <FilesBreadcrumbs path={path} />
-                            {errorMessage &&
-                                <PageSection
-                                    hasBodyWrapper={false}
+                                        variantLabel={`${alert.variant} alert`}
+                                        onClose={() => removeAlert(alert.key)}
+                                      />
+                                  }
+                                  actionLinks={alert.actionLinks}
+                                  key={alert.key}
                                 >
-                                    <Card className="files-empty-state">
-                                        <EmptyStatePanel
-                                            paragraph={errorMessage}
-                                            icon={ExclamationCircleIcon}
-                                        />
-                                    </Card>
-                                </PageSection>}
-                            {!errorMessage &&
-                                <FilesFolderView
-                                    path={path}
-                                    files={files}
-                                    loadingFiles={loadingFiles}
-                                    showHidden={showHidden}
-                                    setShowHidden={setShowHidden}
-                                    selected={selected}
-                                    setSelected={setSelected}
-                                    clipboard={clipboard}
-                                    setClipboard={setClipboard}
-                                />}
-                        </Page>
+                                    {alert.detail}
+                                </Alert>
+                            ))}
+                        </AlertGroup>
+                        <FilesBreadcrumbs path={path} />
+                        {errorMessage &&
+                        <PageSection
+                          hasBodyWrapper={false}
+                        >
+                            <Card className="files-empty-state">
+                                <EmptyStatePanel
+                                  paragraph={errorMessage}
+                                  icon={ExclamationCircleIcon}
+                                />
+                            </Card>
+                        </PageSection>}
+                        {!errorMessage &&
+                        <FilesFolderView
+                          path={path}
+                          files={files}
+                          loadingFiles={loadingFiles}
+                          showHidden={showHidden}
+                          setShowHidden={setShowHidden}
+                          selected={selected}
+                          setSelected={setSelected}
+                          clipboard={clipboard}
+                          setClipboard={setClipboard}
+                        />}
+                    </Page>
                 </WithDialogs>
             </UploadContext.Provider>
         </FilesContext.Provider>

@@ -23,10 +23,10 @@ import { PageSection, PageGroup } from "@patternfly/react-core/dist/esm/componen
 import { debounce } from "throttle-debounce";
 
 import type { FolderFileInfo, ClipboardInfo } from "./common.ts";
+import { DropZone } from "./drag-drop.tsx";
 import { FilesCardBody } from "./files-card-body.tsx";
 import { FilesFooterDetail } from "./files-footer-detail.tsx";
 import { as_sort, FilesCardHeader } from "./header.tsx";
-import { DropZone } from "./drag-drop.tsx";
 
 export const FilesFolderView = ({
     path,
@@ -63,52 +63,52 @@ export const FilesFolderView = ({
         <>
             <PageGroup isFilled hasOverflowScroll>
                 <DropZone>
-            <PageSection>
-                <FilesCardHeader
-                    currentFilter={currentFilter}
-                    onFilterChange={onFilterChange}
-                    isGrid={isGrid}
-                    setIsGrid={setIsGrid}
-                    sortBy={sortBy}
-                    setSortBy={setSortBy}
-                    path={path}
-                    showHidden={showHidden}
-                    setShowHidden={setShowHidden}
-                    selected={selected}
-                    setSelected={setSelected}
-                    clipboard={clipboard}
-                    setClipboard={setClipboard}
-                />
-            </PageSection>
-            <PageSection
-                isFilled
-                hasOverflowScroll
-                className="files-card"
-            >
-                <FilesCardBody
-                    files={files}
-                    currentFilter={currentFilter}
-                    path={path}
-                    isGrid={isGrid}
-                    sortBy={sortBy}
-                    setSortBy={setSortBy}
-                    selected={selected}
-                    setSelected={setSelected}
-                    loadingFiles={loadingFiles}
-                    clipboard={clipboard}
-                    setClipboard={setClipboard}
-                    showHidden={showHidden}
-                    setShowHidden={setShowHidden}
-                    setCurrentFilter={setCurrentFilter}
-                />
-            </PageSection>
+                    <PageSection>
+                        <FilesCardHeader
+                          currentFilter={currentFilter}
+                          onFilterChange={onFilterChange}
+                          isGrid={isGrid}
+                          setIsGrid={setIsGrid}
+                          sortBy={sortBy}
+                          setSortBy={setSortBy}
+                          path={path}
+                          showHidden={showHidden}
+                          setShowHidden={setShowHidden}
+                          selected={selected}
+                          setSelected={setSelected}
+                          clipboard={clipboard}
+                          setClipboard={setClipboard}
+                        />
+                    </PageSection>
+                    <PageSection
+                      isFilled
+                      hasOverflowScroll
+                      className="files-card"
+                    >
+                        <FilesCardBody
+                          files={files}
+                          currentFilter={currentFilter}
+                          path={path}
+                          isGrid={isGrid}
+                          sortBy={sortBy}
+                          setSortBy={setSortBy}
+                          selected={selected}
+                          setSelected={setSelected}
+                          loadingFiles={loadingFiles}
+                          clipboard={clipboard}
+                          setClipboard={setClipboard}
+                          showHidden={showHidden}
+                          setShowHidden={setShowHidden}
+                          setCurrentFilter={setCurrentFilter}
+                        />
+                    </PageSection>
                 </DropZone>
-          </PageGroup>
+            </PageGroup>
             <PageSection>
                 <FilesFooterDetail
-                    files={files}
-                    selected={selected}
-                    showHidden={showHidden}
+                  files={files}
+                  selected={selected}
+                  showHidden={showHidden}
                 />
             </PageSection>
         </>
