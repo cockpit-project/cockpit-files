@@ -17,7 +17,7 @@
  * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React, { useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 import {
     AlertGroup, Alert, AlertActionCloseButton
@@ -25,7 +25,6 @@ import {
 import type { AlertVariant } from "@patternfly/react-core/dist/esm/components/Alert";
 import { Card } from "@patternfly/react-core/dist/esm/components/Card";
 import { Page, PageSection } from "@patternfly/react-core/dist/esm/components/Page";
-import { Stack } from "@patternfly/react-core/dist/esm/layouts/Stack";
 import { ExclamationCircleIcon } from "@patternfly/react-icons";
 
 import cockpit from "cockpit";
@@ -38,9 +37,9 @@ import { superuser } from "superuser";
 
 import { FilesContext, testIsAppleDevice } from "./common.ts";
 import type { ClipboardInfo, FolderFileInfo } from "./common.ts";
+import { DropZone } from "./drag-drop.tsx";
 import { FilesBreadcrumbs } from "./files-breadcrumbs.tsx";
 import { FilesFolderView } from "./files-folder-view.tsx";
-import { FilesFooterDetail } from "./files-footer-detail.tsx";
 import filetype_data from './filetype-data'; // eslint-disable-line import/extensions
 import { filetype_lookup } from './filetype-lookup.js';
 
@@ -72,6 +71,20 @@ const get_path = (options: Location['options']) => {
     return currentPath;
 };
 
+export interface UploadedFilesType {[name: string]:{file: File, progress: number, cancel:() => void}}
+
+interface UploadContextType {
+    uploadedFiles: UploadedFilesType,
+    setUploadedFiles: React.Dispatch<React.SetStateAction<UploadedFilesType>>,
+}
+
+export const UploadContext = createContext({
+    uploadedFiles: {},
+    setUploadedFiles: () => console.warn("UploadContext not initialized!"),
+} as UploadContextType);
+
+export const useUploadContext = () => useContext(UploadContext);
+
 export const Application = () => {
     const [location, setLocation] = useState(cockpit.location);
     const [loading, setLoading] = useState(true);
@@ -83,6 +96,8 @@ export const Application = () => {
     const [clipboard, setClipboard] = useState<ClipboardInfo>({ path: "/", files: [] });
     const [alerts, setAlerts] = useState<AlertInfo[]>([]);
     const [cwdInfo, setCwdInfo] = useState<FileInfo | null>(null);
+    const [uploadedFiles, setUploadedFiles] = useState<{[name: string]:
+                                                        {file: File, progress: number, cancel:() => void}}>({});
 
     const { options } = location;
     const path = get_path(options);
@@ -183,63 +198,58 @@ export const Application = () => {
     const removeAlert = (key: string) => setAlerts(prevAlerts => prevAlerts.filter(alert => alert.key !== key));
 
     return (
-        <Page className="pf-m-no-sidebar" isContentFilled>
-            <FilesContext.Provider value={{ addAlert, removeAlert, cwdInfo }}>
+        <FilesContext.Provider value={{ addAlert, removeAlert, cwdInfo }}>
+            <UploadContext.Provider value={{ uploadedFiles, setUploadedFiles }}>
                 <WithDialogs>
-                    <AlertGroup isToast isLiveRegion>
-                        {alerts.map(alert => (
-                            <Alert
-                              variant={alert.variant}
-                              title={alert.title}
-                              actionClose={
-                                  <AlertActionCloseButton
-                                    title={alert.title}
-                                    variantLabel={`${alert.variant} alert`}
-                                    onClose={() => removeAlert(alert.key)}
-                                  />
-                              }
-                              actionLinks={alert.actionLinks}
-                              key={alert.key}
-                            >
-                                {alert.detail}
-                            </Alert>
-                        ))}
-                    </AlertGroup>
-                    <FilesBreadcrumbs path={path} />
-                    <PageSection
-                      hasBodyWrapper={false}
-                      id="files-folder-section"
-                      data-dir-loaded={!loadingFiles ? path : null}
-                    >
-                        {errorMessage &&
-                        <Card className="files-empty-state">
-                            <EmptyStatePanel
-                              paragraph={errorMessage}
-                              icon={ExclamationCircleIcon}
-                            />
-                        </Card>}
-                        {!errorMessage &&
-                        <Stack className="files-view-stack">
-                            <FilesFolderView
-                              path={path}
-                              files={files}
-                              loadingFiles={loadingFiles}
-                              showHidden={showHidden}
-                              setShowHidden={setShowHidden}
-                              selected={selected}
-                              setSelected={setSelected}
-                              clipboard={clipboard}
-                              setClipboard={setClipboard}
-                            />
-                            <FilesFooterDetail
-                              files={files}
-                              selected={selected}
-                              showHidden={showHidden}
-                            />
-                        </Stack>}
-                    </PageSection>
+                    <DropZone>
+                        <Page className="pf-m-no-sidebar" isContentFilled>
+                            <AlertGroup isToast isLiveRegion>
+                                {alerts.map(alert => (
+                                    <Alert
+                                        variant={alert.variant}
+                                        title={alert.title}
+                                        actionClose={
+                                            <AlertActionCloseButton
+                                                title={alert.title}
+                                                variantLabel={`${alert.variant} alert`}
+                                                onClose={() => removeAlert(alert.key)}
+                                            />
+                                        }
+                                        actionLinks={alert.actionLinks}
+                                        key={alert.key}
+                                    >
+                                        {alert.detail}
+                                    </Alert>
+                                ))}
+                            </AlertGroup>
+                            <FilesBreadcrumbs path={path} />
+                            {errorMessage &&
+                                <PageSection
+                                    hasBodyWrapper={false}
+                                >
+                                    <Card className="files-empty-state">
+                                        <EmptyStatePanel
+                                            paragraph={errorMessage}
+                                            icon={ExclamationCircleIcon}
+                                        />
+                                    </Card>
+                                </PageSection>}
+                            {!errorMessage &&
+                                <FilesFolderView
+                                    path={path}
+                                    files={files}
+                                    loadingFiles={loadingFiles}
+                                    showHidden={showHidden}
+                                    setShowHidden={setShowHidden}
+                                    selected={selected}
+                                    setSelected={setSelected}
+                                    clipboard={clipboard}
+                                    setClipboard={setClipboard}
+                                />}
+                        </Page>
+                    </DropZone>
                 </WithDialogs>
-            </FilesContext.Provider>
-        </Page>
+            </UploadContext.Provider>
+        </FilesContext.Provider>
     );
 };

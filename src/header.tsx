@@ -183,7 +183,6 @@ export const FilesCardHeader = ({
     });
 
     return (
-        <CardTitle className="card-actionbar">
             <div className="header-toolbar">
                 <SearchInput
                   className="files-search"
@@ -207,7 +206,6 @@ export const FilesCardHeader = ({
                     />
                 </div>
             </div>
-        </CardTitle>
     );
 };
 
