@@ -200,7 +200,12 @@ export const Application = () => {
         <FilesContext.Provider value={{ addAlert, removeAlert, cwdInfo }}>
             <UploadContext.Provider value={{ uploadedFiles, setUploadedFiles }}>
                 <WithDialogs>
-                    <Page className="pf-m-no-sidebar" isContentFilled>
+                    <Page
+                      className="pf-m-no-sidebar"
+                      isContentFilled
+                      id="files-folder-section"
+                      data-dir-loaded={!loadingFiles ? path : null}
+                    >
                         <AlertGroup isToast isLiveRegion>
                             {alerts.map(alert => (
                                 <Alert
