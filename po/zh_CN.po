@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-28 03:34+0000\n"
-"PO-Revision-Date: 2025-09-11 01:28+0000\n"
+"POT-Creation-Date: 2025-11-17 03:39+0000\n"
+"PO-Revision-Date: 2025-11-17 16:58+0000\n"
 "Last-Translator: Jesse Guo <jesseguotech@outlook.com>\n"
 "Language-Team: Chinese (Simplified) <https://translate.fedoraproject.org/"
 "projects/cockpit/cockpit-files/zh_CN/>\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
-"X-Generator: Weblate 5.13.2\n"
+"X-Generator: Weblate 5.14.3\n"
 
 #: src/menu.tsx:64
 msgid "\"$0\" exists, not overwriting with paste."
@@ -78,7 +78,7 @@ msgstr "绝对"
 msgid ""
 "Absolute symlinks are ideal when referring to files or directories that "
 "won't move, such as system files."
-msgstr "绝对符号链接适合指向不会被移动的文件或目录（例如系统文件）。"
+msgstr "绝对符号链接适合指向不会被移动的文件或目录，例如系统文件。"
 
 #: src/dialogs/symlink.tsx:197
 msgid "Absolute vs. Relative"
@@ -308,7 +308,7 @@ msgstr "只能执行"
 
 #: src/upload-button.tsx:289
 msgid "Failed"
-msgstr "已失败"
+msgstr "失败"
 
 #: src/manifest.json:0
 msgid "File browser"
@@ -600,6 +600,7 @@ msgid ""
 "Relative symlinks are useful when both a symlink and target might move at "
 "the same time, such as when renaming or moving a parent directory."
 msgstr ""
+"相对符号链接适合符号链接与目标同时移动的场景，例如重命名或移动一父目录时。"
 
 #: src/dialogs/editor.tsx:213
 msgid "Reload"
@@ -679,11 +680,11 @@ msgstr "符号链接"
 
 #: src/dialogs/symlink.tsx:177
 msgid "Symlink name"
-msgstr ""
+msgstr "符号链接名称"
 
 #: src/dialogs/symlink.tsx:170
 msgid "Target"
-msgstr ""
+msgstr "目标"
 
 #: src/dialogs/editor.tsx:61
 msgid "The existing file changed unexpectedly"
@@ -699,7 +700,7 @@ msgstr "文件已在磁盘上进行了更改"
 
 #: src/dialogs/symlink.tsx:193
 msgid "Type"
-msgstr ""
+msgstr "类型"
 
 #: src/files-breadcrumbs.tsx:99
 msgid "Unable to create bookmark directory"
