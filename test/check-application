@@ -581,11 +581,11 @@ class TestFiles(testlib.MachineCase):
         # Sort headers also work in the list view
         b.click("button[aria-label='Display as a list']")
         b.assert_pixels("#files-card-parent", "list-view", mock={".item-date": "Jun 19, 2024, 11:30 AM"})
-        b.wait_visible("th[aria-sort='ascending'].pf-m-selected button:contains(Name)")
+        b.wait_text("th[aria-sort='ascending'].pf-m-selected button", "Name")
 
         # clicking reverse sort order
         b.click("th.pf-m-selected button")
-        b.wait_visible("th[aria-sort='descending'].pf-m-selected button:contains(Name)")
+        b.wait_text("th[aria-sort='descending'].pf-m-selected button", "Name")
         b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "Eee")
         b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "eee")
         b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-name", "ddd")
@@ -594,7 +594,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_text("#folder-view tbody tr:nth-of-type(6) .item-name", "aaa")
 
         b.click("th button:contains(Modified)")
-        b.wait_visible("th[aria-sort='ascending'].pf-m-selected button:contains(Modified)")
+        b.wait_text("th[aria-sort='ascending'].pf-m-selected button", "Modified")
         b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "ddd")
         b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "eee")
         b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-name", "Eee")
@@ -603,7 +603,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_text("#folder-view tbody tr:nth-of-type(6) .item-name", "BBB")
 
         b.click("th button:contains(Size)")
-        b.wait_visible("th[aria-sort='ascending'].pf-m-selected button:contains(Size)")
+        b.wait_text("th[aria-sort='ascending'].pf-m-selected button", "Size")
         b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "ddd")
         b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "eee")
         b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-name", "Eee")
@@ -622,7 +622,7 @@ class TestFiles(testlib.MachineCase):
         """)
 
         b.click("th button:contains(Permissions)")
-        b.wait_visible("th[aria-sort='ascending'].pf-m-selected button:contains(Permissions)")
+        b.wait_text("th[aria-sort='ascending'].pf-m-selected button", "Permissions")
         b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "ddd")
         b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "Eee")
         b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-name", "eee")
@@ -649,7 +649,7 @@ class TestFiles(testlib.MachineCase):
         # Clicking again inverts the list
         # Directories are still sorted first
         b.click("th button:contains(Permissions)")
-        b.wait_visible("th[aria-sort='descending'].pf-m-selected button:contains(Permissions)")
+        b.wait_text("th[aria-sort='descending'].pf-m-selected button", "Permissions")
         b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "Eee")
         b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "eee")
         b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-name", "ddd")
@@ -1030,10 +1030,10 @@ class TestFiles(testlib.MachineCase):
         if not m.ws_container and self.system_before(329):
             # Open in terminal feature not supported before cockpit 329
             self.open_context_menu("[data-item='newdir1']")
-            b.wait_visible(".contextMenu button:contains('Delete')")
+            b.wait_text(".contextMenu button", "Delete")
             b.wait_not_present(".contextMenu button:contains('Open in terminal')")
             self.open_folder_context_menu()
-            b.wait_visible(".contextMenu button:contains('Create directory')")
+            b.wait_text(".contextMenu button", "Create directory")
             b.wait_not_present(".contextMenu button:contains('Open in terminal')")
         else:
             # Open folder in terminal from context menu
@@ -1059,7 +1059,7 @@ class TestFiles(testlib.MachineCase):
         # Regular files should not have terminal feature
         m.execute("echo 'some content' > /home/admin/newfile")
         self.open_context_menu("[data-item='newfile']")
-        b.wait_visible(".contextMenu button:contains('Delete')")
+        b.wait_in_text(".contextMenu", "Delete")
         b.wait_not_present(".contextMenu button:contains('Open in terminal')")
 
         # Delete folder from context menu
@@ -1088,7 +1088,7 @@ class TestFiles(testlib.MachineCase):
         m.execute("touch /home/admin/testfile")
         b.click("button[aria-label='Display as a grid']")
         self.open_context_menu("[data-item='testfile']")
-        b.wait_visible(".contextMenu button:contains('Delete')")
+        b.wait_in_text(".contextMenu", "Delete")
 
     def testDownload(self) -> None:
         b = self.browser
@@ -1681,7 +1681,7 @@ class TestFiles(testlib.MachineCase):
         # No Edit permissions when selecting a folder and files
         b.mouse("[data-item='testdir']", "click", ctrlKey=True)
         self.open_context_menu("[data-item='filename1']")
-        b.wait_visible("button:contains('Delete')")
+        b.wait_in_text(".contextMenu", "Delete")
         b.wait_not_present("button:contains('Edit permissions')")
 
         # Editing > 10 files, select only files with the same owner/group
@@ -2922,7 +2922,7 @@ class TestFiles(testlib.MachineCase):
             b.click("#bookmark-btn")
             b.wait_visible(".pf-v6-c-menu")
             if exists:
-                b.wait_visible(f".pf-v6-c-menu .pf-v6-c-menu__list-item button:contains('{bookmark}')")
+                b.wait_in_text(".pf-v6-c-menu", bookmark)
             else:
                 # Has to wait on file.watch() (inotify) to re-read the bookmarks
                 b.wait_not_in_text(".pf-v6-c-menu", bookmark)
@@ -2949,7 +2949,7 @@ class TestFiles(testlib.MachineCase):
 
         # Remove bookmark
         b.click("#bookmark-btn")
-        b.wait_visible(".pf-v6-c-menu .pf-v6-c-menu__list-item button:contains('/etc')")
+        b.wait_in_text(".pf-v6-c-menu", "/etc")
         b.click(".pf-v6-c-menu .pf-v6-c-menu__list-item button:contains('Remove from bookmarks')")
         b.wait_not_present(".pf-v6-c-menu")
 
