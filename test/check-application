@@ -2396,7 +2396,6 @@ class TestFiles(testlib.MachineCase):
             b.mouse("[data-item='Downloads']", "dblclick")
             self.wait_directory_changed("/home/admin/Downloads/")
 
-            b.click("#upload-file-btn")
             b.upload_files("#upload-file-btn + input[type='file']", [big_file])
             b.wait_visible("#upload-file-btn:disabled")
 
@@ -2439,7 +2438,6 @@ class TestFiles(testlib.MachineCase):
             b.go("/files#/?path=/mnt/upload")
             self.assert_last_breadcrumb("upload")
             self.chdir('/mnt/upload')
-            b.click("#upload-file-btn")
             b.upload_files("#upload-file-btn + input[type='file']", [big_file])
 
             b.wait_in_text(".pf-v6-c-alert__description", "No space left on device")
@@ -2466,7 +2464,6 @@ class TestFiles(testlib.MachineCase):
                     else:
                         self.assertEqual(contents, test_data)
 
-            b.click("#upload-file-btn")
             b.upload_files("#upload-file-btn + input[type='file']", [str(Path(tmpdir) / file) for file in files])
             with b.wait_timeout(30):
                 b.wait(lambda: int(m.execute(f"ls {dest_dir} | wc -l").strip()) == len(files))
@@ -2488,7 +2485,6 @@ class TestFiles(testlib.MachineCase):
                     fp.write("new content" * 20)
 
             # Cancel does not overwrite
-            b.click("#upload-file-btn")
             b.upload_files("#upload-file-btn + input[type='file']", [files[0]])
             b.wait_in_text("h1.pf-v6-c-modal-box__title", f"Replace file {filename}?")
             b.assert_pixels(".pf-v6-c-modal-box", "upload-replace-dialog",
@@ -2499,7 +2495,6 @@ class TestFiles(testlib.MachineCase):
             self.assertEqual(m.execute(f"cat {dest_dir}/{filename}"), "this is a test")
 
             # Overwrite
-            b.click("#upload-file-btn")
             b.upload_files("#upload-file-btn + input[type='file']", [files[0]])
             b.wait_in_text("h1.pf-v6-c-modal-box__title", f"Replace file {filename}?")
             b.click("button.pf-m-warning:contains('Replace')")
@@ -2514,7 +2509,6 @@ class TestFiles(testlib.MachineCase):
             # Multiple files
 
             # Cancel all
-            b.click("#upload-file-btn")
             b.upload_files("#upload-file-btn + input[type='file']", files)
 
             b.wait_in_text("h1.pf-v6-c-modal-box__title", f"Replace file {filename}?")
@@ -2527,7 +2521,6 @@ class TestFiles(testlib.MachineCase):
 
             # Keep original for all
 
-            b.click("#upload-file-btn")
             b.upload_files("#upload-file-btn + input[type='file']", files)
 
             b.wait_in_text("h1.pf-v6-c-modal-box__title", f"Replace file {filename}?")
@@ -2539,7 +2532,6 @@ class TestFiles(testlib.MachineCase):
             verify_uploaded_files()
 
             # Replace all
-            b.click("#upload-file-btn")
             b.upload_files("#upload-file-btn + input[type='file']", files)
 
             b.wait_in_text("h1.pf-v6-c-modal-box__title", f"Replace file {filename}?")
@@ -2558,7 +2550,6 @@ class TestFiles(testlib.MachineCase):
 
             files.append(newfile)
 
-            b.click("#upload-file-btn")
             b.upload_files("#upload-file-btn + input[type='file']", files)
 
             # We only get asked about existing files
@@ -2582,7 +2573,6 @@ class TestFiles(testlib.MachineCase):
             with open(newfile, "w") as fp:
                 fp.write("new content")
 
-            b.click("#upload-file-btn")
             b.upload_files("#upload-file-btn + input[type='file']", files)
 
             # We only get asked about existing files
@@ -2610,7 +2600,6 @@ class TestFiles(testlib.MachineCase):
                 fp.write(test_content)
 
             testuser_filename = os.path.basename(testuser_file)
-            b.click("#upload-file-btn")
             b.upload_files("#upload-file-btn + input[type='file']", [testuser_file])
             assert_upload_alert([testuser_filename], "testuser:testuser", close=False)
             self.assert_owner(f'/home/testuser/{testuser_filename}', 'testuser:testuser')
@@ -2637,7 +2626,6 @@ class TestFiles(testlib.MachineCase):
 
             m.execute("chattr +i /home/testuser")
             self.addCleanup(m.execute, "chattr -i /home/testuser")
-            b.click("#upload-file-btn")
             b.upload_files("#upload-file-btn + input[type='file']", [files[-1]])
             b.wait_in_text(".pf-v6-c-alert__title", "Failed")
             b.wait_in_text(".pf-v6-c-alert__description", "Not permitted to perform this action")
@@ -2653,7 +2641,6 @@ class TestFiles(testlib.MachineCase):
             # Wait for the update to appear so uploading doesn't flake
             b.wait_visible("[data-item='update.txt']")
 
-            b.click("#upload-file-btn")
             b.upload_files("#upload-file-btn + input[type='file']", [files[-1]])
 
             b.wait_in_text(".pf-v6-c-alert__title", "File uploaded")
@@ -2664,7 +2651,6 @@ class TestFiles(testlib.MachineCase):
 
             # Permission error
             self.chdir('/')
-            b.click("#upload-file-btn")
             b.upload_files("#upload-file-btn + input[type='file']", [files[0]])
             b.wait_in_text(".pf-v6-c-alert__description", "UploadError: Not permitted to perform this action")
             b.click(".pf-v6-c-alert__action button")
@@ -2775,7 +2761,6 @@ class TestFiles(testlib.MachineCase):
 
             # Drag & drop is disabled when upload is in progress
             files_cnt = int(m.execute("ls -a /home/admin | wc -l").strip())
-            b.click("#upload-file-btn")
             b.upload_files("#upload-file-btn + input[type='file']", [big_file])
             b.wait_visible("#upload-file-btn:disabled")
             b.wait_not_present(".drag-drop-upload")
