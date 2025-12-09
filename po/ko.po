@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-24 03:47+0000\n"
-"PO-Revision-Date: 2025-07-18 05:53+0000\n"
+"POT-Creation-Date: 2025-12-03 03:41+0000\n"
+"PO-Revision-Date: 2025-12-03 21:23+0000\n"
 "Last-Translator: Jo Hyeonsu <cloud9350@naver.com>\n"
 "Language-Team: Korean <https://translate.fedoraproject.org/projects/cockpit/"
 "cockpit-files/ko/>\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 5.14.3\n"
 
 #: src/menu.tsx:64
 msgid "\"$0\" exists, not overwriting with paste."
@@ -724,7 +724,7 @@ msgstr "즐겨찾기 파일을 저장 할 수 없음"
 
 #: src/upload-button.tsx:503
 msgid "Upload"
-msgstr "올려주기"
+msgstr "업로드"
 
 #: src/upload-button.tsx:484
 msgid "Upload $0% completed"
