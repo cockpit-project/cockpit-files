@@ -39,10 +39,10 @@ import { superuser } from "superuser";
 import * as timeformat from "timeformat";
 import { fmt_to_fragments } from "utils";
 
+import { UploadContext } from "./app.tsx";
 import { permissionShortStr, useFilesContext } from "./common.ts";
 import type { FolderFileInfo } from "./common.ts";
 import { edit_permissions } from "./dialogs/permissions.tsx";
-import { UploadContext } from "./files-folder-view.tsx";
 import { get_owner_candidates } from "./ownership.tsx";
 
 import "./upload-button.css";
