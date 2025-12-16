@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-03 03:41+0000\n"
-"PO-Revision-Date: 2025-12-03 21:23+0000\n"
-"Last-Translator: Jo Hyeonsu <cloud9350@naver.com>\n"
+"POT-Creation-Date: 2025-12-15 03:55+0000\n"
+"PO-Revision-Date: 2025-12-13 23:35+0000\n"
+"Last-Translator: 김인수 <simmon@nplob.com>\n"
 "Language-Team: Korean <https://translate.fedoraproject.org/projects/cockpit/"
 "cockpit-files/ko/>\n"
 "Language: ko\n"
@@ -724,7 +724,7 @@ msgstr "즐겨찾기 파일을 저장 할 수 없음"
 
 #: src/upload-button.tsx:503
 msgid "Upload"
-msgstr "업로드"
+msgstr "올려주기"
 
 #: src/upload-button.tsx:484
 msgid "Upload $0% completed"
