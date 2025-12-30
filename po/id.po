@@ -1,0 +1,784 @@
+# #-#-#-#-#  files.js.pot (PACKAGE VERSION)  #-#-#-#-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# #-#-#-#-#  files.metainfo.pot (PACKAGE VERSION)  #-#-#-#-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-25 03:50+0000\n"
+"PO-Revision-Date: 2025-12-25 01:53+0000\n"
+"Last-Translator: Arif Budiman <arifpedia@gmail.com>\n"
+"Language-Team: Indonesian <https://translate.fedoraproject.org/projects/"
+"cockpit/cockpit-files/id/>\n"
+"Language: id\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"X-Generator: Weblate 5.15.1\n"
+
+#: src/menu.tsx:64
+msgid "\"$0\" exists, not overwriting with paste."
+msgstr "\"$0\" sudah ada, tidak menimpa dengan tempel (paste)."
+
+#: src/upload-button.tsx:69
+msgid "$0 files"
+msgstr "$0 berkas"
+
+#: src/files-footer-detail.tsx:35
+msgid "$0 files selected"
+msgstr "$0 berkas dipilih"
+
+#: src/files-card-body.tsx:532
+msgid "$0 item is hidden"
+msgid_plural "$0 items are hidden"
+msgstr[0] "$0 item tersembunyi"
+
+#: src/dialogs/permissions.tsx:302
+msgid "$0 permissions"
+msgstr "$0 izin"
+
+#: src/dialogs/copyPasteOwnership.tsx:119
+msgid "(original owner)"
+msgstr "(pemilik asli)"
+
+#: org.cockpit_project.files.metainfo.xml:8
+msgid ""
+"A file system UI for Cockpit. You can browse directories, upload and "
+"download files, and change their properties. It also includes a simple file "
+"editor."
+msgstr ""
+"Antarmuka sistem berkas untuk Cockpit. Anda dapat menelusuri direktori, "
+"mengunggah dan mengunduh berkas, serta mengubah propertinya. Ini juga "
+"mencakup penyunting berkas sederhana."
+
+#: src/upload-button.tsx:115
+msgid ""
+"A file with the same name already exists in \"$0\". Replacing it will "
+"overwrite its content."
+msgstr ""
+"Berkas dengan nama yang sama sudah ada di \"$0\". Menggantikannya akan "
+"menimpa isinya."
+
+#: src/header.tsx:69
+msgid "A-Z"
+msgstr "A-Z"
+
+#: src/dialogs/symlink.tsx:215
+msgid "Absolute"
+msgstr "Absolut"
+
+#: src/dialogs/symlink.tsx:201
+msgid ""
+"Absolute symlinks are ideal when referring to files or directories that "
+"won't move, such as system files."
+msgstr ""
+"Tautan simbolik absolut ideal digunakan untuk merujuk pada berkas atau "
+"direktori yang tidak akan berpindah, seperti berkas sistem."
+
+#: src/dialogs/symlink.tsx:197
+msgid "Absolute vs. Relative"
+msgstr "Absolut vs. Relatif"
+
+#: src/dialogs/permissions.tsx:349
+msgid "Access"
+msgstr "Akses"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:86
+#: src/dialogs/keyboardShortcutsHelp.tsx:92
+msgid "Activate selected item, enter directory"
+msgstr "Aktifkan item yang dipilih, masuk ke direktori"
+
+#: src/files-breadcrumbs.tsx:139
+msgid "Add to bookmarks"
+msgstr "Tambahkan ke penanda"
+
+#: src/upload-button.tsx:150
+msgid "Apply this action to all conflicting files"
+msgstr "Terapkan tindakan ini ke semua berkas yang bentrok"
+
+#: src/common.ts:66
+msgid "Block device"
+msgstr "Perangkat blok"
+
+#: src/files-breadcrumbs.tsx:150
+msgid "Bookmarks"
+msgstr "Penanda"
+
+#: src/upload-button.tsx:159 src/dialogs/symlink.tsx:246
+#: src/dialogs/copyPasteOwnership.tsx:179 src/dialogs/editor.tsx:252
+#: src/dialogs/mkdir.tsx:150 src/dialogs/create-file.tsx:209
+#: src/dialogs/delete.tsx:110 src/dialogs/rename.tsx:100
+#: src/dialogs/permissions.tsx:422
+msgid "Cancel"
+msgstr "Batalkan"
+
+#: src/upload-button.tsx:467
+msgid "Cancel upload of $0"
+msgstr "Batalkan unggahan $0"
+
+#: src/upload-button.tsx:350
+msgid "Cancelled"
+msgstr "Dibatalkan"
+
+#: src/upload-button.tsx:351
+msgid "Cancelled upload of $0"
+msgstr "Unggahan $0 dibatalkan"
+
+#: src/dialogs/create-file.tsx:225
+msgid "Cannot create file in current directory"
+msgstr "Tidak dapat membuat berkas di direktori saat ini"
+
+#: src/files-folder-view.tsx:177
+msgid "Cannot drop files, another upload is already in progress"
+msgstr "Tidak dapat menjatuhkan berkas, unggahan lain sedang berlangsung"
+
+#: src/dialogs/permissions.tsx:413
+msgid "Change"
+msgstr "Ubah"
+
+#: src/upload-button.tsx:401
+msgid "Change permissions"
+msgstr "Ubah izin"
+
+#: src/dialogs/permissions.tsx:420
+msgid "Change permissions for enclosed files"
+msgstr "Ubah izin untuk berkas yang disertakan"
+
+#: src/common.ts:67
+msgid "Character device"
+msgstr "Perangkat karakter"
+
+#: src/files-card-body.tsx:520
+msgid "Clear filter"
+msgstr "Hapus penyaring"
+
+#: src/dialogs/editor.tsx:252 src/dialogs/keyboardShortcutsHelp.tsx:46
+msgid "Close"
+msgstr "Tutup"
+
+#: src/index.html:20
+msgid "Cockpit Files"
+msgstr "Berkas Cockpit"
+
+#: org.cockpit_project.files.metainfo.xml:21
+msgid "Cockpit Project"
+msgstr "Proyek Cockpit"
+
+#: src/dialogs/permissions.tsx:283
+msgid "Collapse"
+msgstr "Ciutkan"
+
+#: src/menu.tsx:158 src/menu.tsx:212
+msgid "Copy"
+msgstr "Salin"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:121
+msgid "Copy selected file or directory"
+msgstr "Salin berkas atau direktori yang dipilih"
+
+#: src/dialogs/mkdir.tsx:148 src/dialogs/create-file.tsx:206
+msgid "Create"
+msgstr "Buat"
+
+#: src/menu.tsx:113 src/dialogs/mkdir.tsx:93
+msgid "Create directory"
+msgstr "Buat direktori"
+
+#: src/menu.tsx:118 src/dialogs/create-file.tsx:149
+msgid "Create file"
+msgstr "Buat berkas"
+
+#: src/menu.tsx:204 src/dialogs/symlink.tsx:244
+msgid "Create link"
+msgstr "Buat tautan"
+
+#: src/dialogs/symlink.tsx:141
+msgid "Create link to $0"
+msgstr "Buat tautan ke $0"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:115
+msgid "Create new directory"
+msgstr "Buat direktori baru"
+
+#: src/menu.tsx:175 src/menu.tsx:217 src/dialogs/delete.tsx:108
+msgid "Delete"
+msgstr "Hapus"
+
+#: src/dialogs/delete.tsx:47
+msgid "Delete $0 items?"
+msgstr "Hapus $0 item?"
+
+#: src/dialogs/delete.tsx:64
+msgid "Delete $0?"
+msgstr "Hapus $0?"
+
+#: src/dialogs/delete.tsx:61
+msgid "Delete directory $0?"
+msgstr "Hapus direktori $0?"
+
+#: src/dialogs/delete.tsx:53
+msgid "Delete file $0?"
+msgstr "Hapus berkas $0?"
+
+#: src/dialogs/delete.tsx:57
+msgid "Delete link $0?"
+msgstr "Hapus tautan $0?"
+
+#: src/common.ts:68
+msgid "Directory"
+msgstr "Direktori"
+
+#: src/files-footer-detail.tsx:63
+msgid "Directory contains $0 directories, $1 files"
+msgstr "Direktori berisi $0 direktori, $1 berkas"
+
+#: src/files-footer-detail.tsx:64
+msgid "Directory contains $0 directories, $1 files, $2 hidden"
+msgstr "Direktori berisi $0 direktori, $1 berkas, $2 tersembunyi"
+
+#: src/files-card-body.tsx:527
+msgid "Directory is empty"
+msgstr "Direktori kosong"
+
+#: src/dialogs/mkdir.tsx:109
+msgid "Directory name"
+msgstr "Nama direktori"
+
+#: src/dialogs/mkdir.tsx:44
+msgid "Directory name cannot be empty"
+msgstr "Nama direktori tidak boleh kosong"
+
+#: src/dialogs/mkdir.tsx:48
+msgid "Directory name cannot include a /"
+msgstr "Nama direktori tidak boleh mengandung /"
+
+#: src/dialogs/mkdir.tsx:46
+msgid "Directory name too long"
+msgstr "Nama direktori terlalu panjang"
+
+#: src/dialogs/mkdir.tsx:123
+msgid "Directory owner"
+msgstr "Pemilik direktori"
+
+#: src/common.ts:119 src/dialogs/symlink.tsx:52
+msgid "Directory with the same name exists"
+msgstr "Direktori dengan nama yang sama sudah ada"
+
+#: src/header.tsx:254
+msgid "Display as a grid"
+msgstr "Tampilkan sebagai kisi"
+
+#: src/header.tsx:253
+msgid "Display as a list"
+msgstr "Tampilkan sebagai daftar"
+
+#: src/menu.tsx:185
+msgid "Download"
+msgstr "Unduh"
+
+#: src/files-folder-view.tsx:169
+msgid "Drop files to upload"
+msgstr "Jatuhkan berkas untuk diunggah"
+
+#. Translators: This is the title of a modal dialog.  $0 represents a filename.
+#: src/dialogs/editor.tsx:173
+msgid "Edit $0"
+msgstr "Sunting $0"
+
+#: src/files-breadcrumbs.tsx:298 src/dialogs/keyboardShortcutsHelp.tsx:100
+msgid "Edit path"
+msgstr "Sunting jalur"
+
+#: src/menu.tsx:124 src/menu.tsx:164 src/menu.tsx:231
+msgid "Edit permissions"
+msgstr "Sunting izin"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:160
+msgid "Editing"
+msgstr "Menyunting"
+
+#: src/common.ts:56
+msgid "Execute-only"
+msgstr "Hanya-eksekusi"
+
+#: src/upload-button.tsx:289
+msgid "Failed"
+msgstr "Gagal"
+
+#: src/manifest.json:0
+msgid "File browser"
+msgstr "Penjelajah berkas"
+
+#: src/common.ts:121 src/dialogs/symlink.tsx:54
+msgid "File exists"
+msgstr "Berkas sudah ada"
+
+#: src/dialogs/create-file.tsx:161
+msgid "File name"
+msgstr "Nama berkas"
+
+#: src/upload-button.tsx:370
+msgid "File uploaded"
+msgstr "Berkas berhasil diunggah"
+
+#: src/common.ts:116
+msgid "Filename is the same as original name"
+msgstr "Nama berkas sama dengan nama aslinya"
+
+#: org.cockpit_project.files.metainfo.xml:5
+msgid "Files"
+msgstr "Berkas"
+
+#: src/dialogs/copyPasteOwnership.tsx:196
+msgid ""
+"Files being pasted have a different owner. By default, ownership will be "
+"changed to match the destination directory."
+msgstr ""
+"Berkas yang ditempel memiliki pemilik yang berbeda. Secara bawaan, "
+"kepemilikan akan diubah agar sesuai dengan direktori tujuan."
+
+#: src/upload-button.tsx:370
+msgid "Files uploaded"
+msgstr "Berkas berhasil diunggah"
+
+#: src/files-breadcrumbs.tsx:231
+msgid "Filesystem"
+msgstr "Sistem berkas"
+
+#: src/header.tsx:190
+msgid "Filter directory"
+msgstr "Saring direktori"
+
+#: src/header.tsx:91
+msgid "First modified"
+msgstr "Pertama diubah"
+
+#: src/dialogs/delete.tsx:64
+msgid "Force delete $0"
+msgstr "Paksa hapus $0"
+
+#: src/dialogs/delete.tsx:47
+msgid "Force delete $0 items"
+msgstr "Paksa hapus $0 item"
+
+#: src/dialogs/delete.tsx:61
+msgid "Force delete directory $0?"
+msgstr "Paksa hapus direktori $0?"
+
+#: src/dialogs/delete.tsx:53
+msgid "Force delete file $0?"
+msgstr "Paksa hapus berkas $0?"
+
+#: src/dialogs/delete.tsx:57
+msgid "Force delete link $0?"
+msgstr "Paksa hapus tautan $0?"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:74
+msgid "Go back"
+msgstr "Kembali"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:80
+msgid "Go forward"
+msgstr "Maju"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:68
+msgid "Go up a directory"
+msgstr "Naik satu direktori"
+
+#: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
+#: src/files-footer-detail.tsx:151 src/dialogs/permissions.tsx:332
+msgid "Group"
+msgstr "Grup"
+
+#: src/dialogs/permissions.tsx:363
+msgid "Group access"
+msgstr "Akses grup"
+
+#: src/header.tsx:284
+msgid "Hide hidden items"
+msgstr "Sembunyikan item tersembunyi"
+
+#: src/files-breadcrumbs.tsx:52
+msgid "Home"
+msgstr "Beranda"
+
+#: src/dialogs/editor.tsx:216
+msgid "Ignore"
+msgstr "Abaikan"
+
+#: src/upload-button.tsx:158
+msgid "Keep original"
+msgstr "Pertahankan yang asli"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:146
+msgid "Keyboard shortcuts"
+msgstr "Pintasan keyboard"
+
+#: src/header.tsx:80
+msgid "Largest size"
+msgstr "Ukuran terbesar"
+
+#: src/header.tsx:95
+msgid "Last modified"
+msgstr "Terakhir diubah"
+
+#: src/header.tsx:117
+msgid "Least permissive"
+msgstr "Paling terbatas"
+
+#: org.cockpit_project.files.metainfo.xml:6
+msgid "Manage your files"
+msgstr "Kelola berkas Anda"
+
+#: src/dialogs/permissions.tsx:277
+msgid "Missing type"
+msgstr "Jenis hilang"
+
+#: src/files-card-body.tsx:552 src/header.tsx:88
+msgid "Modified"
+msgstr "Diubah"
+
+#: src/header.tsx:113
+msgid "Most permissive"
+msgstr "Paling permisif"
+
+#: src/files-card-body.tsx:547 src/header.tsx:66
+msgid "Name"
+msgstr "Nama"
+
+#: src/common.ts:110 src/dialogs/symlink.tsx:49
+msgid "Name cannot be empty"
+msgstr "Nama tidak boleh kosong"
+
+#: src/common.ts:114
+msgid "Name cannot include a /"
+msgstr "Nama tidak boleh mengandung /"
+
+#: src/common.ts:112
+msgid "Name too long"
+msgstr "Nama terlalu panjang"
+
+#: src/common.ts:69
+msgid "Named pipe"
+msgstr "Pipa bernama"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:150
+msgid "Navigation"
+msgstr "Navigasi"
+
+#: src/upload-button.tsx:136
+msgid "New file"
+msgstr "Berkas baru"
+
+#: src/dialogs/rename.tsx:104
+msgid "New filename"
+msgstr "Nama berkas baru"
+
+#: src/dialogs/rename.tsx:104
+msgid "New name"
+msgstr "Nama baru"
+
+#: src/dialogs/copyPasteOwnership.tsx:199
+msgid "New owner"
+msgstr "Pemilik baru"
+
+#: src/dialogs/permissions.tsx:233
+msgid "No access"
+msgstr "Tidak ada akses"
+
+#: src/files-card-body.tsx:519
+msgid "No matching results"
+msgstr "Tidak ada hasil yang cocok"
+
+#: src/common.ts:55
+msgid "None"
+msgstr "Tidak ada"
+
+#: src/menu.tsx:133 src/menu.tsx:194
+msgid "Open in terminal"
+msgstr "Buka di terminal"
+
+#: src/menu.tsx:150
+msgid "Open text file"
+msgstr "Buka berkas teks"
+
+#: src/upload-button.tsx:141
+msgid "Original file on server"
+msgstr "Berkas asli di server"
+
+#: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
+msgid "Others"
+msgstr "Lainnya"
+
+#: src/dialogs/permissions.tsx:375
+msgid "Others access"
+msgstr "Akses lainnya"
+
+#: src/dialogs/editor.tsx:236 src/dialogs/rename.tsx:98
+msgid "Overwrite"
+msgstr "Timpa"
+
+#: src/files-card-body.tsx:557 src/files-card-body.tsx:596
+#: src/files-footer-detail.tsx:79 src/header.tsx:99
+#: src/dialogs/create-file.tsx:183 src/dialogs/permissions.tsx:317
+msgid "Owner"
+msgstr "Pemilik"
+
+#: src/dialogs/permissions.tsx:351
+msgid "Owner access"
+msgstr "Akses pemilik"
+
+#: src/header.tsx:102
+msgid "Owner ascending"
+msgstr "Pemilik menaik"
+
+#: src/header.tsx:106
+msgid "Owner descending"
+msgstr "Pemilik menurun"
+
+#: src/dialogs/permissions.tsx:316
+msgid "Ownership"
+msgstr "Kepemilikan"
+
+#: src/menu.tsx:106 src/dialogs/copyPasteOwnership.tsx:177
+msgid "Paste"
+msgstr "Tempel"
+
+#: src/dialogs/copyPasteOwnership.tsx:191
+msgid "Paste as owner"
+msgstr "Tempel sebagai pemilik"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:127
+msgid "Paste file or directory"
+msgstr "Tempel berkas atau direktori"
+
+#: src/menu.tsx:63 src/dialogs/copyPasteOwnership.tsx:66
+msgid "Pasting failed"
+msgstr "Gagal menempel"
+
+#: src/dialogs/create-file.tsx:226
+msgid "Permission denied"
+msgstr "Izin ditolak"
+
+#: src/files-card-body.tsx:562 src/header.tsx:110
+msgid "Permissions"
+msgstr "Izin"
+
+#: src/dialogs/permissions.tsx:303
+msgid "Permissions for $0 files"
+msgstr "Izin untuk $0 berkas"
+
+#: src/common.ts:60
+msgid "Read and execute"
+msgstr "Baca dan eksekusi"
+
+#: src/common.ts:61 src/dialogs/permissions.tsx:223
+msgid "Read and write"
+msgstr "Baca dan tulis"
+
+#: src/common.ts:62
+msgid "Read, write, and execute"
+msgstr "Baca, tulis, dan eksekusi"
+
+#: src/common.ts:59 src/dialogs/editor.tsx:175 src/dialogs/permissions.tsx:228
+msgid "Read-only"
+msgstr "Hanya-baca"
+
+#: src/common.ts:71
+msgid "Regular file"
+msgstr "Berkas biasa"
+
+#: src/dialogs/symlink.tsx:222
+msgid "Relative"
+msgstr "Relatif"
+
+#: src/dialogs/symlink.tsx:204
+msgid ""
+"Relative symlinks are useful when both a symlink and target might move at "
+"the same time, such as when renaming or moving a parent directory."
+msgstr ""
+"Tautan simbolik relatif berguna ketika tautan dan target dapat berpindah "
+"bersamaan, seperti saat mengganti nama atau memindahkan direktori induk."
+
+#: src/dialogs/editor.tsx:213
+msgid "Reload"
+msgstr "Muat ulang"
+
+#: src/files-breadcrumbs.tsx:137
+msgid "Remove from bookmarks"
+msgstr "Hapus dari penanda"
+
+#: src/menu.tsx:169 src/dialogs/rename.tsx:91
+msgid "Rename"
+msgstr "Ganti nama"
+
+#: src/dialogs/rename.tsx:114
+msgid "Rename $0?"
+msgstr "Ganti nama $0?"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:108
+msgid "Rename selected file or directory"
+msgstr "Ganti nama berkas atau direktori yang dipilih"
+
+#: src/upload-button.tsx:156
+msgid "Replace"
+msgstr "Ganti"
+
+#: src/upload-button.tsx:108
+msgid "Replace file $0?"
+msgstr "Ganti berkas $0?"
+
+#: src/dialogs/editor.tsx:249
+msgid "Save"
+msgstr "Simpan"
+
+#: src/dialogs/permissions.tsx:388
+msgid "Security context"
+msgstr "Konteks keamanan"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:133
+msgid "Select all"
+msgstr "Pilih semua"
+
+#: src/dialogs/permissions.tsx:401
+msgid "Set executable as program"
+msgstr "Atur eksekusi sebagai program"
+
+#: src/dialogs/permissions.tsx:284
+msgid "Show all files"
+msgstr "Tampilkan semua berkas"
+
+#: src/files-card-body.tsx:535 src/header.tsx:284
+msgid "Show hidden items"
+msgstr "Tampilkan item tersembunyi"
+
+#: src/header.tsx:165
+msgid "Show keyboard shortcuts"
+msgstr "Tampilkan pintasan keyboard"
+
+#: src/files-card-body.tsx:548 src/header.tsx:77
+msgid "Size"
+msgstr "Ukuran"
+
+#: src/header.tsx:84
+msgid "Smallest size"
+msgstr "Ukuran terkecil"
+
+#: src/common.ts:72
+msgid "Socket"
+msgstr "Soket"
+
+#: src/header.tsx:271
+msgid "Sort"
+msgstr "Urutkan"
+
+#: src/common.ts:70
+msgid "Symbolic link"
+msgstr "Tautan simbolik"
+
+#: src/dialogs/symlink.tsx:177
+msgid "Symlink name"
+msgstr "Nama tautan simbolik"
+
+#: src/dialogs/symlink.tsx:170
+msgid "Target"
+msgstr "Target"
+
+#: src/dialogs/editor.tsx:61
+msgid "The existing file changed unexpectedly"
+msgstr "Berkas yang ada berubah secara tidak terduga"
+
+#: src/dialogs/editor.tsx:59 src/dialogs/editor.tsx:207
+msgid "The file has been removed on disk"
+msgstr "Berkas telah dihapus dari disk"
+
+#: src/dialogs/editor.tsx:208
+msgid "The file has changed on disk"
+msgstr "Berkas telah berubah di disk"
+
+#: src/dialogs/symlink.tsx:193
+msgid "Type"
+msgstr "Jenis"
+
+#: src/files-breadcrumbs.tsx:99
+msgid "Unable to create bookmark directory"
+msgstr "Tidak dapat membuat direktori penanda"
+
+#: src/upload-button.tsx:330
+msgid "Unable to move uploaded file to final destination"
+msgstr "Tidak dapat memindahkan berkas yang diunggah ke tujuan akhir"
+
+#: src/files-breadcrumbs.tsx:119
+msgid "Unable to save bookmark file"
+msgstr "Tidak dapat menyimpan berkas penanda"
+
+#: src/upload-button.tsx:503
+msgid "Upload"
+msgstr "Unggah"
+
+#
+#: src/upload-button.tsx:484
+msgid "Upload $0% completed"
+msgstr "Unggahan $0% selesai"
+
+#: src/upload-button.tsx:329 src/upload-button.tsx:353
+msgid "Upload error"
+msgstr "Kesalahan unggahan"
+
+#: src/upload-button.tsx:73
+msgid "Uploaded as $0, $1"
+msgstr "Diunggah sebagai $0, $1"
+
+#: src/upload-button.tsx:448
+msgid "Uploads"
+msgstr "Unggahan"
+
+#: src/files-footer-detail.tsx:143
+msgid "User"
+msgstr "Pengguna"
+
+#: src/dialogs/editor.tsx:173
+msgid "View $0"
+msgstr "Lihat $0"
+
+#: src/common.ts:58
+msgid "Write and execute"
+msgstr "Tulis dan eksekusi"
+
+#: src/common.ts:57 src/dialogs/permissions.tsx:243
+msgid "Write-only"
+msgstr "Hanya-tulis"
+
+#: src/header.tsx:73
+msgid "Z-A"
+msgstr "Z-A"
+
+#: src/manifest.json:0
+msgid "explorer"
+msgstr "penjelajah"
+
+#: src/manifest.json:0
+msgid "files"
+msgstr "berkas"
+
+#: src/manifest.json:0
+msgid "filesystem"
+msgstr "sistem berkas"
+
+#: src/dialogs/copyPasteOwnership.tsx:128
+msgid "keep original owners"
+msgstr "pertahankan pemilik asli"
+
+#: src/dialogs/symlink.tsx:66
+msgid "link to $0"
+msgstr "tautkan ke $0"
