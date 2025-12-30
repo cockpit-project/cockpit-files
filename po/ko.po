@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-15 03:55+0000\n"
-"PO-Revision-Date: 2025-12-13 23:35+0000\n"
+"POT-Creation-Date: 2025-12-25 03:50+0000\n"
+"PO-Revision-Date: 2025-12-25 18:09+0000\n"
 "Last-Translator: 김인수 <simmon@nplob.com>\n"
 "Language-Team: Korean <https://translate.fedoraproject.org/projects/cockpit/"
 "cockpit-files/ko/>\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
-"X-Generator: Weblate 5.14.3\n"
+"X-Generator: Weblate 5.15.1\n"
 
 #: src/menu.tsx:64
 msgid "\"$0\" exists, not overwriting with paste."
@@ -486,7 +486,7 @@ msgstr "신규 파일이름"
 
 #: src/dialogs/rename.tsx:104
 msgid "New name"
-msgstr "신규 이름"
+msgstr "새로운 이름"
 
 #: src/dialogs/copyPasteOwnership.tsx:199
 msgid "New owner"
