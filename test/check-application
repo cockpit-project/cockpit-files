@@ -593,7 +593,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_text("#folder-view tbody tr:nth-of-type(5) .item-name", "BBB")
         b.wait_text("#folder-view tbody tr:nth-of-type(6) .item-name", "aaa")
 
-        b.click("th button:contains(Modified)")
+        b.click("th button:contains('Modified')")
         b.wait_text("th[aria-sort='ascending'].pf-m-selected button", "Modified")
         b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "ddd")
         b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "eee")
@@ -602,7 +602,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_text("#folder-view tbody tr:nth-of-type(5) .item-name", "aaa")
         b.wait_text("#folder-view tbody tr:nth-of-type(6) .item-name", "BBB")
 
-        b.click("th button:contains(Size)")
+        b.click("th button:contains('Size')")
         b.wait_text("th[aria-sort='ascending'].pf-m-selected button", "Size")
         b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "ddd")
         b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "eee")
@@ -621,7 +621,7 @@ class TestFiles(testlib.MachineCase):
         chmod 0511 {basedir}/ccc
         """)
 
-        b.click("th button:contains(Permissions)")
+        b.click("th button:contains('Permissions')")
         b.wait_text("th[aria-sort='ascending'].pf-m-selected button", "Permissions")
         b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "ddd")
         b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "Eee")
@@ -648,7 +648,7 @@ class TestFiles(testlib.MachineCase):
 
         # Clicking again inverts the list
         # Directories are still sorted first
-        b.click("th button:contains(Permissions)")
+        b.click("th button:contains('Permissions')")
         b.wait_text("th[aria-sort='descending'].pf-m-selected button", "Permissions")
         b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "Eee")
         b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "eee")
@@ -691,7 +691,7 @@ class TestFiles(testlib.MachineCase):
         chown qusr:foousr {basedir}/eee
         chown rebelusr:cmanusr {basedir}/Eee
         """)
-        b.click("th button:contains(Owner)")
+        b.click("th button:contains('Owner')")
 
         # Verify order
         b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "eee")
@@ -710,7 +710,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_text("#folder-view tbody tr:nth-of-type(6) .item-owner", "foousr:root")
 
         # Reverse sorting
-        b.click("th button:contains(Owner)")
+        b.click("th button:contains('Owner')")
         b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "ddd")
         b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "Eee")
         b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-name", "eee")
@@ -727,7 +727,7 @@ class TestFiles(testlib.MachineCase):
         chown admin:foousr {basedir}/eee
         chown admin:admin {basedir}/Eee
         """)
-        b.click("th button:contains(Owner)")
+        b.click("th button:contains('Owner')")
 
         # Verify order
         b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "Eee")
@@ -746,7 +746,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_text("#folder-view tbody tr:nth-of-type(6) .item-owner", "admin:root")
 
         # Reverse sorting
-        b.click("th button:contains(Owner)")
+        b.click("th button:contains('Owner')")
         b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "ddd")
         b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "eee")
         b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-name", "Eee")
@@ -762,7 +762,7 @@ class TestFiles(testlib.MachineCase):
         chown admin:admin {basedir}/eee
         chown admin:admin {basedir}/Eee
         """)
-        b.click("th button:contains(Owner)")
+        b.click("th button:contains('Owner')")
 
         b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "eee")
         b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "Eee")
@@ -798,7 +798,7 @@ class TestFiles(testlib.MachineCase):
         b.wait_text("#folder-view tbody tr:nth-of-type(6) .item-owner", "foousr:568")
 
         # Reverse
-        b.click("th button:contains(Owner)")
+        b.click("th button:contains('Owner')")
         b.wait_text("#folder-view tbody tr:nth-of-type(1) .item-name", "Eee")
         b.wait_text("#folder-view tbody tr:nth-of-type(2) .item-name", "ddd")
         b.wait_text("#folder-view tbody tr:nth-of-type(3) .item-name", "eee")
