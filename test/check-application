@@ -1035,7 +1035,8 @@ class TestFiles(testlib.MachineCase):
             self.open_folder_context_menu()
             b.wait_text(".contextMenu button", "Create directory")
             b.wait_not_present(".contextMenu button:contains('Open in terminal')")
-        else:
+        # WebGL2 is not supported in firefox headless mode, terminal page will not load
+        elif b.browser != "firefox":
             # Open folder in terminal from context menu
             self.open_context_menu("[data-item='newdir1']")
             b.click(".contextMenu button:contains('Open in terminal')")
