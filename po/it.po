@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-16 03:52+0000\n"
-"PO-Revision-Date: 2025-06-01 14:21+0000\n"
+"POT-Creation-Date: 2026-01-26 04:09+0000\n"
+"PO-Revision-Date: 2026-01-24 11:58+0000\n"
 "Last-Translator: Nathan <nathan95@live.it>\n"
 "Language-Team: Italian <https://translate.fedoraproject.org/projects/cockpit/"
 "cockpit-files/it/>\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1\n"
-"X-Generator: Weblate 5.11.4\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #: src/menu.tsx:64
 msgid "\"$0\" exists, not overwriting with paste."
@@ -460,7 +460,7 @@ msgstr "Nome"
 
 #: src/common.ts:110 src/dialogs/symlink.tsx:49
 msgid "Name cannot be empty"
-msgstr "Il nome non può essere vuoto."
+msgstr "Il nome non può essere vuoto"
 
 #: src/common.ts:114
 msgid "Name cannot include a /"
