@@ -22,8 +22,7 @@ BuildRequires:  libappstream-glib
 %endif
 BuildRequires: gettext
 %if %{defined rebuild_bundle}
-BuildRequires: nodejs
-BuildRequires: %{_bindir}/node
+BuildRequires: /usr/bin/node
 BuildRequires: nodejs-esbuild
 %endif
 
