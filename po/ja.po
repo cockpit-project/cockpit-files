@@ -14,17 +14,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-26 04:09+0000\n"
-"PO-Revision-Date: 2025-02-28 05:41+0000\n"
-"Last-Translator: Martin Pitt <mpitt@redhat.com>\n"
+"POT-Creation-Date: 2026-02-03 04:28+0000\n"
+"PO-Revision-Date: 2026-02-03 13:58+0000\n"
+"Last-Translator: Kohei Takahashi <flast@flast.jp>\n"
 "Language-Team: Japanese <https://translate.fedoraproject.org/projects/"
-"cockpit-files/cockpit-files/ja/>\n"
+"cockpit/cockpit-files/ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
-"X-Generator: Weblate 5.10\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #: src/menu.tsx:64
 msgid "\"$0\" exists, not overwriting with paste."
@@ -82,10 +82,12 @@ msgid ""
 "Absolute symlinks are ideal when referring to files or directories that "
 "won't move, such as system files."
 msgstr ""
+"絶対パスシンボリックリンクはシステムファイルなど移動しないファイルやディレク"
+"トリに適しています。"
 
 #: src/dialogs/symlink.tsx:197
 msgid "Absolute vs. Relative"
-msgstr ""
+msgstr "絶対パスと相対パス"
 
 #: src/dialogs/permissions.tsx:349
 msgid "Access"
@@ -197,10 +199,8 @@ msgid "Create file"
 msgstr "ファイルの作成"
 
 #: src/menu.tsx:204 src/dialogs/symlink.tsx:244
-#, fuzzy
-#| msgid "Create file"
 msgid "Create link"
-msgstr "ファイルの作成"
+msgstr "リンクの作成"
 
 #: src/dialogs/symlink.tsx:141
 #, fuzzy
