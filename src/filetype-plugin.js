@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: LGPL-2.1-or-later */
 /* This is an esbuild plugin that creates a JSON blob mapping extensions to
  * file types at bundling time.
  *

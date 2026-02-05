@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: LGPL-2.1-or-later */
 export const Category = Object.freeze({
     FILE: 0,
     ARCHIVE: 1,
