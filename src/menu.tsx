@@ -15,7 +15,7 @@ import type { Dialogs } from 'dialogs';
 import { superuser } from 'superuser';
 
 import { debug } from "./common.ts";
-import type { ClipboardInfo, FolderFileInfo } from "./common.ts";
+import type { ClipboardInfo, FilesContextType, FolderFileInfo } from "./common.ts";
 import { show_copy_paste_as_owner } from "./dialogs/copyPasteOwnership.tsx";
 import { show_create_file_dialog } from './dialogs/create-file.tsx';
 import { confirm_delete } from './dialogs/delete.tsx';
@@ -42,14 +42,17 @@ export async function pasteFromClipboard(
     cwdInfo: FileInfo | null,
     path: string,
     dialogs: Dialogs,
-    addAlert: (title: string, variant: AlertVariant, key: string, detail?: string) => void,
+    addAlert: FilesContextType["addAlert"],
 ) {
     const existingFiles = clipboard.files.filter(sourcePath => cwdInfo?.entries?.[sourcePath.name]);
 
     if (existingFiles.length > 0) {
-        addAlert(_("Pasting failed"), AlertVariant.danger, "paste-error",
-                 cockpit.format(_("\"$0\" exists, not overwriting with paste."),
-                                existingFiles.map(file => file.name).join(", ")));
+        addAlert({
+            title: _("Pasting failed"),
+            variant: AlertVariant.danger,
+            detail: cockpit.format(_("\"$0\" exists, not overwriting with paste."),
+                                   existingFiles.map(file => file.name).join(", "))
+        });
         return;
     }
 
@@ -67,7 +70,10 @@ export async function pasteFromClipboard(
         if (superuser.allowed) {
             show_copy_paste_as_owner(dialogs, clipboard, path);
         } else {
-            addAlert(err.message, AlertVariant.danger, `${new Date().getTime()}`);
+            addAlert({
+                title: err.message,
+                variant: AlertVariant.danger
+            });
         }
     }
 }
@@ -77,7 +83,7 @@ export function get_menu_items(
     selected: FolderFileInfo[], setSelected: React.Dispatch<React.SetStateAction<FolderFileInfo[]>>,
     clipboard: ClipboardInfo, setClipboard: React.Dispatch<React.SetStateAction<ClipboardInfo>>,
     cwdInfo: FileInfo | null,
-    addAlert: (title: string, variant: AlertVariant, key: string, detail?: string) => void,
+    addAlert: FilesContextType["addAlert"],
     dialogs: Dialogs,
 ) {
     const menuItems: MenuItem[] = [];

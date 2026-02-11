@@ -9,7 +9,6 @@ import React, { useEffect, useState } from "react";
 import {
     AlertGroup, Alert, AlertActionCloseButton
 } from "@patternfly/react-core/dist/esm/components/Alert";
-import type { AlertVariant } from "@patternfly/react-core/dist/esm/components/Alert";
 import { Card } from "@patternfly/react-core/dist/esm/components/Card";
 import { Page, PageSection } from "@patternfly/react-core/dist/esm/components/Page";
 import { Stack } from "@patternfly/react-core/dist/esm/layouts/Stack";
@@ -23,8 +22,8 @@ import { WithDialogs } from "dialogs";
 import { useInit } from "hooks";
 import { superuser } from "superuser";
 
-import { FilesContext, testIsAppleDevice } from "./common.ts";
-import type { ClipboardInfo, FolderFileInfo } from "./common.ts";
+import { FilesContext, testIsAppleDevice, uniqueId } from "./common.ts";
+import type { AlertInfo, ClipboardInfo, FolderFileInfo } from "./common.ts";
 import { FilesBreadcrumbs } from "./files-breadcrumbs.tsx";
 import { FilesFolderView } from "./files-folder-view.tsx";
 import { FilesFooterDetail } from "./files-footer-detail.tsx";
@@ -32,14 +31,6 @@ import filetype_data from './filetype-data'; // eslint-disable-line import/exten
 import { filetype_lookup } from './filetype-lookup.js';
 
 superuser.reload_page_on_change();
-
-interface AlertInfo {
-    key: string,
-    title: string,
-    variant: AlertVariant,
-    detail?: string | React.ReactNode,
-    actionLinks?: React.ReactNode
-}
 
 const get_path = (options: Location['options']) => {
     let currentPath = decodeURIComponent(options.path?.toString() || "/");
@@ -68,7 +59,7 @@ export const Application = () => {
     const [selected, setSelected] = useState<FolderFileInfo[]>([]);
     const [showHidden, setShowHidden] = useState(localStorage.getItem("files:showHiddenFiles") === "true");
     const [clipboard, setClipboard] = useState<ClipboardInfo>({ path: "/", files: [] });
-    const [alerts, setAlerts] = useState<AlertInfo[]>([]);
+    const [alerts, setAlerts] = useState<(Required<Pick<AlertInfo, 'key'>> & AlertInfo)[]>([]);
     const [cwdInfo, setCwdInfo] = useState<FileInfo | null>(null);
 
     const { options } = location;
@@ -155,19 +146,16 @@ export const Application = () => {
     if (loading)
         return <EmptyStatePanel loading />;
 
-    const addAlert = (title: string, variant: AlertVariant, key: string, detail?: string | React.ReactNode,
-        actionLinks?: React.ReactNode) => {
+    const addAlert = (alert: AlertInfo) => {
         setAlerts(prevAlerts => [
             ...prevAlerts, {
-                title,
-                variant,
-                key,
-                ...detail && { detail },
-                ...actionLinks && { actionLinks },
+                ...alert,
+                key: alert.key ?? uniqueId()
             }
         ]);
     };
-    const removeAlert = (key: string) => setAlerts(prevAlerts => prevAlerts.filter(alert => alert.key !== key));
+    const removeAlert = (key: AlertInfo["key"]) =>
+        setAlerts(prevAlerts => prevAlerts.filter(alert => alert.key !== key));
 
     return (
         <Page className="pf-m-no-sidebar" isContentFilled>

@@ -83,8 +83,11 @@ function BookmarkButton({ path }: { path: string }) {
             await cockpit.spawn(["mkdir", "-p", config_dir]);
         } catch (err) {
             const exc = err as cockpit.BasicError; // HACK: You can't easily type an error in typescript
-            addAlert(_("Unable to create bookmark directory"), AlertVariant.danger, "bookmark-error",
-                     exc.message);
+            addAlert({
+                title: _("Unable to create bookmark directory"),
+                variant: AlertVariant.danger,
+                detail: exc.message
+            });
             return;
         }
 
@@ -103,8 +106,11 @@ function BookmarkButton({ path }: { path: string }) {
             });
         } catch (err) {
             const exc = err as cockpit.BasicError; // HACK: You can't easily type an error in typescript
-            addAlert(_("Unable to save bookmark file"), AlertVariant.danger, "bookmark-error",
-                     exc.message);
+            addAlert({
+                title: _("Unable to save bookmark file"),
+                variant: AlertVariant.danger,
+                detail: exc.message
+            });
         }
     };
 

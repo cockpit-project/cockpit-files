@@ -25,7 +25,7 @@ import { useInit } from 'hooks';
 import { superuser } from 'superuser';
 
 import "./editor.css";
-import { checkFilename, useFilesContext } from '../common.ts';
+import { AlertInfo, checkFilename, useFilesContext } from '../common.ts';
 import { get_owner_candidates } from '../ownership.tsx';
 
 const _ = cockpit.gettext;
@@ -203,14 +203,17 @@ const CreateFileModal = ({ dialogResult, path } : {
 export async function show_create_file_dialog(
     dialogs: Dialogs,
     path: string,
-    addAlert: (title: string, variant: AlertVariant, key: string, detail?: string) => void
+    addAlert: (alert: AlertInfo) => void
 ) {
     if (!superuser.allowed) {
         try {
             await cockpit.spawn(["test", "-w", path]);
         } catch {
-            addAlert(_("Cannot create file in current directory"), AlertVariant.warning, "create-file",
-                     _("Permission denied"));
+            addAlert({
+                title: _("Cannot create file in current directory"),
+                variant: AlertVariant.warning,
+                detail: _("Permission denied")
+            });
             return;
         }
     }

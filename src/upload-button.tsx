@@ -26,7 +26,7 @@ import { superuser } from "superuser";
 import * as timeformat from "timeformat";
 import { fmt_to_fragments } from "utils";
 
-import { permissionShortStr, useFilesContext } from "./common.ts";
+import { permissionShortStr, uniqueId, useFilesContext } from "./common.ts";
 import type { FolderFileInfo } from "./common.ts";
 import { edit_permissions } from "./dialogs/permissions.tsx";
 import { UploadContext } from "./files-folder-view.tsx";
@@ -273,7 +273,11 @@ export const UploadButton = ({
                 } catch (exc) {
                     const err = exc as BasicError;
                     console.warn("Cannot set initial file permissions", err.toString());
-                    addAlert(_("Failed"), AlertVariant.warning, "upload", err.toString());
+                    addAlert({
+                        title: _("Failed"),
+                        variant: AlertVariant.warning,
+                        detail: err.toString()
+                    });
 
                     try {
                         await cockpit.file(destination, { superuser: "require" }).replace(null);
@@ -313,8 +317,11 @@ export const UploadButton = ({
                                             { superuser: "require" });
                     } catch (exc) {
                         console.warn("Unable to move file to final destination", exc);
-                        addAlert(_("Upload error"), AlertVariant.danger, "upload-error",
-                                 _("Unable to move uploaded file to final destination"));
+                        addAlert({
+                            title: _("Upload error"),
+                            variant: AlertVariant.danger,
+                            detail: _("Unable to move uploaded file to final destination")
+                        });
                         try {
                             await cockpit.file(destination, { superuser: "require" }).replace(null);
                         } catch (exc) {
@@ -334,10 +341,17 @@ export const UploadButton = ({
                     }
                 }
                 if (exc instanceof DOMException && exc.name === 'AbortError') {
-                    addAlert(_("Cancelled"), AlertVariant.warning, "upload",
-                             cockpit.format(_("Cancelled upload of $0"), file.name));
+                    addAlert({
+                        title: _("Cancelled"),
+                        variant: AlertVariant.warning,
+                        detail: cockpit.format(_("Cancelled upload of $0"), file.name)
+                    });
                 } else {
-                    addAlert(_("Upload error"), AlertVariant.danger, "upload-error", exc.toString());
+                    addAlert({
+                        title: _("Upload error"),
+                        variant: AlertVariant.danger,
+                        detail: exc.toString()
+                    });
                 }
                 cancelledUploads.push(file);
             } finally {
@@ -355,7 +369,7 @@ export const UploadButton = ({
         // If all uploads are cancelled, don't show an alert
         if (cancelledUploads.length !== toUploadFiles.length) {
             const title = cockpit.ngettext(_("File uploaded"), _("Files uploaded"), toUploadFiles.length);
-            const key = window.btoa(toUploadFiles.join(""));
+            const key = uniqueId();
             let description;
             let action;
 
@@ -390,7 +404,13 @@ export const UploadButton = ({
                 );
             }
 
-            addAlert(title, AlertVariant.success, key, description, action);
+            addAlert({
+                title,
+                key,
+                variant: AlertVariant.success,
+                detail: description,
+                actionLinks: action
+            });
         }
     }, [
         addAlert,
