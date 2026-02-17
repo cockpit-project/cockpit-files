@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-04 04:22+0000\n"
+"POT-Creation-Date: 2026-02-15 04:35+0000\n"
 "PO-Revision-Date: 2025-11-17 16:58+0000\n"
 "Last-Translator: Jesse Guo <jesseguotech@outlook.com>\n"
 "Language-Team: Chinese (Simplified) <https://translate.fedoraproject.org/"
@@ -26,28 +26,28 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0\n"
 "X-Generator: Weblate 5.14.3\n"
 
-#: src/menu.tsx:64
+#: src/menu.tsx:51
 msgid "\"$0\" exists, not overwriting with paste."
 msgstr "\"$0\" 存在，没有使用粘贴覆盖。"
 
-#: src/upload-button.tsx:69
+#: src/upload-button.tsx:56
 msgid "$0 files"
 msgstr "$0 文件"
 
-#: src/files-footer-detail.tsx:35
+#: src/files-footer-detail.tsx:36
 msgid "$0 files selected"
 msgstr "选择了 $0 文件"
 
-#: src/files-card-body.tsx:532
+#: src/files-card-body.tsx:519
 msgid "$0 item is hidden"
 msgid_plural "$0 items are hidden"
 msgstr[0] "$0 项目被隐藏"
 
-#: src/dialogs/permissions.tsx:302
+#: src/dialogs/permissions.tsx:289
 msgid "$0 permissions"
 msgstr "$0 权限"
 
-#: src/dialogs/copyPasteOwnership.tsx:119
+#: src/dialogs/copyPasteOwnership.tsx:106
 msgid "(original owner)"
 msgstr "（原始所有者）"
 
@@ -60,108 +60,108 @@ msgstr ""
 "Cockpit 的文件系统 UI。您可以浏览目录、上传和下载文件，并更改它们的属性。它还"
 "包括一个简单的文件编辑器。"
 
-#: src/upload-button.tsx:115
+#: src/upload-button.tsx:102
 msgid ""
 "A file with the same name already exists in \"$0\". Replacing it will "
 "overwrite its content."
 msgstr "已存在和 $0 同名的文件，替换该文件将会覆盖其内容。"
 
-#: src/header.tsx:69
+#: src/header.tsx:56
 msgid "A-Z"
 msgstr "由 A 到 Z"
 
-#: src/dialogs/symlink.tsx:215
+#: src/dialogs/symlink.tsx:202
 msgid "Absolute"
 msgstr "绝对"
 
-#: src/dialogs/symlink.tsx:201
+#: src/dialogs/symlink.tsx:188
 msgid ""
 "Absolute symlinks are ideal when referring to files or directories that "
 "won't move, such as system files."
 msgstr "绝对符号链接适合指向不会被移动的文件或目录，例如系统文件。"
 
-#: src/dialogs/symlink.tsx:197
+#: src/dialogs/symlink.tsx:184
 msgid "Absolute vs. Relative"
 msgstr "绝对 vs. 相对"
 
-#: src/dialogs/permissions.tsx:349
+#: src/dialogs/permissions.tsx:336
 msgid "Access"
 msgstr "访问"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:86
-#: src/dialogs/keyboardShortcutsHelp.tsx:92
+#: src/dialogs/keyboardShortcutsHelp.tsx:73
+#: src/dialogs/keyboardShortcutsHelp.tsx:79
 msgid "Activate selected item, enter directory"
 msgstr "激活所选项目，进入目录"
 
-#: src/files-breadcrumbs.tsx:139
+#: src/files-breadcrumbs.tsx:126
 msgid "Add to bookmarks"
 msgstr "添加到书签"
 
-#: src/upload-button.tsx:150
+#: src/upload-button.tsx:137
 msgid "Apply this action to all conflicting files"
 msgstr "将此操作应用于所有冲突文件"
 
-#: src/common.ts:66
+#: src/common.ts:53
 msgid "Block device"
 msgstr "块设备"
 
-#: src/files-breadcrumbs.tsx:150
+#: src/files-breadcrumbs.tsx:137
 msgid "Bookmarks"
 msgstr "书签"
 
-#: src/upload-button.tsx:159 src/dialogs/symlink.tsx:246
-#: src/dialogs/copyPasteOwnership.tsx:179 src/dialogs/editor.tsx:252
-#: src/dialogs/mkdir.tsx:150 src/dialogs/create-file.tsx:209
-#: src/dialogs/delete.tsx:110 src/dialogs/rename.tsx:100
-#: src/dialogs/permissions.tsx:422
+#: src/upload-button.tsx:146 src/dialogs/create-file.tsx:196
+#: src/dialogs/rename.tsx:87 src/dialogs/permissions.tsx:409
+#: src/dialogs/copyPasteOwnership.tsx:166 src/dialogs/editor.tsx:239
+#: src/dialogs/mkdir.tsx:137 src/dialogs/symlink.tsx:233
+#: src/dialogs/delete.tsx:97
 msgid "Cancel"
 msgstr "取消"
 
-#: src/upload-button.tsx:467
+#: src/upload-button.tsx:454
 msgid "Cancel upload of $0"
 msgstr "取消上传 $0"
 
-#: src/upload-button.tsx:350
+#: src/upload-button.tsx:337
 msgid "Cancelled"
 msgstr "已取消"
 
-#: src/upload-button.tsx:351
+#: src/upload-button.tsx:338
 msgid "Cancelled upload of $0"
 msgstr "已取消上传 $0"
 
-#: src/dialogs/create-file.tsx:225
+#: src/dialogs/create-file.tsx:212
 msgid "Cannot create file in current directory"
 msgstr "不能在当前目录中创建文件"
 
-#: src/files-folder-view.tsx:177
+#: src/files-folder-view.tsx:164
 msgid "Cannot drop files, another upload is already in progress"
 msgstr "无法丢弃文件，另一个上传已在进行中"
 
-#: src/dialogs/permissions.tsx:413
+#: src/dialogs/permissions.tsx:400
 msgid "Change"
 msgstr "变更"
 
-#: src/upload-button.tsx:401
+#: src/upload-button.tsx:388
 msgid "Change permissions"
 msgstr "更改权限"
 
-#: src/dialogs/permissions.tsx:420
+#: src/dialogs/permissions.tsx:407
 msgid "Change permissions for enclosed files"
 msgstr "更改所附文件的权限"
 
-#: src/common.ts:67
+#: src/common.ts:54
 msgid "Character device"
 msgstr "字符设备"
 
-#: src/files-card-body.tsx:520
+#: src/files-card-body.tsx:507
 msgid "Clear filter"
 msgstr "清除过滤器"
 
-#: src/dialogs/editor.tsx:252 src/dialogs/keyboardShortcutsHelp.tsx:46
+#: src/dialogs/editor.tsx:239 src/dialogs/keyboardShortcutsHelp.tsx:33
 msgid "Close"
 msgstr "关闭"
 
-#: src/index.html:20
+#: src/index.html:8
 msgid "Cockpit Files"
 msgstr "Cockpit 文件"
 
@@ -169,144 +169,144 @@ msgstr "Cockpit 文件"
 msgid "Cockpit Project"
 msgstr "Cockpit 项目"
 
-#: src/dialogs/permissions.tsx:283
+#: src/dialogs/permissions.tsx:270
 msgid "Collapse"
 msgstr "折叠"
 
-#: src/menu.tsx:158 src/menu.tsx:212
+#: src/menu.tsx:145 src/menu.tsx:199
 msgid "Copy"
 msgstr "复制"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:121
+#: src/dialogs/keyboardShortcutsHelp.tsx:108
 msgid "Copy selected file or directory"
 msgstr "复制所选的文件或目录"
 
-#: src/dialogs/mkdir.tsx:148 src/dialogs/create-file.tsx:206
+#: src/dialogs/create-file.tsx:193 src/dialogs/mkdir.tsx:135
 msgid "Create"
 msgstr "创建"
 
-#: src/menu.tsx:113 src/dialogs/mkdir.tsx:93
+#: src/menu.tsx:100 src/dialogs/mkdir.tsx:80
 msgid "Create directory"
 msgstr "创建目录"
 
-#: src/menu.tsx:118 src/dialogs/create-file.tsx:149
+#: src/menu.tsx:105 src/dialogs/create-file.tsx:136
 msgid "Create file"
 msgstr "创建文件"
 
-#: src/menu.tsx:204 src/dialogs/symlink.tsx:244
+#: src/menu.tsx:191 src/dialogs/symlink.tsx:231
 msgid "Create link"
 msgstr "创建链接"
 
-#: src/dialogs/symlink.tsx:141
+#: src/dialogs/symlink.tsx:128
 msgid "Create link to $0"
 msgstr "创建到 $0 的链接"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:115
+#: src/dialogs/keyboardShortcutsHelp.tsx:102
 msgid "Create new directory"
 msgstr "创建新目录"
 
-#: src/menu.tsx:175 src/menu.tsx:217 src/dialogs/delete.tsx:108
+#: src/menu.tsx:162 src/menu.tsx:204 src/dialogs/delete.tsx:95
 msgid "Delete"
 msgstr "删除"
 
-#: src/dialogs/delete.tsx:47
+#: src/dialogs/delete.tsx:34
 msgid "Delete $0 items?"
 msgstr "删除 $0 个项目？"
 
-#: src/dialogs/delete.tsx:64
+#: src/dialogs/delete.tsx:51
 msgid "Delete $0?"
 msgstr "删除 $0 ？"
 
-#: src/dialogs/delete.tsx:61
+#: src/dialogs/delete.tsx:48
 msgid "Delete directory $0?"
 msgstr "删除目录 $0 ？"
 
-#: src/dialogs/delete.tsx:53
+#: src/dialogs/delete.tsx:40
 msgid "Delete file $0?"
 msgstr "删除文件 $0 ？"
 
-#: src/dialogs/delete.tsx:57
+#: src/dialogs/delete.tsx:44
 msgid "Delete link $0?"
 msgstr "删除链接 $0 ？"
 
-#: src/common.ts:68
+#: src/common.ts:55
 msgid "Directory"
 msgstr "目录"
 
-#: src/files-footer-detail.tsx:63
+#: src/files-footer-detail.tsx:64
 msgid "Directory contains $0 directories, $1 files"
 msgstr "目录包含 $0 目录、$1 文件"
 
-#: src/files-footer-detail.tsx:64
+#: src/files-footer-detail.tsx:65
 msgid "Directory contains $0 directories, $1 files, $2 hidden"
 msgstr "目录包含 $0 目录、$1 文件、$2 隐藏"
 
-#: src/files-card-body.tsx:527
+#: src/files-card-body.tsx:514
 msgid "Directory is empty"
 msgstr "目录为空"
 
-#: src/dialogs/mkdir.tsx:109
+#: src/dialogs/mkdir.tsx:96
 msgid "Directory name"
 msgstr "目录名称"
 
-#: src/dialogs/mkdir.tsx:44
+#: src/dialogs/mkdir.tsx:31
 msgid "Directory name cannot be empty"
 msgstr "目录名称不能为空"
 
-#: src/dialogs/mkdir.tsx:48
+#: src/dialogs/mkdir.tsx:35
 msgid "Directory name cannot include a /"
 msgstr "目录名称不能包含 /"
 
-#: src/dialogs/mkdir.tsx:46
+#: src/dialogs/mkdir.tsx:33
 msgid "Directory name too long"
 msgstr "目录名称太长"
 
-#: src/dialogs/mkdir.tsx:123
+#: src/dialogs/mkdir.tsx:110
 msgid "Directory owner"
 msgstr "目录所有者"
 
-#: src/common.ts:119 src/dialogs/symlink.tsx:52
+#: src/common.ts:106 src/dialogs/symlink.tsx:39
 msgid "Directory with the same name exists"
 msgstr "同名的目录已经存在"
 
-#: src/header.tsx:254
+#: src/header.tsx:241
 msgid "Display as a grid"
 msgstr "以网格显示"
 
-#: src/header.tsx:253
+#: src/header.tsx:240
 msgid "Display as a list"
 msgstr "以列表显示"
 
-#: src/menu.tsx:185
+#: src/menu.tsx:172
 msgid "Download"
 msgstr "下载"
 
-#: src/files-folder-view.tsx:169
+#: src/files-folder-view.tsx:156
 msgid "Drop files to upload"
 msgstr "删除要上传的文件"
 
 #. Translators: This is the title of a modal dialog.  $0 represents a filename.
-#: src/dialogs/editor.tsx:173
+#: src/dialogs/editor.tsx:160
 msgid "Edit $0"
 msgstr "编辑 $0"
 
-#: src/files-breadcrumbs.tsx:298 src/dialogs/keyboardShortcutsHelp.tsx:100
+#: src/files-breadcrumbs.tsx:285 src/dialogs/keyboardShortcutsHelp.tsx:87
 msgid "Edit path"
 msgstr "编辑路径"
 
-#: src/menu.tsx:124 src/menu.tsx:164 src/menu.tsx:231
+#: src/menu.tsx:111 src/menu.tsx:151 src/menu.tsx:218
 msgid "Edit permissions"
 msgstr "编辑权限"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:160
+#: src/dialogs/keyboardShortcutsHelp.tsx:147
 msgid "Editing"
 msgstr "编辑中"
 
-#: src/common.ts:56
+#: src/common.ts:43
 msgid "Execute-only"
 msgstr "只能执行"
 
-#: src/upload-button.tsx:289
+#: src/upload-button.tsx:276
 msgid "Failed"
 msgstr "失败"
 
@@ -314,19 +314,19 @@ msgstr "失败"
 msgid "File browser"
 msgstr "文件浏览器"
 
-#: src/common.ts:121 src/dialogs/symlink.tsx:54
+#: src/common.ts:108 src/dialogs/symlink.tsx:41
 msgid "File exists"
 msgstr "文件已存在"
 
-#: src/dialogs/create-file.tsx:161
+#: src/dialogs/create-file.tsx:148
 msgid "File name"
 msgstr "文件名"
 
-#: src/upload-button.tsx:370
+#: src/upload-button.tsx:357
 msgid "File uploaded"
 msgstr "文件已上传"
 
-#: src/common.ts:116
+#: src/common.ts:103
 msgid "Filename is the same as original name"
 msgstr "文件名与原文件名同名"
 
@@ -334,98 +334,98 @@ msgstr "文件名与原文件名同名"
 msgid "Files"
 msgstr "文件"
 
-#: src/dialogs/copyPasteOwnership.tsx:196
+#: src/dialogs/copyPasteOwnership.tsx:183
 msgid ""
 "Files being pasted have a different owner. By default, ownership will be "
 "changed to match the destination directory."
 msgstr "要粘贴的文件有不同的所有者。默认情况下，所有权将更改为与目标目录匹配。"
 
-#: src/upload-button.tsx:370
+#: src/upload-button.tsx:357
 msgid "Files uploaded"
 msgstr "文件已上传"
 
-#: src/files-breadcrumbs.tsx:231
+#: src/files-breadcrumbs.tsx:218
 msgid "Filesystem"
 msgstr "文件系统"
 
-#: src/header.tsx:190
+#: src/header.tsx:177
 msgid "Filter directory"
 msgstr "筛选目录"
 
-#: src/header.tsx:91
+#: src/header.tsx:78
 msgid "First modified"
 msgstr "最先修改"
 
-#: src/dialogs/delete.tsx:64
+#: src/dialogs/delete.tsx:51
 msgid "Force delete $0"
 msgstr "强制删除 $0"
 
-#: src/dialogs/delete.tsx:47
+#: src/dialogs/delete.tsx:34
 msgid "Force delete $0 items"
 msgstr "强制删除 $0 个项目"
 
-#: src/dialogs/delete.tsx:61
+#: src/dialogs/delete.tsx:48
 msgid "Force delete directory $0?"
 msgstr "强制删除目录 $0 ？"
 
-#: src/dialogs/delete.tsx:53
+#: src/dialogs/delete.tsx:40
 msgid "Force delete file $0?"
 msgstr "强制删除文件 $0 ？"
 
-#: src/dialogs/delete.tsx:57
+#: src/dialogs/delete.tsx:44
 msgid "Force delete link $0?"
 msgstr "强制删除链接 $0 ?"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:74
+#: src/dialogs/keyboardShortcutsHelp.tsx:61
 msgid "Go back"
 msgstr "回退"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:80
+#: src/dialogs/keyboardShortcutsHelp.tsx:67
 msgid "Go forward"
 msgstr "继续"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:68
+#: src/dialogs/keyboardShortcutsHelp.tsx:55
 msgid "Go up a directory"
 msgstr "转到目录"
 
-#: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
-#: src/files-footer-detail.tsx:151 src/dialogs/permissions.tsx:332
+#: src/files-footer-detail.tsx:80 src/files-footer-detail.tsx:152
+#: src/dialogs/permissions.tsx:319 src/files-card-body.tsx:583
 msgid "Group"
 msgstr "组"
 
-#: src/dialogs/permissions.tsx:363
+#: src/dialogs/permissions.tsx:350
 msgid "Group access"
 msgstr "用户组访问权限"
 
-#: src/header.tsx:284
+#: src/header.tsx:271
 msgid "Hide hidden items"
 msgstr "不显示隐藏项目"
 
-#: src/files-breadcrumbs.tsx:52
+#: src/files-breadcrumbs.tsx:39
 msgid "Home"
 msgstr "家目录"
 
-#: src/dialogs/editor.tsx:216
+#: src/dialogs/editor.tsx:203
 msgid "Ignore"
 msgstr "忽略"
 
-#: src/upload-button.tsx:158
+#: src/upload-button.tsx:145
 msgid "Keep original"
 msgstr "保留原本的"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:146
+#: src/dialogs/keyboardShortcutsHelp.tsx:133
 msgid "Keyboard shortcuts"
 msgstr "键盘快捷键"
 
-#: src/header.tsx:80
+#: src/header.tsx:67
 msgid "Largest size"
 msgstr "尺寸最大"
 
-#: src/header.tsx:95
+#: src/header.tsx:82
 msgid "Last modified"
 msgstr "最后修改"
 
-#: src/header.tsx:117
+#: src/header.tsx:104
 msgid "Least permissive"
 msgstr "最小权限"
 
@@ -433,324 +433,324 @@ msgstr "最小权限"
 msgid "Manage your files"
 msgstr "管理您的文件"
 
-#: src/dialogs/permissions.tsx:277
+#: src/dialogs/permissions.tsx:264
 msgid "Missing type"
 msgstr "缺少类型"
 
-#: src/files-card-body.tsx:552 src/header.tsx:88
+#: src/header.tsx:75 src/files-card-body.tsx:539
 msgid "Modified"
 msgstr "修改时间"
 
-#: src/header.tsx:113
+#: src/header.tsx:100
 msgid "Most permissive"
 msgstr "最大权限"
 
-#: src/files-card-body.tsx:547 src/header.tsx:66
+#: src/header.tsx:53 src/files-card-body.tsx:534
 msgid "Name"
 msgstr "名称"
 
-#: src/common.ts:110 src/dialogs/symlink.tsx:49
+#: src/common.ts:97 src/dialogs/symlink.tsx:36
 msgid "Name cannot be empty"
 msgstr "名称不能为空"
 
-#: src/common.ts:114
+#: src/common.ts:101
 msgid "Name cannot include a /"
 msgstr "名称不能包含 /"
 
-#: src/common.ts:112
+#: src/common.ts:99
 msgid "Name too long"
 msgstr "名称太长"
 
-#: src/common.ts:69
+#: src/common.ts:56
 msgid "Named pipe"
 msgstr "命名管道"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:150
+#: src/dialogs/keyboardShortcutsHelp.tsx:137
 msgid "Navigation"
 msgstr "导航"
 
-#: src/upload-button.tsx:136
+#: src/upload-button.tsx:123
 msgid "New file"
 msgstr "新文件"
 
-#: src/dialogs/rename.tsx:104
+#: src/dialogs/rename.tsx:91
 msgid "New filename"
 msgstr "新文件名"
 
-#: src/dialogs/rename.tsx:104
+#: src/dialogs/rename.tsx:91
 msgid "New name"
 msgstr "新名称"
 
-#: src/dialogs/copyPasteOwnership.tsx:199
+#: src/dialogs/copyPasteOwnership.tsx:186
 msgid "New owner"
 msgstr "新所有者"
 
-#: src/dialogs/permissions.tsx:233
+#: src/dialogs/permissions.tsx:220
 msgid "No access"
 msgstr "无访问权限"
 
-#: src/files-card-body.tsx:519
+#: src/files-card-body.tsx:506
 msgid "No matching results"
 msgstr "没有找到匹配的结果"
 
-#: src/common.ts:55
+#: src/common.ts:42
 msgid "None"
 msgstr "无"
 
-#: src/menu.tsx:133 src/menu.tsx:194
+#: src/menu.tsx:120 src/menu.tsx:181
 msgid "Open in terminal"
 msgstr "在终端中打开"
 
-#: src/menu.tsx:150
+#: src/menu.tsx:137
 msgid "Open text file"
 msgstr "打开文本文件"
 
-#: src/upload-button.tsx:141
+#: src/upload-button.tsx:128
 msgid "Original file on server"
 msgstr "服务器上原有的文件"
 
-#: src/files-card-body.tsx:596 src/files-footer-detail.tsx:79
+#: src/files-footer-detail.tsx:80 src/files-card-body.tsx:583
 msgid "Others"
 msgstr "其它"
 
-#: src/dialogs/permissions.tsx:375
+#: src/dialogs/permissions.tsx:362
 msgid "Others access"
 msgstr "其它人访问权限"
 
-#: src/dialogs/editor.tsx:236 src/dialogs/rename.tsx:98
+#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:223
 msgid "Overwrite"
 msgstr "覆盖"
 
-#: src/files-card-body.tsx:557 src/files-card-body.tsx:596
-#: src/files-footer-detail.tsx:79 src/header.tsx:99
-#: src/dialogs/create-file.tsx:183 src/dialogs/permissions.tsx:317
+#: src/files-footer-detail.tsx:80 src/header.tsx:86
+#: src/dialogs/create-file.tsx:170 src/dialogs/permissions.tsx:304
+#: src/files-card-body.tsx:544 src/files-card-body.tsx:583
 msgid "Owner"
 msgstr "所有者"
 
-#: src/dialogs/permissions.tsx:351
+#: src/dialogs/permissions.tsx:338
 msgid "Owner access"
 msgstr "所有者访问权限"
 
-#: src/header.tsx:102
+#: src/header.tsx:89
 msgid "Owner ascending"
 msgstr "所有者升序"
 
-#: src/header.tsx:106
+#: src/header.tsx:93
 msgid "Owner descending"
 msgstr "所有者降序"
 
-#: src/dialogs/permissions.tsx:316
+#: src/dialogs/permissions.tsx:303
 msgid "Ownership"
 msgstr "所有权"
 
-#: src/menu.tsx:106 src/dialogs/copyPasteOwnership.tsx:177
+#: src/menu.tsx:93 src/dialogs/copyPasteOwnership.tsx:164
 msgid "Paste"
 msgstr "粘贴"
 
-#: src/dialogs/copyPasteOwnership.tsx:191
+#: src/dialogs/copyPasteOwnership.tsx:178
 msgid "Paste as owner"
 msgstr "粘贴为所有者"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:127
+#: src/dialogs/keyboardShortcutsHelp.tsx:114
 msgid "Paste file or directory"
 msgstr "粘贴文件或目录"
 
-#: src/menu.tsx:63 src/dialogs/copyPasteOwnership.tsx:66
+#: src/menu.tsx:50 src/dialogs/copyPasteOwnership.tsx:53
 msgid "Pasting failed"
 msgstr "粘贴失败"
 
-#: src/dialogs/create-file.tsx:226
+#: src/dialogs/create-file.tsx:213
 msgid "Permission denied"
 msgstr "权限被拒绝"
 
-#: src/files-card-body.tsx:562 src/header.tsx:110
+#: src/header.tsx:97 src/files-card-body.tsx:549
 msgid "Permissions"
 msgstr "权限"
 
-#: src/dialogs/permissions.tsx:303
+#: src/dialogs/permissions.tsx:290
 msgid "Permissions for $0 files"
 msgstr "$0 文件的权限"
 
-#: src/common.ts:60
+#: src/common.ts:47
 msgid "Read and execute"
 msgstr "读取与执行"
 
-#: src/common.ts:61 src/dialogs/permissions.tsx:223
+#: src/common.ts:48 src/dialogs/permissions.tsx:210
 msgid "Read and write"
 msgstr "读取与写入"
 
-#: src/common.ts:62
+#: src/common.ts:49
 msgid "Read, write, and execute"
 msgstr "读取，写入与执行"
 
-#: src/common.ts:59 src/dialogs/editor.tsx:175 src/dialogs/permissions.tsx:228
+#: src/common.ts:46 src/dialogs/permissions.tsx:215 src/dialogs/editor.tsx:162
 msgid "Read-only"
 msgstr "只读"
 
-#: src/common.ts:71
+#: src/common.ts:58
 msgid "Regular file"
 msgstr "常规文件"
 
-#: src/dialogs/symlink.tsx:222
+#: src/dialogs/symlink.tsx:209
 msgid "Relative"
 msgstr "相对"
 
-#: src/dialogs/symlink.tsx:204
+#: src/dialogs/symlink.tsx:191
 msgid ""
 "Relative symlinks are useful when both a symlink and target might move at "
 "the same time, such as when renaming or moving a parent directory."
 msgstr ""
 "相对符号链接适合符号链接与目标同时移动的场景，例如重命名或移动一父目录时。"
 
-#: src/dialogs/editor.tsx:213
+#: src/dialogs/editor.tsx:200
 msgid "Reload"
 msgstr "重载"
 
-#: src/files-breadcrumbs.tsx:137
+#: src/files-breadcrumbs.tsx:124
 msgid "Remove from bookmarks"
 msgstr "从书签中删除"
 
-#: src/menu.tsx:169 src/dialogs/rename.tsx:91
+#: src/menu.tsx:156 src/dialogs/rename.tsx:78
 msgid "Rename"
 msgstr "重命名"
 
-#: src/dialogs/rename.tsx:114
+#: src/dialogs/rename.tsx:101
 msgid "Rename $0?"
 msgstr "将 $0 重新命名？"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:108
+#: src/dialogs/keyboardShortcutsHelp.tsx:95
 msgid "Rename selected file or directory"
 msgstr "重命名所选的文件或目录"
 
-#: src/upload-button.tsx:156
+#: src/upload-button.tsx:143
 msgid "Replace"
 msgstr "替换"
 
-#: src/upload-button.tsx:108
+#: src/upload-button.tsx:95
 msgid "Replace file $0?"
 msgstr "替换文件 $0 ？"
 
-#: src/dialogs/editor.tsx:249
+#: src/dialogs/editor.tsx:236
 msgid "Save"
 msgstr "保存"
 
-#: src/dialogs/permissions.tsx:388
+#: src/dialogs/permissions.tsx:375
 msgid "Security context"
 msgstr "安全上下文"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:133
+#: src/dialogs/keyboardShortcutsHelp.tsx:120
 msgid "Select all"
 msgstr "选择全部"
 
-#: src/dialogs/permissions.tsx:401
+#: src/dialogs/permissions.tsx:388
 msgid "Set executable as program"
 msgstr "将可执行文件设置为程序"
 
-#: src/dialogs/permissions.tsx:284
+#: src/dialogs/permissions.tsx:271
 msgid "Show all files"
 msgstr "显示所有文件"
 
-#: src/files-card-body.tsx:535 src/header.tsx:284
+#: src/header.tsx:271 src/files-card-body.tsx:522
 msgid "Show hidden items"
 msgstr "显示隐藏项目"
 
-#: src/header.tsx:165
+#: src/header.tsx:152
 msgid "Show keyboard shortcuts"
 msgstr "显示键盘快捷方式"
 
-#: src/files-card-body.tsx:548 src/header.tsx:77
+#: src/header.tsx:64 src/files-card-body.tsx:535
 msgid "Size"
 msgstr "大小"
 
-#: src/header.tsx:84
+#: src/header.tsx:71
 msgid "Smallest size"
 msgstr "尺寸最小"
 
-#: src/common.ts:72
+#: src/common.ts:59
 msgid "Socket"
 msgstr "Socket"
 
-#: src/header.tsx:271
+#: src/header.tsx:258
 msgid "Sort"
 msgstr "排序"
 
-#: src/common.ts:70
+#: src/common.ts:57
 msgid "Symbolic link"
 msgstr "符号链接"
 
-#: src/dialogs/symlink.tsx:177
+#: src/dialogs/symlink.tsx:164
 msgid "Symlink name"
 msgstr "符号链接名称"
 
-#: src/dialogs/symlink.tsx:170
+#: src/dialogs/symlink.tsx:157
 msgid "Target"
 msgstr "目标"
 
-#: src/dialogs/editor.tsx:61
+#: src/dialogs/editor.tsx:48
 msgid "The existing file changed unexpectedly"
 msgstr "现有文件被意外更改"
 
-#: src/dialogs/editor.tsx:59 src/dialogs/editor.tsx:207
+#: src/dialogs/editor.tsx:46 src/dialogs/editor.tsx:194
 msgid "The file has been removed on disk"
 msgstr "文件已从磁盘上删除"
 
-#: src/dialogs/editor.tsx:208
+#: src/dialogs/editor.tsx:195
 msgid "The file has changed on disk"
 msgstr "文件已在磁盘上进行了更改"
 
-#: src/dialogs/symlink.tsx:193
+#: src/dialogs/symlink.tsx:180
 msgid "Type"
 msgstr "类型"
 
-#: src/files-breadcrumbs.tsx:99
+#: src/files-breadcrumbs.tsx:86
 msgid "Unable to create bookmark directory"
 msgstr "无法创建书签目录"
 
-#: src/upload-button.tsx:330
+#: src/upload-button.tsx:317
 msgid "Unable to move uploaded file to final destination"
 msgstr "无法将上传的文件移至最终目的地"
 
-#: src/files-breadcrumbs.tsx:119
+#: src/files-breadcrumbs.tsx:106
 msgid "Unable to save bookmark file"
 msgstr "无法保存书签文件"
 
-#: src/upload-button.tsx:503
+#: src/upload-button.tsx:490
 msgid "Upload"
 msgstr "上传"
 
-#: src/upload-button.tsx:484
+#: src/upload-button.tsx:471
 msgid "Upload $0% completed"
 msgstr "上传 $0 已完成"
 
-#: src/upload-button.tsx:329 src/upload-button.tsx:353
+#: src/upload-button.tsx:316 src/upload-button.tsx:340
 msgid "Upload error"
 msgstr "上传失败"
 
-#: src/upload-button.tsx:73
+#: src/upload-button.tsx:60
 msgid "Uploaded as $0, $1"
 msgstr "上传为 $0，$1"
 
-#: src/upload-button.tsx:448
+#: src/upload-button.tsx:435
 msgid "Uploads"
 msgstr "上传项目"
 
-#: src/files-footer-detail.tsx:143
+#: src/files-footer-detail.tsx:144
 msgid "User"
 msgstr "用户"
 
-#: src/dialogs/editor.tsx:173
+#: src/dialogs/editor.tsx:160
 msgid "View $0"
 msgstr "查看 $0"
 
-#: src/common.ts:58
+#: src/common.ts:45
 msgid "Write and execute"
 msgstr "写入与执行"
 
-#: src/common.ts:57 src/dialogs/permissions.tsx:243
+#: src/common.ts:44 src/dialogs/permissions.tsx:230
 msgid "Write-only"
 msgstr "只能写入"
 
-#: src/header.tsx:73
+#: src/header.tsx:60
 msgid "Z-A"
 msgstr "由 Z 到 A"
 
@@ -766,11 +766,11 @@ msgstr "文件"
 msgid "filesystem"
 msgstr "文件系统"
 
-#: src/dialogs/copyPasteOwnership.tsx:128
+#: src/dialogs/copyPasteOwnership.tsx:115
 msgid "keep original owners"
 msgstr "保留原始所有者"
 
-#: src/dialogs/symlink.tsx:66
+#: src/dialogs/symlink.tsx:53
 msgid "link to $0"
 msgstr "链接到 $0"
 
