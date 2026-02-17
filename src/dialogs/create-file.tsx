@@ -27,6 +27,7 @@ import { checkFilename, useFilesContext } from '../common.ts';
 import { get_owner_candidates } from '../ownership.tsx';
 
 import { edit_file } from './editor.tsx';
+import { PlusIcon } from '@patternfly/react-icons';
 
 const _ = cockpit.gettext;
 
@@ -112,7 +113,7 @@ const CreateFileModal = ({ dialogResult, path, } : {
           onClose={() => dialogResult.resolve(null)}
           variant={ModalVariant.small}
         >
-            <ModalHeader title={_("Create file")} />
+            <ModalHeader title={_("Create file")} titleIconVariant={PlusIcon} />
             <ModalBody>
                 <Stack>
                     {createError &&
