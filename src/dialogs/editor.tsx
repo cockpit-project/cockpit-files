@@ -179,7 +179,6 @@ export const EditFileModal = ({ dialogResult, path } : {
     React.useEffect(() => {
         const onKeyDown = function (event: KeyboardEvent) {
             if (confirmDiscardRef.current) {
-                console.log(event);
                 if (event.key === "s" || event.key === "S" || event.key === "Enter") {
                     saveThenClose();
                 } else if (event.key === "n" || event.key === "N") {
@@ -289,13 +288,17 @@ export const EditFileModal = ({ dialogResult, path } : {
                 </ModalFooter>
             </Modal>
             <Modal
+              variant={ModalVariant.small}
               isOpen={confirmDiscardDialog}
               onClose={() => setConfirmDiscardDialog(false)}
               onEscapePress={() => setConfirmDiscardDialog(false)}
             >
-                <ModalHeader titleIconVariant={TrashIcon} title={_("Close without saving?")} />
+                <ModalHeader titleIconVariant={TrashIcon} title={_("Save changes?")} />
                 <ModalBody id="modal-box-body-basic">
-                    {_("All changes will be lost.")}
+                    {fmt_to_fragments(
+                        _("$0 has unsaved changes and which will be permanently lost if discarded.")
+                        , boldBasename
+                    )}
                 </ModalBody>
                 <ModalFooter>
                     <Button
