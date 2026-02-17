@@ -15,6 +15,7 @@ import {
 } from '@patternfly/react-core/dist/esm/components/Modal';
 import { TextInput } from "@patternfly/react-core/dist/esm/components/TextInput";
 import { Stack } from '@patternfly/react-core/dist/esm/layouts/Stack';
+import { PlusIcon } from '@patternfly/react-icons';
 
 import cockpit from 'cockpit';
 import { FormHelper } from 'cockpit-components-form-helper';
@@ -27,7 +28,6 @@ import { checkFilename, useFilesContext } from '../common.ts';
 import { get_owner_candidates } from '../ownership.tsx';
 
 import { edit_file } from './editor.tsx';
-import { PlusIcon } from '@patternfly/react-icons';
 
 const _ = cockpit.gettext;
 
