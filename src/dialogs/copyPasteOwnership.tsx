@@ -22,7 +22,7 @@ import { useEvent, useInit } from 'hooks.ts';
 import { superuser } from 'superuser';
 
 import { useFilesContext } from '../common.ts';
-import type { ClipboardInfo, FolderFileInfo } from '../common.ts';
+import type { AlertInfo, ClipboardInfo, FolderFileInfo } from '../common.ts';
 import { get_owner_candidates } from '../ownership.tsx';
 
 const _ = cockpit.gettext;
@@ -30,7 +30,7 @@ const _ = cockpit.gettext;
 async function pasteAsOwner(clipboard: ClipboardInfo,
     dstPath: string,
     ownerStr: string,
-    addAlert: (title: string, variant: AlertVariant, key: string, detail?: string) => void) {
+    addAlert: (alert: AlertInfo) => void) {
     try {
         await cockpit.spawn([
             "cp",
@@ -50,7 +50,7 @@ async function pasteAsOwner(clipboard: ClipboardInfo,
         }
     } catch (err) {
         const e = err as cockpit.BasicError;
-        addAlert(_("Pasting failed"), AlertVariant.danger, `${new Date().getTime()}`, e.message);
+        addAlert({ title: _("Pasting failed"), variant: AlertVariant.danger, detail: e.message });
 
         // cleanup potentially copied files in case of "chown" fail
         try {

@@ -23,10 +23,17 @@ export interface ClipboardInfo {
     files: FolderFileInfo[];
 }
 
-interface FilesContextType {
-    addAlert: (title: string, variant: AlertVariant, key: string, detail?: string | React.ReactNode,
-               actionLinks?: React.ReactNode) => void,
-    removeAlert: (key: string) => void,
+export interface AlertInfo {
+    title: string;
+    variant: AlertVariant;
+    key?: string;
+    detail?: string | React.ReactNode;
+    actionLinks?: React.ReactNode;
+}
+
+export interface FilesContextType {
+    addAlert: (alert: AlertInfo) => void,
+    removeAlert: (key: AlertInfo["key"]) => void,
     cwdInfo: FileInfo | null,
 }
 
@@ -119,4 +126,9 @@ export function debug(...args: unknown[]) {
 
 export function testIsAppleDevice() {
     return /Mac|iPhone|iPad|iPod/.test(navigator.platform);
+}
+
+export function uniqueId() {
+    const uint32 = window.crypto.getRandomValues(new Uint32Array(1))[0];
+    return uint32.toString(16);
 }
