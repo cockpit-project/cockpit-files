@@ -76,14 +76,6 @@ const CreateFileModal = ({ dialogResult, path, } : {
         }
     });
 
-    const handleEscape = (event: KeyboardEvent) => {
-        if (filename !== "") {
-            event.preventDefault();
-        } else {
-            dialogResult.resolve(null);
-        }
-    };
-
     const create = async (openEditor: boolean) => {
         cockpit.assert(filename, "filename undefined");
         const filename_valid = checkFilename(filename, cwdInfo?.entries || {}, undefined);
@@ -104,6 +96,13 @@ const CreateFileModal = ({ dialogResult, path, } : {
         dialogResult.resolve({ path: full_path, openEditor });
     };
 
+    const handleSubmit = (event: SubmitEvent) => {
+        event.preventDefault();
+        if (!!filename && filenameError === null) {
+            create(true);
+        }
+    };
+
     if (superuser.allowed && owner === undefined)
         return null;
 
@@ -112,7 +111,6 @@ const CreateFileModal = ({ dialogResult, path, } : {
           isOpen
           onClose={() => dialogResult.resolve(null)}
           variant={ModalVariant.small}
-          onEscapePress={handleEscape}
         >
             <ModalHeader title={_("Create file")} />
             <ModalBody>
@@ -124,7 +122,7 @@ const CreateFileModal = ({ dialogResult, path, } : {
                       title={createError}
                       isInline
                     />}
-                    <Form isHorizontal>
+                    <Form isHorizontal onSubmit={handleSubmit}>
                         <FormGroup
                           label={_("File name")}
                           fieldId="file-name"
