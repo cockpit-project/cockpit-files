@@ -299,14 +299,37 @@ export const EditFileModal = ({ dialogResult, path } : {
                         _("$0 has unsaved changes and which will be permanently lost if discarded.")
                         , boldBasename
                     )}
+                    {change_conflict && !file_removed &&
+                    <Alert
+                      className="file-editor-alert"
+                      isInline
+                      variant="warning"
+                      title={file_removed
+                          ? _("The file has changed on disk between when it was opened and now")
+                          : _("The file was deleted after it was opened, saving will recreate it.")}
+                    />}
                 </ModalBody>
                 <ModalFooter>
+                    {change_conflict && !file_removed &&
                     <Button
-                      key="confirm" variant="primary"
-                      isDisabled={state.saving} onClick={() => saveThenClose()}
+                      variant="warning"
+                      onClick={() => saveThenClose()}
+                    >
+                        {_("Overwrite")}
+                    </Button>}
+                    {state?.writable && (!change_conflict || file_removed) &&
+                    <Button
+                      variant="primary"
+                      isDisabled={
+                          !editorRef.current ||
+                          state.saving ||
+                          !modified ||
+                          !state.writable
+                      }
+                      onClick={() => saveThenClose()}
                     >
                         {_("Save")}
-                    </Button>
+                    </Button>}
                     <Button
                       key="discard" variant="secondary"
                       isDanger isDisabled={state.saving}
