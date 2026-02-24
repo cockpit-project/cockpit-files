@@ -573,6 +573,14 @@ const getFileType = (file: FolderFileInfo) => {
     }
 };
 
+const getFileLabel = (file: FolderFileInfo) => {
+    if (file.to === "dir") {
+        return _("Folder");
+    } else {
+        return _("File");
+    }
+};
+
 const FilePermissions = ({ file } : {
     file: FolderFileInfo,
 }) => {
@@ -621,6 +629,7 @@ const Row = React.memo(function Item({ file, isSelected } : {
     isSelected: boolean
 }) {
     const fileType = getFileType(file);
+    const fileTypeLabel = getFileLabel(file);
     let className = fileType;
     if (isSelected)
         className += " row-selected";
@@ -634,31 +643,35 @@ const Row = React.memo(function Item({ file, isSelected } : {
         >
             <Td
               className="item-name"
-              dataLabel={fileType}
+              dataLabel={fileTypeLabel}
             >
                 <a href="#">{file.name}</a>
             </Td>
             <Td
               className="item-size pf-v6-m-tabular-nums"
-              dataLabel="size"
+              dataLabel={_("Size")}
+              data-ouia-component-id="size"
             >
                 {file.type === 'reg' && cockpit.format_bytes(file.size)}
             </Td>
             <Td
               className="item-date pf-v6-m-tabular-nums"
-              dataLabel="date"
+              dataLabel={_("Modified")}
+              data-ouia-component-id="date"
               modifier="nowrap"
             >
                 {file.mtime ? timeformat.dateTime(file.mtime * 1000) : null}
             </Td>
             <Td
               className="item-owner"
+              dataLabel={_("Owner")}
               modifier="nowrap"
             >
                 <FileOwnership file={file} />
             </Td>
             <Td
               className="item-perms"
+              dataLabel={_("Permissions")}
               modifier="nowrap"
             >
                 <FilePermissions file={file} />

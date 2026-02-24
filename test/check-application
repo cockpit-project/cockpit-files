@@ -2855,8 +2855,8 @@ class TestFiles(testlib.MachineCase):
             selector = f"[data-item='{name}']"
             classes = b.attr(selector, 'class').split()
             self.assertEqual(b.text(f'{selector} .item-name'), name)
-            size = b.text(f'{selector} [data-label="size"]')
-            date = b.text(f'{selector} [data-label="date"]')
+            size = b.text(f'{selector} [data-ouia-component-id="size"]')
+            date = b.text(f'{selector} [data-ouia-component-id="date"]')
 
             if 'dir' in name:
                 # directories are shown with folder icon, regardless of extension
