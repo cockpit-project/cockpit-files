@@ -185,6 +185,7 @@ export const Application = () => {
                       hasBodyWrapper={false}
                       id="files-folder-section"
                       data-dir-loaded={!loadingFiles ? path : null}
+                      padding={{ default: 'noPadding' }}
                     >
                         {errorMessage &&
                         <Card className="files-empty-state">
