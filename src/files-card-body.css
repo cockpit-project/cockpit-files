@@ -229,11 +229,11 @@
 
         @media screen and (min-width: 48rem) {
             :first-child:is(td, th) {
-                padding-inline-start: var(--pf-t--global--spacer--lg);
+                padding-inline-start: var(--pf-t--global--spacer--md);
             }
 
             :last-child:is(td, th):not(.pf-v6-c-table__sort) {
-                padding-inline-end: var(--pf-t--global--spacer--lg);
+                padding-inline-end: var(--pf-t--global--spacer--md);
             }
         }
     }
