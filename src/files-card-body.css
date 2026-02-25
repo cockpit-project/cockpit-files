@@ -327,10 +327,22 @@
     text-align: start;
 }
 
-/* use all available space when there is not enough files to fill the whole view
- * so drag&drop works in empty space
- */
 .fileview-wrapper {
+    /* use all available space when there is not enough files to fill the whole
+     * view so drag&drop works in empty space
+     */
     block-size: 100%;
     overflow: auto;
+
+    @media screen and (min-width: 48rem) {
+        /* More space to the sides of rows for folder context menu */
+        padding-inline: var(--pf-t--global--spacer--md);
+    }
+}
+
+/* Removes the spacing on c-files page to make it possible to get the current
+ * folder context menu from the sides of files.
+ */
+.ct-content-gap .pf-v6-c-page__main {
+    gap: revert;
 }

@@ -158,7 +158,7 @@ export const Application = () => {
         setAlerts(prevAlerts => prevAlerts.filter(alert => alert.key !== key));
 
     return (
-        <Page className="pf-m-no-sidebar" isContentFilled>
+        <Page className="pf-m-no-sidebar ct-content-gap" isContentFilled>
             <FilesContext.Provider value={{ addAlert, removeAlert, cwdInfo }}>
                 <WithDialogs>
                     <AlertGroup isToast isLiveRegion>
