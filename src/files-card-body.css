@@ -253,7 +253,11 @@
             gap: var(--pf-t--global--spacer--sm);
             grid-template-columns: repeat(auto-fill, minmax(8rem,1fr));
             justify-content: space-between;
-            margin: var(--pf-t--global--spacer--sm);
+            padding-block: var(--pf-t--global--spacer--sm);
+
+            @media screen and (max-width: calc(-1px + 48rem)) {
+                padding-inline: var(--pf-t--global--spacer--md);
+            }
 
             tr {
                 border-radius: var(--pf-t--global--border--radius--small);
