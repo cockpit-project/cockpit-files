@@ -146,6 +146,21 @@ export const EditFileModal = ({ dialogResult, editor } : {
         }
     }, [modified]);
 
+    React.useEffect(() => {
+        const onKeyDown = function (event: KeyboardEvent) {
+            if ((event.ctrlKey || event.metaKey) && (event.key === "s" || event.key === "S")) {
+                event.preventDefault();
+                editor.save();
+            }
+        };
+
+        window.addEventListener('keydown', onKeyDown);
+
+        return () => {
+            window.removeEventListener('keydown', onKeyDown);
+        };
+    }, [editor]);
+
     const boldBasename = (<b className="ct-heading-font-weight">{state.basename}</b>);
     /* Translators: This is the title of a modal dialog.  $0 represents a filename. */
     let title = <>{fmt_to_fragments(state?.writable ? _("Edit $0") : _("View $0"), boldBasename)}</>;
@@ -252,6 +267,24 @@ export const ConfirmDiscardDialog = ({ dialogResult, editor } : {
         await editor.save();
         dialogResult.resolve(true);
     }, [editor, dialogResult]);
+
+    React.useEffect(() => {
+        const onKeyDown = function (event: KeyboardEvent) {
+            if (["y", "Y", "s", "S", "Enter"].includes(event.key)) {
+                    saveThenClose();
+                } else if (event.key === "n" || event.key === "N") {
+                    dialogResult.resolve(true);
+                } else if (event.key === "c" || event.key === "C") {
+                    dialogResult.resolve(false);
+                }
+        };
+
+        window.addEventListener('keydown', onKeyDown);
+
+        return () => {
+            window.removeEventListener('keydown', onKeyDown);
+        };
+    }, [editor]);
 
     // File has changed on disk while editing.
     const change_conflict = state.tag_now !== state.tag_at_load;
