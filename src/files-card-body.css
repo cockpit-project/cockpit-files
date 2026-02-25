@@ -349,4 +349,10 @@
  */
 .ct-content-gap .pf-v6-c-page__main {
     gap: revert;
+
+    /* Permission/empty state cards need to get a margin for it to be aligned now */
+    .files-empty-state {
+        margin: var(--pf-t--global--spacer--md);
+        margin-block-start: 0;
+    }
 }
