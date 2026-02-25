@@ -180,6 +180,8 @@
     }
 
     &.view-details {
+        border-collapse: separate;
+        border-spacing: 0 var(--pf-t--global--spacer--xs);
         --icon-size: 16px;
         inline-size: 100%;
         margin: 0;
