@@ -237,7 +237,7 @@ export const UploadButton = ({
 
         window.addEventListener("beforeunload", beforeUnloadHandler);
 
-        const cancelledUploads = [];
+        const cancelledUploads: File[] = [];
         const fileModes: number[] = [];
         await Promise.allSettled(toUploadFiles.map(async (file: File) => {
             let destination = path + file.name;
@@ -366,9 +366,11 @@ export const UploadButton = ({
         resetInput();
         window.removeEventListener("beforeunload", beforeUnloadHandler);
 
+        const actuallyUploadedFiles = toUploadFiles.filter(f => !cancelledUploads.includes(f));
+
         // If all uploads are cancelled, don't show an alert
-        if (cancelledUploads.length !== toUploadFiles.length) {
-            const title = cockpit.ngettext(_("File uploaded"), _("Files uploaded"), toUploadFiles.length);
+        if (actuallyUploadedFiles.length !== 0) {
+            const title = cockpit.ngettext(_("File uploaded"), _("Files uploaded"), actuallyUploadedFiles.length);
             const key = uniqueId();
             let description;
             let action;
@@ -376,7 +378,7 @@ export const UploadButton = ({
             if (owner !== null) {
                 description = (
                     <UploadedFilesList
-                      files={toUploadFiles}
+                      files={actuallyUploadedFiles}
                       modes={fileModes}
                       owner={owner}
                     />
@@ -386,7 +388,7 @@ export const UploadButton = ({
                       onClick={() => {
                           removeAlert(key);
                           const [user, group] = owner.split(':');
-                          const uploadedFiles: FolderFileInfo[] = toUploadFiles.map((file, idx) => {
+                          const uploadedFiles: FolderFileInfo[] = actuallyUploadedFiles.map((file, idx) => {
                               return {
                                   name: file.name,
                                   to: null,
