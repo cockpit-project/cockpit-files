@@ -122,6 +122,21 @@ const KeyboardShortcutsHelp = ({ dialogResult } : { dialogResult: DialogResult<v
         ]
     ];
 
+    const editorShortcuts: Array<[React.JSX.Element, string, string]> = [
+        [
+            <kbd className="keystroke" key="save-file">
+                <kbd className="key">{ctrlString}</kbd> +
+                <kbd className="key" key="save">S</kbd>
+            </kbd>,
+            _("Save current file"),
+            "save-file",
+        ], [
+            <kbd className="key" key="close-editor">Esc</kbd>,
+            _("Close editor"),
+            "close-editor",
+        ]
+    ];
+
     return (
         <Modal
           position="top"
@@ -151,6 +166,16 @@ const KeyboardShortcutsHelp = ({ dialogResult } : { dialogResult: DialogResult<v
                           isFillColumns
                         >
                             {editShortcuts.map(toDescriptionListGroups)}
+                        </DescriptionList>
+                    </Content>
+                    <Content>
+                        <Content component={ContentVariants.h2}>{_("Editor")}</Content>
+                        <DescriptionList
+                          isHorizontal
+                          isFluid
+                          isFillColumns
+                        >
+                            {editorShortcuts.map(toDescriptionListGroups)}
                         </DescriptionList>
                     </Content>
                 </Flex>

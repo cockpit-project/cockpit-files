@@ -14,6 +14,7 @@ import {
 } from '@patternfly/react-core/dist/esm/components/Modal';
 import { TextArea } from '@patternfly/react-core/dist/esm/components/TextArea';
 import { Stack } from '@patternfly/react-core/dist/esm/layouts/Stack';
+import { TrashIcon } from '@patternfly/react-icons';
 import { debounce } from "throttle-debounce";
 
 import cockpit from 'cockpit';
@@ -36,6 +37,7 @@ class EditorState {
     saving: boolean = false; // saving in progress?
     tag_at_load: string | null = null; // the one we loaded
     tag_now: string | null = null; // the one on disk
+    basename: string = '';
     content: string = '';
     writable: boolean = false;
 }
@@ -77,6 +79,7 @@ class Editor extends EventEmitter<{ updated(state: EditorState): void }> {
         super();
         this.file = cockpit.file(filename, { max_read_size: MAX_EDITOR_FILE_SIZE, superuser: "try" });
         this.state = new EditorState();
+        this.state.basename = basename(filename);
 
         this.load_file();
 
@@ -114,22 +117,18 @@ class Editor extends EventEmitter<{ updated(state: EditorState): void }> {
     }
 }
 
-export const EditFileModal = ({ dialogResult, path } : {
+export const EditFileModal = ({ dialogResult, editor } : {
     dialogResult: DialogResult<void>,
-    path: string
+    editor: Editor,
 }) => {
     const [last_tag, setLastTag] = React.useState<string | null>(null);
-    const [state, setState] = React.useState(new EditorState());
-    const [editor, setEditor] = React.useState<Editor | null>(null);
+    const [state, setState] = React.useState(editor.state);
 
     React.useEffect(() => {
-        const editor = new Editor(path);
-        editor.on('updated', setState);
-        setEditor(editor);
-        return () => {
-            editor.close();
-        };
-    }, [path]);
+        editor.on("updated", (state) => {
+            setState(state);
+        });
+    }, [editor]);
 
     const { modified } = state;
     React.useEffect(() => {
@@ -147,15 +146,22 @@ export const EditFileModal = ({ dialogResult, path } : {
         }
     }, [modified]);
 
-    const handleEscape = (event: KeyboardEvent) => {
-        if (state?.modified) {
-            event.preventDefault();
-        } else {
-            dialogResult.resolve();
-        }
-    };
+    React.useEffect(() => {
+        const onKeyDown = function (event: KeyboardEvent) {
+            if ((event.ctrlKey || event.metaKey) && (event.key === "s" || event.key === "S")) {
+                event.preventDefault();
+                editor.save();
+            }
+        };
 
-    const boldBasename = (<b className="ct-heading-font-weight">{basename(path)}</b>);
+        window.addEventListener('keydown', onKeyDown);
+
+        return () => {
+            window.removeEventListener('keydown', onKeyDown);
+        };
+    }, [editor]);
+
+    const boldBasename = (<b className="ct-heading-font-weight">{state.basename}</b>);
     /* Translators: This is the title of a modal dialog.  $0 represents a filename. */
     let title = <>{fmt_to_fragments(state?.writable ? _("Edit $0") : _("View $0"), boldBasename)}</>;
     if (!state.writable) {
@@ -173,7 +179,6 @@ export const EditFileModal = ({ dialogResult, path } : {
           onClose={() => dialogResult.resolve()}
           variant={ModalVariant.large}
           className={`file-editor-modal ${modified ? 'is-modified' : ''}`}
-          onEscapePress={handleEscape}
         >
             <ModalHeader title={title} />
             <ModalBody>
@@ -196,7 +201,7 @@ export const EditFileModal = ({ dialogResult, path } : {
                       actionLinks={
                           <>
                               {!file_removed &&
-                              <AlertActionLink onClick={() => editor && editor.load_file()}>
+                              <AlertActionLink onClick={() => editor.load_file()}>
                                   {_("Reload")}
                               </AlertActionLink>}
                               <AlertActionLink onClick={() => setLastTag(state.tag_now)}>
@@ -210,7 +215,7 @@ export const EditFileModal = ({ dialogResult, path } : {
                       className="file-editor"
                       isDisabled={!state.writable}
                       value={state.content}
-                      onChange={(_ev, content) => editor && editor.modify(content)}
+                      onChange={(_ev, content) => editor.modify(content)}
                     />
                 </Stack>
             </ModalBody>
@@ -218,7 +223,7 @@ export const EditFileModal = ({ dialogResult, path } : {
                 {change_conflict && !file_removed &&
                 <Button
                   variant="warning"
-                  onClick={() => editor && editor.save()}
+                  onClick={() => editor.save()}
                 >
                     {_("Overwrite")}
                 </Button>}
@@ -227,11 +232,11 @@ export const EditFileModal = ({ dialogResult, path } : {
                   variant="primary"
                   isDisabled={
                       !editor ||
-                          state.saving ||
-                          !modified ||
-                          !state.writable
+                        state.saving ||
+                        !modified ||
+                        !state.writable
                   }
-                  onClick={() => editor && editor.save()}
+                  onClick={() => editor.save()}
                 >
                     {_("Save")}
                 </Button>}
@@ -243,6 +248,118 @@ export const EditFileModal = ({ dialogResult, path } : {
     );
 };
 
-export function edit_file(dialogs: Dialogs, path: string) {
-    dialogs.run(EditFileModal, { path });
+export const ConfirmDiscardDialog = ({ dialogResult, editor } : {
+    // if true, it can be safely closed (aka user either has saved or user said to discard)
+    dialogResult: DialogResult<boolean>,
+    editor: Editor,
+}) => {
+    const [state, setState] = React.useState(editor.state);
+
+    React.useEffect(() => {
+        editor.on("updated", (state) => {
+            setState(state);
+        });
+    }, [editor]);
+
+    const boldBasename = (<b className="ct-heading-font-weight">{state.basename}</b>);
+
+    const saveThenClose = React.useCallback(async () => {
+        await editor.save();
+        dialogResult.resolve(true);
+    }, [editor, dialogResult]);
+
+    React.useEffect(() => {
+        const onKeyDown = function (event: KeyboardEvent) {
+            if (["y", "Y", "s", "S", "Enter"].includes(event.key)) {
+                    saveThenClose();
+                } else if (event.key === "n" || event.key === "N") {
+                    dialogResult.resolve(true);
+                } else if (event.key === "c" || event.key === "C") {
+                    dialogResult.resolve(false);
+                }
+        };
+
+        window.addEventListener('keydown', onKeyDown);
+
+        return () => {
+            window.removeEventListener('keydown', onKeyDown);
+        };
+    }, [editor]);
+
+    // File has changed on disk while editing.
+    const change_conflict = state.tag_now !== state.tag_at_load;
+    const file_removed = state.tag_now === "-";
+
+    return (
+        <Modal
+          variant={ModalVariant.small}
+          isOpen
+          onClose={() => dialogResult.resolve(false)}
+          onEscapePress={() => dialogResult.resolve(false)}
+        >
+            <ModalHeader titleIconVariant={TrashIcon} title={_("Save changes?")} />
+            <ModalBody id="modal-box-body-basic">
+                {fmt_to_fragments(
+                    _("$0 has unsaved changes and which will be permanently lost if discarded.")
+                    , boldBasename
+                )}
+                {change_conflict && !file_removed &&
+                <Alert
+                  className="file-editor-alert"
+                  isInline
+                  variant="warning"
+                  title={file_removed
+                      ? _("The file has changed on disk between when it was opened and now")
+                      : _("The file was deleted after it was opened, saving will recreate it.")}
+                />}
+            </ModalBody>
+            <ModalFooter>
+                {change_conflict && !file_removed &&
+                <Button
+                  variant="warning"
+                  onClick={() => saveThenClose()}
+                >
+                    {_("Overwrite")}
+                </Button>}
+                {state?.writable && (!change_conflict || file_removed) &&
+                <Button
+                  variant="primary"
+                  isDisabled={
+                      !editor ||
+                        state.saving ||
+                        !state.modified ||
+                        !state.writable
+                  }
+                  onClick={() => saveThenClose()}
+                >
+                    {_("Save")}
+                </Button>}
+                <Button
+                  key="discard" variant="secondary"
+                  isDanger isDisabled={state.saving}
+                  onClick={() => dialogResult.resolve(true)}
+                >
+                    {_("Discard")}
+                </Button>
+                <Button
+                  key="cancel" variant="link"
+                  isDisabled={state.saving} onClick={() => dialogResult.resolve(false)}
+                >
+                    {_("Cancel")}
+                </Button>
+            </ModalFooter>
+        </Modal>
+    );
+};
+
+export async function edit_file(dialogs: Dialogs, path: string) {
+    const editor = new Editor(path);
+    while (true) {
+        await dialogs.run(EditFileModal, { editor });
+        if (editor.state.modified) {
+            if (await dialogs.run(ConfirmDiscardDialog, { editor })) break;
+        } else {
+            break;
+        }
+    }
 }
