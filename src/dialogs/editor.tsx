@@ -23,6 +23,7 @@ import type { Dialogs, DialogResult } from 'dialogs';
 import { fmt_to_fragments } from 'utils';
 
 import "./editor.css";
+import { Path } from '../path.ts';
 
 const _ = cockpit.gettext;
 
@@ -66,8 +67,10 @@ class Editor extends EventEmitter<{ updated(state: EditorState): void }> {
 
     load_file() {
         // Can't do this async because we can't get the tag via await
-        this.file.read()
-                .then(((content: string, tag: string) => {
+        const path = new Path(this.file.path);
+        path.read()
+                .then(((data: {content: string, tag: string }) => {
+                    const { content, tag } = data;
                     this.update({ content, tag_now: tag, tag_at_load: tag, error: null });
                 }) as any /* eslint-disable-line @typescript-eslint/no-explicit-any */)
                 .catch(error => this.update({ error }));
