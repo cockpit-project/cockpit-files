@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-03 04:27+0000\n"
-"PO-Revision-Date: 2025-05-14 19:17+0000\n"
+"POT-Creation-Date: 2026-03-08 04:25+0000\n"
+"PO-Revision-Date: 2026-03-07 07:58+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <https://translate.fedoraproject.org/projects/"
 "cockpit/cockpit-files/uk/>\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.11.3\n"
+"X-Generator: Weblate 5.16.2\n"
 
 #: src/menu.tsx:53
 msgid "\"$0\" exists, not overwriting with paste."
@@ -319,10 +319,8 @@ msgid "Failed"
 msgstr "Помилка"
 
 #: src/files-card-body.tsx:580
-#, fuzzy
-#| msgid "Files"
 msgid "File"
-msgstr "Файли"
+msgstr "Файл"
 
 #: src/manifest.json:0
 msgid "File browser"
@@ -374,7 +372,7 @@ msgstr "Перший змінений"
 
 #: src/files-card-body.tsx:578
 msgid "Folder"
-msgstr ""
+msgstr "Тека"
 
 #: src/dialogs/delete.tsx:51
 msgid "Force delete $0"
