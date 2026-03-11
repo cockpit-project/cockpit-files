@@ -14,6 +14,7 @@ import {
 } from '@patternfly/react-core/dist/esm/components/Modal';
 import { TextArea } from '@patternfly/react-core/dist/esm/components/TextArea';
 import { Stack } from '@patternfly/react-core/dist/esm/layouts/Stack';
+import { TrashIcon } from '@patternfly/react-icons';
 import { debounce } from "throttle-debounce";
 
 import cockpit from 'cockpit';
@@ -36,6 +37,7 @@ class EditorState {
     saving: boolean = false; // saving in progress?
     tag_at_load: string | null = null; // the one we loaded
     tag_now: string | null = null; // the one on disk
+    basename: string = '';
     content: string = '';
     writable: boolean = false;
 }
@@ -77,6 +79,7 @@ class Editor extends EventEmitter<{ updated(state: EditorState): void }> {
         super();
         this.file = cockpit.file(filename, { max_read_size: MAX_EDITOR_FILE_SIZE, superuser: "try" });
         this.state = new EditorState();
+        this.state.basename = basename(filename);
 
         this.load_file();
 
@@ -114,22 +117,19 @@ class Editor extends EventEmitter<{ updated(state: EditorState): void }> {
     }
 }
 
-export const EditFileModal = ({ dialogResult, path } : {
+export const EditFileModal = ({ dialogResult, editor } : {
     dialogResult: DialogResult<void>,
-    path: string
+    editor: Editor,
 }) => {
     const [last_tag, setLastTag] = React.useState<string | null>(null);
-    const [state, setState] = React.useState(new EditorState());
-    const [editor, setEditor] = React.useState<Editor | null>(null);
+    const [state, setState] = React.useState(editor.state);
+    const [promptDiscardChanges, setPromptDiscardChanges] = React.useState(false);
 
     React.useEffect(() => {
-        const editor = new Editor(path);
-        editor.on('updated', setState);
-        setEditor(editor);
-        return () => {
-            editor.close();
-        };
-    }, [path]);
+        editor.on("updated", (state) => {
+            setState(state);
+        });
+    }, [editor]);
 
     const { modified } = state;
     React.useEffect(() => {
@@ -147,15 +147,20 @@ export const EditFileModal = ({ dialogResult, path } : {
         }
     }, [modified]);
 
-    const handleEscape = (event: KeyboardEvent) => {
+    const tryClose = React.useCallback(() => {
         if (state?.modified) {
-            event.preventDefault();
+            setTimeout(setPromptDiscardChanges, 0, true);
         } else {
             dialogResult.resolve();
         }
-    };
+    }, [state, setPromptDiscardChanges, dialogResult]);
 
-    const boldBasename = (<b className="ct-heading-font-weight">{basename(path)}</b>);
+    const saveThenClose = React.useCallback(async () => {
+        await editor.save();
+        dialogResult.resolve();
+    }, [editor, dialogResult]);
+
+    const boldBasename = (<b className="ct-heading-font-weight">{state.basename}</b>);
     /* Translators: This is the title of a modal dialog.  $0 represents a filename. */
     let title = <>{fmt_to_fragments(state?.writable ? _("Edit $0") : _("View $0"), boldBasename)}</>;
     if (!state.writable) {
@@ -167,82 +172,142 @@ export const EditFileModal = ({ dialogResult, path } : {
     const file_removed = state.tag_now === "-";
 
     return (
-        <Modal
-          position="top"
-          isOpen
-          onClose={() => dialogResult.resolve()}
-          variant={ModalVariant.large}
-          className={`file-editor-modal ${modified ? 'is-modified' : ''}`}
-          onEscapePress={handleEscape}
-        >
-            <ModalHeader title={title} />
-            <ModalBody>
-                <Stack>
-                    {state.tag_now === state.tag_at_load && state.error !== null &&
-                    <Alert
-                      className="file-editor-alert"
-                      variant="danger"
-                      title={translate_error(state.error)}
-                      isInline
-                    />}
-                    {state.tag_now !== state.tag_at_load && last_tag !== state.tag_now &&
+        <>
+            <Modal
+              position="top"
+              isOpen
+              onClose={() => tryClose()}
+              variant={ModalVariant.large}
+              className={`file-editor-modal ${modified ? 'is-modified' : ''}`}
+            >
+                <ModalHeader title={title} />
+                <ModalBody>
+                    <Stack>
+                        {state.tag_now === state.tag_at_load && state.error !== null &&
+                        <Alert
+                          className="file-editor-alert"
+                          variant="danger"
+                          title={translate_error(state.error)}
+                          isInline
+                        />}
+                        {state.tag_now !== state.tag_at_load && last_tag !== state.tag_now &&
+                        <Alert
+                          className="file-editor-alert"
+                          isInline
+                          variant="warning"
+                          title={file_removed
+                              ? _("The file has been removed on disk")
+                              : _("The file has changed on disk")}
+                          actionLinks={
+                              <>
+                                  {!file_removed &&
+                                  <AlertActionLink onClick={() => editor.load_file()}>
+                                      {_("Reload")}
+                                  </AlertActionLink>}
+                                  <AlertActionLink onClick={() => setLastTag(state.tag_now)}>
+                                      {_("Ignore")}
+                                  </AlertActionLink>
+                              </>
+                          }
+                        />}
+                        <TextArea
+                          id="editor-text-area"
+                          className="file-editor"
+                          isDisabled={!state.writable}
+                          value={state.content}
+                          onChange={(_ev, content) => editor.modify(content)}
+                        />
+                    </Stack>
+                </ModalBody>
+                <ModalFooter>
+                    {change_conflict && !file_removed &&
+                    <Button
+                      variant="warning"
+                      onClick={() => editor.save()}
+                    >
+                        {_("Overwrite")}
+                    </Button>}
+                    {state?.writable && (!change_conflict || file_removed) &&
+                    <Button
+                      variant="primary"
+                      isDisabled={
+                          !editor ||
+                            state.saving ||
+                            !modified ||
+                            !state.writable
+                      }
+                      onClick={() => editor.save()}
+                    >
+                        {_("Save")}
+                    </Button>}
+                    <Button variant={state.writable ? "link" : "secondary"} onClick={() => tryClose()}>
+                        {modified ? _("Cancel") : _("Close")}
+                    </Button>
+                </ModalFooter>
+            </Modal>
+
+            <Modal
+              variant={ModalVariant.small}
+              isOpen={promptDiscardChanges}
+              onClose={() => setTimeout(setPromptDiscardChanges, 0, false)}
+            >
+                <ModalHeader titleIconVariant={TrashIcon} title={_("Save changes?")} />
+                <ModalBody id="modal-box-body-basic">
+                    {fmt_to_fragments(
+                        _("$0 has unsaved changes and which will be permanently lost if discarded.")
+                        , boldBasename
+                    )}
+                    {(change_conflict || file_removed) &&
                     <Alert
                       className="file-editor-alert"
                       isInline
                       variant="warning"
                       title={file_removed
-                          ? _("The file has been removed on disk")
-                          : _("The file has changed on disk")}
-                      actionLinks={
-                          <>
-                              {!file_removed &&
-                              <AlertActionLink onClick={() => editor && editor.load_file()}>
-                                  {_("Reload")}
-                              </AlertActionLink>}
-                              <AlertActionLink onClick={() => setLastTag(state.tag_now)}>
-                                  {_("Ignore")}
-                              </AlertActionLink>
-                          </>
-                      }
+                          ? _("The file was deleted after it was opened, saving will recreate it.")
+                          : _("The file has changed on disk between when it was opened and now")}
                     />}
-                    <TextArea
-                      id="editor-text-area"
-                      className="file-editor"
-                      isDisabled={!state.writable}
-                      value={state.content}
-                      onChange={(_ev, content) => editor && editor.modify(content)}
-                    />
-                </Stack>
-            </ModalBody>
-            <ModalFooter>
-                {change_conflict && !file_removed &&
-                <Button
-                  variant="warning"
-                  onClick={() => editor && editor.save()}
-                >
-                    {_("Overwrite")}
-                </Button>}
-                {state?.writable && (!change_conflict || file_removed) &&
-                <Button
-                  variant="primary"
-                  isDisabled={
-                      !editor ||
-                          state.saving ||
-                          !modified ||
-                          !state.writable
-                  }
-                  onClick={() => editor && editor.save()}
-                >
-                    {_("Save")}
-                </Button>}
-                <Button variant={state.writable ? "link" : "secondary"} onClick={() => dialogResult.resolve()}>
-                    {modified ? _("Cancel") : _("Close")}
-                </Button>
-            </ModalFooter>
-        </Modal>
+                </ModalBody>
+                <ModalFooter>
+                    {change_conflict && !file_removed &&
+                    <Button
+                      variant="warning"
+                      onClick={() => saveThenClose()}
+                    >
+                        {_("Overwrite")}
+                    </Button>}
+                    {state?.writable && (!change_conflict || file_removed) &&
+                    <Button
+                      variant="primary"
+                      isDisabled={
+                          !editor ||
+                            state.saving ||
+                            !state.modified ||
+                            !state.writable
+                      }
+                      onClick={() => saveThenClose()}
+                    >
+                        {_("Save")}
+                    </Button>}
+                    <Button
+                      key="discard" variant="secondary"
+                      isDanger isDisabled={state.saving}
+                      onClick={() => dialogResult.resolve()}
+                    >
+                        {_("Discard")}
+                    </Button>
+                    <Button
+                      key="cancel" variant="link"
+                      isDisabled={state.saving} onClick={() => setPromptDiscardChanges(false)}
+                    >
+                        {_("Cancel")}
+                    </Button>
+                </ModalFooter>
+            </Modal>
+        </>
     );
 };
 
 export function edit_file(dialogs: Dialogs, path: string) {
-    dialogs.run(EditFileModal, { path });
+    const editor = new Editor(path);
+    dialogs.run(EditFileModal, { editor });
 }
