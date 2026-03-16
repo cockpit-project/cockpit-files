@@ -258,19 +258,22 @@ export const EditFileModal = ({ dialogResult, editor } : {
             >
                 <ModalHeader titleIconVariant={TrashIcon} title={_("Save changes?")} />
                 <ModalBody id="file-editor-prompt-modal-body">
+                    {(change_conflict || file_removed) &&
+                    <>
+                        <Alert
+                          className="file-editor-alert"
+                          isInline
+                          variant="warning"
+                          title={file_removed
+                              ? _("The file was deleted after it was opened, saving will recreate it.")
+                              : _("The file has changed on disk between when it was opened and now")}
+                        />
+                        <br />
+                    </>}
                     {fmt_to_fragments(
                         _("$0 has unsaved changes and which will be permanently lost if discarded.")
                         , boldBasename
                     )}
-                    {(change_conflict || file_removed) &&
-                    <Alert
-                      className="file-editor-alert"
-                      isInline
-                      variant="warning"
-                      title={file_removed
-                          ? _("The file was deleted after it was opened, saving will recreate it.")
-                          : _("The file has changed on disk between when it was opened and now")}
-                    />}
                 </ModalBody>
                 <ModalFooter>
                     {change_conflict && !file_removed &&
