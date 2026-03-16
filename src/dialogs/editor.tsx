@@ -229,6 +229,7 @@ export const EditFileModal = ({ dialogResult, editor } : {
                     </Button>}
                     {state?.writable && (!change_conflict || file_removed) &&
                     <Button
+                      ouiaId="save-file"
                       variant="primary"
                       isDisabled={
                           !editor ||
@@ -240,19 +241,23 @@ export const EditFileModal = ({ dialogResult, editor } : {
                     >
                         {_("Save")}
                     </Button>}
-                    <Button variant={state.writable ? "link" : "secondary"} onClick={() => tryClose()}>
+                    <Button
+                      ouiaId="cancel-save" variant={state.writable ? "link" : "secondary"}
+                      onClick={() => tryClose()}
+                    >
                         {modified ? _("Cancel") : _("Close")}
                     </Button>
                 </ModalFooter>
             </Modal>
 
             <Modal
+              id="file-editor-prompt-modal"
               variant={ModalVariant.small}
               isOpen={promptDiscardChanges}
               onClose={() => setTimeout(setPromptDiscardChanges, 0, false)}
             >
                 <ModalHeader titleIconVariant={TrashIcon} title={_("Save changes?")} />
-                <ModalBody id="modal-box-body-basic">
+                <ModalBody id="file-editor-prompt-modal-body">
                     {fmt_to_fragments(
                         _("$0 has unsaved changes and which will be permanently lost if discarded.")
                         , boldBasename
@@ -270,6 +275,7 @@ export const EditFileModal = ({ dialogResult, editor } : {
                 <ModalFooter>
                     {change_conflict && !file_removed &&
                     <Button
+                      ouiaId="prompt-override-changes"
                       variant="warning"
                       onClick={() => saveThenClose()}
                     >
@@ -277,6 +283,7 @@ export const EditFileModal = ({ dialogResult, editor } : {
                     </Button>}
                     {state?.writable && (!change_conflict || file_removed) &&
                     <Button
+                      ouiaId="prompt-save-changes"
                       variant="primary"
                       isDisabled={
                           !editor ||
@@ -289,6 +296,7 @@ export const EditFileModal = ({ dialogResult, editor } : {
                         {_("Save")}
                     </Button>}
                     <Button
+                      ouiaId="prompt-discard-changes"
                       key="discard" variant="secondary"
                       isDanger isDisabled={state.saving}
                       onClick={() => dialogResult.resolve()}
@@ -296,6 +304,7 @@ export const EditFileModal = ({ dialogResult, editor } : {
                         {_("Discard")}
                     </Button>
                     <Button
+                      ouiaId="prompt-cancel-changes"
                       key="cancel" variant="link"
                       isDisabled={state.saving} onClick={() => setPromptDiscardChanges(false)}
                     >
