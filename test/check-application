@@ -3122,14 +3122,16 @@ class TestFiles(testlib.MachineCase):
         b.wait_text(".file-editor-modal textarea", "test\n")
 
         # Save button is disabled when not editing yet
-        b.wait_visible(".pf-v6-c-modal-box__footer button.pf-m-primary:disabled")
+        b.wait_visible(".pf-v6-c-modal-box__footer [data-ouia-component-id='save-file']:disabled")
         b.set_input_text(".file-editor-modal textarea", "foobar", append=True, value_check=False)
         b.wait_val(".file-editor-modal textarea", "test\nfoobar")
 
         b.assert_pixels(".file-editor-modal", "editor-modal-changed")
-        b.wait_visible(".pf-v6-c-modal-box__footer .pf-m-primary:not(:disabled)")
+        b.wait_visible(".pf-v6-c-modal-box__footer [data-ouia-component-id='save-file']:not(:disabled)")
 
-        b.click(".file-editor-modal button.pf-m-link")
+        b.click(".file-editor-modal [data-ouia-component-id='cancel-save']")
+        # We modified the file, close the unsaved changes warning modal
+        b.click("#file-editor-prompt-modal [data-ouia-component-id='prompt-discard-changes']")
         b.wait_not_present(".file-editor-modal")
         self.assertEqual(m.execute("cat /home/admin/test.txt"), "test\n")
 
@@ -3140,7 +3142,7 @@ class TestFiles(testlib.MachineCase):
         b.set_input_text(".file-editor-modal textarea", "", append=False, value_check=False)
         b.wait_val(".file-editor-modal textarea", "")
         b.wait_visible(".file-editor-modal.is-modified")
-        b.click(".file-editor-modal button.pf-m-primary")
+        b.click(".file-editor-modal [data-ouia-component-id='save-file']")
         # Saving resets modified state so should not be shown
         b.wait_not_present(".file-editor-modal.is-modified")
 
@@ -3155,7 +3157,11 @@ class TestFiles(testlib.MachineCase):
         b.set_input_text(".file-editor-modal textarea", "foobar", append=True, value_check=False)
         b.wait_val(".file-editor-modal textarea", "test\nfoobar")
         b.wait_visible(".file-editor-modal.is-modified")
-        b.click(".file-editor-modal button.pf-m-primary")
+        b.key("Escape")  # Hit escape to get discard confirmation popup
+        b.wait_visible("#file-editor-prompt-modal")
+        b.click("#file-editor-prompt-modal [data-ouia-component-id='prompt-cancel-changes']")  # Cancel discarding
+        b.wait_not_present("#file-editor-prompt-modal")
+        b.click(".file-editor-modal [data-ouia-component-id='save-file']")
         # Saving resets modified state so should not be shown
         b.wait_not_present(".file-editor-modal.is-modified")
 
@@ -3192,15 +3198,62 @@ class TestFiles(testlib.MachineCase):
         validate_content("test.txt", "testing\nroll\n")
         self.assert_owner('/home/admin/test.txt', 'admin:admin')
 
+        # Let someone else edit again and overwrite using prompt modal
+        open_editor("test.txt")
+        b.set_input_text(".file-editor-modal textarea", "roll\n", append=True, value_check=False)
+        b.wait_val(".file-editor-modal textarea", "testing\nroll\nroll\n")
+        m.execute("echo 'testing' > /home/admin/test.txt")
+        b.wait_in_text(".pf-v6-c-alert__title", "The file has changed on disk")
+
+        b.click(".file-editor-modal [data-ouia-component-id='cancel-save']")
+        b.wait_visible("#file-editor-prompt-modal")
+        b.click("#file-editor-prompt-modal [data-ouia-component-id='prompt-override-changes']")  # Cancel discarding
+        b.wait_not_present("#file-editor-prompt-modal")
+        b.wait_not_present(".file-editor-modal")
+
+        validate_content("test.txt", "testing\nroll\nroll\n")
+        self.assert_owner("/home/admin/test.txt", "admin:admin")
+
+        # Opening a test file, modify text, cancel and discard
+        open_editor("test.txt")
+        b.set_input_text(".file-editor-modal textarea", "baz", append=True, value_check=False)
+        b.wait_val(".file-editor-modal textarea", "testing\nroll\nroll\nbaz")
+        b.wait_visible(".file-editor-modal.is-modified")
+        b.click(".file-editor-modal [data-ouia-component-id='cancel-save']")
+        b.wait_visible("#file-editor-prompt-modal")
+        b.click("#file-editor-prompt-modal [data-ouia-component-id='prompt-discard-changes']")  # Cancel discarding
+        b.wait_not_present("#file-editor-prompt-modal")
+        b.wait_not_present(".file-editor-modal")
+
+        validate_content("test.txt", "testing\nroll\nroll\n")
+        self.assert_owner("/home/admin/test.txt", "admin:admin")
+
+        # Opening a test file, modify text, cancel and save
+        open_editor("test.txt")
+        b.set_input_text(".file-editor-modal textarea", "baz", append=True, value_check=False)
+        b.wait_val(".file-editor-modal textarea", "testing\nroll\nroll\nbaz")
+        b.wait_visible(".file-editor-modal.is-modified")
+        b.click(".file-editor-modal [data-ouia-component-id='cancel-save']")
+        b.wait_visible("#file-editor-prompt-modal")
+        b.click("#file-editor-prompt-modal [data-ouia-component-id='prompt-save-changes']")  # Save file
+        b.wait_not_present("#file-editor-prompt-modal")
+        b.wait_not_present(".file-editor-modal")
+
+        validate_content("test.txt", "testing\nroll\nroll\nbaz\n")
+        self.assert_owner("/home/admin/test.txt", "admin:admin")
+
         # Change ownership during editing
         open_editor("test.txt")
-        b.wait_val(".file-editor-modal textarea", "testing\nroll\n")
+        b.wait_val(".file-editor-modal textarea", "testing\nroll\nroll\nbaz\n")
         m.execute("chown root: /home/admin/test.txt")
         b.set_input_text(".file-editor-modal textarea", "reset")
         b.click(".pf-v6-c-modal-box__footer .pf-m-primary")
         b.wait_in_text(".pf-v6-c-alert.pf-m-warning", "The file has changed on disk")
 
         b.click(".pf-v6-c-modal-box__footer .pf-v6-c-button.pf-m-link")
+        # Changes made so we get a discard prompt
+        b.click("#file-editor-prompt-modal [data-ouia-component-id='prompt-discard-changes']")  # Discard changes
+        b.wait_not_present("#file-editor-prompt-modal")
         b.wait_not_present(".file-editor-modal")
 
         # Emptying a file does not remove the file
