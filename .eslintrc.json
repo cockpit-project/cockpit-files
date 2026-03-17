@@ -10,7 +10,6 @@
     },
     "plugins": ["react", "react-hooks", "jsx-a11y"],
     "rules": {
-        "array-bracket-newline": ["error", { "multiline": true }],
         "import/extensions": ["error", "ignorePackages"],
         "import/order": ["error",
             {
