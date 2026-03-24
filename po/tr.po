@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-17 04:31+0000\n"
-"PO-Revision-Date: 2026-03-03 15:58+0000\n"
-"Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
+"POT-Creation-Date: 2026-03-24 04:32+0000\n"
+"PO-Revision-Date: 2026-03-24 09:58+0000\n"
+"Last-Translator: Burak Yavuz <hitowerdigit@hotmail.com>\n"
 "Language-Team: Turkish <https://translate.fedoraproject.org/projects/cockpit/"
 "cockpit-files/tr/>\n"
 "Language: tr\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1\n"
-"X-Generator: Weblate 5.16.1\n"
+"X-Generator: Weblate 5.16.2\n"
 
 #: src/menu.tsx:53
 msgid "\"$0\" exists, not overwriting with paste."
@@ -37,6 +37,12 @@ msgstr "$0 dosya"
 #: src/files-footer-detail.tsx:36
 msgid "$0 files selected"
 msgstr "$0 dosya seçildi"
+
+#: src/dialogs/editor.tsx:274
+msgid "$0 has unsaved changes and which will be permanently lost if discarded."
+msgstr ""
+"$0 kaydedilmemiş değişikliklere sahip ve vazgeçilirse kalıcı olarak "
+"kaybolacaktır."
 
 #: src/files-card-body.tsx:519
 msgid "$0 item is hidden"
@@ -117,9 +123,9 @@ msgstr "Yer işaretleri"
 
 #: src/upload-button.tsx:146 src/dialogs/create-file.tsx:196
 #: src/dialogs/rename.tsx:87 src/dialogs/permissions.tsx:409
-#: src/dialogs/copyPasteOwnership.tsx:166 src/dialogs/editor.tsx:239
-#: src/dialogs/mkdir.tsx:137 src/dialogs/symlink.tsx:233
-#: src/dialogs/delete.tsx:97
+#: src/dialogs/copyPasteOwnership.tsx:166 src/dialogs/editor.tsx:248
+#: src/dialogs/editor.tsx:314 src/dialogs/mkdir.tsx:137
+#: src/dialogs/symlink.tsx:233 src/dialogs/delete.tsx:97
 msgid "Cancel"
 msgstr "İptal"
 
@@ -163,7 +169,7 @@ msgstr "Karakter aygıtı"
 msgid "Clear filter"
 msgstr "Filtreyi temizle"
 
-#: src/dialogs/editor.tsx:239 src/dialogs/keyboardShortcutsHelp.tsx:33
+#: src/dialogs/editor.tsx:248 src/dialogs/keyboardShortcutsHelp.tsx:33
 msgid "Close"
 msgstr "Kapat"
 
@@ -275,6 +281,10 @@ msgstr "Dizin sahibi"
 msgid "Directory with the same name exists"
 msgstr "Aynı ada sahip dizin var"
 
+#: src/dialogs/editor.tsx:307
+msgid "Discard"
+msgstr "Vazgeç"
+
 #: src/header.tsx:241
 msgid "Display as a grid"
 msgstr "Izgara olarak görüntüle"
@@ -292,7 +302,7 @@ msgid "Drop files to upload"
 msgstr "Karşıya yüklenecek dosyaları bırakın"
 
 #. Translators: This is the title of a modal dialog.  $0 represents a filename.
-#: src/dialogs/editor.tsx:160
+#: src/dialogs/editor.tsx:165
 msgid "Edit $0"
 msgstr "$0 dosyasını düzenle"
 
@@ -421,7 +431,7 @@ msgstr "Gizli ögeleri gizle"
 msgid "Home"
 msgstr "Ev dizini"
 
-#: src/dialogs/editor.tsx:203
+#: src/dialogs/editor.tsx:208
 msgid "Ignore"
 msgstr "Yok say"
 
@@ -533,7 +543,8 @@ msgstr "Diğerleri"
 msgid "Others access"
 msgstr "Diğerlerinin erişimi"
 
-#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:223
+#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:228
+#: src/dialogs/editor.tsx:285
 msgid "Overwrite"
 msgstr "Üzerine yaz"
 
@@ -600,7 +611,7 @@ msgstr "Oku ve yaz"
 msgid "Read, write, and execute"
 msgstr "Oku, yaz ve çalıştır"
 
-#: src/common.ts:53 src/dialogs/permissions.tsx:215 src/dialogs/editor.tsx:162
+#: src/common.ts:53 src/dialogs/permissions.tsx:215 src/dialogs/editor.tsx:167
 msgid "Read-only"
 msgstr "Yalnızca oku"
 
@@ -621,7 +632,7 @@ msgstr ""
 "taşırken olduğu gibi, hem bir sembolik bağlantı hem de hedef aynı anda "
 "hareket edebildiğinde kullanışlıdır."
 
-#: src/dialogs/editor.tsx:200
+#: src/dialogs/editor.tsx:205
 msgid "Reload"
 msgstr "Yeniden yükle"
 
@@ -649,9 +660,13 @@ msgstr "Değiştir"
 msgid "Replace file $0?"
 msgstr "$0 dosyası değiştirilsin mi?"
 
-#: src/dialogs/editor.tsx:236
+#: src/dialogs/editor.tsx:242 src/dialogs/editor.tsx:299
 msgid "Save"
 msgstr "Kaydet"
+
+#: src/dialogs/editor.tsx:259
+msgid "Save changes?"
+msgstr "Değişiklikler kaydedilsin mi?"
 
 #: src/dialogs/permissions.tsx:375
 msgid "Security context"
@@ -705,17 +720,25 @@ msgstr "Sembolik bağlantı adı"
 msgid "Target"
 msgstr "Hedef"
 
-#: src/dialogs/editor.tsx:48
+#: src/dialogs/editor.tsx:50
 msgid "The existing file changed unexpectedly"
 msgstr "Var olan dosya beklenmedik şekilde değişti"
 
-#: src/dialogs/editor.tsx:46 src/dialogs/editor.tsx:194
+#: src/dialogs/editor.tsx:48 src/dialogs/editor.tsx:199
 msgid "The file has been removed on disk"
 msgstr "Dosya diskten kaldırıldı"
 
-#: src/dialogs/editor.tsx:195
+#: src/dialogs/editor.tsx:200
 msgid "The file has changed on disk"
 msgstr "Dosya disk üzerinde değişti"
+
+#: src/dialogs/editor.tsx:269
+msgid "The file has changed on disk between when it was opened and now"
+msgstr "Dosya, açıldığı zaman ile şu an arasında diskte değişti"
+
+#: src/dialogs/editor.tsx:268
+msgid "The file was deleted after it was opened, saving will recreate it."
+msgstr "Dosya açıldıktan sonra silindi, kaydetmek yeniden oluşturacak."
 
 #: src/dialogs/symlink.tsx:180
 msgid "Type"
@@ -757,7 +780,7 @@ msgstr "Yüklenenler"
 msgid "User"
 msgstr "Kullanıcı"
 
-#: src/dialogs/editor.tsx:160
+#: src/dialogs/editor.tsx:165
 msgid "View $0"
 msgstr "$0 dosyasını görüntüle"
 

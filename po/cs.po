@@ -14,10 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-17 04:31+0000\n"
-"PO-Revision-Date: 2026-03-03 15:58+0000\n"
-"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
-"memory@weblate.org>\n"
+"POT-Creation-Date: 2026-03-24 04:32+0000\n"
+"PO-Revision-Date: 2026-03-24 09:58+0000\n"
+"Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech <https://translate.fedoraproject.org/projects/cockpit/"
 "cockpit-files/cs/>\n"
 "Language: cs\n"
@@ -25,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2\n"
-"X-Generator: Weblate 5.16.1\n"
+"X-Generator: Weblate 5.16.2\n"
 
 #: src/menu.tsx:53
 msgid "\"$0\" exists, not overwriting with paste."
@@ -38,6 +37,10 @@ msgstr "$0 souborů"
 #: src/files-footer-detail.tsx:36
 msgid "$0 files selected"
 msgstr "$0 souborů vybráno"
+
+#: src/dialogs/editor.tsx:274
+msgid "$0 has unsaved changes and which will be permanently lost if discarded."
+msgstr "$0 má neuložené změny a ty budou v případě zahození nevratně ztraceny."
 
 #: src/files-card-body.tsx:519
 msgid "$0 item is hidden"
@@ -118,9 +121,9 @@ msgstr "Záložky"
 
 #: src/upload-button.tsx:146 src/dialogs/create-file.tsx:196
 #: src/dialogs/rename.tsx:87 src/dialogs/permissions.tsx:409
-#: src/dialogs/copyPasteOwnership.tsx:166 src/dialogs/editor.tsx:239
-#: src/dialogs/mkdir.tsx:137 src/dialogs/symlink.tsx:233
-#: src/dialogs/delete.tsx:97
+#: src/dialogs/copyPasteOwnership.tsx:166 src/dialogs/editor.tsx:248
+#: src/dialogs/editor.tsx:314 src/dialogs/mkdir.tsx:137
+#: src/dialogs/symlink.tsx:233 src/dialogs/delete.tsx:97
 msgid "Cancel"
 msgstr "Storno"
 
@@ -165,7 +168,7 @@ msgstr "Znakové zařízení"
 msgid "Clear filter"
 msgstr "Vyčistit filtr"
 
-#: src/dialogs/editor.tsx:239 src/dialogs/keyboardShortcutsHelp.tsx:33
+#: src/dialogs/editor.tsx:248 src/dialogs/keyboardShortcutsHelp.tsx:33
 msgid "Close"
 msgstr "Zavřít"
 
@@ -277,6 +280,10 @@ msgstr "Vlastník složky"
 msgid "Directory with the same name exists"
 msgstr "Složka s tímto názvem zde už existuje"
 
+#: src/dialogs/editor.tsx:307
+msgid "Discard"
+msgstr "Zahodit"
+
 #: src/header.tsx:241
 msgid "Display as a grid"
 msgstr "Zobrazit jako mřížku"
@@ -294,7 +301,7 @@ msgid "Drop files to upload"
 msgstr "Soubory nahrajete jejich přetažením sem"
 
 #. Translators: This is the title of a modal dialog.  $0 represents a filename.
-#: src/dialogs/editor.tsx:160
+#: src/dialogs/editor.tsx:165
 msgid "Edit $0"
 msgstr "Upravit $0"
 
@@ -423,7 +430,7 @@ msgstr "Skrýt skryté položky"
 msgid "Home"
 msgstr "Domů"
 
-#: src/dialogs/editor.tsx:203
+#: src/dialogs/editor.tsx:208
 msgid "Ignore"
 msgstr "Ignorovat"
 
@@ -535,7 +542,8 @@ msgstr "Ostatní"
 msgid "Others access"
 msgstr "Přístup pro ostatní"
 
-#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:223
+#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:228
+#: src/dialogs/editor.tsx:285
 msgid "Overwrite"
 msgstr "Přepsat"
 
@@ -602,7 +610,7 @@ msgstr "Číst a zapisovat"
 msgid "Read, write, and execute"
 msgstr "Číst, zapisovat a spouštět"
 
-#: src/common.ts:53 src/dialogs/permissions.tsx:215 src/dialogs/editor.tsx:162
+#: src/common.ts:53 src/dialogs/permissions.tsx:215 src/dialogs/editor.tsx:167
 msgid "Read-only"
 msgstr "Pouze pro čtení"
 
@@ -623,7 +631,7 @@ msgstr ""
 "tak jeho cíl budou společně přesunuty, jako například při přejmenování nebo "
 "přesunu jim nadřazené složky."
 
-#: src/dialogs/editor.tsx:200
+#: src/dialogs/editor.tsx:205
 msgid "Reload"
 msgstr "Načíst znovu"
 
@@ -651,9 +659,13 @@ msgstr "Nahradit"
 msgid "Replace file $0?"
 msgstr "Nahradit soubor $0?"
 
-#: src/dialogs/editor.tsx:236
+#: src/dialogs/editor.tsx:242 src/dialogs/editor.tsx:299
 msgid "Save"
 msgstr "Uložit"
+
+#: src/dialogs/editor.tsx:259
+msgid "Save changes?"
+msgstr "Uložit změny?"
 
 #: src/dialogs/permissions.tsx:375
 msgid "Security context"
@@ -707,17 +719,29 @@ msgstr "Název symbolického odkazu"
 msgid "Target"
 msgstr "Cíl"
 
-#: src/dialogs/editor.tsx:48
+#: src/dialogs/editor.tsx:50
 msgid "The existing file changed unexpectedly"
 msgstr "Existující soubor byl mezitím neočekávaně změněn"
 
-#: src/dialogs/editor.tsx:46 src/dialogs/editor.tsx:194
+#: src/dialogs/editor.tsx:48 src/dialogs/editor.tsx:199
 msgid "The file has been removed on disk"
 msgstr "Soubor byl odebrán z úložiště"
 
-#: src/dialogs/editor.tsx:195
+#: src/dialogs/editor.tsx:200
 msgid "The file has changed on disk"
 msgstr "Soubor byl na úložišti změněn"
+
+#: src/dialogs/editor.tsx:269
+msgid "The file has changed on disk between when it was opened and now"
+msgstr ""
+"Zatímco jste měli soubor otevřený zde, něco jiného ho mezitím změnilo na "
+"disku"
+
+#: src/dialogs/editor.tsx:268
+msgid "The file was deleted after it was opened, saving will recreate it."
+msgstr ""
+"Zatímco jste měli soubor otevřený zde, něco jiného ho mezitím vymazalo z "
+"disku – pokud uložíte, bude znovu vytvořen."
 
 #: src/dialogs/symlink.tsx:180
 msgid "Type"
@@ -759,7 +783,7 @@ msgstr "Nahrání"
 msgid "User"
 msgstr "Uživatel"
 
-#: src/dialogs/editor.tsx:160
+#: src/dialogs/editor.tsx:165
 msgid "View $0"
 msgstr "Zobrazit $0"
 

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-17 04:31+0000\n"
+"POT-Creation-Date: 2026-03-24 04:32+0000\n"
 "PO-Revision-Date: 2025-07-18 05:53+0000\n"
 "Last-Translator: Abdullah Albaroty <albaroty@gmail.com>\n"
 "Language-Team: Arabic <https://translate.fedoraproject.org/projects/cockpit/"
@@ -38,6 +38,10 @@ msgstr "$0 ملفات"
 #: src/files-footer-detail.tsx:36
 msgid "$0 files selected"
 msgstr "$0 ملفاً محدداً"
+
+#: src/dialogs/editor.tsx:274
+msgid "$0 has unsaved changes and which will be permanently lost if discarded."
+msgstr ""
 
 #: src/files-card-body.tsx:519
 msgid "$0 item is hidden"
@@ -120,9 +124,9 @@ msgstr "العلامات المرجعية"
 
 #: src/upload-button.tsx:146 src/dialogs/create-file.tsx:196
 #: src/dialogs/rename.tsx:87 src/dialogs/permissions.tsx:409
-#: src/dialogs/copyPasteOwnership.tsx:166 src/dialogs/editor.tsx:239
-#: src/dialogs/mkdir.tsx:137 src/dialogs/symlink.tsx:233
-#: src/dialogs/delete.tsx:97
+#: src/dialogs/copyPasteOwnership.tsx:166 src/dialogs/editor.tsx:248
+#: src/dialogs/editor.tsx:314 src/dialogs/mkdir.tsx:137
+#: src/dialogs/symlink.tsx:233 src/dialogs/delete.tsx:97
 msgid "Cancel"
 msgstr "إلغاء"
 
@@ -166,7 +170,7 @@ msgstr "جهاز محوري"
 msgid "Clear filter"
 msgstr "إزالة عامل التصفية"
 
-#: src/dialogs/editor.tsx:239 src/dialogs/keyboardShortcutsHelp.tsx:33
+#: src/dialogs/editor.tsx:248 src/dialogs/keyboardShortcutsHelp.tsx:33
 msgid "Close"
 msgstr "أغلق"
 
@@ -278,6 +282,10 @@ msgstr "مدير الدليل"
 msgid "Directory with the same name exists"
 msgstr "الدليل موجود بنفس الاسم"
 
+#: src/dialogs/editor.tsx:307
+msgid "Discard"
+msgstr ""
+
 #: src/header.tsx:241
 msgid "Display as a grid"
 msgstr "إظهار كشبكة"
@@ -295,7 +303,7 @@ msgid "Drop files to upload"
 msgstr "أسقط الملفات للتحميل"
 
 #. Translators: This is the title of a modal dialog.  $0 represents a filename.
-#: src/dialogs/editor.tsx:160
+#: src/dialogs/editor.tsx:165
 msgid "Edit $0"
 msgstr "عدِّل $0"
 
@@ -426,7 +434,7 @@ msgstr "اخفِ العناصر المخفية"
 msgid "Home"
 msgstr "المنزل"
 
-#: src/dialogs/editor.tsx:203
+#: src/dialogs/editor.tsx:208
 msgid "Ignore"
 msgstr "تجاهل"
 
@@ -538,7 +546,8 @@ msgstr "الآخرون"
 msgid "Others access"
 msgstr "وصول آخرين"
 
-#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:223
+#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:228
+#: src/dialogs/editor.tsx:285
 msgid "Overwrite"
 msgstr "الكتابة فوق"
 
@@ -605,7 +614,7 @@ msgstr "قراءة وكتابة"
 msgid "Read, write, and execute"
 msgstr "قراءة، كتابة، وتنفيذ"
 
-#: src/common.ts:53 src/dialogs/permissions.tsx:215 src/dialogs/editor.tsx:162
+#: src/common.ts:53 src/dialogs/permissions.tsx:215 src/dialogs/editor.tsx:167
 msgid "Read-only"
 msgstr "القراءة-فقط"
 
@@ -625,7 +634,7 @@ msgstr ""
 "الروابط الرمزية النسبية مفيدة عندما يكون كلٌ من الرابط والهدف معرضين للحركة "
 "في نفس الوقت، كما هو الحال عند إعادة تسمية أو نقل الدليل الأب."
 
-#: src/dialogs/editor.tsx:200
+#: src/dialogs/editor.tsx:205
 msgid "Reload"
 msgstr "إعادة تحميل"
 
@@ -653,9 +662,13 @@ msgstr "استبدل"
 msgid "Replace file $0?"
 msgstr "استبدال الملف $0؟"
 
-#: src/dialogs/editor.tsx:236
+#: src/dialogs/editor.tsx:242 src/dialogs/editor.tsx:299
 msgid "Save"
 msgstr "حفظ"
+
+#: src/dialogs/editor.tsx:259
+msgid "Save changes?"
+msgstr ""
 
 #: src/dialogs/permissions.tsx:375
 msgid "Security context"
@@ -709,17 +722,27 @@ msgstr "اسم الرابط الرمزي"
 msgid "Target"
 msgstr "الهدف"
 
-#: src/dialogs/editor.tsx:48
+#: src/dialogs/editor.tsx:50
 msgid "The existing file changed unexpectedly"
 msgstr "الملف الموجود تغيَّر بشكل غير متوقع"
 
-#: src/dialogs/editor.tsx:46 src/dialogs/editor.tsx:194
+#: src/dialogs/editor.tsx:48 src/dialogs/editor.tsx:199
 msgid "The file has been removed on disk"
 msgstr "الملف تمت إزالته من القرص"
 
-#: src/dialogs/editor.tsx:195
+#: src/dialogs/editor.tsx:200
 msgid "The file has changed on disk"
 msgstr "تم تغيير الملف على القرص"
+
+#: src/dialogs/editor.tsx:269
+#, fuzzy
+#| msgid "The file has changed on disk"
+msgid "The file has changed on disk between when it was opened and now"
+msgstr "تم تغيير الملف على القرص"
+
+#: src/dialogs/editor.tsx:268
+msgid "The file was deleted after it was opened, saving will recreate it."
+msgstr ""
 
 #: src/dialogs/symlink.tsx:180
 msgid "Type"
@@ -762,7 +785,7 @@ msgstr "عمليات التحميل"
 msgid "User"
 msgstr "المستخدم"
 
-#: src/dialogs/editor.tsx:160
+#: src/dialogs/editor.tsx:165
 msgid "View $0"
 msgstr "عرض $0"
 

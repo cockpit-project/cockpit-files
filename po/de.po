@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: starter-kit 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-17 04:31+0000\n"
+"POT-Creation-Date: 2026-03-24 04:32+0000\n"
 "PO-Revision-Date: 2026-03-08 15:58+0000\n"
 "Last-Translator: \"Christian R.\" <chris-r@cronodevelopment.com>\n"
 "Language-Team: German <https://translate.fedoraproject.org/projects/cockpit/"
@@ -26,6 +26,10 @@ msgstr "$0 Dateien"
 #: src/files-footer-detail.tsx:36
 msgid "$0 files selected"
 msgstr "$0 Dateien ausgewählt"
+
+#: src/dialogs/editor.tsx:274
+msgid "$0 has unsaved changes and which will be permanently lost if discarded."
+msgstr ""
 
 #: src/files-card-body.tsx:519
 msgid "$0 item is hidden"
@@ -106,9 +110,9 @@ msgstr "Lesezeichen"
 
 #: src/upload-button.tsx:146 src/dialogs/create-file.tsx:196
 #: src/dialogs/rename.tsx:87 src/dialogs/permissions.tsx:409
-#: src/dialogs/copyPasteOwnership.tsx:166 src/dialogs/editor.tsx:239
-#: src/dialogs/mkdir.tsx:137 src/dialogs/symlink.tsx:233
-#: src/dialogs/delete.tsx:97
+#: src/dialogs/copyPasteOwnership.tsx:166 src/dialogs/editor.tsx:248
+#: src/dialogs/editor.tsx:314 src/dialogs/mkdir.tsx:137
+#: src/dialogs/symlink.tsx:233 src/dialogs/delete.tsx:97
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -154,7 +158,7 @@ msgstr "Zeichengerät"
 msgid "Clear filter"
 msgstr "Filter entfernen"
 
-#: src/dialogs/editor.tsx:239 src/dialogs/keyboardShortcutsHelp.tsx:33
+#: src/dialogs/editor.tsx:248 src/dialogs/keyboardShortcutsHelp.tsx:33
 msgid "Close"
 msgstr "Schließen"
 
@@ -266,6 +270,10 @@ msgstr "Verzeichniseigentümer"
 msgid "Directory with the same name exists"
 msgstr "Verzeichniseigentümer mit gleichem Namen existiert bereits"
 
+#: src/dialogs/editor.tsx:307
+msgid "Discard"
+msgstr ""
+
 #: src/header.tsx:241
 msgid "Display as a grid"
 msgstr "Als Raster anzeigen"
@@ -283,7 +291,7 @@ msgid "Drop files to upload"
 msgstr "Dateien zum Hochladen ablegen"
 
 #. Translators: This is the title of a modal dialog.  $0 represents a filename.
-#: src/dialogs/editor.tsx:160
+#: src/dialogs/editor.tsx:165
 msgid "Edit $0"
 msgstr "$0 bearbeiten"
 
@@ -412,7 +420,7 @@ msgstr "Versteckte Elemente ausblenden"
 msgid "Home"
 msgstr "Startseite"
 
-#: src/dialogs/editor.tsx:203
+#: src/dialogs/editor.tsx:208
 msgid "Ignore"
 msgstr "Ignorieren"
 
@@ -524,7 +532,8 @@ msgstr "Andere"
 msgid "Others access"
 msgstr "Anderer Zugriff"
 
-#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:223
+#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:228
+#: src/dialogs/editor.tsx:285
 msgid "Overwrite"
 msgstr "Überschreiben"
 
@@ -591,7 +600,7 @@ msgstr "Lesen und schreiben"
 msgid "Read, write, and execute"
 msgstr "Lesen, schreiben und ausführen"
 
-#: src/common.ts:53 src/dialogs/permissions.tsx:215 src/dialogs/editor.tsx:162
+#: src/common.ts:53 src/dialogs/permissions.tsx:215 src/dialogs/editor.tsx:167
 msgid "Read-only"
 msgstr "Nur lesen"
 
@@ -612,7 +621,7 @@ msgstr ""
 "als auch das Ziel gleichzeitig verschoben werden können, z. B. beim "
 "Umbenennen oder Verschieben eines übergeordneten Verzeichnisses."
 
-#: src/dialogs/editor.tsx:200
+#: src/dialogs/editor.tsx:205
 msgid "Reload"
 msgstr "Neu laden"
 
@@ -640,9 +649,13 @@ msgstr "Ersetzen"
 msgid "Replace file $0?"
 msgstr "Datei $0 ersetzen?"
 
-#: src/dialogs/editor.tsx:236
+#: src/dialogs/editor.tsx:242 src/dialogs/editor.tsx:299
 msgid "Save"
 msgstr "Speichern"
+
+#: src/dialogs/editor.tsx:259
+msgid "Save changes?"
+msgstr ""
 
 #: src/dialogs/permissions.tsx:375
 msgid "Security context"
@@ -696,17 +709,27 @@ msgstr "Name des symbolischen Links"
 msgid "Target"
 msgstr "Ziel"
 
-#: src/dialogs/editor.tsx:48
+#: src/dialogs/editor.tsx:50
 msgid "The existing file changed unexpectedly"
 msgstr "Die existierende Datei wurde unerwartet geändert"
 
-#: src/dialogs/editor.tsx:46 src/dialogs/editor.tsx:194
+#: src/dialogs/editor.tsx:48 src/dialogs/editor.tsx:199
 msgid "The file has been removed on disk"
 msgstr "Die Datei wurde von der Festplatte entfernt"
 
-#: src/dialogs/editor.tsx:195
+#: src/dialogs/editor.tsx:200
 msgid "The file has changed on disk"
 msgstr "Die Datei hat sich auf der Festplatte geändert"
+
+#: src/dialogs/editor.tsx:269
+#, fuzzy
+#| msgid "The file has changed on disk"
+msgid "The file has changed on disk between when it was opened and now"
+msgstr "Die Datei hat sich auf der Festplatte geändert"
+
+#: src/dialogs/editor.tsx:268
+msgid "The file was deleted after it was opened, saving will recreate it."
+msgstr ""
 
 #: src/dialogs/symlink.tsx:180
 msgid "Type"
@@ -749,7 +772,7 @@ msgstr "Hochladevorgänge"
 msgid "User"
 msgstr "Benutzer"
 
-#: src/dialogs/editor.tsx:160
+#: src/dialogs/editor.tsx:165
 msgid "View $0"
 msgstr "$0 ansehen"
 
