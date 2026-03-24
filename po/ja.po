@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-17 04:31+0000\n"
+"POT-Creation-Date: 2026-03-24 04:32+0000\n"
 "PO-Revision-Date: 2026-02-03 13:58+0000\n"
 "Last-Translator: Kohei Takahashi <flast@flast.jp>\n"
 "Language-Team: Japanese <https://translate.fedoraproject.org/projects/"
@@ -37,6 +37,10 @@ msgstr "$0 個のファイル"
 #: src/files-footer-detail.tsx:36
 msgid "$0 files selected"
 msgstr "$0 個のファイルを選択中"
+
+#: src/dialogs/editor.tsx:274
+msgid "$0 has unsaved changes and which will be permanently lost if discarded."
+msgstr ""
 
 #: src/files-card-body.tsx:519
 msgid "$0 item is hidden"
@@ -116,9 +120,9 @@ msgstr "ブックマーク"
 
 #: src/upload-button.tsx:146 src/dialogs/create-file.tsx:196
 #: src/dialogs/rename.tsx:87 src/dialogs/permissions.tsx:409
-#: src/dialogs/copyPasteOwnership.tsx:166 src/dialogs/editor.tsx:239
-#: src/dialogs/mkdir.tsx:137 src/dialogs/symlink.tsx:233
-#: src/dialogs/delete.tsx:97
+#: src/dialogs/copyPasteOwnership.tsx:166 src/dialogs/editor.tsx:248
+#: src/dialogs/editor.tsx:314 src/dialogs/mkdir.tsx:137
+#: src/dialogs/symlink.tsx:233 src/dialogs/delete.tsx:97
 msgid "Cancel"
 msgstr "取り消し"
 
@@ -162,7 +166,7 @@ msgstr "キャラクターデバイス"
 msgid "Clear filter"
 msgstr "フィルターを外す"
 
-#: src/dialogs/editor.tsx:239 src/dialogs/keyboardShortcutsHelp.tsx:33
+#: src/dialogs/editor.tsx:248 src/dialogs/keyboardShortcutsHelp.tsx:33
 msgid "Close"
 msgstr "閉じる"
 
@@ -279,6 +283,10 @@ msgstr "ディレクトリー所有者"
 msgid "Directory with the same name exists"
 msgstr "同じ名前のディレクトリーが存在します"
 
+#: src/dialogs/editor.tsx:307
+msgid "Discard"
+msgstr ""
+
 #: src/header.tsx:241
 msgid "Display as a grid"
 msgstr "グリッド形式で表示"
@@ -296,7 +304,7 @@ msgid "Drop files to upload"
 msgstr "アップロードするファイルをドロップする"
 
 #. Translators: This is the title of a modal dialog.  $0 represents a filename.
-#: src/dialogs/editor.tsx:160
+#: src/dialogs/editor.tsx:165
 msgid "Edit $0"
 msgstr "$0 の編集"
 
@@ -427,7 +435,7 @@ msgstr "非表示の項目を非表示にする"
 msgid "Home"
 msgstr "ホーム"
 
-#: src/dialogs/editor.tsx:203
+#: src/dialogs/editor.tsx:208
 msgid "Ignore"
 msgstr "無視"
 
@@ -539,7 +547,8 @@ msgstr "その他のユーザー"
 msgid "Others access"
 msgstr "その他のユーザーのアクセス"
 
-#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:223
+#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:228
+#: src/dialogs/editor.tsx:285
 msgid "Overwrite"
 msgstr "上書き"
 
@@ -606,7 +615,7 @@ msgstr "読み取りおよび書き込み"
 msgid "Read, write, and execute"
 msgstr "読み取り、書き込み、および実行"
 
-#: src/common.ts:53 src/dialogs/permissions.tsx:215 src/dialogs/editor.tsx:162
+#: src/common.ts:53 src/dialogs/permissions.tsx:215 src/dialogs/editor.tsx:167
 msgid "Read-only"
 msgstr "読み取り専用"
 
@@ -624,7 +633,7 @@ msgid ""
 "the same time, such as when renaming or moving a parent directory."
 msgstr ""
 
-#: src/dialogs/editor.tsx:200
+#: src/dialogs/editor.tsx:205
 msgid "Reload"
 msgstr "再ロード"
 
@@ -652,9 +661,13 @@ msgstr "置き換え"
 msgid "Replace file $0?"
 msgstr "ファイル $0 を置き換えますか?"
 
-#: src/dialogs/editor.tsx:236
+#: src/dialogs/editor.tsx:242 src/dialogs/editor.tsx:299
 msgid "Save"
 msgstr "保存"
+
+#: src/dialogs/editor.tsx:259
+msgid "Save changes?"
+msgstr ""
 
 #: src/dialogs/permissions.tsx:375
 msgid "Security context"
@@ -708,17 +721,27 @@ msgstr ""
 msgid "Target"
 msgstr ""
 
-#: src/dialogs/editor.tsx:48
+#: src/dialogs/editor.tsx:50
 msgid "The existing file changed unexpectedly"
 msgstr "既存のファイルが予期せず変更されました"
 
-#: src/dialogs/editor.tsx:46 src/dialogs/editor.tsx:194
+#: src/dialogs/editor.tsx:48 src/dialogs/editor.tsx:199
 msgid "The file has been removed on disk"
 msgstr "ファイルがディスクから削除されました"
 
-#: src/dialogs/editor.tsx:195
+#: src/dialogs/editor.tsx:200
 msgid "The file has changed on disk"
 msgstr "ファイルがディスク上で変更されました"
+
+#: src/dialogs/editor.tsx:269
+#, fuzzy
+#| msgid "The file has changed on disk"
+msgid "The file has changed on disk between when it was opened and now"
+msgstr "ファイルがディスク上で変更されました"
+
+#: src/dialogs/editor.tsx:268
+msgid "The file was deleted after it was opened, saving will recreate it."
+msgstr ""
 
 #: src/dialogs/symlink.tsx:180
 msgid "Type"
@@ -761,7 +784,7 @@ msgstr "アップロード"
 msgid "User"
 msgstr "ユーザー"
 
-#: src/dialogs/editor.tsx:160
+#: src/dialogs/editor.tsx:165
 msgid "View $0"
 msgstr "$0 の表示"
 

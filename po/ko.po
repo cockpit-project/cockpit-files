@@ -14,10 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-17 04:31+0000\n"
-"PO-Revision-Date: 2026-03-17 14:51+0000\n"
-"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
-"memory@weblate.org>\n"
+"POT-Creation-Date: 2026-03-24 04:32+0000\n"
+"PO-Revision-Date: 2026-03-24 09:58+0000\n"
+"Last-Translator: 김인수 <simmon@nplob.com>\n"
 "Language-Team: Korean <https://translate.fedoraproject.org/projects/cockpit/"
 "cockpit-files/ko/>\n"
 "Language: ko\n"
@@ -38,6 +37,10 @@ msgstr "$0 파일"
 #: src/files-footer-detail.tsx:36
 msgid "$0 files selected"
 msgstr "$0 파일을 선택함"
+
+#: src/dialogs/editor.tsx:274
+msgid "$0 has unsaved changes and which will be permanently lost if discarded."
+msgstr "$0 는 변경이 저장되지 않았고 이는 만약 삭제되었다면 영구히 손실됩니다."
 
 #: src/files-card-body.tsx:519
 msgid "$0 item is hidden"
@@ -117,9 +120,9 @@ msgstr "즐겨찾기"
 
 #: src/upload-button.tsx:146 src/dialogs/create-file.tsx:196
 #: src/dialogs/rename.tsx:87 src/dialogs/permissions.tsx:409
-#: src/dialogs/copyPasteOwnership.tsx:166 src/dialogs/editor.tsx:239
-#: src/dialogs/mkdir.tsx:137 src/dialogs/symlink.tsx:233
-#: src/dialogs/delete.tsx:97
+#: src/dialogs/copyPasteOwnership.tsx:166 src/dialogs/editor.tsx:248
+#: src/dialogs/editor.tsx:314 src/dialogs/mkdir.tsx:137
+#: src/dialogs/symlink.tsx:233 src/dialogs/delete.tsx:97
 msgid "Cancel"
 msgstr "취소"
 
@@ -163,7 +166,7 @@ msgstr "문자 장치"
 msgid "Clear filter"
 msgstr "필터 지우기"
 
-#: src/dialogs/editor.tsx:239 src/dialogs/keyboardShortcutsHelp.tsx:33
+#: src/dialogs/editor.tsx:248 src/dialogs/keyboardShortcutsHelp.tsx:33
 msgid "Close"
 msgstr "종료"
 
@@ -275,6 +278,10 @@ msgstr "디렉토리 소유자"
 msgid "Directory with the same name exists"
 msgstr "동일한 이름을 갖는 디렉토리가 존재합니다"
 
+#: src/dialogs/editor.tsx:307
+msgid "Discard"
+msgstr "버림"
+
 #: src/header.tsx:241
 msgid "Display as a grid"
 msgstr "그리드로 표시"
@@ -292,7 +299,7 @@ msgid "Drop files to upload"
 msgstr "올려지는 파일을 삭제합니다"
 
 #. Translators: This is the title of a modal dialog.  $0 represents a filename.
-#: src/dialogs/editor.tsx:160
+#: src/dialogs/editor.tsx:165
 msgid "Edit $0"
 msgstr "$0 편집"
 
@@ -421,7 +428,7 @@ msgstr "숨겨진 항목 감추기"
 msgid "Home"
 msgstr "홈"
 
-#: src/dialogs/editor.tsx:203
+#: src/dialogs/editor.tsx:208
 msgid "Ignore"
 msgstr "무시"
 
@@ -533,7 +540,8 @@ msgstr "기타"
 msgid "Others access"
 msgstr "기타 접근"
 
-#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:223
+#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:228
+#: src/dialogs/editor.tsx:285
 msgid "Overwrite"
 msgstr "덮어쓰기"
 
@@ -600,7 +608,7 @@ msgstr "읽기 및 쓰기"
 msgid "Read, write, and execute"
 msgstr "읽기, 쓰기 및 실행"
 
-#: src/common.ts:53 src/dialogs/permissions.tsx:215 src/dialogs/editor.tsx:162
+#: src/common.ts:53 src/dialogs/permissions.tsx:215 src/dialogs/editor.tsx:167
 msgid "Read-only"
 msgstr "읽기-전용"
 
@@ -620,7 +628,7 @@ msgstr ""
 "상대적인 심볼릭 링크는 심볼릭 링크 및 대상 모두가 부모(상위) 디렉토리의 이름 "
 "변경하기나 이동처럼 동시에 움직일 때에 유용합니다."
 
-#: src/dialogs/editor.tsx:200
+#: src/dialogs/editor.tsx:205
 msgid "Reload"
 msgstr "재적재"
 
@@ -648,9 +656,13 @@ msgstr "교체"
 msgid "Replace file $0?"
 msgstr "파일 $0를 교체합니까?"
 
-#: src/dialogs/editor.tsx:236
+#: src/dialogs/editor.tsx:242 src/dialogs/editor.tsx:299
 msgid "Save"
 msgstr "저장"
+
+#: src/dialogs/editor.tsx:259
+msgid "Save changes?"
+msgstr "변경을 저장할까요?"
 
 #: src/dialogs/permissions.tsx:375
 msgid "Security context"
@@ -704,17 +716,25 @@ msgstr "심볼릭 링크 이름"
 msgid "Target"
 msgstr "대상"
 
-#: src/dialogs/editor.tsx:48
+#: src/dialogs/editor.tsx:50
 msgid "The existing file changed unexpectedly"
 msgstr "기존 파일이 예상치 못하게 변경되었습니다"
 
-#: src/dialogs/editor.tsx:46 src/dialogs/editor.tsx:194
+#: src/dialogs/editor.tsx:48 src/dialogs/editor.tsx:199
 msgid "The file has been removed on disk"
 msgstr "파일이 디스크에서 제거되었습니다"
 
-#: src/dialogs/editor.tsx:195
+#: src/dialogs/editor.tsx:200
 msgid "The file has changed on disk"
 msgstr "파일이 디스크에서 변경되었습니다"
+
+#: src/dialogs/editor.tsx:269
+msgid "The file has changed on disk between when it was opened and now"
+msgstr "파일이 열렸을 때와 현재 사이에서 디스크 부분이 변경되었습니다"
+
+#: src/dialogs/editor.tsx:268
+msgid "The file was deleted after it was opened, saving will recreate it."
+msgstr "파일은 열린 후에 삭제되고, 저장하면 이를 다시 생성합니다."
 
 #: src/dialogs/symlink.tsx:180
 msgid "Type"
@@ -756,7 +776,7 @@ msgstr "올려주기"
 msgid "User"
 msgstr "사용자"
 
-#: src/dialogs/editor.tsx:160
+#: src/dialogs/editor.tsx:165
 msgid "View $0"
 msgstr "$0 보기"
 
