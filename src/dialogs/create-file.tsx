@@ -28,6 +28,8 @@ import "./editor.css";
 import { AlertInfo, checkFilename, useFilesContext } from '../common.ts';
 import { get_owner_candidates } from '../ownership.tsx';
 
+import { edit_file } from './editor.tsx';
+
 const _ = cockpit.gettext;
 
 async function create_file(filename: string, content?: string, owner?: string | null) {
@@ -72,7 +74,7 @@ async function create_file(filename: string, content?: string, owner?: string | 
 }
 
 const CreateFileModal = ({ dialogResult, path } : {
-    dialogResult: DialogResult<string | null>,
+    dialogResult: DialogResult<{path: string, openEditor: boolean} | null>,
     path: string
 }) => {
     const [filename, setFilename] = React.useState<string>("");
@@ -101,7 +103,7 @@ const CreateFileModal = ({ dialogResult, path } : {
         }
     };
 
-    const handleSave = async () => {
+    const handleSave = React.useCallback(async (openEditor = false) => {
         cockpit.assert(filename, "filename undefined");
         const filename_valid = checkFilename(filename, cwdInfo?.entries || {}, undefined);
         if (filename_valid !== null) {
@@ -118,8 +120,23 @@ const CreateFileModal = ({ dialogResult, path } : {
             return;
         }
 
-        dialogResult.resolve(full_path);
-    };
+        dialogResult.resolve({ path: full_path, openEditor });
+    }, [filename, path, cwdInfo, dialogResult, initialText, owner]);
+
+    React.useEffect(() => {
+        const onKeyDown = function (event: KeyboardEvent) {
+            if ((event.ctrlKey || event.metaKey) && (event.key === "s" || event.key === "S")) {
+                event.preventDefault();
+                handleSave(true);
+            }
+        };
+
+        window.addEventListener('keydown', onKeyDown);
+
+        return () => {
+            window.removeEventListener('keydown', onKeyDown);
+        };
+    }, [handleSave]);
 
     if (superuser.allowed && owner === undefined)
         return null;
@@ -218,5 +235,8 @@ export async function show_create_file_dialog(
         }
     }
 
-    await dialogs.run(CreateFileModal, { path });
+    const result = await dialogs.run(CreateFileModal, { path });
+    if (result !== null && result.openEditor === true) {
+        edit_file(dialogs, result.path);
+    }
 }
