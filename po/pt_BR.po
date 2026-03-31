@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-24 04:32+0000\n"
-"PO-Revision-Date: 2026-03-03 15:58+0000\n"
+"POT-Creation-Date: 2026-03-27 04:57+0000\n"
+"PO-Revision-Date: 2026-03-26 15:58+0000\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Portuguese (Brazil) <https://translate.fedoraproject.org/"
 "projects/cockpit/cockpit-files/pt_BR/>\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1\n"
-"X-Generator: Weblate 5.16.1\n"
+"X-Generator: Weblate 5.16.2\n"
 
 #: src/menu.tsx:53
 msgid "\"$0\" exists, not overwriting with paste."
@@ -41,6 +41,8 @@ msgstr "$0 arquivos selecionados"
 #: src/dialogs/editor.tsx:274
 msgid "$0 has unsaved changes and which will be permanently lost if discarded."
 msgstr ""
+"$0 tem alterações não salvas que serão perdidas permanentemente se "
+"descartadas."
 
 #: src/files-card-body.tsx:519
 msgid "$0 item is hidden"
@@ -281,7 +283,7 @@ msgstr "Um diretório com o mesmo nome já existe"
 
 #: src/dialogs/editor.tsx:307
 msgid "Discard"
-msgstr ""
+msgstr "Descartar"
 
 #: src/header.tsx:241
 msgid "Display as a grid"
@@ -664,7 +666,7 @@ msgstr "Salvar"
 
 #: src/dialogs/editor.tsx:259
 msgid "Save changes?"
-msgstr ""
+msgstr "Salvar alterações?"
 
 #: src/dialogs/permissions.tsx:375
 msgid "Security context"
@@ -731,14 +733,14 @@ msgid "The file has changed on disk"
 msgstr "O arquivo foi alterado no disco"
 
 #: src/dialogs/editor.tsx:269
-#, fuzzy
-#| msgid "The file has changed on disk"
 msgid "The file has changed on disk between when it was opened and now"
-msgstr "O arquivo foi alterado no disco"
+msgstr ""
+"O arquivo foi alterado no disco entre o momento em que foi aberto e agora"
 
 #: src/dialogs/editor.tsx:268
 msgid "The file was deleted after it was opened, saving will recreate it."
 msgstr ""
+"O arquivo foi excluído após ele ser aberto. Ao salvá-lo, ele será criado."
 
 #: src/dialogs/symlink.tsx:180
 msgid "Type"
