@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-27 04:57+0000\n"
+"POT-Creation-Date: 2026-04-02 04:53+0000\n"
 "PO-Revision-Date: 2026-03-07 07:58+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <https://translate.fedoraproject.org/projects/"
@@ -121,11 +121,11 @@ msgstr "Блоковий пристрій"
 msgid "Bookmarks"
 msgstr "Закладки"
 
-#: src/upload-button.tsx:146 src/dialogs/create-file.tsx:196
-#: src/dialogs/rename.tsx:87 src/dialogs/permissions.tsx:409
-#: src/dialogs/copyPasteOwnership.tsx:166 src/dialogs/editor.tsx:248
-#: src/dialogs/editor.tsx:314 src/dialogs/mkdir.tsx:137
-#: src/dialogs/symlink.tsx:233 src/dialogs/delete.tsx:97
+#: src/upload-button.tsx:146 src/dialogs/copyPasteOwnership.tsx:166
+#: src/dialogs/mkdir.tsx:137 src/dialogs/rename.tsx:87
+#: src/dialogs/symlink.tsx:233 src/dialogs/editor.tsx:248
+#: src/dialogs/editor.tsx:314 src/dialogs/permissions.tsx:409
+#: src/dialogs/delete.tsx:97 src/dialogs/create-file.tsx:196
 msgid "Cancel"
 msgstr "Скасувати"
 
@@ -169,7 +169,7 @@ msgstr "Символьний пристрій"
 msgid "Clear filter"
 msgstr "Зняти фільтрування"
 
-#: src/dialogs/editor.tsx:248 src/dialogs/keyboardShortcutsHelp.tsx:33
+#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:248
 msgid "Close"
 msgstr "Закрити"
 
@@ -193,19 +193,19 @@ msgstr "Копіювати"
 msgid "Copy selected file or directory"
 msgstr "Копіювати позначений файл або каталог"
 
-#: src/dialogs/create-file.tsx:193 src/dialogs/mkdir.tsx:135
+#: src/dialogs/mkdir.tsx:135 src/dialogs/create-file.tsx:193
 msgid "Create"
 msgstr "Створити"
 
-#: src/menu.tsx:106 src/dialogs/mkdir.tsx:80
+#: src/dialogs/mkdir.tsx:80 src/menu.tsx:106
 msgid "Create directory"
 msgstr "Створити каталог"
 
-#: src/menu.tsx:111 src/dialogs/create-file.tsx:136
+#: src/dialogs/create-file.tsx:136 src/menu.tsx:111
 msgid "Create file"
 msgstr "Створити файл"
 
-#: src/menu.tsx:197 src/dialogs/symlink.tsx:231
+#: src/dialogs/symlink.tsx:231 src/menu.tsx:197
 msgid "Create link"
 msgstr "Створити посилання"
 
@@ -217,7 +217,7 @@ msgstr "Створити посилання на $0"
 msgid "Create new directory"
 msgstr "Створити новий каталог"
 
-#: src/menu.tsx:168 src/menu.tsx:210 src/dialogs/delete.tsx:95
+#: src/dialogs/delete.tsx:95 src/menu.tsx:168 src/menu.tsx:210
 msgid "Delete"
 msgstr "Вилучити"
 
@@ -415,7 +415,7 @@ msgid "Go up a directory"
 msgstr "Вище за ієрархією каталогів"
 
 #: src/files-footer-detail.tsx:80 src/files-footer-detail.tsx:152
-#: src/dialogs/permissions.tsx:319 src/files-card-body.tsx:591
+#: src/files-card-body.tsx:591 src/dialogs/permissions.tsx:319
 msgid "Group"
 msgstr "Група"
 
@@ -463,7 +463,7 @@ msgstr "Керування вашими файлами"
 msgid "Missing type"
 msgstr "Пропущено тип"
 
-#: src/header.tsx:75 src/files-card-body.tsx:539 src/files-card-body.tsx:659
+#: src/files-card-body.tsx:539 src/files-card-body.tsx:659 src/header.tsx:75
 msgid "Modified"
 msgstr "Змінено"
 
@@ -471,7 +471,7 @@ msgstr "Змінено"
 msgid "Most permissive"
 msgstr "Найширший доступ"
 
-#: src/header.tsx:53 src/files-card-body.tsx:534
+#: src/files-card-body.tsx:534 src/header.tsx:53
 msgid "Name"
 msgstr "Назва"
 
@@ -548,10 +548,9 @@ msgstr "Доступ інших"
 msgid "Overwrite"
 msgstr "Перезаписати"
 
-#: src/files-footer-detail.tsx:80 src/header.tsx:86
-#: src/dialogs/create-file.tsx:170 src/dialogs/permissions.tsx:304
-#: src/files-card-body.tsx:544 src/files-card-body.tsx:591
-#: src/files-card-body.tsx:667
+#: src/files-footer-detail.tsx:80 src/files-card-body.tsx:544
+#: src/files-card-body.tsx:591 src/files-card-body.tsx:667 src/header.tsx:86
+#: src/dialogs/permissions.tsx:304 src/dialogs/create-file.tsx:170
 msgid "Owner"
 msgstr "Власник"
 
@@ -571,7 +570,7 @@ msgstr "Власник за спаданням"
 msgid "Ownership"
 msgstr "Власність"
 
-#: src/menu.tsx:99 src/dialogs/copyPasteOwnership.tsx:164
+#: src/dialogs/copyPasteOwnership.tsx:164 src/menu.tsx:99
 msgid "Paste"
 msgstr "Вставити"
 
@@ -583,7 +582,7 @@ msgstr "Вставити як власник"
 msgid "Paste file or directory"
 msgstr "Вставити файл або каталог"
 
-#: src/menu.tsx:51 src/dialogs/copyPasteOwnership.tsx:53
+#: src/dialogs/copyPasteOwnership.tsx:53 src/menu.tsx:51
 msgid "Pasting failed"
 msgstr "Не вдалося вставити"
 
@@ -591,7 +590,7 @@ msgstr "Не вдалося вставити"
 msgid "Permission denied"
 msgstr "Відмовлено у доступі"
 
-#: src/header.tsx:97 src/files-card-body.tsx:549 src/files-card-body.tsx:674
+#: src/files-card-body.tsx:549 src/files-card-body.tsx:674 src/header.tsx:97
 msgid "Permissions"
 msgstr "Права доступу"
 
@@ -611,7 +610,7 @@ msgstr "Читання та запис"
 msgid "Read, write, and execute"
 msgstr "Читання, запис і виконання"
 
-#: src/common.ts:53 src/dialogs/permissions.tsx:215 src/dialogs/editor.tsx:167
+#: src/common.ts:53 src/dialogs/editor.tsx:167 src/dialogs/permissions.tsx:215
 msgid "Read-only"
 msgstr "Лише читання"
 
@@ -640,7 +639,7 @@ msgstr "Перезавантажити"
 msgid "Remove from bookmarks"
 msgstr "Вилучити із закладок"
 
-#: src/menu.tsx:162 src/dialogs/rename.tsx:78
+#: src/dialogs/rename.tsx:78 src/menu.tsx:162
 msgid "Rename"
 msgstr "Перейменувати"
 
@@ -684,7 +683,7 @@ msgstr "Встановити виконуваність як програми"
 msgid "Show all files"
 msgstr "Показати усі файли"
 
-#: src/header.tsx:271 src/files-card-body.tsx:522
+#: src/files-card-body.tsx:522 src/header.tsx:271
 msgid "Show hidden items"
 msgstr "Показати приховані записи"
 
@@ -692,7 +691,7 @@ msgstr "Показати приховані записи"
 msgid "Show keyboard shortcuts"
 msgstr "Показати клавіатурні скорочення"
 
-#: src/header.tsx:64 src/files-card-body.tsx:535 src/files-card-body.tsx:652
+#: src/files-card-body.tsx:535 src/files-card-body.tsx:652 src/header.tsx:64
 msgid "Size"
 msgstr "Розмір"
 

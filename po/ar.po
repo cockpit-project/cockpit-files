@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-27 04:57+0000\n"
+"POT-Creation-Date: 2026-04-02 04:53+0000\n"
 "PO-Revision-Date: 2025-07-18 05:53+0000\n"
 "Last-Translator: Abdullah Albaroty <albaroty@gmail.com>\n"
 "Language-Team: Arabic <https://translate.fedoraproject.org/projects/cockpit/"
@@ -122,11 +122,11 @@ msgstr "حجب الجحاز"
 msgid "Bookmarks"
 msgstr "العلامات المرجعية"
 
-#: src/upload-button.tsx:146 src/dialogs/create-file.tsx:196
-#: src/dialogs/rename.tsx:87 src/dialogs/permissions.tsx:409
-#: src/dialogs/copyPasteOwnership.tsx:166 src/dialogs/editor.tsx:248
-#: src/dialogs/editor.tsx:314 src/dialogs/mkdir.tsx:137
-#: src/dialogs/symlink.tsx:233 src/dialogs/delete.tsx:97
+#: src/upload-button.tsx:146 src/dialogs/copyPasteOwnership.tsx:166
+#: src/dialogs/mkdir.tsx:137 src/dialogs/rename.tsx:87
+#: src/dialogs/symlink.tsx:233 src/dialogs/editor.tsx:248
+#: src/dialogs/editor.tsx:314 src/dialogs/permissions.tsx:409
+#: src/dialogs/delete.tsx:97 src/dialogs/create-file.tsx:196
 msgid "Cancel"
 msgstr "إلغاء"
 
@@ -170,7 +170,7 @@ msgstr "جهاز محوري"
 msgid "Clear filter"
 msgstr "إزالة عامل التصفية"
 
-#: src/dialogs/editor.tsx:248 src/dialogs/keyboardShortcutsHelp.tsx:33
+#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:248
 msgid "Close"
 msgstr "أغلق"
 
@@ -194,19 +194,19 @@ msgstr "نسخ"
 msgid "Copy selected file or directory"
 msgstr "لنسخ المجلد أو الدليل المحدد"
 
-#: src/dialogs/create-file.tsx:193 src/dialogs/mkdir.tsx:135
+#: src/dialogs/mkdir.tsx:135 src/dialogs/create-file.tsx:193
 msgid "Create"
 msgstr "إنشاء"
 
-#: src/menu.tsx:106 src/dialogs/mkdir.tsx:80
+#: src/dialogs/mkdir.tsx:80 src/menu.tsx:106
 msgid "Create directory"
 msgstr "إنشاء دليل"
 
-#: src/menu.tsx:111 src/dialogs/create-file.tsx:136
+#: src/dialogs/create-file.tsx:136 src/menu.tsx:111
 msgid "Create file"
 msgstr "إنشاء ملف"
 
-#: src/menu.tsx:197 src/dialogs/symlink.tsx:231
+#: src/dialogs/symlink.tsx:231 src/menu.tsx:197
 msgid "Create link"
 msgstr "إنشاء رابط"
 
@@ -218,7 +218,7 @@ msgstr "إنشاء رابط إلى $0"
 msgid "Create new directory"
 msgstr "إنشاء دليل جديد"
 
-#: src/menu.tsx:168 src/menu.tsx:210 src/dialogs/delete.tsx:95
+#: src/dialogs/delete.tsx:95 src/menu.tsx:168 src/menu.tsx:210
 msgid "Delete"
 msgstr "حذف"
 
@@ -418,7 +418,7 @@ msgid "Go up a directory"
 msgstr "الانتقال للأعلى"
 
 #: src/files-footer-detail.tsx:80 src/files-footer-detail.tsx:152
-#: src/dialogs/permissions.tsx:319 src/files-card-body.tsx:591
+#: src/files-card-body.tsx:591 src/dialogs/permissions.tsx:319
 msgid "Group"
 msgstr "مجموعة"
 
@@ -466,7 +466,7 @@ msgstr "ادمج ملفاتك"
 msgid "Missing type"
 msgstr "نوع مفقود"
 
-#: src/header.tsx:75 src/files-card-body.tsx:539 src/files-card-body.tsx:659
+#: src/files-card-body.tsx:539 src/files-card-body.tsx:659 src/header.tsx:75
 msgid "Modified"
 msgstr "مُعدَّل"
 
@@ -474,7 +474,7 @@ msgstr "مُعدَّل"
 msgid "Most permissive"
 msgstr "الأكثر تَساهُلًا"
 
-#: src/header.tsx:53 src/files-card-body.tsx:534
+#: src/files-card-body.tsx:534 src/header.tsx:53
 msgid "Name"
 msgstr "الاسم"
 
@@ -551,10 +551,9 @@ msgstr "وصول آخرين"
 msgid "Overwrite"
 msgstr "الكتابة فوق"
 
-#: src/files-footer-detail.tsx:80 src/header.tsx:86
-#: src/dialogs/create-file.tsx:170 src/dialogs/permissions.tsx:304
-#: src/files-card-body.tsx:544 src/files-card-body.tsx:591
-#: src/files-card-body.tsx:667
+#: src/files-footer-detail.tsx:80 src/files-card-body.tsx:544
+#: src/files-card-body.tsx:591 src/files-card-body.tsx:667 src/header.tsx:86
+#: src/dialogs/permissions.tsx:304 src/dialogs/create-file.tsx:170
 msgid "Owner"
 msgstr "المالك"
 
@@ -574,7 +573,7 @@ msgstr "مالك (تنازلي)"
 msgid "Ownership"
 msgstr "الملكية"
 
-#: src/menu.tsx:99 src/dialogs/copyPasteOwnership.tsx:164
+#: src/dialogs/copyPasteOwnership.tsx:164 src/menu.tsx:99
 msgid "Paste"
 msgstr "لصق"
 
@@ -586,7 +585,7 @@ msgstr "لصق كمالك"
 msgid "Paste file or directory"
 msgstr "لصق الملف أو الدليل"
 
-#: src/menu.tsx:51 src/dialogs/copyPasteOwnership.tsx:53
+#: src/dialogs/copyPasteOwnership.tsx:53 src/menu.tsx:51
 msgid "Pasting failed"
 msgstr "فشل اللصق"
 
@@ -594,7 +593,7 @@ msgstr "فشل اللصق"
 msgid "Permission denied"
 msgstr "الإذن مرفوض"
 
-#: src/header.tsx:97 src/files-card-body.tsx:549 src/files-card-body.tsx:674
+#: src/files-card-body.tsx:549 src/files-card-body.tsx:674 src/header.tsx:97
 msgid "Permissions"
 msgstr "الصلاحيات"
 
@@ -614,7 +613,7 @@ msgstr "قراءة وكتابة"
 msgid "Read, write, and execute"
 msgstr "قراءة، كتابة، وتنفيذ"
 
-#: src/common.ts:53 src/dialogs/permissions.tsx:215 src/dialogs/editor.tsx:167
+#: src/common.ts:53 src/dialogs/editor.tsx:167 src/dialogs/permissions.tsx:215
 msgid "Read-only"
 msgstr "القراءة-فقط"
 
@@ -642,7 +641,7 @@ msgstr "إعادة تحميل"
 msgid "Remove from bookmarks"
 msgstr "الإزالة من العلامات المرجعية"
 
-#: src/menu.tsx:162 src/dialogs/rename.tsx:78
+#: src/dialogs/rename.tsx:78 src/menu.tsx:162
 msgid "Rename"
 msgstr "أعد التسمية"
 
@@ -686,7 +685,7 @@ msgstr "اجعله قابلاً للتنفيذ كبرنامج"
 msgid "Show all files"
 msgstr "أظهر جميع الملفات"
 
-#: src/header.tsx:271 src/files-card-body.tsx:522
+#: src/files-card-body.tsx:522 src/header.tsx:271
 msgid "Show hidden items"
 msgstr "أظهر العناصر المخفية"
 
@@ -694,7 +693,7 @@ msgstr "أظهر العناصر المخفية"
 msgid "Show keyboard shortcuts"
 msgstr "أظهر اختصارات لوحة المفاتيح"
 
-#: src/header.tsx:64 src/files-card-body.tsx:535 src/files-card-body.tsx:652
+#: src/files-card-body.tsx:535 src/files-card-body.tsx:652 src/header.tsx:64
 msgid "Size"
 msgstr "الحجم"
 
