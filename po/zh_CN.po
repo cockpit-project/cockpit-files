@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-27 04:57+0000\n"
-"PO-Revision-Date: 2025-11-17 16:58+0000\n"
-"Last-Translator: Jesse Guo <jesseguotech@outlook.com>\n"
+"POT-Creation-Date: 2026-04-02 04:53+0000\n"
+"PO-Revision-Date: 2026-04-02 23:59+0000\n"
+"Last-Translator: 耗子 <haozi@loli.email>\n"
 "Language-Team: Chinese (Simplified) <https://translate.fedoraproject.org/"
 "projects/cockpit/cockpit-files/zh_CN/>\n"
 "Language: zh_CN\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
-"X-Generator: Weblate 5.14.3\n"
+"X-Generator: Weblate 5.16.2\n"
 
 #: src/menu.tsx:53
 msgid "\"$0\" exists, not overwriting with paste."
@@ -40,7 +40,7 @@ msgstr "选择了 $0 文件"
 
 #: src/dialogs/editor.tsx:274
 msgid "$0 has unsaved changes and which will be permanently lost if discarded."
-msgstr ""
+msgstr "$0 有未保存的更改，丢弃后将永久丢失。"
 
 #: src/files-card-body.tsx:519
 msgid "$0 item is hidden"
@@ -113,11 +113,11 @@ msgstr "块设备"
 msgid "Bookmarks"
 msgstr "书签"
 
-#: src/upload-button.tsx:146 src/dialogs/create-file.tsx:196
-#: src/dialogs/rename.tsx:87 src/dialogs/permissions.tsx:409
-#: src/dialogs/copyPasteOwnership.tsx:166 src/dialogs/editor.tsx:248
-#: src/dialogs/editor.tsx:314 src/dialogs/mkdir.tsx:137
-#: src/dialogs/symlink.tsx:233 src/dialogs/delete.tsx:97
+#: src/upload-button.tsx:146 src/dialogs/copyPasteOwnership.tsx:166
+#: src/dialogs/mkdir.tsx:137 src/dialogs/rename.tsx:87
+#: src/dialogs/symlink.tsx:233 src/dialogs/editor.tsx:248
+#: src/dialogs/editor.tsx:314 src/dialogs/permissions.tsx:409
+#: src/dialogs/delete.tsx:97 src/dialogs/create-file.tsx:196
 msgid "Cancel"
 msgstr "取消"
 
@@ -161,7 +161,7 @@ msgstr "字符设备"
 msgid "Clear filter"
 msgstr "清除过滤器"
 
-#: src/dialogs/editor.tsx:248 src/dialogs/keyboardShortcutsHelp.tsx:33
+#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:248
 msgid "Close"
 msgstr "关闭"
 
@@ -185,19 +185,19 @@ msgstr "复制"
 msgid "Copy selected file or directory"
 msgstr "复制所选的文件或目录"
 
-#: src/dialogs/create-file.tsx:193 src/dialogs/mkdir.tsx:135
+#: src/dialogs/mkdir.tsx:135 src/dialogs/create-file.tsx:193
 msgid "Create"
 msgstr "创建"
 
-#: src/menu.tsx:106 src/dialogs/mkdir.tsx:80
+#: src/dialogs/mkdir.tsx:80 src/menu.tsx:106
 msgid "Create directory"
 msgstr "创建目录"
 
-#: src/menu.tsx:111 src/dialogs/create-file.tsx:136
+#: src/dialogs/create-file.tsx:136 src/menu.tsx:111
 msgid "Create file"
 msgstr "创建文件"
 
-#: src/menu.tsx:197 src/dialogs/symlink.tsx:231
+#: src/dialogs/symlink.tsx:231 src/menu.tsx:197
 msgid "Create link"
 msgstr "创建链接"
 
@@ -209,7 +209,7 @@ msgstr "创建到 $0 的链接"
 msgid "Create new directory"
 msgstr "创建新目录"
 
-#: src/menu.tsx:168 src/menu.tsx:210 src/dialogs/delete.tsx:95
+#: src/dialogs/delete.tsx:95 src/menu.tsx:168 src/menu.tsx:210
 msgid "Delete"
 msgstr "删除"
 
@@ -275,7 +275,7 @@ msgstr "同名的目录已经存在"
 
 #: src/dialogs/editor.tsx:307
 msgid "Discard"
-msgstr ""
+msgstr "丢弃"
 
 #: src/header.tsx:241
 msgid "Display as a grid"
@@ -319,8 +319,6 @@ msgid "Failed"
 msgstr "失败"
 
 #: src/files-card-body.tsx:580
-#, fuzzy
-#| msgid "Files"
 msgid "File"
 msgstr "文件"
 
@@ -372,7 +370,7 @@ msgstr "最先修改"
 
 #: src/files-card-body.tsx:578
 msgid "Folder"
-msgstr ""
+msgstr "文件夹"
 
 #: src/dialogs/delete.tsx:51
 msgid "Force delete $0"
@@ -407,7 +405,7 @@ msgid "Go up a directory"
 msgstr "转到目录"
 
 #: src/files-footer-detail.tsx:80 src/files-footer-detail.tsx:152
-#: src/dialogs/permissions.tsx:319 src/files-card-body.tsx:591
+#: src/files-card-body.tsx:591 src/dialogs/permissions.tsx:319
 msgid "Group"
 msgstr "组"
 
@@ -455,7 +453,7 @@ msgstr "管理您的文件"
 msgid "Missing type"
 msgstr "缺少类型"
 
-#: src/header.tsx:75 src/files-card-body.tsx:539 src/files-card-body.tsx:659
+#: src/files-card-body.tsx:539 src/files-card-body.tsx:659 src/header.tsx:75
 msgid "Modified"
 msgstr "修改时间"
 
@@ -463,7 +461,7 @@ msgstr "修改时间"
 msgid "Most permissive"
 msgstr "最大权限"
 
-#: src/header.tsx:53 src/files-card-body.tsx:534
+#: src/files-card-body.tsx:534 src/header.tsx:53
 msgid "Name"
 msgstr "名称"
 
@@ -540,10 +538,9 @@ msgstr "其它人访问权限"
 msgid "Overwrite"
 msgstr "覆盖"
 
-#: src/files-footer-detail.tsx:80 src/header.tsx:86
-#: src/dialogs/create-file.tsx:170 src/dialogs/permissions.tsx:304
-#: src/files-card-body.tsx:544 src/files-card-body.tsx:591
-#: src/files-card-body.tsx:667
+#: src/files-footer-detail.tsx:80 src/files-card-body.tsx:544
+#: src/files-card-body.tsx:591 src/files-card-body.tsx:667 src/header.tsx:86
+#: src/dialogs/permissions.tsx:304 src/dialogs/create-file.tsx:170
 msgid "Owner"
 msgstr "所有者"
 
@@ -563,7 +560,7 @@ msgstr "所有者降序"
 msgid "Ownership"
 msgstr "所有权"
 
-#: src/menu.tsx:99 src/dialogs/copyPasteOwnership.tsx:164
+#: src/dialogs/copyPasteOwnership.tsx:164 src/menu.tsx:99
 msgid "Paste"
 msgstr "粘贴"
 
@@ -575,7 +572,7 @@ msgstr "粘贴为所有者"
 msgid "Paste file or directory"
 msgstr "粘贴文件或目录"
 
-#: src/menu.tsx:51 src/dialogs/copyPasteOwnership.tsx:53
+#: src/dialogs/copyPasteOwnership.tsx:53 src/menu.tsx:51
 msgid "Pasting failed"
 msgstr "粘贴失败"
 
@@ -583,7 +580,7 @@ msgstr "粘贴失败"
 msgid "Permission denied"
 msgstr "权限被拒绝"
 
-#: src/header.tsx:97 src/files-card-body.tsx:549 src/files-card-body.tsx:674
+#: src/files-card-body.tsx:549 src/files-card-body.tsx:674 src/header.tsx:97
 msgid "Permissions"
 msgstr "权限"
 
@@ -603,7 +600,7 @@ msgstr "读取与写入"
 msgid "Read, write, and execute"
 msgstr "读取，写入与执行"
 
-#: src/common.ts:53 src/dialogs/permissions.tsx:215 src/dialogs/editor.tsx:167
+#: src/common.ts:53 src/dialogs/editor.tsx:167 src/dialogs/permissions.tsx:215
 msgid "Read-only"
 msgstr "只读"
 
@@ -630,7 +627,7 @@ msgstr "重载"
 msgid "Remove from bookmarks"
 msgstr "从书签中删除"
 
-#: src/menu.tsx:162 src/dialogs/rename.tsx:78
+#: src/dialogs/rename.tsx:78 src/menu.tsx:162
 msgid "Rename"
 msgstr "重命名"
 
@@ -656,7 +653,7 @@ msgstr "保存"
 
 #: src/dialogs/editor.tsx:259
 msgid "Save changes?"
-msgstr ""
+msgstr "保存更改？"
 
 #: src/dialogs/permissions.tsx:375
 msgid "Security context"
@@ -674,7 +671,7 @@ msgstr "将可执行文件设置为程序"
 msgid "Show all files"
 msgstr "显示所有文件"
 
-#: src/header.tsx:271 src/files-card-body.tsx:522
+#: src/files-card-body.tsx:522 src/header.tsx:271
 msgid "Show hidden items"
 msgstr "显示隐藏项目"
 
@@ -682,7 +679,7 @@ msgstr "显示隐藏项目"
 msgid "Show keyboard shortcuts"
 msgstr "显示键盘快捷方式"
 
-#: src/header.tsx:64 src/files-card-body.tsx:535 src/files-card-body.tsx:652
+#: src/files-card-body.tsx:535 src/files-card-body.tsx:652 src/header.tsx:64
 msgid "Size"
 msgstr "大小"
 
@@ -723,14 +720,12 @@ msgid "The file has changed on disk"
 msgstr "文件已在磁盘上进行了更改"
 
 #: src/dialogs/editor.tsx:269
-#, fuzzy
-#| msgid "The file has changed on disk"
 msgid "The file has changed on disk between when it was opened and now"
-msgstr "文件已在磁盘上进行了更改"
+msgstr "该文件在打开后和现在之间已在磁盘上发生更改"
 
 #: src/dialogs/editor.tsx:268
 msgid "The file was deleted after it was opened, saving will recreate it."
-msgstr ""
+msgstr "该文件在打开后已被删除，保存将重新创建它。"
 
 #: src/dialogs/symlink.tsx:180
 msgid "Type"

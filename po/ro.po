@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-27 04:57+0000\n"
+"POT-Creation-Date: 2026-04-02 04:53+0000\n"
 "PO-Revision-Date: 2026-03-24 09:58+0000\n"
 "Last-Translator: Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>\n"
 "Language-Team: Romanian <https://translate.fedoraproject.org/projects/"
@@ -123,11 +123,11 @@ msgstr "Dispozitiv de blocuri"
 msgid "Bookmarks"
 msgstr "Marcaje"
 
-#: src/upload-button.tsx:146 src/dialogs/create-file.tsx:196
-#: src/dialogs/rename.tsx:87 src/dialogs/permissions.tsx:409
-#: src/dialogs/copyPasteOwnership.tsx:166 src/dialogs/editor.tsx:248
-#: src/dialogs/editor.tsx:314 src/dialogs/mkdir.tsx:137
-#: src/dialogs/symlink.tsx:233 src/dialogs/delete.tsx:97
+#: src/upload-button.tsx:146 src/dialogs/copyPasteOwnership.tsx:166
+#: src/dialogs/mkdir.tsx:137 src/dialogs/rename.tsx:87
+#: src/dialogs/symlink.tsx:233 src/dialogs/editor.tsx:248
+#: src/dialogs/editor.tsx:314 src/dialogs/permissions.tsx:409
+#: src/dialogs/delete.tsx:97 src/dialogs/create-file.tsx:196
 msgid "Cancel"
 msgstr "Anulează"
 
@@ -171,7 +171,7 @@ msgstr "Dispozitiv de caractere"
 msgid "Clear filter"
 msgstr "Șterge filtrul"
 
-#: src/dialogs/editor.tsx:248 src/dialogs/keyboardShortcutsHelp.tsx:33
+#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:248
 msgid "Close"
 msgstr "Închide"
 
@@ -195,19 +195,19 @@ msgstr "Copiază"
 msgid "Copy selected file or directory"
 msgstr "Copiază fișierul sau directorul selectat"
 
-#: src/dialogs/create-file.tsx:193 src/dialogs/mkdir.tsx:135
+#: src/dialogs/mkdir.tsx:135 src/dialogs/create-file.tsx:193
 msgid "Create"
 msgstr "Creează"
 
-#: src/menu.tsx:106 src/dialogs/mkdir.tsx:80
+#: src/dialogs/mkdir.tsx:80 src/menu.tsx:106
 msgid "Create directory"
 msgstr "Creează un director"
 
-#: src/menu.tsx:111 src/dialogs/create-file.tsx:136
+#: src/dialogs/create-file.tsx:136 src/menu.tsx:111
 msgid "Create file"
 msgstr "Creează un fișier"
 
-#: src/menu.tsx:197 src/dialogs/symlink.tsx:231
+#: src/dialogs/symlink.tsx:231 src/menu.tsx:197
 msgid "Create link"
 msgstr "Creează o legătură"
 
@@ -219,7 +219,7 @@ msgstr "Creează o legătură la $0"
 msgid "Create new directory"
 msgstr "Creează un nou director"
 
-#: src/menu.tsx:168 src/menu.tsx:210 src/dialogs/delete.tsx:95
+#: src/dialogs/delete.tsx:95 src/menu.tsx:168 src/menu.tsx:210
 msgid "Delete"
 msgstr "Șterge"
 
@@ -417,7 +417,7 @@ msgid "Go up a directory"
 msgstr "Mergi la directorul părinte"
 
 #: src/files-footer-detail.tsx:80 src/files-footer-detail.tsx:152
-#: src/dialogs/permissions.tsx:319 src/files-card-body.tsx:591
+#: src/files-card-body.tsx:591 src/dialogs/permissions.tsx:319
 msgid "Group"
 msgstr "Grup"
 
@@ -465,7 +465,7 @@ msgstr "Gestionați-vă fișierele"
 msgid "Missing type"
 msgstr "Tipul lipsește"
 
-#: src/header.tsx:75 src/files-card-body.tsx:539 src/files-card-body.tsx:659
+#: src/files-card-body.tsx:539 src/files-card-body.tsx:659 src/header.tsx:75
 msgid "Modified"
 msgstr "Modificat"
 
@@ -473,7 +473,7 @@ msgstr "Modificat"
 msgid "Most permissive"
 msgstr "Mai mult permisiv"
 
-#: src/header.tsx:53 src/files-card-body.tsx:534
+#: src/files-card-body.tsx:534 src/header.tsx:53
 msgid "Name"
 msgstr "Nume"
 
@@ -550,10 +550,9 @@ msgstr "Acces pentru alții"
 msgid "Overwrite"
 msgstr "Suprascrie"
 
-#: src/files-footer-detail.tsx:80 src/header.tsx:86
-#: src/dialogs/create-file.tsx:170 src/dialogs/permissions.tsx:304
-#: src/files-card-body.tsx:544 src/files-card-body.tsx:591
-#: src/files-card-body.tsx:667
+#: src/files-footer-detail.tsx:80 src/files-card-body.tsx:544
+#: src/files-card-body.tsx:591 src/files-card-body.tsx:667 src/header.tsx:86
+#: src/dialogs/permissions.tsx:304 src/dialogs/create-file.tsx:170
 msgid "Owner"
 msgstr "Proprietar"
 
@@ -573,7 +572,7 @@ msgstr "Proprietar descendent"
 msgid "Ownership"
 msgstr "Deținător"
 
-#: src/menu.tsx:99 src/dialogs/copyPasteOwnership.tsx:164
+#: src/dialogs/copyPasteOwnership.tsx:164 src/menu.tsx:99
 msgid "Paste"
 msgstr "Lipește"
 
@@ -585,7 +584,7 @@ msgstr "Lipește ca proprietar"
 msgid "Paste file or directory"
 msgstr "Lipește fișierul sau directorul"
 
-#: src/menu.tsx:51 src/dialogs/copyPasteOwnership.tsx:53
+#: src/dialogs/copyPasteOwnership.tsx:53 src/menu.tsx:51
 msgid "Pasting failed"
 msgstr "Lipirea a eșuat"
 
@@ -593,7 +592,7 @@ msgstr "Lipirea a eșuat"
 msgid "Permission denied"
 msgstr "Permisiune refuzată"
 
-#: src/header.tsx:97 src/files-card-body.tsx:549 src/files-card-body.tsx:674
+#: src/files-card-body.tsx:549 src/files-card-body.tsx:674 src/header.tsx:97
 msgid "Permissions"
 msgstr "Permisiuni"
 
@@ -613,7 +612,7 @@ msgstr "Citire și scriere"
 msgid "Read, write, and execute"
 msgstr "Citire, scriere și executare"
 
-#: src/common.ts:53 src/dialogs/permissions.tsx:215 src/dialogs/editor.tsx:167
+#: src/common.ts:53 src/dialogs/editor.tsx:167 src/dialogs/permissions.tsx:215
 msgid "Read-only"
 msgstr "Numai-citire"
 
@@ -642,7 +641,7 @@ msgstr "Reîncărcare"
 msgid "Remove from bookmarks"
 msgstr "Elimină din marcaje"
 
-#: src/menu.tsx:162 src/dialogs/rename.tsx:78
+#: src/dialogs/rename.tsx:78 src/menu.tsx:162
 msgid "Rename"
 msgstr "Redenumește"
 
@@ -686,7 +685,7 @@ msgstr "Definiți executabilul ca program"
 msgid "Show all files"
 msgstr "Afișează toate fișierele"
 
-#: src/header.tsx:271 src/files-card-body.tsx:522
+#: src/files-card-body.tsx:522 src/header.tsx:271
 msgid "Show hidden items"
 msgstr "Afișează elementele ascunse"
 
@@ -694,7 +693,7 @@ msgstr "Afișează elementele ascunse"
 msgid "Show keyboard shortcuts"
 msgstr "Afișează comenzile rapide de la tastatură"
 
-#: src/header.tsx:64 src/files-card-body.tsx:535 src/files-card-body.tsx:652
+#: src/files-card-body.tsx:535 src/files-card-body.tsx:652 src/header.tsx:64
 msgid "Size"
 msgstr "Dimensiune"
 
