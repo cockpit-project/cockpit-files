@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-02 04:53+0000\n"
+"POT-Creation-Date: 2026-04-14 05:12+0000\n"
 "PO-Revision-Date: 2025-04-03 14:53+0000\n"
 "Last-Translator: Ricky Tigg <ricky.tigg@gmail.com>\n"
 "Language-Team: Finnish <https://translate.fedoraproject.org/projects/cockpit-"
@@ -119,11 +119,11 @@ msgstr "Lohkolaite"
 msgid "Bookmarks"
 msgstr "Kirjanmerkit"
 
-#: src/upload-button.tsx:146 src/dialogs/copyPasteOwnership.tsx:166
-#: src/dialogs/mkdir.tsx:137 src/dialogs/rename.tsx:87
-#: src/dialogs/symlink.tsx:233 src/dialogs/editor.tsx:248
-#: src/dialogs/editor.tsx:314 src/dialogs/permissions.tsx:409
-#: src/dialogs/delete.tsx:97 src/dialogs/create-file.tsx:196
+#: src/upload-button.tsx:146 src/dialogs/mkdir.tsx:137
+#: src/dialogs/rename.tsx:87 src/dialogs/editor.tsx:248
+#: src/dialogs/editor.tsx:314 src/dialogs/copyPasteOwnership.tsx:166
+#: src/dialogs/symlink.tsx:233 src/dialogs/delete.tsx:97
+#: src/dialogs/permissions.tsx:409 src/dialogs/create-file.tsx:196
 msgid "Cancel"
 msgstr "Peru"
 
@@ -167,7 +167,7 @@ msgstr "Merkkilaite"
 msgid "Clear filter"
 msgstr "Tyhjennä suodatin"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:248
+#: src/dialogs/editor.tsx:248 src/dialogs/keyboardShortcutsHelp.tsx:33
 msgid "Close"
 msgstr "Sulje"
 
@@ -195,15 +195,15 @@ msgstr "Kopioi valittu tiedosto tai kansio"
 msgid "Create"
 msgstr "Luo"
 
-#: src/dialogs/mkdir.tsx:80 src/menu.tsx:106
+#: src/menu.tsx:106 src/dialogs/mkdir.tsx:80
 msgid "Create directory"
 msgstr "Luo hakemisto"
 
-#: src/dialogs/create-file.tsx:136 src/menu.tsx:111
+#: src/menu.tsx:111 src/dialogs/create-file.tsx:136
 msgid "Create file"
 msgstr "Luo tiedosto"
 
-#: src/dialogs/symlink.tsx:231 src/menu.tsx:197
+#: src/menu.tsx:197 src/dialogs/symlink.tsx:231
 msgid "Create link"
 msgstr "Luo linkki"
 
@@ -215,7 +215,7 @@ msgstr "Luo linkki $0:iin"
 msgid "Create new directory"
 msgstr "Luo uusi hakemisto"
 
-#: src/dialogs/delete.tsx:95 src/menu.tsx:168 src/menu.tsx:210
+#: src/menu.tsx:168 src/menu.tsx:210 src/dialogs/delete.tsx:95
 msgid "Delete"
 msgstr "Poista"
 
@@ -570,7 +570,7 @@ msgstr "Omistaja laskeva"
 msgid "Ownership"
 msgstr "Omistajuus"
 
-#: src/dialogs/copyPasteOwnership.tsx:164 src/menu.tsx:99
+#: src/menu.tsx:99 src/dialogs/copyPasteOwnership.tsx:164
 msgid "Paste"
 msgstr "Liitä"
 
@@ -582,7 +582,7 @@ msgstr "Liitä omistajana"
 msgid "Paste file or directory"
 msgstr "Liitä tiedosto tai hakemisto"
 
-#: src/dialogs/copyPasteOwnership.tsx:53 src/menu.tsx:51
+#: src/menu.tsx:51 src/dialogs/copyPasteOwnership.tsx:53
 msgid "Pasting failed"
 msgstr "Liittäminen epäonnistui"
 
@@ -639,7 +639,7 @@ msgstr "Lataa uudelleen"
 msgid "Remove from bookmarks"
 msgstr "Poista kirjanmerkeistä"
 
-#: src/dialogs/rename.tsx:78 src/menu.tsx:162
+#: src/menu.tsx:162 src/dialogs/rename.tsx:78
 msgid "Rename"
 msgstr "Nimeä uudelleen"
 

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-02 04:53+0000\n"
+"POT-Creation-Date: 2026-04-14 05:12+0000\n"
 "PO-Revision-Date: 2026-03-27 19:58+0000\n"
 "Last-Translator: Luna Jernberg <droidbittin@gmail.com>\n"
 "Language-Team: Swedish <https://translate.fedoraproject.org/projects/cockpit/"
@@ -121,11 +121,11 @@ msgstr "Blockenhet"
 msgid "Bookmarks"
 msgstr "Bokmärken"
 
-#: src/upload-button.tsx:146 src/dialogs/copyPasteOwnership.tsx:166
-#: src/dialogs/mkdir.tsx:137 src/dialogs/rename.tsx:87
-#: src/dialogs/symlink.tsx:233 src/dialogs/editor.tsx:248
-#: src/dialogs/editor.tsx:314 src/dialogs/permissions.tsx:409
-#: src/dialogs/delete.tsx:97 src/dialogs/create-file.tsx:196
+#: src/upload-button.tsx:146 src/dialogs/mkdir.tsx:137
+#: src/dialogs/rename.tsx:87 src/dialogs/editor.tsx:248
+#: src/dialogs/editor.tsx:314 src/dialogs/copyPasteOwnership.tsx:166
+#: src/dialogs/symlink.tsx:233 src/dialogs/delete.tsx:97
+#: src/dialogs/permissions.tsx:409 src/dialogs/create-file.tsx:196
 msgid "Cancel"
 msgstr "Avbryt"
 
@@ -169,7 +169,7 @@ msgstr "Teckenenhet"
 msgid "Clear filter"
 msgstr "Rensa filter"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:248
+#: src/dialogs/editor.tsx:248 src/dialogs/keyboardShortcutsHelp.tsx:33
 msgid "Close"
 msgstr "Stäng"
 
@@ -197,15 +197,15 @@ msgstr "Kopiera vald fil eller katalog"
 msgid "Create"
 msgstr "Skapa"
 
-#: src/dialogs/mkdir.tsx:80 src/menu.tsx:106
+#: src/menu.tsx:106 src/dialogs/mkdir.tsx:80
 msgid "Create directory"
 msgstr "Skapa katalog"
 
-#: src/dialogs/create-file.tsx:136 src/menu.tsx:111
+#: src/menu.tsx:111 src/dialogs/create-file.tsx:136
 msgid "Create file"
 msgstr "Skapa fil"
 
-#: src/dialogs/symlink.tsx:231 src/menu.tsx:197
+#: src/menu.tsx:197 src/dialogs/symlink.tsx:231
 msgid "Create link"
 msgstr "Skapa länk"
 
@@ -217,7 +217,7 @@ msgstr "Skapa länk till $0"
 msgid "Create new directory"
 msgstr "Skapa ny katalog"
 
-#: src/dialogs/delete.tsx:95 src/menu.tsx:168 src/menu.tsx:210
+#: src/menu.tsx:168 src/menu.tsx:210 src/dialogs/delete.tsx:95
 msgid "Delete"
 msgstr "Ta bort"
 
@@ -570,7 +570,7 @@ msgstr "Ägare minskande"
 msgid "Ownership"
 msgstr "Ägarskap"
 
-#: src/dialogs/copyPasteOwnership.tsx:164 src/menu.tsx:99
+#: src/menu.tsx:99 src/dialogs/copyPasteOwnership.tsx:164
 msgid "Paste"
 msgstr "Klistra in"
 
@@ -582,7 +582,7 @@ msgstr "Klistra in som ägare"
 msgid "Paste file or directory"
 msgstr "Klistra in fil eller katalog"
 
-#: src/dialogs/copyPasteOwnership.tsx:53 src/menu.tsx:51
+#: src/menu.tsx:51 src/dialogs/copyPasteOwnership.tsx:53
 msgid "Pasting failed"
 msgstr "Inklistring misslyckades"
 
@@ -639,7 +639,7 @@ msgstr "Ladda om"
 msgid "Remove from bookmarks"
 msgstr "Ta bort från bokmärken"
 
-#: src/dialogs/rename.tsx:78 src/menu.tsx:162
+#: src/menu.tsx:162 src/dialogs/rename.tsx:78
 msgid "Rename"
 msgstr "Byt namn"
 

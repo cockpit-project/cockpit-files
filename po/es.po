@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-02 04:53+0000\n"
-"PO-Revision-Date: 2025-11-12 21:01+0000\n"
+"POT-Creation-Date: 2026-04-14 05:12+0000\n"
+"PO-Revision-Date: 2026-04-10 13:10+0000\n"
 "Last-Translator: \"Fco. Javier F. Serrador\" <fserrador@gmail.com>\n"
 "Language-Team: Spanish <https://translate.fedoraproject.org/projects/cockpit/"
 "cockpit-files/es/>\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1\n"
-"X-Generator: Weblate 5.14.3\n"
+"X-Generator: Weblate 5.16.2\n"
 
 #: src/menu.tsx:53
 msgid "\"$0\" exists, not overwriting with paste."
@@ -41,6 +41,8 @@ msgstr "$0 archivos seleccionados"
 #: src/dialogs/editor.tsx:274
 msgid "$0 has unsaved changes and which will be permanently lost if discarded."
 msgstr ""
+"$0 tiene cambios no guardados los cuales se perderán permanentemente si se "
+"descartan."
 
 #: src/files-card-body.tsx:519
 msgid "$0 item is hidden"
@@ -119,11 +121,11 @@ msgstr "Dispositivo de bloque"
 msgid "Bookmarks"
 msgstr "Marcadores"
 
-#: src/upload-button.tsx:146 src/dialogs/copyPasteOwnership.tsx:166
-#: src/dialogs/mkdir.tsx:137 src/dialogs/rename.tsx:87
-#: src/dialogs/symlink.tsx:233 src/dialogs/editor.tsx:248
-#: src/dialogs/editor.tsx:314 src/dialogs/permissions.tsx:409
-#: src/dialogs/delete.tsx:97 src/dialogs/create-file.tsx:196
+#: src/upload-button.tsx:146 src/dialogs/mkdir.tsx:137
+#: src/dialogs/rename.tsx:87 src/dialogs/editor.tsx:248
+#: src/dialogs/editor.tsx:314 src/dialogs/copyPasteOwnership.tsx:166
+#: src/dialogs/symlink.tsx:233 src/dialogs/delete.tsx:97
+#: src/dialogs/permissions.tsx:409 src/dialogs/create-file.tsx:196
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -167,7 +169,7 @@ msgstr "Dispositivo de carácter"
 msgid "Clear filter"
 msgstr "Borrar filtro"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:248
+#: src/dialogs/editor.tsx:248 src/dialogs/keyboardShortcutsHelp.tsx:33
 msgid "Close"
 msgstr "Cerrar"
 
@@ -195,15 +197,15 @@ msgstr "Copiar archivo o directorio seleccionado"
 msgid "Create"
 msgstr "Crear"
 
-#: src/dialogs/mkdir.tsx:80 src/menu.tsx:106
+#: src/menu.tsx:106 src/dialogs/mkdir.tsx:80
 msgid "Create directory"
 msgstr "Crear directorio"
 
-#: src/dialogs/create-file.tsx:136 src/menu.tsx:111
+#: src/menu.tsx:111 src/dialogs/create-file.tsx:136
 msgid "Create file"
 msgstr "Crear archivo"
 
-#: src/dialogs/symlink.tsx:231 src/menu.tsx:197
+#: src/menu.tsx:197 src/dialogs/symlink.tsx:231
 msgid "Create link"
 msgstr "Crear enlace"
 
@@ -215,7 +217,7 @@ msgstr "Crear enlace a $0"
 msgid "Create new directory"
 msgstr "Crear nuevo directorio"
 
-#: src/dialogs/delete.tsx:95 src/menu.tsx:168 src/menu.tsx:210
+#: src/menu.tsx:168 src/menu.tsx:210 src/dialogs/delete.tsx:95
 msgid "Delete"
 msgstr "Eliminar"
 
@@ -281,7 +283,7 @@ msgstr "Ya existe un directorio con el mismo nombre"
 
 #: src/dialogs/editor.tsx:307
 msgid "Discard"
-msgstr ""
+msgstr "Descartar"
 
 #: src/header.tsx:241
 msgid "Display as a grid"
@@ -325,10 +327,8 @@ msgid "Failed"
 msgstr "Falló"
 
 #: src/files-card-body.tsx:580
-#, fuzzy
-#| msgid "Files"
 msgid "File"
-msgstr "Archivos"
+msgstr "Archivo"
 
 #: src/manifest.json:0
 msgid "File browser"
@@ -380,7 +380,7 @@ msgstr "Modificado por primera vez"
 
 #: src/files-card-body.tsx:578
 msgid "Folder"
-msgstr ""
+msgstr "Carpeta"
 
 #: src/dialogs/delete.tsx:51
 msgid "Force delete $0"
@@ -570,7 +570,7 @@ msgstr "Propetario descendiente"
 msgid "Ownership"
 msgstr "Propiedad"
 
-#: src/dialogs/copyPasteOwnership.tsx:164 src/menu.tsx:99
+#: src/menu.tsx:99 src/dialogs/copyPasteOwnership.tsx:164
 msgid "Paste"
 msgstr "Pegar"
 
@@ -582,7 +582,7 @@ msgstr "Pegar como propietario"
 msgid "Paste file or directory"
 msgstr "Pegar archivo o directorio"
 
-#: src/dialogs/copyPasteOwnership.tsx:53 src/menu.tsx:51
+#: src/menu.tsx:51 src/dialogs/copyPasteOwnership.tsx:53
 msgid "Pasting failed"
 msgstr "Falló el pegado"
 
@@ -638,7 +638,7 @@ msgstr "Recargar"
 msgid "Remove from bookmarks"
 msgstr "Quitar de marcadores"
 
-#: src/dialogs/rename.tsx:78 src/menu.tsx:162
+#: src/menu.tsx:162 src/dialogs/rename.tsx:78
 msgid "Rename"
 msgstr "Renombrar"
 
@@ -664,7 +664,7 @@ msgstr "Guardar"
 
 #: src/dialogs/editor.tsx:259
 msgid "Save changes?"
-msgstr ""
+msgstr "¿Guardo los cambios?"
 
 #: src/dialogs/permissions.tsx:375
 msgid "Security context"
@@ -731,14 +731,12 @@ msgid "The file has changed on disk"
 msgstr "El archivo ha cambiado en el disco"
 
 #: src/dialogs/editor.tsx:269
-#, fuzzy
-#| msgid "The file has changed on disk"
 msgid "The file has changed on disk between when it was opened and now"
-msgstr "El archivo ha cambiado en el disco"
+msgstr "El archivo ha cambiado en el disco entre cuando fue abierto y ahora"
 
 #: src/dialogs/editor.tsx:268
 msgid "The file was deleted after it was opened, saving will recreate it."
-msgstr ""
+msgstr "El archivo fue borrado tras haber sido abierto, guardar lo recreará."
 
 #: src/dialogs/symlink.tsx:180
 msgid "Type"

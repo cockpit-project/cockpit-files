@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-02 04:53+0000\n"
+"POT-Creation-Date: 2026-04-14 05:12+0000\n"
 "PO-Revision-Date: 2026-02-03 13:58+0000\n"
 "Last-Translator: Kohei Takahashi <flast@flast.jp>\n"
 "Language-Team: Japanese <https://translate.fedoraproject.org/projects/"
@@ -118,11 +118,11 @@ msgstr "ブロックデバイス"
 msgid "Bookmarks"
 msgstr "ブックマーク"
 
-#: src/upload-button.tsx:146 src/dialogs/copyPasteOwnership.tsx:166
-#: src/dialogs/mkdir.tsx:137 src/dialogs/rename.tsx:87
-#: src/dialogs/symlink.tsx:233 src/dialogs/editor.tsx:248
-#: src/dialogs/editor.tsx:314 src/dialogs/permissions.tsx:409
-#: src/dialogs/delete.tsx:97 src/dialogs/create-file.tsx:196
+#: src/upload-button.tsx:146 src/dialogs/mkdir.tsx:137
+#: src/dialogs/rename.tsx:87 src/dialogs/editor.tsx:248
+#: src/dialogs/editor.tsx:314 src/dialogs/copyPasteOwnership.tsx:166
+#: src/dialogs/symlink.tsx:233 src/dialogs/delete.tsx:97
+#: src/dialogs/permissions.tsx:409 src/dialogs/create-file.tsx:196
 msgid "Cancel"
 msgstr "取り消し"
 
@@ -166,7 +166,7 @@ msgstr "キャラクターデバイス"
 msgid "Clear filter"
 msgstr "フィルターを外す"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:248
+#: src/dialogs/editor.tsx:248 src/dialogs/keyboardShortcutsHelp.tsx:33
 msgid "Close"
 msgstr "閉じる"
 
@@ -194,15 +194,15 @@ msgstr "選択したファイルまたはディレクトリーをコピーする
 msgid "Create"
 msgstr "作成"
 
-#: src/dialogs/mkdir.tsx:80 src/menu.tsx:106
+#: src/menu.tsx:106 src/dialogs/mkdir.tsx:80
 msgid "Create directory"
 msgstr "ディレクトリーの作成"
 
-#: src/dialogs/create-file.tsx:136 src/menu.tsx:111
+#: src/menu.tsx:111 src/dialogs/create-file.tsx:136
 msgid "Create file"
 msgstr "ファイルの作成"
 
-#: src/dialogs/symlink.tsx:231 src/menu.tsx:197
+#: src/menu.tsx:197 src/dialogs/symlink.tsx:231
 msgid "Create link"
 msgstr "リンクの作成"
 
@@ -216,7 +216,7 @@ msgstr "リンク $0 を削除しますか?"
 msgid "Create new directory"
 msgstr "新しいディレクトリーの作成"
 
-#: src/dialogs/delete.tsx:95 src/menu.tsx:168 src/menu.tsx:210
+#: src/menu.tsx:168 src/menu.tsx:210 src/dialogs/delete.tsx:95
 msgid "Delete"
 msgstr "削除"
 
@@ -574,7 +574,7 @@ msgstr "所有者降順"
 msgid "Ownership"
 msgstr "所有権"
 
-#: src/dialogs/copyPasteOwnership.tsx:164 src/menu.tsx:99
+#: src/menu.tsx:99 src/dialogs/copyPasteOwnership.tsx:164
 msgid "Paste"
 msgstr "貼り付け"
 
@@ -586,7 +586,7 @@ msgstr "所有者として貼り付け"
 msgid "Paste file or directory"
 msgstr "ファイルまたはディレクトリーを貼り付ける"
 
-#: src/dialogs/copyPasteOwnership.tsx:53 src/menu.tsx:51
+#: src/menu.tsx:51 src/dialogs/copyPasteOwnership.tsx:53
 msgid "Pasting failed"
 msgstr "貼り付けに失敗しました"
 
@@ -640,7 +640,7 @@ msgstr "再ロード"
 msgid "Remove from bookmarks"
 msgstr "ブックマークから削除"
 
-#: src/dialogs/rename.tsx:78 src/menu.tsx:162
+#: src/menu.tsx:162 src/dialogs/rename.tsx:78
 msgid "Rename"
 msgstr "名前変更"
 

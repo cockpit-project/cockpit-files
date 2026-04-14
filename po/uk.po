@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-02 04:53+0000\n"
-"PO-Revision-Date: 2026-03-07 07:58+0000\n"
+"POT-Creation-Date: 2026-04-14 05:12+0000\n"
+"PO-Revision-Date: 2026-04-10 13:10+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <https://translate.fedoraproject.org/projects/"
 "cockpit/cockpit-files/uk/>\n"
@@ -42,6 +42,8 @@ msgstr "Позначено $0 файлів"
 #: src/dialogs/editor.tsx:274
 msgid "$0 has unsaved changes and which will be permanently lost if discarded."
 msgstr ""
+"У $0 є незбережені зміни, які буде незворотно втрачено, якщо дані буде "
+"відкинуто."
 
 #: src/files-card-body.tsx:519
 msgid "$0 item is hidden"
@@ -121,11 +123,11 @@ msgstr "Блоковий пристрій"
 msgid "Bookmarks"
 msgstr "Закладки"
 
-#: src/upload-button.tsx:146 src/dialogs/copyPasteOwnership.tsx:166
-#: src/dialogs/mkdir.tsx:137 src/dialogs/rename.tsx:87
-#: src/dialogs/symlink.tsx:233 src/dialogs/editor.tsx:248
-#: src/dialogs/editor.tsx:314 src/dialogs/permissions.tsx:409
-#: src/dialogs/delete.tsx:97 src/dialogs/create-file.tsx:196
+#: src/upload-button.tsx:146 src/dialogs/mkdir.tsx:137
+#: src/dialogs/rename.tsx:87 src/dialogs/editor.tsx:248
+#: src/dialogs/editor.tsx:314 src/dialogs/copyPasteOwnership.tsx:166
+#: src/dialogs/symlink.tsx:233 src/dialogs/delete.tsx:97
+#: src/dialogs/permissions.tsx:409 src/dialogs/create-file.tsx:196
 msgid "Cancel"
 msgstr "Скасувати"
 
@@ -169,7 +171,7 @@ msgstr "Символьний пристрій"
 msgid "Clear filter"
 msgstr "Зняти фільтрування"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:248
+#: src/dialogs/editor.tsx:248 src/dialogs/keyboardShortcutsHelp.tsx:33
 msgid "Close"
 msgstr "Закрити"
 
@@ -197,15 +199,15 @@ msgstr "Копіювати позначений файл або каталог"
 msgid "Create"
 msgstr "Створити"
 
-#: src/dialogs/mkdir.tsx:80 src/menu.tsx:106
+#: src/menu.tsx:106 src/dialogs/mkdir.tsx:80
 msgid "Create directory"
 msgstr "Створити каталог"
 
-#: src/dialogs/create-file.tsx:136 src/menu.tsx:111
+#: src/menu.tsx:111 src/dialogs/create-file.tsx:136
 msgid "Create file"
 msgstr "Створити файл"
 
-#: src/dialogs/symlink.tsx:231 src/menu.tsx:197
+#: src/menu.tsx:197 src/dialogs/symlink.tsx:231
 msgid "Create link"
 msgstr "Створити посилання"
 
@@ -217,7 +219,7 @@ msgstr "Створити посилання на $0"
 msgid "Create new directory"
 msgstr "Створити новий каталог"
 
-#: src/dialogs/delete.tsx:95 src/menu.tsx:168 src/menu.tsx:210
+#: src/menu.tsx:168 src/menu.tsx:210 src/dialogs/delete.tsx:95
 msgid "Delete"
 msgstr "Вилучити"
 
@@ -283,7 +285,7 @@ msgstr "Каталог із такою назвою вже існує"
 
 #: src/dialogs/editor.tsx:307
 msgid "Discard"
-msgstr ""
+msgstr "Відкинути"
 
 #: src/header.tsx:241
 msgid "Display as a grid"
@@ -570,7 +572,7 @@ msgstr "Власник за спаданням"
 msgid "Ownership"
 msgstr "Власність"
 
-#: src/dialogs/copyPasteOwnership.tsx:164 src/menu.tsx:99
+#: src/menu.tsx:99 src/dialogs/copyPasteOwnership.tsx:164
 msgid "Paste"
 msgstr "Вставити"
 
@@ -582,7 +584,7 @@ msgstr "Вставити як власник"
 msgid "Paste file or directory"
 msgstr "Вставити файл або каталог"
 
-#: src/dialogs/copyPasteOwnership.tsx:53 src/menu.tsx:51
+#: src/menu.tsx:51 src/dialogs/copyPasteOwnership.tsx:53
 msgid "Pasting failed"
 msgstr "Не вдалося вставити"
 
@@ -639,7 +641,7 @@ msgstr "Перезавантажити"
 msgid "Remove from bookmarks"
 msgstr "Вилучити із закладок"
 
-#: src/dialogs/rename.tsx:78 src/menu.tsx:162
+#: src/menu.tsx:162 src/dialogs/rename.tsx:78
 msgid "Rename"
 msgstr "Перейменувати"
 
@@ -665,7 +667,7 @@ msgstr "Зберегти"
 
 #: src/dialogs/editor.tsx:259
 msgid "Save changes?"
-msgstr ""
+msgstr "Зберегти зміни?"
 
 #: src/dialogs/permissions.tsx:375
 msgid "Security context"
@@ -732,14 +734,14 @@ msgid "The file has changed on disk"
 msgstr "Файл змінено на диску"
 
 #: src/dialogs/editor.tsx:269
-#, fuzzy
-#| msgid "The file has changed on disk"
 msgid "The file has changed on disk between when it was opened and now"
-msgstr "Файл змінено на диску"
+msgstr "Файл змінено на диску між моментом його відкриття і поточним моментом"
 
 #: src/dialogs/editor.tsx:268
 msgid "The file was deleted after it was opened, saving will recreate it."
 msgstr ""
+"Файл було вилучено після відкриття — його збереження призведе до повторного "
+"створення файла."
 
 #: src/dialogs/symlink.tsx:180
 msgid "Type"
@@ -751,7 +753,7 @@ msgstr "Не вдалося створити закладку на катало�
 
 #: src/upload-button.tsx:323
 msgid "Unable to move uploaded file to final destination"
-msgstr "НЕ вдалося пересунути вивантажений файл до остаточного місця"
+msgstr "Не вдалося пересунути вивантажений файл до остаточного місця"
 
 #: src/files-breadcrumbs.tsx:110
 msgid "Unable to save bookmark file"
