@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-14 05:12+0000\n"
-"PO-Revision-Date: 2026-02-04 12:55+0000\n"
+"POT-Creation-Date: 2026-04-19 05:17+0000\n"
+"PO-Revision-Date: 2026-04-19 14:58+0000\n"
 "Last-Translator: Priit Jõerüüt "
 "<jrtkbfdr@users.noreply.translate.fedoraproject.org>\n"
 "Language-Team: Estonian <https://translate.fedoraproject.org/projects/"
@@ -25,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1\n"
-"X-Generator: Weblate 5.15.2\n"
+"X-Generator: Weblate 5.17\n"
 
 #: src/menu.tsx:53
 msgid "\"$0\" exists, not overwriting with paste."
@@ -42,6 +42,8 @@ msgstr "Valitud on $0 faili"
 #: src/dialogs/editor.tsx:274
 msgid "$0 has unsaved changes and which will be permanently lost if discarded."
 msgstr ""
+"„$0“ sisaldab salvestamata muudatusi, mis lähevad loobumisel jäädavalt "
+"kaotsi."
 
 #: src/files-card-body.tsx:519
 msgid "$0 item is hidden"
@@ -283,7 +285,7 @@ msgstr "Sellise nimega kaust on juba olemas"
 
 #: src/dialogs/editor.tsx:307
 msgid "Discard"
-msgstr ""
+msgstr "Loobu"
 
 #: src/header.tsx:241
 msgid "Display as a grid"
@@ -327,10 +329,8 @@ msgid "Failed"
 msgstr "Ebaõnnestunud"
 
 #: src/files-card-body.tsx:580
-#, fuzzy
-#| msgid "Files"
 msgid "File"
-msgstr "Failid"
+msgstr "Fail"
 
 #: src/manifest.json:0
 msgid "File browser"
@@ -382,7 +382,7 @@ msgstr "Esmalt muudetud"
 
 #: src/files-card-body.tsx:578
 msgid "Folder"
-msgstr ""
+msgstr "Kaust"
 
 #: src/dialogs/delete.tsx:51
 msgid "Force delete $0"
@@ -667,7 +667,7 @@ msgstr "Salvesta"
 
 #: src/dialogs/editor.tsx:259
 msgid "Save changes?"
-msgstr ""
+msgstr "Kas salvestad muudatused?"
 
 #: src/dialogs/permissions.tsx:375
 msgid "Security context"
@@ -734,14 +734,12 @@ msgid "The file has changed on disk"
 msgstr "Fail on andmekandjal muutunud"
 
 #: src/dialogs/editor.tsx:269
-#, fuzzy
-#| msgid "The file has changed on disk"
 msgid "The file has changed on disk between when it was opened and now"
-msgstr "Fail on andmekandjal muutunud"
+msgstr "Fail on andmekandjal muutunud avamishetke ja praeguse hetke vahel"
 
 #: src/dialogs/editor.tsx:268
 msgid "The file was deleted after it was opened, saving will recreate it."
-msgstr ""
+msgstr "Fail on peale avamist kustutatud ning salvestamisel ta luuakse uuesti."
 
 #: src/dialogs/symlink.tsx:180
 msgid "Type"

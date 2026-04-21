@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-14 05:12+0000\n"
-"PO-Revision-Date: 2026-02-01 02:58+0000\n"
+"POT-Creation-Date: 2026-04-19 05:17+0000\n"
+"PO-Revision-Date: 2026-04-20 02:34+0000\n"
 "Last-Translator: Arif Budiman <arifpedia@gmail.com>\n"
 "Language-Team: Indonesian <https://translate.fedoraproject.org/projects/"
 "cockpit/cockpit-files/id/>\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
-"X-Generator: Weblate 5.15.2\n"
+"X-Generator: Weblate 5.17\n"
 
 #: src/menu.tsx:53
 msgid "\"$0\" exists, not overwriting with paste."
@@ -41,6 +41,8 @@ msgstr "$0 berkas dipilih"
 #: src/dialogs/editor.tsx:274
 msgid "$0 has unsaved changes and which will be permanently lost if discarded."
 msgstr ""
+"$0 memiliki perubahan yang belum disimpan dan akan hilang secara permanen "
+"jika dibuang."
 
 #: src/files-card-body.tsx:519
 msgid "$0 item is hidden"
@@ -280,7 +282,7 @@ msgstr "Direktori dengan nama yang sama sudah ada"
 
 #: src/dialogs/editor.tsx:307
 msgid "Discard"
-msgstr ""
+msgstr "Buang"
 
 #: src/header.tsx:241
 msgid "Display as a grid"
@@ -324,8 +326,6 @@ msgid "Failed"
 msgstr "Gagal"
 
 #: src/files-card-body.tsx:580
-#, fuzzy
-#| msgid "Files"
 msgid "File"
 msgstr "Berkas"
 
@@ -379,7 +379,7 @@ msgstr "Pertama diubah"
 
 #: src/files-card-body.tsx:578
 msgid "Folder"
-msgstr ""
+msgstr "Folder"
 
 #: src/dialogs/delete.tsx:51
 msgid "Force delete $0"
@@ -663,7 +663,7 @@ msgstr "Simpan"
 
 #: src/dialogs/editor.tsx:259
 msgid "Save changes?"
-msgstr ""
+msgstr "Simpan perubahan?"
 
 #: src/dialogs/permissions.tsx:375
 msgid "Security context"
@@ -730,14 +730,12 @@ msgid "The file has changed on disk"
 msgstr "Berkas telah berubah di disk"
 
 #: src/dialogs/editor.tsx:269
-#, fuzzy
-#| msgid "The file has changed on disk"
 msgid "The file has changed on disk between when it was opened and now"
-msgstr "Berkas telah berubah di disk"
+msgstr "Berkas telah berubah di disk antara saat dibuka dan sekarang"
 
 #: src/dialogs/editor.tsx:268
 msgid "The file was deleted after it was opened, saving will recreate it."
-msgstr ""
+msgstr "Berkas dihapus setelah dibuka, menyimpan akan membuatnya kembali."
 
 #: src/dialogs/symlink.tsx:180
 msgid "Type"
