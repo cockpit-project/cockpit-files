@@ -1,0 +1,810 @@
+# #-#-#-#-#  files.js.pot (PACKAGE VERSION)  #-#-#-#-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# #-#-#-#-#  files.metainfo.pot (PACKAGE VERSION)  #-#-#-#-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-12 05:54+0000\n"
+"PO-Revision-Date: 2026-05-07 03:59+0000\n"
+"Last-Translator: Bone NI <bounkirdni@gmail.com>\n"
+"Language-Team: Lao <https://translate.fedoraproject.org/projects/cockpit/"
+"cockpit-files/lo/>\n"
+"Language: lo\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"X-Generator: Weblate 5.17.1\n"
+
+#: src/menu.tsx:53
+msgid "\"$0\" exists, not overwriting with paste."
+msgstr "\"$0\" ມີຢູ່ແລ້ວ, ຈະບໍ່ວາງທັບ."
+
+#: src/upload-button.tsx:56
+msgid "$0 files"
+msgstr "$0 ໄຟລ໌"
+
+#: src/files-footer-detail.tsx:36
+msgid "$0 files selected"
+msgstr "ເລືອກແລ້ວ $0 ໄຟລ໌"
+
+#: src/dialogs/editor.tsx:274
+msgid "$0 has unsaved changes and which will be permanently lost if discarded."
+msgstr "$0 ມີການປ່ຽນແປງທີ່ຍັງບໍ່ທັນໄດ້ບັນທຶກ ເຊິ່ງຈະສູນຫາຍໄປຢ່າງຖາວອນຫາກຖິ້ມໄປ."
+
+#: src/files-card-body.tsx:519
+msgid "$0 item is hidden"
+msgid_plural "$0 items are hidden"
+msgstr[0] "$0 ລາຍການຖືກເຊື່ອງໄວ້"
+
+#: src/dialogs/permissions.tsx:289
+msgid "$0 permissions"
+msgstr "ການອະນຸຍາດ $0"
+
+#: src/dialogs/copyPasteOwnership.tsx:106
+msgid "(original owner)"
+msgstr "(ເຈົ້າຂອງເດີມ)"
+
+#: org.cockpit_project.files.metainfo.xml:8
+msgid ""
+"A file system UI for Cockpit. You can browse directories, upload and "
+"download files, and change their properties. It also includes a simple file "
+"editor."
+msgstr ""
+"UI ລະບົບໄຟລ໌ສຳລັບ Cockpit. ທ່ານສາມາດທ່ອງເວັບໄດເຣັກທໍຣີ, ອັບໂຫຼດ ແລະ ດາວໂຫຼດໄຟລ໌, ແລະ "
+"ປ່ຽນແປງຄຸນສົມບັດຂອງພວກມັນ. ມັນຍັງລວມມີຕົວແກ້ໄຂໄຟລ໌ແບບງ່າຍດາຍ."
+
+#: src/upload-button.tsx:102
+msgid ""
+"A file with the same name already exists in \"$0\". Replacing it will "
+"overwrite its content."
+msgstr "ມີໄຟລ໌ທີ່ມີຊື່ດຽວກັນນີ້ຢູ່ແລ້ວໃນ \"$0\". ການແທນທີ່ມັນຈະເປັນການຂຽນທັບເນື້ອໃນຂອງມັນ."
+
+#: src/header.tsx:56
+msgid "A-Z"
+msgstr "A-Z"
+
+#: src/dialogs/symlink.tsx:202
+msgid "Absolute"
+msgstr "ສົມບູນ (Absolute)"
+
+#: src/dialogs/symlink.tsx:188
+msgid ""
+"Absolute symlinks are ideal when referring to files or directories that "
+"won't move, such as system files."
+msgstr ""
+"Symlink ແບບສົມບູນ (Absolute) ແມ່ນເໝາະສົມເມື່ອອ້າງອີງເຖິງໄຟລ໌ ຫຼື ໄດເຣັກທໍຣີທີ່ຈະບໍ່ມີການຍ້າຍ, ເຊັ່ນ "
+"ໄຟລ໌ລະບົບ."
+
+#: src/dialogs/symlink.tsx:184
+msgid "Absolute vs. Relative"
+msgstr "ແບບສົມບູນ (Absolute) ທຽບກັບ ແບບສຳພັດ (Relative)"
+
+#: src/dialogs/permissions.tsx:336
+msgid "Access"
+msgstr "ການເຂົ້າເຖິງ"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:73
+#: src/dialogs/keyboardShortcutsHelp.tsx:79
+msgid "Activate selected item, enter directory"
+msgstr "ເປີດໃຊ້ລາຍການທີ່ເລືອກ, ເຂົ້າສູ່ໄດເຣັກທໍຣີ"
+
+#: src/files-breadcrumbs.tsx:132
+msgid "Add to bookmarks"
+msgstr "ເພີ່ມເຂົ້າໃນບຸກມາກ"
+
+#: src/upload-button.tsx:137
+msgid "Apply this action to all conflicting files"
+msgstr "ນຳໃຊ້ການດຳເນີນການນີ້ກັບທຸກໄຟລ໌ທີ່ມີຂໍ້ຂັດແຍ່ງ"
+
+#: src/common.ts:60
+msgid "Block device"
+msgstr "ອຸປະກອນບລັອກ"
+
+#: src/files-breadcrumbs.tsx:143
+msgid "Bookmarks"
+msgstr "ບຸກມາກ"
+
+#: src/upload-button.tsx:146 src/dialogs/mkdir.tsx:137
+#: src/dialogs/rename.tsx:87 src/dialogs/editor.tsx:248
+#: src/dialogs/editor.tsx:314 src/dialogs/copyPasteOwnership.tsx:166
+#: src/dialogs/symlink.tsx:233 src/dialogs/delete.tsx:97
+#: src/dialogs/permissions.tsx:409 src/dialogs/create-file.tsx:196
+msgid "Cancel"
+msgstr "ຍົກເລີກ"
+
+#: src/upload-button.tsx:476
+msgid "Cancel upload of $0"
+msgstr "ຍົກເລີກການອັບໂຫຼດຂອງ $0"
+
+#: src/upload-button.tsx:345
+msgid "Cancelled"
+msgstr "ຍົກເລີກແລ້ວ"
+
+#: src/upload-button.tsx:347
+msgid "Cancelled upload of $0"
+msgstr "ຍົກເລີກການອັບໂຫຼດຂອງ $0 ແລ້ວ"
+
+#: src/dialogs/create-file.tsx:213
+msgid "Cannot create file in current directory"
+msgstr "ບໍ່ສາມາດສ້າງໄຟລ໌ໃນໄດເຣັກທໍຣີປັດຈຸບັນໄດ້"
+
+#: src/files-folder-view.tsx:164
+msgid "Cannot drop files, another upload is already in progress"
+msgstr "ບໍ່ສາມາດວາງໄຟລ໌ໄດ້, ກຳລັງມີການອັບໂຫຼດອື່ນດຳເນີນການຢູ່"
+
+#: src/dialogs/permissions.tsx:400
+msgid "Change"
+msgstr "ປ່ຽນ"
+
+#: src/upload-button.tsx:404
+msgid "Change permissions"
+msgstr "ປ່ຽນການອະນຸຍາດ"
+
+#: src/dialogs/permissions.tsx:407
+msgid "Change permissions for enclosed files"
+msgstr "ປ່ຽນການອະນຸຍາດສຳລັບໄຟລ໌ທີ່ຢູ່ພາຍໃນ"
+
+#: src/common.ts:61
+msgid "Character device"
+msgstr "ອຸປະກອນຕົວອັກສອນ"
+
+#: src/files-card-body.tsx:507
+msgid "Clear filter"
+msgstr "ລຶບຕົວຕອງ"
+
+#: src/dialogs/editor.tsx:248 src/dialogs/keyboardShortcutsHelp.tsx:33
+msgid "Close"
+msgstr "ປິດ"
+
+#: src/index.html:8
+msgid "Cockpit Files"
+msgstr "Cockpit Files"
+
+#: org.cockpit_project.files.metainfo.xml:21
+msgid "Cockpit Project"
+msgstr "ໂຄງການ Cockpit"
+
+#: src/dialogs/permissions.tsx:270
+msgid "Collapse"
+msgstr "ຍໍ້ເຂົ້າ"
+
+#: src/menu.tsx:151 src/menu.tsx:205
+msgid "Copy"
+msgstr "ກັອບປີ້"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:108
+msgid "Copy selected file or directory"
+msgstr "ກັອບປີ້ໄຟລ໌ ຫຼື ໄດເຣັກທໍຣີທີ່ເລືອກ"
+
+#: src/dialogs/mkdir.tsx:135 src/dialogs/create-file.tsx:193
+msgid "Create"
+msgstr "ສ້າງ"
+
+#: src/menu.tsx:106 src/dialogs/mkdir.tsx:80
+msgid "Create directory"
+msgstr "ສ້າງໄດເຣັກທໍຣີ"
+
+#: src/menu.tsx:111 src/dialogs/create-file.tsx:136
+msgid "Create file"
+msgstr "ສ້າງໄຟລ໌"
+
+#: src/menu.tsx:197 src/dialogs/symlink.tsx:231
+msgid "Create link"
+msgstr "ສ້າງລິ້ງ"
+
+#: src/dialogs/symlink.tsx:128
+msgid "Create link to $0"
+msgstr "ສ້າງລິ້ງໄປຫາ $0"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:102
+msgid "Create new directory"
+msgstr "ສ້າງໄດເຣັກທໍຣີໃໝ່"
+
+#: src/menu.tsx:168 src/menu.tsx:210 src/dialogs/delete.tsx:95
+msgid "Delete"
+msgstr "ລຶບ"
+
+#: src/dialogs/delete.tsx:34
+msgid "Delete $0 items?"
+msgstr "ລຶບ $0 ລາຍການບໍ່?"
+
+#: src/dialogs/delete.tsx:51
+msgid "Delete $0?"
+msgstr "ລຶບ $0 ບໍ່?"
+
+#: src/dialogs/delete.tsx:48
+msgid "Delete directory $0?"
+msgstr "ລຶບໄດເຣັກທໍຣີ $0 ບໍ່?"
+
+#: src/dialogs/delete.tsx:40
+msgid "Delete file $0?"
+msgstr "ລຶບໄຟລ໌ $0 ບໍ່?"
+
+#: src/dialogs/delete.tsx:44
+msgid "Delete link $0?"
+msgstr "ລຶບລິ້ງ $0 ບໍ່?"
+
+#: src/common.ts:62
+msgid "Directory"
+msgstr "ໄດເຣັກທໍຣີ"
+
+#: src/files-footer-detail.tsx:64
+msgid "Directory contains $0 directories, $1 files"
+msgstr "ໄດເຣັກທໍຣີປະກອບມີ $0 ໄດເຣັກທໍຣີ, $1 ໄຟລ໌"
+
+#: src/files-footer-detail.tsx:65
+msgid "Directory contains $0 directories, $1 files, $2 hidden"
+msgstr "ໄດເຣັກທໍຣີປະກອບມີ $0 ໄດເຣັກທໍຣີ, $1 ໄຟລ໌, ເຊື່ອງໄວ້ $2"
+
+#: src/files-card-body.tsx:514
+msgid "Directory is empty"
+msgstr "ໄດເຣັກທໍຣີວ່າງເປົ່າ"
+
+#: src/dialogs/mkdir.tsx:96
+msgid "Directory name"
+msgstr "ຊື່ໄດເຣັກທໍຣີ"
+
+#: src/dialogs/mkdir.tsx:31
+msgid "Directory name cannot be empty"
+msgstr "ຊື່ໄດເຣັກທໍຣີບໍ່ສາມາດວ່າງເປົ່າໄດ້"
+
+#: src/dialogs/mkdir.tsx:35
+msgid "Directory name cannot include a /"
+msgstr "ຊື່ໄດເຣັກທໍຣີບໍ່ສາມາດມີເຄື່ອງໝາຍ /"
+
+#: src/dialogs/mkdir.tsx:33
+msgid "Directory name too long"
+msgstr "ຊື່ໄດເຣັກທໍຣີຍາວເກີນໄປ"
+
+#: src/dialogs/mkdir.tsx:110
+msgid "Directory owner"
+msgstr "ເຈົ້າຂອງໄດເຣັກທໍຣີ"
+
+#: src/common.ts:113 src/dialogs/symlink.tsx:39
+msgid "Directory with the same name exists"
+msgstr "ມີໄດເຣັກທໍຣີທີ່ມີຊື່ດຽວກັນນີ້ຢູ່ແລ້ວ"
+
+#: src/dialogs/editor.tsx:307
+msgid "Discard"
+msgstr "ຖິ້ມໄປ"
+
+#: src/header.tsx:241
+msgid "Display as a grid"
+msgstr "ສະແດງເປັນຕາຕະລາງ"
+
+#: src/header.tsx:240
+msgid "Display as a list"
+msgstr "ສະແດງເປັນລາຍການ"
+
+#: src/menu.tsx:178
+msgid "Download"
+msgstr "ດາວໂຫຼດ"
+
+#: src/files-folder-view.tsx:156
+msgid "Drop files to upload"
+msgstr "ວາງໄຟລ໌ເພື່ອອັບໂຫຼດ"
+
+#. Translators: This is the title of a modal dialog.  $0 represents a filename.
+#: src/dialogs/editor.tsx:165
+msgid "Edit $0"
+msgstr "ແກ້ໄຂ $0"
+
+#: src/files-breadcrumbs.tsx:291 src/dialogs/keyboardShortcutsHelp.tsx:87
+msgid "Edit path"
+msgstr "ແກ້ໄຂເສັ້ນທາງ (Path)"
+
+#: src/menu.tsx:117 src/menu.tsx:157 src/menu.tsx:224
+msgid "Edit permissions"
+msgstr "ແກ້ໄຂການອະນຸຍາດ"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:147
+msgid "Editing"
+msgstr "ກຳລັງແກ້ໄຂ"
+
+#: src/common.ts:50
+msgid "Execute-only"
+msgstr "ປະຕິບັດການເທົ່ານັ້ນ (Execute-only)"
+
+#: src/upload-button.tsx:277
+msgid "Failed"
+msgstr "ຫຼົ້ມເຫຼວ"
+
+#: src/files-card-body.tsx:580
+msgid "File"
+msgstr "ໄຟລ໌"
+
+#: src/manifest.json:0
+msgid "File browser"
+msgstr "ຕົວທ່ອງໄຟລ໌"
+
+#: src/common.ts:115 src/dialogs/symlink.tsx:41
+msgid "File exists"
+msgstr "ໄຟລ໌ມີຢູ່ແລ້ວ"
+
+#: src/dialogs/create-file.tsx:148
+msgid "File name"
+msgstr "ຊື່ໄຟລ໌"
+
+#: src/upload-button.tsx:373
+msgid "File uploaded"
+msgstr "ອັບໂຫຼດໄຟລ໌ສຳເລັດແລ້ວ"
+
+#: src/common.ts:110
+msgid "Filename is the same as original name"
+msgstr "ຊື່ໄຟລ໌ຄືກັນກັບຊື່ເດີມ"
+
+#: org.cockpit_project.files.metainfo.xml:5
+msgid "Files"
+msgstr "ໄຟລ໌"
+
+#: src/dialogs/copyPasteOwnership.tsx:183
+msgid ""
+"Files being pasted have a different owner. By default, ownership will be "
+"changed to match the destination directory."
+msgstr ""
+"ໄຟລ໌ທີ່ກຳລັງວາງມີເຈົ້າຂອງທີ່ແຕກຕ່າງກັນ. ໂດຍຄ່າເລີ່ມຕົ້ນ, "
+"ຄວາມເປັນເຈົ້າຂອງຈະຖືກປ່ຽນໃຫ້ກົງກັບໄດເຣັກທໍຣີປາຍທາງ."
+
+#: src/upload-button.tsx:373
+msgid "Files uploaded"
+msgstr "ອັບໂຫຼດໄຟລ໌ສຳເລັດແລ້ວ"
+
+#: src/files-breadcrumbs.tsx:224
+msgid "Filesystem"
+msgstr "ລະບົບໄຟລ໌"
+
+#: src/header.tsx:177
+msgid "Filter directory"
+msgstr "ຕອງໄດເຣັກທໍຣີ"
+
+#: src/header.tsx:78
+msgid "First modified"
+msgstr "ແກ້ໄຂຄັ້ງທຳອິດ"
+
+#: src/files-card-body.tsx:578
+msgid "Folder"
+msgstr "ໂຟນເດີ"
+
+#: src/dialogs/delete.tsx:51
+msgid "Force delete $0"
+msgstr "ບັງຄັບລຶບ $0"
+
+#: src/dialogs/delete.tsx:34
+msgid "Force delete $0 items"
+msgstr "ບັງຄັບລຶບ $0 ລາຍການ"
+
+#: src/dialogs/delete.tsx:48
+msgid "Force delete directory $0?"
+msgstr "ບັງຄັບລຶບໄດເຣັກທໍຣີ $0 ບໍ່?"
+
+#: src/dialogs/delete.tsx:40
+msgid "Force delete file $0?"
+msgstr "ບັງຄັບລຶບໄຟລ໌ $0 ບໍ່?"
+
+#: src/dialogs/delete.tsx:44
+msgid "Force delete link $0?"
+msgstr "ບັງຄັບລຶບລິ້ງ $0 ບໍ່?"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:61
+msgid "Go back"
+msgstr "ກັບຄືນ"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:67
+msgid "Go forward"
+msgstr "ໄປຂ້າງໜ້າ"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:55
+msgid "Go up a directory"
+msgstr "ຂຶ້ນໄປໜຶ່ງໄດເຣັກທໍຣີ"
+
+#: src/files-footer-detail.tsx:80 src/files-footer-detail.tsx:152
+#: src/files-card-body.tsx:591 src/dialogs/permissions.tsx:319
+msgid "Group"
+msgstr "ກຸ່ມ"
+
+#: src/dialogs/permissions.tsx:350
+msgid "Group access"
+msgstr "ການເຂົ້າເຖິງຂອງກຸ່ມ"
+
+#: src/header.tsx:271
+msgid "Hide hidden items"
+msgstr "ເຊື່ອງລາຍການທີ່ຖືກເຊື່ອງ"
+
+#: src/files-breadcrumbs.tsx:39
+msgid "Home"
+msgstr "ໜ້າຫຼັກ (Home)"
+
+#: src/dialogs/editor.tsx:208
+msgid "Ignore"
+msgstr "ລະເວັ້ນ"
+
+#: src/upload-button.tsx:145
+msgid "Keep original"
+msgstr "ຮັກສາແບບເດີມໄວ້"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:133
+msgid "Keyboard shortcuts"
+msgstr "ຄີລັດຄີບອດ"
+
+#: src/header.tsx:67
+msgid "Largest size"
+msgstr "ຂະໜາດໃຫຍ່ທີ່ສຸດ"
+
+#: src/header.tsx:82
+msgid "Last modified"
+msgstr "ແກ້ໄຂຫຼ້າສຸດ"
+
+#: src/header.tsx:104
+msgid "Least permissive"
+msgstr "ການອະນຸຍາດໜ້ອຍທີ່ສຸດ"
+
+#: org.cockpit_project.files.metainfo.xml:6
+msgid "Manage your files"
+msgstr "ຈັດການໄຟລ໌ຂອງທ່ານ"
+
+#: src/dialogs/permissions.tsx:264
+msgid "Missing type"
+msgstr "ບໍ່ພົບປະເພດ"
+
+#: src/files-card-body.tsx:539 src/files-card-body.tsx:659 src/header.tsx:75
+msgid "Modified"
+msgstr "ແກ້ໄຂເມື່ອ"
+
+#: src/header.tsx:100
+msgid "Most permissive"
+msgstr "ການອະນຸຍາດຫຼາຍທີ່ສຸດ"
+
+#: src/files-card-body.tsx:534 src/header.tsx:53
+msgid "Name"
+msgstr "ຊື່"
+
+#: src/common.ts:104 src/dialogs/symlink.tsx:36
+msgid "Name cannot be empty"
+msgstr "ຊື່ບໍ່ສາມາດວ່າງເປົ່າໄດ້"
+
+#: src/common.ts:108
+msgid "Name cannot include a /"
+msgstr "ຊື່ບໍ່ສາມາດມີເຄື່ອງໝາຍ /"
+
+#: src/common.ts:106
+msgid "Name too long"
+msgstr "ຊື່ຍາວເກີນໄປ"
+
+#: src/common.ts:63
+msgid "Named pipe"
+msgstr "Named pipe"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:137
+msgid "Navigation"
+msgstr "ການນຳທາງ"
+
+#: src/upload-button.tsx:123
+msgid "New file"
+msgstr "ໄຟລ໌ໃໝ່"
+
+#: src/dialogs/rename.tsx:91
+msgid "New filename"
+msgstr "ຊື່ໄຟລ໌ໃໝ່"
+
+#: src/dialogs/rename.tsx:91
+msgid "New name"
+msgstr "ຊື່ໃໝ່"
+
+#: src/dialogs/copyPasteOwnership.tsx:186
+msgid "New owner"
+msgstr "ເຈົ້າຂອງໃໝ່"
+
+#: src/dialogs/permissions.tsx:220
+msgid "No access"
+msgstr "ບໍ່ມີສິດເຂົ້າເຖິງ"
+
+#: src/files-card-body.tsx:506
+msgid "No matching results"
+msgstr "ບໍ່ພົບຜົນລັບທີ່ກົງກັນ"
+
+#: src/common.ts:49
+msgid "None"
+msgstr "ບໍ່ມີ"
+
+#: src/menu.tsx:126 src/menu.tsx:187
+msgid "Open in terminal"
+msgstr "ເປີດໃນເທີມິນໍ (Terminal)"
+
+#: src/menu.tsx:143
+msgid "Open text file"
+msgstr "ເປີດໄຟລ໌ຂໍ້ຄວາມ"
+
+#: src/upload-button.tsx:128
+msgid "Original file on server"
+msgstr "ໄຟລ໌ເດີມໃນເຊີເວີ"
+
+#: src/files-footer-detail.tsx:80 src/files-card-body.tsx:591
+msgid "Others"
+msgstr "ອື່ນໆ"
+
+#: src/dialogs/permissions.tsx:362
+msgid "Others access"
+msgstr "ການເຂົ້າເຖິງຂອງຜູ້ອື່ນ"
+
+#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:228
+#: src/dialogs/editor.tsx:285
+msgid "Overwrite"
+msgstr "ຂຽນທັບ"
+
+#: src/files-footer-detail.tsx:80 src/files-card-body.tsx:544
+#: src/files-card-body.tsx:591 src/files-card-body.tsx:667 src/header.tsx:86
+#: src/dialogs/permissions.tsx:304 src/dialogs/create-file.tsx:170
+msgid "Owner"
+msgstr "ເຈົ້າຂອງ"
+
+#: src/dialogs/permissions.tsx:338
+msgid "Owner access"
+msgstr "ການເຂົ້າເຖິງຂອງເຈົ້າຂອງ"
+
+#: src/header.tsx:89
+msgid "Owner ascending"
+msgstr "ເຈົ້າຂອງ (ນ້ອຍໄປຫາຫຼາຍ)"
+
+#: src/header.tsx:93
+msgid "Owner descending"
+msgstr "ເຈົ້າຂອງ (ຫຼາຍໄປຫານ້ອຍ)"
+
+#: src/dialogs/permissions.tsx:303
+msgid "Ownership"
+msgstr "ຄວາມເປັນເຈົ້າຂອງ"
+
+#: src/menu.tsx:99 src/dialogs/copyPasteOwnership.tsx:164
+msgid "Paste"
+msgstr "ວາງ (Paste)"
+
+#: src/dialogs/copyPasteOwnership.tsx:178
+msgid "Paste as owner"
+msgstr "ວາງໃນຖານະເຈົ້າຂອງ"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:114
+msgid "Paste file or directory"
+msgstr "ວາງໄຟລ໌ ຫຼື ໄດເຣັກທໍຣີ"
+
+#: src/menu.tsx:51 src/dialogs/copyPasteOwnership.tsx:53
+msgid "Pasting failed"
+msgstr "ການວາງຫຼົ້ມເຫຼວ"
+
+#: src/dialogs/create-file.tsx:215
+msgid "Permission denied"
+msgstr "ການອະນຸຍາດຖືກປະຕິເສດ"
+
+#: src/files-card-body.tsx:549 src/files-card-body.tsx:674 src/header.tsx:97
+msgid "Permissions"
+msgstr "ການອະນຸຍາດ"
+
+#: src/dialogs/permissions.tsx:290
+msgid "Permissions for $0 files"
+msgstr "ການອະນຸຍາດສຳລັບ $0 ໄຟລ໌"
+
+#: src/common.ts:54
+msgid "Read and execute"
+msgstr "ອ່ານ ແລະ ປະຕິບັດການ"
+
+#: src/common.ts:55 src/dialogs/permissions.tsx:210
+msgid "Read and write"
+msgstr "ອ່ານ ແລະ ຂຽນ"
+
+#: src/common.ts:56
+msgid "Read, write, and execute"
+msgstr "ອ່ານ, ຂຽນ, ແລະ ປະຕິບັດການ"
+
+#: src/common.ts:53 src/dialogs/editor.tsx:167 src/dialogs/permissions.tsx:215
+msgid "Read-only"
+msgstr "ອ່ານຢ່າງດຽວ"
+
+#: src/common.ts:65
+msgid "Regular file"
+msgstr "ໄຟລ໌ປົກກະຕິ"
+
+#: src/dialogs/symlink.tsx:209
+msgid "Relative"
+msgstr "ແບບສຳພັດ (Relative)"
+
+#: src/dialogs/symlink.tsx:191
+msgid ""
+"Relative symlinks are useful when both a symlink and target might move at "
+"the same time, such as when renaming or moving a parent directory."
+msgstr ""
+"Symlink ແບບສຳພັດ (Relative) ແມ່ນມີປະໂຫຍດເມື່ອທັງ symlink ແລະ "
+"ເປົ້າໝາຍອາດຈະຍ້າຍໄປພ້ອມກັນ, ເຊັ່ນ ເມື່ອມີການປ່ຽນຊື່ ຫຼື ຍ້າຍໄດເຣັກທໍຣີແມ່."
+
+#: src/dialogs/editor.tsx:205
+msgid "Reload"
+msgstr "ໂຫລດໃໝ່"
+
+#: src/files-breadcrumbs.tsx:130
+msgid "Remove from bookmarks"
+msgstr "ລຶບອອກຈາກບຸກມາກ"
+
+#: src/menu.tsx:162 src/dialogs/rename.tsx:78
+msgid "Rename"
+msgstr "ປ່ຽນຊື່"
+
+#: src/dialogs/rename.tsx:101
+msgid "Rename $0?"
+msgstr "ປ່ຽນຊື່ $0 ບໍ່?"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:95
+msgid "Rename selected file or directory"
+msgstr "ປ່ຽນຊື່ໄຟລ໌ ຫຼື ໄດເຣັກທໍຣີທີ່ເລືອກ"
+
+#: src/upload-button.tsx:143
+msgid "Replace"
+msgstr "ແທນທີ່"
+
+#: src/upload-button.tsx:95
+msgid "Replace file $0?"
+msgstr "ແທນທີ່ໄຟລ໌ $0 ບໍ່?"
+
+#: src/dialogs/editor.tsx:242 src/dialogs/editor.tsx:299
+msgid "Save"
+msgstr "ບັນທຶກ"
+
+#: src/dialogs/editor.tsx:259
+msgid "Save changes?"
+msgstr "ບັນທຶກການປ່ຽນແປງບໍ່?"
+
+#: src/dialogs/permissions.tsx:375
+msgid "Security context"
+msgstr "ບໍລິບົດຄວາມປອດໄພ"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:120
+msgid "Select all"
+msgstr "ເລືອກທັງໝົດ"
+
+#: src/dialogs/permissions.tsx:388
+msgid "Set executable as program"
+msgstr "ຕັ້ງຄ່າໃຫ້ປະຕິບັດການເປັນໂປຣແກຣມ"
+
+#: src/dialogs/permissions.tsx:271
+msgid "Show all files"
+msgstr "ສະແດງໄຟລ໌ທັງໝົດ"
+
+#: src/files-card-body.tsx:522 src/header.tsx:271
+msgid "Show hidden items"
+msgstr "ສະແດງລາຍການທີ່ຖືກເຊື່ອງ"
+
+#: src/header.tsx:152
+msgid "Show keyboard shortcuts"
+msgstr "ສະແດງຄີລັດຄີບອດ"
+
+#: src/files-card-body.tsx:535 src/files-card-body.tsx:652 src/header.tsx:64
+msgid "Size"
+msgstr "ຂະໜາດ"
+
+#: src/header.tsx:71
+msgid "Smallest size"
+msgstr "ຂະໜາດນ້ອຍທີ່ສຸດ"
+
+#: src/common.ts:66
+msgid "Socket"
+msgstr "ຊັອກເກັດ (Socket)"
+
+#: src/header.tsx:258
+msgid "Sort"
+msgstr "ຈັດລຽງ"
+
+#: src/common.ts:64
+msgid "Symbolic link"
+msgstr "ລິ້ງສັນຍະລັກ (Symbolic link)"
+
+#: src/dialogs/symlink.tsx:164
+msgid "Symlink name"
+msgstr "ຊື່ Symlink"
+
+#: src/dialogs/symlink.tsx:157
+msgid "Target"
+msgstr "ເປົ້າໝາຍ"
+
+#: src/dialogs/editor.tsx:50
+msgid "The existing file changed unexpectedly"
+msgstr "ໄຟລ໌ທີ່ມີຢູ່ໄດ້ປ່ຽນແປງໂດຍບໍ່ຄາດຄິດ"
+
+#: src/dialogs/editor.tsx:48 src/dialogs/editor.tsx:199
+msgid "The file has been removed on disk"
+msgstr "ໄຟລ໌ຖືກລຶບອອກຈາກດິສກ໌ແລ້ວ"
+
+#: src/dialogs/editor.tsx:200
+msgid "The file has changed on disk"
+msgstr "ໄຟລ໌ມີການປ່ຽນແປງໃນດິສກ໌"
+
+#: src/dialogs/editor.tsx:269
+msgid "The file has changed on disk between when it was opened and now"
+msgstr "ໄຟລ໌ມີການປ່ຽນແປງໃນດິສກ໌ລະຫວ່າງຕອນທີ່ມັນຖືກເປີດ ແລະ ຕອນນີ້"
+
+#: src/dialogs/editor.tsx:268
+msgid "The file was deleted after it was opened, saving will recreate it."
+msgstr "ໄຟລ໌ຖືກລຶບໄປຫຼັງຈາກທີ່ມັນຖືກເປີດ, ການບັນທຶກຈະເປັນການສ້າງມັນຄືນໃໝ່."
+
+#: src/dialogs/symlink.tsx:180
+msgid "Type"
+msgstr "ປະເພດ"
+
+#: src/files-breadcrumbs.tsx:87
+msgid "Unable to create bookmark directory"
+msgstr "ບໍ່ສາມາດສ້າງໄດເຣັກທໍຣີບຸກມາກໄດ້"
+
+#: src/upload-button.tsx:323
+msgid "Unable to move uploaded file to final destination"
+msgstr "ບໍ່ສາມາດຍ້າຍໄຟລ໌ທີ່ອັບໂຫຼດໄປຫາປາຍທາງສຸດທ້າຍໄດ້"
+
+#: src/files-breadcrumbs.tsx:110
+msgid "Unable to save bookmark file"
+msgstr "ບໍ່ສາມາດບັນທຶກໄຟລ໌ບຸກມາກໄດ້"
+
+#: src/upload-button.tsx:512
+msgid "Upload"
+msgstr "ອັບໂຫຼດ"
+
+#
+#: src/upload-button.tsx:493
+msgid "Upload $0% completed"
+msgstr "ອັບໂຫຼດ $0% ສຳເລັດແລ້ວ"
+
+#: src/upload-button.tsx:321 src/upload-button.tsx:351
+msgid "Upload error"
+msgstr "ການອັບໂຫຼດຜິດພາດ"
+
+#: src/upload-button.tsx:60
+msgid "Uploaded as $0, $1"
+msgstr "ອັບໂຫຼດເປັນ $0, $1"
+
+#: src/upload-button.tsx:457
+msgid "Uploads"
+msgstr "ລາຍການອັບໂຫຼດ"
+
+#: src/files-footer-detail.tsx:144
+msgid "User"
+msgstr "ຜູ້ໃຊ້"
+
+#: src/dialogs/editor.tsx:165
+msgid "View $0"
+msgstr "ເບິ່ງ $0"
+
+#: src/common.ts:52
+msgid "Write and execute"
+msgstr "ຂຽນ ແລະ ປະຕິບັດການ"
+
+#: src/common.ts:51 src/dialogs/permissions.tsx:230
+msgid "Write-only"
+msgstr "ຂຽນຢ່າງດຽວ"
+
+#: src/header.tsx:60
+msgid "Z-A"
+msgstr "Z-A"
+
+#: src/manifest.json:0
+msgid "explorer"
+msgstr "explorer"
+
+#: src/manifest.json:0
+msgid "files"
+msgstr "ໄຟລ໌"
+
+#: src/manifest.json:0
+msgid "filesystem"
+msgstr "ລະບົບໄຟລ໌"
+
+#: src/dialogs/copyPasteOwnership.tsx:115
+msgid "keep original owners"
+msgstr "ຮັກສາເຈົ້າຂອງເດີມໄວ້"
+
+#: src/dialogs/symlink.tsx:53
+msgid "link to $0"
+msgstr "ລິ້ງໄປຫາ $0"
