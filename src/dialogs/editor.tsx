@@ -160,6 +160,28 @@ export const EditFileModal = ({ dialogResult, editor } : {
         dialogResult.resolve();
     }, [editor, dialogResult]);
 
+    React.useEffect(() => {
+        const onKeyDown = promptDiscardChanges
+            ? function (event: KeyboardEvent) {
+                if (["s", "S", "Enter"].includes(event.key)) {
+                    event.preventDefault(); // this allows using ctrl + s here too
+                    saveThenClose();
+                }
+            }
+            : function (event: KeyboardEvent) {
+                if ((event.ctrlKey || event.metaKey) && (event.key === "s" || event.key === "S")) {
+                    event.preventDefault();
+                    editor.save();
+                }
+            };
+
+        window.addEventListener('keydown', onKeyDown);
+
+        return () => {
+            window.removeEventListener('keydown', onKeyDown);
+        };
+    }, [editor, promptDiscardChanges, dialogResult, saveThenClose]);
+
     const boldBasename = (<b className="ct-heading-font-weight">{state.basename}</b>);
     /* Translators: This is the title of a modal dialog.  $0 represents a filename. */
     let title = <>{fmt_to_fragments(state?.writable ? _("Edit $0") : _("View $0"), boldBasename)}</>;
