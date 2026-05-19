@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-12 05:54+0000\n"
-"PO-Revision-Date: 2026-01-24 11:58+0000\n"
+"POT-Creation-Date: 2026-05-17 06:03+0000\n"
+"PO-Revision-Date: 2026-05-15 14:59+0000\n"
 "Last-Translator: Nathan <nathan95@live.it>\n"
 "Language-Team: Italian <https://translate.fedoraproject.org/projects/cockpit/"
 "cockpit-files/it/>\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1\n"
-"X-Generator: Weblate 5.15.2\n"
+"X-Generator: Weblate 2026.5\n"
 
 #: src/menu.tsx:53
 msgid "\"$0\" exists, not overwriting with paste."
@@ -41,6 +41,8 @@ msgstr "$0 file selezionati"
 #: src/dialogs/editor.tsx:274
 msgid "$0 has unsaved changes and which will be permanently lost if discarded."
 msgstr ""
+"$0 ha delle modifiche non salvate che andranno perse definitivamente se "
+"scartate."
 
 #: src/files-card-body.tsx:519
 msgid "$0 item is hidden"
@@ -119,11 +121,11 @@ msgstr "blocca il dispositivo"
 msgid "Bookmarks"
 msgstr "Segnalibri"
 
-#: src/upload-button.tsx:146 src/dialogs/mkdir.tsx:137
-#: src/dialogs/rename.tsx:87 src/dialogs/editor.tsx:248
-#: src/dialogs/editor.tsx:314 src/dialogs/copyPasteOwnership.tsx:166
-#: src/dialogs/symlink.tsx:233 src/dialogs/delete.tsx:97
-#: src/dialogs/permissions.tsx:409 src/dialogs/create-file.tsx:196
+#: src/dialogs/symlink.tsx:233 src/dialogs/copyPasteOwnership.tsx:166
+#: src/dialogs/permissions.tsx:409 src/dialogs/mkdir.tsx:137
+#: src/dialogs/editor.tsx:248 src/dialogs/editor.tsx:314
+#: src/dialogs/create-file.tsx:196 src/dialogs/delete.tsx:97
+#: src/dialogs/rename.tsx:87 src/upload-button.tsx:146
 msgid "Cancel"
 msgstr "Annulla"
 
@@ -195,15 +197,15 @@ msgstr "Copia i file o directory selezionati"
 msgid "Create"
 msgstr "Crea"
 
-#: src/menu.tsx:106 src/dialogs/mkdir.tsx:80
+#: src/dialogs/mkdir.tsx:80 src/menu.tsx:106
 msgid "Create directory"
 msgstr "Crea directory"
 
-#: src/menu.tsx:111 src/dialogs/create-file.tsx:136
+#: src/dialogs/create-file.tsx:136 src/menu.tsx:111
 msgid "Create file"
 msgstr "Crea file"
 
-#: src/menu.tsx:197 src/dialogs/symlink.tsx:231
+#: src/dialogs/symlink.tsx:231 src/menu.tsx:197
 msgid "Create link"
 msgstr "Crea link"
 
@@ -215,7 +217,7 @@ msgstr "Crea link a $0"
 msgid "Create new directory"
 msgstr "Crea una nuova cartella"
 
-#: src/menu.tsx:168 src/menu.tsx:210 src/dialogs/delete.tsx:95
+#: src/dialogs/delete.tsx:95 src/menu.tsx:168 src/menu.tsx:210
 msgid "Delete"
 msgstr "Elimina"
 
@@ -275,13 +277,13 @@ msgstr "Nome della cartella troppo lungo"
 msgid "Directory owner"
 msgstr "Proprietario cartella"
 
-#: src/common.ts:113 src/dialogs/symlink.tsx:39
+#: src/dialogs/symlink.tsx:39 src/common.ts:113
 msgid "Directory with the same name exists"
 msgstr "Esiste una cartella con lo stesso nome"
 
 #: src/dialogs/editor.tsx:307
 msgid "Discard"
-msgstr ""
+msgstr "Scarta"
 
 #: src/header.tsx:241
 msgid "Display as a grid"
@@ -325,8 +327,6 @@ msgid "Failed"
 msgstr "Fallito"
 
 #: src/files-card-body.tsx:580
-#, fuzzy
-#| msgid "Files"
 msgid "File"
 msgstr "File"
 
@@ -334,7 +334,7 @@ msgstr "File"
 msgid "File browser"
 msgstr "Browser file"
 
-#: src/common.ts:115 src/dialogs/symlink.tsx:41
+#: src/dialogs/symlink.tsx:41 src/common.ts:115
 msgid "File exists"
 msgstr "Il file esiste già"
 
@@ -381,7 +381,7 @@ msgstr "Prima modifica"
 
 #: src/files-card-body.tsx:578
 msgid "Folder"
-msgstr ""
+msgstr "Cartella"
 
 #: src/dialogs/delete.tsx:51
 msgid "Force delete $0"
@@ -415,8 +415,8 @@ msgstr "Avanti"
 msgid "Go up a directory"
 msgstr "Tornare alla cartella superiore"
 
+#: src/dialogs/permissions.tsx:319 src/files-card-body.tsx:591
 #: src/files-footer-detail.tsx:80 src/files-footer-detail.tsx:152
-#: src/files-card-body.tsx:591 src/dialogs/permissions.tsx:319
 msgid "Group"
 msgstr "Gruppo"
 
@@ -464,7 +464,7 @@ msgstr "Gestisci i tuoi file"
 msgid "Missing type"
 msgstr "Tipo mancante"
 
-#: src/files-card-body.tsx:539 src/files-card-body.tsx:659 src/header.tsx:75
+#: src/header.tsx:75 src/files-card-body.tsx:539 src/files-card-body.tsx:659
 msgid "Modified"
 msgstr "Modificati"
 
@@ -472,11 +472,11 @@ msgstr "Modificati"
 msgid "Most permissive"
 msgstr "Più permissivi"
 
-#: src/files-card-body.tsx:534 src/header.tsx:53
+#: src/header.tsx:53 src/files-card-body.tsx:534
 msgid "Name"
 msgstr "Nome"
 
-#: src/common.ts:104 src/dialogs/symlink.tsx:36
+#: src/dialogs/symlink.tsx:36 src/common.ts:104
 msgid "Name cannot be empty"
 msgstr "Il nome non può essere vuoto"
 
@@ -536,7 +536,7 @@ msgstr "Apri file di testo"
 msgid "Original file on server"
 msgstr "File originale sul server"
 
-#: src/files-footer-detail.tsx:80 src/files-card-body.tsx:591
+#: src/files-card-body.tsx:591 src/files-footer-detail.tsx:80
 msgid "Others"
 msgstr "Altri"
 
@@ -544,14 +544,15 @@ msgstr "Altri"
 msgid "Others access"
 msgstr "Accesso altri"
 
-#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:228
-#: src/dialogs/editor.tsx:285
+#: src/dialogs/editor.tsx:228 src/dialogs/editor.tsx:285
+#: src/dialogs/rename.tsx:85
 msgid "Overwrite"
 msgstr "Sovrascrivere"
 
-#: src/files-footer-detail.tsx:80 src/files-card-body.tsx:544
-#: src/files-card-body.tsx:591 src/files-card-body.tsx:667 src/header.tsx:86
-#: src/dialogs/permissions.tsx:304 src/dialogs/create-file.tsx:170
+#: src/header.tsx:86 src/dialogs/permissions.tsx:304
+#: src/dialogs/create-file.tsx:170 src/files-card-body.tsx:544
+#: src/files-card-body.tsx:591 src/files-card-body.tsx:667
+#: src/files-footer-detail.tsx:80
 msgid "Owner"
 msgstr "Proprietario"
 
@@ -571,7 +572,7 @@ msgstr "Proprietario decrescente"
 msgid "Ownership"
 msgstr "Proprietà"
 
-#: src/menu.tsx:99 src/dialogs/copyPasteOwnership.tsx:164
+#: src/dialogs/copyPasteOwnership.tsx:164 src/menu.tsx:99
 msgid "Paste"
 msgstr "Incolla"
 
@@ -583,7 +584,7 @@ msgstr "Incolla come proprietario"
 msgid "Paste file or directory"
 msgstr "Incolla file o cartella"
 
-#: src/menu.tsx:51 src/dialogs/copyPasteOwnership.tsx:53
+#: src/dialogs/copyPasteOwnership.tsx:53 src/menu.tsx:51
 msgid "Pasting failed"
 msgstr "Operazione incolla fallita"
 
@@ -591,7 +592,7 @@ msgstr "Operazione incolla fallita"
 msgid "Permission denied"
 msgstr "Permesso negato"
 
-#: src/files-card-body.tsx:549 src/files-card-body.tsx:674 src/header.tsx:97
+#: src/header.tsx:97 src/files-card-body.tsx:549 src/files-card-body.tsx:674
 msgid "Permissions"
 msgstr "permessi"
 
@@ -603,7 +604,7 @@ msgstr "Permessi per $0 file"
 msgid "Read and execute"
 msgstr "Lettura ed esecuzione"
 
-#: src/common.ts:55 src/dialogs/permissions.tsx:210
+#: src/dialogs/permissions.tsx:210 src/common.ts:55
 msgid "Read and write"
 msgstr "Lettura e scrittura"
 
@@ -611,7 +612,7 @@ msgstr "Lettura e scrittura"
 msgid "Read, write, and execute"
 msgstr "Lettura, scrittura ed esecuzione"
 
-#: src/common.ts:53 src/dialogs/editor.tsx:167 src/dialogs/permissions.tsx:215
+#: src/dialogs/permissions.tsx:215 src/dialogs/editor.tsx:167 src/common.ts:53
 msgid "Read-only"
 msgstr "Sola lettura"
 
@@ -640,7 +641,7 @@ msgstr "Ricarica"
 msgid "Remove from bookmarks"
 msgstr "Rimuovi dai segnalibri"
 
-#: src/menu.tsx:162 src/dialogs/rename.tsx:78
+#: src/dialogs/rename.tsx:78 src/menu.tsx:162
 msgid "Rename"
 msgstr "Rinomina"
 
@@ -666,7 +667,7 @@ msgstr "Salva"
 
 #: src/dialogs/editor.tsx:259
 msgid "Save changes?"
-msgstr ""
+msgstr "Salvare le modifiche?"
 
 #: src/dialogs/permissions.tsx:375
 msgid "Security context"
@@ -684,7 +685,7 @@ msgstr "Imposta come eseguibile (programma)"
 msgid "Show all files"
 msgstr "Mostra tutti i file"
 
-#: src/files-card-body.tsx:522 src/header.tsx:271
+#: src/header.tsx:271 src/files-card-body.tsx:522
 msgid "Show hidden items"
 msgstr "Mostra elementi nascosti"
 
@@ -692,7 +693,7 @@ msgstr "Mostra elementi nascosti"
 msgid "Show keyboard shortcuts"
 msgstr "Mostra scorciatoie da tastiera"
 
-#: src/files-card-body.tsx:535 src/files-card-body.tsx:652 src/header.tsx:64
+#: src/header.tsx:64 src/files-card-body.tsx:535 src/files-card-body.tsx:652
 msgid "Size"
 msgstr "Dimensione"
 
@@ -733,14 +734,16 @@ msgid "The file has changed on disk"
 msgstr "Il file è cambiato sul disco"
 
 #: src/dialogs/editor.tsx:269
-#, fuzzy
-#| msgid "The file has changed on disk"
 msgid "The file has changed on disk between when it was opened and now"
-msgstr "Il file è cambiato sul disco"
+msgstr ""
+"Il file sul disco è stato modificato nel periodo tra l'apertura e il momento "
+"attuale"
 
 #: src/dialogs/editor.tsx:268
 msgid "The file was deleted after it was opened, saving will recreate it."
 msgstr ""
+"Il file è stato eliminato dopo essere stato aperto; il salvataggio lo "
+"ricreerà."
 
 #: src/dialogs/symlink.tsx:180
 msgid "Type"
@@ -791,7 +794,7 @@ msgstr "Visualizza $0"
 msgid "Write and execute"
 msgstr "Scrittura ed esecuzione"
 
-#: src/common.ts:51 src/dialogs/permissions.tsx:230
+#: src/dialogs/permissions.tsx:230 src/common.ts:51
 msgid "Write-only"
 msgstr "Sola scrittura"
 
