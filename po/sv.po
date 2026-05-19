@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-12 05:54+0000\n"
+"POT-Creation-Date: 2026-05-17 06:03+0000\n"
 "PO-Revision-Date: 2026-05-12 13:59+0000\n"
 "Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
 "memory@weblate.org>\n"
@@ -122,11 +122,11 @@ msgstr "Blockenhet"
 msgid "Bookmarks"
 msgstr "Bokmärken"
 
-#: src/upload-button.tsx:146 src/dialogs/mkdir.tsx:137
-#: src/dialogs/rename.tsx:87 src/dialogs/editor.tsx:248
-#: src/dialogs/editor.tsx:314 src/dialogs/copyPasteOwnership.tsx:166
-#: src/dialogs/symlink.tsx:233 src/dialogs/delete.tsx:97
-#: src/dialogs/permissions.tsx:409 src/dialogs/create-file.tsx:196
+#: src/dialogs/symlink.tsx:233 src/dialogs/copyPasteOwnership.tsx:166
+#: src/dialogs/permissions.tsx:409 src/dialogs/mkdir.tsx:137
+#: src/dialogs/editor.tsx:248 src/dialogs/editor.tsx:314
+#: src/dialogs/create-file.tsx:196 src/dialogs/delete.tsx:97
+#: src/dialogs/rename.tsx:87 src/upload-button.tsx:146
 msgid "Cancel"
 msgstr "Avbryt"
 
@@ -198,15 +198,15 @@ msgstr "Kopiera vald fil eller katalog"
 msgid "Create"
 msgstr "Skapa"
 
-#: src/menu.tsx:106 src/dialogs/mkdir.tsx:80
+#: src/dialogs/mkdir.tsx:80 src/menu.tsx:106
 msgid "Create directory"
 msgstr "Skapa katalog"
 
-#: src/menu.tsx:111 src/dialogs/create-file.tsx:136
+#: src/dialogs/create-file.tsx:136 src/menu.tsx:111
 msgid "Create file"
 msgstr "Skapa fil"
 
-#: src/menu.tsx:197 src/dialogs/symlink.tsx:231
+#: src/dialogs/symlink.tsx:231 src/menu.tsx:197
 msgid "Create link"
 msgstr "Skapa länk"
 
@@ -218,7 +218,7 @@ msgstr "Skapa länk till $0"
 msgid "Create new directory"
 msgstr "Skapa ny katalog"
 
-#: src/menu.tsx:168 src/menu.tsx:210 src/dialogs/delete.tsx:95
+#: src/dialogs/delete.tsx:95 src/menu.tsx:168 src/menu.tsx:210
 msgid "Delete"
 msgstr "Ta bort"
 
@@ -278,7 +278,7 @@ msgstr "Katalognamn för långt"
 msgid "Directory owner"
 msgstr "Katalogägare"
 
-#: src/common.ts:113 src/dialogs/symlink.tsx:39
+#: src/dialogs/symlink.tsx:39 src/common.ts:113
 msgid "Directory with the same name exists"
 msgstr "Katalog med samma namn existerar"
 
@@ -335,7 +335,7 @@ msgstr "Fil"
 msgid "File browser"
 msgstr "Filbläddrare"
 
-#: src/common.ts:115 src/dialogs/symlink.tsx:41
+#: src/dialogs/symlink.tsx:41 src/common.ts:115
 msgid "File exists"
 msgstr "Fil existerar"
 
@@ -415,8 +415,8 @@ msgstr "Gå framåt"
 msgid "Go up a directory"
 msgstr "Gå upp en katalog"
 
+#: src/dialogs/permissions.tsx:319 src/files-card-body.tsx:591
 #: src/files-footer-detail.tsx:80 src/files-footer-detail.tsx:152
-#: src/files-card-body.tsx:591 src/dialogs/permissions.tsx:319
 msgid "Group"
 msgstr "Grupp"
 
@@ -464,7 +464,7 @@ msgstr "Hantera dina filer"
 msgid "Missing type"
 msgstr "Saknar typ"
 
-#: src/files-card-body.tsx:539 src/files-card-body.tsx:659 src/header.tsx:75
+#: src/header.tsx:75 src/files-card-body.tsx:539 src/files-card-body.tsx:659
 msgid "Modified"
 msgstr "Modifierad"
 
@@ -472,11 +472,11 @@ msgstr "Modifierad"
 msgid "Most permissive"
 msgstr "Mest tillåtande"
 
-#: src/files-card-body.tsx:534 src/header.tsx:53
+#: src/header.tsx:53 src/files-card-body.tsx:534
 msgid "Name"
 msgstr "Namn"
 
-#: src/common.ts:104 src/dialogs/symlink.tsx:36
+#: src/dialogs/symlink.tsx:36 src/common.ts:104
 msgid "Name cannot be empty"
 msgstr "Namn kan inte vara tomt"
 
@@ -536,7 +536,7 @@ msgstr "Öppna en textfil"
 msgid "Original file on server"
 msgstr "Original fil på server"
 
-#: src/files-footer-detail.tsx:80 src/files-card-body.tsx:591
+#: src/files-card-body.tsx:591 src/files-footer-detail.tsx:80
 msgid "Others"
 msgstr "Övriga"
 
@@ -544,14 +544,15 @@ msgstr "Övriga"
 msgid "Others access"
 msgstr "Andra tillgång"
 
-#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:228
-#: src/dialogs/editor.tsx:285
+#: src/dialogs/editor.tsx:228 src/dialogs/editor.tsx:285
+#: src/dialogs/rename.tsx:85
 msgid "Overwrite"
 msgstr "Skriv över"
 
-#: src/files-footer-detail.tsx:80 src/files-card-body.tsx:544
-#: src/files-card-body.tsx:591 src/files-card-body.tsx:667 src/header.tsx:86
-#: src/dialogs/permissions.tsx:304 src/dialogs/create-file.tsx:170
+#: src/header.tsx:86 src/dialogs/permissions.tsx:304
+#: src/dialogs/create-file.tsx:170 src/files-card-body.tsx:544
+#: src/files-card-body.tsx:591 src/files-card-body.tsx:667
+#: src/files-footer-detail.tsx:80
 msgid "Owner"
 msgstr "Ägare"
 
@@ -571,7 +572,7 @@ msgstr "Ägare minskande"
 msgid "Ownership"
 msgstr "Ägarskap"
 
-#: src/menu.tsx:99 src/dialogs/copyPasteOwnership.tsx:164
+#: src/dialogs/copyPasteOwnership.tsx:164 src/menu.tsx:99
 msgid "Paste"
 msgstr "Klistra in"
 
@@ -583,7 +584,7 @@ msgstr "Klistra in som ägare"
 msgid "Paste file or directory"
 msgstr "Klistra in fil eller katalog"
 
-#: src/menu.tsx:51 src/dialogs/copyPasteOwnership.tsx:53
+#: src/dialogs/copyPasteOwnership.tsx:53 src/menu.tsx:51
 msgid "Pasting failed"
 msgstr "Inklistring misslyckades"
 
@@ -591,7 +592,7 @@ msgstr "Inklistring misslyckades"
 msgid "Permission denied"
 msgstr "Åtkomst nekas"
 
-#: src/files-card-body.tsx:549 src/files-card-body.tsx:674 src/header.tsx:97
+#: src/header.tsx:97 src/files-card-body.tsx:549 src/files-card-body.tsx:674
 msgid "Permissions"
 msgstr "Behörigheter"
 
@@ -603,7 +604,7 @@ msgstr "Behörigheter för $0 filer"
 msgid "Read and execute"
 msgstr "Läs och exekvera"
 
-#: src/common.ts:55 src/dialogs/permissions.tsx:210
+#: src/dialogs/permissions.tsx:210 src/common.ts:55
 msgid "Read and write"
 msgstr "Läs och skriv"
 
@@ -611,7 +612,7 @@ msgstr "Läs och skriv"
 msgid "Read, write, and execute"
 msgstr "Läs, skriv, och exekvera"
 
-#: src/common.ts:53 src/dialogs/editor.tsx:167 src/dialogs/permissions.tsx:215
+#: src/dialogs/permissions.tsx:215 src/dialogs/editor.tsx:167 src/common.ts:53
 msgid "Read-only"
 msgstr "Läs-endast"
 
@@ -640,7 +641,7 @@ msgstr "Ladda om"
 msgid "Remove from bookmarks"
 msgstr "Ta bort från bokmärken"
 
-#: src/menu.tsx:162 src/dialogs/rename.tsx:78
+#: src/dialogs/rename.tsx:78 src/menu.tsx:162
 msgid "Rename"
 msgstr "Byt namn"
 
@@ -684,7 +685,7 @@ msgstr "Ställ in körbar fil som program"
 msgid "Show all files"
 msgstr "Visa alla filer"
 
-#: src/files-card-body.tsx:522 src/header.tsx:271
+#: src/header.tsx:271 src/files-card-body.tsx:522
 msgid "Show hidden items"
 msgstr "Visa dolda objekt"
 
@@ -692,7 +693,7 @@ msgstr "Visa dolda objekt"
 msgid "Show keyboard shortcuts"
 msgstr "Visa tangentbordsgenvägar"
 
-#: src/files-card-body.tsx:535 src/files-card-body.tsx:652 src/header.tsx:64
+#: src/header.tsx:64 src/files-card-body.tsx:535 src/files-card-body.tsx:652
 msgid "Size"
 msgstr "Storlek"
 
@@ -790,7 +791,7 @@ msgstr "Visa $0"
 msgid "Write and execute"
 msgstr "Skriv och exekvera"
 
-#: src/common.ts:51 src/dialogs/permissions.tsx:230
+#: src/dialogs/permissions.tsx:230 src/common.ts:51
 msgid "Write-only"
 msgstr "Skriv-endast"
 

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: starter-kit 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-12 05:54+0000\n"
+"POT-Creation-Date: 2026-05-17 06:03+0000\n"
 "PO-Revision-Date: 2026-03-31 20:58+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German <https://translate.fedoraproject.org/projects/cockpit/"
@@ -110,11 +110,11 @@ msgstr "Blockorientiertes Gerät"
 msgid "Bookmarks"
 msgstr "Lesezeichen"
 
-#: src/upload-button.tsx:146 src/dialogs/mkdir.tsx:137
-#: src/dialogs/rename.tsx:87 src/dialogs/editor.tsx:248
-#: src/dialogs/editor.tsx:314 src/dialogs/copyPasteOwnership.tsx:166
-#: src/dialogs/symlink.tsx:233 src/dialogs/delete.tsx:97
-#: src/dialogs/permissions.tsx:409 src/dialogs/create-file.tsx:196
+#: src/dialogs/symlink.tsx:233 src/dialogs/copyPasteOwnership.tsx:166
+#: src/dialogs/permissions.tsx:409 src/dialogs/mkdir.tsx:137
+#: src/dialogs/editor.tsx:248 src/dialogs/editor.tsx:314
+#: src/dialogs/create-file.tsx:196 src/dialogs/delete.tsx:97
+#: src/dialogs/rename.tsx:87 src/upload-button.tsx:146
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -188,15 +188,15 @@ msgstr "Ausgewählte Datei oder ausgewähltes Verzeichnis kopieren"
 msgid "Create"
 msgstr "Erstellen"
 
-#: src/menu.tsx:106 src/dialogs/mkdir.tsx:80
+#: src/dialogs/mkdir.tsx:80 src/menu.tsx:106
 msgid "Create directory"
 msgstr "Verzeichnis erstellen"
 
-#: src/menu.tsx:111 src/dialogs/create-file.tsx:136
+#: src/dialogs/create-file.tsx:136 src/menu.tsx:111
 msgid "Create file"
 msgstr "Datei erstellen"
 
-#: src/menu.tsx:197 src/dialogs/symlink.tsx:231
+#: src/dialogs/symlink.tsx:231 src/menu.tsx:197
 msgid "Create link"
 msgstr "Link erstellen"
 
@@ -208,7 +208,7 @@ msgstr "Link zu $0 erstellen"
 msgid "Create new directory"
 msgstr "Neues Verzeichnis erstellen"
 
-#: src/menu.tsx:168 src/menu.tsx:210 src/dialogs/delete.tsx:95
+#: src/dialogs/delete.tsx:95 src/menu.tsx:168 src/menu.tsx:210
 msgid "Delete"
 msgstr "Löschen"
 
@@ -268,7 +268,7 @@ msgstr "Verzeichnisname zu lang"
 msgid "Directory owner"
 msgstr "Verzeichniseigentümer"
 
-#: src/common.ts:113 src/dialogs/symlink.tsx:39
+#: src/dialogs/symlink.tsx:39 src/common.ts:113
 msgid "Directory with the same name exists"
 msgstr "Verzeichniseigentümer mit gleichem Namen existiert bereits"
 
@@ -325,7 +325,7 @@ msgstr "Datei"
 msgid "File browser"
 msgstr "Datei-Browser"
 
-#: src/common.ts:115 src/dialogs/symlink.tsx:41
+#: src/dialogs/symlink.tsx:41 src/common.ts:115
 msgid "File exists"
 msgstr "Datei existiert"
 
@@ -405,8 +405,8 @@ msgstr "Weitergehen"
 msgid "Go up a directory"
 msgstr "Ein Verzeichnis nach oben gehen"
 
+#: src/dialogs/permissions.tsx:319 src/files-card-body.tsx:591
 #: src/files-footer-detail.tsx:80 src/files-footer-detail.tsx:152
-#: src/files-card-body.tsx:591 src/dialogs/permissions.tsx:319
 msgid "Group"
 msgstr "Gruppe"
 
@@ -454,7 +454,7 @@ msgstr "Verwalten Sie Ihre Dateien"
 msgid "Missing type"
 msgstr "Fehlender Typ"
 
-#: src/files-card-body.tsx:539 src/files-card-body.tsx:659 src/header.tsx:75
+#: src/header.tsx:75 src/files-card-body.tsx:539 src/files-card-body.tsx:659
 msgid "Modified"
 msgstr "Geändert"
 
@@ -462,11 +462,11 @@ msgstr "Geändert"
 msgid "Most permissive"
 msgstr "Am meisten zulässig"
 
-#: src/files-card-body.tsx:534 src/header.tsx:53
+#: src/header.tsx:53 src/files-card-body.tsx:534
 msgid "Name"
 msgstr "Name"
 
-#: src/common.ts:104 src/dialogs/symlink.tsx:36
+#: src/dialogs/symlink.tsx:36 src/common.ts:104
 msgid "Name cannot be empty"
 msgstr "Name darf nicht leer sein"
 
@@ -526,7 +526,7 @@ msgstr "Textdatei öffnen"
 msgid "Original file on server"
 msgstr "Originaldatei auf dem Server"
 
-#: src/files-footer-detail.tsx:80 src/files-card-body.tsx:591
+#: src/files-card-body.tsx:591 src/files-footer-detail.tsx:80
 msgid "Others"
 msgstr "Andere"
 
@@ -534,14 +534,15 @@ msgstr "Andere"
 msgid "Others access"
 msgstr "Anderer Zugriff"
 
-#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:228
-#: src/dialogs/editor.tsx:285
+#: src/dialogs/editor.tsx:228 src/dialogs/editor.tsx:285
+#: src/dialogs/rename.tsx:85
 msgid "Overwrite"
 msgstr "Überschreiben"
 
-#: src/files-footer-detail.tsx:80 src/files-card-body.tsx:544
-#: src/files-card-body.tsx:591 src/files-card-body.tsx:667 src/header.tsx:86
-#: src/dialogs/permissions.tsx:304 src/dialogs/create-file.tsx:170
+#: src/header.tsx:86 src/dialogs/permissions.tsx:304
+#: src/dialogs/create-file.tsx:170 src/files-card-body.tsx:544
+#: src/files-card-body.tsx:591 src/files-card-body.tsx:667
+#: src/files-footer-detail.tsx:80
 msgid "Owner"
 msgstr "Eigentümer"
 
@@ -561,7 +562,7 @@ msgstr "Eigentümer absteigend"
 msgid "Ownership"
 msgstr "Eigentümerschaft"
 
-#: src/menu.tsx:99 src/dialogs/copyPasteOwnership.tsx:164
+#: src/dialogs/copyPasteOwnership.tsx:164 src/menu.tsx:99
 msgid "Paste"
 msgstr "Einfügen"
 
@@ -573,7 +574,7 @@ msgstr "Als Eigentümer einfügen"
 msgid "Paste file or directory"
 msgstr "Datei oder Verzeichnis einfügen"
 
-#: src/menu.tsx:51 src/dialogs/copyPasteOwnership.tsx:53
+#: src/dialogs/copyPasteOwnership.tsx:53 src/menu.tsx:51
 msgid "Pasting failed"
 msgstr "Einfügen fehlgeschlagen"
 
@@ -581,7 +582,7 @@ msgstr "Einfügen fehlgeschlagen"
 msgid "Permission denied"
 msgstr "Erlaubnis verweigert"
 
-#: src/files-card-body.tsx:549 src/files-card-body.tsx:674 src/header.tsx:97
+#: src/header.tsx:97 src/files-card-body.tsx:549 src/files-card-body.tsx:674
 msgid "Permissions"
 msgstr "Berechtigungen"
 
@@ -593,7 +594,7 @@ msgstr "Berechtigungen für $0 Dateien"
 msgid "Read and execute"
 msgstr "Lesen und ausführen"
 
-#: src/common.ts:55 src/dialogs/permissions.tsx:210
+#: src/dialogs/permissions.tsx:210 src/common.ts:55
 msgid "Read and write"
 msgstr "Lesen und schreiben"
 
@@ -601,7 +602,7 @@ msgstr "Lesen und schreiben"
 msgid "Read, write, and execute"
 msgstr "Lesen, schreiben und ausführen"
 
-#: src/common.ts:53 src/dialogs/editor.tsx:167 src/dialogs/permissions.tsx:215
+#: src/dialogs/permissions.tsx:215 src/dialogs/editor.tsx:167 src/common.ts:53
 msgid "Read-only"
 msgstr "Nur lesen"
 
@@ -630,7 +631,7 @@ msgstr "Neu laden"
 msgid "Remove from bookmarks"
 msgstr "Aus den Lesezeichen entfernen"
 
-#: src/menu.tsx:162 src/dialogs/rename.tsx:78
+#: src/dialogs/rename.tsx:78 src/menu.tsx:162
 msgid "Rename"
 msgstr "Umbenennen"
 
@@ -674,7 +675,7 @@ msgstr "Ausführbare Datei als Programm festlegen"
 msgid "Show all files"
 msgstr "Alle Dateien anzeigen"
 
-#: src/files-card-body.tsx:522 src/header.tsx:271
+#: src/header.tsx:271 src/files-card-body.tsx:522
 msgid "Show hidden items"
 msgstr "Versteckte Elemente anzeigen"
 
@@ -682,7 +683,7 @@ msgstr "Versteckte Elemente anzeigen"
 msgid "Show keyboard shortcuts"
 msgstr "Tastenkombinationen anzeigen"
 
-#: src/files-card-body.tsx:535 src/files-card-body.tsx:652 src/header.tsx:64
+#: src/header.tsx:64 src/files-card-body.tsx:535 src/files-card-body.tsx:652
 msgid "Size"
 msgstr "Größe"
 
@@ -783,7 +784,7 @@ msgstr "$0 ansehen"
 msgid "Write and execute"
 msgstr "Schreiben und ausführen"
 
-#: src/common.ts:51 src/dialogs/permissions.tsx:230
+#: src/dialogs/permissions.tsx:230 src/common.ts:51
 msgid "Write-only"
 msgstr "Nur schreiben"
 

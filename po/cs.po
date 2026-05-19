@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-12 05:54+0000\n"
+"POT-Creation-Date: 2026-05-17 06:03+0000\n"
 "PO-Revision-Date: 2026-03-24 09:58+0000\n"
 "Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech <https://translate.fedoraproject.org/projects/cockpit/"
@@ -119,11 +119,11 @@ msgstr "Blokové zařízení"
 msgid "Bookmarks"
 msgstr "Záložky"
 
-#: src/upload-button.tsx:146 src/dialogs/mkdir.tsx:137
-#: src/dialogs/rename.tsx:87 src/dialogs/editor.tsx:248
-#: src/dialogs/editor.tsx:314 src/dialogs/copyPasteOwnership.tsx:166
-#: src/dialogs/symlink.tsx:233 src/dialogs/delete.tsx:97
-#: src/dialogs/permissions.tsx:409 src/dialogs/create-file.tsx:196
+#: src/dialogs/symlink.tsx:233 src/dialogs/copyPasteOwnership.tsx:166
+#: src/dialogs/permissions.tsx:409 src/dialogs/mkdir.tsx:137
+#: src/dialogs/editor.tsx:248 src/dialogs/editor.tsx:314
+#: src/dialogs/create-file.tsx:196 src/dialogs/delete.tsx:97
+#: src/dialogs/rename.tsx:87 src/upload-button.tsx:146
 msgid "Cancel"
 msgstr "Storno"
 
@@ -196,15 +196,15 @@ msgstr "Zkopírovat označený soubor či složku"
 msgid "Create"
 msgstr "Vytvořit"
 
-#: src/menu.tsx:106 src/dialogs/mkdir.tsx:80
+#: src/dialogs/mkdir.tsx:80 src/menu.tsx:106
 msgid "Create directory"
 msgstr "Vytvořit složku"
 
-#: src/menu.tsx:111 src/dialogs/create-file.tsx:136
+#: src/dialogs/create-file.tsx:136 src/menu.tsx:111
 msgid "Create file"
 msgstr "Vytvořit soubor"
 
-#: src/menu.tsx:197 src/dialogs/symlink.tsx:231
+#: src/dialogs/symlink.tsx:231 src/menu.tsx:197
 msgid "Create link"
 msgstr "Vytvořit odkaz"
 
@@ -216,7 +216,7 @@ msgstr "Vytvořit odkaz na $0"
 msgid "Create new directory"
 msgstr "Vytvořit novou složku"
 
-#: src/menu.tsx:168 src/menu.tsx:210 src/dialogs/delete.tsx:95
+#: src/dialogs/delete.tsx:95 src/menu.tsx:168 src/menu.tsx:210
 msgid "Delete"
 msgstr "Smazat"
 
@@ -276,7 +276,7 @@ msgstr "Název složky je příliš dlouhý"
 msgid "Directory owner"
 msgstr "Vlastník složky"
 
-#: src/common.ts:113 src/dialogs/symlink.tsx:39
+#: src/dialogs/symlink.tsx:39 src/common.ts:113
 msgid "Directory with the same name exists"
 msgstr "Složka s tímto názvem zde už existuje"
 
@@ -333,7 +333,7 @@ msgstr "Soubor"
 msgid "File browser"
 msgstr "Procházení souborů"
 
-#: src/common.ts:115 src/dialogs/symlink.tsx:41
+#: src/dialogs/symlink.tsx:41 src/common.ts:115
 msgid "File exists"
 msgstr "Soubor existuje"
 
@@ -413,8 +413,8 @@ msgstr "Přejít vpřed"
 msgid "Go up a directory"
 msgstr "Do nadřazené složky"
 
+#: src/dialogs/permissions.tsx:319 src/files-card-body.tsx:591
 #: src/files-footer-detail.tsx:80 src/files-footer-detail.tsx:152
-#: src/files-card-body.tsx:591 src/dialogs/permissions.tsx:319
 msgid "Group"
 msgstr "Skupina"
 
@@ -462,7 +462,7 @@ msgstr "Spravujte své soubory"
 msgid "Missing type"
 msgstr "Chybí typ"
 
-#: src/files-card-body.tsx:539 src/files-card-body.tsx:659 src/header.tsx:75
+#: src/header.tsx:75 src/files-card-body.tsx:539 src/files-card-body.tsx:659
 msgid "Modified"
 msgstr "Změněno"
 
@@ -470,11 +470,11 @@ msgstr "Změněno"
 msgid "Most permissive"
 msgstr "Nejpřístupnější"
 
-#: src/files-card-body.tsx:534 src/header.tsx:53
+#: src/header.tsx:53 src/files-card-body.tsx:534
 msgid "Name"
 msgstr "Název"
 
-#: src/common.ts:104 src/dialogs/symlink.tsx:36
+#: src/dialogs/symlink.tsx:36 src/common.ts:104
 msgid "Name cannot be empty"
 msgstr "Název je třeba vyplnit"
 
@@ -534,7 +534,7 @@ msgstr "Otevřít textový soubor"
 msgid "Original file on server"
 msgstr "Původní soubor na serveru"
 
-#: src/files-footer-detail.tsx:80 src/files-card-body.tsx:591
+#: src/files-card-body.tsx:591 src/files-footer-detail.tsx:80
 msgid "Others"
 msgstr "Ostatní"
 
@@ -542,14 +542,15 @@ msgstr "Ostatní"
 msgid "Others access"
 msgstr "Přístup pro ostatní"
 
-#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:228
-#: src/dialogs/editor.tsx:285
+#: src/dialogs/editor.tsx:228 src/dialogs/editor.tsx:285
+#: src/dialogs/rename.tsx:85
 msgid "Overwrite"
 msgstr "Přepsat"
 
-#: src/files-footer-detail.tsx:80 src/files-card-body.tsx:544
-#: src/files-card-body.tsx:591 src/files-card-body.tsx:667 src/header.tsx:86
-#: src/dialogs/permissions.tsx:304 src/dialogs/create-file.tsx:170
+#: src/header.tsx:86 src/dialogs/permissions.tsx:304
+#: src/dialogs/create-file.tsx:170 src/files-card-body.tsx:544
+#: src/files-card-body.tsx:591 src/files-card-body.tsx:667
+#: src/files-footer-detail.tsx:80
 msgid "Owner"
 msgstr "Vlastník"
 
@@ -569,7 +570,7 @@ msgstr "Podle vlastníka sestupně"
 msgid "Ownership"
 msgstr "Vlastnictví"
 
-#: src/menu.tsx:99 src/dialogs/copyPasteOwnership.tsx:164
+#: src/dialogs/copyPasteOwnership.tsx:164 src/menu.tsx:99
 msgid "Paste"
 msgstr "Vložit"
 
@@ -581,7 +582,7 @@ msgstr "Vložit jako vlastník"
 msgid "Paste file or directory"
 msgstr "Vložit soubor nebo složku"
 
-#: src/menu.tsx:51 src/dialogs/copyPasteOwnership.tsx:53
+#: src/dialogs/copyPasteOwnership.tsx:53 src/menu.tsx:51
 msgid "Pasting failed"
 msgstr "Vkládání se nezdařilo"
 
@@ -589,7 +590,7 @@ msgstr "Vkládání se nezdařilo"
 msgid "Permission denied"
 msgstr "Přístup zamítnut"
 
-#: src/files-card-body.tsx:549 src/files-card-body.tsx:674 src/header.tsx:97
+#: src/header.tsx:97 src/files-card-body.tsx:549 src/files-card-body.tsx:674
 msgid "Permissions"
 msgstr "Oprávnění"
 
@@ -601,7 +602,7 @@ msgstr "Oprávnění pro $0 souborů"
 msgid "Read and execute"
 msgstr "Číst a spouštět"
 
-#: src/common.ts:55 src/dialogs/permissions.tsx:210
+#: src/dialogs/permissions.tsx:210 src/common.ts:55
 msgid "Read and write"
 msgstr "Číst a zapisovat"
 
@@ -609,7 +610,7 @@ msgstr "Číst a zapisovat"
 msgid "Read, write, and execute"
 msgstr "Číst, zapisovat a spouštět"
 
-#: src/common.ts:53 src/dialogs/editor.tsx:167 src/dialogs/permissions.tsx:215
+#: src/dialogs/permissions.tsx:215 src/dialogs/editor.tsx:167 src/common.ts:53
 msgid "Read-only"
 msgstr "Pouze pro čtení"
 
@@ -638,7 +639,7 @@ msgstr "Načíst znovu"
 msgid "Remove from bookmarks"
 msgstr "Odstranit ze záložek"
 
-#: src/menu.tsx:162 src/dialogs/rename.tsx:78
+#: src/dialogs/rename.tsx:78 src/menu.tsx:162
 msgid "Rename"
 msgstr "Přejmenovat"
 
@@ -682,7 +683,7 @@ msgstr "Nastavit spustitelné jako program"
 msgid "Show all files"
 msgstr "Zobrazit veškeré soubory"
 
-#: src/files-card-body.tsx:522 src/header.tsx:271
+#: src/header.tsx:271 src/files-card-body.tsx:522
 msgid "Show hidden items"
 msgstr "Zobrazit skryté položky"
 
@@ -690,7 +691,7 @@ msgstr "Zobrazit skryté položky"
 msgid "Show keyboard shortcuts"
 msgstr "Zobrazit klávesové zkratky"
 
-#: src/files-card-body.tsx:535 src/files-card-body.tsx:652 src/header.tsx:64
+#: src/header.tsx:64 src/files-card-body.tsx:535 src/files-card-body.tsx:652
 msgid "Size"
 msgstr "Velikost"
 
@@ -790,7 +791,7 @@ msgstr "Zobrazit $0"
 msgid "Write and execute"
 msgstr "Zápis a spouštění"
 
-#: src/common.ts:51 src/dialogs/permissions.tsx:230
+#: src/dialogs/permissions.tsx:230 src/common.ts:51
 msgid "Write-only"
 msgstr "Pouze zápis"
 
