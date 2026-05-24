@@ -101,7 +101,7 @@ const CreateFileModal = ({ dialogResult, path } : {
         }
     };
 
-    const handleSave = async () => {
+    const handleSave = React.useCallback(async () => {
         cockpit.assert(filename, "filename undefined");
         const filename_valid = checkFilename(filename, cwdInfo?.entries || {}, undefined);
         if (filename_valid !== null) {
@@ -119,7 +119,22 @@ const CreateFileModal = ({ dialogResult, path } : {
         }
 
         dialogResult.resolve(full_path);
-    };
+    }, [filename, path, cwdInfo, dialogResult, initialText, owner]);
+
+    React.useEffect(() => {
+        const onKeyDown = function (event: KeyboardEvent) {
+            if ((event.ctrlKey || event.metaKey) && (event.key === "s" || event.key === "S")) {
+                event.preventDefault();
+                handleSave();
+            }
+        };
+
+        window.addEventListener('keydown', onKeyDown);
+
+        return () => {
+            window.removeEventListener('keydown', onKeyDown);
+        };
+    }, [handleSave]);
 
     if (superuser.allowed && owner === undefined)
         return null;
