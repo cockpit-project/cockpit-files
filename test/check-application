@@ -3090,7 +3090,7 @@ class TestFiles(testlib.MachineCase):
         def validate_content(file: str, content: str) -> None:
             open_editor(file)
             b.wait_val(".file-editor-modal textarea", content)
-            b.click(".file-editor-modal button.pf-m-link")
+            b.click(".file-editor-modal [data-ouia-component-id='cancel-save']")
             b.wait_not_present(".file-editor-modal")
 
             # validate on disk
@@ -3292,6 +3292,68 @@ class TestFiles(testlib.MachineCase):
         b.key("Escape")  # Escape for modal
         b.wait_not_present(".file-editor-modal")
 
+        # Ctrl-S on editor saves and keeps modal open
+        open_editor("notes.txt")
+        b.wait_val(".file-editor-modal textarea", "reset\n")
+        b.set_input_text(".file-editor-modal textarea", "")
+        b.wait_visible(".file-editor-modal.is-modified")
+        b.blur(".file-editor-modal textarea")  # remove focus from textarea
+        b.key("S", modifiers=["Control"])  # Save
+        b.wait_not_present(".file-editor-modal.is-modified")
+        b.click(".file-editor-modal [data-ouia-component-id='cancel-save']")
+        b.wait_not_present(".file-editor-modal")
+
+        validate_content("notes.txt", "")
+
+        # Meta-s on editor saves and keeps modal open
+        open_editor("notes.txt")
+        b.wait_val(".file-editor-modal textarea", "")
+        b.set_input_text(".file-editor-modal textarea", "reset")
+        b.wait_visible(".file-editor-modal.is-modified")
+        b.blur(".file-editor-modal textarea")  # remove focus from textarea
+        b.key("s", modifiers=["Meta"])  # Save
+        b.wait_not_present(".file-editor-modal.is-modified")
+        b.click(".file-editor-modal [data-ouia-component-id='cancel-save']")
+        b.wait_not_present(".file-editor-modal")
+
+        validate_content("notes.txt", "reset\n")
+
+        # Ctrl-S on confirmation dialog saves and closes modal
+        open_editor("notes.txt")
+        b.wait_val(".file-editor-modal textarea", "reset\n")
+        b.set_input_text(".file-editor-modal textarea", "")
+        b.blur(".file-editor-modal textarea")  # remove focus from textarea
+        b.key("Escape")  # Escape for modal
+        b.wait_visible("#file-editor-prompt-modal")
+        b.key("S", modifiers=["Control"])  # Save
+        b.wait_not_present(".file-editor-modal")
+
+        validate_content("notes.txt", "")
+
+        # Meta-S on confirmation dialog saves and closes modal
+        open_editor("notes.txt")
+        b.wait_val(".file-editor-modal textarea", "")
+        b.set_input_text(".file-editor-modal textarea", "reset")
+        b.blur(".file-editor-modal textarea")  # remove focus from textarea
+        b.key("Escape")  # Escape for modal
+        b.wait_visible("#file-editor-prompt-modal")
+        b.key("s", modifiers=["Meta"])  # Save
+        b.wait_not_present(".file-editor-modal")
+
+        validate_content("notes.txt", "reset\n")
+
+        # Enter on confirmation dialog saves and closes modal
+        open_editor("notes.txt")
+        b.wait_val(".file-editor-modal textarea", "reset\n")
+        b.set_input_text(".file-editor-modal textarea", "")
+        b.blur(".file-editor-modal textarea")  # remove focus from textarea
+        b.key("Escape")  # Escape for modal
+        b.wait_visible("#file-editor-prompt-modal")
+        b.key("Enter")  # Default on save
+        b.wait_not_present(".file-editor-modal")
+
+        validate_content("notes.txt", "")
+
         # As unprivileged user
         b.drop_superuser()
         self.wait_directory_changed("/home/admin/")
@@ -3400,6 +3462,26 @@ class TestFiles(testlib.MachineCase):
         b.wait_not_present(".pf-v6-c-modal-box")
         self.assert_owner("/home/admin/empty-file", "admin:admin")
         self.assertEqual(m.execute("cat /home/admin/empty-file"), "")
+
+        # Ctrl-S on editor saves and closes modal
+        self.open_folder_context_menu()
+        b.click(".contextMenu button:contains('Create file')")
+        b.set_input_text("#file-name", "ctrls.txt")
+        b.set_input_text(".file-create-modal textarea", "foo")
+        b.blur(".file-create-modal textarea")  # remove focus from textarea
+        b.key("S", modifiers=["Control"])  # Save
+        b.wait_not_present(".file-create-modal")
+        self.assertEqual(m.execute("cat /home/admin/ctrls.txt"), "foo")
+
+        # Meta-s on editor saves and closes modal
+        self.open_folder_context_menu()
+        b.click(".contextMenu button:contains('Create file')")
+        b.set_input_text("#file-name", "metas.txt")
+        b.set_input_text(".file-create-modal textarea", "foo")
+        b.blur(".file-create-modal textarea")  # remove focus from textarea
+        b.key("s", modifiers=["Meta"])  # Save
+        b.wait_not_present(".file-create-modal")
+        self.assertEqual(m.execute("cat /home/admin/ctrls.txt"), "foo")
 
         # Unable to create a file
         self.open_folder_context_menu()
