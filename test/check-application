@@ -2915,6 +2915,8 @@ class TestFiles(testlib.MachineCase):
             b.click("#bookmark-btn")
             b.wait_not_present(".pf-v6-c-menu .pf-v6-c-menu__list-item")
 
+        # Home directory shows icon as bookmarked
+        b.wait_visible('#bookmark-btn[aria-label="Bookmarked"]')
         b.click("#bookmark-btn")
         # There is only one menu item
         b.wait_in_text(".pf-v6-c-menu .pf-v6-c-menu__list-item", "Home")
@@ -2926,11 +2928,15 @@ class TestFiles(testlib.MachineCase):
 
         # Add a bookmark
         self.chdir('/etc')
+        b.wait_visible('#bookmark-btn[aria-label="Not bookmarked"]')
+        b.assert_pixels("#bookmark-btn", "bookmark-btn-unbookmarked")
         b.click("#bookmark-btn")
         b.click(".pf-v6-c-menu .pf-v6-c-menu__list-item button:contains(Add to bookmarks)")
         b.wait_not_present(".pf-v6-c-menu")
+        b.wait_visible('#bookmark-btn[aria-label="Bookmarked"]')
 
         assert_bookmark("/etc", exists=True)
+        b.assert_pixels("#bookmark-btn", "bookmark-btn-bookmarked")
 
         # Remove bookmark
         b.click("#bookmark-btn")
