@@ -14,7 +14,14 @@ import { MenuToggle, MenuToggleElement } from "@patternfly/react-core/dist/esm/c
 import { PageBreadcrumb, PageSection, } from "@patternfly/react-core/dist/esm/components/Page";
 import { TextInput } from "@patternfly/react-core/dist/esm/components/TextInput";
 import { Tooltip, TooltipPosition } from "@patternfly/react-core/dist/esm/components/Tooltip";
-import { CheckIcon, OutlinedHddIcon, PencilAltIcon, StarIcon, TimesIcon } from "@patternfly/react-icons";
+import {
+    CheckIcon,
+    OutlinedHddIcon,
+    OutlinedStarIcon,
+    PencilAltIcon,
+    StarIcon,
+    TimesIcon
+} from "@patternfly/react-icons";
 
 import cockpit from "cockpit";
 import { basename } from "cockpit-path";
@@ -125,12 +132,16 @@ function BookmarkButton({ path }: { path: string }) {
     };
 
     let actionText = null;
+    let isBookmarked = false;
     if (!defaultBookmarks.some(bkmark => bkmark.loc === path)) {
         if (bookmarks.includes(path)) {
+            isBookmarked = true;
             actionText = _("Remove from bookmarks");
         } else if (cwdInfo !== null) {
             actionText = _("Add to bookmarks");
         }
+    } else {
+        isBookmarked = true;
     }
 
     return (
@@ -147,7 +158,8 @@ function BookmarkButton({ path }: { path: string }) {
                   <MenuToggle
                     id="bookmark-btn"
                     variant="secondary"
-                    icon={<StarIcon />}
+                    aria-label={isBookmarked ? _("Bookmarked") : _("Not bookmarked")}
+                    icon={isBookmarked ? <StarIcon /> : <OutlinedStarIcon />}
                     ref={toggleRef}
                     onClick={() => setIsOpen(!isOpen)}
                     isExpanded={isOpen}
