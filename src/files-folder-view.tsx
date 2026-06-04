@@ -60,7 +60,7 @@ export const FilesFolderView = ({
     const [uploadedFiles, setUploadedFiles] = useState<{[name: string]:
                                                         {file: File, progress: number, cancel:() => void}}>({});
     const onFilterChange = debounce(300,
-                                    (_event: React.FormEvent<HTMLInputElement>, value: string) =>
+                                    (_event: React.SyntheticEvent<HTMLElement>, value: string) =>
                                         setCurrentFilter(value));
 
     // Reset the search filter on path changes
