@@ -129,7 +129,7 @@ export const FilesCardHeader = ({
     path,
 }: {
     currentFilter: string,
-    onFilterChange: (_event: React.FormEvent<HTMLInputElement>, value: string) => void,
+    onFilterChange: (_event: React.SyntheticEvent<HTMLElement>, value: string) => void,
     isGrid: boolean, setIsGrid: React.Dispatch<React.SetStateAction<boolean>>,
     sortBy: Sort, setSortBy: React.Dispatch<React.SetStateAction<Sort>>
     showHidden: boolean, setShowHidden: React.Dispatch<React.SetStateAction<boolean>>,
@@ -176,7 +176,7 @@ export const FilesCardHeader = ({
                   className="files-search"
                   placeholder={_("Filter directory")} value={currentFilter}
                   onChange={onFilterChange}
-                  onClear={event => onFilterChange(event as React.FormEvent<HTMLInputElement>, "")}
+                  onClear={event => onFilterChange(event, "")}
                 />
                 <div className="header-actions">
                     <ViewSelector
