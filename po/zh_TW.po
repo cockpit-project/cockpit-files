@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-17 06:03+0000\n"
+"POT-Creation-Date: 2026-06-21 07:19+0000\n"
 "PO-Revision-Date: 2025-08-09 22:55+0000\n"
 "Last-Translator: hsu zangmen <chzang55@gmail.com>\n"
 "Language-Team: Chinese (Traditional) <https://translate.fedoraproject.org/"
@@ -38,7 +38,7 @@ msgstr "$0 個檔案"
 msgid "$0 files selected"
 msgstr "已選擇 $0 個檔案"
 
-#: src/dialogs/editor.tsx:274
+#: src/dialogs/editor.tsx:296
 msgid "$0 has unsaved changes and which will be permanently lost if discarded."
 msgstr ""
 
@@ -97,7 +97,7 @@ msgstr "存取權限"
 msgid "Activate selected item, enter directory"
 msgstr "觸發所選擇的項目，進入目錄"
 
-#: src/files-breadcrumbs.tsx:132
+#: src/files-breadcrumbs.tsx:141
 msgid "Add to bookmarks"
 msgstr "新增至書籤"
 
@@ -109,15 +109,21 @@ msgstr "套用此動作至所有發生衝突的檔案"
 msgid "Block device"
 msgstr "區塊裝置"
 
-#: src/files-breadcrumbs.tsx:143
+#: src/files-breadcrumbs.tsx:161
+#, fuzzy
+#| msgid "Bookmarks"
+msgid "Bookmarked"
+msgstr "書籤"
+
+#: src/files-breadcrumbs.tsx:154
 msgid "Bookmarks"
 msgstr "書籤"
 
-#: src/dialogs/symlink.tsx:233 src/dialogs/copyPasteOwnership.tsx:166
-#: src/dialogs/permissions.tsx:409 src/dialogs/mkdir.tsx:137
-#: src/dialogs/editor.tsx:248 src/dialogs/editor.tsx:314
-#: src/dialogs/create-file.tsx:196 src/dialogs/delete.tsx:97
-#: src/dialogs/rename.tsx:87 src/upload-button.tsx:146
+#: src/upload-button.tsx:146 src/dialogs/create-file.tsx:211
+#: src/dialogs/mkdir.tsx:137 src/dialogs/copyPasteOwnership.tsx:166
+#: src/dialogs/rename.tsx:87 src/dialogs/editor.tsx:270
+#: src/dialogs/editor.tsx:336 src/dialogs/permissions.tsx:409
+#: src/dialogs/delete.tsx:97 src/dialogs/symlink.tsx:233
 msgid "Cancel"
 msgstr "取消"
 
@@ -133,7 +139,7 @@ msgstr "已取消"
 msgid "Cancelled upload of $0"
 msgstr "已取消上傳 $0"
 
-#: src/dialogs/create-file.tsx:213
+#: src/dialogs/create-file.tsx:228
 msgid "Cannot create file in current directory"
 msgstr "無法在目前的目錄建立檔案"
 
@@ -161,9 +167,13 @@ msgstr "字元裝置"
 msgid "Clear filter"
 msgstr "清除篩選器"
 
-#: src/dialogs/editor.tsx:248 src/dialogs/keyboardShortcutsHelp.tsx:33
+#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:270
 msgid "Close"
 msgstr "關閉"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:135
+msgid "Close editor"
+msgstr ""
 
 #: src/index.html:8
 msgid "Cockpit Files"
@@ -185,7 +195,7 @@ msgstr "複製"
 msgid "Copy selected file or directory"
 msgstr "複製已選擇的檔案或目錄"
 
-#: src/dialogs/mkdir.tsx:135 src/dialogs/create-file.tsx:193
+#: src/dialogs/create-file.tsx:208 src/dialogs/mkdir.tsx:135
 msgid "Create"
 msgstr "建立"
 
@@ -193,7 +203,7 @@ msgstr "建立"
 msgid "Create directory"
 msgstr "建立目錄"
 
-#: src/dialogs/create-file.tsx:136 src/menu.tsx:111
+#: src/dialogs/create-file.tsx:151 src/menu.tsx:111
 msgid "Create file"
 msgstr "建立檔案"
 
@@ -273,7 +283,7 @@ msgstr "目錄擁有者"
 msgid "Directory with the same name exists"
 msgstr "相同名稱的目錄已存在"
 
-#: src/dialogs/editor.tsx:307
+#: src/dialogs/editor.tsx:329
 msgid "Discard"
 msgstr ""
 
@@ -294,11 +304,11 @@ msgid "Drop files to upload"
 msgstr "拖曳檔案以上傳"
 
 #. Translators: This is the title of a modal dialog.  $0 represents a filename.
-#: src/dialogs/editor.tsx:165
+#: src/dialogs/editor.tsx:187
 msgid "Edit $0"
 msgstr "編輯 $0"
 
-#: src/files-breadcrumbs.tsx:291 src/dialogs/keyboardShortcutsHelp.tsx:87
+#: src/dialogs/keyboardShortcutsHelp.tsx:87 src/files-breadcrumbs.tsx:303
 msgid "Edit path"
 msgstr "編輯路徑"
 
@@ -306,9 +316,15 @@ msgstr "編輯路徑"
 msgid "Edit permissions"
 msgstr "編輯權限"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:147
+#: src/dialogs/keyboardShortcutsHelp.tsx:162
 msgid "Editing"
 msgstr "正在編輯"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:172
+#, fuzzy
+#| msgid "Edit $0"
+msgid "Editor"
+msgstr "編輯 $0"
 
 #: src/common.ts:50
 msgid "Execute-only"
@@ -332,7 +348,7 @@ msgstr "檔案瀏覽器"
 msgid "File exists"
 msgstr "檔案已存在"
 
-#: src/dialogs/create-file.tsx:148
+#: src/dialogs/create-file.tsx:163
 msgid "File name"
 msgstr "檔案名稱"
 
@@ -360,7 +376,7 @@ msgstr ""
 msgid "Files uploaded"
 msgstr "多個檔案已上傳"
 
-#: src/files-breadcrumbs.tsx:224
+#: src/files-breadcrumbs.tsx:236
 msgid "Filesystem"
 msgstr "檔案系統"
 
@@ -421,11 +437,11 @@ msgstr "群組存取權限"
 msgid "Hide hidden items"
 msgstr "不顯示隱藏的項目"
 
-#: src/files-breadcrumbs.tsx:39
+#: src/files-breadcrumbs.tsx:46
 msgid "Home"
 msgstr "家目錄"
 
-#: src/dialogs/editor.tsx:208
+#: src/dialogs/editor.tsx:230
 msgid "Ignore"
 msgstr "忽略"
 
@@ -433,7 +449,7 @@ msgstr "忽略"
 msgid "Keep original"
 msgstr "保留原本的"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:133
+#: src/dialogs/keyboardShortcutsHelp.tsx:148
 msgid "Keyboard shortcuts"
 msgstr "鍵盤快速鍵"
 
@@ -457,7 +473,7 @@ msgstr "管理您的檔案"
 msgid "Missing type"
 msgstr "類型已遺失"
 
-#: src/header.tsx:75 src/files-card-body.tsx:539 src/files-card-body.tsx:659
+#: src/files-card-body.tsx:539 src/files-card-body.tsx:659 src/header.tsx:75
 msgid "Modified"
 msgstr "被修改"
 
@@ -465,7 +481,7 @@ msgstr "被修改"
 msgid "Most permissive"
 msgstr "最寬鬆的權限"
 
-#: src/header.tsx:53 src/files-card-body.tsx:534
+#: src/files-card-body.tsx:534 src/header.tsx:53
 msgid "Name"
 msgstr "名稱"
 
@@ -485,7 +501,7 @@ msgstr "名稱太長"
 msgid "Named pipe"
 msgstr "Named pipe"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:137
+#: src/dialogs/keyboardShortcutsHelp.tsx:152
 msgid "Navigation"
 msgstr "瀏覽"
 
@@ -517,6 +533,12 @@ msgstr "沒有找到相符的結果"
 msgid "None"
 msgstr "無"
 
+#: src/files-breadcrumbs.tsx:161
+#, fuzzy
+#| msgid "Add to bookmarks"
+msgid "Not bookmarked"
+msgstr "新增至書籤"
+
 #: src/menu.tsx:126 src/menu.tsx:187
 msgid "Open in terminal"
 msgstr "於終端機開啟"
@@ -537,15 +559,14 @@ msgstr "其他人"
 msgid "Others access"
 msgstr "其他人的存取權限"
 
-#: src/dialogs/editor.tsx:228 src/dialogs/editor.tsx:285
-#: src/dialogs/rename.tsx:85
+#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:250
+#: src/dialogs/editor.tsx:307
 msgid "Overwrite"
 msgstr "覆寫"
 
-#: src/header.tsx:86 src/dialogs/permissions.tsx:304
-#: src/dialogs/create-file.tsx:170 src/files-card-body.tsx:544
-#: src/files-card-body.tsx:591 src/files-card-body.tsx:667
-#: src/files-footer-detail.tsx:80
+#: src/dialogs/create-file.tsx:185 src/dialogs/permissions.tsx:304
+#: src/files-card-body.tsx:544 src/files-card-body.tsx:591
+#: src/files-card-body.tsx:667 src/header.tsx:86 src/files-footer-detail.tsx:80
 msgid "Owner"
 msgstr "擁有者"
 
@@ -581,11 +602,11 @@ msgstr "貼上檔案或目錄"
 msgid "Pasting failed"
 msgstr "貼上失敗"
 
-#: src/dialogs/create-file.tsx:215
+#: src/dialogs/create-file.tsx:230
 msgid "Permission denied"
 msgstr "使用權限被拒"
 
-#: src/header.tsx:97 src/files-card-body.tsx:549 src/files-card-body.tsx:674
+#: src/files-card-body.tsx:549 src/files-card-body.tsx:674 src/header.tsx:97
 msgid "Permissions"
 msgstr "權限"
 
@@ -605,7 +626,7 @@ msgstr "讀取與寫入"
 msgid "Read, write, and execute"
 msgstr "讀取、寫入與執行"
 
-#: src/dialogs/permissions.tsx:215 src/dialogs/editor.tsx:167 src/common.ts:53
+#: src/dialogs/editor.tsx:189 src/dialogs/permissions.tsx:215 src/common.ts:53
 msgid "Read-only"
 msgstr "唯讀"
 
@@ -625,11 +646,11 @@ msgstr ""
 "相對符號連結在符號連結與目標同時都可能被移動時相當有用，如重新命名或移動上層"
 "目錄時。"
 
-#: src/dialogs/editor.tsx:205
+#: src/dialogs/editor.tsx:227
 msgid "Reload"
 msgstr "重新載入"
 
-#: src/files-breadcrumbs.tsx:130
+#: src/files-breadcrumbs.tsx:139
 msgid "Remove from bookmarks"
 msgstr "從書籤移除"
 
@@ -653,13 +674,19 @@ msgstr "取代"
 msgid "Replace file $0?"
 msgstr "取代檔案 $0 ？"
 
-#: src/dialogs/editor.tsx:242 src/dialogs/editor.tsx:299
+#: src/dialogs/editor.tsx:264 src/dialogs/editor.tsx:321
 msgid "Save"
 msgstr "儲存"
 
-#: src/dialogs/editor.tsx:259
+#: src/dialogs/editor.tsx:281
 msgid "Save changes?"
 msgstr ""
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:131
+#, fuzzy
+#| msgid "Remove current directory"
+msgid "Save current file"
+msgstr "移除目前的目錄"
 
 #: src/dialogs/permissions.tsx:375
 msgid "Security context"
@@ -677,7 +704,7 @@ msgstr "設定為可執行的程式"
 msgid "Show all files"
 msgstr "顯示所有檔案"
 
-#: src/header.tsx:271 src/files-card-body.tsx:522
+#: src/files-card-body.tsx:522 src/header.tsx:271
 msgid "Show hidden items"
 msgstr "顯示隱藏的項目"
 
@@ -685,7 +712,7 @@ msgstr "顯示隱藏的項目"
 msgid "Show keyboard shortcuts"
 msgstr "顯示鍵盤快速鍵"
 
-#: src/header.tsx:64 src/files-card-body.tsx:535 src/files-card-body.tsx:652
+#: src/files-card-body.tsx:535 src/files-card-body.tsx:652 src/header.tsx:64
 msgid "Size"
 msgstr "大小"
 
@@ -717,21 +744,21 @@ msgstr "目標"
 msgid "The existing file changed unexpectedly"
 msgstr "既存的檔案有意料外的變更"
 
-#: src/dialogs/editor.tsx:48 src/dialogs/editor.tsx:199
+#: src/dialogs/editor.tsx:48 src/dialogs/editor.tsx:221
 msgid "The file has been removed on disk"
 msgstr "該檔案已被從磁碟上移除"
 
-#: src/dialogs/editor.tsx:200
+#: src/dialogs/editor.tsx:222
 msgid "The file has changed on disk"
 msgstr "該檔案已在磁碟上被變更"
 
-#: src/dialogs/editor.tsx:269
+#: src/dialogs/editor.tsx:291
 #, fuzzy
 #| msgid "The file has changed on disk"
 msgid "The file has changed on disk between when it was opened and now"
 msgstr "該檔案已在磁碟上被變更"
 
-#: src/dialogs/editor.tsx:268
+#: src/dialogs/editor.tsx:290
 msgid "The file was deleted after it was opened, saving will recreate it."
 msgstr ""
 
@@ -739,7 +766,7 @@ msgstr ""
 msgid "Type"
 msgstr "類型"
 
-#: src/files-breadcrumbs.tsx:87
+#: src/files-breadcrumbs.tsx:94
 msgid "Unable to create bookmark directory"
 msgstr "無法建立書籤的存放目錄"
 
@@ -747,7 +774,7 @@ msgstr "無法建立書籤的存放目錄"
 msgid "Unable to move uploaded file to final destination"
 msgstr "無法將上傳的檔案移動至目的地"
 
-#: src/files-breadcrumbs.tsx:110
+#: src/files-breadcrumbs.tsx:117
 msgid "Unable to save bookmark file"
 msgstr "無法儲存書籤的存放檔案"
 
@@ -776,7 +803,7 @@ msgstr "上傳項目"
 msgid "User"
 msgstr "使用者"
 
-#: src/dialogs/editor.tsx:165
+#: src/dialogs/editor.tsx:187
 msgid "View $0"
 msgstr "檢視 $0"
 
@@ -811,9 +838,6 @@ msgstr "保留原始擁有者"
 #: src/dialogs/symlink.tsx:53
 msgid "link to $0"
 msgstr "連結至 $0"
-
-#~ msgid "Remove current directory"
-#~ msgstr "移除目前的目錄"
 
 #~ msgid "Successfully uploaded file(s)"
 #~ msgstr "檔案上傳成功"

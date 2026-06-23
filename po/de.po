@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: starter-kit 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-17 06:03+0000\n"
+"POT-Creation-Date: 2026-06-21 07:19+0000\n"
 "PO-Revision-Date: 2026-03-31 20:58+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German <https://translate.fedoraproject.org/projects/cockpit/"
@@ -27,7 +27,7 @@ msgstr "$0 Dateien"
 msgid "$0 files selected"
 msgstr "$0 Dateien ausgewählt"
 
-#: src/dialogs/editor.tsx:274
+#: src/dialogs/editor.tsx:296
 msgid "$0 has unsaved changes and which will be permanently lost if discarded."
 msgstr ""
 "$0 hat nicht gespeicherte Änderungen, die endgültig verloren gehen, wenn sie "
@@ -94,7 +94,7 @@ msgstr "Zugriff"
 msgid "Activate selected item, enter directory"
 msgstr "Ausgewählten Eintrag aktivieren, Verzeichnis eingeben"
 
-#: src/files-breadcrumbs.tsx:132
+#: src/files-breadcrumbs.tsx:141
 msgid "Add to bookmarks"
 msgstr "Zu den Lesezeichen hinzufügen"
 
@@ -106,15 +106,21 @@ msgstr "Diese Aktion auf alle widersprüchlichen Dateien anwenden"
 msgid "Block device"
 msgstr "Blockorientiertes Gerät"
 
-#: src/files-breadcrumbs.tsx:143
+#: src/files-breadcrumbs.tsx:161
+#, fuzzy
+#| msgid "Bookmarks"
+msgid "Bookmarked"
+msgstr "Lesezeichen"
+
+#: src/files-breadcrumbs.tsx:154
 msgid "Bookmarks"
 msgstr "Lesezeichen"
 
-#: src/dialogs/symlink.tsx:233 src/dialogs/copyPasteOwnership.tsx:166
-#: src/dialogs/permissions.tsx:409 src/dialogs/mkdir.tsx:137
-#: src/dialogs/editor.tsx:248 src/dialogs/editor.tsx:314
-#: src/dialogs/create-file.tsx:196 src/dialogs/delete.tsx:97
-#: src/dialogs/rename.tsx:87 src/upload-button.tsx:146
+#: src/upload-button.tsx:146 src/dialogs/create-file.tsx:211
+#: src/dialogs/mkdir.tsx:137 src/dialogs/copyPasteOwnership.tsx:166
+#: src/dialogs/rename.tsx:87 src/dialogs/editor.tsx:270
+#: src/dialogs/editor.tsx:336 src/dialogs/permissions.tsx:409
+#: src/dialogs/delete.tsx:97 src/dialogs/symlink.tsx:233
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -130,7 +136,7 @@ msgstr "Abgebrochen"
 msgid "Cancelled upload of $0"
 msgstr "Upload von $0 abgebrochen"
 
-#: src/dialogs/create-file.tsx:213
+#: src/dialogs/create-file.tsx:228
 msgid "Cannot create file in current directory"
 msgstr "Datei im aktuellen Verzeichnis kann nicht erstellt werden"
 
@@ -160,9 +166,13 @@ msgstr "Zeichengerät"
 msgid "Clear filter"
 msgstr "Filter entfernen"
 
-#: src/dialogs/editor.tsx:248 src/dialogs/keyboardShortcutsHelp.tsx:33
+#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:270
 msgid "Close"
 msgstr "Schließen"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:135
+msgid "Close editor"
+msgstr ""
 
 #: src/index.html:8
 msgid "Cockpit Files"
@@ -184,7 +194,7 @@ msgstr "Kopieren"
 msgid "Copy selected file or directory"
 msgstr "Ausgewählte Datei oder ausgewähltes Verzeichnis kopieren"
 
-#: src/dialogs/mkdir.tsx:135 src/dialogs/create-file.tsx:193
+#: src/dialogs/create-file.tsx:208 src/dialogs/mkdir.tsx:135
 msgid "Create"
 msgstr "Erstellen"
 
@@ -192,7 +202,7 @@ msgstr "Erstellen"
 msgid "Create directory"
 msgstr "Verzeichnis erstellen"
 
-#: src/dialogs/create-file.tsx:136 src/menu.tsx:111
+#: src/dialogs/create-file.tsx:151 src/menu.tsx:111
 msgid "Create file"
 msgstr "Datei erstellen"
 
@@ -272,7 +282,7 @@ msgstr "Verzeichniseigentümer"
 msgid "Directory with the same name exists"
 msgstr "Verzeichniseigentümer mit gleichem Namen existiert bereits"
 
-#: src/dialogs/editor.tsx:307
+#: src/dialogs/editor.tsx:329
 msgid "Discard"
 msgstr "Verwerfen"
 
@@ -293,11 +303,11 @@ msgid "Drop files to upload"
 msgstr "Dateien zum Hochladen ablegen"
 
 #. Translators: This is the title of a modal dialog.  $0 represents a filename.
-#: src/dialogs/editor.tsx:165
+#: src/dialogs/editor.tsx:187
 msgid "Edit $0"
 msgstr "$0 bearbeiten"
 
-#: src/files-breadcrumbs.tsx:291 src/dialogs/keyboardShortcutsHelp.tsx:87
+#: src/dialogs/keyboardShortcutsHelp.tsx:87 src/files-breadcrumbs.tsx:303
 msgid "Edit path"
 msgstr "Pfad bearbeiten"
 
@@ -305,9 +315,15 @@ msgstr "Pfad bearbeiten"
 msgid "Edit permissions"
 msgstr "Berechtigungen bearbeiten"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:147
+#: src/dialogs/keyboardShortcutsHelp.tsx:162
 msgid "Editing"
 msgstr "Bearbeiten"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:172
+#, fuzzy
+#| msgid "Edit $0"
+msgid "Editor"
+msgstr "$0 bearbeiten"
 
 #: src/common.ts:50
 msgid "Execute-only"
@@ -329,7 +345,7 @@ msgstr "Datei-Browser"
 msgid "File exists"
 msgstr "Datei existiert"
 
-#: src/dialogs/create-file.tsx:148
+#: src/dialogs/create-file.tsx:163
 msgid "File name"
 msgstr "Dateiname"
 
@@ -357,7 +373,7 @@ msgstr ""
 msgid "Files uploaded"
 msgstr "Dateien hochgeladen"
 
-#: src/files-breadcrumbs.tsx:224
+#: src/files-breadcrumbs.tsx:236
 msgid "Filesystem"
 msgstr "Dateisystem"
 
@@ -418,11 +434,11 @@ msgstr "Gruppenzugriff"
 msgid "Hide hidden items"
 msgstr "Versteckte Elemente ausblenden"
 
-#: src/files-breadcrumbs.tsx:39
+#: src/files-breadcrumbs.tsx:46
 msgid "Home"
 msgstr "Startseite"
 
-#: src/dialogs/editor.tsx:208
+#: src/dialogs/editor.tsx:230
 msgid "Ignore"
 msgstr "Ignorieren"
 
@@ -430,7 +446,7 @@ msgstr "Ignorieren"
 msgid "Keep original"
 msgstr "Original behalten"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:133
+#: src/dialogs/keyboardShortcutsHelp.tsx:148
 msgid "Keyboard shortcuts"
 msgstr "Tastenkombinationen"
 
@@ -454,7 +470,7 @@ msgstr "Verwalten Sie Ihre Dateien"
 msgid "Missing type"
 msgstr "Fehlender Typ"
 
-#: src/header.tsx:75 src/files-card-body.tsx:539 src/files-card-body.tsx:659
+#: src/files-card-body.tsx:539 src/files-card-body.tsx:659 src/header.tsx:75
 msgid "Modified"
 msgstr "Geändert"
 
@@ -462,7 +478,7 @@ msgstr "Geändert"
 msgid "Most permissive"
 msgstr "Am meisten zulässig"
 
-#: src/header.tsx:53 src/files-card-body.tsx:534
+#: src/files-card-body.tsx:534 src/header.tsx:53
 msgid "Name"
 msgstr "Name"
 
@@ -482,7 +498,7 @@ msgstr "Name zu lang"
 msgid "Named pipe"
 msgstr "Named Pipe"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:137
+#: src/dialogs/keyboardShortcutsHelp.tsx:152
 msgid "Navigation"
 msgstr "Navigation"
 
@@ -514,6 +530,12 @@ msgstr "Keine passenden Ergebnisse"
 msgid "None"
 msgstr "Keine"
 
+#: src/files-breadcrumbs.tsx:161
+#, fuzzy
+#| msgid "Add to bookmarks"
+msgid "Not bookmarked"
+msgstr "Zu den Lesezeichen hinzufügen"
+
 #: src/menu.tsx:126 src/menu.tsx:187
 msgid "Open in terminal"
 msgstr "Im Terminal öffnen"
@@ -534,15 +556,14 @@ msgstr "Andere"
 msgid "Others access"
 msgstr "Anderer Zugriff"
 
-#: src/dialogs/editor.tsx:228 src/dialogs/editor.tsx:285
-#: src/dialogs/rename.tsx:85
+#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:250
+#: src/dialogs/editor.tsx:307
 msgid "Overwrite"
 msgstr "Überschreiben"
 
-#: src/header.tsx:86 src/dialogs/permissions.tsx:304
-#: src/dialogs/create-file.tsx:170 src/files-card-body.tsx:544
-#: src/files-card-body.tsx:591 src/files-card-body.tsx:667
-#: src/files-footer-detail.tsx:80
+#: src/dialogs/create-file.tsx:185 src/dialogs/permissions.tsx:304
+#: src/files-card-body.tsx:544 src/files-card-body.tsx:591
+#: src/files-card-body.tsx:667 src/header.tsx:86 src/files-footer-detail.tsx:80
 msgid "Owner"
 msgstr "Eigentümer"
 
@@ -578,11 +599,11 @@ msgstr "Datei oder Verzeichnis einfügen"
 msgid "Pasting failed"
 msgstr "Einfügen fehlgeschlagen"
 
-#: src/dialogs/create-file.tsx:215
+#: src/dialogs/create-file.tsx:230
 msgid "Permission denied"
 msgstr "Erlaubnis verweigert"
 
-#: src/header.tsx:97 src/files-card-body.tsx:549 src/files-card-body.tsx:674
+#: src/files-card-body.tsx:549 src/files-card-body.tsx:674 src/header.tsx:97
 msgid "Permissions"
 msgstr "Berechtigungen"
 
@@ -602,7 +623,7 @@ msgstr "Lesen und schreiben"
 msgid "Read, write, and execute"
 msgstr "Lesen, schreiben und ausführen"
 
-#: src/dialogs/permissions.tsx:215 src/dialogs/editor.tsx:167 src/common.ts:53
+#: src/dialogs/editor.tsx:189 src/dialogs/permissions.tsx:215 src/common.ts:53
 msgid "Read-only"
 msgstr "Nur lesen"
 
@@ -623,11 +644,11 @@ msgstr ""
 "als auch das Ziel gleichzeitig verschoben werden können, z. B. beim "
 "Umbenennen oder Verschieben eines übergeordneten Verzeichnisses."
 
-#: src/dialogs/editor.tsx:205
+#: src/dialogs/editor.tsx:227
 msgid "Reload"
 msgstr "Neu laden"
 
-#: src/files-breadcrumbs.tsx:130
+#: src/files-breadcrumbs.tsx:139
 msgid "Remove from bookmarks"
 msgstr "Aus den Lesezeichen entfernen"
 
@@ -651,13 +672,19 @@ msgstr "Ersetzen"
 msgid "Replace file $0?"
 msgstr "Datei $0 ersetzen?"
 
-#: src/dialogs/editor.tsx:242 src/dialogs/editor.tsx:299
+#: src/dialogs/editor.tsx:264 src/dialogs/editor.tsx:321
 msgid "Save"
 msgstr "Speichern"
 
-#: src/dialogs/editor.tsx:259
+#: src/dialogs/editor.tsx:281
 msgid "Save changes?"
 msgstr "Änderungen speichern?"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:131
+#, fuzzy
+#| msgid "Remove current directory"
+msgid "Save current file"
+msgstr "Aktuelles Verzeichnis entfernen"
 
 #: src/dialogs/permissions.tsx:375
 msgid "Security context"
@@ -675,7 +702,7 @@ msgstr "Ausführbare Datei als Programm festlegen"
 msgid "Show all files"
 msgstr "Alle Dateien anzeigen"
 
-#: src/header.tsx:271 src/files-card-body.tsx:522
+#: src/files-card-body.tsx:522 src/header.tsx:271
 msgid "Show hidden items"
 msgstr "Versteckte Elemente anzeigen"
 
@@ -683,7 +710,7 @@ msgstr "Versteckte Elemente anzeigen"
 msgid "Show keyboard shortcuts"
 msgstr "Tastenkombinationen anzeigen"
 
-#: src/header.tsx:64 src/files-card-body.tsx:535 src/files-card-body.tsx:652
+#: src/files-card-body.tsx:535 src/files-card-body.tsx:652 src/header.tsx:64
 msgid "Size"
 msgstr "Größe"
 
@@ -715,21 +742,21 @@ msgstr "Ziel"
 msgid "The existing file changed unexpectedly"
 msgstr "Die existierende Datei wurde unerwartet geändert"
 
-#: src/dialogs/editor.tsx:48 src/dialogs/editor.tsx:199
+#: src/dialogs/editor.tsx:48 src/dialogs/editor.tsx:221
 msgid "The file has been removed on disk"
 msgstr "Die Datei wurde von der Festplatte entfernt"
 
-#: src/dialogs/editor.tsx:200
+#: src/dialogs/editor.tsx:222
 msgid "The file has changed on disk"
 msgstr "Die Datei hat sich auf der Festplatte geändert"
 
-#: src/dialogs/editor.tsx:269
+#: src/dialogs/editor.tsx:291
 msgid "The file has changed on disk between when it was opened and now"
 msgstr ""
 "Die Datei hat sich auf der Festplatte zwischen dem Zeitpunkt des Öffnens und "
 "jetzt verändert"
 
-#: src/dialogs/editor.tsx:268
+#: src/dialogs/editor.tsx:290
 msgid "The file was deleted after it was opened, saving will recreate it."
 msgstr ""
 "Die Datei wurde nach dem Öffnen gelöscht; durch Speichern wird sie neu "
@@ -739,7 +766,7 @@ msgstr ""
 msgid "Type"
 msgstr "Typ"
 
-#: src/files-breadcrumbs.tsx:87
+#: src/files-breadcrumbs.tsx:94
 msgid "Unable to create bookmark directory"
 msgstr "Lesezeichenverzeichnis kann nicht erstellt werden"
 
@@ -748,7 +775,7 @@ msgid "Unable to move uploaded file to final destination"
 msgstr ""
 "Hochgeladene Datei kann nicht zum endgültigen Zielort verschoben werden"
 
-#: src/files-breadcrumbs.tsx:110
+#: src/files-breadcrumbs.tsx:117
 msgid "Unable to save bookmark file"
 msgstr "Lesezeichendatei kann nicht gespeichert werden"
 
@@ -776,7 +803,7 @@ msgstr "Hochladevorgänge"
 msgid "User"
 msgstr "Benutzer"
 
-#: src/dialogs/editor.tsx:165
+#: src/dialogs/editor.tsx:187
 msgid "View $0"
 msgstr "$0 ansehen"
 
@@ -811,9 +838,6 @@ msgstr "Originaleigentümer behalten"
 #: src/dialogs/symlink.tsx:53
 msgid "link to $0"
 msgstr "Link zu $0"
-
-#~ msgid "Remove current directory"
-#~ msgstr "Aktuelles Verzeichnis entfernen"
 
 #~ msgid "Successfully uploaded file(s)"
 #~ msgstr "Erfolgreich hochgeladene Datei(en)"

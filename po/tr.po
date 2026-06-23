@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-17 06:03+0000\n"
-"PO-Revision-Date: 2026-03-24 09:58+0000\n"
+"POT-Creation-Date: 2026-06-21 07:19+0000\n"
+"PO-Revision-Date: 2026-06-21 14:10+0000\n"
 "Last-Translator: Burak Yavuz <hitowerdigit@hotmail.com>\n"
 "Language-Team: Turkish <https://translate.fedoraproject.org/projects/cockpit/"
 "cockpit-files/tr/>\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.16.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #: src/menu.tsx:53
 msgid "\"$0\" exists, not overwriting with paste."
@@ -38,7 +38,7 @@ msgstr "$0 dosya"
 msgid "$0 files selected"
 msgstr "$0 dosya seçildi"
 
-#: src/dialogs/editor.tsx:274
+#: src/dialogs/editor.tsx:296
 msgid "$0 has unsaved changes and which will be permanently lost if discarded."
 msgstr ""
 "$0 kaydedilmemiş değişikliklere sahip ve vazgeçilirse kalıcı olarak "
@@ -105,7 +105,7 @@ msgstr "Erişim"
 msgid "Activate selected item, enter directory"
 msgstr "Seçili ögeyi etkinleştir, dizine gir"
 
-#: src/files-breadcrumbs.tsx:132
+#: src/files-breadcrumbs.tsx:141
 msgid "Add to bookmarks"
 msgstr "Yer işaretlerine ekle"
 
@@ -117,15 +117,19 @@ msgstr "Bu eylemi çakışan tüm dosyalara uygula"
 msgid "Block device"
 msgstr "Blok aygıtı"
 
-#: src/files-breadcrumbs.tsx:143
+#: src/files-breadcrumbs.tsx:161
+msgid "Bookmarked"
+msgstr "Yer işaretlerine eklendi"
+
+#: src/files-breadcrumbs.tsx:154
 msgid "Bookmarks"
 msgstr "Yer işaretleri"
 
-#: src/dialogs/symlink.tsx:233 src/dialogs/copyPasteOwnership.tsx:166
-#: src/dialogs/permissions.tsx:409 src/dialogs/mkdir.tsx:137
-#: src/dialogs/editor.tsx:248 src/dialogs/editor.tsx:314
-#: src/dialogs/create-file.tsx:196 src/dialogs/delete.tsx:97
-#: src/dialogs/rename.tsx:87 src/upload-button.tsx:146
+#: src/upload-button.tsx:146 src/dialogs/create-file.tsx:211
+#: src/dialogs/mkdir.tsx:137 src/dialogs/copyPasteOwnership.tsx:166
+#: src/dialogs/rename.tsx:87 src/dialogs/editor.tsx:270
+#: src/dialogs/editor.tsx:336 src/dialogs/permissions.tsx:409
+#: src/dialogs/delete.tsx:97 src/dialogs/symlink.tsx:233
 msgid "Cancel"
 msgstr "İptal"
 
@@ -141,9 +145,9 @@ msgstr "İptal edildi"
 msgid "Cancelled upload of $0"
 msgstr "$0 karşıya yüklenmesi iptal edildi"
 
-#: src/dialogs/create-file.tsx:213
+#: src/dialogs/create-file.tsx:228
 msgid "Cannot create file in current directory"
-msgstr "Geçerli dizinde dosya oluşturulamıyor"
+msgstr "Şu anki dizinde dosya oluşturulamıyor"
 
 #: src/files-folder-view.tsx:164
 msgid "Cannot drop files, another upload is already in progress"
@@ -169,9 +173,13 @@ msgstr "Karakter aygıtı"
 msgid "Clear filter"
 msgstr "Filtreyi temizle"
 
-#: src/dialogs/editor.tsx:248 src/dialogs/keyboardShortcutsHelp.tsx:33
+#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:270
 msgid "Close"
 msgstr "Kapat"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:135
+msgid "Close editor"
+msgstr "Düzenleyiciyi kapat"
 
 #: src/index.html:8
 msgid "Cockpit Files"
@@ -193,7 +201,7 @@ msgstr "Kopyala"
 msgid "Copy selected file or directory"
 msgstr "Seçili dosya veya dizini kopyala"
 
-#: src/dialogs/mkdir.tsx:135 src/dialogs/create-file.tsx:193
+#: src/dialogs/create-file.tsx:208 src/dialogs/mkdir.tsx:135
 msgid "Create"
 msgstr "Oluştur"
 
@@ -201,7 +209,7 @@ msgstr "Oluştur"
 msgid "Create directory"
 msgstr "Dizin oluştur"
 
-#: src/dialogs/create-file.tsx:136 src/menu.tsx:111
+#: src/dialogs/create-file.tsx:151 src/menu.tsx:111
 msgid "Create file"
 msgstr "Dosya oluştur"
 
@@ -281,7 +289,7 @@ msgstr "Dizin sahibi"
 msgid "Directory with the same name exists"
 msgstr "Aynı ada sahip dizin var"
 
-#: src/dialogs/editor.tsx:307
+#: src/dialogs/editor.tsx:329
 msgid "Discard"
 msgstr "Vazgeç"
 
@@ -302,11 +310,11 @@ msgid "Drop files to upload"
 msgstr "Karşıya yüklenecek dosyaları bırakın"
 
 #. Translators: This is the title of a modal dialog.  $0 represents a filename.
-#: src/dialogs/editor.tsx:165
+#: src/dialogs/editor.tsx:187
 msgid "Edit $0"
 msgstr "$0 dosyasını düzenle"
 
-#: src/files-breadcrumbs.tsx:291 src/dialogs/keyboardShortcutsHelp.tsx:87
+#: src/dialogs/keyboardShortcutsHelp.tsx:87 src/files-breadcrumbs.tsx:303
 msgid "Edit path"
 msgstr "Yolu düzenle"
 
@@ -314,9 +322,13 @@ msgstr "Yolu düzenle"
 msgid "Edit permissions"
 msgstr "İzinleri düzenle"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:147
+#: src/dialogs/keyboardShortcutsHelp.tsx:162
 msgid "Editing"
 msgstr "Düzenleme"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:172
+msgid "Editor"
+msgstr "Düzenleyici"
 
 #: src/common.ts:50
 msgid "Execute-only"
@@ -338,7 +350,7 @@ msgstr "Dosya gezgini"
 msgid "File exists"
 msgstr "Dosya var"
 
-#: src/dialogs/create-file.tsx:148
+#: src/dialogs/create-file.tsx:163
 msgid "File name"
 msgstr "Dosya adı"
 
@@ -366,7 +378,7 @@ msgstr ""
 msgid "Files uploaded"
 msgstr "Dosyalar karşıya yüklendi"
 
-#: src/files-breadcrumbs.tsx:224
+#: src/files-breadcrumbs.tsx:236
 msgid "Filesystem"
 msgstr "Dosya sistemi"
 
@@ -427,11 +439,11 @@ msgstr "Grup erişimi"
 msgid "Hide hidden items"
 msgstr "Gizli ögeleri gizle"
 
-#: src/files-breadcrumbs.tsx:39
+#: src/files-breadcrumbs.tsx:46
 msgid "Home"
 msgstr "Ev dizini"
 
-#: src/dialogs/editor.tsx:208
+#: src/dialogs/editor.tsx:230
 msgid "Ignore"
 msgstr "Yok say"
 
@@ -439,7 +451,7 @@ msgstr "Yok say"
 msgid "Keep original"
 msgstr "Orijinali sakla"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:133
+#: src/dialogs/keyboardShortcutsHelp.tsx:148
 msgid "Keyboard shortcuts"
 msgstr "Klavye kısayolları"
 
@@ -463,7 +475,7 @@ msgstr "Dosyalarınızı yönetin"
 msgid "Missing type"
 msgstr "Tür eksik"
 
-#: src/header.tsx:75 src/files-card-body.tsx:539 src/files-card-body.tsx:659
+#: src/files-card-body.tsx:539 src/files-card-body.tsx:659 src/header.tsx:75
 msgid "Modified"
 msgstr "Değiştirilme"
 
@@ -471,7 +483,7 @@ msgstr "Değiştirilme"
 msgid "Most permissive"
 msgstr "En çok izin veren"
 
-#: src/header.tsx:53 src/files-card-body.tsx:534
+#: src/files-card-body.tsx:534 src/header.tsx:53
 msgid "Name"
 msgstr "Ad"
 
@@ -491,7 +503,7 @@ msgstr "Ad çok uzun"
 msgid "Named pipe"
 msgstr "Adlı boru (pipe)"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:137
+#: src/dialogs/keyboardShortcutsHelp.tsx:152
 msgid "Navigation"
 msgstr "Gezinme"
 
@@ -523,6 +535,10 @@ msgstr "Eşleşen sonuç yok"
 msgid "None"
 msgstr "Yok"
 
+#: src/files-breadcrumbs.tsx:161
+msgid "Not bookmarked"
+msgstr "Yer işaretlerine eklenmedi"
+
 #: src/menu.tsx:126 src/menu.tsx:187
 msgid "Open in terminal"
 msgstr "Terminalde aç"
@@ -543,15 +559,14 @@ msgstr "Diğerleri"
 msgid "Others access"
 msgstr "Diğerlerinin erişimi"
 
-#: src/dialogs/editor.tsx:228 src/dialogs/editor.tsx:285
-#: src/dialogs/rename.tsx:85
+#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:250
+#: src/dialogs/editor.tsx:307
 msgid "Overwrite"
 msgstr "Üzerine yaz"
 
-#: src/header.tsx:86 src/dialogs/permissions.tsx:304
-#: src/dialogs/create-file.tsx:170 src/files-card-body.tsx:544
-#: src/files-card-body.tsx:591 src/files-card-body.tsx:667
-#: src/files-footer-detail.tsx:80
+#: src/dialogs/create-file.tsx:185 src/dialogs/permissions.tsx:304
+#: src/files-card-body.tsx:544 src/files-card-body.tsx:591
+#: src/files-card-body.tsx:667 src/header.tsx:86 src/files-footer-detail.tsx:80
 msgid "Owner"
 msgstr "Sahibi"
 
@@ -587,11 +602,11 @@ msgstr "Dosya veya dizini yapıştır"
 msgid "Pasting failed"
 msgstr "Yapıştırma başarısız oldu"
 
-#: src/dialogs/create-file.tsx:215
+#: src/dialogs/create-file.tsx:230
 msgid "Permission denied"
 msgstr "İzin reddedildi"
 
-#: src/header.tsx:97 src/files-card-body.tsx:549 src/files-card-body.tsx:674
+#: src/files-card-body.tsx:549 src/files-card-body.tsx:674 src/header.tsx:97
 msgid "Permissions"
 msgstr "İzinler"
 
@@ -611,7 +626,7 @@ msgstr "Oku ve yaz"
 msgid "Read, write, and execute"
 msgstr "Oku, yaz ve çalıştır"
 
-#: src/dialogs/permissions.tsx:215 src/dialogs/editor.tsx:167 src/common.ts:53
+#: src/dialogs/editor.tsx:189 src/dialogs/permissions.tsx:215 src/common.ts:53
 msgid "Read-only"
 msgstr "Yalnızca oku"
 
@@ -632,11 +647,11 @@ msgstr ""
 "taşırken olduğu gibi, hem bir sembolik bağlantı hem de hedef aynı anda "
 "hareket edebildiğinde kullanışlıdır."
 
-#: src/dialogs/editor.tsx:205
+#: src/dialogs/editor.tsx:227
 msgid "Reload"
 msgstr "Yeniden yükle"
 
-#: src/files-breadcrumbs.tsx:130
+#: src/files-breadcrumbs.tsx:139
 msgid "Remove from bookmarks"
 msgstr "Yer işaretlerinden kaldır"
 
@@ -660,13 +675,17 @@ msgstr "Değiştir"
 msgid "Replace file $0?"
 msgstr "$0 dosyası değiştirilsin mi?"
 
-#: src/dialogs/editor.tsx:242 src/dialogs/editor.tsx:299
+#: src/dialogs/editor.tsx:264 src/dialogs/editor.tsx:321
 msgid "Save"
 msgstr "Kaydet"
 
-#: src/dialogs/editor.tsx:259
+#: src/dialogs/editor.tsx:281
 msgid "Save changes?"
 msgstr "Değişiklikler kaydedilsin mi?"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:131
+msgid "Save current file"
+msgstr "Şu anki dosyayı kaydet"
 
 #: src/dialogs/permissions.tsx:375
 msgid "Security context"
@@ -684,7 +703,7 @@ msgstr "Çalıştırılabilir program olarak ayarla"
 msgid "Show all files"
 msgstr "Tüm dosyaları göster"
 
-#: src/header.tsx:271 src/files-card-body.tsx:522
+#: src/files-card-body.tsx:522 src/header.tsx:271
 msgid "Show hidden items"
 msgstr "Gizli ögeleri göster"
 
@@ -692,7 +711,7 @@ msgstr "Gizli ögeleri göster"
 msgid "Show keyboard shortcuts"
 msgstr "Klavye kısayollarını göster"
 
-#: src/header.tsx:64 src/files-card-body.tsx:535 src/files-card-body.tsx:652
+#: src/files-card-body.tsx:535 src/files-card-body.tsx:652 src/header.tsx:64
 msgid "Size"
 msgstr "Boyut"
 
@@ -724,19 +743,19 @@ msgstr "Hedef"
 msgid "The existing file changed unexpectedly"
 msgstr "Var olan dosya beklenmedik şekilde değişti"
 
-#: src/dialogs/editor.tsx:48 src/dialogs/editor.tsx:199
+#: src/dialogs/editor.tsx:48 src/dialogs/editor.tsx:221
 msgid "The file has been removed on disk"
 msgstr "Dosya diskten kaldırıldı"
 
-#: src/dialogs/editor.tsx:200
+#: src/dialogs/editor.tsx:222
 msgid "The file has changed on disk"
 msgstr "Dosya disk üzerinde değişti"
 
-#: src/dialogs/editor.tsx:269
+#: src/dialogs/editor.tsx:291
 msgid "The file has changed on disk between when it was opened and now"
 msgstr "Dosya, açıldığı zaman ile şu an arasında diskte değişti"
 
-#: src/dialogs/editor.tsx:268
+#: src/dialogs/editor.tsx:290
 msgid "The file was deleted after it was opened, saving will recreate it."
 msgstr "Dosya açıldıktan sonra silindi, kaydetmek yeniden oluşturacak."
 
@@ -744,7 +763,7 @@ msgstr "Dosya açıldıktan sonra silindi, kaydetmek yeniden oluşturacak."
 msgid "Type"
 msgstr "Tür"
 
-#: src/files-breadcrumbs.tsx:87
+#: src/files-breadcrumbs.tsx:94
 msgid "Unable to create bookmark directory"
 msgstr "Yer işareti dizini oluşturulamıyor"
 
@@ -752,7 +771,7 @@ msgstr "Yer işareti dizini oluşturulamıyor"
 msgid "Unable to move uploaded file to final destination"
 msgstr "Karşıya yüklenen dosya son hedefe taşınamıyor"
 
-#: src/files-breadcrumbs.tsx:110
+#: src/files-breadcrumbs.tsx:117
 msgid "Unable to save bookmark file"
 msgstr "Yer işareti dosyası kaydedilemiyor"
 
@@ -780,7 +799,7 @@ msgstr "Yüklenenler"
 msgid "User"
 msgstr "Kullanıcı"
 
-#: src/dialogs/editor.tsx:165
+#: src/dialogs/editor.tsx:187
 msgid "View $0"
 msgstr "$0 dosyasını görüntüle"
 
@@ -815,9 +834,6 @@ msgstr "orijinal sahiplerini sakla"
 #: src/dialogs/symlink.tsx:53
 msgid "link to $0"
 msgstr "$0 için bağlantı"
-
-#~ msgid "Remove current directory"
-#~ msgstr "Geçerli dizini kaldır"
 
 #~ msgid "Successfully uploaded file(s)"
 #~ msgstr "Dosya(lar) başarıyla karşıya yüklendi"
