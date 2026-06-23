@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-17 06:03+0000\n"
+"POT-Creation-Date: 2026-06-21 07:19+0000\n"
 "PO-Revision-Date: 2026-04-20 02:34+0000\n"
 "Last-Translator: Arif Budiman <arifpedia@gmail.com>\n"
 "Language-Team: Indonesian <https://translate.fedoraproject.org/projects/"
@@ -38,7 +38,7 @@ msgstr "$0 berkas"
 msgid "$0 files selected"
 msgstr "$0 berkas dipilih"
 
-#: src/dialogs/editor.tsx:274
+#: src/dialogs/editor.tsx:296
 msgid "$0 has unsaved changes and which will be permanently lost if discarded."
 msgstr ""
 "$0 memiliki perubahan yang belum disimpan dan akan hilang secara permanen "
@@ -104,7 +104,7 @@ msgstr "Akses"
 msgid "Activate selected item, enter directory"
 msgstr "Aktifkan item yang dipilih, masuk ke direktori"
 
-#: src/files-breadcrumbs.tsx:132
+#: src/files-breadcrumbs.tsx:141
 msgid "Add to bookmarks"
 msgstr "Tambahkan ke penanda"
 
@@ -116,15 +116,21 @@ msgstr "Terapkan tindakan ini ke semua berkas yang bentrok"
 msgid "Block device"
 msgstr "Perangkat blok"
 
-#: src/files-breadcrumbs.tsx:143
+#: src/files-breadcrumbs.tsx:161
+#, fuzzy
+#| msgid "Bookmarks"
+msgid "Bookmarked"
+msgstr "Penanda"
+
+#: src/files-breadcrumbs.tsx:154
 msgid "Bookmarks"
 msgstr "Penanda"
 
-#: src/dialogs/symlink.tsx:233 src/dialogs/copyPasteOwnership.tsx:166
-#: src/dialogs/permissions.tsx:409 src/dialogs/mkdir.tsx:137
-#: src/dialogs/editor.tsx:248 src/dialogs/editor.tsx:314
-#: src/dialogs/create-file.tsx:196 src/dialogs/delete.tsx:97
-#: src/dialogs/rename.tsx:87 src/upload-button.tsx:146
+#: src/upload-button.tsx:146 src/dialogs/create-file.tsx:211
+#: src/dialogs/mkdir.tsx:137 src/dialogs/copyPasteOwnership.tsx:166
+#: src/dialogs/rename.tsx:87 src/dialogs/editor.tsx:270
+#: src/dialogs/editor.tsx:336 src/dialogs/permissions.tsx:409
+#: src/dialogs/delete.tsx:97 src/dialogs/symlink.tsx:233
 msgid "Cancel"
 msgstr "Batal"
 
@@ -140,7 +146,7 @@ msgstr "Dibatalkan"
 msgid "Cancelled upload of $0"
 msgstr "Unggahan $0 dibatalkan"
 
-#: src/dialogs/create-file.tsx:213
+#: src/dialogs/create-file.tsx:228
 msgid "Cannot create file in current directory"
 msgstr "Tidak dapat membuat berkas di direktori saat ini"
 
@@ -168,9 +174,13 @@ msgstr "Perangkat karakter"
 msgid "Clear filter"
 msgstr "Hapus penyaring"
 
-#: src/dialogs/editor.tsx:248 src/dialogs/keyboardShortcutsHelp.tsx:33
+#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:270
 msgid "Close"
 msgstr "Tutup"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:135
+msgid "Close editor"
+msgstr ""
 
 #: src/index.html:8
 msgid "Cockpit Files"
@@ -192,7 +202,7 @@ msgstr "Salin"
 msgid "Copy selected file or directory"
 msgstr "Salin berkas atau direktori yang dipilih"
 
-#: src/dialogs/mkdir.tsx:135 src/dialogs/create-file.tsx:193
+#: src/dialogs/create-file.tsx:208 src/dialogs/mkdir.tsx:135
 msgid "Create"
 msgstr "Buat"
 
@@ -200,7 +210,7 @@ msgstr "Buat"
 msgid "Create directory"
 msgstr "Buat direktori"
 
-#: src/dialogs/create-file.tsx:136 src/menu.tsx:111
+#: src/dialogs/create-file.tsx:151 src/menu.tsx:111
 msgid "Create file"
 msgstr "Buat berkas"
 
@@ -280,7 +290,7 @@ msgstr "Pemilik direktori"
 msgid "Directory with the same name exists"
 msgstr "Direktori dengan nama yang sama sudah ada"
 
-#: src/dialogs/editor.tsx:307
+#: src/dialogs/editor.tsx:329
 msgid "Discard"
 msgstr "Buang"
 
@@ -301,11 +311,11 @@ msgid "Drop files to upload"
 msgstr "Jatuhkan berkas untuk diunggah"
 
 #. Translators: This is the title of a modal dialog.  $0 represents a filename.
-#: src/dialogs/editor.tsx:165
+#: src/dialogs/editor.tsx:187
 msgid "Edit $0"
 msgstr "Sunting $0"
 
-#: src/files-breadcrumbs.tsx:291 src/dialogs/keyboardShortcutsHelp.tsx:87
+#: src/dialogs/keyboardShortcutsHelp.tsx:87 src/files-breadcrumbs.tsx:303
 msgid "Edit path"
 msgstr "Sunting jalur"
 
@@ -313,9 +323,15 @@ msgstr "Sunting jalur"
 msgid "Edit permissions"
 msgstr "Sunting izin"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:147
+#: src/dialogs/keyboardShortcutsHelp.tsx:162
 msgid "Editing"
 msgstr "Menyunting"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:172
+#, fuzzy
+#| msgid "Edit $0"
+msgid "Editor"
+msgstr "Sunting $0"
 
 #: src/common.ts:50
 msgid "Execute-only"
@@ -337,7 +353,7 @@ msgstr "Penjelajah berkas"
 msgid "File exists"
 msgstr "Berkas sudah ada"
 
-#: src/dialogs/create-file.tsx:148
+#: src/dialogs/create-file.tsx:163
 msgid "File name"
 msgstr "Nama berkas"
 
@@ -365,7 +381,7 @@ msgstr ""
 msgid "Files uploaded"
 msgstr "Berkas berhasil diunggah"
 
-#: src/files-breadcrumbs.tsx:224
+#: src/files-breadcrumbs.tsx:236
 msgid "Filesystem"
 msgstr "Sistem berkas"
 
@@ -426,11 +442,11 @@ msgstr "Akses grup"
 msgid "Hide hidden items"
 msgstr "Sembunyikan item tersembunyi"
 
-#: src/files-breadcrumbs.tsx:39
+#: src/files-breadcrumbs.tsx:46
 msgid "Home"
 msgstr "Beranda"
 
-#: src/dialogs/editor.tsx:208
+#: src/dialogs/editor.tsx:230
 msgid "Ignore"
 msgstr "Abaikan"
 
@@ -438,7 +454,7 @@ msgstr "Abaikan"
 msgid "Keep original"
 msgstr "Pertahankan yang asli"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:133
+#: src/dialogs/keyboardShortcutsHelp.tsx:148
 msgid "Keyboard shortcuts"
 msgstr "Pintasan keyboard"
 
@@ -462,7 +478,7 @@ msgstr "Kelola berkas Anda"
 msgid "Missing type"
 msgstr "Jenis hilang"
 
-#: src/header.tsx:75 src/files-card-body.tsx:539 src/files-card-body.tsx:659
+#: src/files-card-body.tsx:539 src/files-card-body.tsx:659 src/header.tsx:75
 msgid "Modified"
 msgstr "Diubah"
 
@@ -470,7 +486,7 @@ msgstr "Diubah"
 msgid "Most permissive"
 msgstr "Paling permisif"
 
-#: src/header.tsx:53 src/files-card-body.tsx:534
+#: src/files-card-body.tsx:534 src/header.tsx:53
 msgid "Name"
 msgstr "Nama"
 
@@ -490,7 +506,7 @@ msgstr "Nama terlalu panjang"
 msgid "Named pipe"
 msgstr "Pipa bernama"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:137
+#: src/dialogs/keyboardShortcutsHelp.tsx:152
 msgid "Navigation"
 msgstr "Navigasi"
 
@@ -522,6 +538,12 @@ msgstr "Tidak ada hasil yang cocok"
 msgid "None"
 msgstr "Tidak ada"
 
+#: src/files-breadcrumbs.tsx:161
+#, fuzzy
+#| msgid "Add to bookmarks"
+msgid "Not bookmarked"
+msgstr "Tambahkan ke penanda"
+
 #: src/menu.tsx:126 src/menu.tsx:187
 msgid "Open in terminal"
 msgstr "Buka di terminal"
@@ -542,15 +564,14 @@ msgstr "Lainnya"
 msgid "Others access"
 msgstr "Akses lainnya"
 
-#: src/dialogs/editor.tsx:228 src/dialogs/editor.tsx:285
-#: src/dialogs/rename.tsx:85
+#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:250
+#: src/dialogs/editor.tsx:307
 msgid "Overwrite"
 msgstr "Timpa"
 
-#: src/header.tsx:86 src/dialogs/permissions.tsx:304
-#: src/dialogs/create-file.tsx:170 src/files-card-body.tsx:544
-#: src/files-card-body.tsx:591 src/files-card-body.tsx:667
-#: src/files-footer-detail.tsx:80
+#: src/dialogs/create-file.tsx:185 src/dialogs/permissions.tsx:304
+#: src/files-card-body.tsx:544 src/files-card-body.tsx:591
+#: src/files-card-body.tsx:667 src/header.tsx:86 src/files-footer-detail.tsx:80
 msgid "Owner"
 msgstr "Pemilik"
 
@@ -586,11 +607,11 @@ msgstr "Tempel berkas atau direktori"
 msgid "Pasting failed"
 msgstr "Gagal menempel"
 
-#: src/dialogs/create-file.tsx:215
+#: src/dialogs/create-file.tsx:230
 msgid "Permission denied"
 msgstr "Izin ditolak"
 
-#: src/header.tsx:97 src/files-card-body.tsx:549 src/files-card-body.tsx:674
+#: src/files-card-body.tsx:549 src/files-card-body.tsx:674 src/header.tsx:97
 msgid "Permissions"
 msgstr "Izin"
 
@@ -610,7 +631,7 @@ msgstr "Baca dan tulis"
 msgid "Read, write, and execute"
 msgstr "Baca, tulis, dan eksekusi"
 
-#: src/dialogs/permissions.tsx:215 src/dialogs/editor.tsx:167 src/common.ts:53
+#: src/dialogs/editor.tsx:189 src/dialogs/permissions.tsx:215 src/common.ts:53
 msgid "Read-only"
 msgstr "Hanya-baca"
 
@@ -630,11 +651,11 @@ msgstr ""
 "Tautan simbolik relatif berguna ketika tautan dan target dapat berpindah "
 "bersamaan, seperti saat mengganti nama atau memindahkan direktori induk."
 
-#: src/dialogs/editor.tsx:205
+#: src/dialogs/editor.tsx:227
 msgid "Reload"
 msgstr "Muat ulang"
 
-#: src/files-breadcrumbs.tsx:130
+#: src/files-breadcrumbs.tsx:139
 msgid "Remove from bookmarks"
 msgstr "Hapus dari penanda"
 
@@ -658,13 +679,17 @@ msgstr "Ganti"
 msgid "Replace file $0?"
 msgstr "Ganti berkas $0?"
 
-#: src/dialogs/editor.tsx:242 src/dialogs/editor.tsx:299
+#: src/dialogs/editor.tsx:264 src/dialogs/editor.tsx:321
 msgid "Save"
 msgstr "Simpan"
 
-#: src/dialogs/editor.tsx:259
+#: src/dialogs/editor.tsx:281
 msgid "Save changes?"
 msgstr "Simpan perubahan?"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:131
+msgid "Save current file"
+msgstr ""
 
 #: src/dialogs/permissions.tsx:375
 msgid "Security context"
@@ -682,7 +707,7 @@ msgstr "Atur eksekusi sebagai program"
 msgid "Show all files"
 msgstr "Tampilkan semua berkas"
 
-#: src/header.tsx:271 src/files-card-body.tsx:522
+#: src/files-card-body.tsx:522 src/header.tsx:271
 msgid "Show hidden items"
 msgstr "Tampilkan item tersembunyi"
 
@@ -690,7 +715,7 @@ msgstr "Tampilkan item tersembunyi"
 msgid "Show keyboard shortcuts"
 msgstr "Tampilkan pintasan keyboard"
 
-#: src/header.tsx:64 src/files-card-body.tsx:535 src/files-card-body.tsx:652
+#: src/files-card-body.tsx:535 src/files-card-body.tsx:652 src/header.tsx:64
 msgid "Size"
 msgstr "Ukuran"
 
@@ -722,19 +747,19 @@ msgstr "Target"
 msgid "The existing file changed unexpectedly"
 msgstr "Berkas yang ada berubah secara tidak terduga"
 
-#: src/dialogs/editor.tsx:48 src/dialogs/editor.tsx:199
+#: src/dialogs/editor.tsx:48 src/dialogs/editor.tsx:221
 msgid "The file has been removed on disk"
 msgstr "Berkas telah dihapus dari disk"
 
-#: src/dialogs/editor.tsx:200
+#: src/dialogs/editor.tsx:222
 msgid "The file has changed on disk"
 msgstr "Berkas telah berubah di disk"
 
-#: src/dialogs/editor.tsx:269
+#: src/dialogs/editor.tsx:291
 msgid "The file has changed on disk between when it was opened and now"
 msgstr "Berkas telah berubah di disk antara saat dibuka dan sekarang"
 
-#: src/dialogs/editor.tsx:268
+#: src/dialogs/editor.tsx:290
 msgid "The file was deleted after it was opened, saving will recreate it."
 msgstr "Berkas dihapus setelah dibuka, menyimpan akan membuatnya kembali."
 
@@ -742,7 +767,7 @@ msgstr "Berkas dihapus setelah dibuka, menyimpan akan membuatnya kembali."
 msgid "Type"
 msgstr "Jenis"
 
-#: src/files-breadcrumbs.tsx:87
+#: src/files-breadcrumbs.tsx:94
 msgid "Unable to create bookmark directory"
 msgstr "Tidak dapat membuat direktori penanda"
 
@@ -750,7 +775,7 @@ msgstr "Tidak dapat membuat direktori penanda"
 msgid "Unable to move uploaded file to final destination"
 msgstr "Tidak dapat memindahkan berkas yang diunggah ke tujuan akhir"
 
-#: src/files-breadcrumbs.tsx:110
+#: src/files-breadcrumbs.tsx:117
 msgid "Unable to save bookmark file"
 msgstr "Tidak dapat menyimpan berkas penanda"
 
@@ -779,7 +804,7 @@ msgstr "Unggahan"
 msgid "User"
 msgstr "Pengguna"
 
-#: src/dialogs/editor.tsx:165
+#: src/dialogs/editor.tsx:187
 msgid "View $0"
 msgstr "Lihat ( $0 )"
 

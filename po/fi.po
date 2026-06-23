@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-17 06:03+0000\n"
+"POT-Creation-Date: 2026-06-21 07:19+0000\n"
 "PO-Revision-Date: 2026-04-16 08:59+0000\n"
 "Last-Translator: Ricky Tigg <ricky.tigg@gmail.com>\n"
 "Language-Team: Finnish <https://translate.fedoraproject.org/projects/cockpit/"
@@ -38,7 +38,7 @@ msgstr "$0 tiedostoa"
 msgid "$0 files selected"
 msgstr "$0 tiedostoa valittu"
 
-#: src/dialogs/editor.tsx:274
+#: src/dialogs/editor.tsx:296
 msgid "$0 has unsaved changes and which will be permanently lost if discarded."
 msgstr ""
 "$0:ssa on tallentamattomia muutoksia, jotka menetetään pysyvästi, jos se "
@@ -105,7 +105,7 @@ msgstr "Pääsy"
 msgid "Activate selected item, enter directory"
 msgstr "Aktivoi valittu kohde, siirry hakemistoon"
 
-#: src/files-breadcrumbs.tsx:132
+#: src/files-breadcrumbs.tsx:141
 msgid "Add to bookmarks"
 msgstr "Lisää kirjanmerkkeihin"
 
@@ -117,15 +117,21 @@ msgstr "Käytä tätä toimintoa kaikkiin ristiriitaisiin tiedostoihin"
 msgid "Block device"
 msgstr "Lohkolaite"
 
-#: src/files-breadcrumbs.tsx:143
+#: src/files-breadcrumbs.tsx:161
+#, fuzzy
+#| msgid "Bookmarks"
+msgid "Bookmarked"
+msgstr "Kirjanmerkit"
+
+#: src/files-breadcrumbs.tsx:154
 msgid "Bookmarks"
 msgstr "Kirjanmerkit"
 
-#: src/dialogs/symlink.tsx:233 src/dialogs/copyPasteOwnership.tsx:166
-#: src/dialogs/permissions.tsx:409 src/dialogs/mkdir.tsx:137
-#: src/dialogs/editor.tsx:248 src/dialogs/editor.tsx:314
-#: src/dialogs/create-file.tsx:196 src/dialogs/delete.tsx:97
-#: src/dialogs/rename.tsx:87 src/upload-button.tsx:146
+#: src/upload-button.tsx:146 src/dialogs/create-file.tsx:211
+#: src/dialogs/mkdir.tsx:137 src/dialogs/copyPasteOwnership.tsx:166
+#: src/dialogs/rename.tsx:87 src/dialogs/editor.tsx:270
+#: src/dialogs/editor.tsx:336 src/dialogs/permissions.tsx:409
+#: src/dialogs/delete.tsx:97 src/dialogs/symlink.tsx:233
 msgid "Cancel"
 msgstr "Peru"
 
@@ -141,7 +147,7 @@ msgstr "Peruttu"
 msgid "Cancelled upload of $0"
 msgstr "$0:n lataus ulospäin peruttu"
 
-#: src/dialogs/create-file.tsx:213
+#: src/dialogs/create-file.tsx:228
 msgid "Cannot create file in current directory"
 msgstr "Nykyiseen hakemistoon ei voi luoda tiedostoa"
 
@@ -169,9 +175,13 @@ msgstr "Merkkilaite"
 msgid "Clear filter"
 msgstr "Tyhjennä suodatin"
 
-#: src/dialogs/editor.tsx:248 src/dialogs/keyboardShortcutsHelp.tsx:33
+#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:270
 msgid "Close"
 msgstr "Sulje"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:135
+msgid "Close editor"
+msgstr ""
 
 #: src/index.html:8
 msgid "Cockpit Files"
@@ -193,7 +203,7 @@ msgstr "Kopio"
 msgid "Copy selected file or directory"
 msgstr "Kopioi valittu tiedosto tai kansio"
 
-#: src/dialogs/mkdir.tsx:135 src/dialogs/create-file.tsx:193
+#: src/dialogs/create-file.tsx:208 src/dialogs/mkdir.tsx:135
 msgid "Create"
 msgstr "Luo"
 
@@ -201,7 +211,7 @@ msgstr "Luo"
 msgid "Create directory"
 msgstr "Luo hakemisto"
 
-#: src/dialogs/create-file.tsx:136 src/menu.tsx:111
+#: src/dialogs/create-file.tsx:151 src/menu.tsx:111
 msgid "Create file"
 msgstr "Luo tiedosto"
 
@@ -281,7 +291,7 @@ msgstr "Hakemiston omistaja"
 msgid "Directory with the same name exists"
 msgstr "Samanniminen hakemisto on olemassa"
 
-#: src/dialogs/editor.tsx:307
+#: src/dialogs/editor.tsx:329
 msgid "Discard"
 msgstr "Hylkää"
 
@@ -302,11 +312,11 @@ msgid "Drop files to upload"
 msgstr "Pudota ulospäinladattavat tiedostot"
 
 #. Translators: This is the title of a modal dialog.  $0 represents a filename.
-#: src/dialogs/editor.tsx:165
+#: src/dialogs/editor.tsx:187
 msgid "Edit $0"
 msgstr "Muokkaa $0"
 
-#: src/files-breadcrumbs.tsx:291 src/dialogs/keyboardShortcutsHelp.tsx:87
+#: src/dialogs/keyboardShortcutsHelp.tsx:87 src/files-breadcrumbs.tsx:303
 msgid "Edit path"
 msgstr "Muokkaa polkua"
 
@@ -314,9 +324,15 @@ msgstr "Muokkaa polkua"
 msgid "Edit permissions"
 msgstr "Muokkaa käyttöoikeuksia"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:147
+#: src/dialogs/keyboardShortcutsHelp.tsx:162
 msgid "Editing"
 msgstr "Muokataan"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:172
+#, fuzzy
+#| msgid "Edit $0"
+msgid "Editor"
+msgstr "Muokkaa $0"
 
 #: src/common.ts:50
 msgid "Execute-only"
@@ -338,7 +354,7 @@ msgstr "Tiedostoselain"
 msgid "File exists"
 msgstr "Tiedosto on olemassa"
 
-#: src/dialogs/create-file.tsx:148
+#: src/dialogs/create-file.tsx:163
 msgid "File name"
 msgstr "Tiedostonimi"
 
@@ -366,7 +382,7 @@ msgstr ""
 msgid "Files uploaded"
 msgstr "Tiedostot ladattu ulospäin"
 
-#: src/files-breadcrumbs.tsx:224
+#: src/files-breadcrumbs.tsx:236
 msgid "Filesystem"
 msgstr "Tiedostojärjestelmä"
 
@@ -427,11 +443,11 @@ msgstr "Ryhmään pääsy"
 msgid "Hide hidden items"
 msgstr "Piilota piilotetut kohteet"
 
-#: src/files-breadcrumbs.tsx:39
+#: src/files-breadcrumbs.tsx:46
 msgid "Home"
 msgstr "Koti"
 
-#: src/dialogs/editor.tsx:208
+#: src/dialogs/editor.tsx:230
 msgid "Ignore"
 msgstr "Ohita"
 
@@ -439,7 +455,7 @@ msgstr "Ohita"
 msgid "Keep original"
 msgstr "Säilytä alkuperäinen"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:133
+#: src/dialogs/keyboardShortcutsHelp.tsx:148
 msgid "Keyboard shortcuts"
 msgstr "Pikanäppäimet"
 
@@ -463,7 +479,7 @@ msgstr "Hallitse tiedostojasi"
 msgid "Missing type"
 msgstr "Puuttuva tyyppi"
 
-#: src/header.tsx:75 src/files-card-body.tsx:539 src/files-card-body.tsx:659
+#: src/files-card-body.tsx:539 src/files-card-body.tsx:659 src/header.tsx:75
 msgid "Modified"
 msgstr "Muokattu"
 
@@ -471,7 +487,7 @@ msgstr "Muokattu"
 msgid "Most permissive"
 msgstr "Eniten salliva"
 
-#: src/header.tsx:53 src/files-card-body.tsx:534
+#: src/files-card-body.tsx:534 src/header.tsx:53
 msgid "Name"
 msgstr "Nimi"
 
@@ -491,7 +507,7 @@ msgstr "Nimi liian pitkä"
 msgid "Named pipe"
 msgstr "Nimetty putki"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:137
+#: src/dialogs/keyboardShortcutsHelp.tsx:152
 msgid "Navigation"
 msgstr "Navigointi"
 
@@ -523,6 +539,12 @@ msgstr "Ei vastaavia tuloksia"
 msgid "None"
 msgstr "Ei mitään"
 
+#: src/files-breadcrumbs.tsx:161
+#, fuzzy
+#| msgid "Add to bookmarks"
+msgid "Not bookmarked"
+msgstr "Lisää kirjanmerkkeihin"
+
 #: src/menu.tsx:126 src/menu.tsx:187
 msgid "Open in terminal"
 msgstr "Avaa päätteessä"
@@ -543,15 +565,14 @@ msgstr "Muut"
 msgid "Others access"
 msgstr "Muiden pääsy"
 
-#: src/dialogs/editor.tsx:228 src/dialogs/editor.tsx:285
-#: src/dialogs/rename.tsx:85
+#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:250
+#: src/dialogs/editor.tsx:307
 msgid "Overwrite"
 msgstr "Korvaa"
 
-#: src/header.tsx:86 src/dialogs/permissions.tsx:304
-#: src/dialogs/create-file.tsx:170 src/files-card-body.tsx:544
-#: src/files-card-body.tsx:591 src/files-card-body.tsx:667
-#: src/files-footer-detail.tsx:80
+#: src/dialogs/create-file.tsx:185 src/dialogs/permissions.tsx:304
+#: src/files-card-body.tsx:544 src/files-card-body.tsx:591
+#: src/files-card-body.tsx:667 src/header.tsx:86 src/files-footer-detail.tsx:80
 msgid "Owner"
 msgstr "Omistaja"
 
@@ -587,11 +608,11 @@ msgstr "Liitä tiedosto tai hakemisto"
 msgid "Pasting failed"
 msgstr "Liittäminen epäonnistui"
 
-#: src/dialogs/create-file.tsx:215
+#: src/dialogs/create-file.tsx:230
 msgid "Permission denied"
 msgstr "Käyttö estetty"
 
-#: src/header.tsx:97 src/files-card-body.tsx:549 src/files-card-body.tsx:674
+#: src/files-card-body.tsx:549 src/files-card-body.tsx:674 src/header.tsx:97
 msgid "Permissions"
 msgstr "Käyttöoikeudet"
 
@@ -611,7 +632,7 @@ msgstr "Luku ja kirjoitus"
 msgid "Read, write, and execute"
 msgstr "Luku, kirjoitus ja suoritus"
 
-#: src/dialogs/permissions.tsx:215 src/dialogs/editor.tsx:167 src/common.ts:53
+#: src/dialogs/editor.tsx:189 src/dialogs/permissions.tsx:215 src/common.ts:53
 msgid "Read-only"
 msgstr "Vain luku"
 
@@ -632,11 +653,11 @@ msgstr ""
 "että kohde voivat liikkua samanaikaisesti, esimerkiksi kun nimetään "
 "uudelleen tai siirretään ylähakemistoa."
 
-#: src/dialogs/editor.tsx:205
+#: src/dialogs/editor.tsx:227
 msgid "Reload"
 msgstr "Lataa uudelleen"
 
-#: src/files-breadcrumbs.tsx:130
+#: src/files-breadcrumbs.tsx:139
 msgid "Remove from bookmarks"
 msgstr "Poista kirjanmerkeistä"
 
@@ -660,13 +681,19 @@ msgstr "Vaihda"
 msgid "Replace file $0?"
 msgstr "Vaihdetaanko tiedosto $0?"
 
-#: src/dialogs/editor.tsx:242 src/dialogs/editor.tsx:299
+#: src/dialogs/editor.tsx:264 src/dialogs/editor.tsx:321
 msgid "Save"
 msgstr "Tallenna"
 
-#: src/dialogs/editor.tsx:259
+#: src/dialogs/editor.tsx:281
 msgid "Save changes?"
 msgstr "Tallennetaanko muutokset?"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:131
+#, fuzzy
+#| msgid "Remove current directory"
+msgid "Save current file"
+msgstr "Poista nykyinen hakemisto"
 
 #: src/dialogs/permissions.tsx:375
 msgid "Security context"
@@ -684,7 +711,7 @@ msgstr "Määritä suoritettava ohjelmaksi"
 msgid "Show all files"
 msgstr "Näytä kaikki tiedostot"
 
-#: src/header.tsx:271 src/files-card-body.tsx:522
+#: src/files-card-body.tsx:522 src/header.tsx:271
 msgid "Show hidden items"
 msgstr "Näytä piilotetut kohteet"
 
@@ -692,7 +719,7 @@ msgstr "Näytä piilotetut kohteet"
 msgid "Show keyboard shortcuts"
 msgstr "Näytä pikanäppäimet"
 
-#: src/header.tsx:64 src/files-card-body.tsx:535 src/files-card-body.tsx:652
+#: src/files-card-body.tsx:535 src/files-card-body.tsx:652 src/header.tsx:64
 msgid "Size"
 msgstr "Koko"
 
@@ -724,19 +751,19 @@ msgstr "Kohde"
 msgid "The existing file changed unexpectedly"
 msgstr "Olemassa oleva tiedosto muuttui odottamatta"
 
-#: src/dialogs/editor.tsx:48 src/dialogs/editor.tsx:199
+#: src/dialogs/editor.tsx:48 src/dialogs/editor.tsx:221
 msgid "The file has been removed on disk"
 msgstr "Tiedosto on poistettu levyltä"
 
-#: src/dialogs/editor.tsx:200
+#: src/dialogs/editor.tsx:222
 msgid "The file has changed on disk"
 msgstr "Tiedosto on muuttunut levyllä"
 
-#: src/dialogs/editor.tsx:269
+#: src/dialogs/editor.tsx:291
 msgid "The file has changed on disk between when it was opened and now"
 msgstr "Tiedosto on muuttunut levyllä sen avaamisen ja nykyhetken välillä"
 
-#: src/dialogs/editor.tsx:268
+#: src/dialogs/editor.tsx:290
 msgid "The file was deleted after it was opened, saving will recreate it."
 msgstr ""
 "Tiedosto poistettiin avaamisen jälkeen, tallentaminen luo sen uudelleen."
@@ -745,7 +772,7 @@ msgstr ""
 msgid "Type"
 msgstr "Tyyppi"
 
-#: src/files-breadcrumbs.tsx:87
+#: src/files-breadcrumbs.tsx:94
 msgid "Unable to create bookmark directory"
 msgstr "Kirjanmerkkihakemistoa ei voi luoda"
 
@@ -753,7 +780,7 @@ msgstr "Kirjanmerkkihakemistoa ei voi luoda"
 msgid "Unable to move uploaded file to final destination"
 msgstr "Ulospäinladattua tiedostoa ei voida siirtää lopulliseen määränpäähän"
 
-#: src/files-breadcrumbs.tsx:110
+#: src/files-breadcrumbs.tsx:117
 msgid "Unable to save bookmark file"
 msgstr "Kirjanmerkkitiedostoa ei voi tallentaa"
 
@@ -782,7 +809,7 @@ msgstr "Lataukset ulospäin"
 msgid "User"
 msgstr "Käyttäjä"
 
-#: src/dialogs/editor.tsx:165
+#: src/dialogs/editor.tsx:187
 msgid "View $0"
 msgstr "Näytä $0"
 
@@ -817,9 +844,6 @@ msgstr "säilytä alkuperäiset omistajat"
 #: src/dialogs/symlink.tsx:53
 msgid "link to $0"
 msgstr "linkki $0:iin"
-
-#~ msgid "Remove current directory"
-#~ msgstr "Poista nykyinen hakemisto"
 
 #~ msgid "Successfully uploaded file(s)"
 #~ msgstr "Tiedosto(t) ulosladattu onnistuneesti"
