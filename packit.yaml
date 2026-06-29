@@ -2,6 +2,11 @@
 # To use this, enable Packit-as-a-service in GitHub: https://packit.dev/docs/packit-as-a-service/
 # See https://packit.dev/docs/configuration/ for the format of this file
 
+upstream_project_url: https://github.com/cockpit-project/cockpit-files
+# enable notification of failed downstream jobs as issues
+issue_repository: https://github.com/cockpit-project/cockpit-files
+upstream_package_name: cockpit-files
+downstream_package_name: cockpit-files
 specfile_path: cockpit-files.spec
 # use the nicely formatted release description from our upstream release, instead of git shortlog
 copy_upstream_release_description: true
