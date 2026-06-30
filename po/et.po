@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-21 07:19+0000\n"
-"PO-Revision-Date: 2026-04-19 14:58+0000\n"
+"POT-Creation-Date: 2026-06-25 06:34+0000\n"
+"PO-Revision-Date: 2026-06-25 11:24+0000\n"
 "Last-Translator: Priit Jõerüüt "
 "<jrtkbfdr@users.noreply.translate.fedoraproject.org>\n"
 "Language-Team: Estonian <https://translate.fedoraproject.org/projects/"
@@ -25,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.17\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #: src/menu.tsx:53
 msgid "\"$0\" exists, not overwriting with paste."
@@ -119,10 +119,8 @@ msgid "Block device"
 msgstr "Plokkseade"
 
 #: src/files-breadcrumbs.tsx:161
-#, fuzzy
-#| msgid "Bookmarks"
 msgid "Bookmarked"
-msgstr "Järjehoidjad"
+msgstr "Lisatud järjehoidjana"
 
 #: src/files-breadcrumbs.tsx:154
 msgid "Bookmarks"
@@ -183,7 +181,7 @@ msgstr "Sulge"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:135
 msgid "Close editor"
-msgstr ""
+msgstr "Sulge muutmisvaade"
 
 #: src/index.html:8
 msgid "Cockpit Files"
@@ -331,10 +329,8 @@ msgid "Editing"
 msgstr "Muudan"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:172
-#, fuzzy
-#| msgid "Edit $0"
 msgid "Editor"
-msgstr "Muuda: $0"
+msgstr "Muutmisvaade"
 
 #: src/common.ts:50
 msgid "Execute-only"
@@ -542,10 +538,8 @@ msgid "None"
 msgstr "Puudub"
 
 #: src/files-breadcrumbs.tsx:161
-#, fuzzy
-#| msgid "Add to bookmarks"
 msgid "Not bookmarked"
-msgstr "Lisa järjehoidjana"
+msgstr "Pole järjehoidjana lisatud"
 
 #: src/menu.tsx:126 src/menu.tsx:187
 msgid "Open in terminal"
@@ -693,7 +687,7 @@ msgstr "Kas salvestad muudatused?"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:131
 msgid "Save current file"
-msgstr ""
+msgstr "Salvesta praegune fail"
 
 #: src/dialogs/permissions.tsx:375
 msgid "Security context"
