@@ -1715,6 +1715,7 @@ class TestFiles(testlib.MachineCase):
         # A user cannot change ownership
         b.wait_not_in_text(".pf-v6-c-modal-box__body", "Ownership")
         b.click(".pf-v6-c-modal-box button.pf-m-primary")
+        b.wait_not_present(".pf-v6-c-modal-box")
         self.assertEqual(self.stat("%A", "/home/admin/adminfile"), "-rw-rw-rw-")
         check_perms_match('adminfile', '/home/admin')
         # Does not change ownership
