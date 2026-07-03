@@ -241,7 +241,7 @@ const EditPermissionsModal = ({ dialogResult, items, path } : {
             val += 1;
         }
 
-        setMode((mode & mask) | (val << shift));
+        setMode(mode => (mode & mask) | (val << shift));
     }
 
     function setExecutableBits(shouldBeExecutable: boolean) {
@@ -249,9 +249,9 @@ const EditPermissionsModal = ({ dialogResult, items, path } : {
 
         // Strip / add executable bits
         if (shouldBeExecutable) {
-            setMode(mode | 0b001001001);
+            setMode(mode => mode | 0b001001001);
         } else {
-            setMode(mode & ~0b001001001);
+            setMode(mode => mode & ~0b001001001);
         }
     }
 
