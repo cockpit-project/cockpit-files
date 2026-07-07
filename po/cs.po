@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-25 06:34+0000\n"
-"PO-Revision-Date: 2026-03-24 09:58+0000\n"
+"POT-Creation-Date: 2026-07-06 06:54+0000\n"
+"PO-Revision-Date: 2026-07-01 17:17+0000\n"
 "Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech <https://translate.fedoraproject.org/projects/cockpit/"
 "cockpit-files/cs/>\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 5.16.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #: src/menu.tsx:53
 msgid "\"$0\" exists, not overwriting with paste."
@@ -116,10 +116,8 @@ msgid "Block device"
 msgstr "Blokové zařízení"
 
 #: src/files-breadcrumbs.tsx:161
-#, fuzzy
-#| msgid "Bookmarks"
 msgid "Bookmarked"
-msgstr "Záložky"
+msgstr "Přidáno do záložek"
 
 #: src/files-breadcrumbs.tsx:154
 msgid "Bookmarks"
@@ -180,7 +178,7 @@ msgstr "Zavřít"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:135
 msgid "Close editor"
-msgstr ""
+msgstr "Zavřít editor"
 
 #: src/index.html:8
 msgid "Cockpit Files"
@@ -328,10 +326,8 @@ msgid "Editing"
 msgstr "Upravování"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:172
-#, fuzzy
-#| msgid "Edit $0"
 msgid "Editor"
-msgstr "Upravit $0"
+msgstr "Editor"
 
 #: src/common.ts:50
 msgid "Execute-only"
@@ -539,10 +535,8 @@ msgid "None"
 msgstr "Žádné"
 
 #: src/files-breadcrumbs.tsx:161
-#, fuzzy
-#| msgid "Add to bookmarks"
 msgid "Not bookmarked"
-msgstr "Přidat do záložek"
+msgstr "Nepřidáno do záložek"
 
 #: src/menu.tsx:126 src/menu.tsx:187
 msgid "Open in terminal"
@@ -689,10 +683,8 @@ msgid "Save changes?"
 msgstr "Uložit změny?"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:131
-#, fuzzy
-#| msgid "Remove current directory"
 msgid "Save current file"
-msgstr "Odebrat stávající složku"
+msgstr "Odebrat stávající soubor"
 
 #: src/dialogs/permissions.tsx:375
 msgid "Security context"

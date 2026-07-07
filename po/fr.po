@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-25 06:34+0000\n"
-"PO-Revision-Date: 2026-03-24 09:58+0000\n"
+"POT-Creation-Date: 2026-07-06 06:54+0000\n"
+"PO-Revision-Date: 2026-07-03 16:17+0000\n"
 "Last-Translator: Léane GRASSER <leane.grasser@proton.me>\n"
 "Language-Team: French <https://translate.fedoraproject.org/projects/cockpit/"
 "cockpit-files/fr/>\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.16.2\n"
+"X-Generator: Weblate 2026.7.1.dev0\n"
 
 #: src/menu.tsx:53
 msgid "\"$0\" exists, not overwriting with paste."
@@ -119,10 +119,8 @@ msgid "Block device"
 msgstr "Périphérique de blocs"
 
 #: src/files-breadcrumbs.tsx:161
-#, fuzzy
-#| msgid "Bookmarks"
 msgid "Bookmarked"
-msgstr "Marque-pages"
+msgstr "Ajouté aux marque-pages"
 
 #: src/files-breadcrumbs.tsx:154
 msgid "Bookmarks"
@@ -182,7 +180,7 @@ msgstr "Fermer"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:135
 msgid "Close editor"
-msgstr ""
+msgstr "Fermer l'éditeur"
 
 #: src/index.html:8
 msgid "Cockpit Files"
@@ -330,10 +328,8 @@ msgid "Editing"
 msgstr "Modification"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:172
-#, fuzzy
-#| msgid "Edit $0"
 msgid "Editor"
-msgstr "Modifier $0"
+msgstr "Éditeur"
 
 #: src/common.ts:50
 msgid "Execute-only"
@@ -542,10 +538,8 @@ msgid "None"
 msgstr "Aucune"
 
 #: src/files-breadcrumbs.tsx:161
-#, fuzzy
-#| msgid "Add to bookmarks"
 msgid "Not bookmarked"
-msgstr "Ajouter aux marque-pages"
+msgstr "Non ajouté aux marque-pages"
 
 #: src/menu.tsx:126 src/menu.tsx:187
 msgid "Open in terminal"
@@ -693,7 +687,7 @@ msgstr "Enregistrer les modifications ?"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:131
 msgid "Save current file"
-msgstr ""
+msgstr "Enregistrer le fichier actuel"
 
 #: src/dialogs/permissions.tsx:375
 msgid "Security context"
