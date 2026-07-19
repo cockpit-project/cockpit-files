@@ -48,7 +48,7 @@
     "@patternfly/react-styles": "6.5.1",
     "@patternfly/react-table": "6.5.1",
     "@patternfly/react-tokens": "6.5.1",
-    "argparse": "2.0.1",
+    "argparse": "3.0.0",
     "dequal": "2.0.3",
     "esbuild": "0.28.1",
     "esbuild-sass-plugin": "3.7.0",
