@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-11 05:28+0000\n"
+"POT-Creation-Date: 2026-07-18 05:11+0000\n"
 "PO-Revision-Date: 2026-05-07 03:59+0000\n"
 "Last-Translator: Bone NI <bounkirdni@gmail.com>\n"
 "Language-Team: Lao <https://translate.fedoraproject.org/projects/cockpit/"
@@ -121,11 +121,11 @@ msgstr "ບຸກມາກ"
 msgid "Bookmarks"
 msgstr "ບຸກມາກ"
 
-#: src/upload-button.tsx:146 src/dialogs/create-file.tsx:211
-#: src/dialogs/mkdir.tsx:137 src/dialogs/copyPasteOwnership.tsx:166
-#: src/dialogs/rename.tsx:87 src/dialogs/editor.tsx:270
-#: src/dialogs/editor.tsx:336 src/dialogs/permissions.tsx:409
 #: src/dialogs/delete.tsx:97 src/dialogs/symlink.tsx:233
+#: src/dialogs/permissions.tsx:409 src/dialogs/editor.tsx:270
+#: src/dialogs/editor.tsx:336 src/dialogs/rename.tsx:87
+#: src/dialogs/create-file.tsx:211 src/dialogs/mkdir.tsx:137
+#: src/dialogs/copyPasteOwnership.tsx:166 src/upload-button.tsx:146
 msgid "Cancel"
 msgstr "ຍົກເລີກ"
 
@@ -424,8 +424,8 @@ msgstr "ໄປຂ້າງໜ້າ"
 msgid "Go up a directory"
 msgstr "ຂຶ້ນໄປໜຶ່ງໄດເຣັກທໍຣີ"
 
-#: src/dialogs/permissions.tsx:319 src/files-card-body.tsx:591
-#: src/files-footer-detail.tsx:80 src/files-footer-detail.tsx:152
+#: src/dialogs/permissions.tsx:319 src/files-footer-detail.tsx:80
+#: src/files-footer-detail.tsx:152 src/files-card-body.tsx:591
 msgid "Group"
 msgstr "ກຸ່ມ"
 
@@ -473,7 +473,7 @@ msgstr "ຈັດການໄຟລ໌ຂອງທ່ານ"
 msgid "Missing type"
 msgstr "ບໍ່ພົບປະເພດ"
 
-#: src/files-card-body.tsx:539 src/files-card-body.tsx:659 src/header.tsx:75
+#: src/header.tsx:75 src/files-card-body.tsx:539 src/files-card-body.tsx:659
 msgid "Modified"
 msgstr "ແກ້ໄຂເມື່ອ"
 
@@ -481,7 +481,7 @@ msgstr "ແກ້ໄຂເມື່ອ"
 msgid "Most permissive"
 msgstr "ການອະນຸຍາດຫຼາຍທີ່ສຸດ"
 
-#: src/files-card-body.tsx:534 src/header.tsx:53
+#: src/header.tsx:53 src/files-card-body.tsx:534
 msgid "Name"
 msgstr "ຊື່"
 
@@ -551,7 +551,7 @@ msgstr "ເປີດໄຟລ໌ຂໍ້ຄວາມ"
 msgid "Original file on server"
 msgstr "ໄຟລ໌ເດີມໃນເຊີເວີ"
 
-#: src/files-card-body.tsx:591 src/files-footer-detail.tsx:80
+#: src/files-footer-detail.tsx:80 src/files-card-body.tsx:591
 msgid "Others"
 msgstr "ອື່ນໆ"
 
@@ -559,14 +559,14 @@ msgstr "ອື່ນໆ"
 msgid "Others access"
 msgstr "ການເຂົ້າເຖິງຂອງຜູ້ອື່ນ"
 
-#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:250
-#: src/dialogs/editor.tsx:307
+#: src/dialogs/editor.tsx:250 src/dialogs/editor.tsx:307
+#: src/dialogs/rename.tsx:85
 msgid "Overwrite"
 msgstr "ຂຽນທັບ"
 
-#: src/dialogs/create-file.tsx:185 src/dialogs/permissions.tsx:304
-#: src/files-card-body.tsx:544 src/files-card-body.tsx:591
-#: src/files-card-body.tsx:667 src/header.tsx:86 src/files-footer-detail.tsx:80
+#: src/dialogs/permissions.tsx:304 src/dialogs/create-file.tsx:185
+#: src/files-footer-detail.tsx:80 src/header.tsx:86 src/files-card-body.tsx:544
+#: src/files-card-body.tsx:591 src/files-card-body.tsx:667
 msgid "Owner"
 msgstr "ເຈົ້າຂອງ"
 
@@ -606,7 +606,7 @@ msgstr "ການວາງຫຼົ້ມເຫຼວ"
 msgid "Permission denied"
 msgstr "ການອະນຸຍາດຖືກປະຕິເສດ"
 
-#: src/files-card-body.tsx:549 src/files-card-body.tsx:674 src/header.tsx:97
+#: src/header.tsx:97 src/files-card-body.tsx:549 src/files-card-body.tsx:674
 msgid "Permissions"
 msgstr "ການອະນຸຍາດ"
 
@@ -626,7 +626,7 @@ msgstr "ອ່ານ ແລະ ຂຽນ"
 msgid "Read, write, and execute"
 msgstr "ອ່ານ, ຂຽນ, ແລະ ປະຕິບັດການ"
 
-#: src/dialogs/editor.tsx:189 src/dialogs/permissions.tsx:215 src/common.ts:53
+#: src/dialogs/permissions.tsx:215 src/dialogs/editor.tsx:189 src/common.ts:53
 msgid "Read-only"
 msgstr "ອ່ານຢ່າງດຽວ"
 
@@ -702,7 +702,7 @@ msgstr "ຕັ້ງຄ່າໃຫ້ປະຕິບັດການເປັນ
 msgid "Show all files"
 msgstr "ສະແດງໄຟລ໌ທັງໝົດ"
 
-#: src/files-card-body.tsx:522 src/header.tsx:271
+#: src/header.tsx:271 src/files-card-body.tsx:522
 msgid "Show hidden items"
 msgstr "ສະແດງລາຍການທີ່ຖືກເຊື່ອງ"
 
@@ -710,7 +710,7 @@ msgstr "ສະແດງລາຍການທີ່ຖືກເຊື່ອງ"
 msgid "Show keyboard shortcuts"
 msgstr "ສະແດງຄີລັດຄີບອດ"
 
-#: src/files-card-body.tsx:535 src/files-card-body.tsx:652 src/header.tsx:64
+#: src/header.tsx:64 src/files-card-body.tsx:535 src/files-card-body.tsx:652
 msgid "Size"
 msgstr "ຂະໜາດ"
 
