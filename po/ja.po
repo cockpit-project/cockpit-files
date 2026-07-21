@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-11 05:28+0000\n"
+"POT-Creation-Date: 2026-07-18 05:11+0000\n"
 "PO-Revision-Date: 2026-02-03 13:58+0000\n"
 "Last-Translator: Kohei Takahashi <flast@flast.jp>\n"
 "Language-Team: Japanese <https://translate.fedoraproject.org/projects/"
@@ -124,11 +124,11 @@ msgstr "ブックマーク"
 msgid "Bookmarks"
 msgstr "ブックマーク"
 
-#: src/upload-button.tsx:146 src/dialogs/create-file.tsx:211
-#: src/dialogs/mkdir.tsx:137 src/dialogs/copyPasteOwnership.tsx:166
-#: src/dialogs/rename.tsx:87 src/dialogs/editor.tsx:270
-#: src/dialogs/editor.tsx:336 src/dialogs/permissions.tsx:409
 #: src/dialogs/delete.tsx:97 src/dialogs/symlink.tsx:233
+#: src/dialogs/permissions.tsx:409 src/dialogs/editor.tsx:270
+#: src/dialogs/editor.tsx:336 src/dialogs/rename.tsx:87
+#: src/dialogs/create-file.tsx:211 src/dialogs/mkdir.tsx:137
+#: src/dialogs/copyPasteOwnership.tsx:166 src/upload-button.tsx:146
 msgid "Cancel"
 msgstr "取り消し"
 
@@ -434,8 +434,8 @@ msgstr "進む"
 msgid "Go up a directory"
 msgstr "1 つ上のディレクトリーに移動する"
 
-#: src/dialogs/permissions.tsx:319 src/files-card-body.tsx:591
-#: src/files-footer-detail.tsx:80 src/files-footer-detail.tsx:152
+#: src/dialogs/permissions.tsx:319 src/files-footer-detail.tsx:80
+#: src/files-footer-detail.tsx:152 src/files-card-body.tsx:591
 msgid "Group"
 msgstr "グループ"
 
@@ -483,7 +483,7 @@ msgstr "ファイルの管理"
 msgid "Missing type"
 msgstr "存在しないタイプ"
 
-#: src/files-card-body.tsx:539 src/files-card-body.tsx:659 src/header.tsx:75
+#: src/header.tsx:75 src/files-card-body.tsx:539 src/files-card-body.tsx:659
 msgid "Modified"
 msgstr "変更"
 
@@ -491,7 +491,7 @@ msgstr "変更"
 msgid "Most permissive"
 msgstr "最も許容度が高い"
 
-#: src/files-card-body.tsx:534 src/header.tsx:53
+#: src/header.tsx:53 src/files-card-body.tsx:534
 msgid "Name"
 msgstr "名前"
 
@@ -561,7 +561,7 @@ msgstr "テキストファイルを開く"
 msgid "Original file on server"
 msgstr "サーバー上の元のファイル"
 
-#: src/files-card-body.tsx:591 src/files-footer-detail.tsx:80
+#: src/files-footer-detail.tsx:80 src/files-card-body.tsx:591
 msgid "Others"
 msgstr "その他のユーザー"
 
@@ -569,14 +569,14 @@ msgstr "その他のユーザー"
 msgid "Others access"
 msgstr "その他のユーザーのアクセス"
 
-#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:250
-#: src/dialogs/editor.tsx:307
+#: src/dialogs/editor.tsx:250 src/dialogs/editor.tsx:307
+#: src/dialogs/rename.tsx:85
 msgid "Overwrite"
 msgstr "上書き"
 
-#: src/dialogs/create-file.tsx:185 src/dialogs/permissions.tsx:304
-#: src/files-card-body.tsx:544 src/files-card-body.tsx:591
-#: src/files-card-body.tsx:667 src/header.tsx:86 src/files-footer-detail.tsx:80
+#: src/dialogs/permissions.tsx:304 src/dialogs/create-file.tsx:185
+#: src/files-footer-detail.tsx:80 src/header.tsx:86 src/files-card-body.tsx:544
+#: src/files-card-body.tsx:591 src/files-card-body.tsx:667
 msgid "Owner"
 msgstr "所有者"
 
@@ -616,7 +616,7 @@ msgstr "貼り付けに失敗しました"
 msgid "Permission denied"
 msgstr "パーミッションが拒否されました"
 
-#: src/files-card-body.tsx:549 src/files-card-body.tsx:674 src/header.tsx:97
+#: src/header.tsx:97 src/files-card-body.tsx:549 src/files-card-body.tsx:674
 msgid "Permissions"
 msgstr "パーミッション"
 
@@ -636,7 +636,7 @@ msgstr "読み取りおよび書き込み"
 msgid "Read, write, and execute"
 msgstr "読み取り、書き込み、および実行"
 
-#: src/dialogs/editor.tsx:189 src/dialogs/permissions.tsx:215 src/common.ts:53
+#: src/dialogs/permissions.tsx:215 src/dialogs/editor.tsx:189 src/common.ts:53
 msgid "Read-only"
 msgstr "読み取り専用"
 
@@ -710,7 +710,7 @@ msgstr "実行可能ファイルをプログラムとして設定"
 msgid "Show all files"
 msgstr "すべてのファイルの表示"
 
-#: src/files-card-body.tsx:522 src/header.tsx:271
+#: src/header.tsx:271 src/files-card-body.tsx:522
 msgid "Show hidden items"
 msgstr "非表示の項目を表示する"
 
@@ -718,7 +718,7 @@ msgstr "非表示の項目を表示する"
 msgid "Show keyboard shortcuts"
 msgstr "キーボードショートカットの表示"
 
-#: src/files-card-body.tsx:535 src/files-card-body.tsx:652 src/header.tsx:64
+#: src/header.tsx:64 src/files-card-body.tsx:535 src/files-card-body.tsx:652
 msgid "Size"
 msgstr "サイズ"
 

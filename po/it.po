@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-11 05:28+0000\n"
+"POT-Creation-Date: 2026-07-18 05:11+0000\n"
 "PO-Revision-Date: 2026-05-15 14:59+0000\n"
 "Last-Translator: Nathan <nathan95@live.it>\n"
 "Language-Team: Italian <https://translate.fedoraproject.org/projects/cockpit/"
@@ -127,11 +127,11 @@ msgstr "Segnalibri"
 msgid "Bookmarks"
 msgstr "Segnalibri"
 
-#: src/upload-button.tsx:146 src/dialogs/create-file.tsx:211
-#: src/dialogs/mkdir.tsx:137 src/dialogs/copyPasteOwnership.tsx:166
-#: src/dialogs/rename.tsx:87 src/dialogs/editor.tsx:270
-#: src/dialogs/editor.tsx:336 src/dialogs/permissions.tsx:409
 #: src/dialogs/delete.tsx:97 src/dialogs/symlink.tsx:233
+#: src/dialogs/permissions.tsx:409 src/dialogs/editor.tsx:270
+#: src/dialogs/editor.tsx:336 src/dialogs/rename.tsx:87
+#: src/dialogs/create-file.tsx:211 src/dialogs/mkdir.tsx:137
+#: src/dialogs/copyPasteOwnership.tsx:166 src/upload-button.tsx:146
 msgid "Cancel"
 msgstr "Annulla"
 
@@ -431,8 +431,8 @@ msgstr "Avanti"
 msgid "Go up a directory"
 msgstr "Tornare alla cartella superiore"
 
-#: src/dialogs/permissions.tsx:319 src/files-card-body.tsx:591
-#: src/files-footer-detail.tsx:80 src/files-footer-detail.tsx:152
+#: src/dialogs/permissions.tsx:319 src/files-footer-detail.tsx:80
+#: src/files-footer-detail.tsx:152 src/files-card-body.tsx:591
 msgid "Group"
 msgstr "Gruppo"
 
@@ -480,7 +480,7 @@ msgstr "Gestisci i tuoi file"
 msgid "Missing type"
 msgstr "Tipo mancante"
 
-#: src/files-card-body.tsx:539 src/files-card-body.tsx:659 src/header.tsx:75
+#: src/header.tsx:75 src/files-card-body.tsx:539 src/files-card-body.tsx:659
 msgid "Modified"
 msgstr "Modificati"
 
@@ -488,7 +488,7 @@ msgstr "Modificati"
 msgid "Most permissive"
 msgstr "Più permissivi"
 
-#: src/files-card-body.tsx:534 src/header.tsx:53
+#: src/header.tsx:53 src/files-card-body.tsx:534
 msgid "Name"
 msgstr "Nome"
 
@@ -558,7 +558,7 @@ msgstr "Apri file di testo"
 msgid "Original file on server"
 msgstr "File originale sul server"
 
-#: src/files-card-body.tsx:591 src/files-footer-detail.tsx:80
+#: src/files-footer-detail.tsx:80 src/files-card-body.tsx:591
 msgid "Others"
 msgstr "Altri"
 
@@ -566,14 +566,14 @@ msgstr "Altri"
 msgid "Others access"
 msgstr "Accesso altri"
 
-#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:250
-#: src/dialogs/editor.tsx:307
+#: src/dialogs/editor.tsx:250 src/dialogs/editor.tsx:307
+#: src/dialogs/rename.tsx:85
 msgid "Overwrite"
 msgstr "Sovrascrivere"
 
-#: src/dialogs/create-file.tsx:185 src/dialogs/permissions.tsx:304
-#: src/files-card-body.tsx:544 src/files-card-body.tsx:591
-#: src/files-card-body.tsx:667 src/header.tsx:86 src/files-footer-detail.tsx:80
+#: src/dialogs/permissions.tsx:304 src/dialogs/create-file.tsx:185
+#: src/files-footer-detail.tsx:80 src/header.tsx:86 src/files-card-body.tsx:544
+#: src/files-card-body.tsx:591 src/files-card-body.tsx:667
 msgid "Owner"
 msgstr "Proprietario"
 
@@ -613,7 +613,7 @@ msgstr "Operazione incolla fallita"
 msgid "Permission denied"
 msgstr "Permesso negato"
 
-#: src/files-card-body.tsx:549 src/files-card-body.tsx:674 src/header.tsx:97
+#: src/header.tsx:97 src/files-card-body.tsx:549 src/files-card-body.tsx:674
 msgid "Permissions"
 msgstr "permessi"
 
@@ -633,7 +633,7 @@ msgstr "Lettura e scrittura"
 msgid "Read, write, and execute"
 msgstr "Lettura, scrittura ed esecuzione"
 
-#: src/dialogs/editor.tsx:189 src/dialogs/permissions.tsx:215 src/common.ts:53
+#: src/dialogs/permissions.tsx:215 src/dialogs/editor.tsx:189 src/common.ts:53
 msgid "Read-only"
 msgstr "Sola lettura"
 
@@ -710,7 +710,7 @@ msgstr "Imposta come eseguibile (programma)"
 msgid "Show all files"
 msgstr "Mostra tutti i file"
 
-#: src/files-card-body.tsx:522 src/header.tsx:271
+#: src/header.tsx:271 src/files-card-body.tsx:522
 msgid "Show hidden items"
 msgstr "Mostra elementi nascosti"
 
@@ -718,7 +718,7 @@ msgstr "Mostra elementi nascosti"
 msgid "Show keyboard shortcuts"
 msgstr "Mostra scorciatoie da tastiera"
 
-#: src/files-card-body.tsx:535 src/files-card-body.tsx:652 src/header.tsx:64
+#: src/header.tsx:64 src/files-card-body.tsx:535 src/files-card-body.tsx:652
 msgid "Size"
 msgstr "Dimensione"
 

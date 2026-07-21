@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-11 05:28+0000\n"
+"POT-Creation-Date: 2026-07-18 05:11+0000\n"
 "PO-Revision-Date: 2025-08-09 22:55+0000\n"
 "Last-Translator: hsu zangmen <chzang55@gmail.com>\n"
 "Language-Team: Chinese (Traditional) <https://translate.fedoraproject.org/"
@@ -119,11 +119,11 @@ msgstr "書籤"
 msgid "Bookmarks"
 msgstr "書籤"
 
-#: src/upload-button.tsx:146 src/dialogs/create-file.tsx:211
-#: src/dialogs/mkdir.tsx:137 src/dialogs/copyPasteOwnership.tsx:166
-#: src/dialogs/rename.tsx:87 src/dialogs/editor.tsx:270
-#: src/dialogs/editor.tsx:336 src/dialogs/permissions.tsx:409
 #: src/dialogs/delete.tsx:97 src/dialogs/symlink.tsx:233
+#: src/dialogs/permissions.tsx:409 src/dialogs/editor.tsx:270
+#: src/dialogs/editor.tsx:336 src/dialogs/rename.tsx:87
+#: src/dialogs/create-file.tsx:211 src/dialogs/mkdir.tsx:137
+#: src/dialogs/copyPasteOwnership.tsx:166 src/upload-button.tsx:146
 msgid "Cancel"
 msgstr "取消"
 
@@ -424,8 +424,8 @@ msgstr "前進"
 msgid "Go up a directory"
 msgstr "回上一層目錄"
 
-#: src/dialogs/permissions.tsx:319 src/files-card-body.tsx:591
-#: src/files-footer-detail.tsx:80 src/files-footer-detail.tsx:152
+#: src/dialogs/permissions.tsx:319 src/files-footer-detail.tsx:80
+#: src/files-footer-detail.tsx:152 src/files-card-body.tsx:591
 msgid "Group"
 msgstr "群組"
 
@@ -473,7 +473,7 @@ msgstr "管理您的檔案"
 msgid "Missing type"
 msgstr "類型已遺失"
 
-#: src/files-card-body.tsx:539 src/files-card-body.tsx:659 src/header.tsx:75
+#: src/header.tsx:75 src/files-card-body.tsx:539 src/files-card-body.tsx:659
 msgid "Modified"
 msgstr "被修改"
 
@@ -481,7 +481,7 @@ msgstr "被修改"
 msgid "Most permissive"
 msgstr "最寬鬆的權限"
 
-#: src/files-card-body.tsx:534 src/header.tsx:53
+#: src/header.tsx:53 src/files-card-body.tsx:534
 msgid "Name"
 msgstr "名稱"
 
@@ -551,7 +551,7 @@ msgstr "開啟文字檔案"
 msgid "Original file on server"
 msgstr "伺服器上原有的檔案"
 
-#: src/files-card-body.tsx:591 src/files-footer-detail.tsx:80
+#: src/files-footer-detail.tsx:80 src/files-card-body.tsx:591
 msgid "Others"
 msgstr "其他人"
 
@@ -559,14 +559,14 @@ msgstr "其他人"
 msgid "Others access"
 msgstr "其他人的存取權限"
 
-#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:250
-#: src/dialogs/editor.tsx:307
+#: src/dialogs/editor.tsx:250 src/dialogs/editor.tsx:307
+#: src/dialogs/rename.tsx:85
 msgid "Overwrite"
 msgstr "覆寫"
 
-#: src/dialogs/create-file.tsx:185 src/dialogs/permissions.tsx:304
-#: src/files-card-body.tsx:544 src/files-card-body.tsx:591
-#: src/files-card-body.tsx:667 src/header.tsx:86 src/files-footer-detail.tsx:80
+#: src/dialogs/permissions.tsx:304 src/dialogs/create-file.tsx:185
+#: src/files-footer-detail.tsx:80 src/header.tsx:86 src/files-card-body.tsx:544
+#: src/files-card-body.tsx:591 src/files-card-body.tsx:667
 msgid "Owner"
 msgstr "擁有者"
 
@@ -606,7 +606,7 @@ msgstr "貼上失敗"
 msgid "Permission denied"
 msgstr "使用權限被拒"
 
-#: src/files-card-body.tsx:549 src/files-card-body.tsx:674 src/header.tsx:97
+#: src/header.tsx:97 src/files-card-body.tsx:549 src/files-card-body.tsx:674
 msgid "Permissions"
 msgstr "權限"
 
@@ -626,7 +626,7 @@ msgstr "讀取與寫入"
 msgid "Read, write, and execute"
 msgstr "讀取、寫入與執行"
 
-#: src/dialogs/editor.tsx:189 src/dialogs/permissions.tsx:215 src/common.ts:53
+#: src/dialogs/permissions.tsx:215 src/dialogs/editor.tsx:189 src/common.ts:53
 msgid "Read-only"
 msgstr "唯讀"
 
@@ -704,7 +704,7 @@ msgstr "設定為可執行的程式"
 msgid "Show all files"
 msgstr "顯示所有檔案"
 
-#: src/files-card-body.tsx:522 src/header.tsx:271
+#: src/header.tsx:271 src/files-card-body.tsx:522
 msgid "Show hidden items"
 msgstr "顯示隱藏的項目"
 
@@ -712,7 +712,7 @@ msgstr "顯示隱藏的項目"
 msgid "Show keyboard shortcuts"
 msgstr "顯示鍵盤快速鍵"
 
-#: src/files-card-body.tsx:535 src/files-card-body.tsx:652 src/header.tsx:64
+#: src/header.tsx:64 src/files-card-body.tsx:535 src/files-card-body.tsx:652
 msgid "Size"
 msgstr "大小"
 

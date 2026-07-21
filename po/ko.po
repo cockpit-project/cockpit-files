@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-11 05:28+0000\n"
+"POT-Creation-Date: 2026-07-18 05:11+0000\n"
 "PO-Revision-Date: 2026-06-21 14:10+0000\n"
 "Last-Translator: Min Kyung Kwon <min.kyung.kwon.dev@gmail.com>\n"
 "Language-Team: Korean <https://translate.fedoraproject.org/projects/cockpit/"
@@ -122,11 +122,11 @@ msgstr "즐겨찾기 됨"
 msgid "Bookmarks"
 msgstr "즐겨찾기"
 
-#: src/upload-button.tsx:146 src/dialogs/create-file.tsx:211
-#: src/dialogs/mkdir.tsx:137 src/dialogs/copyPasteOwnership.tsx:166
-#: src/dialogs/rename.tsx:87 src/dialogs/editor.tsx:270
-#: src/dialogs/editor.tsx:336 src/dialogs/permissions.tsx:409
 #: src/dialogs/delete.tsx:97 src/dialogs/symlink.tsx:233
+#: src/dialogs/permissions.tsx:409 src/dialogs/editor.tsx:270
+#: src/dialogs/editor.tsx:336 src/dialogs/rename.tsx:87
+#: src/dialogs/create-file.tsx:211 src/dialogs/mkdir.tsx:137
+#: src/dialogs/copyPasteOwnership.tsx:166 src/upload-button.tsx:146
 msgid "Cancel"
 msgstr "취소"
 
@@ -423,8 +423,8 @@ msgstr "앞으로 가기"
 msgid "Go up a directory"
 msgstr "상위 디렉토리로 이동"
 
-#: src/dialogs/permissions.tsx:319 src/files-card-body.tsx:591
-#: src/files-footer-detail.tsx:80 src/files-footer-detail.tsx:152
+#: src/dialogs/permissions.tsx:319 src/files-footer-detail.tsx:80
+#: src/files-footer-detail.tsx:152 src/files-card-body.tsx:591
 msgid "Group"
 msgstr "그룹"
 
@@ -472,7 +472,7 @@ msgstr "자신의 파일을 관리합니다"
 msgid "Missing type"
 msgstr "누락 유형"
 
-#: src/files-card-body.tsx:539 src/files-card-body.tsx:659 src/header.tsx:75
+#: src/header.tsx:75 src/files-card-body.tsx:539 src/files-card-body.tsx:659
 msgid "Modified"
 msgstr "수정됨"
 
@@ -480,7 +480,7 @@ msgstr "수정됨"
 msgid "Most permissive"
 msgstr "관대한 허용"
 
-#: src/files-card-body.tsx:534 src/header.tsx:53
+#: src/header.tsx:53 src/files-card-body.tsx:534
 msgid "Name"
 msgstr "이름"
 
@@ -548,7 +548,7 @@ msgstr "텍스트 파일 열기"
 msgid "Original file on server"
 msgstr "서버에서 원본 파일"
 
-#: src/files-card-body.tsx:591 src/files-footer-detail.tsx:80
+#: src/files-footer-detail.tsx:80 src/files-card-body.tsx:591
 msgid "Others"
 msgstr "기타"
 
@@ -556,14 +556,14 @@ msgstr "기타"
 msgid "Others access"
 msgstr "기타 접근"
 
-#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:250
-#: src/dialogs/editor.tsx:307
+#: src/dialogs/editor.tsx:250 src/dialogs/editor.tsx:307
+#: src/dialogs/rename.tsx:85
 msgid "Overwrite"
 msgstr "덮어쓰기"
 
-#: src/dialogs/create-file.tsx:185 src/dialogs/permissions.tsx:304
-#: src/files-card-body.tsx:544 src/files-card-body.tsx:591
-#: src/files-card-body.tsx:667 src/header.tsx:86 src/files-footer-detail.tsx:80
+#: src/dialogs/permissions.tsx:304 src/dialogs/create-file.tsx:185
+#: src/files-footer-detail.tsx:80 src/header.tsx:86 src/files-card-body.tsx:544
+#: src/files-card-body.tsx:591 src/files-card-body.tsx:667
 msgid "Owner"
 msgstr "소유자"
 
@@ -603,7 +603,7 @@ msgstr "붙여넣기 실패함"
 msgid "Permission denied"
 msgstr "권한이 거부되었습니다"
 
-#: src/files-card-body.tsx:549 src/files-card-body.tsx:674 src/header.tsx:97
+#: src/header.tsx:97 src/files-card-body.tsx:549 src/files-card-body.tsx:674
 msgid "Permissions"
 msgstr "권한"
 
@@ -623,7 +623,7 @@ msgstr "읽기 및 쓰기"
 msgid "Read, write, and execute"
 msgstr "읽기, 쓰기 및 실행"
 
-#: src/dialogs/editor.tsx:189 src/dialogs/permissions.tsx:215 src/common.ts:53
+#: src/dialogs/permissions.tsx:215 src/dialogs/editor.tsx:189 src/common.ts:53
 msgid "Read-only"
 msgstr "읽기-전용"
 
@@ -699,7 +699,7 @@ msgstr "실행 할 수 있는 프로그램 설정"
 msgid "Show all files"
 msgstr "모든 파일 표시"
 
-#: src/files-card-body.tsx:522 src/header.tsx:271
+#: src/header.tsx:271 src/files-card-body.tsx:522
 msgid "Show hidden items"
 msgstr "숨겨진 항목 표시"
 
@@ -707,7 +707,7 @@ msgstr "숨겨진 항목 표시"
 msgid "Show keyboard shortcuts"
 msgstr "키보드 단축키 표시"
 
-#: src/files-card-body.tsx:535 src/files-card-body.tsx:652 src/header.tsx:64
+#: src/header.tsx:64 src/files-card-body.tsx:535 src/files-card-body.tsx:652
 msgid "Size"
 msgstr "크기"
 
