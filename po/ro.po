@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-23 05:40+0000\n"
+"POT-Creation-Date: 2026-07-29 05:38+0000\n"
 "PO-Revision-Date: 2026-06-21 14:10+0000\n"
 "Last-Translator: Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>\n"
 "Language-Team: Romanian <https://translate.fedoraproject.org/projects/"
@@ -127,11 +127,11 @@ msgstr "Adăugat la marcaje"
 msgid "Bookmarks"
 msgstr "Marcaje"
 
-#: src/dialogs/delete.tsx:97 src/dialogs/symlink.tsx:233
-#: src/dialogs/permissions.tsx:409 src/dialogs/editor.tsx:270
-#: src/dialogs/editor.tsx:336 src/dialogs/rename.tsx:87
-#: src/dialogs/create-file.tsx:211 src/dialogs/mkdir.tsx:137
-#: src/dialogs/copyPasteOwnership.tsx:166 src/upload-button.tsx:146
+#: src/dialogs/editor.tsx:270 src/dialogs/editor.tsx:336
+#: src/dialogs/copyPasteOwnership.tsx:166 src/dialogs/permissions.tsx:409
+#: src/dialogs/create-file.tsx:211 src/dialogs/symlink.tsx:233
+#: src/dialogs/rename.tsx:87 src/dialogs/delete.tsx:97
+#: src/dialogs/mkdir.tsx:137 src/upload-button.tsx:146
 msgid "Cancel"
 msgstr "Anulează"
 
@@ -175,7 +175,7 @@ msgstr "Dispozitiv de caractere"
 msgid "Clear filter"
 msgstr "Șterge filtrul"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:270
+#: src/dialogs/editor.tsx:270 src/dialogs/keyboardShortcutsHelp.tsx:33
 msgid "Close"
 msgstr "Închide"
 
@@ -316,7 +316,7 @@ msgstr "Trageți fișierele pentru a le încărca"
 msgid "Edit $0"
 msgstr "Editează $0"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:87 src/files-breadcrumbs.tsx:303
+#: src/files-breadcrumbs.tsx:303 src/dialogs/keyboardShortcutsHelp.tsx:87
 msgid "Edit path"
 msgstr "Editează ruta"
 
@@ -428,8 +428,8 @@ msgstr "Înainte"
 msgid "Go up a directory"
 msgstr "Mergi la directorul părinte"
 
-#: src/dialogs/permissions.tsx:319 src/files-footer-detail.tsx:80
-#: src/files-footer-detail.tsx:152 src/files-card-body.tsx:591
+#: src/dialogs/permissions.tsx:319 src/files-card-body.tsx:591
+#: src/files-footer-detail.tsx:80 src/files-footer-detail.tsx:152
 msgid "Group"
 msgstr "Grup"
 
@@ -553,7 +553,7 @@ msgstr "Deschide fișierul de text"
 msgid "Original file on server"
 msgstr "Fișierul original de pe server"
 
-#: src/files-footer-detail.tsx:80 src/files-card-body.tsx:591
+#: src/files-card-body.tsx:591 src/files-footer-detail.tsx:80
 msgid "Others"
 msgstr "Alții"
 
@@ -567,8 +567,8 @@ msgid "Overwrite"
 msgstr "Suprascrie"
 
 #: src/dialogs/permissions.tsx:304 src/dialogs/create-file.tsx:185
-#: src/files-footer-detail.tsx:80 src/header.tsx:86 src/files-card-body.tsx:544
-#: src/files-card-body.tsx:591 src/files-card-body.tsx:667
+#: src/header.tsx:86 src/files-card-body.tsx:544 src/files-card-body.tsx:591
+#: src/files-card-body.tsx:667 src/files-footer-detail.tsx:80
 msgid "Owner"
 msgstr "Proprietar"
 
@@ -628,7 +628,7 @@ msgstr "Citire și scriere"
 msgid "Read, write, and execute"
 msgstr "Citire, scriere și executare"
 
-#: src/dialogs/permissions.tsx:215 src/dialogs/editor.tsx:189 src/common.ts:53
+#: src/dialogs/editor.tsx:189 src/dialogs/permissions.tsx:215 src/common.ts:53
 msgid "Read-only"
 msgstr "Numai-citire"
 

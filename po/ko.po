@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-23 05:40+0000\n"
+"POT-Creation-Date: 2026-07-29 05:38+0000\n"
 "PO-Revision-Date: 2026-06-21 14:10+0000\n"
 "Last-Translator: Min Kyung Kwon <min.kyung.kwon.dev@gmail.com>\n"
 "Language-Team: Korean <https://translate.fedoraproject.org/projects/cockpit/"
@@ -122,11 +122,11 @@ msgstr "즐겨찾기 됨"
 msgid "Bookmarks"
 msgstr "즐겨찾기"
 
-#: src/dialogs/delete.tsx:97 src/dialogs/symlink.tsx:233
-#: src/dialogs/permissions.tsx:409 src/dialogs/editor.tsx:270
-#: src/dialogs/editor.tsx:336 src/dialogs/rename.tsx:87
-#: src/dialogs/create-file.tsx:211 src/dialogs/mkdir.tsx:137
-#: src/dialogs/copyPasteOwnership.tsx:166 src/upload-button.tsx:146
+#: src/dialogs/editor.tsx:270 src/dialogs/editor.tsx:336
+#: src/dialogs/copyPasteOwnership.tsx:166 src/dialogs/permissions.tsx:409
+#: src/dialogs/create-file.tsx:211 src/dialogs/symlink.tsx:233
+#: src/dialogs/rename.tsx:87 src/dialogs/delete.tsx:97
+#: src/dialogs/mkdir.tsx:137 src/upload-button.tsx:146
 msgid "Cancel"
 msgstr "취소"
 
@@ -170,7 +170,7 @@ msgstr "문자 장치"
 msgid "Clear filter"
 msgstr "필터 지우기"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:270
+#: src/dialogs/editor.tsx:270 src/dialogs/keyboardShortcutsHelp.tsx:33
 msgid "Close"
 msgstr "종료"
 
@@ -311,7 +311,7 @@ msgstr "올려지는 파일을 삭제합니다"
 msgid "Edit $0"
 msgstr "$0 편집"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:87 src/files-breadcrumbs.tsx:303
+#: src/files-breadcrumbs.tsx:303 src/dialogs/keyboardShortcutsHelp.tsx:87
 msgid "Edit path"
 msgstr "경로 편집"
 
@@ -423,8 +423,8 @@ msgstr "앞으로 가기"
 msgid "Go up a directory"
 msgstr "상위 디렉토리로 이동"
 
-#: src/dialogs/permissions.tsx:319 src/files-footer-detail.tsx:80
-#: src/files-footer-detail.tsx:152 src/files-card-body.tsx:591
+#: src/dialogs/permissions.tsx:319 src/files-card-body.tsx:591
+#: src/files-footer-detail.tsx:80 src/files-footer-detail.tsx:152
 msgid "Group"
 msgstr "그룹"
 
@@ -548,7 +548,7 @@ msgstr "텍스트 파일 열기"
 msgid "Original file on server"
 msgstr "서버에서 원본 파일"
 
-#: src/files-footer-detail.tsx:80 src/files-card-body.tsx:591
+#: src/files-card-body.tsx:591 src/files-footer-detail.tsx:80
 msgid "Others"
 msgstr "기타"
 
@@ -562,8 +562,8 @@ msgid "Overwrite"
 msgstr "덮어쓰기"
 
 #: src/dialogs/permissions.tsx:304 src/dialogs/create-file.tsx:185
-#: src/files-footer-detail.tsx:80 src/header.tsx:86 src/files-card-body.tsx:544
-#: src/files-card-body.tsx:591 src/files-card-body.tsx:667
+#: src/header.tsx:86 src/files-card-body.tsx:544 src/files-card-body.tsx:591
+#: src/files-card-body.tsx:667 src/files-footer-detail.tsx:80
 msgid "Owner"
 msgstr "소유자"
 
@@ -623,7 +623,7 @@ msgstr "읽기 및 쓰기"
 msgid "Read, write, and execute"
 msgstr "읽기, 쓰기 및 실행"
 
-#: src/dialogs/permissions.tsx:215 src/dialogs/editor.tsx:189 src/common.ts:53
+#: src/dialogs/editor.tsx:189 src/dialogs/permissions.tsx:215 src/common.ts:53
 msgid "Read-only"
 msgstr "읽기-전용"
 
