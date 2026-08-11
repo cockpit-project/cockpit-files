@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-29 05:38+0000\n"
-"PO-Revision-Date: 2026-04-16 08:59+0000\n"
-"Last-Translator: Ricky Tigg <ricky.tigg@gmail.com>\n"
+"POT-Creation-Date: 2026-08-06 05:35+0000\n"
+"PO-Revision-Date: 2026-08-06 13:17+0000\n"
+"Last-Translator: Jan Kuparinen <copper_fin@hotmail.com>\n"
 "Language-Team: Finnish <https://translate.fedoraproject.org/projects/cockpit/"
 "cockpit-files/fi/>\n"
 "Language: fi\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.17\n"
+"X-Generator: Weblate 2026.8\n"
 
 #: src/menu.tsx:53
 msgid "\"$0\" exists, not overwriting with paste."
@@ -118,10 +118,8 @@ msgid "Block device"
 msgstr "Lohkolaite"
 
 #: src/files-breadcrumbs.tsx:161
-#, fuzzy
-#| msgid "Bookmarks"
 msgid "Bookmarked"
-msgstr "Kirjanmerkit"
+msgstr "Merkitty kirjanmerkiksi"
 
 #: src/files-breadcrumbs.tsx:154
 msgid "Bookmarks"
@@ -181,7 +179,7 @@ msgstr "Sulje"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:135
 msgid "Close editor"
-msgstr ""
+msgstr "Sulje editori"
 
 #: src/index.html:8
 msgid "Cockpit Files"
@@ -329,10 +327,8 @@ msgid "Editing"
 msgstr "Muokataan"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:172
-#, fuzzy
-#| msgid "Edit $0"
 msgid "Editor"
-msgstr "Muokkaa $0"
+msgstr "Muokkain"
 
 #: src/common.ts:50
 msgid "Execute-only"
@@ -540,10 +536,8 @@ msgid "None"
 msgstr "Ei mitään"
 
 #: src/files-breadcrumbs.tsx:161
-#, fuzzy
-#| msgid "Add to bookmarks"
 msgid "Not bookmarked"
-msgstr "Lisää kirjanmerkkeihin"
+msgstr "Ei kirjanmerkkeihin lisätty"
 
 #: src/menu.tsx:126 src/menu.tsx:187
 msgid "Open in terminal"
@@ -690,10 +684,8 @@ msgid "Save changes?"
 msgstr "Tallennetaanko muutokset?"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:131
-#, fuzzy
-#| msgid "Remove current directory"
 msgid "Save current file"
-msgstr "Poista nykyinen hakemisto"
+msgstr "Tallenna nykyinen tiedosto"
 
 #: src/dialogs/permissions.tsx:375
 msgid "Security context"

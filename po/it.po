@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-29 05:38+0000\n"
-"PO-Revision-Date: 2026-05-15 14:59+0000\n"
-"Last-Translator: Nathan <nathan95@live.it>\n"
+"POT-Creation-Date: 2026-08-06 05:35+0000\n"
+"PO-Revision-Date: 2026-08-06 13:17+0000\n"
+"Last-Translator: Emanuele Petriglia <inbox@emanuelepetriglia.com>\n"
 "Language-Team: Italian <https://translate.fedoraproject.org/projects/cockpit/"
 "cockpit-files/it/>\n"
 "Language: it\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2026.5\n"
+"X-Generator: Weblate 2026.8\n"
 
 #: src/menu.tsx:53
 msgid "\"$0\" exists, not overwriting with paste."
@@ -118,10 +118,8 @@ msgid "Block device"
 msgstr "blocca il dispositivo"
 
 #: src/files-breadcrumbs.tsx:161
-#, fuzzy
-#| msgid "Bookmarks"
 msgid "Bookmarked"
-msgstr "Segnalibri"
+msgstr "Segnalibro aggiunto"
 
 #: src/files-breadcrumbs.tsx:154
 msgid "Bookmarks"
@@ -181,7 +179,7 @@ msgstr "Chiudi"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:135
 msgid "Close editor"
-msgstr ""
+msgstr "Chiudi editor"
 
 #: src/index.html:8
 msgid "Cockpit Files"
@@ -329,10 +327,8 @@ msgid "Editing"
 msgstr "Modifica"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:172
-#, fuzzy
-#| msgid "Edit $0"
 msgid "Editor"
-msgstr "Modifica $0"
+msgstr "Editor"
 
 #: src/common.ts:50
 msgid "Execute-only"
@@ -541,10 +537,8 @@ msgid "None"
 msgstr "Nessuno"
 
 #: src/files-breadcrumbs.tsx:161
-#, fuzzy
-#| msgid "Add to bookmarks"
 msgid "Not bookmarked"
-msgstr "Aggiungi ai segnalibri"
+msgstr "Segnalibro non aggiunto"
 
 #: src/menu.tsx:126 src/menu.tsx:187
 msgid "Open in terminal"
@@ -692,7 +686,7 @@ msgstr "Salvare le modifiche?"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:131
 msgid "Save current file"
-msgstr ""
+msgstr "Salva il file attuale"
 
 #: src/dialogs/permissions.tsx:375
 msgid "Security context"
