@@ -9,7 +9,7 @@ cd "${0%/*}/../.."
 main_builds_repo="$(ls /etc/yum.repos.d/*cockpit*main-builds* 2>/dev/null || true)"
 if [ -n "$main_builds_repo" ]; then
     echo 'priority=0' >> "$main_builds_repo"
-    dnf distro-sync -y --repo 'copr*' cockpit-files
+    dnf distro-sync --setopt=allow_vendor_change=1 -y --repo 'copr*' cockpit-files
 fi
 
 # Show critical package versions
