@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-06 05:35+0000\n"
+"POT-Creation-Date: 2026-08-23 03:33+0000\n"
 "PO-Revision-Date: 2026-07-24 03:17+0000\n"
 "Last-Translator: \"Geraldo S. Simião Kutz\" <geraldo.simiao.kutz@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://translate.fedoraproject.org/"
@@ -125,11 +125,11 @@ msgstr "Favoritos"
 msgid "Bookmarks"
 msgstr "Favoritos"
 
+#: src/dialogs/delete.tsx:97 src/dialogs/mkdir.tsx:137
+#: src/dialogs/copyPasteOwnership.tsx:166 src/dialogs/create-file.tsx:211
+#: src/dialogs/rename.tsx:87 src/dialogs/symlink.tsx:233
 #: src/dialogs/editor.tsx:270 src/dialogs/editor.tsx:336
-#: src/dialogs/copyPasteOwnership.tsx:166 src/dialogs/permissions.tsx:409
-#: src/dialogs/create-file.tsx:211 src/dialogs/symlink.tsx:233
-#: src/dialogs/rename.tsx:87 src/dialogs/delete.tsx:97
-#: src/dialogs/mkdir.tsx:137 src/upload-button.tsx:146
+#: src/dialogs/permissions.tsx:409 src/upload-button.tsx:146
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -173,7 +173,7 @@ msgstr "Dispositivo de caractere"
 msgid "Clear filter"
 msgstr "Limpar filtro"
 
-#: src/dialogs/editor.tsx:270 src/dialogs/keyboardShortcutsHelp.tsx:33
+#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:270
 msgid "Close"
 msgstr "Fechar"
 
@@ -201,7 +201,7 @@ msgstr "Copiar"
 msgid "Copy selected file or directory"
 msgstr "Copiar arquivo ou diretório selecionado"
 
-#: src/dialogs/create-file.tsx:208 src/dialogs/mkdir.tsx:135
+#: src/dialogs/mkdir.tsx:135 src/dialogs/create-file.tsx:208
 msgid "Create"
 msgstr "Criar"
 
@@ -285,7 +285,7 @@ msgstr "Nome do diretório longo demais"
 msgid "Directory owner"
 msgstr "Proprietário do diretório"
 
-#: src/dialogs/symlink.tsx:39 src/common.ts:113
+#: src/common.ts:113 src/dialogs/symlink.tsx:39
 msgid "Directory with the same name exists"
 msgstr "Um diretório com o mesmo nome já existe"
 
@@ -314,7 +314,7 @@ msgstr "Solte arquivos para enviar"
 msgid "Edit $0"
 msgstr "Editar $0"
 
-#: src/files-breadcrumbs.tsx:303 src/dialogs/keyboardShortcutsHelp.tsx:87
+#: src/dialogs/keyboardShortcutsHelp.tsx:87 src/files-breadcrumbs.tsx:303
 msgid "Edit path"
 msgstr "Editar caminho"
 
@@ -346,7 +346,7 @@ msgstr "Arquivo"
 msgid "File browser"
 msgstr "Navegador de arquivos"
 
-#: src/dialogs/symlink.tsx:41 src/common.ts:115
+#: src/common.ts:115 src/dialogs/symlink.tsx:41
 msgid "File exists"
 msgstr "Arquivo existe"
 
@@ -488,7 +488,7 @@ msgstr "Mais permissivo"
 msgid "Name"
 msgstr "Nome"
 
-#: src/dialogs/symlink.tsx:36 src/common.ts:104
+#: src/common.ts:104 src/dialogs/symlink.tsx:36
 msgid "Name cannot be empty"
 msgstr "O nome não pode estar vazio"
 
@@ -560,12 +560,12 @@ msgstr "Outros"
 msgid "Others access"
 msgstr "Acesso de outros"
 
-#: src/dialogs/editor.tsx:250 src/dialogs/editor.tsx:307
-#: src/dialogs/rename.tsx:85
+#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:250
+#: src/dialogs/editor.tsx:307
 msgid "Overwrite"
 msgstr "Sobrescrever"
 
-#: src/dialogs/permissions.tsx:304 src/dialogs/create-file.tsx:185
+#: src/dialogs/create-file.tsx:185 src/dialogs/permissions.tsx:304
 #: src/header.tsx:86 src/files-card-body.tsx:544 src/files-card-body.tsx:591
 #: src/files-card-body.tsx:667 src/files-footer-detail.tsx:80
 msgid "Owner"
@@ -619,7 +619,7 @@ msgstr "Permissões para $0 arquivos"
 msgid "Read and execute"
 msgstr "Ler e executar"
 
-#: src/dialogs/permissions.tsx:210 src/common.ts:55
+#: src/common.ts:55 src/dialogs/permissions.tsx:210
 msgid "Read and write"
 msgstr "Ler e escrever"
 
@@ -627,7 +627,7 @@ msgstr "Ler e escrever"
 msgid "Read, write, and execute"
 msgstr "Ler, escrever e executar"
 
-#: src/dialogs/editor.tsx:189 src/dialogs/permissions.tsx:215 src/common.ts:53
+#: src/common.ts:53 src/dialogs/editor.tsx:189 src/dialogs/permissions.tsx:215
 msgid "Read-only"
 msgstr "Somente leitura"
 
@@ -809,7 +809,7 @@ msgstr "Ver $0"
 msgid "Write and execute"
 msgstr "Escrever e executar"
 
-#: src/dialogs/permissions.tsx:230 src/common.ts:51
+#: src/common.ts:51 src/dialogs/permissions.tsx:230
 msgid "Write-only"
 msgstr "Somente escrever"
 

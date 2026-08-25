@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-06 05:35+0000\n"
+"POT-Creation-Date: 2026-08-23 03:33+0000\n"
 "PO-Revision-Date: 2026-05-07 03:59+0000\n"
 "Last-Translator: Bone NI <bounkirdni@gmail.com>\n"
 "Language-Team: Lao <https://translate.fedoraproject.org/projects/cockpit/"
@@ -121,11 +121,11 @@ msgstr "ບຸກມາກ"
 msgid "Bookmarks"
 msgstr "ບຸກມາກ"
 
+#: src/dialogs/delete.tsx:97 src/dialogs/mkdir.tsx:137
+#: src/dialogs/copyPasteOwnership.tsx:166 src/dialogs/create-file.tsx:211
+#: src/dialogs/rename.tsx:87 src/dialogs/symlink.tsx:233
 #: src/dialogs/editor.tsx:270 src/dialogs/editor.tsx:336
-#: src/dialogs/copyPasteOwnership.tsx:166 src/dialogs/permissions.tsx:409
-#: src/dialogs/create-file.tsx:211 src/dialogs/symlink.tsx:233
-#: src/dialogs/rename.tsx:87 src/dialogs/delete.tsx:97
-#: src/dialogs/mkdir.tsx:137 src/upload-button.tsx:146
+#: src/dialogs/permissions.tsx:409 src/upload-button.tsx:146
 msgid "Cancel"
 msgstr "ຍົກເລີກ"
 
@@ -169,7 +169,7 @@ msgstr "ອຸປະກອນຕົວອັກສອນ"
 msgid "Clear filter"
 msgstr "ລຶບຕົວຕອງ"
 
-#: src/dialogs/editor.tsx:270 src/dialogs/keyboardShortcutsHelp.tsx:33
+#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:270
 msgid "Close"
 msgstr "ປິດ"
 
@@ -197,7 +197,7 @@ msgstr "ກັອບປີ້"
 msgid "Copy selected file or directory"
 msgstr "ກັອບປີ້ໄຟລ໌ ຫຼື ໄດເຣັກທໍຣີທີ່ເລືອກ"
 
-#: src/dialogs/create-file.tsx:208 src/dialogs/mkdir.tsx:135
+#: src/dialogs/mkdir.tsx:135 src/dialogs/create-file.tsx:208
 msgid "Create"
 msgstr "ສ້າງ"
 
@@ -281,7 +281,7 @@ msgstr "ຊື່ໄດເຣັກທໍຣີຍາວເກີນໄປ"
 msgid "Directory owner"
 msgstr "ເຈົ້າຂອງໄດເຣັກທໍຣີ"
 
-#: src/dialogs/symlink.tsx:39 src/common.ts:113
+#: src/common.ts:113 src/dialogs/symlink.tsx:39
 msgid "Directory with the same name exists"
 msgstr "ມີໄດເຣັກທໍຣີທີ່ມີຊື່ດຽວກັນນີ້ຢູ່ແລ້ວ"
 
@@ -310,7 +310,7 @@ msgstr "ວາງໄຟລ໌ເພື່ອອັບໂຫຼດ"
 msgid "Edit $0"
 msgstr "ແກ້ໄຂ $0"
 
-#: src/files-breadcrumbs.tsx:303 src/dialogs/keyboardShortcutsHelp.tsx:87
+#: src/dialogs/keyboardShortcutsHelp.tsx:87 src/files-breadcrumbs.tsx:303
 msgid "Edit path"
 msgstr "ແກ້ໄຂເສັ້ນທາງ (Path)"
 
@@ -344,7 +344,7 @@ msgstr "ໄຟລ໌"
 msgid "File browser"
 msgstr "ຕົວທ່ອງໄຟລ໌"
 
-#: src/dialogs/symlink.tsx:41 src/common.ts:115
+#: src/common.ts:115 src/dialogs/symlink.tsx:41
 msgid "File exists"
 msgstr "ໄຟລ໌ມີຢູ່ແລ້ວ"
 
@@ -485,7 +485,7 @@ msgstr "ການອະນຸຍາດຫຼາຍທີ່ສຸດ"
 msgid "Name"
 msgstr "ຊື່"
 
-#: src/dialogs/symlink.tsx:36 src/common.ts:104
+#: src/common.ts:104 src/dialogs/symlink.tsx:36
 msgid "Name cannot be empty"
 msgstr "ຊື່ບໍ່ສາມາດວ່າງເປົ່າໄດ້"
 
@@ -559,12 +559,12 @@ msgstr "ອື່ນໆ"
 msgid "Others access"
 msgstr "ການເຂົ້າເຖິງຂອງຜູ້ອື່ນ"
 
-#: src/dialogs/editor.tsx:250 src/dialogs/editor.tsx:307
-#: src/dialogs/rename.tsx:85
+#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:250
+#: src/dialogs/editor.tsx:307
 msgid "Overwrite"
 msgstr "ຂຽນທັບ"
 
-#: src/dialogs/permissions.tsx:304 src/dialogs/create-file.tsx:185
+#: src/dialogs/create-file.tsx:185 src/dialogs/permissions.tsx:304
 #: src/header.tsx:86 src/files-card-body.tsx:544 src/files-card-body.tsx:591
 #: src/files-card-body.tsx:667 src/files-footer-detail.tsx:80
 msgid "Owner"
@@ -618,7 +618,7 @@ msgstr "ການອະນຸຍາດສຳລັບ $0 ໄຟລ໌"
 msgid "Read and execute"
 msgstr "ອ່ານ ແລະ ປະຕິບັດການ"
 
-#: src/dialogs/permissions.tsx:210 src/common.ts:55
+#: src/common.ts:55 src/dialogs/permissions.tsx:210
 msgid "Read and write"
 msgstr "ອ່ານ ແລະ ຂຽນ"
 
@@ -626,7 +626,7 @@ msgstr "ອ່ານ ແລະ ຂຽນ"
 msgid "Read, write, and execute"
 msgstr "ອ່ານ, ຂຽນ, ແລະ ປະຕິບັດການ"
 
-#: src/dialogs/editor.tsx:189 src/dialogs/permissions.tsx:215 src/common.ts:53
+#: src/common.ts:53 src/dialogs/editor.tsx:189 src/dialogs/permissions.tsx:215
 msgid "Read-only"
 msgstr "ອ່ານຢ່າງດຽວ"
 
@@ -807,7 +807,7 @@ msgstr "ເບິ່ງ $0"
 msgid "Write and execute"
 msgstr "ຂຽນ ແລະ ປະຕິບັດການ"
 
-#: src/dialogs/permissions.tsx:230 src/common.ts:51
+#: src/common.ts:51 src/dialogs/permissions.tsx:230
 msgid "Write-only"
 msgstr "ຂຽນຢ່າງດຽວ"
 

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-06 05:35+0000\n"
+"POT-Creation-Date: 2026-08-23 03:33+0000\n"
 "PO-Revision-Date: 2026-04-20 02:34+0000\n"
 "Last-Translator: Arif Budiman <arifpedia@gmail.com>\n"
 "Language-Team: Indonesian <https://translate.fedoraproject.org/projects/"
@@ -126,11 +126,11 @@ msgstr "Penanda"
 msgid "Bookmarks"
 msgstr "Penanda"
 
+#: src/dialogs/delete.tsx:97 src/dialogs/mkdir.tsx:137
+#: src/dialogs/copyPasteOwnership.tsx:166 src/dialogs/create-file.tsx:211
+#: src/dialogs/rename.tsx:87 src/dialogs/symlink.tsx:233
 #: src/dialogs/editor.tsx:270 src/dialogs/editor.tsx:336
-#: src/dialogs/copyPasteOwnership.tsx:166 src/dialogs/permissions.tsx:409
-#: src/dialogs/create-file.tsx:211 src/dialogs/symlink.tsx:233
-#: src/dialogs/rename.tsx:87 src/dialogs/delete.tsx:97
-#: src/dialogs/mkdir.tsx:137 src/upload-button.tsx:146
+#: src/dialogs/permissions.tsx:409 src/upload-button.tsx:146
 msgid "Cancel"
 msgstr "Batal"
 
@@ -174,7 +174,7 @@ msgstr "Perangkat karakter"
 msgid "Clear filter"
 msgstr "Hapus penyaring"
 
-#: src/dialogs/editor.tsx:270 src/dialogs/keyboardShortcutsHelp.tsx:33
+#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:270
 msgid "Close"
 msgstr "Tutup"
 
@@ -202,7 +202,7 @@ msgstr "Salin"
 msgid "Copy selected file or directory"
 msgstr "Salin berkas atau direktori yang dipilih"
 
-#: src/dialogs/create-file.tsx:208 src/dialogs/mkdir.tsx:135
+#: src/dialogs/mkdir.tsx:135 src/dialogs/create-file.tsx:208
 msgid "Create"
 msgstr "Buat"
 
@@ -286,7 +286,7 @@ msgstr "Nama direktori terlalu panjang"
 msgid "Directory owner"
 msgstr "Pemilik direktori"
 
-#: src/dialogs/symlink.tsx:39 src/common.ts:113
+#: src/common.ts:113 src/dialogs/symlink.tsx:39
 msgid "Directory with the same name exists"
 msgstr "Direktori dengan nama yang sama sudah ada"
 
@@ -315,7 +315,7 @@ msgstr "Jatuhkan berkas untuk diunggah"
 msgid "Edit $0"
 msgstr "Sunting $0"
 
-#: src/files-breadcrumbs.tsx:303 src/dialogs/keyboardShortcutsHelp.tsx:87
+#: src/dialogs/keyboardShortcutsHelp.tsx:87 src/files-breadcrumbs.tsx:303
 msgid "Edit path"
 msgstr "Sunting jalur"
 
@@ -349,7 +349,7 @@ msgstr "Berkas"
 msgid "File browser"
 msgstr "Penjelajah berkas"
 
-#: src/dialogs/symlink.tsx:41 src/common.ts:115
+#: src/common.ts:115 src/dialogs/symlink.tsx:41
 msgid "File exists"
 msgstr "Berkas sudah ada"
 
@@ -490,7 +490,7 @@ msgstr "Paling permisif"
 msgid "Name"
 msgstr "Nama"
 
-#: src/dialogs/symlink.tsx:36 src/common.ts:104
+#: src/common.ts:104 src/dialogs/symlink.tsx:36
 msgid "Name cannot be empty"
 msgstr "Nama tidak boleh kosong"
 
@@ -564,12 +564,12 @@ msgstr "Lainnya"
 msgid "Others access"
 msgstr "Akses lainnya"
 
-#: src/dialogs/editor.tsx:250 src/dialogs/editor.tsx:307
-#: src/dialogs/rename.tsx:85
+#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:250
+#: src/dialogs/editor.tsx:307
 msgid "Overwrite"
 msgstr "Timpa"
 
-#: src/dialogs/permissions.tsx:304 src/dialogs/create-file.tsx:185
+#: src/dialogs/create-file.tsx:185 src/dialogs/permissions.tsx:304
 #: src/header.tsx:86 src/files-card-body.tsx:544 src/files-card-body.tsx:591
 #: src/files-card-body.tsx:667 src/files-footer-detail.tsx:80
 msgid "Owner"
@@ -623,7 +623,7 @@ msgstr "Izin untuk $0 berkas"
 msgid "Read and execute"
 msgstr "Baca dan eksekusi"
 
-#: src/dialogs/permissions.tsx:210 src/common.ts:55
+#: src/common.ts:55 src/dialogs/permissions.tsx:210
 msgid "Read and write"
 msgstr "Baca dan tulis"
 
@@ -631,7 +631,7 @@ msgstr "Baca dan tulis"
 msgid "Read, write, and execute"
 msgstr "Baca, tulis, dan eksekusi"
 
-#: src/dialogs/editor.tsx:189 src/dialogs/permissions.tsx:215 src/common.ts:53
+#: src/common.ts:53 src/dialogs/editor.tsx:189 src/dialogs/permissions.tsx:215
 msgid "Read-only"
 msgstr "Hanya-baca"
 
@@ -812,7 +812,7 @@ msgstr "Lihat ( $0 )"
 msgid "Write and execute"
 msgstr "Tulis dan eksekusi"
 
-#: src/dialogs/permissions.tsx:230 src/common.ts:51
+#: src/common.ts:51 src/dialogs/permissions.tsx:230
 msgid "Write-only"
 msgstr "Hanya-tulis"
 

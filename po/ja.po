@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-06 05:35+0000\n"
+"POT-Creation-Date: 2026-08-23 03:33+0000\n"
 "PO-Revision-Date: 2026-02-03 13:58+0000\n"
 "Last-Translator: Kohei Takahashi <flast@flast.jp>\n"
 "Language-Team: Japanese <https://translate.fedoraproject.org/projects/"
@@ -124,11 +124,11 @@ msgstr "ブックマーク"
 msgid "Bookmarks"
 msgstr "ブックマーク"
 
+#: src/dialogs/delete.tsx:97 src/dialogs/mkdir.tsx:137
+#: src/dialogs/copyPasteOwnership.tsx:166 src/dialogs/create-file.tsx:211
+#: src/dialogs/rename.tsx:87 src/dialogs/symlink.tsx:233
 #: src/dialogs/editor.tsx:270 src/dialogs/editor.tsx:336
-#: src/dialogs/copyPasteOwnership.tsx:166 src/dialogs/permissions.tsx:409
-#: src/dialogs/create-file.tsx:211 src/dialogs/symlink.tsx:233
-#: src/dialogs/rename.tsx:87 src/dialogs/delete.tsx:97
-#: src/dialogs/mkdir.tsx:137 src/upload-button.tsx:146
+#: src/dialogs/permissions.tsx:409 src/upload-button.tsx:146
 msgid "Cancel"
 msgstr "取り消し"
 
@@ -172,7 +172,7 @@ msgstr "キャラクターデバイス"
 msgid "Clear filter"
 msgstr "フィルターを外す"
 
-#: src/dialogs/editor.tsx:270 src/dialogs/keyboardShortcutsHelp.tsx:33
+#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:270
 msgid "Close"
 msgstr "閉じる"
 
@@ -200,7 +200,7 @@ msgstr "コピー"
 msgid "Copy selected file or directory"
 msgstr "選択したファイルまたはディレクトリーをコピーする"
 
-#: src/dialogs/create-file.tsx:208 src/dialogs/mkdir.tsx:135
+#: src/dialogs/mkdir.tsx:135 src/dialogs/create-file.tsx:208
 msgid "Create"
 msgstr "作成"
 
@@ -289,7 +289,7 @@ msgstr "ディレクトリー名が長すぎます"
 msgid "Directory owner"
 msgstr "ディレクトリー所有者"
 
-#: src/dialogs/symlink.tsx:39 src/common.ts:113
+#: src/common.ts:113 src/dialogs/symlink.tsx:39
 msgid "Directory with the same name exists"
 msgstr "同じ名前のディレクトリーが存在します"
 
@@ -318,7 +318,7 @@ msgstr "アップロードするファイルをドロップする"
 msgid "Edit $0"
 msgstr "$0 の編集"
 
-#: src/files-breadcrumbs.tsx:303 src/dialogs/keyboardShortcutsHelp.tsx:87
+#: src/dialogs/keyboardShortcutsHelp.tsx:87 src/files-breadcrumbs.tsx:303
 msgid "Edit path"
 msgstr "パスの編集"
 
@@ -354,7 +354,7 @@ msgstr "ファイル"
 msgid "File browser"
 msgstr "ファイルブラウザー"
 
-#: src/dialogs/symlink.tsx:41 src/common.ts:115
+#: src/common.ts:115 src/dialogs/symlink.tsx:41
 msgid "File exists"
 msgstr "ファイルが存在します"
 
@@ -495,7 +495,7 @@ msgstr "最も許容度が高い"
 msgid "Name"
 msgstr "名前"
 
-#: src/dialogs/symlink.tsx:36 src/common.ts:104
+#: src/common.ts:104 src/dialogs/symlink.tsx:36
 msgid "Name cannot be empty"
 msgstr "名前は空欄にできません"
 
@@ -569,12 +569,12 @@ msgstr "その他のユーザー"
 msgid "Others access"
 msgstr "その他のユーザーのアクセス"
 
-#: src/dialogs/editor.tsx:250 src/dialogs/editor.tsx:307
-#: src/dialogs/rename.tsx:85
+#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:250
+#: src/dialogs/editor.tsx:307
 msgid "Overwrite"
 msgstr "上書き"
 
-#: src/dialogs/permissions.tsx:304 src/dialogs/create-file.tsx:185
+#: src/dialogs/create-file.tsx:185 src/dialogs/permissions.tsx:304
 #: src/header.tsx:86 src/files-card-body.tsx:544 src/files-card-body.tsx:591
 #: src/files-card-body.tsx:667 src/files-footer-detail.tsx:80
 msgid "Owner"
@@ -628,7 +628,7 @@ msgstr "$0 ファイルのパーミッション"
 msgid "Read and execute"
 msgstr "読み取りおよび実行"
 
-#: src/dialogs/permissions.tsx:210 src/common.ts:55
+#: src/common.ts:55 src/dialogs/permissions.tsx:210
 msgid "Read and write"
 msgstr "読み取りおよび書き込み"
 
@@ -636,7 +636,7 @@ msgstr "読み取りおよび書き込み"
 msgid "Read, write, and execute"
 msgstr "読み取り、書き込み、および実行"
 
-#: src/dialogs/editor.tsx:189 src/dialogs/permissions.tsx:215 src/common.ts:53
+#: src/common.ts:53 src/dialogs/editor.tsx:189 src/dialogs/permissions.tsx:215
 msgid "Read-only"
 msgstr "読み取り専用"
 
@@ -817,7 +817,7 @@ msgstr "$0 の表示"
 msgid "Write and execute"
 msgstr "書き込みおよび実行"
 
-#: src/dialogs/permissions.tsx:230 src/common.ts:51
+#: src/common.ts:51 src/dialogs/permissions.tsx:230
 msgid "Write-only"
 msgstr "書き込み専用"
 

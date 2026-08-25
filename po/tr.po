@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-06 05:35+0000\n"
+"POT-Creation-Date: 2026-08-23 03:33+0000\n"
 "PO-Revision-Date: 2026-06-21 14:10+0000\n"
 "Last-Translator: Burak Yavuz <hitowerdigit@hotmail.com>\n"
 "Language-Team: Turkish <https://translate.fedoraproject.org/projects/cockpit/"
@@ -125,11 +125,11 @@ msgstr "Yer işaretlerine eklendi"
 msgid "Bookmarks"
 msgstr "Yer işaretleri"
 
+#: src/dialogs/delete.tsx:97 src/dialogs/mkdir.tsx:137
+#: src/dialogs/copyPasteOwnership.tsx:166 src/dialogs/create-file.tsx:211
+#: src/dialogs/rename.tsx:87 src/dialogs/symlink.tsx:233
 #: src/dialogs/editor.tsx:270 src/dialogs/editor.tsx:336
-#: src/dialogs/copyPasteOwnership.tsx:166 src/dialogs/permissions.tsx:409
-#: src/dialogs/create-file.tsx:211 src/dialogs/symlink.tsx:233
-#: src/dialogs/rename.tsx:87 src/dialogs/delete.tsx:97
-#: src/dialogs/mkdir.tsx:137 src/upload-button.tsx:146
+#: src/dialogs/permissions.tsx:409 src/upload-button.tsx:146
 msgid "Cancel"
 msgstr "İptal"
 
@@ -173,7 +173,7 @@ msgstr "Karakter aygıtı"
 msgid "Clear filter"
 msgstr "Filtreyi temizle"
 
-#: src/dialogs/editor.tsx:270 src/dialogs/keyboardShortcutsHelp.tsx:33
+#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:270
 msgid "Close"
 msgstr "Kapat"
 
@@ -201,7 +201,7 @@ msgstr "Kopyala"
 msgid "Copy selected file or directory"
 msgstr "Seçili dosya veya dizini kopyala"
 
-#: src/dialogs/create-file.tsx:208 src/dialogs/mkdir.tsx:135
+#: src/dialogs/mkdir.tsx:135 src/dialogs/create-file.tsx:208
 msgid "Create"
 msgstr "Oluştur"
 
@@ -285,7 +285,7 @@ msgstr "Dizin adı çok uzun"
 msgid "Directory owner"
 msgstr "Dizin sahibi"
 
-#: src/dialogs/symlink.tsx:39 src/common.ts:113
+#: src/common.ts:113 src/dialogs/symlink.tsx:39
 msgid "Directory with the same name exists"
 msgstr "Aynı ada sahip dizin var"
 
@@ -314,7 +314,7 @@ msgstr "Karşıya yüklenecek dosyaları bırakın"
 msgid "Edit $0"
 msgstr "$0 dosyasını düzenle"
 
-#: src/files-breadcrumbs.tsx:303 src/dialogs/keyboardShortcutsHelp.tsx:87
+#: src/dialogs/keyboardShortcutsHelp.tsx:87 src/files-breadcrumbs.tsx:303
 msgid "Edit path"
 msgstr "Yolu düzenle"
 
@@ -346,7 +346,7 @@ msgstr "Dosya"
 msgid "File browser"
 msgstr "Dosya gezgini"
 
-#: src/dialogs/symlink.tsx:41 src/common.ts:115
+#: src/common.ts:115 src/dialogs/symlink.tsx:41
 msgid "File exists"
 msgstr "Dosya var"
 
@@ -487,7 +487,7 @@ msgstr "En çok izin veren"
 msgid "Name"
 msgstr "Ad"
 
-#: src/dialogs/symlink.tsx:36 src/common.ts:104
+#: src/common.ts:104 src/dialogs/symlink.tsx:36
 msgid "Name cannot be empty"
 msgstr "Ad boş olamaz"
 
@@ -559,12 +559,12 @@ msgstr "Diğerleri"
 msgid "Others access"
 msgstr "Diğerlerinin erişimi"
 
-#: src/dialogs/editor.tsx:250 src/dialogs/editor.tsx:307
-#: src/dialogs/rename.tsx:85
+#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:250
+#: src/dialogs/editor.tsx:307
 msgid "Overwrite"
 msgstr "Üzerine yaz"
 
-#: src/dialogs/permissions.tsx:304 src/dialogs/create-file.tsx:185
+#: src/dialogs/create-file.tsx:185 src/dialogs/permissions.tsx:304
 #: src/header.tsx:86 src/files-card-body.tsx:544 src/files-card-body.tsx:591
 #: src/files-card-body.tsx:667 src/files-footer-detail.tsx:80
 msgid "Owner"
@@ -618,7 +618,7 @@ msgstr "$0 dosya için izinler"
 msgid "Read and execute"
 msgstr "Oku ve çalıştır"
 
-#: src/dialogs/permissions.tsx:210 src/common.ts:55
+#: src/common.ts:55 src/dialogs/permissions.tsx:210
 msgid "Read and write"
 msgstr "Oku ve yaz"
 
@@ -626,7 +626,7 @@ msgstr "Oku ve yaz"
 msgid "Read, write, and execute"
 msgstr "Oku, yaz ve çalıştır"
 
-#: src/dialogs/editor.tsx:189 src/dialogs/permissions.tsx:215 src/common.ts:53
+#: src/common.ts:53 src/dialogs/editor.tsx:189 src/dialogs/permissions.tsx:215
 msgid "Read-only"
 msgstr "Yalnızca oku"
 
@@ -807,7 +807,7 @@ msgstr "$0 dosyasını görüntüle"
 msgid "Write and execute"
 msgstr "Yaz ve çalıştır"
 
-#: src/dialogs/permissions.tsx:230 src/common.ts:51
+#: src/common.ts:51 src/dialogs/permissions.tsx:230
 msgid "Write-only"
 msgstr "Yalnızca yaz"
 
