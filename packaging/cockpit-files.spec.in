@@ -3,6 +3,7 @@ Version: %{VERSION}
 Release: 1%{?dist}
 Summary: A filesystem browser for Cockpit
 License: LGPL-2.1-or-later
+URL:     https://github.com/cockpit-project/cockpit-files/
 
 # distributions which ship nodejs-esbuild can rebuild the bundle during package build
 %if 0%{?fedora} >= 42
