@@ -42,11 +42,11 @@ async function create_file(filename: string, content?: string, owner?: string | 
 
     if (owner) {
         try {
-            await cockpit.spawn(["chown", owner, filename], { superuser: "require" });
+            await cockpit.spawn(["chown", "--", owner, filename], { superuser: "require" });
         } catch (err) {
             console.warn("Cannot chown new file", err);
             try {
-                await cockpit.spawn(["rm", filename], { superuser: "require" });
+                await cockpit.spawn(["rm", "--", filename], { superuser: "require" });
             } catch (err) {
                 console.warn(`Failed to cleanup ${filename}`, err);
             }
@@ -62,7 +62,7 @@ async function create_file(filename: string, content?: string, owner?: string | 
         } catch (err) {
             console.warn("Cannot set initial file text", err);
             try {
-                await cockpit.spawn(["rm", filename], { superuser: "require" });
+                await cockpit.spawn(["rm", "--", filename], { superuser: "require" });
             } catch (err) {
                 console.warn(`Failed to cleanup ${filename}`, err);
             }
