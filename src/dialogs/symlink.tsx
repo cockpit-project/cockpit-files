@@ -67,7 +67,7 @@ const CreateLinkModal = ({ dialogResult, path, selected } : {
         // for non-absolute paths obtain the absolute path
         if (!symlinkPath.startsWith('/')) {
             try {
-                symlinkPath = await cockpit.spawn(["realpath", `${path}${symlinkName}`], { superuser: "try" });
+                symlinkPath = await cockpit.spawn(["realpath", "--", `${path}${symlinkName}`], { superuser: "try" });
                 symlinkPath = symlinkPath.trim();
             } catch (exc) {
                 const err = exc as BasicError;
@@ -94,7 +94,7 @@ const CreateLinkModal = ({ dialogResult, path, selected } : {
             cmd.push("--relative");
         }
 
-        cmd.push(target, symlinkPath);
+        cmd.push("--", target, symlinkPath);
 
         if (superuser.allowed) {
             owner = [...get_owner_candidates(folder_info)][0];
@@ -108,7 +108,7 @@ const CreateLinkModal = ({ dialogResult, path, selected } : {
             });
 
             if (owner !== null) {
-                await cockpit.spawn(["chown", "--no-dereference", owner, symlinkName], {
+                await cockpit.spawn(["chown", "--no-dereference", "--", owner, symlinkName], {
                     directory: path,
                     superuser: "require"
                 });
