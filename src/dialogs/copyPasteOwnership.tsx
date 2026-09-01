@@ -44,6 +44,7 @@ async function pasteAsOwner(clipboard: ClipboardInfo,
         if (ownerStr !== "original") {
             await cockpit.spawn([
                 "chown",
+                "--no-dereference",
                 "--recursive",
                 "--",
                 ownerStr,
