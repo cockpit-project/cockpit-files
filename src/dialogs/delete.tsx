@@ -53,7 +53,7 @@ const ConfirmDeletionDialog = ({ dialogResult, path, selected, setSelected } : {
     }
 
     const deleteItem = () => {
-        const args = ["rm", "-r"];
+        const args = ["rm", "-r", "--"];
         // TODO: Make force more sensible https://github.com/cockpit-project/cockpit-files/issues/363
         cockpit.spawn([...args, ...selected.map(f => path + f.name)], { err: "message", superuser: "try" })
                 .then(() => {
