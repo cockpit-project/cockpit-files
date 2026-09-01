@@ -170,7 +170,7 @@ const EditPermissionsModal = ({ dialogResult, items, path } : {
             await cockpit.spawn(["chmod", "-R", "--", mode_to_args(mode), full_path],
                                 { superuser: "try", err: "message" });
 
-            await cockpit.spawn(["chown", "-R", "--", owner + ":" + group, full_path],
+            await cockpit.spawn(["chown", "-R", "--no-dereference", "--", owner + ":" + group, full_path],
                                 { superuser: "try", err: "message" });
 
             dialogResult.resolve();

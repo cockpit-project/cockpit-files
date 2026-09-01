@@ -42,7 +42,7 @@ async function create_directory(path: string, owner?: string) {
     if (owner !== undefined) {
         const opts = { err: "message", superuser: "require" } as const;
         await cockpit.spawn(["mkdir", "--", path], opts);
-        await cockpit.spawn(["chown", "--", owner, path], opts);
+        await cockpit.spawn(["chown", "--no-dereference", "--", owner, path], opts);
     } else {
         await cockpit.spawn(["mkdir", "--", path], { err: "message" });
     }

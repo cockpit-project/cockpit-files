@@ -42,7 +42,7 @@ async function create_file(filename: string, content?: string, owner?: string | 
 
     if (owner) {
         try {
-            await cockpit.spawn(["chown", "--", owner, filename], { superuser: "require" });
+            await cockpit.spawn(["chown", "--no-dereference", "--", owner, filename], { superuser: "require" });
         } catch (err) {
             console.warn("Cannot chown new file", err);
             try {
