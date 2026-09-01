@@ -3,7 +3,6 @@
 This is the [Cockpit](https://cockpit-project.org/) user interface for managing
 files.
 
-
 # Development dependencies
 
 On Debian/Ubuntu:
