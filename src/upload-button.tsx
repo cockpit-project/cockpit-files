@@ -265,10 +265,11 @@ export const UploadButton = ({
                 // a stable interface.
                 try {
                     await cockpit.file(destination, { superuser: "try" }).replace("");
-                    await cockpit.spawn(["chown", owner, destination], { superuser: "try" });
+                    await cockpit.spawn(["chown", "--", owner, destination], { superuser: "try" });
                     const { tag } = await fsinfo(destination, ['tag'], { superuser: "try" });
                     options = { superuser: "try", tag };
-                    const stat = await cockpit.spawn(["stat", "--format", "%a", destination], { superuser: "try" });
+                    const stat = await cockpit.spawn(["stat", "--format", "%a", "--", destination],
+                                                     { superuser: "try" });
                     fileModes.push(Number.parseInt(stat.trimEnd(), 8));
                 } catch (exc) {
                     const err = exc as BasicError;
@@ -313,7 +314,7 @@ export const UploadButton = ({
 
                 if (owner !== null) {
                     try {
-                        await cockpit.spawn(["mv", destination, path + file.name],
+                        await cockpit.spawn(["mv", "--", destination, path + file.name],
                                             { superuser: "require" });
                     } catch (exc) {
                         console.warn("Unable to move file to final destination", exc);

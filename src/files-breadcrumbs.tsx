@@ -87,7 +87,7 @@ function BookmarkButton({ path }: { path: string }) {
         const config_dir = bookmarkHandle.path.replace(bookmark_file, "");
 
         try {
-            await cockpit.spawn(["mkdir", "-p", config_dir]);
+            await cockpit.spawn(["mkdir", "-p", "--", config_dir]);
         } catch (err) {
             const exc = err as cockpit.BasicError; // HACK: You can't easily type an error in typescript
             addAlert({
