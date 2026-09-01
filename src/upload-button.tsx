@@ -265,7 +265,7 @@ export const UploadButton = ({
                 // a stable interface.
                 try {
                     await cockpit.file(destination, { superuser: "try" }).replace("");
-                    await cockpit.spawn(["chown", "--", owner, destination], { superuser: "try" });
+                    await cockpit.spawn(["chown", "--no-dereference", "--", owner, destination], { superuser: "try" });
                     const { tag } = await fsinfo(destination, ['tag'], { superuser: "try" });
                     options = { superuser: "try", tag };
                     const stat = await cockpit.spawn(["stat", "--format", "%a", "--", destination],
