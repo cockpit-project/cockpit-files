@@ -35,6 +35,7 @@ async function pasteAsOwner(clipboard: ClipboardInfo,
         await cockpit.spawn([
             "cp",
             "--archive",
+            "--",
             ...clipboard.files.map(file => clipboard.path + "/" + file.name),
             dstPath
         ], { superuser: "require" });
@@ -44,6 +45,7 @@ async function pasteAsOwner(clipboard: ClipboardInfo,
             await cockpit.spawn([
                 "chown",
                 "--recursive",
+                "--",
                 ownerStr,
                 ...clipboard.files.map(file => dstPath + "/" + file.name),
             ], { superuser: "require" });
@@ -57,6 +59,7 @@ async function pasteAsOwner(clipboard: ClipboardInfo,
             await cockpit.spawn([
                 "rm",
                 "-rf",
+                "--",
                 ...clipboard.files.map(file => dstPath + "/" + file.name)
             ], { superuser: "try" });
         } catch (ex) {
