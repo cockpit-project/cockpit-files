@@ -61,6 +61,7 @@ export async function pasteFromClipboard(
         await cockpit.spawn([
             "cp",
             "--archive",
+            "--",
             ...filePaths,
             path
         ]);
