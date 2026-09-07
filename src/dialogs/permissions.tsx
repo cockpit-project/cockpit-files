@@ -32,6 +32,7 @@ import { fmt_to_fragments } from 'utils.tsx';
 import { inode_types } from '../common.ts';
 import type { FolderFileInfo } from '../common.ts';
 
+import py_chmod from './py-chmod.py';
 import read_selinux_context from './read-selinux.py';
 
 const _ = cockpit.gettext;
@@ -53,56 +54,6 @@ const OPTIONS_PERMISSIONS: Record<string, number> = {
     "read-only": 4,
     "read-write": 6,
 };
-
-// Convert the permissions mode to string based permissions to support
-// passing `+X` to chmod which cannot be combined with numeric mode.
-// Cockpit wants to pass `+X` for changing a folder and its contents, this only
-// makes folders executable and retains the executable bits on a file and
-// compared to `+x` does not make every file executable in a directory.
-function mode_to_args(mode: number) {
-    const offset_map: Record<number, string> = {
-        6: 'u',
-        3: 'g',
-        0: 'o',
-    };
-
-    const letter_map: Record<number, string> = {
-        4: 'r',
-        2: 'w',
-        1: 'X',
-    };
-
-    const chmod_args = [];
-    for (const offset_str of Object.keys(offset_map)) {
-        const offset = parseInt(offset_str, 10);
-        const single_mode = (mode >> offset) & 0o7;
-        let chmod_add = "";
-        let chmod_rem = "";
-
-        for (const digit_str of Object.keys(letter_map)) {
-            // An object's keys are automatically converted to a string
-            const digit = parseInt(digit_str, 10);
-            if ((single_mode & digit) === digit) {
-                chmod_add += letter_map[digit];
-            } else {
-                // Removal needs -x not -X
-                chmod_rem += letter_map[digit].toLowerCase();
-            }
-        }
-
-        if (chmod_add.length !== 0) {
-            chmod_add = "+" + chmod_add;
-        }
-
-        if (chmod_rem.length !== 0) {
-            chmod_rem = "-" + chmod_rem;
-        }
-
-        chmod_args.push(`${offset_map[offset]}${chmod_add}${chmod_rem}`);
-    }
-
-    return chmod_args.join(",");
-}
 
 const EditPermissionsModal = ({ dialogResult, items, path } : {
     dialogResult: DialogResult<void>,
@@ -167,8 +118,8 @@ const EditPermissionsModal = ({ dialogResult, items, path } : {
 
     const spawnEncloseFiles = async () => {
         try {
-            await cockpit.spawn(["chmod", "-R", "--", mode_to_args(mode), full_path],
-                                { superuser: "try", err: "message" });
+            await python.spawn(py_chmod, ["--recursive", mode.toString(8), full_path],
+                               { superuser: "try", err: "message" });
 
             await cockpit.spawn(["chown", "-R", "--no-dereference", "--", owner + ":" + group, full_path],
                                 { superuser: "try", err: "message" });
@@ -188,8 +139,8 @@ const EditPermissionsModal = ({ dialogResult, items, path } : {
 
         try {
             if (permissionChanged)
-                await cockpit.spawn(["chmod", "--", mode.toString(8), ...file_paths],
-                                    { superuser: "try", err: "message" });
+                await python.spawn(py_chmod, [mode.toString(8), ...file_paths],
+                                   { superuser: "try", err: "message" });
 
             if (ownerChanged)
                 await cockpit.spawn(["chown", "--no-dereference", "--", owner + ":" + group, ...file_paths],
