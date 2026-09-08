@@ -167,10 +167,10 @@ const EditPermissionsModal = ({ dialogResult, items, path } : {
 
     const spawnEncloseFiles = async () => {
         try {
-            await cockpit.spawn(["chmod", "-R", "--", mode_to_args(mode), full_path],
+            await cockpit.spawn(["chmod", "--recursive", "--", mode_to_args(mode), full_path],
                                 { superuser: "try", err: "message" });
 
-            await cockpit.spawn(["chown", "-R", "--no-dereference", "--", owner + ":" + group, full_path],
+            await cockpit.spawn(["chown", "--recursive", "--no-dereference", "--", owner + ":" + group, full_path],
                                 { superuser: "try", err: "message" });
 
             dialogResult.resolve();
