@@ -1706,6 +1706,52 @@ class TestFiles(testlib.MachineCase):
 
         self.chdir('/home/admin')
 
+        # Don't dereference symlinks in directories, neither chmod/chown allow this
+        m.execute("""
+        mkdir -p /home/admin/recursive/a
+        ln -s /etc/passwd /home/admin/recursive/b
+        chown -R admin: /home/admin/recursive
+        """)
+
+        os_releaser_group = self.stat("%G", "/etc/passwd")
+        os_releaser_mode = self.stat("%A", "/etc/passwd")
+        open_permissions_dialog("recursive")
+        b.wait_in_text("#edit-permissions-group", "admin")
+        select_access("read-write")
+        b.select_from_dropdown("#edit-permissions-group", "testuser")
+        b.click(".pf-v6-c-modal-box button.pf-m-secondary")
+        b.wait_not_present(".pf-v6-c-modal-box")
+
+        b.wait_in_text("[data-item='recursive'] .item-owner", "admin:testuser")
+        self.assertEqual(self.stat("%G", "/etc/passwd"), os_releaser_group)
+        self.assertEqual(self.stat("%A", "/etc/passwd"), os_releaser_mode)
+
+        m.execute("""
+        touch /home/admin/passwd
+        chown admin: /home/admin/passwd
+        """)
+        b.wait_in_text("[data-item='passwd'] .item-owner", "admin")
+        open_permissions_dialog("passwd")
+        b.wait_in_text("#edit-permissions-group", "admin")
+        select_access("read-write")
+        b.select_from_dropdown("#edit-permissions-group", "testuser")
+        # Switch out the file for a symlink, dialog does not update and should not deference the symlink
+        m.execute("""
+        rm --force /home/admin/passwd
+        ln -s /etc/passwd /home/admin/passwd
+        chown --no-dereference admin: /home/admin/passwd""")
+        b.click(".pf-v6-c-modal-box button.pf-m-primary")
+        b.wait_not_present(".pf-v6-c-modal-box")
+        self.assertEqual(self.stat("%G", "/etc/passwd"), os_releaser_group)
+
+        # chmod lacks --no-dereference support
+        if m.image in ["rhel-8-10", "rhel-9-9"]:
+            self.assertNotEqual(self.stat("%A", "/etc/passwd"), os_releaser_mode)
+        else:
+            self.assertEqual(self.stat("%A", "/etc/passwd"), os_releaser_mode)
+
+        self.chdir('/home/admin')
+
         # As normal user you cannot change user/group permissions
         b.drop_superuser()
 
