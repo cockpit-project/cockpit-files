@@ -19,7 +19,7 @@ import { TextInput } from '@patternfly/react-core/dist/esm/components/TextInput'
 import { Stack } from '@patternfly/react-core/dist/esm/layouts/Stack';
 
 import cockpit from 'cockpit';
-import type { BasicError } from 'cockpit';
+import { type BasicError, type SpawnOptions } from 'cockpit';
 import { InlineNotification } from 'cockpit-components-inline-notification';
 import type { Dialogs, DialogResult } from 'dialogs';
 import { useInit } from 'hooks';
@@ -104,6 +104,24 @@ function mode_to_args(mode: number) {
     return chmod_args.join(",");
 }
 
+async function chmod(paths: string[], mode: string, recursive: boolean,
+    spawn_options: SpawnOptions & { binary?: false }) {
+    const options = [];
+    if (recursive) {
+        options.push("--recursive");
+    }
+
+    // Only CoreUtils 9.5 supports --no-dereference
+    try {
+        await cockpit.spawn(["chmod", "--no-dereference", "--version"], { ...spawn_options, environ: ["LC_ALL=C"] });
+        options.push("--no-dereference");
+    } catch (err) {
+        console.warn("No support for '--no-dereference'", err);
+    }
+
+    await cockpit.spawn(["chmod", ...options, "--", mode, ...paths], spawn_options);
+}
+
 const EditPermissionsModal = ({ dialogResult, items, path } : {
     dialogResult: DialogResult<void>,
     items: FolderFileInfo[],
@@ -167,10 +185,8 @@ const EditPermissionsModal = ({ dialogResult, items, path } : {
 
     const spawnEncloseFiles = async () => {
         try {
-            await cockpit.spawn(["chmod", "-R", "--", mode_to_args(mode), full_path],
-                                { superuser: "try", err: "message" });
-
-            await cockpit.spawn(["chown", "-R", "--no-dereference", "--", owner + ":" + group, full_path],
+            await chmod([full_path], mode_to_args(mode), true, { superuser: "try", err: "message" });
+            await cockpit.spawn(["chown", "--recursive", "--no-dereference", "--", owner + ":" + group, full_path],
                                 { superuser: "try", err: "message" });
 
             dialogResult.resolve();
@@ -188,8 +204,7 @@ const EditPermissionsModal = ({ dialogResult, items, path } : {
 
         try {
             if (permissionChanged)
-                await cockpit.spawn(["chmod", "--", mode.toString(8), ...file_paths],
-                                    { superuser: "try", err: "message" });
+                await chmod(file_paths, mode.toString(8), false, { superuser: "try", err: "message" });
 
             if (ownerChanged)
                 await cockpit.spawn(["chown", "--no-dereference", "--", owner + ":" + group, ...file_paths],
