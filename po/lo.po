@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-27 13:05+0000\n"
+"POT-Creation-Date: 2026-09-15 08:01+0000\n"
 "PO-Revision-Date: 2026-05-07 03:59+0000\n"
 "Last-Translator: Bone NI <bounkirdni@gmail.com>\n"
 "Language-Team: Lao <https://translate.fedoraproject.org/projects/cockpit/"
@@ -51,7 +51,7 @@ msgstr[0] "$0 ລາຍການຖືກເຊື່ອງໄວ້"
 msgid "$0 permissions"
 msgstr "ການອະນຸຍາດ $0"
 
-#: src/dialogs/copyPasteOwnership.tsx:106
+#: src/dialogs/copyPasteOwnership.tsx:110
 msgid "(original owner)"
 msgstr "(ເຈົ້າຂອງເດີມ)"
 
@@ -121,23 +121,23 @@ msgstr "ບຸກມາກ"
 msgid "Bookmarks"
 msgstr "ບຸກມາກ"
 
-#: src/dialogs/delete.tsx:97 src/dialogs/mkdir.tsx:137
-#: src/dialogs/copyPasteOwnership.tsx:166 src/dialogs/create-file.tsx:211
-#: src/dialogs/rename.tsx:87 src/dialogs/symlink.tsx:233
-#: src/dialogs/editor.tsx:270 src/dialogs/editor.tsx:336
-#: src/dialogs/permissions.tsx:409 src/upload-button.tsx:146
+#: src/dialogs/permissions.tsx:409 src/dialogs/symlink.tsx:233
+#: src/dialogs/mkdir.tsx:137 src/dialogs/rename.tsx:87
+#: src/dialogs/create-file.tsx:211 src/dialogs/editor.tsx:270
+#: src/dialogs/editor.tsx:336 src/dialogs/copyPasteOwnership.tsx:170
+#: src/dialogs/delete.tsx:97 src/upload-button.tsx:146
 msgid "Cancel"
 msgstr "ຍົກເລີກ"
 
-#: src/upload-button.tsx:476
+#: src/upload-button.tsx:477
 msgid "Cancel upload of $0"
 msgstr "ຍົກເລີກການອັບໂຫຼດຂອງ $0"
 
-#: src/upload-button.tsx:345
+#: src/upload-button.tsx:346
 msgid "Cancelled"
 msgstr "ຍົກເລີກແລ້ວ"
 
-#: src/upload-button.tsx:347
+#: src/upload-button.tsx:348
 msgid "Cancelled upload of $0"
 msgstr "ຍົກເລີກການອັບໂຫຼດຂອງ $0 ແລ້ວ"
 
@@ -153,7 +153,7 @@ msgstr "ບໍ່ສາມາດວາງໄຟລ໌ໄດ້, ກຳລັງ�
 msgid "Change"
 msgstr "ປ່ຽນ"
 
-#: src/upload-button.tsx:404
+#: src/upload-button.tsx:405
 msgid "Change permissions"
 msgstr "ປ່ຽນການອະນຸຍາດ"
 
@@ -169,7 +169,7 @@ msgstr "ອຸປະກອນຕົວອັກສອນ"
 msgid "Clear filter"
 msgstr "ລຶບຕົວຕອງ"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:270
+#: src/dialogs/editor.tsx:270 src/dialogs/keyboardShortcutsHelp.tsx:33
 msgid "Close"
 msgstr "ປິດ"
 
@@ -189,7 +189,7 @@ msgstr "ໂຄງການ Cockpit"
 msgid "Collapse"
 msgstr "ຍໍ້ເຂົ້າ"
 
-#: src/menu.tsx:151 src/menu.tsx:205
+#: src/menu.tsx:152 src/menu.tsx:206
 msgid "Copy"
 msgstr "ກັອບປີ້"
 
@@ -201,15 +201,15 @@ msgstr "ກັອບປີ້ໄຟລ໌ ຫຼື ໄດເຣັກທໍຣ�
 msgid "Create"
 msgstr "ສ້າງ"
 
-#: src/dialogs/mkdir.tsx:80 src/menu.tsx:106
+#: src/dialogs/mkdir.tsx:80 src/menu.tsx:107
 msgid "Create directory"
 msgstr "ສ້າງໄດເຣັກທໍຣີ"
 
-#: src/dialogs/create-file.tsx:151 src/menu.tsx:111
+#: src/dialogs/create-file.tsx:151 src/menu.tsx:112
 msgid "Create file"
 msgstr "ສ້າງໄຟລ໌"
 
-#: src/dialogs/symlink.tsx:231 src/menu.tsx:197
+#: src/dialogs/symlink.tsx:231 src/menu.tsx:198
 msgid "Create link"
 msgstr "ສ້າງລິ້ງ"
 
@@ -221,7 +221,7 @@ msgstr "ສ້າງລິ້ງໄປຫາ $0"
 msgid "Create new directory"
 msgstr "ສ້າງໄດເຣັກທໍຣີໃໝ່"
 
-#: src/dialogs/delete.tsx:95 src/menu.tsx:168 src/menu.tsx:210
+#: src/dialogs/delete.tsx:95 src/menu.tsx:169 src/menu.tsx:211
 msgid "Delete"
 msgstr "ລຶບ"
 
@@ -281,7 +281,7 @@ msgstr "ຊື່ໄດເຣັກທໍຣີຍາວເກີນໄປ"
 msgid "Directory owner"
 msgstr "ເຈົ້າຂອງໄດເຣັກທໍຣີ"
 
-#: src/common.ts:113 src/dialogs/symlink.tsx:39
+#: src/dialogs/symlink.tsx:39 src/common.ts:113
 msgid "Directory with the same name exists"
 msgstr "ມີໄດເຣັກທໍຣີທີ່ມີຊື່ດຽວກັນນີ້ຢູ່ແລ້ວ"
 
@@ -297,7 +297,7 @@ msgstr "ສະແດງເປັນຕາຕະລາງ"
 msgid "Display as a list"
 msgstr "ສະແດງເປັນລາຍການ"
 
-#: src/menu.tsx:178
+#: src/menu.tsx:179
 msgid "Download"
 msgstr "ດາວໂຫຼດ"
 
@@ -314,7 +314,7 @@ msgstr "ແກ້ໄຂ $0"
 msgid "Edit path"
 msgstr "ແກ້ໄຂເສັ້ນທາງ (Path)"
 
-#: src/menu.tsx:117 src/menu.tsx:157 src/menu.tsx:224
+#: src/menu.tsx:118 src/menu.tsx:158 src/menu.tsx:225
 msgid "Edit permissions"
 msgstr "ແກ້ໄຂການອະນຸຍາດ"
 
@@ -332,7 +332,7 @@ msgstr "ແກ້ໄຂ $0"
 msgid "Execute-only"
 msgstr "ປະຕິບັດການເທົ່ານັ້ນ (Execute-only)"
 
-#: src/upload-button.tsx:277
+#: src/upload-button.tsx:278
 msgid "Failed"
 msgstr "ຫຼົ້ມເຫຼວ"
 
@@ -344,7 +344,7 @@ msgstr "ໄຟລ໌"
 msgid "File browser"
 msgstr "ຕົວທ່ອງໄຟລ໌"
 
-#: src/common.ts:115 src/dialogs/symlink.tsx:41
+#: src/dialogs/symlink.tsx:41 src/common.ts:115
 msgid "File exists"
 msgstr "ໄຟລ໌ມີຢູ່ແລ້ວ"
 
@@ -352,7 +352,7 @@ msgstr "ໄຟລ໌ມີຢູ່ແລ້ວ"
 msgid "File name"
 msgstr "ຊື່ໄຟລ໌"
 
-#: src/upload-button.tsx:373
+#: src/upload-button.tsx:374
 msgid "File uploaded"
 msgstr "ອັບໂຫຼດໄຟລ໌ສຳເລັດແລ້ວ"
 
@@ -364,7 +364,7 @@ msgstr "ຊື່ໄຟລ໌ຄືກັນກັບຊື່ເດີມ"
 msgid "Files"
 msgstr "ໄຟລ໌"
 
-#: src/dialogs/copyPasteOwnership.tsx:183
+#: src/dialogs/copyPasteOwnership.tsx:187
 msgid ""
 "Files being pasted have a different owner. By default, ownership will be "
 "changed to match the destination directory."
@@ -372,7 +372,7 @@ msgstr ""
 "ໄຟລ໌ທີ່ກຳລັງວາງມີເຈົ້າຂອງທີ່ແຕກຕ່າງກັນ. ໂດຍຄ່າເລີ່ມຕົ້ນ, "
 "ຄວາມເປັນເຈົ້າຂອງຈະຖືກປ່ຽນໃຫ້ກົງກັບໄດເຣັກທໍຣີປາຍທາງ."
 
-#: src/upload-button.tsx:373
+#: src/upload-button.tsx:374
 msgid "Files uploaded"
 msgstr "ອັບໂຫຼດໄຟລ໌ສຳເລັດແລ້ວ"
 
@@ -424,8 +424,8 @@ msgstr "ໄປຂ້າງໜ້າ"
 msgid "Go up a directory"
 msgstr "ຂຶ້ນໄປໜຶ່ງໄດເຣັກທໍຣີ"
 
-#: src/dialogs/permissions.tsx:319 src/files-card-body.tsx:591
-#: src/files-footer-detail.tsx:80 src/files-footer-detail.tsx:152
+#: src/dialogs/permissions.tsx:319 src/files-footer-detail.tsx:80
+#: src/files-footer-detail.tsx:152 src/files-card-body.tsx:591
 msgid "Group"
 msgstr "ກຸ່ມ"
 
@@ -485,7 +485,7 @@ msgstr "ການອະນຸຍາດຫຼາຍທີ່ສຸດ"
 msgid "Name"
 msgstr "ຊື່"
 
-#: src/common.ts:104 src/dialogs/symlink.tsx:36
+#: src/dialogs/symlink.tsx:36 src/common.ts:104
 msgid "Name cannot be empty"
 msgstr "ຊື່ບໍ່ສາມາດວ່າງເປົ່າໄດ້"
 
@@ -517,7 +517,7 @@ msgstr "ຊື່ໄຟລ໌ໃໝ່"
 msgid "New name"
 msgstr "ຊື່ໃໝ່"
 
-#: src/dialogs/copyPasteOwnership.tsx:186
+#: src/dialogs/copyPasteOwnership.tsx:190
 msgid "New owner"
 msgstr "ເຈົ້າຂອງໃໝ່"
 
@@ -539,11 +539,11 @@ msgstr "ບໍ່ມີ"
 msgid "Not bookmarked"
 msgstr "ເພີ່ມເຂົ້າໃນບຸກມາກ"
 
-#: src/menu.tsx:126 src/menu.tsx:187
+#: src/menu.tsx:127 src/menu.tsx:188
 msgid "Open in terminal"
 msgstr "ເປີດໃນເທີມິນໍ (Terminal)"
 
-#: src/menu.tsx:143
+#: src/menu.tsx:144
 msgid "Open text file"
 msgstr "ເປີດໄຟລ໌ຂໍ້ຄວາມ"
 
@@ -551,7 +551,7 @@ msgstr "ເປີດໄຟລ໌ຂໍ້ຄວາມ"
 msgid "Original file on server"
 msgstr "ໄຟລ໌ເດີມໃນເຊີເວີ"
 
-#: src/files-card-body.tsx:591 src/files-footer-detail.tsx:80
+#: src/files-footer-detail.tsx:80 src/files-card-body.tsx:591
 msgid "Others"
 msgstr "ອື່ນໆ"
 
@@ -564,9 +564,9 @@ msgstr "ການເຂົ້າເຖິງຂອງຜູ້ອື່ນ"
 msgid "Overwrite"
 msgstr "ຂຽນທັບ"
 
-#: src/dialogs/create-file.tsx:185 src/dialogs/permissions.tsx:304
-#: src/header.tsx:86 src/files-card-body.tsx:544 src/files-card-body.tsx:591
-#: src/files-card-body.tsx:667 src/files-footer-detail.tsx:80
+#: src/dialogs/permissions.tsx:304 src/dialogs/create-file.tsx:185
+#: src/files-footer-detail.tsx:80 src/header.tsx:86 src/files-card-body.tsx:544
+#: src/files-card-body.tsx:591 src/files-card-body.tsx:667
 msgid "Owner"
 msgstr "ເຈົ້າຂອງ"
 
@@ -586,11 +586,11 @@ msgstr "ເຈົ້າຂອງ (ຫຼາຍໄປຫານ້ອຍ)"
 msgid "Ownership"
 msgstr "ຄວາມເປັນເຈົ້າຂອງ"
 
-#: src/dialogs/copyPasteOwnership.tsx:164 src/menu.tsx:99
+#: src/dialogs/copyPasteOwnership.tsx:168 src/menu.tsx:100
 msgid "Paste"
 msgstr "ວາງ (Paste)"
 
-#: src/dialogs/copyPasteOwnership.tsx:178
+#: src/dialogs/copyPasteOwnership.tsx:182
 msgid "Paste as owner"
 msgstr "ວາງໃນຖານະເຈົ້າຂອງ"
 
@@ -598,7 +598,7 @@ msgstr "ວາງໃນຖານະເຈົ້າຂອງ"
 msgid "Paste file or directory"
 msgstr "ວາງໄຟລ໌ ຫຼື ໄດເຣັກທໍຣີ"
 
-#: src/dialogs/copyPasteOwnership.tsx:53 src/menu.tsx:51
+#: src/dialogs/copyPasteOwnership.tsx:56 src/menu.tsx:51
 msgid "Pasting failed"
 msgstr "ການວາງຫຼົ້ມເຫຼວ"
 
@@ -618,7 +618,7 @@ msgstr "ການອະນຸຍາດສຳລັບ $0 ໄຟລ໌"
 msgid "Read and execute"
 msgstr "ອ່ານ ແລະ ປະຕິບັດການ"
 
-#: src/common.ts:55 src/dialogs/permissions.tsx:210
+#: src/dialogs/permissions.tsx:210 src/common.ts:55
 msgid "Read and write"
 msgstr "ອ່ານ ແລະ ຂຽນ"
 
@@ -626,7 +626,7 @@ msgstr "ອ່ານ ແລະ ຂຽນ"
 msgid "Read, write, and execute"
 msgstr "ອ່ານ, ຂຽນ, ແລະ ປະຕິບັດການ"
 
-#: src/common.ts:53 src/dialogs/editor.tsx:189 src/dialogs/permissions.tsx:215
+#: src/dialogs/permissions.tsx:215 src/dialogs/editor.tsx:189 src/common.ts:53
 msgid "Read-only"
 msgstr "ອ່ານຢ່າງດຽວ"
 
@@ -654,7 +654,7 @@ msgstr "ໂຫລດໃໝ່"
 msgid "Remove from bookmarks"
 msgstr "ລຶບອອກຈາກບຸກມາກ"
 
-#: src/dialogs/rename.tsx:78 src/menu.tsx:162
+#: src/dialogs/rename.tsx:78 src/menu.tsx:163
 msgid "Rename"
 msgstr "ປ່ຽນຊື່"
 
@@ -766,7 +766,7 @@ msgstr "ປະເພດ"
 msgid "Unable to create bookmark directory"
 msgstr "ບໍ່ສາມາດສ້າງໄດເຣັກທໍຣີບຸກມາກໄດ້"
 
-#: src/upload-button.tsx:323
+#: src/upload-button.tsx:324
 msgid "Unable to move uploaded file to final destination"
 msgstr "ບໍ່ສາມາດຍ້າຍໄຟລ໌ທີ່ອັບໂຫຼດໄປຫາປາຍທາງສຸດທ້າຍໄດ້"
 
@@ -774,16 +774,16 @@ msgstr "ບໍ່ສາມາດຍ້າຍໄຟລ໌ທີ່ອັບໂຫ
 msgid "Unable to save bookmark file"
 msgstr "ບໍ່ສາມາດບັນທຶກໄຟລ໌ບຸກມາກໄດ້"
 
-#: src/upload-button.tsx:512
+#: src/upload-button.tsx:513
 msgid "Upload"
 msgstr "ອັບໂຫຼດ"
 
 #
-#: src/upload-button.tsx:493
+#: src/upload-button.tsx:494
 msgid "Upload $0% completed"
 msgstr "ອັບໂຫຼດ $0% ສຳເລັດແລ້ວ"
 
-#: src/upload-button.tsx:321 src/upload-button.tsx:351
+#: src/upload-button.tsx:322 src/upload-button.tsx:352
 msgid "Upload error"
 msgstr "ການອັບໂຫຼດຜິດພາດ"
 
@@ -791,7 +791,7 @@ msgstr "ການອັບໂຫຼດຜິດພາດ"
 msgid "Uploaded as $0, $1"
 msgstr "ອັບໂຫຼດເປັນ $0, $1"
 
-#: src/upload-button.tsx:457
+#: src/upload-button.tsx:458
 msgid "Uploads"
 msgstr "ລາຍການອັບໂຫຼດ"
 
@@ -807,7 +807,7 @@ msgstr "ເບິ່ງ $0"
 msgid "Write and execute"
 msgstr "ຂຽນ ແລະ ປະຕິບັດການ"
 
-#: src/common.ts:51 src/dialogs/permissions.tsx:230
+#: src/dialogs/permissions.tsx:230 src/common.ts:51
 msgid "Write-only"
 msgstr "ຂຽນຢ່າງດຽວ"
 
@@ -827,7 +827,7 @@ msgstr "ໄຟລ໌"
 msgid "filesystem"
 msgstr "ລະບົບໄຟລ໌"
 
-#: src/dialogs/copyPasteOwnership.tsx:115
+#: src/dialogs/copyPasteOwnership.tsx:119
 msgid "keep original owners"
 msgstr "ຮັກສາເຈົ້າຂອງເດີມໄວ້"
 

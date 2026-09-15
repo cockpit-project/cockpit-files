@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-27 13:05+0000\n"
+"POT-Creation-Date: 2026-09-15 08:01+0000\n"
 "PO-Revision-Date: 2026-06-21 14:10+0000\n"
 "Last-Translator: Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>\n"
 "Language-Team: Romanian <https://translate.fedoraproject.org/projects/"
@@ -56,7 +56,7 @@ msgstr[2] "$0 de elemente sunt ascunse"
 msgid "$0 permissions"
 msgstr "permisiuni $0"
 
-#: src/dialogs/copyPasteOwnership.tsx:106
+#: src/dialogs/copyPasteOwnership.tsx:110
 msgid "(original owner)"
 msgstr "(proprietarul inițial)"
 
@@ -127,23 +127,23 @@ msgstr "Adăugat la marcaje"
 msgid "Bookmarks"
 msgstr "Marcaje"
 
-#: src/dialogs/delete.tsx:97 src/dialogs/mkdir.tsx:137
-#: src/dialogs/copyPasteOwnership.tsx:166 src/dialogs/create-file.tsx:211
-#: src/dialogs/rename.tsx:87 src/dialogs/symlink.tsx:233
-#: src/dialogs/editor.tsx:270 src/dialogs/editor.tsx:336
-#: src/dialogs/permissions.tsx:409 src/upload-button.tsx:146
+#: src/dialogs/permissions.tsx:409 src/dialogs/symlink.tsx:233
+#: src/dialogs/mkdir.tsx:137 src/dialogs/rename.tsx:87
+#: src/dialogs/create-file.tsx:211 src/dialogs/editor.tsx:270
+#: src/dialogs/editor.tsx:336 src/dialogs/copyPasteOwnership.tsx:170
+#: src/dialogs/delete.tsx:97 src/upload-button.tsx:146
 msgid "Cancel"
 msgstr "Anulează"
 
-#: src/upload-button.tsx:476
+#: src/upload-button.tsx:477
 msgid "Cancel upload of $0"
 msgstr "Anulează încărcarea lui $0"
 
-#: src/upload-button.tsx:345
+#: src/upload-button.tsx:346
 msgid "Cancelled"
 msgstr "Anulată"
 
-#: src/upload-button.tsx:347
+#: src/upload-button.tsx:348
 msgid "Cancelled upload of $0"
 msgstr "Anulată încărcarea lui $0"
 
@@ -159,7 +159,7 @@ msgstr "Nu se pot adăuga fișiere, deoarece este deja în curs o altă încărc
 msgid "Change"
 msgstr "Modifică"
 
-#: src/upload-button.tsx:404
+#: src/upload-button.tsx:405
 msgid "Change permissions"
 msgstr "Modifică permisiunile"
 
@@ -175,7 +175,7 @@ msgstr "Dispozitiv de caractere"
 msgid "Clear filter"
 msgstr "Șterge filtrul"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:270
+#: src/dialogs/editor.tsx:270 src/dialogs/keyboardShortcutsHelp.tsx:33
 msgid "Close"
 msgstr "Închide"
 
@@ -195,7 +195,7 @@ msgstr "Proiectul Cockpit"
 msgid "Collapse"
 msgstr "Restrânge"
 
-#: src/menu.tsx:151 src/menu.tsx:205
+#: src/menu.tsx:152 src/menu.tsx:206
 msgid "Copy"
 msgstr "Copiază"
 
@@ -207,15 +207,15 @@ msgstr "Copiază fișierul sau directorul selectat"
 msgid "Create"
 msgstr "Creează"
 
-#: src/dialogs/mkdir.tsx:80 src/menu.tsx:106
+#: src/dialogs/mkdir.tsx:80 src/menu.tsx:107
 msgid "Create directory"
 msgstr "Creează un director"
 
-#: src/dialogs/create-file.tsx:151 src/menu.tsx:111
+#: src/dialogs/create-file.tsx:151 src/menu.tsx:112
 msgid "Create file"
 msgstr "Creează un fișier"
 
-#: src/dialogs/symlink.tsx:231 src/menu.tsx:197
+#: src/dialogs/symlink.tsx:231 src/menu.tsx:198
 msgid "Create link"
 msgstr "Creează o legătură"
 
@@ -227,7 +227,7 @@ msgstr "Creează o legătură la $0"
 msgid "Create new directory"
 msgstr "Creează un nou director"
 
-#: src/dialogs/delete.tsx:95 src/menu.tsx:168 src/menu.tsx:210
+#: src/dialogs/delete.tsx:95 src/menu.tsx:169 src/menu.tsx:211
 msgid "Delete"
 msgstr "Șterge"
 
@@ -287,7 +287,7 @@ msgstr "Numele directorului este prea lung"
 msgid "Directory owner"
 msgstr "Proprietarul directorului"
 
-#: src/common.ts:113 src/dialogs/symlink.tsx:39
+#: src/dialogs/symlink.tsx:39 src/common.ts:113
 msgid "Directory with the same name exists"
 msgstr "Există deja un director cu același nume"
 
@@ -303,7 +303,7 @@ msgstr "Afișează sub formă de grilă"
 msgid "Display as a list"
 msgstr "Afișează sub formă de listă"
 
-#: src/menu.tsx:178
+#: src/menu.tsx:179
 msgid "Download"
 msgstr "Descărcare"
 
@@ -320,7 +320,7 @@ msgstr "Editează $0"
 msgid "Edit path"
 msgstr "Editează ruta"
 
-#: src/menu.tsx:117 src/menu.tsx:157 src/menu.tsx:224
+#: src/menu.tsx:118 src/menu.tsx:158 src/menu.tsx:225
 msgid "Edit permissions"
 msgstr "Editează permisiunile"
 
@@ -336,7 +336,7 @@ msgstr "Editor"
 msgid "Execute-only"
 msgstr "Doar execuție"
 
-#: src/upload-button.tsx:277
+#: src/upload-button.tsx:278
 msgid "Failed"
 msgstr "Nu a funcționat"
 
@@ -348,7 +348,7 @@ msgstr "Fișier"
 msgid "File browser"
 msgstr "Navigator de fișiere"
 
-#: src/common.ts:115 src/dialogs/symlink.tsx:41
+#: src/dialogs/symlink.tsx:41 src/common.ts:115
 msgid "File exists"
 msgstr "Fișierul există"
 
@@ -356,7 +356,7 @@ msgstr "Fișierul există"
 msgid "File name"
 msgstr "Numele fișierului"
 
-#: src/upload-button.tsx:373
+#: src/upload-button.tsx:374
 msgid "File uploaded"
 msgstr "Fișier încărcat"
 
@@ -368,7 +368,7 @@ msgstr "Numele fișierului este același cu numele original"
 msgid "Files"
 msgstr "Fișiere"
 
-#: src/dialogs/copyPasteOwnership.tsx:183
+#: src/dialogs/copyPasteOwnership.tsx:187
 msgid ""
 "Files being pasted have a different owner. By default, ownership will be "
 "changed to match the destination directory."
@@ -376,7 +376,7 @@ msgstr ""
 "Fișierele care sunt lipite au un alt proprietar. În mod implicit, "
 "proprieterul va fi schimbat pentru a corespunde directorului de destinație."
 
-#: src/upload-button.tsx:373
+#: src/upload-button.tsx:374
 msgid "Files uploaded"
 msgstr "Fișiere încărcate"
 
@@ -428,8 +428,8 @@ msgstr "Înainte"
 msgid "Go up a directory"
 msgstr "Mergi la directorul părinte"
 
-#: src/dialogs/permissions.tsx:319 src/files-card-body.tsx:591
-#: src/files-footer-detail.tsx:80 src/files-footer-detail.tsx:152
+#: src/dialogs/permissions.tsx:319 src/files-footer-detail.tsx:80
+#: src/files-footer-detail.tsx:152 src/files-card-body.tsx:591
 msgid "Group"
 msgstr "Grup"
 
@@ -489,7 +489,7 @@ msgstr "Mai mult permisiv"
 msgid "Name"
 msgstr "Nume"
 
-#: src/common.ts:104 src/dialogs/symlink.tsx:36
+#: src/dialogs/symlink.tsx:36 src/common.ts:104
 msgid "Name cannot be empty"
 msgstr "Numele nu poate fi gol"
 
@@ -521,7 +521,7 @@ msgstr "Nume nou de fișier"
 msgid "New name"
 msgstr "Nume nou"
 
-#: src/dialogs/copyPasteOwnership.tsx:186
+#: src/dialogs/copyPasteOwnership.tsx:190
 msgid "New owner"
 msgstr "Proprietar nou"
 
@@ -541,11 +541,11 @@ msgstr "Niciuna"
 msgid "Not bookmarked"
 msgstr "Nu este adăugat la marcaje"
 
-#: src/menu.tsx:126 src/menu.tsx:187
+#: src/menu.tsx:127 src/menu.tsx:188
 msgid "Open in terminal"
 msgstr "Deschide în terminal"
 
-#: src/menu.tsx:143
+#: src/menu.tsx:144
 msgid "Open text file"
 msgstr "Deschide fișierul de text"
 
@@ -553,7 +553,7 @@ msgstr "Deschide fișierul de text"
 msgid "Original file on server"
 msgstr "Fișierul original de pe server"
 
-#: src/files-card-body.tsx:591 src/files-footer-detail.tsx:80
+#: src/files-footer-detail.tsx:80 src/files-card-body.tsx:591
 msgid "Others"
 msgstr "Alții"
 
@@ -566,9 +566,9 @@ msgstr "Acces pentru alții"
 msgid "Overwrite"
 msgstr "Suprascrie"
 
-#: src/dialogs/create-file.tsx:185 src/dialogs/permissions.tsx:304
-#: src/header.tsx:86 src/files-card-body.tsx:544 src/files-card-body.tsx:591
-#: src/files-card-body.tsx:667 src/files-footer-detail.tsx:80
+#: src/dialogs/permissions.tsx:304 src/dialogs/create-file.tsx:185
+#: src/files-footer-detail.tsx:80 src/header.tsx:86 src/files-card-body.tsx:544
+#: src/files-card-body.tsx:591 src/files-card-body.tsx:667
 msgid "Owner"
 msgstr "Proprietar"
 
@@ -588,11 +588,11 @@ msgstr "Proprietar descendent"
 msgid "Ownership"
 msgstr "Deținător"
 
-#: src/dialogs/copyPasteOwnership.tsx:164 src/menu.tsx:99
+#: src/dialogs/copyPasteOwnership.tsx:168 src/menu.tsx:100
 msgid "Paste"
 msgstr "Lipește"
 
-#: src/dialogs/copyPasteOwnership.tsx:178
+#: src/dialogs/copyPasteOwnership.tsx:182
 msgid "Paste as owner"
 msgstr "Lipește ca proprietar"
 
@@ -600,7 +600,7 @@ msgstr "Lipește ca proprietar"
 msgid "Paste file or directory"
 msgstr "Lipește fișierul sau directorul"
 
-#: src/dialogs/copyPasteOwnership.tsx:53 src/menu.tsx:51
+#: src/dialogs/copyPasteOwnership.tsx:56 src/menu.tsx:51
 msgid "Pasting failed"
 msgstr "Lipirea a eșuat"
 
@@ -620,7 +620,7 @@ msgstr "Permisiuni pentru $0 fișiere"
 msgid "Read and execute"
 msgstr "Citire și executare"
 
-#: src/common.ts:55 src/dialogs/permissions.tsx:210
+#: src/dialogs/permissions.tsx:210 src/common.ts:55
 msgid "Read and write"
 msgstr "Citire și scriere"
 
@@ -628,7 +628,7 @@ msgstr "Citire și scriere"
 msgid "Read, write, and execute"
 msgstr "Citire, scriere și executare"
 
-#: src/common.ts:53 src/dialogs/editor.tsx:189 src/dialogs/permissions.tsx:215
+#: src/dialogs/permissions.tsx:215 src/dialogs/editor.tsx:189 src/common.ts:53
 msgid "Read-only"
 msgstr "Numai-citire"
 
@@ -657,7 +657,7 @@ msgstr "Reîncărcare"
 msgid "Remove from bookmarks"
 msgstr "Elimină din marcaje"
 
-#: src/dialogs/rename.tsx:78 src/menu.tsx:162
+#: src/dialogs/rename.tsx:78 src/menu.tsx:163
 msgid "Rename"
 msgstr "Redenumește"
 
@@ -773,7 +773,7 @@ msgstr "Tip"
 msgid "Unable to create bookmark directory"
 msgstr "Nu se poate crea directorul de marcaje"
 
-#: src/upload-button.tsx:323
+#: src/upload-button.tsx:324
 msgid "Unable to move uploaded file to final destination"
 msgstr "Nu se poate muta fișierul încărcat în destinația finală"
 
@@ -781,16 +781,16 @@ msgstr "Nu se poate muta fișierul încărcat în destinația finală"
 msgid "Unable to save bookmark file"
 msgstr "Nu se poate salva fișierul cu marcaje"
 
-#: src/upload-button.tsx:512
+#: src/upload-button.tsx:513
 msgid "Upload"
 msgstr "Încărcare"
 
 #
-#: src/upload-button.tsx:493
+#: src/upload-button.tsx:494
 msgid "Upload $0% completed"
 msgstr "Încărcare $0% finalizată"
 
-#: src/upload-button.tsx:321 src/upload-button.tsx:351
+#: src/upload-button.tsx:322 src/upload-button.tsx:352
 msgid "Upload error"
 msgstr "Eroare la încărcare"
 
@@ -798,7 +798,7 @@ msgstr "Eroare la încărcare"
 msgid "Uploaded as $0, $1"
 msgstr "Încărcat ca $0, $1"
 
-#: src/upload-button.tsx:457
+#: src/upload-button.tsx:458
 msgid "Uploads"
 msgstr "Încărcări"
 
@@ -814,7 +814,7 @@ msgstr "Vizualizare $0"
 msgid "Write and execute"
 msgstr "Scriere și executare"
 
-#: src/common.ts:51 src/dialogs/permissions.tsx:230
+#: src/dialogs/permissions.tsx:230 src/common.ts:51
 msgid "Write-only"
 msgstr "Numai-scriere"
 
@@ -834,7 +834,7 @@ msgstr "fișiere"
 msgid "filesystem"
 msgstr "sistem de fișiere"
 
-#: src/dialogs/copyPasteOwnership.tsx:115
+#: src/dialogs/copyPasteOwnership.tsx:119
 msgid "keep original owners"
 msgstr "păstrează proprietarii originali"
 

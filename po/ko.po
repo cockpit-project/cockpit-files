@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-27 13:05+0000\n"
-"PO-Revision-Date: 2026-06-21 14:10+0000\n"
-"Last-Translator: Min Kyung Kwon <min.kyung.kwon.dev@gmail.com>\n"
+"POT-Creation-Date: 2026-09-15 08:01+0000\n"
+"PO-Revision-Date: 2026-09-11 03:17+0000\n"
+"Last-Translator: 김인수 <simmon@nplob.com>\n"
 "Language-Team: Korean <https://translate.fedoraproject.org/projects/cockpit/"
 "cockpit-files/ko/>\n"
 "Language: ko\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2026.6.1\n"
+"X-Generator: Weblate 2026.9.1\n"
 
 #: src/menu.tsx:53
 msgid "\"$0\" exists, not overwriting with paste."
@@ -51,7 +51,7 @@ msgstr[0] "$0 항목이 숨겨졌습니다"
 msgid "$0 permissions"
 msgstr "$0 권한"
 
-#: src/dialogs/copyPasteOwnership.tsx:106
+#: src/dialogs/copyPasteOwnership.tsx:110
 msgid "(original owner)"
 msgstr "(원소유자)"
 
@@ -122,23 +122,23 @@ msgstr "즐겨찾기 됨"
 msgid "Bookmarks"
 msgstr "즐겨찾기"
 
-#: src/dialogs/delete.tsx:97 src/dialogs/mkdir.tsx:137
-#: src/dialogs/copyPasteOwnership.tsx:166 src/dialogs/create-file.tsx:211
-#: src/dialogs/rename.tsx:87 src/dialogs/symlink.tsx:233
-#: src/dialogs/editor.tsx:270 src/dialogs/editor.tsx:336
-#: src/dialogs/permissions.tsx:409 src/upload-button.tsx:146
+#: src/dialogs/permissions.tsx:409 src/dialogs/symlink.tsx:233
+#: src/dialogs/mkdir.tsx:137 src/dialogs/rename.tsx:87
+#: src/dialogs/create-file.tsx:211 src/dialogs/editor.tsx:270
+#: src/dialogs/editor.tsx:336 src/dialogs/copyPasteOwnership.tsx:170
+#: src/dialogs/delete.tsx:97 src/upload-button.tsx:146
 msgid "Cancel"
 msgstr "취소"
 
-#: src/upload-button.tsx:476
+#: src/upload-button.tsx:477
 msgid "Cancel upload of $0"
 msgstr "$0 올려주기 취소"
 
-#: src/upload-button.tsx:345
+#: src/upload-button.tsx:346
 msgid "Cancelled"
 msgstr "취소됨"
 
-#: src/upload-button.tsx:347
+#: src/upload-button.tsx:348
 msgid "Cancelled upload of $0"
 msgstr "$0 올려주기 취소됨"
 
@@ -154,7 +154,7 @@ msgstr "다른 파일이 이미 진행 중이기 때문에 파일을 삭제 할 
 msgid "Change"
 msgstr "변경"
 
-#: src/upload-button.tsx:404
+#: src/upload-button.tsx:405
 msgid "Change permissions"
 msgstr "권한 변경"
 
@@ -170,7 +170,7 @@ msgstr "문자 장치"
 msgid "Clear filter"
 msgstr "필터 지우기"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:270
+#: src/dialogs/editor.tsx:270 src/dialogs/keyboardShortcutsHelp.tsx:33
 msgid "Close"
 msgstr "종료"
 
@@ -190,7 +190,7 @@ msgstr "Cockpit 프로젝트"
 msgid "Collapse"
 msgstr "붕괴"
 
-#: src/menu.tsx:151 src/menu.tsx:205
+#: src/menu.tsx:152 src/menu.tsx:206
 msgid "Copy"
 msgstr "복사"
 
@@ -202,15 +202,15 @@ msgstr "선택된 파일 또는 디렉토리를 복사"
 msgid "Create"
 msgstr "생성"
 
-#: src/dialogs/mkdir.tsx:80 src/menu.tsx:106
+#: src/dialogs/mkdir.tsx:80 src/menu.tsx:107
 msgid "Create directory"
 msgstr "디렉토리 생성"
 
-#: src/dialogs/create-file.tsx:151 src/menu.tsx:111
+#: src/dialogs/create-file.tsx:151 src/menu.tsx:112
 msgid "Create file"
 msgstr "파일 생성"
 
-#: src/dialogs/symlink.tsx:231 src/menu.tsx:197
+#: src/dialogs/symlink.tsx:231 src/menu.tsx:198
 msgid "Create link"
 msgstr "연결 생성"
 
@@ -222,7 +222,7 @@ msgstr "$0로 연결 생성"
 msgid "Create new directory"
 msgstr "신규 디렉토리 생성"
 
-#: src/dialogs/delete.tsx:95 src/menu.tsx:168 src/menu.tsx:210
+#: src/dialogs/delete.tsx:95 src/menu.tsx:169 src/menu.tsx:211
 msgid "Delete"
 msgstr "삭제"
 
@@ -260,7 +260,7 @@ msgstr "디렉토리는 $0 디렉토리, $1 파일, $2 숨김 파일을 포함�
 
 #: src/files-card-body.tsx:514
 msgid "Directory is empty"
-msgstr "디렉토리가 비었습니다"
+msgstr "디렉토리가 비어 있습니다"
 
 #: src/dialogs/mkdir.tsx:96
 msgid "Directory name"
@@ -282,7 +282,7 @@ msgstr "디렉토리 이름이 너무 길어요"
 msgid "Directory owner"
 msgstr "디렉토리 소유자"
 
-#: src/common.ts:113 src/dialogs/symlink.tsx:39
+#: src/dialogs/symlink.tsx:39 src/common.ts:113
 msgid "Directory with the same name exists"
 msgstr "동일한 이름을 갖는 디렉토리가 존재합니다"
 
@@ -298,7 +298,7 @@ msgstr "그리드로 표시"
 msgid "Display as a list"
 msgstr "목록으로 표시"
 
-#: src/menu.tsx:178
+#: src/menu.tsx:179
 msgid "Download"
 msgstr "내려받기"
 
@@ -315,7 +315,7 @@ msgstr "$0 편집"
 msgid "Edit path"
 msgstr "경로 편집"
 
-#: src/menu.tsx:117 src/menu.tsx:157 src/menu.tsx:224
+#: src/menu.tsx:118 src/menu.tsx:158 src/menu.tsx:225
 msgid "Edit permissions"
 msgstr "권한을 편집합니다"
 
@@ -331,7 +331,7 @@ msgstr "편집기"
 msgid "Execute-only"
 msgstr "실행-전용"
 
-#: src/upload-button.tsx:277
+#: src/upload-button.tsx:278
 msgid "Failed"
 msgstr "실패함"
 
@@ -343,7 +343,7 @@ msgstr "파일"
 msgid "File browser"
 msgstr "파일 탐색기"
 
-#: src/common.ts:115 src/dialogs/symlink.tsx:41
+#: src/dialogs/symlink.tsx:41 src/common.ts:115
 msgid "File exists"
 msgstr "파일이 존재합니다"
 
@@ -351,7 +351,7 @@ msgstr "파일이 존재합니다"
 msgid "File name"
 msgstr "파일 이름"
 
-#: src/upload-button.tsx:373
+#: src/upload-button.tsx:374
 msgid "File uploaded"
 msgstr "파일 올려짐"
 
@@ -363,7 +363,7 @@ msgstr "파일이름이 원래의 이름과 동일합니다"
 msgid "Files"
 msgstr "파일"
 
-#: src/dialogs/copyPasteOwnership.tsx:183
+#: src/dialogs/copyPasteOwnership.tsx:187
 msgid ""
 "Files being pasted have a different owner. By default, ownership will be "
 "changed to match the destination directory."
@@ -371,7 +371,7 @@ msgstr ""
 "붙여 넣기 중인 파일에 다른 소유자가 있습니다. 기본 값으로, 소유권은 대상 디렉"
 "토리와 일치하도록 변경됩니다."
 
-#: src/upload-button.tsx:373
+#: src/upload-button.tsx:374
 msgid "Files uploaded"
 msgstr "파일 올려짐"
 
@@ -423,8 +423,8 @@ msgstr "앞으로 가기"
 msgid "Go up a directory"
 msgstr "상위 디렉토리로 이동"
 
-#: src/dialogs/permissions.tsx:319 src/files-card-body.tsx:591
-#: src/files-footer-detail.tsx:80 src/files-footer-detail.tsx:152
+#: src/dialogs/permissions.tsx:319 src/files-footer-detail.tsx:80
+#: src/files-footer-detail.tsx:152 src/files-card-body.tsx:591
 msgid "Group"
 msgstr "그룹"
 
@@ -484,7 +484,7 @@ msgstr "관대한 허용"
 msgid "Name"
 msgstr "이름"
 
-#: src/common.ts:104 src/dialogs/symlink.tsx:36
+#: src/dialogs/symlink.tsx:36 src/common.ts:104
 msgid "Name cannot be empty"
 msgstr "이름은 비워 둘 수 없습니다"
 
@@ -516,7 +516,7 @@ msgstr "신규 파일이름"
 msgid "New name"
 msgstr "새로운 이름"
 
-#: src/dialogs/copyPasteOwnership.tsx:186
+#: src/dialogs/copyPasteOwnership.tsx:190
 msgid "New owner"
 msgstr "새로운 소유자"
 
@@ -536,11 +536,11 @@ msgstr "없음"
 msgid "Not bookmarked"
 msgstr "즐겨찾기 안 됨"
 
-#: src/menu.tsx:126 src/menu.tsx:187
+#: src/menu.tsx:127 src/menu.tsx:188
 msgid "Open in terminal"
 msgstr "터미널에서 열기"
 
-#: src/menu.tsx:143
+#: src/menu.tsx:144
 msgid "Open text file"
 msgstr "텍스트 파일 열기"
 
@@ -548,7 +548,7 @@ msgstr "텍스트 파일 열기"
 msgid "Original file on server"
 msgstr "서버에서 원본 파일"
 
-#: src/files-card-body.tsx:591 src/files-footer-detail.tsx:80
+#: src/files-footer-detail.tsx:80 src/files-card-body.tsx:591
 msgid "Others"
 msgstr "기타"
 
@@ -561,9 +561,9 @@ msgstr "기타 접근"
 msgid "Overwrite"
 msgstr "덮어쓰기"
 
-#: src/dialogs/create-file.tsx:185 src/dialogs/permissions.tsx:304
-#: src/header.tsx:86 src/files-card-body.tsx:544 src/files-card-body.tsx:591
-#: src/files-card-body.tsx:667 src/files-footer-detail.tsx:80
+#: src/dialogs/permissions.tsx:304 src/dialogs/create-file.tsx:185
+#: src/files-footer-detail.tsx:80 src/header.tsx:86 src/files-card-body.tsx:544
+#: src/files-card-body.tsx:591 src/files-card-body.tsx:667
 msgid "Owner"
 msgstr "소유자"
 
@@ -583,11 +583,11 @@ msgstr "소유자 내림차순"
 msgid "Ownership"
 msgstr "소유권"
 
-#: src/dialogs/copyPasteOwnership.tsx:164 src/menu.tsx:99
+#: src/dialogs/copyPasteOwnership.tsx:168 src/menu.tsx:100
 msgid "Paste"
 msgstr "붙여넣기"
 
-#: src/dialogs/copyPasteOwnership.tsx:178
+#: src/dialogs/copyPasteOwnership.tsx:182
 msgid "Paste as owner"
 msgstr "소유자로 붙여넣기"
 
@@ -595,7 +595,7 @@ msgstr "소유자로 붙여넣기"
 msgid "Paste file or directory"
 msgstr "파일 또는 디렉토리 붙여넣기"
 
-#: src/dialogs/copyPasteOwnership.tsx:53 src/menu.tsx:51
+#: src/dialogs/copyPasteOwnership.tsx:56 src/menu.tsx:51
 msgid "Pasting failed"
 msgstr "붙여넣기 실패함"
 
@@ -615,7 +615,7 @@ msgstr "$0 파일을 위한 권한"
 msgid "Read and execute"
 msgstr "읽기 및 실행"
 
-#: src/common.ts:55 src/dialogs/permissions.tsx:210
+#: src/dialogs/permissions.tsx:210 src/common.ts:55
 msgid "Read and write"
 msgstr "읽기 및 쓰기"
 
@@ -623,7 +623,7 @@ msgstr "읽기 및 쓰기"
 msgid "Read, write, and execute"
 msgstr "읽기, 쓰기 및 실행"
 
-#: src/common.ts:53 src/dialogs/editor.tsx:189 src/dialogs/permissions.tsx:215
+#: src/dialogs/permissions.tsx:215 src/dialogs/editor.tsx:189 src/common.ts:53
 msgid "Read-only"
 msgstr "읽기-전용"
 
@@ -651,7 +651,7 @@ msgstr "재적재"
 msgid "Remove from bookmarks"
 msgstr "즐겨찾기에서 제거"
 
-#: src/dialogs/rename.tsx:78 src/menu.tsx:162
+#: src/dialogs/rename.tsx:78 src/menu.tsx:163
 msgid "Rename"
 msgstr "이름변경"
 
@@ -763,7 +763,7 @@ msgstr "유형"
 msgid "Unable to create bookmark directory"
 msgstr "즐겨찾기 디렉토리를 생성 할 수 없음"
 
-#: src/upload-button.tsx:323
+#: src/upload-button.tsx:324
 msgid "Unable to move uploaded file to final destination"
 msgstr "올려진 파일을 최종 목적지에 이동 할 수 없음"
 
@@ -771,15 +771,15 @@ msgstr "올려진 파일을 최종 목적지에 이동 할 수 없음"
 msgid "Unable to save bookmark file"
 msgstr "즐겨찾기 파일을 저장 할 수 없음"
 
-#: src/upload-button.tsx:512
+#: src/upload-button.tsx:513
 msgid "Upload"
 msgstr "올려주기"
 
-#: src/upload-button.tsx:493
+#: src/upload-button.tsx:494
 msgid "Upload $0% completed"
 msgstr "올려주기 $0% c완료"
 
-#: src/upload-button.tsx:321 src/upload-button.tsx:351
+#: src/upload-button.tsx:322 src/upload-button.tsx:352
 msgid "Upload error"
 msgstr "올려주기 오류"
 
@@ -787,7 +787,7 @@ msgstr "올려주기 오류"
 msgid "Uploaded as $0, $1"
 msgstr "$0, $1 로 올려짐"
 
-#: src/upload-button.tsx:457
+#: src/upload-button.tsx:458
 msgid "Uploads"
 msgstr "올려주기"
 
@@ -803,7 +803,7 @@ msgstr "$0 보기"
 msgid "Write and execute"
 msgstr "쓰기 및 실행"
 
-#: src/common.ts:51 src/dialogs/permissions.tsx:230
+#: src/dialogs/permissions.tsx:230 src/common.ts:51
 msgid "Write-only"
 msgstr "쓰기-전용"
 
@@ -823,7 +823,7 @@ msgstr "파일"
 msgid "filesystem"
 msgstr "파일시스템"
 
-#: src/dialogs/copyPasteOwnership.tsx:115
+#: src/dialogs/copyPasteOwnership.tsx:119
 msgid "keep original owners"
 msgstr "원소유자 유지"
 
