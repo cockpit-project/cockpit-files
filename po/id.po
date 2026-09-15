@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-27 13:05+0000\n"
-"PO-Revision-Date: 2026-04-20 02:34+0000\n"
+"POT-Creation-Date: 2026-09-15 08:01+0000\n"
+"PO-Revision-Date: 2026-09-11 03:17+0000\n"
 "Last-Translator: Arif Budiman <arifpedia@gmail.com>\n"
 "Language-Team: Indonesian <https://translate.fedoraproject.org/projects/"
 "cockpit/cockpit-files/id/>\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.17\n"
+"X-Generator: Weblate 2026.9.1\n"
 
 #: src/menu.tsx:53
 msgid "\"$0\" exists, not overwriting with paste."
@@ -53,7 +53,7 @@ msgstr[0] "$0 item tersembunyi"
 msgid "$0 permissions"
 msgstr "$0 izin"
 
-#: src/dialogs/copyPasteOwnership.tsx:106
+#: src/dialogs/copyPasteOwnership.tsx:110
 msgid "(original owner)"
 msgstr "(pemilik asli)"
 
@@ -126,23 +126,23 @@ msgstr "Penanda"
 msgid "Bookmarks"
 msgstr "Penanda"
 
-#: src/dialogs/delete.tsx:97 src/dialogs/mkdir.tsx:137
-#: src/dialogs/copyPasteOwnership.tsx:166 src/dialogs/create-file.tsx:211
-#: src/dialogs/rename.tsx:87 src/dialogs/symlink.tsx:233
-#: src/dialogs/editor.tsx:270 src/dialogs/editor.tsx:336
-#: src/dialogs/permissions.tsx:409 src/upload-button.tsx:146
+#: src/dialogs/permissions.tsx:409 src/dialogs/symlink.tsx:233
+#: src/dialogs/mkdir.tsx:137 src/dialogs/rename.tsx:87
+#: src/dialogs/create-file.tsx:211 src/dialogs/editor.tsx:270
+#: src/dialogs/editor.tsx:336 src/dialogs/copyPasteOwnership.tsx:170
+#: src/dialogs/delete.tsx:97 src/upload-button.tsx:146
 msgid "Cancel"
 msgstr "Batal"
 
-#: src/upload-button.tsx:476
+#: src/upload-button.tsx:477
 msgid "Cancel upload of $0"
 msgstr "Batalkan unggahan $0"
 
-#: src/upload-button.tsx:345
+#: src/upload-button.tsx:346
 msgid "Cancelled"
 msgstr "Dibatalkan"
 
-#: src/upload-button.tsx:347
+#: src/upload-button.tsx:348
 msgid "Cancelled upload of $0"
 msgstr "Unggahan $0 dibatalkan"
 
@@ -158,7 +158,7 @@ msgstr "Tidak dapat menjatuhkan berkas, unggahan lain sedang berlangsung"
 msgid "Change"
 msgstr "Ubah"
 
-#: src/upload-button.tsx:404
+#: src/upload-button.tsx:405
 msgid "Change permissions"
 msgstr "Ubah izin"
 
@@ -172,9 +172,9 @@ msgstr "Perangkat karakter"
 
 #: src/files-card-body.tsx:507
 msgid "Clear filter"
-msgstr "Hapus penyaring"
+msgstr "Hapus filter"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:270
+#: src/dialogs/editor.tsx:270 src/dialogs/keyboardShortcutsHelp.tsx:33
 msgid "Close"
 msgstr "Tutup"
 
@@ -194,7 +194,7 @@ msgstr "Proyek Cockpit"
 msgid "Collapse"
 msgstr "Ciutkan"
 
-#: src/menu.tsx:151 src/menu.tsx:205
+#: src/menu.tsx:152 src/menu.tsx:206
 msgid "Copy"
 msgstr "Salin"
 
@@ -206,15 +206,15 @@ msgstr "Salin berkas atau direktori yang dipilih"
 msgid "Create"
 msgstr "Buat"
 
-#: src/dialogs/mkdir.tsx:80 src/menu.tsx:106
+#: src/dialogs/mkdir.tsx:80 src/menu.tsx:107
 msgid "Create directory"
 msgstr "Buat direktori"
 
-#: src/dialogs/create-file.tsx:151 src/menu.tsx:111
+#: src/dialogs/create-file.tsx:151 src/menu.tsx:112
 msgid "Create file"
 msgstr "Buat berkas"
 
-#: src/dialogs/symlink.tsx:231 src/menu.tsx:197
+#: src/dialogs/symlink.tsx:231 src/menu.tsx:198
 msgid "Create link"
 msgstr "Buat tautan"
 
@@ -226,7 +226,7 @@ msgstr "Buat tautan ke $0"
 msgid "Create new directory"
 msgstr "Buat direktori baru"
 
-#: src/dialogs/delete.tsx:95 src/menu.tsx:168 src/menu.tsx:210
+#: src/dialogs/delete.tsx:95 src/menu.tsx:169 src/menu.tsx:211
 msgid "Delete"
 msgstr "Hapus"
 
@@ -286,7 +286,7 @@ msgstr "Nama direktori terlalu panjang"
 msgid "Directory owner"
 msgstr "Pemilik direktori"
 
-#: src/common.ts:113 src/dialogs/symlink.tsx:39
+#: src/dialogs/symlink.tsx:39 src/common.ts:113
 msgid "Directory with the same name exists"
 msgstr "Direktori dengan nama yang sama sudah ada"
 
@@ -302,7 +302,7 @@ msgstr "Tampilkan sebagai kisi"
 msgid "Display as a list"
 msgstr "Tampilkan sebagai daftar"
 
-#: src/menu.tsx:178
+#: src/menu.tsx:179
 msgid "Download"
 msgstr "Unduh"
 
@@ -319,7 +319,7 @@ msgstr "Sunting $0"
 msgid "Edit path"
 msgstr "Sunting jalur"
 
-#: src/menu.tsx:117 src/menu.tsx:157 src/menu.tsx:224
+#: src/menu.tsx:118 src/menu.tsx:158 src/menu.tsx:225
 msgid "Edit permissions"
 msgstr "Sunting izin"
 
@@ -337,7 +337,7 @@ msgstr "Sunting $0"
 msgid "Execute-only"
 msgstr "Hanya-eksekusi"
 
-#: src/upload-button.tsx:277
+#: src/upload-button.tsx:278
 msgid "Failed"
 msgstr "Gagal"
 
@@ -349,7 +349,7 @@ msgstr "Berkas"
 msgid "File browser"
 msgstr "Penjelajah berkas"
 
-#: src/common.ts:115 src/dialogs/symlink.tsx:41
+#: src/dialogs/symlink.tsx:41 src/common.ts:115
 msgid "File exists"
 msgstr "Berkas sudah ada"
 
@@ -357,7 +357,7 @@ msgstr "Berkas sudah ada"
 msgid "File name"
 msgstr "Nama berkas"
 
-#: src/upload-button.tsx:373
+#: src/upload-button.tsx:374
 msgid "File uploaded"
 msgstr "Berkas berhasil diunggah"
 
@@ -369,7 +369,7 @@ msgstr "Nama berkas sama dengan nama aslinya"
 msgid "Files"
 msgstr "Berkas"
 
-#: src/dialogs/copyPasteOwnership.tsx:183
+#: src/dialogs/copyPasteOwnership.tsx:187
 msgid ""
 "Files being pasted have a different owner. By default, ownership will be "
 "changed to match the destination directory."
@@ -377,7 +377,7 @@ msgstr ""
 "Berkas yang ditempel memiliki pemilik yang berbeda. Secara bawaan, "
 "kepemilikan akan diubah agar sesuai dengan direktori tujuan."
 
-#: src/upload-button.tsx:373
+#: src/upload-button.tsx:374
 msgid "Files uploaded"
 msgstr "Berkas berhasil diunggah"
 
@@ -429,8 +429,8 @@ msgstr "Maju"
 msgid "Go up a directory"
 msgstr "Naik satu direktori"
 
-#: src/dialogs/permissions.tsx:319 src/files-card-body.tsx:591
-#: src/files-footer-detail.tsx:80 src/files-footer-detail.tsx:152
+#: src/dialogs/permissions.tsx:319 src/files-footer-detail.tsx:80
+#: src/files-footer-detail.tsx:152 src/files-card-body.tsx:591
 msgid "Group"
 msgstr "Grup"
 
@@ -490,7 +490,7 @@ msgstr "Paling permisif"
 msgid "Name"
 msgstr "Nama"
 
-#: src/common.ts:104 src/dialogs/symlink.tsx:36
+#: src/dialogs/symlink.tsx:36 src/common.ts:104
 msgid "Name cannot be empty"
 msgstr "Nama tidak boleh kosong"
 
@@ -522,7 +522,7 @@ msgstr "Nama berkas baru"
 msgid "New name"
 msgstr "Nama baru"
 
-#: src/dialogs/copyPasteOwnership.tsx:186
+#: src/dialogs/copyPasteOwnership.tsx:190
 msgid "New owner"
 msgstr "Pemilik baru"
 
@@ -544,11 +544,11 @@ msgstr "Tidak ada"
 msgid "Not bookmarked"
 msgstr "Tambahkan ke penanda"
 
-#: src/menu.tsx:126 src/menu.tsx:187
+#: src/menu.tsx:127 src/menu.tsx:188
 msgid "Open in terminal"
 msgstr "Buka di terminal"
 
-#: src/menu.tsx:143
+#: src/menu.tsx:144
 msgid "Open text file"
 msgstr "Buka berkas teks"
 
@@ -556,7 +556,7 @@ msgstr "Buka berkas teks"
 msgid "Original file on server"
 msgstr "Berkas asli di server"
 
-#: src/files-card-body.tsx:591 src/files-footer-detail.tsx:80
+#: src/files-footer-detail.tsx:80 src/files-card-body.tsx:591
 msgid "Others"
 msgstr "Lainnya"
 
@@ -569,9 +569,9 @@ msgstr "Akses lainnya"
 msgid "Overwrite"
 msgstr "Timpa"
 
-#: src/dialogs/create-file.tsx:185 src/dialogs/permissions.tsx:304
-#: src/header.tsx:86 src/files-card-body.tsx:544 src/files-card-body.tsx:591
-#: src/files-card-body.tsx:667 src/files-footer-detail.tsx:80
+#: src/dialogs/permissions.tsx:304 src/dialogs/create-file.tsx:185
+#: src/files-footer-detail.tsx:80 src/header.tsx:86 src/files-card-body.tsx:544
+#: src/files-card-body.tsx:591 src/files-card-body.tsx:667
 msgid "Owner"
 msgstr "Pemilik"
 
@@ -591,11 +591,11 @@ msgstr "Pemilik menurun"
 msgid "Ownership"
 msgstr "Kepemilikan"
 
-#: src/dialogs/copyPasteOwnership.tsx:164 src/menu.tsx:99
+#: src/dialogs/copyPasteOwnership.tsx:168 src/menu.tsx:100
 msgid "Paste"
 msgstr "Tempel"
 
-#: src/dialogs/copyPasteOwnership.tsx:178
+#: src/dialogs/copyPasteOwnership.tsx:182
 msgid "Paste as owner"
 msgstr "Tempel sebagai pemilik"
 
@@ -603,7 +603,7 @@ msgstr "Tempel sebagai pemilik"
 msgid "Paste file or directory"
 msgstr "Tempel berkas atau direktori"
 
-#: src/dialogs/copyPasteOwnership.tsx:53 src/menu.tsx:51
+#: src/dialogs/copyPasteOwnership.tsx:56 src/menu.tsx:51
 msgid "Pasting failed"
 msgstr "Gagal menempel"
 
@@ -623,7 +623,7 @@ msgstr "Izin untuk $0 berkas"
 msgid "Read and execute"
 msgstr "Baca dan eksekusi"
 
-#: src/common.ts:55 src/dialogs/permissions.tsx:210
+#: src/dialogs/permissions.tsx:210 src/common.ts:55
 msgid "Read and write"
 msgstr "Baca dan tulis"
 
@@ -631,7 +631,7 @@ msgstr "Baca dan tulis"
 msgid "Read, write, and execute"
 msgstr "Baca, tulis, dan eksekusi"
 
-#: src/common.ts:53 src/dialogs/editor.tsx:189 src/dialogs/permissions.tsx:215
+#: src/dialogs/permissions.tsx:215 src/dialogs/editor.tsx:189 src/common.ts:53
 msgid "Read-only"
 msgstr "Hanya-baca"
 
@@ -659,7 +659,7 @@ msgstr "Muat ulang"
 msgid "Remove from bookmarks"
 msgstr "Hapus dari penanda"
 
-#: src/dialogs/rename.tsx:78 src/menu.tsx:162
+#: src/dialogs/rename.tsx:78 src/menu.tsx:163
 msgid "Rename"
 msgstr "Ganti nama"
 
@@ -771,7 +771,7 @@ msgstr "Jenis"
 msgid "Unable to create bookmark directory"
 msgstr "Tidak dapat membuat direktori penanda"
 
-#: src/upload-button.tsx:323
+#: src/upload-button.tsx:324
 msgid "Unable to move uploaded file to final destination"
 msgstr "Tidak dapat memindahkan berkas yang diunggah ke tujuan akhir"
 
@@ -779,16 +779,16 @@ msgstr "Tidak dapat memindahkan berkas yang diunggah ke tujuan akhir"
 msgid "Unable to save bookmark file"
 msgstr "Tidak dapat menyimpan berkas penanda"
 
-#: src/upload-button.tsx:512
+#: src/upload-button.tsx:513
 msgid "Upload"
 msgstr "Unggah"
 
 #
-#: src/upload-button.tsx:493
+#: src/upload-button.tsx:494
 msgid "Upload $0% completed"
 msgstr "Unggahan $0% selesai"
 
-#: src/upload-button.tsx:321 src/upload-button.tsx:351
+#: src/upload-button.tsx:322 src/upload-button.tsx:352
 msgid "Upload error"
 msgstr "Kesalahan unggahan"
 
@@ -796,7 +796,7 @@ msgstr "Kesalahan unggahan"
 msgid "Uploaded as $0, $1"
 msgstr "Diunggah sebagai $0, $1"
 
-#: src/upload-button.tsx:457
+#: src/upload-button.tsx:458
 msgid "Uploads"
 msgstr "Unggahan"
 
@@ -812,7 +812,7 @@ msgstr "Lihat ( $0 )"
 msgid "Write and execute"
 msgstr "Tulis dan eksekusi"
 
-#: src/common.ts:51 src/dialogs/permissions.tsx:230
+#: src/dialogs/permissions.tsx:230 src/common.ts:51
 msgid "Write-only"
 msgstr "Hanya-tulis"
 
@@ -832,7 +832,7 @@ msgstr "berkas"
 msgid "filesystem"
 msgstr "sistem berkas"
 
-#: src/dialogs/copyPasteOwnership.tsx:115
+#: src/dialogs/copyPasteOwnership.tsx:119
 msgid "keep original owners"
 msgstr "pertahankan pemilik asli"
 

@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: starter-kit 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-27 13:05+0000\n"
-"PO-Revision-Date: 2026-07-18 17:17+0000\n"
+"POT-Creation-Date: 2026-09-15 08:01+0000\n"
+"PO-Revision-Date: 2026-09-12 19:17+0000\n"
 "Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
 "memory@weblate.org>\n"
 "Language-Team: German <https://translate.fedoraproject.org/projects/cockpit/"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2026.7.1\n"
+"X-Generator: Weblate 2026.9.1\n"
 
 #: src/menu.tsx:53
 msgid "\"$0\" exists, not overwriting with paste."
@@ -44,7 +44,7 @@ msgstr[1] "$0 Elemente sind verborgen"
 msgid "$0 permissions"
 msgstr "$0-Berechtigungen"
 
-#: src/dialogs/copyPasteOwnership.tsx:106
+#: src/dialogs/copyPasteOwnership.tsx:110
 msgid "(original owner)"
 msgstr "(ursprünglicher Eigentümer)"
 
@@ -115,23 +115,23 @@ msgstr "Als Lesezeichen gespeichert"
 msgid "Bookmarks"
 msgstr "Lesezeichen"
 
-#: src/dialogs/delete.tsx:97 src/dialogs/mkdir.tsx:137
-#: src/dialogs/copyPasteOwnership.tsx:166 src/dialogs/create-file.tsx:211
-#: src/dialogs/rename.tsx:87 src/dialogs/symlink.tsx:233
-#: src/dialogs/editor.tsx:270 src/dialogs/editor.tsx:336
-#: src/dialogs/permissions.tsx:409 src/upload-button.tsx:146
+#: src/dialogs/permissions.tsx:409 src/dialogs/symlink.tsx:233
+#: src/dialogs/mkdir.tsx:137 src/dialogs/rename.tsx:87
+#: src/dialogs/create-file.tsx:211 src/dialogs/editor.tsx:270
+#: src/dialogs/editor.tsx:336 src/dialogs/copyPasteOwnership.tsx:170
+#: src/dialogs/delete.tsx:97 src/upload-button.tsx:146
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: src/upload-button.tsx:476
+#: src/upload-button.tsx:477
 msgid "Cancel upload of $0"
 msgstr "Upload von $0 abbrechen"
 
-#: src/upload-button.tsx:345
+#: src/upload-button.tsx:346
 msgid "Cancelled"
 msgstr "Abgebrochen"
 
-#: src/upload-button.tsx:347
+#: src/upload-button.tsx:348
 msgid "Cancelled upload of $0"
 msgstr "Upload von $0 abgebrochen"
 
@@ -149,7 +149,7 @@ msgstr ""
 msgid "Change"
 msgstr "Ändern"
 
-#: src/upload-button.tsx:404
+#: src/upload-button.tsx:405
 msgid "Change permissions"
 msgstr "Berechtigungen ändern"
 
@@ -165,7 +165,7 @@ msgstr "Zeichengerät"
 msgid "Clear filter"
 msgstr "Filter entfernen"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:270
+#: src/dialogs/editor.tsx:270 src/dialogs/keyboardShortcutsHelp.tsx:33
 msgid "Close"
 msgstr "Schließen"
 
@@ -185,7 +185,7 @@ msgstr "Cockpit-Projekt"
 msgid "Collapse"
 msgstr "Einklappen"
 
-#: src/menu.tsx:151 src/menu.tsx:205
+#: src/menu.tsx:152 src/menu.tsx:206
 msgid "Copy"
 msgstr "Kopieren"
 
@@ -197,15 +197,15 @@ msgstr "Ausgewählte Datei oder ausgewähltes Verzeichnis kopieren"
 msgid "Create"
 msgstr "Erstellen"
 
-#: src/dialogs/mkdir.tsx:80 src/menu.tsx:106
+#: src/dialogs/mkdir.tsx:80 src/menu.tsx:107
 msgid "Create directory"
 msgstr "Verzeichnis erstellen"
 
-#: src/dialogs/create-file.tsx:151 src/menu.tsx:111
+#: src/dialogs/create-file.tsx:151 src/menu.tsx:112
 msgid "Create file"
 msgstr "Datei erstellen"
 
-#: src/dialogs/symlink.tsx:231 src/menu.tsx:197
+#: src/dialogs/symlink.tsx:231 src/menu.tsx:198
 msgid "Create link"
 msgstr "Link erstellen"
 
@@ -217,7 +217,7 @@ msgstr "Link zu $0 erstellen"
 msgid "Create new directory"
 msgstr "Neues Verzeichnis erstellen"
 
-#: src/dialogs/delete.tsx:95 src/menu.tsx:168 src/menu.tsx:210
+#: src/dialogs/delete.tsx:95 src/menu.tsx:169 src/menu.tsx:211
 msgid "Delete"
 msgstr "Löschen"
 
@@ -277,7 +277,7 @@ msgstr "Verzeichnisname zu lang"
 msgid "Directory owner"
 msgstr "Verzeichniseigentümer"
 
-#: src/common.ts:113 src/dialogs/symlink.tsx:39
+#: src/dialogs/symlink.tsx:39 src/common.ts:113
 msgid "Directory with the same name exists"
 msgstr "Verzeichniseigentümer mit gleichem Namen existiert bereits"
 
@@ -293,7 +293,7 @@ msgstr "Als Raster anzeigen"
 msgid "Display as a list"
 msgstr "Als Liste anzeigen"
 
-#: src/menu.tsx:178
+#: src/menu.tsx:179
 msgid "Download"
 msgstr "Herunterladen"
 
@@ -310,7 +310,7 @@ msgstr "$0 bearbeiten"
 msgid "Edit path"
 msgstr "Pfad bearbeiten"
 
-#: src/menu.tsx:117 src/menu.tsx:157 src/menu.tsx:224
+#: src/menu.tsx:118 src/menu.tsx:158 src/menu.tsx:225
 msgid "Edit permissions"
 msgstr "Berechtigungen bearbeiten"
 
@@ -326,7 +326,7 @@ msgstr "Editor"
 msgid "Execute-only"
 msgstr "Nur Ausführen"
 
-#: src/upload-button.tsx:277
+#: src/upload-button.tsx:278
 msgid "Failed"
 msgstr "Fehlgeschlagen"
 
@@ -338,7 +338,7 @@ msgstr "Datei"
 msgid "File browser"
 msgstr "Datei-Browser"
 
-#: src/common.ts:115 src/dialogs/symlink.tsx:41
+#: src/dialogs/symlink.tsx:41 src/common.ts:115
 msgid "File exists"
 msgstr "Datei existiert"
 
@@ -346,7 +346,7 @@ msgstr "Datei existiert"
 msgid "File name"
 msgstr "Dateiname"
 
-#: src/upload-button.tsx:373
+#: src/upload-button.tsx:374
 msgid "File uploaded"
 msgstr "Datei hochgeladen"
 
@@ -358,7 +358,7 @@ msgstr "Der Dateiname ist derselbe wie der ursprüngliche Name"
 msgid "Files"
 msgstr "Dateien"
 
-#: src/dialogs/copyPasteOwnership.tsx:183
+#: src/dialogs/copyPasteOwnership.tsx:187
 msgid ""
 "Files being pasted have a different owner. By default, ownership will be "
 "changed to match the destination directory."
@@ -366,7 +366,7 @@ msgstr ""
 "Die eingefügten Dateien haben einen anderen Eigentümer. Standardmäßig wird "
 "der Eigentümer so geändert, dass er mit dem Zielverzeichnis übereinstimmt."
 
-#: src/upload-button.tsx:373
+#: src/upload-button.tsx:374
 msgid "Files uploaded"
 msgstr "Dateien hochgeladen"
 
@@ -418,8 +418,8 @@ msgstr "Weitergehen"
 msgid "Go up a directory"
 msgstr "Ein Verzeichnis nach oben gehen"
 
-#: src/dialogs/permissions.tsx:319 src/files-card-body.tsx:591
-#: src/files-footer-detail.tsx:80 src/files-footer-detail.tsx:152
+#: src/dialogs/permissions.tsx:319 src/files-footer-detail.tsx:80
+#: src/files-footer-detail.tsx:152 src/files-card-body.tsx:591
 msgid "Group"
 msgstr "Gruppe"
 
@@ -433,7 +433,7 @@ msgstr "Versteckte Elemente ausblenden"
 
 #: src/files-breadcrumbs.tsx:46
 msgid "Home"
-msgstr "Startseite"
+msgstr "Persönlicher Ordner"
 
 #: src/dialogs/editor.tsx:230
 msgid "Ignore"
@@ -479,7 +479,7 @@ msgstr "Am meisten zulässig"
 msgid "Name"
 msgstr "Name"
 
-#: src/common.ts:104 src/dialogs/symlink.tsx:36
+#: src/dialogs/symlink.tsx:36 src/common.ts:104
 msgid "Name cannot be empty"
 msgstr "Name darf nicht leer sein"
 
@@ -511,7 +511,7 @@ msgstr "Neuer Dateiname"
 msgid "New name"
 msgstr "Neuer Name"
 
-#: src/dialogs/copyPasteOwnership.tsx:186
+#: src/dialogs/copyPasteOwnership.tsx:190
 msgid "New owner"
 msgstr "Neuer Eigentümer"
 
@@ -531,11 +531,11 @@ msgstr "Keine"
 msgid "Not bookmarked"
 msgstr "Nicht als Lesezeichen gespeichert"
 
-#: src/menu.tsx:126 src/menu.tsx:187
+#: src/menu.tsx:127 src/menu.tsx:188
 msgid "Open in terminal"
 msgstr "Im Terminal öffnen"
 
-#: src/menu.tsx:143
+#: src/menu.tsx:144
 msgid "Open text file"
 msgstr "Textdatei öffnen"
 
@@ -543,7 +543,7 @@ msgstr "Textdatei öffnen"
 msgid "Original file on server"
 msgstr "Originaldatei auf dem Server"
 
-#: src/files-card-body.tsx:591 src/files-footer-detail.tsx:80
+#: src/files-footer-detail.tsx:80 src/files-card-body.tsx:591
 msgid "Others"
 msgstr "Andere"
 
@@ -556,9 +556,9 @@ msgstr "Anderer Zugriff"
 msgid "Overwrite"
 msgstr "Überschreiben"
 
-#: src/dialogs/create-file.tsx:185 src/dialogs/permissions.tsx:304
-#: src/header.tsx:86 src/files-card-body.tsx:544 src/files-card-body.tsx:591
-#: src/files-card-body.tsx:667 src/files-footer-detail.tsx:80
+#: src/dialogs/permissions.tsx:304 src/dialogs/create-file.tsx:185
+#: src/files-footer-detail.tsx:80 src/header.tsx:86 src/files-card-body.tsx:544
+#: src/files-card-body.tsx:591 src/files-card-body.tsx:667
 msgid "Owner"
 msgstr "Eigentümer"
 
@@ -578,11 +578,11 @@ msgstr "Eigentümer absteigend"
 msgid "Ownership"
 msgstr "Eigentümerschaft"
 
-#: src/dialogs/copyPasteOwnership.tsx:164 src/menu.tsx:99
+#: src/dialogs/copyPasteOwnership.tsx:168 src/menu.tsx:100
 msgid "Paste"
 msgstr "Einfügen"
 
-#: src/dialogs/copyPasteOwnership.tsx:178
+#: src/dialogs/copyPasteOwnership.tsx:182
 msgid "Paste as owner"
 msgstr "Als Eigentümer einfügen"
 
@@ -590,7 +590,7 @@ msgstr "Als Eigentümer einfügen"
 msgid "Paste file or directory"
 msgstr "Datei oder Verzeichnis einfügen"
 
-#: src/dialogs/copyPasteOwnership.tsx:53 src/menu.tsx:51
+#: src/dialogs/copyPasteOwnership.tsx:56 src/menu.tsx:51
 msgid "Pasting failed"
 msgstr "Einfügen fehlgeschlagen"
 
@@ -610,7 +610,7 @@ msgstr "Berechtigungen für $0 Dateien"
 msgid "Read and execute"
 msgstr "Lesen und ausführen"
 
-#: src/common.ts:55 src/dialogs/permissions.tsx:210
+#: src/dialogs/permissions.tsx:210 src/common.ts:55
 msgid "Read and write"
 msgstr "Lesen und schreiben"
 
@@ -618,7 +618,7 @@ msgstr "Lesen und schreiben"
 msgid "Read, write, and execute"
 msgstr "Lesen, schreiben und ausführen"
 
-#: src/common.ts:53 src/dialogs/editor.tsx:189 src/dialogs/permissions.tsx:215
+#: src/dialogs/permissions.tsx:215 src/dialogs/editor.tsx:189 src/common.ts:53
 msgid "Read-only"
 msgstr "Nur lesen"
 
@@ -647,7 +647,7 @@ msgstr "Neu laden"
 msgid "Remove from bookmarks"
 msgstr "Aus den Lesezeichen entfernen"
 
-#: src/dialogs/rename.tsx:78 src/menu.tsx:162
+#: src/dialogs/rename.tsx:78 src/menu.tsx:163
 msgid "Rename"
 msgstr "Umbenennen"
 
@@ -763,7 +763,7 @@ msgstr "Typ"
 msgid "Unable to create bookmark directory"
 msgstr "Lesezeichenverzeichnis kann nicht erstellt werden"
 
-#: src/upload-button.tsx:323
+#: src/upload-button.tsx:324
 msgid "Unable to move uploaded file to final destination"
 msgstr ""
 "Hochgeladene Datei kann nicht zum endgültigen Zielort verschoben werden"
@@ -772,15 +772,15 @@ msgstr ""
 msgid "Unable to save bookmark file"
 msgstr "Lesezeichendatei kann nicht gespeichert werden"
 
-#: src/upload-button.tsx:512
+#: src/upload-button.tsx:513
 msgid "Upload"
 msgstr "Hochladen"
 
-#: src/upload-button.tsx:493
+#: src/upload-button.tsx:494
 msgid "Upload $0% completed"
 msgstr "Hochladen $0% abgeschlossen"
 
-#: src/upload-button.tsx:321 src/upload-button.tsx:351
+#: src/upload-button.tsx:322 src/upload-button.tsx:352
 msgid "Upload error"
 msgstr "Hochladefehler"
 
@@ -788,7 +788,7 @@ msgstr "Hochladefehler"
 msgid "Uploaded as $0, $1"
 msgstr "Als $0, $1 hochgeladen"
 
-#: src/upload-button.tsx:457
+#: src/upload-button.tsx:458
 msgid "Uploads"
 msgstr "Hochladevorgänge"
 
@@ -804,7 +804,7 @@ msgstr "$0 ansehen"
 msgid "Write and execute"
 msgstr "Schreiben und ausführen"
 
-#: src/common.ts:51 src/dialogs/permissions.tsx:230
+#: src/dialogs/permissions.tsx:230 src/common.ts:51
 msgid "Write-only"
 msgstr "Nur schreiben"
 
@@ -824,7 +824,7 @@ msgstr "Dateien"
 msgid "filesystem"
 msgstr "Dateisystem"
 
-#: src/dialogs/copyPasteOwnership.tsx:115
+#: src/dialogs/copyPasteOwnership.tsx:119
 msgid "keep original owners"
 msgstr "Originaleigentümer behalten"
 
