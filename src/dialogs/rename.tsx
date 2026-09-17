@@ -60,7 +60,7 @@ const RenameItemModal = ({ dialogResult, path, selected } : {
         if (force) {
             mvCmd.push("--force");
         }
-        mvCmd.push(path + selected.name, newPath);
+        mvCmd.push("--", path + selected.name, newPath);
 
         cockpit.spawn(mvCmd, { superuser: "try", err: "message" })
                 .then(() => {
