@@ -10,6 +10,7 @@ updates:
     open-pull-requests-limit: 3
     labels:
       - "node_modules"
+      - "bot"
     groups:
       eslint:
         patterns:
