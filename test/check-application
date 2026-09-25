@@ -1744,7 +1744,7 @@ class TestFiles(testlib.MachineCase):
         self.assertEqual(self.stat("%G", "/tmp/passwd"), "root")
 
         # chmod lacks --no-dereference support
-        if m.image in ["rhel-8-10", "rhel-9-9", "centos-9"]:
+        if m.image in ["rhel-8-10", "rhel-9-9", "rhel-9-10", "centos-9"]:
             self.assertNotEqual(self.stat("%A", "/tmp/passwd"), "-rw-------")
         else:
             self.assertEqual(self.stat("%A", "/tmp/passwd"), "-rw-------")
