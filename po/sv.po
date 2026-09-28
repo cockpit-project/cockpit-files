@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-15 08:01+0000\n"
+"POT-Creation-Date: 2026-09-28 11:35+0000\n"
 "PO-Revision-Date: 2026-06-21 14:10+0000\n"
 "Last-Translator: Luna Jernberg <droidbittin@gmail.com>\n"
 "Language-Team: Swedish <https://translate.fedoraproject.org/projects/cockpit/"
@@ -26,17 +26,687 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 2026.6.1\n"
 
-#: src/menu.tsx:53
-msgid "\"$0\" exists, not overwriting with paste."
-msgstr "\"$0\" existerar, skriver inte över med klistra in."
+#: src/index.html:8
+msgid "Cockpit Files"
+msgstr "Cockpit filer"
+
+#: src/files-breadcrumbs.tsx:46
+msgid "Home"
+msgstr "Hem"
+
+#: src/files-breadcrumbs.tsx:94
+msgid "Unable to create bookmark directory"
+msgstr "Kan inte skapa en bokmärkeskatalog"
+
+#: src/files-breadcrumbs.tsx:117
+msgid "Unable to save bookmark file"
+msgstr "Kan inte spara bokmärkesfilen"
+
+#: src/files-breadcrumbs.tsx:139
+msgid "Remove from bookmarks"
+msgstr "Ta bort från bokmärken"
+
+#: src/files-breadcrumbs.tsx:141
+msgid "Add to bookmarks"
+msgstr "Lägg till i bokmärken"
+
+#: src/files-breadcrumbs.tsx:154
+msgid "Bookmarks"
+msgstr "Bokmärken"
+
+#: src/files-breadcrumbs.tsx:161
+msgid "Bookmarked"
+msgstr "Bokmärkt"
+
+#: src/files-breadcrumbs.tsx:161
+msgid "Not bookmarked"
+msgstr "Inte bokmärkt"
+
+#: src/files-breadcrumbs.tsx:236
+msgid "Filesystem"
+msgstr "Filsystem"
+
+#: src/files-breadcrumbs.tsx:303 src/dialogs/keyboardShortcutsHelp.tsx:87
+msgid "Edit path"
+msgstr "Redigera sökväg"
+
+#: src/header.tsx:53 src/files-card-body.tsx:534
+msgid "Name"
+msgstr "Namn"
+
+#: src/header.tsx:56
+msgid "A-Z"
+msgstr "A-Z"
+
+#: src/header.tsx:60
+msgid "Z-A"
+msgstr "Z-A"
+
+#: src/header.tsx:64 src/files-card-body.tsx:535 src/files-card-body.tsx:652
+msgid "Size"
+msgstr "Storlek"
+
+#: src/header.tsx:67
+msgid "Largest size"
+msgstr "Störst storlek"
+
+#: src/header.tsx:71
+msgid "Smallest size"
+msgstr "Minsta storlek"
+
+#: src/header.tsx:75 src/files-card-body.tsx:539 src/files-card-body.tsx:659
+msgid "Modified"
+msgstr "Modifierad"
+
+#: src/header.tsx:78
+msgid "First modified"
+msgstr "Först modifierad"
+
+#: src/header.tsx:82
+msgid "Last modified"
+msgstr "Senast modifierad"
+
+#: src/header.tsx:86 src/dialogs/permissions.tsx:319
+#: src/dialogs/create-file.tsx:185 src/files-card-body.tsx:544
+#: src/files-card-body.tsx:591 src/files-card-body.tsx:667
+#: src/files-footer-detail.tsx:80
+msgid "Owner"
+msgstr "Ägare"
+
+#: src/header.tsx:89
+msgid "Owner ascending"
+msgstr "Ägare ökande"
+
+#: src/header.tsx:93
+msgid "Owner descending"
+msgstr "Ägare minskande"
+
+#: src/header.tsx:97 src/files-card-body.tsx:549 src/files-card-body.tsx:674
+msgid "Permissions"
+msgstr "Behörigheter"
+
+#: src/header.tsx:100
+msgid "Most permissive"
+msgstr "Mest tillåtande"
+
+#: src/header.tsx:104
+msgid "Least permissive"
+msgstr "Minst tillåtande"
+
+#: src/header.tsx:152
+msgid "Show keyboard shortcuts"
+msgstr "Visa tangentbordsgenvägar"
+
+#: src/header.tsx:177
+msgid "Filter directory"
+msgstr "Filtrera katalog"
+
+#: src/header.tsx:240
+msgid "Display as a list"
+msgstr "Visa som en lista"
+
+#: src/header.tsx:241
+msgid "Display as a grid"
+msgstr "Visa som ett rutnät"
+
+#: src/header.tsx:258
+msgid "Sort"
+msgstr "Sortera"
+
+#: src/header.tsx:271
+msgid "Hide hidden items"
+msgstr "Dölj dolda objekt"
+
+#: src/header.tsx:271 src/files-card-body.tsx:522
+msgid "Show hidden items"
+msgstr "Visa dolda objekt"
 
 #: src/upload-button.tsx:56
 msgid "$0 files"
 msgstr "$0 filer"
 
-#: src/files-footer-detail.tsx:36
-msgid "$0 files selected"
-msgstr "$0 filer valda"
+#: src/upload-button.tsx:60
+msgid "Uploaded as $0, $1"
+msgstr "Uppladdad som $0,$1"
+
+#: src/upload-button.tsx:95
+msgid "Replace file $0?"
+msgstr "Ersätt fil $0?"
+
+#: src/upload-button.tsx:102
+msgid ""
+"A file with the same name already exists in \"$0\". Replacing it will "
+"overwrite its content."
+msgstr ""
+"En fil med samma namn finns redan i \"$0\". Om du ersätter den kommer dess "
+"innehåll att skrivas över."
+
+#: src/upload-button.tsx:123
+msgid "New file"
+msgstr "Ny fil"
+
+#: src/upload-button.tsx:128
+msgid "Original file on server"
+msgstr "Original fil på server"
+
+#: src/upload-button.tsx:137
+msgid "Apply this action to all conflicting files"
+msgstr "Tillämpa den här åtgärden på alla konfliktfiler"
+
+#: src/upload-button.tsx:143
+msgid "Replace"
+msgstr "Ersätt"
+
+#: src/upload-button.tsx:145
+msgid "Keep original"
+msgstr "Behåll original"
+
+#: src/upload-button.tsx:146 src/dialogs/delete.tsx:97
+#: src/dialogs/permissions.tsx:424 src/dialogs/copyPasteOwnership.tsx:170
+#: src/dialogs/rename.tsx:87 src/dialogs/symlink.tsx:233
+#: src/dialogs/editor.tsx:270 src/dialogs/editor.tsx:336
+#: src/dialogs/create-file.tsx:211 src/dialogs/mkdir.tsx:137
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: src/upload-button.tsx:278
+msgid "Failed"
+msgstr "Misslyckades"
+
+#: src/upload-button.tsx:322 src/upload-button.tsx:352
+msgid "Upload error"
+msgstr "Uppladdningsfel"
+
+#: src/upload-button.tsx:324
+msgid "Unable to move uploaded file to final destination"
+msgstr "Det gick inte att flytta uppladdad fil till slutdestinationen"
+
+#: src/upload-button.tsx:346
+msgid "Cancelled"
+msgstr "Avbruten"
+
+#: src/upload-button.tsx:348
+msgid "Cancelled upload of $0"
+msgstr "Avbruten uppladdning av $0"
+
+#: src/upload-button.tsx:374
+msgid "File uploaded"
+msgstr "Fil uppladdad"
+
+#: src/upload-button.tsx:374
+msgid "Files uploaded"
+msgstr "Filer uppladdade"
+
+#: src/upload-button.tsx:405
+msgid "Change permissions"
+msgstr "Ändra behörigheter"
+
+#: src/upload-button.tsx:458
+msgid "Uploads"
+msgstr "Uppladdningar"
+
+#: src/upload-button.tsx:477
+msgid "Cancel upload of $0"
+msgstr "Avbryt uppladdning av $0"
+
+#: src/upload-button.tsx:494
+msgid "Upload $0% completed"
+msgstr "Uppladdning $0% slutförd"
+
+#: src/upload-button.tsx:513
+msgid "Upload"
+msgstr "Ladda upp"
+
+#: src/common.ts:49
+msgid "None"
+msgstr "Inga"
+
+#: src/common.ts:50
+msgid "Execute-only"
+msgstr "Exekvering-endast"
+
+#: src/common.ts:51 src/dialogs/permissions.tsx:245
+msgid "Write-only"
+msgstr "Skriv-endast"
+
+#: src/common.ts:52
+msgid "Write and execute"
+msgstr "Skriv och exekvera"
+
+#: src/common.ts:53 src/dialogs/permissions.tsx:230 src/dialogs/editor.tsx:189
+msgid "Read-only"
+msgstr "Läs-endast"
+
+#: src/common.ts:54
+msgid "Read and execute"
+msgstr "Läs och exekvera"
+
+#: src/common.ts:55 src/dialogs/permissions.tsx:225
+msgid "Read and write"
+msgstr "Läs och skriv"
+
+#: src/common.ts:56
+msgid "Read, write, and execute"
+msgstr "Läs, skriv, och exekvera"
+
+#: src/common.ts:60
+msgid "Block device"
+msgstr "Blockenhet"
+
+#: src/common.ts:61
+msgid "Character device"
+msgstr "Teckenenhet"
+
+#: src/common.ts:62
+msgid "Directory"
+msgstr "Katalog"
+
+#: src/common.ts:63
+msgid "Named pipe"
+msgstr "Namngivet rör"
+
+#: src/common.ts:64
+msgid "Symbolic link"
+msgstr "Symbolisk länk"
+
+#: src/common.ts:65
+msgid "Regular file"
+msgstr "Vanlig fil"
+
+#: src/common.ts:66
+msgid "Socket"
+msgstr "Uttag"
+
+#: src/common.ts:104 src/dialogs/symlink.tsx:36
+msgid "Name cannot be empty"
+msgstr "Namn kan inte vara tomt"
+
+#: src/common.ts:106
+msgid "Name too long"
+msgstr "Namn för långt"
+
+#: src/common.ts:108
+msgid "Name cannot include a /"
+msgstr "Namn kan inte inkludera ett /"
+
+#: src/common.ts:110
+msgid "Filename is the same as original name"
+msgstr "Filnamn är samma som originalnamn"
+
+#: src/common.ts:113 src/dialogs/symlink.tsx:39
+msgid "Directory with the same name exists"
+msgstr "Katalog med samma namn existerar"
+
+#: src/common.ts:115 src/dialogs/symlink.tsx:41
+msgid "File exists"
+msgstr "Fil existerar"
+
+#: src/menu.tsx:51 src/dialogs/copyPasteOwnership.tsx:56
+msgid "Pasting failed"
+msgstr "Inklistring misslyckades"
+
+#: src/menu.tsx:53
+msgid "\"$0\" exists, not overwriting with paste."
+msgstr "\"$0\" existerar, skriver inte över med klistra in."
+
+#: src/menu.tsx:100 src/dialogs/copyPasteOwnership.tsx:168
+msgid "Paste"
+msgstr "Klistra in"
+
+#: src/menu.tsx:107 src/dialogs/mkdir.tsx:80
+msgid "Create directory"
+msgstr "Skapa katalog"
+
+#: src/menu.tsx:112 src/dialogs/create-file.tsx:151
+msgid "Create file"
+msgstr "Skapa fil"
+
+#: src/menu.tsx:118 src/menu.tsx:158 src/menu.tsx:225
+msgid "Edit permissions"
+msgstr "Redigera behörigheter"
+
+#: src/menu.tsx:127 src/menu.tsx:188
+msgid "Open in terminal"
+msgstr "Öppna i terminal"
+
+#: src/menu.tsx:144
+msgid "Open text file"
+msgstr "Öppna en textfil"
+
+#: src/menu.tsx:152 src/menu.tsx:206
+msgid "Copy"
+msgstr "Kopiera"
+
+#: src/menu.tsx:163 src/dialogs/rename.tsx:78
+msgid "Rename"
+msgstr "Byt namn"
+
+#: src/menu.tsx:169 src/menu.tsx:211 src/dialogs/delete.tsx:95
+msgid "Delete"
+msgstr "Ta bort"
+
+#: src/menu.tsx:179
+msgid "Download"
+msgstr "Hämta"
+
+#: src/menu.tsx:198 src/dialogs/symlink.tsx:231
+msgid "Create link"
+msgstr "Skapa länk"
+
+#: src/files-folder-view.tsx:156
+msgid "Drop files to upload"
+msgstr "Släpp filer för att ladda upp"
+
+#: src/files-folder-view.tsx:164
+msgid "Cannot drop files, another upload is already in progress"
+msgstr "Det går inte att släppa filer, en annan uppladdning pågår redan"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:270
+msgid "Close"
+msgstr "Stäng"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:55
+msgid "Go up a directory"
+msgstr "Gå upp en katalog"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:61
+msgid "Go back"
+msgstr "Gå tillbaka"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:67
+msgid "Go forward"
+msgstr "Gå framåt"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:73
+#: src/dialogs/keyboardShortcutsHelp.tsx:79
+msgid "Activate selected item, enter directory"
+msgstr "Aktivera valt objekt, gå in i katalog"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:95
+msgid "Rename selected file or directory"
+msgstr "Byt namn på vald fil eller katalog"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:102
+msgid "Create new directory"
+msgstr "Skapa ny katalog"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:108
+msgid "Copy selected file or directory"
+msgstr "Kopiera vald fil eller katalog"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:114
+msgid "Paste file or directory"
+msgstr "Klistra in fil eller katalog"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:120
+msgid "Select all"
+msgstr "Välj alla"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:131
+msgid "Save current file"
+msgstr "Spara nuvarande fil"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:135
+msgid "Close editor"
+msgstr "Stäng redigerare"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:148
+msgid "Keyboard shortcuts"
+msgstr "Tangentbordsgenvägar"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:152
+msgid "Navigation"
+msgstr "Navigering"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:162
+msgid "Editing"
+msgstr "Redigerar"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:172
+msgid "Editor"
+msgstr "Redigerare"
+
+#: src/dialogs/delete.tsx:34
+msgid "Force delete $0 items"
+msgstr "Tvinga radering $0 objekt"
+
+#: src/dialogs/delete.tsx:34
+msgid "Delete $0 items?"
+msgstr "Radera $0 objekt?"
+
+#: src/dialogs/delete.tsx:40
+msgid "Force delete file $0?"
+msgstr "Tvinga radering av fil $0?"
+
+#: src/dialogs/delete.tsx:40
+msgid "Delete file $0?"
+msgstr "Radera fil $0?"
+
+#: src/dialogs/delete.tsx:44
+msgid "Force delete link $0?"
+msgstr "Tvinga radering av länk $0?"
+
+#: src/dialogs/delete.tsx:44
+msgid "Delete link $0?"
+msgstr "Radera länk $0?"
+
+#: src/dialogs/delete.tsx:48
+msgid "Force delete directory $0?"
+msgstr "Tvinga radering av katalog $0?"
+
+#: src/dialogs/delete.tsx:48
+msgid "Delete directory $0?"
+msgstr "Radera katalog $0?"
+
+#: src/dialogs/delete.tsx:51
+msgid "Force delete $0"
+msgstr "Tvinga radering $0"
+
+#: src/dialogs/delete.tsx:51
+msgid "Delete $0?"
+msgstr "Radera $0?"
+
+#: src/dialogs/permissions.tsx:235
+msgid "No access"
+msgstr "Ingen åtkomst"
+
+#: src/dialogs/permissions.tsx:279
+msgid "Missing type"
+msgstr "Saknar typ"
+
+#: src/dialogs/permissions.tsx:285
+msgid "Collapse"
+msgstr "Fäll ihop"
+
+#: src/dialogs/permissions.tsx:286
+msgid "Show all files"
+msgstr "Visa alla filer"
+
+#: src/dialogs/permissions.tsx:304
+msgid "$0 permissions"
+msgstr "$0 behörigheter"
+
+#: src/dialogs/permissions.tsx:305
+msgid "Permissions for $0 files"
+msgstr "Behörigheter för $0 filer"
+
+#: src/dialogs/permissions.tsx:318
+msgid "Ownership"
+msgstr "Ägarskap"
+
+#: src/dialogs/permissions.tsx:334 src/files-card-body.tsx:591
+#: src/files-footer-detail.tsx:80 src/files-footer-detail.tsx:152
+msgid "Group"
+msgstr "Grupp"
+
+#: src/dialogs/permissions.tsx:351
+msgid "Access"
+msgstr "Åtkomst"
+
+#: src/dialogs/permissions.tsx:353
+msgid "Owner access"
+msgstr "Ägare tillgång"
+
+#: src/dialogs/permissions.tsx:365
+msgid "Group access"
+msgstr "Gruppåtkomst"
+
+#: src/dialogs/permissions.tsx:377
+msgid "Others access"
+msgstr "Andra tillgång"
+
+#: src/dialogs/permissions.tsx:390
+msgid "Security context"
+msgstr "Säkerhetskontext"
+
+#: src/dialogs/permissions.tsx:403
+msgid "Set executable as program"
+msgstr "Ställ in körbar fil som program"
+
+#: src/dialogs/permissions.tsx:415
+msgid "Change"
+msgstr "Ändra"
+
+#: src/dialogs/permissions.tsx:422
+msgid "Change permissions for enclosed files"
+msgstr "Ändra behörigheter för bifogade filer"
+
+#: src/dialogs/copyPasteOwnership.tsx:110
+msgid "(original owner)"
+msgstr "(original ägare)"
+
+#: src/dialogs/copyPasteOwnership.tsx:119
+msgid "keep original owners"
+msgstr "behåll ursprungliga ägare"
+
+#: src/dialogs/copyPasteOwnership.tsx:182
+msgid "Paste as owner"
+msgstr "Klistra in som ägare"
+
+#: src/dialogs/copyPasteOwnership.tsx:187
+msgid ""
+"Files being pasted have a different owner. By default, ownership will be "
+"changed to match the destination directory."
+msgstr ""
+"Filer som klistras in har en annan ägare. Som standard kommer äganderätten "
+"att ändras för att matcha målkatalogen."
+
+#: src/dialogs/copyPasteOwnership.tsx:190
+msgid "New owner"
+msgstr "Ny ägare"
+
+#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:250
+#: src/dialogs/editor.tsx:307
+msgid "Overwrite"
+msgstr "Skriv över"
+
+#: src/dialogs/rename.tsx:91
+msgid "New filename"
+msgstr "Nytt filnamn"
+
+#: src/dialogs/rename.tsx:91
+msgid "New name"
+msgstr "Nytt namn"
+
+#: src/dialogs/rename.tsx:101
+msgid "Rename $0?"
+msgstr "Byt namn på $0?"
+
+#: src/dialogs/symlink.tsx:53
+msgid "link to $0"
+msgstr "länk till $0"
+
+#: src/dialogs/symlink.tsx:128
+msgid "Create link to $0"
+msgstr "Skapa länk till $0"
+
+#: src/dialogs/symlink.tsx:157
+msgid "Target"
+msgstr "Mål"
+
+#: src/dialogs/symlink.tsx:164
+msgid "Symlink name"
+msgstr "Namn på symbolisk länk"
+
+#: src/dialogs/symlink.tsx:180
+msgid "Type"
+msgstr "Typ"
+
+#: src/dialogs/symlink.tsx:184
+msgid "Absolute vs. Relative"
+msgstr "Absolut vs. Relativ"
+
+#: src/dialogs/symlink.tsx:188
+msgid ""
+"Absolute symlinks are ideal when referring to files or directories that "
+"won't move, such as system files."
+msgstr ""
+"Absoluta symboliska länkar är idealiska när du hänvisar till filer eller "
+"kataloger som inte kan flyttas, till exempel systemfiler."
+
+#: src/dialogs/symlink.tsx:191
+msgid ""
+"Relative symlinks are useful when both a symlink and target might move at "
+"the same time, such as when renaming or moving a parent directory."
+msgstr ""
+"Relativa symboliska länkar är användbara när både en symbolisk länk och mål "
+"kan flyttas samtidigt, till exempel när du byter namn på eller flyttar en "
+"överordnad katalog."
+
+#: src/dialogs/symlink.tsx:202
+msgid "Absolute"
+msgstr "Absolut"
+
+#: src/dialogs/symlink.tsx:209
+msgid "Relative"
+msgstr "Relativ"
+
+#: src/dialogs/editor.tsx:48 src/dialogs/editor.tsx:221
+msgid "The file has been removed on disk"
+msgstr "Filen har tagits bort på disken"
+
+#: src/dialogs/editor.tsx:50
+msgid "The existing file changed unexpectedly"
+msgstr "Den befintliga filen ändrades oväntat"
+
+#. Translators: This is the title of a modal dialog.  $0 represents a filename.
+#: src/dialogs/editor.tsx:187
+msgid "Edit $0"
+msgstr "Redigera $0"
+
+#: src/dialogs/editor.tsx:187
+msgid "View $0"
+msgstr "Visa $0"
+
+#: src/dialogs/editor.tsx:222
+msgid "The file has changed on disk"
+msgstr "Filen har ändrats på disken"
+
+#: src/dialogs/editor.tsx:227
+msgid "Reload"
+msgstr "Ladda om"
+
+#: src/dialogs/editor.tsx:230
+msgid "Ignore"
+msgstr "Ignorera"
+
+#: src/dialogs/editor.tsx:264 src/dialogs/editor.tsx:321
+msgid "Save"
+msgstr "Spara"
+
+#: src/dialogs/editor.tsx:281
+msgid "Save changes?"
+msgstr "Spara ändringar?"
+
+#: src/dialogs/editor.tsx:290
+msgid "The file was deleted after it was opened, saving will recreate it."
+msgstr ""
+"Filen raderades efter att den öppnades, om du sparar kommer den att "
+"återskapas."
+
+#: src/dialogs/editor.tsx:291
+msgid "The file has changed on disk between when it was opened and now"
+msgstr "Filen har ändrats på disken mellan när den öppnades och nu"
 
 #: src/dialogs/editor.tsx:296
 msgid "$0 has unsaved changes and which will be permanently lost if discarded."
@@ -44,19 +714,115 @@ msgstr ""
 "$0 har osparade ändringar och som kommer att gå förlorade för alltid om de "
 "kasseras."
 
+#: src/dialogs/editor.tsx:329
+msgid "Discard"
+msgstr "Kassera"
+
+#: src/dialogs/create-file.tsx:163
+msgid "File name"
+msgstr "Filnamn"
+
+#: src/dialogs/create-file.tsx:208 src/dialogs/mkdir.tsx:135
+msgid "Create"
+msgstr "Skapa"
+
+#: src/dialogs/create-file.tsx:228
+msgid "Cannot create file in current directory"
+msgstr "Kan inte skapa fil i nuvarande katalog"
+
+#: src/dialogs/create-file.tsx:230
+msgid "Permission denied"
+msgstr "Åtkomst nekas"
+
+#: src/dialogs/mkdir.tsx:31
+msgid "Directory name cannot be empty"
+msgstr "Katalognamn kan inte vara tomt"
+
+#: src/dialogs/mkdir.tsx:33
+msgid "Directory name too long"
+msgstr "Katalognamn för långt"
+
+#: src/dialogs/mkdir.tsx:35
+msgid "Directory name cannot include a /"
+msgstr "Katalognamn kan inte inkludera /"
+
+#: src/dialogs/mkdir.tsx:96
+msgid "Directory name"
+msgstr "Katalognamn"
+
+#: src/dialogs/mkdir.tsx:110
+msgid "Directory owner"
+msgstr "Katalogägare"
+
+#: src/files-card-body.tsx:506
+msgid "No matching results"
+msgstr "Inga matchande resultat"
+
+#: src/files-card-body.tsx:507
+msgid "Clear filter"
+msgstr "Rensa filter"
+
+#: src/files-card-body.tsx:514
+msgid "Directory is empty"
+msgstr "Katalog är tom"
+
 #: src/files-card-body.tsx:519
 msgid "$0 item is hidden"
 msgid_plural "$0 items are hidden"
 msgstr[0] "($0 objekt är dolt)"
 msgstr[1] "($0 objekt är dolda)"
 
-#: src/dialogs/permissions.tsx:289
-msgid "$0 permissions"
-msgstr "$0 behörigheter"
+#: src/files-card-body.tsx:578
+msgid "Folder"
+msgstr "Mapp"
 
-#: src/dialogs/copyPasteOwnership.tsx:110
-msgid "(original owner)"
-msgstr "(original ägare)"
+#: src/files-card-body.tsx:580
+msgid "File"
+msgstr "Fil"
+
+#: src/files-card-body.tsx:591 src/files-footer-detail.tsx:80
+msgid "Others"
+msgstr "Övriga"
+
+#: src/files-footer-detail.tsx:36
+msgid "$0 files selected"
+msgstr "$0 filer valda"
+
+#: src/files-footer-detail.tsx:64
+msgid "Directory contains $0 directories, $1 files"
+msgstr "Katalog innehåller $0 kataloger, $1 filer"
+
+#: src/files-footer-detail.tsx:65
+msgid "Directory contains $0 directories, $1 files, $2 hidden"
+msgstr "Katalog innehåller $0 kataloger, $1 filer, $2 dolda"
+
+#: src/files-footer-detail.tsx:144
+msgid "User"
+msgstr "Användare"
+
+#: src/manifest.json:0
+msgid "File browser"
+msgstr "Filbläddrare"
+
+#: src/manifest.json:0
+msgid "files"
+msgstr "filer"
+
+#: src/manifest.json:0
+msgid "explorer"
+msgstr "utforskare"
+
+#: src/manifest.json:0
+msgid "filesystem"
+msgstr "filsystem"
+
+#: org.cockpit_project.files.metainfo.xml:5
+msgid "Files"
+msgstr "Filer"
+
+#: org.cockpit_project.files.metainfo.xml:6
+msgid "Manage your files"
+msgstr "Hantera dina filer"
 
 #: org.cockpit_project.files.metainfo.xml:8
 msgid ""
@@ -68,774 +834,9 @@ msgstr ""
 "ladda upp och ladda ner filer och ändra deras egenskaper. Den innehåller "
 "också en enkel filredigerare."
 
-#: src/upload-button.tsx:102
-msgid ""
-"A file with the same name already exists in \"$0\". Replacing it will "
-"overwrite its content."
-msgstr ""
-"En fil med samma namn finns redan i \"$0\". Om du ersätter den kommer dess "
-"innehåll att skrivas över."
-
-#: src/header.tsx:56
-msgid "A-Z"
-msgstr "A-Z"
-
-#: src/dialogs/symlink.tsx:202
-msgid "Absolute"
-msgstr "Absolut"
-
-#: src/dialogs/symlink.tsx:188
-msgid ""
-"Absolute symlinks are ideal when referring to files or directories that "
-"won't move, such as system files."
-msgstr ""
-"Absoluta symboliska länkar är idealiska när du hänvisar till filer eller "
-"kataloger som inte kan flyttas, till exempel systemfiler."
-
-#: src/dialogs/symlink.tsx:184
-msgid "Absolute vs. Relative"
-msgstr "Absolut vs. Relativ"
-
-#: src/dialogs/permissions.tsx:336
-msgid "Access"
-msgstr "Åtkomst"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:73
-#: src/dialogs/keyboardShortcutsHelp.tsx:79
-msgid "Activate selected item, enter directory"
-msgstr "Aktivera valt objekt, gå in i katalog"
-
-#: src/files-breadcrumbs.tsx:141
-msgid "Add to bookmarks"
-msgstr "Lägg till i bokmärken"
-
-#: src/upload-button.tsx:137
-msgid "Apply this action to all conflicting files"
-msgstr "Tillämpa den här åtgärden på alla konfliktfiler"
-
-#: src/common.ts:60
-msgid "Block device"
-msgstr "Blockenhet"
-
-#: src/files-breadcrumbs.tsx:161
-msgid "Bookmarked"
-msgstr "Bokmärkt"
-
-#: src/files-breadcrumbs.tsx:154
-msgid "Bookmarks"
-msgstr "Bokmärken"
-
-#: src/dialogs/permissions.tsx:409 src/dialogs/symlink.tsx:233
-#: src/dialogs/mkdir.tsx:137 src/dialogs/rename.tsx:87
-#: src/dialogs/create-file.tsx:211 src/dialogs/editor.tsx:270
-#: src/dialogs/editor.tsx:336 src/dialogs/copyPasteOwnership.tsx:170
-#: src/dialogs/delete.tsx:97 src/upload-button.tsx:146
-msgid "Cancel"
-msgstr "Avbryt"
-
-#: src/upload-button.tsx:477
-msgid "Cancel upload of $0"
-msgstr "Avbryt uppladdning av $0"
-
-#: src/upload-button.tsx:346
-msgid "Cancelled"
-msgstr "Avbruten"
-
-#: src/upload-button.tsx:348
-msgid "Cancelled upload of $0"
-msgstr "Avbruten uppladdning av $0"
-
-#: src/dialogs/create-file.tsx:228
-msgid "Cannot create file in current directory"
-msgstr "Kan inte skapa fil i nuvarande katalog"
-
-#: src/files-folder-view.tsx:164
-msgid "Cannot drop files, another upload is already in progress"
-msgstr "Det går inte att släppa filer, en annan uppladdning pågår redan"
-
-#: src/dialogs/permissions.tsx:400
-msgid "Change"
-msgstr "Ändra"
-
-#: src/upload-button.tsx:405
-msgid "Change permissions"
-msgstr "Ändra behörigheter"
-
-#: src/dialogs/permissions.tsx:407
-msgid "Change permissions for enclosed files"
-msgstr "Ändra behörigheter för bifogade filer"
-
-#: src/common.ts:61
-msgid "Character device"
-msgstr "Teckenenhet"
-
-#: src/files-card-body.tsx:507
-msgid "Clear filter"
-msgstr "Rensa filter"
-
-#: src/dialogs/editor.tsx:270 src/dialogs/keyboardShortcutsHelp.tsx:33
-msgid "Close"
-msgstr "Stäng"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:135
-msgid "Close editor"
-msgstr "Stäng redigerare"
-
-#: src/index.html:8
-msgid "Cockpit Files"
-msgstr "Cockpit filer"
-
 #: org.cockpit_project.files.metainfo.xml:21
 msgid "Cockpit Project"
 msgstr "Cockpitprojektet"
-
-#: src/dialogs/permissions.tsx:270
-msgid "Collapse"
-msgstr "Fäll ihop"
-
-#: src/menu.tsx:152 src/menu.tsx:206
-msgid "Copy"
-msgstr "Kopiera"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:108
-msgid "Copy selected file or directory"
-msgstr "Kopiera vald fil eller katalog"
-
-#: src/dialogs/mkdir.tsx:135 src/dialogs/create-file.tsx:208
-msgid "Create"
-msgstr "Skapa"
-
-#: src/dialogs/mkdir.tsx:80 src/menu.tsx:107
-msgid "Create directory"
-msgstr "Skapa katalog"
-
-#: src/dialogs/create-file.tsx:151 src/menu.tsx:112
-msgid "Create file"
-msgstr "Skapa fil"
-
-#: src/dialogs/symlink.tsx:231 src/menu.tsx:198
-msgid "Create link"
-msgstr "Skapa länk"
-
-#: src/dialogs/symlink.tsx:128
-msgid "Create link to $0"
-msgstr "Skapa länk till $0"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:102
-msgid "Create new directory"
-msgstr "Skapa ny katalog"
-
-#: src/dialogs/delete.tsx:95 src/menu.tsx:169 src/menu.tsx:211
-msgid "Delete"
-msgstr "Ta bort"
-
-#: src/dialogs/delete.tsx:34
-msgid "Delete $0 items?"
-msgstr "Radera $0 objekt?"
-
-#: src/dialogs/delete.tsx:51
-msgid "Delete $0?"
-msgstr "Radera $0?"
-
-#: src/dialogs/delete.tsx:48
-msgid "Delete directory $0?"
-msgstr "Radera katalog $0?"
-
-#: src/dialogs/delete.tsx:40
-msgid "Delete file $0?"
-msgstr "Radera fil $0?"
-
-#: src/dialogs/delete.tsx:44
-msgid "Delete link $0?"
-msgstr "Radera länk $0?"
-
-#: src/common.ts:62
-msgid "Directory"
-msgstr "Katalog"
-
-#: src/files-footer-detail.tsx:64
-msgid "Directory contains $0 directories, $1 files"
-msgstr "Katalog innehåller $0 kataloger, $1 filer"
-
-#: src/files-footer-detail.tsx:65
-msgid "Directory contains $0 directories, $1 files, $2 hidden"
-msgstr "Katalog innehåller $0 kataloger, $1 filer, $2 dolda"
-
-#: src/files-card-body.tsx:514
-msgid "Directory is empty"
-msgstr "Katalog är tom"
-
-#: src/dialogs/mkdir.tsx:96
-msgid "Directory name"
-msgstr "Katalognamn"
-
-#: src/dialogs/mkdir.tsx:31
-msgid "Directory name cannot be empty"
-msgstr "Katalognamn kan inte vara tomt"
-
-#: src/dialogs/mkdir.tsx:35
-msgid "Directory name cannot include a /"
-msgstr "Katalognamn kan inte inkludera /"
-
-#: src/dialogs/mkdir.tsx:33
-msgid "Directory name too long"
-msgstr "Katalognamn för långt"
-
-#: src/dialogs/mkdir.tsx:110
-msgid "Directory owner"
-msgstr "Katalogägare"
-
-#: src/dialogs/symlink.tsx:39 src/common.ts:113
-msgid "Directory with the same name exists"
-msgstr "Katalog med samma namn existerar"
-
-#: src/dialogs/editor.tsx:329
-msgid "Discard"
-msgstr "Kassera"
-
-#: src/header.tsx:241
-msgid "Display as a grid"
-msgstr "Visa som ett rutnät"
-
-#: src/header.tsx:240
-msgid "Display as a list"
-msgstr "Visa som en lista"
-
-#: src/menu.tsx:179
-msgid "Download"
-msgstr "Hämta"
-
-#: src/files-folder-view.tsx:156
-msgid "Drop files to upload"
-msgstr "Släpp filer för att ladda upp"
-
-#. Translators: This is the title of a modal dialog.  $0 represents a filename.
-#: src/dialogs/editor.tsx:187
-msgid "Edit $0"
-msgstr "Redigera $0"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:87 src/files-breadcrumbs.tsx:303
-msgid "Edit path"
-msgstr "Redigera sökväg"
-
-#: src/menu.tsx:118 src/menu.tsx:158 src/menu.tsx:225
-msgid "Edit permissions"
-msgstr "Redigera behörigheter"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:162
-msgid "Editing"
-msgstr "Redigerar"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:172
-msgid "Editor"
-msgstr "Redigerare"
-
-#: src/common.ts:50
-msgid "Execute-only"
-msgstr "Exekvering-endast"
-
-#: src/upload-button.tsx:278
-msgid "Failed"
-msgstr "Misslyckades"
-
-#: src/files-card-body.tsx:580
-msgid "File"
-msgstr "Fil"
-
-#: src/manifest.json:0
-msgid "File browser"
-msgstr "Filbläddrare"
-
-#: src/dialogs/symlink.tsx:41 src/common.ts:115
-msgid "File exists"
-msgstr "Fil existerar"
-
-#: src/dialogs/create-file.tsx:163
-msgid "File name"
-msgstr "Filnamn"
-
-#: src/upload-button.tsx:374
-msgid "File uploaded"
-msgstr "Fil uppladdad"
-
-#: src/common.ts:110
-msgid "Filename is the same as original name"
-msgstr "Filnamn är samma som originalnamn"
-
-#: org.cockpit_project.files.metainfo.xml:5
-msgid "Files"
-msgstr "Filer"
-
-#: src/dialogs/copyPasteOwnership.tsx:187
-msgid ""
-"Files being pasted have a different owner. By default, ownership will be "
-"changed to match the destination directory."
-msgstr ""
-"Filer som klistras in har en annan ägare. Som standard kommer äganderätten "
-"att ändras för att matcha målkatalogen."
-
-#: src/upload-button.tsx:374
-msgid "Files uploaded"
-msgstr "Filer uppladdade"
-
-#: src/files-breadcrumbs.tsx:236
-msgid "Filesystem"
-msgstr "Filsystem"
-
-#: src/header.tsx:177
-msgid "Filter directory"
-msgstr "Filtrera katalog"
-
-#: src/header.tsx:78
-msgid "First modified"
-msgstr "Först modifierad"
-
-#: src/files-card-body.tsx:578
-msgid "Folder"
-msgstr "Mapp"
-
-#: src/dialogs/delete.tsx:51
-msgid "Force delete $0"
-msgstr "Tvinga radering $0"
-
-#: src/dialogs/delete.tsx:34
-msgid "Force delete $0 items"
-msgstr "Tvinga radering $0 objekt"
-
-#: src/dialogs/delete.tsx:48
-msgid "Force delete directory $0?"
-msgstr "Tvinga radering av katalog $0?"
-
-#: src/dialogs/delete.tsx:40
-msgid "Force delete file $0?"
-msgstr "Tvinga radering av fil $0?"
-
-#: src/dialogs/delete.tsx:44
-msgid "Force delete link $0?"
-msgstr "Tvinga radering av länk $0?"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:61
-msgid "Go back"
-msgstr "Gå tillbaka"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:67
-msgid "Go forward"
-msgstr "Gå framåt"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:55
-msgid "Go up a directory"
-msgstr "Gå upp en katalog"
-
-#: src/dialogs/permissions.tsx:319 src/files-footer-detail.tsx:80
-#: src/files-footer-detail.tsx:152 src/files-card-body.tsx:591
-msgid "Group"
-msgstr "Grupp"
-
-#: src/dialogs/permissions.tsx:350
-msgid "Group access"
-msgstr "Gruppåtkomst"
-
-#: src/header.tsx:271
-msgid "Hide hidden items"
-msgstr "Dölj dolda objekt"
-
-#: src/files-breadcrumbs.tsx:46
-msgid "Home"
-msgstr "Hem"
-
-#: src/dialogs/editor.tsx:230
-msgid "Ignore"
-msgstr "Ignorera"
-
-#: src/upload-button.tsx:145
-msgid "Keep original"
-msgstr "Behåll original"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:148
-msgid "Keyboard shortcuts"
-msgstr "Tangentbordsgenvägar"
-
-#: src/header.tsx:67
-msgid "Largest size"
-msgstr "Störst storlek"
-
-#: src/header.tsx:82
-msgid "Last modified"
-msgstr "Senast modifierad"
-
-#: src/header.tsx:104
-msgid "Least permissive"
-msgstr "Minst tillåtande"
-
-#: org.cockpit_project.files.metainfo.xml:6
-msgid "Manage your files"
-msgstr "Hantera dina filer"
-
-#: src/dialogs/permissions.tsx:264
-msgid "Missing type"
-msgstr "Saknar typ"
-
-#: src/header.tsx:75 src/files-card-body.tsx:539 src/files-card-body.tsx:659
-msgid "Modified"
-msgstr "Modifierad"
-
-#: src/header.tsx:100
-msgid "Most permissive"
-msgstr "Mest tillåtande"
-
-#: src/header.tsx:53 src/files-card-body.tsx:534
-msgid "Name"
-msgstr "Namn"
-
-#: src/dialogs/symlink.tsx:36 src/common.ts:104
-msgid "Name cannot be empty"
-msgstr "Namn kan inte vara tomt"
-
-#: src/common.ts:108
-msgid "Name cannot include a /"
-msgstr "Namn kan inte inkludera ett /"
-
-#: src/common.ts:106
-msgid "Name too long"
-msgstr "Namn för långt"
-
-#: src/common.ts:63
-msgid "Named pipe"
-msgstr "Namngivet rör"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:152
-msgid "Navigation"
-msgstr "Navigering"
-
-#: src/upload-button.tsx:123
-msgid "New file"
-msgstr "Ny fil"
-
-#: src/dialogs/rename.tsx:91
-msgid "New filename"
-msgstr "Nytt filnamn"
-
-#: src/dialogs/rename.tsx:91
-msgid "New name"
-msgstr "Nytt namn"
-
-#: src/dialogs/copyPasteOwnership.tsx:190
-msgid "New owner"
-msgstr "Ny ägare"
-
-#: src/dialogs/permissions.tsx:220
-msgid "No access"
-msgstr "Ingen åtkomst"
-
-#: src/files-card-body.tsx:506
-msgid "No matching results"
-msgstr "Inga matchande resultat"
-
-#: src/common.ts:49
-msgid "None"
-msgstr "Inga"
-
-#: src/files-breadcrumbs.tsx:161
-msgid "Not bookmarked"
-msgstr "Inte bokmärkt"
-
-#: src/menu.tsx:127 src/menu.tsx:188
-msgid "Open in terminal"
-msgstr "Öppna i terminal"
-
-#: src/menu.tsx:144
-msgid "Open text file"
-msgstr "Öppna en textfil"
-
-#: src/upload-button.tsx:128
-msgid "Original file on server"
-msgstr "Original fil på server"
-
-#: src/files-footer-detail.tsx:80 src/files-card-body.tsx:591
-msgid "Others"
-msgstr "Övriga"
-
-#: src/dialogs/permissions.tsx:362
-msgid "Others access"
-msgstr "Andra tillgång"
-
-#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:250
-#: src/dialogs/editor.tsx:307
-msgid "Overwrite"
-msgstr "Skriv över"
-
-#: src/dialogs/permissions.tsx:304 src/dialogs/create-file.tsx:185
-#: src/files-footer-detail.tsx:80 src/header.tsx:86 src/files-card-body.tsx:544
-#: src/files-card-body.tsx:591 src/files-card-body.tsx:667
-msgid "Owner"
-msgstr "Ägare"
-
-#: src/dialogs/permissions.tsx:338
-msgid "Owner access"
-msgstr "Ägare tillgång"
-
-#: src/header.tsx:89
-msgid "Owner ascending"
-msgstr "Ägare ökande"
-
-#: src/header.tsx:93
-msgid "Owner descending"
-msgstr "Ägare minskande"
-
-#: src/dialogs/permissions.tsx:303
-msgid "Ownership"
-msgstr "Ägarskap"
-
-#: src/dialogs/copyPasteOwnership.tsx:168 src/menu.tsx:100
-msgid "Paste"
-msgstr "Klistra in"
-
-#: src/dialogs/copyPasteOwnership.tsx:182
-msgid "Paste as owner"
-msgstr "Klistra in som ägare"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:114
-msgid "Paste file or directory"
-msgstr "Klistra in fil eller katalog"
-
-#: src/dialogs/copyPasteOwnership.tsx:56 src/menu.tsx:51
-msgid "Pasting failed"
-msgstr "Inklistring misslyckades"
-
-#: src/dialogs/create-file.tsx:230
-msgid "Permission denied"
-msgstr "Åtkomst nekas"
-
-#: src/header.tsx:97 src/files-card-body.tsx:549 src/files-card-body.tsx:674
-msgid "Permissions"
-msgstr "Behörigheter"
-
-#: src/dialogs/permissions.tsx:290
-msgid "Permissions for $0 files"
-msgstr "Behörigheter för $0 filer"
-
-#: src/common.ts:54
-msgid "Read and execute"
-msgstr "Läs och exekvera"
-
-#: src/dialogs/permissions.tsx:210 src/common.ts:55
-msgid "Read and write"
-msgstr "Läs och skriv"
-
-#: src/common.ts:56
-msgid "Read, write, and execute"
-msgstr "Läs, skriv, och exekvera"
-
-#: src/dialogs/permissions.tsx:215 src/dialogs/editor.tsx:189 src/common.ts:53
-msgid "Read-only"
-msgstr "Läs-endast"
-
-#: src/common.ts:65
-msgid "Regular file"
-msgstr "Vanlig fil"
-
-#: src/dialogs/symlink.tsx:209
-msgid "Relative"
-msgstr "Relativ"
-
-#: src/dialogs/symlink.tsx:191
-msgid ""
-"Relative symlinks are useful when both a symlink and target might move at "
-"the same time, such as when renaming or moving a parent directory."
-msgstr ""
-"Relativa symboliska länkar är användbara när både en symbolisk länk och mål "
-"kan flyttas samtidigt, till exempel när du byter namn på eller flyttar en "
-"överordnad katalog."
-
-#: src/dialogs/editor.tsx:227
-msgid "Reload"
-msgstr "Ladda om"
-
-#: src/files-breadcrumbs.tsx:139
-msgid "Remove from bookmarks"
-msgstr "Ta bort från bokmärken"
-
-#: src/dialogs/rename.tsx:78 src/menu.tsx:163
-msgid "Rename"
-msgstr "Byt namn"
-
-#: src/dialogs/rename.tsx:101
-msgid "Rename $0?"
-msgstr "Byt namn på $0?"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:95
-msgid "Rename selected file or directory"
-msgstr "Byt namn på vald fil eller katalog"
-
-#: src/upload-button.tsx:143
-msgid "Replace"
-msgstr "Ersätt"
-
-#: src/upload-button.tsx:95
-msgid "Replace file $0?"
-msgstr "Ersätt fil $0?"
-
-#: src/dialogs/editor.tsx:264 src/dialogs/editor.tsx:321
-msgid "Save"
-msgstr "Spara"
-
-#: src/dialogs/editor.tsx:281
-msgid "Save changes?"
-msgstr "Spara ändringar?"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:131
-msgid "Save current file"
-msgstr "Spara nuvarande fil"
-
-#: src/dialogs/permissions.tsx:375
-msgid "Security context"
-msgstr "Säkerhetskontext"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:120
-msgid "Select all"
-msgstr "Välj alla"
-
-#: src/dialogs/permissions.tsx:388
-msgid "Set executable as program"
-msgstr "Ställ in körbar fil som program"
-
-#: src/dialogs/permissions.tsx:271
-msgid "Show all files"
-msgstr "Visa alla filer"
-
-#: src/header.tsx:271 src/files-card-body.tsx:522
-msgid "Show hidden items"
-msgstr "Visa dolda objekt"
-
-#: src/header.tsx:152
-msgid "Show keyboard shortcuts"
-msgstr "Visa tangentbordsgenvägar"
-
-#: src/header.tsx:64 src/files-card-body.tsx:535 src/files-card-body.tsx:652
-msgid "Size"
-msgstr "Storlek"
-
-#: src/header.tsx:71
-msgid "Smallest size"
-msgstr "Minsta storlek"
-
-#: src/common.ts:66
-msgid "Socket"
-msgstr "Uttag"
-
-#: src/header.tsx:258
-msgid "Sort"
-msgstr "Sortera"
-
-#: src/common.ts:64
-msgid "Symbolic link"
-msgstr "Symbolisk länk"
-
-#: src/dialogs/symlink.tsx:164
-msgid "Symlink name"
-msgstr "Namn på symbolisk länk"
-
-#: src/dialogs/symlink.tsx:157
-msgid "Target"
-msgstr "Mål"
-
-#: src/dialogs/editor.tsx:50
-msgid "The existing file changed unexpectedly"
-msgstr "Den befintliga filen ändrades oväntat"
-
-#: src/dialogs/editor.tsx:48 src/dialogs/editor.tsx:221
-msgid "The file has been removed on disk"
-msgstr "Filen har tagits bort på disken"
-
-#: src/dialogs/editor.tsx:222
-msgid "The file has changed on disk"
-msgstr "Filen har ändrats på disken"
-
-#: src/dialogs/editor.tsx:291
-msgid "The file has changed on disk between when it was opened and now"
-msgstr "Filen har ändrats på disken mellan när den öppnades och nu"
-
-#: src/dialogs/editor.tsx:290
-msgid "The file was deleted after it was opened, saving will recreate it."
-msgstr ""
-"Filen raderades efter att den öppnades, om du sparar kommer den att "
-"återskapas."
-
-#: src/dialogs/symlink.tsx:180
-msgid "Type"
-msgstr "Typ"
-
-#: src/files-breadcrumbs.tsx:94
-msgid "Unable to create bookmark directory"
-msgstr "Kan inte skapa en bokmärkeskatalog"
-
-#: src/upload-button.tsx:324
-msgid "Unable to move uploaded file to final destination"
-msgstr "Det gick inte att flytta uppladdad fil till slutdestinationen"
-
-#: src/files-breadcrumbs.tsx:117
-msgid "Unable to save bookmark file"
-msgstr "Kan inte spara bokmärkesfilen"
-
-#: src/upload-button.tsx:513
-msgid "Upload"
-msgstr "Ladda upp"
-
-#: src/upload-button.tsx:494
-msgid "Upload $0% completed"
-msgstr "Uppladdning $0% slutförd"
-
-#: src/upload-button.tsx:322 src/upload-button.tsx:352
-msgid "Upload error"
-msgstr "Uppladdningsfel"
-
-#: src/upload-button.tsx:60
-msgid "Uploaded as $0, $1"
-msgstr "Uppladdad som $0,$1"
-
-#: src/upload-button.tsx:458
-msgid "Uploads"
-msgstr "Uppladdningar"
-
-#: src/files-footer-detail.tsx:144
-msgid "User"
-msgstr "Användare"
-
-#: src/dialogs/editor.tsx:187
-msgid "View $0"
-msgstr "Visa $0"
-
-#: src/common.ts:52
-msgid "Write and execute"
-msgstr "Skriv och exekvera"
-
-#: src/dialogs/permissions.tsx:230 src/common.ts:51
-msgid "Write-only"
-msgstr "Skriv-endast"
-
-#: src/header.tsx:60
-msgid "Z-A"
-msgstr "Z-A"
-
-#: src/manifest.json:0
-msgid "explorer"
-msgstr "utforskare"
-
-#: src/manifest.json:0
-msgid "files"
-msgstr "filer"
-
-#: src/manifest.json:0
-msgid "filesystem"
-msgstr "filsystem"
-
-#: src/dialogs/copyPasteOwnership.tsx:119
-msgid "keep original owners"
-msgstr "behåll ursprungliga ägare"
-
-#: src/dialogs/symlink.tsx:53
-msgid "link to $0"
-msgstr "länk till $0"
 
 #~ msgid "Successfully uploaded file(s)"
 #~ msgstr "Fil(er) som har laddats upp framgångsrikt"

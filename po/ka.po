@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-15 08:01+0000\n"
+"POT-Creation-Date: 2026-09-28 11:35+0000\n"
 "PO-Revision-Date: 2026-06-21 14:10+0000\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <https://translate.fedoraproject.org/projects/"
@@ -26,17 +26,686 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 2026.6.1\n"
 
-#: src/menu.tsx:53
-msgid "\"$0\" exists, not overwriting with paste."
-msgstr "\"$0\" არსებობს. ჩასმით მას თავზე არ გადაეწერება."
+#: src/index.html:8
+msgid "Cockpit Files"
+msgstr "Cockpit Files"
+
+#: src/files-breadcrumbs.tsx:46
+msgid "Home"
+msgstr "საწყისი"
+
+#: src/files-breadcrumbs.tsx:94
+msgid "Unable to create bookmark directory"
+msgstr "სანიშნეების საქაღალდის შექმნა შეუძლებელია"
+
+#: src/files-breadcrumbs.tsx:117
+msgid "Unable to save bookmark file"
+msgstr "სანიშნეს ფაილის შენახვა შეუძლებელია"
+
+#: src/files-breadcrumbs.tsx:139
+msgid "Remove from bookmarks"
+msgstr "სანიშნეებიდან წაშლა"
+
+#: src/files-breadcrumbs.tsx:141
+msgid "Add to bookmarks"
+msgstr "სანიშნეებში დამატება"
+
+#: src/files-breadcrumbs.tsx:154
+msgid "Bookmarks"
+msgstr "სანიშნეები"
+
+#: src/files-breadcrumbs.tsx:161
+msgid "Bookmarked"
+msgstr "ჩამატებულია სანიშნეებში"
+
+#: src/files-breadcrumbs.tsx:161
+msgid "Not bookmarked"
+msgstr "სანიშნეებში არაა"
+
+#: src/files-breadcrumbs.tsx:236
+msgid "Filesystem"
+msgstr "ფაილური სისტემა"
+
+#: src/files-breadcrumbs.tsx:303 src/dialogs/keyboardShortcutsHelp.tsx:87
+msgid "Edit path"
+msgstr "ბილიკის ჩასწორება"
+
+#: src/header.tsx:53 src/files-card-body.tsx:534
+msgid "Name"
+msgstr "სახელი"
+
+#: src/header.tsx:56
+msgid "A-Z"
+msgstr "A-Z"
+
+#: src/header.tsx:60
+msgid "Z-A"
+msgstr "Z-A"
+
+#: src/header.tsx:64 src/files-card-body.tsx:535 src/files-card-body.tsx:652
+msgid "Size"
+msgstr "ზომა"
+
+#: src/header.tsx:67
+msgid "Largest size"
+msgstr "უდიდესი ზომა"
+
+#: src/header.tsx:71
+msgid "Smallest size"
+msgstr "უმცირესი ზომა"
+
+#: src/header.tsx:75 src/files-card-body.tsx:539 src/files-card-body.tsx:659
+msgid "Modified"
+msgstr "შეცვლილია"
+
+#: src/header.tsx:78
+msgid "First modified"
+msgstr "პირველი ცვლილება"
+
+#: src/header.tsx:82
+msgid "Last modified"
+msgstr "ბოლო ცვლილება"
+
+#: src/header.tsx:86 src/dialogs/permissions.tsx:319
+#: src/dialogs/create-file.tsx:185 src/files-card-body.tsx:544
+#: src/files-card-body.tsx:591 src/files-card-body.tsx:667
+#: src/files-footer-detail.tsx:80
+msgid "Owner"
+msgstr "მფლობელი"
+
+#: src/header.tsx:89
+msgid "Owner ascending"
+msgstr "მფლობელი აღმავალი"
+
+#: src/header.tsx:93
+msgid "Owner descending"
+msgstr "მფლობელი დაღმავალი"
+
+#: src/header.tsx:97 src/files-card-body.tsx:549 src/files-card-body.tsx:674
+msgid "Permissions"
+msgstr "წვდომები"
+
+#: src/header.tsx:100
+msgid "Most permissive"
+msgstr "ყველაზე მეტი დაშვებით"
+
+#: src/header.tsx:104
+msgid "Least permissive"
+msgstr "ყველაზე ნაკლები დაშვებით"
+
+#: src/header.tsx:152
+msgid "Show keyboard shortcuts"
+msgstr "კლავიატურის მალსახმობების ჩვენება"
+
+#: src/header.tsx:177
+msgid "Filter directory"
+msgstr "საქაღალდის ფილტრი"
+
+#: src/header.tsx:240
+msgid "Display as a list"
+msgstr "სიის სახით ჩვენება"
+
+#: src/header.tsx:241
+msgid "Display as a grid"
+msgstr "ბადის სახით ჩვენება"
+
+#: src/header.tsx:258
+msgid "Sort"
+msgstr "დალაგება"
+
+#: src/header.tsx:271
+msgid "Hide hidden items"
+msgstr "დამალული ელემენტების დამალვა"
+
+#: src/header.tsx:271 src/files-card-body.tsx:522
+msgid "Show hidden items"
+msgstr "დამალული ელემენტების ჩვენება"
 
 #: src/upload-button.tsx:56
 msgid "$0 files"
 msgstr "$0 ფაილი"
 
-#: src/files-footer-detail.tsx:36
-msgid "$0 files selected"
-msgstr "მონიშნულია $0 ფაილი"
+#: src/upload-button.tsx:60
+msgid "Uploaded as $0, $1"
+msgstr "ატვირთულია, როგორც $0.$1"
+
+#: src/upload-button.tsx:95
+msgid "Replace file $0?"
+msgstr "ჩავანაცვლო ფაილი $0?"
+
+#: src/upload-button.tsx:102
+msgid ""
+"A file with the same name already exists in \"$0\". Replacing it will "
+"overwrite its content."
+msgstr ""
+"ფაილი იგივე სახელით \"$0\"-ში უკვე არსებობს. მისი ჩანაცვლება მის შემცველობას "
+"თავზე გადააწერს."
+
+#: src/upload-button.tsx:123
+msgid "New file"
+msgstr "ახალი ფაილი"
+
+#: src/upload-button.tsx:128
+msgid "Original file on server"
+msgstr "ორიგინალი ფაილი სერვერზე"
+
+#: src/upload-button.tsx:137
+msgid "Apply this action to all conflicting files"
+msgstr "ამ ქმედების გადატარება ყველა კონფლიქტურ ფაილზე"
+
+#: src/upload-button.tsx:143
+msgid "Replace"
+msgstr "ჩანაცვლება"
+
+#: src/upload-button.tsx:145
+msgid "Keep original"
+msgstr "ორიგინალის შენარჩუნება"
+
+#: src/upload-button.tsx:146 src/dialogs/delete.tsx:97
+#: src/dialogs/permissions.tsx:424 src/dialogs/copyPasteOwnership.tsx:170
+#: src/dialogs/rename.tsx:87 src/dialogs/symlink.tsx:233
+#: src/dialogs/editor.tsx:270 src/dialogs/editor.tsx:336
+#: src/dialogs/create-file.tsx:211 src/dialogs/mkdir.tsx:137
+msgid "Cancel"
+msgstr "გაუქმება"
+
+#: src/upload-button.tsx:278
+msgid "Failed"
+msgstr "ჩავარდა"
+
+#: src/upload-button.tsx:322 src/upload-button.tsx:352
+msgid "Upload error"
+msgstr "ატვირთვის შეცდომა"
+
+#: src/upload-button.tsx:324
+msgid "Unable to move uploaded file to final destination"
+msgstr "ატვირთული ფაილების საბოლოო სამიზნეზე გადატანა შეუძლებელია"
+
+#: src/upload-button.tsx:346
+msgid "Cancelled"
+msgstr "გაუქმებულია"
+
+#: src/upload-button.tsx:348
+msgid "Cancelled upload of $0"
+msgstr "$0-ის ატვირთვა შეწყდა"
+
+#: src/upload-button.tsx:374
+msgid "File uploaded"
+msgstr "ფაილი ატვირთულია"
+
+#: src/upload-button.tsx:374
+msgid "Files uploaded"
+msgstr "ფაილები ატვირთულია"
+
+#: src/upload-button.tsx:405
+msgid "Change permissions"
+msgstr "წვდომების შეცვლა"
+
+#: src/upload-button.tsx:458
+msgid "Uploads"
+msgstr "ატვირთვები"
+
+#: src/upload-button.tsx:477
+msgid "Cancel upload of $0"
+msgstr "$0-ის ატვირთვის შეწყვეტა"
+
+#
+#: src/upload-button.tsx:494
+msgid "Upload $0% completed"
+msgstr "ატვირთვის $0% დასრულდა"
+
+#: src/upload-button.tsx:513
+msgid "Upload"
+msgstr "ატვირთვა"
+
+#: src/common.ts:49
+msgid "None"
+msgstr "არაფერი"
+
+#: src/common.ts:50
+msgid "Execute-only"
+msgstr "მხოლოდ-გამშვები"
+
+#: src/common.ts:51 src/dialogs/permissions.tsx:245
+msgid "Write-only"
+msgstr "მხოლოდ-ჩაწერადი"
+
+#: src/common.ts:52
+msgid "Write and execute"
+msgstr "ჩაწერა და შესრულება"
+
+#: src/common.ts:53 src/dialogs/permissions.tsx:230 src/dialogs/editor.tsx:189
+msgid "Read-only"
+msgstr "მხოლოდ-წასაკითხად"
+
+#: src/common.ts:54
+msgid "Read and execute"
+msgstr "წაკითხვა და გაშვება"
+
+#: src/common.ts:55 src/dialogs/permissions.tsx:225
+msgid "Read and write"
+msgstr "წაკითხვა და ჩაწერა"
+
+#: src/common.ts:56
+msgid "Read, write, and execute"
+msgstr "წაკითხვა, ჩაწერა და გაშვება"
+
+#: src/common.ts:60
+msgid "Block device"
+msgstr "ბლოკური მოწყობილობა"
+
+#: src/common.ts:61
+msgid "Character device"
+msgstr "სიმბოლური მოწყობილობა"
+
+#: src/common.ts:62
+msgid "Directory"
+msgstr "საქაღალდე"
+
+#: src/common.ts:63
+msgid "Named pipe"
+msgstr "სახელიანი ფაიფი"
+
+#: src/common.ts:64
+msgid "Symbolic link"
+msgstr "სიმბმული"
+
+#: src/common.ts:65
+msgid "Regular file"
+msgstr "ჩვეულებრივი ფაილი"
+
+#: src/common.ts:66
+msgid "Socket"
+msgstr "სოკეტი"
+
+#: src/common.ts:104 src/dialogs/symlink.tsx:36
+msgid "Name cannot be empty"
+msgstr "სახელი არ შეიძლება იყოს ცარიელი"
+
+#: src/common.ts:106
+msgid "Name too long"
+msgstr "სახელი ძალიან გრძელია"
+
+#: src/common.ts:108
+msgid "Name cannot include a /"
+msgstr "სახელი, არ შეიძლება, სიმბოლოს '/' შეიცავდეს"
+
+#: src/common.ts:110
+msgid "Filename is the same as original name"
+msgstr "ფაილის სახელი იგივეა, რაც საწყისი სახელი"
+
+#: src/common.ts:113 src/dialogs/symlink.tsx:39
+msgid "Directory with the same name exists"
+msgstr "საქაღალდე იგივე სახელით უკვე არსებობს"
+
+#: src/common.ts:115 src/dialogs/symlink.tsx:41
+msgid "File exists"
+msgstr "ფაილი არსებობს"
+
+#: src/menu.tsx:51 src/dialogs/copyPasteOwnership.tsx:56
+msgid "Pasting failed"
+msgstr "ჩასმა ჩავარდა"
+
+#: src/menu.tsx:53
+msgid "\"$0\" exists, not overwriting with paste."
+msgstr "\"$0\" არსებობს. ჩასმით მას თავზე არ გადაეწერება."
+
+#: src/menu.tsx:100 src/dialogs/copyPasteOwnership.tsx:168
+msgid "Paste"
+msgstr "ჩასმა"
+
+#: src/menu.tsx:107 src/dialogs/mkdir.tsx:80
+msgid "Create directory"
+msgstr "საქაღალდის შექმნა"
+
+#: src/menu.tsx:112 src/dialogs/create-file.tsx:151
+msgid "Create file"
+msgstr "ფაილის შექმნა"
+
+#: src/menu.tsx:118 src/menu.tsx:158 src/menu.tsx:225
+msgid "Edit permissions"
+msgstr "წვდომების ჩასწორება"
+
+#: src/menu.tsx:127 src/menu.tsx:188
+msgid "Open in terminal"
+msgstr "ტერმინალში გახსნა"
+
+#: src/menu.tsx:144
+msgid "Open text file"
+msgstr "ტექსტური ფაილის გახსნა"
+
+#: src/menu.tsx:152 src/menu.tsx:206
+msgid "Copy"
+msgstr "კოპირება"
+
+#: src/menu.tsx:163 src/dialogs/rename.tsx:78
+msgid "Rename"
+msgstr "გადარქმევა"
+
+#: src/menu.tsx:169 src/menu.tsx:211 src/dialogs/delete.tsx:95
+msgid "Delete"
+msgstr "წაშლა"
+
+#: src/menu.tsx:179
+msgid "Download"
+msgstr "გადმოწერა"
+
+#: src/menu.tsx:198 src/dialogs/symlink.tsx:231
+msgid "Create link"
+msgstr "ბმულის შექმნა"
+
+#: src/files-folder-view.tsx:156
+msgid "Drop files to upload"
+msgstr "ასატვირთად დაყარეთ ფაილები"
+
+#: src/files-folder-view.tsx:164
+msgid "Cannot drop files, another upload is already in progress"
+msgstr "ფაილებს ვერ დაყრით, რადგან ფაილების ატვირთვა უკვე მიმდინარეობს"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:270
+msgid "Close"
+msgstr "დახურვა"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:55
+msgid "Go up a directory"
+msgstr "ზემო საქაღალდეზე გადასვლა"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:61
+msgid "Go back"
+msgstr "უკან გადასვლა"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:67
+msgid "Go forward"
+msgstr "წინ გადასვლა"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:73
+#: src/dialogs/keyboardShortcutsHelp.tsx:79
+msgid "Activate selected item, enter directory"
+msgstr "მონიშნული ელემენტის გააქტიურება საქაღალდეში შესვლა"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:95
+msgid "Rename selected file or directory"
+msgstr "მონიშნული ფაილის ან საქაღალდის სახელის გადარქმევა"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:102
+msgid "Create new directory"
+msgstr "ახალი საქაღალდის შექმნა"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:108
+msgid "Copy selected file or directory"
+msgstr "მონიშნული ფაილის ან საქაღალდის კოპირება"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:114
+msgid "Paste file or directory"
+msgstr "ფაილის ან საქაღალდის ჩასმა"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:120
+msgid "Select all"
+msgstr "ყველას მონიშვნა"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:131
+msgid "Save current file"
+msgstr "მიმდინარე ფაილის შენახვა"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:135
+msgid "Close editor"
+msgstr "რედაქტორის დახურვა"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:148
+msgid "Keyboard shortcuts"
+msgstr "კლავიატურის მალსახმობები"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:152
+msgid "Navigation"
+msgstr "ნავიგაცია"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:162
+msgid "Editing"
+msgstr "ჩასწორება"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:172
+msgid "Editor"
+msgstr "რედაქტორი"
+
+#: src/dialogs/delete.tsx:34
+msgid "Force delete $0 items"
+msgstr "$0 ელემენტის ნაძალადევი წაშლა"
+
+#: src/dialogs/delete.tsx:34
+msgid "Delete $0 items?"
+msgstr "წავშალო $0 ელემენტი?"
+
+#: src/dialogs/delete.tsx:40
+msgid "Force delete file $0?"
+msgstr "წავშალო ძალით ფაილი $0?"
+
+#: src/dialogs/delete.tsx:40
+msgid "Delete file $0?"
+msgstr "წავშალო ფაილი $0?"
+
+#: src/dialogs/delete.tsx:44
+msgid "Force delete link $0?"
+msgstr "წავშალო ძალით ბმული $0?"
+
+#: src/dialogs/delete.tsx:44
+msgid "Delete link $0?"
+msgstr "წავშალო ბმული $0?"
+
+#: src/dialogs/delete.tsx:48
+msgid "Force delete directory $0?"
+msgstr "წავშალო ძალით საქაღალდე $0?"
+
+#: src/dialogs/delete.tsx:48
+msgid "Delete directory $0?"
+msgstr "წავშალო საქაღალდე $0?"
+
+#: src/dialogs/delete.tsx:51
+msgid "Force delete $0"
+msgstr "$0-ის ნაძალადევი წაშლა"
+
+#: src/dialogs/delete.tsx:51
+msgid "Delete $0?"
+msgstr "წავშალო $0?"
+
+#: src/dialogs/permissions.tsx:235
+msgid "No access"
+msgstr "წვდომის გარეშე"
+
+#: src/dialogs/permissions.tsx:279
+msgid "Missing type"
+msgstr "ნაკლული ტიპი"
+
+#: src/dialogs/permissions.tsx:285
+msgid "Collapse"
+msgstr "ჩამოშლა"
+
+#: src/dialogs/permissions.tsx:286
+msgid "Show all files"
+msgstr "ყველა ფაილის ჩვენება"
+
+#: src/dialogs/permissions.tsx:304
+msgid "$0 permissions"
+msgstr "$0 წვდომა"
+
+#: src/dialogs/permissions.tsx:305
+msgid "Permissions for $0 files"
+msgstr "წვდომები $0 ფაილისთვის"
+
+#: src/dialogs/permissions.tsx:318
+msgid "Ownership"
+msgstr "მფლობელობა"
+
+#: src/dialogs/permissions.tsx:334 src/files-card-body.tsx:591
+#: src/files-footer-detail.tsx:80 src/files-footer-detail.tsx:152
+msgid "Group"
+msgstr "ჯგუფი"
+
+#: src/dialogs/permissions.tsx:351
+msgid "Access"
+msgstr "წვდომა"
+
+#: src/dialogs/permissions.tsx:353
+msgid "Owner access"
+msgstr "მფლობელის წვდომა"
+
+#: src/dialogs/permissions.tsx:365
+msgid "Group access"
+msgstr "ჯგუფის წვდომა"
+
+#: src/dialogs/permissions.tsx:377
+msgid "Others access"
+msgstr "სხვების წვდომა"
+
+#: src/dialogs/permissions.tsx:390
+msgid "Security context"
+msgstr "უსაფრთხოების კონტექსტი"
+
+#: src/dialogs/permissions.tsx:403
+msgid "Set executable as program"
+msgstr "პროგრამის გაშვებადად დაყენება"
+
+#: src/dialogs/permissions.tsx:415
+msgid "Change"
+msgstr "შეცვლა"
+
+#: src/dialogs/permissions.tsx:422
+msgid "Change permissions for enclosed files"
+msgstr "ჩასმული ფაილების წვდომების შეცვლა"
+
+#: src/dialogs/copyPasteOwnership.tsx:110
+msgid "(original owner)"
+msgstr "(ორიგინალი მფლობელი)"
+
+#: src/dialogs/copyPasteOwnership.tsx:119
+msgid "keep original owners"
+msgstr "ორიგინალი მფლობელების შენარჩუნება"
+
+#: src/dialogs/copyPasteOwnership.tsx:182
+msgid "Paste as owner"
+msgstr "ჩასმა მფლობელის სახელით"
+
+#: src/dialogs/copyPasteOwnership.tsx:187
+msgid ""
+"Files being pasted have a different owner. By default, ownership will be "
+"changed to match the destination directory."
+msgstr ""
+"ჩასმული ფაილების მფლობელი განსხვავებულია. ნაგულისხმევად მფლობელობა "
+"შეიცვლება, რომ ის სამიზნე საქაღალდისას დაემთხვეს."
+
+#: src/dialogs/copyPasteOwnership.tsx:190
+msgid "New owner"
+msgstr "ახალი მფლობელი"
+
+#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:250
+#: src/dialogs/editor.tsx:307
+msgid "Overwrite"
+msgstr "გადაწერა"
+
+#: src/dialogs/rename.tsx:91
+msgid "New filename"
+msgstr "ახალი ფაილის სახელი"
+
+#: src/dialogs/rename.tsx:91
+msgid "New name"
+msgstr "ახალი სახელი"
+
+#: src/dialogs/rename.tsx:101
+msgid "Rename $0?"
+msgstr "გადავარქვა სახელი ფაილს $0?"
+
+#: src/dialogs/symlink.tsx:53
+msgid "link to $0"
+msgstr "ბმული $0-ზე"
+
+#: src/dialogs/symlink.tsx:128
+msgid "Create link to $0"
+msgstr "ბმულის შექმნა $0-მდე"
+
+#: src/dialogs/symlink.tsx:157
+msgid "Target"
+msgstr "სამიზნე"
+
+#: src/dialogs/symlink.tsx:164
+msgid "Symlink name"
+msgstr "სიმბმულის სახელი"
+
+#: src/dialogs/symlink.tsx:180
+msgid "Type"
+msgstr "ტიპი"
+
+#: src/dialogs/symlink.tsx:184
+msgid "Absolute vs. Relative"
+msgstr "აბსოლუტური vs ფარდობითი"
+
+#: src/dialogs/symlink.tsx:188
+msgid ""
+"Absolute symlinks are ideal when referring to files or directories that "
+"won't move, such as system files."
+msgstr ""
+"აბსოლუტური სიმბმულები იდეალურია, როცა მიმართავთ ფაილებს, ან საქაღალდეებს, "
+"რომლის გადატანაც არ მოხდება. მაგ: სისტემური ფაილები."
+
+#: src/dialogs/symlink.tsx:191
+msgid ""
+"Relative symlinks are useful when both a symlink and target might move at "
+"the same time, such as when renaming or moving a parent directory."
+msgstr ""
+"შედარებითი სიმბმულები სასარგებლოა, როცა ორივე, სიმბმულიც და სამიზნეც "
+"შეიძლება, ერთდროულად იქნეს გადაადგილებული. მაგალითად, როცა სახელს არქმევთ, "
+"ან გადაგაგაქვთ მშობელი საქაღალდე."
+
+#: src/dialogs/symlink.tsx:202
+msgid "Absolute"
+msgstr "აბსოლუტური"
+
+#: src/dialogs/symlink.tsx:209
+msgid "Relative"
+msgstr "შედარებითი"
+
+#: src/dialogs/editor.tsx:48 src/dialogs/editor.tsx:221
+msgid "The file has been removed on disk"
+msgstr "ფაილი წაიშალა დისკიდან"
+
+#: src/dialogs/editor.tsx:50
+msgid "The existing file changed unexpectedly"
+msgstr "არსებული ფაილი წარმატებით შეიცვალა"
+
+#. Translators: This is the title of a modal dialog.  $0 represents a filename.
+#: src/dialogs/editor.tsx:187
+msgid "Edit $0"
+msgstr "$0-ის ჩასწორება"
+
+#: src/dialogs/editor.tsx:187
+msgid "View $0"
+msgstr "$0-ის ნახვა"
+
+#: src/dialogs/editor.tsx:222
+msgid "The file has changed on disk"
+msgstr "ფაილი შეიცვალა დისკზე"
+
+#: src/dialogs/editor.tsx:227
+msgid "Reload"
+msgstr "თავიდან ჩატვირთვა"
+
+#: src/dialogs/editor.tsx:230
+msgid "Ignore"
+msgstr "დაიგნორება"
+
+#: src/dialogs/editor.tsx:264 src/dialogs/editor.tsx:321
+msgid "Save"
+msgstr "შენახვა"
+
+#: src/dialogs/editor.tsx:281
+msgid "Save changes?"
+msgstr "შევინახო ცვლილებები?"
+
+#: src/dialogs/editor.tsx:290
+msgid "The file was deleted after it was opened, saving will recreate it."
+msgstr "ფაილი წაიშალა მას შემდეგ, რაც გახსენით. შენახვა მას თავიდან შექმნის."
+
+#: src/dialogs/editor.tsx:291
+msgid "The file has changed on disk between when it was opened and now"
+msgstr "ფაილი შეიცვალა დისკზე მას შემდეგ, რაც ის გახსენით"
 
 #: src/dialogs/editor.tsx:296
 msgid "$0 has unsaved changes and which will be permanently lost if discarded."
@@ -44,19 +713,115 @@ msgstr ""
 "$0-ს აქვს შეუნახავი ცვლილებები, რომლებიც სამუდამოდ დაიკარგება, თუ არ "
 "შეინახავთ."
 
+#: src/dialogs/editor.tsx:329
+msgid "Discard"
+msgstr "მოცილება"
+
+#: src/dialogs/create-file.tsx:163
+msgid "File name"
+msgstr "ფაილის სახელი"
+
+#: src/dialogs/create-file.tsx:208 src/dialogs/mkdir.tsx:135
+msgid "Create"
+msgstr "შექმნა"
+
+#: src/dialogs/create-file.tsx:228
+msgid "Cannot create file in current directory"
+msgstr "მიმდინარე საქაღალდეში ფაილის შექმნა შეუძლებელია"
+
+#: src/dialogs/create-file.tsx:230
+msgid "Permission denied"
+msgstr "წვდომა აკრძალულია"
+
+#: src/dialogs/mkdir.tsx:31
+msgid "Directory name cannot be empty"
+msgstr "საქაღალდის სახელი ცარიელი ვერ იქნება"
+
+#: src/dialogs/mkdir.tsx:33
+msgid "Directory name too long"
+msgstr "საქაღალდის სახელი ძალიან გრძელია"
+
+#: src/dialogs/mkdir.tsx:35
+msgid "Directory name cannot include a /"
+msgstr "საქაღალდის სახელი, არ შეიძლება, სიმბოლოს '/' შეიცავდეს"
+
+#: src/dialogs/mkdir.tsx:96
+msgid "Directory name"
+msgstr "საქაღალდის სახელი"
+
+#: src/dialogs/mkdir.tsx:110
+msgid "Directory owner"
+msgstr "საქაღალდის მფლობელი"
+
+#: src/files-card-body.tsx:506
+msgid "No matching results"
+msgstr "პასუხები არაა"
+
+#: src/files-card-body.tsx:507
+msgid "Clear filter"
+msgstr "ფილტრის გასუფთავება"
+
+#: src/files-card-body.tsx:514
+msgid "Directory is empty"
+msgstr "საქაღალდე ცარიელია"
+
 #: src/files-card-body.tsx:519
 msgid "$0 item is hidden"
 msgid_plural "$0 items are hidden"
 msgstr[0] "$0 ელემენტი დამალულია"
 msgstr[1] "$0 ელემენტი დამალულია"
 
-#: src/dialogs/permissions.tsx:289
-msgid "$0 permissions"
-msgstr "$0 წვდომა"
+#: src/files-card-body.tsx:578
+msgid "Folder"
+msgstr "საქაღალდე"
 
-#: src/dialogs/copyPasteOwnership.tsx:110
-msgid "(original owner)"
-msgstr "(ორიგინალი მფლობელი)"
+#: src/files-card-body.tsx:580
+msgid "File"
+msgstr "ფაილი"
+
+#: src/files-card-body.tsx:591 src/files-footer-detail.tsx:80
+msgid "Others"
+msgstr "სხვები"
+
+#: src/files-footer-detail.tsx:36
+msgid "$0 files selected"
+msgstr "მონიშნულია $0 ფაილი"
+
+#: src/files-footer-detail.tsx:64
+msgid "Directory contains $0 directories, $1 files"
+msgstr "საქაღალდე შეიცავს $0 საქაღალდეს და $1 ფაილს"
+
+#: src/files-footer-detail.tsx:65
+msgid "Directory contains $0 directories, $1 files, $2 hidden"
+msgstr "საქაღალდე შეიცავს $0 საქაღალდეს, $1 ფაილს და $2 დამალულ ფაილს"
+
+#: src/files-footer-detail.tsx:144
+msgid "User"
+msgstr "მომხმარებელი"
+
+#: src/manifest.json:0
+msgid "File browser"
+msgstr "ფაილების ბრაუზერი"
+
+#: src/manifest.json:0
+msgid "files"
+msgstr "ფაილები"
+
+#: src/manifest.json:0
+msgid "explorer"
+msgstr "დამთვალიერებელი"
+
+#: src/manifest.json:0
+msgid "filesystem"
+msgstr "ფაილური სისტემა"
+
+#: org.cockpit_project.files.metainfo.xml:5
+msgid "Files"
+msgstr "ფაილები"
+
+#: org.cockpit_project.files.metainfo.xml:6
+msgid "Manage your files"
+msgstr "მართეთ თქვენი ფაილები"
 
 #: org.cockpit_project.files.metainfo.xml:8
 msgid ""
@@ -68,773 +833,9 @@ msgstr ""
 "საქაღალდეები, ატვირთოთ და გადმოწეროთ ფაილები და შეცვალოთ მათი თვისებები. "
 "ასევე შეიცავს მარტივ რედაქტორსაც."
 
-#: src/upload-button.tsx:102
-msgid ""
-"A file with the same name already exists in \"$0\". Replacing it will "
-"overwrite its content."
-msgstr ""
-"ფაილი იგივე სახელით \"$0\"-ში უკვე არსებობს. მისი ჩანაცვლება მის შემცველობას "
-"თავზე გადააწერს."
-
-#: src/header.tsx:56
-msgid "A-Z"
-msgstr "A-Z"
-
-#: src/dialogs/symlink.tsx:202
-msgid "Absolute"
-msgstr "აბსოლუტური"
-
-#: src/dialogs/symlink.tsx:188
-msgid ""
-"Absolute symlinks are ideal when referring to files or directories that "
-"won't move, such as system files."
-msgstr ""
-"აბსოლუტური სიმბმულები იდეალურია, როცა მიმართავთ ფაილებს, ან საქაღალდეებს, "
-"რომლის გადატანაც არ მოხდება. მაგ: სისტემური ფაილები."
-
-#: src/dialogs/symlink.tsx:184
-msgid "Absolute vs. Relative"
-msgstr "აბსოლუტური vs ფარდობითი"
-
-#: src/dialogs/permissions.tsx:336
-msgid "Access"
-msgstr "წვდომა"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:73
-#: src/dialogs/keyboardShortcutsHelp.tsx:79
-msgid "Activate selected item, enter directory"
-msgstr "მონიშნული ელემენტის გააქტიურება საქაღალდეში შესვლა"
-
-#: src/files-breadcrumbs.tsx:141
-msgid "Add to bookmarks"
-msgstr "სანიშნეებში დამატება"
-
-#: src/upload-button.tsx:137
-msgid "Apply this action to all conflicting files"
-msgstr "ამ ქმედების გადატარება ყველა კონფლიქტურ ფაილზე"
-
-#: src/common.ts:60
-msgid "Block device"
-msgstr "ბლოკური მოწყობილობა"
-
-#: src/files-breadcrumbs.tsx:161
-msgid "Bookmarked"
-msgstr "ჩამატებულია სანიშნეებში"
-
-#: src/files-breadcrumbs.tsx:154
-msgid "Bookmarks"
-msgstr "სანიშნეები"
-
-#: src/dialogs/permissions.tsx:409 src/dialogs/symlink.tsx:233
-#: src/dialogs/mkdir.tsx:137 src/dialogs/rename.tsx:87
-#: src/dialogs/create-file.tsx:211 src/dialogs/editor.tsx:270
-#: src/dialogs/editor.tsx:336 src/dialogs/copyPasteOwnership.tsx:170
-#: src/dialogs/delete.tsx:97 src/upload-button.tsx:146
-msgid "Cancel"
-msgstr "გაუქმება"
-
-#: src/upload-button.tsx:477
-msgid "Cancel upload of $0"
-msgstr "$0-ის ატვირთვის შეწყვეტა"
-
-#: src/upload-button.tsx:346
-msgid "Cancelled"
-msgstr "გაუქმებულია"
-
-#: src/upload-button.tsx:348
-msgid "Cancelled upload of $0"
-msgstr "$0-ის ატვირთვა შეწყდა"
-
-#: src/dialogs/create-file.tsx:228
-msgid "Cannot create file in current directory"
-msgstr "მიმდინარე საქაღალდეში ფაილის შექმნა შეუძლებელია"
-
-#: src/files-folder-view.tsx:164
-msgid "Cannot drop files, another upload is already in progress"
-msgstr "ფაილებს ვერ დაყრით, რადგან ფაილების ატვირთვა უკვე მიმდინარეობს"
-
-#: src/dialogs/permissions.tsx:400
-msgid "Change"
-msgstr "შეცვლა"
-
-#: src/upload-button.tsx:405
-msgid "Change permissions"
-msgstr "წვდომების შეცვლა"
-
-#: src/dialogs/permissions.tsx:407
-msgid "Change permissions for enclosed files"
-msgstr "ჩასმული ფაილების წვდომების შეცვლა"
-
-#: src/common.ts:61
-msgid "Character device"
-msgstr "სიმბოლური მოწყობილობა"
-
-#: src/files-card-body.tsx:507
-msgid "Clear filter"
-msgstr "ფილტრის გასუფთავება"
-
-#: src/dialogs/editor.tsx:270 src/dialogs/keyboardShortcutsHelp.tsx:33
-msgid "Close"
-msgstr "დახურვა"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:135
-msgid "Close editor"
-msgstr "რედაქტორის დახურვა"
-
-#: src/index.html:8
-msgid "Cockpit Files"
-msgstr "Cockpit Files"
-
 #: org.cockpit_project.files.metainfo.xml:21
 msgid "Cockpit Project"
 msgstr "პროექტი Cockpit"
-
-#: src/dialogs/permissions.tsx:270
-msgid "Collapse"
-msgstr "ჩამოშლა"
-
-#: src/menu.tsx:152 src/menu.tsx:206
-msgid "Copy"
-msgstr "კოპირება"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:108
-msgid "Copy selected file or directory"
-msgstr "მონიშნული ფაილის ან საქაღალდის კოპირება"
-
-#: src/dialogs/mkdir.tsx:135 src/dialogs/create-file.tsx:208
-msgid "Create"
-msgstr "შექმნა"
-
-#: src/dialogs/mkdir.tsx:80 src/menu.tsx:107
-msgid "Create directory"
-msgstr "საქაღალდის შექმნა"
-
-#: src/dialogs/create-file.tsx:151 src/menu.tsx:112
-msgid "Create file"
-msgstr "ფაილის შექმნა"
-
-#: src/dialogs/symlink.tsx:231 src/menu.tsx:198
-msgid "Create link"
-msgstr "ბმულის შექმნა"
-
-#: src/dialogs/symlink.tsx:128
-msgid "Create link to $0"
-msgstr "ბმულის შექმნა $0-მდე"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:102
-msgid "Create new directory"
-msgstr "ახალი საქაღალდის შექმნა"
-
-#: src/dialogs/delete.tsx:95 src/menu.tsx:169 src/menu.tsx:211
-msgid "Delete"
-msgstr "წაშლა"
-
-#: src/dialogs/delete.tsx:34
-msgid "Delete $0 items?"
-msgstr "წავშალო $0 ელემენტი?"
-
-#: src/dialogs/delete.tsx:51
-msgid "Delete $0?"
-msgstr "წავშალო $0?"
-
-#: src/dialogs/delete.tsx:48
-msgid "Delete directory $0?"
-msgstr "წავშალო საქაღალდე $0?"
-
-#: src/dialogs/delete.tsx:40
-msgid "Delete file $0?"
-msgstr "წავშალო ფაილი $0?"
-
-#: src/dialogs/delete.tsx:44
-msgid "Delete link $0?"
-msgstr "წავშალო ბმული $0?"
-
-#: src/common.ts:62
-msgid "Directory"
-msgstr "საქაღალდე"
-
-#: src/files-footer-detail.tsx:64
-msgid "Directory contains $0 directories, $1 files"
-msgstr "საქაღალდე შეიცავს $0 საქაღალდეს და $1 ფაილს"
-
-#: src/files-footer-detail.tsx:65
-msgid "Directory contains $0 directories, $1 files, $2 hidden"
-msgstr "საქაღალდე შეიცავს $0 საქაღალდეს, $1 ფაილს და $2 დამალულ ფაილს"
-
-#: src/files-card-body.tsx:514
-msgid "Directory is empty"
-msgstr "საქაღალდე ცარიელია"
-
-#: src/dialogs/mkdir.tsx:96
-msgid "Directory name"
-msgstr "საქაღალდის სახელი"
-
-#: src/dialogs/mkdir.tsx:31
-msgid "Directory name cannot be empty"
-msgstr "საქაღალდის სახელი ცარიელი ვერ იქნება"
-
-#: src/dialogs/mkdir.tsx:35
-msgid "Directory name cannot include a /"
-msgstr "საქაღალდის სახელი, არ შეიძლება, სიმბოლოს '/' შეიცავდეს"
-
-#: src/dialogs/mkdir.tsx:33
-msgid "Directory name too long"
-msgstr "საქაღალდის სახელი ძალიან გრძელია"
-
-#: src/dialogs/mkdir.tsx:110
-msgid "Directory owner"
-msgstr "საქაღალდის მფლობელი"
-
-#: src/dialogs/symlink.tsx:39 src/common.ts:113
-msgid "Directory with the same name exists"
-msgstr "საქაღალდე იგივე სახელით უკვე არსებობს"
-
-#: src/dialogs/editor.tsx:329
-msgid "Discard"
-msgstr "მოცილება"
-
-#: src/header.tsx:241
-msgid "Display as a grid"
-msgstr "ბადის სახით ჩვენება"
-
-#: src/header.tsx:240
-msgid "Display as a list"
-msgstr "სიის სახით ჩვენება"
-
-#: src/menu.tsx:179
-msgid "Download"
-msgstr "გადმოწერა"
-
-#: src/files-folder-view.tsx:156
-msgid "Drop files to upload"
-msgstr "ასატვირთად დაყარეთ ფაილები"
-
-#. Translators: This is the title of a modal dialog.  $0 represents a filename.
-#: src/dialogs/editor.tsx:187
-msgid "Edit $0"
-msgstr "$0-ის ჩასწორება"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:87 src/files-breadcrumbs.tsx:303
-msgid "Edit path"
-msgstr "ბილიკის ჩასწორება"
-
-#: src/menu.tsx:118 src/menu.tsx:158 src/menu.tsx:225
-msgid "Edit permissions"
-msgstr "წვდომების ჩასწორება"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:162
-msgid "Editing"
-msgstr "ჩასწორება"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:172
-msgid "Editor"
-msgstr "რედაქტორი"
-
-#: src/common.ts:50
-msgid "Execute-only"
-msgstr "მხოლოდ-გამშვები"
-
-#: src/upload-button.tsx:278
-msgid "Failed"
-msgstr "ჩავარდა"
-
-#: src/files-card-body.tsx:580
-msgid "File"
-msgstr "ფაილი"
-
-#: src/manifest.json:0
-msgid "File browser"
-msgstr "ფაილების ბრაუზერი"
-
-#: src/dialogs/symlink.tsx:41 src/common.ts:115
-msgid "File exists"
-msgstr "ფაილი არსებობს"
-
-#: src/dialogs/create-file.tsx:163
-msgid "File name"
-msgstr "ფაილის სახელი"
-
-#: src/upload-button.tsx:374
-msgid "File uploaded"
-msgstr "ფაილი ატვირთულია"
-
-#: src/common.ts:110
-msgid "Filename is the same as original name"
-msgstr "ფაილის სახელი იგივეა, რაც საწყისი სახელი"
-
-#: org.cockpit_project.files.metainfo.xml:5
-msgid "Files"
-msgstr "ფაილები"
-
-#: src/dialogs/copyPasteOwnership.tsx:187
-msgid ""
-"Files being pasted have a different owner. By default, ownership will be "
-"changed to match the destination directory."
-msgstr ""
-"ჩასმული ფაილების მფლობელი განსხვავებულია. ნაგულისხმევად მფლობელობა "
-"შეიცვლება, რომ ის სამიზნე საქაღალდისას დაემთხვეს."
-
-#: src/upload-button.tsx:374
-msgid "Files uploaded"
-msgstr "ფაილები ატვირთულია"
-
-#: src/files-breadcrumbs.tsx:236
-msgid "Filesystem"
-msgstr "ფაილური სისტემა"
-
-#: src/header.tsx:177
-msgid "Filter directory"
-msgstr "საქაღალდის ფილტრი"
-
-#: src/header.tsx:78
-msgid "First modified"
-msgstr "პირველი ცვლილება"
-
-#: src/files-card-body.tsx:578
-msgid "Folder"
-msgstr "საქაღალდე"
-
-#: src/dialogs/delete.tsx:51
-msgid "Force delete $0"
-msgstr "$0-ის ნაძალადევი წაშლა"
-
-#: src/dialogs/delete.tsx:34
-msgid "Force delete $0 items"
-msgstr "$0 ელემენტის ნაძალადევი წაშლა"
-
-#: src/dialogs/delete.tsx:48
-msgid "Force delete directory $0?"
-msgstr "წავშალო ძალით საქაღალდე $0?"
-
-#: src/dialogs/delete.tsx:40
-msgid "Force delete file $0?"
-msgstr "წავშალო ძალით ფაილი $0?"
-
-#: src/dialogs/delete.tsx:44
-msgid "Force delete link $0?"
-msgstr "წავშალო ძალით ბმული $0?"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:61
-msgid "Go back"
-msgstr "უკან გადასვლა"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:67
-msgid "Go forward"
-msgstr "წინ გადასვლა"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:55
-msgid "Go up a directory"
-msgstr "ზემო საქაღალდეზე გადასვლა"
-
-#: src/dialogs/permissions.tsx:319 src/files-footer-detail.tsx:80
-#: src/files-footer-detail.tsx:152 src/files-card-body.tsx:591
-msgid "Group"
-msgstr "ჯგუფი"
-
-#: src/dialogs/permissions.tsx:350
-msgid "Group access"
-msgstr "ჯგუფის წვდომა"
-
-#: src/header.tsx:271
-msgid "Hide hidden items"
-msgstr "დამალული ელემენტების დამალვა"
-
-#: src/files-breadcrumbs.tsx:46
-msgid "Home"
-msgstr "საწყისი"
-
-#: src/dialogs/editor.tsx:230
-msgid "Ignore"
-msgstr "დაიგნორება"
-
-#: src/upload-button.tsx:145
-msgid "Keep original"
-msgstr "ორიგინალის შენარჩუნება"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:148
-msgid "Keyboard shortcuts"
-msgstr "კლავიატურის მალსახმობები"
-
-#: src/header.tsx:67
-msgid "Largest size"
-msgstr "უდიდესი ზომა"
-
-#: src/header.tsx:82
-msgid "Last modified"
-msgstr "ბოლო ცვლილება"
-
-#: src/header.tsx:104
-msgid "Least permissive"
-msgstr "ყველაზე ნაკლები დაშვებით"
-
-#: org.cockpit_project.files.metainfo.xml:6
-msgid "Manage your files"
-msgstr "მართეთ თქვენი ფაილები"
-
-#: src/dialogs/permissions.tsx:264
-msgid "Missing type"
-msgstr "ნაკლული ტიპი"
-
-#: src/header.tsx:75 src/files-card-body.tsx:539 src/files-card-body.tsx:659
-msgid "Modified"
-msgstr "შეცვლილია"
-
-#: src/header.tsx:100
-msgid "Most permissive"
-msgstr "ყველაზე მეტი დაშვებით"
-
-#: src/header.tsx:53 src/files-card-body.tsx:534
-msgid "Name"
-msgstr "სახელი"
-
-#: src/dialogs/symlink.tsx:36 src/common.ts:104
-msgid "Name cannot be empty"
-msgstr "სახელი არ შეიძლება იყოს ცარიელი"
-
-#: src/common.ts:108
-msgid "Name cannot include a /"
-msgstr "სახელი, არ შეიძლება, სიმბოლოს '/' შეიცავდეს"
-
-#: src/common.ts:106
-msgid "Name too long"
-msgstr "სახელი ძალიან გრძელია"
-
-#: src/common.ts:63
-msgid "Named pipe"
-msgstr "სახელიანი ფაიფი"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:152
-msgid "Navigation"
-msgstr "ნავიგაცია"
-
-#: src/upload-button.tsx:123
-msgid "New file"
-msgstr "ახალი ფაილი"
-
-#: src/dialogs/rename.tsx:91
-msgid "New filename"
-msgstr "ახალი ფაილის სახელი"
-
-#: src/dialogs/rename.tsx:91
-msgid "New name"
-msgstr "ახალი სახელი"
-
-#: src/dialogs/copyPasteOwnership.tsx:190
-msgid "New owner"
-msgstr "ახალი მფლობელი"
-
-#: src/dialogs/permissions.tsx:220
-msgid "No access"
-msgstr "წვდომის გარეშე"
-
-#: src/files-card-body.tsx:506
-msgid "No matching results"
-msgstr "პასუხები არაა"
-
-#: src/common.ts:49
-msgid "None"
-msgstr "არაფერი"
-
-#: src/files-breadcrumbs.tsx:161
-msgid "Not bookmarked"
-msgstr "სანიშნეებში არაა"
-
-#: src/menu.tsx:127 src/menu.tsx:188
-msgid "Open in terminal"
-msgstr "ტერმინალში გახსნა"
-
-#: src/menu.tsx:144
-msgid "Open text file"
-msgstr "ტექსტური ფაილის გახსნა"
-
-#: src/upload-button.tsx:128
-msgid "Original file on server"
-msgstr "ორიგინალი ფაილი სერვერზე"
-
-#: src/files-footer-detail.tsx:80 src/files-card-body.tsx:591
-msgid "Others"
-msgstr "სხვები"
-
-#: src/dialogs/permissions.tsx:362
-msgid "Others access"
-msgstr "სხვების წვდომა"
-
-#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:250
-#: src/dialogs/editor.tsx:307
-msgid "Overwrite"
-msgstr "გადაწერა"
-
-#: src/dialogs/permissions.tsx:304 src/dialogs/create-file.tsx:185
-#: src/files-footer-detail.tsx:80 src/header.tsx:86 src/files-card-body.tsx:544
-#: src/files-card-body.tsx:591 src/files-card-body.tsx:667
-msgid "Owner"
-msgstr "მფლობელი"
-
-#: src/dialogs/permissions.tsx:338
-msgid "Owner access"
-msgstr "მფლობელის წვდომა"
-
-#: src/header.tsx:89
-msgid "Owner ascending"
-msgstr "მფლობელი აღმავალი"
-
-#: src/header.tsx:93
-msgid "Owner descending"
-msgstr "მფლობელი დაღმავალი"
-
-#: src/dialogs/permissions.tsx:303
-msgid "Ownership"
-msgstr "მფლობელობა"
-
-#: src/dialogs/copyPasteOwnership.tsx:168 src/menu.tsx:100
-msgid "Paste"
-msgstr "ჩასმა"
-
-#: src/dialogs/copyPasteOwnership.tsx:182
-msgid "Paste as owner"
-msgstr "ჩასმა მფლობელის სახელით"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:114
-msgid "Paste file or directory"
-msgstr "ფაილის ან საქაღალდის ჩასმა"
-
-#: src/dialogs/copyPasteOwnership.tsx:56 src/menu.tsx:51
-msgid "Pasting failed"
-msgstr "ჩასმა ჩავარდა"
-
-#: src/dialogs/create-file.tsx:230
-msgid "Permission denied"
-msgstr "წვდომა აკრძალულია"
-
-#: src/header.tsx:97 src/files-card-body.tsx:549 src/files-card-body.tsx:674
-msgid "Permissions"
-msgstr "წვდომები"
-
-#: src/dialogs/permissions.tsx:290
-msgid "Permissions for $0 files"
-msgstr "წვდომები $0 ფაილისთვის"
-
-#: src/common.ts:54
-msgid "Read and execute"
-msgstr "წაკითხვა და გაშვება"
-
-#: src/dialogs/permissions.tsx:210 src/common.ts:55
-msgid "Read and write"
-msgstr "წაკითხვა და ჩაწერა"
-
-#: src/common.ts:56
-msgid "Read, write, and execute"
-msgstr "წაკითხვა, ჩაწერა და გაშვება"
-
-#: src/dialogs/permissions.tsx:215 src/dialogs/editor.tsx:189 src/common.ts:53
-msgid "Read-only"
-msgstr "მხოლოდ-წასაკითხად"
-
-#: src/common.ts:65
-msgid "Regular file"
-msgstr "ჩვეულებრივი ფაილი"
-
-#: src/dialogs/symlink.tsx:209
-msgid "Relative"
-msgstr "შედარებითი"
-
-#: src/dialogs/symlink.tsx:191
-msgid ""
-"Relative symlinks are useful when both a symlink and target might move at "
-"the same time, such as when renaming or moving a parent directory."
-msgstr ""
-"შედარებითი სიმბმულები სასარგებლოა, როცა ორივე, სიმბმულიც და სამიზნეც "
-"შეიძლება, ერთდროულად იქნეს გადაადგილებული. მაგალითად, როცა სახელს არქმევთ, "
-"ან გადაგაგაქვთ მშობელი საქაღალდე."
-
-#: src/dialogs/editor.tsx:227
-msgid "Reload"
-msgstr "თავიდან ჩატვირთვა"
-
-#: src/files-breadcrumbs.tsx:139
-msgid "Remove from bookmarks"
-msgstr "სანიშნეებიდან წაშლა"
-
-#: src/dialogs/rename.tsx:78 src/menu.tsx:163
-msgid "Rename"
-msgstr "გადარქმევა"
-
-#: src/dialogs/rename.tsx:101
-msgid "Rename $0?"
-msgstr "გადავარქვა სახელი ფაილს $0?"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:95
-msgid "Rename selected file or directory"
-msgstr "მონიშნული ფაილის ან საქაღალდის სახელის გადარქმევა"
-
-#: src/upload-button.tsx:143
-msgid "Replace"
-msgstr "ჩანაცვლება"
-
-#: src/upload-button.tsx:95
-msgid "Replace file $0?"
-msgstr "ჩავანაცვლო ფაილი $0?"
-
-#: src/dialogs/editor.tsx:264 src/dialogs/editor.tsx:321
-msgid "Save"
-msgstr "შენახვა"
-
-#: src/dialogs/editor.tsx:281
-msgid "Save changes?"
-msgstr "შევინახო ცვლილებები?"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:131
-msgid "Save current file"
-msgstr "მიმდინარე ფაილის შენახვა"
-
-#: src/dialogs/permissions.tsx:375
-msgid "Security context"
-msgstr "უსაფრთხოების კონტექსტი"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:120
-msgid "Select all"
-msgstr "ყველას მონიშვნა"
-
-#: src/dialogs/permissions.tsx:388
-msgid "Set executable as program"
-msgstr "პროგრამის გაშვებადად დაყენება"
-
-#: src/dialogs/permissions.tsx:271
-msgid "Show all files"
-msgstr "ყველა ფაილის ჩვენება"
-
-#: src/header.tsx:271 src/files-card-body.tsx:522
-msgid "Show hidden items"
-msgstr "დამალული ელემენტების ჩვენება"
-
-#: src/header.tsx:152
-msgid "Show keyboard shortcuts"
-msgstr "კლავიატურის მალსახმობების ჩვენება"
-
-#: src/header.tsx:64 src/files-card-body.tsx:535 src/files-card-body.tsx:652
-msgid "Size"
-msgstr "ზომა"
-
-#: src/header.tsx:71
-msgid "Smallest size"
-msgstr "უმცირესი ზომა"
-
-#: src/common.ts:66
-msgid "Socket"
-msgstr "სოკეტი"
-
-#: src/header.tsx:258
-msgid "Sort"
-msgstr "დალაგება"
-
-#: src/common.ts:64
-msgid "Symbolic link"
-msgstr "სიმბმული"
-
-#: src/dialogs/symlink.tsx:164
-msgid "Symlink name"
-msgstr "სიმბმულის სახელი"
-
-#: src/dialogs/symlink.tsx:157
-msgid "Target"
-msgstr "სამიზნე"
-
-#: src/dialogs/editor.tsx:50
-msgid "The existing file changed unexpectedly"
-msgstr "არსებული ფაილი წარმატებით შეიცვალა"
-
-#: src/dialogs/editor.tsx:48 src/dialogs/editor.tsx:221
-msgid "The file has been removed on disk"
-msgstr "ფაილი წაიშალა დისკიდან"
-
-#: src/dialogs/editor.tsx:222
-msgid "The file has changed on disk"
-msgstr "ფაილი შეიცვალა დისკზე"
-
-#: src/dialogs/editor.tsx:291
-msgid "The file has changed on disk between when it was opened and now"
-msgstr "ფაილი შეიცვალა დისკზე მას შემდეგ, რაც ის გახსენით"
-
-#: src/dialogs/editor.tsx:290
-msgid "The file was deleted after it was opened, saving will recreate it."
-msgstr "ფაილი წაიშალა მას შემდეგ, რაც გახსენით. შენახვა მას თავიდან შექმნის."
-
-#: src/dialogs/symlink.tsx:180
-msgid "Type"
-msgstr "ტიპი"
-
-#: src/files-breadcrumbs.tsx:94
-msgid "Unable to create bookmark directory"
-msgstr "სანიშნეების საქაღალდის შექმნა შეუძლებელია"
-
-#: src/upload-button.tsx:324
-msgid "Unable to move uploaded file to final destination"
-msgstr "ატვირთული ფაილების საბოლოო სამიზნეზე გადატანა შეუძლებელია"
-
-#: src/files-breadcrumbs.tsx:117
-msgid "Unable to save bookmark file"
-msgstr "სანიშნეს ფაილის შენახვა შეუძლებელია"
-
-#: src/upload-button.tsx:513
-msgid "Upload"
-msgstr "ატვირთვა"
-
-#
-#: src/upload-button.tsx:494
-msgid "Upload $0% completed"
-msgstr "ატვირთვის $0% დასრულდა"
-
-#: src/upload-button.tsx:322 src/upload-button.tsx:352
-msgid "Upload error"
-msgstr "ატვირთვის შეცდომა"
-
-#: src/upload-button.tsx:60
-msgid "Uploaded as $0, $1"
-msgstr "ატვირთულია, როგორც $0.$1"
-
-#: src/upload-button.tsx:458
-msgid "Uploads"
-msgstr "ატვირთვები"
-
-#: src/files-footer-detail.tsx:144
-msgid "User"
-msgstr "მომხმარებელი"
-
-#: src/dialogs/editor.tsx:187
-msgid "View $0"
-msgstr "$0-ის ნახვა"
-
-#: src/common.ts:52
-msgid "Write and execute"
-msgstr "ჩაწერა და შესრულება"
-
-#: src/dialogs/permissions.tsx:230 src/common.ts:51
-msgid "Write-only"
-msgstr "მხოლოდ-ჩაწერადი"
-
-#: src/header.tsx:60
-msgid "Z-A"
-msgstr "Z-A"
-
-#: src/manifest.json:0
-msgid "explorer"
-msgstr "დამთვალიერებელი"
-
-#: src/manifest.json:0
-msgid "files"
-msgstr "ფაილები"
-
-#: src/manifest.json:0
-msgid "filesystem"
-msgstr "ფაილური სისტემა"
-
-#: src/dialogs/copyPasteOwnership.tsx:119
-msgid "keep original owners"
-msgstr "ორიგინალი მფლობელების შენარჩუნება"
-
-#: src/dialogs/symlink.tsx:53
-msgid "link to $0"
-msgstr "ბმული $0-ზე"
 
 #~ msgid "Successfully uploaded file(s)"
 #~ msgstr "ფაილები წარმატებით აიტვირთა"
