@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-15 08:01+0000\n"
+"POT-Creation-Date: 2026-09-26 07:59+0000\n"
 "PO-Revision-Date: 2026-09-11 03:17+0000\n"
 "Last-Translator: Andrei Stepanov <adem4ik@gmail.com>\n"
 "Language-Team: Russian <https://translate.fedoraproject.org/projects/cockpit/"
@@ -52,7 +52,7 @@ msgstr[0] "Скрыт $0 элемент"
 msgstr[1] "Скрыто $0 элемента"
 msgstr[2] "Скрыто $0 элементов"
 
-#: src/dialogs/permissions.tsx:289
+#: src/dialogs/permissions.tsx:304
 msgid "$0 permissions"
 msgstr "Разрешения $0"
 
@@ -98,7 +98,7 @@ msgstr ""
 msgid "Absolute vs. Relative"
 msgstr "Абсолютная и относительная"
 
-#: src/dialogs/permissions.tsx:336
+#: src/dialogs/permissions.tsx:351
 msgid "Access"
 msgstr "Доступ"
 
@@ -127,11 +127,11 @@ msgstr "В закладках"
 msgid "Bookmarks"
 msgstr "Закладки"
 
-#: src/dialogs/permissions.tsx:409 src/dialogs/symlink.tsx:233
-#: src/dialogs/mkdir.tsx:137 src/dialogs/rename.tsx:87
-#: src/dialogs/create-file.tsx:211 src/dialogs/editor.tsx:270
-#: src/dialogs/editor.tsx:336 src/dialogs/copyPasteOwnership.tsx:170
-#: src/dialogs/delete.tsx:97 src/upload-button.tsx:146
+#: src/upload-button.tsx:146 src/dialogs/delete.tsx:97
+#: src/dialogs/permissions.tsx:424 src/dialogs/copyPasteOwnership.tsx:170
+#: src/dialogs/rename.tsx:87 src/dialogs/symlink.tsx:233
+#: src/dialogs/editor.tsx:270 src/dialogs/editor.tsx:336
+#: src/dialogs/create-file.tsx:211 src/dialogs/mkdir.tsx:137
 msgid "Cancel"
 msgstr "Отмена"
 
@@ -155,7 +155,7 @@ msgstr "Не удаётся создать файл в текущем катал
 msgid "Cannot drop files, another upload is already in progress"
 msgstr "Не удаётся переместить файлы, уже выполняется другая загрузка"
 
-#: src/dialogs/permissions.tsx:400
+#: src/dialogs/permissions.tsx:415
 msgid "Change"
 msgstr "Изменить"
 
@@ -163,7 +163,7 @@ msgstr "Изменить"
 msgid "Change permissions"
 msgstr "Изменить разрешения"
 
-#: src/dialogs/permissions.tsx:407
+#: src/dialogs/permissions.tsx:422
 msgid "Change permissions for enclosed files"
 msgstr "Изменить разрешения для вложенных файлов"
 
@@ -175,7 +175,7 @@ msgstr "Символьное устройство"
 msgid "Clear filter"
 msgstr "Сбросить фильтр"
 
-#: src/dialogs/editor.tsx:270 src/dialogs/keyboardShortcutsHelp.tsx:33
+#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:270
 msgid "Close"
 msgstr "Закрыть"
 
@@ -191,7 +191,7 @@ msgstr "Файлы Cockpit"
 msgid "Cockpit Project"
 msgstr "Проект Cockpit"
 
-#: src/dialogs/permissions.tsx:270
+#: src/dialogs/permissions.tsx:285
 msgid "Collapse"
 msgstr "Свернуть"
 
@@ -203,19 +203,19 @@ msgstr "Копировать"
 msgid "Copy selected file or directory"
 msgstr "Копировать выбранный файл или каталог"
 
-#: src/dialogs/mkdir.tsx:135 src/dialogs/create-file.tsx:208
+#: src/dialogs/create-file.tsx:208 src/dialogs/mkdir.tsx:135
 msgid "Create"
 msgstr "Создать"
 
-#: src/dialogs/mkdir.tsx:80 src/menu.tsx:107
+#: src/menu.tsx:107 src/dialogs/mkdir.tsx:80
 msgid "Create directory"
 msgstr "Создать каталог"
 
-#: src/dialogs/create-file.tsx:151 src/menu.tsx:112
+#: src/menu.tsx:112 src/dialogs/create-file.tsx:151
 msgid "Create file"
 msgstr "Создать файл"
 
-#: src/dialogs/symlink.tsx:231 src/menu.tsx:198
+#: src/menu.tsx:198 src/dialogs/symlink.tsx:231
 msgid "Create link"
 msgstr "Создать ссылку"
 
@@ -227,7 +227,7 @@ msgstr "Создать ссылку на $0"
 msgid "Create new directory"
 msgstr "Создать каталог"
 
-#: src/dialogs/delete.tsx:95 src/menu.tsx:169 src/menu.tsx:211
+#: src/menu.tsx:169 src/menu.tsx:211 src/dialogs/delete.tsx:95
 msgid "Delete"
 msgstr "Удалить"
 
@@ -287,7 +287,7 @@ msgstr "Имя каталога слишком длинное"
 msgid "Directory owner"
 msgstr "Владелец каталога"
 
-#: src/dialogs/symlink.tsx:39 src/common.ts:113
+#: src/common.ts:113 src/dialogs/symlink.tsx:39
 msgid "Directory with the same name exists"
 msgstr "Каталог с таким именем уже существует"
 
@@ -316,7 +316,7 @@ msgstr "Перетащите файлы для загрузки"
 msgid "Edit $0"
 msgstr "Редактировать $0"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:87 src/files-breadcrumbs.tsx:303
+#: src/files-breadcrumbs.tsx:303 src/dialogs/keyboardShortcutsHelp.tsx:87
 msgid "Edit path"
 msgstr "Редактировать путь"
 
@@ -348,7 +348,7 @@ msgstr "Файл"
 msgid "File browser"
 msgstr "Файловый менеджер"
 
-#: src/dialogs/symlink.tsx:41 src/common.ts:115
+#: src/common.ts:115 src/dialogs/symlink.tsx:41
 msgid "File exists"
 msgstr "Файл существует"
 
@@ -428,12 +428,12 @@ msgstr "Вперёд"
 msgid "Go up a directory"
 msgstr "На уровень выше"
 
-#: src/dialogs/permissions.tsx:319 src/files-footer-detail.tsx:80
-#: src/files-footer-detail.tsx:152 src/files-card-body.tsx:591
+#: src/dialogs/permissions.tsx:334 src/files-card-body.tsx:591
+#: src/files-footer-detail.tsx:80 src/files-footer-detail.tsx:152
 msgid "Group"
 msgstr "Группа"
 
-#: src/dialogs/permissions.tsx:350
+#: src/dialogs/permissions.tsx:365
 msgid "Group access"
 msgstr "Доступ группы"
 
@@ -473,7 +473,7 @@ msgstr "Сначала строгие"
 msgid "Manage your files"
 msgstr "Управляйте своими файлами"
 
-#: src/dialogs/permissions.tsx:264
+#: src/dialogs/permissions.tsx:279
 msgid "Missing type"
 msgstr "Отсутствует тип"
 
@@ -489,7 +489,7 @@ msgstr "Сначала свободные"
 msgid "Name"
 msgstr "Имя"
 
-#: src/dialogs/symlink.tsx:36 src/common.ts:104
+#: src/common.ts:104 src/dialogs/symlink.tsx:36
 msgid "Name cannot be empty"
 msgstr "Имя не может быть пустым"
 
@@ -525,7 +525,7 @@ msgstr "Новое имя"
 msgid "New owner"
 msgstr "Новый владелец"
 
-#: src/dialogs/permissions.tsx:220
+#: src/dialogs/permissions.tsx:235
 msgid "No access"
 msgstr "Нет доступа"
 
@@ -553,11 +553,11 @@ msgstr "Открыть текстовый файл"
 msgid "Original file on server"
 msgstr "Исходный файл на сервере"
 
-#: src/files-footer-detail.tsx:80 src/files-card-body.tsx:591
+#: src/files-card-body.tsx:591 src/files-footer-detail.tsx:80
 msgid "Others"
 msgstr "Остальные"
 
-#: src/dialogs/permissions.tsx:362
+#: src/dialogs/permissions.tsx:377
 msgid "Others access"
 msgstr "Доступ остальных"
 
@@ -566,13 +566,14 @@ msgstr "Доступ остальных"
 msgid "Overwrite"
 msgstr "Перезаписать"
 
-#: src/dialogs/permissions.tsx:304 src/dialogs/create-file.tsx:185
-#: src/files-footer-detail.tsx:80 src/header.tsx:86 src/files-card-body.tsx:544
+#: src/header.tsx:86 src/dialogs/permissions.tsx:319
+#: src/dialogs/create-file.tsx:185 src/files-card-body.tsx:544
 #: src/files-card-body.tsx:591 src/files-card-body.tsx:667
+#: src/files-footer-detail.tsx:80
 msgid "Owner"
 msgstr "Владелец"
 
-#: src/dialogs/permissions.tsx:338
+#: src/dialogs/permissions.tsx:353
 msgid "Owner access"
 msgstr "Доступ владельца"
 
@@ -584,11 +585,11 @@ msgstr "По владельцу (возр.)"
 msgid "Owner descending"
 msgstr "По владельцу (убыв.)"
 
-#: src/dialogs/permissions.tsx:303
+#: src/dialogs/permissions.tsx:318
 msgid "Ownership"
 msgstr "Владение"
 
-#: src/dialogs/copyPasteOwnership.tsx:168 src/menu.tsx:100
+#: src/menu.tsx:100 src/dialogs/copyPasteOwnership.tsx:168
 msgid "Paste"
 msgstr "Вставить"
 
@@ -600,7 +601,7 @@ msgstr "Вставить как владелец"
 msgid "Paste file or directory"
 msgstr "Вставить файл или каталог"
 
-#: src/dialogs/copyPasteOwnership.tsx:56 src/menu.tsx:51
+#: src/menu.tsx:51 src/dialogs/copyPasteOwnership.tsx:56
 msgid "Pasting failed"
 msgstr "Вставка не удалась"
 
@@ -612,7 +613,7 @@ msgstr "Отказано в доступе"
 msgid "Permissions"
 msgstr "Разрешения"
 
-#: src/dialogs/permissions.tsx:290
+#: src/dialogs/permissions.tsx:305
 msgid "Permissions for $0 files"
 msgstr "Разрешения для $0 файлов"
 
@@ -620,7 +621,7 @@ msgstr "Разрешения для $0 файлов"
 msgid "Read and execute"
 msgstr "Чтение и выполнение"
 
-#: src/dialogs/permissions.tsx:210 src/common.ts:55
+#: src/common.ts:55 src/dialogs/permissions.tsx:225
 msgid "Read and write"
 msgstr "Чтение и запись"
 
@@ -628,7 +629,7 @@ msgstr "Чтение и запись"
 msgid "Read, write, and execute"
 msgstr "Чтение, запись и выполнение"
 
-#: src/dialogs/permissions.tsx:215 src/dialogs/editor.tsx:189 src/common.ts:53
+#: src/common.ts:53 src/dialogs/permissions.tsx:230 src/dialogs/editor.tsx:189
 msgid "Read-only"
 msgstr "Только чтение"
 
@@ -657,7 +658,7 @@ msgstr "Перезагрузить"
 msgid "Remove from bookmarks"
 msgstr "Удалить из закладок"
 
-#: src/dialogs/rename.tsx:78 src/menu.tsx:163
+#: src/menu.tsx:163 src/dialogs/rename.tsx:78
 msgid "Rename"
 msgstr "Переименовать"
 
@@ -689,7 +690,7 @@ msgstr "Сохранить изменения?"
 msgid "Save current file"
 msgstr "Сохранить текущий файл"
 
-#: src/dialogs/permissions.tsx:375
+#: src/dialogs/permissions.tsx:390
 msgid "Security context"
 msgstr "Контекст безопасности"
 
@@ -697,11 +698,11 @@ msgstr "Контекст безопасности"
 msgid "Select all"
 msgstr "Выбрать всё"
 
-#: src/dialogs/permissions.tsx:388
+#: src/dialogs/permissions.tsx:403
 msgid "Set executable as program"
 msgstr "Установить как исполняемую программу"
 
-#: src/dialogs/permissions.tsx:271
+#: src/dialogs/permissions.tsx:286
 msgid "Show all files"
 msgstr "Показать все файлы"
 
@@ -810,7 +811,7 @@ msgstr "Просмотр $0"
 msgid "Write and execute"
 msgstr "Запись и выполнение"
 
-#: src/dialogs/permissions.tsx:230 src/common.ts:51
+#: src/common.ts:51 src/dialogs/permissions.tsx:245
 msgid "Write-only"
 msgstr "Только запись"
 

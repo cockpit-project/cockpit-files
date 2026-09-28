@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-15 08:01+0000\n"
+"POT-Creation-Date: 2026-09-26 07:59+0000\n"
 "PO-Revision-Date: 2026-09-11 03:17+0000\n"
 "Last-Translator: Arif Budiman <arifpedia@gmail.com>\n"
 "Language-Team: Indonesian <https://translate.fedoraproject.org/projects/"
@@ -49,7 +49,7 @@ msgid "$0 item is hidden"
 msgid_plural "$0 items are hidden"
 msgstr[0] "$0 item tersembunyi"
 
-#: src/dialogs/permissions.tsx:289
+#: src/dialogs/permissions.tsx:304
 msgid "$0 permissions"
 msgstr "$0 izin"
 
@@ -95,7 +95,7 @@ msgstr ""
 msgid "Absolute vs. Relative"
 msgstr "Absolut vs. Relatif"
 
-#: src/dialogs/permissions.tsx:336
+#: src/dialogs/permissions.tsx:351
 msgid "Access"
 msgstr "Akses"
 
@@ -126,11 +126,11 @@ msgstr "Penanda"
 msgid "Bookmarks"
 msgstr "Penanda"
 
-#: src/dialogs/permissions.tsx:409 src/dialogs/symlink.tsx:233
-#: src/dialogs/mkdir.tsx:137 src/dialogs/rename.tsx:87
-#: src/dialogs/create-file.tsx:211 src/dialogs/editor.tsx:270
-#: src/dialogs/editor.tsx:336 src/dialogs/copyPasteOwnership.tsx:170
-#: src/dialogs/delete.tsx:97 src/upload-button.tsx:146
+#: src/upload-button.tsx:146 src/dialogs/delete.tsx:97
+#: src/dialogs/permissions.tsx:424 src/dialogs/copyPasteOwnership.tsx:170
+#: src/dialogs/rename.tsx:87 src/dialogs/symlink.tsx:233
+#: src/dialogs/editor.tsx:270 src/dialogs/editor.tsx:336
+#: src/dialogs/create-file.tsx:211 src/dialogs/mkdir.tsx:137
 msgid "Cancel"
 msgstr "Batal"
 
@@ -154,7 +154,7 @@ msgstr "Tidak dapat membuat berkas di direktori saat ini"
 msgid "Cannot drop files, another upload is already in progress"
 msgstr "Tidak dapat menjatuhkan berkas, unggahan lain sedang berlangsung"
 
-#: src/dialogs/permissions.tsx:400
+#: src/dialogs/permissions.tsx:415
 msgid "Change"
 msgstr "Ubah"
 
@@ -162,7 +162,7 @@ msgstr "Ubah"
 msgid "Change permissions"
 msgstr "Ubah izin"
 
-#: src/dialogs/permissions.tsx:407
+#: src/dialogs/permissions.tsx:422
 msgid "Change permissions for enclosed files"
 msgstr "Ubah izin untuk berkas yang disertakan"
 
@@ -174,7 +174,7 @@ msgstr "Perangkat karakter"
 msgid "Clear filter"
 msgstr "Hapus filter"
 
-#: src/dialogs/editor.tsx:270 src/dialogs/keyboardShortcutsHelp.tsx:33
+#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:270
 msgid "Close"
 msgstr "Tutup"
 
@@ -190,7 +190,7 @@ msgstr "Berkas Cockpit"
 msgid "Cockpit Project"
 msgstr "Proyek Cockpit"
 
-#: src/dialogs/permissions.tsx:270
+#: src/dialogs/permissions.tsx:285
 msgid "Collapse"
 msgstr "Ciutkan"
 
@@ -202,19 +202,19 @@ msgstr "Salin"
 msgid "Copy selected file or directory"
 msgstr "Salin berkas atau direktori yang dipilih"
 
-#: src/dialogs/mkdir.tsx:135 src/dialogs/create-file.tsx:208
+#: src/dialogs/create-file.tsx:208 src/dialogs/mkdir.tsx:135
 msgid "Create"
 msgstr "Buat"
 
-#: src/dialogs/mkdir.tsx:80 src/menu.tsx:107
+#: src/menu.tsx:107 src/dialogs/mkdir.tsx:80
 msgid "Create directory"
 msgstr "Buat direktori"
 
-#: src/dialogs/create-file.tsx:151 src/menu.tsx:112
+#: src/menu.tsx:112 src/dialogs/create-file.tsx:151
 msgid "Create file"
 msgstr "Buat berkas"
 
-#: src/dialogs/symlink.tsx:231 src/menu.tsx:198
+#: src/menu.tsx:198 src/dialogs/symlink.tsx:231
 msgid "Create link"
 msgstr "Buat tautan"
 
@@ -226,7 +226,7 @@ msgstr "Buat tautan ke $0"
 msgid "Create new directory"
 msgstr "Buat direktori baru"
 
-#: src/dialogs/delete.tsx:95 src/menu.tsx:169 src/menu.tsx:211
+#: src/menu.tsx:169 src/menu.tsx:211 src/dialogs/delete.tsx:95
 msgid "Delete"
 msgstr "Hapus"
 
@@ -286,7 +286,7 @@ msgstr "Nama direktori terlalu panjang"
 msgid "Directory owner"
 msgstr "Pemilik direktori"
 
-#: src/dialogs/symlink.tsx:39 src/common.ts:113
+#: src/common.ts:113 src/dialogs/symlink.tsx:39
 msgid "Directory with the same name exists"
 msgstr "Direktori dengan nama yang sama sudah ada"
 
@@ -315,7 +315,7 @@ msgstr "Jatuhkan berkas untuk diunggah"
 msgid "Edit $0"
 msgstr "Sunting $0"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:87 src/files-breadcrumbs.tsx:303
+#: src/files-breadcrumbs.tsx:303 src/dialogs/keyboardShortcutsHelp.tsx:87
 msgid "Edit path"
 msgstr "Sunting jalur"
 
@@ -349,7 +349,7 @@ msgstr "Berkas"
 msgid "File browser"
 msgstr "Penjelajah berkas"
 
-#: src/dialogs/symlink.tsx:41 src/common.ts:115
+#: src/common.ts:115 src/dialogs/symlink.tsx:41
 msgid "File exists"
 msgstr "Berkas sudah ada"
 
@@ -429,12 +429,12 @@ msgstr "Maju"
 msgid "Go up a directory"
 msgstr "Naik satu direktori"
 
-#: src/dialogs/permissions.tsx:319 src/files-footer-detail.tsx:80
-#: src/files-footer-detail.tsx:152 src/files-card-body.tsx:591
+#: src/dialogs/permissions.tsx:334 src/files-card-body.tsx:591
+#: src/files-footer-detail.tsx:80 src/files-footer-detail.tsx:152
 msgid "Group"
 msgstr "Grup"
 
-#: src/dialogs/permissions.tsx:350
+#: src/dialogs/permissions.tsx:365
 msgid "Group access"
 msgstr "Akses grup"
 
@@ -474,7 +474,7 @@ msgstr "Paling terbatas"
 msgid "Manage your files"
 msgstr "Kelola berkas Anda"
 
-#: src/dialogs/permissions.tsx:264
+#: src/dialogs/permissions.tsx:279
 msgid "Missing type"
 msgstr "Jenis hilang"
 
@@ -490,7 +490,7 @@ msgstr "Paling permisif"
 msgid "Name"
 msgstr "Nama"
 
-#: src/dialogs/symlink.tsx:36 src/common.ts:104
+#: src/common.ts:104 src/dialogs/symlink.tsx:36
 msgid "Name cannot be empty"
 msgstr "Nama tidak boleh kosong"
 
@@ -526,7 +526,7 @@ msgstr "Nama baru"
 msgid "New owner"
 msgstr "Pemilik baru"
 
-#: src/dialogs/permissions.tsx:220
+#: src/dialogs/permissions.tsx:235
 msgid "No access"
 msgstr "Tidak ada akses"
 
@@ -556,11 +556,11 @@ msgstr "Buka berkas teks"
 msgid "Original file on server"
 msgstr "Berkas asli di server"
 
-#: src/files-footer-detail.tsx:80 src/files-card-body.tsx:591
+#: src/files-card-body.tsx:591 src/files-footer-detail.tsx:80
 msgid "Others"
 msgstr "Lainnya"
 
-#: src/dialogs/permissions.tsx:362
+#: src/dialogs/permissions.tsx:377
 msgid "Others access"
 msgstr "Akses lainnya"
 
@@ -569,13 +569,14 @@ msgstr "Akses lainnya"
 msgid "Overwrite"
 msgstr "Timpa"
 
-#: src/dialogs/permissions.tsx:304 src/dialogs/create-file.tsx:185
-#: src/files-footer-detail.tsx:80 src/header.tsx:86 src/files-card-body.tsx:544
+#: src/header.tsx:86 src/dialogs/permissions.tsx:319
+#: src/dialogs/create-file.tsx:185 src/files-card-body.tsx:544
 #: src/files-card-body.tsx:591 src/files-card-body.tsx:667
+#: src/files-footer-detail.tsx:80
 msgid "Owner"
 msgstr "Pemilik"
 
-#: src/dialogs/permissions.tsx:338
+#: src/dialogs/permissions.tsx:353
 msgid "Owner access"
 msgstr "Akses pemilik"
 
@@ -587,11 +588,11 @@ msgstr "Pemilik menaik"
 msgid "Owner descending"
 msgstr "Pemilik menurun"
 
-#: src/dialogs/permissions.tsx:303
+#: src/dialogs/permissions.tsx:318
 msgid "Ownership"
 msgstr "Kepemilikan"
 
-#: src/dialogs/copyPasteOwnership.tsx:168 src/menu.tsx:100
+#: src/menu.tsx:100 src/dialogs/copyPasteOwnership.tsx:168
 msgid "Paste"
 msgstr "Tempel"
 
@@ -603,7 +604,7 @@ msgstr "Tempel sebagai pemilik"
 msgid "Paste file or directory"
 msgstr "Tempel berkas atau direktori"
 
-#: src/dialogs/copyPasteOwnership.tsx:56 src/menu.tsx:51
+#: src/menu.tsx:51 src/dialogs/copyPasteOwnership.tsx:56
 msgid "Pasting failed"
 msgstr "Gagal menempel"
 
@@ -615,7 +616,7 @@ msgstr "Izin ditolak"
 msgid "Permissions"
 msgstr "Izin"
 
-#: src/dialogs/permissions.tsx:290
+#: src/dialogs/permissions.tsx:305
 msgid "Permissions for $0 files"
 msgstr "Izin untuk $0 berkas"
 
@@ -623,7 +624,7 @@ msgstr "Izin untuk $0 berkas"
 msgid "Read and execute"
 msgstr "Baca dan eksekusi"
 
-#: src/dialogs/permissions.tsx:210 src/common.ts:55
+#: src/common.ts:55 src/dialogs/permissions.tsx:225
 msgid "Read and write"
 msgstr "Baca dan tulis"
 
@@ -631,7 +632,7 @@ msgstr "Baca dan tulis"
 msgid "Read, write, and execute"
 msgstr "Baca, tulis, dan eksekusi"
 
-#: src/dialogs/permissions.tsx:215 src/dialogs/editor.tsx:189 src/common.ts:53
+#: src/common.ts:53 src/dialogs/permissions.tsx:230 src/dialogs/editor.tsx:189
 msgid "Read-only"
 msgstr "Hanya-baca"
 
@@ -659,7 +660,7 @@ msgstr "Muat ulang"
 msgid "Remove from bookmarks"
 msgstr "Hapus dari penanda"
 
-#: src/dialogs/rename.tsx:78 src/menu.tsx:163
+#: src/menu.tsx:163 src/dialogs/rename.tsx:78
 msgid "Rename"
 msgstr "Ganti nama"
 
@@ -691,7 +692,7 @@ msgstr "Simpan perubahan?"
 msgid "Save current file"
 msgstr ""
 
-#: src/dialogs/permissions.tsx:375
+#: src/dialogs/permissions.tsx:390
 msgid "Security context"
 msgstr "Konteks keamanan"
 
@@ -699,11 +700,11 @@ msgstr "Konteks keamanan"
 msgid "Select all"
 msgstr "Pilih semua"
 
-#: src/dialogs/permissions.tsx:388
+#: src/dialogs/permissions.tsx:403
 msgid "Set executable as program"
 msgstr "Atur eksekusi sebagai program"
 
-#: src/dialogs/permissions.tsx:271
+#: src/dialogs/permissions.tsx:286
 msgid "Show all files"
 msgstr "Tampilkan semua berkas"
 
@@ -812,7 +813,7 @@ msgstr "Lihat ( $0 )"
 msgid "Write and execute"
 msgstr "Tulis dan eksekusi"
 
-#: src/dialogs/permissions.tsx:230 src/common.ts:51
+#: src/common.ts:51 src/dialogs/permissions.tsx:245
 msgid "Write-only"
 msgstr "Hanya-tulis"
 
