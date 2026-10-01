@@ -19,6 +19,7 @@ import { debounce } from "throttle-debounce";
 
 import cockpit from 'cockpit';
 import { EventEmitter } from 'cockpit/event.ts';
+import { fsinfo } from 'cockpit/fsinfo.ts';
 import { basename } from "cockpit-path";
 import type { Dialogs, DialogResult } from 'dialogs';
 import { fmt_to_fragments } from 'utils';
@@ -83,9 +84,20 @@ class Editor extends EventEmitter<{ updated(state: EditorState): void }> {
 
         this.load_file();
 
-        cockpit.spawn(['test', '-w', filename], { superuser: "try" })
-                .then(() => this.update({ writable: true }))
-                .catch(() => this.update({ writable: false }));
+        fsinfo(filename, ['w-ok'], { superuser: "try" }).then((attrs) => {
+            if ('w-ok' in attrs) {
+                this.update({ writable: attrs['w-ok'] });
+            } else {
+                // Fallback for Cockpit < 339
+                cockpit.spawn(['test', '-w', filename], { superuser: "try" })
+                        .then(() => this.update({ writable: true }))
+                        .catch(() => this.update({ writable: false }));
+            }
+        })
+                .catch(err => {
+                    console.warn(err);
+                    this.update({ writable: false });
+                });
 
         const handle_watch = debounce(500, (_content: string | null, tag_now: string | null) => {
             this.update({ tag_now });
