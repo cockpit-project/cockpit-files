@@ -1113,6 +1113,160 @@ class TestFiles(testlib.MachineCase):
         self.waitDownloadFile("漢字", size, "non-latin filename\n")
         m.execute("rm /home/admin/漢字")
 
+    def testDefaultFileAction(self) -> None:
+        b = self.browser
+        m = self.machine
+
+        self.enter_files()
+        b.allow_download()
+
+        m.execute("""
+            runuser -u admin -- bash -c "echo 'hello world' > /home/admin/note.txt"
+            runuser -u admin -- bash -c "printf 'abc\\0def' > /home/admin/blob1.bin"
+            runuser -u admin -- bash -c "printf 'abc\\0def' > /home/admin/blob2.bin"
+            runuser -u admin -- bash -c "printf 'plain text, no extension' > /home/admin/mystery-actuallytext"
+            runuser -u admin -- bash -c "printf 'not text\\0at all' > /home/admin/mystery-nottext"
+            runuser -u admin -- truncate -s 2M /home/admin/big.bin
+            runuser -u admin -- truncate -s 2M /home/admin/big2.bin
+            runuser -u admin -- mkdir /home/admin/adir
+        """)
+        b.wait_visible("[data-item='note.txt']")
+
+        # Double-clicking a directory still navigates when unconfigured
+        b.mouse("[data-item='adir']", "dblclick")
+        self.wait_directory_changed("/home/admin/adir/")
+        self.chdir("/home/admin")
+
+        # Unconfigured double-click opens the first-run dialog
+        b.mouse("[data-item='blob1.bin']", "dblclick")
+        b.wait_visible("#default-file-action-modal")
+        b.wait_text(".pf-v6-c-modal-box__title", "What should the default file action be?")
+        b.wait_in_text("#default-file-action-modal", "This can be changed at any time")
+        b.wait_visible("#default-file-action-confirm:disabled")
+
+        # Choosing an action always persists it, and applies to this file
+        b.click("#default-file-action-download")
+        b.click("#default-file-action-confirm")
+        b.wait_not_present("#default-file-action-modal")
+        self.waitDownloadFile("blob1.bin", len("abc\x00def"), "abc\x00def")
+
+        # The choice also survives a reload
+        b.reload()
+        b.enter_page("/files")
+        b.wait_visible("[data-item='note.txt']")
+        b.click("#dropdown-menu")
+        b.wait_in_text("#default-file-action", "Default file action: Download")
+
+        # Reconfigure to Prefer editor from the overflow menu
+        b.click("#default-file-action")
+        b.wait_visible("#default-file-action-modal")
+        b.wait_text(".pf-v6-c-modal-box__title", "Default file action")
+        b.wait_visible("#default-file-action-download:checked")
+        b.click("#default-file-action-prefer-editor")
+        b.click("#default-file-action-confirm")
+        b.wait_not_present("#default-file-action-modal")
+
+        b.mouse("[data-item='note.txt']", "dblclick")
+        b.wait_text(".pf-v6-c-modal-box__title", "Edit note.txt")
+
+        # Downloading in the editor with unsaved changes prompts first; Cancel leaves the editor open
+        b.set_input_text(".file-editor-modal textarea", "unsaved", append=True, value_check=False)
+        b.click(".file-editor-modal [data-ouia-component-id='download-file']")
+        b.wait_visible("#file-editor-prompt-modal")
+        b.click("#file-editor-prompt-modal [data-ouia-component-id='prompt-cancel-changes']")
+        b.wait_not_present("#file-editor-prompt-modal")
+        b.wait_visible(".file-editor-modal")
+
+        # Saving through that prompt closes the editor and downloads the on-disk file
+        b.click(".file-editor-modal [data-ouia-component-id='download-file']")
+        b.wait_visible("#file-editor-prompt-modal")
+        b.click("#file-editor-prompt-modal [data-ouia-component-id='prompt-save-changes']")
+        b.wait_not_present(".file-editor-modal")
+        self.waitDownloadFile("note.txt", len("hello world\nunsaved\n"), "hello world\nunsaved\n")
+        self.assertEqual(m.execute("cat /home/admin/note.txt"), "hello world\nunsaved\n")
+
+        # Without unsaved changes the editor closes directly and downloads, no prompt;
+        # a distinct file name so a stale download from the step above cannot satisfy it
+        b.mouse("[data-item='mystery-actuallytext']", "dblclick")
+        b.wait_text(".pf-v6-c-modal-box__title", "Edit mystery-actuallytext")
+        b.click(".file-editor-modal [data-ouia-component-id='download-file']")
+        b.wait_not_present(".file-editor-modal")
+        self.waitDownloadFile("mystery-actuallytext", len("plain text, no extension"), "plain text, no extension")
+
+        # Oversized files fall back to download instead of the editor
+        b.mouse("[data-item='big.bin']", "dblclick")
+        self.waitDownloadFile("big.bin", 2 * 1024 * 1024)
+
+        # Keyboard sibling of double-click: Enter on a selected file
+        b.eval_js("window.focus()")
+        b.click("[data-item='note.txt']")
+        b.key("Enter")
+        b.wait_text(".pf-v6-c-modal-box__title", "Edit note.txt")
+        b.click(".file-editor-modal button.pf-m-link")
+        b.wait_not_present(".file-editor-modal")
+
+        # Ask mode: a modal per double-click
+        b.click("#dropdown-menu")
+        b.click("#default-file-action")
+        b.click("#default-file-action-ask")
+        b.click("#default-file-action-confirm")
+        b.mouse("[data-item='mystery-actuallytext']", "dblclick")
+        b.wait_visible("#default-file-ask-modal")
+        b.wait_text(".pf-v6-c-modal-box__title", "Choose action for mystery-actuallytext")
+        b.click("#ask-edit-button")
+        b.wait_text(".pf-v6-c-modal-box__title", "Edit mystery-actuallytext")
+        b.click(".file-editor-modal button.pf-m-link")
+        b.wait_not_present(".file-editor-modal")
+
+        # Refused files download directly, no single-option modal
+        b.mouse("[data-item='big2.bin']", "dblclick")
+        self.waitDownloadFile("big2.bin", 2 * 1024 * 1024)
+        b.wait_not_present("#default-file-ask-modal")
+
+        # "Change default" applies the new default immediately:
+        # switch from ask to prefer-editor while double-clicking the second blob
+        b.mouse("[data-item='blob2.bin']", "dblclick")
+        b.wait_visible("#default-file-ask-modal")
+        b.click("#ask-settings-button")
+        b.wait_visible("#default-file-action-modal")
+        b.click("#default-file-action-prefer-editor")
+        b.click("#default-file-action-confirm")
+        b.wait_text(".pf-v6-c-modal-box__title", "Edit blob2.bin")
+        b.click(".file-editor-modal button.pf-m-link")
+        b.wait_not_present(".file-editor-modal")
+
+        # prefer editor: unknown extension => editor
+        b.mouse("[data-item='mystery-actuallytext']", "dblclick")
+        b.wait_text(".pf-v6-c-modal-box__title", "Edit mystery-actuallytext")
+        b.click(".file-editor-modal button.pf-m-link")
+        b.wait_not_present(".file-editor-modal")
+
+        # prefer editor: an extensionless binary opens too, identical to the
+        # context menu's existing "Open text file" behavior
+        b.mouse("[data-item='mystery-nottext']", "dblclick")
+        b.wait_text(".pf-v6-c-modal-box__title", "Edit mystery-nottext")
+        b.click(".file-editor-modal button.pf-m-link")
+        b.wait_not_present(".file-editor-modal")
+
+        # prefer editor: text by extension => editor
+        b.mouse("[data-item='note.txt']", "dblclick")
+        b.wait_text(".pf-v6-c-modal-box__title", "Edit note.txt")
+        b.click(".file-editor-modal button.pf-m-link")
+        b.wait_not_present(".file-editor-modal")
+
+        # A bogus stored value must degrade to the unconfigured state
+        b.eval_js("""window.localStorage.setItem("files:defaultFileAction", 'bzzt')""")
+        b.reload()
+        b.enter_page("/files")
+        b.click("#dropdown-menu")
+        b.wait_in_text("#default-file-action", "Default file action: Not set")
+        b.click("#default-file-action")
+        b.wait_text(".pf-v6-c-modal-box__title", "What should the default file action be?")
+        b.key("Escape")
+        b.wait_not_present("#default-file-action-modal")
+
+        b.eval_js("""window.localStorage.removeItem("files:defaultFileAction")""")
+
     def testRename(self) -> None:
         b = self.browser
         m = self.machine
