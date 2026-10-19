@@ -23,12 +23,26 @@ import { basename } from "cockpit-path";
 import type { Dialogs, DialogResult } from 'dialogs';
 import { fmt_to_fragments } from 'utils';
 
+import type { FolderFileInfo } from '../common.ts';
+
 import "./editor.css";
 
 const _ = cockpit.gettext;
 
 // 1MB
-export const MAX_EDITOR_FILE_SIZE = 1000000;
+const MAX_EDITOR_FILE_SIZE = 1000000;
+
+// Only allow code, text and unknown file types as we detect things by
+// extensions, so not allowing unknown file types would disallow one
+// from editing for example /etc/hostname
+const EDITABLE_CATEGORY_CLASSES = ["code-file", "text-file", "file"];
+
+export function editor_supports(file: FolderFileInfo): boolean {
+    return file.type === "reg" &&
+        EDITABLE_CATEGORY_CLASSES.includes(file.category?.class || "") &&
+        file.size !== undefined &&
+        file.size < MAX_EDITOR_FILE_SIZE;
+}
 
 class EditorState {
     /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
