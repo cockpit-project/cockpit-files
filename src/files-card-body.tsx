@@ -24,6 +24,8 @@ import * as timeformat from "timeformat";
 
 import { get_permissions, permissionShortStr, testIsAppleDevice, useFilesContext } from "./common.ts";
 import type { ClipboardInfo, FolderFileInfo } from "./common.ts";
+import type { DefaultFileAction } from "./default-file-action.ts";
+import { handleFileDoubleClick } from "./dialogs/default-file-action.tsx";
 import { confirm_delete } from "./dialogs/delete.tsx";
 import { show_create_directory_dialog } from "./dialogs/mkdir.tsx";
 import { show_rename_dialog } from "./dialogs/rename.tsx";
@@ -130,6 +132,8 @@ export const FilesCardBody = ({
     setClipboard,
     showHidden,
     setShowHidden,
+    defaultFileAction,
+    setDefaultFileAction,
 } : {
     currentFilter: string,
     setCurrentFilter: React.Dispatch<React.SetStateAction<string>>,
@@ -142,6 +146,8 @@ export const FilesCardBody = ({
     clipboard: ClipboardInfo, setClipboard: React.Dispatch<React.SetStateAction<ClipboardInfo>>,
     showHidden: boolean,
     setShowHidden: React.Dispatch<React.SetStateAction<boolean>>,
+    defaultFileAction: DefaultFileAction | null,
+    setDefaultFileAction: (action: DefaultFileAction) => void,
 }) => {
     const [boxPerRow, setBoxPerRow] = useState(0);
     const dialogs = useDialogs();
@@ -174,8 +180,11 @@ export const FilesCardBody = ({
         const newPath = path + file.name;
         if (file.to === "dir") {
             cockpit.location.go("/", { path: encodeURIComponent(newPath) });
+        } else if (file.type === "reg") {
+            // symlinks excluded, mirroring the context menu
+            handleFileDoubleClick(dialogs, path, file, defaultFileAction, setDefaultFileAction);
         }
-    }, [path]);
+    }, [path, dialogs, defaultFileAction, setDefaultFileAction]);
 
     const goUpOneDir = useCallback(() => {
         if (path !== "/") {
@@ -335,7 +344,8 @@ export const FilesCardBody = ({
                 break;
 
             case "ArrowDown":
-                if (selected.length === 1 && dirNavigationModifiers(e)) {
+                // key auto-repeat must not fire navigation or file actions repeatedly
+                if (selected.length === 1 && dirNavigationModifiers(e) && !e.repeat) {
                     onDoubleClickNavigate(selected[0]);
                 } else if (hasNoModifiers(e) && sortedFiles.length > 0) {
                     setSelected(_selected => {
@@ -350,7 +360,7 @@ export const FilesCardBody = ({
                 break;
 
             case "Enter":
-                if (hasNoModifiers(e) && selected.length === 1) {
+                if (hasNoModifiers(e) && selected.length === 1 && !e.repeat) {
                     onDoubleClickNavigate(selected[0]);
                 }
                 break;
