@@ -1231,20 +1231,25 @@ class TestFiles(testlib.MachineCase):
         b.wait_visible("#default-file-action-modal")
         b.click("#default-file-action-prefer-editor")
         b.click("#default-file-action-confirm")
-        b.wait_text(".pf-v6-c-modal-box__title", "Edit blob2.bin")
-        b.click(".file-editor-modal button.pf-m-link")
-        b.wait_not_present(".file-editor-modal")
+        # Its content is binary, so the editor warns first; Download takes it
+        b.wait_visible("#file-editor-non-text-warning-modal")
+        b.click("#file-editor-non-text-warning-modal [data-ouia-component-id='download-file']")
+        self.waitDownloadFile("blob2.bin", len("abc\x00def"), "abc\x00def")
+        b.wait_not_present("#file-editor-non-text-warning-modal")
 
-        # prefer editor: unknown extension => editor
+        # prefer editor: unknown extension, text content => editor without warning
         b.mouse("[data-item='mystery-actuallytext']", "dblclick")
         b.wait_text(".pf-v6-c-modal-box__title", "Edit mystery-actuallytext")
         b.click(".file-editor-modal button.pf-m-link")
         b.wait_not_present(".file-editor-modal")
 
-        # prefer editor: an extensionless binary opens too, identical to the
-        # context menu's existing "Open text file" behavior
+        # prefer editor: an extensionless binary warns first, and "Open anyway"
+        # still gets it into the editor
         b.mouse("[data-item='mystery-nottext']", "dblclick")
+        b.wait_visible("#file-editor-non-text-warning-modal")
+        b.click("#file-editor-non-text-warning-modal [data-ouia-component-id='open-anyway']")
         b.wait_text(".pf-v6-c-modal-box__title", "Edit mystery-nottext")
+        b.wait_in_text(".file-editor-modal textarea", "not text")
         b.click(".file-editor-modal button.pf-m-link")
         b.wait_not_present(".file-editor-modal")
 
@@ -3573,6 +3578,51 @@ class TestFiles(testlib.MachineCase):
         b.assert_pixels(".file-editor-modal", "editor-modal-read-only")
 
         b.click(".pf-v6-c-modal-box__footer button.pf-m-secondary")
+        b.wait_not_present(".file-editor-modal")
+
+    def testEditorNonTextWarning(self) -> None:
+        b = self.browser
+        m = self.machine
+
+        self.enter_files()
+        m.execute("""
+            runuser -u admin -- bash -c "printf 'abc\\0def' > /home/admin/blob.bin"
+            runuser -u admin -- bash -c "echo 'hello world' > /home/admin/note.txt"
+        """)
+        b.allow_download()
+        b.wait_visible("[data-item='blob.bin']")
+
+        # Opening a binary file goes through a warning first; Cancel backs out
+        self.open_context_menu("[data-item='blob.bin']")
+        b.click(".contextMenu button:contains('Open text file')")
+        b.wait_visible("#file-editor-non-text-warning-modal")
+        b.click("#file-editor-non-text-warning-modal button.pf-m-link")
+        b.wait_not_present("#file-editor-non-text-warning-modal")
+        b.wait_not_present(".file-editor-modal")
+
+        # "Open anyway" opens the editor with the binary content
+        self.open_context_menu("[data-item='blob.bin']")
+        b.click(".contextMenu button:contains('Open text file')")
+        b.wait_visible("#file-editor-non-text-warning-modal")
+        b.click("#file-editor-non-text-warning-modal [data-ouia-component-id='open-anyway']")
+        b.wait_visible(".file-editor-modal")
+        b.wait_in_text(".file-editor-modal textarea", "abc")
+        b.click(".file-editor-modal button.pf-m-link")
+        b.wait_not_present(".file-editor-modal")
+
+        # "Download" takes the bytes without opening the editor
+        self.open_context_menu("[data-item='blob.bin']")
+        b.click(".contextMenu button:contains('Open text file')")
+        b.wait_visible("#file-editor-non-text-warning-modal")
+        b.click("#file-editor-non-text-warning-modal [data-ouia-component-id='download-file']")
+        self.waitDownloadFile("blob.bin", len("abc\x00def"), "abc\x00def")
+        b.wait_not_present("#file-editor-non-text-warning-modal")
+
+        # Text files open directly, without the warning dialog
+        self.open_context_menu("[data-item='note.txt']")
+        b.click(".contextMenu button:contains('Open text file')")
+        b.wait_text(".pf-v6-c-modal-box__title", "Edit note.txt")
+        b.click(".file-editor-modal button.pf-m-link")
         b.wait_not_present(".file-editor-modal")
 
     def testCreateFile(self) -> None:
