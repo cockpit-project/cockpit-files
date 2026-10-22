@@ -19,16 +19,31 @@ import { debounce } from "throttle-debounce";
 
 import cockpit from 'cockpit';
 import { EventEmitter } from 'cockpit/event.ts';
-import { basename } from "cockpit-path";
+import { basename, dirname } from "cockpit-path";
 import type { Dialogs, DialogResult } from 'dialogs';
 import { fmt_to_fragments } from 'utils';
+
+import type { FolderFileInfo } from '../common.ts';
+import { downloadFile } from '../download.tsx';
 
 import "./editor.css";
 
 const _ = cockpit.gettext;
 
 // 1MB
-export const MAX_EDITOR_FILE_SIZE = 1000000;
+const MAX_EDITOR_FILE_SIZE = 1000000;
+
+// Only allow code, text and unknown file types as we detect things by
+// extensions, so not allowing unknown file types would disallow one
+// from editing for example /etc/hostname
+const EDITABLE_CATEGORY_CLASSES = ["code-file", "text-file", "file"];
+
+export function editor_supports(file: FolderFileInfo): boolean {
+    return file.type === "reg" &&
+        EDITABLE_CATEGORY_CLASSES.includes(file.category?.class || "") &&
+        file.size !== undefined &&
+        file.size < MAX_EDITOR_FILE_SIZE;
+}
 
 class EditorState {
     /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
@@ -117,13 +132,17 @@ class Editor extends EventEmitter<{ updated(state: EditorState): void }> {
     }
 }
 
-export const EditFileModal = ({ dialogResult, editor } : {
+export const EditFileModal = ({ dialogResult, editor, path } : {
     dialogResult: DialogResult<void>,
     editor: Editor,
+    path: string,
 }) => {
     const [last_tag, setLastTag] = React.useState<string | null>(null);
     const [state, setState] = React.useState(editor.state);
     const [promptDiscardChanges, setPromptDiscardChanges] = React.useState(false);
+    // Download intent, acted on only when the dialog really closes; reads
+    // the on-disk file (same lane as the context-menu download)
+    const downloadAfterClose = React.useRef(false);
 
     React.useEffect(() => {
         editor.on("updated", (state) => {
@@ -147,18 +166,34 @@ export const EditFileModal = ({ dialogResult, editor } : {
         }
     }, [modified]);
 
+    const closeEditor = React.useCallback(() => {
+        const wantDownload = downloadAfterClose.current;
+        downloadAfterClose.current = false;
+        dialogResult.resolve();
+        if (wantDownload)
+            downloadFile(dirname(path), { name: state.basename });
+    }, [dialogResult, path, state.basename]);
+
     const tryClose = React.useCallback(() => {
         if (state?.modified) {
             setTimeout(setPromptDiscardChanges, 0, true);
         } else {
-            dialogResult.resolve();
+            closeEditor();
         }
-    }, [state, setPromptDiscardChanges, dialogResult]);
+    }, [state, setPromptDiscardChanges, closeEditor]);
 
     const saveThenClose = React.useCallback(async () => {
         await editor.save();
-        dialogResult.resolve();
-    }, [editor, dialogResult]);
+        closeEditor();
+    }, [editor, closeEditor]);
+
+    const startDownload = React.useCallback(() => {
+        downloadAfterClose.current = true;
+        if (state?.modified)
+            setTimeout(setPromptDiscardChanges, 0, true);
+        else
+            closeEditor();
+    }, [state, setPromptDiscardChanges, closeEditor]);
 
     React.useEffect(() => {
         const onKeyDown = promptDiscardChanges
@@ -264,6 +299,13 @@ export const EditFileModal = ({ dialogResult, editor } : {
                         {_("Save")}
                     </Button>}
                     <Button
+                      ouiaId="download-file"
+                      variant="secondary"
+                      onClick={startDownload}
+                    >
+                        {_("Download")}
+                    </Button>
+                    <Button
                       ouiaId="cancel-save" variant={state.writable ? "link" : "secondary"}
                       onClick={() => tryClose()}
                     >
@@ -276,7 +318,10 @@ export const EditFileModal = ({ dialogResult, editor } : {
               id="file-editor-prompt-modal"
               variant={ModalVariant.small}
               isOpen={promptDiscardChanges}
-              onClose={() => setTimeout(setPromptDiscardChanges, 0, false)}
+              onClose={() => {
+                  downloadAfterClose.current = false;
+                  setTimeout(setPromptDiscardChanges, 0, false);
+              }}
             >
                 <ModalHeader titleIconVariant={TrashIcon} title={_("Save changes?")} />
                 <ModalBody id="file-editor-prompt-modal-body">
@@ -324,14 +369,18 @@ export const EditFileModal = ({ dialogResult, editor } : {
                       ouiaId="prompt-discard-changes"
                       key="discard" variant="secondary"
                       isDanger isDisabled={state.saving}
-                      onClick={() => dialogResult.resolve()}
+                      onClick={closeEditor}
                     >
                         {_("Discard")}
                     </Button>
                     <Button
                       ouiaId="prompt-cancel-changes"
                       key="cancel" variant="link"
-                      isDisabled={state.saving} onClick={() => setPromptDiscardChanges(false)}
+                      isDisabled={state.saving}
+                      onClick={() => {
+                          downloadAfterClose.current = false;
+                          setPromptDiscardChanges(false);
+                      }}
                     >
                         {_("Cancel")}
                     </Button>
@@ -343,5 +392,5 @@ export const EditFileModal = ({ dialogResult, editor } : {
 
 export function edit_file(dialogs: Dialogs, path: string) {
     const editor = new Editor(path);
-    dialogs.run(EditFileModal, { editor });
+    dialogs.run(EditFileModal, { editor, path });
 }
