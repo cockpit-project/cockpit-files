@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-06 09:24+0000\n"
-"PO-Revision-Date: 2026-09-11 03:17+0000\n"
+"POT-Creation-Date: 2026-10-23 07:56+0000\n"
+"PO-Revision-Date: 2026-10-21 08:18+0000\n"
 "Last-Translator: Arif Budiman <arifpedia@gmail.com>\n"
 "Language-Team: Indonesian <https://translate.fedoraproject.org/projects/"
 "cockpit/cockpit-files/id/>\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2026.9.1\n"
+"X-Generator: Weblate 2026.10.1\n"
 
 #: src/index.html:8
 msgid "Cockpit Files"
@@ -55,16 +55,12 @@ msgid "Bookmarks"
 msgstr "Penanda"
 
 #: src/files-breadcrumbs.tsx:161
-#, fuzzy
-#| msgid "Bookmarks"
 msgid "Bookmarked"
-msgstr "Penanda"
+msgstr "Ditandai"
 
 #: src/files-breadcrumbs.tsx:161
-#, fuzzy
-#| msgid "Add to bookmarks"
 msgid "Not bookmarked"
-msgstr "Tambahkan ke penanda"
+msgstr "Tidak ditandai"
 
 #: src/files-breadcrumbs.tsx:236
 msgid "Filesystem"
@@ -449,11 +445,11 @@ msgstr "Pilih semua"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:131
 msgid "Save current file"
-msgstr ""
+msgstr "Simpan berkas saat ini"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:135
 msgid "Close editor"
-msgstr ""
+msgstr "Tutup penyunting"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:148
 msgid "Keyboard shortcuts"
@@ -468,10 +464,8 @@ msgid "Editing"
 msgstr "Menyunting"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:172
-#, fuzzy
-#| msgid "Edit $0"
 msgid "Editor"
-msgstr "Sunting $0"
+msgstr "Penyunting"
 
 #: src/dialogs/delete.tsx:34
 msgid "Force delete $0 items"
