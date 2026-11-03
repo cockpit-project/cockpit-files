@@ -15,6 +15,7 @@ import { cleanPlugin } from './pkg/lib/esbuild-cleanup-plugin.js';
 import { cockpitCompressPlugin } from './pkg/lib/esbuild-compress-plugin.js';
 import { filetype_plugin } from './src/filetype-plugin.js';
 
+const srcdir = import.meta.dirname;
 const useWasm = os.arch() !== 'x64';
 
 const esbuild = await (async () => {
@@ -135,7 +136,7 @@ const context = await esbuild.context({
             ],
         }),
 
-        cockpitPoEsbuildPlugin(),
+        cockpitPoEsbuildPlugin({ podir: `${srcdir}/po` }),
         ...production ? [cockpitCompressPlugin()] : [],
         cockpitRsyncEsbuildPlugin({ dest: packageJson.name }),
         notifyEndPlugin(),
