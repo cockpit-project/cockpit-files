@@ -36,18 +36,20 @@ const esbuild = await (async () => {
 
 const production = process.env.NODE_ENV === 'production';
 // List of directories to use when using import statements
-const nodePaths = ['pkg/lib'];
-const outdir = 'dist';
+const nodePaths = [`${srcdir}/pkg/lib`];
 
 // Obtain package name from package.json
-const packageJson = JSON.parse(fs.readFileSync('package.json'));
+const packageJson = JSON.parse(fs.readFileSync(`${srcdir}/package.json`));
 
 const parser = (await import('argparse')).default.ArgumentParser();
+parser.add_argument('-o', '--outdir', { help: "base output directory", default: ".", metavar: "DIR" });
 /* eslint-disable max-len */
 parser.add_argument('-r', '--rsync', { help: "rsync bundles to ssh target after build", metavar: "HOST" });
 parser.add_argument('-w', '--watch', { action: 'store_true', help: "Enable watch mode", default: process.env.ESBUILD_WATCH === "true" });
 /* eslint-enable max-len */
 const args = parser.parse_args();
+
+const outdir = path.join(args.outdir, 'dist');
 
 if (args.rsync)
     process.env.RSYNC = args.rsync;
@@ -98,7 +100,7 @@ function watch_dirs(dir, on_change) {
 const context = await esbuild.context({
     ...!production ? { sourcemap: "linked" } : {},
     bundle: true,
-    entryPoints: ['./src/index.js'],
+    entryPoints: [`${srcdir}/src/index.js`],
     // Allow external font files which live in ../../static/fonts
     external: ['*.woff', '*.woff2', '*.jpg', '*.svg', '../../assets*'],
     // Move all legal comments to a .LEGAL.txt file
@@ -118,8 +120,8 @@ const context = await esbuild.context({
             setup(build) {
                 build.onEnd((output, _outputFiles) => {
                     if (output?.errors.length === 0) {
-                        fs.copyFileSync('./src/manifest.json', './dist/manifest.json');
-                        fs.copyFileSync('./src/index.html', './dist/index.html');
+                        fs.copyFileSync(`${srcdir}/src/manifest.json`, `${outdir}/manifest.json`);
+                        fs.copyFileSync(`${srcdir}/src/index.html`, `${outdir}/index.html`);
                     }
                 });
             }
@@ -128,7 +130,7 @@ const context = await esbuild.context({
         filetype_plugin,
 
         sassPlugin({
-            loadPaths: [...nodePaths, 'node_modules'],
+            loadPaths: [...nodePaths, `${srcdir}/node_modules`],
             filter: /\.scss/,
             quietDeps: true,
             silenceDeprecations: [
@@ -148,19 +150,20 @@ try {
 
     // skip metafile and runtime module calculation in watch mode
     if (!args.watch) {
-        fs.writeFileSync('metafile.json', JSON.stringify(result.metafile));
+        fs.writeFileSync(`${args.outdir}/metafile.json`, JSON.stringify(result.metafile));
 
         // Extract bundled npm packages for dependency tracking
         const bundledPackages = new Set();
         for (const inputPath of Object.keys(result.metafile.inputs)) {
+            const rel = path.relative(srcdir, inputPath);
             // Match paths like node_modules/package-name/ or node_modules/@scope/package-name/
-            const match = inputPath.match(/^node_modules\/(@[^/]+\/[^/]+|[^/]+)\//);
+            const match = rel.match(/^node_modules\/(@[^/]+\/[^/]+|[^/]+)\//);
             if (match)
                 bundledPackages.add(match[1]);
         }
 
         // Look up versions from package-lock.json and output simple format
-        const packageLock = JSON.parse(fs.readFileSync('package-lock.json', 'utf8'));
+        const packageLock = JSON.parse(fs.readFileSync(`${srcdir}/package-lock.json`, 'utf8'));
         const deps = [];
         for (const pkgName of Array.from(bundledPackages).sort()) {
             const lockKey = `node_modules/${pkgName}`;
@@ -170,7 +173,7 @@ try {
             else
                 console.error(`Warning: Could not find version for ${pkgName}`);
         }
-        fs.writeFileSync('runtime-npm-modules.txt', deps.join('\n') + '\n');
+        fs.writeFileSync(`${args.outdir}/runtime-npm-modules.txt`, deps.join('\n') + '\n');
     }
 } catch (e) {
     if (!args.watch)
@@ -188,7 +191,7 @@ if (args.watch) {
         } catch (e) {} // ignore in watch mode
     };
 
-    watch_dirs('src', on_change);
+    watch_dirs(`${srcdir}/src`, on_change);
 
     // wait forever until Control-C
     await new Promise(() => {});
