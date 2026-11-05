@@ -19,7 +19,7 @@ import type { ClipboardInfo, FilesContextType, FolderFileInfo } from "./common.t
 import { show_copy_paste_as_owner } from "./dialogs/copyPasteOwnership.tsx";
 import { show_create_file_dialog } from './dialogs/create-file.tsx';
 import { confirm_delete } from './dialogs/delete.tsx';
-import { edit_file, MAX_EDITOR_FILE_SIZE } from './dialogs/editor.tsx';
+import { edit_file, editor_supports } from './dialogs/editor.tsx';
 import { show_create_directory_dialog } from './dialogs/mkdir.tsx';
 import { edit_permissions } from './dialogs/permissions.jsx';
 import { show_rename_dialog } from './dialogs/rename.tsx';
@@ -131,13 +131,7 @@ export function get_menu_items(
         }
     } else if (selected.length === 1) {
         const item = selected[0];
-        // Only allow code, text and unknown file types as we detect things by
-        // extensions, so not allowing unknown file types would disallow one
-        // from editing for example /etc/hostname
-        const allowed_edit_types = ["code-file", "text-file", "file"];
-        if (item.type === 'reg' &&
-            allowed_edit_types.includes(item?.category?.class || "") &&
-            item.size !== undefined && item.size < MAX_EDITOR_FILE_SIZE)
+        if (editor_supports(item))
             menuItems.push(
                 {
                     id: "open-file",
