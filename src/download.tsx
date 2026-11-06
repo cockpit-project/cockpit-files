@@ -8,7 +8,7 @@ import cockpit from 'cockpit';
 
 import type { FolderFileInfo } from './common.ts';
 
-export function downloadFile(currentPath: string, selected: FolderFileInfo) {
+export function downloadFile(currentPath: string, selected: Pick<FolderFileInfo, "name">) {
     const payload = JSON.stringify({
         payload: "fsread1",
         binary: "raw",
