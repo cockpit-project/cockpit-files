@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-23 07:56+0000\n"
+"POT-Creation-Date: 2026-11-03 10:02+0000\n"
 "PO-Revision-Date: 2026-09-12 19:17+0000\n"
 "Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
 "memory@weblate.org>\n"
@@ -30,46 +30,6 @@ msgstr ""
 #: src/index.html:8
 msgid "Cockpit Files"
 msgstr "Cockpit Soubory"
-
-#: src/files-breadcrumbs.tsx:46
-msgid "Home"
-msgstr "Domovská složka"
-
-#: src/files-breadcrumbs.tsx:94
-msgid "Unable to create bookmark directory"
-msgstr "Nepodařilo se vytvořit složku záložek"
-
-#: src/files-breadcrumbs.tsx:117
-msgid "Unable to save bookmark file"
-msgstr "Nepodařilo se uložit soubor se záložkami"
-
-#: src/files-breadcrumbs.tsx:139
-msgid "Remove from bookmarks"
-msgstr "Odstranit ze záložek"
-
-#: src/files-breadcrumbs.tsx:141
-msgid "Add to bookmarks"
-msgstr "Přidat do záložek"
-
-#: src/files-breadcrumbs.tsx:154
-msgid "Bookmarks"
-msgstr "Záložky"
-
-#: src/files-breadcrumbs.tsx:161
-msgid "Bookmarked"
-msgstr "Přidáno do záložek"
-
-#: src/files-breadcrumbs.tsx:161
-msgid "Not bookmarked"
-msgstr "Nepřidáno do záložek"
-
-#: src/files-breadcrumbs.tsx:236
-msgid "Filesystem"
-msgstr "Souborový systém"
-
-#: src/files-breadcrumbs.tsx:303 src/dialogs/keyboardShortcutsHelp.tsx:87
-msgid "Edit path"
-msgstr "Upravit popis umístění"
 
 #: src/header.tsx:53 src/files-card-body.tsx:534
 msgid "Name"
@@ -107,10 +67,10 @@ msgstr "Poprvé upraveno"
 msgid "Last modified"
 msgstr "Naposledy změněno"
 
-#: src/header.tsx:86 src/dialogs/permissions.tsx:319
-#: src/dialogs/create-file.tsx:185 src/files-card-body.tsx:544
-#: src/files-card-body.tsx:591 src/files-card-body.tsx:667
-#: src/files-footer-detail.tsx:80
+#: src/header.tsx:86 src/dialogs/create-file.tsx:185
+#: src/dialogs/permissions.tsx:319 src/files-footer-detail.tsx:80
+#: src/files-card-body.tsx:544 src/files-card-body.tsx:591
+#: src/files-card-body.tsx:667
 msgid "Owner"
 msgstr "Vlastník"
 
@@ -162,100 +122,45 @@ msgstr "Skrýt skryté položky"
 msgid "Show hidden items"
 msgstr "Zobrazit skryté položky"
 
-#: src/upload-button.tsx:56
-msgid "$0 files"
-msgstr "$0 souborů"
+#: src/files-breadcrumbs.tsx:46
+msgid "Home"
+msgstr "Domovská složka"
 
-#: src/upload-button.tsx:60
-msgid "Uploaded as $0, $1"
-msgstr "Nahráno jako $0,$1"
+#: src/files-breadcrumbs.tsx:94
+msgid "Unable to create bookmark directory"
+msgstr "Nepodařilo se vytvořit složku záložek"
 
-#: src/upload-button.tsx:95
-msgid "Replace file $0?"
-msgstr "Nahradit soubor $0?"
+#: src/files-breadcrumbs.tsx:117
+msgid "Unable to save bookmark file"
+msgstr "Nepodařilo se uložit soubor se záložkami"
 
-#: src/upload-button.tsx:102
-msgid ""
-"A file with the same name already exists in \"$0\". Replacing it will "
-"overwrite its content."
-msgstr ""
-"Stejně nazvaný soubor už v „$0“ existuje. Nahrazením bude jeho obsah přepsán."
+#: src/files-breadcrumbs.tsx:139
+msgid "Remove from bookmarks"
+msgstr "Odstranit ze záložek"
 
-#: src/upload-button.tsx:123
-msgid "New file"
-msgstr "Nový soubor"
+#: src/files-breadcrumbs.tsx:141
+msgid "Add to bookmarks"
+msgstr "Přidat do záložek"
 
-#: src/upload-button.tsx:128
-msgid "Original file on server"
-msgstr "Původní soubor na serveru"
+#: src/files-breadcrumbs.tsx:154
+msgid "Bookmarks"
+msgstr "Záložky"
 
-#: src/upload-button.tsx:137
-msgid "Apply this action to all conflicting files"
-msgstr "Použít tuto akci na veškeré kolidující soubory"
+#: src/files-breadcrumbs.tsx:161
+msgid "Bookmarked"
+msgstr "Přidáno do záložek"
 
-#: src/upload-button.tsx:143
-msgid "Replace"
-msgstr "Nahradit"
+#: src/files-breadcrumbs.tsx:161
+msgid "Not bookmarked"
+msgstr "Nepřidáno do záložek"
 
-#: src/upload-button.tsx:145
-msgid "Keep original"
-msgstr "Ponechat původní"
+#: src/files-breadcrumbs.tsx:236
+msgid "Filesystem"
+msgstr "Souborový systém"
 
-#: src/upload-button.tsx:146 src/dialogs/delete.tsx:97
-#: src/dialogs/permissions.tsx:424 src/dialogs/copyPasteOwnership.tsx:170
-#: src/dialogs/rename.tsx:87 src/dialogs/symlink.tsx:233
-#: src/dialogs/editor.tsx:270 src/dialogs/editor.tsx:336
-#: src/dialogs/create-file.tsx:211 src/dialogs/mkdir.tsx:137
-msgid "Cancel"
-msgstr "Storno"
-
-#: src/upload-button.tsx:278
-msgid "Failed"
-msgstr "Nezdařilo se"
-
-#: src/upload-button.tsx:322 src/upload-button.tsx:352
-msgid "Upload error"
-msgstr "Chyba nahrávání"
-
-#: src/upload-button.tsx:324
-msgid "Unable to move uploaded file to final destination"
-msgstr "Nebylo možné přesunout nahrané soubory do konečného umístění"
-
-#: src/upload-button.tsx:346
-msgid "Cancelled"
-msgstr "Zrušeno"
-
-#: src/upload-button.tsx:348
-msgid "Cancelled upload of $0"
-msgstr "Zrušeno nahrávání $0"
-
-#: src/upload-button.tsx:374
-msgid "File uploaded"
-msgstr "Soubor nahrán"
-
-#: src/upload-button.tsx:374
-msgid "Files uploaded"
-msgstr "Soubory nahrány"
-
-#: src/upload-button.tsx:405
-msgid "Change permissions"
-msgstr "Změnit oprávnění"
-
-#: src/upload-button.tsx:458
-msgid "Uploads"
-msgstr "Nahrání"
-
-#: src/upload-button.tsx:477
-msgid "Cancel upload of $0"
-msgstr "Zrušit nahrávání $0"
-
-#: src/upload-button.tsx:494
-msgid "Upload $0% completed"
-msgstr "Nahrávání z $0% dokončeno"
-
-#: src/upload-button.tsx:513
-msgid "Upload"
-msgstr "Nahrát"
+#: src/files-breadcrumbs.tsx:303 src/dialogs/keyboardShortcutsHelp.tsx:87
+msgid "Edit path"
+msgstr "Upravit popis umístění"
 
 #: src/common.ts:49
 msgid "None"
@@ -273,7 +178,7 @@ msgstr "Pouze zápis"
 msgid "Write and execute"
 msgstr "Zápis a spouštění"
 
-#: src/common.ts:53 src/dialogs/permissions.tsx:230 src/dialogs/editor.tsx:189
+#: src/common.ts:53 src/dialogs/editor.tsx:189 src/dialogs/permissions.tsx:230
 msgid "Read-only"
 msgstr "Pouze pro čtení"
 
@@ -341,70 +246,199 @@ msgstr "Složka s tímto názvem zde už existuje"
 msgid "File exists"
 msgstr "Soubor existuje"
 
-#: src/menu.tsx:51 src/dialogs/copyPasteOwnership.tsx:56
-msgid "Pasting failed"
-msgstr "Vkládání se nezdařilo"
+#: src/dialogs/delete.tsx:34
+msgid "Force delete $0 items"
+msgstr "Vynutit smazání $0 položek"
 
-#: src/menu.tsx:53
-msgid "\"$0\" exists, not overwriting with paste."
-msgstr "„$0“ existuje – vložením nebude přepsáno."
+#: src/dialogs/delete.tsx:34
+msgid "Delete $0 items?"
+msgstr "Smazat $0 položek?"
 
-#: src/menu.tsx:100 src/dialogs/copyPasteOwnership.tsx:168
-msgid "Paste"
-msgstr "Vložit"
+#: src/dialogs/delete.tsx:40
+msgid "Force delete file $0?"
+msgstr "Vynutit smazání souboru $0?"
 
-#: src/menu.tsx:107 src/dialogs/mkdir.tsx:80
-msgid "Create directory"
-msgstr "Vytvořit složku"
+#: src/dialogs/delete.tsx:40
+msgid "Delete file $0?"
+msgstr "Smazat soubor $0?"
 
-#: src/menu.tsx:112 src/dialogs/create-file.tsx:151
-msgid "Create file"
-msgstr "Vytvořit soubor"
+#: src/dialogs/delete.tsx:44
+msgid "Force delete link $0?"
+msgstr "Vynutit smazání odkazu $0?"
 
-#: src/menu.tsx:118 src/menu.tsx:158 src/menu.tsx:225
-msgid "Edit permissions"
-msgstr "Upravit oprávnění"
+#: src/dialogs/delete.tsx:44
+msgid "Delete link $0?"
+msgstr "Smazat odkaz $0?"
 
-#: src/menu.tsx:127 src/menu.tsx:188
-msgid "Open in terminal"
-msgstr "Otevřít v terminálu"
+#: src/dialogs/delete.tsx:48
+msgid "Force delete directory $0?"
+msgstr "Vynutit smazání složky $0?"
 
-#: src/menu.tsx:144
-msgid "Open text file"
-msgstr "Otevřít textový soubor"
+#: src/dialogs/delete.tsx:48
+msgid "Delete directory $0?"
+msgstr "Smazat složku $0?"
 
-#: src/menu.tsx:152 src/menu.tsx:206
-msgid "Copy"
-msgstr "Zkopírovat"
+#: src/dialogs/delete.tsx:51
+msgid "Force delete $0"
+msgstr "Vynutit smazání $0"
 
-#: src/menu.tsx:163 src/dialogs/rename.tsx:78
-msgid "Rename"
-msgstr "Přejmenovat"
+#: src/dialogs/delete.tsx:51
+msgid "Delete $0?"
+msgstr "Smazat $0?"
 
-#: src/menu.tsx:169 src/menu.tsx:211 src/dialogs/delete.tsx:95
+#: src/dialogs/delete.tsx:95 src/menu.tsx:169 src/menu.tsx:211
 msgid "Delete"
 msgstr "Smazat"
 
-#: src/menu.tsx:179
-msgid "Download"
-msgstr "Stáhnout"
+#: src/dialogs/delete.tsx:97 src/dialogs/rename.tsx:87
+#: src/dialogs/copyPasteOwnership.tsx:170 src/dialogs/mkdir.tsx:137
+#: src/dialogs/editor.tsx:270 src/dialogs/editor.tsx:336
+#: src/dialogs/create-file.tsx:211 src/dialogs/symlink.tsx:233
+#: src/dialogs/permissions.tsx:424 src/upload-button.tsx:146
+msgid "Cancel"
+msgstr "Storno"
 
-#: src/menu.tsx:198 src/dialogs/symlink.tsx:231
-msgid "Create link"
-msgstr "Vytvořit odkaz"
+#: src/dialogs/rename.tsx:78 src/menu.tsx:163
+msgid "Rename"
+msgstr "Přejmenovat"
 
-#: src/files-folder-view.tsx:156
-msgid "Drop files to upload"
-msgstr "Soubory nahrajete jejich přetažením sem"
+#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:250
+#: src/dialogs/editor.tsx:307
+msgid "Overwrite"
+msgstr "Přepsat"
 
-#: src/files-folder-view.tsx:164
-msgid "Cannot drop files, another upload is already in progress"
+#: src/dialogs/rename.tsx:91
+msgid "New filename"
+msgstr "Nový název souboru"
+
+#: src/dialogs/rename.tsx:91
+msgid "New name"
+msgstr "Nový název"
+
+#: src/dialogs/rename.tsx:101
+msgid "Rename $0?"
+msgstr "Přejmenovat $0?"
+
+#: src/dialogs/copyPasteOwnership.tsx:56 src/menu.tsx:51
+msgid "Pasting failed"
+msgstr "Vkládání se nezdařilo"
+
+#: src/dialogs/copyPasteOwnership.tsx:110
+msgid "(original owner)"
+msgstr "(původní vlastník)"
+
+#: src/dialogs/copyPasteOwnership.tsx:119
+msgid "keep original owners"
+msgstr "Ponechat původní vlastníky"
+
+#: src/dialogs/copyPasteOwnership.tsx:168 src/menu.tsx:100
+msgid "Paste"
+msgstr "Vložit"
+
+#: src/dialogs/copyPasteOwnership.tsx:182
+msgid "Paste as owner"
+msgstr "Vložit jako vlastník"
+
+#: src/dialogs/copyPasteOwnership.tsx:187
+msgid ""
+"Files being pasted have a different owner. By default, ownership will be "
+"changed to match the destination directory."
 msgstr ""
-"Není možné přetáhnout soubory – v tuto chvíli probíhá ještě jiné nahrání"
+"Vkládané soubory mají jiného vlastníka. Ve výchozím stavu bude vlastnictví "
+"změněno tak, aby odpovídalo cílové složce."
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:270
+#: src/dialogs/copyPasteOwnership.tsx:190
+msgid "New owner"
+msgstr "Nový vlastník"
+
+#: src/dialogs/mkdir.tsx:31
+msgid "Directory name cannot be empty"
+msgstr "Složku je třeba nějak nazvat"
+
+#: src/dialogs/mkdir.tsx:33
+msgid "Directory name too long"
+msgstr "Název složky je příliš dlouhý"
+
+#: src/dialogs/mkdir.tsx:35
+msgid "Directory name cannot include a /"
+msgstr "Název složky nemůže obsahovat /"
+
+#: src/dialogs/mkdir.tsx:80 src/menu.tsx:107
+msgid "Create directory"
+msgstr "Vytvořit složku"
+
+#: src/dialogs/mkdir.tsx:96
+msgid "Directory name"
+msgstr "Název složky"
+
+#: src/dialogs/mkdir.tsx:110
+msgid "Directory owner"
+msgstr "Vlastník složky"
+
+#: src/dialogs/mkdir.tsx:135 src/dialogs/create-file.tsx:208
+msgid "Create"
+msgstr "Vytvořit"
+
+#: src/dialogs/editor.tsx:48 src/dialogs/editor.tsx:221
+msgid "The file has been removed on disk"
+msgstr "Soubor byl odebrán z úložiště"
+
+#: src/dialogs/editor.tsx:50
+msgid "The existing file changed unexpectedly"
+msgstr "Existující soubor byl mezitím neočekávaně změněn"
+
+#. Translators: This is the title of a modal dialog.  $0 represents a filename.
+#: src/dialogs/editor.tsx:187
+msgid "Edit $0"
+msgstr "Upravit $0"
+
+#: src/dialogs/editor.tsx:187
+msgid "View $0"
+msgstr "Zobrazit $0"
+
+#: src/dialogs/editor.tsx:222
+msgid "The file has changed on disk"
+msgstr "Soubor byl na úložišti změněn"
+
+#: src/dialogs/editor.tsx:227
+msgid "Reload"
+msgstr "Načíst znovu"
+
+#: src/dialogs/editor.tsx:230
+msgid "Ignore"
+msgstr "Ignorovat"
+
+#: src/dialogs/editor.tsx:264 src/dialogs/editor.tsx:321
+msgid "Save"
+msgstr "Uložit"
+
+#: src/dialogs/editor.tsx:270 src/dialogs/keyboardShortcutsHelp.tsx:33
 msgid "Close"
 msgstr "Zavřít"
+
+#: src/dialogs/editor.tsx:281
+msgid "Save changes?"
+msgstr "Uložit změny?"
+
+#: src/dialogs/editor.tsx:290
+msgid "The file was deleted after it was opened, saving will recreate it."
+msgstr ""
+"Zatímco jste měli soubor otevřený zde, něco jiného ho mezitím vymazalo z "
+"disku – pokud uložíte, bude znovu vytvořen."
+
+#: src/dialogs/editor.tsx:291
+msgid "The file has changed on disk between when it was opened and now"
+msgstr ""
+"Zatímco jste měli soubor otevřený zde, něco jiného ho mezitím změnilo na "
+"disku"
+
+#: src/dialogs/editor.tsx:296
+msgid "$0 has unsaved changes and which will be permanently lost if discarded."
+msgstr "$0 má neuložené změny a ty budou v případě zahození nevratně ztraceny."
+
+#: src/dialogs/editor.tsx:329
+msgid "Discard"
+msgstr "Zahodit"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:55
 msgid "Go up a directory"
@@ -467,151 +501,21 @@ msgstr "Upravování"
 msgid "Editor"
 msgstr "Editor"
 
-#: src/dialogs/delete.tsx:34
-msgid "Force delete $0 items"
-msgstr "Vynutit smazání $0 položek"
+#: src/dialogs/create-file.tsx:151 src/menu.tsx:112
+msgid "Create file"
+msgstr "Vytvořit soubor"
 
-#: src/dialogs/delete.tsx:34
-msgid "Delete $0 items?"
-msgstr "Smazat $0 položek?"
+#: src/dialogs/create-file.tsx:163
+msgid "File name"
+msgstr "Název souboru"
 
-#: src/dialogs/delete.tsx:40
-msgid "Force delete file $0?"
-msgstr "Vynutit smazání souboru $0?"
+#: src/dialogs/create-file.tsx:228
+msgid "Cannot create file in current directory"
+msgstr "Ve stávající složce není možné soubor vytvořit"
 
-#: src/dialogs/delete.tsx:40
-msgid "Delete file $0?"
-msgstr "Smazat soubor $0?"
-
-#: src/dialogs/delete.tsx:44
-msgid "Force delete link $0?"
-msgstr "Vynutit smazání odkazu $0?"
-
-#: src/dialogs/delete.tsx:44
-msgid "Delete link $0?"
-msgstr "Smazat odkaz $0?"
-
-#: src/dialogs/delete.tsx:48
-msgid "Force delete directory $0?"
-msgstr "Vynutit smazání složky $0?"
-
-#: src/dialogs/delete.tsx:48
-msgid "Delete directory $0?"
-msgstr "Smazat složku $0?"
-
-#: src/dialogs/delete.tsx:51
-msgid "Force delete $0"
-msgstr "Vynutit smazání $0"
-
-#: src/dialogs/delete.tsx:51
-msgid "Delete $0?"
-msgstr "Smazat $0?"
-
-#: src/dialogs/permissions.tsx:235
-msgid "No access"
-msgstr "Žádný přístup"
-
-#: src/dialogs/permissions.tsx:279
-msgid "Missing type"
-msgstr "Chybí typ"
-
-#: src/dialogs/permissions.tsx:285
-msgid "Collapse"
-msgstr "Sbalit"
-
-#: src/dialogs/permissions.tsx:286
-msgid "Show all files"
-msgstr "Zobrazit veškeré soubory"
-
-#: src/dialogs/permissions.tsx:304
-msgid "$0 permissions"
-msgstr "oprávnění $0"
-
-#: src/dialogs/permissions.tsx:305
-msgid "Permissions for $0 files"
-msgstr "Oprávnění pro $0 souborů"
-
-#: src/dialogs/permissions.tsx:318
-msgid "Ownership"
-msgstr "Vlastnictví"
-
-#: src/dialogs/permissions.tsx:334 src/files-card-body.tsx:591
-#: src/files-footer-detail.tsx:80 src/files-footer-detail.tsx:152
-msgid "Group"
-msgstr "Skupina"
-
-#: src/dialogs/permissions.tsx:351
-msgid "Access"
-msgstr "Přístup"
-
-#: src/dialogs/permissions.tsx:353
-msgid "Owner access"
-msgstr "Přístup pro vlastníka"
-
-#: src/dialogs/permissions.tsx:365
-msgid "Group access"
-msgstr "Přístup pro skupinu"
-
-#: src/dialogs/permissions.tsx:377
-msgid "Others access"
-msgstr "Přístup pro ostatní"
-
-#: src/dialogs/permissions.tsx:390
-msgid "Security context"
-msgstr "Kontext zabezpečení"
-
-#: src/dialogs/permissions.tsx:403
-msgid "Set executable as program"
-msgstr "Nastavit spustitelné jako program"
-
-#: src/dialogs/permissions.tsx:415
-msgid "Change"
-msgstr "Změnit"
-
-#: src/dialogs/permissions.tsx:422
-msgid "Change permissions for enclosed files"
-msgstr "Změnit oprávnění pro obsažené soubory"
-
-#: src/dialogs/copyPasteOwnership.tsx:110
-msgid "(original owner)"
-msgstr "(původní vlastník)"
-
-#: src/dialogs/copyPasteOwnership.tsx:119
-msgid "keep original owners"
-msgstr "Ponechat původní vlastníky"
-
-#: src/dialogs/copyPasteOwnership.tsx:182
-msgid "Paste as owner"
-msgstr "Vložit jako vlastník"
-
-#: src/dialogs/copyPasteOwnership.tsx:187
-msgid ""
-"Files being pasted have a different owner. By default, ownership will be "
-"changed to match the destination directory."
-msgstr ""
-"Vkládané soubory mají jiného vlastníka. Ve výchozím stavu bude vlastnictví "
-"změněno tak, aby odpovídalo cílové složce."
-
-#: src/dialogs/copyPasteOwnership.tsx:190
-msgid "New owner"
-msgstr "Nový vlastník"
-
-#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:250
-#: src/dialogs/editor.tsx:307
-msgid "Overwrite"
-msgstr "Přepsat"
-
-#: src/dialogs/rename.tsx:91
-msgid "New filename"
-msgstr "Nový název souboru"
-
-#: src/dialogs/rename.tsx:91
-msgid "New name"
-msgstr "Nový název"
-
-#: src/dialogs/rename.tsx:101
-msgid "Rename $0?"
-msgstr "Přejmenovat $0?"
+#: src/dialogs/create-file.tsx:230
+msgid "Permission denied"
+msgstr "Přístup zamítnut"
 
 #: src/dialogs/symlink.tsx:53
 msgid "link to $0"
@@ -662,98 +566,214 @@ msgstr "Absolutní"
 msgid "Relative"
 msgstr "Relativní"
 
-#: src/dialogs/editor.tsx:48 src/dialogs/editor.tsx:221
-msgid "The file has been removed on disk"
-msgstr "Soubor byl odebrán z úložiště"
+#: src/dialogs/symlink.tsx:231 src/menu.tsx:198
+msgid "Create link"
+msgstr "Vytvořit odkaz"
 
-#: src/dialogs/editor.tsx:50
-msgid "The existing file changed unexpectedly"
-msgstr "Existující soubor byl mezitím neočekávaně změněn"
+#: src/dialogs/permissions.tsx:235
+msgid "No access"
+msgstr "Žádný přístup"
 
-#. Translators: This is the title of a modal dialog.  $0 represents a filename.
-#: src/dialogs/editor.tsx:187
-msgid "Edit $0"
-msgstr "Upravit $0"
+#: src/dialogs/permissions.tsx:279
+msgid "Missing type"
+msgstr "Chybí typ"
 
-#: src/dialogs/editor.tsx:187
-msgid "View $0"
-msgstr "Zobrazit $0"
+#: src/dialogs/permissions.tsx:285
+msgid "Collapse"
+msgstr "Sbalit"
 
-#: src/dialogs/editor.tsx:222
-msgid "The file has changed on disk"
-msgstr "Soubor byl na úložišti změněn"
+#: src/dialogs/permissions.tsx:286
+msgid "Show all files"
+msgstr "Zobrazit veškeré soubory"
 
-#: src/dialogs/editor.tsx:227
-msgid "Reload"
-msgstr "Načíst znovu"
+#: src/dialogs/permissions.tsx:304
+msgid "$0 permissions"
+msgstr "oprávnění $0"
 
-#: src/dialogs/editor.tsx:230
-msgid "Ignore"
-msgstr "Ignorovat"
+#: src/dialogs/permissions.tsx:305
+msgid "Permissions for $0 files"
+msgstr "Oprávnění pro $0 souborů"
 
-#: src/dialogs/editor.tsx:264 src/dialogs/editor.tsx:321
-msgid "Save"
-msgstr "Uložit"
+#: src/dialogs/permissions.tsx:318
+msgid "Ownership"
+msgstr "Vlastnictví"
 
-#: src/dialogs/editor.tsx:281
-msgid "Save changes?"
-msgstr "Uložit změny?"
+#: src/dialogs/permissions.tsx:334 src/files-footer-detail.tsx:80
+#: src/files-footer-detail.tsx:152 src/files-card-body.tsx:591
+msgid "Group"
+msgstr "Skupina"
 
-#: src/dialogs/editor.tsx:290
-msgid "The file was deleted after it was opened, saving will recreate it."
+#: src/dialogs/permissions.tsx:351
+msgid "Access"
+msgstr "Přístup"
+
+#: src/dialogs/permissions.tsx:353
+msgid "Owner access"
+msgstr "Přístup pro vlastníka"
+
+#: src/dialogs/permissions.tsx:365
+msgid "Group access"
+msgstr "Přístup pro skupinu"
+
+#: src/dialogs/permissions.tsx:377
+msgid "Others access"
+msgstr "Přístup pro ostatní"
+
+#: src/dialogs/permissions.tsx:390
+msgid "Security context"
+msgstr "Kontext zabezpečení"
+
+#: src/dialogs/permissions.tsx:403
+msgid "Set executable as program"
+msgstr "Nastavit spustitelné jako program"
+
+#: src/dialogs/permissions.tsx:415
+msgid "Change"
+msgstr "Změnit"
+
+#: src/dialogs/permissions.tsx:422
+msgid "Change permissions for enclosed files"
+msgstr "Změnit oprávnění pro obsažené soubory"
+
+#: src/files-footer-detail.tsx:36
+msgid "$0 files selected"
+msgstr "$0 souborů vybráno"
+
+#: src/files-footer-detail.tsx:64
+msgid "Directory contains $0 directories, $1 files"
+msgstr "Složka obsahuje $0 podsložek, $1 souborů"
+
+#: src/files-footer-detail.tsx:65
+msgid "Directory contains $0 directories, $1 files, $2 hidden"
+msgstr "Složka obsahuje $0 podsložek, $1 souborů, $2 skrytých"
+
+#: src/files-footer-detail.tsx:80 src/files-card-body.tsx:591
+msgid "Others"
+msgstr "Ostatní"
+
+#: src/files-footer-detail.tsx:144
+msgid "User"
+msgstr "Uživatel"
+
+#: src/files-folder-view.tsx:156
+msgid "Drop files to upload"
+msgstr "Soubory nahrajete jejich přetažením sem"
+
+#: src/files-folder-view.tsx:164
+msgid "Cannot drop files, another upload is already in progress"
 msgstr ""
-"Zatímco jste měli soubor otevřený zde, něco jiného ho mezitím vymazalo z "
-"disku – pokud uložíte, bude znovu vytvořen."
+"Není možné přetáhnout soubory – v tuto chvíli probíhá ještě jiné nahrání"
 
-#: src/dialogs/editor.tsx:291
-msgid "The file has changed on disk between when it was opened and now"
+#: src/upload-button.tsx:56
+msgid "$0 files"
+msgstr "$0 souborů"
+
+#: src/upload-button.tsx:60
+msgid "Uploaded as $0, $1"
+msgstr "Nahráno jako $0,$1"
+
+#: src/upload-button.tsx:95
+msgid "Replace file $0?"
+msgstr "Nahradit soubor $0?"
+
+#: src/upload-button.tsx:102
+msgid ""
+"A file with the same name already exists in \"$0\". Replacing it will "
+"overwrite its content."
 msgstr ""
-"Zatímco jste měli soubor otevřený zde, něco jiného ho mezitím změnilo na "
-"disku"
+"Stejně nazvaný soubor už v „$0“ existuje. Nahrazením bude jeho obsah přepsán."
 
-#: src/dialogs/editor.tsx:296
-msgid "$0 has unsaved changes and which will be permanently lost if discarded."
-msgstr "$0 má neuložené změny a ty budou v případě zahození nevratně ztraceny."
+#: src/upload-button.tsx:123
+msgid "New file"
+msgstr "Nový soubor"
 
-#: src/dialogs/editor.tsx:329
-msgid "Discard"
-msgstr "Zahodit"
+#: src/upload-button.tsx:128
+msgid "Original file on server"
+msgstr "Původní soubor na serveru"
 
-#: src/dialogs/create-file.tsx:163
-msgid "File name"
-msgstr "Název souboru"
+#: src/upload-button.tsx:137
+msgid "Apply this action to all conflicting files"
+msgstr "Použít tuto akci na veškeré kolidující soubory"
 
-#: src/dialogs/create-file.tsx:208 src/dialogs/mkdir.tsx:135
-msgid "Create"
-msgstr "Vytvořit"
+#: src/upload-button.tsx:143
+msgid "Replace"
+msgstr "Nahradit"
 
-#: src/dialogs/create-file.tsx:228
-msgid "Cannot create file in current directory"
-msgstr "Ve stávající složce není možné soubor vytvořit"
+#: src/upload-button.tsx:145
+msgid "Keep original"
+msgstr "Ponechat původní"
 
-#: src/dialogs/create-file.tsx:230
-msgid "Permission denied"
-msgstr "Přístup zamítnut"
+#: src/upload-button.tsx:278
+msgid "Failed"
+msgstr "Nezdařilo se"
 
-#: src/dialogs/mkdir.tsx:31
-msgid "Directory name cannot be empty"
-msgstr "Složku je třeba nějak nazvat"
+#: src/upload-button.tsx:322 src/upload-button.tsx:352
+msgid "Upload error"
+msgstr "Chyba nahrávání"
 
-#: src/dialogs/mkdir.tsx:33
-msgid "Directory name too long"
-msgstr "Název složky je příliš dlouhý"
+#: src/upload-button.tsx:324
+msgid "Unable to move uploaded file to final destination"
+msgstr "Nebylo možné přesunout nahrané soubory do konečného umístění"
 
-#: src/dialogs/mkdir.tsx:35
-msgid "Directory name cannot include a /"
-msgstr "Název složky nemůže obsahovat /"
+#: src/upload-button.tsx:346
+msgid "Cancelled"
+msgstr "Zrušeno"
 
-#: src/dialogs/mkdir.tsx:96
-msgid "Directory name"
-msgstr "Název složky"
+#: src/upload-button.tsx:348
+msgid "Cancelled upload of $0"
+msgstr "Zrušeno nahrávání $0"
 
-#: src/dialogs/mkdir.tsx:110
-msgid "Directory owner"
-msgstr "Vlastník složky"
+#: src/upload-button.tsx:374
+msgid "File uploaded"
+msgstr "Soubor nahrán"
+
+#: src/upload-button.tsx:374
+msgid "Files uploaded"
+msgstr "Soubory nahrány"
+
+#: src/upload-button.tsx:405
+msgid "Change permissions"
+msgstr "Změnit oprávnění"
+
+#: src/upload-button.tsx:458
+msgid "Uploads"
+msgstr "Nahrání"
+
+#: src/upload-button.tsx:477
+msgid "Cancel upload of $0"
+msgstr "Zrušit nahrávání $0"
+
+#: src/upload-button.tsx:494
+msgid "Upload $0% completed"
+msgstr "Nahrávání z $0% dokončeno"
+
+#: src/upload-button.tsx:513
+msgid "Upload"
+msgstr "Nahrát"
+
+#: src/menu.tsx:53
+msgid "\"$0\" exists, not overwriting with paste."
+msgstr "„$0“ existuje – vložením nebude přepsáno."
+
+#: src/menu.tsx:118 src/menu.tsx:158 src/menu.tsx:225
+msgid "Edit permissions"
+msgstr "Upravit oprávnění"
+
+#: src/menu.tsx:127 src/menu.tsx:188
+msgid "Open in terminal"
+msgstr "Otevřít v terminálu"
+
+#: src/menu.tsx:144
+msgid "Open text file"
+msgstr "Otevřít textový soubor"
+
+#: src/menu.tsx:152 src/menu.tsx:206
+msgid "Copy"
+msgstr "Zkopírovat"
+
+#: src/menu.tsx:179
+msgid "Download"
+msgstr "Stáhnout"
 
 #: src/files-card-body.tsx:506
 msgid "No matching results"
@@ -781,26 +801,6 @@ msgstr "Složka"
 #: src/files-card-body.tsx:580
 msgid "File"
 msgstr "Soubor"
-
-#: src/files-card-body.tsx:591 src/files-footer-detail.tsx:80
-msgid "Others"
-msgstr "Ostatní"
-
-#: src/files-footer-detail.tsx:36
-msgid "$0 files selected"
-msgstr "$0 souborů vybráno"
-
-#: src/files-footer-detail.tsx:64
-msgid "Directory contains $0 directories, $1 files"
-msgstr "Složka obsahuje $0 podsložek, $1 souborů"
-
-#: src/files-footer-detail.tsx:65
-msgid "Directory contains $0 directories, $1 files, $2 hidden"
-msgstr "Složka obsahuje $0 podsložek, $1 souborů, $2 skrytých"
-
-#: src/files-footer-detail.tsx:144
-msgid "User"
-msgstr "Uživatel"
 
 #: src/manifest.json:0
 msgid "File browser"
