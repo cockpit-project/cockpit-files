@@ -6,10 +6,13 @@ arch=('any')
 url='https://github.com/cockpit-project/cockpit-files'
 license=(LGPL)
 depends=("cockpit>=318")
-source=("SOURCE")
-sha256sums=('SKIP')
+source=("SOURCE" "NODE_CACHE")
+sha256sums=('SKIP' 'SKIP')
 
 package() {
   cd $pkgname
+  ln -sf ../node_modules
+  rm -rf dist runtime-npm-modules.txt metafile.json
+  NODE_ENV=production NODE_PATH=/usr/lib/node_modules ./build.js
   make DESTDIR="$pkgdir" install PREFIX=/usr
 }
