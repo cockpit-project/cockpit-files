@@ -35,6 +35,7 @@ all: $(DIST_TEST)
 COCKPIT_REPO_FILES = \
 	pkg/lib \
 	test/common \
+	tools/node-archive \
 	tools/node-modules \
 	tools/build-debian-copyright \
 	$(NULL)
@@ -95,7 +96,7 @@ $(DIST_TEST): $(COCKPIT_REPO_STAMP) $(shell find src/ -type f) package.json buil
 	$(MAKE) package-lock.json && NODE_ENV=$(NODE_ENV) ./build.js
 
 packaging/arch/PKGBUILD: packaging/arch/PKGBUILD.in
-	sed 's/VERSION/$(VERSION)/; s/SOURCE/$(TARFILE)/' $< > $@
+	sed 's/VERSION/$(VERSION)/; s/SOURCE/$(TARFILE)/; s/NODE_CACHE/$(NODE_CACHE)/;' $< > $@
 
 packaging/debian/changelog: packaging/debian/changelog.in
 	sed 's/VERSION/$(VERSION)/' $< > $@
@@ -149,7 +150,7 @@ $(TARFILE): $(DIST_TEST) $(SPEC) packaging/arch/PKGBUILD packaging/debian/change
 		packaging/arch/PKGBUILD packaging/debian/changelog packaging/debian/copyright dist/
 
 $(NODE_CACHE): $(NODE_MODULES_TEST)
-	tools/node-modules runtime-tar $(NODE_CACHE)
+	tools/node-archive | XZ_OPT=$${XZ_OPT--e} xz -c > $(NODE_CACHE)
 
 node-cache: $(NODE_CACHE)
 
