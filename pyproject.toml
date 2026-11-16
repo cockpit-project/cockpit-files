@@ -50,6 +50,7 @@ select = [
 ]
 ignore = [
     "RUF001", # String contains ambiguous `’`
+    "ICN001",  # ignore rule "import datetime as dt"
 ]
 
 [tool.ruff.lint.flake8-pytest-style]
