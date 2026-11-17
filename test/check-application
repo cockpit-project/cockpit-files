@@ -1948,6 +1948,103 @@ class TestFiles(testlib.MachineCase):
         b.wait_not_present("[data-item='file1']")
         b.wait_not_present("[data-item='file2']")
 
+        # HACK: Shift select tests uses synthetic clicks as BiDi mouse() leaves modifier keys pressed
+
+        # Shift-click selects a range
+        m.execute("runuser -u admin touch /home/admin/file1 /home/admin/file2 /home/admin/file3 /home/admin/file4")
+        b.wait_visible("[data-item='file4']")
+        b.mouse("[data-item='file1']", "click", synthetic=True)
+        b.mouse("[data-item='file3']", "click", shiftKey=True, synthetic=True)
+        for i in range(1, 4):
+            b.wait_visible(f"[data-item='file{i}'].row-selected")
+        b.wait_not_present("[data-item='file4'].row-selected")
+
+        # Shift-clicking again shrinks the range from the same anchor
+        b.mouse("[data-item='file2']", "click", shiftKey=True, synthetic=True)
+        b.wait_visible("[data-item='file1'].row-selected")
+        b.wait_visible("[data-item='file2'].row-selected")
+        b.wait_not_present("[data-item='file3'].row-selected")
+
+        # Shift-clicking above the anchor selects backwards
+        b.mouse("[data-item='file3']", "click", synthetic=True)
+        b.mouse("[data-item='file1']", "click", shiftKey=True, synthetic=True)
+        for i in range(1, 4):
+            b.wait_visible(f"[data-item='file{i}'].row-selected")
+
+        # Ctrl+Shift-click adds a range to the existing selection
+        b.mouse("[data-item='file1']", "click", synthetic=True)
+        b.mouse("[data-item='file3']", "click", ctrlKey=True, synthetic=True)
+        b.mouse("[data-item='file4']", "click", ctrlKey=True, shiftKey=True, synthetic=True)
+        b.wait_visible("[data-item='file1'].row-selected")
+        b.wait_not_present("[data-item='file2'].row-selected")
+        b.wait_visible("[data-item='file3'].row-selected")
+        b.wait_visible("[data-item='file4'].row-selected")
+
+        # Ctrl-click deselecting still moves the anchor
+        b.key("a", modifiers=["Control"])
+        b.mouse("[data-item='file2']", "click", ctrlKey=True, synthetic=True)
+        b.mouse("[data-item='file3']", "click", ctrlKey=True, synthetic=True)
+        b.mouse("[data-item='file2']", "click", shiftKey=True, synthetic=True)
+        b.wait_not_present("[data-item='file1'].row-selected")
+        b.wait_visible("[data-item='file2'].row-selected")
+        b.wait_visible("[data-item='file3'].row-selected")
+        b.wait_not_present("[data-item='file4'].row-selected")
+
+        # Ctrl+Shift-click from a deselected anchor deselects the range (like Nautilus)
+        b.key("a", modifiers=["Control"])
+        b.mouse("[data-item='file2']", "click", ctrlKey=True, synthetic=True)
+        b.wait_not_present("[data-item='file2'].row-selected")
+        b.mouse("[data-item='file4']", "click", ctrlKey=True, shiftKey=True, synthetic=True)
+        b.wait_visible("[data-item='file1'].row-selected")
+        for i in range(2, 5):
+            b.wait_not_present(f"[data-item='file{i}'].row-selected")
+
+        # Keyboard navigation moves the anchor
+        b.mouse("[data-item='file1']", "click", synthetic=True)
+        b.key("ArrowRight")
+        b.wait_visible("[data-item='file2'].row-selected")
+        b.mouse("[data-item='file4']", "click", shiftKey=True, synthetic=True)
+        b.wait_not_present("[data-item='file1'].row-selected")
+        for i in range(2, 5):
+            b.wait_visible(f"[data-item='file{i}'].row-selected")
+
+        # Anchor filtered out: shift-click ranges from the top of the visible files
+        b.mouse("[data-item='file1']", "click", synthetic=True)
+        b.set_input_text("input[placeholder='Filter directory']", "file3")
+        b.wait_not_present("[data-item='file1']")
+        b.mouse("[data-item='file3']", "click", shiftKey=True, synthetic=True)
+        b.wait_visible("[data-item='file3'].row-selected")
+        b.set_input_text("input[placeholder='Filter directory']", "")
+
+        # Navigating to another directory clears the selection and the anchor
+        m.execute("""
+        runuser -u admin mkdir /home/admin/navdir
+        runuser -u admin touch /home/admin/navdir/file1 /home/admin/navdir/file2 /home/admin/navdir/file3
+        """)
+        b.mouse("[data-item='file3']", "click", synthetic=True)
+        b.wait_visible("[data-item='file3'].row-selected")
+        b.mouse("[data-item='navdir']", "dblclick", synthetic=True)
+        self.wait_directory_changed("/home/admin/navdir/")
+        b.wait_not_present(".row-selected")
+
+        # Select all without an anchor: shift-click ranges from the first selected file
+        b.focus("#files-card-parent")
+        b.key("a", modifiers=["Control"])
+        for i in range(1, 4):
+            b.wait_visible(f"[data-item='file{i}'].row-selected")
+        b.mouse("[data-item='file2']", "click", shiftKey=True, synthetic=True)
+        b.wait_visible("[data-item='file1'].row-selected")
+        b.wait_visible("[data-item='file2'].row-selected")
+        b.wait_not_present("[data-item='file3'].row-selected")
+
+        # Ctrl+Shift-click with nothing selected ranges from the top
+        b.mouse("[data-item='file1']", "click", ctrlKey=True, synthetic=True)
+        b.mouse("[data-item='file2']", "click", ctrlKey=True, synthetic=True)
+        b.wait_not_present(".row-selected")
+        b.mouse("[data-item='file3']", "click", ctrlKey=True, shiftKey=True, synthetic=True)
+        for i in range(1, 4):
+            b.wait_visible(f"[data-item='file{i}'].row-selected")
+
     def testKeyboardNav(self) -> None:
         b = self.browser
         m = self.machine
