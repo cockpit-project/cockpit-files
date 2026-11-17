@@ -158,6 +158,7 @@ export const FilesCardBody = ({
     }, [files]);
     const isMounted = useRef<boolean>();
     const folderViewRef = useRef<HTMLDivElement>(null);
+    const selectionAnchorRef = useRef<string | null>(null);
 
     function calculateBoxPerRow () {
         const boxes = document.querySelectorAll(".fileview tbody > tr") as NodeListOf<HTMLElement>;
@@ -193,6 +194,10 @@ export const FilesCardBody = ({
     });
 
     useEffect(() => {
+        selectionAnchorRef.current = null;
+    }, [path]);
+
+    useEffect(() => {
         let folderViewElem: HTMLDivElement | null = null;
         const isApple = testIsAppleDevice();
 
@@ -202,6 +207,7 @@ export const FilesCardBody = ({
                   (e.target.parentElement && e.target.parentElement.id === "folder-view")) {
                     if (selected.length !== 0) {
                         setSelected([]);
+                        selectionAnchorRef.current = null;
                     }
                 }
             }
@@ -232,7 +238,32 @@ export const FilesCardBody = ({
 
             if (ev.detail > 1) {
                 onDoubleClickNavigate(file);
+            } else if (ev.shiftKey) {
+                setSelected(s => {
+                    const clickedIdx = sortedFiles.findIndex(f => f.name === file.name);
+
+                    let anchorIdx = 0;
+                    if (s.length > 0) {
+                        const anchorName = selectionAnchorRef.current ?? s[0].name;
+                        // anchor filtered out: fall back to the top
+                        anchorIdx = Math.max(sortedFiles.findIndex(f => f.name === anchorName), 0);
+                    }
+
+                    selectionAnchorRef.current = sortedFiles[anchorIdx].name;
+
+                    const start = Math.min(anchorIdx, clickedIdx);
+                    const end = Math.max(anchorIdx, clickedIdx);
+                    const range = sortedFiles.slice(start, end + 1);
+
+                    if (ev.ctrlKey) {
+                        return [...s, ...range.filter(r => !s.some(f => f.name === r.name))];
+                    } else {
+                        return range;
+                    }
+                });
             } else {
+                selectionAnchorRef.current = file.name;
+
                 if (!ev.ctrlKey) {
                     setSelected([file]);
                 } else {
@@ -255,8 +286,10 @@ export const FilesCardBody = ({
 
             const sel = sortedFiles?.find(file => file.name === name);
             if (sel) {
+                selectionAnchorRef.current = sel.name;
                 setSelected([sel]);
             } else {
+                selectionAnchorRef.current = null;
                 setSelected([]);
             }
         };
@@ -289,6 +322,11 @@ export const FilesCardBody = ({
             }
         };
 
+        const selectIndex = (idx: number) => {
+            selectionAnchorRef.current = sortedFiles[idx].name;
+            return [sortedFiles[idx]];
+        };
+
         const onKeyboardNav = (e: KeyboardEvent) => {
             switch (e.key) {
             case "ArrowRight":
@@ -300,7 +338,7 @@ export const FilesCardBody = ({
                             ? selectedIdx + 1
                             : 0;
 
-                        return [sortedFiles[newIdx]];
+                        return selectIndex(newIdx);
                     });
                 }
                 break;
@@ -314,7 +352,7 @@ export const FilesCardBody = ({
                             ? selectedIdx - 1
                             : sortedFiles.length - 1;
 
-                        return [sortedFiles[newIdx]];
+                        return selectIndex(newIdx);
                     });
                 }
                 break;
@@ -328,7 +366,7 @@ export const FilesCardBody = ({
                         const selectedIdx = sortedFiles?.findIndex(file => file.name === firstSelectedName);
                         const newIdx = Math.max(selectedIdx - boxPerRow, 0);
 
-                        return [sortedFiles[newIdx]];
+                        return selectIndex(newIdx);
                     });
                     e.preventDefault();
                 }
@@ -343,7 +381,7 @@ export const FilesCardBody = ({
                         const selectedIdx = sortedFiles?.findIndex(file => file.name === firstSelectedName);
                         const newIdx = Math.min(selectedIdx + boxPerRow, sortedFiles.length - 1);
 
-                        return [sortedFiles[newIdx]];
+                        return selectIndex(newIdx);
                     });
                     e.preventDefault();
                 }
