@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-23 07:56+0000\n"
+"POT-Creation-Date: 2026-11-03 10:02+0000\n"
 "PO-Revision-Date: 2026-09-24 10:17+0000\n"
 "Last-Translator: Léane GRASSER <leane.grasser@proton.me>\n"
 "Language-Team: French <https://translate.fedoraproject.org/projects/cockpit/"
@@ -29,46 +29,6 @@ msgstr ""
 #: src/index.html:8
 msgid "Cockpit Files"
 msgstr "Cockpit Files"
-
-#: src/files-breadcrumbs.tsx:46
-msgid "Home"
-msgstr "Répertoire personnel"
-
-#: src/files-breadcrumbs.tsx:94
-msgid "Unable to create bookmark directory"
-msgstr "Impossible de créer le répertoire des marque-pages"
-
-#: src/files-breadcrumbs.tsx:117
-msgid "Unable to save bookmark file"
-msgstr "Impossible d'enregistrer le fichier des marque-pages"
-
-#: src/files-breadcrumbs.tsx:139
-msgid "Remove from bookmarks"
-msgstr "Supprimer des marque-pages"
-
-#: src/files-breadcrumbs.tsx:141
-msgid "Add to bookmarks"
-msgstr "Ajouter aux marque-pages"
-
-#: src/files-breadcrumbs.tsx:154
-msgid "Bookmarks"
-msgstr "Marque-pages"
-
-#: src/files-breadcrumbs.tsx:161
-msgid "Bookmarked"
-msgstr "Ajouté aux marque-pages"
-
-#: src/files-breadcrumbs.tsx:161
-msgid "Not bookmarked"
-msgstr "Non ajouté aux marque-pages"
-
-#: src/files-breadcrumbs.tsx:236
-msgid "Filesystem"
-msgstr "Système de fichiers"
-
-#: src/files-breadcrumbs.tsx:303 src/dialogs/keyboardShortcutsHelp.tsx:87
-msgid "Edit path"
-msgstr "Modifier le chemin"
 
 #: src/header.tsx:53 src/files-card-body.tsx:534
 msgid "Name"
@@ -106,10 +66,10 @@ msgstr "Première modification"
 msgid "Last modified"
 msgstr "Dernière modification"
 
-#: src/header.tsx:86 src/dialogs/permissions.tsx:319
-#: src/dialogs/create-file.tsx:185 src/files-card-body.tsx:544
-#: src/files-card-body.tsx:591 src/files-card-body.tsx:667
-#: src/files-footer-detail.tsx:80
+#: src/header.tsx:86 src/dialogs/create-file.tsx:185
+#: src/dialogs/permissions.tsx:319 src/files-footer-detail.tsx:80
+#: src/files-card-body.tsx:544 src/files-card-body.tsx:591
+#: src/files-card-body.tsx:667
 msgid "Owner"
 msgstr "Propriétaire"
 
@@ -161,103 +121,45 @@ msgstr "Masquer les éléments masqués"
 msgid "Show hidden items"
 msgstr "Afficher les éléments cachés"
 
-#: src/upload-button.tsx:56
-msgid "$0 files"
-msgstr "$0 fichiers"
+#: src/files-breadcrumbs.tsx:46
+msgid "Home"
+msgstr "Répertoire personnel"
 
-#: src/upload-button.tsx:60
-msgid "Uploaded as $0, $1"
-msgstr "Uploadé en tant que $0,$1"
+#: src/files-breadcrumbs.tsx:94
+msgid "Unable to create bookmark directory"
+msgstr "Impossible de créer le répertoire des marque-pages"
 
-#: src/upload-button.tsx:95
-msgid "Replace file $0?"
-msgstr "Remplacer le fichier $0 ?"
+#: src/files-breadcrumbs.tsx:117
+msgid "Unable to save bookmark file"
+msgstr "Impossible d'enregistrer le fichier des marque-pages"
 
-#: src/upload-button.tsx:102
-msgid ""
-"A file with the same name already exists in \"$0\". Replacing it will "
-"overwrite its content."
-msgstr ""
-"Un fichier portant le même nom existe déjà dans \"$0\". Le remplacer "
-"écrasera son contenu."
+#: src/files-breadcrumbs.tsx:139
+msgid "Remove from bookmarks"
+msgstr "Supprimer des marque-pages"
 
-#: src/upload-button.tsx:123
-msgid "New file"
-msgstr "Nouveau fichier"
+#: src/files-breadcrumbs.tsx:141
+msgid "Add to bookmarks"
+msgstr "Ajouter aux marque-pages"
 
-#: src/upload-button.tsx:128
-msgid "Original file on server"
-msgstr "Fichier original sur le serveur"
+#: src/files-breadcrumbs.tsx:154
+msgid "Bookmarks"
+msgstr "Marque-pages"
 
-#: src/upload-button.tsx:137
-msgid "Apply this action to all conflicting files"
-msgstr "Appliquer cette action à tous les fichiers en conflit"
+#: src/files-breadcrumbs.tsx:161
+msgid "Bookmarked"
+msgstr "Ajouté aux marque-pages"
 
-#: src/upload-button.tsx:143
-msgid "Replace"
-msgstr "Remplacer"
+#: src/files-breadcrumbs.tsx:161
+msgid "Not bookmarked"
+msgstr "Non ajouté aux marque-pages"
 
-#: src/upload-button.tsx:145
-msgid "Keep original"
-msgstr "Garder l'original"
+#: src/files-breadcrumbs.tsx:236
+msgid "Filesystem"
+msgstr "Système de fichiers"
 
-#: src/upload-button.tsx:146 src/dialogs/delete.tsx:97
-#: src/dialogs/permissions.tsx:424 src/dialogs/copyPasteOwnership.tsx:170
-#: src/dialogs/rename.tsx:87 src/dialogs/symlink.tsx:233
-#: src/dialogs/editor.tsx:270 src/dialogs/editor.tsx:336
-#: src/dialogs/create-file.tsx:211 src/dialogs/mkdir.tsx:137
-msgid "Cancel"
-msgstr "Annuler"
-
-#: src/upload-button.tsx:278
-msgid "Failed"
-msgstr "Échec"
-
-#: src/upload-button.tsx:322 src/upload-button.tsx:352
-msgid "Upload error"
-msgstr "Erreur d'upload"
-
-#: src/upload-button.tsx:324
-msgid "Unable to move uploaded file to final destination"
-msgstr ""
-"Impossible de déplacer le fichier téléchargé vers la destination finale"
-
-#: src/upload-button.tsx:346
-msgid "Cancelled"
-msgstr "Annulé"
-
-#: src/upload-button.tsx:348
-msgid "Cancelled upload of $0"
-msgstr "Upload de $0 annulé"
-
-#: src/upload-button.tsx:374
-msgid "File uploaded"
-msgstr "Fichier uploadé"
-
-#: src/upload-button.tsx:374
-msgid "Files uploaded"
-msgstr "Fichiers uploadés"
-
-#: src/upload-button.tsx:405
-msgid "Change permissions"
-msgstr "Modifier les autorisations"
-
-#: src/upload-button.tsx:458
-msgid "Uploads"
-msgstr "Téléversements"
-
-#: src/upload-button.tsx:477
-msgid "Cancel upload of $0"
-msgstr "Annuler l'upload de $0"
-
-#
-#: src/upload-button.tsx:494
-msgid "Upload $0% completed"
-msgstr "Upload effectué à $0 %"
-
-#: src/upload-button.tsx:513
-msgid "Upload"
-msgstr "Uploader"
+#: src/files-breadcrumbs.tsx:303 src/dialogs/keyboardShortcutsHelp.tsx:87
+msgid "Edit path"
+msgstr "Modifier le chemin"
 
 #: src/common.ts:49
 msgid "None"
@@ -275,7 +177,7 @@ msgstr "Écriture seule"
 msgid "Write and execute"
 msgstr "Écriture et exécution"
 
-#: src/common.ts:53 src/dialogs/permissions.tsx:230 src/dialogs/editor.tsx:189
+#: src/common.ts:53 src/dialogs/editor.tsx:189 src/dialogs/permissions.tsx:230
 msgid "Read-only"
 msgstr "Lecture seule"
 
@@ -343,69 +245,200 @@ msgstr "Un répertoire portant le même nom existe"
 msgid "File exists"
 msgstr "Le fichier existe"
 
-#: src/menu.tsx:51 src/dialogs/copyPasteOwnership.tsx:56
-msgid "Pasting failed"
-msgstr "Échec du collage"
+#: src/dialogs/delete.tsx:34
+msgid "Force delete $0 items"
+msgstr "Forcer la suppression de $0 éléments"
 
-#: src/menu.tsx:53
-msgid "\"$0\" exists, not overwriting with paste."
-msgstr "\"$0\" existe, il ne sera pas écrasé par le contenu à coller."
+#: src/dialogs/delete.tsx:34
+msgid "Delete $0 items?"
+msgstr "Supprimer $0 éléments ?"
 
-#: src/menu.tsx:100 src/dialogs/copyPasteOwnership.tsx:168
-msgid "Paste"
-msgstr "Coller"
+#: src/dialogs/delete.tsx:40
+msgid "Force delete file $0?"
+msgstr "Forcer la suppression du fichier $0 ?"
 
-#: src/menu.tsx:107 src/dialogs/mkdir.tsx:80
-msgid "Create directory"
-msgstr "Créer un répertoire"
+#: src/dialogs/delete.tsx:40
+msgid "Delete file $0?"
+msgstr "Supprimer le fichier $0 ?"
 
-#: src/menu.tsx:112 src/dialogs/create-file.tsx:151
-msgid "Create file"
-msgstr "Créer un fichier"
+#: src/dialogs/delete.tsx:44
+msgid "Force delete link $0?"
+msgstr "Forcer la suppression du lien $0 ?"
 
-#: src/menu.tsx:118 src/menu.tsx:158 src/menu.tsx:225
-msgid "Edit permissions"
-msgstr "Modifier les autorisations"
+#: src/dialogs/delete.tsx:44
+msgid "Delete link $0?"
+msgstr "Supprimer le lien $0 ?"
 
-#: src/menu.tsx:127 src/menu.tsx:188
-msgid "Open in terminal"
-msgstr "Ouvrir dans le terminal"
+#: src/dialogs/delete.tsx:48
+msgid "Force delete directory $0?"
+msgstr "Forcer la suppression du répertoire $0 ?"
 
-#: src/menu.tsx:144
-msgid "Open text file"
-msgstr "Ouvrir le fichier texte"
+#: src/dialogs/delete.tsx:48
+msgid "Delete directory $0?"
+msgstr "Supprimer le répertoire $0 ?"
 
-#: src/menu.tsx:152 src/menu.tsx:206
-msgid "Copy"
-msgstr "Copier"
+#: src/dialogs/delete.tsx:51
+msgid "Force delete $0"
+msgstr "Forcer la suppression de $0"
 
-#: src/menu.tsx:163 src/dialogs/rename.tsx:78
-msgid "Rename"
-msgstr "Renommer"
+#: src/dialogs/delete.tsx:51
+msgid "Delete $0?"
+msgstr "Supprimer $0 ?"
 
-#: src/menu.tsx:169 src/menu.tsx:211 src/dialogs/delete.tsx:95
+#: src/dialogs/delete.tsx:95 src/menu.tsx:169 src/menu.tsx:211
 msgid "Delete"
 msgstr "Supprimer"
 
-#: src/menu.tsx:179
-msgid "Download"
-msgstr "Télécharger"
+#: src/dialogs/delete.tsx:97 src/dialogs/rename.tsx:87
+#: src/dialogs/copyPasteOwnership.tsx:170 src/dialogs/mkdir.tsx:137
+#: src/dialogs/editor.tsx:270 src/dialogs/editor.tsx:336
+#: src/dialogs/create-file.tsx:211 src/dialogs/symlink.tsx:233
+#: src/dialogs/permissions.tsx:424 src/upload-button.tsx:146
+msgid "Cancel"
+msgstr "Annuler"
 
-#: src/menu.tsx:198 src/dialogs/symlink.tsx:231
-msgid "Create link"
-msgstr "Créer un lien"
+#: src/dialogs/rename.tsx:78 src/menu.tsx:163
+msgid "Rename"
+msgstr "Renommer"
 
-#: src/files-folder-view.tsx:156
-msgid "Drop files to upload"
-msgstr "Déposez les fichiers à uploader"
+#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:250
+#: src/dialogs/editor.tsx:307
+msgid "Overwrite"
+msgstr "Écraser"
 
-#: src/files-folder-view.tsx:164
-msgid "Cannot drop files, another upload is already in progress"
-msgstr "Impossible de déposer des fichiers, un autre upload est déjà en cours"
+#: src/dialogs/rename.tsx:91
+msgid "New filename"
+msgstr "Nouveau nom de fichier"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:270
+#: src/dialogs/rename.tsx:91
+msgid "New name"
+msgstr "Nouveau nom"
+
+#: src/dialogs/rename.tsx:101
+msgid "Rename $0?"
+msgstr "Renommer $0 ?"
+
+#: src/dialogs/copyPasteOwnership.tsx:56 src/menu.tsx:51
+msgid "Pasting failed"
+msgstr "Échec du collage"
+
+#: src/dialogs/copyPasteOwnership.tsx:110
+msgid "(original owner)"
+msgstr "(propriétaire original)"
+
+#: src/dialogs/copyPasteOwnership.tsx:119
+msgid "keep original owners"
+msgstr "Conserver les propriétaires d'origine"
+
+#: src/dialogs/copyPasteOwnership.tsx:168 src/menu.tsx:100
+msgid "Paste"
+msgstr "Coller"
+
+#: src/dialogs/copyPasteOwnership.tsx:182
+msgid "Paste as owner"
+msgstr "Coller en tant que propriétaire"
+
+#: src/dialogs/copyPasteOwnership.tsx:187
+msgid ""
+"Files being pasted have a different owner. By default, ownership will be "
+"changed to match the destination directory."
+msgstr ""
+"Le propriétaire des fichiers collés est différent. Par défaut, le "
+"propriétaire des fichiers sera modifié pour correspondre au répertoire de "
+"destination."
+
+#: src/dialogs/copyPasteOwnership.tsx:190
+msgid "New owner"
+msgstr "Nouveau propriétaire"
+
+#: src/dialogs/mkdir.tsx:31
+msgid "Directory name cannot be empty"
+msgstr "Le nom du répertoire ne peut pas être vide"
+
+#: src/dialogs/mkdir.tsx:33
+msgid "Directory name too long"
+msgstr "Nom de répertoire trop long"
+
+#: src/dialogs/mkdir.tsx:35
+msgid "Directory name cannot include a /"
+msgstr "Le nom du répertoire ne peut pas contenir un /"
+
+#: src/dialogs/mkdir.tsx:80 src/menu.tsx:107
+msgid "Create directory"
+msgstr "Créer un répertoire"
+
+#: src/dialogs/mkdir.tsx:96
+msgid "Directory name"
+msgstr "Nom du répertoire"
+
+#: src/dialogs/mkdir.tsx:110
+msgid "Directory owner"
+msgstr "Propriétaire du répertoire"
+
+#: src/dialogs/mkdir.tsx:135 src/dialogs/create-file.tsx:208
+msgid "Create"
+msgstr "Créer"
+
+#: src/dialogs/editor.tsx:48 src/dialogs/editor.tsx:221
+msgid "The file has been removed on disk"
+msgstr "Le fichier a été supprimé du disque"
+
+#: src/dialogs/editor.tsx:50
+msgid "The existing file changed unexpectedly"
+msgstr "Le fichier existant a été modifié de manière inattendue"
+
+#. Translators: This is the title of a modal dialog.  $0 represents a filename.
+#: src/dialogs/editor.tsx:187
+msgid "Edit $0"
+msgstr "Modifier $0"
+
+#: src/dialogs/editor.tsx:187
+msgid "View $0"
+msgstr "Voir $0"
+
+#: src/dialogs/editor.tsx:222
+msgid "The file has changed on disk"
+msgstr "Le fichier a été modifié sur le disque"
+
+#: src/dialogs/editor.tsx:227
+msgid "Reload"
+msgstr "Recharger"
+
+#: src/dialogs/editor.tsx:230
+msgid "Ignore"
+msgstr "Ignorer"
+
+#: src/dialogs/editor.tsx:264 src/dialogs/editor.tsx:321
+msgid "Save"
+msgstr "Enregistrer"
+
+#: src/dialogs/editor.tsx:270 src/dialogs/keyboardShortcutsHelp.tsx:33
 msgid "Close"
 msgstr "Fermer"
+
+#: src/dialogs/editor.tsx:281
+msgid "Save changes?"
+msgstr "Enregistrer les modifications ?"
+
+#: src/dialogs/editor.tsx:290
+msgid "The file was deleted after it was opened, saving will recreate it."
+msgstr ""
+"Le fichier a été supprimé après son ouverture. Il sera recréé si vous "
+"l'enregistrez."
+
+#: src/dialogs/editor.tsx:291
+msgid "The file has changed on disk between when it was opened and now"
+msgstr "Le fichier a été modifié sur le disque depuis son ouverture"
+
+#: src/dialogs/editor.tsx:296
+msgid "$0 has unsaved changes and which will be permanently lost if discarded."
+msgstr ""
+"Des modifications de $0 ne sont pas enregistrées et seront définitivement "
+"perdues si vous les abandonnez."
+
+#: src/dialogs/editor.tsx:329
+msgid "Discard"
+msgstr "Abandonner"
 
 #: src/dialogs/keyboardShortcutsHelp.tsx:55
 msgid "Go up a directory"
@@ -468,152 +501,21 @@ msgstr "Modification"
 msgid "Editor"
 msgstr "Éditeur"
 
-#: src/dialogs/delete.tsx:34
-msgid "Force delete $0 items"
-msgstr "Forcer la suppression de $0 éléments"
+#: src/dialogs/create-file.tsx:151 src/menu.tsx:112
+msgid "Create file"
+msgstr "Créer un fichier"
 
-#: src/dialogs/delete.tsx:34
-msgid "Delete $0 items?"
-msgstr "Supprimer $0 éléments ?"
+#: src/dialogs/create-file.tsx:163
+msgid "File name"
+msgstr "Nom du fichier"
 
-#: src/dialogs/delete.tsx:40
-msgid "Force delete file $0?"
-msgstr "Forcer la suppression du fichier $0 ?"
+#: src/dialogs/create-file.tsx:228
+msgid "Cannot create file in current directory"
+msgstr "Impossible de créer le fichier dans le répertoire actuel"
 
-#: src/dialogs/delete.tsx:40
-msgid "Delete file $0?"
-msgstr "Supprimer le fichier $0 ?"
-
-#: src/dialogs/delete.tsx:44
-msgid "Force delete link $0?"
-msgstr "Forcer la suppression du lien $0 ?"
-
-#: src/dialogs/delete.tsx:44
-msgid "Delete link $0?"
-msgstr "Supprimer le lien $0 ?"
-
-#: src/dialogs/delete.tsx:48
-msgid "Force delete directory $0?"
-msgstr "Forcer la suppression du répertoire $0 ?"
-
-#: src/dialogs/delete.tsx:48
-msgid "Delete directory $0?"
-msgstr "Supprimer le répertoire $0 ?"
-
-#: src/dialogs/delete.tsx:51
-msgid "Force delete $0"
-msgstr "Forcer la suppression de $0"
-
-#: src/dialogs/delete.tsx:51
-msgid "Delete $0?"
-msgstr "Supprimer $0 ?"
-
-#: src/dialogs/permissions.tsx:235
-msgid "No access"
-msgstr "Pas d'accès"
-
-#: src/dialogs/permissions.tsx:279
-msgid "Missing type"
-msgstr "Type manquant"
-
-#: src/dialogs/permissions.tsx:285
-msgid "Collapse"
-msgstr "Réduire"
-
-#: src/dialogs/permissions.tsx:286
-msgid "Show all files"
-msgstr "Afficher tous les fichiers"
-
-#: src/dialogs/permissions.tsx:304
-msgid "$0 permissions"
-msgstr "Autorisations de $0"
-
-#: src/dialogs/permissions.tsx:305
-msgid "Permissions for $0 files"
-msgstr "Autorisations pour $0 fichiers"
-
-#: src/dialogs/permissions.tsx:318
-msgid "Ownership"
-msgstr "Propriété"
-
-#: src/dialogs/permissions.tsx:334 src/files-card-body.tsx:591
-#: src/files-footer-detail.tsx:80 src/files-footer-detail.tsx:152
-msgid "Group"
-msgstr "Groupe"
-
-#: src/dialogs/permissions.tsx:351
-msgid "Access"
-msgstr "Accès"
-
-#: src/dialogs/permissions.tsx:353
-msgid "Owner access"
-msgstr "Accès propriétare"
-
-#: src/dialogs/permissions.tsx:365
-msgid "Group access"
-msgstr "Accès groupe"
-
-#: src/dialogs/permissions.tsx:377
-msgid "Others access"
-msgstr "Accès autres"
-
-#: src/dialogs/permissions.tsx:390
-msgid "Security context"
-msgstr "Contexte de sécurité"
-
-#: src/dialogs/permissions.tsx:403
-msgid "Set executable as program"
-msgstr "Définir l'exécutable comme programme"
-
-#: src/dialogs/permissions.tsx:415
-msgid "Change"
-msgstr "Modifier"
-
-#: src/dialogs/permissions.tsx:422
-msgid "Change permissions for enclosed files"
-msgstr "Modifier les autorisations pour les fichiers inclus"
-
-#: src/dialogs/copyPasteOwnership.tsx:110
-msgid "(original owner)"
-msgstr "(propriétaire original)"
-
-#: src/dialogs/copyPasteOwnership.tsx:119
-msgid "keep original owners"
-msgstr "Conserver les propriétaires d'origine"
-
-#: src/dialogs/copyPasteOwnership.tsx:182
-msgid "Paste as owner"
-msgstr "Coller en tant que propriétaire"
-
-#: src/dialogs/copyPasteOwnership.tsx:187
-msgid ""
-"Files being pasted have a different owner. By default, ownership will be "
-"changed to match the destination directory."
-msgstr ""
-"Le propriétaire des fichiers collés est différent. Par défaut, le "
-"propriétaire des fichiers sera modifié pour correspondre au répertoire de "
-"destination."
-
-#: src/dialogs/copyPasteOwnership.tsx:190
-msgid "New owner"
-msgstr "Nouveau propriétaire"
-
-#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:250
-#: src/dialogs/editor.tsx:307
-msgid "Overwrite"
-msgstr "Écraser"
-
-#: src/dialogs/rename.tsx:91
-msgid "New filename"
-msgstr "Nouveau nom de fichier"
-
-#: src/dialogs/rename.tsx:91
-msgid "New name"
-msgstr "Nouveau nom"
-
-#: src/dialogs/rename.tsx:101
-msgid "Rename $0?"
-msgstr "Renommer $0 ?"
+#: src/dialogs/create-file.tsx:230
+msgid "Permission denied"
+msgstr "Accès refusé"
 
 #: src/dialogs/symlink.tsx:53
 msgid "link to $0"
@@ -665,98 +567,216 @@ msgstr "Absolu"
 msgid "Relative"
 msgstr "Relatif"
 
-#: src/dialogs/editor.tsx:48 src/dialogs/editor.tsx:221
-msgid "The file has been removed on disk"
-msgstr "Le fichier a été supprimé du disque"
+#: src/dialogs/symlink.tsx:231 src/menu.tsx:198
+msgid "Create link"
+msgstr "Créer un lien"
 
-#: src/dialogs/editor.tsx:50
-msgid "The existing file changed unexpectedly"
-msgstr "Le fichier existant a été modifié de manière inattendue"
+#: src/dialogs/permissions.tsx:235
+msgid "No access"
+msgstr "Pas d'accès"
 
-#. Translators: This is the title of a modal dialog.  $0 represents a filename.
-#: src/dialogs/editor.tsx:187
-msgid "Edit $0"
-msgstr "Modifier $0"
+#: src/dialogs/permissions.tsx:279
+msgid "Missing type"
+msgstr "Type manquant"
 
-#: src/dialogs/editor.tsx:187
-msgid "View $0"
-msgstr "Voir $0"
+#: src/dialogs/permissions.tsx:285
+msgid "Collapse"
+msgstr "Réduire"
 
-#: src/dialogs/editor.tsx:222
-msgid "The file has changed on disk"
-msgstr "Le fichier a été modifié sur le disque"
+#: src/dialogs/permissions.tsx:286
+msgid "Show all files"
+msgstr "Afficher tous les fichiers"
 
-#: src/dialogs/editor.tsx:227
-msgid "Reload"
-msgstr "Recharger"
+#: src/dialogs/permissions.tsx:304
+msgid "$0 permissions"
+msgstr "Autorisations de $0"
 
-#: src/dialogs/editor.tsx:230
-msgid "Ignore"
-msgstr "Ignorer"
+#: src/dialogs/permissions.tsx:305
+msgid "Permissions for $0 files"
+msgstr "Autorisations pour $0 fichiers"
 
-#: src/dialogs/editor.tsx:264 src/dialogs/editor.tsx:321
-msgid "Save"
-msgstr "Enregistrer"
+#: src/dialogs/permissions.tsx:318
+msgid "Ownership"
+msgstr "Propriété"
 
-#: src/dialogs/editor.tsx:281
-msgid "Save changes?"
-msgstr "Enregistrer les modifications ?"
+#: src/dialogs/permissions.tsx:334 src/files-footer-detail.tsx:80
+#: src/files-footer-detail.tsx:152 src/files-card-body.tsx:591
+msgid "Group"
+msgstr "Groupe"
 
-#: src/dialogs/editor.tsx:290
-msgid "The file was deleted after it was opened, saving will recreate it."
+#: src/dialogs/permissions.tsx:351
+msgid "Access"
+msgstr "Accès"
+
+#: src/dialogs/permissions.tsx:353
+msgid "Owner access"
+msgstr "Accès propriétare"
+
+#: src/dialogs/permissions.tsx:365
+msgid "Group access"
+msgstr "Accès groupe"
+
+#: src/dialogs/permissions.tsx:377
+msgid "Others access"
+msgstr "Accès autres"
+
+#: src/dialogs/permissions.tsx:390
+msgid "Security context"
+msgstr "Contexte de sécurité"
+
+#: src/dialogs/permissions.tsx:403
+msgid "Set executable as program"
+msgstr "Définir l'exécutable comme programme"
+
+#: src/dialogs/permissions.tsx:415
+msgid "Change"
+msgstr "Modifier"
+
+#: src/dialogs/permissions.tsx:422
+msgid "Change permissions for enclosed files"
+msgstr "Modifier les autorisations pour les fichiers inclus"
+
+#: src/files-footer-detail.tsx:36
+msgid "$0 files selected"
+msgstr "$0 fichiers sélectionnés"
+
+#: src/files-footer-detail.tsx:64
+msgid "Directory contains $0 directories, $1 files"
+msgstr "Le répertoire contient $0 répertoires, $1 fichiers"
+
+#: src/files-footer-detail.tsx:65
+msgid "Directory contains $0 directories, $1 files, $2 hidden"
+msgstr "Le répertoire contient $0 répertoires, $1 fichiers, $2 masqués"
+
+#: src/files-footer-detail.tsx:80 src/files-card-body.tsx:591
+msgid "Others"
+msgstr "Autres"
+
+#: src/files-footer-detail.tsx:144
+msgid "User"
+msgstr "Utilisateur"
+
+#: src/files-folder-view.tsx:156
+msgid "Drop files to upload"
+msgstr "Déposez les fichiers à uploader"
+
+#: src/files-folder-view.tsx:164
+msgid "Cannot drop files, another upload is already in progress"
+msgstr "Impossible de déposer des fichiers, un autre upload est déjà en cours"
+
+#: src/upload-button.tsx:56
+msgid "$0 files"
+msgstr "$0 fichiers"
+
+#: src/upload-button.tsx:60
+msgid "Uploaded as $0, $1"
+msgstr "Uploadé en tant que $0,$1"
+
+#: src/upload-button.tsx:95
+msgid "Replace file $0?"
+msgstr "Remplacer le fichier $0 ?"
+
+#: src/upload-button.tsx:102
+msgid ""
+"A file with the same name already exists in \"$0\". Replacing it will "
+"overwrite its content."
 msgstr ""
-"Le fichier a été supprimé après son ouverture. Il sera recréé si vous "
-"l'enregistrez."
+"Un fichier portant le même nom existe déjà dans \"$0\". Le remplacer "
+"écrasera son contenu."
 
-#: src/dialogs/editor.tsx:291
-msgid "The file has changed on disk between when it was opened and now"
-msgstr "Le fichier a été modifié sur le disque depuis son ouverture"
+#: src/upload-button.tsx:123
+msgid "New file"
+msgstr "Nouveau fichier"
 
-#: src/dialogs/editor.tsx:296
-msgid "$0 has unsaved changes and which will be permanently lost if discarded."
+#: src/upload-button.tsx:128
+msgid "Original file on server"
+msgstr "Fichier original sur le serveur"
+
+#: src/upload-button.tsx:137
+msgid "Apply this action to all conflicting files"
+msgstr "Appliquer cette action à tous les fichiers en conflit"
+
+#: src/upload-button.tsx:143
+msgid "Replace"
+msgstr "Remplacer"
+
+#: src/upload-button.tsx:145
+msgid "Keep original"
+msgstr "Garder l'original"
+
+#: src/upload-button.tsx:278
+msgid "Failed"
+msgstr "Échec"
+
+#: src/upload-button.tsx:322 src/upload-button.tsx:352
+msgid "Upload error"
+msgstr "Erreur d'upload"
+
+#: src/upload-button.tsx:324
+msgid "Unable to move uploaded file to final destination"
 msgstr ""
-"Des modifications de $0 ne sont pas enregistrées et seront définitivement "
-"perdues si vous les abandonnez."
+"Impossible de déplacer le fichier téléchargé vers la destination finale"
 
-#: src/dialogs/editor.tsx:329
-msgid "Discard"
-msgstr "Abandonner"
+#: src/upload-button.tsx:346
+msgid "Cancelled"
+msgstr "Annulé"
 
-#: src/dialogs/create-file.tsx:163
-msgid "File name"
-msgstr "Nom du fichier"
+#: src/upload-button.tsx:348
+msgid "Cancelled upload of $0"
+msgstr "Upload de $0 annulé"
 
-#: src/dialogs/create-file.tsx:208 src/dialogs/mkdir.tsx:135
-msgid "Create"
-msgstr "Créer"
+#: src/upload-button.tsx:374
+msgid "File uploaded"
+msgstr "Fichier uploadé"
 
-#: src/dialogs/create-file.tsx:228
-msgid "Cannot create file in current directory"
-msgstr "Impossible de créer le fichier dans le répertoire actuel"
+#: src/upload-button.tsx:374
+msgid "Files uploaded"
+msgstr "Fichiers uploadés"
 
-#: src/dialogs/create-file.tsx:230
-msgid "Permission denied"
-msgstr "Accès refusé"
+#: src/upload-button.tsx:405
+msgid "Change permissions"
+msgstr "Modifier les autorisations"
 
-#: src/dialogs/mkdir.tsx:31
-msgid "Directory name cannot be empty"
-msgstr "Le nom du répertoire ne peut pas être vide"
+#: src/upload-button.tsx:458
+msgid "Uploads"
+msgstr "Téléversements"
 
-#: src/dialogs/mkdir.tsx:33
-msgid "Directory name too long"
-msgstr "Nom de répertoire trop long"
+#: src/upload-button.tsx:477
+msgid "Cancel upload of $0"
+msgstr "Annuler l'upload de $0"
 
-#: src/dialogs/mkdir.tsx:35
-msgid "Directory name cannot include a /"
-msgstr "Le nom du répertoire ne peut pas contenir un /"
+#
+#: src/upload-button.tsx:494
+msgid "Upload $0% completed"
+msgstr "Upload effectué à $0 %"
 
-#: src/dialogs/mkdir.tsx:96
-msgid "Directory name"
-msgstr "Nom du répertoire"
+#: src/upload-button.tsx:513
+msgid "Upload"
+msgstr "Uploader"
 
-#: src/dialogs/mkdir.tsx:110
-msgid "Directory owner"
-msgstr "Propriétaire du répertoire"
+#: src/menu.tsx:53
+msgid "\"$0\" exists, not overwriting with paste."
+msgstr "\"$0\" existe, il ne sera pas écrasé par le contenu à coller."
+
+#: src/menu.tsx:118 src/menu.tsx:158 src/menu.tsx:225
+msgid "Edit permissions"
+msgstr "Modifier les autorisations"
+
+#: src/menu.tsx:127 src/menu.tsx:188
+msgid "Open in terminal"
+msgstr "Ouvrir dans le terminal"
+
+#: src/menu.tsx:144
+msgid "Open text file"
+msgstr "Ouvrir le fichier texte"
+
+#: src/menu.tsx:152 src/menu.tsx:206
+msgid "Copy"
+msgstr "Copier"
+
+#: src/menu.tsx:179
+msgid "Download"
+msgstr "Télécharger"
 
 #: src/files-card-body.tsx:506
 msgid "No matching results"
@@ -783,26 +803,6 @@ msgstr "Dossier"
 #: src/files-card-body.tsx:580
 msgid "File"
 msgstr "Fichier"
-
-#: src/files-card-body.tsx:591 src/files-footer-detail.tsx:80
-msgid "Others"
-msgstr "Autres"
-
-#: src/files-footer-detail.tsx:36
-msgid "$0 files selected"
-msgstr "$0 fichiers sélectionnés"
-
-#: src/files-footer-detail.tsx:64
-msgid "Directory contains $0 directories, $1 files"
-msgstr "Le répertoire contient $0 répertoires, $1 fichiers"
-
-#: src/files-footer-detail.tsx:65
-msgid "Directory contains $0 directories, $1 files, $2 hidden"
-msgstr "Le répertoire contient $0 répertoires, $1 fichiers, $2 masqués"
-
-#: src/files-footer-detail.tsx:144
-msgid "User"
-msgstr "Utilisateur"
 
 #: src/manifest.json:0
 msgid "File browser"
