@@ -14,6 +14,7 @@ import cockpit from "cockpit";
 import { EmptyStatePanel } from "cockpit-components-empty-state";
 
 import type { FolderFileInfo, ClipboardInfo } from "./common.ts";
+import type { DefaultFileAction } from "./default-file-action.ts";
 import { FilesCardBody } from "./files-card-body.tsx";
 import { as_sort, FilesCardHeader } from "./header.tsx";
 
@@ -43,6 +44,8 @@ export const FilesFolderView = ({
     clipboard,
     setClipboard,
     setShowHidden,
+    defaultFileAction,
+    setDefaultFileAction,
 }: {
     path: string,
     files: FolderFileInfo[],
@@ -51,6 +54,8 @@ export const FilesFolderView = ({
     setShowHidden: React.Dispatch<React.SetStateAction<boolean>>,
     selected: FolderFileInfo[], setSelected: React.Dispatch<React.SetStateAction<FolderFileInfo[]>>,
     clipboard: ClipboardInfo, setClipboard: React.Dispatch<React.SetStateAction<ClipboardInfo>>,
+    defaultFileAction: DefaultFileAction | null,
+    setDefaultFileAction: (action: DefaultFileAction) => void,
 }) => {
     const dropzoneRef = useRef<HTMLDivElement>(null);
     const [currentFilter, setCurrentFilter] = useState("");
@@ -183,6 +188,8 @@ export const FilesFolderView = ({
                       path={path}
                       showHidden={showHidden}
                       setShowHidden={setShowHidden}
+                      defaultFileAction={defaultFileAction}
+                      setDefaultFileAction={setDefaultFileAction}
                       selected={selected}
                       setSelected={setSelected}
                       clipboard={clipboard}
@@ -202,6 +209,8 @@ export const FilesFolderView = ({
                       setClipboard={setClipboard}
                       showHidden={showHidden}
                       setShowHidden={setShowHidden}
+                      defaultFileAction={defaultFileAction}
+                      setDefaultFileAction={setDefaultFileAction}
                       setCurrentFilter={setCurrentFilter}
                     />
                     {dragDropActive && dropzoneComponent}

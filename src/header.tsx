@@ -21,6 +21,8 @@ import { useDialogs } from "dialogs";
 
 import { useFilesContext } from "./common.ts";
 import type { FolderFileInfo, ClipboardInfo } from "./common.ts";
+import { actionName, type DefaultFileAction } from "./default-file-action.ts";
+import { show_default_file_action_dialog } from "./dialogs/default-file-action.tsx";
 import { showKeyboardShortcuts } from "./dialogs/keyboardShortcutsHelp.tsx";
 import { get_menu_items } from "./menu.tsx";
 import { UploadButton } from "./upload-button.tsx";
@@ -127,6 +129,8 @@ export const FilesCardHeader = ({
     clipboard,
     setClipboard,
     path,
+    defaultFileAction,
+    setDefaultFileAction,
 }: {
     currentFilter: string,
     onFilterChange: (_event: React.SyntheticEvent<HTMLElement>, value: string) => void,
@@ -136,6 +140,8 @@ export const FilesCardHeader = ({
     selected: FolderFileInfo[], setSelected: React.Dispatch<React.SetStateAction<FolderFileInfo[]>>,
     clipboard: ClipboardInfo, setClipboard: React.Dispatch<React.SetStateAction<ClipboardInfo>>
     path: string,
+    defaultFileAction: DefaultFileAction | null,
+    setDefaultFileAction: (action: DefaultFileAction) => void,
 }) => {
     const { addAlert, cwdInfo } = useFilesContext();
     const dialogs = useDialogs();
@@ -144,9 +150,22 @@ export const FilesCardHeader = ({
         path, selected, setSelected, clipboard, setClipboard, cwdInfo, addAlert, dialogs
     );
 
-    // This button only needs to be in the global menu
+    // These buttons only need to be in the global menu
     menuItems.push(
         { type: "divider" },
+        {
+            id: "default-file-action",
+            title: cockpit.format(
+                _("Default file action: $0"),
+                defaultFileAction ? actionName(defaultFileAction) : _("Not set")
+            ),
+            onClick: () => {
+                show_default_file_action_dialog(dialogs, defaultFileAction).then(action => {
+                    if (action !== null)
+                        setDefaultFileAction(action);
+                });
+            }
+        },
         {
             id: "shortcuts-help",
             title: _("Show keyboard shortcuts"),
