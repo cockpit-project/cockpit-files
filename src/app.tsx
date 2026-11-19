@@ -4,7 +4,7 @@
  * Copyright (C) 2023 Red Hat, Inc.
  */
 
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import {
     AlertGroup, Alert, AlertActionCloseButton
@@ -24,6 +24,9 @@ import { superuser } from "superuser";
 
 import { FilesContext, testIsAppleDevice, uniqueId } from "./common.ts";
 import type { AlertInfo, ClipboardInfo, FolderFileInfo } from "./common.ts";
+import {
+    loadDefaultFileAction, saveDefaultFileAction, type DefaultFileAction
+} from "./default-file-action.ts";
 import { FilesBreadcrumbs } from "./files-breadcrumbs.tsx";
 import { FilesFolderView } from "./files-folder-view.tsx";
 import { FilesFooterDetail } from "./files-footer-detail.tsx";
@@ -58,6 +61,11 @@ export const Application = () => {
     const [files, setFiles] = useState<FolderFileInfo[]>([]);
     const [selected, setSelected] = useState<FolderFileInfo[]>([]);
     const [showHidden, setShowHidden] = useState(localStorage.getItem("files:showHiddenFiles") === "true");
+    const [defaultFileAction, setDefaultFileActionState] = useState<DefaultFileAction | null>(loadDefaultFileAction());
+    const setDefaultFileAction = useCallback((action: DefaultFileAction) => {
+        saveDefaultFileAction(action);
+        setDefaultFileActionState(action);
+    }, []);
     const [clipboard, setClipboard] = useState<ClipboardInfo>({ path: "/", files: [] });
     const [alerts, setAlerts] = useState<(Required<Pick<AlertInfo, 'key'>> & AlertInfo)[]>([]);
     const [cwdInfo, setCwdInfo] = useState<FileInfo | null>(null);
@@ -202,6 +210,8 @@ export const Application = () => {
                               loadingFiles={loadingFiles}
                               showHidden={showHidden}
                               setShowHidden={setShowHidden}
+                              defaultFileAction={defaultFileAction}
+                              setDefaultFileAction={setDefaultFileAction}
                               selected={selected}
                               setSelected={setSelected}
                               clipboard={clipboard}
