@@ -1,0 +1,834 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-22 10:16+0000\n"
+"PO-Revision-Date: 2026-11-22 16:20+0000\n"
+"Last-Translator: Rihards Prieditis <rprieditis@gmail.com>\n"
+"Language-Team: Latvian <https://translate.fedoraproject.org/projects/cockpit/"
+"cockpit-files/lv/>\n"
+"Language: lv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n % 10 == 0 || n % 100 >= 11 && n % 100 <= "
+"19) ? 0 : ((n % 10 == 1 && n % 100 != 11) ? 1 : 2);\n"
+"X-Generator: Weblate 2026.11.2\n"
+
+#: src/index.html:8
+msgid "Cockpit Files"
+msgstr "Cockpit faili"
+
+#: src/files-card-body.tsx:506
+msgid "No matching results"
+msgstr "Nav atbilstošu rezultātu"
+
+#: src/files-card-body.tsx:507
+msgid "Clear filter"
+msgstr "Notīrīt filtru"
+
+#: src/files-card-body.tsx:514
+msgid "Directory is empty"
+msgstr "Direktorija ir tukša"
+
+#: src/files-card-body.tsx:519
+msgid "$0 item is hidden"
+msgid_plural "$0 items are hidden"
+msgstr[0] "Slēpti $0 vienumu"
+msgstr[1] "Slēpts $0 vienums"
+msgstr[2] "Slēpti $0 vienumi"
+
+#: src/files-card-body.tsx:522 src/header.tsx:271
+msgid "Show hidden items"
+msgstr "Rādīt slēptos vienumus"
+
+#: src/files-card-body.tsx:534 src/header.tsx:53
+msgid "Name"
+msgstr "Nosaukums"
+
+#: src/files-card-body.tsx:535 src/files-card-body.tsx:652 src/header.tsx:64
+msgid "Size"
+msgstr "Izmērs"
+
+#: src/files-card-body.tsx:539 src/files-card-body.tsx:659 src/header.tsx:75
+msgid "Modified"
+msgstr "Mainīts"
+
+#: src/files-card-body.tsx:544 src/files-card-body.tsx:591
+#: src/files-card-body.tsx:667 src/header.tsx:86 src/files-footer-detail.tsx:80
+#: src/dialogs/permissions.tsx:319 src/dialogs/create-file.tsx:185
+msgid "Owner"
+msgstr "Īpašnieks"
+
+#: src/files-card-body.tsx:549 src/files-card-body.tsx:674 src/header.tsx:97
+msgid "Permissions"
+msgstr "Atļaujas"
+
+#: src/files-card-body.tsx:578
+msgid "Folder"
+msgstr "Mape"
+
+#: src/files-card-body.tsx:580
+msgid "File"
+msgstr "Fails"
+
+#: src/files-card-body.tsx:591 src/files-footer-detail.tsx:80
+#: src/files-footer-detail.tsx:152 src/dialogs/permissions.tsx:334
+msgid "Group"
+msgstr "Grupa"
+
+#: src/files-card-body.tsx:591 src/files-footer-detail.tsx:80
+msgid "Others"
+msgstr "Citi"
+
+#: src/header.tsx:56
+msgid "A-Z"
+msgstr "A-Z"
+
+#: src/header.tsx:60
+msgid "Z-A"
+msgstr "Z-A"
+
+#: src/header.tsx:67
+msgid "Largest size"
+msgstr "Lielākais izmērs"
+
+#: src/header.tsx:71
+msgid "Smallest size"
+msgstr "Mazākais izmērs"
+
+#: src/header.tsx:78
+msgid "First modified"
+msgstr "Senāk mainītie"
+
+#: src/header.tsx:82
+msgid "Last modified"
+msgstr "Nesen mainītie"
+
+#: src/header.tsx:89
+msgid "Owner ascending"
+msgstr "Īpašnieks augošā secībā"
+
+#: src/header.tsx:93
+msgid "Owner descending"
+msgstr "Īpašnieks dilstošā secībā"
+
+#: src/header.tsx:100
+msgid "Most permissive"
+msgstr "Visplašākās atļaujas"
+
+#: src/header.tsx:104
+msgid "Least permissive"
+msgstr "Visšaurākās atļaujas"
+
+#: src/header.tsx:152
+msgid "Show keyboard shortcuts"
+msgstr "Rādīt īsinājumtaustiņus"
+
+#: src/header.tsx:177
+msgid "Filter directory"
+msgstr "Filtrēt direktoriju"
+
+#: src/header.tsx:240
+msgid "Display as a list"
+msgstr "Rādīt kā sarakstu"
+
+#: src/header.tsx:241
+msgid "Display as a grid"
+msgstr "Rādīt kā režģi"
+
+#: src/header.tsx:258
+msgid "Sort"
+msgstr "Kārtot"
+
+#: src/header.tsx:271
+msgid "Hide hidden items"
+msgstr "Slēpt slēptos vienumus"
+
+#: src/files-footer-detail.tsx:36
+msgid "$0 files selected"
+msgstr "Atlasīti faili: $0"
+
+#: src/files-footer-detail.tsx:64
+msgid "Directory contains $0 directories, $1 files"
+msgstr "Direktorijā ir direktorijas: $0, faili: $1"
+
+#: src/files-footer-detail.tsx:65
+msgid "Directory contains $0 directories, $1 files, $2 hidden"
+msgstr "Direktorijā ir direktorijas: $0, faili: $1, slēpti: $2"
+
+#: src/files-footer-detail.tsx:144
+msgid "User"
+msgstr "Lietotājs"
+
+#: src/upload-button.tsx:56
+msgid "$0 files"
+msgstr "Faili: $0"
+
+#: src/upload-button.tsx:60
+msgid "Uploaded as $0, $1"
+msgstr "Augšupielādēts kā $0, $1"
+
+#: src/upload-button.tsx:95
+msgid "Replace file $0?"
+msgstr "Aizstāt failu $0?"
+
+#: src/upload-button.tsx:102
+msgid ""
+"A file with the same name already exists in \"$0\". Replacing it will "
+"overwrite its content."
+msgstr ""
+"Fails ar tādu pašu nosaukumu jau eksistē „$0”. Aizstājot tiks pārrakstīts tā "
+"saturs."
+
+#: src/upload-button.tsx:123
+msgid "New file"
+msgstr "Jauns fails"
+
+#: src/upload-button.tsx:128
+msgid "Original file on server"
+msgstr "Sākotnējais fails serverī"
+
+#: src/upload-button.tsx:137
+msgid "Apply this action to all conflicting files"
+msgstr "Lietot šo darbību visiem konfliktējošajiem failiem"
+
+#: src/upload-button.tsx:143
+msgid "Replace"
+msgstr "Aizstāt"
+
+#: src/upload-button.tsx:145
+msgid "Keep original"
+msgstr "Paturēt sākotnējo"
+
+#: src/upload-button.tsx:146 src/dialogs/delete.tsx:97
+#: src/dialogs/permissions.tsx:424 src/dialogs/symlink.tsx:233
+#: src/dialogs/rename.tsx:87 src/dialogs/mkdir.tsx:137
+#: src/dialogs/copyPasteOwnership.tsx:170 src/dialogs/editor.tsx:270
+#: src/dialogs/editor.tsx:336 src/dialogs/create-file.tsx:211
+msgid "Cancel"
+msgstr "Atcelt"
+
+#: src/upload-button.tsx:278
+msgid "Failed"
+msgstr "Neizdevās"
+
+#: src/upload-button.tsx:322 src/upload-button.tsx:352
+msgid "Upload error"
+msgstr "Augšupielādes kļūda"
+
+#: src/upload-button.tsx:324
+msgid "Unable to move uploaded file to final destination"
+msgstr "Neizdodas pārvietot augšupielādēto failu uz galamērķi"
+
+#: src/upload-button.tsx:346
+msgid "Cancelled"
+msgstr "Atcelts"
+
+#: src/upload-button.tsx:348
+msgid "Cancelled upload of $0"
+msgstr "Atcelta $0 augšupielāde"
+
+#: src/upload-button.tsx:374
+msgid "File uploaded"
+msgstr "Fails augšupielādēts"
+
+#: src/upload-button.tsx:374
+msgid "Files uploaded"
+msgstr "Faili augšupielādēti"
+
+#: src/upload-button.tsx:405
+msgid "Change permissions"
+msgstr "Mainīt atļaujas"
+
+#: src/upload-button.tsx:458
+msgid "Uploads"
+msgstr "Augšupielādes"
+
+#: src/upload-button.tsx:477
+msgid "Cancel upload of $0"
+msgstr "Atcelt $0 augšupielādi"
+
+#
+#: src/upload-button.tsx:494
+msgid "Upload $0% completed"
+msgstr "Augšupielāde $0% pabeigta"
+
+#: src/upload-button.tsx:513
+msgid "Upload"
+msgstr "Augšupielādēt"
+
+#: src/common.ts:49
+msgid "None"
+msgstr "Nav"
+
+#: src/common.ts:50
+msgid "Execute-only"
+msgstr "Tikai izpilde"
+
+#: src/common.ts:51 src/dialogs/permissions.tsx:245
+msgid "Write-only"
+msgstr "Tikai rakstīšana"
+
+#: src/common.ts:52
+msgid "Write and execute"
+msgstr "Rakstīšana un izpilde"
+
+#: src/common.ts:53 src/dialogs/permissions.tsx:230 src/dialogs/editor.tsx:189
+msgid "Read-only"
+msgstr "Tikai lasāms"
+
+#: src/common.ts:54
+msgid "Read and execute"
+msgstr "Lasīšana un izpilde"
+
+#: src/common.ts:55 src/dialogs/permissions.tsx:225
+msgid "Read and write"
+msgstr "Lasīšana un rakstīšana"
+
+#: src/common.ts:56
+msgid "Read, write, and execute"
+msgstr "Lasīšana, rakstīšana un izpilde"
+
+#: src/common.ts:60
+msgid "Block device"
+msgstr "Bloka ierīce"
+
+#: src/common.ts:61
+msgid "Character device"
+msgstr "Rakstzīmju ierīce"
+
+#: src/common.ts:62
+msgid "Directory"
+msgstr "Direktorija"
+
+#: src/common.ts:63
+msgid "Named pipe"
+msgstr "Nosaukts cauruļvads"
+
+#: src/common.ts:64
+msgid "Symbolic link"
+msgstr "Simboliskā saite"
+
+#: src/common.ts:65
+msgid "Regular file"
+msgstr "Parasts fails"
+
+#: src/common.ts:66
+msgid "Socket"
+msgstr "Ligzda"
+
+#: src/common.ts:104 src/dialogs/symlink.tsx:36
+msgid "Name cannot be empty"
+msgstr "Nosaukums nevar būt tukšs"
+
+#: src/common.ts:106
+msgid "Name too long"
+msgstr "Nosaukums ir pārāk garš"
+
+#: src/common.ts:108
+msgid "Name cannot include a /"
+msgstr "Nosaukumā nedrīkst būt /"
+
+#: src/common.ts:110
+msgid "Filename is the same as original name"
+msgstr "Faila nosaukums ir tāds pats kā sākotnējais"
+
+#: src/common.ts:113 src/dialogs/symlink.tsx:39
+msgid "Directory with the same name exists"
+msgstr "Direktorija ar tādu pašu nosaukumu eksistē"
+
+#: src/common.ts:115 src/dialogs/symlink.tsx:41
+msgid "File exists"
+msgstr "Fails eksistē"
+
+#: src/menu.tsx:51 src/dialogs/copyPasteOwnership.tsx:56
+msgid "Pasting failed"
+msgstr "Ielīmēšana neizdevās"
+
+#: src/menu.tsx:53
+msgid "\"$0\" exists, not overwriting with paste."
+msgstr "„$0” eksistē, ielīmējot netiek pārrakstīts."
+
+#: src/menu.tsx:100 src/dialogs/copyPasteOwnership.tsx:168
+msgid "Paste"
+msgstr "Ielīmēt"
+
+#: src/menu.tsx:107 src/dialogs/mkdir.tsx:80
+msgid "Create directory"
+msgstr "Izveidot direktoriju"
+
+#: src/menu.tsx:112 src/dialogs/create-file.tsx:151
+msgid "Create file"
+msgstr "Izveidot failu"
+
+#: src/menu.tsx:118 src/menu.tsx:158 src/menu.tsx:225
+msgid "Edit permissions"
+msgstr "Rediģēt atļaujas"
+
+#: src/menu.tsx:127 src/menu.tsx:188
+msgid "Open in terminal"
+msgstr "Atvērt terminālī"
+
+#: src/menu.tsx:144
+msgid "Open text file"
+msgstr "Atvērt teksta failu"
+
+#: src/menu.tsx:152 src/menu.tsx:206
+msgid "Copy"
+msgstr "Kopēt"
+
+#: src/menu.tsx:163 src/dialogs/rename.tsx:78
+msgid "Rename"
+msgstr "Pārdēvēt"
+
+#: src/menu.tsx:169 src/menu.tsx:211 src/dialogs/delete.tsx:95
+msgid "Delete"
+msgstr "Dzēst"
+
+#: src/menu.tsx:179
+msgid "Download"
+msgstr "Lejupielādēt"
+
+#: src/menu.tsx:198 src/dialogs/symlink.tsx:231
+msgid "Create link"
+msgstr "Izveidot saiti"
+
+#: src/files-folder-view.tsx:156
+msgid "Drop files to upload"
+msgstr "Nometiet failus, lai augšupielādētu"
+
+#: src/files-folder-view.tsx:164
+msgid "Cannot drop files, another upload is already in progress"
+msgstr "Nevar nomest failus, jau notiek cita augšupielāde"
+
+#: src/files-breadcrumbs.tsx:46
+msgid "Home"
+msgstr "Mājas"
+
+#: src/files-breadcrumbs.tsx:94
+msgid "Unable to create bookmark directory"
+msgstr "Neizdodas izveidot grāmatzīmju direktoriju"
+
+#: src/files-breadcrumbs.tsx:117
+msgid "Unable to save bookmark file"
+msgstr "Neizdodas saglabāt grāmatzīmju failu"
+
+#: src/files-breadcrumbs.tsx:139
+msgid "Remove from bookmarks"
+msgstr "Noņemt no grāmatzīmēm"
+
+#: src/files-breadcrumbs.tsx:141
+msgid "Add to bookmarks"
+msgstr "Pievienot grāmatzīmēm"
+
+#: src/files-breadcrumbs.tsx:154
+msgid "Bookmarks"
+msgstr "Grāmatzīmes"
+
+#: src/files-breadcrumbs.tsx:161
+msgid "Bookmarked"
+msgstr "Grāmatzīmēs"
+
+#: src/files-breadcrumbs.tsx:161
+msgid "Not bookmarked"
+msgstr "Nav grāmatzīmēs"
+
+#: src/files-breadcrumbs.tsx:236
+msgid "Filesystem"
+msgstr "Failu sistēma"
+
+#: src/files-breadcrumbs.tsx:303 src/dialogs/keyboardShortcutsHelp.tsx:87
+msgid "Edit path"
+msgstr "Rediģēt ceļu"
+
+#: src/dialogs/delete.tsx:34
+msgid "Force delete $0 items"
+msgstr "Piespiedu kārtā dzēst vienumus ($0)"
+
+#: src/dialogs/delete.tsx:34
+msgid "Delete $0 items?"
+msgstr "Dzēst vienumus ($0)?"
+
+#: src/dialogs/delete.tsx:40
+msgid "Force delete file $0?"
+msgstr "Piespiedu kārtā dzēst failu $0?"
+
+#: src/dialogs/delete.tsx:40
+msgid "Delete file $0?"
+msgstr "Dzēst failu $0?"
+
+#: src/dialogs/delete.tsx:44
+msgid "Force delete link $0?"
+msgstr "Piespiedu kārtā dzēst saiti $0?"
+
+#: src/dialogs/delete.tsx:44
+msgid "Delete link $0?"
+msgstr "Dzēst saiti $0?"
+
+#: src/dialogs/delete.tsx:48
+msgid "Force delete directory $0?"
+msgstr "Piespiedu kārtā dzēst direktoriju $0?"
+
+#: src/dialogs/delete.tsx:48
+msgid "Delete directory $0?"
+msgstr "Dzēst direktoriju $0?"
+
+#: src/dialogs/delete.tsx:51
+msgid "Force delete $0"
+msgstr "Piespiedu kārtā dzēst $0"
+
+#: src/dialogs/delete.tsx:51
+msgid "Delete $0?"
+msgstr "Dzēst $0?"
+
+#: src/dialogs/permissions.tsx:235
+msgid "No access"
+msgstr "Nav piekļuves"
+
+#: src/dialogs/permissions.tsx:279
+msgid "Missing type"
+msgstr "Trūkst tipa"
+
+#: src/dialogs/permissions.tsx:285
+msgid "Collapse"
+msgstr "Sakļaut"
+
+#: src/dialogs/permissions.tsx:286
+msgid "Show all files"
+msgstr "Rādīt visus failus"
+
+#: src/dialogs/permissions.tsx:304
+msgid "$0 permissions"
+msgstr "$0 atļaujas"
+
+#: src/dialogs/permissions.tsx:305
+msgid "Permissions for $0 files"
+msgstr "$0 failu atļaujas"
+
+#: src/dialogs/permissions.tsx:318
+msgid "Ownership"
+msgstr "Īpašumtiesības"
+
+#: src/dialogs/permissions.tsx:351
+msgid "Access"
+msgstr "Piekļuve"
+
+#: src/dialogs/permissions.tsx:353
+msgid "Owner access"
+msgstr "Īpašnieka piekļuve"
+
+#: src/dialogs/permissions.tsx:365
+msgid "Group access"
+msgstr "Grupas piekļuve"
+
+#: src/dialogs/permissions.tsx:377
+msgid "Others access"
+msgstr "Citu piekļuve"
+
+#: src/dialogs/permissions.tsx:390
+msgid "Security context"
+msgstr "Drošības konteksts"
+
+#: src/dialogs/permissions.tsx:403
+msgid "Set executable as program"
+msgstr "Iestatīt kā izpildāmu programmu"
+
+#: src/dialogs/permissions.tsx:415
+msgid "Change"
+msgstr "Mainīt"
+
+#: src/dialogs/permissions.tsx:422
+msgid "Change permissions for enclosed files"
+msgstr "Mainīt atļaujas ietvertajiem failiem"
+
+#: src/dialogs/symlink.tsx:53
+msgid "link to $0"
+msgstr "saite uz $0"
+
+#: src/dialogs/symlink.tsx:128
+msgid "Create link to $0"
+msgstr "Izveidot saiti uz $0"
+
+#: src/dialogs/symlink.tsx:157
+msgid "Target"
+msgstr "Mērķis"
+
+#: src/dialogs/symlink.tsx:164
+msgid "Symlink name"
+msgstr "Simboliskās saites nosaukums"
+
+#: src/dialogs/symlink.tsx:180
+msgid "Type"
+msgstr "Tips"
+
+#: src/dialogs/symlink.tsx:184
+msgid "Absolute vs. Relative"
+msgstr "Absolūtā vai relatīvā"
+
+#: src/dialogs/symlink.tsx:188
+msgid ""
+"Absolute symlinks are ideal when referring to files or directories that "
+"won't move, such as system files."
+msgstr ""
+"Absolūtās simboliskās saites ir ideālas, ja tās norāda uz failiem vai "
+"direktorijām, kas netiks pārvietotas, piemēram, sistēmas failiem."
+
+#: src/dialogs/symlink.tsx:191
+msgid ""
+"Relative symlinks are useful when both a symlink and target might move at "
+"the same time, such as when renaming or moving a parent directory."
+msgstr ""
+"Relatīvās simboliskās saites noder, ja gan simboliskā saite, gan mērķis var "
+"tikt pārvietoti vienlaikus, piemēram, pārdēvējot vai pārvietojot "
+"vecākdirektoriju."
+
+#: src/dialogs/symlink.tsx:202
+msgid "Absolute"
+msgstr "Absolūtā"
+
+#: src/dialogs/symlink.tsx:209
+msgid "Relative"
+msgstr "Relatīvā"
+
+#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:250
+#: src/dialogs/editor.tsx:307
+msgid "Overwrite"
+msgstr "Pārrakstīt"
+
+#: src/dialogs/rename.tsx:91
+msgid "New filename"
+msgstr "Jaunais faila nosaukums"
+
+#: src/dialogs/rename.tsx:91
+msgid "New name"
+msgstr "Jaunais nosaukums"
+
+#: src/dialogs/rename.tsx:101
+msgid "Rename $0?"
+msgstr "Pārdēvēt $0?"
+
+#: src/dialogs/mkdir.tsx:31
+msgid "Directory name cannot be empty"
+msgstr "Direktorijas nosaukums nevar būt tukšs"
+
+#: src/dialogs/mkdir.tsx:33
+msgid "Directory name too long"
+msgstr "Direktorijas nosaukums ir pārāk garš"
+
+#: src/dialogs/mkdir.tsx:35
+msgid "Directory name cannot include a /"
+msgstr "Direktorijas nosaukumā nedrīkst būt /"
+
+#: src/dialogs/mkdir.tsx:96
+msgid "Directory name"
+msgstr "Direktorijas nosaukums"
+
+#: src/dialogs/mkdir.tsx:110
+msgid "Directory owner"
+msgstr "Direktorijas īpašnieks"
+
+#: src/dialogs/mkdir.tsx:135 src/dialogs/create-file.tsx:208
+msgid "Create"
+msgstr "Izveidot"
+
+#: src/dialogs/copyPasteOwnership.tsx:110
+msgid "(original owner)"
+msgstr "(sākotnējais īpašnieks)"
+
+#: src/dialogs/copyPasteOwnership.tsx:119
+msgid "keep original owners"
+msgstr "saglabāt sākotnējos īpašniekus"
+
+#: src/dialogs/copyPasteOwnership.tsx:182
+msgid "Paste as owner"
+msgstr "Ielīmēt kā īpašnieks"
+
+#: src/dialogs/copyPasteOwnership.tsx:187
+msgid ""
+"Files being pasted have a different owner. By default, ownership will be "
+"changed to match the destination directory."
+msgstr ""
+"Ielīmējamajiem failiem ir cits īpašnieks. Pēc noklusējuma īpašumtiesības "
+"tiks mainītas atbilstoši mērķa direktorijai."
+
+#: src/dialogs/copyPasteOwnership.tsx:190
+msgid "New owner"
+msgstr "Jaunais īpašnieks"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:270
+msgid "Close"
+msgstr "Aizvērt"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:55
+msgid "Go up a directory"
+msgstr "Uz augšu par vienu direktoriju"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:61
+msgid "Go back"
+msgstr "Atpakaļ"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:67
+msgid "Go forward"
+msgstr "Uz priekšu"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:73
+#: src/dialogs/keyboardShortcutsHelp.tsx:79
+msgid "Activate selected item, enter directory"
+msgstr "Aktivizēt atlasīto vienumu, ieiet direktorijā"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:95
+msgid "Rename selected file or directory"
+msgstr "Pārdēvēt atlasīto failu vai direktoriju"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:102
+msgid "Create new directory"
+msgstr "Izveidot jaunu direktoriju"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:108
+msgid "Copy selected file or directory"
+msgstr "Kopēt atlasīto failu vai direktoriju"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:114
+msgid "Paste file or directory"
+msgstr "Ielīmēt failu vai direktoriju"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:120
+msgid "Select all"
+msgstr "Atlasīt visas"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:131
+msgid "Save current file"
+msgstr "Saglabāt pašreizējo failu"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:135
+msgid "Close editor"
+msgstr "Aizvērt redaktoru"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:148
+msgid "Keyboard shortcuts"
+msgstr "Īsinājumtaustiņi"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:152
+msgid "Navigation"
+msgstr "Navigācija"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:162
+msgid "Editing"
+msgstr "Rediģēšana"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:172
+msgid "Editor"
+msgstr "Redaktors"
+
+#: src/dialogs/editor.tsx:48 src/dialogs/editor.tsx:221
+msgid "The file has been removed on disk"
+msgstr "Fails ir noņemts no diska"
+
+#: src/dialogs/editor.tsx:50
+msgid "The existing file changed unexpectedly"
+msgstr "Esošais fails negaidīti mainījās"
+
+#. Translators: This is the title of a modal dialog.  $0 represents a filename.
+#: src/dialogs/editor.tsx:187
+msgid "Edit $0"
+msgstr "Rediģēt $0"
+
+#: src/dialogs/editor.tsx:187
+msgid "View $0"
+msgstr "Skatīt $0"
+
+#: src/dialogs/editor.tsx:222
+msgid "The file has changed on disk"
+msgstr "Fails diskā ir mainījies"
+
+#: src/dialogs/editor.tsx:227
+msgid "Reload"
+msgstr "Pārlādēt"
+
+#: src/dialogs/editor.tsx:230
+msgid "Ignore"
+msgstr "Ignorēt"
+
+#: src/dialogs/editor.tsx:264 src/dialogs/editor.tsx:321
+msgid "Save"
+msgstr "Saglabāt"
+
+#: src/dialogs/editor.tsx:281
+msgid "Save changes?"
+msgstr "Saglabāt izmaiņas?"
+
+#: src/dialogs/editor.tsx:290
+msgid "The file was deleted after it was opened, saving will recreate it."
+msgstr ""
+"Fails tika izdzēsts pēc tā atvēršanas; saglabājot tas tiks izveidots no "
+"jauna."
+
+#: src/dialogs/editor.tsx:291
+msgid "The file has changed on disk between when it was opened and now"
+msgstr "Fails diskā ir mainījies kopš tā atvēršanas"
+
+#: src/dialogs/editor.tsx:296
+msgid "$0 has unsaved changes and which will be permanently lost if discarded."
+msgstr ""
+"$0 ir nesaglabātas izmaiņas, kas tiks neatgriezeniski zaudētas, ja tās "
+"atmetīsiet."
+
+#: src/dialogs/editor.tsx:329
+msgid "Discard"
+msgstr "Atmest"
+
+#: src/dialogs/create-file.tsx:163
+msgid "File name"
+msgstr "Faila nosaukums"
+
+#: src/dialogs/create-file.tsx:228
+msgid "Cannot create file in current directory"
+msgstr "Pašreizējā direktorijā nevar izveidot failu"
+
+#: src/dialogs/create-file.tsx:230
+msgid "Permission denied"
+msgstr "Atļauja liegta"
+
+#: src/manifest.json:0
+msgid "File browser"
+msgstr "Failu pārlūks"
+
+#: src/manifest.json:0
+msgid "files"
+msgstr "faili"
+
+#: src/manifest.json:0
+msgid "explorer"
+msgstr "pārlūks"
+
+#: src/manifest.json:0
+msgid "filesystem"
+msgstr "failu sistēma"
+
+#: org.cockpit_project.files.metainfo.xml:5
+msgid "Files"
+msgstr "Faili"
+
+#: org.cockpit_project.files.metainfo.xml:6
+msgid "Manage your files"
+msgstr "Pārvaldiet savus failus"
+
+#: org.cockpit_project.files.metainfo.xml:8
+msgid ""
+"A file system UI for Cockpit. You can browse directories, upload and "
+"download files, and change their properties. It also includes a simple file "
+"editor."
+msgstr ""
+"Cockpit failu sistēmas saskarne. Varat pārlūkot direktorijas, augšupielādēt "
+"un lejupielādēt failus un mainīt to īpašības. Ietverts arī vienkāršs failu "
+"redaktors."
+
+#: org.cockpit_project.files.metainfo.xml:21
+msgid "Cockpit Project"
+msgstr "Cockpit projekts"
