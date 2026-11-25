@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-23 07:56+0000\n"
+"POT-Creation-Date: 2026-11-22 10:16+0000\n"
 "PO-Revision-Date: 2026-05-07 03:59+0000\n"
 "Last-Translator: Bone NI <bounkirdni@gmail.com>\n"
 "Language-Team: Lao <https://translate.fedoraproject.org/projects/cockpit/"
@@ -30,53 +30,65 @@ msgstr ""
 msgid "Cockpit Files"
 msgstr "Cockpit Files"
 
-#: src/files-breadcrumbs.tsx:46
-msgid "Home"
-msgstr "ໜ້າຫຼັກ (Home)"
+#: src/files-card-body.tsx:506
+msgid "No matching results"
+msgstr "ບໍ່ພົບຜົນລັບທີ່ກົງກັນ"
 
-#: src/files-breadcrumbs.tsx:94
-msgid "Unable to create bookmark directory"
-msgstr "ບໍ່ສາມາດສ້າງໄດເຣັກທໍຣີບຸກມາກໄດ້"
+#: src/files-card-body.tsx:507
+msgid "Clear filter"
+msgstr "ລຶບຕົວຕອງ"
 
-#: src/files-breadcrumbs.tsx:117
-msgid "Unable to save bookmark file"
-msgstr "ບໍ່ສາມາດບັນທຶກໄຟລ໌ບຸກມາກໄດ້"
+#: src/files-card-body.tsx:514
+msgid "Directory is empty"
+msgstr "ໄດເຣັກທໍຣີວ່າງເປົ່າ"
 
-#: src/files-breadcrumbs.tsx:139
-msgid "Remove from bookmarks"
-msgstr "ລຶບອອກຈາກບຸກມາກ"
+#: src/files-card-body.tsx:519
+msgid "$0 item is hidden"
+msgid_plural "$0 items are hidden"
+msgstr[0] "$0 ລາຍການຖືກເຊື່ອງໄວ້"
 
-#: src/files-breadcrumbs.tsx:141
-msgid "Add to bookmarks"
-msgstr "ເພີ່ມເຂົ້າໃນບຸກມາກ"
+#: src/files-card-body.tsx:522 src/header.tsx:271
+msgid "Show hidden items"
+msgstr "ສະແດງລາຍການທີ່ຖືກເຊື່ອງ"
 
-#: src/files-breadcrumbs.tsx:154
-msgid "Bookmarks"
-msgstr "ບຸກມາກ"
-
-#: src/files-breadcrumbs.tsx:161
-#, fuzzy
-#| msgid "Bookmarks"
-msgid "Bookmarked"
-msgstr "ບຸກມາກ"
-
-#: src/files-breadcrumbs.tsx:161
-#, fuzzy
-#| msgid "Add to bookmarks"
-msgid "Not bookmarked"
-msgstr "ເພີ່ມເຂົ້າໃນບຸກມາກ"
-
-#: src/files-breadcrumbs.tsx:236
-msgid "Filesystem"
-msgstr "ລະບົບໄຟລ໌"
-
-#: src/files-breadcrumbs.tsx:303 src/dialogs/keyboardShortcutsHelp.tsx:87
-msgid "Edit path"
-msgstr "ແກ້ໄຂເສັ້ນທາງ (Path)"
-
-#: src/header.tsx:53 src/files-card-body.tsx:534
+#: src/files-card-body.tsx:534 src/header.tsx:53
 msgid "Name"
 msgstr "ຊື່"
+
+#: src/files-card-body.tsx:535 src/files-card-body.tsx:652 src/header.tsx:64
+msgid "Size"
+msgstr "ຂະໜາດ"
+
+#: src/files-card-body.tsx:539 src/files-card-body.tsx:659 src/header.tsx:75
+msgid "Modified"
+msgstr "ແກ້ໄຂເມື່ອ"
+
+#: src/files-card-body.tsx:544 src/files-card-body.tsx:591
+#: src/files-card-body.tsx:667 src/header.tsx:86 src/files-footer-detail.tsx:80
+#: src/dialogs/permissions.tsx:319 src/dialogs/create-file.tsx:185
+msgid "Owner"
+msgstr "ເຈົ້າຂອງ"
+
+#: src/files-card-body.tsx:549 src/files-card-body.tsx:674 src/header.tsx:97
+msgid "Permissions"
+msgstr "ການອະນຸຍາດ"
+
+#: src/files-card-body.tsx:578
+msgid "Folder"
+msgstr "ໂຟນເດີ"
+
+#: src/files-card-body.tsx:580
+msgid "File"
+msgstr "ໄຟລ໌"
+
+#: src/files-card-body.tsx:591 src/files-footer-detail.tsx:80
+#: src/files-footer-detail.tsx:152 src/dialogs/permissions.tsx:334
+msgid "Group"
+msgstr "ກຸ່ມ"
+
+#: src/files-card-body.tsx:591 src/files-footer-detail.tsx:80
+msgid "Others"
+msgstr "ອື່ນໆ"
 
 #: src/header.tsx:56
 msgid "A-Z"
@@ -86,10 +98,6 @@ msgstr "A-Z"
 msgid "Z-A"
 msgstr "Z-A"
 
-#: src/header.tsx:64 src/files-card-body.tsx:535 src/files-card-body.tsx:652
-msgid "Size"
-msgstr "ຂະໜາດ"
-
 #: src/header.tsx:67
 msgid "Largest size"
 msgstr "ຂະໜາດໃຫຍ່ທີ່ສຸດ"
@@ -97,10 +105,6 @@ msgstr "ຂະໜາດໃຫຍ່ທີ່ສຸດ"
 #: src/header.tsx:71
 msgid "Smallest size"
 msgstr "ຂະໜາດນ້ອຍທີ່ສຸດ"
-
-#: src/header.tsx:75 src/files-card-body.tsx:539 src/files-card-body.tsx:659
-msgid "Modified"
-msgstr "ແກ້ໄຂເມື່ອ"
 
 #: src/header.tsx:78
 msgid "First modified"
@@ -110,13 +114,6 @@ msgstr "ແກ້ໄຂຄັ້ງທຳອິດ"
 msgid "Last modified"
 msgstr "ແກ້ໄຂຫຼ້າສຸດ"
 
-#: src/header.tsx:86 src/dialogs/permissions.tsx:319
-#: src/dialogs/create-file.tsx:185 src/files-card-body.tsx:544
-#: src/files-card-body.tsx:591 src/files-card-body.tsx:667
-#: src/files-footer-detail.tsx:80
-msgid "Owner"
-msgstr "ເຈົ້າຂອງ"
-
 #: src/header.tsx:89
 msgid "Owner ascending"
 msgstr "ເຈົ້າຂອງ (ນ້ອຍໄປຫາຫຼາຍ)"
@@ -124,10 +121,6 @@ msgstr "ເຈົ້າຂອງ (ນ້ອຍໄປຫາຫຼາຍ)"
 #: src/header.tsx:93
 msgid "Owner descending"
 msgstr "ເຈົ້າຂອງ (ຫຼາຍໄປຫານ້ອຍ)"
-
-#: src/header.tsx:97 src/files-card-body.tsx:549 src/files-card-body.tsx:674
-msgid "Permissions"
-msgstr "ການອະນຸຍາດ"
 
 #: src/header.tsx:100
 msgid "Most permissive"
@@ -161,9 +154,21 @@ msgstr "ຈັດລຽງ"
 msgid "Hide hidden items"
 msgstr "ເຊື່ອງລາຍການທີ່ຖືກເຊື່ອງ"
 
-#: src/header.tsx:271 src/files-card-body.tsx:522
-msgid "Show hidden items"
-msgstr "ສະແດງລາຍການທີ່ຖືກເຊື່ອງ"
+#: src/files-footer-detail.tsx:36
+msgid "$0 files selected"
+msgstr "ເລືອກແລ້ວ $0 ໄຟລ໌"
+
+#: src/files-footer-detail.tsx:64
+msgid "Directory contains $0 directories, $1 files"
+msgstr "ໄດເຣັກທໍຣີປະກອບມີ $0 ໄດເຣັກທໍຣີ, $1 ໄຟລ໌"
+
+#: src/files-footer-detail.tsx:65
+msgid "Directory contains $0 directories, $1 files, $2 hidden"
+msgstr "ໄດເຣັກທໍຣີປະກອບມີ $0 ໄດເຣັກທໍຣີ, $1 ໄຟລ໌, ເຊື່ອງໄວ້ $2"
+
+#: src/files-footer-detail.tsx:144
+msgid "User"
+msgstr "ຜູ້ໃຊ້"
 
 #: src/upload-button.tsx:56
 msgid "$0 files"
@@ -204,10 +209,10 @@ msgid "Keep original"
 msgstr "ຮັກສາແບບເດີມໄວ້"
 
 #: src/upload-button.tsx:146 src/dialogs/delete.tsx:97
-#: src/dialogs/permissions.tsx:424 src/dialogs/copyPasteOwnership.tsx:170
-#: src/dialogs/rename.tsx:87 src/dialogs/symlink.tsx:233
-#: src/dialogs/editor.tsx:270 src/dialogs/editor.tsx:336
-#: src/dialogs/create-file.tsx:211 src/dialogs/mkdir.tsx:137
+#: src/dialogs/permissions.tsx:424 src/dialogs/symlink.tsx:233
+#: src/dialogs/rename.tsx:87 src/dialogs/mkdir.tsx:137
+#: src/dialogs/copyPasteOwnership.tsx:170 src/dialogs/editor.tsx:270
+#: src/dialogs/editor.tsx:336 src/dialogs/create-file.tsx:211
 msgid "Cancel"
 msgstr "ຍົກເລີກ"
 
@@ -404,72 +409,49 @@ msgstr "ວາງໄຟລ໌ເພື່ອອັບໂຫຼດ"
 msgid "Cannot drop files, another upload is already in progress"
 msgstr "ບໍ່ສາມາດວາງໄຟລ໌ໄດ້, ກຳລັງມີການອັບໂຫຼດອື່ນດຳເນີນການຢູ່"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:270
-msgid "Close"
-msgstr "ປິດ"
+#: src/files-breadcrumbs.tsx:46
+msgid "Home"
+msgstr "ໜ້າຫຼັກ (Home)"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:55
-msgid "Go up a directory"
-msgstr "ຂຶ້ນໄປໜຶ່ງໄດເຣັກທໍຣີ"
+#: src/files-breadcrumbs.tsx:94
+msgid "Unable to create bookmark directory"
+msgstr "ບໍ່ສາມາດສ້າງໄດເຣັກທໍຣີບຸກມາກໄດ້"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:61
-msgid "Go back"
-msgstr "ກັບຄືນ"
+#: src/files-breadcrumbs.tsx:117
+msgid "Unable to save bookmark file"
+msgstr "ບໍ່ສາມາດບັນທຶກໄຟລ໌ບຸກມາກໄດ້"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:67
-msgid "Go forward"
-msgstr "ໄປຂ້າງໜ້າ"
+#: src/files-breadcrumbs.tsx:139
+msgid "Remove from bookmarks"
+msgstr "ລຶບອອກຈາກບຸກມາກ"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:73
-#: src/dialogs/keyboardShortcutsHelp.tsx:79
-msgid "Activate selected item, enter directory"
-msgstr "ເປີດໃຊ້ລາຍການທີ່ເລືອກ, ເຂົ້າສູ່ໄດເຣັກທໍຣີ"
+#: src/files-breadcrumbs.tsx:141
+msgid "Add to bookmarks"
+msgstr "ເພີ່ມເຂົ້າໃນບຸກມາກ"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:95
-msgid "Rename selected file or directory"
-msgstr "ປ່ຽນຊື່ໄຟລ໌ ຫຼື ໄດເຣັກທໍຣີທີ່ເລືອກ"
+#: src/files-breadcrumbs.tsx:154
+msgid "Bookmarks"
+msgstr "ບຸກມາກ"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:102
-msgid "Create new directory"
-msgstr "ສ້າງໄດເຣັກທໍຣີໃໝ່"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:108
-msgid "Copy selected file or directory"
-msgstr "ກັອບປີ້ໄຟລ໌ ຫຼື ໄດເຣັກທໍຣີທີ່ເລືອກ"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:114
-msgid "Paste file or directory"
-msgstr "ວາງໄຟລ໌ ຫຼື ໄດເຣັກທໍຣີ"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:120
-msgid "Select all"
-msgstr "ເລືອກທັງໝົດ"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:131
-msgid "Save current file"
-msgstr ""
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:135
-msgid "Close editor"
-msgstr ""
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:148
-msgid "Keyboard shortcuts"
-msgstr "ຄີລັດຄີບອດ"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:152
-msgid "Navigation"
-msgstr "ການນຳທາງ"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:162
-msgid "Editing"
-msgstr "ກຳລັງແກ້ໄຂ"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:172
+#: src/files-breadcrumbs.tsx:161
 #, fuzzy
-#| msgid "Edit $0"
-msgid "Editor"
-msgstr "ແກ້ໄຂ $0"
+#| msgid "Bookmarks"
+msgid "Bookmarked"
+msgstr "ບຸກມາກ"
+
+#: src/files-breadcrumbs.tsx:161
+#, fuzzy
+#| msgid "Add to bookmarks"
+msgid "Not bookmarked"
+msgstr "ເພີ່ມເຂົ້າໃນບຸກມາກ"
+
+#: src/files-breadcrumbs.tsx:236
+msgid "Filesystem"
+msgstr "ລະບົບໄຟລ໌"
+
+#: src/files-breadcrumbs.tsx:303 src/dialogs/keyboardShortcutsHelp.tsx:87
+msgid "Edit path"
+msgstr "ແກ້ໄຂເສັ້ນທາງ (Path)"
 
 #: src/dialogs/delete.tsx:34
 msgid "Force delete $0 items"
@@ -539,11 +521,6 @@ msgstr "ການອະນຸຍາດສຳລັບ $0 ໄຟລ໌"
 msgid "Ownership"
 msgstr "ຄວາມເປັນເຈົ້າຂອງ"
 
-#: src/dialogs/permissions.tsx:334 src/files-card-body.tsx:591
-#: src/files-footer-detail.tsx:80 src/files-footer-detail.tsx:152
-msgid "Group"
-msgstr "ກຸ່ມ"
-
 #: src/dialogs/permissions.tsx:351
 msgid "Access"
 msgstr "ການເຂົ້າເຖິງ"
@@ -575,47 +552,6 @@ msgstr "ປ່ຽນ"
 #: src/dialogs/permissions.tsx:422
 msgid "Change permissions for enclosed files"
 msgstr "ປ່ຽນການອະນຸຍາດສຳລັບໄຟລ໌ທີ່ຢູ່ພາຍໃນ"
-
-#: src/dialogs/copyPasteOwnership.tsx:110
-msgid "(original owner)"
-msgstr "(ເຈົ້າຂອງເດີມ)"
-
-#: src/dialogs/copyPasteOwnership.tsx:119
-msgid "keep original owners"
-msgstr "ຮັກສາເຈົ້າຂອງເດີມໄວ້"
-
-#: src/dialogs/copyPasteOwnership.tsx:182
-msgid "Paste as owner"
-msgstr "ວາງໃນຖານະເຈົ້າຂອງ"
-
-#: src/dialogs/copyPasteOwnership.tsx:187
-msgid ""
-"Files being pasted have a different owner. By default, ownership will be "
-"changed to match the destination directory."
-msgstr ""
-"ໄຟລ໌ທີ່ກຳລັງວາງມີເຈົ້າຂອງທີ່ແຕກຕ່າງກັນ. ໂດຍຄ່າເລີ່ມຕົ້ນ, "
-"ຄວາມເປັນເຈົ້າຂອງຈະຖືກປ່ຽນໃຫ້ກົງກັບໄດເຣັກທໍຣີປາຍທາງ."
-
-#: src/dialogs/copyPasteOwnership.tsx:190
-msgid "New owner"
-msgstr "ເຈົ້າຂອງໃໝ່"
-
-#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:250
-#: src/dialogs/editor.tsx:307
-msgid "Overwrite"
-msgstr "ຂຽນທັບ"
-
-#: src/dialogs/rename.tsx:91
-msgid "New filename"
-msgstr "ຊື່ໄຟລ໌ໃໝ່"
-
-#: src/dialogs/rename.tsx:91
-msgid "New name"
-msgstr "ຊື່ໃໝ່"
-
-#: src/dialogs/rename.tsx:101
-msgid "Rename $0?"
-msgstr "ປ່ຽນຊື່ $0 ບໍ່?"
 
 #: src/dialogs/symlink.tsx:53
 msgid "link to $0"
@@ -664,6 +600,138 @@ msgstr "ສົມບູນ (Absolute)"
 #: src/dialogs/symlink.tsx:209
 msgid "Relative"
 msgstr "ແບບສຳພັດ (Relative)"
+
+#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:250
+#: src/dialogs/editor.tsx:307
+msgid "Overwrite"
+msgstr "ຂຽນທັບ"
+
+#: src/dialogs/rename.tsx:91
+msgid "New filename"
+msgstr "ຊື່ໄຟລ໌ໃໝ່"
+
+#: src/dialogs/rename.tsx:91
+msgid "New name"
+msgstr "ຊື່ໃໝ່"
+
+#: src/dialogs/rename.tsx:101
+msgid "Rename $0?"
+msgstr "ປ່ຽນຊື່ $0 ບໍ່?"
+
+#: src/dialogs/mkdir.tsx:31
+msgid "Directory name cannot be empty"
+msgstr "ຊື່ໄດເຣັກທໍຣີບໍ່ສາມາດວ່າງເປົ່າໄດ້"
+
+#: src/dialogs/mkdir.tsx:33
+msgid "Directory name too long"
+msgstr "ຊື່ໄດເຣັກທໍຣີຍາວເກີນໄປ"
+
+#: src/dialogs/mkdir.tsx:35
+msgid "Directory name cannot include a /"
+msgstr "ຊື່ໄດເຣັກທໍຣີບໍ່ສາມາດມີເຄື່ອງໝາຍ /"
+
+#: src/dialogs/mkdir.tsx:96
+msgid "Directory name"
+msgstr "ຊື່ໄດເຣັກທໍຣີ"
+
+#: src/dialogs/mkdir.tsx:110
+msgid "Directory owner"
+msgstr "ເຈົ້າຂອງໄດເຣັກທໍຣີ"
+
+#: src/dialogs/mkdir.tsx:135 src/dialogs/create-file.tsx:208
+msgid "Create"
+msgstr "ສ້າງ"
+
+#: src/dialogs/copyPasteOwnership.tsx:110
+msgid "(original owner)"
+msgstr "(ເຈົ້າຂອງເດີມ)"
+
+#: src/dialogs/copyPasteOwnership.tsx:119
+msgid "keep original owners"
+msgstr "ຮັກສາເຈົ້າຂອງເດີມໄວ້"
+
+#: src/dialogs/copyPasteOwnership.tsx:182
+msgid "Paste as owner"
+msgstr "ວາງໃນຖານະເຈົ້າຂອງ"
+
+#: src/dialogs/copyPasteOwnership.tsx:187
+msgid ""
+"Files being pasted have a different owner. By default, ownership will be "
+"changed to match the destination directory."
+msgstr ""
+"ໄຟລ໌ທີ່ກຳລັງວາງມີເຈົ້າຂອງທີ່ແຕກຕ່າງກັນ. ໂດຍຄ່າເລີ່ມຕົ້ນ, "
+"ຄວາມເປັນເຈົ້າຂອງຈະຖືກປ່ຽນໃຫ້ກົງກັບໄດເຣັກທໍຣີປາຍທາງ."
+
+#: src/dialogs/copyPasteOwnership.tsx:190
+msgid "New owner"
+msgstr "ເຈົ້າຂອງໃໝ່"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:270
+msgid "Close"
+msgstr "ປິດ"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:55
+msgid "Go up a directory"
+msgstr "ຂຶ້ນໄປໜຶ່ງໄດເຣັກທໍຣີ"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:61
+msgid "Go back"
+msgstr "ກັບຄືນ"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:67
+msgid "Go forward"
+msgstr "ໄປຂ້າງໜ້າ"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:73
+#: src/dialogs/keyboardShortcutsHelp.tsx:79
+msgid "Activate selected item, enter directory"
+msgstr "ເປີດໃຊ້ລາຍການທີ່ເລືອກ, ເຂົ້າສູ່ໄດເຣັກທໍຣີ"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:95
+msgid "Rename selected file or directory"
+msgstr "ປ່ຽນຊື່ໄຟລ໌ ຫຼື ໄດເຣັກທໍຣີທີ່ເລືອກ"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:102
+msgid "Create new directory"
+msgstr "ສ້າງໄດເຣັກທໍຣີໃໝ່"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:108
+msgid "Copy selected file or directory"
+msgstr "ກັອບປີ້ໄຟລ໌ ຫຼື ໄດເຣັກທໍຣີທີ່ເລືອກ"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:114
+msgid "Paste file or directory"
+msgstr "ວາງໄຟລ໌ ຫຼື ໄດເຣັກທໍຣີ"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:120
+msgid "Select all"
+msgstr "ເລືອກທັງໝົດ"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:131
+msgid "Save current file"
+msgstr ""
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:135
+msgid "Close editor"
+msgstr ""
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:148
+msgid "Keyboard shortcuts"
+msgstr "ຄີລັດຄີບອດ"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:152
+msgid "Navigation"
+msgstr "ການນຳທາງ"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:162
+msgid "Editing"
+msgstr "ກຳລັງແກ້ໄຂ"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:172
+#, fuzzy
+#| msgid "Edit $0"
+msgid "Editor"
+msgstr "ແກ້ໄຂ $0"
 
 #: src/dialogs/editor.tsx:48 src/dialogs/editor.tsx:221
 msgid "The file has been removed on disk"
@@ -722,10 +790,6 @@ msgstr "ຖິ້ມໄປ"
 msgid "File name"
 msgstr "ຊື່ໄຟລ໌"
 
-#: src/dialogs/create-file.tsx:208 src/dialogs/mkdir.tsx:135
-msgid "Create"
-msgstr "ສ້າງ"
-
 #: src/dialogs/create-file.tsx:228
 msgid "Cannot create file in current directory"
 msgstr "ບໍ່ສາມາດສ້າງໄຟລ໌ໃນໄດເຣັກທໍຣີປັດຈຸບັນໄດ້"
@@ -733,71 +797,6 @@ msgstr "ບໍ່ສາມາດສ້າງໄຟລ໌ໃນໄດເຣັກ
 #: src/dialogs/create-file.tsx:230
 msgid "Permission denied"
 msgstr "ການອະນຸຍາດຖືກປະຕິເສດ"
-
-#: src/dialogs/mkdir.tsx:31
-msgid "Directory name cannot be empty"
-msgstr "ຊື່ໄດເຣັກທໍຣີບໍ່ສາມາດວ່າງເປົ່າໄດ້"
-
-#: src/dialogs/mkdir.tsx:33
-msgid "Directory name too long"
-msgstr "ຊື່ໄດເຣັກທໍຣີຍາວເກີນໄປ"
-
-#: src/dialogs/mkdir.tsx:35
-msgid "Directory name cannot include a /"
-msgstr "ຊື່ໄດເຣັກທໍຣີບໍ່ສາມາດມີເຄື່ອງໝາຍ /"
-
-#: src/dialogs/mkdir.tsx:96
-msgid "Directory name"
-msgstr "ຊື່ໄດເຣັກທໍຣີ"
-
-#: src/dialogs/mkdir.tsx:110
-msgid "Directory owner"
-msgstr "ເຈົ້າຂອງໄດເຣັກທໍຣີ"
-
-#: src/files-card-body.tsx:506
-msgid "No matching results"
-msgstr "ບໍ່ພົບຜົນລັບທີ່ກົງກັນ"
-
-#: src/files-card-body.tsx:507
-msgid "Clear filter"
-msgstr "ລຶບຕົວຕອງ"
-
-#: src/files-card-body.tsx:514
-msgid "Directory is empty"
-msgstr "ໄດເຣັກທໍຣີວ່າງເປົ່າ"
-
-#: src/files-card-body.tsx:519
-msgid "$0 item is hidden"
-msgid_plural "$0 items are hidden"
-msgstr[0] "$0 ລາຍການຖືກເຊື່ອງໄວ້"
-
-#: src/files-card-body.tsx:578
-msgid "Folder"
-msgstr "ໂຟນເດີ"
-
-#: src/files-card-body.tsx:580
-msgid "File"
-msgstr "ໄຟລ໌"
-
-#: src/files-card-body.tsx:591 src/files-footer-detail.tsx:80
-msgid "Others"
-msgstr "ອື່ນໆ"
-
-#: src/files-footer-detail.tsx:36
-msgid "$0 files selected"
-msgstr "ເລືອກແລ້ວ $0 ໄຟລ໌"
-
-#: src/files-footer-detail.tsx:64
-msgid "Directory contains $0 directories, $1 files"
-msgstr "ໄດເຣັກທໍຣີປະກອບມີ $0 ໄດເຣັກທໍຣີ, $1 ໄຟລ໌"
-
-#: src/files-footer-detail.tsx:65
-msgid "Directory contains $0 directories, $1 files, $2 hidden"
-msgstr "ໄດເຣັກທໍຣີປະກອບມີ $0 ໄດເຣັກທໍຣີ, $1 ໄຟລ໌, ເຊື່ອງໄວ້ $2"
-
-#: src/files-footer-detail.tsx:144
-msgid "User"
-msgstr "ຜູ້ໃຊ້"
 
 #: src/manifest.json:0
 msgid "File browser"

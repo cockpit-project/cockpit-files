@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-23 07:56+0000\n"
+"POT-Creation-Date: 2026-11-22 10:16+0000\n"
 "PO-Revision-Date: 2026-09-15 09:17+0000\n"
 "Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
 "memory@weblate.org>\n"
@@ -31,49 +31,66 @@ msgstr ""
 msgid "Cockpit Files"
 msgstr "File di Cockpit"
 
-#: src/files-breadcrumbs.tsx:46
-msgid "Home"
-msgstr "Home"
+#: src/files-card-body.tsx:506
+msgid "No matching results"
+msgstr "Nessun risultato corrispondente"
 
-#: src/files-breadcrumbs.tsx:94
-msgid "Unable to create bookmark directory"
-msgstr "Impossibile creare la cartella dei segnalibri"
+#: src/files-card-body.tsx:507
+msgid "Clear filter"
+msgstr "Cancella filtro"
 
-#: src/files-breadcrumbs.tsx:117
-msgid "Unable to save bookmark file"
-msgstr "Impossibile salvare il file dei segnalibri"
+#: src/files-card-body.tsx:514
+msgid "Directory is empty"
+msgstr "La cartella è vuota"
 
-#: src/files-breadcrumbs.tsx:139
-msgid "Remove from bookmarks"
-msgstr "Rimuovi dai segnalibri"
+#: src/files-card-body.tsx:519
+msgid "$0 item is hidden"
+msgid_plural "$0 items are hidden"
+msgstr[0] "$0 l'elemento è nascosto"
+msgstr[1] "$0 gli elementi sono nascosti"
 
-#: src/files-breadcrumbs.tsx:141
-msgid "Add to bookmarks"
-msgstr "Aggiungi ai segnalibri"
+#: src/files-card-body.tsx:522 src/header.tsx:271
+msgid "Show hidden items"
+msgstr "Mostra elementi nascosti"
 
-#: src/files-breadcrumbs.tsx:154
-msgid "Bookmarks"
-msgstr "Segnalibri"
-
-#: src/files-breadcrumbs.tsx:161
-msgid "Bookmarked"
-msgstr "Segnalibro aggiunto"
-
-#: src/files-breadcrumbs.tsx:161
-msgid "Not bookmarked"
-msgstr "Segnalibro non aggiunto"
-
-#: src/files-breadcrumbs.tsx:236
-msgid "Filesystem"
-msgstr "File system"
-
-#: src/files-breadcrumbs.tsx:303 src/dialogs/keyboardShortcutsHelp.tsx:87
-msgid "Edit path"
-msgstr "Modifica percorso"
-
-#: src/header.tsx:53 src/files-card-body.tsx:534
+#: src/files-card-body.tsx:534 src/header.tsx:53
 msgid "Name"
 msgstr "Nome"
+
+#: src/files-card-body.tsx:535 src/files-card-body.tsx:652 src/header.tsx:64
+msgid "Size"
+msgstr "Dimensione"
+
+#: src/files-card-body.tsx:539 src/files-card-body.tsx:659 src/header.tsx:75
+msgid "Modified"
+msgstr "Modificati"
+
+#: src/files-card-body.tsx:544 src/files-card-body.tsx:591
+#: src/files-card-body.tsx:667 src/header.tsx:86 src/files-footer-detail.tsx:80
+#: src/dialogs/permissions.tsx:319 src/dialogs/create-file.tsx:185
+msgid "Owner"
+msgstr "Proprietario"
+
+#: src/files-card-body.tsx:549 src/files-card-body.tsx:674 src/header.tsx:97
+msgid "Permissions"
+msgstr "permessi"
+
+#: src/files-card-body.tsx:578
+msgid "Folder"
+msgstr "Cartella"
+
+#: src/files-card-body.tsx:580
+msgid "File"
+msgstr "File"
+
+#: src/files-card-body.tsx:591 src/files-footer-detail.tsx:80
+#: src/files-footer-detail.tsx:152 src/dialogs/permissions.tsx:334
+msgid "Group"
+msgstr "Gruppo"
+
+#: src/files-card-body.tsx:591 src/files-footer-detail.tsx:80
+msgid "Others"
+msgstr "Altri"
 
 #: src/header.tsx:56
 msgid "A-Z"
@@ -83,10 +100,6 @@ msgstr "A-Z"
 msgid "Z-A"
 msgstr "Z-A"
 
-#: src/header.tsx:64 src/files-card-body.tsx:535 src/files-card-body.tsx:652
-msgid "Size"
-msgstr "Dimensione"
-
 #: src/header.tsx:67
 msgid "Largest size"
 msgstr "Dimensione maggiore"
@@ -94,10 +107,6 @@ msgstr "Dimensione maggiore"
 #: src/header.tsx:71
 msgid "Smallest size"
 msgstr "Dimensione minima"
-
-#: src/header.tsx:75 src/files-card-body.tsx:539 src/files-card-body.tsx:659
-msgid "Modified"
-msgstr "Modificati"
 
 #: src/header.tsx:78
 msgid "First modified"
@@ -107,13 +116,6 @@ msgstr "Prima modifica"
 msgid "Last modified"
 msgstr "Ultima modifica"
 
-#: src/header.tsx:86 src/dialogs/permissions.tsx:319
-#: src/dialogs/create-file.tsx:185 src/files-card-body.tsx:544
-#: src/files-card-body.tsx:591 src/files-card-body.tsx:667
-#: src/files-footer-detail.tsx:80
-msgid "Owner"
-msgstr "Proprietario"
-
 #: src/header.tsx:89
 msgid "Owner ascending"
 msgstr "Proprietario crescente"
@@ -121,10 +123,6 @@ msgstr "Proprietario crescente"
 #: src/header.tsx:93
 msgid "Owner descending"
 msgstr "Proprietario decrescente"
-
-#: src/header.tsx:97 src/files-card-body.tsx:549 src/files-card-body.tsx:674
-msgid "Permissions"
-msgstr "permessi"
 
 #: src/header.tsx:100
 msgid "Most permissive"
@@ -158,9 +156,21 @@ msgstr "ordina"
 msgid "Hide hidden items"
 msgstr "Nascondi elementi nascosti"
 
-#: src/header.tsx:271 src/files-card-body.tsx:522
-msgid "Show hidden items"
-msgstr "Mostra elementi nascosti"
+#: src/files-footer-detail.tsx:36
+msgid "$0 files selected"
+msgstr "$0 file selezionati"
+
+#: src/files-footer-detail.tsx:64
+msgid "Directory contains $0 directories, $1 files"
+msgstr "La cartella contiene $0 cartelle, $1 file"
+
+#: src/files-footer-detail.tsx:65
+msgid "Directory contains $0 directories, $1 files, $2 hidden"
+msgstr "La cartella contiene $0 cartelle, $1 file, $2 nascosti"
+
+#: src/files-footer-detail.tsx:144
+msgid "User"
+msgstr "Utente"
 
 #: src/upload-button.tsx:56
 msgid "$0 files"
@@ -203,10 +213,10 @@ msgid "Keep original"
 msgstr "Mantieni originale"
 
 #: src/upload-button.tsx:146 src/dialogs/delete.tsx:97
-#: src/dialogs/permissions.tsx:424 src/dialogs/copyPasteOwnership.tsx:170
-#: src/dialogs/rename.tsx:87 src/dialogs/symlink.tsx:233
-#: src/dialogs/editor.tsx:270 src/dialogs/editor.tsx:336
-#: src/dialogs/create-file.tsx:211 src/dialogs/mkdir.tsx:137
+#: src/dialogs/permissions.tsx:424 src/dialogs/symlink.tsx:233
+#: src/dialogs/rename.tsx:87 src/dialogs/mkdir.tsx:137
+#: src/dialogs/copyPasteOwnership.tsx:170 src/dialogs/editor.tsx:270
+#: src/dialogs/editor.tsx:336 src/dialogs/create-file.tsx:211
 msgid "Cancel"
 msgstr "Annulla"
 
@@ -403,70 +413,45 @@ msgstr "Trascina i file qui per caricarli"
 msgid "Cannot drop files, another upload is already in progress"
 msgstr "Impossibile rilasciare i file, un altro caricamento è già in corso"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:270
-msgid "Close"
-msgstr "Chiudi"
+#: src/files-breadcrumbs.tsx:46
+msgid "Home"
+msgstr "Home"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:55
-msgid "Go up a directory"
-msgstr "Tornare alla cartella superiore"
+#: src/files-breadcrumbs.tsx:94
+msgid "Unable to create bookmark directory"
+msgstr "Impossibile creare la cartella dei segnalibri"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:61
-msgid "Go back"
-msgstr "Va indietro"
+#: src/files-breadcrumbs.tsx:117
+msgid "Unable to save bookmark file"
+msgstr "Impossibile salvare il file dei segnalibri"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:67
-msgid "Go forward"
-msgstr "Avanti"
+#: src/files-breadcrumbs.tsx:139
+msgid "Remove from bookmarks"
+msgstr "Rimuovi dai segnalibri"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:73
-#: src/dialogs/keyboardShortcutsHelp.tsx:79
-msgid "Activate selected item, enter directory"
-msgstr "Attiva l'elemento selezionato, entra nella cartella"
+#: src/files-breadcrumbs.tsx:141
+msgid "Add to bookmarks"
+msgstr "Aggiungi ai segnalibri"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:95
-msgid "Rename selected file or directory"
-msgstr "Rinomina file o cartella selezionata"
+#: src/files-breadcrumbs.tsx:154
+msgid "Bookmarks"
+msgstr "Segnalibri"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:102
-msgid "Create new directory"
-msgstr "Crea una nuova cartella"
+#: src/files-breadcrumbs.tsx:161
+msgid "Bookmarked"
+msgstr "Segnalibro aggiunto"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:108
-msgid "Copy selected file or directory"
-msgstr "Copia i file o directory selezionati"
+#: src/files-breadcrumbs.tsx:161
+msgid "Not bookmarked"
+msgstr "Segnalibro non aggiunto"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:114
-msgid "Paste file or directory"
-msgstr "Incolla file o cartella"
+#: src/files-breadcrumbs.tsx:236
+msgid "Filesystem"
+msgstr "File system"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:120
-msgid "Select all"
-msgstr "Seleziona tutto"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:131
-msgid "Save current file"
-msgstr "Salva il file attuale"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:135
-msgid "Close editor"
-msgstr "Chiudi editor"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:148
-msgid "Keyboard shortcuts"
-msgstr "Scorciatoie da tastiera"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:152
-msgid "Navigation"
-msgstr "Navigazione"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:162
-msgid "Editing"
-msgstr "Modifica"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:172
-msgid "Editor"
-msgstr "Editor"
+#: src/files-breadcrumbs.tsx:303 src/dialogs/keyboardShortcutsHelp.tsx:87
+msgid "Edit path"
+msgstr "Modifica percorso"
 
 #: src/dialogs/delete.tsx:34
 msgid "Force delete $0 items"
@@ -536,11 +521,6 @@ msgstr "Permessi per $0 file"
 msgid "Ownership"
 msgstr "Proprietà"
 
-#: src/dialogs/permissions.tsx:334 src/files-card-body.tsx:591
-#: src/files-footer-detail.tsx:80 src/files-footer-detail.tsx:152
-msgid "Group"
-msgstr "Gruppo"
-
 #: src/dialogs/permissions.tsx:351
 msgid "Access"
 msgstr "Accesso"
@@ -572,48 +552,6 @@ msgstr "Modifica"
 #: src/dialogs/permissions.tsx:422
 msgid "Change permissions for enclosed files"
 msgstr "Modifica permessi per i file inclusi"
-
-#: src/dialogs/copyPasteOwnership.tsx:110
-msgid "(original owner)"
-msgstr "(propietario originario)"
-
-#: src/dialogs/copyPasteOwnership.tsx:119
-msgid "keep original owners"
-msgstr "mantenere i proprietari originali"
-
-#: src/dialogs/copyPasteOwnership.tsx:182
-msgid "Paste as owner"
-msgstr "Incolla come proprietario"
-
-#: src/dialogs/copyPasteOwnership.tsx:187
-msgid ""
-"Files being pasted have a different owner. By default, ownership will be "
-"changed to match the destination directory."
-msgstr ""
-"I file incollati hanno un proprietario diverso. Per impostazione "
-"predefinita, la proprietà verrà modificata per corrispondere alla cartella "
-"di destinazione."
-
-#: src/dialogs/copyPasteOwnership.tsx:190
-msgid "New owner"
-msgstr "Nuovo proprietario"
-
-#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:250
-#: src/dialogs/editor.tsx:307
-msgid "Overwrite"
-msgstr "Sovrascrivere"
-
-#: src/dialogs/rename.tsx:91
-msgid "New filename"
-msgstr "Nuovo nome file"
-
-#: src/dialogs/rename.tsx:91
-msgid "New name"
-msgstr "Nuovo nome"
-
-#: src/dialogs/rename.tsx:101
-msgid "Rename $0?"
-msgstr "Rinomina $0?"
 
 #: src/dialogs/symlink.tsx:53
 msgid "link to $0"
@@ -663,6 +601,137 @@ msgstr "Assoluto"
 #: src/dialogs/symlink.tsx:209
 msgid "Relative"
 msgstr "Relativo"
+
+#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:250
+#: src/dialogs/editor.tsx:307
+msgid "Overwrite"
+msgstr "Sovrascrivere"
+
+#: src/dialogs/rename.tsx:91
+msgid "New filename"
+msgstr "Nuovo nome file"
+
+#: src/dialogs/rename.tsx:91
+msgid "New name"
+msgstr "Nuovo nome"
+
+#: src/dialogs/rename.tsx:101
+msgid "Rename $0?"
+msgstr "Rinomina $0?"
+
+#: src/dialogs/mkdir.tsx:31
+msgid "Directory name cannot be empty"
+msgstr "Il nome della cartella non può essere vuoto"
+
+#: src/dialogs/mkdir.tsx:33
+msgid "Directory name too long"
+msgstr "Nome della cartella troppo lungo"
+
+#: src/dialogs/mkdir.tsx:35
+msgid "Directory name cannot include a /"
+msgstr "Il nome della cartella non può includere /"
+
+#: src/dialogs/mkdir.tsx:96
+msgid "Directory name"
+msgstr "Nome cartella"
+
+#: src/dialogs/mkdir.tsx:110
+msgid "Directory owner"
+msgstr "Proprietario cartella"
+
+#: src/dialogs/mkdir.tsx:135 src/dialogs/create-file.tsx:208
+msgid "Create"
+msgstr "Crea"
+
+#: src/dialogs/copyPasteOwnership.tsx:110
+msgid "(original owner)"
+msgstr "(propietario originario)"
+
+#: src/dialogs/copyPasteOwnership.tsx:119
+msgid "keep original owners"
+msgstr "mantenere i proprietari originali"
+
+#: src/dialogs/copyPasteOwnership.tsx:182
+msgid "Paste as owner"
+msgstr "Incolla come proprietario"
+
+#: src/dialogs/copyPasteOwnership.tsx:187
+msgid ""
+"Files being pasted have a different owner. By default, ownership will be "
+"changed to match the destination directory."
+msgstr ""
+"I file incollati hanno un proprietario diverso. Per impostazione "
+"predefinita, la proprietà verrà modificata per corrispondere alla cartella "
+"di destinazione."
+
+#: src/dialogs/copyPasteOwnership.tsx:190
+msgid "New owner"
+msgstr "Nuovo proprietario"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:270
+msgid "Close"
+msgstr "Chiudi"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:55
+msgid "Go up a directory"
+msgstr "Tornare alla cartella superiore"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:61
+msgid "Go back"
+msgstr "Va indietro"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:67
+msgid "Go forward"
+msgstr "Avanti"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:73
+#: src/dialogs/keyboardShortcutsHelp.tsx:79
+msgid "Activate selected item, enter directory"
+msgstr "Attiva l'elemento selezionato, entra nella cartella"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:95
+msgid "Rename selected file or directory"
+msgstr "Rinomina file o cartella selezionata"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:102
+msgid "Create new directory"
+msgstr "Crea una nuova cartella"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:108
+msgid "Copy selected file or directory"
+msgstr "Copia i file o directory selezionati"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:114
+msgid "Paste file or directory"
+msgstr "Incolla file o cartella"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:120
+msgid "Select all"
+msgstr "Seleziona tutto"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:131
+msgid "Save current file"
+msgstr "Salva il file attuale"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:135
+msgid "Close editor"
+msgstr "Chiudi editor"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:148
+msgid "Keyboard shortcuts"
+msgstr "Scorciatoie da tastiera"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:152
+msgid "Navigation"
+msgstr "Navigazione"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:162
+msgid "Editing"
+msgstr "Modifica"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:172
+msgid "Editor"
+msgstr "Editor"
 
 #: src/dialogs/editor.tsx:48 src/dialogs/editor.tsx:221
 msgid "The file has been removed on disk"
@@ -727,10 +796,6 @@ msgstr "Scarta"
 msgid "File name"
 msgstr "Nome del file"
 
-#: src/dialogs/create-file.tsx:208 src/dialogs/mkdir.tsx:135
-msgid "Create"
-msgstr "Crea"
-
 #: src/dialogs/create-file.tsx:228
 msgid "Cannot create file in current directory"
 msgstr "Impossibile creare il file nella cartella corrente"
@@ -738,72 +803,6 @@ msgstr "Impossibile creare il file nella cartella corrente"
 #: src/dialogs/create-file.tsx:230
 msgid "Permission denied"
 msgstr "Permesso negato"
-
-#: src/dialogs/mkdir.tsx:31
-msgid "Directory name cannot be empty"
-msgstr "Il nome della cartella non può essere vuoto"
-
-#: src/dialogs/mkdir.tsx:33
-msgid "Directory name too long"
-msgstr "Nome della cartella troppo lungo"
-
-#: src/dialogs/mkdir.tsx:35
-msgid "Directory name cannot include a /"
-msgstr "Il nome della cartella non può includere /"
-
-#: src/dialogs/mkdir.tsx:96
-msgid "Directory name"
-msgstr "Nome cartella"
-
-#: src/dialogs/mkdir.tsx:110
-msgid "Directory owner"
-msgstr "Proprietario cartella"
-
-#: src/files-card-body.tsx:506
-msgid "No matching results"
-msgstr "Nessun risultato corrispondente"
-
-#: src/files-card-body.tsx:507
-msgid "Clear filter"
-msgstr "Cancella filtro"
-
-#: src/files-card-body.tsx:514
-msgid "Directory is empty"
-msgstr "La cartella è vuota"
-
-#: src/files-card-body.tsx:519
-msgid "$0 item is hidden"
-msgid_plural "$0 items are hidden"
-msgstr[0] "$0 l'elemento è nascosto"
-msgstr[1] "$0 gli elementi sono nascosti"
-
-#: src/files-card-body.tsx:578
-msgid "Folder"
-msgstr "Cartella"
-
-#: src/files-card-body.tsx:580
-msgid "File"
-msgstr "File"
-
-#: src/files-card-body.tsx:591 src/files-footer-detail.tsx:80
-msgid "Others"
-msgstr "Altri"
-
-#: src/files-footer-detail.tsx:36
-msgid "$0 files selected"
-msgstr "$0 file selezionati"
-
-#: src/files-footer-detail.tsx:64
-msgid "Directory contains $0 directories, $1 files"
-msgstr "La cartella contiene $0 cartelle, $1 file"
-
-#: src/files-footer-detail.tsx:65
-msgid "Directory contains $0 directories, $1 files, $2 hidden"
-msgstr "La cartella contiene $0 cartelle, $1 file, $2 nascosti"
-
-#: src/files-footer-detail.tsx:144
-msgid "User"
-msgstr "Utente"
 
 #: src/manifest.json:0
 msgid "File browser"
