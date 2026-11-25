@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-23 07:56+0000\n"
+"POT-Creation-Date: 2026-11-22 10:16+0000\n"
 "PO-Revision-Date: 2026-06-21 14:10+0000\n"
 "Last-Translator: Burak Yavuz <hitowerdigit@hotmail.com>\n"
 "Language-Team: Turkish <https://translate.fedoraproject.org/projects/cockpit/"
@@ -30,49 +30,66 @@ msgstr ""
 msgid "Cockpit Files"
 msgstr "Cockpit Dosyalar"
 
-#: src/files-breadcrumbs.tsx:46
-msgid "Home"
-msgstr "Ev dizini"
+#: src/files-card-body.tsx:506
+msgid "No matching results"
+msgstr "Eşleşen sonuç yok"
 
-#: src/files-breadcrumbs.tsx:94
-msgid "Unable to create bookmark directory"
-msgstr "Yer işareti dizini oluşturulamıyor"
+#: src/files-card-body.tsx:507
+msgid "Clear filter"
+msgstr "Filtreyi temizle"
 
-#: src/files-breadcrumbs.tsx:117
-msgid "Unable to save bookmark file"
-msgstr "Yer işareti dosyası kaydedilemiyor"
+#: src/files-card-body.tsx:514
+msgid "Directory is empty"
+msgstr "Dizin boş"
 
-#: src/files-breadcrumbs.tsx:139
-msgid "Remove from bookmarks"
-msgstr "Yer işaretlerinden kaldır"
+#: src/files-card-body.tsx:519
+msgid "$0 item is hidden"
+msgid_plural "$0 items are hidden"
+msgstr[0] "$0 gizli öge"
+msgstr[1] "$0 gizli öge"
 
-#: src/files-breadcrumbs.tsx:141
-msgid "Add to bookmarks"
-msgstr "Yer işaretlerine ekle"
+#: src/files-card-body.tsx:522 src/header.tsx:271
+msgid "Show hidden items"
+msgstr "Gizli ögeleri göster"
 
-#: src/files-breadcrumbs.tsx:154
-msgid "Bookmarks"
-msgstr "Yer işaretleri"
-
-#: src/files-breadcrumbs.tsx:161
-msgid "Bookmarked"
-msgstr "Yer işaretlerine eklendi"
-
-#: src/files-breadcrumbs.tsx:161
-msgid "Not bookmarked"
-msgstr "Yer işaretlerine eklenmedi"
-
-#: src/files-breadcrumbs.tsx:236
-msgid "Filesystem"
-msgstr "Dosya sistemi"
-
-#: src/files-breadcrumbs.tsx:303 src/dialogs/keyboardShortcutsHelp.tsx:87
-msgid "Edit path"
-msgstr "Yolu düzenle"
-
-#: src/header.tsx:53 src/files-card-body.tsx:534
+#: src/files-card-body.tsx:534 src/header.tsx:53
 msgid "Name"
 msgstr "Ad"
+
+#: src/files-card-body.tsx:535 src/files-card-body.tsx:652 src/header.tsx:64
+msgid "Size"
+msgstr "Boyut"
+
+#: src/files-card-body.tsx:539 src/files-card-body.tsx:659 src/header.tsx:75
+msgid "Modified"
+msgstr "Değiştirilme"
+
+#: src/files-card-body.tsx:544 src/files-card-body.tsx:591
+#: src/files-card-body.tsx:667 src/header.tsx:86 src/files-footer-detail.tsx:80
+#: src/dialogs/permissions.tsx:319 src/dialogs/create-file.tsx:185
+msgid "Owner"
+msgstr "Sahibi"
+
+#: src/files-card-body.tsx:549 src/files-card-body.tsx:674 src/header.tsx:97
+msgid "Permissions"
+msgstr "İzinler"
+
+#: src/files-card-body.tsx:578
+msgid "Folder"
+msgstr "Klasör"
+
+#: src/files-card-body.tsx:580
+msgid "File"
+msgstr "Dosya"
+
+#: src/files-card-body.tsx:591 src/files-footer-detail.tsx:80
+#: src/files-footer-detail.tsx:152 src/dialogs/permissions.tsx:334
+msgid "Group"
+msgstr "Grup"
+
+#: src/files-card-body.tsx:591 src/files-footer-detail.tsx:80
+msgid "Others"
+msgstr "Diğerleri"
 
 #: src/header.tsx:56
 msgid "A-Z"
@@ -82,10 +99,6 @@ msgstr "A-Z"
 msgid "Z-A"
 msgstr "Z-A"
 
-#: src/header.tsx:64 src/files-card-body.tsx:535 src/files-card-body.tsx:652
-msgid "Size"
-msgstr "Boyut"
-
 #: src/header.tsx:67
 msgid "Largest size"
 msgstr "En büyük boyut"
@@ -93,10 +106,6 @@ msgstr "En büyük boyut"
 #: src/header.tsx:71
 msgid "Smallest size"
 msgstr "En küçük boyut"
-
-#: src/header.tsx:75 src/files-card-body.tsx:539 src/files-card-body.tsx:659
-msgid "Modified"
-msgstr "Değiştirilme"
 
 #: src/header.tsx:78
 msgid "First modified"
@@ -106,13 +115,6 @@ msgstr "İlk değiştirilme"
 msgid "Last modified"
 msgstr "Son değiştirilme"
 
-#: src/header.tsx:86 src/dialogs/permissions.tsx:319
-#: src/dialogs/create-file.tsx:185 src/files-card-body.tsx:544
-#: src/files-card-body.tsx:591 src/files-card-body.tsx:667
-#: src/files-footer-detail.tsx:80
-msgid "Owner"
-msgstr "Sahibi"
-
 #: src/header.tsx:89
 msgid "Owner ascending"
 msgstr "Sahibine göre artan"
@@ -120,10 +122,6 @@ msgstr "Sahibine göre artan"
 #: src/header.tsx:93
 msgid "Owner descending"
 msgstr "Sahibine göre azalan"
-
-#: src/header.tsx:97 src/files-card-body.tsx:549 src/files-card-body.tsx:674
-msgid "Permissions"
-msgstr "İzinler"
 
 #: src/header.tsx:100
 msgid "Most permissive"
@@ -157,9 +155,21 @@ msgstr "Sırala"
 msgid "Hide hidden items"
 msgstr "Gizli ögeleri gizle"
 
-#: src/header.tsx:271 src/files-card-body.tsx:522
-msgid "Show hidden items"
-msgstr "Gizli ögeleri göster"
+#: src/files-footer-detail.tsx:36
+msgid "$0 files selected"
+msgstr "$0 dosya seçildi"
+
+#: src/files-footer-detail.tsx:64
+msgid "Directory contains $0 directories, $1 files"
+msgstr "Dizin, $0 dizin ve $1 dosya içeriyor"
+
+#: src/files-footer-detail.tsx:65
+msgid "Directory contains $0 directories, $1 files, $2 hidden"
+msgstr "Dizin, $0 dizin ve $1 dosya içeriyor, $2 tanesi gizli"
+
+#: src/files-footer-detail.tsx:144
+msgid "User"
+msgstr "Kullanıcı"
 
 #: src/upload-button.tsx:56
 msgid "$0 files"
@@ -202,10 +212,10 @@ msgid "Keep original"
 msgstr "Orijinali sakla"
 
 #: src/upload-button.tsx:146 src/dialogs/delete.tsx:97
-#: src/dialogs/permissions.tsx:424 src/dialogs/copyPasteOwnership.tsx:170
-#: src/dialogs/rename.tsx:87 src/dialogs/symlink.tsx:233
-#: src/dialogs/editor.tsx:270 src/dialogs/editor.tsx:336
-#: src/dialogs/create-file.tsx:211 src/dialogs/mkdir.tsx:137
+#: src/dialogs/permissions.tsx:424 src/dialogs/symlink.tsx:233
+#: src/dialogs/rename.tsx:87 src/dialogs/mkdir.tsx:137
+#: src/dialogs/copyPasteOwnership.tsx:170 src/dialogs/editor.tsx:270
+#: src/dialogs/editor.tsx:336 src/dialogs/create-file.tsx:211
 msgid "Cancel"
 msgstr "İptal"
 
@@ -401,70 +411,45 @@ msgstr "Karşıya yüklenecek dosyaları bırakın"
 msgid "Cannot drop files, another upload is already in progress"
 msgstr "Dosyalar bırakılamıyor, başka bir karşıya yükleme zaten devam ediyor"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:270
-msgid "Close"
-msgstr "Kapat"
+#: src/files-breadcrumbs.tsx:46
+msgid "Home"
+msgstr "Ev dizini"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:55
-msgid "Go up a directory"
-msgstr "Bir dizin yukarı git"
+#: src/files-breadcrumbs.tsx:94
+msgid "Unable to create bookmark directory"
+msgstr "Yer işareti dizini oluşturulamıyor"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:61
-msgid "Go back"
-msgstr "Geri git"
+#: src/files-breadcrumbs.tsx:117
+msgid "Unable to save bookmark file"
+msgstr "Yer işareti dosyası kaydedilemiyor"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:67
-msgid "Go forward"
-msgstr "İleri git"
+#: src/files-breadcrumbs.tsx:139
+msgid "Remove from bookmarks"
+msgstr "Yer işaretlerinden kaldır"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:73
-#: src/dialogs/keyboardShortcutsHelp.tsx:79
-msgid "Activate selected item, enter directory"
-msgstr "Seçili ögeyi etkinleştir, dizine gir"
+#: src/files-breadcrumbs.tsx:141
+msgid "Add to bookmarks"
+msgstr "Yer işaretlerine ekle"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:95
-msgid "Rename selected file or directory"
-msgstr "Seçili dosya veya dizini yeniden adlandır"
+#: src/files-breadcrumbs.tsx:154
+msgid "Bookmarks"
+msgstr "Yer işaretleri"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:102
-msgid "Create new directory"
-msgstr "Yeni dizin oluştur"
+#: src/files-breadcrumbs.tsx:161
+msgid "Bookmarked"
+msgstr "Yer işaretlerine eklendi"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:108
-msgid "Copy selected file or directory"
-msgstr "Seçili dosya veya dizini kopyala"
+#: src/files-breadcrumbs.tsx:161
+msgid "Not bookmarked"
+msgstr "Yer işaretlerine eklenmedi"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:114
-msgid "Paste file or directory"
-msgstr "Dosya veya dizini yapıştır"
+#: src/files-breadcrumbs.tsx:236
+msgid "Filesystem"
+msgstr "Dosya sistemi"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:120
-msgid "Select all"
-msgstr "Tümünü seç"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:131
-msgid "Save current file"
-msgstr "Şu anki dosyayı kaydet"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:135
-msgid "Close editor"
-msgstr "Düzenleyiciyi kapat"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:148
-msgid "Keyboard shortcuts"
-msgstr "Klavye kısayolları"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:152
-msgid "Navigation"
-msgstr "Gezinme"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:162
-msgid "Editing"
-msgstr "Düzenleme"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:172
-msgid "Editor"
-msgstr "Düzenleyici"
+#: src/files-breadcrumbs.tsx:303 src/dialogs/keyboardShortcutsHelp.tsx:87
+msgid "Edit path"
+msgstr "Yolu düzenle"
 
 #: src/dialogs/delete.tsx:34
 msgid "Force delete $0 items"
@@ -534,11 +519,6 @@ msgstr "$0 dosya için izinler"
 msgid "Ownership"
 msgstr "Sahiplik"
 
-#: src/dialogs/permissions.tsx:334 src/files-card-body.tsx:591
-#: src/files-footer-detail.tsx:80 src/files-footer-detail.tsx:152
-msgid "Group"
-msgstr "Grup"
-
 #: src/dialogs/permissions.tsx:351
 msgid "Access"
 msgstr "Erişim"
@@ -570,47 +550,6 @@ msgstr "Değiştir"
 #: src/dialogs/permissions.tsx:422
 msgid "Change permissions for enclosed files"
 msgstr "İçerilen dosyalar için izinleri değiştir"
-
-#: src/dialogs/copyPasteOwnership.tsx:110
-msgid "(original owner)"
-msgstr "(orijinal sahibi)"
-
-#: src/dialogs/copyPasteOwnership.tsx:119
-msgid "keep original owners"
-msgstr "orijinal sahiplerini sakla"
-
-#: src/dialogs/copyPasteOwnership.tsx:182
-msgid "Paste as owner"
-msgstr "Sahibi olarak yapıştır"
-
-#: src/dialogs/copyPasteOwnership.tsx:187
-msgid ""
-"Files being pasted have a different owner. By default, ownership will be "
-"changed to match the destination directory."
-msgstr ""
-"Yapıştırılan dosyaların farklı bir sahibi var. Varsayılan olarak sahiplik, "
-"hedef dizin ile eşleşmesi için değiştirilecektir."
-
-#: src/dialogs/copyPasteOwnership.tsx:190
-msgid "New owner"
-msgstr "Yeni sahibi"
-
-#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:250
-#: src/dialogs/editor.tsx:307
-msgid "Overwrite"
-msgstr "Üzerine yaz"
-
-#: src/dialogs/rename.tsx:91
-msgid "New filename"
-msgstr "Yeni dosya adı"
-
-#: src/dialogs/rename.tsx:91
-msgid "New name"
-msgstr "Yeni ad"
-
-#: src/dialogs/rename.tsx:101
-msgid "Rename $0?"
-msgstr "$0 yeniden adlandırılsın mı?"
 
 #: src/dialogs/symlink.tsx:53
 msgid "link to $0"
@@ -660,6 +599,136 @@ msgstr "Kesin"
 #: src/dialogs/symlink.tsx:209
 msgid "Relative"
 msgstr "Göreceli"
+
+#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:250
+#: src/dialogs/editor.tsx:307
+msgid "Overwrite"
+msgstr "Üzerine yaz"
+
+#: src/dialogs/rename.tsx:91
+msgid "New filename"
+msgstr "Yeni dosya adı"
+
+#: src/dialogs/rename.tsx:91
+msgid "New name"
+msgstr "Yeni ad"
+
+#: src/dialogs/rename.tsx:101
+msgid "Rename $0?"
+msgstr "$0 yeniden adlandırılsın mı?"
+
+#: src/dialogs/mkdir.tsx:31
+msgid "Directory name cannot be empty"
+msgstr "Dizin adı boş olamaz"
+
+#: src/dialogs/mkdir.tsx:33
+msgid "Directory name too long"
+msgstr "Dizin adı çok uzun"
+
+#: src/dialogs/mkdir.tsx:35
+msgid "Directory name cannot include a /"
+msgstr "Dizin adı / karakteri içeremez"
+
+#: src/dialogs/mkdir.tsx:96
+msgid "Directory name"
+msgstr "Dizin adı"
+
+#: src/dialogs/mkdir.tsx:110
+msgid "Directory owner"
+msgstr "Dizin sahibi"
+
+#: src/dialogs/mkdir.tsx:135 src/dialogs/create-file.tsx:208
+msgid "Create"
+msgstr "Oluştur"
+
+#: src/dialogs/copyPasteOwnership.tsx:110
+msgid "(original owner)"
+msgstr "(orijinal sahibi)"
+
+#: src/dialogs/copyPasteOwnership.tsx:119
+msgid "keep original owners"
+msgstr "orijinal sahiplerini sakla"
+
+#: src/dialogs/copyPasteOwnership.tsx:182
+msgid "Paste as owner"
+msgstr "Sahibi olarak yapıştır"
+
+#: src/dialogs/copyPasteOwnership.tsx:187
+msgid ""
+"Files being pasted have a different owner. By default, ownership will be "
+"changed to match the destination directory."
+msgstr ""
+"Yapıştırılan dosyaların farklı bir sahibi var. Varsayılan olarak sahiplik, "
+"hedef dizin ile eşleşmesi için değiştirilecektir."
+
+#: src/dialogs/copyPasteOwnership.tsx:190
+msgid "New owner"
+msgstr "Yeni sahibi"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:270
+msgid "Close"
+msgstr "Kapat"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:55
+msgid "Go up a directory"
+msgstr "Bir dizin yukarı git"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:61
+msgid "Go back"
+msgstr "Geri git"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:67
+msgid "Go forward"
+msgstr "İleri git"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:73
+#: src/dialogs/keyboardShortcutsHelp.tsx:79
+msgid "Activate selected item, enter directory"
+msgstr "Seçili ögeyi etkinleştir, dizine gir"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:95
+msgid "Rename selected file or directory"
+msgstr "Seçili dosya veya dizini yeniden adlandır"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:102
+msgid "Create new directory"
+msgstr "Yeni dizin oluştur"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:108
+msgid "Copy selected file or directory"
+msgstr "Seçili dosya veya dizini kopyala"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:114
+msgid "Paste file or directory"
+msgstr "Dosya veya dizini yapıştır"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:120
+msgid "Select all"
+msgstr "Tümünü seç"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:131
+msgid "Save current file"
+msgstr "Şu anki dosyayı kaydet"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:135
+msgid "Close editor"
+msgstr "Düzenleyiciyi kapat"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:148
+msgid "Keyboard shortcuts"
+msgstr "Klavye kısayolları"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:152
+msgid "Navigation"
+msgstr "Gezinme"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:162
+msgid "Editing"
+msgstr "Düzenleme"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:172
+msgid "Editor"
+msgstr "Düzenleyici"
 
 #: src/dialogs/editor.tsx:48 src/dialogs/editor.tsx:221
 msgid "The file has been removed on disk"
@@ -720,10 +789,6 @@ msgstr "Vazgeç"
 msgid "File name"
 msgstr "Dosya adı"
 
-#: src/dialogs/create-file.tsx:208 src/dialogs/mkdir.tsx:135
-msgid "Create"
-msgstr "Oluştur"
-
 #: src/dialogs/create-file.tsx:228
 msgid "Cannot create file in current directory"
 msgstr "Şu anki dizinde dosya oluşturulamıyor"
@@ -731,72 +796,6 @@ msgstr "Şu anki dizinde dosya oluşturulamıyor"
 #: src/dialogs/create-file.tsx:230
 msgid "Permission denied"
 msgstr "İzin reddedildi"
-
-#: src/dialogs/mkdir.tsx:31
-msgid "Directory name cannot be empty"
-msgstr "Dizin adı boş olamaz"
-
-#: src/dialogs/mkdir.tsx:33
-msgid "Directory name too long"
-msgstr "Dizin adı çok uzun"
-
-#: src/dialogs/mkdir.tsx:35
-msgid "Directory name cannot include a /"
-msgstr "Dizin adı / karakteri içeremez"
-
-#: src/dialogs/mkdir.tsx:96
-msgid "Directory name"
-msgstr "Dizin adı"
-
-#: src/dialogs/mkdir.tsx:110
-msgid "Directory owner"
-msgstr "Dizin sahibi"
-
-#: src/files-card-body.tsx:506
-msgid "No matching results"
-msgstr "Eşleşen sonuç yok"
-
-#: src/files-card-body.tsx:507
-msgid "Clear filter"
-msgstr "Filtreyi temizle"
-
-#: src/files-card-body.tsx:514
-msgid "Directory is empty"
-msgstr "Dizin boş"
-
-#: src/files-card-body.tsx:519
-msgid "$0 item is hidden"
-msgid_plural "$0 items are hidden"
-msgstr[0] "$0 gizli öge"
-msgstr[1] "$0 gizli öge"
-
-#: src/files-card-body.tsx:578
-msgid "Folder"
-msgstr "Klasör"
-
-#: src/files-card-body.tsx:580
-msgid "File"
-msgstr "Dosya"
-
-#: src/files-card-body.tsx:591 src/files-footer-detail.tsx:80
-msgid "Others"
-msgstr "Diğerleri"
-
-#: src/files-footer-detail.tsx:36
-msgid "$0 files selected"
-msgstr "$0 dosya seçildi"
-
-#: src/files-footer-detail.tsx:64
-msgid "Directory contains $0 directories, $1 files"
-msgstr "Dizin, $0 dizin ve $1 dosya içeriyor"
-
-#: src/files-footer-detail.tsx:65
-msgid "Directory contains $0 directories, $1 files, $2 hidden"
-msgstr "Dizin, $0 dizin ve $1 dosya içeriyor, $2 tanesi gizli"
-
-#: src/files-footer-detail.tsx:144
-msgid "User"
-msgstr "Kullanıcı"
 
 #: src/manifest.json:0
 msgid "File browser"

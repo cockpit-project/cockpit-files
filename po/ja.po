@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-23 07:56+0000\n"
+"POT-Creation-Date: 2026-11-22 10:16+0000\n"
 "PO-Revision-Date: 2026-02-03 13:58+0000\n"
 "Last-Translator: Kohei Takahashi <flast@flast.jp>\n"
 "Language-Team: Japanese <https://translate.fedoraproject.org/projects/"
@@ -30,53 +30,67 @@ msgstr ""
 msgid "Cockpit Files"
 msgstr "Cockpit ファイル"
 
-#: src/files-breadcrumbs.tsx:46
-msgid "Home"
-msgstr "ホーム"
+#: src/files-card-body.tsx:506
+msgid "No matching results"
+msgstr "一致する結果はありません"
 
-#: src/files-breadcrumbs.tsx:94
-msgid "Unable to create bookmark directory"
-msgstr "ブックマークディレクトリーを作成できません"
+#: src/files-card-body.tsx:507
+msgid "Clear filter"
+msgstr "フィルターを外す"
 
-#: src/files-breadcrumbs.tsx:117
-msgid "Unable to save bookmark file"
-msgstr "ブックマークファイルを保存できません"
+#: src/files-card-body.tsx:514
+msgid "Directory is empty"
+msgstr "ディレクトリーは空です"
 
-#: src/files-breadcrumbs.tsx:139
-msgid "Remove from bookmarks"
-msgstr "ブックマークから削除"
+#: src/files-card-body.tsx:519
+msgid "$0 item is hidden"
+msgid_plural "$0 items are hidden"
+msgstr[0] "$0 個の項目が非表示"
 
-#: src/files-breadcrumbs.tsx:141
-msgid "Add to bookmarks"
-msgstr "ブックマークに追加"
+#: src/files-card-body.tsx:522 src/header.tsx:271
+msgid "Show hidden items"
+msgstr "非表示の項目を表示する"
 
-#: src/files-breadcrumbs.tsx:154
-msgid "Bookmarks"
-msgstr "ブックマーク"
-
-#: src/files-breadcrumbs.tsx:161
-#, fuzzy
-#| msgid "Bookmarks"
-msgid "Bookmarked"
-msgstr "ブックマーク"
-
-#: src/files-breadcrumbs.tsx:161
-#, fuzzy
-#| msgid "Add to bookmarks"
-msgid "Not bookmarked"
-msgstr "ブックマークに追加"
-
-#: src/files-breadcrumbs.tsx:236
-msgid "Filesystem"
-msgstr "ファイルシステム"
-
-#: src/files-breadcrumbs.tsx:303 src/dialogs/keyboardShortcutsHelp.tsx:87
-msgid "Edit path"
-msgstr "パスの編集"
-
-#: src/header.tsx:53 src/files-card-body.tsx:534
+#: src/files-card-body.tsx:534 src/header.tsx:53
 msgid "Name"
 msgstr "名前"
+
+#: src/files-card-body.tsx:535 src/files-card-body.tsx:652 src/header.tsx:64
+msgid "Size"
+msgstr "サイズ"
+
+#: src/files-card-body.tsx:539 src/files-card-body.tsx:659 src/header.tsx:75
+msgid "Modified"
+msgstr "変更"
+
+#: src/files-card-body.tsx:544 src/files-card-body.tsx:591
+#: src/files-card-body.tsx:667 src/header.tsx:86 src/files-footer-detail.tsx:80
+#: src/dialogs/permissions.tsx:319 src/dialogs/create-file.tsx:185
+msgid "Owner"
+msgstr "所有者"
+
+#: src/files-card-body.tsx:549 src/files-card-body.tsx:674 src/header.tsx:97
+msgid "Permissions"
+msgstr "パーミッション"
+
+#: src/files-card-body.tsx:578
+msgid "Folder"
+msgstr ""
+
+#: src/files-card-body.tsx:580
+#, fuzzy
+#| msgid "Files"
+msgid "File"
+msgstr "ファイル"
+
+#: src/files-card-body.tsx:591 src/files-footer-detail.tsx:80
+#: src/files-footer-detail.tsx:152 src/dialogs/permissions.tsx:334
+msgid "Group"
+msgstr "グループ"
+
+#: src/files-card-body.tsx:591 src/files-footer-detail.tsx:80
+msgid "Others"
+msgstr "その他のユーザー"
 
 #: src/header.tsx:56
 msgid "A-Z"
@@ -86,10 +100,6 @@ msgstr "A-Z"
 msgid "Z-A"
 msgstr "Z-A"
 
-#: src/header.tsx:64 src/files-card-body.tsx:535 src/files-card-body.tsx:652
-msgid "Size"
-msgstr "サイズ"
-
 #: src/header.tsx:67
 msgid "Largest size"
 msgstr "最大サイズ"
@@ -97,10 +107,6 @@ msgstr "最大サイズ"
 #: src/header.tsx:71
 msgid "Smallest size"
 msgstr "最小サイズ"
-
-#: src/header.tsx:75 src/files-card-body.tsx:539 src/files-card-body.tsx:659
-msgid "Modified"
-msgstr "変更"
 
 #: src/header.tsx:78
 msgid "First modified"
@@ -110,13 +116,6 @@ msgstr "最初に変更"
 msgid "Last modified"
 msgstr "最後に変更"
 
-#: src/header.tsx:86 src/dialogs/permissions.tsx:319
-#: src/dialogs/create-file.tsx:185 src/files-card-body.tsx:544
-#: src/files-card-body.tsx:591 src/files-card-body.tsx:667
-#: src/files-footer-detail.tsx:80
-msgid "Owner"
-msgstr "所有者"
-
 #: src/header.tsx:89
 msgid "Owner ascending"
 msgstr "所有者昇順"
@@ -124,10 +123,6 @@ msgstr "所有者昇順"
 #: src/header.tsx:93
 msgid "Owner descending"
 msgstr "所有者降順"
-
-#: src/header.tsx:97 src/files-card-body.tsx:549 src/files-card-body.tsx:674
-msgid "Permissions"
-msgstr "パーミッション"
 
 #: src/header.tsx:100
 msgid "Most permissive"
@@ -161,9 +156,24 @@ msgstr "ソート"
 msgid "Hide hidden items"
 msgstr "非表示の項目を非表示にする"
 
-#: src/header.tsx:271 src/files-card-body.tsx:522
-msgid "Show hidden items"
-msgstr "非表示の項目を表示する"
+#: src/files-footer-detail.tsx:36
+msgid "$0 files selected"
+msgstr "$0 個のファイルを選択中"
+
+#: src/files-footer-detail.tsx:64
+msgid "Directory contains $0 directories, $1 files"
+msgstr ""
+"ディレクトリーに $0 個のディレクトリー、$1 個のファイルが含まれています"
+
+#: src/files-footer-detail.tsx:65
+msgid "Directory contains $0 directories, $1 files, $2 hidden"
+msgstr ""
+"ディレクトリーに $0 個のディレクトリー、$1 個のファイルが含まれ、$2 個が非表"
+"示です"
+
+#: src/files-footer-detail.tsx:144
+msgid "User"
+msgstr "ユーザー"
 
 #: src/upload-button.tsx:56
 msgid "$0 files"
@@ -206,10 +216,10 @@ msgid "Keep original"
 msgstr "元のものを維持"
 
 #: src/upload-button.tsx:146 src/dialogs/delete.tsx:97
-#: src/dialogs/permissions.tsx:424 src/dialogs/copyPasteOwnership.tsx:170
-#: src/dialogs/rename.tsx:87 src/dialogs/symlink.tsx:233
-#: src/dialogs/editor.tsx:270 src/dialogs/editor.tsx:336
-#: src/dialogs/create-file.tsx:211 src/dialogs/mkdir.tsx:137
+#: src/dialogs/permissions.tsx:424 src/dialogs/symlink.tsx:233
+#: src/dialogs/rename.tsx:87 src/dialogs/mkdir.tsx:137
+#: src/dialogs/copyPasteOwnership.tsx:170 src/dialogs/editor.tsx:270
+#: src/dialogs/editor.tsx:336 src/dialogs/create-file.tsx:211
 msgid "Cancel"
 msgstr "取り消し"
 
@@ -406,72 +416,49 @@ msgstr "アップロードするファイルをドロップする"
 msgid "Cannot drop files, another upload is already in progress"
 msgstr "ファイルをドロップできません。別のアップロードがすでに進行中です"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:270
-msgid "Close"
-msgstr "閉じる"
+#: src/files-breadcrumbs.tsx:46
+msgid "Home"
+msgstr "ホーム"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:55
-msgid "Go up a directory"
-msgstr "1 つ上のディレクトリーに移動する"
+#: src/files-breadcrumbs.tsx:94
+msgid "Unable to create bookmark directory"
+msgstr "ブックマークディレクトリーを作成できません"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:61
-msgid "Go back"
-msgstr "戻る"
+#: src/files-breadcrumbs.tsx:117
+msgid "Unable to save bookmark file"
+msgstr "ブックマークファイルを保存できません"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:67
-msgid "Go forward"
-msgstr "進む"
+#: src/files-breadcrumbs.tsx:139
+msgid "Remove from bookmarks"
+msgstr "ブックマークから削除"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:73
-#: src/dialogs/keyboardShortcutsHelp.tsx:79
-msgid "Activate selected item, enter directory"
-msgstr "選択した項目をアクティブにしてディレクトリーに入る"
+#: src/files-breadcrumbs.tsx:141
+msgid "Add to bookmarks"
+msgstr "ブックマークに追加"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:95
-msgid "Rename selected file or directory"
-msgstr "選択したファイルまたはディレクトリーの名前を変更する"
+#: src/files-breadcrumbs.tsx:154
+msgid "Bookmarks"
+msgstr "ブックマーク"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:102
-msgid "Create new directory"
-msgstr "新しいディレクトリーの作成"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:108
-msgid "Copy selected file or directory"
-msgstr "選択したファイルまたはディレクトリーをコピーする"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:114
-msgid "Paste file or directory"
-msgstr "ファイルまたはディレクトリーを貼り付ける"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:120
-msgid "Select all"
-msgstr "すべて選択"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:131
-msgid "Save current file"
-msgstr ""
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:135
-msgid "Close editor"
-msgstr ""
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:148
-msgid "Keyboard shortcuts"
-msgstr "キーボードショートカット"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:152
-msgid "Navigation"
-msgstr "ナビゲーション"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:162
-msgid "Editing"
-msgstr "編集中"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:172
+#: src/files-breadcrumbs.tsx:161
 #, fuzzy
-#| msgid "Edit $0"
-msgid "Editor"
-msgstr "$0 の編集"
+#| msgid "Bookmarks"
+msgid "Bookmarked"
+msgstr "ブックマーク"
+
+#: src/files-breadcrumbs.tsx:161
+#, fuzzy
+#| msgid "Add to bookmarks"
+msgid "Not bookmarked"
+msgstr "ブックマークに追加"
+
+#: src/files-breadcrumbs.tsx:236
+msgid "Filesystem"
+msgstr "ファイルシステム"
+
+#: src/files-breadcrumbs.tsx:303 src/dialogs/keyboardShortcutsHelp.tsx:87
+msgid "Edit path"
+msgstr "パスの編集"
 
 #: src/dialogs/delete.tsx:34
 msgid "Force delete $0 items"
@@ -541,11 +528,6 @@ msgstr "$0 ファイルのパーミッション"
 msgid "Ownership"
 msgstr "所有権"
 
-#: src/dialogs/permissions.tsx:334 src/files-card-body.tsx:591
-#: src/files-footer-detail.tsx:80 src/files-footer-detail.tsx:152
-msgid "Group"
-msgstr "グループ"
-
 #: src/dialogs/permissions.tsx:351
 msgid "Access"
 msgstr "アクセス"
@@ -577,47 +559,6 @@ msgstr "変更"
 #: src/dialogs/permissions.tsx:422
 msgid "Change permissions for enclosed files"
 msgstr "含まれるファイルのパーミッションの変更"
-
-#: src/dialogs/copyPasteOwnership.tsx:110
-msgid "(original owner)"
-msgstr "(元の所有者)"
-
-#: src/dialogs/copyPasteOwnership.tsx:119
-msgid "keep original owners"
-msgstr "元の所有者を維持"
-
-#: src/dialogs/copyPasteOwnership.tsx:182
-msgid "Paste as owner"
-msgstr "所有者として貼り付け"
-
-#: src/dialogs/copyPasteOwnership.tsx:187
-msgid ""
-"Files being pasted have a different owner. By default, ownership will be "
-"changed to match the destination directory."
-msgstr ""
-"貼り付けるファイルの所有者が異なります。デフォルトでは、貼り付け先のディレク"
-"トリーに合わせて所有権が変更されます。"
-
-#: src/dialogs/copyPasteOwnership.tsx:190
-msgid "New owner"
-msgstr "新しい所有者"
-
-#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:250
-#: src/dialogs/editor.tsx:307
-msgid "Overwrite"
-msgstr "上書き"
-
-#: src/dialogs/rename.tsx:91
-msgid "New filename"
-msgstr "新しいファイル名"
-
-#: src/dialogs/rename.tsx:91
-msgid "New name"
-msgstr "新しい名前"
-
-#: src/dialogs/rename.tsx:101
-msgid "Rename $0?"
-msgstr "$0 の名前を変更しますか?"
 
 #: src/dialogs/symlink.tsx:53
 msgid "link to $0"
@@ -666,6 +607,138 @@ msgstr ""
 #: src/dialogs/symlink.tsx:209
 msgid "Relative"
 msgstr ""
+
+#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:250
+#: src/dialogs/editor.tsx:307
+msgid "Overwrite"
+msgstr "上書き"
+
+#: src/dialogs/rename.tsx:91
+msgid "New filename"
+msgstr "新しいファイル名"
+
+#: src/dialogs/rename.tsx:91
+msgid "New name"
+msgstr "新しい名前"
+
+#: src/dialogs/rename.tsx:101
+msgid "Rename $0?"
+msgstr "$0 の名前を変更しますか?"
+
+#: src/dialogs/mkdir.tsx:31
+msgid "Directory name cannot be empty"
+msgstr "ディレクトリー名は空にできません"
+
+#: src/dialogs/mkdir.tsx:33
+msgid "Directory name too long"
+msgstr "ディレクトリー名が長すぎます"
+
+#: src/dialogs/mkdir.tsx:35
+msgid "Directory name cannot include a /"
+msgstr "ディレクトリー名に / を含めることはできません"
+
+#: src/dialogs/mkdir.tsx:96
+msgid "Directory name"
+msgstr "ディレクトリー名"
+
+#: src/dialogs/mkdir.tsx:110
+msgid "Directory owner"
+msgstr "ディレクトリー所有者"
+
+#: src/dialogs/mkdir.tsx:135 src/dialogs/create-file.tsx:208
+msgid "Create"
+msgstr "作成"
+
+#: src/dialogs/copyPasteOwnership.tsx:110
+msgid "(original owner)"
+msgstr "(元の所有者)"
+
+#: src/dialogs/copyPasteOwnership.tsx:119
+msgid "keep original owners"
+msgstr "元の所有者を維持"
+
+#: src/dialogs/copyPasteOwnership.tsx:182
+msgid "Paste as owner"
+msgstr "所有者として貼り付け"
+
+#: src/dialogs/copyPasteOwnership.tsx:187
+msgid ""
+"Files being pasted have a different owner. By default, ownership will be "
+"changed to match the destination directory."
+msgstr ""
+"貼り付けるファイルの所有者が異なります。デフォルトでは、貼り付け先のディレク"
+"トリーに合わせて所有権が変更されます。"
+
+#: src/dialogs/copyPasteOwnership.tsx:190
+msgid "New owner"
+msgstr "新しい所有者"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:270
+msgid "Close"
+msgstr "閉じる"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:55
+msgid "Go up a directory"
+msgstr "1 つ上のディレクトリーに移動する"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:61
+msgid "Go back"
+msgstr "戻る"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:67
+msgid "Go forward"
+msgstr "進む"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:73
+#: src/dialogs/keyboardShortcutsHelp.tsx:79
+msgid "Activate selected item, enter directory"
+msgstr "選択した項目をアクティブにしてディレクトリーに入る"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:95
+msgid "Rename selected file or directory"
+msgstr "選択したファイルまたはディレクトリーの名前を変更する"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:102
+msgid "Create new directory"
+msgstr "新しいディレクトリーの作成"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:108
+msgid "Copy selected file or directory"
+msgstr "選択したファイルまたはディレクトリーをコピーする"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:114
+msgid "Paste file or directory"
+msgstr "ファイルまたはディレクトリーを貼り付ける"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:120
+msgid "Select all"
+msgstr "すべて選択"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:131
+msgid "Save current file"
+msgstr ""
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:135
+msgid "Close editor"
+msgstr ""
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:148
+msgid "Keyboard shortcuts"
+msgstr "キーボードショートカット"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:152
+msgid "Navigation"
+msgstr "ナビゲーション"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:162
+msgid "Editing"
+msgstr "編集中"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:172
+#, fuzzy
+#| msgid "Edit $0"
+msgid "Editor"
+msgstr "$0 の編集"
 
 #: src/dialogs/editor.tsx:48 src/dialogs/editor.tsx:221
 msgid "The file has been removed on disk"
@@ -726,10 +799,6 @@ msgstr ""
 msgid "File name"
 msgstr "ファイル名"
 
-#: src/dialogs/create-file.tsx:208 src/dialogs/mkdir.tsx:135
-msgid "Create"
-msgstr "作成"
-
 #: src/dialogs/create-file.tsx:228
 msgid "Cannot create file in current directory"
 msgstr "カレントディレクトリーにファイルを作成できません"
@@ -737,76 +806,6 @@ msgstr "カレントディレクトリーにファイルを作成できません
 #: src/dialogs/create-file.tsx:230
 msgid "Permission denied"
 msgstr "パーミッションが拒否されました"
-
-#: src/dialogs/mkdir.tsx:31
-msgid "Directory name cannot be empty"
-msgstr "ディレクトリー名は空にできません"
-
-#: src/dialogs/mkdir.tsx:33
-msgid "Directory name too long"
-msgstr "ディレクトリー名が長すぎます"
-
-#: src/dialogs/mkdir.tsx:35
-msgid "Directory name cannot include a /"
-msgstr "ディレクトリー名に / を含めることはできません"
-
-#: src/dialogs/mkdir.tsx:96
-msgid "Directory name"
-msgstr "ディレクトリー名"
-
-#: src/dialogs/mkdir.tsx:110
-msgid "Directory owner"
-msgstr "ディレクトリー所有者"
-
-#: src/files-card-body.tsx:506
-msgid "No matching results"
-msgstr "一致する結果はありません"
-
-#: src/files-card-body.tsx:507
-msgid "Clear filter"
-msgstr "フィルターを外す"
-
-#: src/files-card-body.tsx:514
-msgid "Directory is empty"
-msgstr "ディレクトリーは空です"
-
-#: src/files-card-body.tsx:519
-msgid "$0 item is hidden"
-msgid_plural "$0 items are hidden"
-msgstr[0] "$0 個の項目が非表示"
-
-#: src/files-card-body.tsx:578
-msgid "Folder"
-msgstr ""
-
-#: src/files-card-body.tsx:580
-#, fuzzy
-#| msgid "Files"
-msgid "File"
-msgstr "ファイル"
-
-#: src/files-card-body.tsx:591 src/files-footer-detail.tsx:80
-msgid "Others"
-msgstr "その他のユーザー"
-
-#: src/files-footer-detail.tsx:36
-msgid "$0 files selected"
-msgstr "$0 個のファイルを選択中"
-
-#: src/files-footer-detail.tsx:64
-msgid "Directory contains $0 directories, $1 files"
-msgstr ""
-"ディレクトリーに $0 個のディレクトリー、$1 個のファイルが含まれています"
-
-#: src/files-footer-detail.tsx:65
-msgid "Directory contains $0 directories, $1 files, $2 hidden"
-msgstr ""
-"ディレクトリーに $0 個のディレクトリー、$1 個のファイルが含まれ、$2 個が非表"
-"示です"
-
-#: src/files-footer-detail.tsx:144
-msgid "User"
-msgstr "ユーザー"
 
 #: src/manifest.json:0
 msgid "File browser"

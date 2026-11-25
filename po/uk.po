@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-23 07:56+0000\n"
+"POT-Creation-Date: 2026-11-22 10:16+0000\n"
 "PO-Revision-Date: 2026-06-21 14:10+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <https://translate.fedoraproject.org/projects/"
@@ -31,49 +31,67 @@ msgstr ""
 msgid "Cockpit Files"
 msgstr "Файли Cockpit"
 
-#: src/files-breadcrumbs.tsx:46
-msgid "Home"
-msgstr "Домівка"
+#: src/files-card-body.tsx:506
+msgid "No matching results"
+msgstr "Нічого не знайдено"
 
-#: src/files-breadcrumbs.tsx:94
-msgid "Unable to create bookmark directory"
-msgstr "Не вдалося створити закладку на каталог"
+#: src/files-card-body.tsx:507
+msgid "Clear filter"
+msgstr "Зняти фільтрування"
 
-#: src/files-breadcrumbs.tsx:117
-msgid "Unable to save bookmark file"
-msgstr "Не вдалося зберегти файл закладки"
+#: src/files-card-body.tsx:514
+msgid "Directory is empty"
+msgstr "Каталог є порожнім"
 
-#: src/files-breadcrumbs.tsx:139
-msgid "Remove from bookmarks"
-msgstr "Вилучити із закладок"
+#: src/files-card-body.tsx:519
+msgid "$0 item is hidden"
+msgid_plural "$0 items are hidden"
+msgstr[0] "$0 запис приховано"
+msgstr[1] "$0 записи приховано"
+msgstr[2] "$0 записів приховано"
 
-#: src/files-breadcrumbs.tsx:141
-msgid "Add to bookmarks"
-msgstr "Додати до закладок"
+#: src/files-card-body.tsx:522 src/header.tsx:271
+msgid "Show hidden items"
+msgstr "Показати приховані записи"
 
-#: src/files-breadcrumbs.tsx:154
-msgid "Bookmarks"
-msgstr "Закладки"
-
-#: src/files-breadcrumbs.tsx:161
-msgid "Bookmarked"
-msgstr "Має закладку"
-
-#: src/files-breadcrumbs.tsx:161
-msgid "Not bookmarked"
-msgstr "Не має закладки"
-
-#: src/files-breadcrumbs.tsx:236
-msgid "Filesystem"
-msgstr "Файлова система"
-
-#: src/files-breadcrumbs.tsx:303 src/dialogs/keyboardShortcutsHelp.tsx:87
-msgid "Edit path"
-msgstr "Редагувати шлях"
-
-#: src/header.tsx:53 src/files-card-body.tsx:534
+#: src/files-card-body.tsx:534 src/header.tsx:53
 msgid "Name"
 msgstr "Назва"
+
+#: src/files-card-body.tsx:535 src/files-card-body.tsx:652 src/header.tsx:64
+msgid "Size"
+msgstr "Розмір"
+
+#: src/files-card-body.tsx:539 src/files-card-body.tsx:659 src/header.tsx:75
+msgid "Modified"
+msgstr "Змінено"
+
+#: src/files-card-body.tsx:544 src/files-card-body.tsx:591
+#: src/files-card-body.tsx:667 src/header.tsx:86 src/files-footer-detail.tsx:80
+#: src/dialogs/permissions.tsx:319 src/dialogs/create-file.tsx:185
+msgid "Owner"
+msgstr "Власник"
+
+#: src/files-card-body.tsx:549 src/files-card-body.tsx:674 src/header.tsx:97
+msgid "Permissions"
+msgstr "Права доступу"
+
+#: src/files-card-body.tsx:578
+msgid "Folder"
+msgstr "Тека"
+
+#: src/files-card-body.tsx:580
+msgid "File"
+msgstr "Файл"
+
+#: src/files-card-body.tsx:591 src/files-footer-detail.tsx:80
+#: src/files-footer-detail.tsx:152 src/dialogs/permissions.tsx:334
+msgid "Group"
+msgstr "Група"
+
+#: src/files-card-body.tsx:591 src/files-footer-detail.tsx:80
+msgid "Others"
+msgstr "Інші"
 
 #: src/header.tsx:56
 msgid "A-Z"
@@ -83,10 +101,6 @@ msgstr "А-Я"
 msgid "Z-A"
 msgstr "Я-А"
 
-#: src/header.tsx:64 src/files-card-body.tsx:535 src/files-card-body.tsx:652
-msgid "Size"
-msgstr "Розмір"
-
 #: src/header.tsx:67
 msgid "Largest size"
 msgstr "Найбільший розмір"
@@ -94,10 +108,6 @@ msgstr "Найбільший розмір"
 #: src/header.tsx:71
 msgid "Smallest size"
 msgstr "Найменший розмір"
-
-#: src/header.tsx:75 src/files-card-body.tsx:539 src/files-card-body.tsx:659
-msgid "Modified"
-msgstr "Змінено"
 
 #: src/header.tsx:78
 msgid "First modified"
@@ -107,13 +117,6 @@ msgstr "Перший змінений"
 msgid "Last modified"
 msgstr "Востаннє змінено"
 
-#: src/header.tsx:86 src/dialogs/permissions.tsx:319
-#: src/dialogs/create-file.tsx:185 src/files-card-body.tsx:544
-#: src/files-card-body.tsx:591 src/files-card-body.tsx:667
-#: src/files-footer-detail.tsx:80
-msgid "Owner"
-msgstr "Власник"
-
 #: src/header.tsx:89
 msgid "Owner ascending"
 msgstr "Власник за зростанням"
@@ -121,10 +124,6 @@ msgstr "Власник за зростанням"
 #: src/header.tsx:93
 msgid "Owner descending"
 msgstr "Власник за спаданням"
-
-#: src/header.tsx:97 src/files-card-body.tsx:549 src/files-card-body.tsx:674
-msgid "Permissions"
-msgstr "Права доступу"
 
 #: src/header.tsx:100
 msgid "Most permissive"
@@ -158,9 +157,21 @@ msgstr "Упорядкувати"
 msgid "Hide hidden items"
 msgstr "Приховати приховані записи"
 
-#: src/header.tsx:271 src/files-card-body.tsx:522
-msgid "Show hidden items"
-msgstr "Показати приховані записи"
+#: src/files-footer-detail.tsx:36
+msgid "$0 files selected"
+msgstr "Позначено $0 файлів"
+
+#: src/files-footer-detail.tsx:64
+msgid "Directory contains $0 directories, $1 files"
+msgstr "У каталозі міститься $0 каталогів, $1 файлів"
+
+#: src/files-footer-detail.tsx:65
+msgid "Directory contains $0 directories, $1 files, $2 hidden"
+msgstr "У каталозі міститься $0 каталогів, $1 файлів, $2 прихованих записів"
+
+#: src/files-footer-detail.tsx:144
+msgid "User"
+msgstr "Користувач"
 
 #: src/upload-button.tsx:56
 msgid "$0 files"
@@ -203,10 +214,10 @@ msgid "Keep original"
 msgstr "Зберегти початкове"
 
 #: src/upload-button.tsx:146 src/dialogs/delete.tsx:97
-#: src/dialogs/permissions.tsx:424 src/dialogs/copyPasteOwnership.tsx:170
-#: src/dialogs/rename.tsx:87 src/dialogs/symlink.tsx:233
-#: src/dialogs/editor.tsx:270 src/dialogs/editor.tsx:336
-#: src/dialogs/create-file.tsx:211 src/dialogs/mkdir.tsx:137
+#: src/dialogs/permissions.tsx:424 src/dialogs/symlink.tsx:233
+#: src/dialogs/rename.tsx:87 src/dialogs/mkdir.tsx:137
+#: src/dialogs/copyPasteOwnership.tsx:170 src/dialogs/editor.tsx:270
+#: src/dialogs/editor.tsx:336 src/dialogs/create-file.tsx:211
 msgid "Cancel"
 msgstr "Скасувати"
 
@@ -402,70 +413,45 @@ msgstr "Скиньте файли для вивантаження"
 msgid "Cannot drop files, another upload is already in progress"
 msgstr "Скидання файлів неможливе, виконуємо інше вивантаження"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:270
-msgid "Close"
-msgstr "Закрити"
+#: src/files-breadcrumbs.tsx:46
+msgid "Home"
+msgstr "Домівка"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:55
-msgid "Go up a directory"
-msgstr "Вище за ієрархією каталогів"
+#: src/files-breadcrumbs.tsx:94
+msgid "Unable to create bookmark directory"
+msgstr "Не вдалося створити закладку на каталог"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:61
-msgid "Go back"
-msgstr "Назад"
+#: src/files-breadcrumbs.tsx:117
+msgid "Unable to save bookmark file"
+msgstr "Не вдалося зберегти файл закладки"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:67
-msgid "Go forward"
-msgstr "Вперед"
+#: src/files-breadcrumbs.tsx:139
+msgid "Remove from bookmarks"
+msgstr "Вилучити із закладок"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:73
-#: src/dialogs/keyboardShortcutsHelp.tsx:79
-msgid "Activate selected item, enter directory"
-msgstr "Активувати позначений запис, увійти до каталогу"
+#: src/files-breadcrumbs.tsx:141
+msgid "Add to bookmarks"
+msgstr "Додати до закладок"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:95
-msgid "Rename selected file or directory"
-msgstr "Перейменувати позначений файл або каталог"
+#: src/files-breadcrumbs.tsx:154
+msgid "Bookmarks"
+msgstr "Закладки"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:102
-msgid "Create new directory"
-msgstr "Створити новий каталог"
+#: src/files-breadcrumbs.tsx:161
+msgid "Bookmarked"
+msgstr "Має закладку"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:108
-msgid "Copy selected file or directory"
-msgstr "Копіювати позначений файл або каталог"
+#: src/files-breadcrumbs.tsx:161
+msgid "Not bookmarked"
+msgstr "Не має закладки"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:114
-msgid "Paste file or directory"
-msgstr "Вставити файл або каталог"
+#: src/files-breadcrumbs.tsx:236
+msgid "Filesystem"
+msgstr "Файлова система"
 
-#: src/dialogs/keyboardShortcutsHelp.tsx:120
-msgid "Select all"
-msgstr "Вибрати все"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:131
-msgid "Save current file"
-msgstr "Зберегти поточний файл"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:135
-msgid "Close editor"
-msgstr "Закрити редактор"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:148
-msgid "Keyboard shortcuts"
-msgstr "Клавіатурні скорочення"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:152
-msgid "Navigation"
-msgstr "Навігація"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:162
-msgid "Editing"
-msgstr "Редагування"
-
-#: src/dialogs/keyboardShortcutsHelp.tsx:172
-msgid "Editor"
-msgstr "Редактор"
+#: src/files-breadcrumbs.tsx:303 src/dialogs/keyboardShortcutsHelp.tsx:87
+msgid "Edit path"
+msgstr "Редагувати шлях"
 
 #: src/dialogs/delete.tsx:34
 msgid "Force delete $0 items"
@@ -535,11 +521,6 @@ msgstr "Права доступу для $0 файлів"
 msgid "Ownership"
 msgstr "Власність"
 
-#: src/dialogs/permissions.tsx:334 src/files-card-body.tsx:591
-#: src/files-footer-detail.tsx:80 src/files-footer-detail.tsx:152
-msgid "Group"
-msgstr "Група"
-
 #: src/dialogs/permissions.tsx:351
 msgid "Access"
 msgstr "Доступ"
@@ -571,47 +552,6 @@ msgstr "Змінити"
 #: src/dialogs/permissions.tsx:422
 msgid "Change permissions for enclosed files"
 msgstr "Змінити права для вкладених файлів"
-
-#: src/dialogs/copyPasteOwnership.tsx:110
-msgid "(original owner)"
-msgstr "(початковий власник)"
-
-#: src/dialogs/copyPasteOwnership.tsx:119
-msgid "keep original owners"
-msgstr "зберегти початкового власника"
-
-#: src/dialogs/copyPasteOwnership.tsx:182
-msgid "Paste as owner"
-msgstr "Вставити як власник"
-
-#: src/dialogs/copyPasteOwnership.tsx:187
-msgid ""
-"Files being pasted have a different owner. By default, ownership will be "
-"changed to match the destination directory."
-msgstr ""
-"Файли, які ви вставляєте мають іншого власника. Типово, права власності буде "
-"змінено так, щоб вони відповідали каталогу призначення."
-
-#: src/dialogs/copyPasteOwnership.tsx:190
-msgid "New owner"
-msgstr "Новий власник"
-
-#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:250
-#: src/dialogs/editor.tsx:307
-msgid "Overwrite"
-msgstr "Перезаписати"
-
-#: src/dialogs/rename.tsx:91
-msgid "New filename"
-msgstr "Нова назва файла"
-
-#: src/dialogs/rename.tsx:91
-msgid "New name"
-msgstr "Нова назва"
-
-#: src/dialogs/rename.tsx:101
-msgid "Rename $0?"
-msgstr "Перейменувати $0?"
 
 #: src/dialogs/symlink.tsx:53
 msgid "link to $0"
@@ -661,6 +601,136 @@ msgstr "Абсолютні"
 #: src/dialogs/symlink.tsx:209
 msgid "Relative"
 msgstr "Відносний"
+
+#: src/dialogs/rename.tsx:85 src/dialogs/editor.tsx:250
+#: src/dialogs/editor.tsx:307
+msgid "Overwrite"
+msgstr "Перезаписати"
+
+#: src/dialogs/rename.tsx:91
+msgid "New filename"
+msgstr "Нова назва файла"
+
+#: src/dialogs/rename.tsx:91
+msgid "New name"
+msgstr "Нова назва"
+
+#: src/dialogs/rename.tsx:101
+msgid "Rename $0?"
+msgstr "Перейменувати $0?"
+
+#: src/dialogs/mkdir.tsx:31
+msgid "Directory name cannot be empty"
+msgstr "Назва каталогу має бути непорожньою"
+
+#: src/dialogs/mkdir.tsx:33
+msgid "Directory name too long"
+msgstr "Назва каталогу занадто довга"
+
+#: src/dialogs/mkdir.tsx:35
+msgid "Directory name cannot include a /"
+msgstr "У назві каталогу не може бути /"
+
+#: src/dialogs/mkdir.tsx:96
+msgid "Directory name"
+msgstr "Назва каталогу"
+
+#: src/dialogs/mkdir.tsx:110
+msgid "Directory owner"
+msgstr "Власник каталогу"
+
+#: src/dialogs/mkdir.tsx:135 src/dialogs/create-file.tsx:208
+msgid "Create"
+msgstr "Створити"
+
+#: src/dialogs/copyPasteOwnership.tsx:110
+msgid "(original owner)"
+msgstr "(початковий власник)"
+
+#: src/dialogs/copyPasteOwnership.tsx:119
+msgid "keep original owners"
+msgstr "зберегти початкового власника"
+
+#: src/dialogs/copyPasteOwnership.tsx:182
+msgid "Paste as owner"
+msgstr "Вставити як власник"
+
+#: src/dialogs/copyPasteOwnership.tsx:187
+msgid ""
+"Files being pasted have a different owner. By default, ownership will be "
+"changed to match the destination directory."
+msgstr ""
+"Файли, які ви вставляєте мають іншого власника. Типово, права власності буде "
+"змінено так, щоб вони відповідали каталогу призначення."
+
+#: src/dialogs/copyPasteOwnership.tsx:190
+msgid "New owner"
+msgstr "Новий власник"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:33 src/dialogs/editor.tsx:270
+msgid "Close"
+msgstr "Закрити"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:55
+msgid "Go up a directory"
+msgstr "Вище за ієрархією каталогів"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:61
+msgid "Go back"
+msgstr "Назад"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:67
+msgid "Go forward"
+msgstr "Вперед"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:73
+#: src/dialogs/keyboardShortcutsHelp.tsx:79
+msgid "Activate selected item, enter directory"
+msgstr "Активувати позначений запис, увійти до каталогу"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:95
+msgid "Rename selected file or directory"
+msgstr "Перейменувати позначений файл або каталог"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:102
+msgid "Create new directory"
+msgstr "Створити новий каталог"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:108
+msgid "Copy selected file or directory"
+msgstr "Копіювати позначений файл або каталог"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:114
+msgid "Paste file or directory"
+msgstr "Вставити файл або каталог"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:120
+msgid "Select all"
+msgstr "Вибрати все"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:131
+msgid "Save current file"
+msgstr "Зберегти поточний файл"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:135
+msgid "Close editor"
+msgstr "Закрити редактор"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:148
+msgid "Keyboard shortcuts"
+msgstr "Клавіатурні скорочення"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:152
+msgid "Navigation"
+msgstr "Навігація"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:162
+msgid "Editing"
+msgstr "Редагування"
+
+#: src/dialogs/keyboardShortcutsHelp.tsx:172
+msgid "Editor"
+msgstr "Редактор"
 
 #: src/dialogs/editor.tsx:48 src/dialogs/editor.tsx:221
 msgid "The file has been removed on disk"
@@ -723,10 +793,6 @@ msgstr "Відкинути"
 msgid "File name"
 msgstr "Назва файла"
 
-#: src/dialogs/create-file.tsx:208 src/dialogs/mkdir.tsx:135
-msgid "Create"
-msgstr "Створити"
-
 #: src/dialogs/create-file.tsx:228
 msgid "Cannot create file in current directory"
 msgstr "Не вдалося створити файл у поточному каталозі"
@@ -734,73 +800,6 @@ msgstr "Не вдалося створити файл у поточному ка
 #: src/dialogs/create-file.tsx:230
 msgid "Permission denied"
 msgstr "Відмовлено у доступі"
-
-#: src/dialogs/mkdir.tsx:31
-msgid "Directory name cannot be empty"
-msgstr "Назва каталогу має бути непорожньою"
-
-#: src/dialogs/mkdir.tsx:33
-msgid "Directory name too long"
-msgstr "Назва каталогу занадто довга"
-
-#: src/dialogs/mkdir.tsx:35
-msgid "Directory name cannot include a /"
-msgstr "У назві каталогу не може бути /"
-
-#: src/dialogs/mkdir.tsx:96
-msgid "Directory name"
-msgstr "Назва каталогу"
-
-#: src/dialogs/mkdir.tsx:110
-msgid "Directory owner"
-msgstr "Власник каталогу"
-
-#: src/files-card-body.tsx:506
-msgid "No matching results"
-msgstr "Нічого не знайдено"
-
-#: src/files-card-body.tsx:507
-msgid "Clear filter"
-msgstr "Зняти фільтрування"
-
-#: src/files-card-body.tsx:514
-msgid "Directory is empty"
-msgstr "Каталог є порожнім"
-
-#: src/files-card-body.tsx:519
-msgid "$0 item is hidden"
-msgid_plural "$0 items are hidden"
-msgstr[0] "$0 запис приховано"
-msgstr[1] "$0 записи приховано"
-msgstr[2] "$0 записів приховано"
-
-#: src/files-card-body.tsx:578
-msgid "Folder"
-msgstr "Тека"
-
-#: src/files-card-body.tsx:580
-msgid "File"
-msgstr "Файл"
-
-#: src/files-card-body.tsx:591 src/files-footer-detail.tsx:80
-msgid "Others"
-msgstr "Інші"
-
-#: src/files-footer-detail.tsx:36
-msgid "$0 files selected"
-msgstr "Позначено $0 файлів"
-
-#: src/files-footer-detail.tsx:64
-msgid "Directory contains $0 directories, $1 files"
-msgstr "У каталозі міститься $0 каталогів, $1 файлів"
-
-#: src/files-footer-detail.tsx:65
-msgid "Directory contains $0 directories, $1 files, $2 hidden"
-msgstr "У каталозі міститься $0 каталогів, $1 файлів, $2 прихованих записів"
-
-#: src/files-footer-detail.tsx:144
-msgid "User"
-msgstr "Користувач"
 
 #: src/manifest.json:0
 msgid "File browser"
